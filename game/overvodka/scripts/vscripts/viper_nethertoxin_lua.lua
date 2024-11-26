@@ -67,7 +67,7 @@ function viper_nethertoxin_lua:OnSpellStart()
 	ProjectileManager:CreateLinearProjectile(info)
 
 	-- play effects
-	Chance = RandomInt(2,2)
+	Chance = RandomInt(1,2)
 	if Chance == 1 then
 		self:PlayEffects( point )
 	elseif Chance == 2 then
@@ -94,6 +94,18 @@ function viper_nethertoxin_lua:OnProjectileHit( target, location )
 			false
 		)
 	elseif Chance == 2 then
+		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+			location,
+			nil,
+			self:GetSpecialValueFor( "radius" ),
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			DOTA_UNIT_TARGET_FLAG_NONE,
+			FIND_ANY_ORDER,
+			false)
+		for _,unit in pairs(targets) do
+			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = self:GetSpecialValueFor( "damage_exp" ), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+		end
 		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", self:GetCaster())
 		 self:PlayEffects3( location )
 	end

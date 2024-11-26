@@ -15825,6 +15825,7 @@
 		"AbilityValues"
 		{
 				"damage"			"50 100 150 200"
+				"damage_exp"		"100 200 300 400"
 				"radius"		"500"
 				"magic_resistance"	"-10 -15 -20 -25"
 				"duration"			"8"
