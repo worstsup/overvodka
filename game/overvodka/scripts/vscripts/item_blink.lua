@@ -1,0 +1,28 @@
+--[[ ============================================================================================================
+	Author: Rook, with help from some of Pizzalol's SpellLibrary code
+	Date: January 25, 2015
+	Called when Blink Dagger is cast.  Blinks the caster in the targeted direction.
+	Additional parameters: keys.MaxBlinkRange and keys.BlinkRangeClamp
+================================================================================================================= ]]
+function item_blink_datadriven_on_spell_start(keys)
+	ProjectileManager:ProjectileDodge(keys.caster)  --Disjoints disjointable incoming projectiles.
+	
+	ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, keys.caster)
+	EmitGlobalSound( "byebye" )
+	local team = keys.caster:GetTeam()
+	local target_point = 0
+	local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
+	for _,fountainEnt in pairs( fountainEntities ) do
+		if fountainEnt:GetTeamNumber() == keys.caster:GetTeamNumber() then
+			target_point = fountainEnt:GetAbsOrigin()
+			break
+		end
+    end
+	local origin_point = keys.caster:GetAbsOrigin()
+	local difference_vector = target_point - origin_point
+	
+	keys.caster:SetAbsOrigin(target_point)
+	FindClearSpaceForUnit(keys.caster, target_point, false)
+	
+	ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, keys.caster)
+end

@@ -1,0 +1,51 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc36:version{972dada4-b828-45a4-bb93-7795cf0585da} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "TextureGeneratorList"
+				children = 
+				[
+					{
+						_class = "TextureGenerator_CavityMap"
+						filename = "$modelname$_cavity"
+						output_resolution = 1024
+						mesh_node_name = ""
+						material_filter = ""
+						dilation = 4
+						num_samples = 16
+						surface_offset = 0.1
+						trace_distance = 1.0
+						remap_min = 0.0
+						remap_max = 1.0
+						ao_map = ""
+						ao_power = 1.0
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/props_gameplay/dmx/mesh/jeep.fbx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		document_sub_type = "ModelDocSubType_None"
+	}
+}

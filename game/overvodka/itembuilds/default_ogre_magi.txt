@@ -1,0 +1,37 @@
+"itembuilds"
+{
+	"author"		"Overvodka"
+	"hero"			"npc_dota_hero_ogre_magi"
+	"Title"			"Overvodka"
+	
+	"Items"
+	{		
+		"#DOTA_Item_Build_Starting_Items"
+		{
+			"item"		"item_ward_observer"
+			"item"		"item_boots"
+			"item"		"item_chapman_red"
+		}
+		
+		"#DOTA_Item_Build_Early_Game"
+		{
+			"item"		"item_balbe"
+			"item"		"item_hqd"
+			"item"		"item_aghanims_shard"
+
+		}
+		"#DOTA_Item_Build_Late_Items"
+		{
+			"item"		"item_nikes"
+			"item"		"item_waka"
+			"item"		"item_kaska"
+			"item"		"item_govno"
+			"item"		"item_ultimate_scepter"
+			"item"		"item_pasito"
+		}
+		"#DOTA_Item_Build_Luxury"
+		{
+			"item"		"item_invis_sword_datadriven"
+		}
+	}
+}

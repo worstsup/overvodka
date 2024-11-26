@@ -1,0 +1,12 @@
+"AddonInfo"
+
+{
+	maps 			"forest_solo"
+	"IsPlayable" 	"1"
+	"HeroGuideSupported" "1"
+	"forest_solo"
+	{
+		"MaxPlayers" 	 "10"
+	}
+	
+}

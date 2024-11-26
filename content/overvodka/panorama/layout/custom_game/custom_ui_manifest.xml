@@ -1,0 +1,41 @@
+<root>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/custom_ui_manifest.js" />
+	</scripts>
+	<Panel>
+		<CustomUIElement type="HudTopBar"			layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overthrow_item_notification.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overthrow_skill_panel.xml" />
+		<CustomUIElement type="GameSetup"			layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
+		<CustomUIElement type="FlyoutScoreboard"	layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml" />
+		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
+		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
+		<CustomUIElement type="EndScreen" 			layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" />
+		<CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ursa.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_loban.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_litvin.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_mellstroy.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ilin.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_golmy.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zombill.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_senya.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_mrus.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_sega.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_lev.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_vova.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_step.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ivanov.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_kirill.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_dmb.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_stariy.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_dima.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_orlov.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_tamaev.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_arsen.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_nix.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_pirat.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zolo.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_pudge.png" />
+	</Panel>
+</root>

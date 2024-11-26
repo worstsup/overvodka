@@ -1,0 +1,78 @@
+﻿"addon"
+{
+	"PointsToWin"									"Ещё {d:points_to_win}"
+	"PointsToWin_CloseToVictory"					"Ещё {d:points_to_win}"
+	"PointsToWin_VeryCloseToVictory"				"Ещё {d:points_to_win}!"
+	"PointsToWin_Victory"							"Победа!"
+
+	"InstructionsTitle"								"OVERVODKA"
+	"InstructionsObjective"							"ЦЕЛЬ"
+	"InstructionsObjectiveText"						"Уничтожайте врагов! Наберите необходимое число убийств первыми или совершите наибольшее число убийств к концу раунда, и победа будет за вами."
+	"InstructionsHowToPlay"							"ПРАВИЛА"
+	"InstructionsLines"								"— Трон Мидаса даёт дополнительное бабло и опыт.<br>
+													— Хватайте гигантские монеты в центре карты, чтобы получить ещё больше золота.<br>
+													— Следите за картой: на ней показано, где появятся сундуки с предметами.<br>
+													— Чем меньше убийств у вашей команды, тем лучше предметы, которые вы получите из сундуков.<br>
+													— Убивайте всех, кто не в вашей команде (сфокусируйтесь на ильине)."
+
+	"Scoreboard_Goal"								"Цель"
+
+	"Chest"											"НЕЙТРАЛЬНЫЙ ПРЕДМЕТ"
+	"ItemWillSpawn"									"ВОТ-ВОТ БУДЕТ ДОСТАВЛЕН!"
+	"ItemHasSpawned"								"ПРИГОТОВЬТЕСЬ ТАПАТЬ ХОМЯЧКА!"
+	"HamsterSpawn"									"СКОРЕЕ ТАПАЙТЕ ХОМЯЧКА!"
+	"HamsterSpawnAnnounce"							"ВРЕМЯ HAMSTER KOMBAT!"
+	"HamsterWillSpawn"								"СКОРО В МИДЕ ПОЯВИТСЯ HAMSTER KOMBAT!"
+
+	"RecentScore"									"+{d:score}"
+
+	"Unassigned"      								"Неопределившиеся"
+	"Spectator"       								"Наблюдатели"
+	"Neutrals"        								"Нейтральная команда"
+	"NoTeam"          								"Нет команды"
+
+	"DOTA_GoodGuys"   								"Бирюзовые Сигмы"
+	"DOTA_BadGuys"    								"Жёлтые Нормисы"
+	"DOTA_Custom1"    								"Розовые Щавели"
+	"DOTA_Custom2"    								"Оранжевые Хайпики"
+	"DOTA_Custom3"    								"Синие Скуфы"
+	"DOTA_Custom4"    								"Зелёные Альтушки"
+	"DOTA_Custom5"    								"Коричневые Найк Про"
+	"DOTA_Custom6"    								"Голубые Зумеры"
+	"DOTA_Custom7"    								"Оливковые Краши"
+	"DOTA_Custom8"    								"Фиолетовые Вайбики"
+	
+	"OverthrowHeroPickup"							"{s:hero_id}"
+	"OverthrowTextPickup"							"ПОЛУЧИЛ"
+	"OverthrowItemPickup"							"{s:item_id}!"
+
+	"Remaining"										"ОСТАЛОСЬ"
+
+	"Overtime"										"ДОБАВОЧНОЕ ВРЕМЯ!"
+	"OvertimeInstructions"							"УБИВАЙТЕ, ЧТОБЫ ПОБЕДИТЬ"
+
+	"KillMessageHero"								"{s:hero_id}"
+	"KillMessageText"								"ЗАЕБАШИЛ ЛИДЕРА"
+	"KillMessageBounty"								"И ПОЛУЧАЕТ 500 ЗОЛОТА СВЕРХУ!"
+	
+	"addonname"										"OVERVODKA"
+	"overthrow_game_info_header_objective"			"Цель:"
+	"overthrow_brief_description"					"Уничтожайте, ебите врагов! Первый, кто наберёт достаточно убийств, победит!"
+	"overthrow_game_info_header_how_to_play"		"Подсказки:"
+	"overthrow_game_info_throne"					"<span class='midas_throne'>Трон Мидаса</span> даёт дополнительные <span class='gold'>золото</span> и <span class='xp'>опыт</span>"
+	"overthrow_game_info_coins"						"Хватайте гигантские монеты <span class='overboss'>в центре карты</span>, чтобы получить ещё больше <span class='gold'>золота</span>."
+	"overthrow_game_info_items"						"Следите за <span class='treasure'>картой</span>: на ней показано, где появятся сундуки с <span class='items'>нейтральными предметами</span>."
+	"overthrow_game_info_tips_header"				"Советы:"
+	"overthrow_game_info_tip01"						"Текущий лидер имеет золотую корону, и вы получите дополнительное золото за его убийство."
+	"overthrow_game_info_tip03"						"Возможно, чтобы убить сильного врага, вам придётся использовать ЛЕЩ и действовать сообща с другими противниками."
+	"overthrow_game_info_tip04"						"Чем меньше убийств совершила ваша команда, тем сильнее нейтральные предметы, которые вы получаете из сундуков."
+	
+	//crow_mask_66_comment
+	//crow_mask_67_comment
+	//crow_mask_68_comment
+	//crow_mask_69_comment
+	//crow_mask_70_comment
+	//crow_mask_71_comment
+	//crow_mask_72_comment
+}
+

@@ -1,0 +1,6 @@
+<root>
+  <Panel class="OverthrowLoadingRoot">
+      <Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_phoenix.png" />
+      <Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_riki.png" />
+  </Panel>
+</root>

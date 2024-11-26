@@ -1,0 +1,10 @@
+ashab_train = class({})
+LinkLuaModifier( "modifier_train", "modifier_train", LUA_MODIFIER_MOTION_NONE )
+
+--------------------------------------------------------------------------------
+
+function ashab_train:OnSpellStart()
+	EmitGlobalSound( "ashab_train" )
+	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_train", { duration = self:GetSpecialValueFor( "duration" ) } )
+end
+--------------------------------------------------------------------------------
