@@ -15280,6 +15280,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
 		// Ability Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -15658,6 +15659,7 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityTextureName"     "zolo_tabletki"
 		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityCastAnimation"				"ACT_DOTA_CAST_ABILITY_3"
 		"MaxLevel"              	"1"
 		"IsGrantedByShard"      "1"
 		"AbilityCooldown"		"30"
@@ -15776,6 +15778,57 @@
 				"close_range"			"300"
 				"mid_evasion"			"20 25 30 35"
 				"min_evasion"			"15"
+		}
+	}
+	"viper_nethertoxin_lua"
+	{
+		// Ability Technical Aspect
+		// base script folder	: scripts/vscripts
+		// base texture folder	: resource/flash3/images/spellicons
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"viper_nethertoxin_lua"
+		"AbilityTextureName"			"viper_nethertoxin"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_viper.vsndevts"
+			"particle"	"particles/molotov_fire.vpcf"
+			"particle"	"particles/grenade_proj.vpcf"
+			"particle"	"particles/viper_immortal_ti8_nethertoxin_proj_new.vpcf"
+			"particle"	"particles/fire_barracks_new.vpcf"
+			"particle"	"particles/grenade_explosion.vpcf"
+		}
+		
+		// Ability General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+
+		// Ability Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.2"
+		"AbilityCastRange"				"1200"
+
+		// Ability Resource
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"6.0"
+		"AbilityManaCost"				"70 80 90 100"
+
+		// Damage
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage"			"50 100 150 200"
+				"radius"		"500"
+				"magic_resistance"	"-10 -15 -20 -25"
+				"duration"			"8"
+				"projectile_speed"	"600"
 		}
 	}
 }

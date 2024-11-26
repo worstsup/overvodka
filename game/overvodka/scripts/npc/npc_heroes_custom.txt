@@ -1775,7 +1775,7 @@
 		"HeroSelectSoundEffect"		"Hero_Clinkz.Pick"
 		"GibType"		"default"
 		"Ability1"		"generic_hidden"
-		"Ability2"		"clinkz_tar_bomb"
+		"Ability2"		"viper_nethertoxin_lua"
 		"Ability3"		"custom_passive_evasion"
 		"Ability4"		"leaping_stride"
 		"Ability5"		"generic_hidden"
