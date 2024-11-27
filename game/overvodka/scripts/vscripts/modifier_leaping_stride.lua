@@ -14,7 +14,7 @@ end
 
 function modifier_leaping_stride:OnIntervalThink()
     if not IsServer() then return end
-
+    if self:GetParent():HasModifier("modifier_custom_critical_strike") then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
     if parent:IsStunned() or parent:IsRooted() then
@@ -97,6 +97,7 @@ end
 function modifier_leaping_stride:OnAttack( params )
     if params.attacker~=self:GetParent() then return end
     if self:GetParent():HasModifier("modifier_windranger_focus_fire_lua") then return end
+    if self:GetParent():HasModifier("modifier_custom_critical_strike") then return end
     self:GetParent():EmitSound("scout")
 end
 function modifier_leaping_stride:OnOrder(keys)

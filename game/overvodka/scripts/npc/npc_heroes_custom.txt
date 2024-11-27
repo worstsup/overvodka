@@ -1774,13 +1774,13 @@
 		"LoadoutScale"		"0.9"
 		"HeroSelectSoundEffect"		"Hero_Clinkz.Pick"
 		"GibType"		"default"
-		"Ability1"		"generic_hidden"
-		"Ability2"		"clinkz_tar_bomb"
-		"Ability3"		"custom_passive_evasion"
-		"Ability4"		"leaping_stride"
-		"Ability5"		"generic_hidden"
+		"Ability1"		"custom_critical_strike"
+		"Ability2"		"viper_nethertoxin_lua"
+		"Ability3"		"generic_hidden"
+		"Ability4"		"generic_hidden"
+		"Ability5"		"custom_passive_disarm"
 		"Ability6"		"windranger_focus_fire_lua"
-		"Ability7"		"generic_hidden"
+		"Ability7"		"leaping_stride"
 		"Ability10"		"special_bonus_unique_clinkz_1"
 		"Ability11"		"special_bonus_unique_clinkz_10"
 		"Ability12"		"special_bonus_attack_range_75"
@@ -1793,15 +1793,33 @@
 		{
 			"clinkz_suppressive_fire" 
 			{
-				"Icon"				"no_vision"
+				"Icon"				"vision"
 				"Color"				"Gray"
 				"GradientID"		"3"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"custom_vision_aura"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+				}
 			}
 			"clinkz_engulfing_step" 
 			{
 				"Icon"				"teleport"
 				"Color"				"Yellow"
 				"GradientID"		"0"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"custom_passive_evasion"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+				}
 			}
 		}
 		"ArmorPhysical"		"0"

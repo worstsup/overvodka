@@ -15247,11 +15247,19 @@
     "BaseClass"                 "ability_lua"
     "ScriptFile"                "leaping_stride.lua"
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"        "serega_opa" // Replace with your icon
     "AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"				"1"
     "Innate"						"1"
 	"MaxLevel"						"1"
+	"AbilityValues"
+		{
+			"interval"
+			{
+				"value"	"0.65"
+			}
+			"base_dist"	"100"
+			"speed_dist" 	"40"
+		}
 	}
 	"mars_gods_rebuke_lua"
 	{
@@ -15280,6 +15288,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
 		// Ability Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -15658,6 +15667,7 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityTextureName"     "zolo_tabletki"
 		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityCastAnimation"				"ACT_DOTA_CAST_ABILITY_3"
 		"MaxLevel"              	"1"
 		"IsGrantedByShard"      "1"
 		"AbilityCooldown"		"30"
@@ -15789,5 +15799,127 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
 		"IsCastableWhileHidden" 		"1"
 		"IsOnCastBar"					"0"
+	}
+	
+	"viper_nethertoxin_lua"
+	{
+		// Ability Technical Aspect
+		// base script folder	: scripts/vscripts
+		// base texture folder	: resource/flash3/images/spellicons
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"viper_nethertoxin_lua"
+		"AbilityTextureName"			"randomgranade"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_viper.vsndevts"
+			"particle"	"particles/molotov_fire.vpcf"
+			"particle"	"particles/grenade_proj.vpcf"
+			"particle"	"particles/viper_immortal_ti8_nethertoxin_proj_new.vpcf"
+			"particle"	"particles/smoke_proj.vpcf"
+			"particle"	"particles/fire_barracks_new.vpcf"
+			"particle"	"particles/grenade_explosion.vpcf"
+			"particle"	"particles/riki_smokebomb_ti8_new.vpcf"
+		}
+		
+		// Ability General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+
+		// Ability Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.2"
+		"AbilityCastRange"				"1200"
+
+		// Ability Resource
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20.0 18.0 16.0 14.0"
+		"AbilityManaCost"				"80 100 120 140"
+
+		// Damage
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"damage"			"50 100 150 200"
+				"damage_exp"		"100 200 300 400"
+				"slow"			"50"
+				"slow_dur"		"1"
+				"radius"		"500"
+				"magic_resistance"	"0"
+				"misses"			"35 50 65 80"
+				"duration"			"8"
+				"projectile_speed"	"600"
+		}
+	}
+	"custom_vision_aura"
+	{
+    		"BaseClass"           "ability_lua"
+    		"ScriptFile"          "custom_vision_aura.lua"
+    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    		"AbilityTextureName"			"viper_nethertoxin"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    		"AbilityCooldown"     "60 55 50 45"  // Cooldown for the global vision
+    		"AbilityManaCost"     "100 125 150 175" // Mana cost for the global vision
+    		"AbilityCastRange"		"400 500 600 700"
+    		"AbilityValues"
+		{
+				"radius"			"400 500 600 700"
+				"duration"		"4.0 4.5 5.0 5.5"
+		}
+	}
+	"custom_critical_strike"
+	{
+    		"BaseClass"           "ability_lua"
+    		"ScriptFile"          "custom_critical_strike.lua"
+   		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+   		"AbilityCooldown"     "30"  // Cooldown of the ability
+   		"AbilityManaCost"     "80 100 120 140"  // Mana cost of the ability
+   		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+   		 "AbilityTextureName"  "phantom_assassin_coup_de_grace"
+   		"AbilityValues"
+		{
+				"crit_mult"		"150 175 200 225"
+				"duration"		"6.0"
+				"slow"			"-15"
+		}
+	}
+	"custom_passive_disarm"
+	{
+    		"BaseClass"           "ability_lua"
+    		"ScriptFile"          "custom_passive_disarm.lua"
+    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    		"AbilityCooldown"     "10" 
+    		"AbilityTextureName"  "tazer"
+    		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"				"1"
+		"AbilityCastRange"		"200"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+    		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+    		"AbilityValues"
+		{
+				"radius"			"200"
+				"duration"		"3.0"
+				"damage"			"400"
+				"chance"			"15"
+				"interval"		"0.5"
+		}
 	}
 }

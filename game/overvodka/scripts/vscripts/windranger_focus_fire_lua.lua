@@ -55,6 +55,6 @@ function windranger_focus_fire_lua:OnSpellStart()
 	end
 
 	-- Play effects
-	local sound_cast = "Ability.Focusfire"
+	local sound_cast = "scar_start"
 	EmitSoundOn( sound_cast, caster )
 end
