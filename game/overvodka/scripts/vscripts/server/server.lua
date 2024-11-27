@@ -61,6 +61,12 @@ function Server:OnPlayerConnected(event)
         }
 
         if SteamID ~= 0 then
+
+            if table.contains(SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES, SteamID) then
+                self.Players[event.PlayerID].ServerData.active = true
+                self.Players[event.PlayerID].ServerData.permanent = true
+            end
+
             cprint('[Server] Trying to get profile of '..event.PlayerID..' PlayerID and '..SteamID..' SteamID')
 
             self:SendRequest(SERVER_URL.."get_player_profile", {SteamID=SteamID}, function(ResultData)
