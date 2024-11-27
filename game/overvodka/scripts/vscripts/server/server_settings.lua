@@ -16,6 +16,7 @@ SERVER_ATTEMPT_INTERVAL = 1
 --Список для оффлайн игры (без сервера)
 SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     188428188,
+    409188637,
 }
 
 --Длительность перезарядки типа
