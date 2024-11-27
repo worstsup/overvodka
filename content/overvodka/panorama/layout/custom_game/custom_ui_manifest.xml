@@ -37,6 +37,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_nix.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_pirat.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zolo.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_pudge.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_clinkz.png" />
 	</Panel>
 </root>
