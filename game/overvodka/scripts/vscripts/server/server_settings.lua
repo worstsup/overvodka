@@ -2,7 +2,7 @@
 SERVER_URL = 'https://overvodka.ru/api/'
 
 -- Ключ кастомки
-SERVER_KEY = "TEST"--GetDedicatedServerKeyV3('overvodka')
+SERVER_KEY = GetDedicatedServerKeyV3('overvodka')
 
 -- Сколько милисекунд ждать ответ от сервера за каждую попытку соединения
 SERVER_ONE_TRY_WAIT_TIME = 10000
@@ -15,7 +15,7 @@ SERVER_ATTEMPT_INTERVAL = 1
 
 --Список для оффлайн игры (без сервера)
 SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
-    -- 188428188,
+    188428188,
 }
 
 --Длительность перезарядки типа
