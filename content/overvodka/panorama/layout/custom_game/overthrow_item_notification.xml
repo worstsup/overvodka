@@ -4,6 +4,7 @@
 		<include src="file://{resources}/styles/custom_game/overthrow_item_notification.css" />
 	</styles>
 	<scripts>
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
 		<include src="file://{resources}/scripts/custom_game/overthrow_notification.js" />
 	</scripts>
 	<Panel hittest="false" class="OverthrowNotification">

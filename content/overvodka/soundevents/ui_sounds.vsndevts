@@ -1,0 +1,40 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+    UUI_SOUNDS.NoGold = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/magic_immune.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.PlayerTipped = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/misc/ti11_tip_gold.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Button = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/buttonclick.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+}

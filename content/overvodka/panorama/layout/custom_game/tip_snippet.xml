@@ -1,0 +1,21 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.css" />
+    	<include src="file://{resources}/styles/custom_game/player_hud.css" />
+  	</styles>
+
+    <Panel hittest="false" class="Tip">
+        <Panel hittest="false" class="TipPlayer">
+            <Image hittest="false" id="LeftPlayerHero" class="PlayerHero"/>
+            <Label id="LeftPlayerName" class="PlayerName" text="{s:LeftPlayerName}" />
+        </Panel>
+        <Panel hittest="false" class="TipDescription">
+            <Label class="TipText Large" text="#PLAYER_HUD_Tip_GoodGame1" />
+            <Label class="TipText" text="#PLAYER_HUD_Tip_GoodGame2" />
+        </Panel>
+        <Panel hittest="false" class="TipPlayer">
+            <Image hittest="false" id="RightPlayerHero" class="PlayerHero" />
+            <Label id="RightPlayerName" class="PlayerName" text="{s:RightPlayerName}" />
+        </Panel>
+    </Panel>
+</root>

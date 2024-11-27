@@ -1,0 +1,9 @@
+<root> 
+	<styles>
+    	<include src="file://{resources}/styles/custom_game/custom_chat_line.css" />
+  	</styles>
+  	<Panel class="CustomChatLine" hittest="false">
+		<Image id="HeroImage" />
+		<Label class="Text" text="{s:Text}" html="true"/>
+  	</Panel>
+</root>
