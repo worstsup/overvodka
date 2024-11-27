@@ -67,6 +67,8 @@ function Server:OnPlayerConnected(event)
                 self.Players[event.PlayerID].ServerData.permanent = true
             end
 
+            self:UpdatePlayerNetTable(event.PlayerID)
+
             cprint('[Server] Trying to get profile of '..event.PlayerID..' PlayerID and '..SteamID..' SteamID')
 
             self:SendRequest(SERVER_URL.."get_player_profile", {SteamID=SteamID}, function(ResultData)
