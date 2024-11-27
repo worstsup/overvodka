@@ -35,11 +35,10 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 
 	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );
 
-	var bTipsAvailable = GameUI.AreTipsAvailable();
-	playerPanel.SetHasClass( "TipsAvailable", bTipsAvailable );
-
-	var bIsPlayerTippable = GameUI.IsPlayerTippable( playerId );
-	playerPanel.SetHasClass( "PlayerTippable", bIsPlayerTippable );
+	let bIsLocalPlayerSubscribed = IsPlayerSubscribed(Game.GetLocalPlayerID());
+	let bIsPlayerSubscribed = IsPlayerSubscribed(playerId);
+	playerPanel.SetHasClass( "TipsAvailable", bIsLocalPlayerSubscribed );
+	playerPanel.SetHasClass( "IsSubscribed", bIsPlayerSubscribed );
 	
 	var ultStateOrTime = PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_HIDDEN; // values > 0 mean on cooldown for that many seconds
 	var goldValue = -1;
@@ -73,99 +72,8 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			if ( playerInfo.player_selected_hero !== "" )
 			{
 				let hero = playerInfo.player_selected_hero
-				if (playerInfo.player_selected_hero == "npc_dota_hero_sniper")
-				{
-					hero = "npc_dota_hero_ivanov"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_bounty_hunter")
-				{
-					hero = "npc_dota_hero_mellstroy"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_meepo")
-				{
-					hero = "npc_dota_hero_kirill"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_lion")
-				{
-					hero = "npc_dota_hero_lev"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_ursa")
-				{
-					hero = "npc_dota_hero_litvin"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_riki")
-				{
-					hero = "npc_dota_hero_sega"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_terrorblade")
-				{
-					hero = "npc_dota_hero_senya"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_tinker")
-				{
-					hero = "npc_dota_hero_ilin"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_pudge")
-				{
-					hero = "npc_dota_hero_step"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_brewmaster")
-				{
-					hero = "npc_dota_hero_golmy"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_phoenix")
-				{
-					hero = "npc_dota_hero_orlov"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_axe")
-				{
-					hero = "npc_dota_hero_dima"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_undying")
-				{
-					hero = "npc_dota_hero_dmb"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_invoker")
-				{
-					hero = "npc_dota_hero_zombill"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_kunkka")
-				{
-					hero = "npc_dota_hero_vova"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_rubick")
-				{
-					hero = "npc_dota_hero_mrus"
-				}	
-				if (playerInfo.player_selected_hero == "npc_dota_hero_monkey_king")
-				{
-					hero = "npc_dota_hero_loban"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_zuus")
-				{
-					hero = "npc_dota_hero_stariy"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_tidehunter")
-				{
-					hero = "npc_dota_hero_tamaev"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_earthshaker")
-				{
-					hero = "npc_dota_hero_arsen"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_furion")
-				{
-					hero = "npc_dota_hero_nix"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_antimage")
-				{
-					hero = "npc_dota_hero_pirat"
-				}
-				if (playerInfo.player_selected_hero == "npc_dota_hero_ogre_magi")
-				{
-					hero = "npc_dota_hero_zolo"
-				}					
-				playerPortrait.SetImage( "file://{images}/heroes/" + hero + ".png" );
+				let OvervodkaHeroName = GetOvervodkaHeroName(hero)
+				playerPortrait.SetImage( "file://{images}/heroes/" + OvervodkaHeroName + ".png" );
 			}
 			else
 			{

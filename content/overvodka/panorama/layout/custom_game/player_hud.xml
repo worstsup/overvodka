@@ -1,0 +1,67 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/player_hud.js" />
+    </scripts>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.css" />
+    	<include src="file://{resources}/styles/custom_game/player_hud.css" />
+  	</styles>
+
+    <snippets>
+        <!-- <snippet name="HistoryRow">
+            <Panel hittest="false" class="HistoryRow">
+                <Panel hittest="false" class="HistoryRowBackground"/>
+                <Label class="HistoryRowText" text="{s:PlayerName}" />
+            </Panel>
+        </snippet> -->
+    </snippets>
+
+    <Panel class="PlayerHUD" hittest="false">
+        <Panel id="SubscribeButton" onactivate="ToggleSubscribePanel();"/>
+        <Panel hittest="false" id="SubscribePanel">
+            <Panel id="SubscribePanelBody">
+                <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>
+
+                <Label class="SubscribeDescriptionHeader" id="SubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_DescriptionHeader"/>
+                <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
+                <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
+                <Panel id="HighFivePreview" />
+                <Panel id="EffectPreview" />
+                <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
+                    <Panel class="Wrapper">
+                        <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                        <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
+                        <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                    </Panel>
+                </Panel>
+                <Panel id="CloseButton" onactivate="CloseSubscribePanel();"/>
+                <Panel id="SubscribedEndDatePanel">
+                    <Label class="SubscribedEndDateText" text="#PLAYER_HUD_Subscribed_Works" />
+                    <Label class="SubscribedEndDateDate" text="{s:EndDate}" />
+                </Panel>
+            </Panel>
+            <Panel id="TipPreview" />
+            <Panel id="OvervodkaHamster" />
+        </Panel>
+
+        <!-- <Panel id="TestButton" onactivate="TipPlayer();"/> -->
+
+        <Panel hittest="false" id="TipsContainer">
+
+        </Panel>
+
+
+        <Panel hittest="false" id="DFGMSecondaryAbilities">
+            <Panel hittest="true" class="DFGMSecondaryAbility" id="HighFive" onmouseover="DOTAShowTextTooltip('#PLAYER_HUD_High_five')" onmouseout="DOTAHideTextTooltip()">
+                <Panel hittest="true" class="DFGMSABack"/>
+                <Panel hittest="true" class="DFGMSAIcon"/>
+                <Label hittest="true" class="DFGMSACount" text="{s:cd}"/>
+                <Panel hittest="false" id="KeyBind">
+                    <Label hittest="false" id="KeyText" text="{s:BindKey}"/>
+                </Panel>
+                <Panel hittest="true" class="DFGMSALoading"/>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

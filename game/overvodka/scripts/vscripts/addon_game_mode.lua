@@ -19,6 +19,8 @@ end
 require( "events" )
 require( "items" )
 require( "utility_functions" )
+require('utils')
+require('server/server')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -105,6 +107,7 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf", context )
 		PrecacheResource( "particle", "particles/zuus_base_attack_new.vpcf", context )
+		PrecacheResource( "particle", "particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf", context )
 		PrecacheResource("particle_folder",  "particles/units/heroes/hero_alchemist", context )
 	--Cache particles for traps
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
@@ -153,6 +156,7 @@ function Precache( context )
 
 	-- Cache overthrow-specific sounds
 		PrecacheResource( "soundfile", "soundevents/game_sounds_overthrow.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/ui_sounds.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/vpis.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/serega_topor.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/pirat_start.vsndevts", context )
@@ -516,7 +520,7 @@ function COverthrowGameMode:InitGameMode()
 	-- Show the ending scoreboard immediately
 	GameRules:SetCustomGameEndDelay( 0 )
 	GameRules:SetCustomVictoryMessageDuration( 10 )
-	GameRules:SetCustomGameSetupTimeout( 0.0 )
+	GameRules:SetCustomGameSetupTimeout( 0 )
 	GameRules:SetPreGameTime( 10.0 )
 	GameRules:SetStrategyTime( 20.0 )
 	if self.m_bFastPlay then

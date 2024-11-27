@@ -9,6 +9,29 @@
 		"HeroPickPhase"									"Выбор героя ЕПТА!"
 		"StrategyPhase"									"Планирование ЕПТА!"
 
+		"LOADING_SCREEN_Telegramm"						"Наш Телеграм"
+		"PLAYER_HUD_High_five"							"Дать пять!"
+
+		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"
+		"PLAYER_HUD_Subscribe_Buy"						"Купить"
+		"PLAYER_HUD_Subscribe_Subscribed_Buy"			"Продлить"
+		"PLAYER_HUD_Subscribed_Works"					"Действует до:"
+		"PLAYER_HUD_Subscribe_Permanent"				"Навсегда"
+		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span> вы получаете:"
+		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"Подписка <span class='OvervodkaName'>Overvodka Prime</span> активна! Вы получаете:"
+
+		"PLAYER_HUD_Subscribe_Description"				"- Возможность давать пять;<br>- Возможность благодарить других игроков за хорошую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
+
+		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
+		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
+
+		"PLAYER_HUD_Error_Tip_Cooldown"					"Перезарядка"
+
+		"PLAYER_HUD_Tip_Top"							"Лох"
+		"PLAYER_HUD_TIPPED"								"типает"
+		"PLAYER_HUD_TIPPED_Text"						"Ебать ты лох"
+
+
 		"DOTA_Tooltip_modifier_get_xp"					"Аура супер-еврейства"
 		"DOTA_Tooltip_modifier_get_xp_Description"		"Это существо становится пиздец богатым"
 

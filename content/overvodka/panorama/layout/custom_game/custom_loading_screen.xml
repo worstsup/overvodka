@@ -3,9 +3,16 @@
 		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
 		<include src="file://{resources}/styles/custom_game/custom_loading_screen.css" />
 	</styles>
-	<Panel class="OverthrowLoadingRoot">
-		<Panel id="seq" >
-			<Image id="seq_bg" class="SeqBg" src="file://{images}/custom_game/loading_screen/loading_screen.png" />
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/custom_loading_screen.js" />
+	</scripts>
+	<Panel class="LoadingScreen">
+		<Image id="BackgroundImage" src="file://{images}/custom_game/loading_screen/loading_screen.png" />
+		<Panel id="TelegramButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka')">
+			<Panel id="TelegramPanel">
+				<Label class="TelegramText" text="#LOADING_SCREEN_Telegramm" />
+			</Panel>
+			<Image id="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
 		</Panel>
 	</Panel>
 </root>

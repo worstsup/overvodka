@@ -1,0 +1,36 @@
+.CustomChatLine{
+    flow-children: right;
+}
+
+.Text{
+    color: #faeac9;
+    margin-left: 5px;
+    text-shadow: 1px 1.5px 0px 2 #000000;
+}
+
+DOTAChat#HudChat .ChatLine.Expired{
+    opacity: 1;
+}
+
+DOTAChat#HudChat .ChatLine.ExpireThis{
+    opacity: 0;
+}
+
+#HeroImage{
+    width: 40px;
+    height: 23px;
+    margin-left: 32px;
+    border: 1px solid black;
+}
+
+.ChatWheelIcon{
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.SpecialField{
+    font-weight: bolder;
+    color: white;
+}
