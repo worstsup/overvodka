@@ -242,6 +242,13 @@
 		"DOTA_Tooltip_ability_custom_critical_strike_slow" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_modifier_custom_critical_strike" "AWP"
 		"DOTA_Tooltip_modifier_custom_critical_strike_Description" "Герой двигается медленнее, но наносит крит. урон"
+		"DOTA_Tooltip_ability_custom_passive_disarm" "ZEUS X27"
+		"DOTA_Tooltip_ability_custom_passive_disarm_Description" "Если рядом с читером окажется вражеский герой, то он имеет шанс ударить его электрошокером, нанеся ему урон и наложив бессилие."
+		"DOTA_Tooltip_ability_custom_passive_disarm_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_custom_passive_disarm_duration" "ДЛИТЕЛЬНОСТЬ БЕССИЛИЯ:"
+		"DOTA_Tooltip_ability_custom_passive_disarm_damage" "УРОН:"
+		"DOTA_Tooltip_ability_custom_passive_disarm_chance" "%ШАНС:"
+		"DOTA_Tooltip_ability_custom_passive_disarm_interval" "ИНТЕРВАЛ:"
 
 		"DOTA_Tooltip_ability_mars_gods_rebuke_lua" "ЭНЕРГЕТИЧЕСКИЙ МОНСТР"
 		"DOTA_Tooltip_ability_mars_gods_rebuke_lua_Description" "Иван выпускает наружу своего энергетического монстра, чтобы создать мощную волну, наносящую критический урон врагам и накладывающую бессилие."

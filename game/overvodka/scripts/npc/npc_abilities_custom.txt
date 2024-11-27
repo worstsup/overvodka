@@ -15885,4 +15885,28 @@
 				"slow"			"-15"
 		}
 	}
+	"custom_passive_disarm"
+	{
+    		"BaseClass"           "ability_lua"
+    		"ScriptFile"          "custom_passive_disarm.lua"
+    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    		"AbilityCooldown"     "10" 
+    		"AbilityTextureName"  "tazer"
+    		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"				"1"
+		"AbilityCastRange"		"200"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+    		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+    		"AbilityValues"
+		{
+				"radius"			"200"
+				"duration"		"3.0"
+				"damage"			"400"
+				"chance"			"15"
+				"interval"		"0.5"
+		}
+	}
 }
