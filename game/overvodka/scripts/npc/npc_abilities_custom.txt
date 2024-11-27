@@ -15749,7 +15749,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0"
-		"AbilityDuration"				"5.0 6.0 7.0 8.0"
 
 		// Ability Resource
 		//-------------------------------------------------------------------------------------------------------------
@@ -15765,7 +15764,16 @@
 		{
 				"bonus_attack_speed"			"450"
 				"focusfire_damage_reduction"	"-30 -20 -10"
-				"focusfire_duration_tooltip"	"6 7 8"
+				"AbilityDuration"
+				{
+					"value"	"5.0 6.0 7.0 8.0"
+					"special_bonus_unique_nyx_carapace_reflect_duration" "+2.0"
+				}
+				"focusfire_duration_tooltip"
+				{
+					"value"	"6 7 8"
+					"special_bonus_unique_nyx_carapace_reflect_duration" "+2"
+				}
 				"focusfire_fire_on_the_move"	"1"
 		}
 	}
@@ -15774,7 +15782,7 @@
     	"BaseClass"               "ability_lua"
     	"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     	"ScriptFile"              "custom_passive_evasion"   // The name of the Lua file (exclude the `.lua` extension)
-    	"AbilityTextureName"      "serega_topor"           // Optional: Replace with your custom icon texture name if available
+    	"AbilityTextureName"      "antiaim"           // Optional: Replace with your custom icon texture name if available
     	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"				"1"
 	"MaxLevel"						"4"
@@ -15785,7 +15793,11 @@
 				"max_evasion"			"30 40 50 60"
 				"close_range"			"300"
 				"mid_evasion"			"20 25 30 35"
-				"min_evasion"			"15"
+				"min_evasion"
+				{
+					"value"	"15"
+					"special_bonus_unique_clinkz_9" "+10"
+				}
 		}
 	}
 	"viper_nethertoxin_lua"
@@ -15796,7 +15808,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"viper_nethertoxin_lua"
-		"AbilityTextureName"			"randomgranade"
+		"AbilityTextureName"			"granade"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"precache"
@@ -15836,6 +15848,11 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
+				"AbilityCooldown"
+				{
+					"value"	"22.0 20.0 18.0 16.0"
+					"special_bonus_unique_clinkz_8" "-4"
+				}
 				"damage"			"50 100 150 200"
 				"damage_exp"		"100 200 300 400"
 				"slow"			"50"
@@ -15852,7 +15869,7 @@
     		"BaseClass"           "ability_lua"
     		"ScriptFile"          "custom_vision_aura.lua"
     		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    		"AbilityTextureName"			"viper_nethertoxin"
+    		"AbilityTextureName"			"wallhack"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -15860,11 +15877,23 @@
     		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     		"AbilityCooldown"     "60 55 50 45"  // Cooldown for the global vision
     		"AbilityManaCost"     "100 125 150 175" // Mana cost for the global vision
-    		"AbilityCastRange"		"400 500 600 700"
     		"AbilityValues"
 		{
-				"radius"			"400 500 600 700"
-				"duration"		"4.0 4.5 5.0 5.5"
+				"AbilityCastRange"
+				{
+					"value"	"400 500 600 700"
+					"special_bonus_unique_clinkz_9" "+100"
+				}
+				"radius"
+				{
+					"value"	"400 500 600 700"
+					"special_bonus_unique_clinkz_9" "+100"
+				}
+				"duration"
+				{
+					"value"	"4.0 4.5 5.0 5.5"
+					"special_bonus_unique_clinkz_10" "+0.5"
+				}
 		}
 	}
 	"custom_critical_strike"
@@ -15877,12 +15906,25 @@
    		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-   		 "AbilityTextureName"  "phantom_assassin_coup_de_grace"
+   		 "AbilityTextureName"  "awp"
    		"AbilityValues"
 		{
-				"crit_mult"		"150 175 200 225"
+				"crit_mult"
+				{
+					"value"	"150 175 200 225"
+					"special_bonus_unique_clinkz_4" "+50"
+				}
 				"duration"		"6.0"
-				"slow"			"-15"
+				"slow"
+				{
+					"value"	"-20"
+					"special_bonus_unique_clinkz_1" "+10"
+				}
+				"extra_range"
+				{
+					"value"	"0"
+					"special_bonus_unique_clinkz_7" "+100"
+				}
 		}
 	}
 	"custom_passive_disarm"

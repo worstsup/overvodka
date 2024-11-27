@@ -10,6 +10,7 @@ function modifier_custom_critical_strike:DeclareFunctions()
         MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
         MODIFIER_EVENT_ON_ATTACK,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
     }
 end
 function modifier_custom_critical_strike:GetModifierMoveSpeedBonus_Percentage(params)
@@ -30,9 +31,12 @@ function modifier_custom_critical_strike:OnAttack( params )
     if params.attacker~=self:GetParent() then return end
     self:GetParent():EmitSound("awp")
 end
+function modifier_custom_critical_strike:GetModifierAttackRangeBonus(params)
+    return self:GetAbility():GetSpecialValueFor( "extra_range" )
+end
 -- Add particle effect on critical strikes (optional)
 function modifier_custom_critical_strike:GetEffectName()
-    return "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+    return "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
 end
 
 function modifier_custom_critical_strike:GetEffectAttachType()
