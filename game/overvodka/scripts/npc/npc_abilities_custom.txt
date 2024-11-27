@@ -15727,7 +15727,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"windranger_focus_fire_lua"
-		"AbilityTextureName"			"windranger_focus_fire"
+		"AbilityTextureName"			"aimlock"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"3"
 		"precache"
@@ -15738,7 +15738,7 @@
 		// Ability General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
@@ -15839,7 +15839,7 @@
 		// Ability General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
     		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -15894,12 +15894,12 @@
 		{
 				"AbilityCastRange"
 				{
-					"value"	"400 500 600 700"
+					"value"	"500 600 700 800"
 					"special_bonus_unique_clinkz_9" "+100"
 				}
 				"radius"
 				{
-					"value"	"400 500 600 700"
+					"value"	"500 600 700 800"
 					"special_bonus_unique_clinkz_9" "+100"
 				}
 				"duration"
@@ -15962,6 +15962,26 @@
 				"damage"			"400"
 				"chance"			"15"
 				"interval"		"0.5"
+		}
+	}
+	"custom_passive_autoshot"
+	{
+   		"BaseClass"                     "ability_lua"
+    		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+   		"ScriptFile"                    "custom_passive_autoshot"
+   		"AbilityTextureName"            "drow_ranger_trueshot"
+   		"FightRecapLevel"				"1"
+		"MaxLevel"					"1"
+		"Innate"						"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityValues"
+		{
+			"interval"
+			{
+				"value"	"0.65"
+			}
+			"base_dist"	"100"
+			"speed_dist" 	"40"
 		}
 	}
 }

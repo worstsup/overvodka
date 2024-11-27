@@ -9,13 +9,14 @@ function modifier_custom_vision_aura:OnCreated()
     self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
     self:StartIntervalThink(0.1)
 end
-
+function modifier_custom_vision_aura:OnRefresh()
+    self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
+end
 function modifier_custom_vision_aura:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     
     -- Provide vision and True Sight in a 900 radius
-    AddFOWViewer(parent:GetTeamNumber(), parent:GetAbsOrigin(), self.radius, 0.1, false)
     
     -- True Sight logic
     local enemies = FindUnitsInRadius(
@@ -31,6 +32,7 @@ function modifier_custom_vision_aura:OnIntervalThink()
     )
     
     for _, enemy in ipairs(enemies) do
+        AddFOWViewer(parent:GetTeamNumber(), enemy:GetAbsOrigin(), 50, 0.1, false)
         if enemy:IsInvisible() then
             enemy:AddNewModifier(parent, nil, "modifier_truesight", {duration = 0.2})
         end

@@ -26,8 +26,7 @@ end
 function viper_nethertoxin_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
-	local target = self:GetCursorTarget()
-	local point = target:GetOrigin()
+	local point = self:GetCursorPosition()
 	local vector = point-caster:GetOrigin()
 
 	-- load data
