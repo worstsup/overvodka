@@ -15930,12 +15930,12 @@
 				"duration"		"6.0"
 				"slow"
 				{
-					"value"	"-20"
+					"value"	"-50"
 					"special_bonus_unique_clinkz_1" "+10"
 				}
 				"extra_range"
 				{
-					"value"	"0"
+					"value"	"200"
 					"special_bonus_unique_clinkz_7" "+100"
 				}
 		}
