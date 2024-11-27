@@ -11,6 +11,8 @@ Ability checklist (erase if done/checked):
 --------------------------------------------------------------------------------
 viper_nethertoxin_lua = class({})
 LinkLuaModifier( "modifier_viper_nethertoxin_lua", "modifier_viper_nethertoxin_lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_cheater_slow", "modifier_cheater_slow", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_cheater_smoke", "modifier_cheater_smoke", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
 -- Custom KV
@@ -24,20 +26,8 @@ end
 function viper_nethertoxin_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
-	local point = caster:GetAbsOrigin()
-	local targets = FindUnitsInRadius(caster:GetTeamNumber(),
-		caster:GetAbsOrigin(),
-		nil,
-		1200,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_NONE,
-		FIND_CLOSEST,
-		false)
-	for _,unit in pairs(targets) do
-		point = unit:GetAbsOrigin()
-		break
-	end
+	local target = self:GetCursorTarget()
+	local point = target:GetOrigin()
 	local vector = point-caster:GetOrigin()
 
 	-- load data
@@ -67,18 +57,18 @@ function viper_nethertoxin_lua:OnSpellStart()
 	ProjectileManager:CreateLinearProjectile(info)
 
 	-- play effects
-	Chance = RandomInt(1,2)
+	Chance = RandomInt(1,3)
 	if Chance == 1 then
 		self:PlayEffects( point )
 	elseif Chance == 2 then
 		self:PlayEffects2( point )
+	elseif Chance == 3 then
+		self:PlayEffects4( point )
 	end
 end
 --------------------------------------------------------------------------------
 -- Projectile
 function viper_nethertoxin_lua:OnProjectileHit( target, location )
-	-- should be no target
-	if target then return false end
 	-- references
 	if Chance == 1 then
 		local duration = self:GetSpecialValueFor( "duration" )
@@ -94,6 +84,7 @@ function viper_nethertoxin_lua:OnProjectileHit( target, location )
 			false
 		)
 	elseif Chance == 2 then
+		local slow_duration = self:GetSpecialValueFor( "slow_dur" )
 		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
 			location,
 			nil,
@@ -105,9 +96,28 @@ function viper_nethertoxin_lua:OnProjectileHit( target, location )
 			false)
 		for _,unit in pairs(targets) do
 			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = self:GetSpecialValueFor( "damage_exp" ), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+			unit:AddNewModifier(
+				self:GetCaster(), -- player source
+				self, -- ability source
+				"modifier_cheater_slow", -- modifier name
+				{ duration = slow_duration } -- kv
+			)
 		end
 		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", self:GetCaster())
 		 self:PlayEffects3( location )
+	elseif Chance == 3 then
+		local duration = self:GetSpecialValueFor( "duration" )
+
+		-- create thinker
+		CreateModifierThinker(
+			self:GetCaster(), -- player source
+			self, -- ability source
+			"modifier_cheater_smoke", -- modifier name
+			{ duration = duration }, -- kv
+			location,
+			self:GetCaster():GetTeamNumber(),
+			false
+		)
 	end
 
 end
@@ -177,4 +187,31 @@ function viper_nethertoxin_lua:PlayEffects3( point )
 
     -- Release Particle
     ParticleManager:ReleaseParticleIndex(effect_cast)
+end
+
+function viper_nethertoxin_lua:PlayEffects4( point )
+	-- Get Resources
+	local particle_cast = "particles/smoke_proj.vpcf"
+	local sound_cast = "smoke_throw"
+
+	-- Get Data
+	local projectile_speed = self:GetSpecialValueFor( "projectile_speed" )
+
+	-- Create Particle
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
+	ParticleManager:SetParticleControlEnt(
+		effect_cast,
+		0,
+		self:GetCaster(),
+		PATTACH_POINT_FOLLOW,
+		"attach_attack1",
+		Vector(0,0,0), -- unknown
+		true -- unknown, true
+	)
+	ParticleManager:SetParticleControl( effect_cast, 1, Vector( projectile_speed, 0, 0 ) )
+	ParticleManager:SetParticleControl( effect_cast, 5, point )
+	ParticleManager:ReleaseParticleIndex( effect_cast )
+
+	-- Create Sound
+	EmitSoundOn( sound_cast, self:GetCaster() )
 end

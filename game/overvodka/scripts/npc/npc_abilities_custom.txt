@@ -15247,11 +15247,19 @@
     "BaseClass"                 "ability_lua"
     "ScriptFile"                "leaping_stride.lua"
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"        "serega_opa" // Replace with your icon
     "AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"				"1"
     "Innate"						"1"
 	"MaxLevel"						"1"
+	"AbilityValues"
+		{
+			"interval"
+			{
+				"value"	"0.65"
+			}
+			"base_dist"	"100"
+			"speed_dist" 	"40"
+		}
 	}
 	"mars_gods_rebuke_lua"
 	{
@@ -15797,14 +15805,18 @@
 			"particle"	"particles/molotov_fire.vpcf"
 			"particle"	"particles/grenade_proj.vpcf"
 			"particle"	"particles/viper_immortal_ti8_nethertoxin_proj_new.vpcf"
+			"particle"	"particles/smoke_proj.vpcf"
 			"particle"	"particles/fire_barracks_new.vpcf"
 			"particle"	"particles/grenade_explosion.vpcf"
+			"particle"	"particles/riki_smokebomb_ti8_new.vpcf"
 		}
 		
 		// Ability General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 
 		// Ability Casting
@@ -15814,8 +15826,8 @@
 
 		// Ability Resource
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"6.0"
-		"AbilityManaCost"				"70 80 90 100"
+		"AbilityCooldown"				"20.0 18.0 16.0 14.0"
+		"AbilityManaCost"				"80 100 120 140"
 
 		// Damage
 		//-------------------------------------------------------------------------------------------------------------
@@ -15826,8 +15838,11 @@
 		{
 				"damage"			"50 100 150 200"
 				"damage_exp"		"100 200 300 400"
+				"slow"			"50"
+				"slow_dur"		"1"
 				"radius"		"500"
-				"magic_resistance"	"-10 -15 -20 -25"
+				"magic_resistance"	"0"
+				"misses"			"35 50 65 80"
 				"duration"			"8"
 				"projectile_speed"	"600"
 		}
