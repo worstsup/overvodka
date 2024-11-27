@@ -108,6 +108,7 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf", context )
 		PrecacheResource( "particle", "particles/zuus_base_attack_new.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf", context )
+		PrecacheResource( "particle", "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", context )
 		PrecacheResource("particle_folder",  "particles/units/heroes/hero_alchemist", context )
 	--Cache particles for traps
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
