@@ -11,7 +11,7 @@
         </Panel>
         <Panel hittest="false" class="TipDescription">
             <Label class="TipText Large" text="#PLAYER_HUD_Tip_GoodGame1" />
-            <Label class="TipText" text="#PLAYER_HUD_Tip_GoodGame2" />
+            <Label class="TipText" text="#PLAYER_HUD_Tip_GoodGame2" /> 
         </Panel>
         <Panel hittest="false" class="TipPlayer">
             <Image hittest="false" id="RightPlayerHero" class="PlayerHero" />

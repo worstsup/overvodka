@@ -15734,7 +15734,6 @@
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
 		}
-		
 		// Ability General
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
@@ -15930,13 +15929,17 @@
 				"duration"		"6.0"
 				"slow"
 				{
-					"value"	"-50"
+					"value"	"-40"
 					"special_bonus_unique_clinkz_1" "+10"
 				}
 				"extra_range"
 				{
-					"value"	"200"
-					"special_bonus_unique_clinkz_7" "+100"
+					"value"	"300"
+					"special_bonus_unique_clinkz_7" "+200"
+				}
+				"attack_fixed"
+				{
+					"value"	"1.5"
 				}
 		}
 	}
@@ -15983,5 +15986,46 @@
 			"base_dist"	"100"
 			"speed_dist" 	"40"
 		}
+	}
+	"c4_bomb"
+	{
+    "BaseClass"               "ability_lua"
+    "ScriptFile"              "c4_bomb"
+    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityCooldown"     "120" 
+    "AbilityManaCost"     "300"
+    "FightRecapLevel"				"1"
+	"MaxLevel"						"1"
+	"IsGrantedByScepter"			"1"
+	"AbilityCastRange"		"200"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"AbilityCastPoint"				"2.2"
+    "AbilityValues"
+    {
+        "detonation_time"     "40"
+        "defuse_time"         "10"
+        "radius_defuse"        "300"
+        "radius_far"          "1800"
+    }
+	}
+"c4_ring"
+	{
+		// Ability Technical Aspect
+		// base script folder	: scripts/vscripts
+		// base texture folder	: resource/flash3/images/spellicons
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"c4_ring"
+		"AbilityTextureName"			"taunt"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		"AbilityCastRange"				"2100"
+		
+		// Ability General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 	}
 }

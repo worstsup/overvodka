@@ -3255,4 +3255,39 @@
 		"HasInventory"				"0"
 		"IsSummoned"            "1"
 	}
+	"npc_dota_c4_bomb"
+    {
+        "BaseClass"               "npc_dota_creature"
+        "Model"                   "cheater/models/heroes/cheat/c4_1.vmdl"  // Replace with your desired model
+        "SoundSet"                "Hero_Techies"
+        "Level"                   "1"
+        "IsSummoned"              "1"
+        "UnitLabel"               "c4_bomb"
+        "IsAncient"					"1"
+		"CanBeDominated"			"0"
+        "HealthBarOffset"         "200"
+        "StatusHealth"            "100000"  // Minimal health to make it easier to manage
+        "StatusHealthRegen"       "1000"
+        "StatusMana"              "0"
+        "StatusManaRegen"         "0"
+
+        "CombatClassAttack"       "DOTA_COMBAT_CLASS_ATTACK_NONE"
+        "CombatClassDefend"       "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+        "AttackCapabilities"      "DOTA_UNIT_CAP_NO_ATTACK"
+        "ArmorPhysical"           "1000"
+        "MagicalResistance"       "100"
+
+        "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_NONE"
+        "MovementSpeed"           "0"
+
+        "VisionDaytimeRange"      "0"
+        "VisionNighttimeRange"    "0"
+
+        "BoundsHullName"          "DOTA_HULL_SIZE_SMALL"
+        "BountyGoldMin"           "0"
+        "BountyGoldMax"           "0"
+        "BountyXP"                "0"
+
+        "Ability1"                "c4_ring" 
+    }
 }	

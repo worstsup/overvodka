@@ -4,6 +4,20 @@ function modifier_custom_critical_strike:IsHidden() return false end
 function modifier_custom_critical_strike:IsDebuff() return false end
 function modifier_custom_critical_strike:IsPurgable() return false end
 
+function modifier_custom_critical_strike:OnCreated()
+    if not IsServer() then return end
+    self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
+    self.attack = self:GetAbility():GetSpecialValueFor( "attack_fixed" )
+    self.crit_mult = self:GetAbility():GetSpecialValueFor( "crit_mult" )
+    self.extra_range = self:GetAbility():GetSpecialValueFor( "extra_range" )
+end
+
+function modifier_custom_critical_strike:OnRefresh( )
+    self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
+    self.attack = self:GetAbility():GetSpecialValueFor( "attack_fixed" )
+    self.crit_mult = self:GetAbility():GetSpecialValueFor( "crit_mult" )
+    self.extra_range = self:GetAbility():GetSpecialValueFor( "extra_range" )
+end
 -- Declare the properties modified
 function modifier_custom_critical_strike:DeclareFunctions()
     return {
@@ -11,10 +25,14 @@ function modifier_custom_critical_strike:DeclareFunctions()
         MODIFIER_EVENT_ON_ATTACK,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
+        MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
     }
 end
 function modifier_custom_critical_strike:GetModifierMoveSpeedBonus_Percentage(params)
-    return self:GetAbility():GetSpecialValueFor( "slow" )
+    return self.slow
+end
+function modifier_custom_critical_strike:GetModifierFixedAttackRate(params)
+    return self.attack
 end
 -- Apply critical strike
 function modifier_custom_critical_strike:GetModifierPreAttack_CriticalStrike(params)
@@ -23,7 +41,7 @@ function modifier_custom_critical_strike:GetModifierPreAttack_CriticalStrike(par
     -- Ensure it applies only to the caster
     local parent = self:GetParent()
     if parent == params.attacker then
-        return self:GetAbility():GetSpecialValueFor( "crit_mult" ) -- Critical strike damage multiplier
+        return self.crit_mult -- Critical strike damage multiplier
     end
 end
 function modifier_custom_critical_strike:OnAttack( params )
@@ -32,7 +50,7 @@ function modifier_custom_critical_strike:OnAttack( params )
     self:GetParent():EmitSound("awp")
 end
 function modifier_custom_critical_strike:GetModifierAttackRangeBonus(params)
-    return self:GetAbility():GetSpecialValueFor( "extra_range" )
+    return self.extra_range
 end
 -- Add particle effect on critical strikes (optional)
 function modifier_custom_critical_strike:GetEffectName()

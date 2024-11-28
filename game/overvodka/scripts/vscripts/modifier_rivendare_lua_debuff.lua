@@ -17,7 +17,6 @@ end
 function modifier_rivendare_lua_debuff:IsPurgable()
 	return false
 end
-
 --------------------------------------------------------------------------------
 -- Initializations
 function modifier_rivendare_lua_debuff:OnCreated( kv )

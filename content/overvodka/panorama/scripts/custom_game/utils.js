@@ -219,6 +219,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_zolo"
     }
+    if (HeroName == "npc_dota_hero_clinkz")
+    {
+        OvervodkaName = "npc_dota_hero_cheater"
+    }
 
     return OvervodkaName	
 }
