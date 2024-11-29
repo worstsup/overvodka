@@ -2296,7 +2296,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "350"
+        "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -2359,7 +2359,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "350"
+        "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -2422,7 +2422,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "350"
+        "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -2485,7 +2485,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "350"
+        "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -2548,7 +2548,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "350"
+        "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
        
         // Status

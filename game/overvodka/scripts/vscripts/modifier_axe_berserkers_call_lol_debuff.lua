@@ -32,11 +32,13 @@ end
 --------------------------------------------------------------------------------
 -- Initializations
 function modifier_axe_berserkers_call_lol_debuff:OnCreated( kv )
-	self.lose_strength = self:GetParent():GetStrength() / 2.5
+	self.lose_strength = self:GetParent():GetStrength() / 2
+	self.as_loss = self:GetAbility():GetSpecialValueFor( "as_loss" )
 end
 
 function modifier_axe_berserkers_call_lol_debuff:OnRefresh( kv )
-	self.lose_strength = self:GetParent():GetStrength() / 2.5
+	self.lose_strength = self:GetParent():GetStrength() / 2
+	self.as_loss = self:GetAbility():GetSpecialValueFor( "as_loss" )
 end
 
 function modifier_axe_berserkers_call_lol_debuff:OnRemoved()
@@ -49,6 +51,7 @@ function modifier_axe_berserkers_call_lol_debuff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_PROPERTY_MODEL_SCALE,
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 	}
 
 	return funcs
@@ -56,6 +59,9 @@ end
 
 function modifier_axe_berserkers_call_lol_debuff:GetModifierBonusStats_Strength( params )
 	return -self.lose_strength
+end
+function modifier_axe_berserkers_call_lol_debuff:GetModifierAttackSpeedBonus_Constant( params )
+	return -self.as_loss
 end
 function modifier_axe_berserkers_call_lol_debuff:GetModifierModelScale()
 	return -30

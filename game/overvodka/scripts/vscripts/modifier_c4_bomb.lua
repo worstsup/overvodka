@@ -5,6 +5,7 @@ function modifier_c4_bomb:IsPurgable() return false end
 
 function modifier_c4_bomb:OnCreated(kv)
     if not IsServer() then return end
+    EmitGlobalSound("bomb_planted")
     EmitSoundOn( "c4", self:GetParent() )
     self.radius = 300  -- Radius to defuse the bomb
     self.defuse_time = 10  -- Time required to defuse the bomb in seconds
@@ -81,9 +82,7 @@ function modifier_c4_bomb:ExplodeBomb()
     local bomb = self:GetParent()
 
     -- Play explosion sound and particle effect
-    local explosion_particle = "particles/units/heroes/hero_techies/techies_blast.vpcf"
-    local sound_explosion = "Hero_Techies.StasisTrap.Explode"
-    EmitSoundOn(sound_explosion, bomb)
+    local explosion_particle = "particles/c4_explosion.vpcf"
 
     -- Create an explosion effect (pure damage in 1200 radius)
     local explosion_radius = 1800  -- Explosion radius (can be 1000 or 1200 as per your original request)

@@ -13,7 +13,6 @@ windranger_focus_fire_lua = class({})
 LinkLuaModifier( "modifier_windranger_focus_fire_lua", "modifier_windranger_focus_fire_lua", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
--- Ability Start
 function windranger_focus_fire_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()

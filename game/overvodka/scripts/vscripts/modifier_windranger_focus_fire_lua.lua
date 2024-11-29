@@ -60,6 +60,13 @@ function modifier_windranger_focus_fire_lua:DeclareFunctions()
 
 	return funcs
 end
+function modifier_windranger_focus_fire_lua:CheckState()
+	local state = {
+		[MODIFIER_STATE_SILENCED] = true,
+	}
+
+	return state
+end
 
 function modifier_windranger_focus_fire_lua:GetModifierAttackSpeedBonus_Constant()
 	return self.bonus

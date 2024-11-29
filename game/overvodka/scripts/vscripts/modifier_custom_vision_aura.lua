@@ -38,3 +38,15 @@ function modifier_custom_vision_aura:OnIntervalThink()
         end
     end
 end
+function modifier_custom_vision_aura:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_BONUS_DAY_VISION,
+        MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
+    }
+end
+function modifier_custom_vision_aura:GetBonusDayVision()
+    return -1000
+end
+function modifier_custom_vision_aura:GetBonusNightVision()
+    return -400
+end

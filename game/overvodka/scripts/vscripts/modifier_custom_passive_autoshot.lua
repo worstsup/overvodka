@@ -20,7 +20,7 @@ function modifier_custom_passive_autoshot:OnIntervalThink()
     local attack_range = parent:Script_GetAttackRange() -- Get the hero's attack range
 
     -- Only proceed if the hero is not stunned, silenced, or disarmed
-    if parent:IsStunned() or parent:IsSilenced() or parent:IsDisarmed() then return end
+    if parent:IsStunned() or parent:IsDisarmed() then return end
 
     -- Find the nearest enemy unit within attack range
     local enemies = FindUnitsInRadius(

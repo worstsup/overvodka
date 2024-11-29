@@ -1423,7 +1423,7 @@
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
-  		"Model"						"models/props_gameplay/recipe.mdl"
+  		"Model"							"models/props_gameplay/recipe.vmdl"
   		"ItemCost"					"575"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
@@ -1470,7 +1470,7 @@
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
-  		"Model"						"models/props_gameplay/recipe.mdl"
+  		"Model"							"models/props_gameplay/recipe.vmdl"
   		"ItemCost"					"1400"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
@@ -2614,7 +2614,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"ID"							"1171"  //Valve's version of this item uses the ID "171".
-		"Model"							"models/props_gameplay/recipe.mdl"
+		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
 		
 		// Item Info
@@ -2812,7 +2812,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"ID"							"1150"  //Valve's version of this item uses the ID "150".
-		"Model"							"models/props_gameplay/recipe.mdl"
+		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
 		
 		// Item Info

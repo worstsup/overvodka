@@ -18,7 +18,7 @@
         [
             "sounds/misc/ti11_tip_gold.vsnd"
         ]
-        volume = "1.0"
+        volume = "3.0"
         pitch = "1.00000"
         soundlevel = "100.0"
         distance_max = "2500.0"

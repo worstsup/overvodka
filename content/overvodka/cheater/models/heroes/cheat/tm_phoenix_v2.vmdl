@@ -56,9 +56,6 @@
 							exclude_by_default = false
 							exception_list = 
 							[
-								"blink_eyes_2",
-								"look_up_eye_2",
-								"look_down_eye_2",
 								"look_down_eye",
 								"look_up_eye",
 								"blink_eyes",

@@ -1709,10 +1709,10 @@
 		"Ability10"		"special_bonus_unique_techies_3"
 		"Ability11"		"special_bonus_unique_antimage_manavoid_aoe"
 		"Ability12"		"special_bonus_unique_antimage_7"
-		"Ability13"		"special_bonus_unique_antimage_5"
+		"Ability13"		"special_bonus_unique_antimage_3"
 		"Ability14"		"special_bonus_unique_antimage_6"
 		"Ability15"		"special_bonus_unique_antimage_8"
-		"Ability16"		"special_bonus_unique_antimage_3"
+		"Ability16"		"special_bonus_unique_antimage_5"
 		"Ability17"		"special_bonus_unique_antimage_2"
 		"Facets"
 		{
@@ -1731,7 +1731,7 @@
 		}
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
-		"ArmorPhysical"		"1"
+		"ArmorPhysical"		"0"
 		// Attack
 		//-------------------------------------------------------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -1763,16 +1763,16 @@
 	}
 	"npc_dota_hero_clinkz"
 	{
-		"Model"		"cheater/models/heroes/cheat/tm_phoenix_v2.vmdl"
+		"Model"		"cheater/models/heroes/cheat/phoenix.vmdl"
 		"IdleExpression"		"scenes/clinkz/clinkz_exp_idle_01.vcd"
 		"SoundSet"		"Hero_Anus"
 		"IdleSoundLoop"		"Hero_Clinkz.IdleLoop"
 		"Enabled"		"1"
 		"DisableWearables"				"1"	
-		"ModelScale"		"1.2"
-		"VersusScale"		"1"
-		"LoadoutScale"		"0.9"
-		"HeroSelectSoundEffect"		"Hero_Clinkz.Pick"
+		"ModelScale"		"3.0"
+		"VersusScale"		"2.0"
+		"LoadoutScale"		"2.0"
+		"HeroSelectSoundEffect"		"vova_start"
 		"GibType"		"default"
 		"Ability1"		"custom_critical_strike"
 		"Ability2"		"viper_nethertoxin_lua"
@@ -1831,7 +1831,7 @@
 		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"		"800"
 		"AttackRange"		"600"
-		"ProjectileModel"		"particles/econ/items/sniper/sniper_charlie/sniper_base_attack_charlie.vpcf"
+		"ProjectileModel"		"particles/sniper_base_attack_charlie_new.vpcf"
 		"ProjectileSpeed"		"2500"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"17"
@@ -1844,8 +1844,8 @@
 		"StatusManaRegen"	"0"
 		"MovementSpeed"		"290"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
-		"HealthBarOffset"		"170"		
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_clinkz.vsndevts"
+		"HealthBarOffset"		"270"		
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 		"particle_folder"		"particles/units/heroes/hero_clinkz"
 		"GameSoundsFile"		"kipil"
 		"MovementTurnRate"		"100.00000"

@@ -52,7 +52,7 @@ function modifier_leaping_stride:PerformJump(direction, speed)
     -- Target position for the jump
     local start_pos = parent:GetAbsOrigin()
     local end_pos = start_pos + direction * jump_distance
-
+    parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
     -- Apply the motion modifier
     parent:AddNewModifier(
         parent, -- Caster

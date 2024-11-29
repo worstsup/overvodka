@@ -40,7 +40,7 @@ function modifier_antimage_spell_shield_lua:GetModifierPhysicalArmorBonus( param
 end
 function modifier_antimage_spell_shield_lua:GetAbsorbSpell( params )
 	if IsServer() then
-		if (not self:GetParent():PassivesDisabled()) and self:GetAbility():IsFullyCastable() and params.ability:GetCaster() ~= self:GetParent() and params.ability:GetAbilityName() ~= "rubick_spell_steal" then
+		if (not self:GetParent():IsIllusion()) and (not self:GetParent():PassivesDisabled()) and self:GetAbility():IsFullyCastable() and params.ability:GetCaster() ~= self:GetParent() and params.ability:GetAbilityName() ~= "rubick_spell_steal" then
 			-- use resources
 			self:GetAbility():UseResources( true, true, false, true )
 			params.ability:GetCaster():AddNewModifier( self:GetParent(), self, "modifier_generic_silenced_lua", { duration = self.duration } )

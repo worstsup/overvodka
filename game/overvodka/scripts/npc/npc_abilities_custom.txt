@@ -1292,7 +1292,7 @@
     {
             "duration"
             {
-            	"value"	"5.0 6.0 7.0 8.0"
+            	"value"	"5.0 5.5 6.0 6.5"
             	"special_bonus_unique_furion_2" "+1"
             }
             "speed"                     
@@ -9948,7 +9948,7 @@
 		{
 			"damage_multiplier"				
 			{
-				"value"		"0.4"
+				"value"		"0.35"
 				"CalculateSpellDamageTooltip"	"0"
 				"DamageTypeTooltip"			"DAMAGE_TYPE_NONE"
 			}
@@ -12470,7 +12470,7 @@
 		
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"1.5"
+		"AbilityCastPoint"				"1.4"
 		"AbilityCooldown"				"12.0"
 		"AbilityManaCost"				"0"
 		
@@ -12495,7 +12495,7 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"subo"
-		"AbilityCooldown"				"40"
+		"AbilityCooldown"				"35"
 		"AbilityManaCost"				"100 150 200 250"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
@@ -12669,7 +12669,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.2"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"28"
 		"MaxLevel"						"1"
 		"Innate"						"1"
 		"AbilityManaCost"				"0"
@@ -13493,7 +13493,7 @@
 				"damage"			"300 600 900"
 				"stun_duration"
 				{
-					"value"	"2.0 2.5 3.0"
+					"value"	"2.0 2.2 2.4"
 					"special_bonus_unique_tidehunter_8" "+1"
 				}
 				"gold"
@@ -14831,11 +14831,23 @@
 				"duration"						"10"
 				"model_scale"					"100"
 				"bonus_strength"				"50 100 150"
-				"str_loss"					"40"
+				"str_loss"					"50"
 				"radius"
 				{
 					"value"	"800"
 					"special_bonus_unique_naga_siren_net_cooldown" "+100"
+				}
+				"as_loss"
+				{
+					"value" "0"
+					"special_bonus_facet_furion_ironwood_treant"	"+30 +65 +100"
+					"RequiresFacet"	"furion_ironwood_treant"
+				}
+				"dps"
+				{
+					"value"	"0"
+					"special_bonus_facet_furion_soothing_saplings"				"+70 +140 +210"
+					"RequiresFacet"	"furion_soothing_saplings"
 				}
 		}
 	}
@@ -14906,7 +14918,7 @@
 				"slow_duration"				"1.0"
 				"range"					"300"
 				"slow_radius"				"600"
-				"bat"		"1.3 1.2 1.1"
+				"bat"		"1.3 1.25 1.2"
 				"buff_duration"
 				{
 					"value"	"0"
@@ -14959,7 +14971,7 @@
 				"AbilityCastRange"
 				{
 					"value"	"500"
-					"special_bonus_unique_antimage_3" "+400"
+					"special_bonus_unique_antimage_3" "+250"
 				}
 				"base_damage"	"3"
 				"base_miss"	"10"
@@ -14967,7 +14979,7 @@
 				"radius"
 				{
 					"value"	"500"
-					"special_bonus_unique_antimage_3" "+400"
+					"special_bonus_unique_antimage_3" "+250"
 				}
 				"interval"				"0.5"
 		}
@@ -15175,8 +15187,8 @@
 				"width"				"125 125 125 125"
 				"duration"
 				{
-					"value"	"1.4 1.6 1.8 2.0"
-					"special_bonus_unique_antimage_5" "+0.4"
+					"value"	"1.4 1.5 1.6 1.7"
+					"special_bonus_unique_antimage_5" "+0.7"
 				}
 				"length_buffer"		"325"
 				"speed"				"1600 1600 1600 1600"
@@ -15751,8 +15763,8 @@
 
 		// Ability Resource
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"30"
-		"AbilityManaCost"				"75 100 125 150"
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"150 200 250"
 
 		// Damage
 		//-------------------------------------------------------------------------------------------------------------
@@ -15842,6 +15854,7 @@
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
     		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
 		// Ability Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -15893,13 +15906,13 @@
 		{
 				"AbilityCastRange"
 				{
-					"value"	"500 600 700 800"
-					"special_bonus_unique_clinkz_9" "+100"
+					"value"	"800 1000 1200 1400"
+					"special_bonus_unique_clinkz_9" "+200"
 				}
 				"radius"
 				{
-					"value"	"500 600 700 800"
-					"special_bonus_unique_clinkz_9" "+100"
+					"value"	"800 1000 1200 1400"
+					"special_bonus_unique_clinkz_9" "+200"
 				}
 				"duration"
 				{
@@ -15939,7 +15952,7 @@
 				}
 				"attack_fixed"
 				{
-					"value"	"1.5"
+					"value"	"1.8"
 				}
 		}
 	}
@@ -15991,6 +16004,7 @@
 	{
     "BaseClass"               "ability_lua"
     "ScriptFile"              "c4_bomb"
+    "AbilityTextureName"			"bomb"
     "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityCooldown"     "120" 
     "AbilityManaCost"     "300"
@@ -16000,6 +16014,7 @@
 	"AbilityCastRange"		"200"
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 	"AbilityCastPoint"				"2.2"
+	"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
     "AbilityValues"
     {
         "detonation_time"     "40"

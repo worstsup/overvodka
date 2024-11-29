@@ -8,9 +8,11 @@ function modifier_nix_rus:OnCreated( kv )
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_strength = self:GetAbility():GetSpecialValueFor( "bonus_strength" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
+	self.dps = self:GetAbility():GetSpecialValueFor( "dps" )
 	if IsServer() then
 		self:StartIntervalThink( 0.25 )
 	end
+	k = 0
 end
 
 --------------------------------------------------------------------------------
@@ -22,6 +24,7 @@ end
 
 function modifier_nix_rus:OnIntervalThink()
 	if IsServer() then
+		k = k + 1
 		local enemies = FindUnitsInRadius(
 			self:GetParent():GetTeamNumber(),	-- int, your team number
 			self:GetParent():GetAbsOrigin(),	-- point, center point
@@ -34,9 +37,12 @@ function modifier_nix_rus:OnIntervalThink()
 			false	-- bool, can grow cache
 		)
 		for _,unit in pairs(enemies) do
-			unit:AddNewModifier(self:GetParent(), self, "modifier_axe_berserkers_call_lol_debuff", {duration = 0.5})
+			unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_axe_berserkers_call_lol_debuff", {duration = 0.5})
+			if k % 4 == 0 then
+				ApplyDamage({ victim = unit, attacker = self:GetParent(), damage = self.dps, damage_type = DAMAGE_TYPE_MAGICAL })
+			end
 			if self:GetParent():HasScepter() then
-				unit:AddNewModifier(self:GetParent(), self, "modifier_generic_disarmed_lua", {duration = 0.5})
+				unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_disarmed_lua", {duration = 0.5})
 			end
 		end
 	end
