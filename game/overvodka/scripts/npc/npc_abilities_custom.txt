@@ -15235,12 +15235,14 @@
 		{
 			"bonus_resist_pct"
 			{
-				"value"	"8 12 16 20"
+				"value"	"0"
+				"special_bonus_facet_antimage_magebanes_mirror"	"+8 +12 +16 +20"
 				"RequiresFacet"	"antimage_magebanes_mirror"
 			}
 			"armor"
 			{
-				"value"	"3 6 9 12"
+				"value"	"0"
+				"special_bonus_facet_antimage_mana_thirst"	"+3 +6 +9 +12"
 				"RequiresFacet"	"antimage_mana_thirst"
 			}
 			"silence_duration"
@@ -15773,8 +15775,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_attack_speed"			"450"
-				"focusfire_damage_reduction"	"-30 -20 -10"
+				"bonus_attack_speed"			"550"
+				"focusfire_damage_reduction"	"-20 -10 0"
 				"AbilityDuration"
 				{
 					"value"	"5.0 6.0 7.0 8.0"
@@ -15936,18 +15938,18 @@
 		{
 				"crit_mult"
 				{
-					"value"	"150 175 200 225"
+					"value"	"175 200 225 250"
 					"special_bonus_unique_clinkz_4" "+50"
 				}
 				"duration"		"6.0"
 				"slow"
 				{
-					"value"	"-40"
+					"value"	"-30"
 					"special_bonus_unique_clinkz_1" "+10"
 				}
 				"extra_range"
 				{
-					"value"	"300"
+					"value"	"400"
 					"special_bonus_unique_clinkz_7" "+200"
 				}
 				"attack_fixed"

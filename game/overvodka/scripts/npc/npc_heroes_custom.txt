@@ -1823,10 +1823,10 @@
 				}
 			}
 		}
-		"ArmorPhysical"		"0"
+		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"		"39"
-		"AttackDamageMax"		"45"
+		"AttackDamageMin"		"45"
+		"AttackDamageMax"		"49"
 		"AttackRate"		"1.700000"
 		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"		"800"
@@ -1834,7 +1834,7 @@
 		"ProjectileModel"		"particles/sniper_base_attack_charlie_new.vpcf"
 		"ProjectileSpeed"		"2500"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
-		"AttributeBaseStrength"		"17"
+		"AttributeBaseStrength"		"20"
 		"AttributeStrengthGain"		"2.000000"
 		"AttributeBaseAgility"		"25"
 		"AttributeAgilityGain"		"2.7"
@@ -1842,7 +1842,7 @@
 		"AttributeIntelligenceGain"		"2.2"
 		"StatusHealthRegen"		"0.25"
 		"StatusManaRegen"	"0"
-		"MovementSpeed"		"290"
+		"MovementSpeed"		"310"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"HealthBarOffset"		"270"		
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
