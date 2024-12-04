@@ -1,0 +1,350 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/debug_panel.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
+		<include src="file://{resources}/scripts/custom_game/debug_panel.js" />
+	</scripts>
+	<snippets>
+		<snippet name="LabelWithHTML">
+			<Label html="true" text="" />
+		</snippet>
+		<snippet name="ButtonRowSnippet">
+			<Panel class="Row">
+				<Button class="DemoButton" acceptsjoyfocus="true">
+					<Label id="ButtonLabel" text="Error" />
+				</Button>
+			</Panel>
+		</snippet>
+		<snippet name="ItemRow">
+			<Panel class="ItemInList">
+				<Panel id="ItemImage" />
+				<Panel id="ItemNameInfo">
+					<Label id="LocalizedItemName" text="ITEM NAME" />
+					<Label id="CodeItemName" text="TRUE ITEM NAME" />
+					<Panel id="ItemRecipe">
+						<Panel id="ItemRecipeImage"/>
+						<Label id="ItemRecipeText" text="Recipe_Text_Name_pizda_aaaaaa"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+		<snippet name="AbilityRow">
+			<Panel class="AbilityInList">
+				<Image id="AbilityImageForAbility">
+					<Image id="CustomAbilityImageForAbility" />
+				</Image>
+			</Panel>
+		</snippet>
+	</snippets>
+	<Panel class="CustomHudRoot" hittest="false">
+		<Button id="DebugPanelButton" onmouseover="UIShowTextTooltip( #ui_debug_tool_title )" onmouseout="UIHideTextTooltip()" onactivate="Toggle()" />
+
+		<Panel hittest="false" id="DebugPanelRoot" class="Minimized">
+			<Panel id="SelectHeroContainer" acceptsfocus="true" oncancel="EscapeHeroPickerSearch()">
+				<DOTAUIHeroPicker id="HeroPicker" />
+				<Button id="CancelButton" class="CloseButton" acceptsjoyfocus="true" onactivate="CloseHeroPicker()" />
+			</Panel>
+			<Panel id="SelectBotContainer" acceptsfocus="true" oncancel="EscapeHeroPickerSearch()">
+				<DOTAUIHeroPicker id="HeroPicker" />
+				<Button id="CancelButton" class="CloseButton" acceptsjoyfocus="true" onactivate="CloseBotPicker()" />
+			</Panel>
+			<Panel id="UnitSpawnerContainer" acceptsfocus="true" oncancel="CloseUnitSpawnerContainer()">
+				<Button id="CancelButton" class="CloseButton" acceptsjoyfocus="true" onactivate="CloseUnitSpawnerContainer()" />
+				<Label class="CategoryHeader" text="Unit name" />
+				<TextEntry id="UnitSpawnerName" maxchars="100" placeholder="Type here..." />
+				<Label class="CategoryHeader" text="Team" />
+				<DropDown id="UnitSpawnerTeam">
+					<Label text="DOTA_TEAM_BADGUYS" id="entry1" />
+					<Label text="DOTA_TEAM_NEUTRALS" id="entry2" />
+					<Label text="DOTA_TEAM_GOODGUYS" id="entry3" />
+					<Label text="DOTA_TEAM_CUSTOM_1" id="entry4" />
+					<Label text="DOTA_TEAM_CUSTOM_2" id="entry5" />
+					<Label text="DOTA_TEAM_CUSTOM_3" id="entry6" />
+					<Label text="DOTA_TEAM_CUSTOM_4" id="entry7" />
+					<Label text="DOTA_TEAM_CUSTOM_5" id="entry8" />
+					<Label text="DOTA_TEAM_CUSTOM_6" id="entry9" />
+					<Label text="DOTA_TEAM_CUSTOM_7" id="entry10" />
+					<Label text="DOTA_TEAM_CUSTOM_8" id="entry11" />
+				</DropDown>
+				<Label class="CategoryHeader" text="Count" />
+				<TextEntry id="UnitSpawnerCount" maxchars="100" placeholder="1" />
+				<Panel id="UnitSpawnerList" />
+			</Panel>
+
+			<Panel id="AbilitiesSpawnerContainer" acceptsfocus="true" oncancel="CloseAbilitiesSpawnerContainer()">
+				<Button id="CancelButton" class="CloseButton" acceptsjoyfocus="true" onactivate="CloseAbilitiesSpawnerContainer()" />
+				<Label class="CategoryHeader" text="Ability name" />
+				<TextEntry id="AbilitySpawnerName" maxchars="200" placeholder="Type here..." />
+				<Panel id="AbilitiesSpawnerList" />
+			</Panel>
+
+			<Panel id="ItemSpawnerContainer" acceptsfocus="true" oncancel="CloseItemSpawnerContainer()">
+				<Button id="CancelButton" class="CloseButton" acceptsjoyfocus="true" onactivate="CloseItemSpawnerContainer()" />
+				<Panel style="width: 100%; flow-children: right;">
+					<Label class="CategoryHeader" style="width: 50%;" text="Item name" />
+					<Label class="CategoryHeader" style="width: 230px;" text="Hide useless items? :"/>
+					<ToggleButton id="HideUselessItemsButton" style="padding-top: 8px;" class="DemoToggleButton" onactivate="HideUselessItems()"/>
+				</Panel>
+				<TextEntry id="ItemSpawnerName" maxchars="100" placeholder="Type here..." />
+				<Panel id="ItemSpawnerList" />
+			</Panel>
+
+			<Panel class="ControlPanel">
+				<Panel class="ControlPanelContainer">
+					<Panel id="SpawnUnitsCategory" class="Category">
+						<Panel class="CategoryButtonContainer">
+							<Panel id="SpawnHeroButton" class="Row DemoButton" onactivate="ToggleHeroPicker( false )" acceptsjoyfocus="true">
+								<Image id="HeroPickerImage" class="HeroImage" />
+								<Label id="SpawnHeroName" text="{s:hero_name}" />
+								<Panel class="HeroPickerArrow" />
+							</Panel>
+							<Panel class="HorizontalRule" />
+							<Panel id="SpawnBotButton" class="Row DemoButton" onactivate="ToggleBotPicker()" acceptsjoyfocus="true">
+								<Image id="BotPickerImage" class="HeroImage" />
+								<Label id="SpawnBotName" text="{s:hero_name}" />
+								<Panel class="HeroPickerArrow" />
+							</Panel>
+							<DropDown id="BotSpawnerTeam">
+								<Label text="DOTA_TEAM_BADGUYS" id="entry1" />
+								<Label text="DOTA_TEAM_NEUTRALS" id="entry2" />
+								<Label text="DOTA_TEAM_GOODGUYS" id="entry3" />
+								<Label text="DOTA_TEAM_CUSTOM_1" id="entry4" />
+								<Label text="DOTA_TEAM_CUSTOM_2" id="entry5" />
+								<Label text="DOTA_TEAM_CUSTOM_3" id="entry6" />
+								<Label text="DOTA_TEAM_CUSTOM_4" id="entry7" />
+								<Label text="DOTA_TEAM_CUSTOM_5" id="entry8" />
+								<Label text="DOTA_TEAM_CUSTOM_6" id="entry9" />
+								<Label text="DOTA_TEAM_CUSTOM_7" id="entry10" />
+								<Label text="DOTA_TEAM_CUSTOM_8" id="entry11" />
+							</DropDown>
+							<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="SpawnBot()">
+								<Label text="Создать героя" />
+							</Button>
+							<Panel class="HorizontalRule" />
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="CreateDummy()">
+									<Label text="Создать мишень" />
+								</Button>
+								<!-- <Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="DestroyDummy()">
+									<Label text="DestroyIcon" />
+								</Button> -->
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="DestroyDummy()">
+									<Label text="Удалить мишень" />
+								</Button>
+							</Panel>
+						</Panel>
+					</Panel>
+					<Panel id="EditUnitsCategory" class="Category">
+						<Panel class="CategoryButtonContainer">
+							<Panel class="Row">
+								<Button class="DemoButton MiddleButton" acceptsjoyfocus="true" onactivate="OnTeleportRequest()">
+									<Label text="Телепорт" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroLevel(1, false)">
+									<Label text="1 Ур." />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroLevel(1, true)">
+									<Label text="+1" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroLevel(10, true)">
+									<Label text="+10" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroLevel(500, true)">
+									<Label text="Макс" />
+								</Button>
+							</Panel>
+							<!-- <Panel class="Row">
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_STRENGTH', 0)">
+									<Label text="STR" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_STRENGTH', 10)">
+									<Label text="+10" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_STRENGTH', 100)">
+									<Label text="+100" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_STRENGTH', 1000)">
+									<Label text="+1000" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_AGILITY', 0)">
+									<Label text="AGI" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_AGILITY', 10)">
+									<Label text="+10" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_AGILITY', 100)">
+									<Label text="+100" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_AGILITY', 1000)">
+									<Label text="+1000" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_INTELLECT', 0)">
+									<Label text="INT" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_INTELLECT', 10)">
+									<Label text="+10" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_INTELLECT', 100)">
+									<Label text="+100" />
+								</Button>
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_INTELLECT', 1000)">
+									<Label text="+1000" />
+								</Button>
+							</Panel> -->
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="AddScepterToHero()">
+									<Label text="Аганим" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="AddShardToHero()">
+									<Label text="Аганим шард" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="SwitchInvulOnHero()">
+									<Label text="Неуяз" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="SwitchFlyMode()">
+									<Label text="Полёт" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="SwitchGraveOnHero()">
+									<Label text="Крест" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnKickPlayerRequest()">
+									<Label text="Кик" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="OnRemoveUnitRequest()">
+									<Label text="Удалить" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnChangeGoldRequest(false)">
+									<Label text="-Золото" />
+								</Button>
+
+								<TextEntry id="GoldTextEntry" maxchars="6" text="10000" />
+
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="OnChangeGoldRequest(true)">
+									<Label text="+Золото" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnSetGoldRequest(0)">
+									<Label text="Мин Золото" />
+								</Button>
+
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="OnSetGoldRequest(99999)">
+									<Label text="Макс Золото" />
+								</Button>
+							</Panel>
+							<!-- <Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="SwitchUnitSpawnerDisplay()">
+									<Label text="UNITS" />
+								</Button>
+								<Button class="DemoButton MiddleButton" acceptsjoyfocus="true" onactivate="SwitchAbilitiesSpawnerDisplay()">
+									<Label text="ABILITIES" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="SwitchItemSpawnerDisplay()">
+									<Label text="ITEMS" />
+								</Button>
+							</Panel> -->
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnHurtMeBadPressed()">
+									<Label text="Почти убить" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="OnKillPressed(false)" oncontextmenu="OnKillPressed(true)">
+									<Label text="(ЛКМ)УБИТЬ/(ПКМ)БЫСТР.УБИТЬ" />
+								</Button>
+							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnRemoveItemsOnGroundPressed()">
+									<Label text="Удалить предметы на полу" />
+								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="OnRespawnPressed()">
+									<Label text="Возродить" />
+								</Button>
+							</Panel>
+							<!-- <Panel class="Row">
+								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="SwitchUnitFinderDisplay()">
+									<Label text="UNIT FINDER (don't work)" />
+								</Button>
+							</Panel> -->
+						</Panel>
+					</Panel>
+					<Panel id="GlobalCategory" class="Category">
+						<Panel class="CategoryButtonContainer">
+							<Panel class="Row">
+								<ToggleButton id="FreeSpellsButton" class="DemoToggleButton" acceptsjoyfocus="true" onactivate="OnWTFTogglePressed()">
+									<Label text="Беск. Мана" />
+								</ToggleButton>
+								<Button id="RefreshButton" acceptsjoyfocus="true" onactivate="OnRefreshAbilitiesRequest()" onmouseover="UIShowTextTooltip( 'Refresh' )" onmouseout="UIHideTextTooltip()">
+									<Panel class="RefreshIcon" />
+								</Button>
+							</Panel>
+						</Panel>
+						<Panel class="Row">
+							<Label class="CategoryHeader" id="HostTimescaleLabel" text="Скорость времени (1.0)" />
+						</Panel>
+						<Panel class="Row">
+							<Slider id="HostTimescaleSlider" class="HorizontalSlider" onvaluechanged="OnHostTimeScaleSliderValueChanged()" direction="horizontal" />
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(1, true)">
+								<Label text="1" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(2, true)">
+								<Label text="2" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(3, true)">
+								<Label text="3" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(4, true)">
+								<Label text="4" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(5, true)">
+								<Label text="5" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustTimescaleSlider(10, true)">
+								<Label text="10" />
+							</Button>
+						</Panel>
+						<Panel></Panel>
+					</Panel>
+					<!-- <Panel id="LastCategory" class="Category">
+						<Label class="CategoryHeader" text="Game difficulty" />
+						<Panel class="Row">
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="OnSetDifficultyRequest(0)">
+								<Label text="0" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="OnSetDifficultyRequest(1)">
+								<Label text="1" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="OnSetDifficultyRequest(2)">
+								<Label text="2" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="OnSetDifficultyRequest(3)">
+								<Label text="3" />
+							</Button>
+							<Button class="DemoButton" acceptsjoyfocus="true" onactivate="OnSetDifficultyRequest(4)">
+								<Label text="4" />
+							</Button>
+						</Panel>
+						<Panel class="Row"/>
+					</Panel> -->
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

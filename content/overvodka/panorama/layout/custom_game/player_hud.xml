@@ -18,6 +18,7 @@
     </snippets>
 
     <Panel class="PlayerHUD" hittest="false">
+        <Panel hittest="false" id="PlayersTitlesContainer" />
         <Panel id="SubscribeButton" onactivate="ToggleSubscribePanel();"/>
         <Panel hittest="false" id="SubscribePanel">
             <Panel id="SubscribePanelBody">

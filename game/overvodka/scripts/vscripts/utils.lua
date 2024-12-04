@@ -13,7 +13,7 @@ end
 function IsRealHero(Unit)
     if not Unit or Unit:IsNull() then return false end
 
-    if not Unit:IsRealHero() or Unit:IsIllusion() or Unit:IsStrongIllusion() or Unit:IsTempestDouble() or Unit:IsClone() or Unit:GetClassname() == "npc_dota_lone_druid_bear" then return false end
+    if not Unit:IsRealHero() or Unit:IsIllusion() or Unit:IsStrongIllusion() or Unit:IsTempestDouble() or Unit:IsClone() or Unit:GetClassname() == "npc_dota_lone_druid_bear" or DebugPanel:IsDummy(Unit) then return false end
 
     return true
 end
@@ -52,4 +52,137 @@ function table.contains(_self, value)
        end
    end
    return false
+end
+
+if IsServer() then
+	function CDOTA_PlayerResource:ReplacePlayerHero(playerID, heroName, restoreGold, restoreExp, restoreItems--[[, restoreBuffs]])
+		if (not IsServer()) then return end
+
+		playerID = tonumber(playerID) or -1
+
+	--Shit checks
+		if(playerID < 0 or PlayerResource:IsValidPlayerID(playerID) == false) then
+			Debug_PrintError("CDOTA_PlayerResource:ReplaceHeroWith attempt to replace hero for invalid player ("..tostring(playerID)..").")
+			return
+		end
+		local playerHero = PlayerResource:GetSelectedHeroEntity(playerID)
+		if(not playerHero) then
+			Debug_PrintError("CDOTA_PlayerResource:ReplaceHeroWith attempt to replace hero for player ("..tostring(playerID)..") with no hero.")
+			return
+		end
+		if(type(heroName) ~= "string") then
+			Debug_PrintError("Attempt to call CDOTA_PlayerResource:ReplaceHeroWith with invalid heroName argument. String expected, got "..tostring(heroName).." ("..type(heroName)..")")
+			return
+		end
+		if(DOTAGameManager:GetHeroIDByName(heroName) < 1) then
+			Debug_PrintError("CDOTA_PlayerResource:ReplaceHeroWith "..tostring(heroName).." is invalid hero name or hero is disabled.")
+			return
+		end
+
+		if (restoreGold ~= nil and type(restoreGold) ~= "boolean") then
+			Debug_PrintError("Attempt to call CDOTA_PlayerResource:ReplaceHeroWith with invalid restoreGold argument. Boolean expected, got "..tostring(restoreGold).." ("..type(restoreGold)..")")
+			return
+		end
+
+		if (restoreExp ~= nil and type(restoreExp) ~= "boolean") then
+			Debug_PrintError("Attempt to call CDOTA_PlayerResource:ReplaceHeroWith with invalid restoreExp argument. Boolean expected, got "..tostring(restoreExp).." ("..type(restoreExp)..")")
+			return
+		end
+
+		if (restoreItems ~= nil and type(restoreExp) ~= "boolean") then
+			Debug_PrintError("Attempt to call CDOTA_PlayerResource:ReplaceHeroWith with invalid restoreItems argument. Boolean expected, got "..tostring(restoreExp).." ("..type(restoreExp)..")")
+			return
+		end
+
+
+	-- variables
+		local gold = 0
+		local level = 0
+		local allHeroItems = {}
+
+	-- Nil checks
+		if (restoreGold == nil) then
+			restoreGold = false
+		end
+
+		if (restoreExp == nil) then
+			restoreExp = false
+		end
+
+		if (restoreItems == nil) then
+			restoreItems = false
+		end
+
+
+	-- just checks
+		if (restoreGold == true) then
+			gold = PlayerResource:GetGold(playerID)
+		end
+
+		if (restoreExp == true) then
+			level = playerHero:GetLevel()
+		end
+
+		if (restoreItems == true) then
+			for i = 0, 23 do
+				local itemInSlot = playerHero:GetItemInSlot(i)
+				if (itemInSlot) then
+					allHeroItems[i] = {
+						itemName = itemInSlot:GetName(),
+						cd = itemInSlot:GetCooldownTimeRemaining() or 0,
+						charges = itemInSlot:GetCurrentCharges() or 0,
+					}
+				end
+			end
+		end
+
+		UTIL_Remove(playerHero)
+		local new_hero = PlayerResource:ReplaceHeroWith(playerID, heroName, gold, 0)
+
+		if (restoreExp == true) then
+			for _ = 1, (level - 1) do
+				new_hero:HeroLevelUp(false)
+			end
+		end
+
+		if (restoreItems == true) then
+			for _, itemData in pairs(allHeroItems) do
+				local item = new_hero:AddItemByName(itemData.itemName)
+				if item then
+					item:StartCooldown(itemData.cd)
+					item:SetCurrentCharges(itemData.charges)
+				end
+			end
+		end
+
+		return new_hero
+	end
+end
+
+function GetRealHero(hAttacker)
+    if not hAttacker then
+        return hAttacker
+    end
+    
+    if hAttacker.IsRealHero and hAttacker.IsIllusion and not hAttacker:IsRealHero() and not hAttacker:IsIllusion() then
+        local owner = hAttacker:GetOwner()
+        if owner and owner:IsBaseNPC() then
+            return owner
+        end
+    end
+    if hAttacker.IsRealHero and hAttacker.IsIllusion and hAttacker:IsRealHero() and not hAttacker:IsIllusion() and hAttacker.IS_CUSTOM_ILLUSION_RD then
+        local playerID = hAttacker:GetPlayerID()
+        local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+        if hero then
+            return hero
+        end
+    end
+    if hAttacker.IsHero and hAttacker.IsIllusion and hAttacker:IsHero() and hAttacker:IsIllusion() then
+        local playerID = hAttacker:GetPlayerID()
+        local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+        if hero then
+            return hero
+        end
+    end
+    return hAttacker
 end

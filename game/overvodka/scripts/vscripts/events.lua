@@ -99,7 +99,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 	if spawnedUnit.bFirstSpawned == nil then ---если юнит герой и это первый его спавн находишь у него скилл и апаешь скиллу 1 уровень
       	spawnedUnit.bFirstSpawned = true
             local ab = spawnedUnit:FindAbilityByName("sidet")
-            ab:SetLevel(1)
+			if ab then
+            	ab:SetLevel(1)
+			end
       end
 	
 end
