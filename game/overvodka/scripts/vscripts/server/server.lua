@@ -39,7 +39,8 @@ function Server:OnNPCSpawned(event)
 
     local bIsRespawn = event.is_respawn == 1
 
-    if IsRealHero(unit) then
+    local RealHero = GetRealHero(unit)
+    if RealHero and RealHero:IsRealHero() and unit:IsHero() and not DebugPanel:IsDummy(unit) then
 		local PlayerID = unit:GetPlayerID()
 
 		if not bIsRespawn and self:IsPlayerSubscribed(PlayerID) then
@@ -55,6 +56,7 @@ function Server:OnPlayerConnected(event)
         local SteamID = PlayerResource:GetSteamAccountID(event.PlayerID)
         self.Players[event.PlayerID] = {
             TipCooldown = 0,
+            is_admin = DebugPanel:IsDeveloper(event.PlayerID),
             ServerData = {
                 SteamID = SteamID
             }
@@ -98,6 +100,7 @@ function Server:UpdatePlayerNetTable(PlayerID)
     if not self.Players[PlayerID] then return end
 
     CustomNetTables:SetTableValue("players", "player_"..PlayerID, self.Players[PlayerID].ServerData)
+    CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_special_info", {is_admin = self.Players[PlayerID].is_admin})
 end
 
 function Server:SendRequest(url, data, callback, debugEnabled, attempt)

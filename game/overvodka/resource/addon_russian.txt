@@ -31,6 +31,8 @@
 		"PLAYER_HUD_TIPPED"								"типает"
 		"PLAYER_HUD_TIPPED_Text"						"Ебать ты лох"
 
+		"PLAYERS_TITLE_Developer"						"Разработчик"
+
 
 		"DOTA_Tooltip_modifier_get_xp"					"Аура супер-еврейства"
 		"DOTA_Tooltip_modifier_get_xp_Description"		"Это существо становится пиздец богатым"

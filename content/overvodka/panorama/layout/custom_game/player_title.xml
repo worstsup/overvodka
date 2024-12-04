@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/custom_game/player_hud.css" />
+	</styles>
+
+	<Panel class="PlayerTitle" hittest="false" >
+        <Label class="PlayerTitleText" text="#PLAYERS_TITLE_Developer" />
+	</Panel>
+</root>

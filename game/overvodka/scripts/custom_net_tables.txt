@@ -3,6 +3,7 @@
 	custom_net_tables =
 	[
 		"game_state",
-		"players"
+		"players",
+		"globals"
 	]
 }

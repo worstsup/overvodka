@@ -1,4 +1,5 @@
 const LocalPlayer = Players.GetLocalPlayer()
+const Container = $("#PlayersTitlesContainer")
 const SubscribePanel = $("#SubscribePanel")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
@@ -193,6 +194,173 @@ function SendCustomMessageToChat(event){
         })
     }
 }
+
+let Offset = 125
+let UISCALE_X = 1;
+let UISCALE_Y = 1;
+
+let AdminPlayers = []
+
+function UpdateTitles() {
+    $.Schedule(0, UpdateTitles)
+
+    UISCALE_X = DotaHUDPanel.actualuiscale_x;
+    UISCALE_Y = DotaHUDPanel.actualuiscale_y;
+
+    for (const Unit of Entities.GetAllHeroEntities()) {
+        let bIsAdminEnt = IsAdminEnt(Unit)
+
+        if(!bIsAdminEnt){continue}
+
+        let bIsDead = !Entities.IsAlive( Unit )
+        let bIsIllusion = Entities.IsIllusion( Unit )
+
+        if(bIsDead && bIsIllusion){
+            DeletePlayerTitle(Unit)
+            continue
+        }
+
+        const panel = GetOrCreatePlayerTitlePanel(Unit)
+
+        panel.checked = true
+    }
+
+    for (let i = Container.GetChildCount(); i > -1; i--) {
+        const panel = Container.GetChild(i)
+        if(panel){
+            let Unit = panel.title_unit
+            
+            let bIsDead = !Entities.IsAlive( Unit)
+
+            let bIsActivePlayerHero = false
+            let PlayerID = Entities.GetPlayerOwnerID( Unit )
+            const Hero = Players.GetPlayerHeroEntityIndex( PlayerID )
+
+            if(Hero != -1 && Hero == Unit){
+                bIsActivePlayerHero = true
+            }
+            if(!panel.checked && !bIsActivePlayerHero){
+                DeletePlayerTitle(Unit)
+                continue
+            }
+
+            panel.SetHasClass("TitleHiddenByHero", bIsDead || !panel.checked)
+
+            panel.checked = false
+
+            if(!bIsDead){
+                let HeroOrigin = Entities.GetAbsOrigin(Unit);
+                let ScreenX = Game.WorldToScreenX(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
+                let ScreenY = Game.WorldToScreenY(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
+                let bIsOutScreen = GameUI.GetScreenWorldPosition(ScreenX, ScreenY) == null
+                panel.SetHasClass("TitleHidden", bIsOutScreen)
+                if(!bIsOutScreen){
+                    let x = (ScreenX - (100 * UISCALE_Y)) / UISCALE_X;
+                    let y = (ScreenY - (Offset * UISCALE_Y)) / UISCALE_Y;
+                    panel.style.position = (Math.floor(x)) + "px " + (Math.floor(y)) + "px" + ' 0';
+                }
+            }
+        }
+    }
+    
+    // for (const PlayerID of Game.GetAllPlayerIDs()) {
+    //     // $.Msg("==========================================")
+    //     const panel = GetOrCreatePlayerTitlePanel(PlayerID)
+
+    //     const Hero = Players.GetPlayerHeroEntityIndex( PlayerID )
+
+    //     panel.SetHasClass("TitleHiddenByHero", Hero == -1)
+
+    //     if(Hero != -1){
+    //         let bIsDead = !Entities.IsAlive( Hero )
+    //         let bSeenByMyTeam = IsSeenByMyTeam(Hero)
+    //         panel.SetHasClass("TitleHiddenByHero", bIsDead || !bSeenByMyTeam)
+    //         if(!bIsDead){
+    //             let HeroOrigin = Entities.GetAbsOrigin(Hero);
+    //             let ScreenX = Game.WorldToScreenX(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
+    //             let ScreenY = Game.WorldToScreenY(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
+    //             let bIsOutScreen = GameUI.GetScreenWorldPosition(ScreenX, ScreenY) == null
+    //             panel.SetHasClass("TitleHidden", bIsOutScreen)
+    //             if(!bIsOutScreen){
+    //                 let x = (ScreenX - (100 * UISCALE_Y)) / UISCALE_X;
+    //                 let y = (ScreenY - (Offset * UISCALE_Y)) / UISCALE_Y;
+    //                 panel.style.position = (Math.floor(x)) + "px " + (Math.floor(y)) + "px" + ' 0';
+    //             }
+    //         }
+    //     }
+    //     // $.Msg("==========================================")
+    // }
+}
+
+function GetOrCreatePlayerTitlePanel(EntIndex) {
+    let find = Container.FindChildTraverse(`unit_${EntIndex}`)
+    if(find){
+        return find
+    }else{
+        let panel = $.CreatePanel("Panel", Container, `unit_${EntIndex}`, {})
+        panel.title_unit = EntIndex
+        panel.BLoadLayout("file://{resources}/layout/custom_game/player_title.xml", false, false)
+        return panel
+    }
+}
+
+function DeletePlayerTitle(EntIndex){
+    let find = Container.FindChildTraverse(`unit_${EntIndex}`)
+    if(find){
+        SafeDeleteAsync(find)
+    }
+}
+
+function GetAdmins() {
+    let Admins = []
+    for (const PlayerID of Game.GetAllPlayerIDs()) {
+        if(Players.IsSpectator( PlayerID )){
+            continue
+        }
+
+        let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${PlayerID}_special_info`)
+        if(PlayerInfo){
+            if(PlayerInfo.is_admin == 1){
+                Admins.push(PlayerID)
+            }
+        }
+    }
+    AdminPlayers = Admins
+}
+
+function IsAdminEnt(unit){
+    let PlayerID = Entities.GetPlayerOwnerID( unit )
+    if(PlayerID == -1){
+        return false
+    }
+
+    if(AdminPlayers.includes(PlayerID)){
+        return true
+    }
+
+    return false
+}
+
+(function(){
+
+    let BeforePanel = DotaHUDPanel.FindChildTraverse("ContextualTips");
+    let Hud = DotaHUDPanel.FindChildTraverse("HUDElements");
+    if (Hud && BeforePanel) {
+        let Find = Hud.FindChildTraverse("PlayersTitlesContainer");
+        if (Find) {
+            Find.DeleteAsync(0.0);
+        }
+        Container.SetParent(Hud);
+        Hud.MoveChildBefore(Container, BeforePanel);
+    }
+
+    GetAdmins()
+
+    UpdateTitles()
+})();
+
+
+
 (function(){
     StartSecondaryAbilities();
 

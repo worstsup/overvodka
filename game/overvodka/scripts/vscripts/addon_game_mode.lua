@@ -19,7 +19,9 @@ end
 require( "events" )
 require( "items" )
 require( "utility_functions" )
+require('timers')
 require('utils')
+require('server/debug_panel')
 require('server/server')
 ---------------------------------------------------------------------------
 -- Precache
@@ -424,6 +426,9 @@ function COverthrowGameMode:InitGameMode()
   
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
+
+	DebugPanel:Init()
+
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 35 )
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(XP_PER_LEVEL_TABLE)
@@ -529,7 +534,7 @@ function COverthrowGameMode:InitGameMode()
 	-- Show the ending scoreboard immediately
 	GameRules:SetCustomGameEndDelay( 0 )
 	GameRules:SetCustomVictoryMessageDuration( 10 )
-	GameRules:SetCustomGameSetupTimeout( 0 )
+	GameRules:SetCustomGameSetupTimeout( 3 )
 	GameRules:SetPreGameTime( 10.0 )
 	GameRules:SetStrategyTime( 20.0 )
 	if self.m_bFastPlay then
