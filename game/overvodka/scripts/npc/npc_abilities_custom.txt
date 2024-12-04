@@ -9755,8 +9755,8 @@
 		"AbilityValues"
 		{
 				"illusion_duration"					"10.0"
-				"illusion_outgoing_damage"			"-50"		
-				"illusion_outgoing_tooltip"			"50"
+				"illusion_outgoing_damage"			"-25"		
+				"illusion_outgoing_tooltip"			"75"
 				"illusion_incoming_damage"			"100.0"
 				"illusion_incoming_damage_total_tooltip"			"200.0"
 		}
@@ -13524,6 +13524,7 @@
 				}
 				"hpregen"	"5"
 				"bonus_ms" "10"
+				"bonus_as"	"50"
 		}
 		"OnSpellStart"
 		{
@@ -13651,6 +13652,7 @@
 				"hp_regen"        "5"
 				"radius"                    "500"
 				"bonus_ms"	"10"
+				"bonus_as"	"50"
 		}
 		
 		"Modifiers"
@@ -13676,6 +13678,7 @@
 				{
 					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"        "%hp_regen"
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"     "%bonus_ms"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_as"
 				}
 			}
 		}
@@ -16039,12 +16042,12 @@
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"1.0 1.0 1.0 1.0"
-		"AbilityManaCost"				"50 70 90 110"
+		"AbilityManaCost"				"45 75 105 135"
 		"AbilityValues"
 		{
 				"mana_cost_per_second"
 				{
-					"value"	"40 60 80 100"
+					"value"	"30 60 90 120"
 					"special_bonus_unique_slark_6" "-20%"
 				}
 				"radius"			"600"
@@ -16057,6 +16060,18 @@
 				{
 					"value"	"-10"
 					"special_bonus_unique_slark_8" "-10"
+				}
+				"slow_as"
+				{
+					"value"	"0"
+					"special_bonus_facet_ancient_apparition_exposure" "-25 -50 -75 -100"
+					"RequiresFacet"	"ancient_apparition_exposure"
+				}
+				"slow_proj"
+				{
+					"value"	"0"
+					"special_bonus_facet_ancient_apparition_exposure" "-50"
+					"RequiresFacet"	"ancient_apparition_exposure"
 				}
 		}
 	}
@@ -16109,18 +16124,18 @@
 	}
 	"custom_passive_bonus_armor_regen"
 	{
-    		"BaseClass"               "ability_lua"
+    		"BaseClass"              "ability_lua"
     		"AbilityType"			"DOTA_ABILITY_TYPE_BASIC"
-    		"ScriptFile"              "custom_passive_bonus_armor_regen"
-    		"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    		"AbilityTextureName"      "your_custom_ability_texture"
+    		"ScriptFile"             "custom_passive_bonus_armor_regen"
+    		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    		"AbilityTextureName"     "your_custom_ability_texture"
     		"MaxLevel"			"1"
     		"RequiredLevel"		"-1"
 		"Innate"				"1"
     		"AbilityValues"
 		{
 				"armor"			"1"
-				"hp"				"3"
+				"hp"				"2"
 		}
 	}
 	"chillguy_r"
@@ -16147,76 +16162,47 @@
 				"spell_amp"				"30 45 60"
 		}
 	}
-	"faceless_void_time_zone"
+	"chillzone"
 	{
-		// General
+		// Ability Technical Aspect
+		// base script folder	: scripts/vscripts
+		// base texture folder	: resource/flash3/images/spellicons
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"FightRecapLevel"				"2"
-		"MaxLevel"					"1"
-		"AbilitySound"					"Hero_FacelessVoid.Chronosphere"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"chillzone"
 		"AbilityTextureName"			"chillzone"
-		"IsGrantedByShard"				"1"
+		"FightRecapLevel"				"2"
+		"MaxLevel"						"1"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts"
+//			"particle"	"particles/units/heroes/hero_<hero>/<hero>_<ability>.vpcf"
+		}
 		
-		// Casting
+		// Ability General
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"625"
-		"AbilityCastPoint"				"0.35 0.35 0.35"
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"IsGrantedByShard"				"1"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.6"
+		"AbilityCooldown"				"120.0"
+		"AbilityManaCost"				"400"
 
-		// Time		
+		// Damage
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"100"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"300"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityModifierSupportBonus"		"50"
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-			"radius"				
-			{
-				"value"		"600"
-				"affected_by_aoe_increase"	"1"
-			}
-			"duration"				
-			{
-				"value"			"5"				
-			}
-			"vision_radius"			
-			{
-				"value"	"475"				
-			}
-			"bonus_attack_speed"
-			{					
-				"value" "70"				
-			}
-			"bonus_move_speed"
-			{					
-				"value" "50"				
-			}
-			"bonus_cast_speed"
-			{					
-				"value" "40"	
-			}
-			"bonus_turn_speed"
-			{					
-				"value" "40"
-			}
-			"bonus_projectile_speed"
-			{					
-				"value" "30"
-			}
-			"yaw"				"45"
+				"radius"				"900"
+				"duration"				"5.0"
+				"vision_radius"			"900"
+				"bonus_attack_speed"	"0"
+				"slow"				"-60"
 		}
 	}
 }

@@ -9,7 +9,7 @@ function TricksMaster(keys)
 	if caster:IsIllusion() == false then
 		if ability:GetCooldownTimeRemaining() == 0 then
 			ability:StartCooldown(cooldown)
-			scale = scale + 0.015
+			scale = scale + 0.01
 			if caster:HasScepter() then
 				caster:ModifyStrength(bonus_strength)
 				caster:ModifyAgility(bonus_strength)

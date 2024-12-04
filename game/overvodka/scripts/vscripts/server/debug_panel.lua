@@ -1,6 +1,9 @@
 DebugPanel = DebugPanel or {
 	allowedSteamIDS = {
 		188428188, -- Nears
+		409188637, -- Worstsup
+		885116894, -- dolbayobi
+		349446348, -- mefisto
 	},
 	SelectedBot = {}
 }

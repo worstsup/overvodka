@@ -16,6 +16,8 @@ function modifier_chillguy_w_shard:OnCreated( kv )
 	if not IsServer() then return end
 	self.slow = self:GetAbility():GetSpecialValueFor("slow")
 	self.shard = self:GetCaster():HasScepter()
+	self.slow_as = self:GetAbility():GetSpecialValueFor("slow_as")
+	self.slow_proj = self:GetAbility():GetSpecialValueFor("slow_proj")
 end
 
 function modifier_chillguy_w_shard:OnRefresh( kv )
@@ -32,8 +34,7 @@ end
 -- Status Effects
 function modifier_chillguy_w_shard:CheckState()
 	local state = {
-		[MODIFIER_STATE_DISARMED] = self.shard,
-		[MODIFIER_STATE_SILENCED] = self.shard,
+		[MODIFIER_STATE_SILENCED] = self.shard
 	}
 
 	return state
@@ -41,11 +42,15 @@ end
 function modifier_chillguy_w_shard:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 	}
 	return funcs
 end
 function modifier_chillguy_w_shard:GetModifierMoveSpeedBonus_Percentage( params )
 	return self.slow
+end
+function modifier_chillguy_w_shard:GetModifierAttackSpeedBonus_Constant( params )
+	return self.slow_as
 end
 --------------------------------------------------------------------------------
 -- Graphics & Animations
