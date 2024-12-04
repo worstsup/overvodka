@@ -17,12 +17,11 @@ end
 
 function modifier_chillguy_e:OnCreated( kv )
 	if not IsServer() then return end
-	self:PlayEffects()
+	self:PlayEffects() 
 end
 
 function modifier_chillguy_e:OnRefresh( kv )
 	if not IsServer() then return end
-	self.damageTable.damage = damage
 	local sound_cast = "chillguy_photo"
 	EmitSoundOn( sound_cast, self:GetParent() )
 end
@@ -53,7 +52,6 @@ end
 function modifier_chillguy_e:StatusEffectPriority()
 	return MODIFIER_PRIORITY_SUPER_ULTRA
 end
-
 function modifier_chillguy_e:PlayEffects()
 	-- Get Resources
 	local particle_cast = "particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_freezing_field_explosion_white_arcana1.vpcf"

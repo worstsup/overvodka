@@ -1926,8 +1926,8 @@
 		"Ability1"		"chillguy_q"
 		"Ability2"		"chillguy_w"
 		"Ability3"		"chillguy_e"
-		"Ability4"		"custom_passive_bonus_armor_regen"
-		"Ability5"		"generic_hidden"
+		"Ability4"		"faceless_void_time_zone"
+		"Ability5"		"custom_passive_bonus_armor_regen"
 		"Ability6"		"chillguy_r"
 		"Ability7"		"generic_hidden"
 
