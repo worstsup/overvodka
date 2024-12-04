@@ -1,9 +1,3 @@
---[[ ============================================================================================================
-	Author: Rook, with help from some of Pizzalol's SpellLibrary code
-	Date: January 25, 2015
-	Called when Blink Dagger is cast.  Blinks the caster in the targeted direction.
-	Additional parameters: keys.MaxBlinkRange and keys.BlinkRangeClamp
-================================================================================================================= ]]
 function item_blink_datadriven_on_spell_start(keys)
 	ProjectileManager:ProjectileDodge(keys.caster)  --Disjoints disjointable incoming projectiles.
 	

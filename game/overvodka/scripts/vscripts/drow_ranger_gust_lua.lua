@@ -18,7 +18,7 @@ LinkLuaModifier( "modifier_generic_muted_lua", "modifier_generic_muted_lua.lua",
 function drow_ranger_gust_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition()
+	local point = self:GetCursorPosition() + Vector(2, 2, 0)
 
 	-- load data
 	local speed = self:GetSpecialValueFor( "wave_speed" )

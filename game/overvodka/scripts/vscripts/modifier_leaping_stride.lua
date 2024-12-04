@@ -6,7 +6,7 @@ function modifier_leaping_stride:RemoveOnDeath() return false end
 
 function modifier_leaping_stride:OnCreated()
     if not IsServer() then return end
-    self.jumping_active = true -- Start with jumping enabled
+    self.jumping_active = false -- Start with jumping enabled
     self:StartIntervalThink(0.03) -- Frequent checks for movement input
     self:GetParent():SetTurnRate(100)
     k = 0
@@ -14,7 +14,7 @@ end
 
 function modifier_leaping_stride:OnIntervalThink()
     if not IsServer() then return end
-    if self:GetParent():HasModifier("modifier_custom_critical_strike") then return end
+    if self:GetParent():HasModifier("modifier_custom_critical_strike") or self:GetParent():HasModifier("modifier_custom_vision_aura_lol") or self:GetParent():HasModifier("modifier_lol_slow") then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
     if parent:IsStunned() or parent:IsRooted() then

@@ -1,5 +1,5 @@
 LinkLuaModifier("modifier_custom_vision_aura", "modifier_custom_vision_aura.lua", LUA_MODIFIER_MOTION_NONE)
-
+LinkLuaModifier("modifier_custom_vision_aura_lol", "modifier_custom_vision_aura_lol.lua", LUA_MODIFIER_MOTION_NONE)
 custom_vision_aura = class({})
 
 -- Apply the modifier when the ability is created
@@ -11,7 +11,7 @@ function custom_vision_aura:OnSpellStart()
 
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor( "duration" )
-
+    caster:AddNewModifier(caster, self, "modifier_custom_vision_aura_lol", { duration = duration })
     -- Provide global vision for the duration
     AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 10000, duration, false)
 

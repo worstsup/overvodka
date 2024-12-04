@@ -33,7 +33,7 @@ function spirit_breaker_charge_of_darkness_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
+	if target:TriggerSpellAbsorb(self) then return end
 	-- add charge modifier
 	caster:AddNewModifier(
 		caster, -- player source

@@ -112,6 +112,8 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/c4_explosion.vpcf", context )
 		PrecacheResource( "particle", "particles/doom_bringer_doom_ring_bomb.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf", context )
+		PrecacheResource( "particle", "particles/units/heroes/hero_alchemist/alchemist_unstable_concoction_timer.vpcf", context )
+
 		PrecacheResource( "particle", "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", context )
 		PrecacheResource("particle_folder",  "particles/units/heroes/hero_alchemist", context )
 	--Cache particles for traps
@@ -156,7 +158,7 @@ function Precache( context )
 
 		
 	--Cache sounds for traps
-		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/soundevents_conquest.vsndevts", context )
 		PrecacheResource( "soundfile", "sounds/weapons/hero/zuus/lightning_bolt.vsnd", context )
 
@@ -351,6 +353,13 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/c4_defused.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/bomb_defusing.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/bomb_planted.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/oboyudno.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/vibes.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/klonk.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/chillguy_music.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/chillguy_photo.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/chillguy_start.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/chillguy_r.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_marci.vsndevts", context )
@@ -809,7 +818,7 @@ function COverthrowGameMode:GatherAndRegisterValidTeams()
 	
 	local foundTeamsList = {}
 	for t, _ in pairs( foundTeams ) do
-		table.insert( foundTeamsList, t )
+		table.insert( foundTeamsList, t )	
 	end
 
 	if numTeams == 0 then

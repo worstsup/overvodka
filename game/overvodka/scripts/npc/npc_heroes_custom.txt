@@ -438,7 +438,7 @@
 		"HeroSelectSoundEffect"		"ivnv_start"
 		"GibType"		"default"
 		"Ability1"		"Naval_meeting"
-		"Ability2"		"ogre_magi_fireblast_datadrive"
+		"Ability2"		"ogre_magi_fireblast_lua"
 		"Ability3"		"queenofpain_blink_datadriven"
 		"Ability4"		"silencer_global_silence_datadriven"
 		"Ability5"		"enchantress_untouchable_lua"
@@ -1291,7 +1291,7 @@
 		"HealthBarOffset"		"270"
 		"Ability1"		"mellstroy_shavel"
 		"Ability2"		"mellstroy_meteors"
-		"Ability3"		"mellstroy_business"
+		"Ability3"		"mellstroy_business_new"
 		"Ability4"		"mellstroy_casino"
 		"Ability5"		"mellstroy_casino_allin"
 		"Ability6"		"mellstroy_amam"
@@ -1759,7 +1759,7 @@
 		"StatusHealthRegen"		"1.0"
 		// Movement
 		//-------------------------------------------------------------------------------------------------------------
-		"MovementSpeed"		"305"
+		"MovementSpeed"		"295"
 	}
 	"npc_dota_hero_clinkz"
 	{
@@ -1823,9 +1823,9 @@
 				}
 			}
 		}
-		"ArmorPhysical"		"0"
+		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"		"39"
+		"AttackDamageMin"		"41"
 		"AttackDamageMax"		"45"
 		"AttackRate"		"1.700000"
 		"AttackAnimationPoint"		"0.4"
@@ -1834,7 +1834,7 @@
 		"ProjectileModel"		"particles/sniper_base_attack_charlie_new.vpcf"
 		"ProjectileSpeed"		"2500"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
-		"AttributeBaseStrength"		"17"
+		"AttributeBaseStrength"		"20"
 		"AttributeStrengthGain"		"2.000000"
 		"AttributeBaseAgility"		"25"
 		"AttributeAgilityGain"		"2.7"
@@ -1842,7 +1842,7 @@
 		"AttributeIntelligenceGain"		"2.2"
 		"StatusHealthRegen"		"0.25"
 		"StatusManaRegen"	"0"
-		"MovementSpeed"		"290"
+		"MovementSpeed"		"310"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"HealthBarOffset"		"270"		
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
@@ -1909,6 +1909,71 @@
 		"StatusHealthRegen"		"1.5"
 		"StatusMana"			"120"
 		"MovementSpeed"		"290"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+	}
+	"npc_dota_hero_ancient_apparition"
+	{
+		"Model"		"chillguy/models/heroes/chill/chillguyrigged.vmdl"
+		"SoundSet"		"Hero_ancient_apparition"
+		"DisableWearables"	"1"
+		"Enabled"		"1"
+		"ModelScale"		"1.2"
+		"VersusScale"		"1.2"
+		"LoadoutScale"		"1.2"
+		"SpectatorLoadoutScale" "1.2"
+		"HeroSelectSoundEffect"		"chillguy_start"
+		"HealthBarOffset"		"250"		
+		"Ability1"		"chillguy_q"
+		"Ability2"		"chillguy_w"
+		"Ability3"		"chillguy_e"
+		"Ability4"		"faceless_void_time_zone"
+		"Ability5"		"custom_passive_bonus_armor_regen"
+		"Ability6"		"chillguy_r"
+		"Ability7"		"generic_hidden"
+
+		"Ability10"		"special_bonus_unique_slark_6"
+		"Ability11"		"special_bonus_unique_slark"
+		"Ability12"		"special_bonus_unique_slark_2"
+		"Ability13"		"special_bonus_unique_slark_8"
+		"Ability14"		"special_bonus_unique_slark_5"
+		"Ability15"		"special_bonus_unique_slark_7"
+		"Ability16"		"special_bonus_unique_slark_3"
+		"Ability17"		"special_bonus_unique_slark_4"
+		"Facets"
+		{
+			"ancient_apparition_bone_chill" 
+			{
+				"Icon"				"debuff"
+				"Color"				"Gray"
+				"GradientID"		"3"
+			}
+			"ancient_apparition_exposure" 
+			{
+				"Icon"				"area_of_effect"
+				"Color"				"Blue"
+				"GradientID"		"0"
+			}
+		}
+		
+		"AbilityDraftIgnoreCount"		"7"
+		"ArmorPhysical"		"-1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"21"
+		"AttackDamageMax"		"31"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.450000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"600"
+		"ProjectileModel"		"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+		"ProjectileSpeed"		"1250"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"20"
+		"AttributeStrengthGain"		"1.900000"
+		"AttributeBaseAgility"		"20"
+		"AttributeAgilityGain"		"2.200000"
+		"AttributeBaseIntelligence"		"23"
+		"AttributeIntelligenceGain"		"3.100000"
+		"MovementSpeed"		"285"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

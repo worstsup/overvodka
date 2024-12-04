@@ -51,7 +51,7 @@ function modifier_custom_passive_disarm:OnIntervalThink()
             })
 
             -- Apply disarm
-            enemy:AddNewModifier(parent, self:GetAbility(), "modifier_generic_disarmed_lua", {duration = self.disarm_duration})
+            enemy:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.disarm_duration})
 
             -- Start cooldown
             self:GetAbility():StartCooldown(self.cooldown)
