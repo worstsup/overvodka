@@ -2,6 +2,10 @@ function StealDamage(keys)
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
+	if target:TriggerSpellAbsorb(ability) then 
+		target:RemoveModifierByName("modifier_Doljan_RapBattle_debuff")
+		return
+	end
 	local buff = "modifier_steal_damage_buff"
 	local debuff = "modifier_steal_damage_debuff"
 	local buff_ms = "modifier_steal_ms_buff"
@@ -16,7 +20,6 @@ function StealDamage(keys)
 	local target_location = target:GetAbsOrigin()
 	local distance = (target_location - caster_location):Length2D()
 	local break_distance = ability:GetLevelSpecialValueFor("break_distance", (ability:GetLevel() - 1))
-
 	if distance >= break_distance then
 		target:RemoveModifierByName("modifier_Doljan_RapBattle_debuff")
 		return

@@ -59,10 +59,10 @@
 }
 
 #ScoreboardTeam {
-    margin-left: EXTRA_PADDING;
-    margin-right: EXTRA_PADDING;
-    padding-left: 2px;
-    padding-right: 2px;
+    margin-left: M_EXTRA_PADDING;
+    margin-right: M_EXTRA_PADDING;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .AspectRatio4x3 .ScoreboardTeamWrapper {

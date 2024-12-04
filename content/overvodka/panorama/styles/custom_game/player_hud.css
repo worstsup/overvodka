@@ -99,11 +99,11 @@
 }
 
 #SubscribeButton{
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
 
-    margin-left: 158px;
-    margin-top: 13px;
+    margin-left: 153px;
+    margin-top: 8px;
 
     background-image: url("file://{images}/custom_game/subscribe_button.png");
     background-position: center;

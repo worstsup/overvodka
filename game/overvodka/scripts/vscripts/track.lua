@@ -1,6 +1,14 @@
---[[Author: Pizzalol
-	Date: 02.01.2015.
-	Triggers on death and grants bonus gold to the caster and friendly heroes around the target]]
+function LinkenCheck( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	if target:TriggerSpellAbsorb(ability) then 
+		target:RemoveModifierByName("modifier_track_datadriven")
+		target:RemoveModifierByName("modifier_track_aura_datadriven")
+		return
+	end
+end
+
 function Track( keys )
 	local caster = keys.caster
 	local target = keys.target

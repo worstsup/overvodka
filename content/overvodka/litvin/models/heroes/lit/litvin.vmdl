@@ -500,28 +500,6 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "lit_dance"
-						activity_name = "ACT_DOTA_CAST_ABILITY_1"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						animgraph_additive = false
-						source_filename = "litvin/models/heroes/lit/lit_dance.fbx"
-						import_bone_scales = false
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
 						name = "lit_punch"
 						activity_name = "ACT_DOTA_ATTACK"
 						activity_weight = 1
@@ -576,6 +554,28 @@
 						import_bone_scales = false
 						start_frame = 19
 						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "conditions"
+						activity_name = "ACT_DOTA_CAST_ABILITY_1"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "litvin/models/heroes/lit/conditions.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = 120
 						framerate = -1.0
 						reverse = false
 					},

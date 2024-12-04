@@ -45,7 +45,7 @@
 		"item"		"item_balbe"
 		"item"		"item_hqd_maxx"
 		"item"		"item_pasito"
-		"item"		"item_chainmail"
+		"item"		"item_cuirass_2"
 		"item"		"item_quarterstaff"
 		"item"		"item_helm_of_iron_will"
 		"item"		"item_broadsword"
