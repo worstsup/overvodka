@@ -32,14 +32,11 @@ function DebugPanel:RegisterPanoramaListeners()
 	CustomGameEventManager:RegisterListener('debug_panel_remove_unit', Dynamic_Wrap(DebugPanel, 'OnRemoveUnitRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_give_item', Dynamic_Wrap(DebugPanel, 'OnItemRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_set_time_scale', Dynamic_Wrap(DebugPanel, 'OnSetHostTimescaleRequest'))
-	CustomGameEventManager:RegisterListener('debug_panel_reload_kv', Dynamic_Wrap(DebugPanel, 'OnReloadKVRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_wtf_toggle', Dynamic_Wrap(DebugPanel, 'OnWTFToggleRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_refresh_abilities', Dynamic_Wrap(DebugPanel, 'OnRefreshAbilitiesRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_set_gold', Dynamic_Wrap(DebugPanel, 'OnSetGoldRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_change_gold', Dynamic_Wrap(DebugPanel, 'OnChangeGoldRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_state_for_player', Dynamic_Wrap(DebugPanel, 'OnStateRequest'))
-	CustomGameEventManager:RegisterListener('debug_panel_reload_scripts', Dynamic_Wrap(DebugPanel, 'OnReloadScriptsRequest'))
-	CustomGameEventManager:RegisterListener('debug_panel_restart', Dynamic_Wrap(DebugPanel, 'OnRestartRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_teleport', Dynamic_Wrap(DebugPanel, 'OnTeleportRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_spawn_unit', Dynamic_Wrap(DebugPanel, 'OnSpawnUnitRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_set_difficulty', Dynamic_Wrap(DebugPanel, 'OnSetDifficultyRequest'))
@@ -91,7 +88,6 @@ function DebugPanel:RestorePanelForPlayer(playerID)
 			DebugPanel:SendSetHeroResponse(playerID, DOTAGameManager:GetHeroIDByName(playerHero:GetUnitName()))
 			DebugPanel:OnSetBotRequest({PlayerID = playerID, id = DOTAGameManager:GetHeroIDByName(playerHero:GetUnitName())})
 			DebugPanel:SendDebugPanelState(playerID, DebugPanel:IsPlayerAllowedToExecuteCommand(playerID))
-			DebugPanel:SendKVData(playerID)
 		else
 			return 1
 		end
@@ -157,40 +153,6 @@ function DebugPanel:SendDebugPanelState(playerID, enabled)
 	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "debug_panel_state_for_player_response", {
 		disabled = disabled
 	})
-end
-
-function DebugPanel:SendKVData(playerID)
-	local units = {}
-	local unitKV = KeyValues.UnitKV
-	for k,v in pairs(unitKV) do
-		if(type(v) == "table") then
-			table.insert(units, k)
-		end
-	end
-
-	local items = {}
-	local itemsKV = KeyValues.ItemKV
-	for k,v in pairs(itemsKV) do
-		if(type(v) == "table") then
-			table.insert(items, k)
-		end
-	end
-
-	local abilities = {}
-	local abilitiesKV = KeyValues.AbilityKV
-	for k,v in pairs(abilitiesKV) do
-		if(type(v) == "table") then
-			local AbilityTextureName = v.AbilityTextureName or (not (v.BaseClass and string.find(v.BaseClass, "ability_")) and v.BaseClass) or tostring(k)
-			table.insert(abilities, {k, AbilityTextureName})
-		end
-	end
-
-	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "debug_panel_kv_data", {
-		units = units,
-		items = items,
-		abilities = abilities
-	})
-	print("KVData reloaded")
 end
 
 function DebugPanel:OnSpawnUnitRequest(kv)
@@ -595,15 +557,6 @@ function DebugPanel:OnSetHostTimescaleRequest(kv)
 	Convars:SetFloat("host_timescale", kv.value)
 end
 
-function DebugPanel:OnReloadKVRequest(kv)
-	local playerID = kv.PlayerID
-	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
-		return
-	end
-	GameRules:Playtesting_UpdateAddOnKeyValues()
-	DebugPanel:SendKVData(playerID)
-end
-
 function DebugPanel:OnSetGoldRequest(kv)
 	local playerID = kv.PlayerID
 	if not DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) then return end
@@ -625,26 +578,6 @@ function DebugPanel:OnChangeGoldRequest(kv)
 	if Unit and not Unit:IsNull() and Unit:IsAlive() and Unit:IsRealHero() then
 		Unit:SpendGold(-kv.gold, 0)
 	end
-end
-
-function DebugPanel:OnReloadScriptsRequest(kv)
-	local playerID = kv.PlayerID
-	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
-		return
-	end
-	SendToServerConsole("script_reload")
-	SendToServerConsole("cl_script_reload")
-end
-
-function DebugPanel:OnRestartRequest(kv)
-	local playerID = kv.PlayerID
-	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
-		return
-	end
-	SendToConsole("restart")
-	SendToServerConsole("restart")
-	SendToConsole("clearall")
-	SendToServerConsole("clearall")
 end
 
 function DebugPanel:OnTeleportRequest(kv)
