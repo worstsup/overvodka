@@ -23,17 +23,18 @@
 		"#DOTA_Item_Build_Late_Items"
 		{
 			"item"		"item_nikes"
-			"item"		"item_mask_of_quadrobe"
-			"item"		"item_manta_datadriven"
 			"item"		"item_mega_spinner"
+			"item"		"item_manta_datadriven"
+			"item"		"item_mask_of_quadrobe"
 			"item"		"item_govno"
 			"item"		"item_waka"
-			"item"		"item_ultimate_scepter"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_invis_sword_datadriven"
+                        "item"		"item_ultimate_scepter"
+                        "item"		"item_blink"
 		}
 	}
 }
