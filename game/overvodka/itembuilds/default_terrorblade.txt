@@ -28,10 +28,20 @@
 			"item"		"item_pasito"
 			"item"		"item_ultimate_scepter"
 		}
+                "#DOTA_Item_Build_Mid_Items"
+		{
+			"item"		"item_jordan"
+                        "item"		"item_sharoeb"
+			"item"		"item_govno"
+                        "item"		"item_ultimate_scepter"
+			"item"		"item_suchiy"
+			"item"		"item_pasito"
+		}
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_invis_sword_datadriven"
+                        "item"		"item_refresher"
 		}
 	}
 }
