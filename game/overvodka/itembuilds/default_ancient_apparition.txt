@@ -24,16 +24,20 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_sharoeb"
+                        "item"		"item_kaya_and_sange"
 			"item"		"item_ultimate_scepter"
-			"item"		"item_armlet_datadriven"
 			"item"		"item_suchiy"
 			"item"		"item_pasito"
+                        "item"		"item_badun"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_cuirass_2"
-			"item"		"item_govno"
 			"item"		"item_aghanims_shard"
+                        "item"		"item_armlet_datadriven"
+                        "item"		"item_cuirass_2"
+			"item"		"item_govno"
+                        "item"		"item_revenants_brooch"
+                        "item"		"item_bloodstone"
 		}
 	}
 }
