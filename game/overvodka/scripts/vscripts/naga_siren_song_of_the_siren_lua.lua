@@ -60,6 +60,9 @@ end
 -- Cancel ability
 --------------------------------------------------------------------------------
 naga_siren_song_of_the_siren_end_lua = class({})
+function naga_siren_song_of_the_siren_end_lua:IsStealable()
+	return false
+end
 function naga_siren_song_of_the_siren_end_lua:OnSpellStart()
 	-- kill modifier
 	self.modifier:End()

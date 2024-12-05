@@ -156,6 +156,8 @@ function Precache( context )
 		PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
 		PrecacheResource( "model", "models/items/courier/carty_dire/carty_dire_flying.vmdl", context )
 		PrecacheResource( "model", "cheater/models/heroes/cheat/c4_1.vmdl", context )
+		PrecacheResource( "model", "nix/model.vmdl", context )
+		PrecacheResource( "model", "nix/pc_nightmare_mushroom.vmdl", context )
 
 		
 	--Cache sounds for traps

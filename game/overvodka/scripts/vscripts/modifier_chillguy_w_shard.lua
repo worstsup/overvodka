@@ -23,7 +23,6 @@ end
 function modifier_chillguy_w_shard:OnRefresh( kv )
 	self:OnCreated( kv )
 end
-
 function modifier_chillguy_w_shard:OnRemoved()
 end
 

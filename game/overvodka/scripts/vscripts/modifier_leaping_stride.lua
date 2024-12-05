@@ -17,6 +17,14 @@ function modifier_leaping_stride:OnIntervalThink()
     if self:GetParent():HasModifier("modifier_custom_critical_strike") or self:GetParent():HasModifier("modifier_custom_vision_aura_lol") or self:GetParent():HasModifier("modifier_lol_slow") then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
+    local playerID = parent:GetPlayerOwnerID()
+
+    -- Check if the player has left the game
+    local connection_state = PlayerResource:GetConnectionState(playerID)
+    if connection_state == DOTA_CONNECTION_STATE_DISCONNECTED or connection_state == DOTA_CONNECTION_STATE_ABANDONED then
+        self.jumping_active = false -- Stop jumping
+        return
+    end
     if parent:IsStunned() or parent:IsRooted() then
         return -- Stop further logic if the hero is stunned or rooted
     end

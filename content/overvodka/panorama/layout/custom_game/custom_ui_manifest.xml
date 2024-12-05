@@ -40,6 +40,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zolo.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_cheater.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_chill.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_ancient_apparition.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_sniper.png" />
 	</Panel>
 </root>

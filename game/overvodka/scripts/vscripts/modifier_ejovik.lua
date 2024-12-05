@@ -12,19 +12,11 @@ function modifier_ejovik:OnCreated( kv )
 	self.evasion = self:GetAbility():GetSpecialValueFor( "evasion" )
 	self.mag = self:GetAbility():GetSpecialValueFor( "bonus_mag" )
 	self:PlayEffects( self:GetParent() )
-	self:GetParent():SetOriginalModel("maps/cavern_assets/models/mushrooms/mushroom_inkycap_01.vmdl")
-	self:GetParent():SetModelScale(1.2)
 end
 
 --------------------------------------------------------------------------------
 
 function modifier_ejovik:OnRemoved()
-	model = "models/heroes/furion/furion.vmdl"
-	if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
-		model = "models/heroes/rubick/rubick.vmdl"
-	end
-	self:GetParent():SetOriginalModel(model)
-	self:GetParent():SetModelScale(1)
 	ParticleManager:DestroyParticle( self.nChannelFX, false )
 end
 
@@ -40,6 +32,7 @@ function modifier_ejovik:DeclareFunctions()
 		MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+		MODIFIER_PROPERTY_MODEL_CHANGE,
 	}
 
 	return funcs
@@ -62,6 +55,9 @@ function modifier_ejovik:GetModifierEvasion_Constant( params )
 end
 function modifier_ejovik:GetModifierAttackSpeedBonus_Constant( params )
 	return self.as
+end
+function modifier_ejovik:GetModifierModelChange( params )
+	return "nix/pc_nightmare_mushroom.vmdl"
 end
 function modifier_ejovik:PlayEffects( target )
 	self.nChannelFX = ParticleManager:CreateParticle( "particles/econ/items/shadow_shaman/ti8_ss_mushroomer_belt/ti8_ss_mushroomer_belt_ambient_shimmer.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )

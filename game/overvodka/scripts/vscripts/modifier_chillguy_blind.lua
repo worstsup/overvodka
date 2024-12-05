@@ -44,6 +44,14 @@ function modifier_chillguy_blind:DeclareFunctions()
 
 	return funcs
 end
+
+function modifier_chillguy_blind:CheckState()
+	local state = {
+		[MODIFIER_STATE_DISARMED] = true,
+	}
+
+	return state
+end
 function modifier_chillguy_blind:GetBonusDayVision()
 	return -1600
 end

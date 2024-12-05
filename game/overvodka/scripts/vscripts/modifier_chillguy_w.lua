@@ -15,18 +15,11 @@ end
 
 function modifier_chillguy_w:OnCreated( kv )
 	if not IsServer() then return end
-	local damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.manacost = self:GetAbility():GetSpecialValueFor( "mana_cost_per_second" )
 	local interval = 1
 	-- precache
 	self.parent = self:GetParent()
-	self.damageTable = {
-		attacker = self:GetParent(),
-		damage = damage,
-		damage_type = self:GetAbility():GetAbilityDamageType(),
-		ability = self:GetAbility(),
-	}
 	self.parent:AddNewModifier(self.parent, self:GetAbility(), "modifier_chillguy_w_debuff", {})
 	self:Burn()
 	self:StartIntervalThink( interval )
@@ -74,9 +67,17 @@ function modifier_chillguy_w:Burn()
 		0,	-- int, order filter
 		false	-- bool, can grow cache
 	)
-
+	local damage = self:GetAbility():GetSpecialValueFor( "damage" )
+	local damage_pct = self:GetAbility():GetSpecialValueFor( "damage_pct" )
 	for _,enemy in pairs(enemies) do
 		-- apply damage
+		local damage_new = damage_pct * enemy:GetMaxHealth() * 0.01 + damage
+		self.damageTable = {
+			attacker = self:GetParent(),
+			damage = damage_new,
+			damage_type = self:GetAbility():GetAbilityDamageType(),
+			ability = self:GetAbility(),
+		}
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
 		self:PlayEffects( enemy )
