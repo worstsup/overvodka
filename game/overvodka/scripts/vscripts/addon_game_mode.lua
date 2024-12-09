@@ -545,7 +545,11 @@ function COverthrowGameMode:InitGameMode()
 	-- Show the ending scoreboard immediately
 	GameRules:SetCustomGameEndDelay( 0 )
 	GameRules:SetCustomVictoryMessageDuration( 10 )
-	GameRules:SetCustomGameSetupTimeout( 3 )
+	if GetMapName() == "desert_duo" then
+		GameRules:SetCustomGameSetupTimeout( 3 )
+	else
+		GameRules:SetCustomGameSetupTimeout( 0 )
+	end
 	GameRules:SetPreGameTime( 10.0 )
 	GameRules:SetStrategyTime( 20.0 )
 	if self.m_bFastPlay then

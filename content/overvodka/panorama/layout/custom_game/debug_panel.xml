@@ -293,6 +293,11 @@
 									<Panel class="RefreshIcon" />
 								</Button>
 							</Panel>
+							<Panel class="Row">
+								<ToggleButton id="TitleStatusButton" class="DemoToggleButton" acceptsjoyfocus="true" onactivate="OnTitleStatusPressed()">
+									<Label text="Титул над головой" />
+								</ToggleButton>
+							</Panel>
 						</Panel>
 						<Panel class="Row">
 							<Label class="CategoryHeader" id="HostTimescaleLabel" text="Скорость времени (1.0)" />
