@@ -57,6 +57,7 @@ function Server:OnPlayerConnected(event)
         self.Players[event.PlayerID] = {
             TipCooldown = 0,
             is_admin = DebugPanel:IsDeveloper(event.PlayerID),
+            title_status = false,
             ServerData = {
                 SteamID = SteamID
             }
@@ -101,6 +102,18 @@ function Server:UpdatePlayerNetTable(PlayerID)
 
     CustomNetTables:SetTableValue("players", "player_"..PlayerID, self.Players[PlayerID].ServerData)
     CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_special_info", {is_admin = self.Players[PlayerID].is_admin})
+    if self.Players[PlayerID].is_admin == true then
+        self.Players[PlayerID].title_status = true
+        CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_title_status", {status = self.Players[PlayerID].title_status})
+    end
+end
+
+function Server:SwitchTitleStatus(PlayerID)
+    if not self.Players[PlayerID] then return end
+
+    self.Players[PlayerID].title_status = not self.Players[PlayerID].title_status
+
+    CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_title_status", {status = self.Players[PlayerID].title_status})
 end
 
 function Server:SendRequest(url, data, callback, debugEnabled, attempt)

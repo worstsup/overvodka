@@ -1,6 +1,7 @@
 var Utils = GameUI.CustomUIConfig().Utils;
 var Constants = GameUI.CustomUIConfig().Constants;
 var DebugPanelWindow = {};
+const LocalPID = Players.GetLocalPlayer()
 $.Msg("Initialize debug panel")
 
 function Init()
@@ -265,9 +266,20 @@ function OnWTFTogglePressed() {
 	Game.EmitSound( "UI.Button.Pressed" );
 }
 
-function OnRefreshAbilitiesRequest() {
-	GameEvents.SendCustomGameEventToServer("debug_panel_refresh_abilities", {});
+function OnTitleStatusPressed() {
+	let check = $( '#TitleStatusButton' ).checked
+	GameEvents.SendCustomGameEventToServer("debug_panel_switch_title_status", {
+		isActive : check
+	});
 	Game.EmitSound( "UI.Button.Pressed" );
+}
+
+function OnRefreshAbilitiesRequest() {
+	let SelectedUnit = Players.GetLocalPlayerPortraitUnit()
+	if(SelectedUnit != -1){
+		GameEvents.SendCustomGameEventToServer("debug_panel_refresh_abilities", {unit: SelectedUnit});
+		Game.EmitSound( "UI.Button.Pressed" );
+	}
 }
 
 function OnHurtMeBadPressed() {
@@ -776,3 +788,7 @@ let awaitDebugWindowInitFunction = function() {
 
 awaitDebugWindowInitFunction();
 
+let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${LocalPID}_title_status`)
+if(PlayerInfo && PlayerInfo.status == 1){
+	$("#TitleStatusButton").SetSelected(true)
+}

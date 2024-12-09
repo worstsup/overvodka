@@ -220,6 +220,11 @@ function UpdateTitles() {
             continue
         }
 
+        if(!IsTitleActive(Unit)){
+            DeletePlayerTitle(Unit)
+            continue
+        }
+
         const panel = GetOrCreatePlayerTitlePanel(Unit)
 
         panel.checked = true
@@ -335,6 +340,19 @@ function IsAdminEnt(unit){
     }
 
     if(AdminPlayers.includes(PlayerID)){
+        return true
+    }
+
+    return false
+}
+
+function IsTitleActive(unit){
+    if(!IsAdminEnt(unit)){return false}
+
+    let PlayerID = Entities.GetPlayerOwnerID( unit )
+
+    let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${PlayerID}_title_status`)
+    if(PlayerInfo && PlayerInfo.status == 1){
         return true
     }
 

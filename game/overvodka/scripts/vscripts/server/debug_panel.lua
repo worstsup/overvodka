@@ -45,6 +45,7 @@ function DebugPanel:RegisterPanoramaListeners()
 	CustomGameEventManager:RegisterListener('debug_panel_remove_items_on_ground', Dynamic_Wrap(DebugPanel, 'OnRemoveItemsOnGroundRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_respawn_hero', Dynamic_Wrap(DebugPanel, 'OnRespawnHeroRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_add_ability', Dynamic_Wrap(DebugPanel, 'OnAddAbilityRequest'))
+	CustomGameEventManager:RegisterListener('debug_panel_switch_title_status', Dynamic_Wrap(DebugPanel, 'OnSwitchTitleStatus'))
 end
 
 function DebugPanel:IsDeveloper(playerID)
@@ -153,6 +154,12 @@ function DebugPanel:SendDebugPanelState(playerID, enabled)
 	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "debug_panel_state_for_player_response", {
 		disabled = disabled
 	})
+end
+
+function DebugPanel:OnSwitchTitleStatus(event)
+	local PlayerID = event.PlayerID
+	
+	Server:SwitchTitleStatus(PlayerID)
 end
 
 function DebugPanel:OnSpawnUnitRequest(kv)
@@ -536,13 +543,15 @@ end
 
 function DebugPanel:OnRefreshAbilitiesRequest(kv)
 	local playerID = kv.PlayerID
-	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
-		return
+	if not DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) then return end
+
+	local UnitIndex = kv.unit
+	local Unit = EntIndexToHScript(UnitIndex)
+	if Unit and not Unit:IsNull() and Unit:IsAlive() then
+		DebugPanel:RemoveAllCooldownForUnit(Unit, true)
+		Unit:SetHealth(Unit:GetMaxHealth())
+		Unit:SetMana(Unit:GetMaxMana())
 	end
-	local playerHero = PlayerResource:GetSelectedHeroEntity(playerID)
-	DebugPanel:RemoveAllCooldownForUnit(playerHero, true)
-	playerHero:SetHealth(playerHero:GetMaxHealth())
-	playerHero:SetMana(playerHero:GetMaxMana())
 end
 
 function DebugPanel:OnSetHostTimescaleRequest(kv)
