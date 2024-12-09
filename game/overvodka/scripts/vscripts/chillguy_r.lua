@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_chillguy_r", "modifier_chillguy_r", LUA_MODIFIER_MOTI
 --------------------------------------------------------------------------------
 
 function chillguy_r:OnSpellStart()
-	EmitGlobalSound( "chillguy_r" )
+	EmitSoundOn( "chillguy_r", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_chillguy_r", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 --------------------------------------------------------------------------------

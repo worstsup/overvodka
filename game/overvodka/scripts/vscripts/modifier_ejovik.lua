@@ -33,6 +33,8 @@ function modifier_ejovik:DeclareFunctions()
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
+		MODIFIER_PROPERTY_MODEL_SCALE,
+		MODIFIER_PROPERTY_MODEL_SCALE_ANIMATE_TIME,
 	}
 
 	return funcs
@@ -58,6 +60,13 @@ function modifier_ejovik:GetModifierAttackSpeedBonus_Constant( params )
 end
 function modifier_ejovik:GetModifierModelChange( params )
 	return "nix/pc_nightmare_mushroom.vmdl"
+end
+function modifier_ejovik:GetModifierModelScaleAnimateTime( params )
+	return 0
+end
+function modifier_ejovik:GetModifierModelScale( params )
+	if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then return 16000 end
+	return 0
 end
 function modifier_ejovik:PlayEffects( target )
 	self.nChannelFX = ParticleManager:CreateParticle( "particles/econ/items/shadow_shaman/ti8_ss_mushroomer_belt/ti8_ss_mushroomer_belt_ambient_shimmer.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )

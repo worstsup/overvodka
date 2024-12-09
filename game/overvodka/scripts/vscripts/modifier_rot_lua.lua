@@ -49,7 +49,7 @@ function modifier_rot_lua:OnCreated( kv )
 		self.manacost = self:GetAbility():GetOrbSpecialValueFor( "mana_cost_per_secondd", "w" )
 	else
 		self.rot_slow = -21
-		self.rot_damage = 180
+		self.rot_damage = 80
 		self.manacost = 75
 	end
 	self.rot_tick = self:GetAbility():GetSpecialValueFor( "rot_tick" )
@@ -109,7 +109,7 @@ function modifier_rot_lua:OnIntervalThink()
 	    end
 		local flDamagePerTick = self.rot_tick * self.rot_damage
 		local mana = self.parent:GetMana()
-	    if mana < self.manacost then
+	    if mana < self.manacost or (self.parent:GetAbilityByIndex( 3 ) ~= self:GetAbility() and self.parent:GetAbilityByIndex( 4 ) ~= self:GetAbility()) then
 		    -- turn off
 		    if self:GetAbility():GetToggleState() then
 		    	self:GetAbility():ToggleAbility()
@@ -128,13 +128,6 @@ function modifier_rot_lua:Burn()
 		return 0
 	end
 	-- find enemies
-	self.damageTable = {
-		-- victim = target,
-		attacker = self:GetParent(),
-		damage = self.rot_damage,
-		damage_type = self:GetAbility():GetAbilityDamageType(),
-		ability = self:GetAbility(), --Optional.
-	}
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(),	-- int, your team number
 		self.parent:GetOrigin(),	-- point, center point
@@ -148,6 +141,14 @@ function modifier_rot_lua:Burn()
 	)
 	for _,enemy in pairs(enemies) do
 		-- apply damage
+		self.dmg = self.rot_damage + enemy:GetMaxHealth() * 0.006
+		self.damageTable = {
+			-- victim = target,
+			attacker = self:GetParent(),
+			damage = self.dmg,
+			damage_type = self:GetAbility():GetAbilityDamageType(),
+			ability = self:GetAbility(), --Optional.
+		}
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
 	end

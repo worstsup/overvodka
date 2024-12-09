@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_provor", "modifier_provor", LUA_MODIFIER_MOTION_NONE 
 --------------------------------------------------------------------------------
 
 function Provor:OnSpellStart()
-	EmitGlobalSound( "prov" )
+	EmitSoundOn( "prov", self:GetCaster() )
 
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_provor", { duration = self:GetSpecialValueFor( "duration" ) } )
 end

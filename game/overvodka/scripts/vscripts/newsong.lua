@@ -5,6 +5,7 @@ function NewSong(keys)
 	local duration = ability:GetLevelSpecialValueFor( "duration" , ability:GetLevel() - 1  )
 	
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_face_newsong", {duration = duration })
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_eldjey_aura", {duration = duration })
 end
 
 function Damage(keys)

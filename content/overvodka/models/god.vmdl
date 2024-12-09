@@ -30,7 +30,7 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "mellstroy/models/heroes/mell/seregafixed.fbx"
-						import_scale = 1.0
+						import_scale = 0.8
 						import_filter = 
 						{
 							exclude_by_default = false

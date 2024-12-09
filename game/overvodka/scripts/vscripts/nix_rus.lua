@@ -8,7 +8,7 @@ LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua
 --------------------------------------------------------------------------------
 
 function nix_rus:OnSpellStart()
-	EmitGlobalSound( "nix_rus" )
+	EmitSoundOn( "nix_rus", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_nix_rus", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 --------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_orlov_fly", "modifier_orlov_fly", LUA_MODIFIER_MOTION
 --------------------------------------------------------------------------------
 
 function orlov_fly:OnSpellStart()
-	EmitGlobalSound( "orlov" )
+	EmitSoundOn( "orlov", self:GetCaster() )
 
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_orlov_fly", { duration = self:GetSpecialValueFor( "duration" ) } )
 end

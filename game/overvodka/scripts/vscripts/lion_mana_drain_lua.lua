@@ -22,12 +22,11 @@ function lion_mana_drain_lua:OnSpellStart()
 
 	-- cancel if linken
 	if target:TriggerSpellAbsorb( self ) then
-		caster:Interrupt()
 		return
 	end
 
 	-- load data
-	local duration = self:GetChannelTime()
+	local duration = 5.1
 
 	-- register modifier (in case for multi-target)
 	local modifier = target:AddNewModifier(
@@ -40,20 +39,6 @@ function lion_mana_drain_lua:OnSpellStart()
 	-- play effects
 	self.sound_cast = "hehe"
 	EmitSoundOn( self.sound_cast, caster )
-end
-
-function lion_mana_drain_lua:OnChannelFinish( bInterrupted )
-	-- destroy all modifier
-	for modifier,_ in pairs(self.modifiers) do
-		if not modifier:IsNull() then
-			modifier.forceDestroy = bInterrupted
-			modifier:Destroy()
-		end
-	end
-	self.modifiers = {}
-
-	-- end sound
-	StopSoundOn( self.sound_cast, self:GetCaster() )
 end
 
 function lion_mana_drain_lua:Unregister( modifier )
@@ -69,7 +54,5 @@ function lion_mana_drain_lua:Unregister( modifier )
 	end
 
 	-- stop channelling if no other target exist
-	if counter==0 and self:IsChanneling() then
-		self:EndChannel( false )
-	end
+	
 end

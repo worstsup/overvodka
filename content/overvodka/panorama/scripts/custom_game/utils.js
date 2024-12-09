@@ -227,6 +227,14 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_chill"
     }
+    if (HeroName == "npc_dota_hero_bloodseeker")
+    {
+        OvervodkaName = "npc_dota_hero_sasavot"
+    }
+    if (HeroName == "npc_dota_hero_juggernaut")
+    {
+        OvervodkaName = "npc_dota_hero_golovach"
+    }
     return OvervodkaName	
 }
 

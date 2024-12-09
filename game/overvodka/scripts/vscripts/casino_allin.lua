@@ -1,5 +1,8 @@
+LinkLuaModifier( "modifier_mell_two", "modifier_mell_two", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_one", "modifier_mell_one", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_three", "modifier_mell_three", LUA_MODIFIER_MOTION_NONE )
 mellstroy_casino_allin = class({})
-
+k = 0
 function mellstroy_casino_allin:OnSpellStart()
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
@@ -11,10 +14,23 @@ function mellstroy_casino_allin:OnSpellStart()
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
-        caster:EmitSound("jackpot") -- Play gold pickup sound
+        caster:EmitSound("jackpot") -- Play gold pickup sound\
+        if k == 0 then
+            caster:AddNewModifier(caster, self, "modifier_mell_one", { duration = 3 })
+        end
+        if k == 1 then
+            caster:AddNewModifier(caster, self, "modifier_mell_two", { duration = 3 })
+        end
+        if k == 2 then
+            caster:AddNewModifier(caster, self, "modifier_mell_three", { duration = 3 })
+        end
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
+        k = k + 1
     else -- 50% chance to give nothing
         caster:EmitSound("lose") -- play cancel sound for no reward
+    end
+    if k >= 3 then
+        self:SetActivated( false )
     end
 end
 

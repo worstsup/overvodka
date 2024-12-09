@@ -2,7 +2,7 @@ function Damage(keys)
 	local caster = keys.caster
 	local ability = keys.ability
 	local damage = ability:GetSpecialValueFor("damage")
-	local radius = ability:GetSpecialValueFor("radius")
+	local radius = ability:GetSpecialValueFor("fear_radius")
 	local targets = FindUnitsInRadius(caster:GetTeamNumber(),
 		caster:GetAbsOrigin(),
 		nil,

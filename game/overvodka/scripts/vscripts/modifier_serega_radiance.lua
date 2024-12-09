@@ -48,6 +48,7 @@ function modifier_serega_radiance:DeclareFunctions()
 	return funcs
 end
 function modifier_serega_radiance:OnIntervalThink()
+	if not self:GetCaster():IsAlive() then return end
 	self.dmg = self:GetCaster():GetLevel() * self.base_damage * self.interval
 	self.miss = self.base_miss + self:GetCaster():GetLevel()
 	if self:GetParent():IsIllusion() then
@@ -92,7 +93,7 @@ function modifier_serega_radiance:GetModifierEvasion_Constant()
 	return self.miss
 end
 function modifier_serega_radiance:PlayEffects( target )
-	local particle_cast = "particles/econ/events/fall_2022/radiance/radiance_owner_fall2022.vpcf"
+	local particle_cast = "particles/radiance_owner_fall2022_new.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

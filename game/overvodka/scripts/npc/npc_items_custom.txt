@@ -3168,7 +3168,7 @@
 			"duration"			 				"6.0"
 			"return_damage"						"85"
 			"return_damage_passive"				"20"
-			"return_damage_passive_percentage" 	"20"	
+			"return_damage_passive_percentage" 	"25"	
 			"radius"						"0"
 		}
 	}
