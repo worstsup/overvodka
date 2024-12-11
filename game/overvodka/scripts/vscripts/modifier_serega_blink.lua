@@ -64,10 +64,12 @@ function modifier_serega_blink:OnIntervalThink()
 			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
 			DOTA_UNIT_TARGET_HERO,	-- int, type filter
 			0,	-- int, flag filter
-			0,	-- int, order filter
+			FIND_CLOSEST,	-- int, order filter
 			false	-- bool, can grow cache
 		)
+		t = 0
 		for _,enemy in pairs(enemies) do
+			if t == 1 then return end
 			self.mana_damage = (enemy:GetMaxMana() - enemy:GetMana()) * self.mana_damage_pct
 			local damageTable = {
 				victim = enemy,
@@ -78,6 +80,7 @@ function modifier_serega_blink:OnIntervalThink()
 			}
 			ApplyDamage(damageTable)
 			self:PlayEffectsNew(enemy)
+			t = t + 1
 		end
 	end
 	k = k + 1

@@ -25,7 +25,7 @@
 		"item"		"item_invis_sword_datadriven"
 		"item"		"item_badun"	
 		"item"		"item_sharoeb"
-		"item"		"item_charon_baby"
+		"item"		"item_charik_new"
 		"item"		"item_nikes"
 		"item"		"item_jordan"	
 		"item"		"item_mega_spinner"

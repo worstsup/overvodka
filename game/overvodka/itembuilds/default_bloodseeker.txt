@@ -22,7 +22,7 @@
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{
-			"item"		"item_charon_baby"
+			"item"		"item_charik_new"
 			"item"		"item_aghanims_shard"
 			"item"		"item_nikes"
 			"item"		"item_mega_spinner"

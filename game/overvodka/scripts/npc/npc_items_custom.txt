@@ -382,51 +382,17 @@
 			"01"						"item_phase_boots;item_power_treads"
 		}
 	}
-	//==================================================
-	// CHARON BABY
-	//==================================================
-		"item_charon_baby"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"                     "item_trident"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"            "charik"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"3000"
-		"ItemQuality"					"artifact"
-		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-				"bonus_strength"		"15"
-				"bonus_agility"			"15"
-				"bonus_intellect"			"15"
-				"status_resistance"				"20"
-				"bonus_attack_speed"	"30"
-				"movement_speed_percent_bonus"	"8"
-				"hp_regen_amp"			"30"
-				"mana_regen_multiplier"		"0"
-				"spell_amp"			"0"
-				"magic_damage_attack"	"0"
-		}
-	}
+
 	//=================================================================================================================
 	// Recipe: CHARON BABY
 	//=================================================================================================================
-	"item_recipe_charon_baby"
+	"item_recipe_charik_new"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemStockMax"					"1"
-		"ItemStockTime"					"99999.0"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -436,7 +402,7 @@
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_charon_baby"
+		"ItemResult"					"item_charik_new"
 		"ItemRequirements"
 		{
 			"01"						"item_yasha;item_bracer"
@@ -1136,8 +1102,8 @@
             "bonus_attack_speed"                                "15"
             "bonus_movement_speed_percentage"                   "10"
             "illusion_duration"                 "14.0"
-            "illusion_outgoing_damage"          "0.0"       
-            "illusion_outgoing_tooltip"         "100.0"
+            "illusion_outgoing_damage"          "-30.0"       
+            "illusion_outgoing_tooltip"         "70.0"
             "illusion_incoming_damage"          "100.0"
             "illusion_incoming_damage_total_tooltip"            "100.0"
             "duration"                                     		"14.0"
@@ -2465,6 +2431,7 @@
 				"bonus_movement_speed"		"8"
 				"bonus_all_stats"			"20"
 				"bonus_magic_resist"		"15"
+				"bonus_as"					"30"
 		}
 	
 		"Modifiers"
@@ -2482,6 +2449,7 @@
                 "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_all_stats"
                 "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_all_stats"
 				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%bonus_magic_resist"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
 				}
 			}
 			"modifier_backtrack_datadriven"
@@ -2545,7 +2513,7 @@
 		"ItemResult"					"item_govno"
 		"ItemRequirements"
 		{
-			"01"						"item_charon_baby;item_ultimate_orb;item_vanguard"
+			"01"						"item_charik_new;item_ultimate_orb;item_vanguard"
 		}
 	}
 	//=================================================================================================================
@@ -2659,8 +2627,8 @@
 				"berserk_bonus_attack_speed"					"100"
 				"berserk_bonus_movement_speed_percentage"		"30"
 				"berserk_extra_incoming_damage_percentage"		"0"
-				"berserk_duration"								"12.0"
-				"berserk_evasion"								"60"
+				"berserk_duration"								"10.0"
+				"berserk_evasion"								"0"
 				"aura_negative_armor"							"-5"
 				"aura_radius"									"900"
 				"bonus_damage"									"50"
@@ -3166,7 +3134,7 @@
 			"bonus_attack_speed_aura"		  	"0"
 			"minus_armor_aura"			 		"0"
 			"duration"			 				"6.0"
-			"return_damage"						"85"
+			"return_damage"						"100"
 			"return_damage_passive"				"20"
 			"return_damage_passive_percentage" 	"25"	
 			"radius"						"0"
@@ -3205,6 +3173,23 @@
 				"passive_reflection_constant"			"20"
 				"passive_reflection_pct"			"20"
 				"active_reflection_pct"			"85"
+		}
+	}
+	"item_charik_new"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"item_charik_new"
+		"AbilityTextureName"		"charik"
+		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCooldown"			"25"
+		"ItemCost"					"3000"
+		
+		"AbilityValues"
+		{
+			"bonus_all_stats"			 	"15"
+			"bonus_attack_speed_stats"		  "30"
+			"bonus_ms"		"8"
+			"bonus_magresist"	"15"
 		}
 	}
 }

@@ -14,7 +14,12 @@ function ModelSwapStart( keys )
 		caster.caster_model = caster:GetModelName()
 	end
 	caster.caster_attack = caster:GetAttackCapability()
-
+	local random_chance = RandomInt(1, 2)
+	if random_chance == 1 then
+		EmitSoundOn("opasvo", caster)
+	else
+		EmitSoundOn("opasvo_1", caster)
+	end
 	-- Sets the new model and projectile
 	caster:SetOriginalModel(model)
 	caster:SetRangedProjectileName(projectile_model)

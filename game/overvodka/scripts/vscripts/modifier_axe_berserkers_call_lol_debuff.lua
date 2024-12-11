@@ -32,12 +32,12 @@ end
 --------------------------------------------------------------------------------
 -- Initializations
 function modifier_axe_berserkers_call_lol_debuff:OnCreated( kv )
-	self.lose_strength = self:GetParent():GetStrength() / 2
+	self.lose_strength = self:GetParent():GetStrength() * 0.45
 	self.as_loss = self:GetAbility():GetSpecialValueFor( "as_loss" )
 end
 
 function modifier_axe_berserkers_call_lol_debuff:OnRefresh( kv )
-	self.lose_strength = self:GetParent():GetStrength() / 2
+	self.lose_strength = self:GetParent():GetStrength() * 0.45
 	self.as_loss = self:GetAbility():GetSpecialValueFor( "as_loss" )
 end
 

@@ -17,7 +17,7 @@
 			"item"		"item_nikes"
 			"item"		"item_hqd"
 			"item"		"item_mask_of_quadrobe"
-			"item"		"item_charon_baby"
+			"item"		"item_charik_new"
 			"item"		"item_chapman_blue"
 
 		}

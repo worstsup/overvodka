@@ -652,9 +652,9 @@
 				{
 					"Name"          "Invade"
       				"Aggression"    "0.0"
-      				"Avoidance"     "80.0"
+      				"Avoidance"     "60.0"
       				"Support"       "0.0"
-      				"RoamDistance"  "800.0"
+      				"RoamDistance"  "500.0"
 				}
 			}
 
@@ -2335,8 +2335,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "80"
-        "AttackDamageMax"       "80"
+        "AttackDamageMin"       "120"
+        "AttackDamageMax"       "120"
         "AttackRate"            "1.5"
         "AttackAnimationPoint"  "0.5"
         "AttackAcquisitionRange" "500"
@@ -2398,8 +2398,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "120"
-        "AttackDamageMax"       "120"
+        "AttackDamageMin"       "200"
+        "AttackDamageMax"       "200"
         "AttackRate"            "1.5"
         "AttackAnimationPoint"  "0.5"
         "AttackAcquisitionRange" "500"
@@ -2461,8 +2461,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "160"
-        "AttackDamageMax"       "160"
+        "AttackDamageMin"       "280"
+        "AttackDamageMax"       "280"
         "AttackRate"            "1.5"
         "AttackAnimationPoint"  "0.5"
         "AttackAcquisitionRange" "500"
