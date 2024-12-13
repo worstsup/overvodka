@@ -2854,7 +2854,7 @@
     {
             "blink_range"           
             {
-            	"value"	"700 800 900 1000"
+            	"value"	"700 750 800 850"
             	"special_bonus_unique_weaver_4"	"+300"
             }
             "min_blink_range"       "200"
@@ -3368,9 +3368,9 @@
 		"AbilityValues"
 		{
 				"duration"						"20"
-				"bonus_strength"				"175 300 425"
+				"bonus_strength"				"150 275 400"
 				"model_scale"					"200"
-				"bonus_intellect"				"175 300 425"
+				"bonus_intellect"				"150 275 400"
 				"move_speed"
 				{
 					"value"	"550"
@@ -4477,12 +4477,10 @@
 		"AbilityCooldown"				"40"
 		"AbilityCastRange"				"600"
 		"AbilityManaCost"               "150"
-
 		"AbilityValues"
 		{
 				"gold"					"15"
 		}
-
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -4505,11 +4503,11 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"              "0.25 0.25 0.25"
-    "AbilityChannelTime"            "2.5 1.75 1"
+    "AbilityChannelTime"            "2.75 2 1.25"
     
     // Time     
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "0.0 0.0 0.0"
+    "AbilityCooldown"               "7.0 6.0 5.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -4519,9 +4517,9 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-            "channel_tooltip"           "2.5 1.75 1"
+            "channel_tooltip"           "2.75 2 1.25"
             "buff_duration"			"3"
-            "spell"		"10 20 30"
+            "spell"		"10 15 20"
             "chance"
             {
             	"value"	"0"
@@ -4682,7 +4680,7 @@
 		"AbilityValues"
 		{
 				"base_damage"			"20 40 60 80"
-				"pct_damage"			"6.0 8.0 10.0 12.0"
+				"pct_damage"			"4.0 6.0 8.0 10.0"
 				"slow_tooltip"			"15 20 25 30"
 				"pct_heal"				"8 15 22 29"
 				"radius"				"600"
@@ -6397,7 +6395,7 @@
 
 		// Ability Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"600"
+		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
 
 
@@ -6416,10 +6414,10 @@
 				"duration"					"3.0"
 				"mana_per_second"
 				{
-					"value"	"50 100 150 200 250 300 350"
+					"value"	"20 40 60 80 100 120 140"
 					"levelkey"				"quaslevel"
 				}
-				"break_distance"			"800"
+				"break_distance"			"700"
 				"tick_interval"				"0.1"
 				"movespeed"
 				{
@@ -7189,8 +7187,8 @@
     "AbilityValues"
     {
             "duration"                "0.6 0.8 1.0 1.2"
-            "crit_chance"               "6 7 8 9"
-            "crit_tooltip"               "24 28 32 36"
+            "crit_chance"               "3 4 5 6"
+            "crit_tooltip"               "12 16 20 24"
     }
 
     
@@ -7937,7 +7935,7 @@
 		{
 				"illusion_duration"
 				{
-					"value" "26.0"
+					"value" "14.0"
 					"special_bonus_unique_disruptor_7" "+4"
 				}
 				"illusion_outgoing_damage"
@@ -10038,7 +10036,7 @@
 				"value"	"0"
 				"special_bonus_facet_monkey_king_wukongs_faithful"	"+1"
 			}
-			"mana_leak_pct"				"4.0 6.0 8.0 10.0"
+			"mana_leak_pct"				"2.0 4.0 6.0 8.0"
 			"stun_duration"
 			{
 				"value"	"0.5 1.0 1.5 2.0"
@@ -10244,10 +10242,10 @@
 					"special_bonus_facet_undying_rotting_mitts"	"+0.3"
 					"RequiresFacet"	"undying_rotting_mitts"
 				}
-				"illusion_outgoing_damage"			"0"		 
-				"illusion_outgoing_tooltip"			"100"
-				"illusion_incoming_damage"			"0"
-				"illusion_incoming_damage_total_tooltip"			"100"
+				"illusion_outgoing_damage"			"-40"		 
+				"illusion_outgoing_tooltip"			"60"
+				"illusion_incoming_damage"			"80"
+				"illusion_incoming_damage_total_tooltip"			"180"
 		}
 	}
 	"lone_druid_spirit_bear"
@@ -12942,7 +12940,11 @@
 				"damage"
 				{
 					"value"	"50 100 150 200"
-					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+75"
+				}
+				"damage_percent"
+				{
+					"value"	"0"
+					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+3"
 				}
 				"microstun"
 				{
@@ -13400,9 +13402,9 @@
 		//-------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCooldown"				"60"
+		"AbilityCooldown"				"40"
 		"AbilityCastRange"				"1200"
-		"AbilityManaCost"				"200 400 600"
+		"AbilityManaCost"				"150 300 450"
 		"AbilityTextureName"			"rocket"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
@@ -13415,7 +13417,7 @@
 				"damage"			"300 600 900"
 				"stun_duration"
 				{
-					"value"	"2.0 2.2 2.4"
+					"value"	"1.6 1.8 2.0"
 					"special_bonus_unique_tidehunter_8" "+1"
 				}
 				"gold"
@@ -14238,41 +14240,35 @@
 	"ejovik"
 	{
 
-		"BaseClass"						"ability_lua"
+		"BaseClass"					"ability_lua"
 		"AbilityTextureName"			"ejovik"
 		"ScriptFile"					"ejovik"
-
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastPoint"				"0.0"
-		
-
 		"AbilityCooldown"				"35"
-
-
+		"HasShardUpgrade"				"1"
 		"AbilityManaCost"				"100 150 200 250"
-
-
 		"AbilityValues"
 		{
 				"duration"
 				{
-					"value"	"8"
+					"value"	"6"
 					"special_bonus_unique_naga_siren_2" "+2"
 				}
 				"bonus_mag"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=15 =20 =25 =30"
+					"special_bonus_facet_furion_soothing_saplings"				"=25 =30 =35 =40"
 					"RequiresFacet"	"furion_soothing_saplings"
-					"special_bonus_unique_naga_siren_5" "+10"
+					"special_bonus_unique_naga_siren_5" "+15"
 				}
 				"bonus_resist"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=15 =20 =25 =30"
+					"special_bonus_facet_furion_soothing_saplings"				"=25 =30 =35 =40"
 					"RequiresFacet"	"furion_soothing_saplings"
 				}
 				"bonus_mp"
@@ -14292,12 +14288,20 @@
 					"value"	"0"
 					"special_bonus_facet_furion_ironwood_treant"	"=20 =40 =60 =80"
 					"RequiresFacet"	"furion_ironwood_treant"
-					"special_bonus_unique_naga_siren_5" "+50"
+					"special_bonus_unique_naga_siren_5" "+70"
 				}
-				"bonus_ms"
+				"bonus_range"
 				{
-					"value"	"10"
-					"special_bonus_unique_naga_siren_4" "+10"
+					"value"	"100 150 200 250"
+				}
+				"bonus_vision"
+				{
+					"value"	"100 200 300 400"
+				}
+				"armor"
+				{
+					"value"	"0"
+					"special_bonus_shard"	"+3"
 				}
 		}
 	}
@@ -14651,64 +14655,6 @@
 					"special_bonus_facet_furion_ironwood_treant"	"=5"
 					"RequiresFacet"	"furion_ironwood_treant"
 				}
-		}
-	}
-	"nix_skiter"
-	{
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"skiter"
-		"AbilityCooldown"				"40"
-		"AbilityManaCost"				"200"
-		"MaxLevel"	"1"
-		"AbilityCastPoint"				"0.3"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
-		"IsGrantedByShard"				"1"
-		"AbilityValues"
-		{
-				"schoolboys_number"			"1"
-				"schoolboys_duration"
-				{
-					"value"	"20"
-				}
-				"schoolboys_hp"
-				{
-					"value"	"1500"
-				}
-				"schoolboys_dmg"
-				{
-					"value"	"200"
-				}
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "skiter"
-
-        		}	
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_skiter_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"200"
-				"GrantsXP"		"100"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
 		}
 	}
 	"nix_rus"
@@ -15684,12 +15630,10 @@
 				"AbilityDuration"
 				{
 					"value"	"5.0 6.0 7.0"
-					"special_bonus_unique_nyx_carapace_reflect_duration" "+2.0"
 				}
 				"focusfire_duration_tooltip"
 				{
 					"value"	"5 6 7"
-					"special_bonus_unique_nyx_carapace_reflect_duration" "+2"
 				}
 				"focusfire_fire_on_the_move"	"1"
 		}
@@ -15786,6 +15730,21 @@
 				}
 				"damage"			"50 100 150 200"
 				"damage_exp"		"100 200 300 400"
+				"damage_exp_percent_close"
+				{
+					"value"	"0"
+					"special_bonus_unique_nyx_carapace_reflect_duration" "+20"
+				}
+				"damage_exp_percent_mid"
+				{
+					"value"	"0"
+					"special_bonus_unique_nyx_carapace_reflect_duration" "+10"
+				}
+				"damage_exp_percent_far"
+				{
+					"value"	"0"
+					"special_bonus_unique_nyx_carapace_reflect_duration" "+10"
+				}
 				"slow"			"50"
 				"slow_dur"		"1"
 				"radius"		"500"
@@ -16189,11 +16148,11 @@
 	}
 	"sasavot_q"
 	{
-		"BaseClass"						"ability_lua"
+		"BaseClass"					"ability_lua"
 		"ScriptFile"					"sasavot_q"
 		"AbilityTextureName"			"sasavot_q"
 		"FightRecapLevel"				"2"
-		"MaxLevel"						"4"
+		"MaxLevel"					"4"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
@@ -16209,6 +16168,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastRange"				"2000"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityManaCost"				"100 120 140 160"
 		"AbilityValues"
 		{
@@ -16386,7 +16346,7 @@
 	"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 	"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-    "AbilityTextureName"            "kamera"
+    "AbilityTextureName"            "golovach_w"
     "HasShardUpgrade"			"1"
     
     // Stats
@@ -16648,9 +16608,19 @@
 				"flurry_bonus_attack_speed"	"800"
 				"time_between_flurries"	"2.5"
 				"pulse_radius"			"800"
-				"pulse_debuff_duration"	"2.0"
+				"pulse_debuff_duration"
+				{
+					"value"	"0"
+					"special_bonus_facet_juggernaut_agigain" "+2"
+					"RequiresFacet"	"juggernaut_agigain"
+				}
 				"pulse_damage"			"150 250 350"
-				"pulse_move_slow_pct"	"25.0"
+				"pulse_move_slow_pct"
+				{
+					"value"	"0"
+					"special_bonus_facet_juggernaut_agigain" "+25"
+					"RequiresFacet"	"juggernaut_agigain"
+				}
 				"pulse_attack_slow_pct"	"60.0 80.0 100.0"
 				"max_time_window_per_hit"	"10.0"
 				"bonus_movespeed"
@@ -16665,7 +16635,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"golovach_q"
-		"AbilityTextureName"			"bristleback_bristleback"
+		"AbilityTextureName"			"golovach_e"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"precache"
@@ -16701,6 +16671,11 @@
 				"rock_distance"			"2000.0"
 				"remnant_smash_radius_tooltip"			"200"
 				"slow"	"15"
+				"attackdamage"
+				{
+					"value"	"0"
+					"special_bonus_facet_juggernaut_bladestorm" "+1"
+				}
 		}
 	}
 	"golovach_hidden"
@@ -16798,6 +16773,158 @@
 					"value"	"7"
 					"RequiresScepter"			"1"
 				}
+		}
+	}
+	"imba_batrider_sticky_napalm"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"hero_batrider"
+		"AbilityTextureName"			"ashab_mohito"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
+		"Innate"						"1"
+		"MaxLevel"					"1"
+		"precache"
+		{
+			"particle"	"particles/batrider_stickynapalm_impact_new.vpcf"
+			"particle"	"particles/status_fx/status_effect_stickynapalm.vpcf"
+			"particle"	"particles/batrider_napalm_damage_debuff_new.vpcf"
+			"particle"	"particles/batrider_stickynapalm_stack_new.vpcf"
+		}
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"5.0"
+		"AbilityManaCost"				"0"
+		"AbilityModifierSupportValue"	"0.5"
+		"AbilityValues"
+		{
+				"damage"				"10"
+				"radius"				"375"
+				"duration"				"8.0"
+				"movement_speed_pct"	"-3"
+				"turn_rate_pct"			"-40"
+				"max_stacks"			"6"
+				"damage_per_level"		"2"
+		}
+	}
+	"imba_batrider_sticky_napalm_new"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"hero_batrider_new"
+		"AbilityTextureName"			"ashab_mohito"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"MaxLevel"	"1"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
+		"precache"
+		{
+			"particle"	"particles/batrider_stickynapalm_impact_new.vpcf"
+			"particle"	"particles/status_fx/status_effect_stickynapalm.vpcf"
+			"particle"	"particles/batrider_napalm_damage_debuff_new.vpcf"
+			"particle"	"particles/batrider_stickynapalm_stack_new.vpcf"
+		}
+		"AbilityCastRange"				"550"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"5.0"
+		"AbilityManaCost"				"0"
+		"AbilityModifierSupportValue"	"0.5"
+	}
+	"sasavot_e_new"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"sasavot_e_new"
+		"AbilityTextureName"			"sasavot_e"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"				"0.0"
+		"AbilityChannelTime"			"6.0"
+		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCooldown"				"25.0"
+		"AbilityManaCost"				"110 130 150 170"
+		"precache"
+		{
+			"soundfile"	"soundevents/sasavot_dance_1.vsndevts"
+			"soundfile"	"soundevents/sasavot_dance_2.vsndevts"
+			"soundfile"	"soundevents/sasavot_dance_success.vsndevts"
+			"soundfile"	"soundevents/sasavot_dance_interrupt.vsndevts"
+			"particle"	"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green_mid.vpcf"
+			"particle"	"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf"
+			"particle"	"particles/black_king_bar_avatar_sasavot.vpcf"
+		}
+		"AbilityValues"
+		{
+			"cast_duration"	"6"
+			"buffs_duration"	"5"
+			"hp_perc"			"25 30 35 40"
+			"mp_perc"			"15 20 25 30"
+			"movespeed"		"30 60 90 120"
+			"damage"			"25 50 75 100"
+			"magresist_duration"
+			{
+				"value"	"0"
+				"special_bonus_facet_bloodseeker_arterial_spray" "+5"
+				"RequiresFacet"	"facet_bloodseeker_arterial_spray"
+			}
+		}
+	}
+	"sasavot_r_new"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"sasavot_r_new"
+		"AbilityTextureName"			"sasavot_r"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"3"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"				"110 130 150"
+		"precache"
+		{
+			"soundfile"	"soundevents/sasavot_r_tick.vsndevts"
+			"soundfile"	"soundevents/sasavot_r_success.vsndevts"
+			"soundfile"	"soundevents/sasavot_r_new_start.vsndevts"
+			"soundfile"	"soundevents/sasavot_dance_interrupt.vsndevts"
+			"particle"	"particles/venomancer_noxious_contagion_buff_overhead_virus_new.vpcf"
+			"particle"	"particles/units/heroes/hero_demonartist/hero_demonartist_track_shield.vpcf"
+		}
+		"AbilityValues"
+		{
+			"AbilityCharges"
+			{
+				"value"	"1"
+				"special_bonus_scepter"	"+2"
+			}
+			"AbilityChargeRestoreTime"
+			{
+				"value"	"60"
+			}
+		}
+	}
+	"juggernaut_bladeform"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"MaxLevel"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"max_stacks"				"0"
+			"stack_gain_time"			"0.0"
+			"agi_bonus_pct_per_stack"	"0.0"
+			"movement_speed_pct_per_stack"		"0"
+			"linger_duration"			"0"
 		}
 	}
 }

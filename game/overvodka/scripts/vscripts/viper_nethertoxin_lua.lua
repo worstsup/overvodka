@@ -84,6 +84,7 @@ function viper_nethertoxin_lua:OnProjectileHit( target, location )
 		)
 	elseif Chance == 2 then
 		local slow_duration = self:GetSpecialValueFor( "slow_dur" )
+		local damage = self:GetSpecialValueFor( "damage_exp" )
 		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
 			location,
 			nil,
@@ -94,13 +95,40 @@ function viper_nethertoxin_lua:OnProjectileHit( target, location )
 			FIND_ANY_ORDER,
 			false)
 		for _,unit in pairs(targets) do
-			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = self:GetSpecialValueFor( "damage_exp" ), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+			local dmg_far = damage + self:GetSpecialValueFor( "damage_exp_percent_far" ) * unit:GetHealth() * 0.01
+			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_far, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
 			unit:AddNewModifier(
 				self:GetCaster(), -- player source
 				self, -- ability source
 				"modifier_cheater_slow", -- modifier name
 				{ duration = slow_duration } -- kv
 			)
+		end
+		local targets1 = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+			location,
+			nil,
+			250,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			DOTA_UNIT_TARGET_FLAG_NONE,
+			FIND_ANY_ORDER,
+			false)
+		for _,unit in pairs(targets1) do
+			local dmg_mid = self:GetSpecialValueFor( "damage_exp_percent_mid" ) * unit:GetHealth() * 0.01
+			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_mid, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+		end
+		local targets2 = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+			location,
+			nil,
+			100,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			DOTA_UNIT_TARGET_FLAG_NONE,
+			FIND_ANY_ORDER,
+			false)
+		for _,unit in pairs(targets2) do
+			local dmg_close = self:GetSpecialValueFor( "damage_exp_percent_close" ) * unit:GetHealth() * 0.01
+			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_close, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
 		end
 		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", self:GetCaster())
 		 self:PlayEffects3( location )

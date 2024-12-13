@@ -37,7 +37,7 @@ function modifier_ExplosionMagic:OnIntervalThink()
 		ParticleManager:ReleaseParticleIndex( nFXIndex )
 
 		EmitSoundOn( "Hero_Techies.Suicide", self:GetParent() )
-		local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
+		local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
 		
 		for _,enemy in pairs( enemies ) do
 			if enemy ~= nil and enemy:IsInvulnerable() == false then

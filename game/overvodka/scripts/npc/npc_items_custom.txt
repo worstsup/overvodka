@@ -696,8 +696,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"300"
-		"ItemStockMax"					"1"
-		"ItemStockTime"					"99999.0"
 		"ItemShopTags"					"str;damage;hard_to_tag"
 
 		"ItemKillable" 					"0" 
@@ -3190,6 +3188,9 @@
 			"bonus_attack_speed_stats"		  "30"
 			"bonus_ms"		"8"
 			"bonus_magresist"	"15"
+			"percent_min"	"40"
+			"percent_heal"	"30"
+			"time_to_heal"	"4"
 		}
 	}
 }

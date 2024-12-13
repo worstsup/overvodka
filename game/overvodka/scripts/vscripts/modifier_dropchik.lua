@@ -12,7 +12,6 @@ function modifier_dropchik:OnCreated( kv )
 	self.bonus_range = self:GetAbility():GetSpecialValueFor( "bonus_range" )
 	self.bonus_agility = 0
 	self.drdr = self:GetAbility():GetSpecialValueFor( "drdr" )
-	self.shard = self:GetCaster():HasModifier("modifier_item_aghanims_shard")
 end
 
 --------------------------------------------------------------------------------
@@ -37,13 +36,6 @@ function modifier_dropchik:DeclareFunctions()
 	}
 
 	return funcs
-end
-function modifier_dropchik:CheckState()
-	local state = {
-		[MODIFIER_STATE_MAGIC_IMMUNE] = self.shard,
-	}
-
-	return state
 end
 --------------------------------------------------------------------------------
 

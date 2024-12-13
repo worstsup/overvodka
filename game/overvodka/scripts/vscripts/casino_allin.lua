@@ -7,7 +7,7 @@ function mellstroy_casino_allin:OnSpellStart()
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
     local hero_level = caster:GetLevel()
-    local ability_cost = PlayerResource:GetGold(player_id)
+    local ability_cost = PlayerResource:GetGold(player_id) * 0.5
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
     if random_chance <= 50 then -- 50% chance to give double the cost 

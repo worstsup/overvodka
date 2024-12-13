@@ -43,7 +43,7 @@ end
 function modifier_phantom_assassin_coup_de_grace_lua:GetModifierPreAttack_CriticalStrike( params )
 	if IsServer() and (not self:GetParent():PassivesDisabled()) then
 		if self:RollChance( self.crit_chance ) then
-			if params.target:GetUnitName() == "npc_dota_hero_invoker" then
+			if params.target:GetUnitName() == "npc_dota_hero_invoker" or params.target:GetUnitName() == "npc_dota_hero_ogre_magi" or params.target:GetUnitName() == "npc_dota_hero_terrorblade" or params.target:GetUnitName() == "npc_dota_hero_ursa" then
 				self.record = params.record
 				return self.crit_bonus
 			end
@@ -74,7 +74,6 @@ end
 function modifier_phantom_assassin_coup_de_grace_lua:PlayEffects( target )
 	-- Load effects
 	local particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-	local sound_cast = "kirik"
 
 	-- if target:IsMechanical() then
 	-- 	particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_mechanical.vpcf"
@@ -94,6 +93,4 @@ function modifier_phantom_assassin_coup_de_grace_lua:PlayEffects( target )
 	)
 	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetOrigin()-target:GetOrigin()):Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	EmitSoundOn( sound_cast, target )
 end

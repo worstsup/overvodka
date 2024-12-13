@@ -23,6 +23,7 @@ function modifier_stariy_bolt:OnCreated( kv )
 	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
+	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
@@ -35,6 +36,7 @@ function modifier_stariy_bolt:OnRefresh( kv )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
+	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
 end
@@ -78,7 +80,8 @@ function modifier_stariy_bolt:OnIntervalThink()
 			"modifier_generic_stunned_lua", 
 			{duration = self.microstun}
 		)
-		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
+		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		-- Play effects
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )

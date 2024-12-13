@@ -6,18 +6,22 @@ end
 
 function modifier_ejovik:OnCreated( kv )
 	self.as = self:GetAbility():GetSpecialValueFor( "bonus_as" )
-	self.ms = self:GetAbility():GetSpecialValueFor( "bonus_ms" )
 	self.mp = self:GetAbility():GetSpecialValueFor( "bonus_mp" )
 	self.resist = self:GetAbility():GetSpecialValueFor( "bonus_resist" )
 	self.evasion = self:GetAbility():GetSpecialValueFor( "evasion" )
 	self.mag = self:GetAbility():GetSpecialValueFor( "bonus_mag" )
-	self:PlayEffects( self:GetParent() )
+	self.range = self:GetAbility():GetSpecialValueFor( "bonus_range" )
+	self.vision = self:GetAbility():GetSpecialValueFor( "bonus_vision" )
+	self.shard = self:GetParent():HasModifier("modifier_item_aghanims_shard")
+	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
+	self:StartIntervalThink(1)
 end
 
 --------------------------------------------------------------------------------
-
+function modifier_ejovik:OnIntervalThink()
+	self.armor = self.armor + 3
+end
 function modifier_ejovik:OnRemoved()
-	ParticleManager:DestroyParticle( self.nChannelFX, false )
 end
 
 
@@ -26,7 +30,6 @@ end
 function modifier_ejovik:DeclareFunctions()
 	local funcs = 
 	{
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_EVASION_CONSTANT,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
@@ -35,22 +38,45 @@ function modifier_ejovik:DeclareFunctions()
 		MODIFIER_PROPERTY_MODEL_CHANGE,
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_MODEL_SCALE_ANIMATE_TIME,
+		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
+		MODIFIER_PROPERTY_BONUS_DAY_VISION,
+		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
+		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 	}
 
 	return funcs
 end
+function modifier_ejovik:CheckState()
+	local state = {
+		[MODIFIER_STATE_ROOTED] = true,
+		[MODIFIER_STATE_FORCED_FLYING_VISION] = true,
+		[MODIFIER_STATE_MAGIC_IMMUNE] = self.shard
+	}
+
+	return state
+end
 --------------------------------------------------------------------------------
+function modifier_ejovik:GetModifierPhysicalArmorBonus( params )
+	if not self.shard then return end
+	return self.armor
+end
+function modifier_ejovik:GetBonusDayVision( params )
+	return self.vision
+end
+function modifier_ejovik:GetBonusNightVision( params )
+	return self.vision
+end
 function modifier_ejovik:GetModifierConstantManaRegen( params )
 	return self.mp
+end
+function modifier_ejovik:GetModifierAttackRangeBonus( params )
+	return self.range
 end
 function modifier_ejovik:GetModifierSpellAmplify_Percentage( params )
 	return self.mag
 end
 function modifier_ejovik:GetModifierMagicalResistanceBonus( params )
 	return self.resist
-end
-function modifier_ejovik:GetModifierMoveSpeedBonus_Percentage( params )
-	return self.ms
 end
 function modifier_ejovik:GetModifierEvasion_Constant( params )
 	return self.evasion
@@ -68,6 +94,11 @@ function modifier_ejovik:GetModifierModelScale( params )
 	if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then return 16000 end
 	return 0
 end
-function modifier_ejovik:PlayEffects( target )
-	self.nChannelFX = ParticleManager:CreateParticle( "particles/econ/items/shadow_shaman/ti8_ss_mushroomer_belt/ti8_ss_mushroomer_belt_ambient_shimmer.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
+function modifier_ejovik:GetEffectName()
+	if not self.shard then return end
+	return "particles/pangolier_shard_rollup_magic_immune_nix.vpcf"
+end
+
+function modifier_ejovik:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end
