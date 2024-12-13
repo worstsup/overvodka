@@ -33,6 +33,13 @@
 
 		"PLAYERS_TITLE_Developer"						"Разработчик"
 
+		// "LEADERBOARD_Button_solo"						"Solo"
+		// "LEADERBOARD_Button_duo"						"Duo"
+
+		"rating_position"								"Позиция"
+		"rating_player"									"Игрок"
+		"rating_rating"									"Рейтинг"
+
 
 		"DOTA_Tooltip_modifier_get_xp"					"Аура супер-еврейства"
 		"DOTA_Tooltip_modifier_get_xp_Description"		"Это существо становится пиздец богатым"

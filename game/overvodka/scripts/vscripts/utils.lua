@@ -1,5 +1,11 @@
 LinkLuaModifier("modifier_subscriber_effect", "modifiers/modifier_subscriber_effect", LUA_MODIFIER_MOTION_NONE)
 
+GAME_CATEGORY_DEFINITIONS = {
+	NONE = 0,
+	SOLO = 1,
+	DUO = 2
+}
+
 function SendErrorToPlayer(PID, errorText, errorSound)
     if errorSound == nil then
         errorSound = "UUI_SOUNDS.NoGold"
@@ -185,4 +191,22 @@ function GetRealHero(hAttacker)
         end
     end
     return hAttacker
+end
+
+function IsSolo()
+	return GetMapName() == "forest_solo"
+end
+
+function IsDuo()
+	return GetMapName() == "desert_duo"
+end
+
+function GetCurrentCategory()
+	if IsSolo() then 
+		return GAME_CATEGORY_DEFINITIONS.SOLO
+	elseif IsDuo() then 
+		return GAME_CATEGORY_DEFINITIONS.DUO
+	end
+
+	return GAME_CATEGORY_DEFINITIONS.NONE
 end
