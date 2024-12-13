@@ -49,7 +49,7 @@ function modifier_rot_lua:OnCreated( kv )
 		self.manacost = self:GetAbility():GetOrbSpecialValueFor( "mana_cost_per_secondd", "w" )
 	else
 		self.rot_slow = -21
-		self.rot_damage = 80
+		self.rot_damage = 50
 		self.manacost = 75
 	end
 	self.rot_tick = self:GetAbility():GetSpecialValueFor( "rot_tick" )
@@ -141,7 +141,7 @@ function modifier_rot_lua:Burn()
 	)
 	for _,enemy in pairs(enemies) do
 		-- apply damage
-		self.dmg = self.rot_damage + enemy:GetMaxHealth() * 0.006
+		self.dmg = self.rot_damage + enemy:GetMaxHealth() * 0.004
 		self.damageTable = {
 			-- victim = target,
 			attacker = self:GetParent(),

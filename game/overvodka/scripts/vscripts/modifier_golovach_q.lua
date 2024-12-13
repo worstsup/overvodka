@@ -79,6 +79,18 @@ function modifier_golovach_q:ThresholdLogic( damage, target )
 	local random_chance = RandomInt(1, 2)
 	if damage > 0 and random_chance == 1 then
 		local ability = self:GetParent():FindAbilityByName( self.ability_proc )
+		if self:GetCaster():IsIllusion() then return end
+		if not self:GetCaster():IsAlive() then return end
+		local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+			self:GetCaster():GetAbsOrigin(),
+			nil,
+			350,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+			FIND_ANY_ORDER,
+			false)
+		if #enemies == 0 then return end
 		if ability~=nil then
 			self:GetAbility():UseResources( false, false, false, true )
 			EmitSoundOn( "golovach_q", self:GetCaster() )

@@ -15,11 +15,12 @@ SERVER_ATTEMPT_INTERVAL = 1
 
 --Список для оффлайн игры (без сервера)
 SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
-    409188637,
+    409188637,  -- worstsup
     885116894,
     1362960359,
     1010078422,
-    349446348,
+    349446348,  -- mefisto 
+    1248303404, -- sega
     1133110680, -- buyer
 }
 

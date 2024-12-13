@@ -1979,14 +1979,14 @@
 	{
 		"Model"		"sasavot/model.vmdl"
 		"IdleExpression"		"scenes/bloodseeker/bloodseeker_exp_idle_01.vcd"
-		"SoundSet"		"Hero_Bloodseeker"
+		"SoundSet"		"Hero_Lycan"
 		"DisableWearables"	"1"
 		"Enabled"		"1"
 		"ModelScale"		"1.3"
 		"VersusScale"		"0.88"
 		"LoadoutScale"		"0.88"
 		"HealthBarOffset"		"240"
-		"HeroSelectSoundEffect"		"Hero_Bloodseeker.Pick"
+		"HeroSelectSoundEffect"		"sasavot_start"
 		"Ability1"		"sasavot_q"
 		"Ability2"		"sasavot_w"
 		"Ability3"		"sasavot_e_new"
@@ -2034,8 +2034,8 @@
 		"MovementSpeed"		"285"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"particle_folder"		"particles/units/heroes/hero_bloodseeker"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_bloodseeker.vsndevts"
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_bloodseeker.vsndevts"
+		"GameSoundsFile"		"anus"
+		"VoiceFile"		"anus"
 	}
 	"npc_dota_hero_juggernaut"
 	{

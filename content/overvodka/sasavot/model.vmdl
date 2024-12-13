@@ -580,7 +580,7 @@
 						animgraph_additive = false
 						source_filename = "sasavot/Taunt.fbx"
 						import_bone_scales = false
-						start_frame = -1
+						start_frame = 20
 						end_frame = -1
 						framerate = -1.0
 						reverse = false

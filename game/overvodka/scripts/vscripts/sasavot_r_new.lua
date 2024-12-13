@@ -63,57 +63,40 @@ function modifier_sasavot_r_new_secondary:IsDebuff() return true end
 function modifier_sasavot_r_new_secondary:IsPurgable() return false end
 
 function modifier_sasavot_r_new_secondary:OnCreated()
+    self.Pct = 0
+    self.t = 0
+    self.radius = self:GetAbility():GetSpecialValueFor("radius")
+
+    self:StartIntervalThink(0.5)
+
     if not IsServer() then return end
 
     self.caster = self:GetCaster()
     self.target = self:GetParent()
     self.durationPassed = 0
     self.damageDealt = false
-    self:StartIntervalThink(0.5)
-    self.vision = 0
-    t = 0
     EmitSoundOn("sasavot_r_tick", self.target)
-    self:SetHasCustomTransmitterData(true)
-    self.slow = 50
 end
 function modifier_sasavot_r_new_secondary:OnRefresh()
-    if (not IsServer()) then
-        return
-    end
-    self.bonusDmgPct = -10
+    self.radius = self:GetAbility():GetSpecialValueFor("radius")
 end
 function modifier_sasavot_r_new_secondary:DeclareFunctions()
     local funcs = 
     {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        MODIFIER_PROPERTY_BONUS_DAY_VISION,
-        MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
-        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_BONUS_VISION_PERCENTAGE,
+        MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
     }
     return funcs
 end
-function modifier_sasavot_r_new_secondary:GetModifierMoveSpeedBonus_Percentage()
-    return -self.slow
-end
-function modifier_sasavot_r_new_secondary:AddCustomTransmitterData()
-    local data = {
-        slow = self.slow
-    }
 
-    return data
+function modifier_sasavot_r_new_secondary:GetModifierDamageOutgoing_Percentage()
+    return self.Pct
 end
 
-function modifier_sasavot_r_new_secondary:HandleCustomTransmitterData(data)
-    self.slow = data.slow
+function modifier_sasavot_r_new_secondary:GetBonusVisionPercentage( params )
+    return self.Pct
 end
-
-function modifier_sasavot_r_new_secondary:GetBonusDayVision( params )
-    return self.vision
-end
-
-function modifier_sasavot_r_new_secondary:GetBonusNightVision( params )
-    return self.vision
-end 
 
 function modifier_sasavot_r_new_secondary:OnTakeDamage(params)
     if params.attacker == self.target and params.unit == self.caster then
@@ -123,20 +106,21 @@ function modifier_sasavot_r_new_secondary:OnTakeDamage(params)
 end
 
 function modifier_sasavot_r_new_secondary:OnIntervalThink()
+    self.t = self.t + 1
+    if self.t == 10 then
+        self.Pct = self.Pct - (100/12)
+        self.t = 0
+    end
     if not IsServer() then return end
     if not self.target:IsAlive() or not self.caster:IsAlive() then
         self:Destroy()
         return
     end
-    t = t + 1
+    AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300 + self.durationPassed * 10, 0.5, false)
     AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300 + self.durationPassed * 10, 0.5, false)
     self.durationPassed = self.durationPassed + 0.5
-    if t == 10 then
-        self.vision = self.vision - 100
-        t = 0
-    end
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
-    if distance > 3000 then
+    if distance > self.radius then
         self:Destroy()
     end
 end
@@ -145,7 +129,7 @@ function modifier_sasavot_r_new_secondary:OnDestroy()
     if not IsServer() then return end
     StopSoundOn("sasavot_r_tick", self.target)
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
-    if self.durationPassed >= 59 and distance <= 3000 and not self.damageDealt then
+    if self.durationPassed >= 59 and distance <= self.radius and not self.damageDealt then
         self.target:Kill(self:GetAbility(), self.caster)
         EmitGlobalSound("sasavot_r_success")
     end
