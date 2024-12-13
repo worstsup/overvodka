@@ -705,6 +705,18 @@ function COverthrowGameMode:EndGame( victoryTeam )
 	end
 	GameRules:SetPostGameTeamScores( tTeamScores )
 
+	local sortedTeams = {}
+	for _, team in pairs( self.m_GatheredShuffledTeams ) do
+		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
+			table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+		end
+	end
+
+	-- reverse-sort by score
+	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
+
+	Server:OnGameEnded(sortedTeams)
+
 	GameRules:SetGameWinner( victoryTeam )
 end
 
@@ -1036,4 +1048,3 @@ function COverthrowGameMode:AssignTeams()
 		GameRules:BotPopulate()
 	end
 end
-

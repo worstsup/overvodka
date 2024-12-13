@@ -113,6 +113,62 @@ function toArray(obj) {
     return result;
 }
 
+function GetSteamID32(PlayerID){
+    let Table = CustomNetTables.GetTableValue("players", `player_${PlayerID}_steamid`)
+    if(Table){
+        return Table.steamid
+    }
+
+    return 0
+}
+
+function GetRankClassName(Rating){
+    let Definitions = [
+        {
+            min: 0,
+            max: 1000,
+            class_name: "Bronze"
+        },
+        {
+            min: 1000,
+            max: 2000,
+            class_name: "Silver"
+        },
+        {
+            min: 2000,
+            max: 3000,
+            class_name: "Gold"
+        },
+        {
+            min: 3000,
+            max: 4000,
+            class_name: "Platinum"
+        },
+        {
+            min: 4000,
+            max: 5000,
+            class_name: "Diamond"
+        },
+        {
+            min: 5000,
+            max: -1,
+            class_name: "Mythical"
+        },
+    ]
+
+    for (const RatingInfo of Definitions) {
+        if(Rating >= RatingInfo.min){
+            if(RatingInfo.max == -1){
+                return RatingInfo.class_name
+            }else if(Rating < RatingInfo.max){
+                return RatingInfo.class_name
+            }
+        }
+    }
+
+    return "Bronze"
+}
+
 function GetHEXPlayerColor(PID) {
     var Color = Players.GetPlayerColor(PID).toString(16);
     return Color == null

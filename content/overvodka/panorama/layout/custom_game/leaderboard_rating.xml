@@ -1,0 +1,67 @@
+<root>
+	<scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/leaderboard_rating.js" />
+    </scripts>
+	<styles>
+        <include src="file://{resources}/styles/custom_game/leaderboard_rating.css" />
+        <include src="s2r://panorama/styles/dotastyles.css" />
+    </styles>
+
+	<snippets>
+        <snippet name="Player">
+            <Panel hittest="true" class="PlayerLine">
+				<Panel hittest="true" class="Player">
+					<Panel class="RankPanel">
+						<Label class="RankLabel" text="{d:Rank}" />
+					</Panel>
+					<Panel class="PlayerImageNick" >
+						<Panel class="PlayerImageNickAdjust" >
+							<DOTAAvatarImage class="PlayerImage" steamid="local" />
+							<DOTAUserName class="PlayerNickname" steamid="local" />
+						</Panel>
+					</Panel>
+					<Panel class="ValuePanel">
+                        <Panel class="Wrapper" hittest="false">
+						    <Label class="ValueLabel" text="{s:rating}" />
+                            <Panel class="ValueIcon" hittest="false" />
+                        </Panel>
+					</Panel>
+				</Panel>
+            </Panel>
+        </snippet>
+    </snippets>
+
+	<Panel class="LeaderboardHUD" hittest="false">
+        <Panel id="LeaderboardButton" onactivate="ToggleLeaderboard();"/>
+        <Panel id="LeaderboardMain">
+            <Panel class="ButtonsRow" hittest="false">
+                <Panel id="Buttons" class="Wrapper" hittest="false">
+                    <Panel id="Category1" class="CategoryButton" hittest="true" onactivate="SelectCategory(1)">
+                        <Panel class="CategoryButtonBack" hittest="false" />
+                        <Label class="CategoryButtonText" text="Solo"/>
+                    </Panel>
+                    <Panel id="Category2" class="CategoryButton" hittest="true" onactivate="SelectCategory(2)">
+                        <Panel class="CategoryButtonBack" hittest="false" />
+                        <Label class="CategoryButtonText" text="Duo"/>
+                    </Panel>
+                </Panel>
+            </Panel>
+            <Panel class="Body" hittest="false">
+                <Panel class="RankContainer" hittest="false">
+                    <Panel class="RankContainerHeader">
+                        <Panel class="leaderboard_rank">
+                            <Label text="#rating_position" class="leaderboard_rankText"/>
+                        </Panel>
+                        <Label text="#rating_player" class="leaderboard_player"/>
+                        <Label text="#rating_rating" class="leaderboard_rating"/>
+                    </Panel>
+                    <Panel class="PlayersTable" id="PlayerContainer">
+                    </Panel>
+                </Panel>
+                <Panel class="LinePlayerSelf" id="LineSelf">
+                </Panel>
+            </Panel>
+        </Panel>
+	</Panel>
+</root>

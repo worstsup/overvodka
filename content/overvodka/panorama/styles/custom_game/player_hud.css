@@ -135,7 +135,7 @@
     transition-property: brightness;
     transition-duration: .2s;
 
-    wash-color: #4b628bef;
+    wash-color: #8b7e4bef;
 }
 
 #CloseButton:hover{
@@ -147,6 +147,8 @@
     height: 899px;
 
     align: center center;
+
+    overflow: noclip;
 
     opacity: 0;
 
@@ -172,10 +174,10 @@
     
     align: center center;
 
-    background-color: gradient(linear, 20% 70%, 0% 0%, from(#1f212aef), color-stop(0.5, #181e29ef), to(#192238ef));
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a291fef), color-stop(0.5, #292618ef), to(#383219ef));
 
     border: 1px solid white;
-    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#414750), color-stop(0.5, #3a4c6bef), to(#2c4687ef));
+    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b643aef), to(#87792cef));
 
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0);
 
@@ -190,13 +192,13 @@
     font-size: 50px;
     text-transform: uppercase;
     letter-spacing: 1px;
-	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #9ca9dd ), color-stop( 0.55, #7082b5 ), to( #8299e5 ) );
+	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
 
     font-family: 'Roboto';
 }
 
 .OvervodkaName{
-	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #9ca9dd ), color-stop( 0.55, #7082b5 ), to( #8299e5 ) );
+	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
 }
 
 #SubscribeDescription{
@@ -209,7 +211,7 @@
     margin-top: 140px;
     margin-left: 25px;
 
-    color: #acc0c7;
+    color: #c7c4ac;
 }
 
 .SubscribeDescriptionHeader{
@@ -217,7 +219,7 @@
     font-size: 25px;
 
     margin-top: 90px;
-    color: rgb(214, 239, 255);
+    color: rgb(255, 247, 214);
     text-transform: uppercase;
     letter-spacing: 1px;
 
@@ -257,10 +259,10 @@
 
     margin-bottom: 20px;
 
-    background-color: gradient(linear, 20% 70%, 0% 0%, from(#1f212aef), color-stop(0.5, #181e29ef), to(#192238ef));
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
 
     border: 1px solid white;
-    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#414750), color-stop(0.5, #3a4c6bef), to(#2c4687ef));
+    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
 
     transition-property: brightness, border-brush;
     transition-duration: .1s;
@@ -272,7 +274,7 @@
 
 #BuyButton:hover{
     brightness: 1.5;
-    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#2c4687ef), color-stop(0.5, #2c4687ef), to(#2c4687ef));
+    border-brush: #87782cef;
 }
 
 .Wrapper{
@@ -288,7 +290,7 @@
 
 .TelegramText{
     font-size: 30px;
-    color: gradient( linear, 0% 0%, 0% 100%, from( #9cc6dd ), color-stop( 0.55, #7098b5 ), to( #82c2e5 ) );
+    color: gradient( linear, 0% 0%, 0% 100%, from( #ddd09c ), color-stop( 0.55, #b5ac70 ), to( #e5db82 ) );
     text-transform: uppercase;
     font-weight: thin;
     font-family: 'Roboto';

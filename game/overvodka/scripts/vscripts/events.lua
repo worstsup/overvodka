@@ -158,14 +158,10 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 	}
 
 	if nKillsRemaining <= 0 then
-		local tTeamScores = {}
-		for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
-			tTeamScores[team] = GetTeamHeroKills(team)
-		end
-		GameRules:SetPostGameTeamScores( tTeamScores )
-
 		GameRules:SetCustomVictoryMessage( self.m_VictoryMessages[nTeamID] )
-		GameRules:SetGameWinner( nTeamID )
+		
+		self:EndGame( nTeamID )
+		
 		broadcast_kill_event.victory = 1
 	elseif nKillsRemaining == 1 then
 		EmitGlobalSound( "ui.npe_objective_complete" )
