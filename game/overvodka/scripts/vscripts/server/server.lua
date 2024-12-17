@@ -25,7 +25,7 @@ function Server:OnGameEnded(Teams)
 
     if IsInToolsMode() or GameRules:IsCheatMode() then return end
 
-    if Teams == nil or #Teams <= 1 then return end
+    if Teams == nil then return end
 
     if self.bGameEnded == true then return end
 
@@ -34,6 +34,12 @@ function Server:OnGameEnded(Teams)
     local CurrentCategory = GetCurrentCategory()
 
     if CurrentCategory == GAME_CATEGORY_DEFINITIONS.NONE then return end
+
+    if CurrentCategory == GAME_CATEGORY_DEFINITIONS.SOLO then
+        if #Teams < 3 then return end
+    elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DUO then
+        if #Teams < 2 then return end
+    end
 
     local MatchID = tostring(GameRules:Script_GetMatchID())
 
