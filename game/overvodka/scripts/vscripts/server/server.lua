@@ -47,7 +47,7 @@ function Server:OnGameEnded(Teams)
             local Deaths = PlayerResource:GetDeaths(PlayerID)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
-            local bWin = Rating > 0
+            local bWin = Rating >= 45
             local PlayerData = {
                 rating = Rating,
                 heroname = HeroName,
