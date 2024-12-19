@@ -19,6 +19,7 @@
                 <!-- <Label hittest="false" id="test" text="Test"/> -->
 			</Button>
 			<Image hittest="false" id="DisconnectionIndicator" src="s2r://panorama/images/custom_game/icon_disconnect_png.vtex" />
+			<Panel hittest="false" class="RatingRankIcon" />
 		</Panel>
 		<Panel hittest="false" id="UltimateIndicatorContainer">
 			<Panel hittest="false" id="UltimateIndicatorBG" class="UltimateIndicatorShared" />

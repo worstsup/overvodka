@@ -16,6 +16,7 @@ function Server:Init()
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(Server, 'OnNPCSpawned'), self)
 
     CustomGameEventManager:RegisterListener("player_want_tip", function(source, event) self:OnPlayerWantTip(event) end)
+    CustomGameEventManager:RegisterListener("player_doubled_rating", function(source, event) self:OnPlayerDoubledRating(event) end)
     CustomGameEventManager:RegisterListener("server_get_leaderboard_info", function(source, event) self:OnAttemptGetLeaderboardInfo(event) end)
 
     self.ThinkerEnt = SpawnEntityFromTableSynchronous("info_target", {targetname="server_thinker"})
@@ -25,7 +26,7 @@ function Server:OnGameEnded(Teams)
 
     if IsInToolsMode() or GameRules:IsCheatMode() then return end
 
-    if Teams == nil or #Teams <= 1 then return end
+    if Teams == nil then return end
 
     if self.bGameEnded == true then return end
 
@@ -34,6 +35,12 @@ function Server:OnGameEnded(Teams)
     local CurrentCategory = GetCurrentCategory()
 
     if CurrentCategory == GAME_CATEGORY_DEFINITIONS.NONE then return end
+
+    if CurrentCategory == GAME_CATEGORY_DEFINITIONS.SOLO then
+        if #Teams < 3 then return end
+    elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DUO then
+        if #Teams < 2 then return end
+    end
 
     local MatchID = tostring(GameRules:Script_GetMatchID())
 
@@ -48,6 +55,11 @@ function Server:OnGameEnded(Teams)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
             local bWin = Rating >= 45
+
+            if PlayerInfo.doubled then
+                Rating = Rating * 2
+            end
+
             local PlayerData = {
                 rating = Rating,
                 heroname = HeroName,
@@ -238,6 +250,22 @@ function Server:OnPlayerWantTip(event)
     end
 end
 
+function Server:OnPlayerDoubledRating(event)
+    local PlayerID = event.PlayerID
+
+    if not self.Players[PlayerID] then return end
+
+    if not self.Players[PlayerID].doubled then
+        self.Players[PlayerID].doubled = true
+
+        local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
+
+        CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_double_rating", {doubled = true})
+
+        self:SendRequest(SERVER_URL.."player_used_double_rating", {SteamID=SteamID}, nil, true)
+    end
+end
+
 function Server:OnNPCSpawned(event)
     if not event.entindex then return end
 
@@ -252,8 +280,16 @@ function Server:OnNPCSpawned(event)
 
 		if not bIsRespawn and self:IsPlayerSubscribed(PlayerID) then
 			unit:AddAbility("plus_high_five"):SetLevel(1)
+			unit:AddAbility("seasonal_ti11_balloon"):SetLevel(1)
+            unit:AddAbility("seasonal_ti11_duel"):SetLevel(1)
 
             unit:AddNewModifier(unit, nil, "modifier_subscriber_effect", {})
+
+            if unit == RealHero and self.Players[PlayerID].last_time_double_show == 0 then
+                self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
+
+                CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_double_rating_time", {time = self.Players[PlayerID].last_time_double_show})
+            end
 		end
     end
 end
@@ -266,6 +302,8 @@ function Server:OnPlayerConnected(event)
             is_admin = DebugPanel:IsDeveloper(event.PlayerID),
             title_status = false,
             loaded = false,
+            doubled = false,
+            last_time_double_show = 0,
             ServerData = {
                 SteamID = SteamID
             }

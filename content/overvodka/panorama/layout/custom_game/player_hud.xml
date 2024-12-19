@@ -28,6 +28,10 @@
                 <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
                 <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
                 <Panel id="HighFivePreview" />
+                <Panel id="SeasonalPreview" >
+                    <Panel class="SeasonalPreviewIcon Duel" />
+                    <Panel class="SeasonalPreviewIcon Balloon" />
+                </Panel>
                 <Panel id="EffectPreview" />
                 <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
                     <Panel class="Wrapper">
@@ -43,6 +47,7 @@
                 </Panel>
             </Panel>
             <Panel id="TipPreview" />
+            <Panel id="DoubleRatingPreview" />
             <Panel id="OvervodkaHamster" />
         </Panel>
 
@@ -52,9 +57,39 @@
 
         </Panel>
 
+        <Panel hittest="false" id="DoubleRating">
+            <Label class="DoubleRatingText" text="#PLAYER_HUD_DoubleRating" />
+            <Panel hittest="false" id="DoubleRatingCountPanel">
+                <Label class="DoubleRatingCount" text="#PLAYER_HUD_DoubleRatingCount" />
+                <Label class="DoubleRatingCountValue" text="{s:count}" />
+                <Panel hittest="false" class="DoubleRatingCountIcon" />
+            </Panel>
+            <Panel id="DoubleRatingButton" onactivate="OnDoubleRating();">
+                <Label class="DoubleRatingButtonText" text="#PLAYER_HUD_DoubleRating_Button" />
+            </Panel>
+            <Label class="TimerToClose" text="{s:close_timer}" />
+        </Panel>
 
         <Panel hittest="false" id="DFGMSecondaryAbilities">
-            <Panel hittest="true" class="DFGMSecondaryAbility" id="HighFive" onmouseover="DOTAShowTextTooltip('#PLAYER_HUD_High_five')" onmouseout="DOTAHideTextTooltip()">
+            <Panel hittest="true" class="DFGMSecondaryAbility" id="HighFive" onactivate="CastHighFive()" onmouseover="DOTAShowTextTooltip('#PLAYER_HUD_High_five')" onmouseout="DOTAHideTextTooltip()">
+                <Panel hittest="true" class="DFGMSABack"/>
+                <Panel hittest="true" class="DFGMSAIcon"/>
+                <Label hittest="true" class="DFGMSACount" text="{s:cd}"/>
+                <Panel hittest="false" id="KeyBind">
+                    <Label hittest="false" id="KeyText" text="{s:BindKey}"/>
+                </Panel>
+                <Panel hittest="true" class="DFGMSALoading"/>
+            </Panel>
+            <Panel hittest="true" class="DFGMSecondaryAbility" id="Seasonal1" onactivate="CastSeasonal1()" onmouseover="DOTAShowTextTooltip('#PLAYER_HUD_Seasonal1')" onmouseout="DOTAHideTextTooltip()">
+                <Panel hittest="true" class="DFGMSABack"/>
+                <Panel hittest="true" class="DFGMSAIcon"/>
+                <Label hittest="true" class="DFGMSACount" text="{s:cd}"/>
+                <Panel hittest="false" id="KeyBind">
+                    <Label hittest="false" id="KeyText" text="{s:BindKey}"/>
+                </Panel>
+                <Panel hittest="true" class="DFGMSALoading"/>
+            </Panel>
+            <Panel hittest="true" class="DFGMSecondaryAbility" id="Seasonal2" onactivate="CastSeasonal2()" onmouseover="DOTAShowTextTooltip('#PLAYER_HUD_Seasonal2')" onmouseout="DOTAHideTextTooltip()">
                 <Panel hittest="true" class="DFGMSABack"/>
                 <Panel hittest="true" class="DFGMSAIcon"/>
                 <Label hittest="true" class="DFGMSACount" text="{s:cd}"/>
