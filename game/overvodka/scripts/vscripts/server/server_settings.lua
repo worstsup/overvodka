@@ -38,6 +38,9 @@ SERVER_RANKS_DEFINITION = {
 --Длительность перезарядки типа
 SERVER_TIP_COOLDOWN = 40
 
+--Длительность возможности поставить Дабл рейт
+SERVER_DOUBLE_RATING_TIME = 10
+
 --Настройки рейтинга
 SERVER_RATING = {
     [GAME_CATEGORY_DEFINITIONS.SOLO] = {

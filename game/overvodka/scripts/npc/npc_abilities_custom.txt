@@ -15672,6 +15672,31 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
 		"IsCastableWhileHidden" 		"1"
 		"IsOnCastBar"					"0"
+		"AbilityCooldown"				"20"
+	}
+
+	//=================================================================================================================
+	// Ability: Summon Snowman (Frostivus 2018)
+	//=================================================================================================================
+	"seasonal_ti11_balloon"
+	{
+		"IsCastableWhileHidden" 		"1"
+		"IsOnCastBar"					"0"
+		"AbilityCharges"				"10000"
+		"AssociatedConsumable"			""
+		"AbilityCooldown"				"20"
+	}
+
+	//=================================================================================================================
+	// Ability: Decorate Tree (Frostivus 2018)
+	//=================================================================================================================
+	"seasonal_ti11_duel"
+	{
+		"IsCastableWhileHidden" 		"1"
+		"IsOnCastBar"					"0"
+		"AbilityCharges"				"10000"
+		"AssociatedConsumable"			""
+		"AbilityCooldown"				"20"
 	}
 	
 	"viper_nethertoxin_lua"

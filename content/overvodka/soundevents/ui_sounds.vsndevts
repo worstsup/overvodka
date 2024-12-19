@@ -37,4 +37,21 @@
         distance_max = "2500.0"
         event_type = "2.0"
     }
+
+    UUI_SOUNDS.DoubledRating = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/doubled.vsnd",
+            "sounds/doubled2.vsnd",
+            "sounds/doubled3.vsnd",
+            "sounds/doubled4.vsnd",
+            "sounds/doubled5.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
 }

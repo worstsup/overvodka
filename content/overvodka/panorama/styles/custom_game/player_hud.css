@@ -59,6 +59,16 @@
 #HighFive .DFGMSAIcon{
     background-image: url("file://{resources}/images/custom_game/high_five_icon.png");
 }
+#Seasonal1 .DFGMSAIcon{
+    background-image: url("file://{resources}/images/custom_game/seasonal/duel.png");
+    width: 48px;
+    height: 48px;
+}
+#Seasonal2 .DFGMSAIcon{
+    background-image: url("file://{resources}/images/custom_game/seasonal/balloon.png");
+    width: 48px;
+    height: 48px;
+}
 
 .DFGMSACount{
     align: center bottom;
@@ -144,9 +154,11 @@
 
 #SubscribePanel{
     width: 700px;
-    height: 899px;
+    height: 700px;
 
     align: center center;
+
+    margin-top: -100px;
 
     overflow: noclip;
 
@@ -170,9 +182,9 @@
 
 #SubscribePanelBody{
     width: 700px;
-    height: 400px;
+    height: 450px;
     
-    align: center center;
+    align: center bottom;
 
     background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a291fef), color-stop(0.5, #292618ef), to(#383219ef));
 
@@ -426,7 +438,7 @@
     align: right top;
 
     margin-right: 55px;
-    margin-top: 230px;
+    margin-top: 280px;
 }
 
 #OvervodkaHamster{
@@ -460,6 +472,23 @@
     transform: rotateZ(10deg);
 
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.5);
+}
+
+#DoubleRatingPreview{
+    width: 128px;
+    height: 128px;
+
+    background-image: url("file://{images}/custom_game/rating_doubled.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    align: left top;
+
+    margin-left: 50px;
+    margin-top: 70px;
+
+    transform: rotateZ(-10deg);
 }
 
 .PreviewPanelSize{
@@ -586,3 +615,170 @@
 		text-shadow: 0px 0px 10px 0 #ff852e;
 	}
 }
+
+#DoubleRating{
+    width: 300px;
+    height: 170px;
+
+    background-color: gradient(linear, 0% 20%, 70% 0%, from(#2a291fef), color-stop(0.5, #292618ef), to(#383219ef));
+
+    opacity: 0;
+    transform: translateX(-25px);
+
+    border: 1px solid white;
+    border-left: 0px solid white;
+    border-brush: gradient(linear, 0% 20%, 70% 0%, from(#504d41), color-stop(0.5, #6b643aef), to(#87792cef));
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0);
+
+    align: left bottom;
+    margin-bottom: 300px;
+
+    transition-property: opacity, transform;
+    transition-duration: .2s;
+}
+
+#DoubleRating.Show{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.DoubleRatingText{
+    align: center top;
+    padding: 10px;
+    text-align: center;
+    color: #fff6a2;
+}
+
+#DoubleRatingButton{
+    width: 150px;
+    height: 30px;
+
+    align: center bottom;
+
+    margin-bottom: 35px;
+
+    background-color: gradient(linear, 0% 20%, 70% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
+
+    border: 1px solid white;
+    border-brush: gradient(linear, 0% 20%, 70% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
+
+    transition-property: brightness, border-brush;
+    transition-duration: .1s;
+}
+
+#DoubleRatingButton:hover{
+    brightness: 1.5;
+    border-brush: #87782cef;
+}
+
+.DoubleRatingButtonText{
+    font-size: 16px;
+    color: gradient( linear, 0% 0%, 0% 100%, from( #ddd09c ), color-stop( 0.55, #b5ac70 ), to( #e5db82 ) );
+    text-transform: uppercase;
+    font-weight: thin;
+    font-family: 'Roboto';
+
+    brightness: 1.5;
+
+    align: center center;
+    text-align: center;
+}
+
+#DoubleRatingCountPanel{
+    flow-children: right;
+
+    align: center top;
+    margin-top: 55px;
+}
+
+.DoubleRatingCount{
+    color: white;
+
+    align: left center;
+
+    font-size: 16px;
+}
+
+.DoubleRatingCountValue{
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );  
+
+    align: left center;
+
+    font-size: 30px;
+
+    margin-left: 5px;
+}
+
+.TimerToClose{
+    color: white;
+    font-size: 20px;
+
+    align: center bottom;
+    margin-bottom: 5px;
+}
+
+.Alarm .TimerToClose{
+    color: crimson;
+}
+
+.DoubleRatingCountIcon{
+    width: 32px;
+    height: 32px;
+
+    align: center center;
+
+    /* margin-top: 10px; */
+
+    margin-left: 3px;
+
+    background-image: url("file://{resources}/images/custom_game/double_rating_coin_mini.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#SeasonalPreview{
+    width: 128px;
+    height: 64px;
+
+    align: right top;
+    
+    margin-top: 220px;
+
+    margin-right: 28px;
+
+    flow-children: right;
+}
+
+.SeasonalPreviewIcon{
+    width: 48px;
+    height: 48px;
+
+    background-image: url("file://{resources}/images/custom_game/high_five_icon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.SeasonalPreviewIcon.Duel{
+    background-image: url("file://{resources}/images/custom_game/seasonal/duel.png");
+}
+
+.SeasonalPreviewIcon.Balloon{
+    background-image: url("file://{resources}/images/custom_game/seasonal/balloon.png");
+}
+
+/* #HighFive .DFGMSAIcon{
+    background-image: url("file://{resources}/images/custom_game/high_five_icon.png");
+}
+#Seasonal1 .DFGMSAIcon{
+    background-image: url("file://{resources}/images/custom_game/seasonal/duel.png");
+    width: 48px;
+    height: 48px;
+}
+#Seasonal2 .DFGMSAIcon{
+    background-image: url("file://{resources}/images/custom_game/seasonal/balloon.png");
+    width: 48px;
+    height: 48px;
+} */

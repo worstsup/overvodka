@@ -39,6 +39,13 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 	let bIsPlayerSubscribed = IsPlayerSubscribed(playerId);
 	playerPanel.SetHasClass( "TipsAvailable", bIsLocalPlayerSubscribed );
 	playerPanel.SetHasClass( "IsSubscribed", bIsPlayerSubscribed );
+
+	let [PlayerRating, RatingClass] = GetPlayerRatingInfo(playerId)
+	playerPanel.SetHasClass("ShowRating", PlayerRating != undefined)
+
+	if(PlayerRating != undefined && RatingClass != undefined && !playerPanel.BHasClass(RatingClass)){
+		playerPanel.AddClass(RatingClass)
+	}
 	
 	var ultStateOrTime = PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_HIDDEN; // values > 0 mean on cooldown for that many seconds
 	var goldValue = -1;

@@ -3,10 +3,34 @@ const Container = $("#PlayersTitlesContainer")
 const SubscribePanel = $("#SubscribePanel")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
+const DoubleRating = $("#DoubleRating");
 const DotaHUDPanel = GetDotaHud();
-const DefaultSlotKeyBind = "N";
-let SlotKeyBindDota = Game.GetKeybindForCommand(DOTAKeybindCommand_t.DOTA_KEYBIND_CONTROL_GROUP5);
-let SlotKey = "";
+
+let SlotsKeys = [
+    {
+        Default: "N",
+        Dota: DOTAKeybindCommand_t.DOTA_KEYBIND_CONTROL_GROUP5,
+        Current: "",
+        Slot: "HighFive",
+        Func: CastHighFive,
+    },
+    {
+        Default: "K",
+        Dota: DOTAKeybindCommand_t.DOTA_KEYBIND_CONTROL_GROUP6,
+        Current: "",
+        Slot: "Seasonal1",
+        Func: CastSeasonal1,
+    },
+    {
+        Default: "L",
+        Dota: DOTAKeybindCommand_t.DOTA_KEYBIND_CONTROL_GROUP7,
+        Current: "",
+        Slot: "Seasonal2",
+        Func: CastSeasonal2,
+    },
+]
+
+let DoubleRatingLastTime = 0
 
 function StartSecondaryAbilities() {
     let dota_sec = DotaHUDPanel.FindChildTraverse("SecondaryAbilityContainer");
@@ -28,12 +52,12 @@ function StartSecondaryAbilities() {
         DebuffsFix.style.marginBottom = "200px";
     }
 
-    let HighFivePanel = SecondaryAbilities.FindChildTraverse("HighFive");
-    if(HighFivePanel){
-        HighFivePanel.SetPanelEvent("onactivate", function(){
-            CastHighFive()
-        })
-    }
+    // let HighFivePanel = SecondaryAbilities.FindChildTraverse("HighFive");
+    // if(HighFivePanel){
+    //     HighFivePanel.SetPanelEvent("onactivate", function(){
+    //         CastHighFive()
+    //     })
+    // }
     SetUpKeyBind();
     UpdateSecondaryAbilities();
 }
@@ -49,6 +73,26 @@ function UpdateSecondaryAbilities() {
                 let CDRemaining = Abilities.GetCooldownTimeRemaining(HighFive)
                 HighFivePanel.SetHasClass("Cooldown", CDRemaining > 0);
                 HighFivePanel.SetDialogVariable("cd", CDRemaining <= 5 ? CDRemaining.toFixed(1) : CDRemaining.toFixed(0));
+            }
+        }
+        let Seasonal1 = Entities.GetAbilityByName( Unit, "seasonal_ti11_duel" )
+        if(Seasonal1 && Seasonal1 != -1){
+            let SeasonalPanel = SecondaryAbilities.FindChildTraverse("Seasonal1");
+            if(SeasonalPanel){
+                HideOnThisUnit = false
+                let CDRemaining = Abilities.GetCooldownTimeRemaining(Seasonal1)
+                SeasonalPanel.SetHasClass("Cooldown", CDRemaining > 0);
+                SeasonalPanel.SetDialogVariable("cd", CDRemaining <= 5 ? CDRemaining.toFixed(1) : CDRemaining.toFixed(0));
+            }
+        }
+        let Seasonal2 = Entities.GetAbilityByName( Unit, "seasonal_ti11_balloon" )
+        if(Seasonal2 && Seasonal2 != -1){
+            let SeasonalPanel = SecondaryAbilities.FindChildTraverse("Seasonal2");
+            if(SeasonalPanel){
+                HideOnThisUnit = false
+                let CDRemaining = Abilities.GetCooldownTimeRemaining(Seasonal2)
+                SeasonalPanel.SetHasClass("Cooldown", CDRemaining > 0);
+                SeasonalPanel.SetDialogVariable("cd", CDRemaining <= 5 ? CDRemaining.toFixed(1) : CDRemaining.toFixed(0));
             }
         }
     }
@@ -82,23 +126,44 @@ function CastHighFive(){
     }
 }
 
-function SetUpKeyBind() {
-    let oldKey = SlotKey;
-    SlotKeyBindDota = Game.GetKeybindForCommand(DOTAKeybindCommand_t.DOTA_KEYBIND_CONTROL_GROUP5);
-    if (SlotKey == "") {
-        SlotKey = DefaultSlotKeyBind;
-    }
-    if (SlotKeyBindDota != "") {
-        SlotKey = SlotKeyBindDota;
-    }
-    if (oldKey != SlotKey) {
-        let HighFivePanel = SecondaryAbilities.FindChildTraverse("HighFive");
-        if (HighFivePanel) {
-            HighFivePanel.SetDialogVariable("BindKey", SlotKey+"")
+function CastSeasonal1(){
+    let Unit = Players.GetLocalPlayerPortraitUnit()
+    if(Unit && Unit != -1 && CheckCastableOnUnit(Unit)){
+        let HighFive = Entities.GetAbilityByName( Unit, "seasonal_ti11_duel" )
+        if(HighFive && HighFive != -1){
+            Abilities.ExecuteAbility(HighFive, Unit, false);
         }
-        const cmd_name = "CastDFGMText" + Math.floor(Math.random() * 99999999);
-        Game.CreateCustomKeyBind(SlotKey, cmd_name);
-        Game.AddCommand(cmd_name, () => CastHighFive(), "", 0);
+    }
+}
+function CastSeasonal2(){
+    let Unit = Players.GetLocalPlayerPortraitUnit()
+    if(Unit && Unit != -1 && CheckCastableOnUnit(Unit)){
+        let HighFive = Entities.GetAbilityByName( Unit, "seasonal_ti11_balloon" )
+        if(HighFive && HighFive != -1){
+            Abilities.ExecuteAbility(HighFive, Unit, false);
+        }
+    }
+}
+
+function SetUpKeyBind() {
+    for (const KeysInfo of SlotsKeys) {
+        let oldKey = KeysInfo.Current;
+        let DotaKey = Game.GetKeybindForCommand(KeysInfo.Dota);
+        if (KeysInfo.Current == "") {
+            KeysInfo.Current = KeysInfo.Default;
+        }
+        if (DotaKey != "") {
+            KeysInfo.Current = DotaKey;
+        }
+        if (oldKey != KeysInfo.Current) {
+            let PanelForBind = SecondaryAbilities.FindChildTraverse(KeysInfo.Slot);
+            if (PanelForBind) {
+                PanelForBind.SetDialogVariable("BindKey", KeysInfo.Current+"")
+            }
+            const cmd_name = "CastDFGMText" + Math.floor(Math.random() * 99999999);
+            Game.CreateCustomKeyBind(KeysInfo.Current, cmd_name);
+            Game.AddCommand(cmd_name, () => KeysInfo.Func(), "", 0);
+        }
     }
 }
 
@@ -377,7 +442,61 @@ function IsTitleActive(unit){
     UpdateTitles()
 })();
 
+function OnDoubleRating(){
+    if(!IsPlayerDoubled()){
+        GameEvents.SendCustomGameEventToServer( "player_doubled_rating", {} )
+        Game.EmitSound( "UUI_SOUNDS.DoubledRating" )
+    }
+}
 
+function IsPlayerDoubled(){
+    let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${LocalPlayer}_double_rating`)
+    if(PlayerInfo && PlayerInfo.doubled == 1){
+        return true
+    }
+
+    return false
+}
+
+function UpdatePlayerHUD(v){
+    let bSubscribed = v.active == 1
+    let bHasDoubleRating = v.double_rating && v.double_rating.count != undefined && v.double_rating.count > 0
+
+    let bPlayerDoubled = IsPlayerDoubled()
+
+    let bTime = (Math.max(Math.floor(DoubleRatingLastTime - Game.GetGameTime()), 0)) > 0
+
+    let bDoubleRatingShow = bTime && bSubscribed && bHasDoubleRating && !bPlayerDoubled
+
+    SubscribePanel.SetHasClass("PlayerSubscribed", bSubscribed)
+
+    if(bSubscribed){
+        let Text = v.permanent == 1 ? $.Localize("#PLAYER_HUD_Subscribe_Permanent") : GetDateString(v.end_date, true)
+        SubscribePanel.SetDialogVariable("EndDate", Text)
+    }
+
+    DoubleRating.SetHasClass("Show", bDoubleRatingShow)
+    if(bDoubleRatingShow){
+        DoubleRating.SetDialogVariable("count", v.double_rating.count)
+    }
+}
+
+function DoubleRatingTimer(){
+    let Diff = Math.max(Math.floor(DoubleRatingLastTime - Game.GetGameTime()), 0)
+
+    DoubleRating.SetDialogVariable("close_timer", Diff)
+
+    DoubleRating.SetHasClass("Alarm", Diff <= 5)
+
+    if(Diff > 0){
+        $.Schedule(1, DoubleRatingTimer)
+    }else{
+        let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${LocalPlayer}`)
+        if(PlayerInfo){
+            UpdatePlayerHUD(PlayerInfo)
+        }
+    }
+}
 
 (function(){
     StartSecondaryAbilities();
@@ -399,12 +518,24 @@ function IsTitleActive(unit){
 
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
-    SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}`, function(v){
-        SubscribePanel.SetHasClass("PlayerSubscribed", v.active == 1)
+    SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}_double_rating_time`, function(v){
+        DoubleRatingLastTime = v.time
+        DoubleRatingTimer()
 
-        if(v.active == 1){
-            let Text = v.permanent == 1 ? $.Localize("#PLAYER_HUD_Subscribe_Permanent") : GetDateString(v.end_date, true)
-            SubscribePanel.SetDialogVariable("EndDate", Text)
+        let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${LocalPlayer}`)
+        if(PlayerInfo){
+            UpdatePlayerHUD(PlayerInfo)
+        }
+    })
+
+    SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}`, function(v){
+        UpdatePlayerHUD(v)
+    })
+
+    SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}_double_rating`, function(v){
+        let PlayerInfo = CustomNetTables.GetTableValue("players", `player_${LocalPlayer}`)
+        if(PlayerInfo){
+            UpdatePlayerHUD(PlayerInfo)
         }
     })
 })();

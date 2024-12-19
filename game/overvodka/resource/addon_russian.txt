@@ -11,6 +11,12 @@
 
 		"LOADING_SCREEN_Telegramm"						"Наш Телеграм"
 		"PLAYER_HUD_High_five"							"Дать пять!"
+		"PLAYER_HUD_Seasonal1"							"Удар по лицу!"
+		"PLAYER_HUD_Seasonal2"							"Эх шарик..."
+
+		"PLAYER_HUD_DoubleRating"						"Удвоить ставку рейтинга в этой игре?"
+		"PLAYER_HUD_DoubleRatingCount"					"Осталось на сегодня:"
+		"PLAYER_HUD_DoubleRating_Button"				"Удвоить"
 
 		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"
 		"PLAYER_HUD_Subscribe_Buy"						"Купить"
@@ -20,7 +26,7 @@
 		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span> вы получаете:"
 		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"Подписка <span class='OvervodkaName'>Overvodka Prime</span> активна! Вы получаете:"
 
-		"PLAYER_HUD_Subscribe_Description"				"- Возможность давать пять;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
+		"PLAYER_HUD_Subscribe_Description"				"- Возможность удваивать свою ставку рейтинга;<br>- Возможность давать пять, бить врагов по лицу и надувать надувные игрушки;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"

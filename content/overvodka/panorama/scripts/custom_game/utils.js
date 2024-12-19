@@ -311,6 +311,15 @@ function IsPlayerSubscribed(PlayerID){
     return false
 }
 
+function GetPlayerRatingInfo(PlayerID){
+    let Table = CustomNetTables.GetTableValue("players", `player_${PlayerID}`)
+    if(Table && Table.rating != undefined){
+        return [Table.rating, GetRankClassName(Table.rating)]
+    }
+
+    return [undefined, undefined]
+}
+
 function GetDateString(Date, bTime){
     if(!Date){
         return ""

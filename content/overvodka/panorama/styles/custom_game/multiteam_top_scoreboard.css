@@ -251,6 +251,48 @@
 	}
 }
 
+.RatingRankIcon{
+	width: 24px;
+	height: 24px;
+
+    align: right bottom;
+
+    margin-right: 1px;
+    margin-bottom: 1px;
+
+    opacity: 0;
+
+    img-shadow: 0px 0px 3px 5 black;
+
+	background-image: url("file://{images}/custom_game/ranks/bronze.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.ShowRating .RatingRankIcon{
+    opacity: 1;
+}
+
+.Bronze .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/bronze.png");
+}
+.Silver .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/silver.png");
+}
+.Gold .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/gold.png");
+}
+.Platinum .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/platinum.png");
+}
+.Diamond .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/diamond.png");
+}
+.Mythical .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/mythical.png");
+}
+
 .FlowDown {
     flow-children: down;
 }
