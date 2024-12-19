@@ -342,8 +342,6 @@ function Server:CreatePlayerProfile(data, PlayerID, SteamID)
         self.Players[PlayerID].ServerData.permanent = true
     end
 
-    DeepPrintTable(self.Players[PlayerID].ServerData)
-
     self.Players[PlayerID].loaded = true
 
     self:UpdatePlayerNetTable(PlayerID)
