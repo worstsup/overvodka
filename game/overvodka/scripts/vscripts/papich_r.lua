@@ -99,8 +99,21 @@ function modifier_papich_r:OnCreated()
     local particle_ambient = ParticleManager:CreateParticle( "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
     ParticleManager:SetParticleControlEnt(particle_ambient, 0, self:GetParent(), PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true)
     self:AddParticle(particle_ambient, false, false, -1, false, false)
-end
+    self.check_interval = 0.1
 
+    if IsServer() then
+        self:StartIntervalThink(self.check_interval)
+    end
+end
+function modifier_papich_r:OnIntervalThink()
+    if not IsServer() then return end
+    local current_health = self:GetParent():GetHealth()
+    local max_health = self:GetParent():GetMaxHealth()
+    local health_threshold = max_health * 0.01
+    if current_health <= health_threshold then
+        self:Destroy()
+    end
+end
 function modifier_papich_r:DeclareFunctions()
     return
     {
@@ -115,6 +128,7 @@ function modifier_papich_r:DeclareFunctions()
     }
 end
 function modifier_papich_r:OnAttackLanded( params )
+    if params.attacker ~= self:GetParent() then return end
     local sound_cast = "fof"
     EmitSoundOn( sound_cast, params.target )
 end
@@ -167,5 +181,5 @@ function modifier_papich_r:OnDestroy()
 end
 
 function modifier_papich_r:GetMinHealth()
-    return 0
+    return 1
 end

@@ -7,7 +7,7 @@ function OnSuccess( keys )
 	local cleave_percent = 75
 	local player = caster:GetPlayerID()
 
-	if caster:IsIllusion() then
+	if caster:IsIllusion() or caster:IsRangedAttacker() then
 		return 
 	end
 

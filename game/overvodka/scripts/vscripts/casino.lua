@@ -29,7 +29,7 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    elseif random_chance <= 53 then -- 50% chance to give double the cost 
+    elseif random_chance <= 57 then -- 50% chance to give double the cost 
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)

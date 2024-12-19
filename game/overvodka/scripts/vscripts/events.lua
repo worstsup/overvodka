@@ -65,6 +65,7 @@ end
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
+		ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, spawnedUnit:GetPlayerOwner())
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_meepo" then
 			if spawnedUnit:HasModifier("modifier_item_aghanims_shard") then
 				spawnedUnit:AddItemByName("item_lesh")
@@ -188,6 +189,7 @@ end
 function COverthrowGameMode:OnEntityKilled( event )
 	local killedUnit = EntIndexToHScript( event.entindex_killed )
 	local killedTeam = killedUnit:GetTeam()
+	if killedUnit:IsTempestDouble() then return end
 	local hero = EntIndexToHScript( event.entindex_attacker )
 	local heroTeam = hero:GetTeam()
 	local extraTime = 0

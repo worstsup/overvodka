@@ -288,7 +288,7 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 	else
 		self.speed = 1600
 	end
-	if distance < 500 then
+	if distance < 500 or distance > 20000 then
 		if self.k == 0 then
 			self:GetCaster():ModifyGold(self.gold, false, 0)
 			EmitSoundOn( "papich_e_plane_start", self:GetCaster() )

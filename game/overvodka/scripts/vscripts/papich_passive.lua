@@ -63,6 +63,8 @@ function modifier_papich_passive:IsPurgable() return false end
 function modifier_papich_passive:RemoveOnDeath() return false end
 
 function modifier_papich_passive:OnCreated()
+    if not self:GetParent():IsRealHero() then return end
+    if self:GetParent():IsTempestDouble() then return end
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
     self.check_interval = 0.1
@@ -74,7 +76,7 @@ end
 
 function modifier_papich_passive:OnIntervalThink()
     if not IsServer() then return end
-
+    if self:GetParent():IsTempestDouble() then return end
     -- Ensure ability and caster are valid
     if not self.ability or not self.parent or self.parent:IsIllusion() then return end
 
@@ -97,7 +99,6 @@ function modifier_papich_passive:OnIntervalThink()
         -- Remove min health modifier and start cooldown
         if self.parent:HasModifier("modifier_custom_min_health") then
             self.parent:RemoveModifierByName("modifier_custom_min_health")
-            self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
         end
         if self.parent:HasModifier("modifier_brb_test") then
             self.parent:RemoveModifierByName("modifier_brb_test")
@@ -108,6 +109,12 @@ function modifier_papich_passive:OnIntervalThink()
         end
         if self.parent:HasModifier("modifier_generic_stunned_lua") then
             self.parent:RemoveModifierByName("modifier_generic_stunned_lua")
+        end
+        if self.parent:HasModifier("modifier_golovach_e") then
+            self.parent:RemoveModifierByName("modifier_golovach_e")
+        end
+        if self.parent:HasModifier("modifier_dark_willow_debuff_fear") then
+            self.parent:RemoveModifierByName("modifier_dark_willow_debuff_fear")
         end
         if self.parent:IsMoving() or self.parent:IsChanneling() or self.parent:IsAttacking() then
             self.parent:Stop()
@@ -122,6 +129,7 @@ function modifier_papich_passive:OnIntervalThink()
            "modifier_papich_e_command", -- modifier name
            { duration = duration } -- kv
         )
+        self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
         local team = caster:GetTeam()
         local point = 0
         local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")

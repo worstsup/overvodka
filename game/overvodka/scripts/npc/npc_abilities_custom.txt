@@ -6550,9 +6550,7 @@
 		
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"FightRecapLevel"				"1"
 		"MaxLevel"					"1"
 		"AbilitySound"					"Hero_Undying.FleshGolem"
@@ -11647,7 +11645,7 @@
 		{
 				"meteor_stun"
 				{
-					"value"		"0.3"
+					"value"		"0.4"
 				}
 				"damage"			
 				{
@@ -11661,14 +11659,13 @@
 				"dur_tooltip" "4"
 				"gold"
 				{
-					"value"	"25 50 75 100"
+					"value"	"30 60 90 120"
 					"special_bonus_unique_bounty_hunter_3" "+50"
 				}
 				"gold_cost"
 				{
 					"value" "150 300 450 600"
 				}
-
 				"fruts" "5"
 		}
     }
@@ -11814,7 +11811,7 @@
 		{
 		        "damage"          
 		        {
-		        	"value"	"75 150 225"
+		        	"value"	"80 160 240"
 		        }
 		        "stun_dur"
 		        {
@@ -11828,7 +11825,7 @@
 		        }
 		        "interv"	"1.5"
 		        "duration"          "15"
-		        "bonus_gold" "70 140 210"
+		        "bonus_gold" "80 160 240"
 		        "gold_cost"	"1000 2000 3000"
 		}
 	}
@@ -11842,7 +11839,7 @@
 		"AbilityCastPoint"				"0.5"
 		"MaxLevel"						"1"
 		"Innate"						"1"
-		"AbilityCooldown"				"7"
+		"AbilityCooldown"				"6"
 		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
@@ -11953,7 +11950,7 @@
 				"duration"			"2.0"
 				"bonus_movespeed"
 				{
-					"value"	"-8"
+					"value"	"-15"
 					"special_bonus_unique_bounty_hunter_4" "-8"
 				}
 				"bonus_attackspeed"		"-15 -30 -45 -60"
@@ -12299,7 +12296,7 @@
 
 		// Ability Resource
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"70 65 60"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"200 300 400"
 
 		// Damage
@@ -13371,7 +13368,7 @@
 		//-------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCooldown"				"40"
+		"AbilityCooldown"				"60 50 40"
 		"AbilityCastRange"				"1200"
 		"AbilityManaCost"				"150 300 450"
 		"AbilityTextureName"			"rocket"
@@ -14262,6 +14259,7 @@
 				"bonus_range"
 				{
 					"value"	"100 150 200 250"
+					"special_bonus_unique_naga_siren_4" "+100"
 				}
 				"bonus_vision"
 				{
@@ -14857,7 +14855,7 @@
 				"min_blink_range"		"200"
 				"illusion_duration"
 				{
-					"value"	"5.0"
+					"value"	"4.0"
 					"special_bonus_unique_techies_3" "+2"
 				}
             		"illusion_outgoing_damage"          "-80 -75 -70 -65"  
@@ -14924,9 +14922,9 @@
 				"radius"					"1200"
 				"duration"					"9.0"
 				"animation_rate"				"0.55"
-				"regen_rate"				"5.0"
-				"regen_rate_self"				"5.0"
-				"regen_rate_tooltip_scepter"				"5"
+				"regen_rate"				"3.0"
+				"regen_rate_self"				"3.0"
+				"regen_rate_tooltip_scepter"				"3"
 		}
 	}
 	//=================================================================================================================
@@ -14992,7 +14990,7 @@
 
 		// Ability Resource
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"21.0 19.0 17.0 15.0"
+		"AbilityCooldown"				"23.0 21.0 19.0 17.0"
 		"AbilityManaCost"				"100 115 130 145"
 
 		// Damage
@@ -16929,7 +16927,7 @@
 		"AbilityCastPoint"				"0.5 0.5 0.5 0.5"
 		"AbilityCooldown"				"20"
 		"AbilityChannelTime"			"0.01"
-		"AbilityManaCost"				"150 160 170 180"
+		"AbilityManaCost"				"200 220 240 260"
 		"AbilityValues"
 		{
 				"damage_per_second"		"10000.0 10000.0 10000.0 10000.0"
@@ -16962,7 +16960,7 @@
 				"damage_mana"
 				{
 					"value"	"0"
-					"special_bonus_shard"	"+20"
+					"special_bonus_shard"	"+15"
 					"RequiresShard"	"1"
 				}
 		}
@@ -17045,7 +17043,7 @@
 				"evasion_chance"			"100"
 				"intellect_steal_pct"
 				{
-					"value"	"20 25 30 35"
+					"value"	"15 20 25 30"
 					"special_bonus_unique_wraith_king_4" "+10"
 				}
 		}
@@ -17184,7 +17182,7 @@
 			}
 			"outgoing_damage"
 			{
-				"value"	"80 90 100"
+				"value"	"90 100 110"
 				"special_bonus_unique_wraith_king_11" "+15"
 			}
 			"incoming_damage"		   "150 125 100"
