@@ -8,21 +8,23 @@ function sasavot_r_new:OnSpellStart()
     local caster = self:GetCaster()
 
     if target:TriggerSpellAbsorb(self) then return end
+    EmitSoundOnClient("sasavot_r_new_start", self:GetCaster():GetPlayerOwner())
     target:AddNewModifier(caster, self, "modifier_sasavot_r_new", {duration = -1})
-    EmitSoundOn("Hero_BountyHunter.Track", target)
 end
 
 modifier_sasavot_r_new = class({})
 
 function modifier_sasavot_r_new:IsDebuff() return true end
 function modifier_sasavot_r_new:IsPurgable() return false end
-
+function modifier_sasavot_r_new:IsHidden()
+    return true
+end
 function modifier_sasavot_r_new:OnCreated()
     if not IsServer() then return end
 
     self.caster = self:GetCaster()
     self.target = self:GetParent()
-    EmitSoundOn("sasavot_r_new_start", self.target)
+    self:PlayEffects()
     self:StartIntervalThink(0.5)
 end
 
@@ -49,12 +51,22 @@ function modifier_sasavot_r_new:OnTakeDamage(params)
         self:Destroy()
     end
 end
-function modifier_sasavot_r_new:GetEffectName()
-    return "particles/venomancer_noxious_contagion_buff_overhead_virus_new.vpcf"
-end
 
-function modifier_sasavot_r_new:GetEffectAttachType()
-    return PATTACH_OVERHEAD_FOLLOW
+function modifier_sasavot_r_new:PlayEffects()
+    local particle_cast = "particles/venomancer_noxious_contagion_buff_overhead_virus_new.vpcf"
+
+    -- Create Particle
+    local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_OVERHEAD_FOLLOW, self:GetParent(), self:GetCaster():GetTeamNumber() )
+
+    -- buff particle
+    self:AddParticle(
+        effect_cast,
+        false, -- bDestroyImmediately
+        false, -- bStatusEffect
+        -1, -- iPriority
+        false, -- bHeroEffect
+        false -- bOverheadEffect
+    )
 end
 
 modifier_sasavot_r_new_secondary = class({})

@@ -2106,4 +2106,91 @@
 		"StatusHealthRegen"		"0.5"
 		"MovementSpeed"		"300"
 	}
+	"npc_dota_hero_skeleton_king"
+	{
+		"Model"		"arthas/untitled_1.vmdl"
+		"SoundSet"		"Hero_Nevermore"
+		"DisableWearables"	"1"
+		"Enabled"		"1"
+		"PickSound"		"anus"
+		"ModelScale"		"1.30000"
+		"VersusScale"		"1.30000"
+		"LoadoutScale"		"1.2"
+		"HealthBarOffset"		"250"
+		"HeroSelectSoundEffect"		"papich_start"
+		"GibType"		"ethereal"
+		"GibTintColor"	"92 196 128 255"
+		"Ability1"		"imba_keeper_of_the_light_illuminate"
+		"Ability2"		"imba_arc_warden_magnetic_field"
+		"Ability3"		"papich_passive"
+		"Ability4"		"papich_innate"
+		"Ability5"		"papich_maniac"
+		"Ability6"		"papich_r"
+		"Ability7"		"papich_q_clone"
+		"Ability8"		"papich_w_clone"
+		"Ability9"		"papich_e_clone"
+		"Ability18"		"papich_e_clone_slam"
+		"Ability19"		"amplify_regen_ability"
+		"Ability10"		"special_bonus_unique_phantom_assassin_3"
+		"Ability11"		"special_bonus_unique_wraith_king_3"
+		"Ability12"		"special_bonus_unique_wraith_king_2"
+		"Ability13"		"special_bonus_unique_phantom_assassin_7"
+		"Ability14"		"special_bonus_unique_wraith_king_4"
+		"Ability15"		"special_bonus_unique_wraith_king_11"
+		"Ability16"		"special_bonus_unique_wraith_king_10"
+		"Ability17"		"special_bonus_unique_phantom_assassin_4"
+		"Facets"
+		{
+			"skeleton_king_facet_bone_guard" 
+			{
+				"Icon"				"gold"
+				"Color"				"Yellow"
+				"GradientID"		"0"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+
+			"skeleton_king_facet_cursed_blade"
+			{
+				"Icon"				"damage"
+				"Color"				"Red"
+				"GradientID"		"0"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+		}
+
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackAcquisitionRange"		"700"
+		"AttackRange"		"500"
+		"ProjectileModel"		"particles/viper_base_attack_new.vpcf"
+		"ProjectileSpeed"		"1250"
+		"AttackDamageMin"		"18"
+		"AttackDamageMax"		"20"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.30000"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"			"22"
+		"AttributeStrengthGain"			"2.5"
+		"AttributeBaseIntelligence"		"20"
+		"AttributeIntelligenceGain"		"3.0"
+		"AttributeBaseAgility"			"14"
+		"AttributeAgilityGain"			"1.4"
+		"StatusHealthRegen"		"0.5"
+		"MovementSpeed"		"315"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+	}
 }

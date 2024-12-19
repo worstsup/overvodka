@@ -65,8 +65,7 @@ function modifier_sasavot_debuff:OnCreated()
     local random_chance = RandomInt(1, 2)
     if random_chance == 1 then
         EmitSoundOn("sasavot_dance_1", self:GetCaster())
-    end
-    if random_chance == 2 then
+    elseif random_chance == 2 then
         EmitSoundOn("sasavot_dance_2", self:GetCaster())
     end
     if not IsServer() then return end

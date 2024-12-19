@@ -2,11 +2,11 @@ function Dmg (keys)
 	local ability = keys.ability
     local caster = keys.caster
     local target = keys.target
-    local dadada = caster:GetStrength() * 2
+    local dadada = caster:GetStrength()
     if caster:GetUnitName() == "npc_dota_hero_pudge" then
 		local Talent = caster:FindAbilityByName("special_bonus_unique_pugna_5")
 		if Talent:GetLevel() == 1 then
-        	dadada = caster:GetStrength() * 3
+        	dadada = caster:GetStrength() * 2
     	end
     end
     

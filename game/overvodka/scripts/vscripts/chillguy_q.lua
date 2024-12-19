@@ -17,7 +17,6 @@ function chillguy_q:OnSpellStart()
 	ProjectileManager:CreateTrackingProjectile( info )
 	self:PlayEffects1()
 end
-
 function chillguy_q:OnProjectileHit( hTarget, vLocation )
 	if hTarget ~= nil and ( not hTarget:IsInvulnerable() ) and ( not hTarget:IsMagicImmune() ) and ( not hTarget:TriggerSpellAbsorb( self ) ) then
 		local stun_duration = self:GetSpecialValueFor( "blast_stun_duration" )

@@ -106,6 +106,14 @@ function COverthrowGameMode:OnNPCSpawned( event )
 		if ash then
 			ash:SetLevel(1)
 		end
+		local pap = spawnedUnit:FindAbilityByName("amplify_regen_ability")
+		if pap then
+			pap:SetLevel(1)
+		end
+		local papich = spawnedUnit:FindAbilityByName("papich_e")
+		if papich then
+			papich:SetLevel(1)
+		end
       end
 	
 end

@@ -1,5 +1,6 @@
 sasavot_q = class({})
 LinkLuaModifier( "modifier_sasavot_q", "modifier_sasavot_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
 --------------------------------------------------------------------------------
@@ -100,6 +101,7 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 	local radius = self:GetSpecialValueFor("scepter_radius")
 	local health_damage = self:GetSpecialValueFor("health_damage")
 	-- apply damage
+	local stun_duration = self:GetSpecialValueFor("stun_duration")
 	local damage = self:GetSpecialValueFor("damage")
 	local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
 		target:GetAbsOrigin(),
@@ -110,6 +112,7 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 		DOTA_UNIT_TARGET_FLAG_NONE,
 		FIND_ANY_ORDER,
 		false)
+	target:AddNewModifier( self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun_duration } )
 	local dmg = damage + self:GetCaster():GetMaxHealth() * health_damage * 0.01
 	for _,unit in pairs(enemies) do
 		local damageTable = {
