@@ -1,5 +1,5 @@
 -- Главная страница сервера
-SERVER_URL = 'https://overvodka.ru/api/'
+SERVER_URL = 'http://overvodka.com/api/'
 
 -- Ключ кастомки
 SERVER_KEY = GetDedicatedServerKeyV3('overvodka')
