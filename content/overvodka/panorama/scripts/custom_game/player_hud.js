@@ -460,7 +460,7 @@ function IsPlayerDoubled(){
 
 function UpdatePlayerHUD(v){
     let bSubscribed = v.active == 1
-    let bHasDoubleRating = v.double_rating && v.double_rating.count != undefined && v.double_rating.count > 0
+    let bHasDoubleRating = v.double_rating != undefined && v.double_rating.count != undefined && v.double_rating.count > 0
 
     let bPlayerDoubled = IsPlayerDoubled()
 
