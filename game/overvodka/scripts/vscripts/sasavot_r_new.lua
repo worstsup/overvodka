@@ -128,7 +128,7 @@ function modifier_sasavot_r_new_secondary:OnIntervalThink()
         self:Destroy()
         return
     end
-    AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300 + self.durationPassed * 10, 0.5, false)
+    AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300, 0.5, false)
     AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300 + self.durationPassed * 10, 0.5, false)
     self.durationPassed = self.durationPassed + 0.5
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()

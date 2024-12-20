@@ -116,6 +116,9 @@ function modifier_papich_passive:OnIntervalThink()
         if self.parent:HasModifier("modifier_dark_willow_debuff_fear") then
             self.parent:RemoveModifierByName("modifier_dark_willow_debuff_fear")
         end
+        if self.parent:HasModifier("modifier_generic_arc_lua") then
+            self.parent:RemoveModifierByName("modifier_generic_arc_lua")
+        end
         if self.parent:IsMoving() or self.parent:IsChanneling() or self.parent:IsAttacking() then
             self.parent:Stop()
         end

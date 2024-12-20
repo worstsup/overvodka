@@ -269,8 +269,8 @@ function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 			extraTime = -15
 		end
 		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
-			if killedUnit:FindAbilityByName("golovach_innate"):IsFullyCastable() then
-				extraTime = -15
+			if killedUnit:IsReincarnating() then
+				extraTime = -16
 			end
 		end
 		killedUnit:SetTimeUntilRespawn( 20 + extraTime )
@@ -279,8 +279,8 @@ function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 			extraTime = -5
 		end
 		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
-			if killedUnit:FindAbilityByName("golovach_innate"):IsFullyCastable() then
-				extraTime = -5
+			if killedUnit:IsReincarnating() then
+				extraTime = -6
 			end
 		end
 		killedUnit:SetTimeUntilRespawn( 10 + extraTime )

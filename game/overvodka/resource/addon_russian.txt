@@ -265,7 +265,7 @@
 		"DOTA_Tooltip_ability_papich_q_clone_end_damage" "УРОН ОТ КИНЖАЛОВ:"
 		"DOTA_Tooltip_ability_papich_q_clone_end_radius" "РАДИУС УРОНА ОТ КИНЖАЛОВ:"
 		"DOTA_Tooltip_ability_papich_q_clone_blood_duration" "ДЛИТЕЛЬНОСТЬ КРОВОТЕЧЕНИЯ:"
-		"DOTA_Tooltip_ability_papich_q_clone_blood_damage" "%УРОН ОТ КРОВОТЕЧЕНИЯ"
+		"DOTA_Tooltip_ability_papich_q_clone_blood_damage" "%УРОН ОТ КРОВОТЕЧЕНИЯ:"
 		"DOTA_Tooltip_modifier_papich_q_clone_blood" "Кровотечение"
 		"DOTA_Tooltip_ability_papich_passive" "ДУБАИЧ"
 		"DOTA_Tooltip_ability_papich_passive_Description" "При получении летального урона Папич быстро садится в самолёт и улетает на свою базу, получая полную неуязвимость на время полёта. Долетев до базы, Папаня отдыхает на ней пару секунд, полностью восстанавливая своё здоровье, а затем прилетает обратно на то же место, откуда он улетел.\nКулдаун этой способности нельзя уменьшить с помощью способностей, рун или предметов."
