@@ -290,6 +290,7 @@ function modifier_papich_e_clone_debuff:OnIntervalThink()
     if self:GetParent():GetHealthPercent() <= 20 then
         self:GetParent():Kill(self:GetAbility(), self:GetCaster())
         EmitSoundOn("papich_e_clone_success", self:GetCaster())
+        self:Destroy()
     end
 end
 

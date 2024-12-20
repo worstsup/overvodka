@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc37:version{9e04b9aa-f073-4e59-8923-ff57489eb2c7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc38:version{81520c21-94aa-45fa-a458-34731c145969} -->
 {
 	rootNode = 
 	{
@@ -474,7 +474,7 @@
 					{
 						_class = "AnimFile"
 						name = "JETER"
-						activity_name = "ACT_DOTA_RUN"
+						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -496,12 +496,12 @@
 					{
 						_class = "AnimFile"
 						name = "SPINBOT"
-						activity_name = "ACT_DOTA_IDLE"
+						activity_name = "ACT_DOTA_CAST_ABILITY_6"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
 						fade_out_time = 0.2
-						looping = true
+						looping = false
 						delta = false
 						worldSpace = false
 						hidden = false
@@ -583,7 +583,29 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "SPINBOThop"
+						name = "Armature_Armature_ArmatureAction"
+						activity_name = "ACT_DOTA_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "hack/SpinBOT_standalone/anims/Armature_Armature_ArmatureAction.dmx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "spinbothopstandalone"
 						activity_name = "ACT_DOTA_CAST_ABILITY_1"
 						activity_weight = 1
 						weight_list_name = ""
@@ -596,11 +618,77 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
-						source_filename = "hack/SPINBOThop/anims/SPINBOThop.dmx"
+						source_filename = "hack/SPINBOT_hop_standalone/anims/spinbothopstandalone.dmx"
 						import_bone_scales = false
-						start_frame = 0
-						end_frame = 20
-						framerate = 25.0
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "spinbot_run"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "hack/SPINBOTrun/anims/spinbot_run.dmx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "Hop_standalone"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "hack/Hop_standalone.dmx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "SPINBOTrub"
+						activity_name = "ACT_DOTA_RUN"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "hack/SPINBOTrub.dmx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
 						reverse = false
 					},
 				]

@@ -42,7 +42,7 @@ end
 function sasavot_e_new:PlayEffects1()
     self.nChannelFX = ParticleManager:CreateParticle( "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 end
-
+random_chance = 0
 modifier_sasavot_debuff = class({})
 
 function modifier_sasavot_debuff:IsHidden() return true end
@@ -62,10 +62,10 @@ function modifier_sasavot_debuff:DeclareFunctions()
 end
 
 function modifier_sasavot_debuff:OnCreated()
-    local random_chance = RandomInt(1, 2)
-    if random_chance == 1 then
+    random_chance = random_chance + 1
+    if (random_chance % 2) == 1 then
         EmitSoundOn("sasavot_dance_1", self:GetCaster())
-    elseif random_chance == 2 then
+    else
         EmitSoundOn("sasavot_dance_2", self:GetCaster())
     end
     if not IsServer() then return end

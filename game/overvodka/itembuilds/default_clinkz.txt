@@ -22,7 +22,7 @@
 		"#DOTA_Item_Build_Late_Items"
 		{
 			"item"		"item_nikes"
-			"item"		"item_mega_spinner"
+			"item"		"item_drobe"
 			"item"		"item_aghanims_shard"
 			"item"		"item_waka"
 			"item"		"item_pasito"

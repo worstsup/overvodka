@@ -26,7 +26,7 @@
 		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span> вы получаете:"
 		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"Подписка <span class='OvervodkaName'>Overvodka Prime</span> активна! Вы получаете:"
 
-		"PLAYER_HUD_Subscribe_Description"				"- Возможность удваивать свою ставку рейтинга;<br>- Возможность давать пять, бить врагов по лицу и надувать надувные игрушки;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
+		"PLAYER_HUD_Subscribe_Description"				"- Возможность удваивать свою ставку рейтинга;<br>- Возможность давать пять, бить врагов по лицу и использовать надувные игрушки;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
@@ -150,7 +150,7 @@
 
 		"DOTA_Tooltip_modifier_invis_revealed"			"Невидимость раскрыта"
 
-		"DOTA_Tooltip_ability_item_bag_of_gold"			"БАБЛО"
+		"DOTA_Tooltip_ability_item_bag_of_gold"			"HAMSTER COIN"
 		"DOTA_Tooltip_ability_item_treasure_chest"		"Сундук с приколами"
 
 		"npc_dota_creature_basic_zombie"				"Зондби"
@@ -259,7 +259,7 @@
 		"DOTA_Tooltip_ability_imba_arc_warden_magnetic_field_attack_speed_bonus" "УМЕНЬШЕНИЕ СКОРОСТИ АТАКИ:"
 		"DOTA_Tooltip_ability_imba_arc_warden_magnetic_field_intellect_steal_pct" "%КРАЖА ИНТЕЛЛЕКТА ОТ СИЛЫ:"
 		"DOTA_Tooltip_ability_papich_q_clone" "ДОГОНЯЛЫЧ"
-		"DOTA_Tooltip_ability_papich_q_clone_Description" "Маньякич прыгает вперед, привязывая к месту первую попавшуюся жертву, а также выпускает вокруг себя кинжалы, наносящие урон всем врагам в радиусе %end_damage_radius% и накладывающие на них кровотечение на %blood_duration% сек., наносящее %blood_damage%%% чистого урона от текущего здоровья в секунду."
+		"DOTA_Tooltip_ability_papich_q_clone_Description" "Маньякич прыгает вперед, привязывая к месту первую попавшуюся жертву, а при попадании во врага выпускает вокруг себя кинжалы, наносящие урон всем врагам в радиусе %end_damage_radius% и накладывающие на них кровотечение на %blood_duration% сек., наносящее %blood_damage%%% чистого урона от текущего здоровья в секунду."
 		"DOTA_Tooltip_ability_papich_q_clone_pounce_distance" "ДАЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_papich_q_clone_leash_duration" "ДЛИТЕЛЬНОСТЬ ПРИВЯЗКИ:"
 		"DOTA_Tooltip_ability_papich_q_clone_end_damage" "УРОН ОТ КИНЖАЛОВ:"
@@ -322,6 +322,8 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_phantom_assassin_3" "-10 сек. перезарядки ДУБАИЧ"
 		"DOTA_Tooltip_ability_special_bonus_unique_phantom_assassin_4_Description" "Длится 5 сек."
 		"DOTA_Tooltip_modifier_papich_bkb" "Невосприимчивость к магии"
+		"DOTA_Tooltip_modifier_golovach_innate_debuff" "Убрал чай"
+		"DOTA_Tooltip_modifier_golovach_innate_debuff_Description" "Ваша скорость передвижения и атаки уменьшена"
 
 		"DOTA_Tooltip_ability_bloodseeker_sanguivore"			"КУРСКИЙ МАНЬЯК"
 		"DOTA_Tooltip_modifier_magresist_sasavot"	"Невосприимчив к магии"
@@ -370,6 +372,7 @@
 		"DOTA_Tooltip_modifier_papich_e_clone_debuff_Description" "Вы не можете восстанавливать здоровье, а также получаете периодический урон. Если ваше здоровье упадёт ниже 20%%, то вы умрёте."
 		"DOTA_Tooltip_ability_papich_maniac" "КРОВОТОК"
 		"DOTA_Tooltip_ability_papich_maniac_Description"	"Каждая из способностей Маньякича накладывает на врагов кровотечение, наносящее периодический урон."
+		"DOTA_Tooltip_ability_papich_maniac_chance" "%УРОН ОТ КРОВОТЕЧЕНИЯ:"
 
 
 		"DOTA_Tooltip_ability_sasavot_e_new_movespeed" "ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
@@ -1999,6 +2002,13 @@
 		"DOTA_Tooltip_ability_item_mega_spinner"            "AEGIS HERO"
 		"DOTA_Tooltip_ability_item_mega_spinner_Description"            "<h1>Пассивное: Минибаш</h1> С шансом в %minibash_chance%%% оглушает врага на %bash_stun% секунду, нанося прорубающую атаку в радиусе %cleave_radius% и %bash_damage% доп. урона, замедляя его на %movement_speed_slow%%% и уменьшая его скорость атаки на %attack_speed_slow% на %slow_duration% секунды. \n <h1>Пассивное: Трезвость</h1> Герой не может промахнуться атакой.\n Предмет не стакается и не работает на иллюзиях"
 		"DOTA_Tooltip_ability_item_mega_spinner_bonus_attack_speed" "+$attack"
+		"DOTA_Tooltip_ability_item_onehp"					"1HP"
+		"DOTA_Tooltip_ability_item_onehp_Description"		"<h1>Пассивное: Тотем бессмертия</h1> Если здоровье владельца упадёт ниже %percent_tooltip%%%, то он получит сильное развеивание и не будет получать и наносит урон в течение %duration% сек."
+		"DOTA_Tooltip_ability_item_onehp_bonus_health"	"+$health"
+		"DOTA_Tooltip_ability_item_onehp_bonus_mana"	"+$mana"
+		"DOTA_Tooltip_ability_item_onehp_bonus_damage"	"+$damage"
+		"DOTA_Tooltip_modifier_item_onehp_active"	"1hp"
+		"DOTA_Tooltip_modifier_item_onehp_active_Description" "Герой не получает и не наносит урон"
 		"DOTA_Tooltip_ability_item_sharoeb"                 "MAGIC AEGIS HERO"
 		"DOTA_Tooltip_ability_item_sharoeb_Description"     "<h1>Пассивное: Уменьшение кулдаунов</h1> Уменьшает перезарядку всех способностей и предметов на %cd%%% \n <h1>Пассивное: Увеличение маг. урона</h1> Увеличивает урон от заклинаний на %dmg%%%"
 		"DOTA_Tooltip_ability_item_sharoeb_hp" "+$health"

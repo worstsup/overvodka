@@ -153,6 +153,7 @@
 			}
 
 		}
+
 	}
 	"npc_dota_hero_pudge"
 	{
@@ -1413,6 +1414,7 @@
 		"AttributeIntelligenceGain"		"1.5"
 		"MovementSpeed"		"310"
 		"StatusHealthRegen"		"1.0"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_zuus"
 	{
@@ -1476,6 +1478,7 @@
 		"AttributeBaseAgility"		"11"
 		"AttributeAgilityGain"		"1.200000"
 		"MovementSpeed"		"315"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_tidehunter"
 	{
@@ -1552,6 +1555,7 @@
 		"AttributeBaseAgility"		"15"
 		"AttributeAgilityGain"		"1.500000"
 		"MovementSpeed"		"300"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_earthshaker"
 	{
@@ -1621,6 +1625,7 @@
 		"MovementSpeed"		"315"
 		"MovementTurnRate"		"0.900000"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_furion"
 	{
@@ -1687,6 +1692,7 @@
 		"AttributeBaseAgility"		"20"
 		"AttributeAgilityGain"		"2.800000"
 		"MovementSpeed"		"295"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_antimage"
 	{

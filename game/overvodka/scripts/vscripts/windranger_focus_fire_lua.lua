@@ -16,7 +16,7 @@ LinkLuaModifier( "modifier_windranger_focus_fire_lua", "modifier_windranger_focu
 function windranger_focus_fire_lua:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
-
+	caster:StartGesture(ACT_DOTA_CAST_ABILITY_6)
 	-- load data
 	local duration = self:GetDuration()
 		-- add modifier to new targets

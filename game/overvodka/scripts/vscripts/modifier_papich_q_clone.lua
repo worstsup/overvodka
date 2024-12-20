@@ -92,21 +92,6 @@ function modifier_papich_q_clone:OnDestroy()
 
 	-- set active
 	self:GetAbility():SetActivated( true )
-	self:PlayEffects1()
-	local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
-		self:GetParent():GetAbsOrigin(),
-		nil,
-		self.end_damage_radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_NONE,
-		FIND_ANY_ORDER,
-		false) 
-
-	for _,unit in pairs(targets) do
-		ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility()})
-		unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_papich_q_clone_blood", {duration = self.blood_duration})
-	end
 	-- destroy trees upon land
 	GridNav:DestroyTreesAroundPoint( self.parent:GetOrigin(), 100, false )
 
@@ -162,6 +147,21 @@ function modifier_papich_q_clone:OnIntervalThink()
 			purgable = false,
 		} -- kv
 	)
+	self:PlayEffects1()
+	local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
+		self:GetParent():GetAbsOrigin(),
+		nil,
+		self.end_damage_radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_NONE,
+		FIND_ANY_ORDER,
+		false) 
+
+	for _,unit in pairs(targets) do
+		ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility()})
+		unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_papich_q_clone_blood", {duration = self.blood_duration})
+	end
 
 	-- play effects
 	local sound_cast = "Hero_Slark.Pounce.Impact"

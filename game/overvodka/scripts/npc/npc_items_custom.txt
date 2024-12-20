@@ -2025,6 +2025,38 @@
 			{}
     }
 }
+"item_onehp"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"item_onehp"
+		"AbilityTextureName"		"onehp"
+		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCooldown"			"90"
+		"ItemCost"					"4600"
+		
+		"AbilityValues"
+		{
+			"bonus_health"			 	"400"
+			"bonus_mana"		  "300"
+			"bonus_damage"		"25"
+			"duration"			"3"
+			"percent_tooltip"	"15"
+		}
+	}
+"item_recipe_onehp"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"250"	
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_onehp"
+
+		"ItemRequirements"
+		{
+			"01"						"item_aeon_disk;item_claymore"
+		}
+	}
 "item_kaska"
 {
     // General
@@ -2039,12 +2071,12 @@
     // Stats        
     //-------------------------------------------------------------------------------------------------------------
 	"AbilityCastPoint"              "0.0"
-    "AbilityCooldown"               "100.0"
+    "AbilityCooldown"               "80.0"
     "AbilityManaCost"               "100.0"
         
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "8000"
+    "ItemCost"                      "9000"
     "ItemShopTags"                  "str;regen_health;health_pool"
     "ItemQuality"                   "epic"
 
@@ -2052,12 +2084,12 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
-            "bonus_strength"                    "40"
+            "bonus_strength"                    "45"
             "bonus_health"                      "0"
             "health_regen_percent_per_second"   "1.8"
             "bonus_damage"              "50"
             "lifesteal_percent"         "25"
-            "duration"					"4"
+            "duration"					"5"
     }
     "OnSpellStart"
     {
@@ -2131,7 +2163,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"550"	
+		"ItemCost"						"700"	
 		"ItemShopTags"					""
 		
 		// Recipe
@@ -2140,7 +2172,7 @@
 		"ItemResult"					"item_kaska"
 		"ItemRequirements"
 		{
-			"01"						"item_heart;item_lifesteal;item_claymore"
+			"01"						"item_onehp;item_reaver;item_lifesteal"
 		}
 	}
 "item_jordan"
@@ -3200,7 +3232,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"items/excalibur"
+		"AbilityTextureName"			"drobe"
 		"ItemCost"						"8200"
 
 		"AbilityValues"

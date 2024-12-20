@@ -4,6 +4,7 @@ LinkLuaModifier( "modifier_golovach_r_animation", "modifier_golovach_r_animation
 LinkLuaModifier( "modifier_golovach_r_fury", "modifier_golovach_r_fury", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_golovach_r_debuff", "modifier_golovach_r_debuff", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_golovach_r_recovery", "modifier_golovach_r_recovery", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 
 function golovach_r:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_marci.vsndevts", context )

@@ -35,6 +35,7 @@ function modifier_windranger_focus_fire_lua:OnCreated( kv )
 	if not IsServer() then return end
 	self.bonus = self:GetAbility():GetSpecialValueFor( "bonus_attack_speed" )
 	self.reduction = self:GetAbility():GetSpecialValueFor( "focusfire_damage_reduction" )
+	self:StartIntervalThink(0.1)
 end
 
 function modifier_windranger_focus_fire_lua:OnRefresh( kv )
@@ -47,8 +48,11 @@ function modifier_windranger_focus_fire_lua:OnRemoved()
 end
 
 function modifier_windranger_focus_fire_lua:OnDestroy()
+	self:GetParent():StartGesture(ACT_DOTA_IDLE)
 end
-
+function modifier_windranger_focus_fire_lua:OnIntervalThink()
+	self:GetParent():StartGesture(ACT_DOTA_CAST_ABILITY_6)
+end
 --------------------------------------------------------------------------------
 -- Modifier Effects
 function modifier_windranger_focus_fire_lua:DeclareFunctions()

@@ -198,6 +198,7 @@ function COverthrowGameMode:OnEntityKilled( event )
 			hero:AddItemByName("item_aegis")
 		end
 	end
+
 	if killedUnit:IsRealHero() then
 		self.allSpawned = true
 		--print("Hero has been killed")
@@ -267,10 +268,20 @@ function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -15
 		end
+		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
+			if killedUnit:FindAbilityByName("golovach_innate"):IsFullyCastable() then
+				extraTime = -15
+			end
+		end
 		killedUnit:SetTimeUntilRespawn( 20 + extraTime )
 	else
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -5
+		end
+		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
+			if killedUnit:FindAbilityByName("golovach_innate"):IsFullyCastable() then
+				extraTime = -5
+			end
 		end
 		killedUnit:SetTimeUntilRespawn( 10 + extraTime )
 	end

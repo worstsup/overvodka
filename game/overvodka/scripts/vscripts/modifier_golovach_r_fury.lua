@@ -171,7 +171,9 @@ function modifier_golovach_r_fury:Pulse( center )
 		-- damage
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
-
+		local direction = enemy:GetOrigin()-self:GetParent():GetOrigin()
+		direction.z = 0
+		direction = direction:Normalized()
 		-- slow
 		enemy:AddNewModifier(
 			self.parent, -- player source
@@ -179,6 +181,19 @@ function modifier_golovach_r_fury:Pulse( center )
 			"modifier_golovach_r_debuff", -- modifier name
 			{ duration = self.duration } -- kv
 		)
+		enemy:AddNewModifier(
+				self.parent, -- player source
+				self.ability, -- ability source
+				"modifier_generic_arc_lua", -- modifier name
+				{
+					dir_x = direction.x,
+					dir_y = direction.y,
+					duration = 0.3,
+					distance = 0,
+					height = 100,
+					activity = ACT_DOTA_FLAIL,
+				} -- kv
+			)
 	end
 
 	-- play effects
