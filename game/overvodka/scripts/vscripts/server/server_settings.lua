@@ -40,6 +40,8 @@ SERVER_TIP_COOLDOWN = 40
 --Длительность возможности поставить Дабл рейт
 SERVER_DOUBLE_RATING_TIME = 10
 
+SERVER_RATING_WHEN_ABANDONED_GAME = -100
+
 --Настройки рейтинга
 SERVER_RATING = {
     [GAME_CATEGORY_DEFINITIONS.SOLO] = {

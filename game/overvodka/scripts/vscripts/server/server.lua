@@ -55,9 +55,14 @@ function Server:OnGameEnded(Teams)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
             local bWin = Rating >= 45
+            local bLeaved = PlayerResource:GetConnectionState(PlayerID) == "DOTA_CONNECTION_STATE_ABANDONED"
 
             if PlayerInfo.doubled then
                 Rating = Rating * 2
+            end
+
+            if bLeaved then
+                Rating = SERVER_RATING_WHEN_ABANDONED_GAME
             end
 
             local PlayerData = {
@@ -67,7 +72,7 @@ function Server:OnGameEnded(Teams)
                 deaths = Deaths,
                 assists = Assists,
                 win = bWin,
-                leaved = PlayerResource:GetConnectionState(PlayerID) == "DOTA_CONNECTION_STATE_ABANDONED"
+                leaved = bLeaved
             }
 
             local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
