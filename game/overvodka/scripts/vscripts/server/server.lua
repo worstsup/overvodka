@@ -45,6 +45,13 @@ function Server:OnGameEnded(Teams)
     local MatchID = tostring(GameRules:Script_GetMatchID())
 
     print("[Server] Saving data to server!")
+    
+    local CountNotLeaved = 0
+    for PlayerID, PlayerInfo in pairs(self.Players) do
+        if PlayerResource:GetConnectionState(PlayerID) ~= DOTA_CONNECTION_STATE_ABANDONED then
+            CountNotLeaved = CountNotLeaved + 1
+        end
+    end
 
     for PlayerID, PlayerInfo in pairs(self.Players) do
         local Hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
@@ -55,10 +62,14 @@ function Server:OnGameEnded(Teams)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
             local bWin = Rating >= 45
-            local bLeaved = PlayerResource:GetConnectionState(PlayerID) == "DOTA_CONNECTION_STATE_ABANDONED"
+            local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
 
             if PlayerInfo.doubled then
                 Rating = Rating * 2
+            end
+
+            if CountNotLeaved <= 4 then
+                Rating = Rating / 2
             end
 
             if bLeaved then
