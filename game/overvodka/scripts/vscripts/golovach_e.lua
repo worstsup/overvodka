@@ -1,6 +1,7 @@
 golovach_e = class({})
 LinkLuaModifier( "modifier_golovach_e", "modifier_golovach_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_golovach_run", "modifier_golovach_run", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_marci_sidekick_lua", "modifier_marci_sidekick_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_NONE )
 
@@ -23,6 +24,12 @@ function golovach_e:OnSpellStart()
 	EmitSoundOn( "golovach_e_start", self:GetCaster() )
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_golovach_run", {target = target:entindex(), duration = duration})
 	-- logic
+	self:GetCaster():AddNewModifier(
+		self:GetCaster(), -- player source
+		self, -- ability source
+		"modifier_marci_sidekick_lua", -- modifier name
+		{ duration = duration } -- kv
+	)
 	target:AddNewModifier(
 		caster, -- player source
 		self, -- ability source

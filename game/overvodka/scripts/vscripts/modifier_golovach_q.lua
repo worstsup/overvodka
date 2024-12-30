@@ -51,19 +51,18 @@ function modifier_golovach_q:OnAttackLanded( params )
 	if IsServer() and (not self:GetParent():PassivesDisabled()) then
 		if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 		if params.attacker == self:GetParent() then return end
+		if params.target ~= self:GetParent() then return end
 		local parent = self:GetParent()
 		local attacker = params.attacker
 		local reduction = 0
 		if attacker:IsTower() then
 			return 0
 		end
-		-- Check target position
 		local facing_direction = parent:GetAnglesAsVector().y
 		local attacker_vector = (attacker:GetOrigin() - parent:GetOrigin()):Normalized()
 		local attacker_direction = VectorToAngles( attacker_vector ).y
 		local angle_diff = AngleDiff( facing_direction, attacker_direction )
 		angle_diff = math.abs(angle_diff)
-
 		-- calculate damage reduction
 		if angle_diff > (180-self.angle_back) then
 			reduction = self.reduction_back

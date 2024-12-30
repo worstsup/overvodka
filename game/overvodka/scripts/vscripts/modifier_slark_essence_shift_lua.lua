@@ -4,7 +4,6 @@ modifier_slark_essence_shift_lua = class({})
 function modifier_slark_essence_shift_lua:IsHidden()
 	return false
 end
-
 function modifier_slark_essence_shift_lua:IsDebuff()
 	return false
 end
@@ -33,6 +32,8 @@ function modifier_slark_essence_shift_lua:OnRefresh( kv )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
+	self:StartIntervalThink( self.interval )
+	self:OnIntervalThink()
 end
 
 function modifier_slark_essence_shift_lua:OnDestroy( kv )

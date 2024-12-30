@@ -1,5 +1,4 @@
 --[[ events.lua ]]
-k = 1
 ---------------------------------------------------------------------------
 -- Event: Game state change handler
 ---------------------------------------------------------------------------
@@ -65,7 +64,6 @@ end
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
-		ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, spawnedUnit:GetPlayerOwner())
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_meepo" then
 			if spawnedUnit:HasModifier("modifier_item_aghanims_shard") then
 				spawnedUnit:AddItemByName("item_lesh")
@@ -76,12 +74,6 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
 		end
 		-- Destroys the last hit effects
-		if k == 1 then
-			if spawnedUnit:GetUnitName() == "npc_dota_hero_kunkka" then
-				spawnedUnit:AddItemByName("item_balbe")
-				k = k + 1
-			end
-		end
 		local deathEffects = spawnedUnit:Attribute_GetIntValue( "effectsID", -1 )
 		if deathEffects ~= -1 then
 			ParticleManager:DestroyParticle( deathEffects, true )
@@ -99,6 +91,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 	end
 	if spawnedUnit.bFirstSpawned == nil then ---если юнит герой и это первый его спавн находишь у него скилл и апаешь скиллу 1 уровень
       	spawnedUnit.bFirstSpawned = true
+      	if spawnedUnit:IsRealHero() then
+      		ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, spawnedUnit:GetPlayerOwner())
+      	end
             local ab = spawnedUnit:FindAbilityByName("sidet")
 		if ab then
             	ab:SetLevel(1)

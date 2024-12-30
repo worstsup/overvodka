@@ -24,7 +24,7 @@ end
 function modifier_marci_sidekick_lua:IsPurgable()
 	return true
 end
-
+ 
 --------------------------------------------------------------------------------
 -- Initializations
 function modifier_marci_sidekick_lua:OnCreated( kv )

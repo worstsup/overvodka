@@ -8,7 +8,7 @@ function Meteor(keys)
 	local caster_loc = caster:GetAttachmentOrigin(DOTA_PROJECTILE_ATTACHMENT_ATTACK_1)
 	local cast_direction = caster:GetForwardVector()
 	local meteor_count = 1
-	local distince = 1250
+	local distince = 1050
 	local projectile_direction = (target - caster:GetAbsOrigin()):Normalized()
 	caster:EmitSound("penal")
 	tartar = {}

@@ -69,8 +69,24 @@ function modifier_sasavot_debuff:OnCreated()
         EmitSoundOn("sasavot_dance_2", self:GetCaster())
     end
     if not IsServer() then return end
+    self.damage = self:GetAbility():GetSpecialValueFor("damage_aoe")
+    self:StartIntervalThink(0.5)
 end
+function modifier_sasavot_debuff:OnIntervalThink()
+    local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
+        self:GetParent():GetAbsOrigin(),
+        nil,
+        self:GetAbility():GetSpecialValueFor("radius"),
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false) 
 
+    for _,unit in pairs(targets) do
+        ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage * 0.5, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+    end
+end
 function modifier_sasavot_debuff:OnTakeDamage(keys)
     if not IsServer() then return end
 
@@ -83,6 +99,12 @@ function modifier_sasavot_debuff:OnTakeDamage(keys)
         caster:RemoveModifierByName("modifier_sasavot_debuff")
         caster:AddNewModifier(caster, self:GetAbility(), "modifier_sasavot_bonus_buff", { duration = 5 })
     end
+end
+function modifier_sasavot_debuff:GetEffectName()
+    return "particles/econ/events/ti9/radiance_owner_ti9.vpcf"
+end
+function modifier_sasavot_debuff:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end
 
 modifier_sasavot_bonus_buff = class({})

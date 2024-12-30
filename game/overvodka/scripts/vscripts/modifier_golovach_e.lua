@@ -40,7 +40,7 @@ function modifier_golovach_e:OnRefresh( kv )
 		self.threshold = self:GetAbility():GetSpecialValueFor( "damage_trigger" )
 	end
 end
-
+ 
 function modifier_golovach_e:OnDestroy( kv )
 
 end

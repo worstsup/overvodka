@@ -91,8 +91,8 @@ function modifier_c4_bomb:DefuseBomb()
 
     -- Reward the defuser
     if defuser and defuser:IsHero() then
-        defuser:ModifyGold(1000, true, DOTA_ModifyGold_Unspecified) -- Add 1000 gold
-        SendOverheadEventMessage(defuser, OVERHEAD_ALERT_GOLD, defuser, 1000, nil) -- Display gold overhead
+        defuser:ModifyGold(500, true, DOTA_ModifyGold_Unspecified) -- Add 1000 gold
+        SendOverheadEventMessage(defuser, OVERHEAD_ALERT_GOLD, defuser, 500, nil) -- Display gold overhead
     end
 
     -- Remove the bomb's planting modifier (it is now defused)

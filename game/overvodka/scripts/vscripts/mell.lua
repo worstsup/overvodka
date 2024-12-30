@@ -21,7 +21,7 @@ function Meteor(keys)
 	local caster_loc = caster:GetAttachmentOrigin(DOTA_PROJECTILE_ATTACHMENT_ATTACK_1)
 	local cast_direction = caster:GetForwardVector()
 	local meteor_count = 1
-	local distince = 900
+	local distince = 800
 	local eff = "particles/invoker_chaos_meteor_mell_1.vpcf"
 	if k == 2 then
 		eff = "particles/invoker_chaos_meteor_mell_2.vpcf"

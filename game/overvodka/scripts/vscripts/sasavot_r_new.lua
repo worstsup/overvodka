@@ -46,8 +46,8 @@ function modifier_sasavot_r_new:DeclareFunctions()
 end
 
 function modifier_sasavot_r_new:OnTakeDamage(params)
-    if params.attacker == self.target and params.unit ~= self.caster and params.unit:IsOpposingTeam(self.caster:GetTeamNumber()) then
-        self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 60})
+    if params.attacker == self.target and params.unit ~= self.caster and params.unit:IsRealHero() then
+        self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 30})
         self:Destroy()
     end
 end
@@ -120,7 +120,7 @@ end
 function modifier_sasavot_r_new_secondary:OnIntervalThink()
     self.t = self.t + 1
     if self.t == 10 then
-        self.Pct = self.Pct - (100/12)
+        self.Pct = self.Pct - 20
         self.t = 0
     end
     if not IsServer() then return end
@@ -141,7 +141,7 @@ function modifier_sasavot_r_new_secondary:OnDestroy()
     if not IsServer() then return end
     StopSoundOn("sasavot_r_tick", self.target)
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
-    if self.durationPassed >= 59 and distance <= self.radius and not self.damageDealt then
+    if self.durationPassed >= 29 and distance <= self.radius and not self.damageDealt then
         self.target:Kill(self:GetAbility(), self.caster)
         EmitGlobalSound("sasavot_r_success")
     end

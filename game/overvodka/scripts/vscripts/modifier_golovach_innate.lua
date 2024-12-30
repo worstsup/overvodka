@@ -31,7 +31,7 @@ end
 function modifier_golovach_innate:OnDestroy( kv )
 end
 function modifier_golovach_innate:OnIntervalThink()
-	if self:GetParent():HasScepter() and (self:GetAbility():GetCooldownTimeRemaining() >= 235.4 and self:GetAbility():GetCooldownTimeRemaining() <= 236) then
+	if self:GetParent():HasScepter() and (self:GetAbility():GetCooldownTimeRemaining() >= 135.4 and self:GetAbility():GetCooldownTimeRemaining() <= 136) then
 		self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_black_king_bar_immune", {duration = 7})
 		local enemies = FindUnitsInRadius(
 			self:GetParent():GetTeamNumber(),	-- int, your team number
@@ -79,7 +79,7 @@ end
 function modifier_golovach_innate:Reincarnate()
 	-- spend resources
 	if self:GetParent():HasScepter() then
-		self.cooldown = 240
+		self.cooldown = 140
 	end
 	self:GetAbility():StartCooldown(self.cooldown)
 	AddFOWViewer( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), 900, 4, false)

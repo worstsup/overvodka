@@ -2331,7 +2331,7 @@
             "cold_attack_speed"     "-45"
             "cold_duration_melee"   "3.0"
             "cold_duration_ranged"  "3.0"
-            "cold_regen"  			"-50"
+            "cold_regen"  			"-40"
     }
     
     "OnSpellStart"
@@ -2411,7 +2411,7 @@
             {
                 "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"      "%cold_attack_speed"
                 "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%cold_movement_speed"
-				"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"         	"%cold_regen"
+				"MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE"        	"%cold_regen"
             }
         }
     }
@@ -2457,9 +2457,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"dodge_chance_pct"			"25"
+				"dodge_chance_pct"			"20"
 				"bonus_movement_speed"		"8"
-				"bonus_all_stats"			"20"
+				"bonus_all_stats"			"15"
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
 		}
@@ -2834,6 +2834,7 @@
 		"ID"                            "2001"
 		"BaseClass"                     "item_datadriven"
 		"ItemBaseLevel"                 "1"
+		"ItemPurchasable"				"0"
 	}
 	
 	"item_armlet_datadriven"  //The inactive version of Armlet.
@@ -2860,8 +2861,8 @@
 		"AbilityValues"
 		{
 				"int"	"30"
-				"armor" "5"
-				"mp"	"4"
+				"armor" "8"
+				"mp"	"10"
 				"dmg"	"30"
 		}
 		
@@ -2924,9 +2925,9 @@
 		"AbilityValues"
 		{
 				"int"	"30"
-				"armor" "5"
+				"armor" "8"
 				"bonus_armor"	"10"
-				"mp"	"4"
+				"mp"	"10"
 				"dmg"	"30"
 				"bonus_damage"						"9"
 				"bonus_attack_speed"				"0"
@@ -2935,7 +2936,7 @@
 				"unholy_bonus_damage"				"15"
 				"unholy_bonus_attack_speed"			"10"
 				"unholy_bonus_strength"				"25"  //The ratio of %unholy_bonus_strength to %unholy_ticks_to_full_effect is currently hardcoded in 
-				"unholy_health_drain_per_second"	"4"
+				"unholy_health_drain_per_second"	"3"
 				"unholy_health_drain_interval"		".1"
 				"unholy_ticks_to_full_effect"		"7"  //The ratio of %unholy_bonus_strength to %unholy_ticks_to_full_effect is currently hardcoded in 
 				"unholy_tick_interval"				".1"  //This is the interval at which the caster will gain Strength immediately after Armlet is toggled
@@ -3216,7 +3217,7 @@
 		
 		"AbilityValues"
 		{
-			"bonus_all_stats"			 	"15"
+			"bonus_all_stats"			 	"10"
 			"bonus_attack_speed_stats"		  "30"
 			"bonus_ms"		"8"
 			"bonus_magresist"	"15"
@@ -3233,15 +3234,15 @@
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"drobe"
-		"ItemCost"						"8200"
+		"ItemCost"						"6600"
 
 		"AbilityValues"
 		{
 			"bonus_damage"			"65"
 			"bonus_hp_regen"		"10"
 			"bonus_mana_regen"		"5"
-			"bonus_agi"				"30"
-			"bonus_str"				"20"
+			"bonus_agi"				"25"
+			"bonus_str"				"15"
 			"bonus_range"			"200"
 			"cleave"				"50"
 			"radius"				"250"
@@ -3252,13 +3253,13 @@
 		"BaseClass"						"item_datadriven"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		"ItemCost"						"300"
+		"ItemCost"						"600"
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_drobe"
 
 		"ItemRequirements"
 		{
-			"01"						"item_dragon_lance;item_dragon_lance;item_bfury"
+			"01"						"item_dragon_lance;item_bfury"
 		}
 	}
 }

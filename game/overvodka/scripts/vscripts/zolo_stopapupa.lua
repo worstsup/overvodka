@@ -12,6 +12,7 @@ Ability checklist (erase if done/checked):
 zolo_stopapupa = class({})
 LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_stopapupa", "modifier_zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_zolo_slow", "zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
 -- Passive Modifier
@@ -54,4 +55,68 @@ function zolo_stopapupa:OnOrbImpact( params )
 		"modifier_dark_willow_debuff_fear", -- modifier name
 		{ duration = bash } -- kv
 	)
+	params.target:AddNewModifier(
+		self:GetCaster(), -- player source
+		self, -- ability source
+		"modifier_zolo_slow", -- modifier name
+		{ duration = bash } -- kv
+	)
 end
+
+-- Created by Elfansoer
+--[[
+Ability checklist (erase if done/checked):
+- Scepter Upgrade
+- Break behavior
+- Linken/Reflect behavior
+- Spell Immune/Invulnerable/Invisible behavior
+- Illusion behavior
+- Stolen behavior
+]]
+--------------------------------------------------------------------------------
+modifier_zolo_slow = class({})
+
+--------------------------------------------------------------------------------
+-- Classifications
+function modifier_zolo_slow:IsHidden()
+	return true
+end
+
+function modifier_zolo_slow:IsDebuff()
+	return true
+end
+
+function modifier_zolo_slow:IsStunDebuff()
+	return false
+end
+
+function modifier_zolo_slow:IsPurgable()
+	return true
+end
+
+--------------------------------------------------------------------------------
+-- Initializations
+function modifier_zolo_slow:OnCreated( kv )
+	self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
+end
+
+function modifier_zolo_slow:OnRefresh( kv )
+	self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
+end
+
+function modifier_zolo_slow:OnRemoved()
+end
+
+function modifier_zolo_slow:OnDestroy()
+end
+function modifier_zolo_slow:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+	}
+
+	return funcs
+end
+function modifier_zolo_slow:GetModifierMoveSpeedBonus_Percentage()
+	return -self.slow
+end
+--------------------------------------------------------------------------------

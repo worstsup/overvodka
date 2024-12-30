@@ -26,6 +26,7 @@ function modifier_sasavot_w:OnCreated( kv )
 	self:SetStackCount(1)
 	self.stack_multiplier = self:GetAbility():GetSpecialValueFor("attack_speed")
 	self.stack_multiplier_armor = self:GetAbility():GetSpecialValueFor("armor")
+	self.stack_multiplier_spell = self:GetAbility():GetSpecialValueFor("spell")
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
 	self.currentTarget = {}
 end
@@ -33,6 +34,7 @@ end
 function modifier_sasavot_w:OnRefresh( kv )
 	self.stack_multiplier = self:GetAbility():GetSpecialValueFor("attack_speed")
 	self.stack_multiplier_armor = self:GetAbility():GetSpecialValueFor("armor")
+	self.stack_multiplier_spell = self:GetAbility():GetSpecialValueFor("spell")
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
 end
 
@@ -44,6 +46,7 @@ function modifier_sasavot_w:DeclareFunctions()
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 	}
 
 	return funcs
@@ -72,7 +75,13 @@ function modifier_sasavot_w:OnAttack( params )
 		end
 	end
 end
-
+function modifier_sasavot_w:GetModifierSpellAmplify_Percentage( params )
+	local passive = 1
+	if self:GetParent():PassivesDisabled() then
+		passive = 0
+	end
+	return self:GetStackCount() * self.stack_multiplier_spell * passive
+end
 function modifier_sasavot_w:GetModifierAttackSpeedBonus_Constant( params )
 	local passive = 1
 	if self:GetParent():PassivesDisabled() then

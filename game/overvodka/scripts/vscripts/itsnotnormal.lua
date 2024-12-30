@@ -1,21 +1,18 @@
-function ItsNotNormalEnd( keys )
-
-	local sound_name = "Hero_ObsidianDestroyer.AstralImprisonment"
-	local target = keys.target
-
-	StopSoundEvent(sound_name, target)
-
-	target:RemoveNoDraw()	
-end
-
+k = 0
 function ItsNotNormalStart( keys )
 	local target = keys.target
 	if target:HasModifier("modifier_black_king_bar_immune") then return end
-	target:AddNoDraw()
 end
 
 function ItsNotNormal(keys)
 	local caster = keys.caster
+	if (k % 2 == 0) then
+		EmitSoundOn("zima_holoda", caster)
+	end
+	if (k % 2 == 1) then
+		EmitSoundOn("ebanul_moroz", caster)
+	end
+	k = k + 1
 	local ability = keys.ability
 	local radius = ability:GetSpecialValueFor( "radius" )
 	local targets = FindUnitsInRadius(caster:GetTeamNumber(),

@@ -97,9 +97,6 @@ function modifier_papich_passive:OnIntervalThink()
         end
     else
         -- Remove min health modifier and start cooldown
-        if self.parent:HasModifier("modifier_custom_min_health") then
-            self.parent:RemoveModifierByName("modifier_custom_min_health")
-        end
         if self.parent:HasModifier("modifier_brb_test") then
             self.parent:RemoveModifierByName("modifier_brb_test")
             self.parent:RemoveModifierByName("modifier_brb_test_attack_target")
@@ -119,20 +116,16 @@ function modifier_papich_passive:OnIntervalThink()
         if self.parent:HasModifier("modifier_generic_arc_lua") then
             self.parent:RemoveModifierByName("modifier_generic_arc_lua")
         end
+        if self.parent:HasModifier("modifier_generic_knockback_lua") then
+            self.parent:RemoveModifierByName("modifier_generic_knockback_lua")
+        end
+        if self.parent:HasModifier("modifier_serega_sven") then
+            self.parent:RemoveModifierByName("modifier_serega_sven")
+        end
         if self.parent:IsMoving() or self.parent:IsChanneling() or self.parent:IsAttacking() then
             self.parent:Stop()
         end
-        self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_3)
-        self.parent:Purge( false, true, false, true, true )
-        local duration = self:GetAbility():GetSpecialValueFor( "chargeup_time" )
         local caster = self:GetParent()
-        local mod = caster:AddNewModifier(
-           caster, -- player source
-           self.ability, -- ability source
-           "modifier_papich_e_command", -- modifier name
-           { duration = duration } -- kv
-        )
-        self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
         local team = caster:GetTeam()
         local point = 0
         local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
@@ -142,6 +135,19 @@ function modifier_papich_passive:OnIntervalThink()
                break
             end
         end
+        self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_3)
+        self.parent:Purge( true, true, false, true, true )
+        caster:FaceTowards(point)
+        local duration = self:GetAbility():GetSpecialValueFor( "chargeup_time" )
+        local mod = caster:AddNewModifier(
+           caster, -- player source
+           self.ability, -- ability source
+           "modifier_papich_e_command", -- modifier name
+           { duration = duration } -- kv
+        )
+        self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
+        caster:FaceTowards(point)
+        caster:FaceTowards(point)
         caster:FaceTowards(point)
         -- load data
         -- add modifier
@@ -151,6 +157,10 @@ function modifier_papich_passive:OnIntervalThink()
            "modifier_papich_e_charge", -- modifier name
            { duration = duration } -- kv
         )
+        if self.parent:HasModifier("modifier_custom_min_health") then
+            self.parent:RemoveModifierByName("modifier_custom_min_health")
+        end
+        caster:FaceTowards(point)
     end
 end
 modifier_custom_min_health = class({})
@@ -182,6 +192,8 @@ function modifier_papich_e_command:CheckState()
     local state = {
         [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
         [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+        [MODIFIER_STATE_OUT_OF_GAME] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
 
     return state

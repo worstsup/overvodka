@@ -1,7 +1,7 @@
 lion_earth_spike_lua = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_serega_sven", "modifier_serega_sven", LUA_MODIFIER_MOTION_BOTH )
+LinkLuaModifier( "modifier_serega_sven", "modifier_serega_sven", LUA_MODIFIER_MOTION_NONE )
 tartar = {}
 
 --------------------------------------------------------------------------------

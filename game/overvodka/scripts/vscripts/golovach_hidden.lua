@@ -5,6 +5,9 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua",
 
 --------------------------------------------------------------------------------
 -- Custom KV
+function golovach_hidden:IsStealable()
+	return false
+end
 function golovach_hidden:GetCastRange( vLocation, hTarget )
 	if IsServer() then
 		local radius = 200

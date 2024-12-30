@@ -41,6 +41,9 @@ function mellstroy_business_new:OnOrbImpact( params )
 	PlayerResource:SpendGold(player_id, damage, 4)
 	local sound_cast = "biznes"
 	EmitSoundOn( sound_cast, self:GetCaster() )
+	if self:GetCaster():HasScepter() then
+		damage = damage * 2
+	end
 	ApplyDamage({attacker = self:GetCaster(), victim = params.target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_PURE})
 	-- add debuff
 	params.target:AddNewModifier(

@@ -25,7 +25,7 @@ function Damage(keys)
 
 	for _,unit in pairs(targets) do
 		if caster:HasScepter() then
-			damage = damage + unit:GetHealth() / 100 * 2
+			damage = damage + unit:GetHealth() * 0.015
 		end
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = ability})
 	end

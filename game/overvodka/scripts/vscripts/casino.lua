@@ -24,6 +24,16 @@ function mellstroy_casino:OnSpellStart()
         caster:ModifyGold(reward, false, 0)
         caster:EmitSound("jackpot") -- Play gold pickup sound
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
+        local abilities_count = caster:GetAbilityCount()
+        for i = 0, abilities_count - 1 do
+            local ability = caster:GetAbilityByIndex(i)
+            if ability and ability ~= self and ability:GetCooldownTimeRemaining() > 0 then
+                -- Reduce the cooldown by half
+                local new_cooldown = ability:GetCooldownTimeRemaining() * 0.5
+                ability:EndCooldown()
+                ability:StartCooldown(new_cooldown)
+            end
+        end
         if caster:HasScepter() then
             caster:ModifyStrength(1)
             caster:ModifyAgility(1)
