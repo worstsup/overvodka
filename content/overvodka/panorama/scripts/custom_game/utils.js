@@ -151,8 +151,23 @@ function GetRankClassName(Rating){
         },
         {
             min: 5000,
-            max: -1,
+            max: 6000,
             class_name: "Mythical"
+        },
+        {
+            min: 6000,
+            max: 7000,
+            class_name: "Legend"
+        },
+        {
+            min: 7000,
+            max: 8000,
+            class_name: "Divine"
+        },
+        {
+            min: 9000,
+            max: -1,
+            class_name: "HamsterGod"
         },
     ]
 
@@ -165,7 +180,6 @@ function GetRankClassName(Rating){
             }
         }
     }
-
     return "Bronze"
 }
 

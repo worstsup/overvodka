@@ -9,7 +9,7 @@ function invoker_ghost_walk_lua:OnSpellStart()
 	local caster = self:GetCaster()
 
 	-- load data
-	local duration = self:GetSpecialValueFor("duration")
+	local duration = self:GetOrbSpecialValueFor( "duration", "q" )
 
 	-- add modifier
 	caster:AddNewModifier(

@@ -435,6 +435,15 @@
 .Mythical .ValueIcon{
 	background-image: url("file://{images}/custom_game/ranks/mythical.png");
 }
+.Legend .ValueIcon{
+	background-image: url("file://{images}/custom_game/ranks/legend.png");
+}
+.Divine .ValueIcon{
+	background-image: url("file://{images}/custom_game/ranks/divine.png");
+}
+.HamsterGod .ValueIcon{
+	background-image: url("file://{images}/custom_game/ranks/hamstergod.png");
+}
 
 .QuickToggle{
     margin-top: 10px;

@@ -777,14 +777,14 @@
         // Armor
         //----------------------------------------------------------------
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "MagicalResistance"     "45"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "20"
-        "AttackDamageMax"       "20"
+        "AttackDamageMin"       "35"
+        "AttackDamageMax"       "35"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -845,14 +845,14 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "MagicalResistance"     "55"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "35"
-        "AttackDamageMax"       "35"
+        "AttackDamageMin"       "55"
+        "AttackDamageMax"       "55"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -924,14 +924,14 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "MagicalResistance"     "65"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "50"
-        "AttackDamageMax"       "50"
+        "AttackDamageMin"       "75"
+        "AttackDamageMax"       "75"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1001,14 +1001,14 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "MagicalResistance"     "75"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "65"
-        "AttackDamageMax"       "65"
+        "AttackDamageMin"       "95"
+        "AttackDamageMax"       "95"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1074,14 +1074,14 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "MagicalResistance"     "75"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "130"
-        "AttackDamageMax"       "130"
+        "AttackDamageMin"       "190"
+        "AttackDamageMax"       "190"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1140,7 +1140,7 @@
 	"npc_penek_1"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "maps/cavern_assets/models/mushrooms/mushroom_cavern_02.vmdl"
+        "Model"                 "pvz/sunflower_defaultflower_mesh.vmdl"
         "ModelScale"            "1.5"
         "Level"                 "1"
         "HealthBarOffset"       "0"
@@ -1170,7 +1170,7 @@
 	"npc_penek_2"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "maps/cavern_assets/models/mushrooms/mushroom_cavern_02.vmdl"
+        "Model"                 "pvz/sunflower_defaultflower_mesh.vmdl"
         "ModelScale"            "1.5"
         "Level"                 "1"
         "HealthBarOffset"       "0"
@@ -1200,7 +1200,7 @@
 	"npc_penek_3"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "maps/cavern_assets/models/mushrooms/mushroom_cavern_02.vmdl"
+        "Model"                 "pvz/sunflower_defaultflower_mesh.vmdl"
         "ModelScale"            "1.5"
         "Level"                 "1"
         "HealthBarOffset"       "0"
@@ -1230,7 +1230,7 @@
 	"npc_penek_4"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "maps/cavern_assets/models/mushrooms/mushroom_cavern_02.vmdl"
+        "Model"                 "pvz/sunflower_defaultflower_mesh.vmdl"
         "ModelScale"            "1.5"
         "Level"                 "1"
         "HealthBarOffset"       "0"
@@ -1260,7 +1260,7 @@
     "npc_penek_5"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "maps/cavern_assets/models/mushrooms/mushroom_cavern_02.vmdl"
+        "Model"                 "pvz/sunflower_defaultflower_mesh.vmdl"
         "ModelScale"            "1.5"
         "Level"                 "1"
         "HealthBarOffset"       "0"
@@ -1286,6 +1286,206 @@
         "CanBeDominated"        "0"
         "ConsideredHero"        "0"
         "SelectOnSpawn"         "1"
+    }
+    "npc_peashooter_1"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"20"			// Damage range min.
+		"AttackDamageMax"			"20"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_viper/viper_base_attack.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"150"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
+    }
+	"npc_peashooter_2"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"30"			// Damage range min.
+		"AttackDamageMax"			"30"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_viper/viper_base_attack.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"220"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
+    }
+	"npc_peashooter_3"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"40"			// Damage range min.
+		"AttackDamageMax"			"40"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_viper/viper_base_attack.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"290"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
+    }
+	"npc_peashooter_4"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"50"			// Damage range min.
+		"AttackDamageMax"			"50"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_viper/viper_base_attack.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"360"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
+    }
+    "npc_peashooter_5"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"150"			// Damage range min.
+		"AttackDamageMax"			"150"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_viper/viper_base_attack.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"1080"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
     }
     "npc_dota_roshan"
     {
@@ -2931,7 +3131,7 @@
         "AutoAttacksByDefault"  "0"
         "IsSummoned"            "1"
 	}
-	"npc_dota_mars_arena_of_blood_lua_soldier"
+	"npc_dota_arsen_tg_soldier"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -3079,7 +3279,7 @@
 		"BaseClass"             "npc_dota_creature"				// Class of entity of link to.
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"1"
-		"ModelScale" 				"0.4"
+		"ModelScale" 				"0.35"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3147,7 +3347,7 @@
 		"BaseClass"             "npc_dota_creature"				// Class of entity of link to.
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"2"
-		"ModelScale" 				"0.5"
+		"ModelScale" 				"0.4"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3215,7 +3415,7 @@
 		"BaseClass"             "npc_dota_creature"				// Class of entity of link to.
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"3"
-		"ModelScale" 				"0.6"
+		"ModelScale" 				"0.45"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3283,7 +3483,7 @@
 		"BaseClass"             "npc_dota_creature"				// Class of entity of link to.
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"4"
-		"ModelScale" 				"0.6"
+		"ModelScale" 				"0.45"
 
 		// Abilities
 		//----------------------------------------------------------------

@@ -15,10 +15,10 @@ SERVER_ATTEMPT_INTERVAL = 1
 
 --Список для оффлайн игры (без сервера)
 SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
-    188428188,
+    188428188,  -- nears
     409188637,  -- worstsup
-    885116894,
-    1010078422,
+    885116894, -- dolbayobi
+    1010078422, -- mikeil
     349446348,  -- mefisto 
     1248303404, -- sega
     1133110680, -- buyer
@@ -31,7 +31,10 @@ SERVER_RANKS_DEFINITION = {
     GOLD = 3,
     PLATINUM = 4,
     DIAMOND = 5,
-    EPIC = 6
+    EPIC = 6,
+    LEGEND = 7,
+    DIVINE = 8,
+    HAMSTERGOD = 9
 }
 
 --Длительность перезарядки типа

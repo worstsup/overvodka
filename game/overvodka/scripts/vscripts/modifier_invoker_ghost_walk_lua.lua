@@ -47,8 +47,8 @@ function modifier_invoker_ghost_walk_lua:OnCreated( kv )
 		-- references
 		self.radius = self:GetAbility():GetSpecialValueFor( "area_of_effect" )
 		self.aura_duration = self:GetAbility():GetSpecialValueFor( "aura_fade_time" )
-		self.self_slow = self:GetAbility():GetOrbSpecialValueFor( "self_slow", "w" )
-		self.enemy_slow = self:GetAbility():GetOrbSpecialValueFor( "enemy_slow", "q" )
+		self.self_slow = self:GetAbility():GetSpecialValueFor( "self_slow" )
+		self.enemy_slow = self:GetAbility():GetSpecialValueFor( "enemy_slow" )
 
 		-- send to client
 		local sign = 0

@@ -1,0 +1,149 @@
+dave_loonboon = class({})
+LinkLuaModifier( "modifier_dave_loonboon", "heroes/dave/dave_loonboon", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_dave_loonboon_plants", "heroes/dave/dave_loonboon", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
+
+--------------------------------------------------------------------------------
+
+function dave_loonboon:OnSpellStart()
+    EmitSoundOn( "dave_loonboon", self:GetCaster() )
+    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_dave_loonboon", { duration = self:GetSpecialValueFor( "duration" ) } )
+end
+
+--------------------------------------------------------------------------------
+modifier_dave_loonboon = class({})
+
+function modifier_dave_loonboon:IsPurgable()
+    return false
+end
+
+function modifier_dave_loonboon:OnCreated( kv )
+    self.move_speed = self:GetAbility():GetSpecialValueFor( "move_speed" )
+    self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
+    self.stun_dur = self:GetAbility():GetSpecialValueFor( "stun_dur" )
+    self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
+    self:StartIntervalThink(1.5)
+    self:OnIntervalThink()
+end
+
+function modifier_dave_loonboon:OnIntervalThink()
+    local plants = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
+        self:GetParent():GetAbsOrigin(),
+        nil,
+        12000,
+        DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+        DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false)
+    for _,unit in pairs(plants) do
+        unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_dave_loonboon_plants", { duration = 1.55 } )
+    end
+    local enemies = FindUnitsInRadius(
+        self:GetParent():GetTeamNumber(),   -- int, your team number
+        self:GetParent():GetOrigin(),   -- point, center point
+        nil,    -- handle, cacheUnit. (not known)
+        self.radius,    -- float, radius. or use FIND_UNITS_EVERYWHERE
+        DOTA_UNIT_TARGET_TEAM_ENEMY,    -- int, team filter
+        DOTA_UNIT_TARGET_HERO,  -- int, type filter
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,  -- int, flag filter
+        FIND_CLOSEST,   -- int, order filter
+        false   -- bool, can grow cache
+    )
+    if #enemies == 0 then return end
+    t = 0
+    for _,enemy in pairs(enemies) do
+        if t == 1 then return end
+        local target = enemy:GetAbsOrigin()
+        local projectile_direction = (target - self:GetParent():GetAbsOrigin()):Normalized()
+        local distince = 900
+        local info = {
+            Source = self:GetParent(),
+            Ability = self:GetAbility(),
+            vSpawnOrigin = self:GetParent():GetAbsOrigin(),
+
+            bDeleteOnHit = false,
+
+            iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+            iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+            iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+
+            EffectName = "particles/invoker_chaos_meteor_new.vpcf",
+            fDistance = distince,
+            fStartRadius = 115,
+            fEndRadius = 120,
+            vVelocity = projectile_direction * 1000,
+
+            bProvidesVision = true,
+            iVisionRadius = 200,
+            iVisionTeamNumber = self:GetParent():GetTeamNumber()
+        }
+        t = t + 1
+        ProjectileManager:CreateLinearProjectile(info)
+    end
+end
+
+function modifier_dave_loonboon:OnProjectileHit(target, location)
+    if target then
+        target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.stun_dur })
+        ApplyDamage({
+            victim = target,
+            attacker = self:GetParent(),
+            damage = self.damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self:GetAbility(),
+        })
+    end
+end
+
+function modifier_dave_loonboon:OnRemoved()
+end
+
+--------------------------------------------------------------------------------
+
+function modifier_dave_loonboon:DeclareFunctions()
+    local funcs = 
+    {
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    }
+
+    return funcs
+end
+
+--------------------------------------------------------------------------------
+function modifier_dave_loonboon:GetModifierMoveSpeedBonus_Percentage( params )
+    return self.move_speed
+end
+
+
+modifier_dave_loonboon_plants = class({})
+--------------------------------------------------------------------------------
+function modifier_dave_loonboon_plants:IsPurgable()
+    return false
+end
+
+function modifier_dave_loonboon_plants:OnCreated( kv )
+    self.bonus_as_aura = self:GetAbility():GetSpecialValueFor( "bonus_as_aura" )
+end
+
+--------------------------------------------------------------------------------
+
+function modifier_dave_loonboon_plants:OnRemoved()
+end
+
+--------------------------------------------------------------------------------
+
+function modifier_dave_loonboon_plants:DeclareFunctions()
+    local funcs = 
+    {
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+    }
+
+    return funcs
+end
+
+--------------------------------------------------------------------------------
+
+function modifier_dave_loonboon_plants:GetModifierAttackSpeedBonus_Constant( params )
+    return self.bonus_as_aura
+end

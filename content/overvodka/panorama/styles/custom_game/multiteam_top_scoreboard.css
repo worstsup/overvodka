@@ -292,6 +292,15 @@
 .Mythical .RatingRankIcon{
 	background-image: url("file://{images}/custom_game/ranks/mythical.png");
 }
+.Legend .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/legend.png");
+}
+.Divine .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/divine.png");
+}
+.HamsterGod .RatingRankIcon{
+	background-image: url("file://{images}/custom_game/ranks/hamstergod.png");
+}
 
 .FlowDown {
     flow-children: down;

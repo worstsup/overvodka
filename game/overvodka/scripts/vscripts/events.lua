@@ -110,6 +110,10 @@ function COverthrowGameMode:OnNPCSpawned( event )
 		if papich then
 			papich:SetLevel(1)
 		end
+		local dave = spawnedUnit:FindAbilityByName("dave_ambient")
+		if dave then
+			dave:SetLevel(1)
+		end
       end
 	
 end
@@ -178,6 +182,66 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 	CustomGameEventManager:Send_ServerToAllClients( "kill_event", broadcast_kill_event )
 end
 
+connectedPlayers = {}
+
+function COverthrowGameMode:OnGameInProgress()
+    for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+        if PlayerResource:IsValidPlayer(playerID) then
+            connectedPlayers[playerID] = true
+        end
+    end
+
+    Timers:CreateTimer(1.0, function()
+        CheckPlayerConnections()
+        return 1.0 -- Repeat every second
+    end)
+end
+
+function CheckPlayerConnections()
+    local teamAliveCount = {}
+    for team = DOTA_TEAM_FIRST, DOTA_TEAM_CUSTOM_MAX do
+        teamAliveCount[team] = 0
+    end
+
+    for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+        if PlayerResource:IsValidPlayer(playerID) then
+            local isConnected = PlayerResource:GetConnectionState(playerID) == DOTA_CONNECTION_STATE_CONNECTED
+            connectedPlayers[playerID] = isConnected
+            if isConnected and PlayerResource:IsAlive(playerID) then
+                local team = PlayerResource:GetTeam(playerID)
+                if teamAliveCount[team] ~= nil then
+                    teamAliveCount[team] = teamAliveCount[team] + 1
+                end
+            end
+        end
+    end
+    local teamsWithPlayers = 0
+    local lastTeamStanding = nil
+
+    for team, count in pairs(teamAliveCount) do
+        if count > 0 then
+            teamsWithPlayers = teamsWithPlayers + 1
+            lastTeamStanding = team
+        end
+    end
+    if teamsWithPlayers == 1 and lastTeamStanding ~= nil then
+        COverthrowGameMode:EndGame( lastTeamStanding )
+    end
+end
+
+function COverthrowGameMode:OnPlayerDisconnect( event )
+    local playerID = event.PlayerID
+    if PlayerResource:IsValidPlayer(playerID) then
+        connectedPlayers[playerID] = false
+    end
+end
+
+function COverthrowGameMode:OnPlayerReconnect( event )
+    local playerID = event.PlayerID
+    if PlayerResource:IsValidPlayer(playerID) then
+        connectedPlayers[playerID] = true
+    end
+end
 ---------------------------------------------------------------------------
 -- Event: OnEntityKilled
 ---------------------------------------------------------------------------

@@ -2588,7 +2588,7 @@
 		// Items		
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemPurchasable"				"0"
-		"ItemDroppable"					"1"
+		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
 		"ItemKillable"					"1"
 		"ItemContributesToNetWorthWhenDropped"	"0"
@@ -3148,15 +3148,14 @@
 		"ScriptFile"				"cuirass"
 		"AbilityTextureName"		"oboyudno"
 		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityCooldown"			"25"
-		"AbilityManaCost"			"150"
-		"AbilityCastRange"			"1200"
+		"AbilityCooldown"			"35"
+		"AbilityManaCost"			"200"
 		"ItemCost"					"7000"
 		"AbilitySharedCooldown" 	"blademail"
 		
 		"AbilityValues"
 		{
-			"bonus_armor_stats"			 	"17"
+			"bonus_armor_stats"			 	"15"
 			"bonus_attack_speed_stats"		  "0"
 			"bonus_damage_stats"				"20"
 			"bonus_int_stats"					"10"
@@ -3164,10 +3163,51 @@
 			"bonus_armor_aura"			 		"0"
 			"bonus_attack_speed_aura"		  	"0"
 			"minus_armor_aura"			 		"0"
-			"duration"			 				"6.0"
-			"return_damage"						"100"
+			"duration"			 				"5.0"
+			"return_damage"						"85"
 			"return_damage_passive"				"20"
 			"return_damage_passive_percentage" 	"25"	
+			"radius"						"0"
+		}
+	}
+	"item_recipe_oboyudno_2"
+	{
+		"BaseClass"				 "item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"		"item_recipe"
+		"ItemCost"					"400"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_oboyudno_2"
+		"ItemRequirements"
+		{
+			"01"	"item_cuirass_2;item_mithril_hammer"
+		}
+	}
+	
+	"item_oboyudno_2"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"oboyudno_2"
+		"AbilityTextureName"		"oboyudno_2"
+		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"			"30"
+		"AbilityManaCost"			"150"
+		"ItemCost"					"9000"
+		"AbilitySharedCooldown" 	"blademail"
+		"AbilityValues"
+		{
+			"bonus_armor_stats"			 	"15"
+			"bonus_attack_speed_stats"		  "0"
+			"bonus_damage_stats"				"50"
+			"bonus_int_stats"					"10"
+			"bonus_hpregen"						"10"
+			"bonus_armor_aura"			 		"0"
+			"bonus_attack_speed_aura"		  	"0"
+			"minus_armor_aura"			 		"0"
+			"duration"			 				"6.0"
+			"return_damage"						"100"
+			"return_damage_passive"				"40"
+			"return_damage_passive_percentage" 	"35"	
 			"radius"						"0"
 		}
 	}

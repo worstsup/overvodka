@@ -235,8 +235,23 @@ function Server:GetPlayerRank(PlayerID)
         },
         {
             min = 5000,
-            max = -1,
+            max = 6000,
             type = SERVER_RANKS_DEFINITION.EPIC
+        },
+        {
+            min = 6000,
+            max = 7000,
+            type = SERVER_RANKS_DEFINITION.LEGEND
+        },
+        {
+            min = 7000,
+            max = 8000,
+            type = SERVER_RANKS_DEFINITION.DIVINE
+        },
+        {
+            min = 8000,
+            max = -1,
+            type = SERVER_RANKS_DEFINITION.HAMSTERGOD
         },
     }
 
