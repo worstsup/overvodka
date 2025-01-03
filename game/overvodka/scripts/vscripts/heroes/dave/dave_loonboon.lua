@@ -41,7 +41,7 @@ function modifier_dave_loonboon:OnIntervalThink()
     end
     local enemies = FindUnitsInRadius(
         self:GetParent():GetTeamNumber(),   -- int, your team number
-        self:GetParent():GetOrigin(),   -- point, center point
+        self:GetParent():GetAbsOrigin(),   -- point, center point
         nil,    -- handle, cacheUnit. (not known)
         self.radius,    -- float, radius. or use FIND_UNITS_EVERYWHERE
         DOTA_UNIT_TARGET_TEAM_ENEMY,    -- int, team filter
@@ -55,7 +55,9 @@ function modifier_dave_loonboon:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         if t == 1 then return end
         local target = enemy:GetAbsOrigin()
-        local projectile_direction = (target - self:GetParent():GetAbsOrigin()):Normalized()
+        local projectile_direction = (target - self:GetParent():GetAbsOrigin())
+        projectile_direction.z = 0
+        projectile_direction = projectile_direction:Normalized()
         local distince = 900
         local info = {
             Source = self:GetParent(),
