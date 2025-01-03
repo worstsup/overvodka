@@ -41,7 +41,7 @@ function modifier_dave_loonboon:OnIntervalThink()
     end
     local enemies = FindUnitsInRadius(
         self:GetParent():GetTeamNumber(),   -- int, your team number
-        self:GetParent():GetAbsOrigin(),   -- point, center point
+        self:GetParent():GetOrigin(),   -- point, center point
         nil,    -- handle, cacheUnit. (not known)
         self.radius,    -- float, radius. or use FIND_UNITS_EVERYWHERE
         DOTA_UNIT_TARGET_TEAM_ENEMY,    -- int, team filter
@@ -55,33 +55,28 @@ function modifier_dave_loonboon:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         if t == 1 then return end
         local target = enemy:GetAbsOrigin()
-        local projectile_direction = (target - self:GetParent():GetAbsOrigin())
-        projectile_direction.z = 0
-        projectile_direction = projectile_direction:Normalized()
+        local projectile_direction = (target - self:GetParent():GetAbsOrigin()):Normalized()
         local distince = 900
-        local info = {
-            Source = self:GetParent(),
-            Ability = self:GetAbility(),
-            vSpawnOrigin = self:GetParent():GetAbsOrigin(),
-
-            bDeleteOnHit = false,
-
-            iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-            iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-            iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-
-            EffectName = "particles/invoker_chaos_meteor_new.vpcf",
-            fDistance = distince,
-            fStartRadius = 115,
-            fEndRadius = 120,
-            vVelocity = projectile_direction * 1000,
-
-            bProvidesVision = true,
-            iVisionRadius = 200,
-            iVisionTeamNumber = self:GetParent():GetTeamNumber()
+        local arrow_projectile = {
+            Ability             = self:GetAbility(),
+            EffectName          = "particles/invoker_chaos_meteor_new.vpcf",
+            vSpawnOrigin        = self:GetParent():GetAbsOrigin(),
+            fDistance           = distince,
+            fStartRadius        = 115,
+            fEndRadius          = 120,
+            Source              = self:GetParent(),
+            bHasFrontalCone     = false,
+            bReplaceExisting    = false,
+            iUnitTargetTeam     = DOTA_UNIT_TARGET_TEAM_ENEMY,
+            iUnitTargetType     = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+            bDeleteOnHit        = true,
+            vVelocity           = projectile_direction * 1000,
+            bProvidesVision     = true,
+            iVisionRadius       = 200,
+            iVisionTeamNumber   = self:GetParent():GetTeamNumber(),
         }
         t = t + 1
-        ProjectileManager:CreateLinearProjectile(info)
+        ProjectileManager:CreateLinearProjectile(arrow_projectile)
     end
 end
 
