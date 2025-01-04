@@ -10,6 +10,21 @@ function dave_loonboon:OnSpellStart()
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_dave_loonboon", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 
+function dave_loonboon:OnProjectileHit(target, location)
+    if target then
+        self.stun_dur = self:GetSpecialValueFor( "stun_dur" )
+        self.damage = self:GetSpecialValueFor( "damage" )
+        target:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = self.stun_dur })
+        ApplyDamage({
+            victim = target,
+            attacker = self:GetCaster(),
+            damage = self.damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self,
+        })
+    end
+end
+
 --------------------------------------------------------------------------------
 modifier_dave_loonboon = class({})
 
@@ -20,9 +35,20 @@ end
 function modifier_dave_loonboon:OnCreated( kv )
     self.move_speed = self:GetAbility():GetSpecialValueFor( "move_speed" )
     self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-    self.stun_dur = self:GetAbility():GetSpecialValueFor( "stun_dur" )
-    self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
-    self:StartIntervalThink(1.5)
+    self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
+    self.facet = self:GetAbility():GetSpecialValueFor( "hasfacet" )
+    if self.facet == 1 then
+        local sunflower = CreateUnitByName(
+            "npc_penek_4",
+            self:GetParent():GetAbsOrigin(),
+            true,
+            self:GetParent(),
+            nil,
+            self:GetParent():GetTeam()
+        )
+        EmitSoundOn("gribochki", self:GetParent())
+    end
+    self:StartIntervalThink(self.interval)
     self:OnIntervalThink()
 end
 
@@ -55,11 +81,13 @@ function modifier_dave_loonboon:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         if t == 1 then return end
         local target = enemy:GetAbsOrigin()
-        local projectile_direction = (target - self:GetParent():GetAbsOrigin()):Normalized()
+        local projectile_direction = (target - self:GetParent():GetAbsOrigin())
+        projectile_direction.z = 0
+        projectile_direction = projectile_direction:Normalized()
         local distince = 900
         local arrow_projectile = {
             Ability             = self:GetAbility(),
-            EffectName          = "particles/invoker_chaos_meteor_new.vpcf",
+            EffectName          = "particles/invoker_chaos_meteor_dave.vpcf",
             vSpawnOrigin        = self:GetParent():GetAbsOrigin(),
             fDistance           = distince,
             fStartRadius        = 115,
@@ -80,20 +108,19 @@ function modifier_dave_loonboon:OnIntervalThink()
     end
 end
 
-function modifier_dave_loonboon:OnProjectileHit(target, location)
-    if target then
-        target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.stun_dur })
-        ApplyDamage({
-            victim = target,
-            attacker = self:GetParent(),
-            damage = self.damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self:GetAbility(),
-        })
-    end
-end
 
 function modifier_dave_loonboon:OnRemoved()
+    if self.facet == 1 then
+        local sunflower = CreateUnitByName(
+            "npc_penek_4",
+            self:GetParent():GetAbsOrigin(),
+            true,
+            self:GetParent(),
+            nil,
+            self:GetParent():GetTeam()
+        )
+        EmitSoundOn("gribochki", self:GetParent())
+    end
 end
 
 --------------------------------------------------------------------------------
@@ -112,6 +139,13 @@ function modifier_dave_loonboon:GetModifierMoveSpeedBonus_Percentage( params )
     return self.move_speed
 end
 
+function modifier_dave_loonboon:GetEffectName()
+    return "particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+end
+
+function modifier_dave_loonboon:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
+end
 
 modifier_dave_loonboon_plants = class({})
 --------------------------------------------------------------------------------
@@ -143,4 +177,12 @@ end
 
 function modifier_dave_loonboon_plants:GetModifierAttackSpeedBonus_Constant( params )
     return self.bonus_as_aura
+end
+
+function modifier_dave_loonboon_plants:GetEffectName()
+    return "particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+end
+
+function modifier_dave_loonboon_plants:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end

@@ -14120,6 +14120,56 @@
 			}
 		}
 	}
+	//==================================================================================================================
+	// МОРОЗНЫЙ ГОРОХОСТРЕЛ
+	//================================================================================================================
+	"dave_peashooter_freeze"
+	{
+		"BaseClass"					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityType"                   	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"			"peashooter_freeze"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"10.0"
+		"MaxLevel"					"1"
+		"IsGrantedByShard"				"1"
+		"AbilityManaCost"				"65"
+		"AbilityValues"
+		{
+				"base_damage"			"50"
+				"base_hp"				"360"
+				"slow"				"15"
+				"as_slow"				"50"
+				"duration"
+				{
+					"value"	"20.0"
+				}
+				"slow_dur"	"3.0"
+		}
+		
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_peashooter_freeze"
+				"Target" 		"POINT"
+				"Duration"		"%duration"
+				"UnitCount"		"1"
+				"UnitLimit"		"20"
+				"OnSpawn"
+				{}
+			}
+			"FireSound"
+			{
+				"EffectName"	"gribochki"
+				"Target" 		"CASTER"
+			}
+		}
+	}
 	"dave_loonboon"
 	{
 		"BaseClass"						"ability_lua"
@@ -14129,22 +14179,103 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"		
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"90"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"200 300 400"
+		"AbilityCastRange"				"900"
 		"AbilityValues"
 		{
 				"duration"						"12"
 				"move_speed"
 				{
-					"value"	"15 20 25"
+					"value"	"10"
+					"special_bonus_unique_disruptor_4" "+10"
 				}
-				"bonus_as_aura"	"100 150 200"
+				"bonus_as_aura"
+				{
+					"value"	"100 150 200"
+					"special_bonus_unique_enigma_3" "+60"
+				}
 				"radius"	"900"
-				"stun_dur"	"0.5 0.6 0.7"
+				"stun_dur"
+				{
+					"value"	"0.4 0.5 0.6"
+					"special_bonus_unique_enigma_4" "+0.2"
+				}
 				"damage"		"100 200 300"
+				"interval"	"1.5"
+				"hasfacet"
+				{
+					"value"	"0"
+					"special_bonus_facet_tinker_translocator"	"+1"
+				}
+		}
+	}
+	"passive_peashooter_freeze"
+{
+    "BaseClass"                     "ability_datadriven"
+    "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityTextureName"            "peashooter_freeze"
+	"MaxLevel" "1"
+    "AbilityValues"
+    {
+            "duration"
+            {
+            	"value"	"3.0"
+            }
+            "movement_speed"            "-15"
+            "as_slow"        			"-50"
+    }	
+
+    "Modifiers"
+    {
+        "modifier_peashooter_freeze"
+        {
+            "Passive"   "1"
+            "IsHidden"  "1"
+
+            "OnAttackLanded"
+            {
+                "ApplyModifier"
+                {
+                    "ModifierName"  "modifier_peashooter_freeze_debuff"
+                    "Target"        "TARGET"
+                }
+            }
+        }
+
+        "modifier_peashooter_freeze_debuff"
+        {
+            "IsDebuff"  "1"
+            "Duration"  "%duration"
+            "EffectName"    "particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf"
+            "EffectAttachType"  "attach_origin"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
+                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	   "%as_slow"
+            }
+        }
+    }
+}
+"shatter_aura"
+	{
+		"BaseClass"              "ability_lua"
+		"MaxLevel"			"1"
+		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityType"			"DOTA_ABILITY_TYPE_BASIC"
+		"ScriptFile"			"heroes/dave/shatter_aura"
+		"AbilityCastRange"		"900"
+		"AbilityValues"
+		{
+		        "base_tooltip"	"1"
+		        "unit_tooltip"	"1"
+		        "max_tooltip"	"10"
+		        "radius_tooltip" "900"
 		}
 	}
 }

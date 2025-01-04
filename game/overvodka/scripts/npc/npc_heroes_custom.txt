@@ -610,7 +610,7 @@
 		"Ability1"		"dave_peashooter"
 		"Ability2"		"Pocik_penek"
 		"Ability3"		"medusa_mana_shield"
-		"Ability4"		"obsidian_destroyer_essence_aura_datadriven"
+		"Ability4"		"dave_peashooter_freeze"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"dave_loonboon"
 		"Ability7"		"dave_ambient"
@@ -626,14 +626,23 @@
 		{
 			"tinker_repair_bots"
 			{
-				"Icon"				"healing"
-				"Color"				"Blue"
-				"GradientID"		"2"
+				"Icon"				"armor_broken"
+				"Color"				"Red"
+				"GradientID"		"0"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"shatter_aura"
+						"AbilityIndex"	"7"
+						"AutoLevelAbility" "true"
+					}
+				}
 			}
 
 			"tinker_translocator"
 			{
-				"Icon"				"movement"
+				"Icon"				"sun"
 				"Color"				"Yellow"
 				"GradientID"		"2"
 			}
@@ -655,7 +664,7 @@
 		"AttributeIntelligenceGain"		"3.000000"
 		"AttributeBaseAgility"		"17"
 		"AttributeAgilityGain"		"1.400000"
-		"MovementSpeed"		"310"
+		"MovementSpeed"		"290"
 		"StatusManaRegen"	"0.75"
 	}
 	"npc_dota_hero_brewmaster"

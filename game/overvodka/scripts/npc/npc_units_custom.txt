@@ -1271,7 +1271,7 @@
         "BoundsHullName"        "DOTA_HULL_SIZE_SMALL"
         "RingRadius"            "40"
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "200"
+        "MovementSpeed"         "250"
         "MovementTurnRate"      "10.0"
         "StatusHealth"          "99999"
         "StatusHealthRegen"     "999"
@@ -1316,6 +1316,47 @@
 		"BountyGoldMin"				"14"		// Gold earned min.
 		"BountyGoldMax"				"17"		// Gold earned max.
 		"StatusHealth"				"150"		// Base health.
+		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+		"HasInventory"				"0"
+    }
+    "npc_peashooter_freeze"
+	{
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "pvz/peashooter_freeze.vmdl"
+        "ModelScale"            "0.8"
+        "Level"                 "1"
+        "HealthBarOffset"       "0"
+        "HasInventory"          "0"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "50"
+        "Ability1"              "passive_peashooter_freeze"
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"50"			// Damage range min.
+		"AttackDamageMax"			"50"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
+		"AttackRange"				"600"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/viper_base_attack_frozen.vpcf" 
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		"BountyXP"					"20"		// Experience earn.
+		"BountyGoldMin"				"14"		// Gold earned min.
+		"BountyGoldMax"				"17"		// Gold earned max.
+		"StatusHealth"				"360"		// Base health.
 		"StatusHealthRegen"			"1.0"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
