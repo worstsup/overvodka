@@ -14,6 +14,9 @@
 		"PLAYER_HUD_Seasonal1"							"Удар по лицу!"
 		"PLAYER_HUD_Seasonal2"							"Эх шарик..."
 
+		"custom_end_screen_legend_rating"				"Рейтинг"
+		"custom_end_screen_rating_no_data"				"Нет данных"
+
 		"PLAYER_HUD_DoubleRating"						"Удвоить ставку рейтинга в этой игре?"
 		"PLAYER_HUD_DoubleRatingCount"					"Осталось на сегодня:"
 		"PLAYER_HUD_DoubleRating_Button"				"Удвоить"

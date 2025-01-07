@@ -24,6 +24,7 @@
 				<Label class="LegendPanel ScoreCol_Assists" text="#custom_end_screen_legend_assists" />
 				<Label class="LegendPanel ScoreCol_Items" text="#custom_end_screen_legend_items" />
 				<Label class="LegendPanel ScoreCol_Networth" text="#custom_end_screen_legend_networth" />
+				<Label class="LegendPanel ScoreCol_Rating" text="#custom_end_screen_legend_rating" />
 			</Panel>
 			<Panel id="TeamsContainer" />
 			<Button id="CloseButton" onactivate="Game.FinishGame();">

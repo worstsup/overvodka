@@ -24,6 +24,15 @@ function IsRealHero(Unit)
     return true
 end
 
+function table.count(t)
+    local key_table = {}
+    for k in pairs(t) do
+        table.insert(key_table, k)
+    end
+
+    return #key_table
+end
+
 function cprint(...)
     local list = {...}
 	for _,value in pairs(list) do
