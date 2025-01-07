@@ -61,7 +61,7 @@ function modifier_ExplosionMagic:OnIntervalThink()
 					knockback_distance = 200,
 					knockback_height = 200
 				}
-				if not enemy:HasModifier("modifier_knockback") then
+				if not enemy:HasModifier("modifier_knockback") and not enemy:HasModifier("modifier_black_king_bar_immune") and not enemy:IsMagicImmune() then
 					enemy:AddNewModifier( enemy, nil, "modifier_knockback", knockbackProperties )
 				end
 			end

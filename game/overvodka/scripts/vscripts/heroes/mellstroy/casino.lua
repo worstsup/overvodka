@@ -1,6 +1,5 @@
 mellstroy_casino = class({})
 
--- Function to handle the spell cast
 function mellstroy_casino:OnSpellStart()
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
@@ -18,11 +17,11 @@ function mellstroy_casino:OnSpellStart()
     end
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
-    if random_chance <= 3 then -- 3% chance to give 10x the cost
+    if random_chance <= 2 then
         local reward = ability_cost * 10
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
-        caster:EmitSound("jackpot") -- Play gold pickup sound
+        caster:EmitSound("jackpot")
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
         local abilities_count = caster:GetAbilityCount()
         for i = 0, abilities_count - 1 do
@@ -39,7 +38,7 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    elseif random_chance <= 57 then -- 50% chance to give double the cost 
+    elseif random_chance <= 56 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
@@ -50,12 +49,10 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    else -- 47% chance to give nothing
-        caster:EmitSound("lose") -- Optional: play cancel sound for no reward
+    else
+        caster:EmitSound("lose") 
     end
 end
 
--- Register the ability
 function mellstroy_casino:OnUpgrade()
-    -- This ability has only one level, so no additional behavior needed
 end

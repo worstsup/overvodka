@@ -22,31 +22,30 @@ function modifier_custom_passive_bonus_armor_regen:OnIntervalThink()
 
     local parent = self:GetParent()
     local isMoving = parent:IsMoving()
-    
-    if isMoving then
-        self:SetStackCount(0) -- Not moving
+    if not isMoving or (parent:HasScepter() and parent:HasModifier("modifier_chillguy_r")) then
+        self:SetStackCount(1)
     else
-        self:SetStackCount(1) -- Moving
+        self:SetStackCount(0)
     end
 end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierPhysicalArmorBonus()
     if self:GetStackCount() > 0 then
-        return self:GetParent():GetLevel() -- +1 armor per hero level while not moving
+        return self:GetParent():GetLevel() / 2
     end
     return 0
 end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierHealthRegenPercentage()
     if self:GetStackCount() > 0 then
-        return 3 -- +3% HP regen while not moving
+        return 3
     end
     return 0
 end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierTotalPercentageManaRegen()
     if self:GetStackCount() > 0 then
-        return 3 -- +3% mana regen while not moving
+        return 3
     end
     return 0
 end

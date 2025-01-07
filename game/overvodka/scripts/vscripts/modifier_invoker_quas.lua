@@ -1,7 +1,6 @@
 modifier_invoker_quas_lua = class({})
 
 --------------------------------------------------------------------------------
--- Classifications
 function modifier_invoker_quas_lua:IsHidden()
 	return false
 end
@@ -21,21 +20,29 @@ end
 --------------------------------------------------------------------------------
 -- Initializations
 function modifier_invoker_quas_lua:OnCreated( kv )
-	-- references
 	self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" ) -- special value
+	self.regen_sss = self.regen * 2
+	self:StartIntervalThink(0.5)
 end
 
 function modifier_invoker_quas_lua:OnRefresh( kv )
-	-- references
-	self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" ) -- special value	
+	self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" ) -- special value
+	self.regen_sss = self.regen * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_invoker_quas_lua:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+		self.regen = self.regen_sss
+	else
+		self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" )
+	end
 end
 
 function modifier_invoker_quas_lua:OnDestroy( kv )
-
 end
 
 --------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_invoker_quas_lua:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,

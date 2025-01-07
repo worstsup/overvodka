@@ -4,23 +4,80 @@ LinkLuaModifier( "modifier_dave_loonboon_plants", "heroes/dave/dave_loonboon", L
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
-
+hit = false
 function dave_loonboon:OnSpellStart()
     EmitSoundOn( "dave_loonboon", self:GetCaster() )
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_dave_loonboon", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 
-function dave_loonboon:OnProjectileHit(target, location)
-    if target then
-        self.stun_dur = self:GetSpecialValueFor( "stun_dur" )
-        self.damage = self:GetSpecialValueFor( "damage" )
-        target:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = self.stun_dur })
+function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
+    if not target then return end
+
+    local caster = self:GetCaster()
+    local ability = self
+    local radius = self:GetSpecialValueFor("radius")
+    local damage = self:GetSpecialValueFor("damage")
+    local stun_duration = self:GetSpecialValueFor("stun_dur")
+    if not hit then
+        -- Mark target as hit for the first time
+        hit = true
+        -- Damage and stun the first target
+        target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_duration })
         ApplyDamage({
             victim = target,
-            attacker = self:GetCaster(),
-            damage = self.damage,
+            attacker = caster,
+            damage = damage,
             damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self,
+            ability = ability,
+        })
+
+        -- Find the nearest other enemy
+        local enemies = FindUnitsInRadius(
+            caster:GetTeamNumber(),
+            target:GetAbsOrigin(),
+            nil,
+            radius,
+            DOTA_UNIT_TARGET_TEAM_ENEMY,
+            DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+            DOTA_UNIT_TARGET_FLAG_NONE,
+            FIND_CLOSEST,
+            false
+        )
+        for _, enemy in pairs(enemies) do
+            if enemy ~= target then
+                local projectile_direction = (enemy:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
+                local projectile_info = {
+                    Ability = self,
+                    EffectName = "particles/invoker_chaos_meteor_dave.vpcf",
+                    vSpawnOrigin = target:GetAbsOrigin(),
+                    fDistance = 900,
+                    fStartRadius = 115,
+                    fEndRadius = 120,
+                    Source = caster,
+                    bHasFrontalCone = false,
+                    bReplaceExisting = false,
+                    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+                    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+                    bDeleteOnHit = true,
+                    vVelocity = projectile_direction * 1000,
+                    bProvidesVision = true,
+                    iVisionRadius = 200,
+                    iVisionTeamNumber = caster:GetTeamNumber(),
+                }
+                ProjectileManager:DestroyLinearProjectile(projectilehandle)
+                ProjectileManager:CreateLinearProjectile(projectile_info)
+                return
+            end
+        end
+    else
+        -- Damage and stun the second target
+        target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_duration })
+        ApplyDamage({
+            victim = target,
+            attacker = caster,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = ability,
         })
     end
 end
@@ -104,6 +161,7 @@ function modifier_dave_loonboon:OnIntervalThink()
             iVisionTeamNumber   = self:GetParent():GetTeamNumber(),
         }
         t = t + 1
+        hit = false
         ProjectileManager:CreateLinearProjectile(arrow_projectile)
     end
 end

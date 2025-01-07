@@ -19,21 +19,37 @@ function modifier_invoker_wex_lua:IsPurgable()
 end
 
 --------------------------------------------------------------------------------
--- Initializations
 function modifier_invoker_wex_lua:OnCreated( kv )
-	-- references
-	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" ) -- special value
-	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" ) -- special value
-	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" ) -- special value
+	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	self.as_bonus_sss = self.as_bonus * 2
+	self.ms_bonus_sss = self.ms_bonus * 2
+	self.cdr_sss = self.cdr * 2
+	self:StartIntervalThink(0.5)
 end
 
 function modifier_invoker_wex_lua:OnRefresh( kv )
-	-- references
-	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" ) -- special value
-	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" ) -- special value
-	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" ) -- special value
+	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	self.as_bonus_sss = self.as_bonus * 2
+	self.ms_bonus_sss = self.ms_bonus * 2
+	self.cdr_sss = self.cdr * 2
+	self:StartIntervalThink(0.5)
 end
 
+function modifier_invoker_wex_lua:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+		self.as_bonus = self.as_bonus_sss
+		self.ms_bonus = self.ms_bonus_sss
+		self.cdr = self.cdr_sss
+	else
+		self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+		self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+		self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	end
+end
 function modifier_invoker_wex_lua:OnDestroy( kv )
 
 end

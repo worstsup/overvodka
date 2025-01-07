@@ -7,7 +7,7 @@ function modifier_serega_blink:IsHidden()
 	return true
 end
 function modifier_serega_blink:OnCreated( kv )
-	k = 0
+	self.k = 0
 	self:StartIntervalThink( 1.1 )
 	self:OnIntervalThink()
 end
@@ -22,10 +22,10 @@ function modifier_serega_blink:OnIntervalThink()
 	self.mana_burn = self:GetAbility():GetSpecialValueFor( "mana_burn" )
 	self.mana_damage_pct = self:GetAbility():GetSpecialValueFor("mana_void_damage_per_mana")
 	self.distance = 72
-	if k == 1 then
+	if self.k == 1 then
 		local illusions = CreateIllusions(
-			self:GetParent(), -- hOwner
-			self:GetParent(), -- hHeroToCopy
+			self:GetCaster(), -- hOwner
+			self:GetCaster(), -- hHeroToCopy
 			{
 				outgoing_damage = self.outgoing,
 				incoming_damage = self.incoming,
@@ -37,10 +37,10 @@ function modifier_serega_blink:OnIntervalThink()
 			true -- bFindClearSpace
 		)
 	end
-	if k == 2 then
+	if self.k == 2 then
 		local enemies = FindUnitsInRadius(
-			self:GetParent():GetTeamNumber(),	-- int, your team number
-			self:GetParent():GetOrigin(),	-- point, center point
+			self:GetCaster():GetTeamNumber(),	-- int, your team number
+			self:GetCaster():GetOrigin(),	-- point, center point
 			nil,	-- handle, cacheUnit. (not known)
 			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
@@ -55,10 +55,10 @@ function modifier_serega_blink:OnIntervalThink()
 			self:PlayEffects(enemy)
 		end
 	end
-	if k == 3 then
+	if self.k == 3 then
 		local enemies = FindUnitsInRadius(
-			self:GetParent():GetTeamNumber(),	-- int, your team number
-			self:GetParent():GetOrigin(),	-- point, center point
+			self:GetCaster():GetTeamNumber(),	-- int, your team number
+			self:GetCaster():GetOrigin(),	-- point, center point
 			nil,	-- handle, cacheUnit. (not known)
 			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
@@ -67,23 +67,23 @@ function modifier_serega_blink:OnIntervalThink()
 			FIND_CLOSEST,	-- int, order filter
 			false	-- bool, can grow cache
 		)
-		t = 0
+		self.t = 0
 		for _,enemy in pairs(enemies) do
-			if t == 1 then return end
+			if self.t == 1 then return end
 			self.mana_damage = (enemy:GetMaxMana() - enemy:GetMana()) * self.mana_damage_pct
 			local damageTable = {
 				victim = enemy,
-				attacker = self:GetParent(),
+				attacker = self:GetCaster(),
 				damage = self.mana_damage,
 				damage_type = DAMAGE_TYPE_MAGICAL,
 				ability = self, --Optional.
 			}
 			ApplyDamage(damageTable)
 			self:PlayEffectsNew(enemy)
-			t = t + 1
+			self.t = self.t + 1
 		end
 	end
-	k = k + 1
+	self.k = self.k + 1
 end
 
 function modifier_serega_blink:OnRemoved()

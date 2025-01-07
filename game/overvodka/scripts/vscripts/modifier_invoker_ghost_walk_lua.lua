@@ -99,7 +99,6 @@ end
 function modifier_invoker_ghost_walk_lua:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-
 		MODIFIER_PROPERTY_INVISIBILITY_LEVEL,
 		MODIFIER_EVENT_ON_ABILITY_EXECUTED,
 		MODIFIER_EVENT_ON_ATTACK,
@@ -113,13 +112,16 @@ function modifier_invoker_ghost_walk_lua:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function modifier_invoker_ghost_walk_lua:GetModifierInvisibilityLevel()
-	return 1
+	return 2
 end
 
 function modifier_invoker_ghost_walk_lua:OnAbilityExecuted( params )
 	if IsServer() then
 		if params.unit~=self:GetParent() then return end
-
+		if params.ability:GetAbilityName() == "invoker_wex_lua" then return end
+		if params.ability:GetAbilityName() == "invoker_quas_lua" then return end
+		if params.ability:GetAbilityName() == "invoker_exort_lua" then return end
+		if params.ability:GetAbilityName() == "invoker_invoke_lua" then return end
 		self:Destroy()
 	end
 end

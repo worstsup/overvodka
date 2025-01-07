@@ -36,7 +36,7 @@ function modifier_snapfire_lil_shredder_lua_debuff:OnCreated( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		self.slow = -self:GetAbility():GetOrbSpecialValueFor( "attack_speed_slow_per_stack", "e" )
 	else
-		self.slow = -5
+		self.slow = -3
 	end
 
 	if not IsServer() then return end
@@ -59,7 +59,7 @@ end
 function modifier_snapfire_lil_shredder_lua_debuff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 	}
 
 	return funcs
@@ -68,7 +68,7 @@ end
 function modifier_snapfire_lil_shredder_lua_debuff:GetModifierAttackSpeedBonus_Constant()
 	return self.slow * self:GetStackCount()
 end
-function modifier_snapfire_lil_shredder_lua_debuff:GetModifierMoveSpeedBonus_Percentage()
+function modifier_snapfire_lil_shredder_lua_debuff:GetModifierMagicalResistanceBonus()
 	return self.slow * self:GetStackCount()
 end
 

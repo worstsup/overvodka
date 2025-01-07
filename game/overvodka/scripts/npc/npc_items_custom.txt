@@ -413,8 +413,6 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemStockMax"					"3"
-		"ItemStockTime"					"99999.0"
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
@@ -730,9 +728,6 @@
 		    {
 		        "Passive"           "1"
 		        "IsHidden"          "1"
-		        "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-		        "AllowIllusionDuplicate"     "1"
-
 		        "Properties"
 		        {
 		            "MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" "%dmg"
@@ -2558,8 +2553,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"100"	
 		"ItemShopTags"					""
-		"ItemStockMax"					"1"
-		"ItemStockTime"					"99999.0"
 		
 		// Recipe
 		//-------------------------------------------------------------------------------------------------------------
@@ -2568,6 +2561,33 @@
 		"ItemRequirements"
 		{
 			"01"						"item_tiara_of_selemene;item_soul_booster"
+		}
+	}
+	"item_octarine_core"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"4800"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
+		"ItemQuality"					"rare"
+		"ItemAliases"					"mana;mb;octarine core"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_cooldown"		"0"
+			"bonus_health"			"500"
+			"bonus_mana"			"500"
+			"bonus_health_regen"	"0"
+			"bonus_mana_regen"		"6"
 		}
 	}
 	"item_aegis"

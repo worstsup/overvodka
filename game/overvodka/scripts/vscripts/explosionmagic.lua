@@ -71,7 +71,7 @@ end
 function Megumin_ExplosionMagic:OnChannelThink( flInterval )
 	if IsServer() then
 	
-		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),self:GetCaster():GetAbsOrigin(),nil,300,DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,DOTA_UNIT_TARGET_FLAG_NONE,FIND_ANY_ORDER,false)
+		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),self:GetCaster():GetAbsOrigin(),nil,300,DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,FIND_ANY_ORDER,false)
 		if #targets >= 1 then	
 				for _,unit in pairs(targets) do
 				
@@ -89,7 +89,7 @@ function Megumin_ExplosionMagic:OnChannelThink( flInterval )
 						knockback_height = 0
 					}
 				
-					if not unit:HasModifier("modifier_knockback") then
+					if not unit:HasModifier("modifier_knockback") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:IsMagicImmune() then
 						unit:AddNewModifier( unit, nil, "modifier_knockback", knockbackProperties )
 						unit:AddNewModifier( self:GetCaster(), nil, "modifier_ExplosionMagic_debuff", { duration = 1 } )
 						local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_huskar/huskar_inner_fire.vpcf", PATTACH_CUSTOMORIGIN, nil )

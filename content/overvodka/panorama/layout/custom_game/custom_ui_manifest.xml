@@ -44,6 +44,7 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_sasavot.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_golovach.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_papich.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_tinker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_vihorkov.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_rattletrap.png" />
 	</Panel>
 </root>

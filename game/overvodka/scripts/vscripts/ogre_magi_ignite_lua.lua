@@ -43,7 +43,7 @@ function ogre_magi_ignite_lua:OnSpellStart()
 		nil,	-- handle, cacheUnit. (not known)
 		self:GetCastRange( target:GetOrigin(), target ),	-- float, radius. or use FIND_UNITS_EVERYWHERE
 		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
+		DOTA_UNIT_TARGET_HERO,	-- int, type filter
 		DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
 		0,	-- int, order filter
 		false	-- bool, can grow cache

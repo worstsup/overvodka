@@ -17,6 +17,7 @@ function modifier_chillguy_w:OnCreated( kv )
 	if not IsServer() then return end
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.manacost = self:GetAbility():GetSpecialValueFor( "mana_cost_per_second" )
+	self.manacost_percent = self:GetAbility():GetSpecialValueFor( "mana_cost_percent" )
 	local interval = 1
 	-- precache
 	self.parent = self:GetParent()
@@ -44,7 +45,8 @@ end
 function modifier_chillguy_w:OnIntervalThink()
 	-- check mana
 	local mana = self.parent:GetMana()
-	if mana < self.manacost then
+	self.mp = self.manacost + self.manacost_percent * self.parent:GetMaxMana() * 0.01
+	if mana < self.mp then
 		-- turn off
 		if self:GetAbility():GetToggleState() then
 			self:GetAbility():ToggleAbility()
@@ -55,7 +57,8 @@ function modifier_chillguy_w:OnIntervalThink()
 end
 
 function modifier_chillguy_w:Burn()
-	self.parent:SpendMana( self.manacost, self:GetAbility() )
+	self.mp = self.manacost + self.manacost_percent * self.parent:GetMaxMana() * 0.01
+	self.parent:SpendMana( self.mp, self:GetAbility() )
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(),	-- int, your team number
 		self.parent:GetOrigin(),	-- point, center point

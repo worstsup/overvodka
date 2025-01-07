@@ -74,19 +74,19 @@ function modifier_stariy_bolt:OnIntervalThink()
 				duration = self.duration,
 			}
 		)
-		enemy:AddNewModifier(
-			self:GetParent(),
-			self:GetAbility(),
-			"modifier_generic_stunned_lua", 
-			{duration = self.microstun}
-		)
+		-- enemy:AddNewModifier(
+		-- 	self:GetParent(),
+		--	self:GetAbility(),
+		--	"modifier_generic_stunned_lua", 
+		--	{duration = self.microstun}
+		--)
 		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		-- Play effects
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )
 		if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
-			self:GetAbility():StartCooldown(1.5)
+			self:GetAbility():StartCooldown(1.0)
 		else
 			self:GetAbility():StartCooldown(self.cooldown)
 		end

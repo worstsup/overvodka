@@ -11,7 +11,6 @@ modifier_item_drobe = class({})
 function modifier_item_drobe:IsHidden() return true end
 function modifier_item_drobe:IsPurgable() return false end
 function modifier_item_drobe:IsPurgeException() return false end
-function modifier_item_drobe:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_drobe:DeclareFunctions()
     return  

@@ -46,13 +46,13 @@ function modifier_rot_lua:OnCreated( kv )
     if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		self.rot_slow = self:GetAbility():GetOrbSpecialValueFor( "rot_slow", "e" )
 		self.rot_damage = self:GetAbility():GetOrbSpecialValueFor( "rot_damaged", "w" )
-		self.manacost = self:GetAbility():GetOrbSpecialValueFor( "mana_cost_per_secondd", "w" )
 	else
 		self.rot_slow = -21
 		self.rot_damage = 40
-		self.manacost = 75
 	end
+	self.manacost = self:GetAbility():GetSpecialValueFor( "mana_cost_per_secondd" )
 	self.rot_tick = self:GetAbility():GetSpecialValueFor( "rot_tick" )
+	self.manacost = self.manacost * self:GetParent():GetMaxMana() * 0.01
 	self.parent = self:GetParent()
 
 	-- Start interval

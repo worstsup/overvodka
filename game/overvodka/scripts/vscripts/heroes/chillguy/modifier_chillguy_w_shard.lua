@@ -33,7 +33,7 @@ end
 -- Status Effects
 function modifier_chillguy_w_shard:CheckState()
 	local state = {
-		[MODIFIER_STATE_SILENCED] = self.shard
+		[MODIFIER_STATE_SILENCED] = false
 	}
 
 	return state

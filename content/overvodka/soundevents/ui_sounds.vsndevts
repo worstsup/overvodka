@@ -48,10 +48,10 @@
             "sounds/doubled4.vsnd",
             "sounds/doubled5.vsnd"
         ]
-        volume = "1.0"
+        volume = "3.0"
         pitch = "1.00000"
         soundlevel = "100.0"
-        distance_max = "2500.0"
+        distance_max = "10000.0"
         event_type = "2.0"
     }
 }

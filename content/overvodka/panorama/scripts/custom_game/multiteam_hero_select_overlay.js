@@ -218,9 +218,16 @@ function UpdatePlayer( teamPanel, playerId )
 																														playerPanel.SetHasClass( "hero_highlighted", false );
 																													}
 																													else{
-																														playerPortrait.SetImage( "file://{images}/heroes/" + playerInfo.player_selected_hero + ".png" );
-																														playerPanel.SetHasClass( "hero_selected", true );
-																														playerPanel.SetHasClass( "hero_highlighted", false );
+																														if (playerInfo.player_selected_hero == "npc_dota_hero_rattletrap"){
+																															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vihorkov.png" );
+																															playerPanel.SetHasClass( "hero_selected", true );
+																															playerPanel.SetHasClass( "hero_highlighted", false );
+																														}
+																														else{
+																															playerPortrait.SetImage( "file://{images}/heroes/" + playerInfo.player_selected_hero + ".png" );
+																															playerPanel.SetHasClass( "hero_selected", true );
+																															playerPanel.SetHasClass( "hero_highlighted", false );
+																														}
 																													}
 																												}
 																											}
@@ -420,9 +427,16 @@ function UpdatePlayer( teamPanel, playerId )
 																														playerPanel.SetHasClass( "hero_highlighted", true );
 																													}
 																													else{
-																														playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png" );
-																														playerPanel.SetHasClass( "hero_selected", false );
-																														playerPanel.SetHasClass( "hero_highlighted", true );
+																														if (playerInfo.possible_hero_selection == "rattletrap"){
+																															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vihorkov.png" );
+																															playerPanel.SetHasClass( "hero_selected", false );
+																															playerPanel.SetHasClass( "hero_highlighted", true );
+																														}
+																														else{
+																															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png" );
+																															playerPanel.SetHasClass( "hero_selected", false );
+																															playerPanel.SetHasClass( "hero_highlighted", true );
+																														}
 																													}
 																												}
 																											}

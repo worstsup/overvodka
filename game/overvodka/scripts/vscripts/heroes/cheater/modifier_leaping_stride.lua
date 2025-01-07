@@ -24,7 +24,7 @@ function modifier_leaping_stride:OnIntervalThink()
         self.jumping_active = false -- Stop jumping
         return
     end
-    if parent:IsStunned() or parent:IsRooted() then
+    if parent:IsStunned() or parent:IsRooted() or parent:IsCommandRestricted() then
         return -- Stop further logic if the hero is stunned or rooted
     end
     if not self.jumping_active then

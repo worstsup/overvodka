@@ -599,14 +599,13 @@
 	}
 	"npc_dota_hero_tinker"
 	{
-		"Model"		"models/heroes/tinker/tinker.vmdl"
+		"Model"		"pvz/dave.vmdl"
+		"DisableWearables"	"1"
 		"SoundSet"		"Hero_Tinker"
 		"Enabled"		"1"
 		"HeroSelectSoundEffect"		"dave_start"
-		"HeroID"		"34"
-		"HeroOrderID"	"40"
-		"ModelScale"		"0.800000"
-		"VersusScale"		"0.80"
+		"ModelScale"		"1.20000"
+		"VersusScale"		"1.0"
 		"Ability1"		"dave_peashooter"
 		"Ability2"		"Pocik_penek"
 		"Ability3"		"medusa_mana_shield"
@@ -655,6 +654,7 @@
 		"AttackAnimationPoint"		"0.350000"
 		"AttackAcquisitionRange"		"800"
 		"AttackRange"		"500"
+		"HealthBarOffset"		"270"
 		"ProjectileModel"		"particles/units/heroes/hero_tinker/tinker_base_attack.vpcf"
 		"ProjectileSpeed"		"900"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
@@ -666,6 +666,7 @@
 		"AttributeAgilityGain"		"1.400000"
 		"MovementSpeed"		"290"
 		"StatusManaRegen"	"0.75"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_brewmaster"
 	{
@@ -778,6 +779,7 @@
 		{
 			"soundfile" "soundevents/vpiska_start.vsndevts"
 		}
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_meepo"
 	{
@@ -1052,6 +1054,7 @@
 		"AttributeAgilityGain"		"1.6"
 		"StatusHealthRegen"		"2.5"
 		"MovementSpeed"		"285"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	//=================================================================================================================
 	// HERO: Io (Dark Willow)
@@ -1271,12 +1274,13 @@
 		"AttributeAgilityGain"		"0"
 		"AttributeBaseIntelligence"		"20"
 		"AttributeIntelligenceGain"		"0"
-		"MovementSpeed"		"325"
+		"MovementSpeed"		"285"
 		"StatusHealthRegen"		"0.75"
 		"StatusManaRegen"	"0.5"
 		"VisionDaytimeRange"		"1800"
 		"VisionNighttimeRange"		"1000"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_ursa"
 	{
@@ -1368,9 +1372,9 @@
 		"Ability7"		"generic_hidden"	
 		"Ability10"		"special_bonus_unique_keeper_of_the_light_11"
 		"Ability11"		"special_bonus_hp_200"
-		"Ability12"		"special_bonus_unique_keeper_of_the_light_14"
+		"Ability12"		"special_bonus_unique_keeper_of_the_light_5"
 		"Ability13"		"special_bonus_unique_keeper_of_the_light_2"
-		"Ability14"		"special_bonus_unique_keeper_of_the_light_5"
+		"Ability14"		"special_bonus_unique_keeper_of_the_light_14"
 		"Ability15"		"special_bonus_unique_keeper_of_the_light_8"
 		"Ability16"		"special_bonus_unique_keeper_of_the_light_7"
 		"Ability17"		"special_bonus_unique_keeper_of_the_light_illuminate_cooldown"
@@ -1406,7 +1410,7 @@
 		"AttributeIntelligenceGain"		"3.300000"
 		"AttributeBaseAgility"		"11"
 		"AttributeAgilityGain"		"1.200000"
-		"MovementSpeed"		"315"
+		"MovementSpeed"		"285"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_tidehunter"
@@ -1890,8 +1894,8 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"20"
 		"AttributeStrengthGain"		"1.900000"
-		"AttributeBaseAgility"		"20"
-		"AttributeAgilityGain"		"2.200000"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"1.500000"
 		"AttributeBaseIntelligence"		"23"
 		"AttributeIntelligenceGain"		"3.100000"
 		"MovementSpeed"		"285"
@@ -2116,6 +2120,69 @@
 		"AttributeAgilityGain"			"1.4"
 		"StatusHealthRegen"		"0.5"
 		"MovementSpeed"		"275"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+	}
+	"npc_dota_hero_rattletrap"
+	{
+		"Model"		"vihor/igor_vikhorkov.vmdl"
+		"DisableWearables"	"1"
+		"SoundSet"		"Hero_Rattletrap"
+		"Enabled"		"1"
+		"ModelScale"		"1.20000"
+		"VersusScale"		"0.8"
+		"LoadoutScale"		"0.75"
+		"HeroSelectSoundEffect"		"Hero_Rattletrap.Pick"
+		"GibType"		"motor"
+		"Ability1"		"rattletrap_battery_assault"
+		"Ability2"		"vihor_w"
+		"Ability3"		"vihor_e"
+		"Ability4"		"rattletrap_overclocking"
+		"Ability5"		"rattletrap_jetpack"
+		"Ability6"		"vihor_r"
+		"Ability7"		"rattletrap_armor_power"
+		"Ability10"		"special_bonus_unique_clockwerk_7"
+		"Ability11"		"special_bonus_unique_clockwerk_hookshot_damage"
+		"Ability12"		"special_bonus_unique_clockwerk_5"
+		"Ability13"		"special_bonus_unique_clockwerk_3"
+		"Ability14"		"special_bonus_unique_clockwerk"
+		"Ability15"		"special_bonus_unique_clockwerk_flare_damage"
+		"Ability16"		"special_bonus_unique_clockwerk_6"
+		"Ability17"		"special_bonus_unique_clockwerk_4"
+		"Facets"
+		{
+			"rattletrap_hookup" 
+			{
+				"Icon"				"healing"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
+			"rattletrap_expanded_armature" 
+			{
+				"Icon"				"area_of_effect"
+				"Color"				"Red"
+				"GradientID"		"2"
+			}
+		}
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"StatusHealthRegen"		"0.5"
+		"AttackDamageMin"		"8"
+		"AttackDamageMax"		"10"
+		"AttackRate"		"1.700000"
+		"BaseAttackSpeed"		"100"
+		"AttackAnimationPoint"		"0.330000"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"		"24"
+		"AttributeStrengthGain"		"3.0"
+		"AttributeBaseAgility"		"13"
+		"AttributeAgilityGain"		"1.5"
+		"AttributeBaseIntelligence"		"18"
+		"AttributeIntelligenceGain"		"2.2"
+		"MovementSpeed"		"310"
+		"HealthBarOffset"		"250"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

@@ -19,19 +19,30 @@ function modifier_invoker_exort_lua:IsPurgable()
 end
 
 --------------------------------------------------------------------------------
--- Initializations
 function modifier_invoker_exort_lua:OnCreated( kv )
-	-- references
-	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" ) -- special value
-	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" ) -- special value
+	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	self.damage_sss = self.damage * 2
+	self.dmg_sss = self.dmg * 2
+	self:StartIntervalThink(0.5)
 end
 
 function modifier_invoker_exort_lua:OnRefresh( kv )
-	-- references
-	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" ) -- special value
-	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" ) -- special value
+	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	self.damage_sss = self.damage * 2
+	self.dmg_sss = self.dmg * 2
+	self:StartIntervalThink(0.5)
 end
-
+function modifier_invoker_exort_lua:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+		self.damage = self.damage_sss
+		self.dmg = self.dmg_sss
+	else
+		self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+		self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	end
+end
 function modifier_invoker_exort_lua:OnDestroy( kv )
 
 end

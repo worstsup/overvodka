@@ -6,13 +6,16 @@ end
 
 function modifier_litvin_litenergy:OnCreated( kv )
 	self.base_hp = self:GetAbility():GetSpecialValueFor( "base_hp" )
+	self.level_hp = self:GetAbility():GetSpecialValueFor( "level_hp" )
 	self.base_mana = self:GetAbility():GetSpecialValueFor( "base_mana" )
+	self.level_mana = self:GetAbility():GetSpecialValueFor( "level_mana" )
 	self.base_miss = self:GetAbility():GetSpecialValueFor( "base_miss" )
+	self.level_miss = self:GetAbility():GetSpecialValueFor( "level_miss" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.level = self:GetCaster():GetLevel()
-	self.base_hp = self.base_hp * self.level
-	self.base_mana = self.base_mana * self.level
-	self.base_miss = self.base_miss * self.level
+	self.base_hp = self.base_hp + self.level_hp * self.level
+	self.base_mana = self.base_mana + self.level_mana * self.level
+	self.base_miss = self.base_miss + self.level_miss * self.level
 end
 
 --------------------------------------------------------------------------------
