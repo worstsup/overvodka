@@ -14,6 +14,7 @@ function Server:Init()
 
     ListenToGameEvent('player_connect_full', Dynamic_Wrap(Server, 'OnPlayerConnected'), self)
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(Server, 'OnNPCSpawned'), self)
+    ListenToGameEvent("player_disconnect", Dynamic_Wrap( Server, "OnPlayerDisconnected" ), self )
 
     CustomGameEventManager:RegisterListener("player_want_tip", function(source, event) self:OnPlayerWantTip(event) end)
     CustomGameEventManager:RegisterListener("player_doubled_rating", function(source, event) self:OnPlayerDoubledRating(event) end)
@@ -86,6 +87,8 @@ function Server:OnGameEnded(Teams)
                 leaved = bLeaved
             }
 
+            CustomNetTables:SetTableValue('players', "player_"..PlayerID.."_end_game_rating", {rating = Rating})
+
             local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
 
             self:SendRequest(SERVER_URL.."game_ended", {SteamID=SteamID, MatchID = MatchID, Category = CurrentCategory, PlayerData=PlayerData}, nil, true)
@@ -135,15 +138,23 @@ function Server:CalculateRating(PlayerID, Teams)
                     Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
                 end
             elseif TeamTop < 4 then
-                Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                else
+                    Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
+                end
             elseif TeamTop < 6 then
-                if PlayerRank >= SERVER_RANKS_DEFINITION.GOLD then
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                elseif PlayerRank >= SERVER_RANKS_DEFINITION.GOLD then
                     Rating = RandomInt(RatingTable.min_full_after_gold, RatingTable.max_full_after_gold)
                 else
                     Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
                 end
             elseif TeamTop < 8 then
-                if PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                elseif PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
                     Rating = RandomInt(RatingTable.min_full_after_diamond, RatingTable.max_full_after_diamond)
                 elseif PlayerRank >= SERVER_RANKS_DEFINITION.GOLD then
                     Rating = RandomInt(RatingTable.min_full_after_gold, RatingTable.max_full_after_gold)
@@ -151,7 +162,9 @@ function Server:CalculateRating(PlayerID, Teams)
                     Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
                 end
             else
-                if PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                elseif PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
                     Rating = RandomInt(RatingTable.min_full_after_diamond, RatingTable.max_full_after_diamond)
                 else
                     Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
@@ -178,9 +191,15 @@ function Server:CalculateRating(PlayerID, Teams)
                     Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
                 end
             elseif TeamTop == 2 then
-                Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                else
+                    Rating = RandomInt(RatingTable.min_full, RatingTable.max_full)
+                end
             else
-                if PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
+                if PlayerRank >= SERVER_RANKS_DEFINITION.EPIC then
+                    Rating = RandomInt(RatingTable.min_full_after_epic, RatingTable.max_full_after_epic)
+                elseif PlayerRank >= SERVER_RANKS_DEFINITION.DIAMOND then
                     Rating = RandomInt(RatingTable.min_full_after_diamond, RatingTable.max_full_after_diamond)
                 else
                     Rating = RandomInt(RatingTable.min_full_before_diamond, RatingTable.min_full_before_diamond)
@@ -376,6 +395,31 @@ function Server:CreatePlayerProfile(data, PlayerID, SteamID)
     self.Players[PlayerID].loaded = true
 
     self:UpdatePlayerNetTable(PlayerID)
+end
+
+function Server:OnPlayerDisconnected(event)
+    if self.bGameEnded == true then return end
+
+    local ConnectedTeams = {}
+
+    for PlayerID, PlayerInfo in pairs(self.Players) do
+        local Team = PlayerResource:GetTeam(PlayerID)
+        local bAbandoned = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
+        if bAbandoned == false then
+            if ConnectedTeams[Team] == nil then
+                ConnectedTeams[Team] = 0
+            end
+
+            ConnectedTeams[Team] = ConnectedTeams[Team] + 1
+        end
+    end
+
+    if table.count(ConnectedTeams) == 1 then
+        for TeamNumber, Count in pairs(ConnectedTeams) do
+            COverthrowGameMode:EndGame( TeamNumber )
+            break
+        end
+    end
 end
 
 function Server:UpdatePlayerNetTable(PlayerID)

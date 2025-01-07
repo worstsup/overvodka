@@ -708,8 +708,6 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
-	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
-	ListenToGameEvent( "player_reconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerReconnected" ), self )
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
@@ -786,6 +784,14 @@ function COverthrowGameMode:EndGame( victoryTeam )
 	end
 	GameRules:SetPostGameTeamScores( tTeamScores )
 
+	local sortedTeams = self:GetSortedValidTeams()
+
+	Server:OnGameEnded(sortedTeams)
+
+	GameRules:SetGameWinner( victoryTeam )
+end
+
+function COverthrowGameMode:GetSortedValidTeams()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
@@ -793,12 +799,9 @@ function COverthrowGameMode:EndGame( victoryTeam )
 		end
 	end
 
-	-- reverse-sort by score
 	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
 
-	Server:OnGameEnded(sortedTeams)
-
-	GameRules:SetGameWinner( victoryTeam )
+	return sortedTeams
 end
 
 ---------------------------------------------------------------------------

@@ -211,6 +211,15 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 	_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerGoldAmount", goldValue );
 	_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerNetworth", networthValue );
 
+	if(PlayerRating != undefined){
+		let AddedRating = CustomNetTables.GetTableValue("players", `player_${playerId}_end_game_rating`)
+		let Rating = AddedRating ? AddedRating.rating : 0
+		let RatingPrefix = Rating > 0 ? "+" : Rating < 0 ? "-" : ""
+		playerPanel.SetHasClass("MinusRating", RatingPrefix == "-")
+		let RatingText = `${RatingPrefix}${Rating}`
+		_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerRating", RatingText );
+	}
+
 	playerPanel.SetHasClass( "player_ultimate_ready", ( ultStateOrTime == PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_READY ) );
 	playerPanel.SetHasClass( "player_ultimate_no_mana", ( ultStateOrTime == PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_NO_MANA) );
 	playerPanel.SetHasClass( "player_ultimate_not_leveled", ( ultStateOrTime == PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_NOT_LEVELED) );
