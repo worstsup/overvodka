@@ -95,7 +95,7 @@ end
 function modifier_sasavot_r_new_secondary:DeclareFunctions()
     local funcs = 
     {
-        MODIFIER_EVENT_ON_TAKEDAMAGE,
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
         MODIFIER_PROPERTY_BONUS_VISION_PERCENTAGE,
         MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
     }
@@ -110,8 +110,8 @@ function modifier_sasavot_r_new_secondary:GetBonusVisionPercentage( params )
     return self.Pct
 end
 
-function modifier_sasavot_r_new_secondary:OnTakeDamage(params)
-    if params.attacker == self.target and params.unit == self.caster then
+function modifier_sasavot_r_new_secondary:OnAttackLanded(params)
+    if params.attacker == self.target and params.target == self.caster then
         self.damageDealt = true
         self:Destroy()
     end

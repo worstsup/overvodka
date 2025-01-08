@@ -4374,10 +4374,9 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"			"sunflower"
 		"FightRecapLevel"				"1"
-		"HasScepterUpgrade"				"1"
 		"AbilityCastRange"				"300"
 		"AbilityCastPoint"				"0.35 0.35 0.35 0.35"
-		"AbilityCooldown"				"12"
+		"AbilityCooldown"				"18"
 		"AbilityManaCost"				"75 100 125 150"
 		"AOERadius"					"600"
 		"AbilityValues"
@@ -4392,18 +4391,25 @@
 					"value"	"15.0"
 					"special_bonus_unique_disruptor_5" "+5.0"
 				}
-				"count1"				"1 0 0 0"
-				"count2"				"0 1 0 0"
-				"count3"				"0 0 1 0"
+				"count1"
+				{
+					"value"	"1 0 0 0"
+				}
+				"count2"
+				{
+					"value"	"0 1 0 0"
+				}
+				"count3"
+				{
+					"value"	"0 0 1 0"
+				}
 				"count4"
 				{
 					"value"	"0 0 0 1"
-					"special_bonus_scepter" "-1"
 				}
 				"count5"
 				{
 					"value"	"0 0 0 0"
-					"special_bonus_scepter"	"+1"
 				}
 		}
 		
@@ -14058,8 +14064,16 @@
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
-				"base_damage"			"20 30 40 50"
-				"base_hp"				"150 220 290 360"
+				"base_damage"
+				{
+					"value"	"20 30 40 50"
+					"special_bonus_unique_disruptor_2" "+200%"
+				}
+				"base_hp"
+				{
+					"value"	"150 220 290 360"
+					"special_bonus_unique_disruptor_2" "+200%"
+				}
 				"duration"
 				{
 					"value"	"20.0"
@@ -14088,6 +14102,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"%count1"
 				"UnitLimit"		"20"
+				"GrantsGold"		"15"
+				"GrantsXP"		"20"
 				"OnSpawn"
 				{}
 			}
@@ -14098,6 +14114,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"%count2"
 				"UnitLimit"		"20"
+				"GrantsGold"		"25"
+				"GrantsXP"		"40"
 				"OnSpawn"
 				{}
 			}
@@ -14108,6 +14126,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"%count3"
 				"UnitLimit"		"20"
+				"GrantsGold"		"35"
+				"GrantsXP"		"60"
 				"OnSpawn"
 				{}
 			}
@@ -14118,6 +14138,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"%count4"
 				"UnitLimit"		"20"
+				"GrantsGold"		"45"
+				"GrantsXP"		"80"
 				"OnSpawn"
 				{}
 			}
@@ -14128,6 +14150,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"%count5"
 				"UnitLimit"		"20"
+				"GrantsGold"		"45"
+				"GrantsXP"		"80"
 				"OnSpawn"
 				{}
 			}
@@ -14179,6 +14203,8 @@
 				"Duration"		"%duration"
 				"UnitCount"		"1"
 				"UnitLimit"		"20"
+				"GrantsGold"		"45"
+				"GrantsXP"		"80"
 				"OnSpawn"
 				{}
 			}
@@ -14327,6 +14353,11 @@
             		"value"	"1.0 1.25 1.5"
             		"special_bonus_unique_clockwerk" "+0.5"
             	}
+            	"tick_damage"
+            	{
+            		"value"	"0"
+            		"special_bonus_unique_clockwerk_4" "+5"
+            	}
             	"slow"						 "-55"
         	}
 	}
@@ -14334,8 +14365,9 @@
 	{
 		"BaseClass"					"ability_lua"
 		"ScriptFile"					"heroes/vihor/vihor_e"
-		"AbilityTextureName"			"golovach_e"
+		"AbilityTextureName"			"vihor_e"
 		"FightRecapLevel"				"1"
+		"HasShardUpgrade"				"1"
 		"MaxLevel"					"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -14354,10 +14386,17 @@
 				"damage"
 				{
 					"value"	"30 60 90 120"
+					"special_bonus_unique_clockwerk_flare_damage" "+60"
 				}
 				"chance"
 				{
 					"value"	"20"
+					"special_bonus_unique_clockwerk_7" "+5"
+				}
+				"tick_duration"
+				{
+					"value"	"0"
+					"special_bonus_shard"	"+2"
 				}
 				"blocked"
 				{
@@ -14370,7 +14409,7 @@
 	{
 		"BaseClass"					"ability_lua"
 		"ScriptFile"					"heroes/vihor/vihor_w"
-		"AbilityTextureName"			"chillguy_q"
+		"AbilityTextureName"			"vihor_w"
 		"FightRecapLevel"				"1"
 		"MaxLevel"					"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -14385,10 +14424,106 @@
 		"AbilityValues"
 		{
 				"duration"						"8.0"
-				"illusion_outgoing_damage"			"-50 -40 -30 -20"
-				"illusion_outgoing_tooltip"			"50 60 70 80"
+				"illusion_outgoing_damage"
+				{
+					"value"	"-50 -40 -30 -20"
+					"special_bonus_unique_clockwerk_hookshot_damage" "+15"
+				}
+				"illusion_outgoing_tooltip"
+				{
+					"value"	"50 60 70 80"
+					"special_bonus_unique_clockwerk_hookshot_damage" "+15"
+				}
 				"illusion_incoming_damage"			"100 90 80 70"
 				"illusion_incoming_damage_total_tooltip"			"200 190 180 170"
+				"facet"
+				{
+					"value"	"0"
+					"special_bonus_facet_rattletrap_expanded_armature"	"+1"
+				}
+		}
+	}
+	"vihor_q"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"heroes/vihor/vihor_q"
+		"AbilityTextureName"			"vihor_q"
+		"FightRecapLevel"				"1"
+		"MaxLevel"					"4"
+		"HasScepterUpgrade"				"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.35"
+		"AbilityManaCost"				"40 50 60 70"
+		"AbilityValues"
+		{
+				"range"							"800"
+				"duration"						"5.0"
+				"blast_slow"						"-10 -15 -20 -25"
+				"damage"
+				{
+					"value"	"75 150 225 300"
+					"special_bonus_unique_clockwerk_5" "+100"
+				}
+				"duration_fly"						"2.0"
+				"bonus_speed"						"20"
+				"blast_speed"						"1200"
+				"radius"							"325"
+				"targets"
+				{
+					"value"	"1"
+					"special_bonus_scepter"	"+1"
+				}
+				"AbilityCharges"
+				{
+					"value"	"1"
+					"special_bonus_scepter" "+1"
+				}
+				"AbilityChargeRestoreTime"
+				{
+					"value"	"18 16 14 12"
+					"special_bonus_unique_clockwerk_6" "-6"
+				}
+		}
+	}
+	"vihor_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/vihor/vihor_innate"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastRange"				"900"
+		"AbilityValues"
+		{
+				"bonus_hp"					"15"
+				"radius"				"900"
+		}
+	}
+	"dave_scepter"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"heroes/dave/dave_scepter"
+		"AbilityTextureName"			"dave_scepter"
+		"FightRecapLevel"				"1"
+		"IsGrantedByScepter"			"1"
+		"MaxLevel"					"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityValues"
+		{
+				"damage"	"25"
 		}
 	}
 }

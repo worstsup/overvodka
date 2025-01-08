@@ -26,6 +26,11 @@ if IsServer() then
         self:StartMusicLoop()
         self:StartIntervalThink(1)
     end
+    function modifier_dave_ambient:OnRefresh()
+        self.musicPlaying = "dave_ambient_1"
+        self:StartMusicLoop()
+        self:StartIntervalThink(1)
+    end
     function modifier_dave_ambient:OnDestroy()
         self:StopMusicLoop()
     end

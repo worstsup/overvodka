@@ -92,6 +92,7 @@ function modifier_vihor_r_debuff:OnCreated(kv)
     self.slow = self:GetAbility():GetSpecialValueFor("slow")
     self.bonus_attack_range = 2000
     self.target = self:GetCaster():GetAbsOrigin() + RandomVector(100)
+    self.tick_damage = self:GetAbility():GetSpecialValueFor("tick_damage")
     self:StartIntervalThink(0.2)
 end
 
@@ -99,6 +100,8 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local caster = self:GetCaster()
+    self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * 0.2
+    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
     AddFOWViewer(parent:GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetAbility():GetSpecialValueFor("radius"), 0.2, false)
     if not parent:IsMoving() then
         parent:MoveToPosition(self.target)
@@ -179,7 +182,7 @@ function modifier_vihor_r_debuff:OnDestroy()
     local units = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self:GetAbility():GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
     local stun_duration = self:GetAbility():GetSpecialValueFor("stun_duration")
     for _, unit in pairs(units) do
-        ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self:GetAbility():GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
+        ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self:GetAbility():GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
         unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration * (1 - unit:GetStatusResistance())})
     end
     self:GetCaster():RemoveGesture(ACT_DOTA_CAST_ABILITY_5)

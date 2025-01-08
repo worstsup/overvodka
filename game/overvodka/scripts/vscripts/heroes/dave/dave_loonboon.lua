@@ -103,6 +103,7 @@ function modifier_dave_loonboon:OnCreated( kv )
             nil,
             self:GetParent():GetTeam()
         )
+        sunflower:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_kill", {duration = 15})
         EmitSoundOn("gribochki", self:GetParent())
     end
     self:StartIntervalThink(self.interval)
@@ -177,6 +178,7 @@ function modifier_dave_loonboon:OnRemoved()
             nil,
             self:GetParent():GetTeam()
         )
+        sunflower:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_kill", {duration = 15})
         EmitSoundOn("gribochki", self:GetParent())
     end
 end

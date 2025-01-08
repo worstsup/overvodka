@@ -22,9 +22,25 @@ function vihor_w:OnSpellStart()
 		true
 	)
 	illusion = self.illusions[1]
+	self.facet = self:GetSpecialValueFor("facet")
 	illusion:SetAbsOrigin(self:GetCaster():GetAbsOrigin())
 	ProjectileManager:ProjectileDodge(self:GetCaster())
 	self:GetCaster():SetAbsOrigin(target:GetAbsOrigin())
+	if self.facet == 1 then
+		self.illusions_facet = CreateIllusions(
+			self:GetCaster(),
+			self:GetCaster(),
+			{
+				outgoing_damage = self.outgoing,
+				incoming_damage = self.incoming,
+				duration = self.duration,
+			},
+			1,
+			0,
+			false,
+			true
+		)
+	end
 	FindClearSpaceForUnit(self:GetCaster(), target:GetAbsOrigin(), false)
 end
 
