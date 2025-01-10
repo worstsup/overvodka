@@ -19,7 +19,8 @@ end
 function serega_topor:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
-	caster:AddNewModifier( caster, self, "modifier_topor", { duration = 10 } )
+	local topor_duration = self:GetSpecialValueFor( "topor_duration" )
+	caster:AddNewModifier( caster, self, "modifier_topor", { duration = topor_duration } )
 	-- load data
 	local radius = self:GetSpecialValueFor( "radius" )
 	local speed = self:GetSpecialValueFor( "speed" )

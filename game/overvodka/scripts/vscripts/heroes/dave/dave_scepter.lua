@@ -16,6 +16,7 @@ modifier_dave_scepter = class({})
 function modifier_dave_scepter:IsHidden() return true end
 function modifier_dave_scepter:IsPurgable() return false end
 function modifier_dave_scepter:RemoveOnDeath() return false end
+function modifier_dave_scepter:IsPermanent() return true end
 
 function modifier_dave_scepter:DeclareFunctions()
     return { MODIFIER_EVENT_ON_DEATH }
@@ -23,18 +24,18 @@ end
 
 function modifier_dave_scepter:OnDeath(params)
     if not IsServer() then return end
-    local parent = self:GetParent()
-    EmitSoundOn("dave_scepter", parent)
-    if params.unit ~= parent then return end
+    self.parent = self:GetParent()
+    if params.unit ~= self.parent then return end
     local killer = params.attacker
     if not killer or not killer:IsHero() then return end
+    EmitSoundOn("dave_scepter", self.parent)
     local projectile_info = {
         Target = killer,
-        Source = parent,
+        Source = self.parent,
         Ability = self:GetAbility(),
         EffectName = "particles/dave_missile.vpcf",
         iMoveSpeed = 600,
-        vSourceLoc = parent:GetAbsOrigin(),
+        vSourceLoc = self.parent:GetAbsOrigin(),
         bDodgeable = true,
         bProvidesVision = false,
     }

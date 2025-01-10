@@ -3,6 +3,7 @@ LinkLuaModifier("modifier_vihor_w", "heroes/vihor/vihor_w", LUA_MODIFIER_MOTION_
 
 function vihor_w:OnSpellStart()
 	local target  = self:GetCursorTarget()
+	if target:TriggerSpellAbsorb(self) then return end
 	self.duration = self:GetSpecialValueFor("duration")
 	self.outgoing = self:GetSpecialValueFor("illusion_outgoing_damage")
 	self.incoming = self:GetSpecialValueFor("illusion_incoming_damage")

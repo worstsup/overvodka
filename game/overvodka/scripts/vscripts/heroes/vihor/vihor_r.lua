@@ -3,7 +3,6 @@ LinkLuaModifier("modifier_vihor_r_debuff", "heroes/vihor/vihor_r", LUA_MODIFIER_
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 vihor_r = class({})
-
 function vihor_r:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/techies/techies_arcana/techies_suicide_arcana.vpcf", context)
@@ -44,16 +43,16 @@ function modifier_vihor_r:OnCreated()
     local particle_1 = ParticleManager:CreateParticle("particles/vihor_r_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_marci/marci_bodyguard_radius.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
-    ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, self.radius, self.radius))
+    ParticleManager:SetParticleControl(particle, 1, Vector(self.radius + 50, self.radius + 50, self.radius + 50))
     self:AddParticle(particle, false, false, -1, false, false)
     self:StartIntervalThink(0.1)
 end
 
 function modifier_vihor_r:OnIntervalThink()
     if not IsServer() then return end
-    local units = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
+    local units = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
     for _, unit in pairs(units) do
-        if not unit:HasModifier("modifier_vihor_r_debuff") then
+        if not unit:HasModifier("modifier_vihor_r_debuff") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:HasModifier("modifier_primal_beast_onslaught_lua") then
             unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_vihor_r_debuff", {duration = self:GetRemainingTime()})
         end
     end
@@ -67,7 +66,14 @@ end
 function modifier_vihor_r:OnDestroy()
     if not IsServer() then return end
     self:GetParent():EmitSound("Hero_Shredder.Bomb")
-
+    self.damage = self:GetAbility():GetSpecialValueFor("damage")
+    local units = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self:GetAbility():GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
+    local stun_duration = self:GetAbility():GetSpecialValueFor("stun_duration")
+    for _, unit in pairs(units) do
+        unit:RemoveModifierByName("modifier_vihor_r_debuff")
+        ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+        unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration * (1 - unit:GetStatusResistance())})
+    end
     local particle_death = ParticleManager:CreateParticle("particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle_death, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle_death)
@@ -90,9 +96,11 @@ modifier_vihor_r_debuff = class({})
 function modifier_vihor_r_debuff:OnCreated(kv)
     if not IsServer() then return end
     self.slow = self:GetAbility():GetSpecialValueFor("slow")
-    self.bonus_attack_range = 2000
+    self.bonus_attack_range = 1000
+    self.min_health = 1
     self.target = self:GetCaster():GetAbsOrigin() + RandomVector(100)
     self.tick_damage = self:GetAbility():GetSpecialValueFor("tick_damage")
+    self:GetParent():Stop()
     self:StartIntervalThink(0.2)
 end
 
@@ -101,42 +109,46 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     local parent = self:GetParent()
     local caster = self:GetCaster()
     self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * 0.2
-    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
+    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })
+    if self:GetParent():GetHealthPercent() <= 3 then
+        self.min_health = 0
+        self:GetParent():Kill(self:GetAbility(), self:GetCaster())
+    end
     AddFOWViewer(parent:GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetAbility():GetSpecialValueFor("radius"), 0.2, false)
     if not parent:IsMoving() then
         parent:MoveToPosition(self.target)
     end
-
     if GameRules:GetGameTime() % 1.2 < 0.2 then
         local debuff_radius = self:GetAbility():GetSpecialValueFor("radius")
         local enemies = FindUnitsInRadius(
             caster:GetTeamNumber(),
-            parent:GetAbsOrigin(),
+            caster:GetAbsOrigin(),
             nil,
             debuff_radius,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_NONE,
+            DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
             FIND_ANY_ORDER,
             false
         )
 
         for _, attacker in ipairs(enemies) do
-            if attacker:IsAlive() and attacker:HasModifier("modifier_vihor_r_debuff") then
+            if attacker:IsAlive() and attacker:HasModifier("modifier_vihor_r_debuff") and not attacker:IsMagicImmune() and not attacker:HasModifier("modifier_black_king_bar_immune") then
                 local target = nil
                 for _, potential_target in ipairs(enemies) do
                     if potential_target:IsAlive() and potential_target:HasModifier("modifier_vihor_r_debuff") and potential_target ~= attacker then
                         target = potential_target
                         break
+                    else
+                        attacker:Stop()
                     end
                 end
 
                 if target then
-                    attacker:SetForceAttackTarget(target)
                     attacker:MoveToTargetToAttack(target)
-                    Timers:CreateTimer(1.0, function()
+                    Timers:CreateTimer(0.9, function()
                         if not attacker:IsNull() then
-                            attacker:SetForceAttackTarget(nil)
+                            attacker:Stop()
                         end
                     end)
                 end
@@ -149,14 +161,13 @@ function modifier_vihor_r_debuff:DeclareFunctions()
     local funcs = {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
-        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-        MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
+        MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
         MODIFIER_PROPERTY_MIN_HEALTH,
     }
     return funcs
 end
 function modifier_vihor_r_debuff:GetMinHealth()
-    return 1
+    return self.min_health
 end
 function modifier_vihor_r_debuff:GetModifierMoveSpeedBonus_Percentage()
     return self.slow
@@ -166,24 +177,14 @@ function modifier_vihor_r_debuff:GetModifierAttackRangeBonus()
     return self.bonus_attack_range
 end
 
-function modifier_vihor_r_debuff:GetModifierAttackSpeedBonus_Constant()
-    return 1000
-end
-
-function modifier_vihor_r_debuff:GetModifierBaseAttackTimeConstant()
-    return 0.9
+function modifier_vihor_r_debuff:GetModifierFixedAttackRate()
+    return 0.3
 end
 function modifier_vihor_r_debuff:OnDestroy()
     if not IsServer() then return end
     local parent = self:GetParent()
     if not parent:IsNull() then
-        parent:SetForceAttackTarget(nil)
-    end
-    local units = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self:GetAbility():GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
-    local stun_duration = self:GetAbility():GetSpecialValueFor("stun_duration")
-    for _, unit in pairs(units) do
-        ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self:GetAbility():GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
-        unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration * (1 - unit:GetStatusResistance())})
+        parent:Stop()
     end
     self:GetCaster():RemoveGesture(ACT_DOTA_CAST_ABILITY_5)
 end

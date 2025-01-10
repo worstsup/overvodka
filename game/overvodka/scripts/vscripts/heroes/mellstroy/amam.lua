@@ -36,5 +36,5 @@ end
 
 function Back(keys)
 	local caster = keys.caster
-	caster:SetModelScale(1.2)
+	caster:SetModelScale(1.3)
 end

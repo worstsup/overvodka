@@ -408,600 +408,12 @@
 				}
 			}
 		}
-	}	
-	//=================================================================================================================
-	// Ability: Traps
-	//=================================================================================================================
-	"trap_unselectable"
-  	{
-	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-	    
-	    "BaseClass"             "ability_datadriven"
-	    
-	    "Modifiers"
-	    {
-			"modifier_unselectable"
-			{
-				"Passive" "1"
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_PROVIDES_VISION"		"MODIFIER_STATE_VALUE_DISABLED"
-					"MODIFIER_STATE_ROOTED"					"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_DISARMED"				"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_FLYING"					"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_BLOCK_DISABLED"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_OUT_OF_GAME"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_BLIND"					"MODIFIER_STATE_VALUE_ENABLED"
-		        }
-	      	}
-	    }
 	}
-	"breathe_fire"
-	{
-		"BaseClass"           			"ability_lua"
-		"ScriptFile"					"breathe_fire"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"				   
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"3000"
-		"AbilityCastPoint"				"0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"1.5"
-		
-		// Damage.
-		//-------------------------------------------------------------------------------------------------------------
-		
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"start_radius"			"150"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"250"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"range"					"650"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"speed"					"1050"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"fire_damage"			"400"
-			}
-		}
-	}
-
-	"breathe_poison"
-	{
-		"BaseClass"           			"ability_lua"
-		"ScriptFile"					"breathe_poison"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"				   
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"3000"
-		"AbilityCastPoint"				"0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"3.5"
-		
-		// Damage.
-		//-------------------------------------------------------------------------------------------------------------
-		
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"start_radius"			"150"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"250"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"range"					"650"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"speed"					"1200"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"poison_damage"			"0"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"duration"				"15.0"
-			}
-			"07"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"strike_damage"			"100"
-			}
-			"08"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"tick_damage"			"100"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"tick_interval"			"3.0"
-			}
-			"10"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"movement_slow"			"-50"
-			}
-		}
-	}
-
-	"spike_trap"
-	{
-		"BaseClass"           			"ability_lua"
-		"ScriptFile"					"spike_trap"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"				   
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"600"
-		"AbilityCastPoint"				"0.45"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"2"
-		
-		// Damage.
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityDamage"					"150"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"light_strike_array_aoe"	"192"
-			}
-			
-			"02"
-			{
-				"var_type"						"FIELD_FLOAT"
-				"light_strike_array_delay_time"	"0.65"
-			}
-						
-			"03"
-			{
-				"var_type"						"FIELD_FLOAT"
-				"light_strike_array_stun_duration"	"1.6"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"cast_animation"			"12"
-			}
-			"05"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"light_strike_array_damage"			"600"
-			}
-		}
-	}
-	"pendulum_trap"
-	{
-		"BaseClass"           			"ability_lua"
-		"ScriptFile"					"pendulum_trap"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"	
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"			   
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"60000"
-		"AbilityCastPoint"				"0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-			
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityModifierSupportValue"	"0.0"	// Modifier just delays damage
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage"					"10000"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"cast_range_scepter"		"60000"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"damage_delay"				"0"
-			}
-		}
-	}
-
-//========================================
-// КОТ
-//====================================
-"queenofpain_scream_of_pain_datadriven"
-	{
-		"BaseClass"                 "ability_datadriven"
-		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityTextureName"        "mya"
-		"MaxLevel"                  "4"
-		"AbilityCooldown"           "16"
-		"AbilityManaCost"           "125"
-		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-		"precache"
-    		{
-        		"particle"          "particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf"
-    		}
-		"OnSpellStart"
-		{
-			"AttachEffect"
-            	{
-            		"EffectName"    "particles/units/heroes/hero_queenofpain/queen_scream_of_pain_owner.vpcf"
-            		"EffectAttachType"  "attach_origin"
-            		"Target"        "CASTER"
-            	}
-			"FireSound"
-			{
-				"EffectName"    "myak"
-				"Target"        "CASTER"
-			}
-			"RunScript"
-			{
-				"ScriptFile"	"screamer.lua"
-				"Function"		"Damage"
-			}
-		}
-		"AbilityValues"
-		{
-				"fear_radius"
-				{
-					"value"	"500"
-					"special_bonus_unique_bane_5" "+200"
-					"affected_by_aoe_increase"	"1"
-				}
-				"AbilityCastRange"
-				{
-					"value"	"500"
-					"special_bonus_unique_bane_5" "+200"
-					"affected_by_aoe_increase"	"1"
-				}
-				"damage"
-				{
-					"value" 	"100 200 300 400"
-					"special_bonus_unique_ursa_4" "+100"
-				}
-
-		}
-	}
-//=======================================
-// УБЕРИ КАМЕРУ!
-//=======================================
-	"night_stalker_darkness_datadriven"
-{
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"             "ability_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-    "AbilityTextureName"            "kamera"
-    
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"              "0.3 0.3 0.3 0.3"
-    "AbilityCooldown"               "30"
-    "AbilityManaCost"               "50 100 150 200"
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
-    "precache"
-    {
-        "particle"          "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
-    }
-        
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityValues"
-    {
-            "duration"
-            {
-            	"value"	"3.0 4.0 5.0 6.0"
-            	"special_bonus_unique_ursa_3" "+2"
-            }
-            "invis_duration"
-            {
-            	"value"	"0"
-            	"RequiresFacet" "riki_contract_killer"
-            	"special_bonus_facet_riki_contract_killer"	"3.0 4.0 5.0 6.0"
-            	"special_bonus_unique_ursa_3" "+2"
-            }
-            "blind_percentage"              "-75"
-            "radius"                "12000"
-    }
-
-    "OnSpellStart"
-    {
-        "FireSound"
-        {
-            "EffectName"    "uberi"
-            "Target"        "CASTER"
-        }
-
-        "FireEffect"
-        {
-            "EffectName"    "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
-            "EffectAttachType"  "follow_origin"
-            "Target"        "CASTER"
-        }
-
-        "ApplyModifier"
-        {
-            "ModifierName"  "modifier_darkness_aura_datadriven"
-            "Target"        "CASTER"
-        }
-		"ApplyModifier"
-		{
-						"Target"		"CASTER"
-						"ModifierName"	"modifier_invisible"
-						"Duration" "%invis_duration"
-		}  
-
-        "RunScript"
-        {
-            "ScriptFile"    "darkness.lua"
-            "Function"      "Darkness"
-        }
-    }
-
-    "Modifiers"
-    {
-        "modifier_darkness_aura_datadriven"
-        {
-            "Duration"  "%duration"
-
-            "Attributes" "MODIFIER_ATTRIBUTE_PERMANENT"
-
-            "Aura"          "modifier_darkness_datadriven"
-            "Aura_Radius"   "%radius"
-            "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
-            "Aura_Types"    "DOTA_UNIT_TARGET_ALL"
-        }
-
-        "modifier_darkness_datadriven"
-        {
-            "IsDebuff"  "1"
-
-            "OnCreated"
-            {
-                "RunScript"
-                {
-                    "ScriptFile"    "darkness.lua"
-                    "Function"      "ReduceVision"
-                }
-            }
-
-            "OnDestroy"
-            {
-                "RunScript"
-                {
-                    "ScriptFile"    "darkness.lua"
-                    "Function"      "RevertVision"
-                }
-            }
-        }
-    }
-}
-//==================================
-//ЦОК
-//===================================
-"phantom_assassin_coup_de_grace_datadriven"
-{
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"             "ability_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-    "AbilityTextureName"            "tsok"
-    "MaxLevel"						"4"
-    "IsBreakable"				"0"
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
-    "precache"
-    {
-        "soundfile"         "soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
-        "particle"          "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-        "particle"		   "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf"
-    }
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityValues"
-    {
-            "crit_bonus"
-            {
-            	"value"	"150 175 200 225"
-            	"special_bonus_unique_bane_3" "+35"
-            }
-            "crit_chance"
-            {
-            	"value"	"15 20 25 30"
-            	"special_bonus_unique_bane_2" "+5"
-            }
-            "slow_duration"
-            {
-            	"value"	"0"
-            	"special_bonus_facet_riki_exterminator"	"=1"
-            }
-
-    }
-    "Modifiers"
-    {
-        "modifier_coup_de_grace_datadriven"
-        {
-            "Passive"   "1"
-            "IsHidden"  "1"
-
-            "OnAttackStart"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_coup_de_grace_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-
-                "Random"
-                {
-                    "Chance"        "%crit_chance"
-                    "PseudoRandom"  "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
-
-                    "OnSuccess"
-                    {
-                        "ApplyModifier"
-                        {
-                            "ModifierName"  "modifier_coup_de_grace_crit_datadriven"
-                            "Target"        "CASTER"
-                        }
-                        "ApplyModifier"
-                        {
-                            "ModifierName"  "modifier_slsl"
-                            "Target"        "TARGET"
-                        }
-                    }
-                }
-            }
-        }
-
-        "modifier_coup_de_grace_crit_datadriven"
-        {
-            "IsHidden"  "1"
-
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_bonus"
-            }
-
-            "OnAttackLanded"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_coup_de_grace_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-                "FireEffect"
-        		{
-            		"EffectName"    "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf"
-            		"EffectAttachType"  "start_at_customorigin"
-				"Target"            "TARGET"
-				"ControlPointEntities"
-				{
-					"CASTER"	"attach_cast4_primal_roar"
-					"TARGET"	"attach_hitloc"
-				}
-        		}
-
-                "FireEffect"
-                {
-                    "EffectName"    "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-                    "EffectAttachType"  "start_at_customorigin"
-                    
-                    "ControlPointEntities"
-                    {
-                        "TARGET"    "follow_origin"
-                        "TARGET"    "follow_origin"
-                    }
-                }
-
-                "FireSound"
-                {
-                    "EffectName"    "tsts"
-                    "Target"        "TARGET"
-                }
-            }
-        }
-        "modifier_slsl"
-			{
-				"Passive"			"0"
-				"IsHidden"			"0"
-				"IsDebuff"			"1"
-				"Duration"			"%slow_duration"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-10"
-				}
-			}
-    }
-}
+//=================================================================================================================
+// ЧИСТЕЙШИЙ БЕЛОК
+//=================================================================================================================
 "test_of_faith_datadriven"
 {
-	// General
-	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"				"ability_datadriven"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -1011,28 +423,14 @@
 	"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 	"FightRecapLevel"				"1"
 	"AbilityTextureName"			"adod"
-
-	// Precache
-	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
 		"particle"			"particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
 	}
-	// Casting
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
-
-	// Time		
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCastRange"				"600 600 600 600"
 	"AbilityCooldown"				"13"
-
-	// Cost
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityManaCost"				"90 100 110 120"
-
-	// Special
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityValues"
 	{
 			"damage_min"
@@ -1061,7 +459,6 @@
 			"ability_name"	"test_of_faith_teleport_datadriven"
 		}
 	}
-
 	"OnSpellStart"
 	{
 		"FireSound"
@@ -1091,19 +488,17 @@
 		}
 	}
 }
+//=================================================================================================================
+// БИГ ТЕЙСТИ
+//=================================================================================================================
 "lycan_shapeshift_datadriven"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"             "ability_datadriven"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"               "2"
     "AbilityTextureName"            "tasty"
     "HasShardUpgrade"               "1"
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
         "soundfile"     "soundevents/vkusno.vsndevts"     
@@ -1111,17 +506,8 @@
         "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
         "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
     }
-
-    // Time     
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"               "34.0 30.0 26.0 22.0"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"               "100 125 150 175"       
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"               "100 125 150 175"
     "AbilityValues"
     {
             "duration"
@@ -1314,7 +700,6 @@
             "IsPurgable"    "0"
 
             "OnAttackLanded"
-            // "%attack_damage" is set to the damage value before mitigation
             {
                 "RemoveModifier"
                 {
@@ -1322,7 +707,6 @@
                     "Target"        "CASTER"
                 }
             }
-
             "Properties"
             {
                 "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
@@ -1332,7 +716,7 @@
 }
 //=================================
 //ВОЗДЕРЖАНИЕ
-//=============================
+//=================================
 "Ns_TricksMaster"
 	{
 		"BaseClass"              "ability_datadriven"
@@ -1372,7 +756,7 @@
 		}
 	}
 	//=================================================================================================================
-	// Тест на чурку
+	// Тест на жим
 	//=================================================================================================================
 	"BigRussianBoss_test"
 	{
@@ -1393,7 +777,7 @@
 		}
 
 		"AbilityCastRange"				"175"
-		"AbilityCooldown"               "60.0 50.0 40.0"
+		"AbilityCooldown"               "60.0 55.0 50.0"
 		"AbilityManaCost"               "75"
 		"AbilityCastPoint"				"0.1"
 
@@ -1401,7 +785,7 @@
 		{
 				"duration"
 				{
-					"value"	"4.5 5.0 5.5"
+					"value"	"4.0"
 					"special_bonus_unique_furion_4" "+1"
 				}
 				"reward_damage"
@@ -1503,81 +887,8 @@
 		}
 	}
 	//=================================================================================================================
-	// Lion: Mana Drain
+	// ХОЛОДОК
 	//=================================================================================================================
-	"lion_mana_drain"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NO_INVIS"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityTextureName"            "mate"
-        "HasShardUpgrade"               "1"
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"900"
-		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
-		"AbilityChannelTime"				"5.1"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"40 35 30 25"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityModifierSupportValue"	"5.0"	// better then the mana cost implies
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-				"duration"					"5.0"
-				"mana_per_second"			
-				{
-					"value"		"150 300 450 600"
-				}
-				"break_distance"			
-				{
-					"value"	"1100"
-					"special_bonus_shard"		"+400"	
-				}
-				"tick_interval"				"0.1"
-				"movespeed"			
-				{
-					"value"				"25 30 35 40"
-				}
-				
-				"shard_bonus_targets"			
-				{
-					"value"		"5"
-					"RequiresShard"				"1"
-				}		
-				"damage_pct"					
-				{
-					"value"					"150 300 450 600"		
-				}
-				"magic_resist"
-				{
-					"value"				"0"
-					"special_bonus_shard"		"+100"
-				}
-				"ally_pct"				"50"
-		}
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
-	}
-	//=================================================================================================================
-	// Это ненормально это нечестно
-	//=================================================================================================================
-	
 	"V1lat_ItsNotNormal"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -1589,22 +900,18 @@
 		"AbilityTextureName"			"vovacho"
 		"AbilityCooldown"				"25 23 21 19"
 		"AbilityManaCost"				"75 105 135 165"
-		
-
 		"precache"
 		{
 			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"		
 			"particle"		"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_prison.vpcf"
 		}
-
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
 		"AbilityModifierSupportValue"	"0.5"
-
 		"AbilityValues"
 		{
 				"duration"
 				{
-					"value"	"1.5 2.0 2.5 3.0"
+					"value"	"1.0 1.4 1.8 2.2"
 					"special_bonus_unique_bane_10" "+0.5"
 				}
 				"damage"				"75"
@@ -1618,7 +925,6 @@
 					"affected_by_aoe_increase"	"1"
 				}
 		}
-
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1627,25 +933,20 @@
 				"Function"		"ItsNotNormal"				
 			}
 		}
-		
 		"Modifiers"
 		{
 			"modifier_V1lat_ItsNotNormal"
 			{
 				"Duration"	"%duration"
 				"IsDebuff"	"1"
-				
 				"EffectName"	"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
 				"EffectAttachType"	"attach_origin"
-
-
 				"States"
 				{
 					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_ROOTED"			"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_DISABLED"
 				}
-
 				"OnCreated"
 				{
 					"RunScript"
@@ -1660,7 +961,7 @@
 						"Damage"		"%damage"
 					}
 				}
-				"ThinkInterval"  "1"
+					"ThinkInterval"  "1"
 					"OnIntervalThink"
 					{
 						"Damage"
@@ -1674,7 +975,7 @@
 		}
 	}
 //=========================
-//ФОФАН
+//Я ТЕБЯ ОТЪЕБУ
 //==========================
 	"bullet_taa"
 	{
@@ -1848,7 +1149,10 @@
 		    }
 		}
 	}
-"Naval_President"
+	//=========================
+	//ПО-КИТАЙСКИ
+	//==========================
+	"Naval_President"
 	{
 		"BaseClass"             "ability_datadriven"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
@@ -1859,23 +1163,19 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"precache"
 		{
-			"soundfile"   "soundevents/game_sounds_heroes/game_sounds_sven.vsnd"
-			"soundfile"   "soundevents/game_sounds_heroes/game_sounds_ursa.vsnd"
 			"particle"    "particles/econ/items/luna/luna_selemene_returns/luna_selemene_eye_2.vpcf"
 			"particle"    "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf"
 			"particle"  	"particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok_drips.vpcf"
 			"particle"    "particles/repel/omniknight_repel_buff.vpcf"
 		}
-	 
 		"AbilityCastRange"              "0"
 		"AbilityCastPoint"              "0.0 0.0 0.0"
 		"AbilityCooldown"               "60"
-	   
 		"AbilityValues"    
 		{
 				"bonus_damage"
 				{
-					"value"	"100 150 200"
+					"value"	"60 100 140"
 					"special_bonus_unique_bane_9" "+75"
 				}
 				"bonus_attack_speed"        "80 120 160"
@@ -1945,6 +1245,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// КАКАО
+	//=================================================================================================================
 	"Gitelman_Kaif"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -1955,7 +1258,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCastRange"				"%radius"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"25"
 		"AbilityHealthCost"				"75 150 225 300"
 		"precache"
 		{
@@ -1969,7 +1272,7 @@
 					"special_bonus_unique_bane_8" "+100"
 					"affected_by_aoe_increase"	"1"
 				}
-				"duration"				"7 8 9 10"
+				"duration"				"4 5 6 7"
 				"evasion"
 				{
 					"value" 			"50"
@@ -2055,61 +1358,9 @@
 			}
 		}
 	}
-	"terrorblade_conjure_image_datadriven"
-{
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"             "ability_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityTextureName"            "fei"
-    
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"              "0.5"
-
-    // Time     
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "16.0"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"               "80 90 100 110"
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityValues"
-    {
-            "illusion_duration"                 "30.0"
-            "illusion_outgoing_damage"          "-45.0 -35.0 -25.0 -15.0"  
-            "illusion_outgoing_tooltip"         
-            {
-            	"value"					"55.0 65.0 75.0 85.0"
-            	"special_bonus_unique_pudge_4" "+10"
-            }
-
-            "illusion_incoming_damage"          "200.0"
-            "illusion_incoming_damage_total_tooltip"            "300.0"
-    }
-
-    "precache"
-    {
-        "soundfile" "soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts"
-    }
-
-    "OnSpellStart"
-    {
-        "FireSound"
-        {
-            "EffectName"        "tima"
-            "Target"            "CASTER"
-        }
-        "RunScript"
-        {
-            "ScriptFile"        "conjure_image.lua"
-            "Function"          "ConjureImage"
-        }
-    }
-}
+//=================================================================================================================
+// МАРЬИВАННА
+//=================================================================================================================
 "windrunner_windrun_datadriven"
 {
     // General
@@ -2118,27 +1369,12 @@
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"            "qmar"
-	"AbilitySharedCooldown" 		"arseni"
-    
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySharedCooldown" 		"arseni"
     "AbilityCastPoint"              "0.3 0.3 0.3 0.3"
-
-    // Time     
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"               "18.0"
     "AbilityDuration"               "10"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityHealthCost"               "100 150 200 250"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityModifierSupportValue"   "0.1"   // Mostly about dodging all attacks
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
             "movespeed_bonus_pct"       "15 20 25 30"     
@@ -2156,9 +1392,6 @@
             	"special_bonus_facet_terrorblade_soul_fragment" "+40"
             }
     }
-    
-    // Data driven
-    //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
         "soundfile"                 "soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
@@ -2171,7 +1404,7 @@
         "FireSound"
         {
             "Target"                "CASTER"
-            "EffectName"            "parit"   // Find the name for actual sound
+            "EffectName"            "parit"
         }
     
         "ApplyModifier"
@@ -2287,31 +1520,19 @@
 			}
     }
 }
+//=================================================================================================================
+// ЗОЖ
+//=================================================================================================================
 "omniknight_purification_datadriven"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"             "ability_datadriven"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "FightRecapLevel"               "1"
     "AbilityTextureName"            "novape"
-	"AbilitySharedCooldown" 		"arseni"
-	"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"              "0.5 0.5 0.5 0.5"
-    
-    // Time     
-    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySharedCooldown" 		"arseni"
+    "AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
     "AbilityCooldown"               "18.0"
-    
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"               "100 120 140 160"
-    
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
             "heal"                  
@@ -2342,7 +1563,6 @@
         "particle"  "particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
         "particle"  "particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
         "particle"  "particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf"
-
     }
 
     "OnSpellStart"
@@ -2407,7 +1627,7 @@
 }
 
 	//=================================================================================================================
-	// Эминем
+	// ОРАТЬ
 	//=================================================================================================================
 	
 	"V1lat_Eminem"
@@ -2540,64 +1760,41 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// ДОМАШКА
+	//=================================================================================================================
 	"silencer_global_silence_datadriven"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"             "ability_datadriven"
     "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
     "MaxLevel"						"1"
-	"IsGrantedByShard"              "1"
-	"AbilityCastRange"				"900"
+    "IsGrantedByShard"              "1"
+    "AbilityCastRange"				"900"
     "AbilityTextureName"            "doma"
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
     "precache"
-    {
-        "soundfile"     "soundevents/game_sounds_heroes/game_sounds_silencer.vsndevts"      
+    {     
         "particle"      "particles/units/heroes/hero_silencer/silencer_global_silence.vpcf"
         "particle"		"particles/invoker_kid_book_new.vpcf"     
     }
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"              "0.3 0.3 0.3"
-
-    // Time     
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"               "30.0"
     "AbilityDuration"               "5.0"
-
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"               "150"
-
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityModifierSupportValue"   "0.5"   // Hits all units on the map.
-
-    
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
+    "AbilityModifierSupportValue"   "0.5"
     "AbilityValues"
     {
             "tooltip_duration"      "5.0"
             "radius"      "900"		
     }
-
     "OnSpellStart"
     {
-
         "FireSound"
         {
             "EffectName"    "shkola"
             "Target"        "CASTER"
         }
-
         "FireEffect"
         {
             "EffectName"    "particles/units/heroes/hero_silencer/silencer_global_silence.vpcf"
@@ -2610,10 +1807,8 @@
             "EffectAttachType"  "follow_origin"
             "Target"        "CASTER"
         }
-
         "ActOnTargets"
         {
-
             "Target"
             {
                 "Center" "CASTER"
@@ -2622,7 +1817,6 @@
                 "Types" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
                 "Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
             }
-
             "Action"
             {
                 "ApplyModifier"
@@ -2642,9 +1836,7 @@
             "Duration"  "%tooltip_duration"
             "IsPurgable"    "1"
             "EffectName"    "particles/generic_gameplay/generic_silence.vpcf"
-            "EffectAttachType"  "follow_overhead"           
-
-
+            "EffectAttachType"  "follow_overhead"
             "States"
             {
                 "MODIFIER_STATE_SILENCED"   "MODIFIER_STATE_VALUE_ENABLED"
@@ -2652,6 +1844,9 @@
         }
     }
 }
+//=================================================================================================================
+// ЗВОНОК НА УРОК
+//=================================================================================================================
 "queenofpain_blink_datadriven"
 {
     "BaseClass"             "ability_datadriven"
@@ -3862,26 +3057,17 @@
         }
     }
 }
-"terrorblade_metamorphosis_datadriven"
-	{
 
-		"BaseClass"				"ability_datadriven"
+	"terrorblade_metamorphosis_datadriven"
+	{
+		"BaseClass"						"ability_datadriven"
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityTextureName"			"churban"
-		"MaxLevel"               "3"
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"               		"3"
 		"AbilityCastPoint"				"0.0"
-
-
-		"AbilityCooldown"				"60"
-
-
-		"AbilityManaCost"				"150 225 300"
-
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"80 125 170"
 		"AbilityValues"
 		{
 				"base_attack_time"
@@ -3889,16 +3075,16 @@
 					"value"				"1.3 1.2 1.1"
 					"special_bonus_unique_jakiro_3" "-0.2"
 				}
+				"bonus_as"	"100"
 				"bonus_movement_speed"		"0"
 				"bonus_range"
 				{
-					"value"	"100 200 300"
+					"value"	"150 250 350"
 					"special_bonus_unique_furion_4" "+75"
 				}
 				"bonus_health"			"0"
 				"duration"				"15"
 		}
-
 		"precache"
 		{
 			"particle"  "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
@@ -3908,7 +3094,6 @@
 			"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
 			"soundfile" "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
 		}
-
 		"OnSpellStart"
 		{
 			"ApplyModifier"
@@ -3921,7 +3106,6 @@
 				}
 			}
 		}
-
 		"Modifiers"
 		{
 			"modifier_DemonicForm"
@@ -3955,6 +3139,7 @@
 					"MODIFIER_PROPERTY_HEALTH_BONUS" 				"%bonus_health"
 					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" 	"%base_attack_time"		
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%bonus_movement_speed"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_as"
 				}
 				
 				"OnDestroy"
@@ -5162,7 +4347,6 @@
 			"damage_per_mana"		
 			{
 				"value"								"1.7 1.9 2.1 2.3 2.5"
-				"special_bonus_unique_dazzle_5"              "+0.3"
 			}
 
 			"illusion_damage_per_mana"
@@ -5913,7 +5097,7 @@
 			}
 			"tooltip_key"
 			{
-				"value"	"3"
+				"value"	"5"
 			}
 			"maxhealth_dmg"
 			{
@@ -5921,7 +5105,7 @@
 			}
 			"mana_cost_per_secondd"
 			{
-				"value"	"1"
+				"value"	"1.5"
 			}
 		}
 	}
@@ -5965,7 +5149,7 @@
 				"tick_interval"				"0.1"
 				"movespeed"
 				{
-					"value"	"14 18 22 26 30 34 38"
+					"value"	"10 12 14 16 18 20 22"
 					"levelkey"				"quaslevel"
 				}
 		}
@@ -6004,7 +5188,7 @@
 				"duration"			"4"
 				"burn_damage"
 				{
-					"value"	"40 55 70 85 100 115 130"
+					"value"	"40 50 60 70 80 90 100"
 					"levelkey"				"quaslevel"
 				}
 				"slow_movement_speed_pct"		"-20"
@@ -6066,7 +5250,7 @@
 				"base_attack_time"			"0.7"
 				"attack_speed_slow_per_stack"
 				{
-					"value"	"0 0 1 2 3 4 5"
+					"value"	"1.0 1.5 2.0 2.5 3.0 3.5 4.0"
 					"levelkey"				"quaslevel"
 				}
 				"slow_duration"				"2.0"
@@ -7474,14 +6658,10 @@
 		"AbilityManaCost"				"0"
 	}
 	//=================================================================================================================
-	// Primal Beast: Onslaught (Lua version)
+	// ASPHALT 8
 	//=================================================================================================================
 	"primal_beast_onslaught_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"primal_beast_onslaught_lua.lua"
 		"AbilityTextureName"			"largus"
@@ -7489,30 +6669,15 @@
 		"MaxLevel"						"3"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"HasScepterUpgrade"				"1"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY" 
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.15"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"90 80 70"
 		"AbilityManaCost"				"200 300 400"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 			"charge_speed"
@@ -7523,9 +6688,8 @@
 			"chargeup_time"
 			{
 				"value"	"1.5"
-				"special_bonus_scepter" "-1.4"
+				"special_bonus_scepter" "-1.0"
 			}
-
 			"slow_pct"					"35 45 55"
 			"knockback_radius"
 			{
@@ -7559,83 +6723,39 @@
 			"stun_duration"				"0.8"
 		}
 	}
-
-	//=================================================================================================================
-	// Primal Beast: Onslaught Release (Lua version)
-	//=================================================================================================================
 	"primal_beast_onslaught_release_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"primal_beast_onslaught_lua.lua"
 		"AbilityTextureName"			"largus"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"AbilityCastRange"				"999999"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"0.3"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 	}
 	//=================================================================================================================
-	// Dark Willow: Bedlam (Lua version)
+	// РАЗЪЕБАТЬ ЧАРТЫ
 	//=================================================================================================================
 	"dark_willow_bedlam_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"dark_willow_bedlam_lua.lua"
 		"AbilityTextureName"			"pchela"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-
-
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_dark_willow.vsndevts"
 		}
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"30 28 26 24"
 		"AbilityManaCost"				"100 130 160 190"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"attack_damage"
@@ -7645,7 +6765,7 @@
 				}
 				"attack_interval"
 				{
-					"value"	"0.25"
+					"value"	"0.3"
 					"special_bonus_unique_huskar_5" "-0.1"
 				}
 				"attack_radius"			"450"
@@ -7654,7 +6774,7 @@
 				"roaming_seconds_per_rotation"				"2.4"
 				"roaming_duration"
 				{
-					"value"	"5.0 6.0 7.0 8.0"
+					"value"	"6.0"
 					"special_bonus_unique_huskar_4" "+2"
 				}
 				"bol"
@@ -7665,14 +6785,10 @@
 		}
 	}
 	//=================================================================================================================
-	// Phantom Assassin: Coup de Grace (Lua version)
+	// КОНКУРЕНЦИЯ (MACAN)
 	//=================================================================================================================
 	"phantom_assassin_coup_de_grace_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"phantom_assassin_coup_de_grace_lua"
 		"AbilityTextureName"			"phantom_assassin_coup_de_grace"
@@ -7685,36 +6801,20 @@
 			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
 			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_mechanical.vpcf"
 		}
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"crit_chance"				"100"
-				"crit_bonus"				"150"
+				"crit_bonus"				"140"
 		}
 	}
+	//=================================================================================================================
+	// ДВОРОВАЯ ЗАКАЛКА
+	//=================================================================================================================
 	"slark_essence_shift_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"slark_essence_shift_lua"
 		"AbilityTextureName"			"baidul"
@@ -7725,32 +6825,17 @@
 		{
 			"particle"	"particles/units/heroes/hero_slark/slark_essence_shift.vpcf"
 		}
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"agi_gain"				"1"
 				"stat_loss"				"1"
 				"AbilityCastRange"
 				{
-					"value"	"600"
+					"value"	"450 500 550 600"
 					"special_bonus_unique_muerta_calling_hp_regen" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
@@ -7760,7 +6845,7 @@
 				}
 				"radius"
 				{
-					"value"	"600"
+					"value"	"450 500 550 600"
 					"special_bonus_unique_muerta_calling_hp_regen" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
@@ -7778,22 +6863,15 @@
 		}
 	}
 	//=================================================================================================================
-	// Marci: Dispose (Lua version)
+	// РАЗГОВОР С ХЕЙТЕРОМ
 	//=================================================================================================================
 	"marci_dispose_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"marci_dispose_lua"
 		"AbilityTextureName"			"razg"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
@@ -7801,22 +6879,10 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
-		"AbilityCastRange"				"500 575 650 725"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"25"
+		"AbilityCastRange"				"480 525 570 615"
+		"AbilityCooldown"				"25 23 21 19"
 		"AbilityManaCost"				"100 130 160 190"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"landing_radius"	"275"
@@ -7835,44 +6901,25 @@
 					"value"	"80 160 240 320"
 					"special_bonus_unique_huskar_6" "+150"
 				}
-				"castrange"		"500 575 650 725"
+				"castrange"		"480 525 570 615"
 		}
 	}
 	//=================================================================================================================
-	// SDVG
+	// БРАТКИ
 	//=================================================================================================================
 	"dimon_sdvg"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"dimon_sdvg.lua"
 		"AbilityTextureName"			"sdvg"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"              "1"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.15"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"40"
 		"AbilityManaCost"				"250"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"illusion_duration"					"10.0"
@@ -7883,41 +6930,21 @@
 		}
 	}
 	//=================================================================================================================
-	// Shadow Fiend: Presence of the Dark Lord
+	// КОНКУРЕНЦИЯ (ДВОРЕЦКОВ)
 	//=================================================================================================================
 	"shadow_fiend_presence_of_the_dark_lord_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"shadow_fiend_presence_of_the_dark_lord_lua"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"900"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"presence_armor_reduction"		"-5"
@@ -7930,10 +6957,6 @@
 	//=================================================================================================================
 	"silencer_glaives_of_wisdom_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"silencer_glaives_of_wisdom_lua"
 		"AbilityTextureName"			"silencer_glaives_of_wisdom_lua"
@@ -7941,37 +6964,21 @@
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
-
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_silencer.vsndevts"
 			"particle"	"particles/units/heroes/hero_silencer/silencer_glaives_of_wisdom.vpcf"
 		}
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityDuration"				"0.0"
 		"AbilityCastRange"				"0"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityDamage"					"0"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"steal_range"		"0"
@@ -7979,8 +6986,6 @@
 	}
 	"riki_innate_backstab"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"			"1"
 		"Innate"			"1"
@@ -8028,8 +7033,6 @@
 	}
 	"ursa_maul"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"DependentOnAbility"			"lycan_shapeshift_datadriven"
 		"MaxLevel"						"4"			
@@ -8047,17 +7050,12 @@
 	}
 	"slardar_seaborn_sentinel"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"						"4"
 		"Innate"						"1"
 		"DependentOnAbility"			"kirill_abuser"
 		"HasScepterUpgrade"				"0"
 		"IsBreakable"					"0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{			
 			"river_speed"					"5"
@@ -8082,17 +7080,12 @@
 	}
 	"mana_leak_datadriven"
 {
-	// General
-	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"				"ability_datadriven"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	"AbilityTextureName"			"bobka"
-
-	// Precache
-	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
 		"soundfile"			"soundevents/game_sounds_heroes/game_sounds_keeper_of_the_light.vsndevts"
@@ -8100,25 +7093,10 @@
 		"particle"			"particles/units/heroes/hero_keeper_of_the_light/keeper_mana_leak_cast.vpcf"
 		
 	}
-
-	// Casting
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
-
-	// Time		
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCooldown"				"26.0 24.0 22.0 20.0"
-
-	// Cost
-	//-------------------------------------------------------------------------------------------------------------
-	"AbilityManaCost"				"75 100 125 150"		
-
-	// Cast Range
-	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"75 100 125 150"
 	"AbilityCastRange"				"500 600 700 800"
-
-	// Special
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityValues"
 	{
 			"duration"
@@ -8253,10 +7231,6 @@
 	}
 	"enchantress_untouchable_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"enchantress_untouchable_lua.lua"
 		"AbilityTextureName"			"enchantress_untouchable"
@@ -8270,25 +7244,10 @@
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_enchantress.vsndevts"
 			"particle"	"particles/units/heroes/hero_enchantress/enchantress_untouchable.vpcf"
 		}
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"slow_attack_speed"		"-20 -30 -40 -50"
@@ -8296,33 +7255,21 @@
 		}
 	}
 	//=================================================================================================================
-	// Terrorblade: Conjure Image (Lua version)
+	// ПАТРИОТИЗМ
 	//=================================================================================================================
 	"patriotizm"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"patriotizm"
 		"AbilityTextureName"			"patr"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"IsBreakable"				"1"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
+    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"AbilityCooldown"				"5 4 3 2"
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"chance"
@@ -8345,31 +7292,16 @@
 	}
 	"lone_druid_spirit_bear"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"DisplayAdditionalHeroes"	"1"
 		"AbilitySound"					"Hero_LoneDruid.SpiritBear.Cast"
 		"AbilityTextureName"			"sam"
 		"HasScepterUpgrade"			"1"
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.5 0.5 0.5 0.5"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"1500"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"75 75 75 75"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-			
 			"bear_hp"
 			{
 				"value"	"1100 1400 1700 2000"
@@ -8412,30 +7344,18 @@
 			{
 				"value"					"1100"
 			}
-
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
-	//=================================================================================================================
-	// Lone Druid: Spirit Bear Return
-	//=================================================================================================================
 	"lone_druid_spirit_bear_return"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"HasScepterUpgrade"             "1"
 		"AbilityTextureName"			"komne"
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"20.0"
 		"AbilityCastPoint"				"0"
 		"AbilityChannelTime"			"2.0"
 		"MaxLevel"						"1"
-	
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
@@ -8451,35 +7371,16 @@
 	//=================================================================================================================
 	"spirit_breaker_greater_bash_lua"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"spirit_breaker_greater_bash_lua"
 		"AbilityTextureName"			"gaf"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"AbilityCooldown"
@@ -8712,7 +7613,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"900"
+		"AbilityCastRange"				"550"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"150"
@@ -8735,7 +7636,7 @@
 		}
 	}
 	//=================================================================================================================
-	// Underlord: Firestorm (Lua version)
+	// ПРОГРЕВ ПОЛЕЙ СРАЖЕНИЙ
 	//=================================================================================================================
 	"underlord_firestorm_lua"
 	{
@@ -8791,6 +7692,9 @@
 			"damage_pct"				"0"
 		}
 	}
+	//=================================================================================================================
+	// БАРОН РИВЕНДЕР
+	//=================================================================================================================
 	"orlov_rivendare"
 	{
 
@@ -8950,7 +7854,9 @@
 			}
 		}
 	}
-	
+	//=================================================================================================================
+	// АГР РИВЕНДЕРА
+	//=================================================================================================================
 	"rivendare_lua"
 	{
 		"BaseClass"						"ability_lua"
@@ -8983,10 +7889,11 @@
 				"interval"				"0.1"
 		}
 	}
+	//=================================================================================================================
+	// СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА
+	//=================================================================================================================
 	"borrowed_time_datadriven"
 {
-	// General
-	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"				"ability_datadriven"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -8995,20 +7902,8 @@
 	"AbilityTextureName"			"secret"
 	"HasScepterUpgrade"				"1"
 	"IsBreakable"				"1"
-	// Casting
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCastPoint"				"0"
-
-	// Time		
-	//-------------------------------------------------------------------------------------------------------------
-	
-
-	// Cost
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityManaCost"				"0 0 0"
-
-	// Special
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityValues"
 	{
 			"hp_threshold"				"20"
@@ -9104,8 +7999,6 @@
 }
 "hill_troll_rally"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"MaxLevel"				"1"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"		
 		"IsBreakable"					"1"
@@ -9123,6 +8016,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// МУРЛОКИ
+	//=================================================================================================================
 	"orlov_murloc"
 	{
 
@@ -9378,8 +8274,8 @@
 		}
 
 	}
-		//=================================================================================================================
-	// Взрывные метеоры
+	//=================================================================================================================
+	// SWEET BONANZA
 	//=================================================================================================================
 	
 	"mellstroy_meteors"
@@ -9492,6 +8388,9 @@
 				"fruts" "5"
 		}
     }
+    //=================================================================================================================
+	// АМ АМ АМ
+	//=================================================================================================================
     "mellstroy_amam"
 	{
 		"BaseClass"                 "ability_datadriven"
@@ -9506,47 +8405,45 @@
 		"HasScepterUpgrade"				"1"
 		"AbilityCooldown"           "90"
 		"AbilityGoldCost"           "750 1750 2750"
-
 		"OnSpellStart"
 		{
 			"RunScript"
-					{
-						"ScriptFile"    "heroes/mellstroy/amam.lua"
-						"Function"      "Damage"
-					}
-					
-					"AttachEffect"
-					{
-						"Target"			"CASTER"
-						"EffectName"		"particles/earthshaker_arcana_echoslam_start_v2_new.vpcf"
-						"EffectAttachType"	"start_at_customorigin"
-						"ControlPoints"
-						{
-							"01"			"%radius %radius %radius"
-						}
-					}
-					"Knockback"
-		            {
-		                "Target"
-		                {
-		                    "Center"    "CASTER"
-		                    "Radius"    "%radius"
-		                    "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		                    "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		                }
-		                "Center"            "TARGET"
-		                "Duration"          "%stun_dur"
-		                "Height"            "300"
-		                "IsFixedDistance"   "1"
-		                "Distance"			"0"
-		                "ShouldStun"        "1"    
-		            }
-		             "ApplyModifier"
-        {
-            "ModifierName"  "modifier_mellbonus"
-            "Target"        "CASTER"
-            "Duration"	   "%duration"
-        }
+			{
+				"ScriptFile"    "heroes/mellstroy/amam.lua"
+				"Function"      "Damage"
+			}
+			"AttachEffect"
+			{
+				"Target"			"CASTER"
+				"EffectName"		"particles/earthshaker_arcana_echoslam_start_v2_new.vpcf"
+				"EffectAttachType"	"start_at_customorigin"
+				"ControlPoints"
+				{
+					"01"			"%radius %radius %radius"
+				}
+			}
+			"Knockback"
+		    {
+		        "Target"
+		        {
+		            "Center"    "CASTER"
+		            "Radius"    "%radius"
+		            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		            "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		        }
+		        "Center"            "TARGET"
+		        "Duration"          "%stun_dur"
+		        "Height"            "300"
+		        "IsFixedDistance"   "1"
+		        "Distance"			"0"
+		        "ShouldStun"        "1"    
+		    }
+		    "ApplyModifier"
+        	{
+                "ModifierName"  "modifier_mellbonus"
+                "Target"        "CASTER"
+                "Duration"	   "%duration"
+            }
 			"RunScript"
 			{
 				"ScriptFile"    "heroes/mellstroy/amam.lua"
@@ -9558,7 +8455,6 @@
 				"Target"			"CASTER"
 			}
 		}
-	
 		"Modifiers"
 		{
 		    "modifier_mell_amam"
@@ -9582,8 +8478,6 @@
 							"01"			"%radius %radius %radius"
 						}
 					}
-				
-					
 		            "Knockback"
 		            {
 		                "Target"
@@ -9604,30 +8498,28 @@
 		    }
 		    "modifier_mellbonus"
 		    {
-		    "IsBuff" "1"
-		    "IsHidden" "1"
-		    "Properties"
+		    	"IsBuff" "1"
+		    	"IsHidden" "1"
+		    	"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "100"
 				}
-			"States"
+				"States"
 		        {
 		            "MODIFIER_STATE_SILENCED"   "MODIFIER_STATE_VALUE_ENABLED"
 		        }
-		    "OnCreated"
-            {
-		    }
-		    "OnDestroy"
+		    	"OnCreated"
+            	{
+		    	}
+		    	"OnDestroy"
 				{
-					
 					"RunScript"
 					{
 						"ScriptFile"	"heroes/mellstroy/amam.lua"
 						"Function"		"Back"					
 					}
 				}		
-		
-		}
+			}
 		}
 		"AbilityValues"
 		{
@@ -9648,9 +8540,12 @@
 		        "interv"	"1.5"
 		        "duration"          "9 12 15"
 		        "bonus_gold" "80 140 200"
-		        "gold_cost"	"1000 2000 3000"
+		        "gold_cost"	"750 1750 2750"
 		}
 	}
+	//=================================================================================================================
+	// КРУТИТЬ
+	//=================================================================================================================
 	"mellstroy_casino"
 	{
 		"BaseClass"						"ability_lua"
@@ -9674,6 +8569,9 @@
 		}
 		
 	}
+	//=================================================================================================================
+	// ЩАВЕЛЬ
+	//=================================================================================================================
 	"mellstroy_shavel"
 	{
 		"BaseClass"						"ability_lua"
@@ -9707,6 +8605,9 @@
 			"gold_cost"				"100 200 300 400"
 		}
 	}
+	//=================================================================================================================
+	// ЧТО ЗА БИЗНЕС?
+	//=================================================================================================================
 	"mellstroy_business_new"
 	{
 		"BaseClass"						"ability_lua"
@@ -9756,7 +8657,10 @@
 				}
 		}
 	}
-"mellstroy_casino_allin"
+	//=================================================================================================================
+	// ALL-IN
+	//=================================================================================================================
+	"mellstroy_casino_allin"
 	{
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"casino_allin"
@@ -9775,7 +8679,7 @@
 		
 	}
 	//=================================================================================================================
-	// Alchemist: Goblin's Greed
+	// АСПЕКТ МЕЛЛСТРОЯ НА ДОП. ГОЛДУ
 	//=================================================================================================================
 	"alchemist_goblins_greed"
 	{
@@ -9877,6 +8781,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// БЛЯДИНА
+	//=================================================================================================================
 	"litvin_bledina"
 	{
 		"BaseClass"						"ability_lua"
@@ -9970,6 +8877,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// УДАР СУБО
+	//=================================================================================================================
 	"ogre_bruiser_ogre_smash"
 	{
 		"MaxLevel"						"1"
@@ -9993,9 +8903,11 @@
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
+	//=================================================================================================================
+	// СУБО
+	//=================================================================================================================
 	"litvin_subo"
 	{
-
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -10004,8 +8916,6 @@
 		"AbilityManaCost"				"75 125 175 225"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		
-
 		"AbilityValues"
 		{
 				"schoolboys_number"			"1 0 0 0"
@@ -10148,6 +9058,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// LIT ENERGY
+	//=================================================================================================================
 	"litvin_litenergy"
 	{
 
@@ -10206,29 +9119,17 @@
 	}
 	"hamster"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"hamster"
 		"AbilityTextureName"			"hamster"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"IsBreakable"				"0"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
+    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"AbilityCooldown"				"0"
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"gold"
@@ -10252,7 +9153,7 @@
         "SpellDispellableType"          "SPELL_DISPELLABLE_NO"
         "FightRecapLevel"               "1"
         "AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_2"
-	   "AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+	    "AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_4"
         "AnimationIgnoresModelScale"	"1"
         "AbilityCastPoint"              "1.0"
         "MaxLevel"                      "3"
@@ -10290,7 +9191,6 @@
     //=================================================================================================================
 	// ЗВЕРЯ НЕТ СИЛЬНЕЙ...
 	//=================================================================================================================
-	
 	"stariy_zveri"
 	{
 		"BaseClass"                 "ability_datadriven"
@@ -10376,6 +9276,9 @@
         		 }
         }																				
 	}
+	//=================================================================================================================
+	// ЙОУ
+	//=================================================================================================================
 	"stariy_bolt"
 	{
 		"BaseClass"						"ability_lua"
@@ -10429,6 +9332,9 @@
 				"interval"				"0.1"
 		}
 	}
+	//=================================================================================================================
+	// БРЕД
+	//=================================================================================================================
 	"stariy_bred"
 	{
 
@@ -10465,6 +9371,9 @@
 		}
 		
 	}
+	//=================================================================================================================
+	// ВОВЧИК
+	//=================================================================================================================
 	"vovchik"
 	{
 		"BaseClass"						"ability_lua"
@@ -10499,40 +9408,21 @@
 	//=================================================================================================================
 	"ashab_dogon"
 	{
-		// Ability Technical Aspect
-		// base script folder	: scripts/vscripts
-		// base texture folder	: resource/flash3/images/spellicons
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/ashab/ashab_dogon"
 		"AbilityTextureName"			"dogon"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_ALERT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityUnitDamageType"     		"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastRange"				"0"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"23 21 19 17"
 		"AbilityManaCost"				"110 130 150 170"
-
-		// Damage
-		//-------------------------------------------------------------------------------------------------------------
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"movement_speed"
@@ -10606,6 +9496,9 @@
 				"radius"				"375"
 		}
 	}
+	//=================================================================================================================
+	// РАКЕТКА
+	//=================================================================================================================
 	"Ashab_rocket"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -10689,6 +9582,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// ЭТО МОЯ МАШИНА
+	//=================================================================================================================
 	"ashab_car"
 	{
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -10918,6 +9814,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// ТРЕНИРОВКА
+	//=================================================================================================================
 	"ashab_train"
 	{
 		"BaseClass"						"ability_lua"
@@ -11001,6 +9900,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// ТЕСТОСТЕРОН
+	//=================================================================================================================
 	"arsen_testosteron"
 	{
 		"BaseClass"						"ability_lua"
@@ -11051,6 +9953,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// ПРИВАТНЫЙ ТГ-КАНАЛ
+	//=================================================================================================================
 	"arsen_tg"
 	{
 		"BaseClass"						"ability_lua"
@@ -11106,6 +10011,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// ВЫДАТЬ БАЗУ
+	//=================================================================================================================
 	"arsen_baza"
 	{
 		"BaseClass"						"ability_lua"
@@ -11149,10 +10057,11 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// БИОХАКИНГ
+	//=================================================================================================================
 	"centaur_return"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
@@ -11163,10 +10072,6 @@
 		"IsBreakable"					"1"
 		"IsGrantedByShard"				"1"
 		"MaxLevel"					"1"
-
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"return_damage"				
@@ -11180,19 +10085,17 @@
 					"value"		"1200"
 					"affected_by_aoe_increase"	"1"
 				}
-
 		}
 	}
+	//=================================================================================================================
+	// МУЖСКАЯ СИЛА
+	//=================================================================================================================
 	"rattletrap_armor_power"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"						"1"
 		"Innate"						"1"
 		"IsBreakable"					"1"
-
 		"AbilityValues"
 		{
 			"damage_per_armor"			"0.25"
@@ -11200,15 +10103,11 @@
 	}
 	"earthshaker_slugger"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"MaxLevel"						"4"
 		"DependentOnAbility"			"heroes/arsen/arsen_baza"
 		"IsBreakable"					"1"
-
 		"AbilityValues"
 		{
 			"projectile_body_on_kill"
@@ -11256,6 +10155,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// ЕЖОВИК
+	//=================================================================================================================
 	"ejovik"
 	{
 		"BaseClass"					"ability_lua"
@@ -11324,6 +10226,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// СБОР СЕМЕНИ
+	//=================================================================================================================
 	"nix_semya"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -11509,6 +10414,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// ГУННАР
+	//=================================================================================================================
 	"gunnar_bash"
 	{
 		"BaseClass"						"ability_lua"
@@ -11556,6 +10464,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// ДРЕВНИЙ РУС
+	//=================================================================================================================
 	"nix_rus"
 	{
 		"BaseClass"						"ability_lua"
@@ -11611,6 +10522,9 @@
 			"bat_tooltip"				"1.5"
 		}
 	}
+	//=================================================================================================================
+	// МОЙ ТОПОР
+	//=================================================================================================================
 	"serega_topor"
 	{
 		"BaseClass"						"ability_lua"
@@ -11639,7 +10553,7 @@
 					"special_bonus_unique_antimage_manavoid_aoe" "+100"
 				}
 				"radius"					"1200"
-				"speed"						"1600"  // 1.2 second to reach radius
+				"speed"						"1600"
 				"slow_min"				"0"
 				"slow_max"				"0"
 				"slow_duration"				"0.8"
@@ -11653,8 +10567,12 @@
 				}
 				"lifesteal_pct"			"20"
 				"bonus_dmg"	"15 20 25"
+				"topor_duration"	"10"
 		}
 	}
+	//=================================================================================================================
+	// РАДИК
+	//=================================================================================================================
 	"serega_radiance"
 	{
 		"BaseClass"						"ability_lua"
@@ -11694,6 +10612,9 @@
 				"interval"				"0.5"
 		}
 	}
+	//=================================================================================================================
+	// ЗАЛЕТАЮ В ЗАМЕС
+	//=================================================================================================================
 	"serega_blink"
 	{
 		"BaseClass"						"ability_lua"
@@ -11716,7 +10637,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"23 22 21 20"
-					"special_bonus_unique_antimage_2" "-8"
+					"special_bonus_unique_antimage_2" "-5"
 				}
 				"blink_range"
 				{
@@ -11745,6 +10666,9 @@
             		"mana_void_damage_per_mana" "0.5 0.6 0.7 0.8"
 		}
 	}
+	//=================================================================================================================
+	// ОСТАНОВИТЕ КАТКУ
+	//=================================================================================================================
 	"serega_song"
 	{
 		"BaseClass"						"ability_lua"
@@ -11789,6 +10713,9 @@
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"1.0"
 	}
+	//=================================================================================================================
+	// СВЕНА КОПНИ!
+	//=================================================================================================================
 	"serega_sven"
 	{
 		"BaseClass"					"ability_lua"
@@ -11827,6 +10754,9 @@
 				"speed"				"1600 1600 1600 1600"
 		}
 	}
+	//=================================================================================================================
+	// РАЗВОД ВРАГОВ
+	//=================================================================================================================
 	"serega_opa"
 	{
 		"BaseClass"						"ability_lua"
@@ -11869,6 +10799,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// BUNNYHOP
+	//=================================================================================================================
 	"leaping_stride"
 	{
     "BaseClass"                 "ability_lua"
@@ -11888,6 +10821,9 @@
 			"speed_dist" 	"40"
 		}
 	}
+	//=================================================================================================================
+	// ЭНЕРГЕТИЧЕСКИЙ МОНСТР
+	//=================================================================================================================
 	"zolo_zver"
 	{
 		"BaseClass"						"ability_lua"
@@ -11937,6 +10873,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// МАМА ЗОВЕТ НА УЖИН
+	//=================================================================================================================
 	"zolo_home"
 	{
 		"BaseClass"						"ability_lua"
@@ -11993,6 +10932,9 @@
             		}
 		}
 	}
+	//=================================================================================================================
+	// СТОПАПУПА
+	//=================================================================================================================
 	"zolo_stopapupa"
 	{
 		"BaseClass"						"ability_lua"
@@ -12049,30 +10991,33 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// ГРОЗНЫЙ ПАПКА
+	//=================================================================================================================
 	"zolo_batya"
-{
-	"BaseClass"				"ability_datadriven"
-	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-	"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
-	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-	"FightRecapLevel"				"2"
-	"AbilityTextureName"			"zolo_batya"
-	"precache"
 	{
-		"particle"		"particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf"
-		"particle"		"particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot_gold.vpcf"
-		"soundfile"		"sounds/weapons/hero/witch_doctor/deathward_build.vsnd"
-	}
-	"AbilityCastRange"				"900"
-	"AOERadius"					"%radius"
-	"AbilityCastPoint"				"0.35 0.35 0.35"
-	"AbilityCooldown"				"80.0"
-	"AbilityManaCost"				"150 250 350"
-	"AbilityValues"
-	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"zolo_batya"
+		"precache"
+		{
+			"particle"		"particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf"
+			"particle"		"particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot_gold.vpcf"
+			"soundfile"		"sounds/weapons/hero/witch_doctor/deathward_build.vsnd"
+		}
+		"AbilityCastRange"				"900"
+		"AOERadius"					"%radius"
+		"AbilityCastPoint"				"0.35 0.35 0.35"
+		"AbilityCooldown"				"80.0"
+		"AbilityManaCost"				"150 250 350"
+		"AbilityValues"
+		{
 			"damage"
 			{
 				"value"	"100"
@@ -12094,76 +11039,76 @@
 				"special_bonus_unique_ogre_magi_2" "+1"
 			}
 			"slow"					"-20 -25 -30"
-	}
-	"OnSpellStart"
-	{
-		"RunScript"
-		{
-			"ScriptFile"	"heroes/zolo/death_ward.lua"
-			"Function"		"CreateWard"
 		}
-		
-		"FireSound"
+		"OnSpellStart"
 		{
-			"EffectName"	"sharik"
-			"Target"		"CASTER"
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/zolo/death_ward.lua"
+				"Function"		"CreateWard"
+			}
+			"FireSound"
+			{
+				"EffectName"	"sharik"
+				"Target"		"CASTER"
+			}
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center"	"POINT"
+					"Radius" 	"%radius"
+					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				}		
+				"Action"    
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/zolo/batya.lua"
+						"Function"		"Batya"
+				}
+					"FireEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
+						"EffectAttachType"  "follow_origin"
+						"Target"            "TARGET"
+					}
+					"Knockback"
+					{
+						"Target"            "TARGET"
+						"Center" 	        "CASTER"
+						"Distance"	        "350"
+						"Duration"	        "%stun_dur"
+						"Height"	        "350"
+						"IsFixedDistance"	"1"
+						"ShouldStun"        "1"	
+					}
+				}
+			}
 		}
-		"ActOnTargets"
+		"Modifiers"
 		{
-			"Target"
+			"modifier_death_ward_datadriven"
 			{
-				"Center"	"POINT"
-				"Radius" 	"%radius"
-				"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-			}		
-			"Action"    
-			{
-				"RunScript"
+				"IsHidden"	"1"
+				"Properties"
 				{
-					"ScriptFile"	"heroes/zolo/batya.lua"
-					"Function"		"Batya"
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"%damage"
 				}
-				"FireEffect"
+				"States"
 				{
-					"EffectName"        "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
-					"EffectAttachType"  "follow_origin"
-					"Target"            "TARGET"
-				}
-				"Knockback"
-				{
-					"Target"            "TARGET"
-					"Center" 	        "CASTER"
-					"Distance"	        "350"
-					"Duration"	        "%stun_dur"
-					"Height"	        "350"
-					"IsFixedDistance"	"1"
-					"ShouldStun"        "1"	
+					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
 	}
-	
-	"Modifiers"
-	{
-		"modifier_death_ward_datadriven"
-		{
-			"IsHidden"	"1"
-			"Properties"
-			{
-				"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"%damage"
-			}
-		
-			"States"
-			{
-				"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-				"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-			}
-		}
-	}
-}
-"batya_radiance"
+	//=================================================================================================================
+	// ВОНЬ ГРОЗНОГО ПАПКИ
+	//=================================================================================================================
+	"batya_radiance"
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/zolo/batya_radiance"
@@ -12198,6 +11143,9 @@
 				"interval"				"0.5"
 		}
 	}
+	//=================================================================================================================
+	// ТАБЛЕТКИ ОТ УМА
+	//=================================================================================================================
 	"zolo_tabletki"
 	{
 		"BaseClass"              "ability_datadriven"
@@ -12256,6 +11204,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// RAGE
+	//=================================================================================================================
 	"cheater_rage"
 	{
 		"BaseClass"						"ability_lua"
@@ -12284,11 +11235,11 @@
 				"focusfire_damage_reduction"	"-30 -15 0"
 				"AbilityDuration"
 				{
-					"value"	"5.0 6.0 7.0"
+					"value"	"5.0"
 				}
 				"focusfire_duration_tooltip"
 				{
-					"value"	"5 6 7"
+					"value"	"5"
 				}
 				"focusfire_fire_on_the_move"	"1"
 		}
@@ -12375,7 +11326,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastPoint"				"0.2"
@@ -12417,27 +11368,27 @@
 	}
 	"custom_vision_aura"
 	{
-    		"BaseClass"           "ability_lua"
-    		"ScriptFile"          "heroes/cheater/custom_vision_aura.lua"
-    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    		"AbilityTextureName"			"wallhack"
+    	"BaseClass"           "ability_lua"
+    	"ScriptFile"          "heroes/cheater/custom_vision_aura.lua"
+    	"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    	"AbilityTextureName"			"wallhack"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    		"AbilityCooldown"     "60 55 50 45"
-    		"AbilityManaCost"     "100 125 150 175"
-    		"AbilityValues"
+    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    	"AbilityCooldown"     "60 55 50 45"
+    	"AbilityManaCost"     "100 125 150 175"
+    	"AbilityValues"
 		{
 				"AbilityCastRange"
 				{
-					"value"	"600 800 1000 1200"
+					"value"	"550 700 850 1050"
 					"special_bonus_unique_clinkz_9" "+200"
 				}
 				"radius"
 				{
-					"value"	"600 800 1000 1200"
+					"value"	"550 700 850 1050"
 					"special_bonus_unique_clinkz_9" "+200"
 				}
 				"duration"
@@ -12449,20 +11400,20 @@
 	}
 	"custom_critical_strike"
 	{
-    		"BaseClass"           "ability_lua"
-    		"ScriptFile"          "heroes/cheater/custom_critical_strike.lua"
+    	"BaseClass"           "ability_lua"
+    	"ScriptFile"          "heroes/cheater/custom_critical_strike.lua"
    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
    		"AbilityCooldown"     "25"
    		"AbilityManaCost"     "80 100 120 140"
-   		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+   		"FightRecapLevel"	  "1"
+		"MaxLevel"			  "4"
+		"AbilityType"		  "DOTA_ABILITY_TYPE_BASIC"
    		"AbilityTextureName"  "awp"
    		"AbilityValues"
 		{
 				"crit_mult"
 				{
-					"value"	"200 225 250 275"
+					"value"	"155 195 235 275"
 				}
 				"duration"		"6.0"
 				"slow"
@@ -12472,7 +11423,7 @@
 				}
 				"extra_range"
 				{
-					"value"	"400 475 550 625"
+					"value"	"350 400 450 500"
 					"special_bonus_unique_clinkz_7" "+200"
 				}
 				"attack_fixed"
@@ -12484,20 +11435,20 @@
 	}
 	"custom_passive_disarm"
 	{
-    		"BaseClass"           "ability_lua"
-    		"ScriptFile"          "heroes/cheater/custom_passive_disarm.lua"
-    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    		"AbilityCooldown"     "15" 
-    		"AbilityTextureName"  "tazer"
-    		"FightRecapLevel"				"1"
+    	"BaseClass"           "ability_lua"
+    	"ScriptFile"          "heroes/cheater/custom_passive_disarm.lua"
+    	"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    	"AbilityCooldown"     "15" 
+    	"AbilityTextureName"  "tazer"
+    	"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"				"1"
 		"AbilityCastRange"		"200"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-    		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-    		"AbilityValues"
+    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+    	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+    	"AbilityValues"
 		{
 				"radius"			"200"
 				"duration"		"1.2"
@@ -12509,7 +11460,7 @@
 	"custom_passive_autoshot"
 	{
    		"BaseClass"                     "ability_lua"
-    		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
    		"ScriptFile"                    "heroes/cheater/custom_passive_autoshot"
    		"AbilityTextureName"            "drow_ranger_trueshot"
    		"FightRecapLevel"				"1"
@@ -12528,20 +11479,20 @@
 	}
 	"c4_bomb"
 	{
-    		"BaseClass"               "ability_lua"
-    		"ScriptFile"              "heroes/cheater/c4_bomb"
-    		"AbilityTextureName"			"bomb"
-    		"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    		"AbilityCooldown"     "40" 
-    		"AbilityManaCost"     "300"
-    		"FightRecapLevel"				"1"
+    	"BaseClass"               "ability_lua"
+    	"ScriptFile"              "heroes/cheater/c4_bomb"
+    	"AbilityTextureName"			"bomb"
+    	"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    	"AbilityCooldown"     "40" 
+    	"AbilityManaCost"     "300"
+    	"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"IsGrantedByScepter"			"1"
 		"AbilityCastRange"		"200"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityCastPoint"				"2.2"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
-    		"AbilityValues"
+    	"AbilityValues"
     		{
         		"detonation_time"     "40"
         		"defuse_time"         "6"
@@ -12573,10 +11524,10 @@
 		"AbilityTextureName"			"chillguy_q"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		precache
+		"precache"
 		{
-			"particleFile"				"particles/skeletonking_hellfireblast_new.vpcf"
-			"particleFile"				"particles/skeletonking_hellfireblast_debuff_new.vpcf"
+			"particle"				"particles/skeletonking_hellfireblast_new.vpcf"
+			"particle"				"particles/skeletonking_hellfireblast_debuff_new.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -12723,15 +11674,14 @@
 	}
 	"custom_passive_bonus_armor_regen"
 	{
-    		"BaseClass"              "ability_lua"
-    		"AbilityType"			"DOTA_ABILITY_TYPE_BASIC"
-    		"ScriptFile"             "heroes/chillguy/custom_passive_bonus_armor_regen"
-    		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    		"AbilityTextureName"     "your_custom_ability_texture"
-    		"MaxLevel"			"1"
-    		"RequiredLevel"		"-1"
+    	"BaseClass"              "ability_lua"
+    	"AbilityType"			"DOTA_ABILITY_TYPE_BASIC"
+    	"ScriptFile"             "heroes/chillguy/custom_passive_bonus_armor_regen"
+    	"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    	"MaxLevel"			"1"
+    	"RequiredLevel"		"-1"
 		"Innate"				"1"
-    		"AbilityValues"
+    	"AbilityValues"
 		{
 				"armor"			"0.5"
 				"hp"				"3"
@@ -13181,9 +12131,9 @@
 					"special_bonus_unique_abaddon_immolation" "+150"
 				}
            		"radius"                            "200"
-            		"damage"                            "90 180 270 360"
-            		"lifesteal_pct"					"10"
-            		"hui_chance"					 "10"
+            	"damage"                            "90 180 270 360"
+            	"lifesteal_pct"					"10"
+            	"hui_chance"					 "10"
 		}
 	}
 	"golovach_r"
@@ -13754,18 +12704,9 @@
 		"AbilityTextureName"			"papich_e"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		
-		// Ability General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-		// Ability Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"AbilityCastRange"				"999999"
-
-		// Ability Resource
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 	}
@@ -13957,12 +12898,12 @@
 	}
 	"papich_passive"
 	{
-    		"BaseClass"                 "ability_lua"
+    	"BaseClass"                 "ability_lua"
    		"ScriptFile"                "papich_passive.lua"
-    		"AbilityTextureName"			"papich_e"
-    		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-    		"FightRecapLevel"				"1"
+    	"AbilityTextureName"			"papich_e"
+    	"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+    	"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"AbilityValues"
 		{
@@ -14059,11 +13000,19 @@
 		"FightRecapLevel"				"1"
 		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"6.0"
 		"AbilityManaCost"				"35 45 55 65"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
+				"AbilityCharges"
+				{
+					"value"	"1"
+					"special_bonus_unique_dazzle_5" "+1"
+				}
+				"AbilityChargeRestoreTime"
+				{
+					"value"	"6"
+				}
 				"base_damage"
 				{
 					"value"	"20 30 40 50"
@@ -14185,13 +13134,13 @@
 		{
 				"base_damage"			"50"
 				"base_hp"				"360"
-				"slow"				"15"
+				"slow"				"45"
 				"as_slow"				"50"
 				"duration"
 				{
 					"value"	"20.0"
 				}
-				"slow_dur"	"3.0"
+				"slow_dur"	"1.0"
 		}
 		
 		"OnSpellStart"
@@ -14259,55 +13208,54 @@
 		}
 	}
 	"passive_peashooter_freeze"
-{
-    "BaseClass"                     "ability_datadriven"
-    "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
-    "AbilityTextureName"            "peashooter_freeze"
-	"MaxLevel" "1"
-    "AbilityValues"
-    {
+	{
+    	"BaseClass"                     "ability_datadriven"
+    	"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    	"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+    	"AbilityTextureName"            "peashooter_freeze"
+		"MaxLevel" "1"
+    	"AbilityValues"
+    	{
             "duration"
             {
-            	"value"	"3.0"
+            	"value"	"1.0"
             }
-            "movement_speed"            "-15"
+            "movement_speed"            "-45"
             "as_slow"        			"-50"
-    }	
+    	}	
+    	"Modifiers"
+    	{
+        	"modifier_peashooter_freeze"
+        	{
+            	"Passive"   "1"
+            	"IsHidden"  "1"
 
-    "Modifiers"
-    {
-        "modifier_peashooter_freeze"
-        {
-            "Passive"   "1"
-            "IsHidden"  "1"
+            	"OnAttackLanded"
+            	{
+                	"ApplyModifier"
+                	{
+                	    "ModifierName"  "modifier_peashooter_freeze_debuff"
+                	    "Target"        "TARGET"
+                	}
+            	}
+       		}
 
-            "OnAttackLanded"
-            {
-                "ApplyModifier"
-                {
-                    "ModifierName"  "modifier_peashooter_freeze_debuff"
-                    "Target"        "TARGET"
-                }
-            }
-        }
-
-        "modifier_peashooter_freeze_debuff"
-        {
-            "IsDebuff"  "1"
-            "Duration"  "%duration"
-            "EffectName"    "particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf"
-            "EffectAttachType"  "attach_origin"
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
-                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	   "%as_slow"
-            }
-        }
-    }
-}
-"shatter_aura"
+        	"modifier_peashooter_freeze_debuff"
+        	{
+            	"IsDebuff"  "1"
+            	"Duration"  "%duration"
+            	"EffectName"    "particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf"
+            	"EffectAttachType"  "attach_origin"
+            	"Properties"
+            	{
+                	"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
+                	"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	   "%as_slow"
+            	}
+        	}
+    	}
+	}
+	"shatter_aura"
 	{
 		"BaseClass"              "ability_lua"
 		"MaxLevel"			"1"
@@ -14330,23 +13278,23 @@
 		"AbilityUnitTargetTeam"		             "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"						   "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityUnitTargetType"		             "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetType"		             "DOTA_UNIT_TARGET_HERO"
 		"SpellImmunityType"			             "SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"	  	             "SPELL_DISPELLABLE_NO"
-        	"AbilityUnitDamageType"			        "DAMAGE_TYPE_MAGICAL"
+        "AbilityUnitDamageType"			        "DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"			        "vihor_r"
-        	"AbilityCooldown"                          "90 80 70"
-        	"AbilityCastRange"                         "900"
-        	"AbilityCastPoint"					   "2.45"
-        	"AbilityManaCost"					   "200 350 500"
-        	"AbilityValues"
-        	{
+        "AbilityCooldown"                          "90 80 70"
+        "AbilityCastRange"                         "900"
+        "AbilityCastPoint"					   "2.45"
+        "AbilityManaCost"					   "200 350 500"
+        "AbilityValues"
+        {
             	"radius"                            "900"
             	"duration_to_explosion"             "9"
             	"damage"
             	{
-            		"value"	"150 300 450"
-            		"special_bonus_unique_clockwerk_3" "+200"
+            		"value"	"200 400 600"
+            		"special_bonus_unique_clockwerk_3" "+150"
             	}
             	"stun_duration"
             	{
@@ -14359,7 +13307,7 @@
             		"special_bonus_unique_clockwerk_4" "+5"
             	}
             	"slow"						 "-55"
-        	}
+        }
 	}
 	"vihor_e"
 	{
@@ -14454,6 +13402,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"800"
@@ -14485,8 +13434,8 @@
 				}
 				"AbilityChargeRestoreTime"
 				{
-					"value"	"18 16 14 12"
-					"special_bonus_unique_clockwerk_6" "-6"
+					"value"	"17 16 15 14"
+					"special_bonus_unique_clockwerk_6" "-4"
 				}
 		}
 	}

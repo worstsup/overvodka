@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_snapfire_lil_shredder_lua = class({})
 
 --------------------------------------------------------------------------------

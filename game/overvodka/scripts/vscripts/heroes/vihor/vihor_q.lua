@@ -111,8 +111,8 @@ end
 
 modifier_vihor_q_fly = class({})
 function modifier_vihor_q_fly:OnCreated( kv )
-	self:GetParent():StartGesture(ACT_DOTA_FLEE)
 	self.bonus_speed = self:GetAbility():GetSpecialValueFor("bonus_speed")
+	self:GetParent():StartGesture(ACT_DOTA_FLEE)
 end
 function modifier_vihor_q_fly:OnRefresh( kv )
 end
