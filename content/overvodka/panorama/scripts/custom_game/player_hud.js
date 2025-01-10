@@ -4,6 +4,7 @@ const SubscribePanel = $("#SubscribePanel")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
+const TeamLeavedEncounter = $("#TeamLeavedEncounter");
 const DotaHUDPanel = GetDotaHud();
 
 let SlotsKeys = [
@@ -31,6 +32,8 @@ let SlotsKeys = [
 ]
 
 let DoubleRatingLastTime = 0
+
+let TeamLeavedLastTime = 0
 
 function StartSecondaryAbilities() {
     let dota_sec = DotaHUDPanel.FindChildTraverse("SecondaryAbilityContainer");
@@ -498,6 +501,61 @@ function DoubleRatingTimer(){
     }
 }
 
+function OnTeamLeaved(event){
+    TeamLeavedLastTime = event.last_time
+
+    Game.EmitSound("UUI_SOUNDS.TeamLeaved")
+
+    TeamLeavedEncounter.AddClass("Show")
+
+    let TeamDetails = Game.GetTeamDetails( event.team )
+
+    let TeamName = $.Localize( TeamDetails.team_name )
+
+    let ReducedTime = Math.floor(event.time_reduce/60)
+
+    let CurrentBonusGold = event.bonus_gold * event.missing_teams
+    let CurrentBonusXp = event.bonus_xp * event.missing_teams
+
+    let MinuteText = ReducedTime > 4 ? $.Localize("#PLAYER_HUD_TeamLeavedValue2") : $.Localize("#PLAYER_HUD_TeamLeavedValue")
+
+    TeamLeavedEncounter.SetDialogVariable("LeavedTeamName", TeamName)
+    TeamLeavedEncounter.SetDialogVariable("TimeReduced", `${ReducedTime} ${MinuteText}`)
+    TeamLeavedEncounter.SetDialogVariableInt("XpIncrease", event.bonus_xp)
+    TeamLeavedEncounter.SetDialogVariableInt("GoldIncrease", event.bonus_gold)
+    TeamLeavedEncounter.SetDialogVariableInt("GoldIncreaseCurrent", CurrentBonusGold)
+    TeamLeavedEncounter.SetDialogVariableInt("XpIncreaseCurrent", CurrentBonusXp)
+
+    let color = GameUI.CustomUIConfig().team_colors[event.team]
+    let icon = GameUI.CustomUIConfig().team_icons[event.team]
+
+    let NamePanel = TeamLeavedEncounter.FindChildTraverse("TeamLeavedName")
+    if(NamePanel){
+        NamePanel.style.color = color
+    }
+
+    let IconPanel = TeamLeavedEncounter.FindChildTraverse("TeamLeavedIcon")
+    if(IconPanel){
+        IconPanel.SetImage(icon)
+    }
+
+    let IconPanel2 = TeamLeavedEncounter.FindChildTraverse("TeamLeavedShieldIcon")
+    if(IconPanel2){
+        IconPanel2.style.washColor = color
+    }
+
+    UpdateTeamLeaved()
+}
+
+function UpdateTeamLeaved(){
+    let Diff = Math.max(Math.floor(TeamLeavedLastTime - Game.GetGameTime()), 0)
+    if(Diff > 0){
+        $.Schedule(1, UpdateTeamLeaved)
+    }else{
+        TeamLeavedEncounter.RemoveClass("Show")
+    }
+}
+
 (function(){
     StartSecondaryAbilities();
 
@@ -517,6 +575,8 @@ function DoubleRatingTimer(){
     });
 
     GameEvents.Subscribe("player_tipped", PlayerTipped)
+
+    GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
 
     SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}_double_rating_time`, function(v){
         DoubleRatingLastTime = v.time

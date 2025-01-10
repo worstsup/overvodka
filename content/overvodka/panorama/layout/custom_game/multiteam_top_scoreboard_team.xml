@@ -1,0 +1,25 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.css" />
+		<include src="s2r://panorama/styles/custom_game/multiteam_top_scoreboard.css" />
+		<include src="s2r://panorama/styles/custom_game/shared_scoreboard_styles.css" />
+	</styles>
+	<scripts>
+		<include src="s2r://panorama/scripts/custom_game/multiteam_top_scoreboard_team.js" />
+	</scripts>
+	<Panel hittest="false" class="ScoreboardTeamWrapper">
+		<Panel hittest="false" id="ScoreboardTeam">
+			<Panel id="LocalTeamOverlay" />
+			<Panel id="ComebackActivated" onmouseover="DOTAShowTextTooltip('#COMEBACK_SYSTEM_DESC')" onmouseout="DOTAHideTextTooltip()" />
+			<Panel hittest="false" id="PlayersContainer" />
+			<Panel hittest="false" id="TeamOverlayBar">
+				<Panel hittest="false" id="TeamDarkenWash" />
+				<Panel hittest="false" id="LogoAndScore">
+					<Panel hittest="false" id="TeamLogo" />
+					<Label hittest="false" id="TeamScore" text="999" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel hittest="false" id="TeamOverlayXMLFile" />
+	</Panel>
+</root>

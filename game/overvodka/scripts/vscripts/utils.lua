@@ -26,6 +26,12 @@ end
 
 function ChangeValueByTeamPlace(value, Team)
 	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
+	local bIsFirstBlooded = COverthrowGameMode:IsFirstBlooded()
+
+	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
+		return value
+	end
+	
 	if IsSolo() then
 		if #CurrentTeams > 2 then
 			if Team == CurrentTeams[#CurrentTeams].teamID then

@@ -45,6 +45,8 @@ function modifier_dota_ability_xp_granter:OnCreated()
         self.Radius = Ability:GetSpecialValueFor("radius")
         self.Xp = Ability:GetSpecialValueFor("xp")
         self.Gold = Ability:GetSpecialValueFor("gold")
+        self.XpBonusPerTeam = Ability:GetSpecialValueFor("xp_bonus_per_team")
+        self.GoldBonusPerTeam = Ability:GetSpecialValueFor("gold_bonus_per_team")
 
         if IsServer() then
             self:StartIntervalThink(0.5)
@@ -53,17 +55,23 @@ function modifier_dota_ability_xp_granter:OnCreated()
 end
 
 function modifier_dota_ability_xp_granter:OnIntervalThink()
+    local MissingTeamsCount = COverthrowGameMode:GetCountMissingTeams()
+    local GoldBonus = self.GoldBonusPerTeam * MissingTeamsCount
+    local XpBonus = self.XpBonusPerTeam * MissingTeamsCount
+    
     local Units = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0,0,0), nil, self.Radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_ANY_ORDER, false)
     for _, Unit in ipairs(Units) do
-        local Gold = self.Gold
         local Xp = self.Xp
+        local Gold = self.Gold
 
         local Team = Unit:GetTeamNumber()
 
-        local newGold = ChangeValueByTeamPlace(Gold, Team)
-        local newXp = ChangeValueByTeamPlace(Gold, Team)
+        Xp = Xp + XpBonus
+        Gold = Gold + GoldBonus
 
-        Unit:ModifyGold(newGold, false, DOTA_ModifyGold_GameTick)
+        local newXp = ChangeValueByTeamPlace(Xp, Team)
+
+        Unit:ModifyGold(Gold, false, DOTA_ModifyGold_GameTick)
         Unit:AddExperience(newXp, DOTA_ModifyXP_Unspecified, false, false)
     end
 end

@@ -139,6 +139,8 @@
 			"radius"				"1000"
 			"xp"					"12"
 			"gold"					"8"
+			"gold_bonus_per_team"	"2"
+			"xp_bonus_per_team"		"4"
 		}
 	}
 
@@ -154,6 +156,8 @@
 			"radius"				"1400"
 			"xp"					"24"
 			"gold"					"20"
+			"gold_bonus_per_team"	"2"
+			"xp_bonus_per_team"		"4"
 		}
 	}
 
