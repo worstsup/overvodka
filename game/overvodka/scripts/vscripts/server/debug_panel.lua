@@ -32,6 +32,7 @@ function DebugPanel:RegisterPanoramaListeners()
 	CustomGameEventManager:RegisterListener('debug_panel_switch_invul_on_hero', Dynamic_Wrap(DebugPanel, 'OnHeroInvulRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_switch_fly_on_hero', Dynamic_Wrap(DebugPanel, 'OnHeroFlyRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_switch_grave_on_hero', Dynamic_Wrap(DebugPanel, 'OnHeroGraveRequest'))
+	CustomGameEventManager:RegisterListener('debug_panel_switch_vision_on_hero', Dynamic_Wrap(DebugPanel, 'OnHeroVisionRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_kick_player', Dynamic_Wrap(DebugPanel, 'OnKickPlayerRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_remove_unit', Dynamic_Wrap(DebugPanel, 'OnRemoveUnitRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_give_item', Dynamic_Wrap(DebugPanel, 'OnItemRequest'))
@@ -461,6 +462,21 @@ function DebugPanel:OnHeroGraveRequest(kv)
 	end
 end
 
+function DebugPanel:OnHeroVisionRequest(kv)
+	local playerID = kv.PlayerID
+	if not DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) then return end
+
+	local UnitIndex = kv.unit
+	local Unit = EntIndexToHScript(UnitIndex)
+	if Unit and not Unit:IsNull() and Unit:IsAlive() then
+		if not Unit:HasModifier("modifier_debug_panel_vision") then
+			Unit:AddNewModifier(Unit, nil, "modifier_debug_panel_vision", nil)
+		else
+			Unit:RemoveModifierByName("modifier_debug_panel_vision")
+		end
+	end
+end
+
 function DebugPanel:OnKickPlayerRequest(kv)
 	local playerID = kv.PlayerID
 	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
@@ -734,6 +750,7 @@ end
 LinkLuaModifier("modifier_debug_panel_dummy", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_debug_panel_no_damage", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_debug_panel_grave", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_debug_panel_vision", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_debug_panel_free_spells_aura", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_debug_panel_free_spells_aura_buff", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_debug_panel_fly_mode", "server/debug_panel", LUA_MODIFIER_MOTION_NONE)
@@ -828,6 +845,36 @@ modifier_debug_panel_grave = class({
 		MODIFIER_PROPERTY_MIN_HEALTH
 	} end
 })
+
+modifier_debug_panel_vision = class({
+	IsDebuff = function()
+		return false
+	end,
+	GetTexture = function()
+		return "item_ward_observer"
+	end,
+	IsPurgable = function()
+		return false
+	end,
+	IsPurgeException = function()
+		return false
+	end,
+	RemoveOnDeath = function()
+		return false
+	end,
+})
+
+function modifier_debug_panel_vision:OnCreated()
+	if not IsServer() then return end
+
+	self:StartIntervalThink(0.3)
+end
+
+function modifier_debug_panel_vision:OnIntervalThink()
+	local parent = self:GetParent()
+
+	AddFOWViewer(parent:GetTeamNumber(), Vector(0,0,0), 6000, 0.4, false)
+end
 
 modifier_debug_panel_free_spells_aura = class({
 	IsHidden = function()

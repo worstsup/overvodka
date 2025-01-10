@@ -377,10 +377,14 @@ function COverthrowGameMode:OnItemPickUp( event )
 				end
 			end
 
+			local Team = PlayerResource:GetTeam(playerID)
+
+			local newR = ChangeValueByTeamPlace(r, Team)
+
 			--print("Bag of gold picked up")
-			PlayerResource:ModifyGold( playerID, r, false, 0 )
+			PlayerResource:ModifyGold( playerID, newR, false, 0 )
+			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
-		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, r, nil )
 		UTIL_Remove( item ) -- otherwise it pollutes the player inventory
 	elseif event.itemname == "item_treasure_chest" then
 		print( "Special Item Picked Up" )

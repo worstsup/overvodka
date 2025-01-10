@@ -24,6 +24,27 @@ function IsRealHero(Unit)
     return true
 end
 
+function ChangeValueByTeamPlace(value, Team)
+	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
+	if IsSolo() then
+		if #CurrentTeams > 2 then
+			if Team == CurrentTeams[#CurrentTeams].teamID then
+				value = value * 2
+			elseif Team == CurrentTeams[#CurrentTeams-1].teamID then
+				value = value * 1.5
+			end
+		end
+	elseif IsDuo() then
+		if #CurrentTeams > 3 then
+			if Team == CurrentTeams[#CurrentTeams].teamID then
+				value = value * 2
+			end
+		end
+	end
+
+	return value
+end
+
 function table.count(t)
     local key_table = {}
     for k in pairs(t) do

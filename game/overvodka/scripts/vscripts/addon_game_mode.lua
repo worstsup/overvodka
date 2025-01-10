@@ -805,6 +805,28 @@ function COverthrowGameMode:GetSortedValidTeams()
 	return sortedTeams
 end
 
+function COverthrowGameMode:GetSortedValidActiveTeams()
+	local sortedTeams = {}
+	for _, team in pairs( self.m_GatheredShuffledTeams ) do
+		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
+			for i = 1, PlayerResource:GetPlayerCountForTeam(team) do
+				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
+				if PlayerID ~= -1 then
+					local Connection = PlayerResource:GetConnectionState(PlayerID)
+					if Connection ~= DOTA_CONNECTION_STATE_ABANDONED then
+						table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+						break
+					end
+				end
+			end
+		end
+	end
+
+	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
+
+	return sortedTeams
+end
+
 ---------------------------------------------------------------------------
 -- Put a label over a player's hero so people know who is on what team
 ---------------------------------------------------------------------------

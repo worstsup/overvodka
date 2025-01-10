@@ -33,6 +33,7 @@
 					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
@@ -68,6 +69,7 @@
 					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
@@ -93,6 +95,7 @@
 					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
@@ -118,6 +121,7 @@
 					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_OUT_OF_GAME"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
@@ -125,121 +129,31 @@
 
 	"dota_ability_xp_granter"
 	{
-		"BaseClass"          			    "ability_datadriven"
+		"BaseClass"          			    "ability_lua"
+		"ScriptFile"						"abilities/xp_granter"
 		"AbilityName"           			"dota_ability_xp_granter"
 		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-		"Modifiers"
+		"AbilityValues"
 		{
-			"modifier_dota_ability_xp_granter"
-			{
-				"IsHidden"				"1"
-				"Passive"				"1"
-				
-				"Aura"					"modifier_get_xp"
-				"Aura_Radius"			"800"
-				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-				"Aura_Types"			"DOTA_UNIT_TARGET_HERO"
-				"Aura_ApplyToCaster"	"0"
-				"Aura_Flags"    		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
-
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"ThinkInterval"	".5"
-
-				"OnIntervalThink"
-				{
-					"GrantXPGold"
-					{
-						"Target"
-						{
-							"Center"		"CASTER"
-							"radius"		"1000"
-							"Types"			"DOTA_UNIT_TARGET_HERO"
-							"Flags"			"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
-						}
-						"XPAmount"		"12"
-						"SplitEvenly"	"0"
-						"GoldAmount"	"8"
-						"ReliableGold"	"0"
-						"PlayAlert"		"0"
-					}
-				}
-			}
-
-			"modifier_get_xp"
-			{
-				"Passive"       "1"
-				"EffectName"	""
-				"TextureName"	"custom_games_xp_coin"
-			}
+			"radius"				"1000"
+			"xp"					"12"
+			"gold"					"8"
 		}
 	}
 
 	"dota_ability_xp_granter2"
 	{
-		"BaseClass"          			    "ability_datadriven"
+		"BaseClass"          			    "ability_lua"
+		"ScriptFile"						"abilities/xp_granter"
 		"AbilityName"           			"dota_ability_xp_granter"
 		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-		"Modifiers"
+		"AbilityValues"
 		{
-			"modifier_dota_ability_xp_granter"
-			{
-				"IsHidden"				"1"
-				"Passive"				"1"
-				
-				"Aura"					"modifier_get_xp"
-				"Aura_Radius"			"1400"
-				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-				"Aura_Types"			"DOTA_UNIT_TARGET_HERO"
-				"Aura_ApplyToCaster"	"0"
-				"Aura_Flags"    		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
-
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"ThinkInterval"	".5"
-
-				"OnIntervalThink"
-				{
-					"GrantXPGold"
-					{
-						"Target"
-						{
-							"Center"		"CASTER"
-							"radius"		"1400"
-							"Types"			"DOTA_UNIT_TARGET_HERO"
-							"Flags"			"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS"
-						}
-						"XPAmount"		"24"
-						"SplitEvenly"	"0"
-						"GoldAmount"	"20"
-						"ReliableGold"	"0"
-						"PlayAlert"		"0"
-					}
-				}
-			}
-
-			"modifier_get_xp"
-			{
-				"Passive"       "1"
-				"EffectName"	""
-				"TextureName"	"custom_games_xp_coin"
-			}
+			"radius"				"1400"
+			"xp"					"24"
+			"gold"					"20"
 		}
 	}
 
