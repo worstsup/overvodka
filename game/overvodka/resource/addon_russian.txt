@@ -21,6 +21,17 @@
 		"PLAYER_HUD_DoubleRatingCount"					"Осталось на сегодня:"
 		"PLAYER_HUD_DoubleRating_Button"				"Удвоить"
 
+		"PLAYER_HUD_TeamLeavedHeader"					"Команда"
+		"PLAYER_HUD_TeamLeavedHeader2"					"Покинула игру!"
+		"PLAYER_HUD_TeamLeavedValue"					"минуты"
+		"PLAYER_HUD_TeamLeavedValue2"					"минут"
+
+		"PLAYER_HUD_TeamLeavedDescription1"				"Время игры уменьшено на"
+		"PLAYER_HUD_TeamLeavedDescription2"				"Золото в центре увеличено на"
+		"PLAYER_HUD_TeamLeavedDescription3"				"Опыт в центре увеличен на"
+		"PLAYER_HUD_TeamLeavedDescription4"				"Общий бонус золота:"
+		"PLAYER_HUD_TeamLeavedDescription5"				"Общий бонус опыта:"
+
 		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"
 		"PLAYER_HUD_Subscribe_Buy"						"Купить"
 		"PLAYER_HUD_Subscribe_Subscribed_Buy"			"Продлить"
@@ -28,6 +39,8 @@
 		"PLAYER_HUD_Subscribe_Permanent"				"Навсегда"
 		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span> вы получаете:"
 		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"Подписка <span class='OvervodkaName'>Overvodka Prime</span> активна! Вы получаете:"
+
+		"COMEBACK_SYSTEM_DESC"							"Эта команда получает увеличенное количество опыта в кругу а также увеличенное количество золота за монеты"
 
 		"PLAYER_HUD_Subscribe_Description"				"- Возможность удваивать свою ставку рейтинга;<br>- Возможность давать пять, бить врагов по лицу и использовать надувные игрушки;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд."
 

@@ -621,6 +621,19 @@ function COverthrowGameMode:InitGameMode()
 	self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_SINGLES
 	self.CLOSE_TO_VICTORY_THRESHOLD = 5
 
+	self.TEAMS_MISSING = 0
+	self.GoldBonusPerTeam = 2
+	self.XpBonusPerTeam = 4
+	self.MIN_COUNTDOWN_TIME = 900
+	self.SOLO_TIME_PER_TEAM = 120
+	self.DUO_TIME_PER_TEAM = 300
+
+	self.LeaveTeamEncounterDuration = 5
+
+	self.bFirstBlooded = false
+
+	self.bShowsComeback = false
+
 	---------------------------------------------------------------------------
 
 	self:GatherAndRegisterValidTeams()
@@ -714,6 +727,17 @@ function COverthrowGameMode:InitGameMode()
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_end_game", function(...) return self:EndGame( DOTA_TEAM_GOODGUYS ) end, "Force the game to end.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_team_leaved", function(...) 
+			local Data = {
+				team = 2,
+				last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+				bonus_gold = self.GoldBonusPerTeam,
+				bonus_xp = self.XpBonusPerTeam,
+				time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
+				missing_teams = self.TEAMS_MISSING
+			}
+			return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
+		end, "Show team leave encounter", FCVAR_CHEAT )
 	Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
 
 	COverthrowGameMode:SetUpFountains()
@@ -803,6 +827,66 @@ function COverthrowGameMode:GetSortedValidTeams()
 	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
 
 	return sortedTeams
+end
+
+function COverthrowGameMode:GetSortedValidActiveTeams()
+	local sortedTeams = {}
+	for _, team in pairs( self.m_GatheredShuffledTeams ) do
+		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
+			for i = 1, PlayerResource:GetPlayerCountForTeam(team) do
+				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
+				if PlayerID ~= -1 then
+					local Connection = PlayerResource:GetConnectionState(PlayerID)
+					if Connection ~= DOTA_CONNECTION_STATE_ABANDONED then
+						table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+						break
+					end
+				end
+			end
+		end
+	end
+
+	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
+
+	return sortedTeams
+end
+
+function COverthrowGameMode:GetCountMissingTeams()
+	local MaxTeamsCount = #self.m_GatheredShuffledTeams
+
+	local CurrentActiveTeams = #self:GetSortedValidActiveTeams()
+
+	local Diff = MaxTeamsCount - CurrentActiveTeams
+
+	return Diff
+end
+
+function COverthrowGameMode:IsFirstBlooded()
+	return self.bFirstBlooded
+end
+
+function COverthrowGameMode:OnPlayerDisconnected(event)
+	if self.TEAMS_MISSING ~= self:GetCountMissingTeams() then
+		local PlayerID = event.PlayerID
+
+		local Team = PlayerResource:GetTeam(PlayerID)
+
+		self.TEAMS_MISSING = self:GetCountMissingTeams()
+
+		local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
+		if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
+			_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-MinusTime)
+		end
+
+		CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", {
+			team = Team, 
+			last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+			bonus_gold = self.GoldBonusPerTeam,
+			bonus_xp = self.XpBonusPerTeam,
+			time_reduce = MinusTime,
+			missing_teams = self.TEAMS_MISSING
+		} )
+	end
 end
 
 ---------------------------------------------------------------------------
@@ -903,6 +987,15 @@ function COverthrowGameMode:OnThink()
 
 	if self.countdownEnabled == true then
 		CountdownTimer()
+
+		if nCOUNTDOWNTIMER <= 900 and self.bShowsComeback == false then
+			self.bShowsComeback = true
+
+			local SortedTeams = self:GetSortedValidActiveTeams()
+
+			CustomNetTables:SetTableValue("globals", "teams_top", SortedTeams)
+		end
+
 		if nCOUNTDOWNTIMER == 30 then
 			CustomGameEventManager:Send_ServerToAllClients( "timer_alert", {} )
 		end

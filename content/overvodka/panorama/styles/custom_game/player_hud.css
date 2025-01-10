@@ -782,3 +782,173 @@
     width: 48px;
     height: 48px;
 } */
+
+#EncountersContainer{
+    flow-children: down;
+
+    width: 1200px;
+    height: 900px;
+
+    align: center center;
+
+    overflow: noclip;
+}
+
+#CurrentBonus{
+    margin-top: 20px;
+}
+
+#TeamLeavedEncounter{
+    width: 600px;
+    height: 300px;
+    align: center top;
+
+    flow-children: down;
+
+    opacity: 0;
+
+    transform: scaleX(1.5) scaleY(1.5);
+
+    background-color: rgba(0,0,0,0.9);
+    border: 1px solid black;
+
+    transition-property: opacity, transform;
+    transition-duration: .15s;
+}
+
+#TeamLeavedEncounter.Show{
+    opacity: 1;
+    transform: scaleX(1) scaleY(1);
+}
+
+#TeamLeavedContainer{
+    align: center top;
+    flow-children: right;
+}
+
+.TeamLeavedEncounterDescriptionPanel{
+    flow-children: right;
+
+    padding-left: 50px;
+    padding-right: 50px;
+
+    align: center top;
+}
+
+.TeamLeavedEncounterDescriptionValue{
+    text-shadow: 1px 2px 3px black;
+    font-size: 20px;
+
+    align: left center;
+
+    color: white;
+    font-weight: bold;
+
+    margin-left: 5px;
+}
+
+.GoldIcon{
+    width: 20px;
+    height: 20px;
+
+    align: left center;
+
+    background-image: url("s2r://panorama/images/hud/reborn/gold_small_psd.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin-left: 3px;
+}
+
+.XpIcon{
+    width: 20px;
+    height: 20px;
+
+    align: left center;
+
+    background-image: url("file://{resources}/images/custom_game/xp_icon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin-left: 3px;
+}
+
+#TeamLeavedIconContainer{
+    width: 64px;
+    height: 64px;
+    margin-right: 5px;
+    margin-top: -5px;
+}
+
+#TeamLeavedIcon{
+    width: 100%;
+    height: 100%;
+
+    wash-color: black;
+}
+
+#TeamLeavedShieldIconShadow{
+    width: 100%;
+    height: 100%;
+
+    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_shadow_01.psd");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#TeamLeavedShieldIconBorder{
+    width: 100%;
+    height: 100%;
+
+    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_border_01.psd");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#TeamLeavedShieldIcon{
+    width: 100%;
+    height: 100%;
+
+    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_color_01.psd");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.TeamLeavedEncounterHeader{
+    color: white;
+    text-shadow: 1px 2px 3px black;
+    font-size: 40px;
+
+    align: center top;
+    text-align: center;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: semi-bold;
+}
+
+.TeamLeavedEncounterHeader2{
+    color: crimson;
+    text-shadow: 1px 2px 3px black;
+    font-size: 30px;
+    margin-top: -10px;
+
+    align: center top;
+    text-align: center;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: semi-bold;
+}
+
+.TeamLeavedEncounterDescription{
+    color: #ccc;
+    text-shadow: 1px 2px 3px black;
+    font-size: 20px;
+
+    align: center top;
+    text-align: center;
+}

@@ -54,4 +54,19 @@
         distance_max = "10000.0"
         event_type = "2.0"
     }
+
+    UUI_SOUNDS.TeamLeaved = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/team_leaved/sound_1.vsnd",
+            "sounds/team_leaved/sound_2.vsnd",
+            "sounds/team_leaved/sound_3.vsnd"
+        ]
+        volume = "3.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "10000.0"
+        event_type = "2.0"
+    }
 }

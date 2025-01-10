@@ -242,6 +242,14 @@ function SwitchGraveOnHero() {
 	}
 }
 
+function SwitchVisionOnTeam() {
+	let SelectedUnit = Players.GetLocalPlayerPortraitUnit()
+	if(SelectedUnit != -1){
+		GameEvents.SendCustomGameEventToServer("debug_panel_switch_vision_on_hero", {unit:SelectedUnit});
+		Game.EmitSound( "UI.Button.Pressed" );
+	}
+}
+
 function OnKickPlayerRequest() {
 	GameEvents.SendCustomGameEventToServer("debug_panel_kick_player", {
 		target : Players.GetLocalPlayerPortraitUnit()

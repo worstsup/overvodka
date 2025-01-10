@@ -62,7 +62,7 @@ function Server:OnGameEnded(Teams)
             local Deaths = PlayerResource:GetDeaths(PlayerID)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
-            local bWin = Rating >= 45
+            local bWin = Rating >= 35
             local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
 
             if PlayerInfo.doubled then
@@ -420,6 +420,7 @@ function Server:OnPlayerDisconnected(event)
             break
         end
     end
+    COverthrowGameMode:OnPlayerDisconnected(event)
 end
 
 function Server:UpdatePlayerNetTable(PlayerID)

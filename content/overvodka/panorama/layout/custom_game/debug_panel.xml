@@ -220,6 +220,9 @@
 								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="SwitchGraveOnHero()">
 									<Label text="Крест" />
 								</Button>
+								<Button class="DemoButton RightButton" acceptsjoyfocus="true" onactivate="SwitchVisionOnTeam()">
+									<Label text="Вижн" />
+								</Button>
 							</Panel>
 							<Panel class="Row">
 								<Button class="DemoButton LeftButton" acceptsjoyfocus="true" onactivate="OnKickPlayerRequest()">

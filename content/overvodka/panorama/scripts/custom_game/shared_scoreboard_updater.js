@@ -46,13 +46,14 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 	if(PlayerRating != undefined && RatingClass != undefined && !playerPanel.BHasClass(RatingClass)){
 		playerPanel.AddClass(RatingClass)
 	}
+
+	var playerInfo = Game.GetPlayerInfo( playerId );
 	
 	var ultStateOrTime = PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_HIDDEN; // values > 0 mean on cooldown for that many seconds
 	var goldValue = -1;
 	var networthValue = -1;
 	var isTeammate = false;
 
-	var playerInfo = Game.GetPlayerInfo( playerId );
 	if ( playerInfo )
 	{
 		isTeammate = ( playerInfo.player_team_id == localPlayerTeamId );
@@ -259,6 +260,19 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 			}
 		}
 	}
+
+	let bIsActiveComeback = false
+	let TeamsTop = CustomNetTables.GetTableValue("globals", `teams_top`)
+	if(TeamsTop){
+		let Array = toArray(TeamsTop)
+		if(Array[Array.length-1] && Array[Array.length-2]){
+			if(teamId == Array[Array.length-1].teamID || teamId == Array[Array.length-2].teamID){
+				bIsActiveComeback = true
+			}
+		}
+	}
+
+	teamPanel.SetHasClass("IsComebackActivated", bIsActiveComeback)
 	
 	var localPlayerTeamId = -1;
 	var localPlayer = Game.GetLocalPlayerInfo();

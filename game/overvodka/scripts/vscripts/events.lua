@@ -21,6 +21,12 @@ function COverthrowGameMode:OnGameRulesStateChange()
 			--self.TEAM_KILLS_TO_WIN = 15
 			nCOUNTDOWNTIMER = 1501
 		end
+
+		self.TEAMS_MISSING = self:GetCountMissingTeams()
+		if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
+			local MinusTime = (IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM) * self.TEAMS_MISSING
+			_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-MinusTime)
+		end
 		
 		if GetMapName() == "forest_solo" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_SINGLES
@@ -165,6 +171,8 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 		very_close_to_victory = 0,
 	}
 
+	self.bFirstBlooded = true
+
 	if nKillsRemaining <= 0 then
 		GameRules:SetCustomVictoryMessage( self.m_VictoryMessages[nTeamID] )
 		
@@ -177,6 +185,12 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 	elseif nKillsRemaining <= self.CLOSE_TO_VICTORY_THRESHOLD then
 		EmitGlobalSound( "ui.npe_objective_given" )
 		broadcast_kill_event.close_to_victory = 1
+	end
+
+	if nCOUNTDOWNTIMER <= self.MIN_COUNTDOWN_TIME then
+		local SortedTeams = self:GetSortedValidActiveTeams()
+
+		CustomNetTables:SetTableValue("globals", "teams_top", SortedTeams)
 	end
 
 	CustomGameEventManager:Send_ServerToAllClients( "kill_event", broadcast_kill_event )
@@ -377,10 +391,14 @@ function COverthrowGameMode:OnItemPickUp( event )
 				end
 			end
 
+			local Team = PlayerResource:GetTeam(playerID)
+
+			local newR = ChangeValueByTeamPlace(r, Team)
+
 			--print("Bag of gold picked up")
-			PlayerResource:ModifyGold( playerID, r, false, 0 )
+			PlayerResource:ModifyGold( playerID, newR, false, 0 )
+			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
-		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, r, nil )
 		UTIL_Remove( item ) -- otherwise it pollutes the player inventory
 	elseif event.itemname == "item_treasure_chest" then
 		print( "Special Item Picked Up" )

@@ -57,6 +57,46 @@
 
         </Panel>
 
+        <Panel hittest="false" id="EncountersContainer">
+            <Panel hittest="false" id="TeamLeavedEncounter">
+                <Label class="TeamLeavedEncounterHeader" text="#PLAYER_HUD_TeamLeavedHeader" />
+                <Panel hittest="false" id="TeamLeavedContainer">
+                    <Panel hittest="false" id="TeamLeavedIconContainer">
+                        <Panel hittest="false" id="TeamLeavedShieldIconShadow" />
+                        <Panel hittest="false" id="TeamLeavedShieldIconBorder" />
+                        <Panel hittest="false" id="TeamLeavedShieldIcon" />
+                        <Image hittest="false" id="TeamLeavedIcon" />
+                    </Panel>
+                    <Label id="TeamLeavedName" class="TeamLeavedEncounterHeader" text="{s:LeavedTeamName}" />
+                </Panel>
+                <Label class="TeamLeavedEncounterHeader2" text="#PLAYER_HUD_TeamLeavedHeader2" />
+                <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">
+                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription1" />
+                    <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{s:TimeReduced}" />
+                </Panel>
+                <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">
+                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription2" />
+                    <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{d:GoldIncrease}" />
+                    <Panel hittest="false" class="GoldIcon" />
+                </Panel>
+                <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">
+                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription3" />
+                    <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{d:XpIncrease}" />
+                    <Panel hittest="false" class="XpIcon" />
+                </Panel>
+                <Panel hittest="false" id="CurrentBonus" class="TeamLeavedEncounterDescriptionPanel">
+                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription4" />
+                    <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{d:GoldIncreaseCurrent}" />
+                    <Panel hittest="false" class="GoldIcon" />
+                </Panel>
+                <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">
+                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription5" />
+                    <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{d:XpIncreaseCurrent}" />
+                    <Panel hittest="false" class="XpIcon" />
+                </Panel>
+            </Panel>
+        </Panel>
+
         <Panel hittest="false" id="DoubleRating">
             <Label class="DoubleRatingText" text="#PLAYER_HUD_DoubleRating" />
             <Panel hittest="false" id="DoubleRatingCountPanel">
