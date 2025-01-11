@@ -1,13 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
 --------------------------------------------------------------------------------
 terrorblade_conjure_image_lua = class({})
 LinkLuaModifier( "modifier_terrorblade_conjure_image_lua", "modifier_terrorblade_conjure_image_lua.lua", LUA_MODIFIER_MOTION_NONE )

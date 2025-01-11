@@ -89,6 +89,7 @@ function litvin_conditions:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
+	if target:TriggerSpellAbsorb(self) then return end
 	-- local point = self:GetCursorPosition()
 
 	-- get victim

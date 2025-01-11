@@ -48,7 +48,7 @@ function papich_r:OnSpellStart()
             for itemSlot = 0,16 do
                 local itemName = target:GetItemInSlot(itemSlot)
                 if itemName then 
-                    if itemName:GetName() ~= "item_rapier" and itemName:GetName() ~= "item_gem" and itemName:GetName() ~= "item_lesh" and itemName:GetName() ~= "item_moon_shard" and itemName:IsPermanent() then
+                    if itemName:GetName() ~= "item_rapier" and itemName:GetName() ~= "item_ward_dispenser" and itemName:GetName() ~= "item_gem" and itemName:GetName() ~= "item_lesh" and itemName:GetName() ~= "item_moon_shard" and itemName:IsPermanent() then
                         local newItem = CreateItem(itemName:GetName(), nil, nil)
                         knight:AddItem(newItem)
                         if itemName and itemName:GetCurrentCharges() > 0 and newItem and not newItem:IsNull() then

@@ -18,7 +18,7 @@ function golovach_e:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
+	if target:TriggerSpellAbsorb(self) then return end
 	-- load data
 	local duration = self:GetSpecialValueFor("duration")
 	EmitSoundOn( "golovach_e_start", self:GetCaster() )

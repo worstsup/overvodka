@@ -381,16 +381,13 @@ function COverthrowGameMode:OnItemPickUp( event )
 							false )
 		for i = 1, #heroes do
 			local playerID = heroes[i]:GetPlayerID()
+			r = 300
 			if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
 				r = 600
-			else
-				if heroes[i]:GetUnitName() == "npc_dota_hero_undying" then
-					r = 0
-				else
-					r = 300
-				end
 			end
-
+			if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
+					r = 0
+			end
 			local Team = PlayerResource:GetTeam(playerID)
 
 			local newR = ChangeValueByTeamPlace(r, Team)

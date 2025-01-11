@@ -9,10 +9,7 @@ function Dmg (keys)
         	dadada = caster:GetStrength() * 2
     	end
     end
-    
-
     local damage_table = {}
-
     damage_table.damage = dadada
     damage_table.attacker = caster
     damage_table.damage_type = ability:GetAbilityDamageType()
