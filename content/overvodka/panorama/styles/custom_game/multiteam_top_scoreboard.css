@@ -17,6 +17,10 @@
     margin-left: 225px;
 }
 
+.AspectRatio16x10 #TopBarScoreboard {
+    margin-left: 25px;
+}
+
 #ScoreboardContainer {
     flow-children: right;
     horizontal-align: left;
@@ -30,6 +34,10 @@
     padding-left: EXTRA_PADDING;
     padding-right: EXTRA_PADDING;
     flow-children: right;
+}
+
+.AspectRatio16x10 #MultiteamScoreboard {
+    padding-left: 110px;
 }
 
 .ScoreboardTeamWrapper {
