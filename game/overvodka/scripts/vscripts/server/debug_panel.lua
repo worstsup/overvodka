@@ -8,6 +8,7 @@ DebugPanel = DebugPanel or {
 		1362960359, -- zmbvlv
 		389577160, -- streamer
 		1248303404, -- sega
+		466290701, -- timoxa
 	},
 	SelectedBot = {}
 }

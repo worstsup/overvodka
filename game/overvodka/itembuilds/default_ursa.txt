@@ -23,7 +23,7 @@
 		"#DOTA_Item_Build_Late_Items"
 		{
 			"item"		"item_nikes"
-			"item"		"item_mega_spinner"
+			"item"		"item_aegis_hero"
 			"item"		"item_waka"
 			"item"		"item_manta_datadriven"
 			"item"		"item_pasito"

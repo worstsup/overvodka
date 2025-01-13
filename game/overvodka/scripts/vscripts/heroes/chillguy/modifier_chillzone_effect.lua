@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_chillzone_effect = class({})
 
 --------------------------------------------------------------------------------
@@ -34,10 +23,7 @@ function modifier_chillzone_effect:GetPriority()
 end
 
 function modifier_chillzone_effect:NotAffected()
-	-- true owner
 	if self:GetParent()==self:GetCaster() then return true end
-
-	-- true if owner controlled
 	if self:GetParent():GetPlayerOwnerID()==self:GetCaster():GetPlayerOwnerID() then return true end
 end
 --------------------------------------------------------------------------------
@@ -105,19 +91,6 @@ function modifier_chillzone_effect:CheckState()
 end
 
 --------------------------------------------------------------------------------
--- Graphics & Animations
--- function modifier_chillzone_effect:GetEffectName()
--- 	return "particles/units/heroes/hero_faceless_void/faceless_void_chrono_speed.vpcf"
--- end
-
--- function modifier_chillzone_effect:GetEffectAttachType()
--- 	return PATTACH_ABSORIGIN_FOLLOW
--- end
-
--- function modifier_chillzone_effect:GetStatusEffectName()
--- 	return "status/effect/here.vpcf"
--- end
-
 function modifier_chillzone_effect:PlayEffects()
 	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_faceless_void/faceless_void_chrono_speed.vpcf"

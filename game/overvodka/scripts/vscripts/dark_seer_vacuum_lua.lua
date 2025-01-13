@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 dark_seer_vacuum_lua = class({})
 LinkLuaModifier( "modifier_dark_seer_vacuum_lua", "modifier_dark_seer_vacuum_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 

@@ -1,7 +1,6 @@
 modifier_cheater_rage = class({})
 
 --------------------------------------------------------------------------------
--- Classifications
 function modifier_cheater_rage:IsHidden()
 	return false
 end
@@ -19,7 +18,6 @@ function modifier_cheater_rage:GetAttributes()
 end
 
 --------------------------------------------------------------------------------
--- Initializations
 function modifier_cheater_rage:OnCreated( kv )
 	if not IsServer() then return end
 	self.bonus = self:GetAbility():GetSpecialValueFor( "bonus_attack_speed" )
@@ -43,7 +41,6 @@ function modifier_cheater_rage:OnIntervalThink()
 	self:GetParent():StartGesture(ACT_DOTA_CAST_ABILITY_6)
 end
 --------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_cheater_rage:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,

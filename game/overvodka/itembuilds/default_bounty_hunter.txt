@@ -37,7 +37,7 @@
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_nikes"
-			"item"		"item_mega_spinner"
+			"item"		"item_aegis_hero"
 			"item"		"item_waka"
 			"item"		"item_pasito"
 		}

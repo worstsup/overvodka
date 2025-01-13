@@ -15,10 +15,6 @@ end
 function modifier_custom_vision_aura:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
-    
-    -- Provide vision and True Sight in a 900 radius
-    
-    -- True Sight logic
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
         parent:GetAbsOrigin(),
@@ -30,7 +26,6 @@ function modifier_custom_vision_aura:OnIntervalThink()
         FIND_ANY_ORDER,
         false
     )
-    
     for _, enemy in ipairs(enemies) do
         AddFOWViewer(parent:GetTeamNumber(), enemy:GetAbsOrigin(), 50, 0.1, false)
         if enemy:IsInvisible() then

@@ -1,6 +1,5 @@
 modifier_c4_ring = class({})
 --------------------------------------------------------------------------------
--- Classifications
 function modifier_c4_ring:IsHidden()
 	return true
 end
@@ -14,7 +13,6 @@ function modifier_c4_ring:IsPurgable()
 end
 
 --------------------------------------------------------------------------------
--- Initializations
 function modifier_c4_ring:OnCreated( kv )
 	local nFXIndex = ParticleManager:CreateParticle( "particles/doom_bringer_doom_ring_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( self.radius, 1, self.radius ) )

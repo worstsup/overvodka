@@ -19,9 +19,7 @@ function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
     local damage = self:GetSpecialValueFor("damage")
     local stun_duration = self:GetSpecialValueFor("stun_dur")
     if not hit then
-        -- Mark target as hit for the first time
         hit = true
-        -- Damage and stun the first target
         target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_duration })
         ApplyDamage({
             victim = target,
@@ -70,7 +68,6 @@ function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
             end
         end
     else
-        -- Damage and stun the second target
         target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_duration })
         ApplyDamage({
             victim = target,

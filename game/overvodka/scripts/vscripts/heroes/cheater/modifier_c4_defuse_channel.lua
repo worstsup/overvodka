@@ -13,8 +13,6 @@ function modifier_c4_defuse_channel:OnIntervalThink()
 
     local bomb = self:GetParent()
     local defuser = self:GetCaster()
-
-    -- Successfully defuse the bomb
     local defuse_particle = "particles/units/heroes/hero_techies/techies_defuse.vpcf"
     local sound_defuse = "Hero_Techies.StasisTrap.Stun"
     EmitSoundOn(sound_defuse, bomb)

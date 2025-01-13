@@ -1,11 +1,6 @@
 pudge_rot_lua = class({})
 LinkLuaModifier( "modifier_rot_lua", "modifier_rot_lua.lua" ,LUA_MODIFIER_MOTION_NONE )
 
---[[Author: Valve
-	Date: 26.09.2015.
-	Applies the rot modifier on the caster depending on the toggle state]]
---------------------------------------------------------------------------------
-
 function pudge_rot_lua:ProcsMagicStick()
 	return false
 end

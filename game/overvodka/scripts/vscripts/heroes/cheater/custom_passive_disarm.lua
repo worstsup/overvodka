@@ -3,7 +3,6 @@ LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", 
 
 custom_passive_disarm = class({})
 
--- Intrinsic modifier for the passive ability
 function custom_passive_disarm:GetIntrinsicModifierName()
     return "modifier_custom_passive_disarm"
 end

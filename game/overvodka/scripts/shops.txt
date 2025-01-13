@@ -28,7 +28,7 @@
 		"item"		"item_charik_new"
 		"item"		"item_nikes"
 		"item"		"item_jordan"	
-		"item"		"item_mega_spinner"
+		"item"		"item_aegis_hero"
 		"item"		"item_drobe"
 		"item"		"item_mask_of_quadrobe"
 		"item"		"item_armlet_datadriven"

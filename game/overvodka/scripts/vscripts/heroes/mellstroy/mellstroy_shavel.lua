@@ -35,7 +35,9 @@ function mellstroy_shavel:OnSpellStart()
 
 	-- load data
 	local duration = self:GetSpecialValueFor( "channel_time" )
-
+	if target:HasModifier("modifier_generic_motion") then
+		target:RemoveModifierByName("modifier_generic_motion")
+	end
 	-- add modifier
 	local mod = target:AddNewModifier(
 		caster, -- player source

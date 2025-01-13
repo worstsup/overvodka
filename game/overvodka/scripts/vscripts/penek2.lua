@@ -34,7 +34,7 @@ function CheckUnitTeam(keys)
 	local damage_pct = 6
 	local target_health_percentage = target:GetHealth() / 100
 	local damage_percentage = target_health_percentage * damage_pct
-	local base_damage = 40
+	local base_damage = 35
 	local total_damage = damage_percentage + base_damage
 	if target:GetTeamNumber() ~= caster_team then
 		ApplyDamage({ victim = target, attacker = caster, damage = total_damage, damage_type = damage_type })

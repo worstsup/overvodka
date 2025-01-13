@@ -259,6 +259,7 @@ end
 function modifier_papich_e_clone_debuff:OnCreated(params)
     if not IsServer() then return end
     self.dot_damage = self:GetAbility():GetSpecialValueFor("dot_damage")
+    self.kill_percent = self:GetAbility():GetSpecialValueFor("kill_percent")
     if params.caster_entindex then
         self.caster = EntIndexToHScript(params.caster_entindex)
     else
@@ -287,7 +288,7 @@ function modifier_papich_e_clone_debuff:OnIntervalThink()
     self:GetParent():EmitSound("Hero_Ancient_Apparition.IceBlastRelease.Tick")
     ApplyDamage(self.damage_table)
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, self:GetParent(), self.dot_damage, nil)
-    if self:GetParent():GetHealthPercent() <= 20 then
+    if self:GetParent():GetHealthPercent() <= self.kill_percent then
         self:GetParent():Kill(self:GetAbility(), self:GetCaster())
         EmitSoundOn("papich_e_clone_success", self:GetCaster())
         self:Destroy()

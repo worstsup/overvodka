@@ -17,6 +17,7 @@ end
 function item_oboyudno_2:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
+    self:GetCaster():Purge( false, true, false, false, false)
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_birzha_blade_mail_active", {duration = duration} )
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_lotus_orb_active", {duration = duration} )
     self:GetCaster():EmitSound("oboyudno_2")

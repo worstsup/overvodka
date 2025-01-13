@@ -1,18 +1,6 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_cheater_smoke = class({})
 
 --------------------------------------------------------------------------------
--- Classifications
 function modifier_cheater_smoke:IsHidden()
 	return false
 end
@@ -59,7 +47,6 @@ function modifier_cheater_smoke:OnDestroy()
 end
 
 --------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_cheater_smoke:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MISS_PERCENTAGE,
@@ -80,7 +67,6 @@ function modifier_cheater_smoke:GetBonusNightVision()
 end
 
 --------------------------------------------------------------------------------
--- Aura Effects
 function modifier_cheater_smoke:IsAura()
 	return self.owner
 end
@@ -108,26 +94,18 @@ end
 --------------------------------------------------------------------------------
 
 function modifier_cheater_smoke:PlayEffects()
-	-- Get Resources
 	local particle_cast = "particles/riki_smokebomb_ti8_new.vpcf"
 	local sound_cast = "smoke_explosion"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( self.radius, self.radius, self.radius ) )
-	-- ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- buff particle
 	self:AddParticle(
 		effect_cast,
-		false, -- bDestroyImmediately
-		false, -- bStatusEffect
-		-1, -- iPriority
-		false, -- bHeroEffect
-		false -- bOverheadEffect
+		false,
+		false,
+		-1,
+		false,
+		false
 	)
-
-	-- Create Sound
 	EmitSoundOn( sound_cast, self:GetParent() )
 end

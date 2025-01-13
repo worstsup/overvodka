@@ -7,7 +7,7 @@ function modifier_custom_evasion:RemoveOnDeath() return false end
 function modifier_custom_evasion:OnCreated()
     if not IsServer() then return end
     self.current_evasion = 30
-    self:StartIntervalThink(0.1) -- Update every 0.1 seconds
+    self:StartIntervalThink(0.1)
 end
 function modifier_custom_evasion:OnRemoved()
 end
@@ -20,8 +20,6 @@ function modifier_custom_evasion:OnIntervalThink()
     local min_evasion = self:GetAbility():GetSpecialValueFor( "min_evasion" )
     local close_range = self:GetAbility():GetSpecialValueFor( "close_range" )
     local mid_range = self:GetAbility():GetSpecialValueFor( "mid_range" )
-
-    -- Find enemy heroes in range using the global FindUnitsInRadius function
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
         caster:GetAbsOrigin(),
@@ -33,20 +31,15 @@ function modifier_custom_evasion:OnIntervalThink()
         FIND_ANY_ORDER,
         false
     )
-    -- Default to max evasion if no enemies are found
     if #enemies == 0 then
         self.current_evasion = max_evasion
         return
     end
-
-    -- Determine the closest enemy distance
     local closest_distance = mid_range
     for _, enemy in pairs(enemies) do
         local distance = (enemy:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D()
         closest_distance = math.min(closest_distance, distance)
     end
-
-    -- Update evasion based on distance
     if closest_distance <= close_range then
         self.current_evasion = min_evasion
     elseif closest_distance <= mid_range then

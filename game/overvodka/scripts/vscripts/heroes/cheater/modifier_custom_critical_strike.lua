@@ -18,7 +18,6 @@ function modifier_custom_critical_strike:OnRefresh( )
     self.crit_mult = self:GetAbility():GetSpecialValueFor( "crit_mult" )
     self.extra_range = self:GetAbility():GetSpecialValueFor( "extra_range" )
 end
--- Declare the properties modified
 function modifier_custom_critical_strike:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
@@ -34,14 +33,11 @@ end
 function modifier_custom_critical_strike:GetModifierFixedAttackRate(params)
     return self.attack
 end
--- Apply critical strike
 function modifier_custom_critical_strike:GetModifierPreAttack_CriticalStrike(params)
     if not IsServer() then return end
-
-    -- Ensure it applies only to the caster
     local parent = self:GetParent()
     if parent == params.attacker then
-        return self.crit_mult -- Critical strike damage multiplier
+        return self.crit_mult
     end
 end
 function modifier_custom_critical_strike:OnAttack( params )
@@ -52,7 +48,6 @@ end
 function modifier_custom_critical_strike:GetModifierAttackRangeBonus(params)
     return self.extra_range
 end
--- Add particle effect on critical strikes (optional)
 function modifier_custom_critical_strike:GetEffectName()
     return "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf"
 end

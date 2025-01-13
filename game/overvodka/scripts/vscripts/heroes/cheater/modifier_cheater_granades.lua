@@ -1,7 +1,6 @@
 modifier_cheater_granades = class({})
 
 --------------------------------------------------------------------------------
--- Classifications
 function modifier_cheater_granades:IsHidden()
 	return false
 end
@@ -19,9 +18,7 @@ function modifier_cheater_granades:IsPurgable()
 end
 
 --------------------------------------------------------------------------------
--- Initializations
 function modifier_cheater_granades:OnCreated( kv )
-	-- references
 	local damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.magic_resist = self:GetAbility():GetSpecialValueFor( "magic_resistance" )
@@ -31,7 +28,6 @@ function modifier_cheater_granades:OnCreated( kv )
 	if not IsServer() then return end
 
 	if not self.owner then
-		-- precache damage
 		self.damageTable = {
 			victim = self:GetParent(),
 			attacker = self:GetCaster(),
@@ -39,9 +35,6 @@ function modifier_cheater_granades:OnCreated( kv )
 			damage_type = self:GetAbility():GetAbilityDamageType(),
 			ability = self:GetAbility(), --Optional.
 		}
-		-- ApplyDamage(damageTable)
-
-		-- Start interval
 		self:StartIntervalThink( 1 )
 	else
 		self:PlayEffects()

@@ -62,7 +62,7 @@ function Server:OnGameEnded(Teams)
             local Deaths = PlayerResource:GetDeaths(PlayerID)
             local Assists = PlayerResource:GetAssists(PlayerID)
             local Rating = self:CalculateRating(PlayerID, Teams)
-            local bWin = Rating >= 35
+            local bWin = Rating >= 45
             local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
 
             if PlayerInfo.doubled then
@@ -269,7 +269,7 @@ function Server:GetPlayerRank(PlayerID)
         },
         {
             min = 8000,
-            max = -1,
+            max = 12000,
             type = SERVER_RANKS_DEFINITION.HAMSTERGOD
         },
     }

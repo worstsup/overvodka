@@ -23,6 +23,7 @@ require('timers')
 require('utils')
 require('server/debug_panel')
 require('server/server')
+require('music_zone_trigger')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -545,7 +546,7 @@ function COverthrowGameMode:InitGameMode()
   
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
-
+  	MusicZoneTrigger:Init()
 	DebugPanel:Init()
 
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)

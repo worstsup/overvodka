@@ -510,8 +510,6 @@
 //=================================
 	"item_lesh"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
     "ID"                            "1104"  //Valve's version of this item uses the ID "104".
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -532,27 +530,19 @@
 	{
 		"soundfile"			"soundevents/ailesh.vsndevts"
 	}
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"              "300"
     "AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "40.0"
     "AbilityManaCost"               "0"
     "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "700"
     "ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
     "ItemQuality"                   "rare"  
-    
     "AbilityValues"
     {
             "range_tooltip"         "300"
             "stun_duration"         "1"
     }
-    
     "OnSpellStart"
     {
         "RunScript"
@@ -563,7 +553,6 @@
 		"SpendCharge"
 			{}	
     }
-    
     "Modifiers"
     {
 		"modifier_item_abyssal_blade_datadriven_active"
@@ -586,124 +575,37 @@
         }
     }
 }
-"item_mega_spinner"
+	"item_aegis_hero"
 	{
-		"ID"							"1502"
-		"BaseClass" 					"item_datadriven"
-		"ItemCost"						"7000"
-		"ItemKillable" 					"0" 
-		"ItemDroppable" 				"1"
-		"ItemSellable"                  "1"
-		"ItemPurchasable"		 		"1"
-		"ItemQuality"					"common"
-		"AbilityTextureName"			"aega"
+		"BaseClass" 					"item_lua"
+		"ScriptFile" 					"aegis_hero"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-		"Modifiers"
-		{
-			"modifier_item_mega_spinner"
-			{
-				"Passive"          "1"    
-				"IsHidden"         "1"
-				"Attributes" 		        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				"AllowIllusionDuplicate"    "1"
-
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
-				}
-				
-				"States"
-				{
-					"MODIFIER_STATE_CANNOT_MISS"			"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"OnAttackLanded"
-				{
-					"Random"
-					{
-						"Chance"			"%minibash_chance"
-						"PseudoRandom"		"DOTA_PSEUDO_RANDOM_ITEM_MKB"
-						"OnSuccess"
-						{
-							
-							"RunScript"
-							{
-								"ScriptFile"	"mega_spinner.lua"
-								"Function"		"OnSuccess"
-								"attack_damage"	"%attack_damage"
-							}
-
-							"ApplyModifier"
-							{
-								"ModifierName"	"modifier_item_mega_spinner_slow"
-								"Target" 		"TARGET"
-							}
-
-							"CleaveAttack"
-							{
-								"CleavePercent"		"%cleave_percent"
-								"CleaveRadius"		"%cleave_radius"
-								"CleaveEffect"		"particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf"
-							}
-						}
-					}
-				}	
-			}
-			
-			"modifier_item_mega_spinner_slow"
-			{
-				"IsDebuff" "1"
-				"IsPurgable"	"1"
-
-				"Duration"	"%slow_duration"
-				"EffectAttachType"	"follow_origin"
-				
-				"TextureName"	"aega"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed_slow"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movement_speed_slow" 
-				}
-			}
-		}
-		
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"			"aegis_hero"
+		"ItemCost"						"7000"
 		"AbilityValues"
 		{
-				"bonus_attack_speed"	"120"
-				"minibash_chance"			"30"
-				"bash_damage"			"200"
-				"bash_stun"				"0.1"
-				"cleave_percent" "100"
-				"cleave_radius" "650"
-				"attack_speed_slow" "-30"
-				"movement_speed_slow" "-10"
-				"slow_duration"			"2"
+			"bonus_attack_speed"	"120"
+			"minibash_chance"		"30"
+			"bash_damage"			"200"
+			"bash_stun"				"0.1"
+			"cleave_percent" 		"100"
+			"cleave_radius" 		"650"
+			"attack_speed_slow" 	"-30"
+			"movement_speed_slow" 	"-10"
+			"slow_duration"			"2"
 		}
 	}
-	"item_recipe_mega_spinner"
+	"item_recipe_aegis_hero"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"1501"						
 		"Model"							"models/props_gameplay/recipe.mdl"
 		"BaseClass"                     "item_datadriven"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"300"
-		"ItemShopTags"					"str;damage;hard_to_tag"
-
 		"ItemKillable" 					"0" 
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
-		"AbilityTextureName"    "recipe"
-		"ItemResult"					"item_mega_spinner"
-		
+		"AbilityTextureName"   			"recipe"
+		"ItemResult"					"item_aegis_hero"
 		"ItemRequirements"
 		{
 			"01"						"item_hyperstone;item_monkey_king_bar"
@@ -1325,31 +1227,17 @@
 	}
 	"item_suchiy"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_shivas_guard"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"FightRecapLevel"				"1"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"            "suchiy"
 		"AbilitySharedCooldown"			"shiva"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"27"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"275"
 		"ItemCost"						"6000"
-		"ItemShopTags"					"int;armor;hard_to_tag"
-		"ItemQuality"					"epic"
-		"ItemAliases"					"shiva\'s guard;shivas"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"bonus_intellect"		"20"
@@ -1841,8 +1729,6 @@
 }
 "item_chapman_violet"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
     "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityTextureName"            "chapman_violet"
@@ -1854,17 +1740,11 @@
 	"ItemStockInitial"				"1"
 	"ItemStockMax"					"2"
 	"ItemStockTime"					"180.0"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"              "300"
     "AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "30.0"
     "AbilityManaCost"               "0"
     "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "700"
     "ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
     "ItemQuality"                   "rare"  
@@ -1889,8 +1769,6 @@
 }
 "item_chapman_blue"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
     "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityTextureName"            "chapman_blue"
@@ -1902,9 +1780,6 @@
 	"ItemStockInitial"				"1"
 	"ItemStockMax"					"2"
 	"ItemStockTime"					"180.0"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"              "300"
     "AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "30.0"
@@ -1950,17 +1825,11 @@
 	"ItemStockInitial"				"1"
 	"ItemStockMax"					"1"
 	"ItemStockTime"					"300.0"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"              "300"
     "AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "30.0"
     "AbilityManaCost"               "0"
     "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "2000"
     "ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
     "ItemQuality"                   "rare"  
@@ -2054,29 +1923,18 @@
 	}
 "item_kaska"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
     "ID"                            "1114"  //Valve's version of this item uses the ID "114".
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "serdce"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
 	"AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "80.0"
     "AbilityManaCost"               "100.0"
-        
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "9000"
     "ItemShopTags"                  "str;regen_health;health_pool"
     "ItemQuality"                   "epic"
-
-    // Special  
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityValues"
     {
             "bonus_strength"                    "45"
@@ -2175,7 +2033,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
-    "ID"                            "1057"  //Valve's version of this item uses the ID "50".
+    "ID"                            "1057"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -2293,24 +2151,16 @@
 	}
 "item_nikes"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
-    "ID"                            "1050"  //Valve's version of this item uses the ID "50".
+    "ID"                            "1050"  
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "nikes"
     "AbilitySharedCooldown"			"phase"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"              "0"
     "AbilityCooldown"               "8"
     "AbilityManaCost"               "0"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "9000"
     
     "AbilityValues"
@@ -2413,19 +2263,11 @@
 }
 "item_recipe_nikes"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"700"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_nikes"
 		"ItemRequirements"
@@ -2435,21 +2277,13 @@
 	}
 "item_govno"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
-    "ID"                            "1032"  //Valve's version of this item uses the ID "32".
+    "ID"                            "1032"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "govno"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "8000"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"dodge_chance_pct"			"20"
@@ -2521,19 +2355,11 @@
 }
 "item_recipe_govno"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"500"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_govno"
 		"ItemRequirements"
@@ -2546,16 +2372,8 @@
 	//=================================================================================================================
 	"item_recipe_octarine_core"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"100"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_octarine_core"
 		"ItemRequirements"
@@ -2565,12 +2383,7 @@
 	}
 	"item_octarine_core"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"4800"
 		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
 		"ItemQuality"					"rare"
@@ -2578,9 +2391,6 @@
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
 		"SuggestLategame"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 			"bonus_cooldown"		"0"
@@ -2592,21 +2402,13 @@
 	}
 	"item_aegis"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/aegis.vmdl"		
 		"Effect"						"particles/generic_gameplay/dropped_aegis.vpcf"
 		"FightRecapLevel"				"2"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"0"
 		"ItemShopTags"					""
 		"ItemQuality"					"artifact"
-
-		// Items		
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemPurchasable"				"0"
 		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
@@ -2615,9 +2417,6 @@
 		"AllowedInBackpack"				"0"
 		"IsTempestDoubleClonable"		"0"
 		"SpeciallyBannedFromNeutralSlot"		"1"
-
-
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"reincarnate_time"		"5.0"
@@ -2628,20 +2427,12 @@
 	}
 	"item_recipe_mask_of_quadrobe"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
-		"ID"							"1171"  //Valve's version of this item uses the ID "171".
+		"ID"							"1171"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"450"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_mask_of_quadrobe"
 		"ItemRequirements"
@@ -2651,23 +2442,15 @@
 	}
 	"item_mask_of_quadrobe"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
-		"ID"							"1172"  //Valve's version of this item uses the ID "172".
+		"ID"							"1172"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"mask_of_quadrobe"
-		
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"30.0"
 		"AbilityManaCost"				"100"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"6000"
 		
 		"AbilityValues"
@@ -2790,10 +2573,7 @@
 						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_interval_think"
 					}
 				}
-				
 				"ThinkInterval"			".03"
-				//This debuff aura is invisible to enemies unless its emitting unit is visible to them,
-				//so regularly check to see if the modifier should be visible.
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -2803,7 +2583,7 @@
 					}
 				}
 				
-				"OnDestroy"  //Remove the visible modifier, if it is currently on the unit.
+				"OnDestroy"
 				{
 					"RunScript"
 					{
@@ -2812,8 +2592,6 @@
 					}
 				}
 			}
-			//A visible modifier that should appear to enemies only if they are affected by the debuff aura and its emitter
-			//is visible to their team.
 			"modifier_item_assault_datadriven_enemy_aura_visible"
 			{
 				"Passive"			"0"
@@ -2826,20 +2604,12 @@
 	}
 	"item_recipe_armlet_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
-		"ID"							"1150"  //Valve's version of this item uses the ID "150".
+		"ID"							"1150"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"200"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_armlet_datadriven"
 		"ItemRequirements"
@@ -2849,33 +2619,23 @@
 	}
 	"item_dummy_datadriven"  //A dummy item that is used to take up item slots in the swap_to_item() Lua function.
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"ID"                            "2001"
 		"BaseClass"                     "item_datadriven"
 		"ItemBaseLevel"                 "1"
 		"ItemPurchasable"				"0"
 	}
 	
-	"item_armlet_datadriven"  //The inactive version of Armlet.
+	"item_armlet_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"ID"							"1151"  //Valve's version of this item uses the ID "151".
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"armlet_datadriven"
-		
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"5500"
 		
 		"AbilityValues"
@@ -2919,25 +2679,17 @@
 		    }
 		}
 	}
-	"item_armlet_active_datadriven"  //The active version of Armlet.
+	"item_armlet_active_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"ID"							"2151"  //Valve's version of this item uses the ID "151".
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"armlet_active_datadriven"
-	
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
-			
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"5500"
 		
 		"ItemPurchasable"				"0"
@@ -2962,7 +2714,7 @@
 				"unholy_tick_interval"				".1"  //This is the interval at which the caster will gain Strength immediately after Armlet is toggled
 		}
 		
-		"OnSpellStart"  //Switch to the inactive version of Armlet.
+		"OnSpellStart"
 		{
 			"RunScript"
 			{
@@ -3009,7 +2761,7 @@
 				}
 				
 				"ThinkInterval" 		"%unholy_health_drain_interval"
-				"OnIntervalThink"  //Damage the caster while Armlet is toggled on.
+				"OnIntervalThink"
 				{
 					"RunScript"
 					{
@@ -3020,8 +2772,6 @@
 					}
 				}
 			}
-			//The acquisition of Strength is delayed until after the first %unholy_tick_interval seconds.  Regularly add
-			//more Strength so long as the caster doesn't have as many Strength ticks as they should.
 			"modifier_item_armlet_active_datadriven_apply_tick_strength"
 			{
 				"Passive"			"1"
@@ -3040,8 +2790,6 @@
 					}
 				}
 			}
-			//Strength is gained every %unholy_tick_interval seconds a total of %unholy_ticks_to_full_effect times, so 
-			//for the default values, add one of these modifiers every .1 seconds until there are 7 on the caster.
 			"modifier_item_armlet_active_datadriven_tick"
 			{
 				"Passive"			"0"
@@ -3050,15 +2798,13 @@
 				
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"3.57"  //This value is %unholy_bonus_strength / %unholy_ticks_to_full_effect and is hardcoded here for technical reasons.
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"3.57"
 				}
 			}
 		}
 	}
 	"item_byebye"
 {
-	// General
-	//-------------------------------------------------------------------------------------------------------------
 	"BaseClass"						"item_datadriven"
 	"ID"							"1001"  //Valve's version of this item uses the ID "1".
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -3066,9 +2812,6 @@
 	"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 	"AbilityTextureName"			"byebye"
 	"FightRecapLevel"				"1"
-	
-	// Stats		
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityCastRange"				"0"
 	"AbilityCastPoint"				"3.0"
 	"AbilityCooldown"				"90.0"
@@ -3081,18 +2824,12 @@
 	"ItemStockInitial"				"1"
 	"ItemStockMax"					"1"
 	"ItemStockTime"					"90.0"
-	
-	// Item Info
-	//-------------------------------------------------------------------------------------------------------------
 	"ItemCost"						"400"
 	"ItemShopTags"					"teleport"
 	"ItemQuality"					"component"
 	"ItemAliases"					"blink dagger"
 	"SideShop"						"1"
 	"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-
-	// Special	
-	//-------------------------------------------------------------------------------------------------------------
 	"AbilityValues"
 	{
 			"max_blink_range"				"12000"
@@ -3150,8 +2887,8 @@
 }
 	"item_recipe_cuirass_2"
 	{
-		"BaseClass"				 "item_datadriven"
-		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"				 	"item_datadriven"
+		"Model"						"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"		"item_recipe"
 		"ItemCost"					"850"
 		"ItemRecipe"				"1"
@@ -3167,7 +2904,7 @@
 		"BaseClass"					"item_lua"
 		"ScriptFile"				"cuirass"
 		"AbilityTextureName"		"oboyudno"
-		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"			"35"
 		"AbilityManaCost"			"200"
 		"ItemCost"					"7000"
@@ -3175,8 +2912,8 @@
 		
 		"AbilityValues"
 		{
-			"bonus_armor_stats"			 	"15"
-			"bonus_attack_speed_stats"		  "0"
+			"bonus_armor_stats"			 		"15"
+			"bonus_attack_speed_stats"		  	"0"
 			"bonus_damage_stats"				"20"
 			"bonus_int_stats"					"10"
 			"bonus_hpregen"						"10"
@@ -3187,7 +2924,7 @@
 			"return_damage"						"85"
 			"return_damage_passive"				"20"
 			"return_damage_passive_percentage" 	"25"	
-			"radius"						"0"
+			"radius"							"0"
 		}
 	}
 	"item_recipe_oboyudno_2"
@@ -3216,8 +2953,8 @@
 		"AbilitySharedCooldown" 	"blademail"
 		"AbilityValues"
 		{
-			"bonus_armor_stats"			 	"15"
-			"bonus_attack_speed_stats"		  "0"
+			"bonus_armor_stats"			 		"15"
+			"bonus_attack_speed_stats"			"0"
 			"bonus_damage_stats"				"50"
 			"bonus_int_stats"					"10"
 			"bonus_hpregen"						"10"
@@ -3228,22 +2965,14 @@
 			"return_damage"						"100"
 			"return_damage_passive"				"40"
 			"return_damage_passive_percentage" 	"35"	
-			"radius"						"0"
+			"radius"							"0"
 		}
 	}
 	"item_blade_mail"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"25.0"
 		"AbilitySharedCooldown" 	"blademail"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"25"
 		"ItemCost"						"2300"
 		"ItemShopTags"					"damage;armor;int;hard_to_tag"
@@ -3251,10 +2980,6 @@
 		"ItemAliases"					"bm;blade mail;blademail"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"SuggestLategame"				"1"
-		
-
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"bonus_damage"			"18"
@@ -3274,16 +2999,15 @@
 		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown"			"25"
 		"ItemCost"					"3000"
-		
 		"AbilityValues"
 		{
-			"bonus_all_stats"			 	"10"
-			"bonus_attack_speed_stats"		  "30"
-			"bonus_ms"		"8"
-			"bonus_magresist"	"15"
-			"percent_min"	"40"
-			"percent_heal"	"30"
-			"time_to_heal"	"4"
+			"bonus_all_stats"			"10"
+			"bonus_attack_speed_stats"  "30"
+			"bonus_ms"					"8"
+			"bonus_magresist"			"15"
+			"percent_min"				"40"
+			"percent_heal"				"30"
+			"time_to_heal"				"4"
 		}
 	}
 	"item_drobe"

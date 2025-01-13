@@ -50,7 +50,8 @@ function modifier_ejovik:CheckState()
 	local state = {
 		[MODIFIER_STATE_ROOTED] = true,
 		[MODIFIER_STATE_FORCED_FLYING_VISION] = true,
-		[MODIFIER_STATE_MAGIC_IMMUNE] = self.shard
+		[MODIFIER_STATE_MAGIC_IMMUNE] = self.shard,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.shard,
 	}
 
 	return state

@@ -3,19 +3,17 @@ LinkLuaModifier( "modifier_cheater_rage", "heroes/cheater/modifier_cheater_rage"
 
 --------------------------------------------------------------------------------
 function cheater_rage:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	caster:StartGesture(ACT_DOTA_CAST_ABILITY_6)
 	-- load data
 	local duration = self:GetDuration()
-		-- add modifier to new targets
 	caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_cheater_rage", -- modifier name
+		caster,
+		self,
+		"modifier_cheater_rage",
 		{
 			duration = duration,
-		} -- kv
+		}
 	)
 	local sound_cast = "scar_start"
 	EmitSoundOn( sound_cast, caster )

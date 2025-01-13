@@ -16,7 +16,7 @@ function papich_r:OnSpellStart()
         {"papich_passive", "papich_maniac"},
         {"papich_r",   "papich_e_clone"},
     }
-    local target = self:GetCaster()
+    local target = Entities:FindByNameNearest("npc_dota_hero_skeleton_king", self:GetCaster():GetAbsOrigin(), 10000)
     if self.knight ~= nil then
         self.knight:RemoveModifierByName("modifier_papich_r")
     end

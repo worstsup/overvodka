@@ -31,7 +31,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_mega_spinner"
+			"item"		"item_aegis_hero"
 			"item"		"item_aghanims_shard"
             "item"		"item_waka"
             "item"		"item_kaska"

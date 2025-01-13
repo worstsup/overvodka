@@ -26,6 +26,7 @@ function modifier_dave_scepter:OnDeath(params)
     if not IsServer() then return end
     self.parent = self:GetParent()
     if params.unit ~= self.parent then return end
+    if self.parent:IsIllusion() then return end
     local killer = params.attacker
     if not killer or not killer:IsHero() then return end
     EmitSoundOn("dave_scepter", self.parent)
