@@ -723,6 +723,7 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
+	ListenToGameEvent("player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
@@ -838,7 +839,12 @@ function COverthrowGameMode:GetSortedValidActiveTeams()
 				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
 				if PlayerID ~= -1 then
 					local Connection = PlayerResource:GetConnectionState(PlayerID)
-					if Connection ~= DOTA_CONNECTION_STATE_ABANDONED then
+					local FakeClient = PlayerResource:IsFakeClient(PlayerID)
+					local Check = DOTA_CONNECTION_STATE_ABANDONED
+					if FakeClient then
+						Check = DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
+					end
+					if Connection ~= Check and Connection ~= DOTA_CONNECTION_STATE_UNKNOWN then
 						table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
 						break
 					end
@@ -867,26 +873,43 @@ function COverthrowGameMode:IsFirstBlooded()
 end
 
 function COverthrowGameMode:OnPlayerDisconnected(event)
-	if self.TEAMS_MISSING ~= self:GetCountMissingTeams() then
-		local PlayerID = event.PlayerID
+	local PlayerID = event.PlayerID
 
-		local Team = PlayerResource:GetTeam(PlayerID)
+	local Team = PlayerResource:GetTeam(PlayerID)
 
-		self.TEAMS_MISSING = self:GetCountMissingTeams()
+	local ActiveTeams = self:GetSortedValidActiveTeams()
 
-		local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
-		if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
-			_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-MinusTime)
+	local bTeamActive = false
+	for _, TeamInfo in ipairs(ActiveTeams) do
+		if TeamInfo.teamID == Team then
+			bTeamActive = true
+			break
 		end
+	end
 
-		CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", {
-			team = Team, 
-			last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
-			bonus_gold = self.GoldBonusPerTeam,
-			bonus_xp = self.XpBonusPerTeam,
-			time_reduce = MinusTime,
-			missing_teams = self.TEAMS_MISSING
-		} )
+	if bTeamActive == true then return end
+
+	print("Team Disconnected: "..Team)
+
+	self.TEAMS_MISSING = self:GetCountMissingTeams()
+
+	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
+	self:ReduceCountdownTimer(1)
+
+	CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", {
+		team = Team, 
+		last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+		bonus_gold = self.GoldBonusPerTeam,
+		bonus_xp = self.XpBonusPerTeam,
+		time_reduce = MinusTime,
+		missing_teams = self.TEAMS_MISSING
+	} )
+end
+
+function COverthrowGameMode:ReduceCountdownTimer(nTimes)
+	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
+	if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
+		_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-(MinusTime*nTimes))
 	end
 end
 
