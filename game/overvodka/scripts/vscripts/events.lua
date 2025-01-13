@@ -23,10 +23,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		end
 
 		self.TEAMS_MISSING = self:GetCountMissingTeams()
-		if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
-			local MinusTime = (IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM) * self.TEAMS_MISSING
-			_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-MinusTime)
-		end
+		self:ReduceCountdownTimer(self.TEAMS_MISSING)
 		
 		if GetMapName() == "forest_solo" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_SINGLES

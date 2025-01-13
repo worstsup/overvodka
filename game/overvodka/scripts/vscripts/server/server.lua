@@ -400,27 +400,11 @@ end
 function Server:OnPlayerDisconnected(event)
     if self.bGameEnded == true then return end
 
-    local ConnectedTeams = {}
+    local ConnectedTeams = COverthrowGameMode:GetSortedValidActiveTeams()
 
-    for PlayerID, PlayerInfo in pairs(self.Players) do
-        local Team = PlayerResource:GetTeam(PlayerID)
-        local bAbandoned = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
-        if bAbandoned == false then
-            if ConnectedTeams[Team] == nil then
-                ConnectedTeams[Team] = 0
-            end
-
-            ConnectedTeams[Team] = ConnectedTeams[Team] + 1
-        end
+    if #ConnectedTeams == 1 then
+        COverthrowGameMode:EndGame( ConnectedTeams[#ConnectedTeams].teamID )
     end
-
-    if table.count(ConnectedTeams) == 1 then
-        for TeamNumber, Count in pairs(ConnectedTeams) do
-            COverthrowGameMode:EndGame( TeamNumber )
-            break
-        end
-    end
-    COverthrowGameMode:OnPlayerDisconnected(event)
 end
 
 function Server:UpdatePlayerNetTable(PlayerID)
