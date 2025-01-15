@@ -33,6 +33,7 @@
                     <Panel class="SeasonalPreviewIcon Balloon" />
                 </Panel>
                 <Panel id="EffectPreview" />
+                <Panel id="ChatWheelPreview" />
                 <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
                     <Panel class="Wrapper">
                         <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>

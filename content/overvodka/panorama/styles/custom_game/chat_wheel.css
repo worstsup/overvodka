@@ -1,0 +1,739 @@
+.CustomChatWheel{
+    width: 100%;
+    height: 100%;
+}
+
+.SettingsOpenButton{
+    width: 40px;
+    height: 40px;
+    background-image: url("s2r://panorama/images/settings_chatwheel_png.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin-top: 8px;
+	margin-left: 271px;
+
+    wash-color: #CDF;
+    img-shadow: 0px 0px 3px 2 black;
+
+    opacity: 0;
+
+    transition-property: brightness;
+    transition-duration: .1s;
+}
+
+.SettingsOpenButton:hover{
+    brightness: 1.5;
+}
+
+.IsSubscribed .SettingsOpenButton{
+    opacity: 1;
+}
+
+#SettingsBody{
+    align: center center;
+
+    opacity: 0;
+
+    transform: translateX(-25px) translateY(-25px);
+
+    transition-property: opacity, transform, box-shadow;
+    transition-duration: .15s;
+    
+    width: 1300px;
+    height: 740px;
+
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#1d1c15ef), color-stop(0.5, #1b1910ef), to(#252110ef));
+    border: 1px solid white;
+    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#7e765b), color-stop(0.5, #978d52ef), to(#bca93cef));
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.0);
+
+    flow-children: right;
+}
+
+#SettingsBody.Show{
+    opacity: 1;
+
+    transform: translateX(0) translateY(0);
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.727);
+}
+
+.SettingsChatWheel{
+    width: 830px;
+    padding: 30px;
+    flow-children: down;
+    align: center center;
+}
+
+.Top{
+    width: 100%;
+    /* margin-bottom: 15px; */
+}
+
+.Center{
+    width: 100%;
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
+}
+
+.Bottom{
+    /* margin-top: 30px; */
+    width: 100%;
+}
+
+#LineButton1{
+    align: center top;
+}
+
+#LineButton2{
+    align: right top;
+    margin-right: 50px;
+}
+
+#LineButton3{
+    margin-right: 0px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+
+    align: right top;
+}
+
+#LineButton4{
+    align: right top;
+    margin-right: 50px;
+}
+
+#LineButton5{
+    align: center top;
+}
+
+#LineButton6{
+    align: left top;
+    margin-left: 50px;
+}
+
+#LineButton7{
+    margin-left: 0px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+}
+
+#LineButton8{
+    align: left bottom;
+    margin-left: 50px;
+}
+
+.LineButton{
+    width: 210px;
+    height: 92px;
+    border-radius: 32px;
+    background-color: #302f2b;
+    border: 2px solid white;
+    border-brush: gradient( linear, 0% 0%, 100% 0%, from( #eed872 ), color-stop( .3, #bba850 ), color-stop( .35, #9f8f45), color-stop( .65, #9f8f45), color-stop( .7, #bba850 ), to( #eed872 ) );
+    padding: 8px;
+
+    margin: 12px;
+}
+
+.LineButton.SelectingTime{
+    animation-name: select_time;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 'select_time'
+{
+	0%
+	{
+        border-brush: gradient( linear, 0% 0%, 100% 0%, from( #ffd726 ), color-stop( .3, #e9c938 ), color-stop( .35, #fee46e), color-stop( .65, #fee46e), color-stop( .7, #e9c938 ), to( #ffd726 ) );   
+		box-shadow: 0px 0px 3px 0px #eed872;
+        background-color: #928550;
+	}
+
+    50%
+	{
+        border-brush: gradient( linear, 0% 0%, 100% 0%, from( #ffe880 ), color-stop( .3, #e9c938 ), color-stop( .35, #fee46e), color-stop( .65, #fee46e), color-stop( .7, #e9c938 ), to( #ffe880 ) );     
+		box-shadow: 0px 0px 5px 0px #eed872;
+        background-color: #574e2b;
+    }
+	
+	100%
+	{
+        border-brush: gradient( linear, 0% 0%, 100% 0%, from( #ffd726 ), color-stop( .3, #e9c938 ), color-stop( .35, #fee46e), color-stop( .65, #fee46e), color-stop( .7, #e9c938 ), to( #ffd726 ) );   
+		box-shadow: 0px 0px 3px 0px #eed872;
+        background-color: #928550;
+	}
+}
+
+.DecorLine{
+    width: 400px;
+    height: 3px;
+
+    align: center center;
+
+    background-color: gradient( linear, 0% 0%, 100% 0%, from( #897b3b88 ), color-stop( .3, #484533 ), color-stop( .35, transparent), color-stop( .65, transparent), color-stop( .7, #484533 ), to( #897b3b88 ) );
+}
+
+#DecorLine2{
+    transform: rotateZ(45deg);
+}
+
+#DecorLine3{
+    transform: rotateZ(-45deg);
+}
+
+#DecorLine4{
+    width: 460px;
+    transform: rotateZ(90deg);
+}
+
+.LeftButtons{
+    width: 500px;
+    flow-children: down;
+    align: left center;
+}
+
+.RightButtons{
+    width: 500px;
+    flow-children: down;
+    align: right center;
+}
+
+.CenterIcon{
+    align: center center;
+    background-image: url("s2r://panorama/images/settings_chatwheel_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 112px;
+    height: 112px;
+    wash-color: #eed872;
+}
+
+#SettingsVariantsTable{
+    width: 100%;
+    height: 100%;
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a291fef), color-stop(0.5, #292618ef), to(#383219ef));
+    border-left: 1px solid #7e765b;
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.727);
+    flow-children: down;
+
+    transition-property: background-color, box-shadow;
+    transition-duration: .1s;
+}
+
+#SettingsVariantsTable.SelectingTime{
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#4a4937ef), color-stop(0.5, #423d27ef), to(#655a2eef));
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.727);
+}
+
+.HeaderLine{
+    width: 100%;
+    height: 37px;
+
+    /* border-bottom: 1px solid #7e765b;
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.727); */
+
+    background-color: #1e1d16ef;
+
+    z-index: 999999;
+}
+
+#CloseButton{
+    width: 32px;
+    height: 32px;
+    background-image: url("s2r://panorama/images/control_icons/24px/x_close.vsvg");
+    background-size: 80% 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    wash-color: rgb(218, 192, 97);
+    transition-property: wash-color;
+    transition-duration: 0.1s;
+    brightness: 2;
+
+    align: right top;
+}
+
+#CloseButton:hover{
+    wash-color: rgb(251, 229, 131);
+}
+
+.HeaderMenus{
+    height: fit-children;
+    margin-top: 5px;
+
+    align: center top;
+
+    flow-children: right;
+}
+
+.ButtonHeader{
+    width: fit-children;
+    height: 30px;
+
+    z-index: 99999999;
+}
+
+.ButtonHeader:hover .ButtonHeaderText{
+    color: white;
+}
+
+.ButtonHeader:hover .ButtonHeaderArrow{
+    wash-color: white;
+}
+
+.Selected .ButtonHeaderText{
+    color: white;
+    text-shadow: 0px 0px 12px #706d5d;
+}
+
+.ButtonHeaderText{
+    align: center center;
+    text-align: center;
+
+    padding: 0px 10px;
+
+    text-transform: uppercase;
+
+    font-size: 25px;
+
+    color: #8e8b76;
+
+    transition-property: color, text-shadow;
+    transition-duration: .2s;
+}
+
+.ButtonHeaderDash{
+    width: 25px;
+    height: 25px;
+    margin: 0px 0px;
+}
+
+.ButtonHeaderDashText{
+    align: center center;
+    text-align: center;
+    font-size: 25px;
+
+    text-transform: uppercase;
+
+    color: #8e8b76;
+}
+
+.ItemsBody{
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+}
+
+/* #ItemsText{
+    background-color: black;
+}
+
+#ItemsSounds{
+    background-color: white;
+} */
+
+.ItemsContainer{
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    align: center center;
+
+    transition-property: opacity;
+    transition-duration: .2s;
+
+    flow-children: down;
+
+    overflow: squish scroll;
+}
+
+.ItemsContainer #VerticalScrollBar{
+    width: 4px;
+    height: 100%;
+    visibility: visible;
+    horizontal-align: right;
+    layout-position: fixed;
+    background-color: black;
+}
+
+.ItemsContainer #ScrollThumb{
+    min-height: 32px;
+    background-color: #8a8156;
+    border-top: 1px solid #aaaaaa22;
+    border-right: 1px solid #000000aa;
+}
+
+.ItemsContainer.Selected{
+    opacity: 1;
+}
+
+.Item{
+    width: 100%;
+    height: 50px;
+    flow-children: right;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    transition-property: brightness;
+    transition-duration: .15s;
+
+    z-index: 0.0;
+}
+
+.Item.Odd{
+    background-color: rgba(0,0,0,0.25);
+}
+
+.SelectingTime .Item:hover{
+    brightness: 2;
+    background-color: rgba(255, 229, 98, 0.1);
+}
+
+.ItemIconContainer{
+    width: 24px;
+    height: 24px;
+
+    margin-left: 10px;
+
+    align: left center;
+}
+
+.ItemText{
+    font-size: 18px;
+    text-shadow: 1px 1.5px 0px 2 #000000;
+    color: #fff;
+
+    margin-left: 5px;
+
+    align: left center;
+    text-align: left;
+}
+
+.TypeText .TextIcon{
+    opacity: 1;
+}
+
+.TypeSound .SoundIcon{
+    opacity: 1;
+}
+
+.TextIcon{
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    background-image: url("s2r://panorama/images/control_icons/chat_wheel_icon_png.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.SoundIcon{
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    background-image: url("s2r://panorama/images/hud/reborn/icon_scoreboard_mute_sound_psd.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    transition-property: brightness;
+    transition-duration: .15s;
+}
+
+.SoundIcon:hover{
+    brightness: 2;
+}
+
+.LineText{
+    font-size: 18px;
+    text-shadow: 1px 1.5px 0px 2 #000000;
+    color: #fff;
+    align: center center;
+    text-align: center;
+}
+
+#CallKeyBind{
+    align: center center;
+    font-size: 20px;
+
+    color: white;
+
+    text-shadow: 1px 1.5px 0px 2 #000000;
+
+    font-weight: semi-bold;
+
+    text-transform: uppercase;
+}
+
+#CallBody{
+    width: 100%;
+    height: 300px;
+
+    align: center center;
+    /* background-color: black; */
+
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: .15s;
+}
+
+.ShowCall #CallBody{
+    opacity: 1;
+}
+
+.CenterWheel{
+    width: 164px;
+    height: 164px;
+    align: center center;
+}
+
+#Arrow{
+    width: 46px;
+    height: 46px;
+    margin-left: 2px;
+    brightness: 2;
+
+    opacity: 0;
+
+    align: center center;
+
+    background-image: url("s2r://panorama/images/chat_wheel/arrow_psd.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.CallLineSelected #Arrow{
+    opacity: 1;
+}
+
+.PointerContainer{
+    width: 100%;
+    height: 100%;
+
+    align: center center;
+
+    margin-left: 2px;
+}
+
+#WheelPointer{
+    width: 128px;
+    height: 128px;
+
+    opacity: 0;
+
+    align: center center;
+
+    background-image: url("s2r://panorama/images/chat_wheel/circle_pointer_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.CallLineSelected #WheelPointer{
+    opacity: 1;
+}
+
+.WheelBackground{
+    width: 128px;
+    height: 128px;
+    margin-top: 11px;
+    margin-left: 4px;
+
+    align: center center;
+
+    background-image: url("s2r://panorama/images/chat_wheel/circle_bg_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.WheelBackground2{
+    width: 100%;
+    height: 100%;
+
+    align: center center;
+
+    background-image: url("s2r://panorama/images/chat_wheel/circle_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.WheelBackground3{
+    width: 100%;
+    height: 100%;
+
+    align: center center;
+
+    background-image: url("s2r://panorama/images/chat_wheel/circle_bg2_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#ChatWheelCursor{
+    background-image: url("s2r://panorama/images/chat_wheel/cursor_png.vtex");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* align: center center; */
+
+    opacity: 0;
+
+    width: 46px;
+    height: 46px;
+}
+
+.ShowCall #ChatWheelCursor{
+    opacity: 1;
+}
+
+.CallWheel{
+    width: 100%;
+    height: 100%;
+}
+
+.CallLine{
+    pre-transform-scale2d: 1.0;
+    width: fit-children;
+    height: 50px;
+
+    transition-property: pre-transform-scale2d;
+    transition-duration: .1s;
+
+    flow-children: right;
+}
+
+.CallLine.Selected{
+    pre-transform-scale2d: 1.4;
+}
+
+#CallLine1{
+    align: center top;
+    margin-top: 13px;
+}
+
+#CallLine2{
+    align: left top;
+    margin-left: 75px;
+    margin-top: 45px;
+}
+
+#CallLine3{
+    align: left center;
+    margin-left: 100px;
+}
+
+#CallLine4{
+    align: left bottom;
+    margin-left: 75px;
+    margin-bottom: 43px;
+}
+
+#CallLine5{
+    align: center bottom;
+    margin-bottom: 13px;
+}
+
+#CallLine6{
+    align: right bottom;
+    margin-right: 105px;
+    margin-bottom: 45px;
+}
+
+#CallLine7{
+    align: right center;
+    margin-right: 130px;
+}
+
+#CallLine8{
+    align: right top;
+    margin-right: 105px;
+    margin-top: 43px;
+}
+
+.CallSoundIcon{
+    width: 22px;
+    height: 22px;
+    margin-right: 4px;
+    align: left center;
+
+    opacity: 0;
+
+    background-image: url("s2r://panorama/images/hud/reborn/icon_scoreboard_mute_sound_psd.vtex");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.TypeSound .CallSoundIcon{
+    opacity: 1;
+}
+
+.CallLineText{
+    font-size: 26px;
+    text-shadow: 1px 1.5px 0px 2 #000000;
+    color: #fff;
+    align: center center;
+    text-align: center;
+    font-weight: bold;
+
+    padding-right: 8px;
+}
+
+.Selected .CallLineText{
+    animation-name: selected_line;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 'selected_line'
+{
+	0%
+	{
+        text-shadow: 1px 1.5px 5px 0 #ffe284;
+	}
+
+    50%
+	{
+        text-shadow: 1px 1.5px 10px 1 #ffe284;
+    }
+	
+	100%
+	{
+        text-shadow: 1px 1.5px 5px 0 #ffe284;
+	}
+}
+
+
+.CallRight{
+    height: 250px;
+    width: 100%;
+    margin-left: 50%;
+    align: left center;
+}
+
+.CallLeft{
+    height: 250px;
+    width: 100%;
+    margin-right: 50%;
+    align: right center;
+}

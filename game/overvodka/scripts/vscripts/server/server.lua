@@ -359,6 +359,8 @@ function Server:OnPlayerConnected(event)
             }
         }
 
+        ChatWheel:LoadPlayer(event.PlayerID, {})
+
         if SteamID ~= 0 then
 
             if table.contains(SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES, SteamID) then
@@ -372,7 +374,7 @@ function Server:OnPlayerConnected(event)
 
             cprint('[Server] Trying to get profile of '..event.PlayerID..' PlayerID and '..SteamID..' SteamID')
 
-            self:SendRequest(SERVER_URL.."get_player_profile_rating", {SteamID=SteamID, Category=CurrentCategory}, function(ResultData)
+            self:SendRequest(SERVER_URL.."get_player_profile_chatwheel", {SteamID=SteamID, Category=CurrentCategory}, function(ResultData)
                 self:CreatePlayerProfile(ResultData, event.PlayerID, SteamID)
             end, true)
         end
@@ -384,7 +386,7 @@ function Server:CreatePlayerProfile(data, PlayerID, SteamID)
 
     cprint('[Server] Creating profile for PlayerID '..PlayerID..' and SteamID '..SteamID)
 
-    self.Players[PlayerID].ServerData = data
+    self.Players[PlayerID].ServerData = data.Profile
     self.Players[PlayerID].ServerData.SteamID = SteamID
 
     if table.contains(SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES, SteamID) then
@@ -393,6 +395,10 @@ function Server:CreatePlayerProfile(data, PlayerID, SteamID)
     end
 
     self.Players[PlayerID].loaded = true
+
+    if data and data.ChatWheel then
+        ChatWheel:LoadPlayer(PlayerID, data.ChatWheel)
+    end
 
     self:UpdatePlayerNetTable(PlayerID)
 end
@@ -439,6 +445,11 @@ function Server:OnAttemptGetLeaderboardInfo(event)
 
         CustomGameEventManager:Send_ServerToAllClients("server_leaderboard_update", {category = event.category})
     end, true)
+end
+
+function Server:RecordChatWheelChanges(PlayerID, LineID, ItemID)
+    local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
+    self:SendRequest(SERVER_URL.."chat_wheel_changed", {SteamID = SteamID, LineID = LineID, ItemID = ItemID}, nil, true)
 end
 
 function Server:SendRequest(url, data, callback, debugEnabled, attempt)

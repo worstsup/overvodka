@@ -22,6 +22,7 @@ require( "utility_functions" )
 require('timers')
 require('utils')
 require('server/debug_panel')
+require('chat_wheel/chat_wheel')
 require('server/server')
 ---------------------------------------------------------------------------
 -- Precache
