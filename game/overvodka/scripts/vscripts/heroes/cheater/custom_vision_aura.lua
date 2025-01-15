@@ -24,7 +24,7 @@ function custom_vision_aura:OnSpellStart()
         false
     )
     for _, enemy in ipairs(enemies) do
-            enemy:AddNewModifier(caster, self, "modifier_truesight", {duration = duration})
+        enemy:AddNewModifier(caster, self, "modifier_truesight", {duration = duration})
     end
     EmitSoundOn("wallhack", caster)
 end

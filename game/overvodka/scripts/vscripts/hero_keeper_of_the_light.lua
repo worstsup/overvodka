@@ -1,9 +1,7 @@
--- Creator:
---	   AltiV, March 1st, 2019
-
 LinkLuaModifier("modifier_imba_keeper_of_the_light_illuminate_self_thinker", "hero_keeper_of_the_light.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_imba_keeper_of_the_light_illuminate", "hero_keeper_of_the_light.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_imba_keeper_of_the_light_spotlights", "hero_keeper_of_the_light.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua.lua", LUA_MODIFIER_MOTION_NONE)
 imba_keeper_of_the_light_illuminate							= class({})
 modifier_imba_keeper_of_the_light_illuminate_self_thinker	= class({}) -- Custom class for attempting non-channel logic
 modifier_imba_keeper_of_the_light_illuminate				= class({})
@@ -234,7 +232,7 @@ function modifier_imba_keeper_of_the_light_illuminate:OnCreated( params )
 	--self.channel_vision_duration	= self.ability:GetSpecialValueFor("channel_vision_duration")
 	--self.channel_vision_step		= self.ability:GetSpecialValueFor("channel_vision_step")
 	self.total_damage				= self.ability:GetSpecialValueFor("total_damage")
-
+	self.silence_duration			= self.ability:GetSpecialValueFor("silence_duration")
 	self.duration			= params.duration
 	self.direction			= Vector(params.direction_x, params.direction_y, 0)
 	self.direction_angle	= math.deg(math.atan2(self.direction.x, self.direction.y))
@@ -304,7 +302,14 @@ function modifier_imba_keeper_of_the_light_illuminate:OnIntervalThink()
 				}
 				
 				ApplyDamage(damageTable)
-				
+				target:AddNewModifier(
+					caster,
+					self,
+					"modifier_generic_silenced_lua",
+					{
+						duration = self.silence_duration,
+					}
+				)
 				-- Spotlights
 				local spotlight_modifier = self.caster:FindModifierByName("modifier_imba_keeper_of_the_light_spotlights")
 				
@@ -386,7 +391,7 @@ function imba_keeper_of_the_light_illuminate_end:GetAssociatedPrimaryAbilities()
 end
 
 function imba_keeper_of_the_light_illuminate_end:ProcsMagicStick() return false end
-
+function imba_keeper_of_the_light_illuminate_end:IsStealable() return false end
 function imba_keeper_of_the_light_illuminate_end:OnSpellStart()
 	if not IsServer() then return end
 

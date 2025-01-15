@@ -1,8 +1,3 @@
--- Creator:
---	   AltiV, April 7th, 2020
-
--- I will NOT be making Tempest Double custom; there are far too many exceptions, and argubaly no way to replicate all the mechanics with only Lua (at least without some serious compromises in game performance such as lag)
-
 LinkLuaModifier("modifier_imba_arc_warden_flux", "hero_arc_warden", LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_imba_arc_warden_magnetic_field_thinker_attack_speed", "hero_arc_warden", LUA_MODIFIER_MOTION_NONE)
@@ -26,14 +21,6 @@ imba_arc_warden_spark_wraith									= imba_arc_warden_spark_wraith or class({})
 modifier_imba_arc_warden_spark_wraith_thinker					= modifier_imba_arc_warden_spark_wraith_thinker or class({})
 modifier_imba_arc_warden_spark_wraith_purge						= modifier_imba_arc_warden_spark_wraith_purge or class({})
 
-    -- "modifier_arc_warden_scepter",
-    -- "modifier_arc_warden_spark_wraith_purge",
-    -- "modifier_arc_warden_spark_wraith_thinker",
-    -- "modifier_arc_warden_tempest_double",
-
---------------------------
--- IMBA_ARC_WARDEN_FLUX --
---------------------------
 
 function imba_arc_warden_flux:GetCastRange(location, target)
 	return self.BaseClass.GetCastRange(self, location, target) + self:GetCaster():FindTalentValue("special_bonus_imba_arc_warden_flux_cast_range")
@@ -202,6 +189,7 @@ function modifier_imba_arc_warden_magnetic_field_attack_speed:OnCreated()
 	if self:GetAbility() then
 		self.attack_speed_bonus	= self:GetAbility():GetSpecialValueFor("attack_speed_bonus")
 		self.steal = self:GetAbility():GetSpecialValueFor("intellect_steal_pct")
+		self.movespeed = self:GetAbility():GetSpecialValueFor("slow")
 		self.stolen = self:GetParent():GetStrength() * self.steal * 0.01
 		if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
 			k = k + 1
@@ -230,7 +218,11 @@ function modifier_imba_arc_warden_magnetic_field_attack_speed:OnDestroy()
 	end
 end
 function modifier_imba_arc_warden_magnetic_field_attack_speed:DeclareFunctions()
-	return {MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,MODIFIER_PROPERTY_STATS_AGILITY_BONUS}
+	return {MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+			MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
+			MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+			MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
+			MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,}
 end
 
 function modifier_imba_arc_warden_magnetic_field_attack_speed:GetModifierAttackSpeedBonus_Constant()
@@ -255,7 +247,12 @@ function modifier_imba_arc_warden_magnetic_field_attack_speed:GetModifierBonusSt
 	end
 	return k * self.stolen
 end
-
+function modifier_imba_arc_warden_magnetic_field_attack_speed:GetModifierMoveSpeedBonus_Percentage()
+	if self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
+		return -self.movespeed
+	end
+	return self.movespeed
+end
 -----------------------------------------------------
 -- MODIFIER_IMBA_ARC_WARDEN_MAGNETIC_FIELD_EVASION --
 -----------------------------------------------------

@@ -9,6 +9,7 @@ function modifier_bred:OnCreated( kv )
 	self.resist = self:GetAbility():GetSpecialValueFor( "resist" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "bonus_ms" )
 	self.regen = self:GetAbility():GetSpecialValueFor( "regen" )
+	self.spell_amp = self:GetAbility():GetSpecialValueFor( "spell_amp" )
 	self:PlayEffectsNew( self:GetParent() )
 	self:PlayEffects( self:GetParent() )
 end
@@ -29,6 +30,7 @@ function modifier_bred:DeclareFunctions()
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 	}
 
 	return funcs
@@ -45,6 +47,9 @@ end
 
 function modifier_bred:GetModifierHealthRegenPercentage( params )
 	return self.regen
+end
+function modifier_bred:GetModifierSpellAmplify_Percentage()
+	return self.spell_amp
 end
 function modifier_bred:GetModifierPhysicalArmorBonus( params )
 	return self.armor

@@ -1,4 +1,3 @@
-
 stariy_lasers = class({})
 
 LinkLuaModifier( "modifier_stariy_lasers_thinker", "heroes/stariy/modifier_stariy_lasers_thinker", LUA_MODIFIER_MOTION_NONE )
@@ -62,7 +61,6 @@ end
 
 function stariy_lasers:OnSpellStart()
 	if IsServer() then
-		--EmitSoundOn( "Aghanim.ShardAttack.Channel", self:GetCaster() )
 		EmitSoundOn( "Hero_Phoenix.SunRay.Cast", self:GetCaster() )
 		EmitSoundOn( "stariy_ult", self:GetCaster() )
 		EmitSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
@@ -138,9 +136,53 @@ function stariy_lasers:OnProjectileThinkHandle( nProjectileHandle )
 end
 
 -------------------------------------------------------------------------------
+local function isUnitInTable(unit, table)
+    for _, u in ipairs(table) do
+        if u == unit then
+            return true
+        end
+    end
+    return false
+end
+
 
 function stariy_lasers:OnChannelThink( flInterval )
 	if IsServer() then
+		self.newTargets = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
+		for k,enemy in pairs ( self.newTargets ) do
+			if enemy ~= nil and not isUnitInTable(enemy, self.vecTargets) then
+				enemy.vSourceLoc = enemy:GetAbsOrigin()
+				local hBeamThinker = CreateModifierThinker( self:GetCaster(), self, "modifier_stariy_lasers_thinker", { duration = self:GetChannelTime() }, enemy.vSourceLoc, self:GetCaster():GetTeamNumber(), false )
+				local projectile =
+				{
+					Target = enemy,
+					Source = hBeamThinker,
+					Ability = self,
+					EffectName = "",
+					iMoveSpeed = self:GetSpecialValueFor( "beam_speed" ),
+					vSourceLoc = enemy.vSourceLoc,
+					bDodgeable = false,
+					bProvidesVision = false,
+					flExpireTime = GameRules:GetGameTime() + self:GetChannelTime(),
+					bIgnoreObstructions = true,
+					bSuppressTargetCheck = true,
+				}
+
+				projectile.hThinker = hBeamThinker
+
+				local nProjectileHandle = ProjectileManager:CreateTrackingProjectile( projectile )
+				projectile.nProjectileHandle = nProjectileHandle
+
+				local nBeamFXIndex = ParticleManager:CreateParticle( "particles/staff_beam_new.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster() )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_staff_fx", self:GetCaster():GetAbsOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 1, projectile.hThinker, PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 2, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 9, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetCaster():GetAbsOrigin(), true )
+				projectile.nFXIndex = nBeamFXIndex
+				table.insert(self.vecTargets, enemy)
+				table.insert( self.Projectiles, projectile )
+			end
+		end
 	end
 end
 
@@ -160,6 +202,5 @@ function stariy_lasers:OnChannelFinish( bInterrupted )
 				UTIL_Remove( v.hThinker )
 			end
 		end
-		--self:GetCaster():RemoveModifierByName( "modifier_stariy_lasers" )
 	end
 end

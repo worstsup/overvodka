@@ -231,7 +231,7 @@
 		"GibType"		"ethereal"
 		"GibTintColor"	"113 74 91 255"
 		"Ability1"		"terrorblade_conjure_image_lua"
-		"Ability2"		"omniknight_purification_datadriven"
+		"Ability2"		"eldzhey_w"
 		"Ability3"		"windrunner_windrun_datadriven"
 		"Ability4"		"galimost"
 		"Ability5"		"generic_hidden"
@@ -730,7 +730,6 @@
 					}
 				}
 			}
-
 		}
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -1522,10 +1521,10 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"19"
 		"AttributeStrengthGain"		"1.600000"
-		"AttributeBaseIntelligence"		"12"
+		"AttributeBaseIntelligence"		"16"
 		"AttributeIntelligenceGain"		"1.800000"
 		"AttributeBaseAgility"		"24"
-		"AttributeAgilityGain"		"2.8"
+		"AttributeAgilityGain"		"2.5"
 		"StatusHealthRegen"		"1.0"
 		"MovementSpeed"		"295"
 	}

@@ -28,9 +28,6 @@ function modifier_custom_vision_aura:OnIntervalThink()
     )
     for _, enemy in ipairs(enemies) do
         AddFOWViewer(parent:GetTeamNumber(), enemy:GetAbsOrigin(), 50, 0.1, false)
-        if enemy:IsInvisible() then
-            enemy:AddNewModifier(parent, nil, "modifier_truesight", {duration = 0.2})
-        end
     end
 end
 function modifier_custom_vision_aura:DeclareFunctions()

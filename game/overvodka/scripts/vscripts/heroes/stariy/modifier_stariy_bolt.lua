@@ -25,6 +25,8 @@ function modifier_stariy_bolt:OnCreated( kv )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
+	self.radius_0 = self.radius
+	self.radius_1 = self.radius + 200
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
 end
@@ -38,6 +40,8 @@ function modifier_stariy_bolt:OnRefresh( kv )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
+	self.radius_0 = self.radius
+	self.radius_1 = self.radius + 200
 	self.cooldown = self:GetAbility():GetCooldown(1)
 end
 
@@ -52,6 +56,11 @@ function modifier_stariy_bolt:OnIntervalThink()
 	-- find enemies
 	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
 	if self:GetParent():HasModifier("modifier_break") then return end
+	if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
+		self.radius = self.radius_1
+	else
+		self.radius = self.radius_0
+	end
 	local enemies = FindUnitsInRadius(
 		self:GetParent():GetTeamNumber(),	-- int, your team number
 		self:GetParent():GetOrigin(),	-- point, center point
@@ -88,7 +97,7 @@ function modifier_stariy_bolt:OnIntervalThink()
 		if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
 			self:GetAbility():StartCooldown(1.0)
 		else
-			self:GetAbility():StartCooldown(self.cooldown)
+			self:GetAbility():UseResources(false, false, false, true)
 		end
 	end
 end
