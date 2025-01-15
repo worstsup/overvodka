@@ -69,4 +69,342 @@
         distance_max = "10000.0"
         event_type = "2.0"
     }
+
+    UUI_SOUNDS.Casino = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/casino.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Sosat = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/sosat.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.DjStoika = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/dj_stoika.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Hrap = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/hrap.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Sori = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/sori.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.BigBalls = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/big_balls.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.HihiHaha = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/hihihaha.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.NaKoleni = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/na_koleni.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.ComeHere = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/come_here.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.OBrother = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/o_brother.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.GetOut = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/get_out.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.WantShoot = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/want_shoot.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Avokado = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/avokado.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.OldGod = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/old_god.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Pencil = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/pencil.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Nasral = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/nasral.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.YouEban = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/you_eban.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.CrazyLaugh = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/crazy_laugh.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.ThiefLife = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/thief_life.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.FrogLaugh = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/frog_laugh.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.BadToTheBone = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/bad_to_the_bone.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.SilNety = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/sil_nety.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Ohuel = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/ohuel.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.Sex = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/sex.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.PencilFleita = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/pencil_fleita.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+
+    UUI_SOUNDS.OooNice = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/ooo_nice.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
 }

@@ -1,0 +1,150 @@
+<root> 
+	<styles>
+    	<include src="file://{resources}/styles/custom_game/chat_wheel.css" />
+  	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
+		<include src="file://{resources}/scripts/custom_game/chat_wheel.js" />
+	</scripts>
+
+	<snippets>
+        <snippet name="Item">
+            <Panel hittest="true" class="Item">
+				<Panel hittest="true" class="ItemIconContainer">
+					<Panel hittest="true" class="TextIcon" />
+					<Panel hittest="true" id="SoundIcon" class="SoundIcon" />
+            	</Panel>
+				<Label hittest="false" class="ItemText" text="{s:itemtext}"/>
+            </Panel>
+        </snippet>
+    </snippets>
+
+  	<Panel class="CustomChatWheel" hittest="false">
+		<Panel class="SettingsOpenButton" hittest="true" onactivate="ToggleChatWheelSettings()"/>
+		<Panel id="SettingsBody" hittest="false">
+			<Panel class="SettingsChatWheel" hittest="true" onactivate="StartSelectItem(0)">
+				<Panel class="Top" hittest="false">
+					<Panel class="Top" hittest="false">
+						<Panel id="LineButton1" class="LineButton" hittest="true" onactivate="StartSelectItem(1)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+  					</Panel>
+  				</Panel>
+				<Panel class="Center" hittest="false">
+					<Panel id="DecorLine1" class="DecorLine" hittest="false" />
+					<Panel id="DecorLine2" class="DecorLine" hittest="false" />
+					<Panel id="DecorLine3" class="DecorLine" hittest="false" />
+					<Panel id="DecorLine4" class="DecorLine" hittest="false" />
+
+					<Label id="CallKeyBind" text="{s:callkeybind}"/>
+
+					<Panel class="CenterIcon" hittest="false" />
+
+					<Panel class="LeftButtons" hittest="false">
+						<Panel id="LineButton8" class="LineButton" hittest="true" onactivate="StartSelectItem(8)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+						<Panel id="LineButton7" class="LineButton" hittest="true" onactivate="StartSelectItem(7)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+						<Panel id="LineButton6" class="LineButton" hittest="true" onactivate="StartSelectItem(6)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+					</Panel>
+					<Panel class="RightButtons" hittest="false">
+						<Panel id="LineButton2" class="LineButton" hittest="true" onactivate="StartSelectItem(2)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+						<Panel id="LineButton3" class="LineButton" hittest="true" onactivate="StartSelectItem(3)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+						<Panel id="LineButton4" class="LineButton" hittest="true" onactivate="StartSelectItem(4)">
+							<Label class="LineText" text="{s:linetext}"/>
+  						</Panel>
+					</Panel>
+  				</Panel>
+				<Panel class="Bottom" hittest="false">
+					<Panel id="LineButton5" class="LineButton" hittest="true" onactivate="StartSelectItem(5)">
+						<Label class="LineText" text="{s:linetext}"/>
+  					</Panel>
+  				</Panel>
+  			</Panel>
+			<Panel id="SettingsVariantsTable" hittest="false">
+				<Panel class="HeaderLine" hittest="true">
+					<Panel class="HeaderMenus" hittest="true">
+						<Panel id="TextMenuButton" class="ButtonHeader" hittest="true" onactivate="OpenMenuPage('text')">
+							<Label hittest="false" class="ButtonHeaderText" text="#CUSTOM_CHAT_WHEEL_Text"/>
+						</Panel>
+						<Panel class="ButtonHeaderDash" hittest="false">
+							<Label class="ButtonHeaderDashText" text="/"/>
+						</Panel>
+						<Panel id="SoundsMenuButton" class="ButtonHeader" hittest="true" onactivate="OpenMenuPage('sound')">
+							<Label hittest="false" class="ButtonHeaderText" text="#CUSTOM_CHAT_WHEEL_Sounds"/>
+						</Panel>
+  					</Panel>
+					<Panel id="CloseButton" hittest="true" onactivate="CloseChatWheelSettings()"/>
+  				</Panel>
+				<Panel class="ItemsBody" hittest="false">
+					<Panel id="ItemsText" class="ItemsContainer" hittest="false">
+					
+					</Panel>
+					<Panel id="ItemsSounds" class="ItemsContainer" hittest="false">
+					
+					</Panel>
+				</Panel>
+  			</Panel>
+  		</Panel>
+		<Panel id="ChatWheelCursor" hittest="false" />
+		<Panel id="CallBody" hittest="false">
+			<Panel class="CenterWheel" hittest="false">
+				<Panel id="Arrow" hittest="false" />
+				<Panel class="PointerContainer" hittest="false">
+					<Panel id="WheelPointer" hittest="false" />
+				</Panel>
+				<Panel class="WheelBackground" hittest="false">
+					<Panel class="WheelBackground2" hittest="false">
+						<Panel class="WheelBackground3" hittest="false" />
+					</Panel>
+				</Panel>
+  			</Panel>
+			<Panel class="CallWheel" hittest="false">
+				<Panel id="CallLine1" class="CallLine" hittest="false">
+					<Panel hittest="true" class="CallSoundIcon" />
+					<Label class="CallLineText" text="{s:calllinetext}"/>
+				</Panel>
+				<Panel class="CallRight" hittest="false">
+					<Panel id="CallLine2" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+					<Panel id="CallLine3" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+					<Panel id="CallLine4" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+				</Panel>
+				<Panel id="CallLine5" class="CallLine" hittest="false">
+					<Panel hittest="true" class="CallSoundIcon" />
+					<Label class="CallLineText" text="{s:calllinetext}"/>
+				</Panel>
+				<Panel class="CallLeft" hittest="false">
+					<Panel id="CallLine6" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+					<Panel id="CallLine7" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+					<Panel id="CallLine8" class="CallLine" hittest="false">
+						<Panel hittest="true" class="CallSoundIcon" />
+						<Label class="CallLineText" text="{s:calllinetext}"/>
+					</Panel>
+				</Panel>
+			</Panel>
+  		</Panel>
+  	</Panel>
+</root>

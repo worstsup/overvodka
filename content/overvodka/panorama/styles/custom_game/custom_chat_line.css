@@ -34,3 +34,8 @@ DOTAChat#HudChat .ChatLine.ExpireThis{
     font-weight: bolder;
     color: white;
 }
+
+.SoundIconChat{
+    width: 20px;
+    height: 20px;
+}

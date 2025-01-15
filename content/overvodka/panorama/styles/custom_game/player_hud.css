@@ -154,7 +154,7 @@
 
 #SubscribePanel{
     width: 700px;
-    height: 700px;
+    height: 765px;
 
     align: center center;
 
@@ -182,7 +182,7 @@
 
 #SubscribePanelBody{
     width: 700px;
-    height: 450px;
+    height: 515px;
     
     align: center bottom;
 
@@ -439,6 +439,25 @@
 
     margin-right: 55px;
     margin-top: 280px;
+}
+
+#ChatWheelPreview{
+    width: 100px;
+    height: 66.7px;
+
+    background-image: url("file://{images}/custom_game/chat_wheel_preview.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    /* background-color: rgba(0, 0, 0, 0.5);
+
+    border: 1px solid black; */
+
+    align: right top;
+
+    margin-right: 58px;
+    margin-top: 360px;
 }
 
 #OvervodkaHamster{

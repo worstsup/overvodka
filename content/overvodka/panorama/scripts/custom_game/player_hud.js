@@ -256,7 +256,7 @@ function SendCustomMessageToChat(event){
 
         HeroImage.SetImage( "file://{images}/heroes/" + OvervodkaName + ".png" );
 
-        msgPanel.SetDialogVariable("Text", Text)
+        msgPanel.SetDialogVariable("text", Text)
         $.Schedule(5, function(){
             msgPanel.AddClass("ExpireThis")
         })
