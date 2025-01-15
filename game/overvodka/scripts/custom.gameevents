@@ -20,6 +20,10 @@
 
 "CustomEvents"
 {
+	"chat_wheel_console_command"
+    {
+        "command"           "string"
+    }
 	
 	"score_board"
 	{

@@ -4,6 +4,6 @@
   	</styles>
   	<Panel class="CustomChatLine" hittest="false">
 		<Image id="HeroImage" />
-		<Label class="Text" text="{s:Text}" html="true"/>
+		<Label class="Text" text="{s:text}" html="true"/>
   	</Panel>
 </root>
