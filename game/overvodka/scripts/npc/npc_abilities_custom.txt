@@ -6121,11 +6121,11 @@
 		{
 			"radius"		
 			{
-				"value"		"1200"
+				"value"		"750"
 				"affected_by_aoe_increase"	"1"
 			}
-			"inside_radius_bonus_damage_pct"	"20"
-			"outside_radius_bonus_damage_pct"	"-20"
+			"inside_radius_bonus_damage_pct"	"25"
+			"outside_radius_bonus_damage_pct"	"-25"
 		}
 	}
 	"ursa_maul"
@@ -7789,7 +7789,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"275"
 		"AbilityCastPoint"				"0.1"
-		"AbilityManaCost"				"100 120 140 160"
+		"AbilityManaCost"				"90 105 120 135"
 		"AbilityValues"
 		{
 				"duration"
@@ -7836,7 +7836,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"20"
+		"AbilityCooldown"				"23 21 19 17"
 		"AbilityManaCost"				"50 70 90 110"
 		"AbilityValues"
 		{
@@ -7931,18 +7931,18 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
-		"AbilityCastPoint"				"1.4"
-		"AbilityCooldown"				"12.0"
+		"AbilityCastPoint"				"1.2"
+		"AbilityCooldown"				"6.0"
 		"AbilityManaCost"				"0"
 		"AbilityValues"
 		{
 				"radius"						
 				{
-					"value"			"550"
+					"value"			"350"
 				}
 				"damage"						"200"
 				"damage_pct"					"15"
-				"hero_stun_duration"			"2.0"
+				"hero_stun_duration"			"2.4"
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
@@ -7955,8 +7955,8 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"subo"
-		"AbilityCooldown"				"35"
-		"AbilityManaCost"				"75 125 175 225"
+		"AbilityCooldown"				"28 27 26 25"
+		"AbilityManaCost"				"60 100 140 180"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
@@ -7976,7 +7976,7 @@
 				}
 				"schoolboys_duration"
 				{
-					"value"	"20"
+					"value"	"15"
 				}
 				"schoolboys_hp"
 				{
@@ -12478,7 +12478,7 @@
             		"value"	"900"
             		"affected_by_aoe_increase"	"1"
             	}
-            	"duration_to_explosion"             "9"
+            	"duration_to_explosion"             "7 8 9"
             	"damage"
             	{
             		"value"	"200 400 600"
@@ -12514,6 +12514,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"4"
+					"special_bonus_unique_clockwerk_7" "-0.5"
 				}
 				"hex_duration"
 				{
@@ -12526,8 +12527,7 @@
 				}
 				"chance"
 				{
-					"value"	"20"
-					"special_bonus_unique_clockwerk_7" "+5"
+					"value"	"15"
 				}
 				"tick_duration"
 				{
@@ -12552,23 +12552,27 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastRange"				"800"
+		"AbilityCastRange"				"675"
 		"AbilityCastPoint"				"0.35"
 		"AbilityCooldown"				"20.0 18.0 16.0 14.0"
 		"AbilityManaCost"				"60 100 140 180"
 		"AbilityValues"
 		{
+				"damage_percent"
+				{
+					"value"	"10"
+					"special_bonus_unique_clockwerk_hookshot_damage" "+5"
+				}
 				"duration"						"8.0"
 				"illusion_outgoing_damage"
 				{
 					"value"	"-50 -40 -30 -20"
-					"special_bonus_unique_clockwerk_hookshot_damage" "+15"
 				}
 				"illusion_outgoing_tooltip"
 				{
 					"value"	"50 60 70 80"
-					"special_bonus_unique_clockwerk_hookshot_damage" "+15"
 				}
 				"illusion_incoming_damage"			"100 90 80 70"
 				"illusion_incoming_damage_total_tooltip"			"200 190 180 170"
@@ -12670,5 +12674,28 @@
 		{
 				"damage"	"25"
 		}
+	}
+	"gaster_blaster" 
+	{
+    	"BaseClass"                "ability_lua"
+    	"ScriptFile"               "gaster_blaster.lua"
+    	"AbilityTextureName"	   "dave_scepter"
+    	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT"
+    	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
+    	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
+    	"AbilityUnitTargetFlags"   "DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
+    	"AbilityCastRange"         "1200"
+    	"AbilityCooldown"          "22 20 18 16"
+    	"AbilityManaCost"          "100"
+    	"AbilityCastPoint"		   "0.2"
+    	"AbilityValues" 
+    	{
+        	"blast_delay"    "0.9"
+        	"blaster_radius" "1200"
+        	"damage"         "125 200 275 350"
+        	"laser_length"   "10000"
+        	"laser_width"	 "150"
+    	}
 	}
 }

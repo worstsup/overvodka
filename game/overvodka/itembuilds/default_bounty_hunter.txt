@@ -40,6 +40,7 @@
 			"item"		"item_aegis_hero"
 			"item"		"item_waka"
 			"item"		"item_pasito"
+			"item"		"item_armature_strike"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{

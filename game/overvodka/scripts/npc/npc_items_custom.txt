@@ -2972,14 +2972,9 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown"				"25.0"
-		"AbilitySharedCooldown" 	"blademail"
+		"AbilitySharedCooldown" 		"blademail"
 		"AbilityManaCost"				"25"
 		"ItemCost"						"2300"
-		"ItemShopTags"					"damage;armor;int;hard_to_tag"
-		"ItemQuality"					"epic"
-		"ItemAliases"					"bm;blade mail;blademail"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-		"SuggestLategame"				"1"
 		"AbilityValues"
 		{
 				"bonus_damage"			"18"
@@ -3010,40 +3005,46 @@
 			"time_to_heal"				"4"
 		}
 	}
-	"item_drobe"
+	"item_recipe_armature_strike"
 	{
-		"BaseClass" 					"item_lua"
-		"ScriptFile" 					"drobe"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"drobe"
-		"ItemCost"						"6600"
-
-		"AbilityValues"
-		{
-			"bonus_damage"			"65"
-			"bonus_hp_regen"		"10"
-			"bonus_mana_regen"		"5"
-			"bonus_agi"				"25"
-			"bonus_str"				"15"
-			"bonus_range"			"200"
-			"cleave"				"50"
-			"radius"				"250"
-		}
-	}
-	"item_recipe_drobe"
-	{
-		"BaseClass"						"item_datadriven"
-		"Model"							"models/props_gameplay/recipe.vmdl"
-		"AbilityTextureName"			"item_recipe"
-		"ItemCost"						"600"
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_drobe"
-
+		"BaseClass"				 	"item_datadriven"
+		"Model"						"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"		"item_recipe"
+		"ItemCost"					"1775"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_armature_strike"
 		"ItemRequirements"
 		{
-			"01"						"item_dragon_lance;item_bfury"
+			"01"	"item_greater_crit;item_oblivion_staff"
+		}
+	}
+	
+	"item_armature_strike"
+	{
+		"BaseClass"				   "item_lua"
+		"ScriptFile"			   "armature_strike"
+		"AbilityTextureName"	   "armature_strike"
+		"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    	"SpellImmunityType"        "SPELL_IMMUNITY_ENEMIES_NO"
+    	"AbilityCastRange"         "1200"
+    	"AbilityCooldown"          "35"
+    	"AbilityManaCost"          "150"
+    	"AbilityCastPoint"		   "0.25"
+		"ItemCost"				   "8500"
+		"AbilityValues"
+		{
+			"bonus_damage"			"88"
+			"bonus_attack_speed"	"20"
+			"bonus_int"				"10"
+			"bonus_mana_regen"		"2"
+			"strike_width"          "100"
+            "strike_range"          "1200"
+            "crit_multiplier"       "250"
+            "stun_duration"         "1.2"
+			"chance"				"30"
+			"crit"					"250"
 		}
 	}
 }

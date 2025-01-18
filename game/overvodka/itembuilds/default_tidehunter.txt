@@ -26,6 +26,7 @@
 			"item"		"item_kaska"
 			"item"		"item_govno"
 			"item"		"item_waka"
+			"item"		"item_armature_strike"
 			"item"		"item_pasito"
 		}
 		"#DOTA_Item_Build_Luxury"

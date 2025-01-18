@@ -25,21 +25,19 @@
 		{
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
-            		"item"		"item_govno"
+            "item"		"item_govno"
 			"item"		"item_abyssal_blade"
-            		"item"		"item_pasito"
-            		"item"		"item_ultimate_scepter"
-            		"item"		"item_waka"
+            "item"		"item_pasito"
+            "item"		"item_ultimate_scepter"
+            "item"		"item_waka"
 		}
 
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_kaska"
-            		"item"		"item_aghanims_shard"
-            		"item"		"item_butterfly"
-            		"item"		"item_bloodthorn"
-            		"item"		"item_greater_crit"
-            		"item"		"item_swift_blink"
+            "item"		"item_aghanims_shard"
+            "item"		"item_armature_strike"
+            "item"		"item_swift_blink"
 		}
 	}
 }

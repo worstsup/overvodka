@@ -39,7 +39,11 @@ function Precache( context )
 		PrecacheUnitByNameSync( "npc_dota_creature_basic_zombie", context )
         PrecacheUnitByNameSync( "npc_dota_creature_berserk_zombie", context )
         PrecacheUnitByNameSync( "npc_dota_treasure_courier", context )
-
+        PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", context)
+    	PrecacheResource("soundfile", "soundevents/armature.vsndevts", context)
+    	PrecacheResource("soundfile", "soundevents/armature_crit.vsndevts", context)
+    	PrecacheResource("particle", "particles/armature_strike.vpcf", context)
+    	PrecacheResource("particle", "particles/armature_cast.vpcf", context)
     --Cache new particles
        	PrecacheResource( "particle", "particles/econ/events/nexon_hero_compendium_2014/teleport_end_nexon_hero_cp_2014.vpcf", context )
        	PrecacheResource( "particle", "particles/leader/leader_overhead.vpcf", context )

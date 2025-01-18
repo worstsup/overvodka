@@ -93,10 +93,9 @@ function modifier_item_charik_new_regen:OnIntervalThink()
     local parent = self:GetParent()
     local ability = self:GetAbility()
 
-    -- Check if the ability is on cooldown
     if ability:IsCooldownReady() and parent:IsAlive() then
         if not parent:IsMoving() then
-        	if parent:GetHealth() >= parent:GetMaxHealth() * 0.4 then
+        	if parent:GetHealth() >= parent:GetMaxHealth() * 0.4 and parent:GetMana() >= parent:GetMaxMana() * 0.4 then
                 self.standing_time = 0
                 return
             end
@@ -115,7 +114,6 @@ function modifier_item_charik_new_regen:OnIntervalThink()
                 local particle = ParticleManager:CreateParticle("particles/dev/library/base_dust_hit_smoke.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
                 ParticleManager:ReleaseParticleIndex(particle)
 
-                -- Put the ability on cooldown
                 ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
                 t = 1
                 -- Reset standing time
@@ -127,25 +125,23 @@ function modifier_item_charik_new_regen:OnIntervalThink()
         		StopSoundOn("smok2", self:GetParent())
         		parent:RemoveModifierByName("modifier_item_charik_new_regen_effect")
         	end
-            self.standing_time = 0 -- Reset the timer if the hero moves
+            self.standing_time = 0
         end
     else
     	t = 0
-        self.standing_time = 0 -- Reset the timer if the ability is on cooldown
+        self.standing_time = 0 
     end
 end
 function modifier_item_charik_new_regen:OnTakeDamage(params)
     if not IsServer() then return end
-
-    -- Check if the hero taking damage is the parent
     if params.unit == self:GetParent() then
-        self.standing_time = 0 -- Reset the timer when damage is received
+        self.standing_time = 0
     end
 end
 
 modifier_item_charik_new_regen_effect = class({})
 function modifier_item_charik_new_regen_effect:GetTexture()
-  	return "charik"
+  	return "items/charik"
 end
 
 function modifier_item_charik_new_regen_effect:IsHidden() return false end

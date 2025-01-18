@@ -41,6 +41,7 @@
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_pasito"
+			"item"		"item_armature_strike"
 		}
 	}
 }

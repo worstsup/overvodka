@@ -7,6 +7,9 @@ function vihor_w:OnSpellStart()
 	self.duration = self:GetSpecialValueFor("duration")
 	self.outgoing = self:GetSpecialValueFor("illusion_outgoing_damage")
 	self.incoming = self:GetSpecialValueFor("illusion_incoming_damage")
+	self.damage_percent = self:GetSpecialValueFor("damage_percent")
+	self.damage = target:GetMaxHealth() * self.damage_percent * 0.01
+	ApplyDamage({victim = target, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self})
 	EmitSoundOn("vihor_w", self:GetCaster())
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_vihor_w", {duration = self.duration})
 	self.illusions = CreateIllusions(
@@ -45,21 +48,32 @@ function vihor_w:OnSpellStart()
 	FindClearSpaceForUnit(self:GetCaster(), target:GetAbsOrigin(), false)
 end
 
+
 modifier_vihor_w = class({})
 
 function modifier_vihor_w:IsPurgable() return false end
 
 function modifier_vihor_w:OnCreated()
+	if not IsServer() then return end
+	self:StartIntervalThink(0.1)
 end
 
+
 function modifier_vihor_w:OnDestroy()
-	illusion:Kill(self:GetAbility(), self:GetCaster())
+	if illusion and illusion:IsAlive() then
+		illusion:Kill(self:GetAbility(), self:GetCaster())
+	end
 	StopSoundOn("vihor_w", self:GetCaster())
 end
 
 function modifier_vihor_w:OnRemoved()
 end
 
+function modifier_vihor_w:OnIntervalThink()
+    if not illusion:IsAlive() then
+        self:Destroy()
+    end
+end
 function modifier_vihor_w:CheckState()
 	local state = {
 		[MODIFIER_STATE_INVISIBLE] = true,

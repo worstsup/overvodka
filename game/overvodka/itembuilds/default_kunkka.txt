@@ -27,6 +27,7 @@
 			"item"		"item_govno"
 			"item"		"item_aegis_hero"
 			"item"		"item_waka"
+			"item"		"item_armature_strike"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_pasito"
 		}

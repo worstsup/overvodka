@@ -51,7 +51,6 @@ function modifier_snapfire_lil_shredder_lua:OnCreated( kv )
 end
 
 function modifier_snapfire_lil_shredder_lua:OnRefresh( kv )
-	-- references
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		self.attacks = self:GetAbility():GetOrbSpecialValueFor( "buffed_attacks", "e" )
 		self.damage = self:GetAbility():GetOrbSpecialValueFor( "damage", "e" )
@@ -62,7 +61,7 @@ function modifier_snapfire_lil_shredder_lua:OnRefresh( kv )
 		self.range_bonus = 275
 	end
 	if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
-		self.damage = self:GetCaster():GetAttackDamage() + self.damage + 70
+		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) + self.damage
 	end
 	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_bonus" )
 	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )

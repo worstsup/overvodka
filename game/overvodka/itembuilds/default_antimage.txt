@@ -33,6 +33,7 @@
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_invis_sword_datadriven"
+			"item"		"item_armature_strike"
 		}
 	}
 }
