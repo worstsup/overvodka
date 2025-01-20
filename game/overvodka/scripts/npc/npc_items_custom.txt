@@ -2972,9 +2972,14 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown"				"25.0"
-		"AbilitySharedCooldown" 		"blademail"
+		"AbilitySharedCooldown" 	"blademail"
 		"AbilityManaCost"				"25"
 		"ItemCost"						"2300"
+		"ItemShopTags"					"damage;armor;int;hard_to_tag"
+		"ItemQuality"					"epic"
+		"ItemAliases"					"bm;blade mail;blademail"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
 		"AbilityValues"
 		{
 				"bonus_damage"			"18"
@@ -3003,6 +3008,42 @@
 			"percent_min"				"40"
 			"percent_heal"				"30"
 			"time_to_heal"				"4"
+		}
+	}
+	"item_drobe"
+	{
+		"BaseClass" 					"item_lua"
+		"ScriptFile" 					"drobe"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"			"drobe"
+		"ItemCost"						"6600"
+
+		"AbilityValues"
+		{
+			"bonus_damage"			"65"
+			"bonus_hp_regen"		"10"
+			"bonus_mana_regen"		"5"
+			"bonus_agi"				"25"
+			"bonus_str"				"15"
+			"bonus_range"			"200"
+			"cleave"				"50"
+			"radius"				"250"
+		}
+	}
+	"item_recipe_drobe"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"600"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_drobe"
+
+		"ItemRequirements"
+		{
+			"01"						"item_dragon_lance;item_bfury"
 		}
 	}
 	"item_recipe_armature_strike"

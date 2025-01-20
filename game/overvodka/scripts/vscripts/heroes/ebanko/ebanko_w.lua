@@ -118,7 +118,7 @@ function modifier_ebanko_w:GetModifierProcAttack_Feedback( params )
 end
 
 function modifier_ebanko_w:Bash(target)
-	if target:TriggerSpellAbsorb( self ) then
+	if target:TriggerSpellAbsorb( self:GetAbility() ) then
 		return
 	end
 	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )

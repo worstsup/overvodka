@@ -2023,4 +2023,72 @@
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
+	"npc_dota_hero_storm_spirit"
+	{
+		"Model"		"rostik/rostik.vmdl"
+		"DisableWearables"	"1"
+		"SoundSet"		"Hero_StormSpirit"
+		"Enabled"		"1"
+		"ModelScale"		"1.25"
+		"LoadoutScale"		"1.1"
+		"HeroSelectSoundEffect"		"Hero_StormSpirit.Pick"
+		"GibType"		"electric"
+		"Ability1"		"rostik_q"
+		"Ability2"		"storm_spirit_electric_vortex"
+		"Ability3"		"storm_spirit_overload"
+		"Ability4"		"generic_hidden"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"rostik_r"
+		"Ability7"		"rostik_q_throw"
+
+		"Ability10"		"special_bonus_unique_storm_spirit_overload_aspd"
+		"Ability11"		"special_bonus_mp_regen_150"
+		"Ability12"		"special_bonus_hp_250"
+		"Ability13"		"special_bonus_unique_storm_spirit_5"
+		"Ability14"		"special_bonus_unique_storm_spirit"
+		"Ability15"		"special_bonus_unique_storm_spirit_8"
+		"Ability16"		"special_bonus_unique_storm_spirit_7"
+		"Ability17"		"special_bonus_unique_storm_spirit_4"
+		"Facets"
+		{
+			"storm_spirit_shock_collar"
+			{
+				"Icon"				"nuke"
+				"Color"				"Blue"
+				"GradientID"		"1"
+			}
+
+			"storm_spirit_static_slide"	
+			{
+				"Icon"				"movement"
+				"Color"				"Gray"
+				"GradientID"		"3"
+			}
+		}
+
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"24"
+		"AttackDamageMax"		"34"
+		"BaseAttackSpeed"		"115"
+		"AttackRate"		"1.600000"
+		"AttackAnimationPoint"		"0.500000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"480"
+		"ProjectileModel"		"particles/units/heroes/hero_stormspirit/stormspirit_base_attack.vpcf"
+		"ProjectileSpeed"		"1100"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"2.000000"
+		"AttributeBaseIntelligence"		"23"
+		"AttributeIntelligenceGain"		"3.900000"
+		"AttributeBaseAgility"		"22"
+		"AttributeAgilityGain"		"2.600000"
+		"StatusHealthRegen"	"0.5"
+		"MovementSpeed"		"285"
+		"MovementTurnRate"		"0.800000"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+		"HealthBarOffset"		"250"
+	}
 }

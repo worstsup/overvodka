@@ -166,7 +166,7 @@ function GetRankClassName(Rating){
         },
         {
             min: 9000,
-            max: 12000,
+            max: 20000,
             class_name: "Hamstergod"
         },
     ]
@@ -312,6 +312,10 @@ function GetOvervodkaHeroName(HeroName){
     if (HeroName == "npc_dota_hero_rattletrap")
     {
         OvervodkaName = "npc_dota_hero_vihorkov"
+    }
+    if (HeroName == "npc_dota_hero_storm_spirit")
+    {
+        OvervodkaName = "npc_dota_hero_rostik"
     }
     return OvervodkaName	
 }

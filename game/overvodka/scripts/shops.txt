@@ -32,7 +32,7 @@
 		"item"		"item_drobe"
 		"item"		"item_mask_of_quadrobe"
 		"item"		"item_armlet_datadriven"
-		"item"		"item_ogre_axe"
+		"item"		"item_armature_strike"
 		"item"		"item_blade_of_alacrity"
 		"item"		"item_staff_of_wizardry"
 	}

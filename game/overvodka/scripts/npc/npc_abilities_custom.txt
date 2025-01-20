@@ -12698,4 +12698,113 @@
         	"laser_width"	 "150"
     	}
 	}
+	"rostik_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/rostik/rostik_q"
+		"AbilityTextureName"			"rostik_q"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"precache"
+		{
+			"soundfile"	"soundevents/rostik_q_start.vsndevts"
+			"soundfile"	"soundevents/rostik_q_start_fitil.vsndevts"
+			"soundfile"	"soundevents/rostik_q_fly.vsndevts"
+			"soundfile"	"soundevents/rostik_q_exp.vsndevts"
+			"particle"	"particles/rostik_q_exp.vpcf"
+			"particle"	"particles/rostik_q.vpcf"
+			"particle"	"particles/rostik_q_timer.vpcf"
+		}
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"775"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"22 20 18 16"
+		"AbilityManaCost"				"120"
+		"AbilityValues"
+		{
+				"brew_time"					"5.0"
+				"brew_explosion"			"5.5"
+				"min_stun"					"0.2"
+				"max_stun"					"1.4 1.8 2.2 2.6"
+				"min_damage"				"0"
+				"max_damage"				"150 250 350 450"
+				"radius"
+				{
+					"value"	"400"
+					"affected_by_aoe_increase"	"1"
+				}
+				"fail_damage"				"99999"
+		}
+	}
+	"rostik_q_throw"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/rostik/rostik_q"
+		"AbilityTextureName"			"rostik_q"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"775"
+		"AbilityCastPoint"				"0.2"
+		"AbilityValues"
+		{
+				"brew_time"					"5.0"
+				"min_stun"					"0.2"
+				"max_stun"					"1.2 1.6 2.0 2.4"
+				"min_damage"				"0"
+				"max_damage"				"150 250 350 450"
+				"movement_speed"			"900"
+				"vision_range"				"300"
+				"midair_explosion_radius"	"400"
+				"brew_explosion"			"7.0"
+		}
+	}
+	"rostik_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/rostik/rostik_r"
+		"AbilityTextureName"			"rostik_r"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"3"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_earth_spirit.vsndevts"
+			"soundfile"	"soundevents/rostik_r.vsndevts"
+			"particle"	"particles/rostik_r.vpcf"
+		}
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0.01"
+		"AbilityManaCost"				"100"
+		"AbilityValues"
+		{
+				"AbilityCharges"
+				{
+					"value"	"2"
+				}
+				"AbilityChargeRestoreTime"
+				{
+					"value"	"20.0 16.0 12.0"
+				}
+				"radius"				"160"
+				"speed"					"2000"
+				"distance"				"800.0 900.0 1000.0"
+				"delay"					"0.2"
+				"damage"				"130 260 390"
+				"move_slow"				"80"
+				"slow_duration"			"1.4 1.6 1.8"
+		}
+	}
 }

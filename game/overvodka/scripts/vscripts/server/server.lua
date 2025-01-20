@@ -269,11 +269,10 @@ function Server:GetPlayerRank(PlayerID)
         },
         {
             min = 8000,
-            max = 12000,
+            max = 20000,
             type = SERVER_RANKS_DEFINITION.HAMSTERGOD
         },
     }
-
     for _, RatingInfo in ipairs(Definitions) do
         if Rating >= RatingInfo.min then
             if RatingInfo.max == -1 then
@@ -419,7 +418,7 @@ function Server:UpdatePlayerNetTable(PlayerID)
     CustomNetTables:SetTableValue("players", "player_"..PlayerID, self.Players[PlayerID].ServerData)
     CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_special_info", {is_admin = self.Players[PlayerID].is_admin})
     if self.Players[PlayerID].is_admin == true then
-        self.Players[PlayerID].title_status = true
+        self.Players[PlayerID].title_status = false
         CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_title_status", {status = self.Players[PlayerID].title_status})
     end
 

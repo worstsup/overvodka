@@ -194,6 +194,7 @@ function Precache( context )
 		PrecacheResource( "model", "arthas/papich_maniac.vmdl", context )
 		PrecacheResource( "model", "golovach/golovach.vmdl", context )
 		PrecacheResource( "model", "ebanko/ebanko.vmdl", context )
+		PrecacheResource( "model", "rostik/rostik.vmdl", context )
 		
 	--Cache sounds for traps
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts", context )
