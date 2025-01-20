@@ -20,6 +20,8 @@ function Server:Init()
     CustomGameEventManager:RegisterListener("player_doubled_rating", function(source, event) self:OnPlayerDoubledRating(event) end)
     CustomGameEventManager:RegisterListener("server_get_leaderboard_info", function(source, event) self:OnAttemptGetLeaderboardInfo(event) end)
 
+    CustomGameEventManager:RegisterListener("player_want_toggle_mute", function(source, event) self:OnPlayerWantToggleMute(event) end)
+
     self.ThinkerEnt = SpawnEntityFromTableSynchronous("info_target", {targetname="server_thinker"})
 end
 
@@ -287,6 +289,22 @@ function Server:GetPlayerRank(PlayerID)
     return SERVER_RANKS_DEFINITION.NONE
 end
 
+function Server:OnPlayerWantToggleMute(event)
+    local PlayerID = event.PlayerID
+    if not self.Players[PlayerID] then return end
+
+    local MutedPlayer = event.muted_player
+
+    local FindIndex = table.find(self.Players[PlayerID].mutes, MutedPlayer)
+    if FindIndex ~= nil then
+        table.remove(self.Players[PlayerID].mutes, FindIndex)
+    else
+        table.insert(self.Players[PlayerID].mutes, MutedPlayer)
+    end
+
+    CustomNetTables:SetTableValue("players", "player_".. PlayerID .."_mutes", self.Players[PlayerID].mutes)
+end
+
 function Server:OnPlayerWantTip(event)
     if not self.Players[event.tips_player] then return end
 
@@ -354,6 +372,7 @@ function Server:OnPlayerConnected(event)
             loaded = false,
             doubled = false,
             last_time_double_show = 0,
+            mutes = {},
             ServerData = {
                 SteamID = SteamID
             }

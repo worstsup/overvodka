@@ -276,6 +276,8 @@ function SetCursorToCenter(){
 }
 
 function OnSayLine(event){
+    if(IsPlayerMuted(event.caller_player)){return}
+    
     let ItemInfo = ItemsList[event.item_id]
     if(ItemInfo){
         let Info = Game.GetPlayerInfo(event.caller_player)
