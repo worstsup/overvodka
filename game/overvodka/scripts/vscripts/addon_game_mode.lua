@@ -747,6 +747,9 @@ function COverthrowGameMode:InitGameMode()
 			}
 			return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
 		end, "Show team leave encounter", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_chat_wheel_say", function(...) 
+			return CustomGameEventManager:Send_ServerToAllClients("chat_wheel_say_line", {caller_player = 1, item_id = 1})
+		end, "Show team leave encounter", FCVAR_CHEAT )
 	Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
 
 	COverthrowGameMode:SetUpFountains()

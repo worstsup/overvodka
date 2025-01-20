@@ -60,6 +60,15 @@ function table.count(t)
     return #key_table
 end
 
+function table.find(tbl, value)
+    for i, v in ipairs(tbl) do
+        if v == value then
+            return i
+        end
+    end
+    return nil
+end
+
 function cprint(...)
     local list = {...}
 	for _,value in pairs(list) do

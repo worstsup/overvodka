@@ -1,3 +1,5 @@
+const LocalPIDPlayer = Players.GetLocalPlayer()
+
 function GetDotaHud() {
 	var rootUI = $.GetContextPanel();
 	while (rootUI.id != "Hud" && rootUI.GetParent() != null) {
@@ -334,6 +336,21 @@ function IsPlayerSubscribed(PlayerID){
         return true
     }
 
+    return false
+}
+
+function IsPlayerMuted(PlayerID){
+    let Table = CustomNetTables.GetTableValue("players", `player_${LocalPIDPlayer}_mutes`)
+    if(Table){
+        let Array = toArray(Table)
+        if(Array){
+            for (const tPlayerID of Array) {
+                if(tPlayerID == PlayerID){
+                    return true
+                }
+            }
+        }
+    }
     return false
 }
 
