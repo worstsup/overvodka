@@ -32,6 +32,8 @@
 		"#DOTA_Item_Build_Mid_Items"
 		{
 			"item"		"item_sharoeb"
+			"item"		"item_jordan"
+			"item"		"item_magic_daedalus"
 			"item"		"item_arcane_blink"
 			"item"		"item_yasha_and_kaya"
 			"item"		"item_pasito"

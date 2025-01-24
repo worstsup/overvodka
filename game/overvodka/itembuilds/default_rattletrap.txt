@@ -27,6 +27,7 @@
 			"item"		"item_ultimate_scepter"
 			"item"		"item_suchiy"
 			"item"		"item_pasito"
+			"item"		"item_magic_daedalus"
 			"item"		"item_badun"
 		}
 		"#DOTA_Item_Build_Luxury"

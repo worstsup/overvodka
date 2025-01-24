@@ -1,5 +1,5 @@
 mellstroy_casino = class({})
-
+loses = 0
 function mellstroy_casino:OnSpellStart()
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
@@ -27,7 +27,6 @@ function mellstroy_casino:OnSpellStart()
         for i = 0, abilities_count - 1 do
             local ability = caster:GetAbilityByIndex(i)
             if ability and ability ~= self and ability:GetCooldownTimeRemaining() > 0 then
-                -- Reduce the cooldown by half
                 local new_cooldown = ability:GetCooldownTimeRemaining() * 0.5
                 ability:EndCooldown()
                 ability:StartCooldown(new_cooldown)
@@ -38,19 +37,21 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    elseif random_chance <= 56 then
+    elseif random_chance <= 56 or loses >= 5 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
-        caster:EmitSound("normalwin") -- Play gold pickup sound
+        caster:EmitSound("normalwin")
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
         if caster:HasScepter() then
             caster:ModifyStrength(1)
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
+        loses = 0
     else
-        caster:EmitSound("lose") 
+        caster:EmitSound("lose")
+        loses = loses + 1
     end
 end
 

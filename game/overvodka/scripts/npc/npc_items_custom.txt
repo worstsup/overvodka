@@ -2821,10 +2821,7 @@
 	"ItemPermanent"					"0"
 	"ItemInitialCharges"			"1"
 	"ItemDisplayCharges"			"1"
-	"ItemStockInitial"				"1"
-	"ItemStockMax"					"1"
-	"ItemStockTime"					"90.0"
-	"ItemCost"						"400"
+	"ItemCost"						"250"
 	"ItemShopTags"					"teleport"
 	"ItemQuality"					"component"
 	"ItemAliases"					"blink dagger"
@@ -3086,6 +3083,76 @@
             "stun_duration"         "1.2"
 			"chance"				"30"
 			"crit"					"250"
+		}
+	}
+	"item_recipe_magic_crystalis"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"500"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_magic_crystalis"
+
+		"ItemRequirements"
+		{
+			"01"						"item_oblivion_staff"
+		}
+	}
+
+	"item_magic_crystalis"
+	{
+		"BaseClass" 					"item_lua"
+		"ScriptFile" 					"magic_crit"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"			"magic_crystalis"
+		"AbilityValues"
+		{
+			"bonus_damage"			"15"
+			"bonus_intellect"		"10"
+			"bonus_attackspeed"		"10"
+			"bonus_mana_regen"		"5"
+			"chance"				"20"
+			"crit"					"125"
+		}
+	}
+	"item_recipe_magic_daedalus"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"900"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_magic_daedalus"
+
+		"ItemRequirements"
+		{
+			"01"						"item_ultimate_orb;item_magic_crystalis"
+		}
+	}
+
+	"item_magic_daedalus"
+	{
+		"BaseClass" 					"item_lua"
+		"ScriptFile" 					"magic_crit"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"			"magic_daedalus"
+		"AbilityValues"
+		{
+			"bonus_damage"			"15"
+			"bonus_str"				"10"
+			"bonus_agi"				"10"
+			"bonus_intellect"		"26"
+			"bonus_mana"			"175"
+			"bonus_hp"				"175"
+			"bonus_attackspeed"		"10"
+			"bonus_mana_regen"		"5"
+			"chance"				"25"
+			"crit"					"150"
 		}
 	}
 }

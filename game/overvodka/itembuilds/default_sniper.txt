@@ -38,6 +38,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
+			"item"		"item_magic_daedalus"
 			"item"		"item_invis_sword_datadriven"
 			"item"		"item_armlet_datadriven"
 		}

@@ -1,8 +1,3 @@
--- Creator:
---	   AltiV, August 27th, 2019
--- Primary Idea Giver:
---     Kinkykids
-
 LinkLuaModifier("modifier_imba_batrider_sticky_napalm_handler", "hero_batrider", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_imba_batrider_sticky_napalm", "hero_batrider", LUA_MODIFIER_MOTION_NONE)
 
@@ -10,9 +5,6 @@ imba_batrider_sticky_napalm						= class({})
 modifier_imba_batrider_sticky_napalm_handler		= class({})
 modifier_imba_batrider_sticky_napalm				= class({})
 
----------------------------------
--- IMBA_BATRIDER_STICKY_NAPALM --
----------------------------------
 function imba_batrider_sticky_napalm:IsStealable()
 	return false
 end
@@ -40,24 +32,19 @@ function imba_batrider_sticky_napalm:OnSpellStart()
 	for _, enemy in pairs(self.enemies) do
 		enemy:AddNewModifier(self:GetCaster(), self, "modifier_imba_batrider_sticky_napalm", {duration = self:GetSpecialValueFor("duration") * (1 - enemy:GetStatusResistance())})
 	end
-	
-	-- "Provides 400 radius flying vision at the targeted point upon cast for 2 seconds."
 	AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCursorPosition(), 400, 2, false)
 	
 	self.napalm_impact_particle = nil
 	self.enemies				= nil
 end
 
---------------------------------------------------
--- MODIFIER_IMBA_BATRIDER_STICKY_NAPALM_HANDLER --
---------------------------------------------------
 
 function modifier_imba_batrider_sticky_napalm_handler:IsHidden()	return true end
 
 function modifier_imba_batrider_sticky_napalm_handler:OnIntervalThink()
 	if not IsServer() then return end
 
-	if not self:GetCaster():IsHexed() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
+	if not self:GetCaster():IsHexed() and not self:GetCaster():IsInvisible() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
 		local targets = FindUnitsInRadius(
 			self:GetCaster():GetTeamNumber(),	-- int, your team number
 			self:GetCaster():GetAbsOrigin(),	-- point, center point
@@ -65,11 +52,12 @@ function modifier_imba_batrider_sticky_napalm_handler:OnIntervalThink()
 			600,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
 			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			DOTA_UNIT_TARGET_FLAG_NONE,	-- int, flag filter
+			DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
 			FIND_CLOSEST,	-- int, order filter
 			false	-- bool, can grow cache
 		)
 		if targets == nil then return end
+		if self:GetCaster():IsInvisible() then return end
 		for _,unit in pairs(targets) do
 			local pointd = unit:GetAbsOrigin()
 			break
@@ -89,16 +77,13 @@ function modifier_imba_batrider_sticky_napalm_handler:OnOrder(keys)
 	if not IsServer() or keys.unit ~= self:GetParent() then return end
 	
 	if keys.ability == self:GetAbility() then
-		-- IMBAfication: Oil Slick
 		if keys.order_type == DOTA_UNIT_ORDER_CAST_POSITION and (keys.new_pos - self:GetCaster():GetAbsOrigin()):Length2D() <= self:GetAbility():GetCastRange(self:GetCaster():GetCursorPosition(), self:GetCaster()) + self:GetCaster():GetCastRangeBonus() then
 			self.bActive = true
 		else
 			self.bActive = false
 		end
 		
-		-- IMBAfication: Oil Leak
 		if keys.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO then
-			-- Due to logic order, this is actually reversed
 			if self:GetAbility():GetAutoCastState() then
 				self:SetStackCount(0)
 				self:StartIntervalThink(-1)
@@ -122,11 +107,6 @@ function modifier_imba_batrider_sticky_napalm_handler:GetModifierDisableTurning(
 	return 0
 end
 
-------------------------------------------
--- MODIFIER_IMBA_BATRIDER_STICKY_NAPALM --
-------------------------------------------
-
--- TODO: Get this particle to work?
 function modifier_imba_batrider_sticky_napalm:GetEffectName()
 	return "particles/units/heroes/hero_batrider/batrider_napalm_damage_debuff.vpcf"
 end
@@ -151,9 +131,6 @@ function modifier_imba_batrider_sticky_napalm:OnCreated()
 		attacker 		= self:GetCaster(),
 		ability 		= self:GetAbility()
 	}
-	
-	-- "Sticky Napalm triggers on any damage instance caused by Batrider, except from Orb of Venom, Radiance, Spirit Vessel, Urn of Shadows and damage with the no-reflection flag."
-	-- Orb of Venom seems to already be taken care of innately so it doesn't have to be added to this list
 	self.non_trigger_inflictors = {
 		["imba_batrider_sticky_napalm"] = true,
 		

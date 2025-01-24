@@ -74,7 +74,9 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
         if not params.attacker:IsRangedAttacker() then
         	local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
 			DoCleaveAttack( self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf" )
-			params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = bash_stun})
+			if not params.target:HasModifier("modifier_generic_stunned_lua") then
+				params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = bash_stun})
+			end
 		end
         params.target:EmitSound("DOTA_Item.MKB.melee")
         params.target:EmitSound("DOTA_Item.MKB.Minibash")

@@ -16,7 +16,6 @@ function COverthrowGameMode:SpawnGold()
 		throwCoin = overBoss:FindAbilityByName( 'dota_ability_throw_coin' )
 		throwCoin2 = overBoss:FindAbilityByName( 'dota_ability_throw_coin_long' )
 	end
-
 	-- sometimes play the long anim
 	if throwCoin2 and RandomInt( 1, 100 ) > 80 then
 		overBoss:CastAbilityNoTarget( throwCoin2, -1 )

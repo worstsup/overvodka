@@ -167,7 +167,7 @@ function golovach_hidden:Kick( target, x, y, isRemnant )
 			r = distance,
 		} -- kv
 	)
-	local slow = target:AddNewModifier(self:GetCaster(), self, "modifier_golovach_slow", { duration = 2 })
+	local slow = target:AddNewModifier(self:GetCaster(), self, "modifier_golovach_slow", { duration = 3 })
 
 	-- create projectile
 	local info = {

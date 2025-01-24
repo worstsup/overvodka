@@ -1,6 +1,3 @@
---[[Author: YOLOSPAGHETTI
-	Date: March 15, 2016
-	Creates the death ward]]
 function CreateWard(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -29,13 +26,8 @@ function CreateWard(keys)
 	caster.death_ward:SetControllableByPlayer(caster:GetPlayerID(), true)
 	caster.death_ward:SetOwner(caster)
 	caster.death_ward:AddNewModifier(caster.death_ward, nil, "modifier_kill", {duration = duration})
-	-- Applies the modifier (gives it damage, removes health bar, and makes it invulnerable)
-	--ability:ApplyDataDrivenModifier( caster, caster.death_ward, "modifier_death_ward_datadriven", {} )
 end
 
---[[Author: YOLOSPAGHETTI
-	Date: March 15, 2016
-	Removes the death ward entity from the game and stops its sound]]
 function DestroyWard(keys)
 	local caster = keys.caster
 	

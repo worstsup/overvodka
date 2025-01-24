@@ -236,8 +236,10 @@ function modifier_rostik_q:OnIntervalThink()
 		)
 	end
 	if not self:GetParent():IsInvulnerable() then
-		damageTable.damage = 99999
+		self.fail_damage = self:GetAbility():GetSpecialValueFor( "fail_damage" )
+		damageTable.damage = self.fail_damage * self:GetParent():GetMaxHealth() * 0.01
 		damageTable.victim = self:GetParent()
+		damageTable.damage_type = DAMAGE_TYPE_PURE
 		ApplyDamage( damageTable )
 		self:GetParent():AddNewModifier(
 			self:GetParent(),

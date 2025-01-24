@@ -5,6 +5,11 @@ function modifier_golovach_run:OnCreated(params)
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
     self.target = EntIndexToHScript(params.target)
     self.damage = self:GetAbility():GetSpecialValueFor("damage")
+    self.debuff_immune = self:GetAbility():GetSpecialValueFor("debuff_immune")
+    self.talent = false
+    if self.debuff_immune == 1 then
+        self.talent = true
+    end
     self.targets_table = {}
     self:PlayEffects1()
     local order =
@@ -54,14 +59,16 @@ function modifier_golovach_run:OnIntervalThink()
                 unit:AddNewModifier(
                     self:GetCaster(),
                     self,
-                    "modifier_generic_knockback_lua",
-                    {
-                        direction_x = direction.x,
-                        direction_y = direction.y,
-                        distance = 200,
-                        height = 50,	
-                        duration = 0.5,
-                    }
+                    "modifier_knockback",
+			        {
+				        center_x = self:GetParent():GetAbsOrigin().x,
+				        center_y = self:GetParent():GetAbsOrigin().y,
+				        center_z = self:GetParent():GetAbsOrigin().z,
+				        duration = 0.5,
+				        knockback_duration = 0.5,
+				        knockback_distance = 200,
+				        knockback_height = 50
+			        }
                 )
                 local particle = ParticleManager:CreateParticle( "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", PATTACH_POINT_FOLLOW, unit )
                 ParticleManager:SetParticleControlEnt( particle, 0, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
@@ -76,7 +83,7 @@ function modifier_golovach_run:CheckState()
     {
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
         [MODIFIER_STATE_UNSLOWABLE] = true,
-        [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = self.talent,
     }
 end
 

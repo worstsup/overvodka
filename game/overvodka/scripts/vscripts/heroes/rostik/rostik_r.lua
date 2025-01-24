@@ -1,6 +1,8 @@
 rostik_r = class({})
 LinkLuaModifier( "modifier_rostik_r", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_rostik_r_slow", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_HORIZONTAL )
+LinkLuaModifier( "modifier_rostik_r_thinker", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_rostik_r_fire", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_NONE )
 
 function rostik_r:OnSpellStart()
 	local caster = self:GetCaster()
@@ -127,8 +129,15 @@ function modifier_rostik_r:OnCreated( kv )
 	self.delay = self:GetAbility():GetSpecialValueFor( "delay" )
 	self.speed = self:GetAbility():GetSpecialValueFor( "speed" )
 	self.distance = self:GetAbility():GetSpecialValueFor( "distance" )
+	self.facet = self:GetAbility():GetSpecialValueFor( "hasfacet" )
+	if self.facet == 1 then
+		self.hasfacet = true
+	else
+		self.hasfacet = false
+	end
 	if IsServer() then
 		self.direction = Vector( kv.x, kv.y, 0 )
+		self.start_point = self:GetParent():GetOrigin()
 		self.origin = self:GetParent():GetOrigin()
 		self:StartIntervalThink( self.delay )
 		self:PlayEffects()
@@ -141,6 +150,26 @@ end
 function modifier_rostik_r:OnDestroy( kv )
 	if IsServer() then
 		self:GetParent():InterruptMotionControllers( true )
+	end
+	if self:GetParent():HasModifier("modifier_item_aghanims_shard") then
+		local dir = self.start_point - self:GetParent():GetOrigin()
+		dir.z = 0
+		dir = dir:Normalized()
+		local duration = self:GetAbility():GetSpecialValueFor( "fire_duration" )
+		CreateModifierThinker(
+			self:GetParent(),
+			self:GetAbility(),
+			"modifier_rostik_r_thinker",
+			{
+				duration = duration,
+				x = dir.x,
+				y = dir.y,
+				range = (self.start_point - self:GetParent():GetOrigin()):Length2D(),
+			},
+			self:GetParent():GetOrigin(),
+			self:GetParent():GetTeamNumber(),
+			false
+		)
 	end
 end
 
@@ -162,6 +191,8 @@ function modifier_rostik_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_ROOTED] = true,
 		[MODIFIER_STATE_DISARMED] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.hasfacet,
+		[MODIFIER_STATE_UNSELECTABLE] = self.hasfacet,
 	}
 	return state
 end
@@ -193,7 +224,7 @@ function modifier_rostik_r:OnIntervalThink()
 	    EffectName = "",
 	    fDistance = self.distance,
 	    fStartRadius = 150,
-	    fEndRadius =150,
+	    fEndRadius = 150,
 		vVelocity = self.direction * self.speed,
 	
 		bHasFrontalCone = false,
@@ -236,4 +267,170 @@ function modifier_rostik_r:PlayEffects()
 		false
 	)
 	EmitSoundOn( sound_loop, self:GetParent() )
+end
+
+modifier_rostik_r_thinker = class({})
+
+function modifier_rostik_r_thinker:IsHidden()
+	return false
+end
+function modifier_rostik_r_thinker:IsDebuff()
+	return false
+end
+function modifier_rostik_r_thinker:IsStunDebuff()
+	return false
+end
+function modifier_rostik_r_thinker:IsPurgable()
+	return false
+end
+
+function modifier_rostik_r_thinker:OnCreated( kv )
+	self.caster = self:GetCaster()
+	self.parent = self:GetParent()
+	self.radius = self:GetAbility():GetSpecialValueFor( "radius" ) + 30
+	self.duration = self:GetAbility():GetSpecialValueFor( "fire_effect_duration" )
+	self.interval = 0.4
+	self.range = kv.range
+	self.damage = self:GetAbility():GetSpecialValueFor( "fire_damage" )
+
+	if not IsServer() then return end
+	self.abilityDamageType = self:GetAbility():GetAbilityDamageType()
+	self.abilityTargetTeam = self:GetAbility():GetAbilityTargetTeam()
+	self.abilityTargetType = self:GetAbility():GetAbilityTargetType()
+	self.abilityTargetFlags = self:GetAbility():GetAbilityTargetFlags()
+	local start_range = -50
+	self.direction = Vector( kv.x, kv.y, 0 )
+	self.startpoint = self.parent:GetOrigin() + self.direction * start_range
+	self.endpoint = self.startpoint + self.direction * self.range
+	local step = 0
+	while step < self.range do
+		local loc = self.startpoint + self.direction * step
+		GridNav:DestroyTreesAroundPoint( loc, self.radius, true )
+
+		step = step + self.radius
+	end
+	self:StartIntervalThink( self.interval )
+	self:PlayEffects()
+end
+
+function modifier_rostik_r_thinker:OnRefresh( kv )
+	self:OnCreated( kv )
+end
+
+function modifier_rostik_r_thinker:OnRemoved()
+end
+
+function modifier_rostik_r_thinker:OnDestroy()
+	if not IsServer() then return end
+	UTIL_Remove( self:GetParent() )
+end
+
+function modifier_rostik_r_thinker:OnIntervalThink()
+	local enemies = FindUnitsInLine(
+		self.caster:GetTeamNumber(),
+		self.startpoint,
+		self.endpoint,
+		nil,
+		self.radius,
+		self.abilityTargetTeam,
+		self.abilityTargetType,
+		self.abilityTargetFlags
+	)
+
+	for _,enemy in pairs(enemies) do
+		enemy:AddNewModifier(
+			self.caster,
+			self:GetAbility(),
+			"modifier_rostik_r_fire",
+			{
+				duration = self.duration,
+				interval = self.interval,
+				damage = self.damage * self.interval,
+				damage_type = self.abilityDamageType,
+			}
+		)
+	end
+
+end
+
+function modifier_rostik_r_thinker:PlayEffects()
+	local particle_cast = "particles/rostik_r_fire.vpcf"
+	local duration = self:GetAbility():GetSpecialValueFor( "fire_duration" )
+
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self.parent )
+	ParticleManager:SetParticleControl( effect_cast, 0, self.startpoint )
+	ParticleManager:SetParticleControl( effect_cast, 1, self.endpoint )
+	ParticleManager:SetParticleControl( effect_cast, 2, Vector( duration, 0, 0 ) )
+	self:AddParticle(
+		effect_cast,
+		false,
+		false,
+		-1,
+		false,
+		false
+	)
+end
+
+modifier_rostik_r_fire = class({})
+
+function modifier_rostik_r_fire:IsHidden()
+	return false
+end
+
+function modifier_rostik_r_fire:IsDebuff()
+	return true
+end
+
+function modifier_rostik_r_fire:IsStunDebuff()
+	return false
+end
+
+function modifier_rostik_r_fire:IsPurgable()
+	return false
+end
+
+function modifier_rostik_r_fire:OnCreated( kv )
+	if not IsServer() then return end
+	local interval = kv.interval
+	local damage = kv.damage
+	local damage_type = kv.damage_type
+
+	self.damageTable = {
+		victim = self:GetParent(),
+		attacker = self:GetCaster(),
+		damage = damage,
+		damage_type = damage_type,
+		ability = self:GetAbility(),
+	}
+
+	self:StartIntervalThink( interval )
+end
+
+function modifier_rostik_r_fire:OnRefresh( kv )
+	if not IsServer() then return end
+	local damage = kv.damage
+	local damage_type = kv.damage_type
+
+	self.damageTable.damage = damage
+	self.damageTable.damage_type = damage_type
+end
+
+function modifier_rostik_r_fire:OnRemoved()
+end
+
+function modifier_rostik_r_fire:OnDestroy()
+end
+
+
+function modifier_rostik_r_fire:OnIntervalThink()
+	ApplyDamage( self.damageTable )
+end
+
+
+function modifier_rostik_r_fire:GetEffectName()
+	return "particles/rostik_r_fire_debuff.vpcf"
+end
+
+function modifier_rostik_r_fire:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end

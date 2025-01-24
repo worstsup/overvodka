@@ -84,14 +84,23 @@ end
 function modifier_golovach_r:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-
+		MODIFIER_EVENT_ON_ATTACK_LANDED,
 		-- not necessary, for fun
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
 	}
 
 	return funcs
 end
-
+function modifier_golovach_r:OnAttackLanded(params)
+	if params.attacker ~= self:GetParent() then return end
+	if params.target:IsWard() then return end
+	local cleave_damage = self:GetAbility():GetSpecialValueFor("cleave_percent")
+    local cleave_radius = self:GetAbility():GetSpecialValueFor("cleave_radius")
+	if not params.attacker:IsRangedAttacker() then
+		local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
+		DoCleaveAttack( self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave_gods_strength.vpcf" )
+	end
+end
 function modifier_golovach_r:GetModifierMoveSpeedBonus_Percentage()
 	return self.bonus_ms
 end

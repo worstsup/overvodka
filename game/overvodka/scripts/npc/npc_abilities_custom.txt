@@ -649,7 +649,7 @@
 				"bonus_strength"             "1"
 				"AbilityCooldown"
 				{
-					"value"	"15 13 11 9"
+					"value"	"14 12 10 8"
 					"special_bonus_unique_pudge_1" "-2"
 				}
 		}
@@ -3909,7 +3909,7 @@
     }
 	"acid_spray_datadriven"
 	{
-		"BaseClass"				"ability_datadriven"
+		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
@@ -4168,7 +4168,7 @@
 		"AbilityCastAnimation"			"ACT_INVALID"
 		"AbilityValues"
 		{
-				"health_regen_per_instance"	"3 6 9 12 15 18 21"
+				"health_regen_per_instance"	"3 5 7 9 11 13 15"
 		}
 	}
 	//=================================================================================================================
@@ -4250,7 +4250,7 @@
 				"special_bonus_facet_invoker_elitist"	"1 2 3 4 5 6 7"
 				"RequiresFacet"					"invoker_elitist"
 				}
-				"move_speed_per_instance"	"4 5 6 7 8 9 10"
+				"move_speed_per_instance"	"2 3 4 5 6 7 8"
 		}
 	}
 	//=================================================================================================================
@@ -4627,7 +4627,7 @@
 				}
 				"land_stun_duration"
 				{
-					"value"	"1.0 1.25 1.5 1.75 2.0 2.25 2.5"
+					"value"	"0.8 1.0 1.2 1.4 1.6 1.8 2.0"
 					"levelkey"				"quaslevel"
 				}
 				"max_offset_distance"			"100"
@@ -8214,7 +8214,7 @@
         		"dur_tooltip"		"6.0"
                 "beam_speed"
                 {
-                	"value"	"360 380 400"
+                	"value"	"340 360 380"
                 }
                 "beam_radius"       "200"
                 "beam_dps"          "100 125 150"
@@ -8317,7 +8317,7 @@
         		 "disarm_duration"	"2.0 2.5 3.0 3.5"
         		 "damage"
         		 {
-        		 	"value"	"100 200 300 400"
+        		 	"value"	"75 150 225 300"
         		 	"special_bonus_unique_keeper_of_the_light_8" "+200"
         		 }
         }																				
@@ -8401,7 +8401,7 @@
 		"AbilityValues"
 		{
 				"duration"						"6"
-				"armor"	"5 11 17 23"
+				"armor"	"5 10 15 20"
 				"resist"
 				{
 					"value"	"14 21 28 35"
@@ -8419,7 +8419,7 @@
 				"regen"
 				{
 					"value" "0"
-					"special_bonus_facet_zuus_divine_rampage"	"+5"
+					"special_bonus_facet_zuus_divine_rampage"	"+3"
 					"RequiresFacet"			"zuus_divine_rampage"
 				}
 		}
@@ -8476,7 +8476,7 @@
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastRange"				"0"
 		"AbilityCooldown"				"23 21 19 17"
-		"AbilityManaCost"				"110 130 150 170"
+		"AbilityManaCost"				"90 100 110 120"
 		"AbilityValues"
 		{
 				"movement_speed"
@@ -8490,8 +8490,8 @@
 				"vision_duration"		"0.94 0.94 0.94 0.94"
 				"damage"
 				{
-					"value"	"100 200 300 400"
-					"special_bonus_unique_tidehunter_2" "+250"
+					"value"	"125 175 225 275"
+					"special_bonus_unique_tidehunter_2" "+175"
 				}
 				"magresist_duration"
 				{
@@ -8528,12 +8528,12 @@
 		{
 				"attack_damage"
 				{
-					"value"	"50 100 150 200"
-					"special_bonus_unique_tidehunter_5" "+100"
+					"value"	"40 80 120 160"
+					"special_bonus_unique_tidehunter_5" "+75"
 				}
 				"reduction_duration"
 				{
-					"value"	"2.0"
+					"value"	"1.5"
 					"special_bonus_unique_tidehunter_10" "+1"
 				}
 				"AbilityCharges"
@@ -8586,7 +8586,7 @@
 					"value"	"1200"
 					"affected_by_aoe_increase"	"1"
 				}
-				"damage"			"300 600 900"
+				"damage"			"250 500 750"
 				"stun_duration"
 				{
 					"value"	"1.6 1.8 2.0"
@@ -8692,9 +8692,9 @@
 				{
 					"value"	"0"
 				}
-				"hpregen"	"5"
-				"bonus_ms" "10"
-				"bonus_as"	"50"
+				"hpregen"	"3 4 5 6"
+				"bonus_ms" "10 14 18 22"
+				"bonus_as"	"30 45 60 75"
 		}
 		"OnSpellStart"
 		{
@@ -8794,7 +8794,7 @@
 				"Duration"		"%schoolboys_duration"
 				"UnitCount"		"%schoolboys_number5"
 				"UnitLimit"		"100"
-				"GrantsGold"	"50"
+				"GrantsGold"	"250"
 				"GrantsXP"		"100"
 				"SpawnRadius"	"200"
 				"OnSpawn"
@@ -8812,17 +8812,19 @@
 	"ashab_car_aura"
 	{
 		"BaseClass"                     "ability_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityTextureName"            "car_aura"
 		"AbilityCastRange"              "500"
-		"MaxLevel"				  "1"
+		"FightRecapLevel"				"1"
+		"MaxLevel"				  		"8"
 		"AbilityValues"
 		{
-				"hp_regen"        "5"
+				"hp_regen"        "3 3 4 4 5 5 6 6"
 				"radius"                    "500"
-				"bonus_ms"	"10"
-				"bonus_as"	"50"
+				"bonus_ms"	"10 10 14 14 18 18 22 22"
+				"bonus_as"	"30 30 45 45 60 60 75 75"
 		}
 		
 		"Modifiers"
@@ -8837,7 +8839,7 @@
 				"Aura_Teams"            "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 				"Aura_Types"            "DOTA_UNIT_TARGET_HERO"
 				"EffectName"    "particles/econ/items/juggernaut/jugg_fall20_immortal/jugg_fall20_immortal_healing_ward.vpcf"
-            		"EffectAttachType"  "follow_origin"
+            	"EffectAttachType"  "follow_origin"
 			}
 
 			"modifier_ashab_car_buff"
@@ -8901,13 +8903,14 @@
 		"FightRecapLevel"				"1"
 		"IsGrantedByScepter"			"1"
 		"MaxLevel"						"1"
-		"AbilityCooldown"				"60"
-		"AbilityManaCost"				"200"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"125"
 		"AbilityValues"
 		{
-				"duration"						"10"
+				"duration"						"7"
 				"bonus_strength"				"2"
-				"model_scale"					"120"
+				"model_scale"					"50"
+				"bonus_status"					"20"
 		}
 		
 	}
@@ -9638,9 +9641,9 @@
 				"slow_min"				"0"
 				"slow_max"				"0"
 				"slow_duration"				"0.8"
-				"range"					"300"
+				"range"					"200 250 300"
 				"slow_radius"				"0"
-				"bat"		"1.3 1.25 1.2"
+				"bat"		"1.4 1.3 1.2"
 				"buff_duration"
 				{
 					"value"	"0"
@@ -9750,7 +9753,7 @@
             		"value"	"14 16 18 20"
             		"special_bonus_unique_antimage_7" "+10"
             	}
-            	"mana_void_damage_per_mana" "0.5 0.6 0.7 0.8"
+            	"mana_void_damage_per_mana" "0.55 0.6 0.65 0.7"
 		}
 	}
 	//=================================================================================================================
@@ -9947,7 +9950,7 @@
 		{
 				"crit_mult"
 				{
-					"value"	"200 240 280 320"
+					"value"	"200 230 260 290"
 					"special_bonus_unique_ogre_magi_3" "+80"
 				}
 				"angle"					"360"
@@ -9994,7 +9997,7 @@
 			"particle"	"particles/econ/events/spring_2021/blink_dagger_spring_2021_end_lvl2.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityCastRange"				"700 800 900 1000"
 		"AbilityCastPoint"				"0.33"
 		"AbilityCooldown"				"28"
@@ -10069,7 +10072,7 @@
 		"AbilityManaCost"				"60 80 100 120"
 		"AbilityValues"
 		{
-				"ministun_duration"	"1.5 1.8 2.1 2.4"
+				"ministun_duration"	"1.5 1.7 1.9 2.1"
 				"slow"
 				{
 					"value" "40"
@@ -10083,7 +10086,7 @@
 				"str_damage"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+2"
+					"special_bonus_scepter"	"+150"
 				}
 				"armor_duration"			"6.0"
 				"chance"
@@ -10682,7 +10685,7 @@
 				"blast_dot_duration"	"4"
 				"blast_dot_damage"
 				{
-					"value"	"15 20 25 30"
+					"value"	"25 40 55 70"
 					"special_bonus_unique_slark" "+30"
 				}
 		}
@@ -10813,14 +10816,14 @@
     	"BaseClass"             "ability_lua"
     	"AbilityType"			"DOTA_ABILITY_TYPE_BASIC"
     	"ScriptFile"            "heroes/chillguy/custom_passive_bonus_armor_regen"
-    	"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    	"MaxLevel"				"1"
-    	"RequiredLevel"			"-1"
+    	"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"DependentOnAbility"	"chillguy_r"
+    	"MaxLevel"				"4"
 		"Innate"				"1"
     	"AbilityValues"
 		{
-				"armor"	"0.5"
-				"hp"	"3"
+				"armor"	"0.4 0.6 0.8 1.0"
+				"hp"	"2.5 3.0 3.5 4.0"
 		}
 	}
 	"chillguy_r"
@@ -11096,7 +11099,7 @@
     	"AbilityTextureName"            "golovach_w"
     	"HasShardUpgrade"				"1"
     	"AbilityCastPoint"              "0"
-    	"AbilityCooldown"               "40"
+    	"AbilityCooldown"               "26 24 22 20"
     	"AbilityManaCost"               "100 125 150 175"
     	"precache"
     	{
@@ -11108,7 +11111,6 @@
     		 {
 		  		"value"	"500"
 				"affected_by_aoe_increase"	"1"
-				"special_bonus_unique_juggernaut_healing_ward_heal" "+75"
 		  	}
             "duration"
             {
@@ -11131,7 +11133,6 @@
 		  	{
 		  		"value"	"500"
 				"affected_by_aoe_increase"	"1"
-				"special_bonus_unique_juggernaut_healing_ward_heal" "+75"
 		  	}
 		  	"damage"
 		  	{
@@ -11253,7 +11254,7 @@
 		"AbilityCastRange"				"900 1000 1100 1200"
 		"AbilityCastPoint"				"0.05"
 		"AbilityCooldown"				"30.0 26.0 22.0 18.0"
-		"AbilityManaCost"				"100 120 140 160"
+		"AbilityManaCost"				"75 90 105 120"
 		"precache"
 		{
 			"particle"	"particles/status_fx/status_effect_marci_sidekick.vpcf"
@@ -11280,6 +11281,11 @@
             	"damage"                            "90 180 270 360"
             	"lifesteal_pct"					"10"
             	"hui_chance"					 "10"
+				"debuff_immune"
+				{
+					"value"	"0"
+					"special_bonus_unique_juggernaut_omnislash_duration" "+1"
+				}
 		}
 	}
 	"golovach_r"
@@ -11336,6 +11342,8 @@
 					"value"	"0"
 					"special_bonus_unique_juggernaut_blade_fury_movespeed" "+15"
 				}
+				"cleave_percent" 		"35 45 55"
+				"cleave_radius" 		"650"
 				"recovery_fixed_attack_rate"	"2.0"
 		}
 	}
@@ -11362,10 +11370,10 @@
 				"AbilityCooldown"
 				{
 					"value"	"20 16 12 8"
-					"special_bonus_unique_juggernaut_omnislash_duration" "-4"
+					"special_bonus_unique_juggernaut_healing_ward_heal" "-2"
 				}
 				"back_angle"					"70"
-				"back_damage_reduction"			"0"
+				"back_damage_reduction"			"5 10 15 20"
 				"quill_release_threshold"		"210"
 				"radius"						"180"
 				"rock_search_aoe"				"200"
@@ -11378,7 +11386,8 @@
 				}
 				"rock_distance"					"2000.0"
 				"remnant_smash_radius_tooltip"	"200"
-				"slow"							"15"
+				"slow"							"20"
+				"slow_dur_tooltip"				"3"
 				"attackdamage"
 				{
 					"value"	"0"
@@ -11776,8 +11785,8 @@
 		{
 				"radius"
 				{
-					"value"	"600"
-					"special_bonus_scepter"	"+300"
+					"value"	"550"
+					"special_bonus_scepter"	"+200"
 					"affected_by_aoe_increase"	"1"
 				}
 				"duration"
@@ -12008,7 +12017,7 @@
 				}
 				"axe_movement_speed"		"277"
 				"blind_duration"			"3 4 5"
-				"blind_pct"					"30 40 50"
+				"blind_pct"					"15 20 25"
 				"blind_stacks"				"3 4 5"
 				"whirl_duration"			"3.0 4.0 5.0"
 				"blood_damage"				"3 4 5"
@@ -12722,22 +12731,30 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"775"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"22 20 18 16"
-		"AbilityManaCost"				"120"
+		"AbilityCooldown"				"26 24 22 20"
+		"AbilityManaCost"				"120 140 160 180"
 		"AbilityValues"
 		{
 				"brew_time"					"5.0"
 				"brew_explosion"			"5.5"
 				"min_stun"					"0.2"
-				"max_stun"					"1.4 1.8 2.2 2.6"
+				"max_stun"
+				{
+					"value"	"1.8 2.0 2.2 2.4"
+					"special_bonus_unique_storm_spirit_8" "+0.8"
+				}
 				"min_damage"				"0"
-				"max_damage"				"150 250 350 450"
+				"max_damage"
+				{
+					"value"	"150 250 350 450"
+					"special_bonus_unique_storm_spirit_5" "+150"
+				}
 				"radius"
 				{
 					"value"	"400"
 					"affected_by_aoe_increase"	"1"
 				}
-				"fail_damage"				"99999"
+				"fail_damage"				"30"
 		}
 	}
 	"rostik_q_throw"
@@ -12759,7 +12776,11 @@
 		{
 				"brew_time"					"5.0"
 				"min_stun"					"0.2"
-				"max_stun"					"1.2 1.6 2.0 2.4"
+				"max_stun"
+				{
+					"value"	"1.4 1.8 2.2 2.6"
+					"special_bonus_unique_storm_spirit_8" "+0.8"
+				}
 				"min_damage"				"0"
 				"max_damage"				"150 250 350 450"
 				"movement_speed"			"900"
@@ -12775,24 +12796,31 @@
 		"AbilityTextureName"			"rostik_r"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
+		"HasShardUpgrade"				"1"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_earth_spirit.vsndevts"
 			"soundfile"	"soundevents/rostik_r.vsndevts"
+			"particle"	"particles/rostik_r_fire.vpcf"
 			"particle"	"particles/rostik_r.vpcf"
+			"particle"	"particles/rostik_r_fire_debuff.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"3000"
 		"AbilityCastPoint"				"0.01"
-		"AbilityManaCost"				"100"
+		"AbilityManaCost"				"100 125 150"
 		"AbilityValues"
 		{
 				"AbilityCharges"
 				{
 					"value"	"2"
+					"special_bonus_unique_storm_spirit_7" "+1"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -12804,7 +12832,228 @@
 				"delay"					"0.2"
 				"damage"				"130 260 390"
 				"move_slow"				"80"
-				"slow_duration"			"1.4 1.6 1.8"
+				"slow_duration"			"0.8 1.2 1.6"
+				"hasfacet"
+				{
+					"value"												"0"
+					"special_bonus_facet_storm_spirit_static_slide"		"+1"
+				}
+				"fire_duration"
+				{
+					"value"	"0"
+					"special_bonus_shard" "+4"
+					"RequiresShard"	"1"
+				}
+				"fire_effect_duration"
+				{
+					"value"	"0"
+					"special_bonus_shard" "+2"
+					"RequiresShard"	"1"
+				}
+				"fire_damage"
+				{
+					"value"	"0"
+					"special_bonus_shard" "+80"
+					"RequiresShard"	"1"
+				}
+				"fire_dps_tooltip"
+				{
+					"value"	"0"
+					"special_bonus_shard" "+200"
+					"RequiresShard"	"1"
+				}
+		}
+	}
+	"rostik_w" 
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/rostik/rostik_w"
+		"AbilityBehavior"		   		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"		 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"		 	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"		  	"rostik_w"
+		"AOERadius"			   			"%target_radius"
+		"AbilityCastRange"				"900"
+		"AbilityCastAnimation"		  	"ACT_DOTA_CAST_ABILITY_2"
+		"AnimationPlaybackRate"		 	"1"
+		"AnimationIgnoresModelScale"	"1"
+		"AbilityCastPoint"				"0.3"
+		"AbilityManaCost"		   		"120 160 200 240"
+		"AbilityCooldown"		   		"34 32 30 28"
+		"precache"
+		{
+			"particle"	"particles/rostik_w.vpcf"
+			"soundfile"	"soundevents/rostik_w_bolt.vsndevts"
+			"soundfile"	"soundevents/rostik_w.vsndevts"
+		}
+		"AbilityValues"
+		{
+			"duration"					"5"
+			"damage"					"30 60 90 120"
+			"int_multi"
+			{
+				"value"	"50"
+				"special_bonus_unique_storm_spirit" "+50"
+			}
+			"radius"					"175"
+			"target_radius"
+			{
+				"value"	"425"
+				"affected_by_aoe_increase"	"1"
+			}
+			"blasts"
+			{
+				"value"	"18"
+				"special_bonus_unique_storm_spirit_4" "+6"
+			}
+		}
+	}
+	"rostik_e"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"rostik_e"
+		"ScriptFile"					"heroes/rostik/rostik_e"
+		"FightRecapLevel"				"1"
+		"HasScepterUpgrade"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCooldown"				"25"
+		"AbilityManaCost"				"90 120 150 180"
+		"AbilityValues"
+		{
+				"buff_duration"					"5"
+				"duration"						"0.6"
+				"overload_damage"
+				{
+					"value"	"20 40 60 80"
+					"special_bonus_unique_storm_spirit_overload_aspd" "+20"
+				}
+				"overload_aoe"
+				{
+					"value"	"300"
+					"affected_by_aoe_increase"	"1"
+				}
+				"overload_move_slow"			"-80"
+				"overload_attack_slow"			"-80"
+				"bonus_as"
+				{
+					"value"	"0"
+					"special_bonus_facet_storm_spirit_shock_collar" "+20 +40 +60 +80"
+					"RequiresFacet"		"storm_spirit_shock_collar"
+				}
+				"spirits_duration"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+10"
+					"RequiresScepter"	"1"
+				}
+				"spirits_damage"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+125 +150 +175 +200"
+					"RequiresScepter"	"1"
+				}
+				"spirits_radius"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+600"
+					"RequiresScepter"	"1"
+				}
+				"spirits_slow"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+30"
+					"RequiresScepter"	"1"
+				}
+				"spirits_slow_duration"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+0.3"
+					"RequiresScepter"	"1"
+				}
+				"AbilityCastRange"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+600"
+				}
+		}
+	}
+	"wisp_spirits"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"rostik_e"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilitySound"					"Hero_Wisp.Spirits.Cast"
+        "HasScepterUpgrade"				"0"
+		"AbilityCastPoint"				"0"
+  		"AbilityCastAnimation"			"ACT_INVALID"
+		"IsStealable"					"0"
+		"AbilityDuration"				"10.0"
+		"AbilityValues"
+		{
+			"creep_damage"				"50 100 150 200"
+			"hero_damage"
+			{
+				"value"				"125 150 175 200"
+			}
+			"revolution_time"			"5.0 5.0 5.0 5.0"
+			"min_range"					"600"
+			"max_range"					
+			{
+					"value"		"600"
+			}
+			"hero_hit_radius"			"110"
+			"explode_radius"
+			{
+				"value"		"360"
+			}
+			"hit_radius"				
+			{
+				"value"		"150 150 150 150"
+			}
+			"spirit_movement_rate"		"250 250 250 250"
+			"spirit_duration"			"10.0"
+			"spirit_amount"			"5"
+			"scepter_slow_pct"
+			{
+				"value"			"15"
+			}
+			"scepter_slow_duration"
+			{
+				"value"			"0.3"
+			}
+			"AbilityManaCost"				
+			{
+				"value"							"0"
+			}
+			"AbilityCooldown"				
+			{
+				"value"				"10"
+			}
+		}
+	}
+	"skywrath_mage_ruin_and_restoration"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"3"
+		"Innate"						"1"
+		"DependentOnAbility"			"rostik_r"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"spell_lifesteal"
+			{
+				"value"		"15 20 25"
+			}
 		}
 	}
 }

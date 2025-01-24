@@ -94,11 +94,12 @@ function modifier_golovach_q:ThresholdLogic( damage, target )
 		if ability~=nil then
 			self:GetAbility():UseResources( false, false, false, true )
 			EmitSoundOn( "golovach_q", self:GetCaster() )
-			local dmg = self:GetCaster():GetAttackDamage()
+			local dmg = self:GetCaster():GetAverageTrueAttackDamage(nil) * 2
 			if self:GetAbility():GetSpecialValueFor( "attackdamage" ) == 1 then
 				ApplyDamage({ victim = target, attacker = self:GetCaster(), damage = dmg, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility() })
 			end
 			self:GetParent():CastAbilityOnTarget( target, ability, self:GetParent():GetPlayerID() )
+			self:GetParent():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_golovach_q_buff", {duration = self:GetAbility():GetSpecialValueFor("slow_dur_tooltip")})
 		end
 	end
 end

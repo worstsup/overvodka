@@ -3,7 +3,6 @@ LinkLuaModifier( "modifier_golovach_e", "heroes/golovach/modifier_golovach_e", L
 LinkLuaModifier( "modifier_golovach_run", "heroes/golovach/modifier_golovach_run", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_marci_sidekick_lua", "modifier_marci_sidekick_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
 -- Ability Start

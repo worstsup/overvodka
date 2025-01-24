@@ -64,6 +64,7 @@ end
 --------------------------------------------------------------------------------
 -- Event: OnNPCSpawned
 --------------------------------------------------------------------------------
+golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
@@ -75,6 +76,10 @@ function COverthrowGameMode:OnNPCSpawned( event )
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_juggernaut" and golovach_spawned == 0 then
+			spawnedUnit:FindAbilityByName("golovach_innate"):StartCooldown(spawnedUnit:FindAbilityByName("golovach_innate"):GetCooldown(1))
+			golovach_spawned = golovach_spawned + 1
 		end
 		-- Destroys the last hit effects
 		local deathEffects = spawnedUnit:Attribute_GetIntValue( "effectsID", -1 )

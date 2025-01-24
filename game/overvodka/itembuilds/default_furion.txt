@@ -24,6 +24,7 @@
 			"item"		"item_jordan"
 			"item"		"item_sharoeb"
 			"item"		"item_suchiy"
+			"item"		"item_magic_daedalus"
 			"item"		"item_armlet_datadriven"
 			"item"		"item_pasito"
 		}

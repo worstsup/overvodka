@@ -2885,7 +2885,7 @@
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
 		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
+        "Level"                 "1"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
@@ -2917,7 +2917,7 @@
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
 		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
+        "Level"                 "2"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
@@ -2949,7 +2949,7 @@
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
 		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
+        "Level"                 "3"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
@@ -3003,7 +3003,7 @@
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
 		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
+        "Level"                 "4"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
@@ -3057,7 +3057,7 @@
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
 		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
+        "Level"                 "4"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
@@ -3248,28 +3248,15 @@
 	}
 	"npc_batya_1"
 	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"             "npc_dota_creature"				// Class of entity of link to.
+		"BaseClass"             "npc_dota_creature"
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"1"
 		"ModelScale" 				"0.35"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"batya_radiance"			// Ability 1.
-		"Ability2"					""			// Ability 2.
-		"Ability3"					""			// Ability 3.
-		"Ability4"					""			// Ability 4.
-		"Ability5"					""			// Ability 5.
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"5"			// Physical protection.
-		"MagicalResistance"				"30"			// Magical protection.
-
-		// Attack
-		//----------------------------------------------------------------
+		"IsAncient"					"1"
+		"CanBeDominated"			"0"
+		"Ability1"					"batya_radiance"
+		"ArmorPhysical"				"5"
+		"MagicalResistance"				"30"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
 		"AttackDamageMin"			"0"			// Damage range min.
 		"AttackDamageMax"			"0"			// Damage range max.	
@@ -3278,39 +3265,22 @@
 		"AttackAcquisitionRange"	"0"			// Range within a target can be acquired.
 		"AttackRange"				"0"			// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
-		"ProjectileSpeed"			"0"			// Speed of projectile.		   
-
-		// Bounds
-		//----------------------------------------------------------------
+		"ProjectileSpeed"			"0"			// Speed of projectile.
 		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"			// Hull type used for navigation/locomotion.
 		"RingRadius"				"100"
 		"HealthBarOffset"			"350"
-
-		// Movement
-		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
 		"MovementSpeed"				"0"			// Speed
 		"MovementTurnRate"			"0"		// Turning rate.
-	
-		// Bounty
-		//----------------------------------------------------------------
 		"BountyXP"					"300"		// Experience earn.
 		"BountyGoldMin"				"300"		// Gold earned min.
 		"BountyGoldMax"				"300"		// Gold earned max.
-
-		// Status
-		//----------------------------------------------------------------
 		"StatusHealth"				"2000"		// Base health.
 		"StatusHealthRegen"			"0.25"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
-		
-		// Vision
-		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"0"		// Range of vision during day light.
 		"VisionNighttimeRange"		"0"		// Range of vision at night time.
-
-		//Inventory
 		"HasInventory"				"0"
 		"IsSummoned"            "1"
 	}
@@ -3322,6 +3292,8 @@
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"2"
 		"ModelScale" 				"0.4"
+		"IsAncient"					"1"
+		"CanBeDominated"			"0"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3390,6 +3362,8 @@
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"3"
 		"ModelScale" 				"0.45"
+		"IsAncient"					"1"
+		"CanBeDominated"			"0"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3458,6 +3432,8 @@
 		"Model"						"zolo/models/heroes/zol/old_man_to_sk.vmdl"
 		"Level"						"4"
 		"ModelScale" 				"0.45"
+		"IsAncient"					"1"
+		"CanBeDominated"			"0"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3570,4 +3546,5 @@
     "BoundsHullName"        "DOTA_HULL_SIZE_SMALL"
     "IsSummoned"            "1"
 	}
+	
 }	

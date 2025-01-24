@@ -31,21 +31,21 @@ end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierPhysicalArmorBonus()
     if self:GetStackCount() > 0 then
-        return self:GetParent():GetLevel() / 2
+        return (self:GetAbility():GetSpecialValueFor("armor") * self:GetParent():GetLevel())
     end
     return 0
 end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierHealthRegenPercentage()
     if self:GetStackCount() > 0 then
-        return 3
+        return self:GetAbility():GetSpecialValueFor("hp")
     end
     return 0
 end
 
 function modifier_custom_passive_bonus_armor_regen:GetModifierTotalPercentageManaRegen()
     if self:GetStackCount() > 0 then
-        return 3
+        return self:GetAbility():GetSpecialValueFor("hp")
     end
     return 0
 end

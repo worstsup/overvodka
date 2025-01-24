@@ -1,7 +1,3 @@
--- Creator:
---	   AltiV, August 27th, 2019
--- Primary Idea Giver:
---     Kinkykids
 
 LinkLuaModifier("modifier_imba_batrider_sticky_napalm_handler_new", "hero_batrider_new", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_imba_batrider_sticky_napalm_new", "hero_batrider_new", LUA_MODIFIER_MOTION_NONE)
@@ -10,9 +6,6 @@ imba_batrider_sticky_napalm_new							= class({})
 modifier_imba_batrider_sticky_napalm_handler_new		= class({})
 modifier_imba_batrider_sticky_napalm_new				= class({})
 
----------------------------------
--- IMBA_BATRIDER_STICKY_NAPALM --
----------------------------------
 function imba_batrider_sticky_napalm_new:IsStealable()
 	return false
 end
@@ -41,23 +34,19 @@ function imba_batrider_sticky_napalm_new:OnSpellStart()
 		enemy:AddNewModifier(self:GetCaster(), self, "modifier_imba_batrider_sticky_napalm_new", {duration = 8 * (1 - enemy:GetStatusResistance())})
 	end
 	
-	-- "Provides 400 radius flying vision at the targeted point upon cast for 2 seconds."
 	AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCursorPosition(), 400, 2, false)
 	
 	self.napalm_impact_particle = nil
 	self.enemies				= nil
 end
 
---------------------------------------------------
--- MODIFIER_IMBA_BATRIDER_STICKY_NAPALM_HANDLER --
---------------------------------------------------
 
 function modifier_imba_batrider_sticky_napalm_handler_new:IsHidden()	return true end
 
 function modifier_imba_batrider_sticky_napalm_handler_new:OnIntervalThink()
 	if not IsServer() then return end
 
-	if self:GetCaster():IsAlive() and self:GetAbility():IsFullyCastable() and not self:GetAbility():IsInAbilityPhase() and not self:GetCaster():IsHexed() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
+	if self:GetCaster():IsAlive() and self:GetAbility():IsFullyCastable() and not self:GetAbility():IsInAbilityPhase() and not self:GetCaster():IsInvisible() and not self:GetCaster():IsHexed() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
 		local targets = FindUnitsInRadius(
 			self:GetCaster():GetTeamNumber(),	-- int, your team number
 			self:GetCaster():GetAbsOrigin(),	-- point, center point
@@ -65,7 +54,7 @@ function modifier_imba_batrider_sticky_napalm_handler_new:OnIntervalThink()
 			600,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
 			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			DOTA_UNIT_TARGET_FLAG_NONE,	-- int, flag filter
+			DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
 			FIND_CLOSEST,	-- int, order filter
 			false	-- bool, can grow cache
 		)
@@ -106,11 +95,6 @@ function modifier_imba_batrider_sticky_napalm_handler_new:GetModifierDisableTurn
 	return 0
 end
 
-------------------------------------------
--- MODIFIER_IMBA_BATRIDER_STICKY_NAPALM --
-------------------------------------------
-
--- TODO: Get this particle to work?
 function modifier_imba_batrider_sticky_napalm_new:GetEffectName()
 	return "particles/units/heroes/hero_batrider/batrider_napalm_damage_debuff.vpcf"
 end
@@ -136,8 +120,6 @@ function modifier_imba_batrider_sticky_napalm_new:OnCreated()
 		ability 		= self:GetAbility()
 	}
 	
-	-- "Sticky Napalm triggers on any damage instance caused by Batrider, except from Orb of Venom, Radiance, Spirit Vessel, Urn of Shadows and damage with the no-reflection flag."
-	-- Orb of Venom seems to already be taken care of innately so it doesn't have to be added to this list
 	self.non_trigger_inflictors = {
 		["imba_batrider_sticky_napalm_new"] = true,
 		
@@ -190,7 +172,6 @@ function modifier_imba_batrider_sticky_napalm_new:OnTakeDamage(keys)
 		ParticleManager:ReleaseParticleIndex(self.damage_debuff_particle)
 		self.damage_debuff_particle = nil
 		
-		-- The wikis don't say anything about creep-heroes so I'll just assume they'll be treated as creeps
 		if self:GetParent():IsHero() then
 			self.damage_table.damage = self.damage * self:GetStackCount()
 		else
