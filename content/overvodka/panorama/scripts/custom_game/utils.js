@@ -319,6 +319,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_rostik"
     }
+    if (HeroName == "npc_dota_hero_necrolyte")
+    {
+        OvervodkaName = "npc_dota_hero_5opka"
+    }
     return OvervodkaName	
 }
 

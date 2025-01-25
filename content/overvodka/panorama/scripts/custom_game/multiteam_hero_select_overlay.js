@@ -50,435 +50,91 @@ function UpdatePlayer( teamPanel, playerId )
 
 	if ( playerInfo.player_selected_hero !== "" )
 	{
-		if (playerInfo.player_selected_hero == "npc_dota_hero_ursa"){
-			playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_litvin.png" );
-			playerPanel.SetHasClass( "hero_selected", true );
-			playerPanel.SetHasClass( "hero_highlighted", false );
+		const heroImages = {
+			"npc_dota_hero_ursa": "file://{images}/heroes/npc_dota_hero_litvin.png",
+			"npc_dota_hero_bounty_hunter": "file://{images}/heroes/npc_dota_hero_mellstroy.png",
+			"npc_dota_hero_tinker": "file://{images}/heroes/npc_dota_hero_ilin.png",
+			"npc_dota_hero_brewmaster": "file://{images}/heroes/npc_dota_hero_golmy.png",
+			"npc_dota_hero_invoker": "file://{images}/heroes/npc_dota_hero_zombill.png",
+			"npc_dota_hero_rubick": "file://{images}/heroes/npc_dota_hero_mrus.png",
+			"npc_dota_hero_terrorblade": "file://{images}/heroes/npc_dota_hero_senya.png",
+			"npc_dota_hero_riki": "file://{images}/heroes/npc_dota_hero_sega.png",
+			"npc_dota_hero_lion": "file://{images}/heroes/npc_dota_hero_lev.png",
+			"npc_dota_hero_kunkka": "file://{images}/heroes/npc_dota_hero_vova.png",
+			"npc_dota_hero_pudge": "file://{images}/heroes/npc_dota_hero_step.png",
+			"npc_dota_hero_sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
+			"npc_dota_hero_meepo": "file://{images}/heroes/npc_dota_hero_kirill.png",
+			"npc_dota_hero_undying": "file://{images}/heroes/npc_dota_hero_dmb.png",
+			"npc_dota_hero_axe": "file://{images}/heroes/npc_dota_hero_dima.png",
+			"npc_dota_hero_phoenix": "file://{images}/heroes/npc_dota_hero_orlov.png",
+			"npc_dota_hero_monkey_king": "file://{images}/heroes/npc_dota_hero_loban.png",
+			"npc_dota_hero_zuus": "file://{images}/heroes/npc_dota_hero_stariy.png",
+			"npc_dota_hero_tidehunter": "file://{images}/heroes/npc_dota_hero_tamaev.png",
+			"npc_dota_hero_earthshaker": "file://{images}/heroes/npc_dota_hero_arsen.png",
+			"npc_dota_hero_furion": "file://{images}/heroes/npc_dota_hero_nix.png",
+			"npc_dota_hero_antimage": "file://{images}/heroes/npc_dota_hero_pirat.png",
+			"npc_dota_hero_ogre_magi": "file://{images}/heroes/npc_dota_hero_zolo.png",
+			"npc_dota_hero_clinkz": "file://{images}/heroes/npc_dota_hero_cheater.png",
+			"npc_dota_hero_ancient_apparition": "file://{images}/heroes/npc_dota_hero_chill.png",
+			"npc_dota_hero_bloodseeker": "file://{images}/heroes/npc_dota_hero_sasavot.png",
+			"npc_dota_hero_juggernaut": "file://{images}/heroes/npc_dota_hero_golovach.png",
+			"npc_dota_hero_skeleton_king": "file://{images}/heroes/npc_dota_hero_papich.png",
+			"npc_dota_hero_rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
+			"npc_dota_hero_storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
+			"npc_dota_hero_necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png"
+		};
+
+		if (heroImages[playerInfo.player_selected_hero]) {
+			playerPortrait.SetImage(heroImages[playerInfo.player_selected_hero]);
+		} else {
+			playerPortrait.SetImage("file://{images}/heroes/" + playerInfo.player_selected_hero + ".png");
 		}
-		else{
-			if (playerInfo.player_selected_hero == "npc_dota_hero_bounty_hunter"){
-				playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_mellstroy.png" );
-				playerPanel.SetHasClass( "hero_selected", true );
-				playerPanel.SetHasClass( "hero_highlighted", false );
-			}
-			else{
-				if (playerInfo.player_selected_hero == "npc_dota_hero_tinker"){
-					playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_ilin.png" );
-					playerPanel.SetHasClass( "hero_selected", true );
-					playerPanel.SetHasClass( "hero_highlighted", false );
-				}
-				else{
-					if (playerInfo.player_selected_hero == "npc_dota_hero_brewmaster"){
-						playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_golmy.png" );
-						playerPanel.SetHasClass( "hero_selected", true );
-						playerPanel.SetHasClass( "hero_highlighted", false );
-					}
-					else{
-						if (playerInfo.player_selected_hero == "npc_dota_hero_invoker"){
-							playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_zombill.png" );
-							playerPanel.SetHasClass( "hero_selected", true );
-							playerPanel.SetHasClass( "hero_highlighted", false );
-						}
-						else{
-							if (playerInfo.player_selected_hero == "npc_dota_hero_rubick"){
-								playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_mrus.png" );
-								playerPanel.SetHasClass( "hero_selected", true );
-								playerPanel.SetHasClass( "hero_highlighted", false );
-							}
-							else{
-								if (playerInfo.player_selected_hero == "npc_dota_hero_terrorblade"){
-									playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_senya.png" );
-									playerPanel.SetHasClass( "hero_selected", true );
-									playerPanel.SetHasClass( "hero_highlighted", false );
-								}
-								else{
-									if (playerInfo.player_selected_hero == "npc_dota_hero_riki"){
-										playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_sega.png" );
-										playerPanel.SetHasClass( "hero_selected", true );
-										playerPanel.SetHasClass( "hero_highlighted", false );
-									}
-									else{
-										if (playerInfo.player_selected_hero == "npc_dota_hero_lion"){
-											playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_lev.png" );
-											playerPanel.SetHasClass( "hero_selected", true );
-											playerPanel.SetHasClass( "hero_highlighted", false );
-										}
-										else{
-											if (playerInfo.player_selected_hero == "npc_dota_hero_kunkka"){
-												playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vova.png" );
-												playerPanel.SetHasClass( "hero_selected", true );
-												playerPanel.SetHasClass( "hero_highlighted", false );
-											}
-											else{
-												if (playerInfo.player_selected_hero == "npc_dota_hero_pudge"){
-													playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_step.png" );
-													playerPanel.SetHasClass( "hero_selected", true );
-													playerPanel.SetHasClass( "hero_highlighted", false );
-												}
-												else{
-													if (playerInfo.player_selected_hero == "npc_dota_hero_sniper"){
-														playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_ivanov.png" );
-														playerPanel.SetHasClass( "hero_selected", true );
-														playerPanel.SetHasClass( "hero_highlighted", false );
-													}
-													else{
-														if (playerInfo.player_selected_hero == "npc_dota_hero_meepo"){
-															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_kirill.png" );
-															playerPanel.SetHasClass( "hero_selected", true );
-															playerPanel.SetHasClass( "hero_highlighted", false );
-														}
-														else{
-															if (playerInfo.player_selected_hero == "npc_dota_hero_undying"){
-																playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_dmb.png" );
-																playerPanel.SetHasClass( "hero_selected", true );
-																playerPanel.SetHasClass( "hero_highlighted", false );
-															}
-															else{
-																if (playerInfo.player_selected_hero == "npc_dota_hero_axe"){
-																	playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_dima.png" );
-																	playerPanel.SetHasClass( "hero_selected", true );
-																	playerPanel.SetHasClass( "hero_highlighted", false );
-																}
-																else{
-																	if (playerInfo.player_selected_hero == "npc_dota_hero_phoenix"){
-																		playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_orlov.png" );
-																		playerPanel.SetHasClass( "hero_selected", true );
-																		playerPanel.SetHasClass( "hero_highlighted", false );
-																	}
-																	else{
-																		if (playerInfo.player_selected_hero == "npc_dota_hero_monkey_king"){
-																			playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_loban.png" );
-																			playerPanel.SetHasClass( "hero_selected", true );
-																			playerPanel.SetHasClass( "hero_highlighted", false );
-																		}
-																		else{
-																			if (playerInfo.player_selected_hero == "npc_dota_hero_zuus"){
-																				playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_stariy.png" );
-																				playerPanel.SetHasClass( "hero_selected", true );
-																				playerPanel.SetHasClass( "hero_highlighted", false );
-																			}
-																			else{
-																				if (playerInfo.player_selected_hero == "npc_dota_hero_tidehunter"){
-																					playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_tamaev.png" );
-																					playerPanel.SetHasClass( "hero_selected", true );
-																					playerPanel.SetHasClass( "hero_highlighted", false );
-																				}
-																				else{
-																					if (playerInfo.player_selected_hero == "npc_dota_hero_earthshaker"){
-																						playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_arsen.png" );
-																						playerPanel.SetHasClass( "hero_selected", true );
-																						playerPanel.SetHasClass( "hero_highlighted", false );
-																					}
-																					else{
-																						if (playerInfo.player_selected_hero == "npc_dota_hero_furion"){
-																							playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_nix.png" );
-																							playerPanel.SetHasClass( "hero_selected", true );
-																							playerPanel.SetHasClass( "hero_highlighted", false );
-																						}
-																						else{
-																							if (playerInfo.player_selected_hero == "npc_dota_hero_antimage"){
-																								playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_pirat.png" );
-																								playerPanel.SetHasClass( "hero_selected", true );
-																								playerPanel.SetHasClass( "hero_highlighted", false );
-																							}
-																							else{
-																								if (playerInfo.player_selected_hero == "npc_dota_hero_ogre_magi"){
-																									playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_zolo.png" );
-																									playerPanel.SetHasClass( "hero_selected", true );
-																									playerPanel.SetHasClass( "hero_highlighted", false );
-																								}
-																								else{
-																									if (playerInfo.player_selected_hero == "npc_dota_hero_clinkz"){
-																										playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_cheater.png" );
-																										playerPanel.SetHasClass( "hero_selected", true );
-																										playerPanel.SetHasClass( "hero_highlighted", false );
-																									}
-																									else{
-																										if (playerInfo.player_selected_hero == "npc_dota_hero_ancient_apparition"){
-																											playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_chill.png" );
-																											playerPanel.SetHasClass( "hero_selected", true );
-																											playerPanel.SetHasClass( "hero_highlighted", false );
-																										}
-																										else{
-																											if (playerInfo.player_selected_hero == "npc_dota_hero_bloodseeker"){
-																												playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_sasavot.png" );
-																												playerPanel.SetHasClass( "hero_selected", true );
-																												playerPanel.SetHasClass( "hero_highlighted", false );
-																											}
-																											else{
-																												if (playerInfo.player_selected_hero == "npc_dota_hero_juggernaut"){
-																													playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_golovach.png" );
-																													playerPanel.SetHasClass( "hero_selected", true );
-																													playerPanel.SetHasClass( "hero_highlighted", false );
-																												}
-																												else{
-																													if (playerInfo.player_selected_hero == "npc_dota_hero_skeleton_king"){
-																														playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_papich.png" );
-																														playerPanel.SetHasClass( "hero_selected", true );
-																														playerPanel.SetHasClass( "hero_highlighted", false );
-																													}
-																													else{
-																														if (playerInfo.player_selected_hero == "npc_dota_hero_rattletrap"){
-																															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vihorkov.png" );
-																															playerPanel.SetHasClass( "hero_selected", true );
-																															playerPanel.SetHasClass( "hero_highlighted", false );
-																														}
-																														else{
-																															if (playerInfo.player_selected_hero == "npc_dota_hero_storm_spirit"){
-																																playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_rostik.png" );
-																																playerPanel.SetHasClass( "hero_selected", true );
-																																playerPanel.SetHasClass( "hero_highlighted", false );
-																															}
-																															else{
-																																playerPortrait.SetImage( "file://{images}/heroes/" + playerInfo.player_selected_hero + ".png" );
-																																playerPanel.SetHasClass( "hero_selected", true );
-																																playerPanel.SetHasClass( "hero_highlighted", false );
-																															}
-																														}
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		playerPanel.SetHasClass("hero_selected", true);
+		playerPanel.SetHasClass("hero_highlighted", false);
 	}
 	else if ( playerInfo.possible_hero_selection !== "" && ( playerInfo.player_team_id == localPlayerTeamId ) )
 	{
-		if (playerInfo.possible_hero_selection == "ursa"){
-			playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_litvin.png" );
-			playerPanel.SetHasClass( "hero_selected", false );
-			playerPanel.SetHasClass( "hero_highlighted", true );
+		const possibleHeroImages = {
+			"ursa": "file://{images}/heroes/npc_dota_hero_litvin.png",
+			"bounty_hunter": "file://{images}/heroes/npc_dota_hero_mellstroy.png",
+			"tinker": "file://{images}/heroes/npc_dota_hero_ilin.png",
+			"brewmaster": "file://{images}/heroes/npc_dota_hero_golmy.png",
+			"invoker": "file://{images}/heroes/npc_dota_hero_zombill.png",
+			"rubick": "file://{images}/heroes/npc_dota_hero_mrus.png",
+			"terrorblade": "file://{images}/heroes/npc_dota_hero_senya.png",
+			"riki": "file://{images}/heroes/npc_dota_hero_sega.png",
+			"lion": "file://{images}/heroes/npc_dota_hero_lev.png",
+			"kunkka": "file://{images}/heroes/npc_dota_hero_vova.png",
+			"pudge": "file://{images}/heroes/npc_dota_hero_step.png",
+			"sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
+			"meepo": "file://{images}/heroes/npc_dota_hero_kirill.png",
+			"undying": "file://{images}/heroes/npc_dota_hero_dmb.png",
+			"axe": "file://{images}/heroes/npc_dota_hero_dima.png",
+			"phoenix": "file://{images}/heroes/npc_dota_hero_orlov.png",
+			"monkey_king": "file://{images}/heroes/npc_dota_hero_loban.png",
+			"zuus": "file://{images}/heroes/npc_dota_hero_stariy.png",
+			"tidehunter": "file://{images}/heroes/npc_dota_hero_tamaev.png",
+			"earthshaker": "file://{images}/heroes/npc_dota_hero_arsen.png",
+			"furion": "file://{images}/heroes/npc_dota_hero_nix.png",
+			"antimage": "file://{images}/heroes/npc_dota_hero_pirat.png",
+			"ogre_magi": "file://{images}/heroes/npc_dota_hero_zolo.png",
+			"clinkz": "file://{images}/heroes/npc_dota_hero_cheater.png",
+			"ancient_apparition": "file://{images}/heroes/npc_dota_hero_chill.png",
+			"bloodseeker": "file://{images}/heroes/npc_dota_hero_sasavot.png",
+			"juggernaut": "file://{images}/heroes/npc_dota_hero_golovach.png",
+			"skeleton_king": "file://{images}/heroes/npc_dota_hero_papich.png",
+			"rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
+			"storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
+			"necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png"
+		};
+
+		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
+			playerPortrait.SetImage(possibleHeroImages[playerInfo.possible_hero_selection]);
+		} else {
+			playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png");
 		}
-		else{
-			if (playerInfo.possible_hero_selection == "bounty_hunter"){
-				playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_mellstroy.png" );
-				playerPanel.SetHasClass( "hero_selected", false );
-				playerPanel.SetHasClass( "hero_highlighted", true );
-			}
-			else{
-				if (playerInfo.possible_hero_selection == "tinker"){
-					playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_ilin.png" );
-					playerPanel.SetHasClass( "hero_selected", false );
-					playerPanel.SetHasClass( "hero_highlighted", true );
-				}
-				else{
-					if (playerInfo.possible_hero_selection == "brewmaster"){
-						playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_golmy.png" );
-						playerPanel.SetHasClass( "hero_selected", false );
-						playerPanel.SetHasClass( "hero_highlighted", true );
-					}
-					else{
-						if (playerInfo.possible_hero_selection == "invoker"){
-							playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_zombill.png" );
-							playerPanel.SetHasClass( "hero_selected", false );
-							playerPanel.SetHasClass( "hero_highlighted", true );
-						}
-						else{
-							if (playerInfo.possible_hero_selection == "rubick"){
-								playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_mrus.png" );
-								playerPanel.SetHasClass( "hero_selected", false );
-								playerPanel.SetHasClass( "hero_highlighted", true );
-							}
-							else{
-								if (playerInfo.possible_hero_selection == "terrorblade"){
-									playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_senya.png" );
-									playerPanel.SetHasClass( "hero_selected", false );
-									playerPanel.SetHasClass( "hero_highlighted", true );
-								}
-								else{
-									if (playerInfo.possible_hero_selection == "riki"){
-										playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_sega.png" );
-										playerPanel.SetHasClass( "hero_selected", false );
-										playerPanel.SetHasClass( "hero_highlighted", true );
-									}
-									else{
-										if (playerInfo.possible_hero_selection == "lion"){
-											playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_lev.png" );
-											playerPanel.SetHasClass( "hero_selected", false );
-											playerPanel.SetHasClass( "hero_highlighted", true );
-										}
-										else{
-											if (playerInfo.possible_hero_selection == "kunkka"){
-												playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vova.png" );
-												playerPanel.SetHasClass( "hero_selected", false );
-												playerPanel.SetHasClass( "hero_highlighted", true );
-											}
-											else{
-												if (playerInfo.possible_hero_selection == "pudge"){
-													playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_step.png" );
-													playerPanel.SetHasClass( "hero_selected", false );
-													playerPanel.SetHasClass( "hero_highlighted", true );
-												}
-												else{
-													if (playerInfo.possible_hero_selection == "sniper"){
-														playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_ivanov.png" );
-														playerPanel.SetHasClass( "hero_selected", false );
-														playerPanel.SetHasClass( "hero_highlighted", true );
-													}
-													else{
-														if (playerInfo.possible_hero_selection == "meepo"){
-															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_kirill.png" );
-															playerPanel.SetHasClass( "hero_selected", false );
-															playerPanel.SetHasClass( "hero_highlighted", true );
-														}
-														else{
-															if (playerInfo.possible_hero_selection == "undying"){
-																playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_dmb.png" );
-																playerPanel.SetHasClass( "hero_selected", false );
-																playerPanel.SetHasClass( "hero_highlighted", true );
-															}
-															else{
-																if (playerInfo.possible_hero_selection == "axe"){
-																	playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_dima.png" );
-																	playerPanel.SetHasClass( "hero_selected", false );
-																	playerPanel.SetHasClass( "hero_highlighted", true );
-																}
-																else{
-																	if (playerInfo.possible_hero_selection == "phoenix"){
-																		playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_orlov.png" );
-																		playerPanel.SetHasClass( "hero_selected", false );
-																		playerPanel.SetHasClass( "hero_highlighted", true );
-																	}
-																	else{
-																		if (playerInfo.possible_hero_selection == "monkey_king"){
-																			playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_loban.png" );
-																			playerPanel.SetHasClass( "hero_selected", false );
-																			playerPanel.SetHasClass( "hero_highlighted", true );
-																		}
-																		else{
-																			if (playerInfo.possible_hero_selection == "zuus"){
-																				playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_stariy.png" );
-																				playerPanel.SetHasClass( "hero_selected", false );
-																				playerPanel.SetHasClass( "hero_highlighted", true );
-																			}
-																			else{
-																				if (playerInfo.possible_hero_selection == "tidehunter"){
-																					playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_tamaev.png" );
-																					playerPanel.SetHasClass( "hero_selected", false );
-																					playerPanel.SetHasClass( "hero_highlighted", true );
-																				}
-																				else{
-																					if (playerInfo.possible_hero_selection == "earthshaker"){
-																						playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_arsen.png" );
-																						playerPanel.SetHasClass( "hero_selected", false );
-																						playerPanel.SetHasClass( "hero_highlighted", true );
-																					}
-																					else{
-																						if (playerInfo.possible_hero_selection == "furion"){
-																							playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_nix.png" );
-																							playerPanel.SetHasClass( "hero_selected", false );
-																							playerPanel.SetHasClass( "hero_highlighted", true );
-																						}
-																						else{
-																							if (playerInfo.possible_hero_selection == "antimage"){
-																								playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_pirat.png" );
-																								playerPanel.SetHasClass( "hero_selected", false );
-																								playerPanel.SetHasClass( "hero_highlighted", true );
-																							}
-																							else{
-																								if (playerInfo.possible_hero_selection == "ogre_magi"){
-																									playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_zolo.png" );
-																									playerPanel.SetHasClass( "hero_selected", false );
-																									playerPanel.SetHasClass( "hero_highlighted", true );
-																								}
-																								else{
-																									if (playerInfo.possible_hero_selection == "clinkz"){
-																										playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_cheater.png" );
-																										playerPanel.SetHasClass( "hero_selected", false );
-																										playerPanel.SetHasClass( "hero_highlighted", true );
-																									}
-																									else{
-																										if (playerInfo.possible_hero_selection == "ancient_apparition"){
-																											playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_chill.png" );
-																											playerPanel.SetHasClass( "hero_selected", false );
-																											playerPanel.SetHasClass( "hero_highlighted", true );
-																										}
-																										else{
-																											if (playerInfo.possible_hero_selection == "bloodseeker"){
-																												playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_sasavot.png" );
-																												playerPanel.SetHasClass( "hero_selected", false );
-																												playerPanel.SetHasClass( "hero_highlighted", true );
-																											}
-																											else{
-																												if (playerInfo.possible_hero_selection == "juggernaut"){
-																													playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_golovach.png" );
-																													playerPanel.SetHasClass( "hero_selected", false );
-																													playerPanel.SetHasClass( "hero_highlighted", true );
-																												}
-																												else{
-																													if (playerInfo.possible_hero_selection == "skeleton_king"){
-																														playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_papich.png" );
-																														playerPanel.SetHasClass( "hero_selected", false );
-																														playerPanel.SetHasClass( "hero_highlighted", true );
-																													}
-																													else{
-																														if (playerInfo.possible_hero_selection == "rattletrap"){
-																															playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_vihorkov.png" );
-																															playerPanel.SetHasClass( "hero_selected", false );
-																															playerPanel.SetHasClass( "hero_highlighted", true );
-																														}
-																														else{
-																															if (playerInfo.possible_hero_selection == "storm_spirit"){
-																																playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_rostik.png" );
-																																playerPanel.SetHasClass( "hero_selected", false );
-																																playerPanel.SetHasClass( "hero_highlighted", true );
-																															}
-																															else{
-																																playerPortrait.SetImage( "file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png" );
-																																playerPanel.SetHasClass( "hero_selected", false );
-																																playerPanel.SetHasClass( "hero_highlighted", true );
-																															}
-																														}
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		playerPanel.SetHasClass("hero_selected", false);
+		playerPanel.SetHasClass("hero_highlighted", true);
 	}
 	else
 	{

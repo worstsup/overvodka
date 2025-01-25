@@ -36,40 +36,37 @@ function rostik_q_throw:OnUpgrade()
 	ability:SetLevel( self:GetLevel() )
 end
 
+function rostik_q_throw:CastFilterResultLocation(location)
+	return UF_SUCCESS
+end
+
 function rostik_q_throw:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-	local max_brew = self:GetSpecialValueFor( "brew_time" )
+	local point = self:GetCursorPosition()
+	local max_brew = self:GetSpecialValueFor("brew_time")
 	local projectile_name = "particles/rostik_q.vpcf"
-	local projectile_speed = self:GetSpecialValueFor( "movement_speed" )
-	local projectile_vision = self:GetSpecialValueFor( "vision_range" )
+	local projectile_name_2 = "particles/rostik_q_2.vpcf"
+	local projectile_speed = self:GetSpecialValueFor("movement_speed")
+	local projectile_vision = self:GetSpecialValueFor("vision_range")
 	local brew_time
 
-	local modifier = caster:FindModifierByName( "modifier_rostik_q" )
+	local modifier = caster:FindModifierByName("modifier_rostik_q")
 	if modifier then
-		brew_time = math.min( GameRules:GetGameTime()-modifier:GetCreationTime(), max_brew )
+		brew_time = math.min(GameRules:GetGameTime() - modifier:GetCreationTime(), max_brew)
 		modifier:Destroy()
-
 	elseif rostik_q_throw.reflected_brew_time then
 		brew_time = rostik_q_throw.reflected_brew_time
-
 	elseif self.stored_brew_time then
 		brew_time = self.stored_brew_time
-
 	else
 		brew_time = 0
 	end
 	self.brew_time = brew_time
 
 	local info = {
-		Target = target,
 		Source = caster,
-		Ability = self,	
-		
-		EffectName = projectile_name,
-		iMoveSpeed = projectile_speed,
-		bDodgeable = false,
-	
+		Ability = self,
 		bVisibleToEnemies = true,
 		bProvidesVision = true,
 		iVisionRadius = projectile_vision,
@@ -78,36 +75,46 @@ function rostik_q_throw:OnSpellStart()
 			brew_time = brew_time,
 		}
 	}
-	ProjectileManager:CreateTrackingProjectile(info)
+
+	if target then
+		info.Target = target
+		info.iMoveSpeed = projectile_speed
+		info.bDodgeable = false
+		info.EffectName = projectile_name
+		ProjectileManager:CreateTrackingProjectile(info)
+	else
+		info.vVelocity = (point - caster:GetOrigin()):Normalized() * projectile_speed
+		info.fDistance = (point - caster:GetOrigin()):Length2D()
+		info.vSpawnOrigin  = self:GetCaster():GetOrigin()
+		info.EffectName = projectile_name_2
+		ProjectileManager:CreateLinearProjectile(info)
+	end
+
 	local sound_cast = "rostik_q_fly"
-	EmitSoundOn( sound_cast, caster )
-	local ability = caster:FindAbilityByName( "rostik_q" )
+	EmitSoundOn(sound_cast, caster)
+
+	local ability = caster:FindAbilityByName("rostik_q")
 	if not ability then return end
-	caster:SwapAbilities(
-		self:GetAbilityName(),
-		ability:GetAbilityName(),
-		false,
-		true
-	)
+	caster:SwapAbilities(self:GetAbilityName(), ability:GetAbilityName(), false, true)
 end
 
-function rostik_q_throw:OnProjectileHit_ExtraData( target, location, ExtraData )
-	if not target then return end
+function rostik_q_throw:OnProjectileHit_ExtraData(target, location, ExtraData)
+	if not target and not location then return end
 	local sound_cast = "rostik_q_fly"
-	StopSoundOn( sound_cast, self:GetCaster() )
+	StopSoundOn(sound_cast, self:GetCaster())
 	local brew_time = ExtraData.brew_time
 	rostik_q_throw.reflected_brew_time = brew_time
-	local TRIGGERED = target:TriggerSpellAbsorb( self )
+	local TRIGGERED = target and target:TriggerSpellAbsorb(self)
 	rostik_q_throw.reflected_brew_time = nil
 	if TRIGGERED then return end
-	local max_brew = self:GetSpecialValueFor( "brew_time" )
-	local min_stun = self:GetSpecialValueFor( "min_stun" )
-	local max_stun = self:GetSpecialValueFor( "max_stun" )
-	local min_damage = self:GetSpecialValueFor( "min_damage" )
-	local max_damage = self:GetSpecialValueFor( "max_damage" )
-	local radius = self:GetSpecialValueFor( "midair_explosion_radius" )
-	local stun = (brew_time/max_brew)*(max_stun-min_stun) + min_stun
-	local damage = (brew_time/max_brew)*(max_damage-min_damage) + min_damage
+	local max_brew = self:GetSpecialValueFor("brew_time")
+	local min_stun = self:GetSpecialValueFor("min_stun")
+	local max_stun = self:GetSpecialValueFor("max_stun")
+	local min_damage = self:GetSpecialValueFor("min_damage")
+	local max_damage = self:GetSpecialValueFor("max_damage")
+	local radius = self:GetSpecialValueFor("midair_explosion_radius")
+	local stun = (brew_time / max_brew) * (max_stun - min_stun) + min_stun
+	local damage = (brew_time / max_brew) * (max_damage - min_damage) + min_damage
 	local damageTable = {
 		attacker = self:GetCaster(),
 		damage = damage,
@@ -116,7 +123,7 @@ function rostik_q_throw:OnProjectileHit_ExtraData( target, location, ExtraData )
 	}
 	local enemies = FindUnitsInRadius(
 		self:GetCaster():GetTeamNumber(),
-		target:GetOrigin(),
+		location or (target and target:GetOrigin()),
 		nil,
 		radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -126,34 +133,21 @@ function rostik_q_throw:OnProjectileHit_ExtraData( target, location, ExtraData )
 		false
 	)
 
-	for _,enemy in pairs(enemies) do
+	for _, enemy in pairs(enemies) do
 		damageTable.victim = enemy
-		ApplyDamage( damageTable )
-		enemy:AddNewModifier(
-			self:GetCaster(),
-			self,
-			"modifier_generic_stunned_lua",
-			{ duration = stun }
-		)
+		ApplyDamage(damageTable)
+		enemy:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun })
 	end
-	self:PlayEffects( target )
+	self:PlayEffects(location)
 end
 
-function rostik_q_throw:PlayEffects( target )
+function rostik_q_throw:PlayEffects( location )
 	local particle_cast = "particles/rostik_q_exp.vpcf"
 	local sound_cast = "rostik_q_exp"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
-	ParticleManager:SetParticleControlEnt(
-		effect_cast,
-		0,
-		target,
-		PATTACH_POINT_FOLLOW,
-		"attach_hitloc",
-		Vector(0,0,0),
-		true
-	)
+	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_WORLDORIGIN, nil)
+	ParticleManager:SetParticleControl(effect_cast, 0, location)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOn( sound_cast, target )
+	EmitSoundOnLocationWithCaster( location, sound_cast, self:GetCaster() )
 end
 
 modifier_rostik_q = class({})

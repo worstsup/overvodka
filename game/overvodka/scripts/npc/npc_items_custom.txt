@@ -3115,7 +3115,7 @@
 			"bonus_attackspeed"		"10"
 			"bonus_mana_regen"		"5"
 			"chance"				"20"
-			"crit"					"125"
+			"crit"					"130"
 		}
 	}
 	"item_recipe_magic_daedalus"
@@ -3123,7 +3123,7 @@
 		"BaseClass"						"item_datadriven"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		"ItemCost"						"900"
+		"ItemCost"						"1075"
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_magic_daedalus"
 
@@ -3152,7 +3152,7 @@
 			"bonus_attackspeed"		"10"
 			"bonus_mana_regen"		"5"
 			"chance"				"25"
-			"crit"					"150"
+			"crit"					"160"
 		}
 	}
 }

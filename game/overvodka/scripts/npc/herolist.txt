@@ -104,7 +104,7 @@
 	"npc_dota_hero_dark_seer"			"0"
 	"npc_dota_hero_lone_druid"			"0"
 	"npc_dota_hero_mirana"				"0"
-	"npc_dota_hero_necrolyte"			"0"
+	"npc_dota_hero_necrolyte"			"1"
 	"npc_dota_hero_puck"				"0"
 	"npc_dota_hero_pudge"				"1"
 	"npc_dota_hero_queenofpain"			"0"

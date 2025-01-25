@@ -9,10 +9,8 @@ function dark_seer_vacuum_lua:Precache( context )
 end
 
 --------------------------------------------------------------------------------
--- Custom KV
--- AOE Radius
 function dark_seer_vacuum_lua:GetAOERadius()
-	return 900
+	return 700
 end
 
 function dark_seer_vacuum_lua:GetCooldown( level )

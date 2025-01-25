@@ -31,8 +31,9 @@ function modifier_snapfire_lil_shredder_lua:OnCreated( kv )
 		self.damage = 105
 		self.range_bonus = 275
 	end
-	if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
-		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) + self.damage
+	self.hastalent = self:GetAbility():GetSpecialValueFor("hastalent")
+	if self.hastalent == 1 then
+		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * 0.6 + self.damage
 	end
 	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_bonus" )
 	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )
@@ -60,8 +61,9 @@ function modifier_snapfire_lil_shredder_lua:OnRefresh( kv )
 		self.damage = 105
 		self.range_bonus = 275
 	end
-	if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
-		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) + self.damage
+	self.hastalent = self:GetAbility():GetSpecialValueFor("hastalent")
+	if self.hastalent == 1 then
+		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * 0.6 + self.damage
 	end
 	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_bonus" )
 	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )

@@ -121,15 +121,15 @@ function modifier_dave_loonboon:OnIntervalThink()
         unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_dave_loonboon_plants", { duration = 1.55 } )
     end
     local enemies = FindUnitsInRadius(
-        self:GetParent():GetTeamNumber(),   -- int, your team number
-        self:GetParent():GetOrigin(),   -- point, center point
-        nil,    -- handle, cacheUnit. (not known)
-        self.radius,    -- float, radius. or use FIND_UNITS_EVERYWHERE
-        DOTA_UNIT_TARGET_TEAM_ENEMY,    -- int, team filter
-        DOTA_UNIT_TARGET_HERO,  -- int, type filter
-        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,  -- int, flag filter
-        FIND_CLOSEST,   -- int, order filter
-        false   -- bool, can grow cache
+        self:GetParent():GetTeamNumber(),
+        self:GetParent():GetOrigin(),
+        nil,
+        self.radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+        FIND_CLOSEST,
+        false
     )
     if #enemies == 0 then return end
     t = 0
