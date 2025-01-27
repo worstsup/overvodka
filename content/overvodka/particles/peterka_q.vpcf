@@ -1,0 +1,61 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf61:version{39d3ce1d-9442-4407-9b78-8317145b1732} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_nBehaviorVersion = 12
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 2
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 3
+			m_vecCP1Pos = [ 0.0, 0.0, 100.0 ]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_strike_end_light.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_disk_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_haze_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_flek_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_strike_end_star.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_rings_b_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_beam_new.vpcf"
+			m_flDelay = 0.1
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_strike_end_rings_new.vpcf"
+		},
+	]
+}

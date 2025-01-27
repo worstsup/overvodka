@@ -13075,9 +13075,10 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/5opka/peterka_r"
-		"AbilityTextureName"			"tinker_march_of_the_machines"
+		"AbilityTextureName"			"peterka_r"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
+		"HasScepterUpgrade"				"1"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_tinker.vsndevts"
@@ -13091,11 +13092,14 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"70.0 65.0 60.0"
-		"AbilityManaCost"				"200 350 500"
-		"AbilityDamage"					"60 100 140"
+		"AbilityManaCost"				"200 300 420"
 		"AbilityValues"
 		{
+				"damage"
+				{
+					"value"	"60 100 140"
+					"special_bonus_unique_necrophos_2" "+100"
+				}
 				"radius"				"1000"
 				"collision_radius"		"50 50 50 50"
 				"splash_radius"			"150 150 150 150"
@@ -13108,6 +13112,148 @@
 					"value"	"0 0 0"
 					"special_bonus_facet_necrolyte_profane_potency"	"+10 +14 +18"
 					"RequiresFacet" "necrolyte_profane_potency"
+				}
+				"stun_dur"
+				{
+					"value"	"0"
+					"special_bonus_scepter" "+0.3"
+					"RequiresScepter"		"1"
+				}
+				"AbilityCooldown"
+				{
+					"value"	"68.0 60.0 52.0"
+					"special_bonus_unique_necrophos_sadist_heal_bonus" "-10"
+				}
+		}
+	}
+	"peterka_e"
+	{
+		"BaseClass"			 		"ability_lua"
+		"ScriptFile"					"heroes/5opka/peterka_e"
+		"AbilityTextureName"			"peterka_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY" 
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"LinkedAbility"					"peterka_e_release"
+		"AbilityCastPoint"				"0.15"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastGestureSlot"		"DEFAULT"
+		"AbilityManaCost"				"120 140 160 180"
+
+		"AbilityValues"
+		{
+			"charge_speed"								"750"
+			"chargeup_time"					"1.45"
+			"knockback_radius"				"250"
+			"max_distance"
+			{
+				"value"									"2500"
+			}
+			"knockback_distance"			"250"
+			"AbilityCooldown"
+			{
+				"value"	"42"
+				"special_bonus_unique_necrophos_4" "-8"
+			}
+			"knockback_damage"
+			{
+				"value"	"180 220 260 300"
+				"special_bonus_unique_necrophos_5" "+175"
+			}
+			"knockback_duration"			"0.2"
+			"turn_rate"						"85"
+			"base_power"					"0.15"
+			"movement_turn_rate"			"85"
+			"stun_duration"
+			{
+				"value"									"0.8"
+				"special_bonus_unique_necrophos_heartstopper_regen_duration" "+0.4"
+			}
+		}
+	}
+
+	"peterka_e_release"	
+	{
+		"BaseClass"			 			"ability_lua"
+		"ScriptFile"					"heroes/5opka/peterka_e"
+		"AbilityTextureName"			"peterka_e_release"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCastRange"				"999999"
+ 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_7"
+		"AbilityCooldown"				"0.3"
+	}
+	"peterka_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/5opka/peterka_w"
+		"AbilityTextureName"			"peterka_w"
+		"FightRecapLevel"				"1"
+		"HasShardUpgrade"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityValues"
+		{
+				"radius"	"400 500 600 700"
+				"AbilityCastRange" "400 500 600 700"
+				"AbilityCooldown"
+				{
+					"value"	"10 9 8 7"
+					"special_bonus_unique_necrophos" "-5"
+				}
+				"damage"
+				{
+					"value"	"0"
+					"special_bonus_shard"	"+75"
+				}
+				"heal"
+				{
+					"value"	"0"
+					"special_bonus_facet_necrolyte_rapid_decay" "+20 +25 +30 +35"
+				}
+		}
+	}
+	"peterka_innate"
+	{
+		"BaseClass"                 "ability_datadriven"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityValues"
+		{
+			"dmg"	"20"
+		}
+	}
+	"peterka_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/5opka/peterka_q"
+		"AbilityTextureName"			"peterka_q"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"675"
+		"AbilityCastPoint"				"0.35"
+		"AbilityCooldown"				"24.0 22.0 20.0 18.0"
+		"AbilityManaCost"				"60 100 140 180"
+		"AbilityValues"
+		{
+				"stun_duration"	"1.75 2.0 2.25 2.5"
+				"damage"
+				{
+					"value"	"80 160 240 320"
+					"special_bonus_unique_necrophos_3" "+100"
 				}
 		}
 	}

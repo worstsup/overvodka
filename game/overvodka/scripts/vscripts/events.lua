@@ -372,6 +372,9 @@ function COverthrowGameMode:OnItemPickUp( event )
 	r = 300
 	--r = RandomInt(200, 400)
 	if event.itemname == "item_bag_of_gold" then
+		if owner:GetUnitName() == "npc_dota_hero_necrolyte" then
+			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
+		end
 		local heroes = FindUnitsInRadius(owner:GetTeamNumber(),
 							owner:GetAbsOrigin(),
 							nil,

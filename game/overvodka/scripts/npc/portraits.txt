@@ -1,0 +1,565 @@
+"Portraits" // Раздел, описывающий настройки портретов для моделей
+{
+        "stariy/models/heroes/stariy/stariy.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/queenofpain.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0 .1 1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.3 0.9" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.3 0.6 0.8" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.3 0.8 0.8" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "280 -10 150" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "15" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "rostik/rostik.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/rubick.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 0.4 0.6" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 0.4 0.6" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 0.4 0.6" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 0.4 0.6" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 135" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "vihor/igor_vikhorkov.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/leshrac.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.7 0.9 0.9" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.7 0.9 0.9" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.7 0.9 0.9" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.7 0.9 0.9" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 145" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "mellstroy/models/heroes/mell/mellstroy.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/bounty_hunter.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 1.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 1.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 1.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 1.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 145" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "sasavot/model.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/bloodseeker.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 0.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 0.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 0.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 0.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 132" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "golovach/golovach.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/crystal_maiden.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.0 0.0 1.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.0 0.0 1.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.0 0.0 1.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.0 0.0 1.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 135" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "8" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "zolo/models/heroes/zol/model.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/kunkka.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.0 0.0 0.5" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.0 0.0 0.5" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.0 0.0 0.5" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.0 0.0 0.5" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 140" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "arthas/untitled_1.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/bounty_hunter.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 1.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 1.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 1.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 1.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 145" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "arthas/papich_maniac.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/clinkz.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.3 0.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.3 0.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.3 0.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.3 0.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 130" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "litvin/models/heroes/lit/litvin.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/batrider.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.5 0.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.5 0.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.5 0.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.5 0.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -10 145" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "peterka/5opka.vmdl" // Модель, для которой задаются настройки портрета
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/bounty_hunter.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 1.0 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 1.0 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 1.0 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 1.0 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 142" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "6" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "models/heroes/tidehunter/tidehunter.vmdl"
+	{
+		"PortraitLightPosition"		"159.58 106.16 244.17"
+		"PortraitLightAngles"		"29.10 221.65 0.00"
+		"PortraitLightFOV"		"67"
+		"PortraitLightDistance"		"255"
+		"PortraitLightColor"		"108 129 254"
+		"PortraitShadowColor"		"0 79 89"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"48 123 203"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_underwater.vmat"
+		"PortraitBackgroundColor1"		"0 .5 1"
+		"PortraitBackgroundColor2"		"0 .5 1"
+		"PortraitBackgroundColor3"		".5 .8 1"
+		"PortraitBackgroundColor4"		".3 .5 1"
+		"PortraitParticle"		"particles/units/heroes/hero_tidehunter/tidehunter_portrait.vpcf"
+		"PortraitLightScale"		"5.000000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-30.860 -14.140 -5.740"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"423.58 -202.55 -14.06"
+				"PortraitAngles"		"337.09 151.36 0.00"
+				"PortraitFOV"		"11"
+			}
+		}
+	}
+    "models/heroes/rubick/rubick.vmdl"
+	{
+		"PortraitLightPosition"		"59.27 46.28 320.97"
+		"PortraitLightAngles"		"53.83 234.32 0.00"
+		"PortraitLightFOV"		"66"
+		"PortraitLightDistance"		"227"
+		"PortraitLightColor"		"63 195 108"
+		"PortraitShadowColor"		"48 38 38"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"100 79 141"
+		"PortraitAmbientScale"		"2.850000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_motion_swoops.vmat"
+		"PortraitBackgroundColor1"		".1 .5 .1"
+		"PortraitBackgroundColor2"		".1 .5 .1"
+		"PortraitBackgroundColor3"		".1 .5 .1"
+		"PortraitBackgroundColor4"		".1 .5 .1"
+		"PortraitLightScale"		"1.000000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"124.230 118.250 350.520"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"65.10 -25.03 223.22"
+				"PortraitAngles"		"22.63 154.69 -12.00"
+				"PortraitFOV"		"75"
+			}
+		}
+	}
+    "models/heroes/antimage/antimage.vmdl"
+	{
+		"PortraitLightPosition"		"14.01 -58.95 179.59"
+		"PortraitLightAngles"		"39.61 63.38 0.00"
+		"PortraitLightFOV"		"90"
+		"PortraitLightDistance"		"99"
+		"PortraitLightColor"		"185 182 254"
+		"PortraitShadowColor"		"126 104 123"
+		"PortraitShadowScale"		"1.775000"
+		"PortraitAmbientColor"		"185 79 180"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_glacier.vmat"
+		"PortraitBackgroundColor1"		".47 .34 .16"
+		"PortraitBackgroundColor2"		".47 .34 .16"
+		"PortraitBackgroundColor3"		".61 .20 1"
+		"PortraitBackgroundColor4"		"0 0 0"
+		"PortraitLightScale"		"3.700000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"67.910 81.180 33.970"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"29.12 -146.64 155.75"
+				"PortraitAngles"		"6.12 98.04 0.00"
+				"PortraitFOV"		"16"
+			}
+		}
+	}
+	"models/heroes/antimage_female/antimage_female.vmdl"
+	{
+		"PortraitLightPosition"		"64.314369 96.313148 213.326187"
+		"PortraitLightAngles"		"32.906242 -98.087585 -12.825317"
+		"PortraitLightFOV"		"50.504002"
+		"PortraitLightDistance"		"212.979996"
+		"PortraitLightColor"		"110 158 255"
+		"PortraitLightScale"		"5.662000"
+		"PortraitShadowColor"		"255 43 43"
+		"PortraitShadowScale"		"1.000000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"0.903 -0.386 0.188"
+		"PortraitAmbientColor"		"206 142 90"
+		"PortraitAmbientScale"		"10.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitSpecularDirection"		"0.000000 0.000000 -1.000000"
+		"PortraitSpecularPower"		"16.000000"
+		"PortraitBackgroundColor1"		"1.000000 1.000000 1.000000"
+		"PortraitBackgroundColor2"		"1.000000 1.000000 1.000000"
+		"PortraitBackgroundColor3"		"1.000000 1.000000 1.000000"
+		"PortraitBackgroundColor4"		"1.000000 1.000000 1.000000"
+		"PortraitBackgroundTexture"		"materials\portraits_card\portrait_backgrounds\antimage_persona.vmat"
+		"PortraitAnimationActivity"		"ACT_DOTA_CAPTURE"
+		"PortraitAnimationCycle"		"0.142857"
+		"PortraitAnimationRate"		"1.000000"
+		"PortraitPlayIdleExpression"		"0"
+		"PortraitHideHero"		"0"
+		"PortraitHideParticles"		"0"
+		"PortraitHideDropShadow"		"0"
+		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateHero"		"1"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"133.212189 -114.874199 173.325348"
+				"PortraitAngles"		"6.763391 138.303940 -11.520004"
+				"PortraitFOV"		"10.000000"
+				"PortraitFar"		"3303.399902"
+			}
+		}
+		"PortraitSpecularDirection"		"0.000000 0.000000 -1.000000"
+		"PortraitSpecularPower"		"16.000000"
+		"PortraitAnimationCycle"		"0.000000"
+		"PortraitAnimationRate"		"1.000000"
+		"PortraitPlayIdleExpression"		"0"
+		"PortraitHideHero"		"0"
+		"PortraitHideParticles"		"0"
+		"PortraitHideDropShadow"		"0"
+		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateHero"		"1"
+		"SummonPosition"		"0.000000 -1.970718 43.679947"
+		"SummonAngles"		"4.062950 0.000000 0.000000"
+	}
+    "default"
+	{
+		"PortraitLightPosition"		"202.70 -23.15 308.17"
+		"PortraitLightAngles"		"54.79 171.70 0.00"
+		"PortraitLightFOV"		"69"
+		"PortraitLightDistance"		"377"
+		"PortraitLightColor"		"254 248 242"
+		"PortraitShadowColor"		"74 74 74"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"79 108 108"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_gradient_top.vmat"
+		"PortraitBackgroundColor1"		"1 1 1"
+		"PortraitBackgroundColor2"		"1 1 1"
+		"PortraitBackgroundColor3"		"1 1 1"
+		"PortraitBackgroundColor4"		"1 1 1"
+		"PortraitLightScale"		"4.500000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-79.070 -84.150 -25.320"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"446.17 -88.29 -22.69"
+				"PortraitAngles"		"334.89 166.83 0.00"
+				"PortraitFOV"		"16"
+			}
+		}
+	}
+    "models/heroes/axe/axe.vmdl"
+	{
+		"PortraitLightPosition"		"69.29 -11.57 252.09"
+		"PortraitLightAngles"		"56.51 182.29 0.00"
+		"PortraitLightFOV"		"63"
+		"PortraitLightDistance"		"207"
+		"PortraitLightColor"		"254 233 233"
+		"PortraitShadowColor"		"131 131 131"
+		"PortraitShadowScale"		"1.025000"
+		"PortraitAmbientColor"		"161 100 0"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_desert.vmat"
+		"PortraitBackgroundColor1"		"1 .5 .5"
+		"PortraitBackgroundColor2"		"1 .8 .9"
+		"PortraitBackgroundColor3"		"0 0 0"
+		"PortraitBackgroundColor4"		"1 .5 .5"
+		"PortraitLightScale"		"2.750000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-76.520 7.960 38.340"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"166.15 -166.83 60.25"
+				"PortraitAngles"		"337.05 136.08 0.00"
+				"PortraitFOV"		"17"
+			}
+		}
+	}
+}

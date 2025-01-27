@@ -19,7 +19,7 @@ SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     409188637,  -- worstsup
     885116894, -- dolbayobi
     1010078422, -- mikeil
-    349446348,  -- mefisto 
+    349446348,  -- mefisto
     1248303404, -- sega
     1133110680, -- buyer
 }

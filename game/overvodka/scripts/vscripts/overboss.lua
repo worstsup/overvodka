@@ -1,7 +1,6 @@
 k = 0
 require( "utility_functions" )
 function ThrowCoin( args )
---	print( "ThrowCoin" )
 	local coinAttach = args.caster:ScriptLookupAttachment( "coin_toss_point" )
 	local coinSpawn = Vector( 0, 0, 0 )
 	if coinAttach ~= -1 then

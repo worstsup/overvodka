@@ -1,5 +1,6 @@
 peterka_r = class({})
 LinkLuaModifier( "modifier_peterka_r_thinker", "heroes/5opka/peterka_r", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function peterka_r:OnSpellStart()
 	local caster = self:GetCaster()
@@ -38,8 +39,13 @@ function peterka_r:OnProjectileHit_ExtraData( target, location, extraData )
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
+		if self:GetCaster():HasScepter() and not enemy:HasModifier("modifier_generic_stunned_lua") then
+			enemy:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor("stun_dur")})
+		end
 	end
-	self:GetCaster():ModifyGold(self:GetSpecialValueFor("gold_per_hit"), false, 0)
+	if target:IsRealHero() then
+		self:GetCaster():ModifyGold(self:GetSpecialValueFor("gold_per_hit"), false, 0)
+	end
 	return true
 end
 
@@ -58,7 +64,7 @@ function peterka_r:PlayEffects()
 		true
 	)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOnLocationForAllies( self:GetCaster():GetOrigin(), sound_cast, self:GetCaster() )
+	EmitGlobalSound( sound_cast )
 end
 
 modifier_peterka_r_thinker = class({})
@@ -82,7 +88,7 @@ function modifier_peterka_r_thinker:OnCreated( kv )
 		local machines_per_sec = self:GetAbility():GetSpecialValueFor( "machines_per_sec" )
 		local collision_radius = self:GetAbility():GetSpecialValueFor( "collision_radius" )
 		local splash_radius = self:GetAbility():GetSpecialValueFor( "splash_radius" )
-		local splash_damage = self:GetAbility():GetAbilityDamage()
+		local splash_damage = self:GetAbility():GetSpecialValueFor( "damage" )
 		local projectile_name = "particles/peterka_r.vpcf"
 		local interval = 1/machines_per_sec
 		local center = self:GetParent():GetOrigin()

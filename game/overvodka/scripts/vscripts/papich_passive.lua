@@ -12,20 +12,14 @@ function papich_passive:GetIntrinsicModifierName()
 end
 
 function papich_passive:OnChargeFinish( interrupt )
-    -- unit identifier
     local caster = self:GetCaster()
-
-    -- load data
     local max_duration = self:GetSpecialValueFor( "chargeup_time" )
     local max_distance = self:GetSpecialValueFor( "max_distance" )
     local speed = self:GetSpecialValueFor( "charge_speed" )
-
-    -- find charge modifier
     local charge_duration = max_duration
     local mod = caster:FindModifierByName( "modifier_papich_e_charge" )
     if mod then
         charge_duration = mod:GetElapsedTime()
-
         mod.charge_finish = true
         mod:Destroy()
     end
@@ -44,16 +38,12 @@ function papich_passive:OnChargeFinish( interrupt )
     end
     caster:FaceTowards(point)
     if interrupted then return end
-
-    -- add modifier
     caster:AddNewModifier(
-        caster, -- player source
-        self, -- ability source
-        "modifier_papich_e", -- modifier name
-        { duration = -1 } -- kv
+        caster,
+        self,
+        "modifier_papich_e",
+        { duration = -1 }
     )
-
-    -- play effects
 end
 
 modifier_papich_passive = class({})
@@ -78,10 +68,7 @@ function modifier_papich_passive:OnIntervalThink()
     if not IsServer() then return end
     if self:GetParent():IsTempestDouble() then return end
     if not self:GetParent():IsAlive() then return end
-    -- Ensure ability and caster are valid
     if not self.ability or not self.parent or self.parent:IsIllusion() then return end
-
-    -- Check if the ability is on cooldown
     if not self.ability:IsCooldownReady() then
         self.parent:RemoveModifierByName("modifier_custom_min_health")
         return
@@ -92,12 +79,10 @@ function modifier_papich_passive:OnIntervalThink()
     local health_threshold = max_health * 0.05
 
     if current_health > health_threshold then
-        -- Grant min health modifier if not already applied
         if not self.parent:HasModifier("modifier_custom_min_health") then
             self.parent:AddNewModifier(self.parent, self.ability, "modifier_custom_min_health", {})
         end
     else
-        -- Remove min health modifier and start cooldown
         if self.parent:HasModifier("modifier_brb_test") then
             self.parent:RemoveModifierByName("modifier_brb_test")
             self.parent:RemoveModifierByName("modifier_brb_test_attack_target")
@@ -141,22 +126,20 @@ function modifier_papich_passive:OnIntervalThink()
         caster:FaceTowards(point)
         local duration = self:GetAbility():GetSpecialValueFor( "chargeup_time" )
         local mod = caster:AddNewModifier(
-           caster, -- player source
-           self.ability, -- ability source
-           "modifier_papich_e_command", -- modifier name
-           { duration = duration } -- kv
+           caster,
+           self.ability,
+           "modifier_papich_e_command",
+           { duration = duration }
         )
         self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
         caster:FaceTowards(point)
         caster:FaceTowards(point)
         caster:FaceTowards(point)
-        -- load data
-        -- add modifier
         local mod = caster:AddNewModifier(
-           caster, -- player source
-            self.ability, -- ability source
-           "modifier_papich_e_charge", -- modifier name
-           { duration = duration } -- kv
+           caster,
+            self.ability,
+           "modifier_papich_e_charge",
+           { duration = duration }
         )
         if self.parent:HasModifier("modifier_custom_min_health") then
             self.parent:RemoveModifierByName("modifier_custom_min_health")

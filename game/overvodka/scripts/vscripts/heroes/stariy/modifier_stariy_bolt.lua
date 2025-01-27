@@ -90,6 +90,9 @@ function modifier_stariy_bolt:OnIntervalThink()
 		--	{duration = self.microstun}
 		--)
 		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
+		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
+			dmg = 0
+		end
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		-- Play effects
 		self:PlayEffectsNew( self:GetParent() )

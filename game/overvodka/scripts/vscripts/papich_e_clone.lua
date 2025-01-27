@@ -162,7 +162,6 @@ function papich_e_clone_slam:OnSpellStart()
             self.ice_blast_ability.ice_blast_dummy      = nil
             self.ice_blast_ability.initial_projectile   = nil
         end
-        --self:GetCaster():SwapAbilities(self:GetName(), self.ice_blast_ability:GetName(), false, true)
     end
 end
 

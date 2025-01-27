@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 papich_q_clone = class({})
 LinkLuaModifier( "modifier_papich_q_clone", "modifier_papich_q_clone", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_papich_q_clone_debuff", "modifier_papich_q_clone_debuff", LUA_MODIFIER_MOTION_BOTH )
@@ -16,23 +5,15 @@ LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MOD
 LinkLuaModifier( "modifier_generic_leashed_lua", "modifier_generic_leashed_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier("modifier_papich_q_clone_blood", "papich_q_clone", LUA_MODIFIER_MOTION_NONE)
 
---------------------------------------------------------------------------------
 
-
--- Ability Start
 function papich_q_clone:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
-
-	-- pounce
 	caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_papich_q_clone", -- modifier name
-		{} -- kv
+		caster,
+		self,
+		"modifier_papich_q_clone",
+		{}
 	)
-
-	-- play effects
 	local sound_cast = "papich_q_clone"
 	EmitSoundOn( sound_cast, caster )
 end
@@ -44,7 +25,6 @@ function modifier_papich_q_clone_blood:IsPurgable() return true end
 function modifier_papich_q_clone_blood:IsPurgeException() return false end
 function modifier_papich_q_clone_blood:IsStunDebuff() return false end
 function modifier_papich_q_clone_blood:RemoveOnDeath() return true end
--------------------------------------------
 
 function modifier_papich_q_clone_blood:OnCreated(params)
 	self.blood_damage = self:GetAbility():GetSpecialValueFor("blood_damage")

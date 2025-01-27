@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 papich_e = class({})
 papich_e_release = class({})
 LinkLuaModifier( "modifier_papich_e_charge", "modifier_papich_e_charge.lua", LUA_MODIFIER_MOTION_NONE )
@@ -17,8 +6,6 @@ LinkLuaModifier( "modifier_papich_e_command", "papich_e.lua", LUA_MODIFIER_MOTIO
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua.lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Init Abilities
 function papich_e:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_charge_active.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_impact.vpcf", context )
@@ -26,8 +13,6 @@ function papich_e:Precache( context )
 	PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function papich_e:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()

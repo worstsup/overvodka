@@ -363,6 +363,7 @@
 	[
 		{
 			m_ChildRef = resource:"particles/econ/items/tinker/tinker_motm_rollermaw/tinker_machine_spawn_c.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/tinker/tinker_motm_rollermaw/tinker_machine_spawn_e.vpcf"
@@ -372,6 +373,7 @@
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/tinker/tinker_motm_rollermaw/tinker_machine_spawn_b_rope.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }
