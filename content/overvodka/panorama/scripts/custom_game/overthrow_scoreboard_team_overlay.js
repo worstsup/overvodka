@@ -9,10 +9,12 @@ function OnKillEvent( event )
 	if ( teamId !== event.team_id )
 		return;
 
+	let Kills = event.kills_count
+
 //	$.Msg( event );
 
 	var recentScore = teamPanel.GetAttributeInt( "recent_score_count", 0 );
-	recentScore++;
+	recentScore+=Kills;
 	teamPanel.SetAttributeInt( "recent_score_count", recentScore );
 	teamPanel.SetAttributeInt( "ds_time_of_most_recent_score", curTimeDS );
 

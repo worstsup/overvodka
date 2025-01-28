@@ -1006,3 +1006,11 @@ Label {
 	margin-left: 1px;
 	margin-right: 2px;
 }
+
+#TitleStatusButton{
+	opacity: 0;
+}
+
+.IsDeveloper #TitleStatusButton{
+	opacity: 1;
+}

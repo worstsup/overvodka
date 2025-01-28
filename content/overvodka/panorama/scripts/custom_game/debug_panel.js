@@ -730,6 +730,7 @@ function OnDebugPanelStateResponse(kv)
 {
 	$("#DebugPanelRoot").style.visibility = (kv.disabled == 1) ? "collapse" : "visible";
 	$("#DebugPanelButton").style.visibility = (kv.disabled == 1) ? "collapse" : "visible";
+	$("#DebugPanelRoot").SetHasClass("IsDeveloper", kv.is_developer == 1)
 }
 
 GameEvents.Subscribe("debug_panel_state_for_player_response", OnDebugPanelStateResponse);

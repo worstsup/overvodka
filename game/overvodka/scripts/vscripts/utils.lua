@@ -24,6 +24,31 @@ function IsRealHero(Unit)
     return true
 end
 
+function IsComebackTeam(TeamID)
+	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
+	local bIsFirstBlooded = COverthrowGameMode:IsFirstBlooded()
+
+	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
+		return false
+	end
+
+	if IsSolo() then
+		if #CurrentTeams > 2 then
+			if TeamID == CurrentTeams[#CurrentTeams].teamID or TeamID == CurrentTeams[#CurrentTeams-1].teamID then
+				return true
+			end
+		end
+	elseif IsDuo() then
+		if #CurrentTeams > 3 then
+			if TeamID == CurrentTeams[#CurrentTeams].teamID then
+				return true
+			end
+		end
+	end
+	
+	return false
+end
+
 function ChangeValueByTeamPlace(value, Team)
 	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
 	local bIsFirstBlooded = COverthrowGameMode:IsFirstBlooded()
