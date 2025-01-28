@@ -648,6 +648,8 @@ function COverthrowGameMode:InitGameMode()
 
 	self.bShowsComeback = false
 
+	self.TeamKills = {}
+
 	---------------------------------------------------------------------------
 
 	self:GatherAndRegisterValidTeams()
@@ -784,6 +786,21 @@ function COverthrowGameMode:InitGameMode()
 		DOTA_POST_GAME_COLUMN_HEALING,
 	} )
 end
+
+function COverthrowGameMode:IncrementTeamHeroKills(TeamID, value)
+	if self.TeamKills[TeamID] == nil then
+		self.TeamKills[TeamID] = 0
+	end
+
+	self.TeamKills[TeamID] = self.TeamKills[TeamID] + value
+
+	CustomNetTables:SetTableValue("globals", "team_".. TeamID .."_kills", {kills=self.TeamKills[TeamID]})
+end
+
+function COverthrowGameMode:GetTeamHeroKills(TeamID)
+	return self.TeamKills[TeamID] or 0
+end
+
 ---------------------------------------------------------------------------
 -- Set up fountain regen
 ---------------------------------------------------------------------------
@@ -823,7 +840,7 @@ function COverthrowGameMode:EndGame( victoryTeam )
 	
 	local tTeamScores = {}
 	for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
-		tTeamScores[team] = GetTeamHeroKills(team)
+		tTeamScores[team] = self:GetTeamHeroKills(team)
 	end
 	GameRules:SetPostGameTeamScores( tTeamScores )
 
@@ -838,7 +855,7 @@ function COverthrowGameMode:GetSortedValidTeams()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
-			table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+			table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
 		end
 	end
 
@@ -861,7 +878,7 @@ function COverthrowGameMode:GetSortedValidActiveTeams()
 						Check = DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
 					end
 					if Connection ~= Check and Connection ~= DOTA_CONNECTION_STATE_UNKNOWN then
-						table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+						table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
 						break
 					end
 				end
@@ -954,7 +971,7 @@ end
 function COverthrowGameMode:UpdateScoreboard()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
-		table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+		table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
 	end
 
 	-- reverse-sort by score

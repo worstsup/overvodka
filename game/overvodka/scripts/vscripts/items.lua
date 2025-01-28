@@ -129,7 +129,7 @@ function COverthrowGameMode:SpecialItemAdd( event )
 	local spawnedItem = ""
 
 	-- pick the item we're giving them
-	local nLeaderKills = GetTeamHeroKills( leader )
+	local nLeaderKills = self:GetTeamHeroKills(leader)
 
 	if nLeaderKills <= 5 then
 		spawnedItem = t1

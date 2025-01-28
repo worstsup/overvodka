@@ -187,6 +187,10 @@
     wash-color: gold;
 }
 
+.IsPreLastTeam #ComebackActivated{
+    wash-color: lightgreen;
+}
+
 .IsComebackActivated #ComebackActivated{
     opacity: 1;
 }

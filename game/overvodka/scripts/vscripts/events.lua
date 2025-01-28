@@ -159,7 +159,11 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 
 	local nKillerID = event.killer_userid
 	local nTeamID = event.teamnumber
-	local nTeamKills = event.herokills
+
+	local Kills = IsComebackTeam(nTeamID) and 2 or 1
+	self:IncrementTeamHeroKills(nTeamID, Kills)
+
+	local nTeamKills = self:GetTeamHeroKills(nTeamID)
 	local nKillsRemaining = self.TEAM_KILLS_TO_WIN - nTeamKills
 	
 	local broadcast_kill_event =
@@ -171,6 +175,7 @@ function COverthrowGameMode:OnTeamKillCredit( event )
 		victory = 0,
 		close_to_victory = 0,
 		very_close_to_victory = 0,
+		kills_count=Kills,
 	}
 
 	self.bFirstBlooded = true

@@ -262,17 +262,35 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 	}
 
 	let bIsActiveComeback = false
+	let bIsPreLastTeam = false
 	let TeamsTop = CustomNetTables.GetTableValue("globals", `teams_top`)
 	if(TeamsTop){
 		let Array = toArray(TeamsTop)
 		if(Array[Array.length-1] && Array[Array.length-2]){
+
+			if(teamId == Array[Array.length-2].teamID){
+				bIsPreLastTeam = true
+			}
+
 			if(teamId == Array[Array.length-1].teamID || teamId == Array[Array.length-2].teamID){
 				bIsActiveComeback = true
 			}
 		}
 	}
 
+	let ComebackActivated = teamPanel.FindChildTraverse("ComebackActivated")
+	if(ComebackActivated && bIsPreLastTeam){
+		ComebackActivated.SetPanelEvent('onmouseover', function () {
+			$.DispatchEvent("UIShowTextTooltip", ComebackActivated, "#COMEBACK_SYSTEM_DESC2");
+		});
+	
+		ComebackActivated.SetPanelEvent('onmouseout', function () {
+			$.DispatchEvent("UIHideTextTooltip", ComebackActivated);
+		});
+	}
+
 	teamPanel.SetHasClass("IsComebackActivated", bIsActiveComeback)
+	teamPanel.SetHasClass("IsPreLastTeam", bIsPreLastTeam)
 	
 	var localPlayerTeamId = -1;
 	var localPlayer = Game.GetLocalPlayerInfo();
@@ -302,7 +320,13 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 		teamsInfo.max_team_players = teamPlayers.length;
 	}
 
-	_ScoreboardUpdater_SetTextSafe( teamPanel, "TeamScore", teamDetails.team_score )
+	let TeamKills = 0
+	let TKTable = CustomNetTables.GetTableValue("globals", `team_${teamId}_kills`)
+	if(TKTable){
+		TeamKills = TKTable.kills
+	}
+
+	_ScoreboardUpdater_SetTextSafe( teamPanel, "TeamScore", TeamKills )
 	_ScoreboardUpdater_SetTextSafe( teamPanel, "TeamName", $.Localize( teamDetails.team_name ) )
 	
 	if ( GameUI.CustomUIConfig().team_colors )
@@ -362,11 +386,23 @@ function _ScoreboardUpdater_ReorderTeam( scoreboardConfig, teamsParent, teamPane
 // sort / reorder as necessary
 function compareFunc( a, b ) // GameUI.CustomUIConfig().sort_teams_compare_func;
 {
-	if ( a.team_score < b.team_score )
+	let ATeamKills = 0
+	let ATKTable = CustomNetTables.GetTableValue("globals", `team_${a.team_id}_kills`)
+	if(ATKTable){
+		ATeamKills = ATKTable.kills
+	}
+
+	let BTeamKills = 0
+	let BTKTable = CustomNetTables.GetTableValue("globals", `team_${b.team_id}_kills`)
+	if(BTKTable){
+		BTeamKills = BTKTable.kills
+	}
+
+	if ( ATeamKills < BTeamKills )
 	{
 		return 1; // [ B, A ]
 	}
-	else if ( a.team_score > b.team_score )
+	else if ( ATeamKills > BTeamKills )
 	{
 		return -1; // [ A, B ]
 	}
