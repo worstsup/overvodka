@@ -7,7 +7,7 @@ LinkLuaModifier( "modifier_rostik_r_fire", "heroes/rostik/rostik_r", LUA_MODIFIE
 function rostik_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
-	local direction = point - caster:GetOrigin()
+	local direction = point - caster:GetOrigin() +Vector(3,3,0)
 	direction.z = 0
 	direction = direction:Normalized()
 	self.direction = direction

@@ -1,10 +1,10 @@
 peterka_r = class({})
 LinkLuaModifier( "modifier_peterka_r_thinker", "heroes/5opka/peterka_r", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_peterka_r", "heroes/5opka/peterka_r", LUA_MODIFIER_MOTION_NONE )
 
 function peterka_r:OnSpellStart()
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition()
+	local point = self:GetCursorPosition() + Vector(10, 0, 0)
 	CreateModifierThinker(
 		caster,
 		self,
@@ -40,7 +40,7 @@ function peterka_r:OnProjectileHit_ExtraData( target, location, extraData )
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
 		if self:GetCaster():HasScepter() and not enemy:HasModifier("modifier_generic_stunned_lua") then
-			enemy:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor("stun_dur")})
+			enemy:AddNewModifier(self:GetCaster(), self, "modifier_peterka_r", {duration = self:GetSpecialValueFor("stun_dur")})
 		end
 	end
 	if target:IsRealHero() then
@@ -66,7 +66,25 @@ function peterka_r:PlayEffects()
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitGlobalSound( sound_cast )
 end
-
+modifier_peterka_r = class({})
+function modifier_peterka_r:IsHidden()
+	return false
+end
+function modifier_peterka_r:IsDebuff()
+	return true
+end
+function modifier_peterka_r:IsPurgable()
+	return true
+end
+function modifier_peterka_r:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+	}
+	return funcs
+end
+function modifier_peterka_r:GetModifierMoveSpeedBonus_Percentage()
+	return -self:GetAbility():GetSpecialValueFor("slow")
+end
 modifier_peterka_r_thinker = class({})
 
 function modifier_peterka_r_thinker:IsHidden()
@@ -123,7 +141,11 @@ function modifier_peterka_r_thinker:OnCreated( kv )
 		self:OnIntervalThink()
 	end
 end
-
+function modifier_peterka_r_thinker:CheckState()
+	return {
+		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+	}
+end
 function modifier_peterka_r_thinker:OnRefresh( kv )
 end
 

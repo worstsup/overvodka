@@ -45,7 +45,8 @@ function modifier_item_magic_crystalis:GetModifierBonusStats_Intellect()
 end
 
 function modifier_item_magic_crystalis:GetModifierTotalDamageOutgoing_Percentage(params)
-    if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then 
+    if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
+        if params.damage_type ~= DAMAGE_TYPE_MAGICAL then return end
         if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS) ~= DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS then
             if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) then
                 params.target:EmitSound("magic_crit")
@@ -116,7 +117,8 @@ function modifier_item_magic_daedalus:GetModifierBonusStats_Agility()
 end
 
 function modifier_item_magic_daedalus:GetModifierTotalDamageOutgoing_Percentage(params)
-    if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then 
+    if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
+        if params.damage_type ~= DAMAGE_TYPE_MAGICAL then return end
         --if params.original_damage < 100 then return end
         if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS) ~= DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS then
             if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) then

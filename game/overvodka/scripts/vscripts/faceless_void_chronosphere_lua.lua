@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 faceless_void_chronosphere_lua = class({})
 LinkLuaModifier( "modifier_faceless_void_chronosphere_lua_thinker", "modifier_faceless_void_chronosphere_lua_thinker.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_faceless_void_chronosphere_lua_effect", "modifier_faceless_void_chronosphere_lua_effect.lua", LUA_MODIFIER_MOTION_NONE )

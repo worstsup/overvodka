@@ -60,6 +60,10 @@ end
 
 peterka_e_release = class({})
 
+function peterka_e_release:IsStealable()
+	return false
+end
+
 function peterka_e_release:OnSpellStart()
 	local ability = self:GetCaster():FindAbilityByName("peterka_e")
 	if ability then
@@ -239,6 +243,7 @@ function modifier_peterka_e_charge:CheckState()
 	local state = 
 	{
 		[MODIFIER_STATE_DISARMED] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.debuff_immune
 	}
 	return state
 end
@@ -256,7 +261,10 @@ function modifier_peterka_e_charge:OnCreated( kv )
 	self.duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
 
 	self.stun = self:GetAbility():GetSpecialValueFor( "stun_duration" )
-
+	self.debuff_immune = false
+	if self:GetAbility():GetSpecialValueFor("debuff_immune") == 1 then
+		self.debuff_immune = true
+	end
 	local damage = self:GetAbility():GetSpecialValueFor( "knockback_damage" )
 	EmitSoundOn("5opka_e_cast", self:GetParent())
 	self.tree_radius = 100
@@ -365,8 +373,8 @@ function modifier_peterka_e_charge:HitLogic()
 end
 
 function modifier_peterka_e_charge:UpdateHorizontalMotion( me, dt )
-	if self:GetParent():IsRooted() then
-		return
+	if self:GetParent():IsRooted() or self:GetParent():IsStunned() or self:GetParent():IsHexed() or self:GetParent():IsFeared() then
+		self:Destroy()
 	end
 
 	self:HitLogic()

@@ -39,7 +39,9 @@ end
 function rostik_q_throw:CastFilterResultLocation(location)
 	return UF_SUCCESS
 end
-
+function rostik_q_throw:IsStealable()
+	return false
+end
 function rostik_q_throw:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()

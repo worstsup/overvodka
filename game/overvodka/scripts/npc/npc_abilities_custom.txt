@@ -5542,7 +5542,7 @@
 				}
 				"duration_scepter"		"2.5 3.0 3.5 4.0"
 				"cooldown_scepter"		"85.0 80.0 75.0 70.0"
-				"vision_radius"			"10000"
+				"vision_radius"			"0"
 				"bonus_attack_speed"	"0"
 				"as"	"40 80 120 160"
 		}
@@ -12737,23 +12737,26 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"775"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"26 24 22 20"
+		"AbilityCooldown"				"17"
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityValues"
 		{
-				"brew_time"					"5.0"
-				"brew_explosion"			"5.5"
-				"min_stun"					"0.2"
+				"brew_time"					"4.0"
+				"brew_explosion"			"4.5"
+				"min_stun"
+				{
+					"value"	"0.4 0.6 0.8 1.0"
+					"special_bonus_unique_storm_spirit_8" "+0.8"
+				}
 				"max_stun"
 				{
 					"value"	"1.8 2.0 2.2 2.4"
 					"special_bonus_unique_storm_spirit_8" "+0.8"
 				}
-				"min_damage"				"0"
+				"min_damage"				"50 100 150 200"
 				"max_damage"
 				{
 					"value"	"150 250 350 450"
-					"special_bonus_unique_storm_spirit_5" "+150"
 				}
 				"radius"
 				{
@@ -12780,19 +12783,32 @@
 		"AbilityCastPoint"				"0.2"
 		"AbilityValues"
 		{
-				"brew_time"					"5.0"
-				"min_stun"					"0.2"
-				"max_stun"
+				"brew_time"					"4.0"
+				"brew_explosion"			"4.5"
+				"min_stun"
 				{
-					"value"	"1.4 1.8 2.2 2.6"
+					"value"	"0.4 0.6 0.8 1.0"
 					"special_bonus_unique_storm_spirit_8" "+0.8"
 				}
-				"min_damage"				"0"
-				"max_damage"				"150 250 350 450"
+				"max_stun"
+				{
+					"value"	"1.8 2.0 2.2 2.4"
+					"special_bonus_unique_storm_spirit_8" "+0.8"
+				}
+				"min_damage"				"50 100 150 200"
+				"max_damage"
+				{
+					"value"	"150 250 350 450"
+				}
+				"radius"
+				{
+					"value"	"400"
+					"affected_by_aoe_increase"	"1"
+				}
+				"fail_damage"				"30"
 				"movement_speed"			"900"
 				"vision_range"				"300"
 				"midair_explosion_radius"	"400"
-				"brew_explosion"			"7.0"
 		}
 	}
 	"rostik_r"
@@ -12830,7 +12846,7 @@
 				}
 				"AbilityChargeRestoreTime"
 				{
-					"value"	"20.0 16.0 12.0"
+					"value"	"16.0 13.0 10.0"
 				}
 				"radius"				"160"
 				"speed"					"2000"
@@ -12910,7 +12926,7 @@
 			"radius"					"175"
 			"target_radius"
 			{
-				"value"	"500"
+				"value"	"425"
 				"affected_by_aoe_increase"	"1"
 			}
 			"blasts"
@@ -12921,9 +12937,13 @@
 			"jump_delay" "0.25"
 			"jump_count" "3"
 			"radius_jump" "600"
-			"stun_duration" "0.2"
-			"chance"	"25"
-			"arc_damage_percent" "3"
+			"stun_duration" "0.3 0.4 0.5 0.6"
+			"chance"
+			{
+				"value"	"25"
+				"special_bonus_unique_disruptor_consecutive_strike_damage" "+10"
+			}
+			"arc_damage_percent" "3 4 5 6"
 		}
 	}
 	"rostik_e"
@@ -12939,15 +12959,19 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"27 24 21 18"
 		"AbilityManaCost"				"90 120 150 180"
 		"AbilityValues"
 		{
-				"buff_duration"					"5"
+				"buff_duration"
+				{
+					"value"	"5"
+					"special_bonus_unique_storm_spirit_5" "+2"
+				}
 				"duration"						"0.6"
 				"overload_damage"
 				{
-					"value"	"20 40 60 80"
+					"value"	"25 50 75 100"
 					"special_bonus_unique_storm_spirit_overload_aspd" "+20"
 				}
 				"overload_aoe"
@@ -13059,15 +13083,16 @@
 	"skywrath_mage_ruin_and_restoration"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"MaxLevel"						"3"
+		"MaxLevel"						"4"
 		"Innate"						"1"
+		"RequiredLevel"					"-1"
 		"DependentOnAbility"			"rostik_r"
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
 			"spell_lifesteal"
 			{
-				"value"		"15 20 25"
+				"value"		"10 15 20 25"
 			}
 		}
 	}
@@ -13100,23 +13125,29 @@
 					"value"	"60 100 140"
 					"special_bonus_unique_necrophos_2" "+100"
 				}
-				"radius"				"1000"
+				"radius"				"700 800 900"
 				"collision_radius"		"50 50 50 50"
 				"splash_radius"			"150 150 150 150"
 				"duration"				"8.0"
 				"speed"					"1000"
-				"machines_per_sec"		"36"
-				"distance"				"2500"
+				"machines_per_sec"		"32 34 36"
+				"distance"				"2000 2200 2400"
 				"gold_per_hit"
 				{
-					"value"	"0 0 0"
-					"special_bonus_facet_necrolyte_profane_potency"	"+10 +14 +18"
+					"value"	"0"
+					"special_bonus_facet_necrolyte_profane_potency"	"+10"
 					"RequiresFacet" "necrolyte_profane_potency"
 				}
 				"stun_dur"
 				{
 					"value"	"0"
-					"special_bonus_scepter" "+0.3"
+					"special_bonus_scepter" "+0.6"
+					"RequiresScepter"		"1"
+				}
+				"slow"
+				{
+					"value"	"0"
+					"special_bonus_scepter" "+80"
 					"RequiresScepter"		"1"
 				}
 				"AbilityCooldown"
@@ -13161,7 +13192,6 @@
 			"knockback_damage"
 			{
 				"value"	"180 220 260 300"
-				"special_bonus_unique_necrophos_5" "+175"
 			}
 			"knockback_duration"			"0.2"
 			"turn_rate"						"85"
@@ -13171,6 +13201,11 @@
 			{
 				"value"									"0.8"
 				"special_bonus_unique_necrophos_heartstopper_regen_duration" "+0.4"
+			}
+			"debuff_immune"
+			{
+				"value"	"0"
+				"special_bonus_unique_necrophos_5" "+1"
 			}
 		}
 	}
@@ -13198,8 +13233,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityValues"
 		{
-				"radius"	"400 500 600 700"
-				"AbilityCastRange" "400 500 600 700"
+				"radius"			"400 500 600 700"
+				"AbilityCastRange"  "400 500 600 700"
 				"AbilityCooldown"
 				{
 					"value"	"10 9 8 7"
@@ -13213,7 +13248,7 @@
 				"heal"
 				{
 					"value"	"0"
-					"special_bonus_facet_necrolyte_rapid_decay" "+20 +25 +30 +35"
+					"special_bonus_facet_necrolyte_rapid_decay" "+40"
 				}
 		}
 	}

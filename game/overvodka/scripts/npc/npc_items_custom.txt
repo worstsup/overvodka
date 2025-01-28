@@ -321,60 +321,15 @@
 		}
 	}
 	//=================================================================================================================
-	// BALBE
-	//=================================================================================================================
-	"item_balbe"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"                     "item_phase_boots"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityTextureName"            "balbe"
-		
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"8.0"
-		"AbilitySharedCooldown"			"phase"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"3000"
-		"ItemShopTags"					"damage;move_speed;hard_to_tag;"
-		"ItemQuality"					"artifact"
-		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityValues"
-		{
-				"bonus_movement_speed"	"60"	
-				"bonus_damage_melee"			"48"
-				"bonus_damage_range"			"48"
-				"phase_movement_speed"  "25"
-				"phase_movement_speed_range"  "25"
-				"phase_duration"		"3.5"
-				"bonus_attack_speed"	"40"
-				"bonus_armor"			"10"
-		}
-	}
-	//=================================================================================================================
 	// Recipe: BALBE
 	//=================================================================================================================
 	"item_recipe_balbe"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"100"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_balbe"
 		"ItemRequirements"
@@ -382,25 +337,42 @@
 			"01"						"item_phase_boots;item_power_treads"
 		}
 	}
+	
+	//=================================================================================================================
+	// BALBE
+	//=================================================================================================================
+	"item_balbe"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"balbe"
+		"AbilityTextureName" 			"balbe"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityCooldown"				"8.0"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+		"AbilitySharedCooldown"			"phase"
+		"ItemCost"						"3000"
 
+		"AbilityValues"
+		{
+			"bonus_movement_speed"	"55"
+			"movespeed_bonus"		"20"
+			"attack_speed_bonus"	"25"
+			"duration"				"3.5"
+			"bonus_damage"			"28"
+			"bonus_armor"			"5"
+			"bonus_all"				"10"
+		}
+	}
 	//=================================================================================================================
 	// Recipe: CHARON BABY
 	//=================================================================================================================
 	"item_recipe_charik_new"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"395"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_charik_new"
 		"ItemRequirements"
@@ -408,33 +380,11 @@
 			"01"						"item_yasha;item_bracer"
 		}
 	}
-	"item_recipe_kaya"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"650"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_kaya"
-		"ItemRequirements"
-		{
-			"01"						"item_staff_of_wizardry;item_robe"
-		}
-	}
 	//=================================================================================================================
 	// Badun Blade
 	//=================================================================================================================
 	"item_badun"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_ethereal_blade"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -442,16 +392,10 @@
 		"FightRecapLevel"				"1"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"            "bad"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"1000"
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"22.0"	    
 		"AbilitySharedCooldown"			"ethereal"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"200"
 		"ItemCost"						"5500"
 		"ItemShopTags"					"agi;str;int;hard_to_tag"
@@ -459,45 +403,34 @@
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ShouldBeSuggested"				"1"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"bonus_agility"			"0"
 				"bonus_strength"		"0"
-				"bonus_intellect"		"40"
+				"bonus_intellect"		"20"
 				"bonus_mana"			"400"
 				"bonus_cast_range"		"0"
 				"bonus_mana_regen"		"10"
 				"blast_movement_slow"	"-80"
 				"duration"				"4.0"
-				"blast_agility_multiplier"			"2.5"
-				"blast_damage_base"			"100"
+				"blast_agility_multiplier"			"2"
+				"blast_damage_base"			"150"
 				"duration_ally"				"4.0"
-				"ethereal_damage_bonus"	"-60"
+				"ethereal_damage_bonus"	"-50"
 				"projectile_speed"	"1500"
 
 		}
 	}
-		//=================================================================================================================
+	//=================================================================================================================
 	// Recipe: BADUN BLADE
 	//=================================================================================================================
 	"item_recipe_badun"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemCost"						"1900"	
 		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_badun"
 		"ItemRequirements"
@@ -518,6 +451,7 @@
     "Model"                         "models/props_gameplay/red_box.vmdl"
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "leshec"
+	"AbilityUnitDamageType"	   		"DAMAGE_TYPE_PURE"
 	"ItemStackable"					"1"
 	"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 	"ItemPermanent"					"0"
@@ -618,7 +552,7 @@
   		"AbilityTextureName"        "mag"
   		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-  		"ItemCost"					"7500"
+  		"ItemCost"					"8000"
 		"ItemShopTags"				"damage"
 		"ItemQuality"				"magicks"
 		"ItemDeclarations"			"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -656,9 +590,9 @@
 		{
 		        "cd"       			"25"
 		    	"dmg"				"15"
-		    	"hp"				"300"
-		    	"mp"				"300"
-		    	"int"				"50"
+		    	"hp"				"500"
+		    	"mp"				"500"
+		    	"int"				"30"
 		}
   	}
 	
@@ -667,13 +601,13 @@
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
   		"Model"						"models/props_gameplay/recipe.mdl"
-  		"ItemCost"					"500"
+  		"ItemCost"					"300"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
 		"ItemResult"				"item_sharoeb"
 		"ItemRequirements"
 		{
-			"01" "item_octarine_core;item_kaya"
+			"01" "item_octarine_core;item_mystic_staff"
 		}
   	}
 	"item_invis_sword_datadriven"
@@ -696,7 +630,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "6500"
+    "ItemCost"                      "6200"
     "ItemShopTags"                  "damage;attack_speed;movespeed;hard_to_tag"
     "ItemQuality"                   "epic"
     "ItemAliases"                   "sb;invis;shadow blade"
@@ -854,7 +788,7 @@
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
   		"Model"						"models/props_gameplay/recipe.mdl"
-  		"ItemCost"					"600"
+  		"ItemCost"					"300"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
 		"ItemResult"				"item_invis_sword_datadriven"
@@ -2030,8 +1964,6 @@
 	}
 "item_jordan"
 {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "item_datadriven"
     "ID"                            "1057"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
@@ -2039,29 +1971,25 @@
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "jordans"
     "AbilitySharedCooldown"			"phase"
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"              "0"
     "AbilityCooldown"               "8"
     "AbilityManaCost"               "50"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                      "6000"
     
     "AbilityValues"
     {
             "phase_duration"            "4.0"
-            "phase_movement_speed"      "25"
-            "bonus_movement_speed"      "65"
-            "bonus_damage"              "50"
+            "phase_movement_speed"      "20"
+            "bonus_movement_speed"      "55"
+            "bonus_damage"              "28"
             "bonus_all_stats"       "0"
-            "bonus_int"       "30"
+            "bonus_int"       "21"
             "bonus_mregen"		  "5"
-            "bonus_armor"	  "10"
-            "bonus_as"		  "40"
+            "bonus_armor"	  "5"
+            "bonus_as"		  "25"
             "bonus_health"          "0"
-            "bonus_mana"            "0"
+            "bonus_mana"            "0.5"
+			"bonus_mana_tooltip"	"50"
             "spell_amp"				"12"
     }
     
@@ -2096,7 +2024,7 @@
                 "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_all_stats"
                 "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_int"
                 "MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-                "MODIFIER_PROPERTY_MANA_BONUS"                  "%bonus_mana"
+                "MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%bonus_mana"
                 "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
                 "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
                 "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "%bonus_mregen"
@@ -2161,15 +2089,17 @@
     "AbilityCastPoint"              "0"
     "AbilityCooldown"               "8"
     "AbilityManaCost"               "0"
-    "ItemCost"                      "9000"
+    "ItemCost"                      "8300"
     
     "AbilityValues"
     {
             "phase_duration"            "4.0"
             "phase_movement_speed"      "25"
-            "bonus_movement_speed"      "65"
-            "bonus_damage"              "60"
+            "bonus_movement_speed"      "60"
+            "bonus_damage"              "48"
             "bonus_all_stats"       "30"
+			"bonus_as"				"25"
+			"bonus_armor"			"5"
             "bonus_health"          "0"
             "bonus_mana"            "0"
             "cold_movement_speed"   "-25"
@@ -2211,6 +2141,8 @@
                 "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_all_stats"
                 "MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
                 "MODIFIER_PROPERTY_MANA_BONUS"                  "%bonus_mana"
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%bonus_armor"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
             }
 			"OnAttackLanded"
 			{
@@ -2266,7 +2198,7 @@
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"700"	
+		"ItemCost"						"0"	
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_nikes"
@@ -2814,7 +2746,7 @@
 	"FightRecapLevel"				"1"
 	"AbilityCastRange"				"0"
 	"AbilityCastPoint"				"3.0"
-	"AbilityCooldown"				"90.0"
+	"AbilityCooldown"				"40.0"
 	"AbilityManaCost"				"0"
 	"ItemStackable"					"1"
 	"ItemShareability"				"ITEM_FULLY_SHAREABLE"
@@ -2960,8 +2892,8 @@
 			"minus_armor_aura"			 		"0"
 			"duration"			 				"6.0"
 			"return_damage"						"100"
-			"return_damage_passive"				"40"
-			"return_damage_passive_percentage" 	"35"	
+			"return_damage_passive"				"30"
+			"return_damage_passive_percentage" 	"30"	
 			"radius"							"0"
 		}
 	}
@@ -3074,7 +3006,7 @@
 		"AbilityValues"
 		{
 			"bonus_damage"			"88"
-			"bonus_attack_speed"	"20"
+			"bonus_attack_speed"	"30"
 			"bonus_int"				"10"
 			"bonus_mana_regen"		"2"
 			"strike_width"          "100"
@@ -3114,8 +3046,8 @@
 			"bonus_intellect"		"10"
 			"bonus_attackspeed"		"10"
 			"bonus_mana_regen"		"5"
-			"chance"				"20"
-			"crit"					"130"
+			"chance"				"25"
+			"crit"					"150"
 		}
 	}
 	"item_recipe_magic_daedalus"
@@ -3151,8 +3083,61 @@
 			"bonus_hp"				"175"
 			"bonus_attackspeed"		"10"
 			"bonus_mana_regen"		"5"
-			"chance"				"25"
-			"crit"					"160"
+			"chance"				"30"
+			"crit"					"200"
+		}
+	}
+	//=================================================================================================================
+	// Recipe: Hand of Midas
+	//=================================================================================================================
+	"item_recipe_hand_of_midas"
+	{
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"ItemCost"						"1050"	
+		"ItemShopTags"					""
+		"ItemAliases"					"hom"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_hand_of_midas"
+		"ItemRequirements"
+		{
+			"01"						"item_gloves*"		
+		}
+	}
+	
+	//=================================================================================================================
+	// Hand of Midas
+	//=================================================================================================================
+	"item_hand_of_midas"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_CREEP"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.0"
+		
+		"AbilityCooldown"				"0"
+		"AbilityCharges"				"2"
+		"AbilityChargeRestoreTime"		"60"
+		"ItemInitialCharges"			"1"
+		"ItemRequiresCharges"			"1"
+		"ItemDisplayCharges"			"1"
+		"ItemStackable"					"0"
+		"ItemPermanent"					"1"
+		"ItemDisassembleRule"				"DOTA_ITEM_DISASSEMBLE_NEVER"
+		"SpeciallyBannedFromNeutralSlot"		"1"
+		"AbilityManaCost"				"0"
+		"ItemCost"						"1500"
+		"ItemShopTags"					"attack_speed;hard_to_tag"
+		"ItemQuality"					"common"
+		"ItemAliases"					"hand of midas"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		"AbilityValues"
+		{
+				"bonus_attack_speed"	"35"
+				"xp_multiplier"			"2.1"
+				"bonus_gold"			"250"
 		}
 	}
 }
