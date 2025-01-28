@@ -63,7 +63,7 @@ function DebugPanel:IsDeveloper(playerID)
 end
 
 function DebugPanel:IsPlayerAllowedToExecuteCommand(playerID)
-	if DebugPanel:IsDeveloper(playerID) then
+	if DebugPanel:IsDeveloper(playerID) or GameRules:IsCheatMode() then
 		return true
 	end
 	return false
@@ -158,7 +158,8 @@ function DebugPanel:SendDebugPanelState(playerID, enabled)
 		disabled = false
 	end
 	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "debug_panel_state_for_player_response", {
-		disabled = disabled
+		disabled = disabled,
+		is_developer = self:IsDeveloper(playerID)
 	})
 end
 
