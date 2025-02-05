@@ -35,7 +35,7 @@
 	"npc_dota_hero_magnataur"			"0"
 	"npc_dota_hero_mars"				"0"
 	"npc_dota_hero_medusa"				"0"
-	"npc_dota_hero_morphling"			"0"
+	"npc_dota_hero_morphling"			"1"
 	"npc_dota_hero_naga_siren"			"0"
 	"npc_dota_hero_nevermore"			"0"
 	"npc_dota_hero_night_stalker"		"0"

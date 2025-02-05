@@ -1178,7 +1178,7 @@
 				"bonus_strength"		"5"
 				"bonus_agility"			"5"
 				"bonus_hp_regen"		"15"
-				"bonus_armor"			"10"
+				"bonus_armor"			"15"
 				"aura_radius"			
 				{
 					"value"	"1200"

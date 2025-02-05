@@ -26,11 +26,12 @@ function sasavot_e_new:OnChannelFinish(interrupted)
         local mana = self.mp_perc * caster:GetMaxMana() * 0.01
         caster:Heal(heal, self)
         caster:GiveMana(mana)
+        caster:AddNewModifier(caster, self, "modifier_sasavot_bonus_buff", { duration = self.buffs_duration })
         caster:AddNewModifier(
-            caster, -- player source
-            self, -- ability source
-            "modifier_magresist_sasavot", -- modifier name
-            { duration = self.magresist_duration } -- kv
+            caster,
+            self,
+            "modifier_magresist_sasavot",
+            { duration = self.magresist_duration }
         )
         self:PlayEffects()
         EmitSoundOn("sasavot_dance_success", self:GetCaster())
@@ -143,20 +144,14 @@ function modifier_sasavot_bonus_buff:GetModifierPreAttack_BonusDamage()
 end
 
 modifier_magresist_sasavot = class({})
---------------------------------------------------------------------------------
+
 function modifier_magresist_sasavot:IsPurgable()
     return false
 end
-
 function modifier_magresist_sasavot:OnCreated( kv )
 end
-
---------------------------------------------------------------------------------
-
 function modifier_magresist_sasavot:OnRemoved()
 end
-
---------------------------------------------------------------------------------
 
 function modifier_magresist_sasavot:CheckState()
     local state = {

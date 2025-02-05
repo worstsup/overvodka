@@ -81,7 +81,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_skeleton_king": "file://{images}/heroes/npc_dota_hero_papich.png",
 			"npc_dota_hero_rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
 			"npc_dota_hero_storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
-			"npc_dota_hero_necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png"
+			"npc_dota_hero_necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
+			"npc_dota_hero_morphling": "file://{images}/heroes/npc_dota_hero_sans.png"
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -125,7 +126,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"skeleton_king": "file://{images}/heroes/npc_dota_hero_papich.png",
 			"rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
 			"storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
-			"necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png"
+			"necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
+			"morphling": "file://{images}/heroes/npc_dota_hero_sans.png"
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

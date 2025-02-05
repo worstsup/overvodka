@@ -22,6 +22,7 @@ SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     349446348,  -- mefisto
     1248303404, -- sega
     1133110680, -- buyer
+    466290701,  -- timoxa
 }
 
 SERVER_RANKS_DEFINITION = {

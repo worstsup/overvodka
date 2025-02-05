@@ -102,8 +102,8 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"ModelScale"		"0.6"
 		"LoadoutScale"		"0.6"
-		"AttackDamageMin"		"40"
-		"AttackDamageMax"		"46"
+		"AttackDamageMin"		"34"
+		"AttackDamageMax"		"40"
 		"AttackRate"		"1.700000"
 		"AttackAnimationPoint"		"0.500000"
 		"AttackAcquisitionRange"		"600"
@@ -1258,14 +1258,12 @@
 	"npc_dota_hero_tidehunter"
 	{
 		"Model"		"models/heroes/tidehunter/tidehunter.vmdl"
-		"IdleExpression"		"scenes/tidehunter/tidehunter_exp_idle_01.vcd"
 		"SoundSet"		"Hero_Tidehunter"
 		"PickSound"		"tidehunter_tide_spawn_09"
 		"BanSound"		"tidehunter_tide_anger_04"
 		"Enabled"		"1"
-		"ModelScale"		"0.840000"
-		"VersusScale"		"0.84"
-		"LoadoutScale"		"0.840000"
+		"ModelScale"		"0.88"
+		"LoadoutScale"		"0.9"
 		"HeroSelectSoundEffect"		"tamaev_start"
 		"GibType"		"default"
 		"Ability1"		"ashab_dogon"
@@ -1792,11 +1790,11 @@
 		"AttackRange"		"150"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"20"
-		"AttributeStrengthGain"		"2.300000"
+		"AttributeStrengthGain"		"2.6"
 		"AttributeBaseIntelligence"		"17"
 		"AttributeIntelligenceGain"		"2.0"
 		"AttributeBaseAgility"		"24"
-		"AttributeAgilityGain"		"3.100000"
+		"AttributeAgilityGain"		"3.1"
 		"MovementSpeed"		"285"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"particle_folder"		"particles/units/heroes/hero_bloodseeker"
@@ -2156,5 +2154,93 @@
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 		"HealthBarOffset"		"250"
+	}
+	"npc_dota_hero_morphling"
+	{
+		"Model"		"sans/sans_rig.vmdl"
+		"SoundSet"		"Hero_Rubick"
+		"Enabled"		"1"
+		"ModelScale"		"1.15000"
+		"LoadoutScale"		"1.0"
+		"DisableWearables"	"1"
+		"HeroSelectSoundEffect"		"sans_start"
+		"GibType"		"ethereal"
+
+		"Ability1"		"gaster_blaster"
+		"Ability2"		"sans_w"
+		"Ability3"		"sans_e"
+		"Ability4"		"sans_shard"
+		"Ability5"		"sans_scepter"
+		"Ability6"		"sans_r"
+		"Ability7"		"sans_innate"
+		"Ability8"		"generic_hidden"
+		"Ability9"		"generic_hidden"
+		"Ability15"		"special_bonus_unique_nyx_4"
+		"Ability16"		"special_bonus_unique_morphling_1"
+		"Ability17"		"special_bonus_unique_morphling_8"
+		"Ability18"		"special_bonus_unique_nyx_jolt_cooldown"
+		"Ability19"		"special_bonus_unique_morphling_4"
+		"Ability20"		"special_bonus_unique_morphling_10"
+		"Ability21"		"special_bonus_unique_morphling_waveform_cooldown"
+		"Ability22"		"special_bonus_unique_nyx_vendetta_damage"
+		
+		"Facets"
+		{
+			"morphling_agi"
+			{
+				"Icon"				"area_of_effect"
+				"Color"				"Blue"
+				"GradientID"		"1"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+
+			"morphling_str"
+			{
+				"Icon"				"fence"
+				"Color"				"Red"
+				"GradientID"		"2"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+		}
+		
+		"AbilityTalentStart"		"15"
+		"AbilityDraftIgnoreCount"	"8"
+		"ArmorPhysical"		"-2"
+		"StatusHealthRegen"		"0.5"
+		"StatusManaRegen"		"0.5"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"2"
+		"AttackDamageMax"		"6"
+		"AttackRate"		"1.6"
+		"AttackAnimationPoint"		"0.500000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"550"
+		"MovementTurnRate"		"0.700000"
+		"ProjectileModel"		"particles/sans_base_attack.vpcf"
+		"ProjectileSpeed"		"1000"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"2.0"
+		"AttributeBaseIntelligence"		"24"
+		"AttributeIntelligenceGain"		"3.1"
+		"AttributeBaseAgility"		"18"
+		"AttributeAgilityGain"		"1.6"
+		"MovementSpeed"		"285"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+		"HealthBarOffset"		"230"
 	}
 }

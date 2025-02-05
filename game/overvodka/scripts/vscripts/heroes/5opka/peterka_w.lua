@@ -44,6 +44,31 @@ function modifier_peterka_w:OnIntervalThink()
 			    local newR = ChangeValueByTeamPlace(r, Team)
                 self.parent:ModifyGold(newR, true, DOTA_ModifyGold_Unspecified)
                 SendOverheadEventMessage( self.parent, OVERHEAD_ALERT_GOLD, self.parent, newR, nil )
+                local heroes = FindUnitsInRadius(self.parent:GetTeamNumber(),
+                            self.parent:GetAbsOrigin(),
+							nil,
+							10000,
+							DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+							DOTA_UNIT_TARGET_HERO,
+							DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
+							FIND_ANY_ORDER,
+							false )
+		        for i = 1, #heroes do
+                    if heroes[i]:GetUnitName() ~= self.parent:GetUnitName() then
+			            playerID = heroes[i]:GetPlayerID()
+			            r = 300
+			            if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
+				            r = 600
+			            end
+			            if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
+					        r = 0
+			            end
+			            Team = PlayerResource:GetTeam(playerID)
+			            newR = ChangeValueByTeamPlace(r, Team)
+			            PlayerResource:ModifyGold( playerID, newR, false, 0 )
+			            SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
+                    end
+		        end
                 item_entity:RemoveSelf()
                 if self:GetParent():HasModifier("modifier_item_aghanims_shard") then
                     local enemies = FindUnitsInRadius(self.parent:GetTeamNumber(), self.parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)

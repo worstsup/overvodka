@@ -852,6 +852,9 @@ modifier_debug_panel_vision = class({
 	IsDebuff = function()
 		return false
 	end,
+	IsHidden = function()
+		return true
+	end,
 	GetTexture = function()
 		return "item_ward_observer"
 	end,

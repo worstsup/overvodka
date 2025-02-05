@@ -323,6 +323,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_5opka"
     }
+    if (HeroName == "npc_dota_hero_morphling")
+    {
+        OvervodkaName = "npc_dota_hero_sans"
+    }
     return OvervodkaName	
 }
 

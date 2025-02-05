@@ -33,7 +33,6 @@ function modifier_sasavot_r_new:OnIntervalThink()
 
     if self.target:IsAlive() and self.caster:IsAlive() then
         AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300, 0.5, false)
-        AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300, 0.5, false)
     else
         self:Destroy()
     end
@@ -54,18 +53,15 @@ end
 
 function modifier_sasavot_r_new:PlayEffects()
     local particle_cast = "particles/venomancer_noxious_contagion_buff_overhead_virus_new.vpcf"
-
-    -- Create Particle
     local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_OVERHEAD_FOLLOW, self:GetParent(), self:GetCaster():GetTeamNumber() )
 
-    -- buff particle
     self:AddParticle(
         effect_cast,
-        false, -- bDestroyImmediately
-        false, -- bStatusEffect
-        -1, -- iPriority
-        false, -- bHeroEffect
-        false -- bOverheadEffect
+        false,
+        false,
+        -1,
+        false,
+        false
     )
 end
 
