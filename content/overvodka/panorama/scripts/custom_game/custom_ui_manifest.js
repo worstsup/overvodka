@@ -5,6 +5,11 @@ GameUI.CustomUIConfig().multiteam_top_scoreboard =
 	TeamOverlayXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_team_overlay.xml"
 };
 
+GameUI.CustomUIConfig().team_select = 
+{
+    "bShowSpectatorTeam" : true
+}
+
 GameUI.CustomUIConfig().team_logo_xml = "file://{resources}/layout/custom_game/overthrow_team_icon.xml";
 GameUI.CustomUIConfig().team_logo_large_xml = "file://{resources}/layout/custom_game/overthrow_team_icon_large.xml";
 
