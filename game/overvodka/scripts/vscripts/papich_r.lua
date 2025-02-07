@@ -40,7 +40,6 @@ function papich_r:OnSpellStart()
             knight:SetHasInventory(false)
             knight:SetCanSellItems(false)
             knight:StartGesture(ACT_DOTA_SPAWN)
-
             local particle = ParticleManager:CreateParticle( "particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_nether_swap_v3_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, knight )
             ParticleManager:SetParticleControlEnt(particle, 0, knight, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", knight:GetAbsOrigin(), true)
             ParticleManager:ReleaseParticleIndex(particle)
@@ -48,7 +47,7 @@ function papich_r:OnSpellStart()
             for itemSlot = 0,16 do
                 local itemName = target:GetItemInSlot(itemSlot)
                 if itemName then 
-                    if itemName:GetName() ~= "item_rapier" and itemName:GetName() ~= "item_ward_dispenser" and itemName:GetName() ~= "item_gem" and itemName:GetName() ~= "item_lesh" and itemName:GetName() ~= "item_moon_shard" and itemName:GetName() ~= "item_hand_of_midas" and itemName:IsPermanent() then
+                    if itemName:GetName() ~= "item_rapier" and itemName:GetName() ~= "item_ward_dispenser" and itemName:GetName() ~= "item_gem" and itemName:GetName() ~= "item_lesh" and itemName:GetName() ~= "item_moon_shard" and itemName:GetName() ~= "item_hand_of_midas" and itemName:GetName() ~= "item_bablokrad" and itemName:IsPermanent() then
                         local newItem = CreateItem(itemName:GetName(), nil, nil)
                         knight:AddItem(newItem)
                         if itemName and itemName:GetCurrentCharges() > 0 and newItem and not newItem:IsNull() then
@@ -76,7 +75,11 @@ function papich_r:OnSpellStart()
                 if ability then
                     local knight_ability = knight:FindAbilityByName(ability:GetAbilityName())
                     if i == 3 then
-                        knight_ability:SetActivated(false)
+                        if self:GetSpecialValueFor("innate_activated") == 1 then
+                            knight_ability:SetActivated(true)
+                        else
+                            knight_ability:SetActivated(false)
+                        end
                     end
                     if knight_ability then
                         knight_ability:SetLevel(self:GetLevel())

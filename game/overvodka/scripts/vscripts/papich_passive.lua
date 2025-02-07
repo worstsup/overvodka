@@ -178,6 +178,8 @@ function modifier_papich_e_command:CheckState()
         [MODIFIER_STATE_MAGIC_IMMUNE] = true,
         [MODIFIER_STATE_OUT_OF_GAME] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
+        [MODIFIER_STATE_SILENCED] = true,
+        [MODIFIER_STATE_MUTED] = true,
     }
 
     return state

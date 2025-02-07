@@ -107,6 +107,7 @@ function modifier_sans_innate_debuff:GetTexture()
 	return "sans_innate"
 end
 function modifier_sans_innate_debuff:IsDebuff() return true end
+function modifier_sans_innate_debuff:IsPurgable() return false end
 
 function modifier_sans_innate_debuff:GetEffectName()
     return "particles/sans_innate_debuff.vpcf"

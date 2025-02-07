@@ -71,9 +71,9 @@ function modifier_shatter_aura_debuff:OnIntervalThink()
         false
     )
 
-    local base_reduction = 1
+    local base_reduction = 3
     local bonus_reduction = #friendly_units
-    local total_reduction = math.min(base_reduction + bonus_reduction, 10)
+    local total_reduction = math.min(base_reduction + bonus_reduction, 15)
 
     self:SetStackCount(total_reduction)
 end

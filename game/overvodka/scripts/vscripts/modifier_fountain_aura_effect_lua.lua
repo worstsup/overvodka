@@ -18,13 +18,13 @@ end
 --------------------------------------------------------------------------------
 
 function modifier_fountain_aura_effect_lua:GetModifierHealthRegenPercentage( params )
-	return 10
+	return 15
 end
 
 --------------------------------------------------------------------------------
 
 function modifier_fountain_aura_effect_lua:GetModifierTotalPercentageManaRegen( params )
-	return 10
+	return 15
 end
 
 --------------------------------------------------------------------------------

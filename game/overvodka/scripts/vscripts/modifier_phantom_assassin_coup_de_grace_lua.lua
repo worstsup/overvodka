@@ -43,7 +43,7 @@ end
 function modifier_phantom_assassin_coup_de_grace_lua:GetModifierPreAttack_CriticalStrike( params )
 	if IsServer() and (not self:GetParent():PassivesDisabled()) then
 		if self:RollChance( self.crit_chance ) then
-			if params.target:GetUnitName() == "npc_dota_hero_invoker" or params.target:GetUnitName() == "npc_dota_hero_ogre_magi" or params.target:GetUnitName() == "npc_dota_hero_terrorblade" or params.target:GetUnitName() == "npc_dota_hero_ursa" then
+			if params.target:GetUnitName() == "npc_dota_hero_invoker" or params.target:GetUnitName() == "npc_dota_hero_ogre_magi" or params.target:GetUnitName() == "npc_dota_hero_terrorblade" or params.target:GetUnitName() == "npc_dota_hero_ursa" or params.target:GetUnitName() == "npc_dota_hero_rattletrap" or params.target:GetUnitName() == "npc_dota_hero_kunkka" or params.target:GetUnitName() == "npc_dota_hero_necrolyte" or params.target:GetUnitName() == "npc_dota_hero_antimage" then
 				self.record = params.record
 				return self.crit_bonus
 			end

@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 dawnbreaker_solar_guardian_lua = class({})
 LinkLuaModifier( "modifier_dawnbreaker_solar_guardian_lua", "modifier_dawnbreaker_solar_guardian_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dawnbreaker_solar_guardian_lua_leap", "modifier_dawnbreaker_solar_guardian_lua_leap.lua", LUA_MODIFIER_MOTION_NONE )

@@ -90,12 +90,11 @@ function COverthrowGameMode:SpecialItemAdd( event )
 	}
 
 	local tier3 =
-	{	--
-		"item_lesh",		-- blast rig
-		"item_spider_legs",				--
+	{
+		"item_lesh",
 		"item_paladin_sword",			--
 		"item_titan_sliver",			--
-		"item_mind_breaker",			--
+		"item_quickening_charm",			--
 	}
 
 	local tier4 =
@@ -105,7 +104,7 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_lesh",					--
 		"item_spy_gadget",				-- telescope
 		"item_trickster_cloak",			--
-		"item_penta_edged_sword",		--
+		"item_mind_breaker",		--
 	}
 
 	local tier5 =
@@ -117,7 +116,7 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_fallen_sky",				-- arcanist's armor
 		"item_pirate_hat",				--
 		"item_ex_machina",				--
-		"item_giants_ring",				--
+		"item_panic_button",			-- magic lamp
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )

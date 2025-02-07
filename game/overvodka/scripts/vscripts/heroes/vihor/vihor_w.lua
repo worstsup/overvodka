@@ -9,7 +9,7 @@ function vihor_w:OnSpellStart()
 	self.incoming = self:GetSpecialValueFor("illusion_incoming_damage")
 	self.damage_percent = self:GetSpecialValueFor("damage_percent")
 	self.damage = target:GetMaxHealth() * self.damage_percent * 0.01
-	ApplyDamage({victim = target, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self})
+	ApplyDamage({victim = target, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS, ability = self})
 	EmitSoundOn("vihor_w", self:GetCaster())
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_vihor_w", {duration = self.duration})
 	self.illusions = CreateIllusions(

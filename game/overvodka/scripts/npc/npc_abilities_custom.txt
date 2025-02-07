@@ -941,6 +941,8 @@
 				{
 					"value" "1.0"
 				}
+				"slow"	"15 20 25 30"
+				"slow_duration"	"2"
 		}
 	}
 	//==========================
@@ -959,8 +961,8 @@
 		"AbilityTextureName"			"podzho"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"1"
-		"AbilityCooldown"				"30"
-		"AbilityManaCost"				"200"
+		"AbilityCooldown"				"25"
+		"AbilityManaCost"				"150"
 		"AbilityCastRange"				"150"
 		"AbilityCastPoint"				"0.35"
 		"FightRecapLevel"				"2"
@@ -999,7 +1001,7 @@
 		}
 		"AbilityCastRange"              "0"
 		"AbilityCastPoint"              "0.0 0.0 0.0"
-		"AbilityCooldown"               "60"
+		"AbilityCooldown"               "60 55 50"
 		"AbilityValues"    
 		{
 				"bonus_damage"
@@ -1079,111 +1081,40 @@
 	//=================================================================================================================
 	"ebanko_e"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ebanko/ebanko_e"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityTextureName"			"parit"
 		"AOERadius"						"%radius"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"				"0.4"
-		"AbilityCastRange"				"%radius"
+		"AbilityCastRange"				"600"
 		"AbilityCooldown"				"25"
-		"AbilityHealthCost"				"75 150 225 300"
+		"AbilityManaCost"				"40 60 80 100"
 		"precache"
 		{
 			"particle"	"particles/riki_smokebomb_ebanko.vpcf"
 		}
 		"AbilityValues"
 		{
-				"radius"
-				{
-					"value"	"350 425 500 575"
-					"special_bonus_unique_bane_8" "+100"
-					"affected_by_aoe_increase"	"1"
-				}
-				"duration"				"4 5 6 7"
-				"evasion"
-				{
-					"value" 			"50"
-					"special_bonus_unique_abaddon_4" "+50"
-				}
-				"heal"
-				{
-					"value" "0"
-					"special_bonus_facet_kunkka_grog"	"+5"
-				}
-		}
-
-		"OnSpellStart"
-		{
-			"CreateThinker"
+			"radius"
 			{
-				"ModifierName"	"modifier_ebanko_e_smoke"
-				"Target" 		"POINT"
+				"value"	"350 425 500 575"
+				"special_bonus_unique_bane_8" "+100"
+				"affected_by_aoe_increase"	"1"
 			}
-			"FireSound"
+			"duration"				"4 5 6 7"
+			"evasion"
 			{
-				"EffectName" "kakao"
-				"Target"     "CASTER"
+				"value" 			"50"
+				"special_bonus_unique_abaddon_4" "+50"
 			}
-		} 
-
-		"Modifiers"
-		{
-			"modifier_ebanko_e_smoke"
+			"heal"
 			{
-				"Aura"					"modifier_ebanko_e_smoke_buff"
-				"Aura_Radius"			"%radius"
-				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
-				"Duration"				"%duration"
-				"IsHidden"				"1"
-
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"		"particles/riki_smokebomb_ebanko.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"			"TARGET"
-						"ControlPoints"
-						{
-							"00" "0 0 0"
-							"01" "%radius %radius %radius"
-						}
-					}
-				}
-			}
-
-			"modifier_ebanko_e_smoke_buff"
-			{
-				"IsHidden"		"1"
-				
-				"ThinkInterval"  "0.1"
-				"OnIntervalThink"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName" "modifier_invisible"
-						"Target" "TARGET"
-						"Duration" "0.5"
-					}
-					"RunScript"
-        				{
-            				"ScriptFile"        "heroes/ebanko/ebanko_e.lua"
-            				"Function"          "Anim"
-        				}
-				}
-				
-				"States"
-				{
-					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-				"Properties"
-            		{
-                   		"MODIFIER_PROPERTY_EVASION_CONSTANT" "%evasion"
-                   		"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%heal"
-            		} 
+				"value" "0"
+				"special_bonus_facet_kunkka_grog"	"+5"
 			}
 		}
 	}
@@ -1219,7 +1150,7 @@
             "chance"
             {
             	"value"	"0"
-            	"special_bonus_facet_terrorblade_soul_fragment" "+40"
+            	"special_bonus_facet_terrorblade_soul_fragment" "+30"
             }
     }
     "precache"
@@ -3630,7 +3561,7 @@
 			}
 		}
 	}
-"medusa_mana_shield"
+	"medusa_mana_shield"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"		
@@ -3699,7 +3630,7 @@
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 	}
-"Azazin_Spinner"
+	"Azazin_Spinner"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityType"            "DOTA_ABILITY_TYPE_ULTIMATE"	
@@ -3714,7 +3645,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastRange"				"400"
-		"AbilityCastPoint"				"1.0"
+		"AbilityCastPoint"				"0.8"
 		"AbilityCooldown"				"90"
 		"AbilityManaCost"				"200 350 500"
 
@@ -4026,7 +3957,7 @@
 		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
 		"precache"
 		{
-			"particle"	"particles/penguin_bump_counter_new.vpcf"
+			"particle"	"particles/golmy_2.vpcf"
 			"particle"	"particles/econ/courier/courier_greevil_blue/courier_greevil_blue_ambient_3.vpcf"
 		}
 		"MaxLevel"              	"4"
@@ -4067,8 +3998,8 @@
 			}
 			"modifier_movement_speed"
 			{
-				"EffectName"	"particles/penguin_bump_counter_new.vpcf"
-			    	"EffectAttachType"	"follow_overhead"
+				"EffectName"	"particles/golmy_2.vpcf"
+			    "EffectAttachType"	"follow_overhead"
 				"Properties"
 				{
                 "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"  "1000"
@@ -4080,7 +4011,7 @@
 			{
 				"IsHidden"	"1"
 				"EffectName"	"particles/econ/courier/courier_greevil_blue/courier_greevil_blue_ambient_3.vpcf"
-			    	"EffectAttachType"	"follow_origin"
+			    "EffectAttachType"	"follow_origin"
 			}
 			"modifier_bkb"
 			{
@@ -5537,10 +5468,10 @@
 				"radius"				"10000"
 				"duration"
 				{
-					"value"	"2.5 3.0 3.5 4.0"
+					"value"	"2.6 2.9 3.2 3.5"
 					"special_bonus_unique_gyrocopter_3" "+0.5"
 				}
-				"duration_scepter"		"2.5 3.0 3.5 4.0"
+				"duration_scepter"		"2.6 2.9 3.2 3.5"
 				"cooldown_scepter"		"85.0 80.0 75.0 70.0"
 				"vision_radius"			"0"
 				"bonus_attack_speed"	"0"
@@ -5981,7 +5912,7 @@
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -5996,6 +5927,7 @@
 				"landing_radius"	"275"
 				"air_duration"		"0.3"
 				"air_height"		"150"
+				"enemies_radius"	"300"
 				"pull_offset"		"75"
 				"throw_distance_behind"	"-200"
 				"pull_angle"		"230"
@@ -9647,6 +9579,7 @@
 					"value"	"1200"
 					"affected_by_aoe_increase"	"1"
 				}
+				"bonus_speed"				"10 15 20"
 				"speed"						"1600"
 				"slow_min"				"0"
 				"slow_max"				"0"
@@ -9656,12 +9589,12 @@
 				"bat"		"1.4 1.3 1.2"
 				"buff_duration"
 				{
-					"value"	"0"
-					"special_bonus_unique_antimage_8" "+10"
+					"value"	"0 0 0"
+					"special_bonus_unique_antimage_8" "+8 +9 +10"
 				}
 				"lifesteal_pct"			"20"
 				"bonus_dmg"	"10"
-				"topor_duration"	"10"
+				"topor_duration"	"8 9 10"
 		}
 	}
 	//=================================================================================================================
@@ -10832,8 +10765,8 @@
 		"Innate"				"1"
     	"AbilityValues"
 		{
-				"armor"	"0.4 0.6 0.8 1.0"
-				"hp"	"2.5 3.0 3.5 4.0"
+				"armor"	"0.5 0.6 0.7 0.8"
+				"hp"	"2.4 2.7 3.0 3.3"
 		}
 	}
 	"chillguy_r"
@@ -11290,7 +11223,7 @@
            		"radius"                            "200"
             	"damage"                            "90 180 270 360"
             	"lifesteal_pct"					"10"
-            	"hui_chance"					 "10"
+            	"hui_chance"					 "15"
 				"debuff_immune"
 				{
 					"value"	"0"
@@ -11333,7 +11266,7 @@
 					"special_bonus_facet_juggernaut_agigain" "+2"
 					"RequiresFacet"	"juggernaut_agigain"
 				}
-				"pulse_damage"				"150 250 350"
+				"pulse_damage"				"100 200 300"
 				"pulse_move_slow_pct"
 				{
 					"value"	"0"
@@ -11892,7 +11825,7 @@
 		"AbilityTextureName"			"papich_r"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityCooldown"				"90 80 70"
+		"AbilityCooldown"				"80 75 70"
 		"AbilityManaCost"				"200"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"				"1.0"
@@ -11900,8 +11833,7 @@
 		{	
 			"duration"
 			{
-				"value"	"17"
-				"special_bonus_unique_wraith_king_10" "+10"
+				"value"	"20"
 			}
 			"outgoing_damage"
 			{
@@ -11909,6 +11841,11 @@
 				"special_bonus_unique_wraith_king_11" "+15"
 			}
 			"incoming_damage"		   "150 125 100"
+			"innate_activated"
+			{
+				"value"	"0"
+				"special_bonus_unique_wraith_king_10" "+1"
+			}
 		}	
 	}
 	"papich_q_clone"
@@ -12459,9 +12396,9 @@
 		"AbilityCastRange"		"900"
 		"AbilityValues"
 		{
-		        "base_tooltip"	"1"
+		        "base_tooltip"	"3"
 		        "unit_tooltip"	"1"
-		        "max_tooltip"	"10"
+		        "max_tooltip"	"15"
 		        "radius_tooltip" "900"
 		}
 	}
@@ -12484,12 +12421,14 @@
         {
             	"radius"
             	{
-            		"value"	"900"
+            		"value"	"750"
+					"special_bonus_unique_clockwerk" "+150"
             		"affected_by_aoe_increase"	"1"
             	}
             	"AbilityCastRange"
             	{
-            		"value"	"900"
+            		"value"	"750"
+					"special_bonus_unique_clockwerk" "+150"
             		"affected_by_aoe_increase"	"1"
             	}
             	"duration_to_explosion"             "7 8 9"
@@ -12501,7 +12440,6 @@
             	"stun_duration"
             	{
             		"value"	"1.0 1.25 1.5"
-            		"special_bonus_unique_clockwerk" "+0.5"
             	}
             	"tick_damage"
             	{
@@ -12588,8 +12526,8 @@
 				{
 					"value"	"50 60 70 80"
 				}
-				"illusion_incoming_damage"			"100 90 80 70"
-				"illusion_incoming_damage_total_tooltip"			"200 190 180 170"
+				"illusion_incoming_damage"			"150 130 110 90"
+				"illusion_incoming_damage_total_tooltip"			"250 230 210 190"
 				"facet"
 				{
 					"value"	"0"
@@ -12711,16 +12649,24 @@
 			}
 			"AbilityChargeRestoreTime"
 			{
-				"value"	"24 22 20 18"
-				"special_bonus_unique_morphling_8" "-4"
+				"value"	"16 15 14 13"
+				"special_bonus_unique_morphling_8" "-3"
 			}
-        	"blast_delay"    "0.9"
+        	"blast_delay"
+			{
+				"value"	"0.9"
+				"special_bonus_unique_morphling_1" "-0.2"
+			}
         	"blaster_radius" "700"
 			"blaster_vision" "700"
         	"damage"
 			{
 				"value"	"125 200 275 350"
-				"special_bonus_unique_morphling_4" "+100"
+			}
+			"int_damage"
+			{
+				"value"	"15"
+				"special_bonus_unique_morphling_4" "+10"
 			}
         	"laser_length"   "10000"
         	"laser_width"	 "150"
@@ -12850,7 +12796,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"3000"
 		"AbilityCastPoint"				"0.01"
-		"AbilityManaCost"				"100 125 150"
+		"AbilityManaCost"				"100 150 200"
 		"AbilityValues"
 		{
 				"AbilityCharges"
@@ -12935,7 +12881,7 @@
 			"int_multi"
 			{
 				"value"	"35"
-				"special_bonus_unique_storm_spirit" "+50"
+				"special_bonus_unique_storm_spirit" "+35"
 			}
 			"radius"					"175"
 			"target_radius"
@@ -13016,7 +12962,7 @@
 				"spirits_radius"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+600"
+					"special_bonus_scepter"	"+500"
 					"RequiresScepter"	"1"
 				}
 				"spirits_slow"
@@ -13034,7 +12980,7 @@
 				"AbilityCastRange"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+600"
+					"special_bonus_scepter"	"+500"
 				}
 		}
 	}
@@ -13241,29 +13187,52 @@
 		"ScriptFile"					"heroes/5opka/peterka_w"
 		"AbilityTextureName"			"peterka_w"
 		"FightRecapLevel"				"1"
-		"HasShardUpgrade"				"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityValues"
 		{
-				"radius"			"400 500 600 700"
-				"AbilityCastRange"  "400 500 600 700"
+				"radius"			"375 450 525 600"
+				"AbilityCastRange"  "375 450 525 600"
 				"AbilityCooldown"
 				{
-					"value"	"10 9 8 7"
-					"special_bonus_unique_necrophos" "-5"
+					"value"	"8 7 6 5"
 				}
 				"damage"
 				{
-					"value"	"0"
-					"special_bonus_shard"	"+75"
+					"value"	"35 45 55 65"
 				}
 				"heal"
 				{
 					"value"	"0"
 					"special_bonus_facet_necrolyte_rapid_decay" "+40"
 				}
+				"gold_mult"
+				{
+					"value"	"1"
+					"special_bonus_unique_necrophos" "+1"
+				}
+		}
+	}
+	"peterka_shard"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/5opka/peterka_shard"
+		"AbilityTextureName"			"peterka_shard"
+		"FightRecapLevel"				"1"
+		"IsGrantedByShard"				"1"
+		"MaxLevel"						"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityManaCost"				"100"
+		"AbilityValues"
+		{
+				"AbilityCastRange"  "500"
+				"radius"			"500"
+				"AbilityCooldown" "30"
+				"damage"	"30"
 		}
 	}
 	"peterka_innate"
@@ -13330,9 +13299,9 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastRange"				"600 800 1000 1200"
+		"AbilityCastRange"				"600 700 800 900"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"24 22 20 18"
 		"AbilityManaCost"				"75 100 125 150"
 		"AbilityValues"
 		{
@@ -13343,11 +13312,11 @@
 				}
 				"fissure_range"
 				{
-					"value"	"600 750 900 1050"
+					"value"	"600 700 800 900"
 				}
 				"fissure_duration"
 				{
-					"value"	"6.0 7.0 8.0 9.0"
+					"value"	"5.0 6.0 7.0 8.0"
 				}
 				"fissure_radius"				"250"
 				"stun_duration"
@@ -13356,7 +13325,7 @@
 					"special_bonus_unique_nyx_jolt_cooldown" "+0.5"
 				}
 				"damage_mini"	"100"
-				"ministun"		"0.5"
+				"ministun"		"0.3"
 				"facet_walk"
 				{
 					"value"	"0"
@@ -13396,8 +13365,7 @@
 		{
 				"AbilityCooldown"
 				{
-					"value"	"30.0 28.0 26.0 24.0"
-					"special_bonus_unique_morphling_1" "-2"
+					"value"	"30.0 27.0 24.0 21.0"
 				}
 				"damage"					"100 150 200 250"
 				"impact_stun_duration"		"1.0 1.25 1.5 1.75"
@@ -13464,7 +13432,8 @@
 		"ScriptFile"					"heroes/sans/sans_scepter"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN"				   
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"MaxLevel"						"1"
 		"IsGrantedByScepter"			"1"
@@ -13485,7 +13454,7 @@
         	"damage"         "150"
         	"laser_width"	 "100"
 			"laser_length"   "1250"
-			"formation_time" "1.0"
+			"formation_time" "0.5"
 		}
 	}
 	"sans_r"
@@ -13509,6 +13478,10 @@
 				{
 					"value" "10 15 20"
 				}
+				"cooldown_reduction"
+				{
+					"value"	"25"
+				}
 				"add_blasters"	"2"
 				"interval"		"0.2"
 				"radius"		"200"
@@ -13529,16 +13502,16 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
-		"Innate"						"1"
+		"Innate"				"1"
+		"MaxLevel"				"1"
 		"AbilityCooldown"				"1"
 		"AbilityValues"
 		{
 			"dur_tooltip"	"5"
 			"pct_tooltip"
 			{
-				"value"	"25"
-				"special_bonus_unique_morphling_waveform_cooldown" "+25"
+				"value"	"35"
+				"special_bonus_unique_morphling_waveform_cooldown" "+35"
 			}
 		}
 	}

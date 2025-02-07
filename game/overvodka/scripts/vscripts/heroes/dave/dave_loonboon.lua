@@ -190,7 +190,13 @@ function modifier_dave_loonboon:DeclareFunctions()
 
     return funcs
 end
+function modifier_dave_loonboon:CheckState()
+    local state = {
+        [MODIFIER_STATE_DISARMED] = true,
+    }
 
+    return state
+end
 --------------------------------------------------------------------------------
 function modifier_dave_loonboon:GetModifierMoveSpeedBonus_Percentage( params )
     return self.move_speed

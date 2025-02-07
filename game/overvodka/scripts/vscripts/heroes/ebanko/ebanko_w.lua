@@ -1,6 +1,7 @@
 ebanko_w = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ebanko_w", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_ebanko_w_slow", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
 --------------------------------------------------------------------------------
 function ebanko_w:GetIntrinsicModifierName()
 	return "modifier_ebanko_w"
@@ -13,6 +14,7 @@ function ebanko_w:OnSpellStart()
 		return
 	end
 	local duration = self:GetSpecialValueFor( "dur" )
+	local slow_duration = self:GetSpecialValueFor( "slow_duration" )
 	local damage = self:GetSpecialValueFor( "damage" )
 	local stack = self:GetSpecialValueFor("stack")
 	local kills = caster:GetKills()
@@ -41,6 +43,7 @@ function ebanko_w:OnSpellStart()
 			}
 		)
 		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration })
+		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration })
 	end
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
@@ -60,9 +63,31 @@ function ebanko_w:PlayEffects1( target )
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 end
 
---------------------------------------------------------------------------------
+modifier_ebanko_w_slow = class({})
+
+function modifier_ebanko_w_slow:IsHidden()
+	return false
+end
+function modifier_ebanko_w_slow:IsDebuff()
+	return true
+end
+function modifier_ebanko_w_slow:IsPurgable()
+	return true
+end
+function modifier_ebanko_w_slow:OnCreated()
+	self.slow = self:GetAbility():GetSpecialValueFor("slow")
+end
+function modifier_ebanko_w_slow:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+	}
+	return funcs
+end
+function modifier_ebanko_w_slow:GetModifierMoveSpeedBonus_Percentage()
+	return -self.slow
+end
+
 modifier_ebanko_w = class({})
---------------------------------------------------------------------------------
 function modifier_ebanko_w:IsHidden()
 	return true
 end
@@ -123,6 +148,7 @@ function modifier_ebanko_w:Bash(target)
 	end
 	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "dur" )
+	self.slow_duration = self:GetAbility():GetSpecialValueFor( "slow_duration" )
 	self.stack = self:GetAbility():GetSpecialValueFor( "stack" )
 	self.kills = self:GetParent():GetKills()
 	self.dmg = self.damage + self.kills * self.stack
@@ -150,6 +176,7 @@ function modifier_ebanko_w:Bash(target)
 			}
 		)
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
+		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_ebanko_w_slow", { duration = self.slow_duration })
 	end
 	self:PlayEffects( target )
 	self:PlayEffects1( target )

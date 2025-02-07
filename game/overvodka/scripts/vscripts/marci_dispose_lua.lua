@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 marci_dispose_lua = class({})
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
@@ -26,9 +15,10 @@ end
 function marci_dispose_lua:Spawn()
 	if not IsServer() then return end
 end
+function marci_dispose_lua:GetAOERadius()
+	return 300
+end
 
---------------------------------------------------------------------------------
--- Ability Cast Filter
 function marci_dispose_lua:CastFilterResultTarget( hTarget )
 	if self:GetCaster() == hTarget then
 		return UF_FAIL_CUSTOM
@@ -70,85 +60,82 @@ function marci_dispose_lua:OnSpellStart()
 	local duration = self:GetSpecialValueFor( "air_duration" )
 	local height = self:GetSpecialValueFor( "air_height" )
 	local distance = self:GetSpecialValueFor( "throw_distance_behind" )
-
+	local enemies_radius = self:GetSpecialValueFor( "enemies_radius" )
 	local radius = self:GetSpecialValueFor( "landing_radius" )
 	local stun = self:GetSpecialValueFor( "stun_duration" )
 	local damage = self:GetSpecialValueFor( "impact_damage" )
-
-	-- set target pos
-	local targetpos = caster:GetOrigin() - caster:GetForwardVector() * distance
-	local totaldist = (target:GetOrigin() - targetpos):Length2D()
-
-	-- create arc
-	local arc = target:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_generic_arc_lua", -- modifier name
-		{
-			target_x = targetpos.x,
-			target_y = targetpos.y,
-			duration = duration,
-			distance = totaldist,
-			height = height,
-			fix_end = false,
-			fix_duration = false,
-			isStun = true,
-			isForward = true,
-			activity = ACT_DOTA_FLAIL,
-		} -- kv
+	local targets = FindUnitsInRadius(
+		caster:GetTeamNumber(),	-- int, your team number
+		target:GetOrigin(),	-- point, center point
+		nil,	-- handle, cacheUnit. (not known)
+		enemies_radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
+		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
+		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
+		0,	-- int, order filter
+		false	-- bool, can grow cache
 	)
-	arc:SetEndCallback( function()
-		-- find enemies
-		local enemies = FindUnitsInRadius(
-			caster:GetTeamNumber(),	-- int, your team number
-			target:GetOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-			0,	-- int, flag filter
-			0,	-- int, order filter
-			false	-- bool, can grow cache
-		)
-
-		-- precache damage
-		local damageTable = {
-			-- victim = target,
-			attacker = caster,
-			damage = damage,
-			damage_type = DAMAGE_TYPE_MAGICAL,
-			ability = self, --Optional.
-		}
-
-		for _,enemy in pairs(enemies) do
-			-- stun
-			enemy:AddNewModifier(
-				caster, -- player source
-				self, -- ability source
-				"modifier_generic_stunned_lua", -- modifier name
-				{ duration = stun } -- kv
+	local damagedEnemies = {}
+	for _,enemy in pairs(targets) do
+		local targetpos = caster:GetOrigin() - caster:GetForwardVector() * distance
+		local totaldist = (enemy:GetOrigin() - targetpos):Length2D()
+		local arc = enemy:AddNewModifier(
+			caster, -- player source
+			self, -- ability source
+			"modifier_generic_arc_lua", -- modifier name
+			{
+				target_x = targetpos.x,
+				target_y = targetpos.y,
+				duration = duration,
+				distance = totaldist,
+				height = height,
+				fix_end = false,
+				fix_duration = false,
+				isStun = true,
+				isForward = true,
+				activity = ACT_DOTA_FLAIL,
+			}
+		)	
+		arc:SetEndCallback( function()
+			local enemies = FindUnitsInRadius(
+				caster:GetTeamNumber(),	-- int, your team number
+				enemy:GetOrigin(),	-- point, center point
+				nil,	-- handle, cacheUnit. (not known)
+				radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
+				DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
+				DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
+				0,	-- int, flag filter
+				0,	-- int, order filter
+				false	-- bool, can grow cache
 			)
-			
-			-- damage
-			damageTable.victim = enemy
-			ApplyDamage(damageTable)
+			local damageTable = {
+				attacker = caster,
+				damage = damage,
+				damage_type = DAMAGE_TYPE_MAGICAL,
+				ability = self, --Optional.
+			}
 
-			-- play effects
-			self:PlayEffects2( enemy:GetOrigin() )
-
-		end
-
-		-- destroy trees
-		GridNav:DestroyTreesAroundPoint( target:GetOrigin(), radius, false )
-
-		-- play effects
-		local allied = target:GetTeamNumber()==caster:GetTeamNumber()
-		self:PlayEffects1( target:GetOrigin(), radius, allied )
-	end)
-
-	-- play effects
-	self:PlayEffects3( caster, target, duration )
-	self:PlayEffects4( caster )
+			for _,enemy1 in pairs(enemies) do
+				if not damagedEnemies[enemy1:entindex()] then
+					enemy1:AddNewModifier(
+						caster, -- player source
+						self, -- ability source
+						"modifier_generic_stunned_lua", -- modifier name
+						{ duration = stun } -- kv
+					)
+					damageTable.victim = enemy1
+					ApplyDamage(damageTable)
+					self:PlayEffects2( enemy1:GetOrigin() )
+					damagedEnemies[enemy1:entindex()] = true
+				end
+			end
+			GridNav:DestroyTreesAroundPoint( enemy:GetOrigin(), radius, false )
+			local allied = enemy:GetTeamNumber()==caster:GetTeamNumber()
+			self:PlayEffects1( enemy:GetOrigin(), radius, allied )
+		end)
+		self:PlayEffects3( caster, enemy, duration )
+		self:PlayEffects4( caster )
+	end
 
 end
 

@@ -16,6 +16,7 @@ function gaster_blaster:OnSpellStart()
     local blaster_radius = self:GetSpecialValueFor("blaster_radius")
     local laser_length = self:GetSpecialValueFor("laser_length")
     local laser_width = self:GetSpecialValueFor("laser_width")
+    local dmg = self:GetSpecialValueFor("damage") + self:GetSpecialValueFor("int_damage") * self:GetCaster():GetIntellect(false) * 0.01
     AddFOWViewer(caster:GetTeamNumber(), target_point, self:GetSpecialValueFor("blaster_vision"), 2, false)
     local function CreateBlaster(position, direction)
         local blaster = CreateUnitByName("npc_gaster_blaster", position, false, caster, caster, caster:GetTeamNumber())
@@ -46,7 +47,7 @@ function gaster_blaster:OnSpellStart()
                     ApplyDamage({
                         victim = unit,
                         attacker = caster,
-                        damage = self:GetSpecialValueFor("damage") * 0.5,
+                        damage = dmg * 0.5,
                         damage_type = self:GetAbilityDamageType(),
                         ability = self,
                     })
@@ -99,7 +100,7 @@ function gaster_blaster:OnSpellStart()
                 ApplyDamage({
                     victim = unit,
                     attacker = caster,
-                    damage = self:GetSpecialValueFor("damage"),
+                    damage = dmg,
                     damage_type = self:GetAbilityDamageType(),
                     ability = self,
                 })

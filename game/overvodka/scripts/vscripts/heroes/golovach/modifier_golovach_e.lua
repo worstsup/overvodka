@@ -60,8 +60,8 @@ function modifier_golovach_e:OnTakeDamage( params )
 		if params.unit~=self:GetParent() then return end
 		if params.damage<self.threshold then return end
 		if self.onCooldown then return end
-		local random_chance = RandomInt(1, 10)
-		if random_chance == 1 then
+		local random_chance = RandomInt(1, 100)
+		if random_chance <= self:GetAbility():GetSpecialValueFor("hui_chance") then
 			EmitSoundOn( "golovach_e_fail", self:GetParent() )
 			return
 		end

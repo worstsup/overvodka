@@ -12,7 +12,7 @@ function papich_e:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_chargeup.vpcf", context )
 	PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
 end
-
+function papich_e:IsStealable() return false end
 function papich_e:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
@@ -100,6 +100,8 @@ end
 function modifier_papich_e_command:CheckState()
 	local state = {
 		[MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+		[MODIFIER_STATE_MUTED] = true,
+		[MODIFIER_STATE_SILENCED] = true,
 	}
 
 	return state

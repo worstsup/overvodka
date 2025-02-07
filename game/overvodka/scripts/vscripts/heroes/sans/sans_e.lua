@@ -222,11 +222,9 @@ function modifier_sans_e:EndTransition()
 		self:GetParent():AddNewModifier(caster, self:GetAbility(), "modifier_sans_pathing", { duration = 0.2})
 		local enemies = FindUnitsInRadius(caster:GetTeamNumber(), parent_pos, nil, impact_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 		for _,enemy in ipairs(enemies) do
-			if enemy ~= parent then
-				enemy:AddNewModifier(caster, ability, "modifier_stunned", {duration = impact_stun_duration * (1 - enemy:GetStatusResistance())})
-				enemy:AddNewModifier(caster, ability, "modifier_phased", { duration = 2})
-				FindClearSpaceForUnit(enemy, enemy:GetAbsOrigin(), true)
-			end
+			enemy:AddNewModifier(caster, ability, "modifier_stunned", {duration = impact_stun_duration * (1 - enemy:GetStatusResistance())})
+			enemy:AddNewModifier(caster, ability, "modifier_phased", { duration = 2})
+			FindClearSpaceForUnit(enemy, enemy:GetAbsOrigin(), true)
 			ApplyDamage({attacker = caster, victim = enemy, ability = ability, damage = damage, damage_type = ability:GetAbilityDamageType()})
 		end
 		if caster:HasModifier("modifier_sans_r") then

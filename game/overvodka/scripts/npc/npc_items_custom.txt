@@ -32,6 +32,67 @@
 		"ItemKillable"					"0"
 		"ItemCastOnPickup"				"1"
 	}
+	"item_bag_of_gold_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityName"					"item_bag_of_gold"
+		"BaseClass"						"item_bag_of_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/props_gameplay/gold_coin_overthrow.vmdl"
+		"ItemKillable"					"0"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"99999"
+		"ItemPurchasable"				"0"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+		"ItemCastOnPickup"				"1"
+	}
+	"item_bag_of_gold_bablokrad"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityName"					"item_bag_of_gold"
+		"BaseClass"						"item_bag_of_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"Model"							"models/props_gameplay/gold_coin_overthrow.vmdl"
+		"ItemKillable"					"0"
+		
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"99999"
+		"ItemPurchasable"				"0"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"0"
+		"ItemKillable"					"0"
+		"ItemCastOnPickup"				"1"
+	}
 	//=================================================================================================================
 	// Treasure Chest
 	//=================================================================================================================
@@ -149,7 +210,7 @@
 			"duration"				"5"
 			"max_level"				"5"
 			"model_scale"			"30"     // Percentage over model scale
-			"magic_resist"			"60"
+			"magic_resist"			"50"
 		}
 	}
 	//=================================================================================================================
@@ -189,7 +250,7 @@
 			"duration"				"6"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
-			"magic_resist"			"80"
+			"magic_resist"			"65"
 		}
 	}
 		//=================================================================================================================
@@ -254,7 +315,7 @@
 			"duration"				"7"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
-			"magic_resist"			"100"
+			"magic_resist"			"80"
 		}
 	}
 		//=================================================================================================================
@@ -2735,6 +2796,77 @@
 			}
 		}
 	}
+	"item_recipe_bablokrad"
+	{
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"					 	"item_datadriven"
+		"AbilityTextureName"			"recipe"
+		"ItemCost"						"500"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_bablokrad"
+		"ItemRequirements"
+		{
+			"01"						"item_hand_of_midas"
+		}
+	}
+	"item_bablokrad"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile" 					"item_bablokrad"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityTextureName"			"bablokrad"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityCooldown"				"60"
+		"AbilityCastRange"				"600"
+		"ItemCost"						"1500"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"5"
+		"ItemDisplayCharges"			"5"
+		"AbilityValues"
+		{
+			"gold"					"15"
+			"Attackspeed"			"30"
+			"atribute"				"0"
+			"gold_b"				"300"
+		}
+	}
+	"item_recipe_byebye_boots"
+	{
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"					 	"item_datadriven"
+		"ItemCost"						"500"
+		"ItemRecipe"					"1"
+		"AbilityTextureName"			"item_recipe"
+		"ItemResult"					"item_byebye_boots"
+		"ItemRequirements"
+		{
+			"01"						"item_travel_boots;item_byebye"
+		}
+	}
+		
+	"item_byebye_boots"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"item_byebye_boots"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"Model"							"models/props_gameplay/red_box.vmdl"
+		"AbilityTextureName"			"byebye_boots"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"3.0"
+		"AbilityCooldown"				"40"
+		"AbilityManaCost"				"0"
+		"ItemCost"						"3250"
+		"AbilitySharedCooldown" 		"byebye"
+
+		"AbilityValues"
+		{
+			"bonus_movement_speed"			"90"
+		}
+	}
 	"item_byebye"
 {
 	"BaseClass"						"item_datadriven"
@@ -2754,9 +2886,7 @@
 	"ItemInitialCharges"			"1"
 	"ItemDisplayCharges"			"1"
 	"ItemCost"						"250"
-	"ItemShopTags"					"teleport"
-	"ItemQuality"					"component"
-	"ItemAliases"					"blink dagger"
+	"AbilitySharedCooldown" 		"byebye"
 	"SideShop"						"1"
 	"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 	"AbilityValues"
@@ -3093,7 +3223,7 @@
 	"item_recipe_hand_of_midas"
 	{
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"1050"	
+		"ItemCost"						"550"	
 		"ItemShopTags"					""
 		"ItemAliases"					"hom"
 		"ItemRecipe"					"1"
@@ -3127,7 +3257,7 @@
 		"ItemDisassembleRule"				"DOTA_ITEM_DISASSEMBLE_NEVER"
 		"SpeciallyBannedFromNeutralSlot"		"1"
 		"AbilityManaCost"				"0"
-		"ItemCost"						"1500"
+		"ItemCost"						"1000"
 		"ItemShopTags"					"attack_speed;hard_to_tag"
 		"ItemQuality"					"common"
 		"ItemAliases"					"hand of midas"
@@ -3135,9 +3265,9 @@
 		"SuggestLategame"				"1"
 		"AbilityValues"
 		{
-				"bonus_attack_speed"	"35"
+				"bonus_attack_speed"	"25"
 				"xp_multiplier"			"2.1"
-				"bonus_gold"			"250"
+				"bonus_gold"			"100"
 		}
 	}
 }

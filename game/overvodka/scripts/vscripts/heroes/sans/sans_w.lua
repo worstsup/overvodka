@@ -183,7 +183,7 @@ function modifier_sans_w_bone_thinker:OnCreated(params)
         self.perpendicular = Vector(-self.wall_direction.y, self.wall_direction.x, 0):Normalized()
         
         self.radius = 200
-        self:StartIntervalThink(0.2)
+        self:StartIntervalThink(0.1)
     end
 end
 

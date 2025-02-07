@@ -174,7 +174,7 @@ function modifier_sans_field:IsDebuff()
 	return true
 end
 function modifier_sans_field:IsPurgable()
-	return true
+	return false
 end
 function modifier_sans_field:GetAttributes()
 	return MODIFIER_ATTRIBUTE_MULTIPLE

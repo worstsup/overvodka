@@ -17,7 +17,7 @@
 		{
 			"item"		"item_balbe"
 			"item"		"item_hqd"
-
+			"item"		"item_bablokrad"
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{

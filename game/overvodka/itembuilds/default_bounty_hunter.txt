@@ -16,6 +16,7 @@
 		"#DOTA_Item_Build_Early_Game"
 		{
 			"item"		"item_balbe"
+			"item"		"item_bablokrad"
 			"item"		"item_hqd"
 			"item"		"item_chapman_blue"
 			"item"		"item_chapman_pink"

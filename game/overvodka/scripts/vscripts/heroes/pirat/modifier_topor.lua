@@ -7,7 +7,7 @@ end
 function modifier_topor:OnCreated( kv )
 	self.as = 1000
 	self.bat = self:GetAbility():GetSpecialValueFor( "bat" )
-	self.speed = 1000
+	self.speed = self:GetAbility():GetSpecialValueFor( "bonus_speed" )
 	self.projectile = 900
 	self.bonus_dmg = self:GetAbility():GetSpecialValueFor( "bonus_dmg" )
 	self.range = self:GetAbility():GetSpecialValueFor( "range" )
@@ -242,7 +242,7 @@ function modifier_topor:DeclareFunctions()
 	{
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT,
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_PROJECTILE_SPEED_BONUS,
 		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
@@ -267,7 +267,7 @@ function modifier_topor:GetModifierBaseAttackTimeConstant()
 	return self.bat
 end
 
-function modifier_topor:GetModifierMoveSpeedBonus_Constant()
+function modifier_topor:GetModifierMoveSpeedBonus_Percentage()
 	return self.speed
 end
 

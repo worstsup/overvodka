@@ -407,6 +407,26 @@ function COverthrowGameMode:OnItemPickUp( event )
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
 		UTIL_Remove( item ) -- otherwise it pollutes the player inventory
+	elseif event.itemname == "item_bag_of_gold_2" then
+		if owner:GetUnitName() ~= "npc_dota_hero_necrolyte" then
+			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.3, damage_type = DAMAGE_TYPE_PURE } )
+			EmitSoundOn("peterka_shard", owner)
+		else
+			SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, 300, nil )
+		end
+		UTIL_Remove( item )
+	elseif event.itemname == "item_bag_of_gold_bablokrad" then
+		if owner:GetUnitName() == "npc_dota_hero_necrolyte" then
+			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
+		end
+		local rewerd = 100
+		if owner:GetUnitName() == "npc_dota_hero_bounty_hunter" then
+			rewerd = 200
+		end
+		local playerID = owner:GetPlayerID()
+		PlayerResource:ModifyGold( playerID, rewerd, false, 0 )
+		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
+		UTIL_Remove( item )
 	elseif event.itemname == "item_treasure_chest" then
 		print( "Special Item Picked Up" )
 

@@ -41,7 +41,8 @@ function modifier_peterka_w:OnIntervalThink()
                 local r = 300
                 local playerID = self.parent:GetPlayerID()
                 local Team = PlayerResource:GetTeam(playerID)
-			    local newR = ChangeValueByTeamPlace(r, Team)
+			    local newR = ChangeValueByTeamPlace(r, Team) * self:GetAbility():GetSpecialValueFor("gold_mult")
+                local newR2 = ChangeValueByTeamPlace(r, Team)
                 self.parent:ModifyGold(newR, true, DOTA_ModifyGold_Unspecified)
                 SendOverheadEventMessage( self.parent, OVERHEAD_ALERT_GOLD, self.parent, newR, nil )
                 local heroes = FindUnitsInRadius(self.parent:GetTeamNumber(),
@@ -64,25 +65,23 @@ function modifier_peterka_w:OnIntervalThink()
 					        r = 0
 			            end
 			            Team = PlayerResource:GetTeam(playerID)
-			            newR = ChangeValueByTeamPlace(r, Team)
-			            PlayerResource:ModifyGold( playerID, newR, false, 0 )
-			            SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
+			            newR2 = ChangeValueByTeamPlace(r, Team)
+			            PlayerResource:ModifyGold( playerID, newR2, false, 0 )
+			            SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR2, nil )
                     end
 		        end
                 item_entity:RemoveSelf()
-                if self:GetParent():HasModifier("modifier_item_aghanims_shard") then
-                    local enemies = FindUnitsInRadius(self.parent:GetTeamNumber(), self.parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-                    for _, enemy in pairs(enemies) do
-                        local damage = newR * self:GetAbility():GetSpecialValueFor("damage") * 0.01
-                        ApplyDamage({
-                            victim = enemy,
-                            attacker = self.parent,
-                            damage = damage,
-                            damage_type = DAMAGE_TYPE_MAGICAL,
-                            ability = self:GetAbility()
-                        })
-                        ParticleManager:CreateParticle("particles/centaur_ti6_warstomp_gold_ring_glow_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
-                    end
+                local enemies = FindUnitsInRadius(self.parent:GetTeamNumber(), self.parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+                for _, enemy in pairs(enemies) do
+                    local damage = newR * self:GetAbility():GetSpecialValueFor("damage") * 0.01
+                    ApplyDamage({
+                        victim = enemy,
+                        attacker = self.parent,
+                        damage = damage,
+                        damage_type = self:GetAbility():GetAbilityDamageType(),
+                        ability = self:GetAbility()
+                    })
+                    ParticleManager:CreateParticle("particles/centaur_ti6_warstomp_gold_ring_glow_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
                 end
                 self.parent:Heal(newR * self:GetAbility():GetSpecialValueFor("heal") * 0.01, self:GetAbility())
                 self:GetAbility():UseResources(false, false, false, true)

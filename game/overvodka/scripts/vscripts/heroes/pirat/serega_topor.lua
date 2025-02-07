@@ -6,6 +6,7 @@ LinkLuaModifier( "modifier_marci_sidekick_lua", "modifier_marci_sidekick_lua", L
 
 function serega_topor:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_razor.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/serega_topor.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_scepter_ground_proj.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_scepter.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_sidekick_self_buff.vpcf", context )
@@ -53,27 +54,23 @@ end
 
 function serega_topor:OnHit( enemy )
 	local caster = self:GetCaster()
-	-- load data
 	local radius = self:GetSpecialValueFor( "radius" )
 	local damage_min = self:GetSpecialValueFor( "damage_min" )
 	local damage_max = self:GetSpecialValueFor( "damage_max" )
 	local slow_min = self:GetSpecialValueFor( "slow_min" )
 	local slow_max = self:GetSpecialValueFor( "slow_max" )
 	local duration = self:GetSpecialValueFor( "slow_duration" )
-	-- calculate damage & slow
 	local distance = (enemy:GetOrigin()-caster:GetOrigin()):Length2D()
 	local pct = distance/radius
 	pct = math.min(pct,1)
 	local damage = damage_min + (damage_max-damage_min)*pct
 	local slow = slow_min + (slow_max-slow_min)*pct
-
-	-- apply damage
 	local damageTable = {
 		victim = enemy,
 		attacker = caster,
 		damage = damage,
 		damage_type = DAMAGE_TYPE_MAGICAL,
-		ability = self, --Optional.
+		ability = self,
 	}
 	ApplyDamage(damageTable)
 	enemy:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = duration})
@@ -87,20 +84,13 @@ function serega_topor:OnHit( enemy )
 			slow = slow,
 		} -- kv
 	)
-	-- Play effects
-	-- self:PlayEffects2( enemy )
 	local sound_cast = "Ability.PlasmaFieldImpact"
 	EmitSoundOn( sound_cast, enemy )
 end
 
---------------------------------------------------------------------------------
--- Effects
 function serega_topor:PlayEffects( radius, speed )
-	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_terrorblade/terrorblade_scepter_ground_proj.vpcf"
 	local sound_cast = "serega_topor"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( speed, radius, 1 ) )
 
