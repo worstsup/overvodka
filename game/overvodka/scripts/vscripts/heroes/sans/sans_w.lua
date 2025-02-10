@@ -144,7 +144,7 @@ end
 
 function modifier_sans_w_thinker:OnCreated()
     if IsServer() then
-        self.radius = 100
+        self.radius = 150
         self:StartIntervalThink(0.2)
     end
 end

@@ -175,8 +175,7 @@ function shkolnik_r:OnProjectileHit( target, location )
     if not IsServer() then return end
     local damage = self:GetSpecialValueFor("damage")
     if not target then return end
-    if target:HasModifier("modifier_black_king_bar_immune") then damage = damage * 0.2 end
-	if target:IsMagicImmune() then damage = damage * 0.2 end
+    if target:HasModifier("modifier_black_king_bar_immune") or target:IsMagicImmune() or target:IsDebuffImmune() then damage = damage * 0.2 end
     local damageTable = 
     {
         victim          = target,

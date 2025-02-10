@@ -9010,7 +9010,7 @@
 				}
 				"ms"
 				{
-					"value"	"1 2 3 4"
+					"value"	"0.5 1.0 1.5 2.0"
 				}
 		}
 
@@ -9531,22 +9531,27 @@
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
 			"particle"	"particles/units/heroes/hero_antimage/antimage_spellshield.vpcf"
 			"particle"	"particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf"
+			"particle"	"particles/serega_opa.vpcf"
+			"soundfile"	"soundevents/serega_opa.vsndevts"
+			"soundfile"	"soundevents/serega_absorb.vsndevts"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityCooldown"				"34 31 28 25"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCooldown"				"24 20 16 12"
+		"AbilityManaCost"				"45"
 		"AbilityValues"
 		{
+			"duration"	"3"
 			"bonus_resist_pct"
 			{
 				"value"	"0"
-				"special_bonus_facet_antimage_magebanes_mirror"	"+6 +9 +12 +15"
+				"special_bonus_facet_antimage_magebanes_mirror"	"+10 +15 +20 +25"
 				"RequiresFacet"	"antimage_magebanes_mirror"
 			}
 			"armor"
 			{
 				"value"	"0"
-				"special_bonus_facet_antimage_mana_thirst"	"+3 +5 +7 +9"
+				"special_bonus_facet_antimage_mana_thirst"	"+4 +8 +12 +16"
 				"RequiresFacet"	"antimage_mana_thirst"
 			}
 			"silence_duration"

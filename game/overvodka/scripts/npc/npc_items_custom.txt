@@ -432,7 +432,7 @@
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"395"	
+		"ItemCost"						"895"	
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_charik_new"
@@ -1304,7 +1304,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_damage"			"120"
+				"bonus_damage"			"100"
 				"corruption_armor"		"-10"
 				"corruption_duration"	"7.0"
 				"bonus_damage_per_kill"	"4"
@@ -2280,12 +2280,12 @@
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "govno"
-    "ItemCost"                      "8000"
+    "ItemCost"                      "8750"
 		"AbilityValues"
 		{
 				"dodge_chance_pct"			"20"
-				"bonus_movement_speed"		"8"
-				"bonus_all_stats"			"15"
+				"bonus_movement_speed"		"10"
+				"bonus_all_stats"			"25"
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
 		}
@@ -2355,7 +2355,7 @@
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"500"	
+		"ItemCost"						"750"	
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_govno"
@@ -2828,14 +2828,14 @@
 		"FightRecapLevel"				"1"
 		"AbilityCastRange"				"0"
 		"AbilityCastPoint"				"3.0"
-		"AbilityCooldown"				"40"
+		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"0"
 		"ItemCost"						"3250"
 		"AbilitySharedCooldown" 		"byebye"
 
 		"AbilityValues"
 		{
-			"bonus_movement_speed"			"90"
+			"bonus_movement_speed"			"105"
 		}
 	}
 	"item_byebye"
@@ -3028,12 +3028,12 @@
 		"AbilityTextureName"		"charik"
 		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown"			"25"
-		"ItemCost"					"3000"
+		"ItemCost"					"3500"
 		"AbilityValues"
 		{
-			"bonus_all_stats"			"10"
+			"bonus_all_stats"			"15"
 			"bonus_attack_speed_stats"  "30"
-			"bonus_ms"					"8"
+			"bonus_ms"					"10"
 			"bonus_magresist"			"15"
 			"percent_min"				"40"
 			"percent_heal"				"30"
@@ -3107,7 +3107,7 @@
 		"AbilityValues"
 		{
 			"bonus_damage"			"88"
-			"bonus_attack_speed"	"30"
+			"bonus_attack_speed"	"35"
 			"bonus_int"				"10"
 			"bonus_mana_regen"		"2"
 			"strike_width"          "100"
