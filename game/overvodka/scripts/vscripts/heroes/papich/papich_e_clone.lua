@@ -1,7 +1,7 @@
 LinkLuaModifier( "modifier_birzha_stunned", "modifier_birzha_dota_modifiers.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_birzha_stunned_purge", "modifier_birzha_dota_modifiers.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_papich_e_clone_thinker", "papich_e_clone", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_papich_e_clone_debuff", "papich_e_clone", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_e_clone_thinker", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_e_clone_debuff", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
 
 papich_e_clone = class({})
 

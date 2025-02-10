@@ -11,7 +11,7 @@ function item_bablokrad:CastFilterResultTarget(target)
     if target:HasModifier("modifier_item_bablokrad_cooldown") then
         return UF_FAIL_CUSTOM
     end
-    if not target:IsRealHero() then
+    if not target:IsRealHero() or target:GetUnitName() == "npc_hamster" then
         return UF_FAIL_CUSTOM
     end
     local nResult = UnitFilter( target, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, self:GetCaster():GetTeamNumber() )

@@ -1,5 +1,5 @@
 papich_innate = class({})
-LinkLuaModifier( "modifier_papich_innate", "papich_innate", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_papich_innate", "heroes/papich/papich_innate", LUA_MODIFIER_MOTION_NONE )
 
 --------------------------------------------------------------------------------
 random_chance = 0
@@ -53,7 +53,7 @@ function modifier_papich_innate:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function modifier_papich_innate:GetModifierSpellAmplify_Percentage()
-	return self.amp
+	return self.base_amp
 end
 
 function modifier_papich_innate:GetModifierBonusStats_Strength()

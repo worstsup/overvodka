@@ -14,15 +14,15 @@
 			map = "temple_quartet"
 		},
 		{
-			MaxPlayers = 15
+			MaxPlayers = 10
 			map = "desert_quintet"
 		},
 		{
-			MaxPlayers = 15
+			MaxPlayers = 10
 			map = "forest_solo"
 		},
 		{
-			MaxPlayers = 15
+			MaxPlayers = 10
 			map = "desert_duo"
 		},
 		{

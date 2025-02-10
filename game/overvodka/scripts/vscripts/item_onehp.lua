@@ -67,9 +67,7 @@ function modifier_item_onehp:OnIntervalThink()
     end
 end
 function modifier_item_onehp:PlayEffects(target)
-    -- Get Resources
     local particle_cast = "particles/ti9_banner_fireworksrockets_b_new.vpcf"
-
     local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
     ParticleManager:SetParticleControl( effect_cast, 1, target:GetAbsOrigin() )
     ParticleManager:ReleaseParticleIndex(effect_cast)

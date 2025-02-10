@@ -1,9 +1,9 @@
 papich_q_clone = class({})
-LinkLuaModifier( "modifier_papich_q_clone", "modifier_papich_q_clone", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_papich_q_clone_debuff", "modifier_papich_q_clone_debuff", LUA_MODIFIER_MOTION_BOTH )
+LinkLuaModifier( "modifier_papich_q_clone", "heroes/papich/modifier_papich_q_clone", LUA_MODIFIER_MOTION_BOTH )
+LinkLuaModifier( "modifier_papich_q_clone_debuff", "heroes/papich/modifier_papich_q_clone_debuff", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_leashed_lua", "modifier_generic_leashed_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier("modifier_papich_q_clone_blood", "papich_q_clone", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_q_clone_blood", "heroes/papich/papich_q_clone", LUA_MODIFIER_MOTION_NONE)
 
 
 function papich_q_clone:OnSpellStart()

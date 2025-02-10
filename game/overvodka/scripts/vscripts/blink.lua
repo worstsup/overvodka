@@ -1,5 +1,4 @@
 function Blink(keys)
-    --PrintTable(keys)
     local point = keys.target_points[1]
     local caster = keys.caster
     local casterPos = caster:GetAbsOrigin()

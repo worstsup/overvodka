@@ -249,6 +249,7 @@
 	}
 	"item_radiance"							"REMOVE"
 	"item_black_king_bar"					"REMOVE"
+	"item_octarine_core"					"REMOVE"
 	"item_tpscroll"							"REMOVE"
 
 	//=================================================================================================================

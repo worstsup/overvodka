@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_papich_r", "papich_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_r", "heroes/papich/papich_r", LUA_MODIFIER_MOTION_NONE)
 
 papich_r = class({})
 function papich_r:OnAbilityPhaseStart()
@@ -11,9 +11,9 @@ function papich_r:OnSpellStart()
     if not IsServer() then return end
      self.abilities_list = 
     {
-        {"imba_keeper_of_the_light_illuminate", "papich_q_clone"},
-        {"imba_arc_warden_magnetic_field", "papich_w_clone"},
-        {"papich_passive", "papich_maniac"},
+        {"papich_q", "papich_q_clone"},
+        {"papich_w", "papich_w_clone"},
+        {"papich_e", "papich_maniac"},
         {"papich_r",   "papich_e_clone"},
     }
     local target = Entities:FindByNameNearest("npc_dota_hero_skeleton_king", self:GetCaster():GetAbsOrigin(), 10000)

@@ -228,12 +228,13 @@ function modifier_sans_e:EndTransition()
 			ApplyDamage({attacker = caster, victim = enemy, ability = ability, damage = damage, damage_type = ability:GetAbilityDamageType()})
 		end
 		if caster:HasModifier("modifier_sans_r") then
+			local bones_duration = caster:FindAbilityByName("sans_r"):GetSpecialValueFor("bones_dur")
 			if self:GetAbility():GetSpecialValueFor("facet_blue") == 1 then
 				CreateModifierThinker(
 	    			caster,
 	    			ability,
 	    			"modifier_sans_e_thinker_blue",
-	    			{ duration = 3 },
+	    			{ duration = bones_duration },
 	    			parent_pos,
 	    			caster:GetTeamNumber(),
 	   				false
@@ -244,7 +245,7 @@ function modifier_sans_e:EndTransition()
     				caster,
     				ability,
     				"modifier_sans_e_thinker_orange",
-    				{ duration = 3 },
+    				{ duration = bones_duration },
     				parent_pos,
     				caster:GetTeamNumber(),
    					false

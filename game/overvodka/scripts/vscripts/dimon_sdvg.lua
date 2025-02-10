@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 dimon_sdvg = class({})
 LinkLuaModifier( "modifier_dimon_sdvg", "modifier_dimon_sdvg.lua", LUA_MODIFIER_MOTION_NONE )
 

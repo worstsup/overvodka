@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_papich_w_clone", "papich_w_clone", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_w_clone", "heroes/papich/papich_w_clone", LUA_MODIFIER_MOTION_NONE)
 
 papich_w_clone = class({})
 function papich_w_clone:IsHiddenWhenStolen() return false end

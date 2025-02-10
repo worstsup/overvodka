@@ -1,8 +1,3 @@
---[[
-	Author: Noya
-	Date: 9.1.2015.
-	Checks if the caster HP dropped below the threshold
-]]
 function BorrowedTimeActivate( event )
 	-- Variables
 	local caster = event.caster

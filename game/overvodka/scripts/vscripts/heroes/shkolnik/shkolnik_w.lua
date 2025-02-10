@@ -1,45 +1,23 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
-ogre_magi_fireblast_lua = class({})
+shkolnik_w = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_shkolnik_armor", "modifier_shkolnik_armor", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_shkolnik_armor", "heroes/shkolnik/shkolnik_w", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Ability Start
-function ogre_magi_fireblast_lua:OnSpellStart()
-	-- unit identifier
+function shkolnik_w:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
-	-- cancel if linken
 	if target:TriggerSpellAbsorb( self ) then
 		return
 	end
-
-	-- load data
 	local duration = self:GetSpecialValueFor( "stun_duration" )
 	local damage = self:GetSpecialValueFor( "fireblast_damage" )
-
-	-- Apply damage
 	local damageTable = {
 		victim = target,
 		attacker = caster,
 		damage = damage,
 		damage_type = self:GetAbilityDamageType(),
-		ability = self, --Optional.
+		ability = self,
 	}
 	ApplyDamage( damageTable )
-
-	-- stun
 	target:AddNewModifier(
 		self:GetCaster(),
 		self, 
@@ -52,18 +30,12 @@ function ogre_magi_fireblast_lua:OnSpellStart()
 		"modifier_shkolnik_armor", 
 		{duration = duration}
 	)
-	-- play effects
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
 
 end
-
---------------------------------------------------------------------------------
-function ogre_magi_fireblast_lua:PlayEffects( target )
-	-- Get Resources
+function shkolnik_w:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -71,18 +43,54 @@ function ogre_magi_fireblast_lua:PlayEffects( target )
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControl( effect_cast, 1, target:GetOrigin() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( "dvoika", target )
 end
 
-function ogre_magi_fireblast_lua:PlayEffects1( target )
-	-- Get Resources
+function shkolnik_w:PlayEffects1( target )
 	local particle_cast = "particles/marci_unleash_stack_number_new.vpcf"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_OVERHEAD_FOLLOW, target )
+end
+
+modifier_shkolnik_armor = class({})
+
+function modifier_shkolnik_armor:IsHidden()
+	return true
+end
+function modifier_shkolnik_armor:IsDebuff()
+	return true
+end
+function modifier_shkolnik_armor:IsStunDebuff()
+	return false
+end
+function modifier_shkolnik_armor:IsPurgable()
+	return true
+end
+
+function modifier_shkolnik_armor:OnCreated()
+	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
+end
+
+function modifier_shkolnik_armor:OnRefresh()
+	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
+end
+
+function modifier_shkolnik_armor:OnRemoved()
+end
+
+function modifier_shkolnik_armor:OnDestroy()
+end
+function modifier_shkolnik_armor:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+	}
+	return funcs
+end
+
+function modifier_shkolnik_armor:GetModifierPhysicalArmorBonus()
+	return self.armor
 end

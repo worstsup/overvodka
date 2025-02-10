@@ -25,7 +25,7 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_aghanims_shard"
-			"item"		"item_sharoeb"
+			"item"		"item_magic_aegis"
 			"item"		"item_magic_daedalus"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_badun"

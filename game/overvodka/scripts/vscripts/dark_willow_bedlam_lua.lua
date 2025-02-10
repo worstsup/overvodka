@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 dark_willow_bedlam_lua = class({})
 LinkLuaModifier( "modifier_wisp_ambient", "modifier_wisp_ambient.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dark_willow_bedlam_lua", "modifier_dark_willow_bedlam_lua.lua", LUA_MODIFIER_MOTION_NONE )

@@ -606,58 +606,29 @@
 			"01"						"item_hyperstone;item_monkey_king_bar"
 		}
 	}
-	"item_sharoeb"
+	"item_magic_aegis"
   	{
-  		"BaseClass"                 "item_datadriven"
-  		"ID"						"2163"
-  		"AbilityTextureName"        "mag"
-  		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"magic_aegis"
+  		"AbilityTextureName"		"magic_aegis"
+  		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemCost"					"8000"
 		"ItemShopTags"				"damage"
 		"ItemQuality"				"magicks"
 		"ItemDeclarations"			"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 
-		
-		"Modifiers"
-		{
-		    "modifier_spell"
-		    {
-		        "Passive"           "1"
-		        "IsHidden"          "1"
-		        "Properties"
-		        {
-		            "MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" "%dmg"
-		            "MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE"		"%cd"
-		        }
-		    }
-			
-		    "modifier_stats"
-		    {
-		        "Passive"           "1"
-		        "IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-
-		        "Properties"
-		        {
-		            "MODIFIER_PROPERTY_MANA_BONUS" "%mp"
-		            "MODIFIER_PROPERTY_HEALTH_BONUS" "%hp" 
-		            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int"
-		        }
-		    }
-		}
-	
 		"AbilityValues"
 		{
-		        "cd"       			"25"
-		    	"dmg"				"15"
-		    	"hp"				"500"
-		    	"mp"				"500"
-		    	"int"				"30"
+			"cd"	   						"25"
+			"hp"							"500"
+			"mp"							"500"
+			"int"							"30"
+			"dmg"							"25"
+			"mana_regen"					"6"
 		}
   	}
 	
-  	"item_recipe_sharoeb"
+  	"item_recipe_magic_aegis"
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
@@ -665,10 +636,43 @@
   		"ItemCost"					"300"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
-		"ItemResult"				"item_sharoeb"
+		"ItemResult"				"item_magic_aegis"
 		"ItemRequirements"
 		{
-			"01" "item_octarine_core;item_mystic_staff"
+			"01" "item_octarine_vodka;item_mystic_staff"
+		}
+  	}
+	"item_octarine_vodka"
+  	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"octarine_vodka"
+  		"AbilityTextureName"		"octarine_vodka"
+  		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"ItemCost"					"4800"
+		"ItemShopTags"				"damage"
+		"ItemQuality"				"magicks"
+		"ItemDeclarations"			"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+		"AbilityValues"
+		{
+			"cd"	   			"25"
+			"hp"				"500"
+			"mp"				"500"
+			"mana_regen"		"6"
+		}
+  	}
+	
+  	"item_recipe_octarine_vodka"
+  	{
+  		"BaseClass"				 "item_datadriven"
+  		"AbilityTextureName"		"recipe"
+  		"Model"						"models/props_gameplay/recipe.vmdl"
+  		"ItemCost"					"100"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_octarine_vodka"
+		"ItemRequirements"
+		{
+			"01" "item_tiara_of_selemene;item_soul_booster"
 		}
   	}
 	"item_invis_sword_datadriven"
@@ -2358,39 +2362,6 @@
 		"ItemRequirements"
 		{
 			"01"						"item_charik_new;item_ultimate_orb;item_vanguard"
-		}
-	}
-	//=================================================================================================================
-	// Recipe: Octarine Core
-	//=================================================================================================================
-	"item_recipe_octarine_core"
-	{
-		"ItemCost"						"100"	
-		"ItemShopTags"					""
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_octarine_core"
-		"ItemRequirements"
-		{
-			"01"						"item_tiara_of_selemene;item_soul_booster"
-		}
-	}
-	"item_octarine_core"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ItemCost"						"4800"
-		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
-		"ItemQuality"					"rare"
-		"ItemAliases"					"mana;mb;octarine core"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
-		"SuggestLategame"				"1"
-		"AbilityValues"
-		{
-			"bonus_cooldown"		"0"
-			"bonus_health"			"500"
-			"bonus_mana"			"500"
-			"bonus_health_regen"	"0"
-			"bonus_mana_regen"		"6"
 		}
 	}
 	"item_aegis"

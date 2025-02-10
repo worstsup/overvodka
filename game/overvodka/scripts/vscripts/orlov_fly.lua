@@ -8,4 +8,4 @@ function orlov_fly:OnSpellStart()
 
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_orlov_fly", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
---------------------------------------------------------------------------------\
+--------------------------------------------------------------------------------

@@ -94,7 +94,7 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_lesh",
 		"item_paladin_sword",			--
 		"item_titan_sliver",			--
-		"item_quickening_charm",			--
+		"item_nemesis_curse",			--
 	}
 
 	local tier4 =

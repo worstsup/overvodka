@@ -126,16 +126,7 @@ function item_armature_strike:OnSpellStart()
 
     for _, enemy in pairs(enemies) do
         enemy:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = stun_duration })
-        caster:PerformAttack(
-                enemy,
-                true,
-                true,
-                true,
-                true,
-                true,
-                false,
-                true
-            )
+        caster:PerformAttack(enemy, true, true, true, true, true, false, true)
     end
     buff:Destroy()
     caster:EmitSound("armature")

@@ -1,17 +1,17 @@
-LinkLuaModifier("modifier_papich_passive", "papich_passive.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_custom_min_health", "papich_passive.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier( "modifier_papich_e_charge", "modifier_papich_e_charge.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_papich_e", "modifier_papich_e.lua", LUA_MODIFIER_MOTION_HORIZONTAL )
-LinkLuaModifier( "modifier_papich_e_command", "papich_passive.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_papich_e_heal", "papich_passive.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_papich_bkb", "papich_passive.lua", LUA_MODIFIER_MOTION_NONE )
-papich_passive = class({})
+LinkLuaModifier("modifier_papich_e_passive", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_custom_min_health", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier( "modifier_papich_e_charge", "heroes/papich/modifier_papich_e_charge.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_papich_e", "heroes/papich/modifier_papich_e.lua", LUA_MODIFIER_MOTION_HORIZONTAL )
+LinkLuaModifier( "modifier_papich_e_command", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_papich_e_heal", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_papich_bkb", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE )
+papich_e = class({})
 
-function papich_passive:GetIntrinsicModifierName()
-    return "modifier_papich_passive"
+function papich_e:GetIntrinsicModifierName()
+    return "modifier_papich_e_passive"
 end
 
-function papich_passive:OnChargeFinish( interrupt )
+function papich_e:OnChargeFinish( interrupt )
     local caster = self:GetCaster()
     local max_duration = self:GetSpecialValueFor( "chargeup_time" )
     local max_distance = self:GetSpecialValueFor( "max_distance" )
@@ -46,15 +46,14 @@ function papich_passive:OnChargeFinish( interrupt )
     )
 end
 
-modifier_papich_passive = class({})
+modifier_papich_e_passive = class({})
 
-function modifier_papich_passive:IsHidden() return true end
-function modifier_papich_passive:IsPurgable() return false end
-function modifier_papich_passive:RemoveOnDeath() return false end
+function modifier_papich_e_passive:IsHidden() return true end
+function modifier_papich_e_passive:IsPurgable() return false end
+function modifier_papich_e_passive:RemoveOnDeath() return false end
 
-function modifier_papich_passive:OnCreated()
+function modifier_papich_e_passive:OnCreated()
     if not self:GetParent():IsRealHero() then return end
-    if self:GetParent():IsTempestDouble() then return end
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
     self.check_interval = 0.1
@@ -64,7 +63,7 @@ function modifier_papich_passive:OnCreated()
     end
 end
 
-function modifier_papich_passive:OnIntervalThink()
+function modifier_papich_e_passive:OnIntervalThink()
     if not IsServer() then return end
     if self:GetParent():IsTempestDouble() then return end
     if not self:GetParent():IsAlive() then return end

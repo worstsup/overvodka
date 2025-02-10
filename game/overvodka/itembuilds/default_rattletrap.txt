@@ -24,7 +24,7 @@
 		"#DOTA_Item_Build_Mid_Items"
 		{
 			"item"		"item_jordan"
-			"item"		"item_sharoeb"
+			"item"		"item_magic_aegis"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_suchiy"
 			"item"		"item_pasito"

@@ -42,12 +42,12 @@ function gaster_blaster:OnSpellStart()
                 ParticleManager:SetParticleControl(particle, 1, laser_end)
                 ParticleManager:ReleaseParticleIndex(particle)
                 blaster:EmitSound("gaster_blaster_shoot")
-                
+                local dmg_r = dmg * self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("blasters_damage_pct") * 0.01
                 for _, unit in pairs(units) do
                     ApplyDamage({
                         victim = unit,
                         attacker = caster,
-                        damage = dmg * 0.5,
+                        damage = dmg_r,
                         damage_type = self:GetAbilityDamageType(),
                         ability = self,
                     })

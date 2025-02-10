@@ -7,7 +7,7 @@ GameUI.CustomUIConfig().multiteam_top_scoreboard =
 
 GameUI.CustomUIConfig().team_select = 
 {
-    "bShowSpectatorTeam" : true
+    "bShowSpectatorTeam" : false
 }
 
 GameUI.CustomUIConfig().team_logo_xml = "file://{resources}/layout/custom_game/overthrow_team_icon.xml";

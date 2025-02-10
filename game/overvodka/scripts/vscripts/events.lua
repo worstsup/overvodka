@@ -89,15 +89,13 @@ function COverthrowGameMode:OnNPCSpawned( event )
 		end
 		if self.allSpawned == false then
 			if GetMapName() == "mines_trio" then
-				--print("mines_trio is the map")
-				--print("self.allSpawned is " .. tostring(self.allSpawned) )
 				local unitTeam = spawnedUnit:GetTeam()
 				local particleSpawn = ParticleManager:CreateParticleForTeam( "particles/addons_gameplay/player_deferred_light.vpcf", PATTACH_ABSORIGIN, spawnedUnit, unitTeam )
 				ParticleManager:SetParticleControlEnt( particleSpawn, PATTACH_ABSORIGIN, spawnedUnit, PATTACH_ABSORIGIN, "attach_origin", spawnedUnit:GetAbsOrigin(), true )
 			end
 		end
 	end
-	if spawnedUnit.bFirstSpawned == nil then ---если юнит герой и это первый его спавн находишь у него скилл и апаешь скиллу 1 уровень
+	if spawnedUnit.bFirstSpawned == nil then
       	spawnedUnit.bFirstSpawned = true
       	if spawnedUnit:IsRealHero() then
       		ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, spawnedUnit:GetPlayerOwner())
@@ -110,13 +108,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 		if ash then
 			ash:SetLevel(1)
 		end
-		local pap = spawnedUnit:FindAbilityByName("amplify_regen_ability")
+		local pap = spawnedUnit:FindAbilityByName("papich_facet_regen")
 		if pap then
 			pap:SetLevel(1)
-		end
-		local papich = spawnedUnit:FindAbilityByName("papich_e")
-		if papich then
-			papich:SetLevel(1)
 		end
 		local dave = spawnedUnit:FindAbilityByName("dave_ambient")
 		if dave then

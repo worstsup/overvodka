@@ -32,7 +32,6 @@ function modifier_bred:DeclareFunctions()
 		MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 	}
-
 	return funcs
 end
 

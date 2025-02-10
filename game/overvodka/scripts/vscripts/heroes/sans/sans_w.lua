@@ -145,7 +145,7 @@ end
 function modifier_sans_w_thinker:OnCreated()
     if IsServer() then
         self.radius = 100
-        self:StartIntervalThink(0.1)
+        self:StartIntervalThink(0.2)
     end
 end
 function modifier_sans_w_thinker:OnIntervalThink()
@@ -181,9 +181,10 @@ function modifier_sans_w_bone_thinker:OnCreated(params)
         self.end_pos = Vector(params.end_pos_x, params.end_pos_y, params.end_pos_z)
         self.wall_direction = Vector(params.direction_x, params.direction_y, 0):Normalized()
         self.perpendicular = Vector(-self.wall_direction.y, self.wall_direction.x, 0):Normalized()
-        
+		self.damage_mini = self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("damage_mini")
+		self.duration = self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("ministun")
         self.radius = 200
-        self:StartIntervalThink(0.1)
+        self:StartIntervalThink(0.2)
     end
 end
 
@@ -217,11 +218,11 @@ function modifier_sans_w_bone_thinker:OnIntervalThink()
             ApplyDamage({
                 victim = enemy,
                 attacker = self:GetCaster(),
-                damage = self:GetAbility():GetSpecialValueFor("damage_mini"),
+                damage = self.damage_mini,
                 damage_type = DAMAGE_TYPE_MAGICAL,
                 ability = self:GetAbility()
             })
-			enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("ministun") })
+			enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
 			EmitSoundOn("sans_damage", enemy)
         end
 

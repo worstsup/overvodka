@@ -861,7 +861,7 @@
         // Armor
         //----------------------------------------------------------------
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "45"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------
@@ -929,7 +929,7 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "55"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------
@@ -944,8 +944,8 @@
        
         // Bounty
         //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
+        "BountyGoldMin"         "30"
+        "BountyGoldMax"         "30"
        
         // Bounds
         //----------------------------------------------------------------
@@ -1008,7 +1008,7 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "65"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------
@@ -1023,8 +1023,8 @@
        
         // Bounty
         //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
+        "BountyGoldMin"         "35"
+        "BountyGoldMax"         "35"
        
         // Bounds
         //----------------------------------------------------------------
@@ -1085,7 +1085,7 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "75"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------
@@ -1100,8 +1100,8 @@
        
         // Bounty
         //----------------------------------------------------------------
-        "BountyGoldMin"         "70"
-        "BountyGoldMax"         "70"
+        "BountyGoldMin"         "40"
+        "BountyGoldMax"         "40"
        
         // Bounds
         //----------------------------------------------------------------
@@ -1158,7 +1158,7 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "5"
-        "MagicalResistance"     "75"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------

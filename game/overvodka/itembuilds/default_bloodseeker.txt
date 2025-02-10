@@ -32,7 +32,7 @@
 		}
 		"#DOTA_Item_Build_Mid_Items"
 		{
-			"item"		"item_sharoeb"
+			"item"		"item_magic_aegis"
 			"item"		"item_jordan"
 			"item"		"item_magic_daedalus"
 			"item"		"item_arcane_blink"

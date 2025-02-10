@@ -12,6 +12,8 @@ function vihor_r:Precache(context)
     PrecacheResource("particle", "particles/econ/items/arc_warden/arc_warden_frostivus_2023/arc_warden_magnetic_frostivus_start.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_flame.vpcf", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/vihor_r_start.vsndevts", context )
+	PrecacheResource("soundfile", "soundevents/vihor_r.vsndevts", context )
 end
 
 function vihor_r:OnAbilityPhaseStart()

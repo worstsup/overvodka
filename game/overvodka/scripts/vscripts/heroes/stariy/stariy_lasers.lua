@@ -31,7 +31,7 @@ end
 function stariy_lasers:OnAbilityPhaseStart()
 	EmitSoundOn( "old_start", self:GetCaster() )
 	self.radius = self:GetSpecialValueFor( "radius" )
-	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_stariy_fly", {duration = 1.5,} )
+	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_stariy_fly", {duration = 1.5} )
 	if IsServer() then
 		StartSoundEventFromPositionReliable( "Aghanim.StaffBeams.WindUp", self:GetCaster():GetAbsOrigin() )
 		self.nChannelFX = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_channel.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
