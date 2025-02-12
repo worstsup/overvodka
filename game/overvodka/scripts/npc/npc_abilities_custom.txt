@@ -4829,17 +4829,15 @@
         		"AbilityCastRange"
         		{
         			"value"	"900"
-        			"special_bonus_scepter" "+500"
         			"affected_by_aoe_increase"	"1"
                 }
                 "effect_radius"
                 {
                 	"value"	"900"
-                	"special_bonus_scepter" "+500"
                 	"affected_by_aoe_increase"	"1"
                 }
                 "delay"                     "0.0"
-                "radius"                    "600"
+                "radius"                    "500"
                 "blast_damage"
                 {
                 	"value"	"25 50 75 100 125 150 175 200 225 250 275 300 325 350 375 400 425 450 475 500 525"
@@ -4848,10 +4846,15 @@
                 "channel_duration"          "9.0"
                 "interval"
                 {
-                	"value"	"0.2"
-                	"special_bonus_scepter" "-0.1"
+                	"value"	"0.15"
+					"special_bonus_scepter"	"-0.05"
                 }
-                "block_cooldown"            "0.001"
+				"scepter_slow"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"-50"
+				}
+                "block_cooldown"            "0.1"
                 "debuff_duration"            "1"
         }
     }
@@ -5692,26 +5695,22 @@
 		}
 	}
 	//=================================================================================================================
-	// КОНКУРЕНЦИЯ (ДВОРЕЦКОВ)
+	// ОТХОДНЯК (ДВОРЕЦКОВ)
 	//=================================================================================================================
-	"shadow_fiend_presence_of_the_dark_lord_lua"
+	"dvoreckov_innate"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"shadow_fiend_presence_of_the_dark_lord_lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_innate"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastRange"				"900"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityValues"
 		{
-				"presence_armor_reduction"		"-5"
-				"mag"						"-10"
-				"presence_radius"				"900"
+				"dmg_max" "25"
+				"dmg_min" "-20"
 		}
 	}
 	//=================================================================================================================

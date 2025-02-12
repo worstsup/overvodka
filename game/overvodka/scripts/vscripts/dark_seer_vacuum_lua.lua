@@ -1,16 +1,21 @@
 dark_seer_vacuum_lua = class({})
 LinkLuaModifier( "modifier_dark_seer_vacuum_lua", "modifier_dark_seer_vacuum_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 
---------------------------------------------------------------------------------
--- Init Abilities
 function dark_seer_vacuum_lua:Precache( context )
-	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dark_seer.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dark_seer/dark_seer_vacuum.vpcf", context )
 end
 
 --------------------------------------------------------------------------------
 function dark_seer_vacuum_lua:GetAOERadius()
-	return 700
+	local base_radius = self:GetSpecialValueFor("radius")
+    if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
+        local orb_ability = self:GetCaster():FindAbilityByName("invoker_wex_lua")
+        if orb_ability then
+            return base_radius + (orb_ability:GetLevel() * 60)
+        end
+    end
+    
+    return 700
 end
 
 function dark_seer_vacuum_lua:GetCooldown( level )
@@ -29,7 +34,7 @@ function dark_seer_vacuum_lua:OnSpellStart()
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		radius = self:GetOrbSpecialValueFor( "radius", "w" )
 	else
-		radius = 900
+		radius = 700
 	end
 	local tree = self:GetSpecialValueFor( "radius_tree" )
 	local duration = self:GetSpecialValueFor( "duration" )

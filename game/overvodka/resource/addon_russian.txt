@@ -856,7 +856,6 @@
 		"DOTA_Tooltip_ability_zolo_home_bonus_ms"	"%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_modifier_zolo_home" "Мама позвала на ужин"
 		"DOTA_Tooltip_modifier_zolo_home_Description" "Скорость передвижения увеличена"
-
 		"DOTA_Tooltip_modifier_zolo_stopapupa" "Стопапупа"
 		"DOTA_Tooltip_ability_zolo_stopapupa" "СТОПАПУПА"
 		"DOTA_Tooltip_ability_zolo_stopapupa_Description" "Во время атаки Иван случайно произносит иностранные слова с ошибкой, превращая их в смешные и нелепые фразы. Враг ловит дикий кринж и пытается как можно дальше убежать от аутиста, получая страх и замедление передвижения на %slow%%%. Также на время снижается броня противника."
@@ -896,7 +895,6 @@
 		"DOTA_Tooltip_Facet_ogre_magi_learning_curve"						"ОБМАНКА"
 		"DOTA_Tooltip_Facet_ogre_magi_learning_curve_Description"			"На месте применения способности МАМА ЗОВЕТ НА УЖИН Иван создает свою иллюзию. А ещё можно вкачать таланты на уровень раньше."
 		"DOTA_Tooltip_ability_zolo_home_Facet_ogre_magi_learning_curve" "На месте применения способности Иван создает свою иллюзию."
-		
 		"DOTA_Tooltip_ability_zolo_stopapupa_scepter_Description"	"Способность наносит дополнительный урон в размере %str_damage%%% от силы персонажа."
 
 		"DOTA_Tooltip_ability_serega_topor" "МОЙ ТОПОР"
@@ -1061,7 +1059,6 @@
 		"DOTA_Tooltip_ability_item_armature_strike_bonus_int"	"+$int"
 		"DOTA_Tooltip_ability_item_armature_strike_Description" "<h1>Активное: Уебать</h1>Герой ебашит по земле арматурой, оглушая всех задетых врагов на %stun_duration% сек., и наносит им критический урон в размере %crit_multiplier%%%. \n\n<h1>Пассивное: Крит арматуры</h1>Каждая атака может с вероятностью в %chance%%% нанести %crit%%% урона."
 
-
 		"DOTA_Tooltip_ability_item_drobe" "РЕЛЬСОТРОН"
 		"DOTA_Tooltip_ability_item_drobe_Description" "<h1>Пассивное: Импульс</h1>Атаки героев дальнего боя наносят %cleave%%% урона всем врагам в радиусе %radius% от основной цели."
 		"DOTA_Tooltip_ability_item_drobe_bonus_damage" "+$damage"
@@ -1138,7 +1135,6 @@
 		"DOTA_Tooltip_ability_imba_batrider_sticky_napalm_movement_speed_pct" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ ЗА ЭФФЕКТ:"
 		"DOTA_Tooltip_ability_imba_batrider_sticky_napalm_max_stacks" "МАКСИМУМ ЭФФЕКТОВ:"
 		"DOTA_Tooltip_ability_imba_batrider_sticky_napalm_damage_per_level" "ДОП. УРОН ЗА УРОВЕНЬ:"
-
 		"DOTA_Tooltip_modifier_imba_batrider_sticky_napalm_new" "Эффекты клубничного мохито"
 		"DOTA_Tooltip_ability_ashab_dogon" "ДОГОНЯЮ!"
 		"DOTA_Tooltip_ability_ashab_dogon_Description" "ПРЕРЫВАЕМАЯ — Асхаб начинает догонять своего противника, и при столкновении оглушает его и наносит ему урон."
@@ -1567,10 +1563,10 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_axe_4" "+0.5 сек. к оглушению от РАЗГОВОР С ХЕЙТЕРОМ"
 		"DOTA_Tooltip_ability_special_bonus_unique_muerta_dead_shot_range" "+20 к урону от РАЗЪЕБАТЬ ЧАРТЫ"
 		"DOTA_Tooltip_ability_special_bonus_unique_muerta_calling_hp_regen" "+50 к радиусу ДВОРОВАЯ ЗАКАЛКА"
-		"DOTA_Tooltip_ability_shadow_fiend_presence_of_the_dark_lord_lua" "КОНКУРЕНЦИЯ"
-		"DOTA_Tooltip_ability_shadow_fiend_presence_of_the_dark_lord_lua_Description" "Находясь рядом с персонажем MACAN, ДВОРЕЦКОВ снижает его броню и сопротивление магии."
-		"DOTA_Tooltip_ability_shadow_fiend_presence_of_the_dark_lord_lua_presence_armor_reduction" "СНИЖЕНИЕ БРОНИ:"
-		"DOTA_Tooltip_ability_shadow_fiend_presence_of_the_dark_lord_lua_mag" "%СНИЖЕНИЕ СОПРОТИВЛЕНИЯ МАГИИ:"
+		"DOTA_Tooltip_ability_dvoreckov_innate" "ОТХОДНЯК"
+		"DOTA_Tooltip_ability_dvoreckov_innate_Description" "Из-за вечных вписок все способности Дворецкова наносят от -%dmg_min%%% до +%dmg_max%%% урона."
+		"DOTA_Tooltip_ability_dvoreckov_innate_dmg_max" "%МАКС. УВЕЛИЧЕНИЕ:"
+		"DOTA_Tooltip_ability_dvoreckov_innate_dmg_min" "%МАКС. УМЕНЬШЕНИЕ:"
 		"DOTA_Tooltip_ability_ebanko_innate" "НАБОР МАССЫ"
 		"DOTA_Tooltip_ability_ebanko_innate_Description" "Герой получает +1 к силе за каждое убийство."
 		"DOTA_Tooltip_modifier_ebanko_innate" "Получено силы за убийства"
@@ -2377,10 +2373,12 @@
 		"DOTA_Tooltip_ability_ogre_magi_ignite_lua_slow_movement_speed_pct" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_Megumin_ExplosionMagic"         "Вписка"
 		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_Description"  "Дворецков устраивает жёсткую вписку, обстреливая врагов ебнутыми метеоритами. \n <font color='#FFFFFF'> Урон от взрывов зависит от суммарного уровня всех трёх сфер. </font>"
-		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_scepter_Description" "Герой невосприимчив к магии во время действия способности, а радиус её действия увеличивается на <font color='#FFFFFF'>500</font>, а интервал взрывов уменьшается в <font color='#FFFFFF'>2</font> раза."
+		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_scepter_Description" "Позволяет передвигаться, атаковать и применять заклинания во время действия способности. Враги всё ещё могут её прервать. Герой передвигается на %scepter_slow%%% медленнее."
 		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_blast_damage" "УРОН ОТ ВЗРЫВА:"
 		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_effect_radius" "РАДИУС:"
 		"DOTA_Tooltip_ability_Megumin_ExplosionMagic_channel_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_modifier_ExplosionMagic_nonchanneled" "Вписка"
+		"DOTA_Tooltip_modifier_ExplosionMagic_nonchanneled_Description" "Этой ночью я на вписке побывал..."
 		"DOTA_Tooltip_ability_item_waka"   "WAKA"
 		"DOTA_Tooltip_ability_item_waka_Description" "<h1>Пассивное: Уменьшение брони</h1> Снижает броню атакуемого врага на %corruption_armor% на %corruption_duration% секунд \n <h1>Пассивное: Стаки урона</h1> Когда умирает герой, броня которого была уменьшена WAKA, бонус к урону увеличивается на %bonus_damage_per_kill%. Максимум: %max_damage% урона"
 		"DOTA_Tooltip_ability_item_waka_bonus_damage"							"+$damage"

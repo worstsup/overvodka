@@ -8,6 +8,7 @@ function vihor_e:GetIntrinsicModifierName()
 end
 function vihor_e:Precache(context)
     PrecacheResource("particle", "particles/econ/courier/courier_greevil_purple/courier_greevil_purple_ambient_2.vpcf", context)
+	PrecacheResource( "soundfile", "soundevents/vihor_e.vsndevts", context )
 end
 modifier_vihor_e = class({})
 

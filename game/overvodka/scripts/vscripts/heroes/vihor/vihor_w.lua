@@ -1,6 +1,10 @@
 vihor_w = class({})
 LinkLuaModifier("modifier_vihor_w", "heroes/vihor/vihor_w", LUA_MODIFIER_MOTION_NONE )
 
+function vihor_w:Precache(context)
+	PrecacheResource( "soundfile", "soundevents/vihor_w.vsndevts", context )
+end
+
 function vihor_w:OnSpellStart()
 	local target  = self:GetCursorTarget()
 	if target:TriggerSpellAbsorb(self) then return end

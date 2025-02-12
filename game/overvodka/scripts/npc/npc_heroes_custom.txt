@@ -647,7 +647,7 @@
 		"Ability22"		"special_bonus_unique_pudge_7"
 		"Ability23"		"special_bonus_unique_oracle_2"
 		"Ability24"		"special_bonus_unique_viper_5"
-		"Ability25"		"shadow_fiend_presence_of_the_dark_lord_lua"
+		"Ability25"		"dvoreckov_innate"
 		"ArmorPhysical"		"-1"
 		"StatusHealthRegen"		"0.5"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"

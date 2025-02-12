@@ -13,12 +13,25 @@ function modifier_ExplosionMagic_immunity:IsPurgable()
 	return false
 end
 function modifier_ExplosionMagic_immunity:OnCreated()
-	self.scepter = self:GetParent():HasScepter()
+	if not IsServer() then return end
+	self.scepter = false
+	self.slow = self:GetAbility():GetSpecialValueFor("scepter_slow")
 end
 -----------------------------------------------------------------------------------------
 
 function modifier_ExplosionMagic_immunity:CheckState()
 	return {[MODIFIER_STATE_MAGIC_IMMUNE] = self.scepter,}
+end
+
+function modifier_ExplosionMagic_immunity:DeclareFunctions()
+	local funcs = 
+	{
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+	}
+	return funcs
+end
+function modifier_ExplosionMagic_immunity:GetModifierMoveSpeedBonus_Percentage()
+	return -50
 end
 
 -----------------------------------------------------------------------------------------
