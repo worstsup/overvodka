@@ -5169,18 +5169,13 @@
 	//=================================================================================================================
 	// СТОПАНТРЭ
 	//=================================================================================================================
-	"faceless_void_chronosphere_lua"
+	"worstsup_q"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"faceless_void_chronosphere_lua.lua"
+		"ScriptFile"					"heroes/worstsup/worstsup_q"
 		"AbilityTextureName"			"stop"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts"
-//			"particle"	"particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_combined.vpcf"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
@@ -5196,162 +5191,50 @@
 					"value"	"2.6 2.9 3.2 3.5"
 					"special_bonus_unique_gyrocopter_3" "+0.5"
 				}
-				"duration_scepter"		"2.6 2.9 3.2 3.5"
-				"cooldown_scepter"		"85.0 80.0 75.0 70.0"
 				"vision_radius"			"0"
-				"bonus_attack_speed"	"0"
 				"as"	"40 80 120 160"
 		}
 	}
 	//=================================================================================================================
 	// НЕРФ
 	//=================================================================================================================
-	
-	"Ns_FullCounter"
+	"worstsup_w"
     {
-        "BaseClass"                 "ability_datadriven"
+        "BaseClass"                 "ability_lua"
+		"ScriptFile"				"heroes/worstsup/worstsup_w"
         "AbilityTextureName"        "nerf"
         "MaxLevel"                  "4"
         "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
         "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
 		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
         "AbilityCooldown"           "45 40 35 30"
         "AbilityManaCost"           "125 150 175 200"
 		"AbilityCastRange"			"800"
-
-		"precache"
-		{
-			"particle"				"particles/econ/items/wisp/wisp_tether_ti7.vpcf"
-		}
-		
-        "OnSpellStart"
-        {
-			"TrackingProjectile"
-			{
-				"Target"            "TARGET"
-				"EffectName"        "particles/econ/items/wisp/wisp_tether_ti7.vpcf"
-				"Dodgeable"         "1"
-				"ProvidesVision"    "1"
-				"MoveSpeed"         "2000"
-				"SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
-			}
-		}
-		
-		"OnProjectileHitUnit"
-		{
-		    "DeleteOnHit"    "1"
-			
-            "ApplyModifier"
-            {
-                "ModifierName"  "modifier_ns_fullcounter_debuff"
-                "Duration"      "%duration"
-                "Target"        "TARGET"
-            }
-            "ApplyModifier"
-            {
-                "ModifierName"  "modifier_ns_fullcounter_buff"
-                "Duration"      "%duration"
-                "Target"        "CASTER"
-            }
-            "RunScript"
-			{
-				"ScriptFile"		"nerf.lua"
-				"Function"		"LinkenCheck"
-				"Target"			"TARGET"
-			}
-            "FireSound"
-            {
-                "EffectName"    "cheza"
-                "Target"        "TARGET"
-            }
-        }
-		
-        "Modifiers"
-        {
-        	  "modifier_ns_fullcounter_buff"
-            {
-                "IsDebuff"          "0"
-				"IsPurgable"        "1"
-				
-		        "Properties"
-		        {
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" 	"%magic_buff"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" 		"%armor_buff"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "%slow_buff"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"          "%att_buff"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"           "%att_buff"
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"         "%att_buff"
-
-		        }
-            }
-            "modifier_ns_fullcounter_debuff"
-            {
-                "IsDebuff"          "1"
-				"IsPurgable"        "1"
-				
-				"EffectName"	"particles/generic_gameplay/generic_disarm.vpcf"
-			    "EffectAttachType"	"follow_overhead"
-
-				"States"
-				{
-					"MODIFIER_STATE_EVADE_DISABLED" "MODIFIER_STATE_VALUE_ENABLED"
-				}
-				
-		        "Properties"
-		        {
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" 	"%magic"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" 		"%armor"
-					"MODIFIER_PROPERTY_BONUS_DAY_VISION" 			"%vision"
-					"MODIFIER_PROPERTY_BONUS_NIGHT_VISION" 			"%vision"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "%slow"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"          "%att"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"           "%att"
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"         "%att"
-
-		        }
-            }
-        }
-		
         "AbilityValues"
         {
 				"duration"
 				{
 					"value"	"6 7 8 9"
 				}
-				"magic"          "-10 -15 -20 -25"
-				"armor"          "-4 -6 -8 -10"
+				"buff"
+				{
+					"value"	"0"
+					"special_bonus_unique_gyrocopter_2" "+1"
+				}
+				"magic"          "10 15 20 25"
+				"armor"          "4 6 8 10"
 				"slow"
 				{
-					"value"	"-5 -10 -15 -20"
-					"special_bonus_unique_huskar_2" "-10"
+					"value"	"5 10 15 20"
+					"special_bonus_unique_huskar_2" "+10"
 				}
 				"att"
 				{
-					"value"	"-4 -8 -12 -16"
-					"special_bonus_unique_huskar_3" "-5"
+					"value"	"4 8 12 16"
+					"special_bonus_unique_huskar_3" "+5"
 				}
-				"vision" "-50"
-				"magic_buff"
-				{
-					"value"	"0"
-					"special_bonus_unique_gyrocopter_2" "+25"
-				}
-				"armor_buff"
-				{
-					"value"	"0"
-					"special_bonus_unique_gyrocopter_2" "+12"
-				}
-				"slow_buff"
-				{
-					"value"	"0"
-					"special_bonus_unique_gyrocopter_2" "+20"
-				}
-				"att_buff"
-				{
-					"value"	"0"
-					"special_bonus_unique_gyrocopter_2" "+25"
-				}
+				"vision" "50"
         }
     }
     //=================================================================================================================
@@ -5424,10 +5307,10 @@
 	//=================================================================================================================
 	// ASPHALT 8
 	//=================================================================================================================
-	"primal_beast_onslaught_lua"
+	"macan_r"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"primal_beast_onslaught_lua.lua"
+		"ScriptFile"					"heroes/macan/macan_r.lua"
 		"AbilityTextureName"			"largus"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
@@ -5487,10 +5370,10 @@
 			"stun_duration"				"0.8"
 		}
 	}
-	"primal_beast_onslaught_release_lua"
+	"macan_r_release"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"primal_beast_onslaught_lua.lua"
+		"ScriptFile"					"heroes/macan/macan_r.lua"
 		"AbilityTextureName"			"largus"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
@@ -5502,17 +5385,13 @@
 	//=================================================================================================================
 	// РАЗЪЕБАТЬ ЧАРТЫ
 	//=================================================================================================================
-	"dark_willow_bedlam_lua"
+	"macan_q"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"dark_willow_bedlam_lua.lua"
+		"ScriptFile"					"heroes/macan/macan_q.lua"
 		"AbilityTextureName"			"pchela"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_dark_willow.vsndevts"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -5551,11 +5430,10 @@
 	//=================================================================================================================
 	// КОНКУРЕНЦИЯ (MACAN)
 	//=================================================================================================================
-	"phantom_assassin_coup_de_grace_lua"
+	"macan_innate"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"phantom_assassin_coup_de_grace_lua"
-		"AbilityTextureName"			"phantom_assassin_coup_de_grace"
+		"ScriptFile"					"heroes/macan/macan_innate"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
@@ -5577,10 +5455,10 @@
 	//=================================================================================================================
 	// ДВОРОВАЯ ЗАКАЛКА
 	//=================================================================================================================
-	"slark_essence_shift_lua"
+	"macan_e"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"slark_essence_shift_lua"
+		"ScriptFile"					"heroes/macan/macan_e"
 		"AbilityTextureName"			"baidul"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
@@ -5629,10 +5507,10 @@
 	//=================================================================================================================
 	// РАЗГОВОР С ХЕЙТЕРОМ
 	//=================================================================================================================
-	"marci_dispose_lua"
+	"macan_w"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"marci_dispose_lua"
+		"ScriptFile"					"heroes/macan/macan_w"
 		"AbilityTextureName"			"razg"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
@@ -5672,10 +5550,10 @@
 	//=================================================================================================================
 	// БРАТКИ
 	//=================================================================================================================
-	"dimon_sdvg"
+	"macan_shard"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"dimon_sdvg.lua"
+		"ScriptFile"					"heroes/macan/macan_shard.lua"
 		"AbilityTextureName"			"sdvg"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"

@@ -1,37 +1,33 @@
-modifier_phantom_assassin_coup_de_grace_lua = class({})
+macan_innate = class({})
+LinkLuaModifier( "modifier_macan_innate", "heroes/macan/macan_innate", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Classifications
-function modifier_phantom_assassin_coup_de_grace_lua:IsHidden()
-	-- actual true
-	return true
+function macan_innate:GetIntrinsicModifierName()
+	return "modifier_macan_innate"
 end
 
-function modifier_phantom_assassin_coup_de_grace_lua:IsPurgable()
+modifier_macan_innate = class({})
+
+function modifier_macan_innate:IsHidden()
+	return true
+end
+function modifier_macan_innate:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
-function modifier_phantom_assassin_coup_de_grace_lua:OnCreated( kv )
-	-- references
+function modifier_macan_innate:OnCreated( kv )
 	self.crit_chance = self:GetAbility():GetSpecialValueFor( "crit_chance" )
 	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "crit_bonus" )
 end
 
-function modifier_phantom_assassin_coup_de_grace_lua:OnRefresh( kv )
-	-- references
+function modifier_macan_innate:OnRefresh( kv )
 	self.crit_chance = self:GetAbility():GetSpecialValueFor( "crit_chance" )
 	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "crit_bonus" )
 end
 
-function modifier_phantom_assassin_coup_de_grace_lua:OnDestroy( kv )
-
+function modifier_macan_innate:OnDestroy( kv )
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
-function modifier_phantom_assassin_coup_de_grace_lua:DeclareFunctions()
+function modifier_macan_innate:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
@@ -40,7 +36,7 @@ function modifier_phantom_assassin_coup_de_grace_lua:DeclareFunctions()
 	return funcs
 end
 
-function modifier_phantom_assassin_coup_de_grace_lua:GetModifierPreAttack_CriticalStrike( params )
+function modifier_macan_innate:GetModifierPreAttack_CriticalStrike( params )
 	if IsServer() and (not self:GetParent():PassivesDisabled()) then
 		if self:RollChance( self.crit_chance ) then
 			if params.target:GetUnitName() == "npc_dota_hero_invoker" or params.target:GetUnitName() == "npc_dota_hero_ogre_magi" or params.target:GetUnitName() == "npc_dota_hero_terrorblade" or params.target:GetUnitName() == "npc_dota_hero_ursa" or params.target:GetUnitName() == "npc_dota_hero_rattletrap" or params.target:GetUnitName() == "npc_dota_hero_kunkka" or params.target:GetUnitName() == "npc_dota_hero_necrolyte" or params.target:GetUnitName() == "npc_dota_hero_antimage" then
@@ -51,7 +47,7 @@ function modifier_phantom_assassin_coup_de_grace_lua:GetModifierPreAttack_Critic
 	end
 end
 
-function modifier_phantom_assassin_coup_de_grace_lua:GetModifierProcAttack_Feedback( params )
+function modifier_macan_innate:GetModifierProcAttack_Feedback( params )
 	if IsServer() then
 		if self.record then
 			self.record = nil
@@ -59,9 +55,8 @@ function modifier_phantom_assassin_coup_de_grace_lua:GetModifierProcAttack_Feedb
 		end
 	end
 end
---------------------------------------------------------------------------------
--- Helper
-function modifier_phantom_assassin_coup_de_grace_lua:RollChance( chance )
+
+function modifier_macan_innate:RollChance( chance )
 	local rand = math.random()
 	if rand<chance/100 then
 		return true
@@ -69,18 +64,8 @@ function modifier_phantom_assassin_coup_de_grace_lua:RollChance( chance )
 	return false
 end
 
---------------------------------------------------------------------------------
--- Graphics & Animations
-function modifier_phantom_assassin_coup_de_grace_lua:PlayEffects( target )
-	-- Load effects
+function modifier_macan_innate:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-
-	-- if target:IsMechanical() then
-	-- 	particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_mechanical.vpcf"
-	-- 	sound_cast = "Hero_PhantomAssassin.CoupDeGrace.Mech"
-	-- end
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -88,8 +73,8 @@ function modifier_phantom_assassin_coup_de_grace_lua:PlayEffects( target )
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		target:GetOrigin(), -- unknown
-		true -- unknown, true
+		target:GetOrigin(),
+		true
 	)
 	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetOrigin()-target:GetOrigin()):Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )

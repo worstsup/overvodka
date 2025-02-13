@@ -1,5 +1,5 @@
 --[[
-Overthrow Game Mode
+Overvodka Game Mode
 ]]
 
 _G.nNEUTRAL_TEAM = 4
@@ -10,7 +10,6 @@ _G.nCOUNTDOWNTIMER = 1501
 ---------------------------------------------------------------------------
 if COverthrowGameMode == nil then
 	_G.COverthrowGameMode = class({}) -- put COverthrowGameMode in the global scope
-	--refer to: http://stackoverflow.com/questions/6586145/lua-require-with-global-local
 end
 
 ---------------------------------------------------------------------------
@@ -65,11 +64,6 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_faceless_void/faceless_void_backtrack.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_dark_seer/dark_seer_vacuum.vpcf", context)
 		PrecacheResource( "particle", "particles/bloodseeker_rupture_new.vpcf", context)
-		PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context)
-		PrecacheResource( "particle", "particles/dark_willow_willowisp_ambient_new.vpcf", context)
-		PrecacheResource( "particle", "particles/dark_willow_wisp_aoe_cast_new.vpcf", context)
-		PrecacheResource( "particle", "particles/dark_willow_wisp_aoe_new.vpcf", context)
-		PrecacheResource( "particle", "particles/dark_willow_willowisp_base_attack_new.vpcf", context)
 		PrecacheResource( "particle", "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf", context)
 		PrecacheResource( "particle", "particles/axe_ti9_call_ring_new_1.vpcf", context )
 		PrecacheResource( "particle", "particles/ember_spirit_hit_shockwave_new.vpcf", context )
@@ -98,7 +92,6 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/econ/items/skywrath_mage/skywrath_arcana/skywrath_arcana_rod_of_atos_projectile.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_v2_debuff.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf", context )
-		PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_combined.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/juggernaut/jugg_fall20_immortal/jugg_fall20_immortal_healing_ward.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_rattletrap/clock_overclock_buff_stun.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/shadow_shaman/ti8_ss_mushroomer_belt/ti8_ss_mushroomer_belt_ambient_shimmer.vpcf", context )
@@ -145,7 +138,6 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/kotl_ti10_blinding_light_groundring_new.vpcf", context)
 		PrecacheResource( "particle", "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", context )
 		PrecacheResource("particle_folder",  "particles/units/heroes/hero_alchemist", context )
-	--Cache particles for traps
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_venomancer", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_axe", context )
@@ -219,15 +211,12 @@ function Precache( context )
 		PrecacheResource( "model", "golovach/golovach.vmdl", context )
 		PrecacheResource( "model", "ebanko/ebanko.vmdl", context )
 		PrecacheResource( "model", "rostik/rostik.vmdl", context )
-		
-	--Cache sounds for traps
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_alchemist.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/soundevents_conquest.vsndevts", context )
 		PrecacheResource( "soundfile", "sounds/weapons/hero/zuus/lightning_bolt.vsnd", context )
 
-	-- Cache overthrow-specific sounds
 		PrecacheResource( "soundfile", "soundevents/game_sounds_overthrow.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/ui_sounds.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/vpis.vsndevts", context )
@@ -267,9 +256,7 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/ailesh.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/drunk.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/razbil.vsndevts", context ) 
-		PrecacheResource( "soundfile", "soundevents/unitazik.vsndevts", context ) 
-		PrecacheResource( "soundfile", "soundevents/uberi.vsndevts", context ) 
-		PrecacheResource( "soundfile", "soundevents/tsts.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/unitazik.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/ejovik.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/serega.vsndevts", context ) 
 		PrecacheResource( "soundfile", "soundevents/zizi.vsndevts", context ) 
@@ -324,16 +311,7 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/stavka.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/stopan.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/siga.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/cheza.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/lvinoe.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/zavod.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/ezda.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/bandoleros.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/glox.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/med.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/ulei.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/govor.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/sdvg.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/gimn.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/sobaka.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/razgrom.vsndevts", context )
@@ -408,9 +386,6 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/zolo_tabletki.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/scar.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/scout.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/privik.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/zanovo.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/brat.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/smoke_throw.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/molotov_throw.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/grenade_throw.vsndevts", context )
@@ -485,6 +460,7 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_marci.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_lycan.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_rubick.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_techies.vsndevts", context )
@@ -505,16 +481,11 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/econ/items/sven/sven_ti10_helmet/sven_ti10_helmet_gods_strength.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/omniknight/omni_crimson_witness_2021/omniknight_crimson_witness_2021_degen_aura_debuff.vpcf", context )
-		PrecacheResource( "soundfile", "soundevents/myak.vsndevts", context )
 end
 
 function Activate()
-	-- Create our game mode and initialize it
 	COverthrowGameMode:InitGameMode()
-	-- Custom Spawn
 	COverthrowGameMode:CustomSpawnCamps()
-
-
 end
 
 function COverthrowGameMode:CustomSpawnCamps()
@@ -753,7 +724,7 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
-	ListenToGameEvent("player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
+	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
@@ -826,7 +797,6 @@ function COverthrowGameMode:SetUpFountains()
 
 	local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
 	for _,fountainEnt in pairs( fountainEntities ) do
-		--print("fountain unit " .. tostring( fountainEnt ) )
 		fountainEnt:AddNewModifier( fountainEnt, fountainEnt, "modifier_fountain_aura_lua", {} )
 	end
 end
