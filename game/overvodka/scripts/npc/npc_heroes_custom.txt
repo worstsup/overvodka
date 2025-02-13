@@ -86,7 +86,7 @@
 		"GibType"		"default"
 		"Ability1"		"test_of_faith_datadriven"
 		"Ability2"		"lycan_shapeshift_datadriven"
-		"Ability3"		"Ns_TricksMaster"
+		"Ability3"		"kachok_e"
 		"Ability4"		"ursa_maul"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"generic_hidden"

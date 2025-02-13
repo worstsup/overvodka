@@ -635,42 +635,25 @@
 //=================================
 //ВОЗДЕРЖАНИЕ
 //=================================
-	"Ns_TricksMaster"
+	"kachok_e"
 	{
-		"BaseClass"              "ability_datadriven"
+		"BaseClass"              "ability_lua"
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"ScriptFile"             "heroes/kachok/kachok_e"
 		"AbilityTextureName"     "nosex"
-		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"              	"4"
+		"AbilityType"          	 "DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"             	 "4"
 		"HasScepterUpgrade"      "1"
+		
 	  
 		"AbilityValues"
 		{
-				"bonus_strength"             "1"
+				"bonus_attribute"             "1"
 				"AbilityCooldown"
 				{
 					"value"	"15 13 11 9"
-					"special_bonus_unique_pudge_1" "-2"
+					
 				}
-		}
-
-		"Modifiers"
-		{
-			"modifier_ns_TricksMaster"
-			{
-				"Passive"       "1"
-				"IsHidden"		"1"
-		  
-				"ThinkInterval"  "0.1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"            "TricksMaster.lua"
-						"Function"              "TricksMaster"
-					}
-				}      
-			}
 		}
 	}
 	//=================================================================================================================
