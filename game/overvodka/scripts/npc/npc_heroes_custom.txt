@@ -84,9 +84,9 @@
 		"HeroSelectSoundEffect"		"step_start"
 		"Enabled"		"1"
 		"GibType"		"default"
-		"Ability1"		"test_of_faith_datadriven"
-		"Ability2"		"lycan_shapeshift_datadriven"
-		"Ability3"		"Ns_TricksMaster"
+		"Ability1"		"kachok_pure_protein"
+		"Ability2"		"kachok_big_tasty"
+		"Ability3"		"kachok_abstention"
 		"Ability4"		"ursa_maul"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"generic_hidden"
@@ -131,7 +131,7 @@
 				{
 					"Ability1"
 					{
-						"AbilityName"	"terrorblade_metamorphosis_datadriven"
+						"AbilityName"	"kachok_trenbolone"
 						"AbilityIndex"	"5"
 						"AutoLevelAbility" "false"
 					}
