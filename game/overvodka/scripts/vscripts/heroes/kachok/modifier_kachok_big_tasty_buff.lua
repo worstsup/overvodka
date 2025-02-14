@@ -21,12 +21,16 @@ function modifier_kachok_big_tasty_buff:DeclareFunctions()
     }
 end
 
-function modifier_kachok_big_tasty_buff:OnCreated()
+function modifier_kachok_big_tasty_buff:OnCreated( kv )
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
 
     if not IsServer() then return end
     self.particle = ParticleManager:CreateParticle(PARTICLE_BUFF, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+end
+
+function modifier_kachok_big_tasty_buff:OnRefresh( kv )
+    self:OnCreated( kv )
 end
 
 function modifier_kachok_big_tasty_buff:OnDestroy()

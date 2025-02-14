@@ -378,7 +378,7 @@
 {
     "BaseClass"             		"ability_lua"
 	"ScriptFile"             		"heroes/kachok/kachok_big_tasty"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | "
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 	"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
     "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
@@ -437,8 +437,107 @@
 			"AbilityCooldown"
 			{
 				"value"	"15 13 11 9"
-				
+				"special_bonus_unique_pudge_1" "-2"
 			}
+	}
+}
+//=================================
+//ТРЕНБОЛОН
+//=================================
+"kachok_trenbolone"
+{
+	"BaseClass"						"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_trenbolone"
+	"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+	"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+	"AbilityTextureName"			"churban"
+	"MaxLevel"               		"3"
+	"AbilityCastPoint"				"0.0"
+	"AbilityCooldown"				"60"
+	"AbilityManaCost"				"80 125 170"
+	"precache"
+	{
+		"particle"  "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
+		"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		"particle"	"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
+		"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
+		"soundfile" "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+	}
+	"AbilityValues"
+	{
+		"base_attack_time"
+		{
+			"value"				"1.3 1.2 1.1"
+			"special_bonus_unique_jakiro_3" "-0.2"
+		}
+		"bonus_as"	"100"
+		"bonus_range"
+		{
+			"value"	"150 250 350"
+			"special_bonus_unique_furion_4" "+75"
+		}
+		"duration"				"15"
+	}
+	"OnSpellStart"
+	{
+		"ApplyModifier"
+		{
+			"ModifierName"		"modifier_DemonicForm"
+			"Target"
+			{
+				"Center"  	"CASTER"
+				"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+			}
+		}
+	}
+	"Modifiers"
+	{
+		"modifier_DemonicForm"
+		{
+			"Duration"		"%duration"
+			"IsPurgable"	"0"
+			"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"		
+
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"DemonicForm.lua"
+					"model"					"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
+					"projectile_model"		"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
+					"Function"				"ModelSwapStart"
+					"Function"				"HideWearables"
+				}
+
+				"AttachEffect"
+				{
+					"EffectName" 		"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"			"%bonus_range"
+				"MODIFIER_PROPERTY_HEALTH_BONUS" 				"%bonus_health"
+				"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" 	"%base_attack_time"		
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%bonus_movement_speed"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_as"
+			}
+			
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"DemonicForm.lua"
+					"Function"		"ModelSwapEnd"
+					"Function"		"ShowWearables"
+				}
+			}
+		}
 	}
 }
 //=================================================================================================================
@@ -2197,102 +2296,6 @@
     }
 }
 
-	"terrorblade_metamorphosis_datadriven"
-	{
-		"BaseClass"						"ability_datadriven"
-		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"churban"
-		"MaxLevel"               		"3"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"60"
-		"AbilityManaCost"				"80 125 170"
-		"AbilityValues"
-		{
-				"base_attack_time"
-				{
-					"value"				"1.3 1.2 1.1"
-					"special_bonus_unique_jakiro_3" "-0.2"
-				}
-				"bonus_as"	"100"
-				"bonus_movement_speed"		"0"
-				"bonus_range"
-				{
-					"value"	"150 250 350"
-					"special_bonus_unique_furion_4" "+75"
-				}
-				"bonus_health"			"0"
-				"duration"				"15"
-		}
-		"precache"
-		{
-			"particle"  "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
-			"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
-			"particle"	"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
-			"particle"	"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
-			"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-			"soundfile" "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
-		}
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"		"modifier_DemonicForm"
-				"Target"
-				{
-					"Center"  	"CASTER"
-					"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				}
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_DemonicForm"
-			{
-				"Duration"	"%duration"
-				"IsPurgable"	"0"
-				"Attributes"		"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"		
-
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"			"DemonicForm.lua"
-						"model"					"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-						"projectile_model"		"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
-						"Function"				"ModelSwapStart"
-						"Function"				"HideWearables"
-					}
-
-					"AttachEffect"
-					{
-						"EffectName" 		"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"			"TARGET"
-					}
-				}
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"			"%bonus_range"
-					"MODIFIER_PROPERTY_HEALTH_BONUS" 				"%bonus_health"
-					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" 	"%base_attack_time"		
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%bonus_movement_speed"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_as"
-				}
-				
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"DemonicForm.lua"
-						"Function"		"ModelSwapEnd"
-						"Function"		"ShowWearables"
-					}
-				}
-			}
-		}
-	}
 	//=================================================================================================================
 	// ПЕРЕМЕНА
 	//=================================================================================================================

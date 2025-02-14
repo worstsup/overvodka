@@ -131,7 +131,7 @@
 				{
 					"Ability1"
 					{
-						"AbilityName"	"terrorblade_metamorphosis_datadriven"
+						"AbilityName"	"kachok_trenbolone"
 						"AbilityIndex"	"5"
 						"AutoLevelAbility" "false"
 					}

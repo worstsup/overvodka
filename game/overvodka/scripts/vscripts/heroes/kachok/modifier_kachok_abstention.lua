@@ -12,13 +12,17 @@ function modifier_kachok_abstention:GetAttributes()
     return MODIFIER_ATTRIBUTE_PERMANENT
 end
 
-function modifier_kachok_abstention:OnCreated()
+function modifier_kachok_abstention:OnCreated( kv )
     if not IsServer() then return end
     self.ability = self:GetAbility()
     self.caster = self:GetCaster()
 
     self:StartIntervalThink(0.1)
     self:OnIntervalThink()
+end
+
+function modifier_kachok_abstention:OnRefresh( kv )
+    self:OnCreated( kv )
 end
 
 function modifier_kachok_abstention:OnIntervalThink()
