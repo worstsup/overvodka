@@ -409,256 +409,75 @@
 //=================================================================================================================
 // БИГ ТЕЙСТИ
 //=================================================================================================================
-"lycan_shapeshift_datadriven"
+"kachok_big_tasty"
 {
-    "BaseClass"             "ability_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"             		"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_big_tasty"
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | "
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+	"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
     "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"               "2"
     "AbilityTextureName"            "tasty"
     "HasShardUpgrade"               "1"
-    "precache"
-    {
-        "soundfile"     "soundevents/vkusno.vsndevts"     
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-    }
-    "AbilityCooldown"               "34.0 30.0 26.0 22.0"
+    "AbilityCooldown"               "34 30 26 22"
     "AbilityManaCost"               "100 125 150 175"
+	"precache"
+	{
+		"soundfile" "soundevents/vkusno.vsndevts"
+		"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
+		"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
+		"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
+	}
     "AbilityValues"
     {
-            "duration"
-            {
-            	"value"	"4.0 4.4 4.8 5.2"
-            	"special_bonus_unique_furion_2" "+1"
-            }
-            "speed"                     
-            {
-            	"value"				"550"
-            	"special_bonus_unique_pugna_6" "+100"
-            }
-            "bonus_night_vision"        "200"
-            "crit_chance"               "25 30 35 40"
-            "crit_damage"
-            {
-            	"value"	"200 220 240 260"
-            	"special_bonus_unique_furion_3" "+40"
-            }
-            "transformation_time"       "0.5"
-    }
-
-    "OnSpellStart"
-    {
-        "FireSound"
-        {
-            "EffectName"    "vkusno"
-            "Target"        "CASTER"
-        }
-
-        "FireEffect"
-        {
-            "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-            "EffectAttachType"  "follow_origin"
-            "Target"            "CASTER"
-        }
-
-        "ApplyModifier"
-        {
-            "ModifierName"  "modifier_shapeshift_transform_datadriven"
-            "Target"        "CASTER"
-            "Duration"      "%transformation_time"
-        }
-    }
-
-    "Modifiers"
-    {
-        "modifier_shapeshift_transform_datadriven"
-        {
-            "IsBuff"        "1"
-            "IsPurgable"    "0"
-
-            "ThinkInterval"  "%transformation_time"
-            "OnIntervalThink"
-            {
-                "ApplyModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_datadriven"
-                    "Target"        "TARGET"
-                    "Duration"      "%duration"
-                }
-            }
-
-            "States"
-            {
-                "MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
-            }
-        }
-
-        "modifier_shapeshift_datadriven"
-        {
-            "IsBuff"        "1"
-            "IsPurgable"    "0"
-
-            "Attributes"        "MODIFIER_ATTRIBUTE_PERMANENT"
-
-            "OnCreated"
-            {
-                "ActOnTargets"
-                {
-                    "Target"
-                    {
-                        "Center"    "CASTER"
-                        "Radius"    "GLOBAL"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-                        "Types"     "DOTA_UNIT_TARGET_BASIC"
-                    }
-                
-                    "Action"    
-                    {
-                        "RunScript"
-                        {
-                            "ScriptFile"    "shapeshift.lua"
-                            "Function"      "ShapeshiftHaste"
-                        }
-                    }
-                }
-
-                "AttachEffect"
-                {
-                    "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-                    "EffectAttachType"  "follow_origin"
-                    "Target"            "TARGET"
-
-                    "ControlPointEntities"
-                    {
-                        "TARGET"    "attach_origin"
-                        "TARGET"    "attach_hitloc"
-                    }
-                }
-
-                "RunScript"
-                {
-                    "ScriptFile"            "shapeshift.lua"
-                    "Function"              "ShapeshiftStart"
-                }
-            }
-
-            "OnDestroy"
-            {
-                "FireEffect"
-                {
-                    "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-                    "EffectAttachType"  "follow_origin"
-                    "Target"
-                    {
-                        "Center"    "TARGET"
-                        "Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_DEAD"
-                    }
-                }
-            }
-
-            "ThinkInterval"  "%aura_interval"
-            "OnIntervalThink"
-            {
-                "ActOnTargets"
-                {
-                    "Target"
-                    {
-                        "Center"    "CASTER"
-                        "Radius"    "12000"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-                        "Types"     "DOTA_UNIT_TARGET_BASIC"
-                    }
-                
-                    "Action"    
-                    {
-                        "RunScript"
-                        {
-                            "ScriptFile"    "shapeshift.lua"
-                            "Function"      "ShapeshiftHaste"
-                        }
-                    }
-                }
-            }
-
-            "OnAttackStart"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-
-                "Random"
-                {
-                    "Chance"        "%crit_chance"
-                    "PseudoRandom"  "DOTA_PSEUDO_RANDOM_LYCAN_CRIT"
-
-                    "OnSuccess"
-                    {
-                        "ApplyModifier"
-                        {
-                            "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                            "Target"        "CASTER"
-                        }
-                    }
-                }
-            }
-
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_BONUS_NIGHT_VISION"      "%bonus_night_vision"
-            }
-        }
-
-        "modifier_shapeshift_crit_datadriven"
-        {
-            "IsHidden"      "1"
-            "IsPurgable"    "0"
-
-            "OnAttackLanded"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-            }
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
-            }
-        }
+		"duration"
+		{
+			"value"	"4.0 4.4 4.8 5.2"
+			"special_bonus_unique_furion_2" "+1"
+		}
+		"speed"                     
+		{
+			"value"				"550"
+			"special_bonus_unique_pugna_6" "+100"
+		}
+		"bonus_night_vision"        "150 200 250 300"
+		"crit_chance"               "25 30 35 40"
+		"crit_damage"
+		{
+			"value"	"200 220 240 260"
+			"special_bonus_unique_furion_3" "+40"
+		}
+		"transformation_time"       "0.5"
     }
 }
 //=================================
 //ВОЗДЕРЖАНИЕ
 //=================================
-	"kachok_e"
+"kachok_abstention"
+{
+	"BaseClass"              "ability_lua"
+	"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"ScriptFile"             "heroes/kachok/kachok_abstention"
+	"AbilityTextureName"     "nosex"
+	"AbilityType"          	 "DOTA_ABILITY_TYPE_BASIC"
+	"MaxLevel"             	 "4"
+	"HasScepterUpgrade"      "1"
+	"IsBreakable"			 "1"
+	
+	"AbilityValues"
 	{
-		"BaseClass"              "ability_lua"
-		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ScriptFile"             "heroes/kachok/kachok_e"
-		"AbilityTextureName"     "nosex"
-		"AbilityType"          	 "DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"             	 "4"
-		"HasScepterUpgrade"      "1"
-		
-	  
-		"AbilityValues"
-		{
-				"bonus_attribute"             "1"
-				"AbilityCooldown"
-				{
-					"value"	"15 13 11 9"
-					
-				}
-		}
+			"bonus_attribute"             "1"
+			"AbilityCooldown"
+			{
+				"value"	"15 13 11 9"
+				
+			}
 	}
-	//=================================================================================================================
-	// Тест на жим
-	//=================================================================================================================
+}
+//=================================================================================================================
+// Тест на жим
+//=================================================================================================================
 	"BigRussianBoss_test"
 	{
 		"BaseClass"                    	"ability_datadriven" 
@@ -5777,7 +5596,7 @@
 	"ursa_maul"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"DependentOnAbility"			"lycan_shapeshift_datadriven"
+		"DependentOnAbility"			"kachok_big_tasty"
 		"MaxLevel"						"4"			
 		"Innate"						"1"
 		"IsBreakable"					"0"
