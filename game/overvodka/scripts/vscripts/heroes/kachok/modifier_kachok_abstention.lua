@@ -13,28 +13,27 @@ function modifier_kachok_abstention:GetAttributes()
 end
 
 function modifier_kachok_abstention:OnCreated()
-    if IsServer() then
-        self.ability = self:GetAbility()
-        self.caster = self:GetCaster()
-    end
+    if not IsServer() then return end
+    self.ability = self:GetAbility()
+    self.caster = self:GetCaster()
 
     self:StartIntervalThink(0.1)
     self:OnIntervalThink()
 end
 
 function modifier_kachok_abstention:OnIntervalThink()
-    local caster = self.caster
-    local ability = self.ability
-    local ability_level = ability:GetLevel() - 1
-    local cooldown = ability:GetCooldown(ability_level)
-
-    if caster:IsIllusion() or not ability:IsCooldownReady() or caster:PassivesDisabled() then return end
+    if not IsServer() then return end
+    local ability_level = self.ability:GetLevel() - 1
+    local cooldown = self.ability:GetCooldown(ability_level)
+    
+    if self.caster:IsIllusion() or not self.ability:IsCooldownReady() or self.caster:PassivesDisabled() then return end
 
     self:AddAttributes()
-    ability:StartCooldown( cooldown )
+    self.ability:StartCooldown( cooldown )
 end
 
 function modifier_kachok_abstention:AddAttributes()
+    if not IsServer() then return end
     local caster = self.caster
     local ability = self.ability
     local attribute_gain = ability:GetAttributeGain()

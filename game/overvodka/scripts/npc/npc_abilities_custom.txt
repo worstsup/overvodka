@@ -330,9 +330,10 @@
 //=================================================================================================================
 // ЧИСТЕЙШИЙ БЕЛОК
 //=================================================================================================================
-"test_of_faith_datadriven"
+"kachok_pure_protein"
 {
-	"BaseClass"				"ability_datadriven"
+	"BaseClass"						"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_pure_protein"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -343,7 +344,9 @@
 	"AbilityTextureName"			"adod"
 	"precache"
 	{
-		"particle"			"particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
+		"particle"					"particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
+		"particle"					"particles/ogre_magi_arcana_egg_run_new.vpcf"
+		"soundfile"					"soundevents/zizi.vsndevts"
 	}
 	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
 	"AbilityCastRange"				"600 600 600 600"
@@ -351,58 +354,20 @@
 	"AbilityManaCost"				"90 100 110 120"
 	"AbilityValues"
 	{
-			"damage_min"
-			{
-				"value"	"50 100 150 200"
-				"special_bonus_unique_furion_5" "+100"
-			}
-			"damage_max"
-			{	
-				"value"   "150 225 300 375"
-				"special_bonus_unique_furion_5" "+100"
-			}
-			"dmg_strength"
-			{
-				"value"				"100"
-				"special_bonus_unique_pugna_5" "+100"
-			}
-	}
-
-	"OnUpgrade"
-	{
-		"RunScript"
+		"damage_min"
 		{
-			"ScriptFile"	"test_of_faith.lua"
-			"Function"		"LevelUpAbility"
-			"ability_name"	"test_of_faith_teleport_datadriven"
+			"value"	"50 100 150 200"
+			"special_bonus_unique_furion_5" "+100"
 		}
-	}
-	"OnSpellStart"
-	{
-		"FireSound"
-		{
-			"EffectName"	"zizi"
-			"Target" 		"TARGET"
+		"damage_max"
+		{	
+			"value"   "150 225 300 375"
+			"special_bonus_unique_furion_5" "+100"
 		}
-		"RunScript"
+		"dmg_strength"
 		{
-				"ScriptFile"	"test_of_faith.lua"
-				"Function"		"Dmg"				
-		}
-
-		"FireEffect"
-		{
-			"EffectName"        "particles/ogre_magi_arcana_egg_run_new.vpcf"
-			"EffectAttachType"  "follow_origin"
-			"Target"            "TARGET"
-			"Duration"		"1"
-		}
-
-		"Damage"
-		{
-			"Target"		"TARGET"
-			"Type"			"DAMAGE_TYPE_PURE"
-			"Damage"		"? %damage_min %damage_max"
+			"value"				"100"
+			"special_bonus_unique_pugna_5" "+100"
 		}
 	}
 }

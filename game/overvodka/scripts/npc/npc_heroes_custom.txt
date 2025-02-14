@@ -84,7 +84,7 @@
 		"HeroSelectSoundEffect"		"step_start"
 		"Enabled"		"1"
 		"GibType"		"default"
-		"Ability1"		"test_of_faith_datadriven"
+		"Ability1"		"kachok_pure_protein"
 		"Ability2"		"kachok_big_tasty"
 		"Ability3"		"kachok_abstention"
 		"Ability4"		"ursa_maul"
