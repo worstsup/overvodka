@@ -330,9 +330,10 @@
 //=================================================================================================================
 // ЧИСТЕЙШИЙ БЕЛОК
 //=================================================================================================================
-"test_of_faith_datadriven"
+"kachok_pure_protein"
 {
-	"BaseClass"				"ability_datadriven"
+	"BaseClass"						"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_pure_protein"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -343,7 +344,9 @@
 	"AbilityTextureName"			"adod"
 	"precache"
 	{
-		"particle"			"particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
+		"particle"					"particles/units/heroes/hero_chen/chen_test_of_faith.vpcf"
+		"particle"					"particles/ogre_magi_arcana_egg_run_new.vpcf"
+		"soundfile"					"soundevents/zizi.vsndevts"
 	}
 	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
 	"AbilityCastRange"				"600 600 600 600"
@@ -351,331 +354,195 @@
 	"AbilityManaCost"				"90 100 110 120"
 	"AbilityValues"
 	{
-			"damage_min"
-			{
-				"value"	"50 100 150 200"
-				"special_bonus_unique_furion_5" "+100"
-			}
-			"damage_max"
-			{	
-				"value"   "150 225 300 375"
-				"special_bonus_unique_furion_5" "+100"
-			}
-			"dmg_strength"
-			{
-				"value"				"100"
-				"special_bonus_unique_pugna_5" "+100"
-			}
-	}
-
-	"OnUpgrade"
-	{
-		"RunScript"
+		"damage_min"
 		{
-			"ScriptFile"	"test_of_faith.lua"
-			"Function"		"LevelUpAbility"
-			"ability_name"	"test_of_faith_teleport_datadriven"
+			"value"	"50 100 150 200"
+			"special_bonus_unique_furion_5" "+100"
 		}
-	}
-	"OnSpellStart"
-	{
-		"FireSound"
-		{
-			"EffectName"	"zizi"
-			"Target" 		"TARGET"
+		"damage_max"
+		{	
+			"value"   "150 225 300 375"
+			"special_bonus_unique_furion_5" "+100"
 		}
-		"RunScript"
+		"dmg_strength"
 		{
-				"ScriptFile"	"test_of_faith.lua"
-				"Function"		"Dmg"				
-		}
-
-		"FireEffect"
-		{
-			"EffectName"        "particles/ogre_magi_arcana_egg_run_new.vpcf"
-			"EffectAttachType"  "follow_origin"
-			"Target"            "TARGET"
-			"Duration"		"1"
-		}
-
-		"Damage"
-		{
-			"Target"		"TARGET"
-			"Type"			"DAMAGE_TYPE_PURE"
-			"Damage"		"? %damage_min %damage_max"
+			"value"				"100"
+			"special_bonus_unique_pugna_5" "+100"
 		}
 	}
 }
 //=================================================================================================================
 // БИГ ТЕЙСТИ
 //=================================================================================================================
-"lycan_shapeshift_datadriven"
+"kachok_big_tasty"
 {
-    "BaseClass"             "ability_datadriven"
+    "BaseClass"             		"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_big_tasty"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+	"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
     "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
     "FightRecapLevel"               "2"
     "AbilityTextureName"            "tasty"
     "HasShardUpgrade"               "1"
-    "precache"
-    {
-        "soundfile"     "soundevents/vkusno.vsndevts"     
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-        "particle"      "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-    }
-    "AbilityCooldown"               "34.0 30.0 26.0 22.0"
+    "AbilityCooldown"               "34 30 26 22"
     "AbilityManaCost"               "100 125 150 175"
+	"precache"
+	{
+		"soundfile" "soundevents/vkusno.vsndevts"
+		"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
+		"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
+		"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
+	}
     "AbilityValues"
     {
-            "duration"
-            {
-            	"value"	"4.0 4.4 4.8 5.2"
-            	"special_bonus_unique_furion_2" "+1"
-            }
-            "speed"                     
-            {
-            	"value"				"550"
-            	"special_bonus_unique_pugna_6" "+100"
-            }
-            "bonus_night_vision"        "200"
-            "crit_chance"               "25 30 35 40"
-            "crit_damage"
-            {
-            	"value"	"200 220 240 260"
-            	"special_bonus_unique_furion_3" "+40"
-            }
-            "transformation_time"       "0.5"
-    }
-
-    "OnSpellStart"
-    {
-        "FireSound"
-        {
-            "EffectName"    "vkusno"
-            "Target"        "CASTER"
-        }
-
-        "FireEffect"
-        {
-            "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-            "EffectAttachType"  "follow_origin"
-            "Target"            "CASTER"
-        }
-
-        "ApplyModifier"
-        {
-            "ModifierName"  "modifier_shapeshift_transform_datadriven"
-            "Target"        "CASTER"
-            "Duration"      "%transformation_time"
-        }
-    }
-
-    "Modifiers"
-    {
-        "modifier_shapeshift_transform_datadriven"
-        {
-            "IsBuff"        "1"
-            "IsPurgable"    "0"
-
-            "ThinkInterval"  "%transformation_time"
-            "OnIntervalThink"
-            {
-                "ApplyModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_datadriven"
-                    "Target"        "TARGET"
-                    "Duration"      "%duration"
-                }
-            }
-
-            "States"
-            {
-                "MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
-            }
-        }
-
-        "modifier_shapeshift_datadriven"
-        {
-            "IsBuff"        "1"
-            "IsPurgable"    "0"
-
-            "Attributes"        "MODIFIER_ATTRIBUTE_PERMANENT"
-
-            "OnCreated"
-            {
-                "ActOnTargets"
-                {
-                    "Target"
-                    {
-                        "Center"    "CASTER"
-                        "Radius"    "GLOBAL"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-                        "Types"     "DOTA_UNIT_TARGET_BASIC"
-                    }
-                
-                    "Action"    
-                    {
-                        "RunScript"
-                        {
-                            "ScriptFile"    "shapeshift.lua"
-                            "Function"      "ShapeshiftHaste"
-                        }
-                    }
-                }
-
-                "AttachEffect"
-                {
-                    "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-                    "EffectAttachType"  "follow_origin"
-                    "Target"            "TARGET"
-
-                    "ControlPointEntities"
-                    {
-                        "TARGET"    "attach_origin"
-                        "TARGET"    "attach_hitloc"
-                    }
-                }
-
-                "RunScript"
-                {
-                    "ScriptFile"            "shapeshift.lua"
-                    "Function"              "ShapeshiftStart"
-                }
-            }
-
-            "OnDestroy"
-            {
-                "FireEffect"
-                {
-                    "EffectName"        "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-                    "EffectAttachType"  "follow_origin"
-                    "Target"
-                    {
-                        "Center"    "TARGET"
-                        "Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_DEAD"
-                    }
-                }
-            }
-
-            "ThinkInterval"  "%aura_interval"
-            "OnIntervalThink"
-            {
-                "ActOnTargets"
-                {
-                    "Target"
-                    {
-                        "Center"    "CASTER"
-                        "Radius"    "12000"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-                        "Types"     "DOTA_UNIT_TARGET_BASIC"
-                    }
-                
-                    "Action"    
-                    {
-                        "RunScript"
-                        {
-                            "ScriptFile"    "shapeshift.lua"
-                            "Function"      "ShapeshiftHaste"
-                        }
-                    }
-                }
-            }
-
-            "OnAttackStart"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-
-                "Random"
-                {
-                    "Chance"        "%crit_chance"
-                    "PseudoRandom"  "DOTA_PSEUDO_RANDOM_LYCAN_CRIT"
-
-                    "OnSuccess"
-                    {
-                        "ApplyModifier"
-                        {
-                            "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                            "Target"        "CASTER"
-                        }
-                    }
-                }
-            }
-
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_BONUS_NIGHT_VISION"      "%bonus_night_vision"
-            }
-        }
-
-        "modifier_shapeshift_crit_datadriven"
-        {
-            "IsHidden"      "1"
-            "IsPurgable"    "0"
-
-            "OnAttackLanded"
-            {
-                "RemoveModifier"
-                {
-                    "ModifierName"  "modifier_shapeshift_crit_datadriven"
-                    "Target"        "CASTER"
-                }
-            }
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
-            }
-        }
+		"duration"
+		{
+			"value"	"4.0 4.4 4.8 5.2"
+			"special_bonus_unique_furion_2" "+1"
+		}
+		"speed"                     
+		{
+			"value"				"550"
+			"special_bonus_unique_pugna_6" "+100"
+		}
+		"bonus_night_vision"        "150 200 250 300"
+		"crit_chance"               "25 30 35 40"
+		"crit_damage"
+		{
+			"value"	"200 220 240 260"
+			"special_bonus_unique_furion_3" "+40"
+		}
+		"transformation_time"       "0.5"
+		"shard_healing_percent"     "25"
     }
 }
 //=================================
 //ВОЗДЕРЖАНИЕ
 //=================================
-	"Ns_TricksMaster"
+"kachok_abstention"
+{
+	"BaseClass"              "ability_lua"
+	"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"ScriptFile"             "heroes/kachok/kachok_abstention"
+	"AbilityTextureName"     "nosex"
+	"AbilityType"          	 "DOTA_ABILITY_TYPE_BASIC"
+	"MaxLevel"             	 "4"
+	"HasScepterUpgrade"      "1"
+	"IsBreakable"			 "1"
+	
+	"AbilityValues"
 	{
-		"BaseClass"              "ability_datadriven"
-		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     "nosex"
-		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"              	"4"
-		"HasScepterUpgrade"      "1"
-	  
-		"AbilityValues"
-		{
-				"bonus_strength"             "1"
-				"AbilityCooldown"
-				{
-					"value"	"15 13 11 9"
-					"special_bonus_unique_pudge_1" "-2"
-				}
-		}
-
-		"Modifiers"
-		{
-			"modifier_ns_TricksMaster"
+			"bonus_attribute"             "1"
+			"AbilityCooldown"
 			{
-				"Passive"       "1"
-				"IsHidden"		"1"
-		  
-				"ThinkInterval"  "0.1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"            "TricksMaster.lua"
-						"Function"              "TricksMaster"
-					}
-				}      
+				"value"	"15 13 11 9"
+				"special_bonus_unique_pudge_1" "-2"
+			}
+	}
+}
+//=================================
+//ТРЕНБОЛОН
+//=================================
+"kachok_trenbolone"
+{
+	"BaseClass"						"ability_lua"
+	"ScriptFile"             		"heroes/kachok/kachok_trenbolone"
+	"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+	"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+	"AbilityTextureName"			"churban"
+	"MaxLevel"               		"3"
+	"AbilityCastPoint"				"0.0"
+	"AbilityCooldown"				"60"
+	"AbilityManaCost"				"80 125 170"
+	"precache"
+	{
+		"particle"  "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
+		"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
+		"particle"	"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
+		"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
+		"soundfile" "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+	}
+	"AbilityValues"
+	{
+		"base_attack_time"
+		{
+			"value"				"1.3 1.2 1.1"
+			"special_bonus_unique_jakiro_3" "-0.2"
+		}
+		"bonus_as"	"100"
+		"bonus_range"
+		{
+			"value"	"150 250 350"
+			"special_bonus_unique_furion_4" "+75"
+		}
+		"duration"				"15"
+	}
+	"OnSpellStart"
+	{
+		"ApplyModifier"
+		{
+			"ModifierName"		"modifier_DemonicForm"
+			"Target"
+			{
+				"Center"  	"CASTER"
+				"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
 			}
 		}
 	}
-	//=================================================================================================================
-	// Тест на жим
-	//=================================================================================================================
+	"Modifiers"
+	{
+		"modifier_DemonicForm"
+		{
+			"Duration"		"%duration"
+			"IsPurgable"	"0"
+			"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"		
+
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"DemonicForm.lua"
+					"model"					"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
+					"projectile_model"		"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
+					"Function"				"ModelSwapStart"
+					"Function"				"HideWearables"
+				}
+
+				"AttachEffect"
+				{
+					"EffectName" 		"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"			"%bonus_range"
+				"MODIFIER_PROPERTY_HEALTH_BONUS" 				"%bonus_health"
+				"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" 	"%base_attack_time"		
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%bonus_movement_speed"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_as"
+			}
+			
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+					"ScriptFile"	"DemonicForm.lua"
+					"Function"		"ModelSwapEnd"
+					"Function"		"ShowWearables"
+				}
+			}
+		}
+	}
+}
+//=================================================================================================================
+// Тест на жим
+//=================================================================================================================
 	"BigRussianBoss_test"
 	{
 		"BaseClass"                    	"ability_datadriven" 
@@ -2429,102 +2296,6 @@
     }
 }
 
-	"terrorblade_metamorphosis_datadriven"
-	{
-		"BaseClass"						"ability_datadriven"
-		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"churban"
-		"MaxLevel"               		"3"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"60"
-		"AbilityManaCost"				"80 125 170"
-		"AbilityValues"
-		{
-				"base_attack_time"
-				{
-					"value"				"1.3 1.2 1.1"
-					"special_bonus_unique_jakiro_3" "-0.2"
-				}
-				"bonus_as"	"100"
-				"bonus_movement_speed"		"0"
-				"bonus_range"
-				{
-					"value"	"150 250 350"
-					"special_bonus_unique_furion_4" "+75"
-				}
-				"bonus_health"			"0"
-				"duration"				"15"
-		}
-		"precache"
-		{
-			"particle"  "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
-			"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf"
-			"particle"	"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
-			"particle"	"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
-			"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-			"soundfile" "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
-		}
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"		"modifier_DemonicForm"
-				"Target"
-				{
-					"Center"  	"CASTER"
-					"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				}
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_DemonicForm"
-			{
-				"Duration"	"%duration"
-				"IsPurgable"	"0"
-				"Attributes"		"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"		
-
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"			"DemonicForm.lua"
-						"model"					"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-						"projectile_model"		"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
-						"Function"				"ModelSwapStart"
-						"Function"				"HideWearables"
-					}
-
-					"AttachEffect"
-					{
-						"EffectName" 		"particles/neutral_fx/black_dragon_fireball_lava_a.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"			"TARGET"
-					}
-				}
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"			"%bonus_range"
-					"MODIFIER_PROPERTY_HEALTH_BONUS" 				"%bonus_health"
-					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" 	"%base_attack_time"		
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%bonus_movement_speed"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_as"
-				}
-				
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"DemonicForm.lua"
-						"Function"		"ModelSwapEnd"
-						"Function"		"ShowWearables"
-					}
-				}
-			}
-		}
-	}
 	//=================================================================================================================
 	// ПЕРЕМЕНА
 	//=================================================================================================================
@@ -5672,7 +5443,7 @@
 	"ursa_maul"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"DependentOnAbility"			"lycan_shapeshift_datadriven"
+		"DependentOnAbility"			"kachok_big_tasty"
 		"MaxLevel"						"4"			
 		"Innate"						"1"
 		"IsBreakable"					"0"
