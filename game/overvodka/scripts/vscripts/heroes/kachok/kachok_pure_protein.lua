@@ -5,7 +5,6 @@ function kachok_pure_protein:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
 
-    if target:TriggerSpellAbsorb(self) then return end
     -- Damage by Strength
     local strength = caster:GetStrength()
     local strengthDamage = strength * self:GetSpecialValueFor("dmg_strength") / 100
