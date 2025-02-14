@@ -2061,6 +2061,7 @@
 		"DOTA_Tooltip_ability_kachok_big_tasty_Description"    "Качок жрёт биг тейсти, на время получая скорость и криты."
 		"DOTA_Tooltip_ability_kachok_big_tasty_duration"       "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_kachok_big_tasty_speed"          "СКОРОСТЬ:"
+		"DOTA_Tooltip_ability_kachok_big_tasty_bonus_night_vision"	"ДОП. НОЧНОЕ ЗРЕНИЕ:"
 		"DOTA_Tooltip_ability_kachok_big_tasty_crit_damage"    "%КРИТ. УРОН:"
 		"DOTA_Tooltip_ability_kachok_big_tasty_crit_chance"    "%ШАНС КРИТА:"
 		"DOTA_Tooltip_ability_kachok_big_tasty_shard_Description" "Способность восстанавливает Качку 25% от его макс. здоровья."
