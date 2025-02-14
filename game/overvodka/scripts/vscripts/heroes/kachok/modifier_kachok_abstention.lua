@@ -1,3 +1,5 @@
+STACK_COUNT = 0
+
 modifier_kachok_abstention = class({})
 
 function modifier_kachok_abstention:IsPurgable()
@@ -5,7 +7,7 @@ function modifier_kachok_abstention:IsPurgable()
 end
 
 function modifier_kachok_abstention:IsHidden()
-	return true
+	return false
 end
 
 function modifier_kachok_abstention:GetAttributes()
@@ -16,7 +18,8 @@ function modifier_kachok_abstention:OnCreated( kv )
     if not IsServer() then return end
     self.ability = self:GetAbility()
     self.caster = self:GetCaster()
-
+    self.scale = self.caster:GetModelScale()
+    self:SetStackCount(STACK_COUNT)
     self:StartIntervalThink(0.1)
     self:OnIntervalThink()
 end
@@ -41,12 +44,15 @@ function modifier_kachok_abstention:AddAttributes()
     local caster = self.caster
     local ability = self.ability
     local attribute_gain = ability:GetAttributeGain()
-
+    self.scale = self.scale + 0.01
+    if not caster:HasModifier("modifier_kachok_trenbolone") then
+        caster:SetModelScale(self.scale)
+    end
     if caster:HasScepter() then
         caster:ModifyAgility(attribute_gain)
         caster:ModifyIntellect(attribute_gain)
     end
-
     caster:ModifyStrength(attribute_gain)
-    -- TODO: Добавить эффект и звуки?
+    STACK_COUNT = STACK_COUNT + 1
+    self:SetStackCount(STACK_COUNT)
 end

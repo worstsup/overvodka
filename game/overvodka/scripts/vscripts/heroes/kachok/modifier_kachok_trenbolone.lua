@@ -22,7 +22,7 @@ function modifier_kachok_trenbolone:OnCreated( kv )
 
     local transformParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:ReleaseParticleIndex(transformParticle)
-    EmitSoundOn("game_sounds_rattletrap", self:GetParent())
+    EmitSoundOn("opasvo", self:GetParent())
 end
 
 function modifier_kachok_trenbolone:OnRefresh( kv )
@@ -56,5 +56,5 @@ function modifier_kachok_trenbolone:GetModifierModelChange()
 end
 
 function modifier_kachok_trenbolone:GetModifierModelScale()
-    return 120
+    return 20
 end

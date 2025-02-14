@@ -4,11 +4,8 @@ function kachok_pure_protein:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-
-    -- Damage by Strength
     local strength = caster:GetStrength()
     local strengthDamage = strength * self:GetSpecialValueFor("dmg_strength") / 100
-    -- Damage by Random
     local randomDamage = RandomFloat(self:GetSpecialValueFor("damage_min"), self:GetSpecialValueFor("damage_max"))
 
     local totalDamage = strengthDamage + randomDamage

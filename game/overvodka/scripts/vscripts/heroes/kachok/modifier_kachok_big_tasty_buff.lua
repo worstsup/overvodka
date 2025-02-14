@@ -1,5 +1,3 @@
-PARTICLE_BUFF = "particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-PARTICLE_REVERT = "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
 
 modifier_kachok_big_tasty_buff = class({})
 
@@ -26,7 +24,10 @@ function modifier_kachok_big_tasty_buff:OnCreated( kv )
     self.ability = self:GetAbility()
 
     if not IsServer() then return end
-    self.particle = ParticleManager:CreateParticle(PARTICLE_BUFF, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    self.particle = ParticleManager:CreateParticle("particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    ParticleManager:SetParticleControlEnt(self.particle, 0, self.parent, PATTACH_POINT_FOLLOW, "attach_head", self.parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(self.particle, 1, self.parent, PATTACH_POINT_FOLLOW, "attach_head", self.parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(self.particle, 3, self.parent, PATTACH_POINT_FOLLOW, "attach_head", self.parent:GetAbsOrigin(), true)
 end
 
 function modifier_kachok_big_tasty_buff:OnRefresh( kv )
@@ -37,9 +38,12 @@ function modifier_kachok_big_tasty_buff:OnDestroy()
     if not IsServer() then return end
     ParticleManager:DestroyParticle(self.particle, false)
     ParticleManager:ReleaseParticleIndex(self.particle)
-    local revert_particle = ParticleManager:CreateParticle(PARTICLE_REVERT, PATTACH_ABSORIGIN_FOLLOW, caster)
+    local revert_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    ParticleManager:SetParticleControlEnt(revert_particle, 0, self.parent, PATTACH_POINT_FOLLOW, "attach_head", self.parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(revert_particle, 3, self.parent, PATTACH_POINT_FOLLOW, "attach_head", self.parent:GetAbsOrigin(), true)
     ParticleManager:ReleaseParticleIndex(revert_particle)
 end
+
 
 function modifier_kachok_big_tasty_buff:GetModifierPreAttack_CriticalStrike()
     if (RollPseudoRandomPercentage(self.ability:GetSpecialValueFor("crit_chance"), DOTA_PSEUDO_RANDOM_WOLF_CRIT, self.parent)) then

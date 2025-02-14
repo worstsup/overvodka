@@ -2091,6 +2091,7 @@
 		"DOTA_Tooltip_ability_kachok_trenbolone_bonus_range" "ДОП. ДАЛЬНОСТЬ АТАКИ:"
 		"DOTA_Tooltip_ability_kachok_trenbolone_base_attack_time" "БАЗОВЫЙ ИНТЕРВАЛ АТАК:"
 		"DOTA_Tooltip_ability_kachok_trenbolone_bonus_as"	"ДОП. СКОРОСТЬ АТАКИ:"
+		"DOTA_Tooltip_modifier_kachok_abstention" "Получено силы"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel_river"								"Король мида"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel_river_Description"					"Скорость передвижения, восстановление здоровья, урон от атак и броня увеличены."
 		"DOTA_Tooltip_modifier_item_balbe_active"				"БЕЖАТЬ БАЛБЕ!"
