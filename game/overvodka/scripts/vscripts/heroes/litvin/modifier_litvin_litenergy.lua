@@ -23,6 +23,10 @@ end
 function modifier_litvin_litenergy:OnRemoved()
 end
 
+function modifier_litvin_litenergy:GetTexture()
+	return "litenergy"
+end
+
 --------------------------------------------------------------------------------
 
 function modifier_litvin_litenergy:DeclareFunctions()

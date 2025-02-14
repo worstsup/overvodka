@@ -2785,6 +2785,7 @@
 		"BaseClass"						"item_lua"
 		"ScriptFile" 					"item_bablokrad"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"Model"							"models/props_gameplay/red_box.vmdl"	
 		"AbilityTextureName"			"bablokrad"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
@@ -2802,6 +2803,49 @@
 			"Attackspeed"			"30"
 			"atribute"				"0"
 			"gold_b"				"300"
+		}
+	}
+	"item_elixir_collector"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"elixir_collector"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"Model"							"models/props_gameplay/red_box.vmdl"		
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"elixir_collector"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCastRange"				"375"
+		"AbilityCooldown"				"35"
+		"AbilityManaCost"				"100"
+		"ItemCost"						"7000"
+		"AbilityValues"
+		{
+			"radius"					"800"
+			"damage"					"2.5"
+			"attack_destroy"			"10"
+			"duration"					"8"
+			"hp"						"450"
+			"mp"						"750"
+			"mana_regen"				"6"
+			"cast_range"				"225"
+			"spell_lifesteal"			"20"
+			"mana_tooltip"				"10"
+			"lifesteal_multiplier"		"4"
+		}
+	}
+	"item_recipe_elixir_collector"
+	{
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"					 	"item_datadriven"
+		"ItemCost"						"325"
+		"ItemRecipe"					"1"
+		"AbilityTextureName"			"item_recipe"
+		"ItemResult"					"item_elixir_collector"
+		"ItemRequirements"
+		{
+			"01"						"item_bloodstone;item_aether_lens"
 		}
 	}
 	"item_recipe_byebye_boots"

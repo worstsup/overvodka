@@ -36,6 +36,7 @@
 			"item"		"item_aghanims_shard"
             "item"		"item_arcane_blink"
 			"item"		"item_yasha_and_kaya"
+			"item"		"item_elixir_collector"
 		}
 	}
 }

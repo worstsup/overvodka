@@ -27,7 +27,6 @@ function Megumin_ExplosionMagic:OnAbilityPhaseStart()
         self.channel_duration = self:GetSpecialValueFor("channel_duration")
         self.immune_duration = self:GetCaster():HasScepter() and self.channel_duration or (self.channel_duration + self:GetCastPoint())
         
-        --self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_ExplosionMagic_immunity", { duration = self.immune_duration })
 
         self.nPreviewFX = ParticleManager:CreateParticle("particles/booom/1.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
         ParticleManager:SetParticleControlEnt(self.nPreviewFX, 0, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, self:GetCaster():GetOrigin(), true)
@@ -43,15 +42,13 @@ function Megumin_ExplosionMagic:OnSpellStart()
     if IsServer() then
         ParticleManager:DestroyParticle(self.nPreviewFX, false)
         EmitSoundOn("vpis", self:GetCaster())
-
+        self.lastExplosionTime = GameRules:GetGameTime()
+        self.effect_radius = self:GetSpecialValueFor("effect_radius")
+        self.interval = self:GetSpecialValueFor("interval")
         if self:GetCaster():HasScepter() then
             self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_ExplosionMagic_nonchanneled", {
                 duration = self:GetSpecialValueFor("channel_duration")
             })
-        else
-            self.effect_radius = self:GetSpecialValueFor("effect_radius")
-            self.interval = self:GetSpecialValueFor("interval")
-            self.lastExplosionTime = GameRules:GetGameTime()
         end
     end
 end

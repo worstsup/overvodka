@@ -94,7 +94,9 @@ function modifier_arsen_tg_wall_aura:GetModifierMoveSpeed_Limit( params )
 		limit = 0
 	else
 		-- interpolate between max
-		limit = self:Interpolate( wall_distance/self.width, self.MIN_SPEED, self.MAX_SPEED )
+		if not self.parent:IsDebuffImmune() or self:GetAbility():GetSpecialValueFor("immunity") == 1 then
+			limit = self:Interpolate( wall_distance/self.width, self.MIN_SPEED, self.MAX_SPEED )
+		end
 	end
 
 	return limit

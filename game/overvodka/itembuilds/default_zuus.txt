@@ -36,6 +36,7 @@
 			"item"		"item_kaska"
 			"item"		"item_govno"
 			"item"		"item_devastator"
+			"item"		"item_elixir_collector"
 		}
 	}
 }

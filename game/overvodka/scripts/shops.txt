@@ -49,7 +49,7 @@
 		"item"		"item_pasito"
 		"item"		"item_cuirass_2"
 		"item"		"item_oboyudno_2"
-		"item"		"item_broadsword"
+		"item"		"item_elixir_collector"
 		"item"		"item_blitz_knuckles"
 		"item"		"item_javelin"
 		"item"		"item_claymore"				

@@ -32,6 +32,7 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_magic_aegis"
+			"item"		"item_elixir_collector"
 			"item"		"item_badun"
 			"item"		"item_suchiy"
 		}

@@ -60,6 +60,7 @@ function modifier_arsen_tg_spear_aura:OnCreated( kv )
 		self:PlayEffects( direction:Normalized() )
 
 		-- knockback if not having spear buff
+		if self:GetParent():IsDebuffImmune() and self:GetAbility():GetSpecialValueFor("immunity") == 0 then return end
 		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua" ) then return end
 		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua_debuff" ) then return end
 		self:GetParent():AddNewModifier(
