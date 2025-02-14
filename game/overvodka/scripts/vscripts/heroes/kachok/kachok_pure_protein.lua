@@ -23,5 +23,5 @@ function kachok_pure_protein:OnSpellStart()
 
     EmitSoundOn("zizi", target)
     local particle = ParticleManager:CreateParticle("particles/ogre_magi_arcana_egg_run_new.vpcf", PATTACH_ABSORIGIN, target)
-    --ParticleManager:ReleaseParticleIndex(particle)
+    ParticleManager:ReleaseParticleIndex(particle)
 end
