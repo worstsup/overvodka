@@ -10,5 +10,5 @@ function item_dagon_datadriven_on_spell_start(keys)
     keys.caster:EmitSound("ailesh")
     keys.target:EmitSound("ailesh")
     keys.ability:ApplyDataDrivenModifier(keys.caster, keys.target, "modifier_item_abyssal_blade_datadriven_active", nil)
-    ApplyDamage({victim = keys.target, attacker = keys.caster, damage = special_damage, damage_type = DAMAGE_TYPE_PURE,})
+    ApplyDamage({victim = keys.target, attacker = keys.caster, damage = special_damage, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS})
 end

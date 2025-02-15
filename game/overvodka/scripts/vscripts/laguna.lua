@@ -12,7 +12,7 @@ function Dmg (keys)
     local nowmana = caster:GetMana()
     if target:TriggerSpellAbsorb(ability) then return end
     -- dmg + mana
-    local dadada = demeg + caster:GetMaxMana() * 0.2 
+    local dadada = demeg + caster:GetMaxMana() * 0.15
     if istrtr == 15 then
         if nowmana >= maxmana * 0.9 then
             dadada = dadada * 1.15

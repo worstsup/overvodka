@@ -222,7 +222,7 @@ function MeteorHit(keys)
 		caster:ModifyGold(gold, false, 0)
 	end
 	ApplyDamage({attacker = caster, victim = target, ability = ability, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
-	target:AddNewModifier(caster, ability, "modifier_stunned", {duration = stun_time})
+	ability:ApplyDataDrivenModifier( caster, target, "mellstroy_meteor_slowed_debuff", { Duration = stun_time } )
 	ability:ApplyDataDrivenModifier( caster, target, "mellstroy_meteor_fired_debuff", { Duration = 4 } )
 	table.insert(tartar, target)
 end

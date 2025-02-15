@@ -195,7 +195,9 @@ function modifier_elixir_collector_buff:OnIntervalThink()
 	end
 
     for _,target in pairs(targets) do
-    	target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_elixir_collector_debuff", {})
+        if not target:IsIllusion() then
+    	    target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_elixir_collector_debuff", {})
+        end
     end
 
     self:GetCaster():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_elixir_collector_buff_hero", {})

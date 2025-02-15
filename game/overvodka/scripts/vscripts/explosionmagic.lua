@@ -19,7 +19,9 @@ function Megumin_ExplosionMagic:GetChannelTime()
     end
     return self:GetSpecialValueFor("channel_duration")
 end
-
+function Megumin_ExplosionMagic:GetCastPoint()
+	return self:GetSpecialValueFor( "total_cast_time_tooltip" )
+end
 --------------------------------------------------------------------------------
 
 function Megumin_ExplosionMagic:OnAbilityPhaseStart()
@@ -125,11 +127,11 @@ function modifier_ExplosionMagic_nonchanneled:OnCreated(params)
 end
 function modifier_ExplosionMagic_nonchanneled:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE
     }
 end
-function modifier_ExplosionMagic_nonchanneled:GetModifierMoveSpeedBonus_Percentage()
-    return -50
+function modifier_ExplosionMagic_nonchanneled:GetModifierMoveSpeed_Absolute()
+    return 300
 end
 
 function modifier_ExplosionMagic_nonchanneled:OnIntervalThink()

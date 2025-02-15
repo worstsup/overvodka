@@ -80,8 +80,8 @@ function modifier_eldzhey_r:Knock()
              center_x = bump_point.x,
              center_y = bump_point.y,
              center_z = bump_point.z,
-             duration = 0.2,
-             knockback_duration = 0.2,
+             duration = 0.15,
+             knockback_duration = 0.15,
              knockback_distance = 0,
              knockback_height = 75,
         }
