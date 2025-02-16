@@ -5047,7 +5047,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastPoint"				"0.15"
+		"AbilityCastPoint"				"0.1"
 		"AbilityCooldown"				"90 80 70"
 		"AbilityManaCost"				"200 300 400"
 		"AbilityValues"
@@ -6583,7 +6583,7 @@
 		"AbilityValues"
 		{
 			"armor_pct_as_strength"			"0"
-			"radius"					"0"
+			"radius"					"10000"
 			"bonus_linger_duration"		"0"
 		}
 	}

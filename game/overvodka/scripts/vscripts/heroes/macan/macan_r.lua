@@ -337,6 +337,7 @@ end
 
 function modifier_macan_r_charge:OnCreated( kv )
 	self.parent = self:GetParent()
+	self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_5)
 	self.ability = self:GetAbility()
 	local sound_cast = "zavod"
 	EmitSoundOn( sound_cast, self.parent )

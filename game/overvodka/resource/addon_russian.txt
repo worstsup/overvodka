@@ -184,9 +184,8 @@
 		"DOTA_Tooltip_Facet_brewmaster_drunken_master"								"ЯГЕРМЕЙСТИЙ"
 		"DOTA_Tooltip_Facet_brewmaster_drunken_master_Description"					"БЛЕВАЛИЙ замедляет врагов."
 		"DOTA_Tooltip_ability_acid_spray_datadriven_Facet_brewmaster_drunken_master"			"Способность замедляет врагов на 15%."
-		"DOTA_Tooltip_ability_axe_one_man_army"						"БЛАГОСЛОВЛЕНИЕ РАЙОНА"
-		"DOTA_Tooltip_ability_axe_one_man_army_Description"			"Способность ДВОРОВАЯ ЗАКАЛКА ворует у врагов скорость передвижения."
-		"DOTA_Tooltip_ability_axe_one_man_army_Note0"			""
+		"DOTA_Tooltip_Facet_axe_one_man_army"						"БЛАГОСЛОВЛЕНИЕ РАЙОНА"
+		"DOTA_Tooltip_Facet_axe_one_man_army_Description"			"Способность ДВОРОВАЯ ЗАКАЛКА ворует у врагов скорость передвижения."
 
 		"DOTA_Tooltip_modifier_axe_one_man_army"						"Район доволен"
 		"DOTA_Tooltip_modifier_axe_one_man_army_Description"			"Способность ДВОРОВАЯ ЗАКАЛКА ворует у врагов скорость передвижения."

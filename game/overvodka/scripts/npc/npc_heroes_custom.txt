@@ -839,14 +839,13 @@
 	}
 	"npc_dota_hero_axe"
 	{
-		"Model"		"models/items/axe/ti9_jungle_axe/axe_bare.vmdl"
+		"Model"		"macan/macan.vmdl"
 		"DisableWearables"		"1"
 		"SoundSet"		"Hero_PrimalBeast"
 		"Enabled"		"1"
-		"ModelScale"		"1.000000"
-		"VersusScale"		"1"
-		"LoadoutScale"		"1"
-		"SpectatorLoadoutScale" "0.85"
+		"ModelScale"		"1.3"
+		"LoadoutScale"		"1.2"
+		"HealthBarOffset"	"250"
 		"HeroSelectSoundEffect"		"dima_start"
 		"GibType"		"default"
 		"Ability1"		"macan_q"
@@ -876,7 +875,7 @@
 				{
 					"Ability1"
 					{
-						"AbilityName"	"axe_one_man_army"
+						"AbilityName"	"generic_hidden"
 					}
 				}
 			}
