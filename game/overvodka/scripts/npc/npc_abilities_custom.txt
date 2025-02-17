@@ -11960,7 +11960,7 @@
 			}
 			"AbilityChargeRestoreTime"
 			{
-				"value"	"16 15 14 13"
+				"value"	"14 12 10 8"
 				"special_bonus_unique_morphling_8" "-3"
 			}
         	"blast_delay"
@@ -11980,7 +11980,11 @@
 				"special_bonus_unique_morphling_4" "+20"
 			}
         	"laser_length"   "10000"
-        	"laser_width"	 "150"
+        	"laser_width"
+			{
+				"value"	"150"
+				"affected_by_aoe_increase"	"1"
+			}
     	}
 	}
 	"rostik_q"
@@ -12619,8 +12623,8 @@
 		{
 				"damage"
 				{
-					"value" "75 125 175 250"
-					"special_bonus_unique_nyx_4" "+75"
+					"value" "75 150 225 300"
+					"special_bonus_unique_nyx_4" "+100"
 				}
 				"fissure_range"
 				{
@@ -12679,7 +12683,11 @@
 				}
 				"damage"					"100 150 200 250"
 				"impact_stun_duration"		"1.0 1.25 1.5 1.75"
-				"impact_radius"				"325"
+				"impact_radius"
+				{
+					"value"	"325"
+					"affected_by_aoe_increase"	"1"
+				}
 				"ally_lift_duration"		"1.0"
 				"ally_range"				"750 875 1000 1125"
 				"enemy_range"				"375 500 625 750"
@@ -12733,7 +12741,11 @@
         		"blaster_radius" "700"
 				"blaster_vision" "700"
         		"damage"         "300"
-        		"laser_width"	 "120"
+        		"laser_width"
+				{
+					"value"	"120"
+					"affected_by_aoe_increase"	"1"
+				}
 		}
 	}
 	"sans_scepter"
@@ -12822,8 +12834,8 @@
 			"dur_tooltip"	"5"
 			"pct_tooltip"
 			{
-				"value"	"35"
-				"special_bonus_unique_morphling_waveform_cooldown" "+35"
+				"value"	"40"
+				"special_bonus_unique_morphling_waveform_cooldown" "+40"
 			}
 		}
 	}
