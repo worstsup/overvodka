@@ -144,11 +144,16 @@ function serega_sven:OnProjectileHit( target, location )
 	local knockback = target:AddNewModifier(
 		self:GetCaster(), -- player source
 		self, -- ability source
-		"modifier_generic_knockback_lua", -- modifier name
-		{
-			duration = 0.5,
-			height = 350,
-		} -- kv
+		"modifier_knockback",
+			{
+				center_x = 0,
+				center_y = 0,
+				center_z = 0,
+				duration = 0.5,
+				knockback_duration = 0.5,
+				knockback_distance = 0,
+				knockback_height = 350
+			}
 	)
 	local callback = function()
 		-- damage on landed

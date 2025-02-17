@@ -7,7 +7,7 @@ end
 function modifier_train:OnCreated( kv )
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_status = self:GetAbility():GetSpecialValueFor( "bonus_status" )
-	self.bonus_strength   = self:GetParent():GetStrength()
+	self.bonus_strength   = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("bonus_strength") * 0.01
 end
 
 function modifier_train:OnRemoved()

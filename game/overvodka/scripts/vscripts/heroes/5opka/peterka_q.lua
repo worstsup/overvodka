@@ -43,9 +43,11 @@ end
 function modifier_peterka_q:OnCreated(kv)
     if not IsServer() then return end
     self.damage = kv.damage
+    self.interval = 0.5
+    self:StartIntervalThink(self.interval)
 end
 
-function modifier_peterka_q:OnDestroy()
+function modifier_peterka_q:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
@@ -53,10 +55,13 @@ function modifier_peterka_q:OnDestroy()
     ApplyDamage({
         victim = parent,
         attacker = caster,
-        damage = self.damage,
+        damage = self.damage * self.interval,
         damage_type = ability:GetAbilityDamageType(),
         ability = ability
     })
+end
+function modifier_peterka_q:OnDestroy()
+    if not IsServer() then return end
 	self:PlayEffects()
 end
 function modifier_peterka_q:PlayEffects()

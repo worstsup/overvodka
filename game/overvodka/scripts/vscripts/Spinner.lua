@@ -2,9 +2,8 @@ function Damage(event)
 	local caster = event.caster
 	local ability = event.ability
 	local damage = ability:GetSpecialValueFor("damage") * ability:GetSpecialValueFor("spinner_damage_tick")
-	if caster:HasScepter() then
-		damage = damage + caster:GetStrength() / 6
-	end
+	local dmg_scepter = ability:GetSpecialValueFor("dmg_scepter") * caster:GetStrength() * 0.01 * ability:GetSpecialValueFor("spinner_damage_tick")
+	local dmg = damage + dmg_scepter
 	local targets = FindUnitsInRadius(caster:GetTeamNumber(),
 		caster:GetAbsOrigin(),
 		nil,
@@ -16,13 +15,12 @@ function Damage(event)
 		false) 
 
 	for _,unit in pairs(targets) do
-		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PURE, ability = ability})
+		ApplyDamage({victim = unit, attacker = caster, damage = dmg, damage_type = DAMAGE_TYPE_PURE, ability = ability})
 	end
 end
 
 function BladeFuryStop( event )
 	local caster = event.caster
-	
 	caster:StopSound("gennadiy")
 end
 

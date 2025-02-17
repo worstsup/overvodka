@@ -207,8 +207,8 @@
 		{
 			"bonus_strength"		"10"
 			"bonus_damage"			"15"
-			"duration"				"5"
-			"max_level"				"5"
+			"duration"				"4"
+			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"50"
 		}
@@ -247,7 +247,7 @@
 		{
 			"bonus_strength"		"20"
 			"bonus_damage"			"30"
-			"duration"				"6"
+			"duration"				"5"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"65"
@@ -312,7 +312,7 @@
 		{
 			"bonus_strength"		"30"
 			"bonus_damage"			"45"
-			"duration"				"7"
+			"duration"				"6"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"80"
@@ -1379,7 +1379,7 @@
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"burum"
-		"ItemCost"						"1500"
+		"ItemCost"						"1800"
 		"ItemShopTags"					"str;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
@@ -1416,7 +1416,7 @@
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"burgir"
-		"ItemCost"						"1500"
+		"ItemCost"						"1800"
 		"ItemShopTags"					"agi;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
@@ -1453,7 +1453,7 @@
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"cocktail"
-		"ItemCost"						"1500"
+		"ItemCost"						"1800"
 		"ItemShopTags"					"int;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
@@ -1941,7 +1941,7 @@
             "health_regen_percent_per_second"   "1.8"
             "bonus_damage"              "50"
             "lifesteal_percent"         "25"
-            "duration"					"5"
+            "duration"					"4"
     }
     "OnSpellStart"
     {
@@ -1978,7 +1978,7 @@
             "Passive"           "1"
             "IsHidden"          "1"
             
-            "OnDealDamage"
+            "OnAttackLanded"
             {
                 "Lifesteal"
                 {
@@ -2669,7 +2669,7 @@
 				"bonus_attack_speed"				"0"
 				"bonus_armor"						"5"
 				"bonus_health_regen"				"0"
-				"unholy_bonus_damage"				"15"
+				"unholy_bonus_damage"				"20"
 				"unholy_bonus_attack_speed"			"10"
 				"unholy_bonus_strength"				"25"  //The ratio of %unholy_bonus_strength to %unholy_ticks_to_full_effect is currently hardcoded in 
 				"unholy_health_drain_per_second"	"3"

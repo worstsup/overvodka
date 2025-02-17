@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_sasavot_r_new", "heroes/sasavot/sasavot_r_new.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sasavot_r_new_secondary", "heroes/sasavot/sasavot_r_new.lua", LUA_MODIFIER_MOTION_NONE)
-
+LinkLuaModifier("modifier_sasavot_r_new_secondary_self", "heroes/sasavot/sasavot_r_new.lua", LUA_MODIFIER_MOTION_NONE)
 sasavot_r_new = class({})
 
 function sasavot_r_new:OnSpellStart()
@@ -47,6 +47,7 @@ end
 function modifier_sasavot_r_new:OnTakeDamage(params)
     if params.attacker == self.target and params.unit ~= self.caster and params.unit:IsRealHero() then
         self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 20})
+        self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary_self", {duration = 20})
         self:Destroy()
     end
 end
@@ -64,6 +65,64 @@ function modifier_sasavot_r_new:PlayEffects()
         false
     )
 end
+modifier_sasavot_r_new_secondary_self = class({})
+
+function modifier_sasavot_r_new_secondary_self:IsHidden()
+	return false
+end
+function modifier_sasavot_r_new_secondary_self:IsPurgable()
+	return false
+end
+
+function modifier_sasavot_r_new_secondary_self:OnCreated( kv )
+	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "damage_bonus" )
+end
+
+function modifier_sasavot_r_new_secondary_self:OnDestroy( kv )
+end
+
+function modifier_sasavot_r_new_secondary_self:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
+	}
+	return funcs
+end
+
+function modifier_sasavot_r_new_secondary_self:GetModifierPreAttack_CriticalStrike( params )
+	if IsServer() then
+		if params.target:HasModifier("modifier_sasavot_r_new_secondary") then
+			self.record = params.record
+			return self.crit_bonus
+		end
+	end
+end
+
+function modifier_sasavot_r_new_secondary_self:GetModifierProcAttack_Feedback( params )
+	if IsServer() then
+		if self.record then
+			self.record = nil
+			self:PlayEffects( params.target )
+		end
+	end
+end
+
+
+function modifier_sasavot_r_new_secondary_self:PlayEffects( target )
+	local particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
+	ParticleManager:SetParticleControlEnt(
+		effect_cast,
+		0,
+		target,
+		PATTACH_POINT_FOLLOW,
+		"attach_hitloc",
+		target:GetOrigin(),
+		true
+	)
+	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetOrigin()-target:GetOrigin()):Normalized() )
+	ParticleManager:ReleaseParticleIndex( effect_cast )
+end
 
 modifier_sasavot_r_new_secondary = class({})
 
@@ -74,7 +133,8 @@ function modifier_sasavot_r_new_secondary:OnCreated()
     self.Pct = 0
     self.t = 0
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
-
+    self.damage_needed = self:GetAbility():GetSpecialValueFor("damage_needed")
+    self:SetStackCount(self.damage_needed)
     self:StartIntervalThink(0.5)
 
     if not IsServer() then return end
@@ -91,7 +151,7 @@ end
 function modifier_sasavot_r_new_secondary:DeclareFunctions()
     local funcs = 
     {
-        MODIFIER_EVENT_ON_ATTACK_LANDED,
+        MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_PROPERTY_BONUS_VISION_PERCENTAGE,
         MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
     }
@@ -106,10 +166,15 @@ function modifier_sasavot_r_new_secondary:GetBonusVisionPercentage( params )
     return self.Pct
 end
 
-function modifier_sasavot_r_new_secondary:OnAttackLanded(params)
-    if params.attacker == self.target and params.target == self.caster then
-        self.damageDealt = true
-        self:Destroy()
+function modifier_sasavot_r_new_secondary:OnTakeDamage(params)
+    if not IsServer() then return end
+    if params.attacker == self.target and params.unit == self.caster then
+        self.damage_needed = self.damage_needed - params.damage
+        if self.damage_needed <= 0 then
+            self.damageDealt = true
+            self:Destroy()
+        end
+        self:SetStackCount(self.damage_needed)
     end
 end
 
@@ -124,6 +189,10 @@ function modifier_sasavot_r_new_secondary:OnIntervalThink()
         self:Destroy()
         return
     end
+    if self.damage_needed <= 0 then
+        self:Destroy()
+        return
+    end
     AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300, 0.5, false)
     AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300 + self.durationPassed * 15, 0.5, false)
     self.durationPassed = self.durationPassed + 0.5
@@ -135,6 +204,7 @@ end
 
 function modifier_sasavot_r_new_secondary:OnDestroy()
     if not IsServer() then return end
+    self:GetCaster():RemoveModifierByName("modifier_sasavor_r_new_secondary_self")
     StopSoundOn("sasavot_r_tick", self.target)
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
     if self.durationPassed >= 19 and distance <= self.radius and not self.damageDealt then

@@ -396,16 +396,16 @@ function COverthrowGameMode:OnItemPickUp( event )
 
 			local newR = ChangeValueByTeamPlace(r, Team)
 
-			--print("Bag of gold picked up")
 			PlayerResource:ModifyGold( playerID, newR, false, 0 )
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
-		UTIL_Remove( item ) -- otherwise it pollutes the player inventory
+		UTIL_Remove( item )
 	elseif event.itemname == "item_bag_of_gold_2" then
 		if owner:GetUnitName() ~= "npc_dota_hero_necrolyte" then
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.3, damage_type = DAMAGE_TYPE_PURE } )
 			EmitSoundOn("peterka_shard", owner)
 		else
+			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
 			SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, 300, nil )
 		end
 		UTIL_Remove( item )

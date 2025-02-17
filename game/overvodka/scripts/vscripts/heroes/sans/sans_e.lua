@@ -5,6 +5,7 @@ LinkLuaModifier("modifier_sans_e_caster", "heroes/sans/sans_e", LUA_MODIFIER_MOT
 LinkLuaModifier("modifier_sans_pathing", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_e_thinker_orange", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_e_thinker_blue", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 sans_e = class({})
 
@@ -80,7 +81,7 @@ function sans_e:OnSpellStart( params )
 			duration = self:GetSpecialValueFor("ally_lift_duration")
 			self.target:AddNewModifier(caster, self, "modifier_sans_e_root", { duration = duration})
 		end
-
+		
 		self.target_modifier = self.target:AddNewModifier(caster, self, "modifier_sans_e", { duration = duration })
 
 		if is_ally then
@@ -163,12 +164,20 @@ function modifier_sans_e:OnCreated( params )
 		local caster = self:GetCaster()
 		local ability = self:GetAbility()
 		self.parent = self:GetParent()
+		if self.parent:IsDebuffImmune() or self.parent:IsMagicImmune() then return end
 		self.z_height = 0
 		self.duration = params.duration
 		self.lift_animation = ability:GetSpecialValueFor("lift_animation")
 		self.fall_animation = ability:GetSpecialValueFor("fall_animation")
 		self.current_time = 0
-
+		if self.parent:GetTeamNumber() ~= caster:GetTeamNumber() then
+			self.parent:AddNewModifier(
+				caster,
+				self:GetAbility(),
+				"modifier_generic_stunned_lua",
+				{ duration = self.duration }
+			)
+		end
 		self.frametime = FrameTime()
 		self:StartIntervalThink(FrameTime())
 		

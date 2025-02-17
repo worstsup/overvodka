@@ -28,7 +28,6 @@ function modifier_gunnar_bash:OnCreated( kv )
 	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
 	self.armor_duration = self:GetAbility():GetSpecialValueFor( "armor_duration" )
 	self.knockback_duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
-	self.knockback_distance = self:GetAbility():GetSpecialValueFor( "knockback_distance" )
 	self.knockback_height = self:GetAbility():GetSpecialValueFor( "knockback_height" )
 
 
@@ -82,31 +81,24 @@ function modifier_gunnar_bash:GetModifierProcAttack_Feedback( params )
 	self:Bash( params.target, false )
 end
 
---------------------------------------------------------------------------------
--- Helper
 function modifier_gunnar_bash:Bash( target, double )
 	local direction = target:GetOrigin()-self.parent:GetOrigin()
 	direction.z = 0
 	direction = direction:Normalized()
 
-	local dist = self.knockback_distance
-	if double then
-		dist = dist*2
-	end
-
-	-- create arc
 	target:AddNewModifier(
-		self.parent, -- player source
-		self.ability, -- ability source
-		"modifier_generic_arc_lua", -- modifier name
+		self.parent,
+		self.ability,
+		"modifier_knockback",
 		{
-			dir_x = direction.x,
-			dir_y = direction.y,
+			center_x = target:GetAbsOrigin().x,
+			center_y = target:GetAbsOrigin().y,
+			center_z = target:GetAbsOrigin().z,
 			duration = self.knockback_duration,
-			distance = dist,
-			height = self.knockback_height,
-			activity = ACT_DOTA_FLAIL,
-		} -- kv
+			knockback_duration = self.knockback_duration,
+			knockback_distance = 0,
+			knockback_height = self.knockback_height,
+		}
 	)
 
 	-- stun

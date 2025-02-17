@@ -7,14 +7,9 @@ function arsen_konchai:GetBehavior()
 	return behavior
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function arsen_konchai:OnSpellStart()
-	-- unit identifier
 	caster = self:GetCaster()
 	target = self:GetCursorTarget()
-
-	-- load data
 	local projectile_name = "particles/bristleback_viscous_nasal_goo_new.vpcf"
 	local projectile_speed = self:GetSpecialValueFor("goo_speed")
 
@@ -25,7 +20,6 @@ function arsen_konchai:OnSpellStart()
 		EffectName = projectile_name,
 		iMoveSpeed = projectile_speed,
 	}
-		-- Find Units in Radius
 	local radius = self:GetSpecialValueFor("radius_scepter")
 	local enemies = FindUnitsInRadius(
 		self:GetCaster():GetTeamNumber(),	-- int, your team number
@@ -54,21 +48,24 @@ function arsen_konchai:OnProjectileHit( hTarget, vLocation )
 	end
 
 	local stack_duration = self:GetSpecialValueFor("goo_duration")
-	local buff_duration = self:GetSpecialValueFor("self_duration")
+	--local buff_duration = self:GetSpecialValueFor("self_duration")
 	-- Add modifier
 	hTarget:AddNewModifier(
-		caster, -- player source
+		self:GetCaster(), -- player source
 		self, -- ability source
 		"modifier_arsen_konchai", -- modifier name
 		{ duration = stack_duration } -- kv
 	)
-	if hTarget:IsRealHero() then
-		caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_arsen_konchai_buff", -- modifier name
-		{ duration = buff_duration } -- kv
-	)
+	--if hTarget:IsRealHero() then
+	--	caster:AddNewModifier(
+	--	caster, -- player source
+	--	self, -- ability source
+	--	"modifier_arsen_konchai_buff", -- modifier name
+	--	{ duration = buff_duration } -- kv
+	--)
+	--end
+	if self:GetCaster():HasScepter() then
+		self:GetCaster():PerformAttack(hTarget, true, true, true, true, true, false, true)
 	end
 	self:PlayEffects2( hTarget )
 end

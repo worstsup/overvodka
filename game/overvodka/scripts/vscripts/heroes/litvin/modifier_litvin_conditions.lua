@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_litvin_conditions = class({})
 
 --------------------------------------------------------------------------------
@@ -29,13 +18,10 @@ function modifier_litvin_conditions:IsPurgable()
 	return true
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_litvin_conditions:OnCreated( kv )
 	self.caster = self:GetCaster()
 	self.parent = self:GetParent()
 
-	-- references
 	self.damage = self:GetAbility():GetSpecialValueFor( "toss_damage" )
 	self.mnozh = self:GetAbility():GetSpecialValueFor( "mnozh" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -45,12 +31,17 @@ function modifier_litvin_conditions:OnCreated( kv )
 	local duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.target = EntIndexToHScript( kv.target )
 	local height = 400
+	self.parent:AddNewModifier(
+		self.caster,
+		self:GetAbility(),
+		"modifier_generic_stunned_lua",
+		{ duration = duration + 0.1 }
+	)
 
-	-- add arc modifier for vertical only
 	self.arc = self.parent:AddNewModifier(
-		self.caster, -- player source
-		self:GetAbility(), -- ability source
-		"modifier_generic_arc_lua", -- modifier name
+		self.caster,
+		self:GetAbility(),
+		"modifier_generic_arc_lua",
 		{
 			duration = duration,
 			distance = 0,
@@ -59,16 +50,11 @@ function modifier_litvin_conditions:OnCreated( kv )
 			fix_duration = false,
 			isStun = true,
 			activity = ACT_DOTA_FLAIL,
-		} -- kv
+		}
 	)
 	self.arc:SetEndCallback(function( interrupted )
-		-- destroy this modifier
 		self:Destroy()
-
-		-- not damage if interrupted
 		if interrupted then return end
-
-		-- find units
 		local enemies = FindUnitsInRadius(
 			self.caster:GetTeamNumber(),	-- int, your team number
 			self.parent:GetOrigin(),	-- point, center point
@@ -101,7 +87,7 @@ function modifier_litvin_conditions:OnCreated( kv )
 			end
 			enemy:AddNewModifier(
 			self:GetCaster(),
-			self, 
+			self:GetAbility(), 
 			"modifier_generic_stunned_lua", 
 			{duration = self.stun_duration}
 		)

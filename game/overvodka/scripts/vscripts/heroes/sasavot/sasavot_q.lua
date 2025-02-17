@@ -69,20 +69,21 @@ function sasavot_q:OnSpellStart()
 		bDodgeable = true,                           -- Optional
 		ExtraData = { modifier = self.modifier }
 	}
-	local direction = ((target:GetAbsOrigin() - caster:GetAbsOrigin()) * Vector(1,1,0)):Normalized()
 	ProjectileManager:CreateTrackingProjectile(info)
 	self.modifier = nil
 	local mod = caster:AddNewModifier(
 		caster, -- player source
 		self, -- ability source
-		"modifier_generic_knockback_lua", -- modifier name
-		{
-			duration = 0.4,
-			height = 75,
-			distance = 350,
-			direction_x = -direction.x*100,
-			direction_y = -direction.y*100,
-		} -- kv
+		"modifier_knockback",
+			{
+				center_x = target:GetAbsOrigin().x,
+				center_y = target:GetAbsOrigin().y,
+				center_z = target:GetAbsOrigin().z,
+				duration = 0.4,
+				knockback_duration = 0.4,
+				knockback_distance = 350,
+				knockback_height = 75,
+			}
 	)
 	-- effects
 	local sound_cast = "Ability.Assassinate"
@@ -123,6 +124,9 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 			ability = self, --Optional.
 		}
 		ApplyDamage(damageTable)
+		if self:GetCaster():HasScepter() then
+			self:GetCaster():PerformAttack(unit, true, true, true, true, true, false, true)
+		end
 	end
 
 	-- stun
