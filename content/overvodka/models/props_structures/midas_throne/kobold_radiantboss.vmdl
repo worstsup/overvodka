@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc32:version{c5dcef98-b629-46ab-88e3-a17c005c935e} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc39:version{1ceecb0d-4093-4729-ab18-b76886c64cde} -->
 {
 	rootNode = 
 	{
@@ -40,6 +40,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -59,6 +60,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 52
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -67,6 +69,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_IDLE"
 								activity_weight = 0
 								weight_list_name = ""
@@ -95,6 +98,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -114,6 +118,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 65
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -125,6 +130,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 14
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_splash.vpcf"
@@ -141,6 +147,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_IDLE_RARE"
 								activity_weight = 0
 								weight_list_name = ""
@@ -174,6 +181,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -193,6 +201,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 65
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -201,6 +210,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_IDLE_RARE"
 								activity_weight = 1
 								weight_list_name = ""
@@ -229,6 +239,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -248,6 +259,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 182
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -256,6 +268,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_IDLE_RARE"
 								activity_weight = 1
 								weight_list_name = ""
@@ -284,6 +297,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -303,6 +317,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 71
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -311,6 +326,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_CAST_ABILITY_1"
 								activity_weight = 1
 								weight_list_name = ""
@@ -339,6 +355,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -358,6 +375,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 111
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -366,6 +384,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -394,6 +413,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -413,6 +433,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 111
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -421,6 +442,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -449,6 +471,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -468,6 +491,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 109
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -476,6 +500,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_CAST_ABILITY_2"
 								activity_weight = 1
 								weight_list_name = ""
@@ -504,6 +529,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 0
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -523,6 +549,7 @@
 										_class = "AnimEvent"
 										event_class = "AE_CL_STOP_PARTICLE_EFFECT"
 										event_frame = 475
+										event_end_frame = -1
 										event_keys = 
 										{
 											name = resource:"particles/overboss_chalice_fizz.vpcf"
@@ -531,6 +558,7 @@
 										}
 									},
 								]
+								is_default_idle_anim = false
 								activity_name = "ACT_DOTA_CAST_ABILITY_3"
 								activity_weight = 1
 								weight_list_name = ""
@@ -570,12 +598,26 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "bubbles"
+						parent_bone = "Spine0_JNT"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
-		importer_notes = """
-Imported from VMDL
-"""
+		importer_notes = "Imported from VMDL"
+		document_sub_type = "ModelDocSubType_None"
 	}
 }

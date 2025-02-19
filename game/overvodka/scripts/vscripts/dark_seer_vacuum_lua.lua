@@ -9,7 +9,7 @@ end
 function dark_seer_vacuum_lua:GetAOERadius()
 	local base_radius = self:GetSpecialValueFor("radius")
     if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-        local orb_ability = self:GetCaster():FindAbilityByName("invoker_wex_lua")
+        local orb_ability = self:GetCaster():FindAbilityByName("dvoreckov_w")
         if orb_ability then
             return base_radius + (orb_ability:GetLevel() * 60)
         end

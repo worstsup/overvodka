@@ -8,7 +8,7 @@ function modifier_ExplosionMagic:OnCreated( kv )
 		self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
     	local ability_level = 0
     	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-			ability_level = self:GetCaster():FindAbilityByName("invoker_wex_lua"):GetLevel() + self:GetCaster():FindAbilityByName("invoker_quas_lua"):GetLevel() + self:GetCaster():FindAbilityByName("invoker_exort_lua"):GetLevel() - 1
+			ability_level = self:GetCaster():FindAbilityByName("dvoreckov_w"):GetLevel() + self:GetCaster():FindAbilityByName("dvoreckov_q"):GetLevel() + self:GetCaster():FindAbilityByName("dvoreckov_e"):GetLevel() - 1
 		else
 			ability_level = self:GetCaster():GetLevel() / 3
 		end

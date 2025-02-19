@@ -2,6 +2,10 @@ snapfire_lil_shredder_lua = class({})
 LinkLuaModifier( "modifier_snapfire_lil_shredder_lua", "modifier_snapfire_lil_shredder_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_snapfire_lil_shredder_lua_debuff", "modifier_snapfire_lil_shredder_lua_debuff.lua", LUA_MODIFIER_MOTION_NONE )
 
+function snapfire_lil_shredder_lua:Precache( context )
+	PrecacheResource( "particle", "particles/econ/items/snapfire/snapfire_fall20_immortal/snapfire_fall20_immortal_lil_projectile.vpcf", context )
+end
+
 --------------------------------------------------------------------------------
 function snapfire_lil_shredder_lua:OnSpellStart()
 	local caster = self:GetCaster()

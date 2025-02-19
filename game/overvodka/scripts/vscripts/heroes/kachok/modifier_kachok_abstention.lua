@@ -32,7 +32,7 @@ function modifier_kachok_abstention:OnIntervalThink()
     if not IsServer() then return end
     local ability_level = self.ability:GetLevel() - 1
     
-    if self.caster:IsIllusion() or not self.ability:IsCooldownReady() or self.caster:PassivesDisabled() then return end
+    if self.caster:IsIllusion() or not self.ability:IsCooldownReady() or self.caster:PassivesDisabled() or not self.caster:IsAlive() then return end
 
     self:AddAttributes()
     self.ability:UseResources( false, false, false, true )

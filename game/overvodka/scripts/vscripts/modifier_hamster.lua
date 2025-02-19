@@ -1,35 +1,26 @@
 modifier_hamster = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_hamster:IsHidden()
 	return true
 end
-
 function modifier_hamster:IsDebuff()
 	return false
 end
-
 function modifier_hamster:IsStunDebuff()
 	return false
 end
-
 function modifier_hamster:IsPurgable()
 	return false
 end
 
--- Initializations
-function modifier_hamster:OnCreated( kv )
-	-- load data
-	self.gold = 100
-	self:StartIntervalThink( 0.2 )
+function modifier_hamster:OnCreated()
+	if not IsServer() then return end
+	self.gold = 200
+	self.gold_cooldowns = {}
+	self:StartIntervalThink(0.2)
 	k = 0
 end
 
-function modifier_hamster:OnRefresh( kv )
-	-- references
-	self.gold = 100
-end
 function modifier_hamster:OnRemoved()
 end
 
@@ -38,17 +29,12 @@ end
 
 function modifier_hamster:OnIntervalThink()
 	k = k + 1
-	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),	-- int, your team number
-		self:GetParent():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		FIND_UNITS_EVERYWHERE,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
-	)
+	local current_time = GameRules:GetGameTime()
+	for entindex, last_time in pairs(self.gold_cooldowns) do
+		if current_time - last_time > 1 then
+			self.gold_cooldowns[entindex] = nil
+		end
+	end
 	local ALL_TEAMS = {
     	DOTA_TEAM_CUSTOM_1,
     	DOTA_TEAM_CUSTOM_2,
@@ -66,21 +52,20 @@ function modifier_hamster:OnIntervalThink()
     if (k % 15 == 0) then
     	for _, team in ipairs(ALL_TEAMS) do
         	MinimapEvent(
-            	team,                -- The team to broadcast the ping to
-            	caster,              -- The entity causing the event
-            	caster_position.x,   -- X-coordinate of the event
-            	caster_position.y,   -- Y-coordinate of the event
-            	DOTA_MINIMAP_EVENT_HINT_LOCATION, -- Mimics Alt + Right Click ping type
-            	3                    -- Event duration in seconds
+            	team,
+            	caster,
+            	caster_position.x,
+            	caster_position.y,
+            	DOTA_MINIMAP_EVENT_HINT_LOCATION,
+            	3
         	)
     	end
     end
-	for _,enemy in pairs(enemies) do
-		AddFOWViewer( enemy:GetTeamNumber(), self:GetParent():GetOrigin(), 400, 1, false )
+	for _, team in ipairs(ALL_TEAMS) do
+		AddFOWViewer( team, caster_position, 400, 1, false )
 	end
 end
---------------------------------------------------------------------------------
--- Modifier Effects
+
 function modifier_hamster:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
@@ -96,15 +81,23 @@ end
 function modifier_hamster:OnTakeDamage( params )
 	if not IsServer() then return end
 	if params.unit~=self:GetParent() then return end
-	if params.attacker:IsRealHero() and params.attacker:IsIllusion() == false then
-		params.attacker:ModifyGold( self.gold, true, 0 )
-		SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, params.attacker, self.gold, nil)
+	
+	local attacker = params.attacker
+	if attacker:IsRealHero() and not attacker:IsIllusion() then
+		local current_time = GameRules:GetGameTime()
+		local entindex = attacker:entindex()
+		if not self.gold_cooldowns[entindex] or (current_time - self.gold_cooldowns[entindex]) >= 0.9 then
+			attacker:ModifyGold(self.gold, true, 0)
+			SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, attacker, self.gold, nil)
+			self.gold_cooldowns[entindex] = current_time
+		end
 	end
 end
 
 function modifier_hamster:GetEffectName()
-	return "particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_freezing_field_snow_arcana1_shard.vpcf"
+	return "particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf"
 end
+
 function modifier_hamster:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end

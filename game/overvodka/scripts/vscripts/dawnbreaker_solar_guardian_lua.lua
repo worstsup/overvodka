@@ -4,29 +4,23 @@ LinkLuaModifier( "modifier_dawnbreaker_solar_guardian_lua_leap", "modifier_dawnb
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua.lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Init Abilities
 function dawnbreaker_solar_guardian_lua:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dawnbreaker.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian.vpcf", context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_aoe.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_damage.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_healing_buff.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_airtime_buff.vpcf", context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_landing.vpcf", context )
+	PrecacheResource( "particle", "particles/dvoreckov_qqe_impact.vpcf", context )
+	PrecacheResource( "particle", "particles/dvoreckov_qqe.vpcf", context )
 end
 
 function dawnbreaker_solar_guardian_lua:Spawn()
-	-- register custom indicator
 	if not IsServer() then
 		CustomIndicator:RegisterAbility( self )
 		return
 	end
 end
 
---------------------------------------------------------------------------------
--- Ability Custom Indicator (using CustomIndicator library, this section is Client Lua only)
--- NOTE: The whole Custom Indicator doesn't work because FindUnitsInRadius is server-only.
 function dawnbreaker_solar_guardian_lua:CreateCustomIndicator()
 	local particle_cast1 = "particles/ui_mouseactions/range_finder_tp_dest.vpcf"
 	local particle_cast2 = "particles/ui_mouseactions/range_finder_aoe.vpcf"
@@ -35,12 +29,9 @@ function dawnbreaker_solar_guardian_lua:CreateCustomIndicator()
 end
 
 function dawnbreaker_solar_guardian_lua:UpdateCustomIndicator( loc )
-	-- get data
 	local origin = self:GetCaster():GetAbsOrigin()
 	local radius = self:GetSpecialValueFor( "radius" )
 	local offset = self:GetSpecialValueFor( "max_offset_distance" )
-
-	-- find rargets
 	local target, point = self:FindValidPoint( loc )
 
 	ParticleManager:SetParticleControl( self.effect_cast1, 0, origin )
@@ -98,14 +89,10 @@ function dawnbreaker_solar_guardian_lua:FindValidPoint( point )
 	return target,point
 end
 
---------------------------------------------------------------------------------
--- Custom KV
 function dawnbreaker_solar_guardian_lua:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
---------------------------------------------------------------------------------
--- Ability Cast Filter
 function dawnbreaker_solar_guardian_lua:CastFilterResultLocation( vLoc )
 	if IsClient() then
 		if self.custom_indicator then
@@ -114,22 +101,16 @@ function dawnbreaker_solar_guardian_lua:CastFilterResultLocation( vLoc )
 		end
 	end
 
-	-- check nohammer
-	if self:GetCaster():HasModifier( "modifier_dawnbreaker_celestial_hammer_lua_nohammer" ) then
-		return UF_FAIL_CUSTOM
-	end
-
 	if not IsServer() then return end
-
+	if self:GetSpecialValueFor("talent") == 1 then
+		return UF_SUCCESS
+	end
 	local caster = self:GetCaster()
-	local buffer = 1200
-
-	-- find allies
 	local allies = FindUnitsInRadius(
 		caster:GetTeamNumber(),	-- int, your team number
 		vLoc,	-- point, center point
 		nil,	-- handle, cacheUnit. (not known)
-		1200,	-- float, radius. or use FIND_UNITS_EVERYWHERE
+		300,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
 		DOTA_UNIT_TARGET_HERO,	-- int, type filter
 		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
@@ -145,22 +126,18 @@ function dawnbreaker_solar_guardian_lua:CastFilterResultLocation( vLoc )
 end
 
 function dawnbreaker_solar_guardian_lua:GetCustomCastErrorLocation( vLoc )
-	-- check nohammer
-	if self:GetCaster():HasModifier( "modifier_dawnbreaker_celestial_hammer_lua_nohammer" ) then
-		return "#dota_hud_error_nohammer"
-	end
 
 	if not IsServer() then return "" end
 
 	local caster = self:GetCaster()
-	local buffer = 1200
-
-	-- find allies
+	if self:GetSpecialValueFor("talent") == 1 then
+		return ""
+	end
 	local allies = FindUnitsInRadius(
 		caster:GetTeamNumber(),	-- int, your team number
 		vLoc,	-- point, center point
 		nil,	-- handle, cacheUnit. (not known)
-		1200,	-- float, radius. or use FIND_UNITS_EVERYWHERE
+		300,	-- float, radius. or use FIND_UNITS_EVERYWHERE
 		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
 		DOTA_UNIT_TARGET_HERO,	-- int, type filter
 		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
@@ -175,21 +152,15 @@ function dawnbreaker_solar_guardian_lua:GetCustomCastErrorLocation( vLoc )
 	return ""
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function dawnbreaker_solar_guardian_lua:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
-
-	-- get actual point
-	local target,point = self:FindValidPoint( point )
-
-	-- load data
+	local target = nil
+	if not self:GetSpecialValueFor("talent") == 1 then
+		target,point = self:FindValidPoint( point )
+	end
 	local channel = self:GetChannelTime()
 	local leaptime = self:GetSpecialValueFor( "airtime_duration" )
-
-	-- add modifier
 	caster:AddNewModifier(
 		caster, -- player source
 		self, -- ability source
@@ -201,14 +172,10 @@ function dawnbreaker_solar_guardian_lua:OnSpellStart()
 		} -- kv
 	)
 
-	-- store point
 	self.point = point
 end
 
---------------------------------------------------------------------------------
--- Ability Channeling
 function dawnbreaker_solar_guardian_lua:OnChannelFinish( interrupted )
-	-- unit identifier
 	local caster = self:GetCaster()
 
 	if interrupted then
@@ -219,10 +186,8 @@ function dawnbreaker_solar_guardian_lua:OnChannelFinish( interrupted )
 		return
 	end
 
-	-- load data
 	local duration = self:GetSpecialValueFor( "airtime_duration" )
 
-	-- add leap modifier
 	caster:AddNewModifier(
 		caster, -- player source
 		self, -- ability source

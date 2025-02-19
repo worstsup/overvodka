@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_dawnbreaker_solar_guardian_lua = class({})
 
 --------------------------------------------------------------------------------
@@ -181,7 +170,7 @@ end
 
 function modifier_dawnbreaker_solar_guardian_lua:PlayEffects2( point, radius )
 	-- Get Resources
-	local particle_cast = "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_aoe.vpcf"
+	local particle_cast = "particles/dvoreckov_qqe.vpcf"
 	local sound_cast = "suda"
 
 	-- Get Data

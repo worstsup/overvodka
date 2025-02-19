@@ -73,50 +73,54 @@ function COverthrowGameMode:SpecialItemAdd( event )
 
 	local tier1 = 
 	{
-		"item_keen_optic",				--
-		"item_broom_handle",			--
-		"item_arcane_ring",				--
-		"item_chipped_vest",			--
-		"item_lesh",			--
+		"item_lesh",
+		"item_chapman_blue",
+		"item_chapman_red",
+		"item_chapman_green",
+		"item_chapman_indigo",
+		"item_chapman_pink",
+		"item_byebye"
 	}
 
 	local tier2 =
 	{
-		"item_ring_of_aquila",			--
-		"item_lesh",			--
-		"item_dragon_scale",			--
-		"item_vambrace",				--
-		"item_misericorde",				-- 
+		"item_lesh",
+		"item_chapman_blue",
+		"item_chapman_red",
+		"item_chapman_green",
+		"item_chapman_indigo",
+		"item_chapman_pink"
 	}
 
 	local tier3 =
 	{
 		"item_lesh",
-		"item_paladin_sword",			--
-		"item_titan_sliver",			--
-		"item_nemesis_curse",			--
+		"item_burger_sobolev",
+		"item_burger_oblomoff",
+		"item_burger_larin",
+		"item_chapman_blue",
+		"item_chapman_red",
+		"item_chapman_green",
+		"item_chapman_indigo",
+		"item_chapman_pink"
 	}
 
 	local tier4 =
 	{
-		"item_timeless_relic",			--
-		"item_ascetic_cap",				--
-		"item_lesh",					--
-		"item_spy_gadget",				-- telescope
-		"item_trickster_cloak",			--
-		"item_mind_breaker",		--
+		"item_lesh",
+		"item_cubin",
+		"item_burger_sobolev",
+		"item_burger_oblomoff",
+		"item_burger_larin"
 	}
 
 	local tier5 =
 	{
-		"item_lesh",				--
-		"item_desolator_2",				--
-		"item_seer_stone",				--
-		"item_apex",					--
-		"item_fallen_sky",				-- arcanist's armor
-		"item_pirate_hat",				--
-		"item_ex_machina",				--
-		"item_panic_button",			-- magic lamp
+		"item_lesh",
+		"item_cubin",
+		"item_burger_sobolev",
+		"item_burger_oblomoff",
+		"item_burger_larin"
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )

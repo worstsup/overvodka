@@ -118,10 +118,10 @@ end
 function modifier_invoker_ghost_walk_lua:OnAbilityExecuted( params )
 	if IsServer() then
 		if params.unit~=self:GetParent() then return end
-		if params.ability:GetAbilityName() == "invoker_wex_lua" then return end
-		if params.ability:GetAbilityName() == "invoker_quas_lua" then return end
-		if params.ability:GetAbilityName() == "invoker_exort_lua" then return end
-		if params.ability:GetAbilityName() == "invoker_invoke_lua" then return end
+		if params.ability:GetAbilityName() == "dvoreckov_w" then return end
+		if params.ability:GetAbilityName() == "dvoreckov_q" then return end
+		if params.ability:GetAbilityName() == "dvoreckov_e" then return end
+		if params.ability:GetAbilityName() == "dvoreckov_r" then return end
 		self:Destroy()
 	end
 end

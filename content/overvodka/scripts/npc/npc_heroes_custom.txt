@@ -1,6 +1,0 @@
-"DOTAHeroes"
-{
-	"npc_dota_hero_alchemist"
-	{
-	}
-}

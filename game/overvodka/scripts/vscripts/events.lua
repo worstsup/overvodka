@@ -77,6 +77,13 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
 		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_invoker" then
+			local cigarette = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/dvoreckov/cigarette.vmdl"})
+				cigarette:FollowEntity(spawnedUnit, true)
+				cigarette:SetParent(spawnedUnit, "attach_mouth")
+				cigarette:SetLocalOrigin(Vector(1, -1, 0))
+				cigarette:SetLocalAngles(0, 0, 0)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_juggernaut" and golovach_spawned == 0 then
 			spawnedUnit:FindAbilityByName("golovach_innate"):StartCooldown(spawnedUnit:FindAbilityByName("golovach_innate"):GetCooldown(1))
 			golovach_spawned = golovach_spawned + 1
@@ -97,10 +104,7 @@ function COverthrowGameMode:OnNPCSpawned( event )
 	end
 	if spawnedUnit.bFirstSpawned == nil then
       	spawnedUnit.bFirstSpawned = true
-      	if spawnedUnit:IsRealHero() then
-      		ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, spawnedUnit:GetPlayerOwner())
-      	end
-            local ab = spawnedUnit:FindAbilityByName("sidet")
+        local ab = spawnedUnit:FindAbilityByName("sidet")
 		if ab then
             	ab:SetLevel(1)
 		end

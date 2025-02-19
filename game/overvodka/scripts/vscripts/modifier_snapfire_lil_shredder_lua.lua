@@ -154,7 +154,7 @@ end
 
 function modifier_snapfire_lil_shredder_lua:GetModifierProjectileName()
 	if self:GetStackCount()<=0 then return end
-	return "particles/units/heroes/hero_snapfire/hero_snapfire_shells_projectile.vpcf"
+	return "particles/econ/items/snapfire/snapfire_fall20_immortal/snapfire_fall20_immortal_lil_projectile.vpcf"
 end
 
 function modifier_snapfire_lil_shredder_lua:GetModifierOverrideAttackDamage()

@@ -137,12 +137,13 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/viper_base_attack_frozen.vpcf", context )
 		PrecacheResource( "particle", "particles/rostik_attack.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf", context )
-		PrecacheResource( "particle", "particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_freezing_field_snow_arcana1_shard.vpcf", context )
+		PrecacheResource( "particle", "pparticles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_nether_swap_v3_explosion.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/lifestealer/lifestealer_immortal_backbone_gold/lifestealer_immortal_backbone_gold_rage.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", context)
 		PrecacheResource( "particle", "particles/kotl_ti10_blinding_light_groundring_new.vpcf", context)
 		PrecacheResource( "particle", "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", context )
+		PrecacheResource("particle_folder",  "particles/booom", context )
 		PrecacheResource("particle_folder",  "particles/units/heroes/hero_alchemist", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_dragon_knight", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_venomancer", context )
@@ -172,10 +173,18 @@ function Precache( context )
 		PrecacheResource( "model", "models/elixir_collector.vmdl", context )
 		PrecacheResource( "model", "bmw/models/heroes/bm/bmwe90.vmdl", context )
 		PrecacheResource( "model", "peterka/girlv2.vmdl", context )
+		PrecacheResource( "model", "models/dvoreckov/dvoreckov.vmdl", context )
+		PrecacheResource( "model", "models/dvoreckov/cigarette.vmdl", context )
 		PrecacheResource( "model", "peterka/5opka.vmdl", context )
 		PrecacheResource( "model", "pvz/peashooter.vmdl", context )
 		PrecacheResource( "model", "pvz/dave.vmdl", context )
-		PrecacheResource( "model", "models/heroes/mars/mars_soldier.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_haste01.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_arcane.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_doubledamage01.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_illusion01.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_invisibility01.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_regeneration01.vmdl", context )
+		PrecacheResource( "model", "models/props_gameplay/rune_shield01.vmdl", context )
 		PrecacheResource( "model", "models/props_consumables/balloons/donkey_2022/donkey_2022.vmdl", context )
 		PrecacheResource( "model", "models/props_consumables/balloons/donkey_2022/donkey_2022_fx.vmdl", context )
 		PrecacheResource( "model", "models/props_consumables/balloons/donkey_dire_2022/donkey_dire_2022.vmdl", context )
@@ -193,7 +202,7 @@ function Precache( context )
 		PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_harpy_a/n_creep_harpy_a.vmdl", context )
 		PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_harpy_b/n_creep_harpy_b.vmdl", context )
 		PrecacheResource( "model", "models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl", context )
-		PrecacheResource( "model", "models/items/courier/hamster_courier/hamster_courier_lv4.vmdl", context )
+		PrecacheResource( "model", "models/items/courier/hamster_courier/hamster_courier_lv7.vmdl", context )
 		PrecacheResource( "model", "models/heroes/troll_warlord/troll_warlord.vmdl", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf", context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf", context )
@@ -1181,23 +1190,17 @@ function COverthrowGameMode:ExecuteOrderFilter( filterTable )
 			-- determine if we can scoop the neutral or not
 			-- we need either a free backpack slot or a free neutral item slot
 			local bAllowPickup = false
-			local hNeutralItem = hero:GetItemInSlot( DOTA_ITEM_NEUTRAL_SLOT )
-			if hNeutralItem == nil then
+			local numBackpackItems = 0
+			for nItemSlot = 0,DOTA_ITEM_INVENTORY_SIZE - 1 do 
+				local hItem = hero:GetItemInSlot( nItemSlot )
+				if hItem and hItem:IsInBackpack() then
+					numBackpackItems = numBackpackItems + 1
+				end
+			end
+			--print( '^^^Backpack slots = ' .. numBackpackItems )
+			if numBackpackItems < 3 then
 				bAllowPickup = true
-				--print( '^^^Empty neutral slot!' )
-			else
-				local numBackpackItems = 0
-				for nItemSlot = 0,DOTA_ITEM_INVENTORY_SIZE - 1 do 
-					local hItem = hero:GetItemInSlot( nItemSlot )
-					if hItem and hItem:IsInBackpack() then
-						numBackpackItems = numBackpackItems + 1
-					end
-				end
-				--print( '^^^Backpack slots = ' .. numBackpackItems )
-				if numBackpackItems < 3 then
-					bAllowPickup = true
-				end
-			end		
+			end
 
 			if bAllowPickup then
 				--print("inventory has space")

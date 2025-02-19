@@ -10,6 +10,7 @@ function Meteor(keys)
 	local meteor_count = 1
 	local distince = 1050
 	local projectile_direction = (target - caster:GetAbsOrigin()):Normalized()
+	projectile_direction.z = 0
 	caster:EmitSound("penal")
 	tartar = {}
 	local arrow_projectile = {

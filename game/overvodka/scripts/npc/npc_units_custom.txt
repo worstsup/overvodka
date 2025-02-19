@@ -785,7 +785,7 @@
 	"npc_hamster"
 	{
 		"BaseClass" "npc_dota_creature"
-		"Model" "models/items/courier/hamster_courier/hamster_courier_lv4.vmdl"
+		"Model" "models/items/courier/hamster_courier/hamster_courier_lv7.vmdl"
 		"ModelScale" "3"
 		"Level"	"1"
 		"IsAncient"					"1"

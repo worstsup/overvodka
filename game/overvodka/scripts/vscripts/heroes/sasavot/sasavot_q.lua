@@ -114,6 +114,9 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 		FIND_ANY_ORDER,
 		false)
 	target:AddNewModifier( self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun_duration } )
+	if self:GetCaster():HasScepter() then
+		self:GetCaster():PerformAttack(target, true, true, true, true, true, false, true)
+	end
 	local dmg = damage + self:GetCaster():GetMaxHealth() * health_damage * 0.01
 	for _,unit in pairs(enemies) do
 		local damageTable = {
@@ -124,9 +127,6 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 			ability = self, --Optional.
 		}
 		ApplyDamage(damageTable)
-		if self:GetCaster():HasScepter() then
-			self:GetCaster():PerformAttack(unit, true, true, true, true, true, false, true)
-		end
 	end
 
 	-- stun

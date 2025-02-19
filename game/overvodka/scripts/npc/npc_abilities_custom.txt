@@ -245,7 +245,7 @@
                            "MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
                            "MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
                            "MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-                           "MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
+                           "MODIFIER_STATE_OUT_OF_GAME"			"MODIFIER_STATE_VALUE_ENABLED"
                      }
                 }
 
@@ -832,6 +832,7 @@
 				}
 				"bonus_movespeed"	"20 25 30"
 				"model_scale"     "1.5"
+				"magresist"		  "50"
 		}
 	 
 		"OnSpellStart"
@@ -884,6 +885,10 @@
 			"States"
 				{
 					"MODIFIER_STATE_DEBUFF_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			"Properties"
+				{
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magresist"
 				}
 			}
 		}
@@ -3621,10 +3626,10 @@
 	//=================================================================================================================
 	// РЭП
 	//=================================================================================================================
-	"invoker_quas_lua"
+	"dvoreckov_q"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_quas.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"materka"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
@@ -3640,16 +3645,16 @@
 		"AbilityCastAnimation"			"ACT_INVALID"
 		"AbilityValues"
 		{
-				"health_regen_per_instance"	"3 5 7 9 11 13 15"
+				"health_regen_per_instance"	"3 6 9 12 15 18 21"
 		}
 	}
 	//=================================================================================================================
 	// СМЕШАТЬ
 	//=================================================================================================================
-	"invoker_invoke_lua"
+	"dvoreckov_r"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_invoke.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"borya"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -3670,19 +3675,19 @@
 				"mana_cost_scepter"			"0"
 		}
 	}
-	"invoker_empty_1_lua"
+	"dvoreckov_empty_1"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_invoke.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"invoker_empty1"
 		"MaxLevel"						"0"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 	}
-	"invoker_empty_2_lua"
+	"dvoreckov_empty_2"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_invoke.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"invoker_empty2"
 		"MaxLevel"						"0"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -3691,10 +3696,10 @@
 	//=================================================================================================================
 	// АЛКОГОЛЬ
 	//=================================================================================================================
-	"invoker_wex_lua"
+	"dvoreckov_w"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_wex_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"alko"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
@@ -3713,14 +3718,14 @@
 				"attack_speed_per_instance"
 				{
 				"value"	"0"
-				"special_bonus_facet_invoker_agnostic"	"5 10 15 20 25 30 35"
-				"RequiresFacet"					"invoker_agnostic"
+				"special_bonus_facet_invoker_exort_focus"	"5 10 15 20 25 30 35"
+				"RequiresFacet"					"invoker_exort_focus"
 				}
 				"cdr"
 				{
 				"value"	"0"
-				"special_bonus_facet_invoker_elitist"	"1 2 3 4 5 6 7"
-				"RequiresFacet"					"invoker_elitist"
+				"special_bonus_facet_invoker_wex_focus"	"2 3 4 5 6 7 8"
+				"RequiresFacet"					"invoker_wex_focus"
 				}
 				"move_speed_per_instance"	"2 3 4 5 6 7 8"
 		}
@@ -3728,10 +3733,10 @@
 	//=================================================================================================================
 	// НИКОТИН
 	//=================================================================================================================
-	"invoker_exort_lua"
+	"dvoreckov_e"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_exort_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_orbs"
 		"AbilityTextureName"			"wakas"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
@@ -3750,14 +3755,14 @@
 			"bonus_damage_per_instance"	
 			{
 				"value"	"0"
-				"special_bonus_facet_invoker_agnostic"	"5 10 15 20 25 30 35"
-				"RequiresFacet"					"invoker_agnostic"
+				"special_bonus_facet_invoker_exort_focus"	"5 10 15 20 25 30 35"
+				"RequiresFacet"					"invoker_exort_focus"
 			}
 			"dmg"
 			{
 				"value"	"0"
-				"special_bonus_facet_invoker_elitist"	"1 2 3 4 5 6 7"
-				"RequiresFacet"					"invoker_elitist"
+				"special_bonus_facet_invoker_wex_focus"	"1 2 3 4 5 6 7"
+				"RequiresFacet"					"invoker_wex_focus"
 			}
 		}
 	}
@@ -3897,6 +3902,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"AbilityCastRange"				"900"
@@ -3959,7 +3965,7 @@
 					"value" 				"6"
 					"special_bonus_unique_abaddon_2" "+3"
 				}
-				"attack_speed_bonus"		"300"
+				"attack_speed_bonus"		"350"
 				"attack_range_bonus"
 				{
 					"value"	"200 225 250 275 300 325 350"
@@ -3992,16 +3998,12 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"FightRecapLevel"				"1"
-		"MaxLevel"					"1"
-		"AbilitySound"					"Hero_Undying.FleshGolem"
+		"MaxLevel"						"1"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 		"AbilityCooldown"				"70"
 		"AbilityManaCost"				"200"
 		"AbilityValues"
 		{
-				"slow"						"40"
-				"damage"					"25"
-				"slow_duration"					"6"
 				"str_percentage"
 				{
 					"value"	"40 45 50 55 60 65 70"
@@ -4010,16 +4012,7 @@
 				"duration"
 				{
 					"value"	"15"
-					"levelkey"				"quaslevel"
 				}
-				"spawn_rate"				"3"
-				"zombie_radius"			"400"
-				"movement_bonus"			"30"
-				"zombie_multiplier"			"2"
-				"remnants_aura_radius"		"375"
-				"remnants_health_damage_pct"			"9"
-				"remnants_max_health_heal_pct_hero"		"15"
-				"remnants_max_health_heal_pct_non_hero"		"2"
 		}
 	}
 	//=================================================================================================================
@@ -4042,6 +4035,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.25"
 		"AbilityCooldown"				"30"
@@ -4060,7 +4054,7 @@
 				"knockback_height"		"0"
 				"damage"
 				{
-					"value"	"50 100 150 200 300 350 400"
+					"value"	"100 150 200 300 350 400 450"
 					"levelkey"				"quaslevel"
 				}
 		}
@@ -4081,6 +4075,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_5"
 		"AbilityCastRange"				"10000"
 		"AbilityCastPoint"				"0.1 0.1 0.1 0.1"
 		"AbilityChannelTime"			"0.5"
@@ -4112,6 +4107,11 @@
 					"value"	"0.8 1.0 1.2 1.4 1.6 1.8 2.0"
 					"levelkey"				"quaslevel"
 				}
+				"talent"
+				{
+					"value"	"0"
+					"special_bonus_unique_invoker_additional_chaos_meteors" "+1"
+				}
 				"max_offset_distance"			"100"
 		}
 	}
@@ -4141,7 +4141,7 @@
 		{
 				"duration"
 				{
-					"value"	"8.0 9.0 10.0 11.0 12.0 13.0 14.0"
+					"value"	"9.0 10.0 11.0 12.0 13.0 14.0 15.0"
 					"levelkey"				"quaslevel"
 				}
 				"area_of_effect"		"0"
@@ -4559,6 +4559,7 @@
 		"AbilityManaCost"				"300"
 		"HasScepterUpgrade"				"1"
         "AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_4"
         "IsOnCastBar"                   "1"
         "AbilityCooldown"               "100"
         "AbilityChannelTime"            "9.0"
@@ -7478,7 +7479,7 @@
 		"MaxLevel"						"1"
 		"IsBreakable"					"0"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
     	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"AbilityCooldown"				"0"
@@ -7486,7 +7487,7 @@
 		{
 				"gold"
 				{
-					"value"	"100"
+					"value"	"200"
 				}
 		}
 	}
@@ -12690,7 +12691,7 @@
 				}
 				"ally_lift_duration"		"1.0"
 				"ally_range"				"750 875 1000 1125"
-				"enemy_range"				"375 500 625 750"
+				"enemy_range"				"400 475 550 625"
 				"enemy_lift_duration"		"0.8 1.2 1.6 2.0"
 				"fall_animation"			"0.2"
 				"lift_animation"			"0.2"
@@ -12834,8 +12835,65 @@
 			"dur_tooltip"	"5"
 			"pct_tooltip"
 			{
-				"value"	"40"
+				"value"	"30"
 				"special_bonus_unique_morphling_waveform_cooldown" "+40"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Ability: Bloodseeker's Thirst
+	//=================================================================================================================
+	"bloodseeker_sanguivore"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
+		"AbilityCastPoint"				"0.3"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"						"1"
+		"Innate"						"1"
+		"IsBreakable"					"1"
+		"HasShardUpgrade"				"0"
+		"HasScepterUpgrade"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"base_heal"							"25"
+			"heal_hp_pct_per_level"				
+			{
+				"value"										"1.5"
+
+			}
+			
+			"creep_lifesteal_reduction_pct"		"40"
+			"deny_lifesteal_reduction_pct"						"0"
+
+			"half_bonus_aoe"		
+			{
+				"value"		"300"
+				"affected_by_aoe_increase"	"1"
+			}
+
+			"max_hp_percent_heal_tooltip"
+			{
+				"dynamic_value"				"true"
+			}
+			"barrier_decay_pct"			
+			{
+				"value"								"0"
+				"special_bonus_shard"				"0"
+			}
+			"max_shield_pct"
+			{
+				"value"								"0"
+				"special_bonus_shard"				"0"
+			}
+			"pure_damage_lifesteal_pct"
+			{
+				"value"								"0"
+				"special_bonus_scepter"				"0"
 			}
 		}
 	}
