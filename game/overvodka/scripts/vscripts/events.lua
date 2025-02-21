@@ -36,7 +36,6 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		else
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_TRIOS
 		end
-		--print( "Kills to win = " .. tostring(self.TEAM_KILLS_TO_WIN) )
 
 		CustomNetTables:SetTableValue( "game_state", "victory_condition", { kills_to_win = self.TEAM_KILLS_TO_WIN } );
 
@@ -339,9 +338,6 @@ end
 
 function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 	--print("Setting time for respawn")
-	if killedUnit:GetUnitName() == "npc_dota_lone_druid_bear" then
-		extraTime = 1000
-	end
 	if killedTeam == self.leadingTeam and self.isGameTied == false then
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -15

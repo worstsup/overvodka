@@ -62,7 +62,7 @@ function modifier_dvoreckov_q:OnRefresh( kv )
 end
 
 function modifier_dvoreckov_q:OnIntervalThink()
-	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
 		self.regen = self.regen_sss
 	else
 		self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" )
@@ -154,7 +154,7 @@ function modifier_dvoreckov_w:OnRefresh( kv )
 end
 
 function modifier_dvoreckov_w:OnIntervalThink()
-	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
 		self.as_bonus = self.as_bonus_sss
 		self.ms_bonus = self.ms_bonus_sss
 		self.cdr = self.cdr_sss
@@ -257,7 +257,7 @@ function modifier_dvoreckov_e:OnRefresh( kv )
 	self:StartIntervalThink(0.5)
 end
 function modifier_dvoreckov_e:OnIntervalThink()
-	if self:GetParent():HasModifier("modifier_invoker_ghost_walk_lua") then
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
 		self.damage = self.damage_sss
 		self.dmg = self.dmg_sss
 	else
@@ -297,16 +297,16 @@ ability_manager = {}
 
 orb_manager.orb_order = "qwe"
 orb_manager.invoke_list = {
-	["qqq"] = "lion_mana_drain_lua",
-	["qqw"] = "invoker_ghost_walk_lua",
-	["qqe"] = "dawnbreaker_solar_guardian_lua",
-	["www"] = "dark_seer_vacuum_lua",
-	["qww"] = "ogre_magi_ignite_lua",
-	["wwe"] = "pudge_rot_lua",
-	["eee"] = "snapfire_lil_shredder_lua",
-	["qee"] = "drow_ranger_gust_lua",
-	["wee"] = "imba_undying_flesh_golem",
-	["qwe"] = "Megumin_ExplosionMagic",
+	["qqq"] = "dvoreckov_qqq",
+	["qqw"] = "dvoreckov_qqw",
+	["qqe"] = "dvoreckov_qqe",
+	["www"] = "dvoreckov_www",
+	["qww"] = "dvoreckov_qww",
+	["wwe"] = "dvoreckov_wwe",
+	["eee"] = "dvoreckov_eee",
+	["qee"] = "dvoreckov_qee",
+	["wee"] = "dvoreckov_wee",
+	["qwe"] = "dvoreckov_qwe",
 }
 orb_manager.modifier_list = {
 	["q"] = "modifier_dvoreckov_q",

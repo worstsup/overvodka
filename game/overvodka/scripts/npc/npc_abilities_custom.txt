@@ -3769,7 +3769,7 @@
 	//=================================================================================================================
 	// ПЕРЕДОЗ
 	//=================================================================================================================
-	"pudge_rot_lua"
+	"dvoreckov_wwe"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
@@ -3778,7 +3778,7 @@
 		"MaxLevel"					"1"
 		"BaseClass"					"ability_lua"
 		"AbilityTextureName"			"poros"
-		"ScriptFile"					"pudge_rot_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityManaCost"				"50"
 		"precache"
 		{
@@ -3831,10 +3831,10 @@
 	//=================================================================================================================
 	// ИСПИТЬ ЧАЙ
 	//=================================================================================================================
-	"lion_mana_drain_lua"
+	"dvoreckov_qqq"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"lion_mana_drain_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"mate"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
@@ -3862,7 +3862,7 @@
 				"duration"					"3.0"
 				"mana_per_second"
 				{
-					"value"	"20 40 60 80 100 120 140"
+					"value"	"40 60 80 100 120 140 160"
 					"levelkey"				"quaslevel"
 				}
 				"break_distance"
@@ -3882,10 +3882,10 @@
 	//=================================================================================================================
 	// ЧЕСТНАЯ ВОДКА
 	//=================================================================================================================
-	"ogre_magi_ignite_lua"
+	"dvoreckov_qww"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"ogre_magi_ignite_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"vodka"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
@@ -3917,11 +3917,11 @@
 					"value"	"40 50 60 70 80 90 100"
 					"levelkey"				"quaslevel"
 				}
-				"slow_movement_speed_pct"		"-20"
+				"slow_movement_speed_pct"		"-25"
 				"projectile_speed"		"1000"
 				"stun_duration"
 				{
-					"value"	"0.8 1.0 1.2 1.4 1.6 1.8 2.0"
+					"value"	"1.0 1.2 1.4 1.6 1.8 2.0 2.2"
 					"levelkey"				"quaslevel"
 				}
 		}
@@ -3929,10 +3929,10 @@
 	//=================================================================================================================
 	// ЗАКИНУТЬ СНЮС
 	//=================================================================================================================
-	"snapfire_lil_shredder_lua"
+	"dvoreckov_eee"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"snapfire_lil_shredder_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"dima"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -3989,10 +3989,10 @@
 	//=================================================================================================================
 	// Я ДРОЧУ
 	//=================================================================================================================
-	"imba_undying_flesh_golem"
+	"dvoreckov_wee"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"hero_undying.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"zombill"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -4006,7 +4006,7 @@
 		{
 				"str_percentage"
 				{
-					"value"	"40 45 50 55 60 65 70"
+					"value"	"50 55 60 65 70 75 80"
 					"levelkey"				"quaslevel"
 				}
 				"duration"
@@ -4018,10 +4018,10 @@
 	//=================================================================================================================
 	// ПОШЛА ТЫ НАХУЙ!
 	//=================================================================================================================
-	"drow_ranger_gust_lua"
+	"dvoreckov_qee"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"drow_ranger_gust_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"zavali"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -4062,10 +4062,10 @@
 	//=================================================================================================================
 	// ПОЗВОНИЛ ШАЛАВЕ
 	//=================================================================================================================
-	"dawnbreaker_solar_guardian_lua"
+	"dvoreckov_qqe"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"dawnbreaker_solar_guardian_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"vezde"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -4118,10 +4118,10 @@
 	//=================================================================================================================
 	// УГАДЫВАЮ
 	//=================================================================================================================
-	"invoker_ghost_walk_lua"
+	"dvoreckov_qqw"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"invoker_ghost_walk_lua.lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"sosi"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -4141,7 +4141,7 @@
 		{
 				"duration"
 				{
-					"value"	"9.0 10.0 11.0 12.0 13.0 14.0 15.0"
+					"value"					"9.0 10.0 11.0 12.0 13.0 14.0 15.0"
 					"levelkey"				"quaslevel"
 				}
 				"area_of_effect"		"0"
@@ -4544,10 +4544,10 @@
 	//=================================================================================================================
 	// ВПИСКА
 	//=================================================================================================================
-	"Megumin_ExplosionMagic"
+	"dvoreckov_qwe"
     {
         "BaseClass"                     "ability_lua"
-        "ScriptFile"                    "ExplosionMagic.lua"
+        "ScriptFile"                    "heroes/dvoreckov/dvoreckov_abilities"
         "AbilityTextureName"            "vpiska"
         "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -4561,7 +4561,7 @@
         "AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_4"
 		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_4"
         "IsOnCastBar"                   "1"
-        "AbilityCooldown"               "100"
+        "AbilityCooldown"               "90"
         "AbilityChannelTime"            "9.0"
         "AbilityValues"
         {
@@ -5946,10 +5946,10 @@
 		}
 		
 	}
-	"dark_seer_vacuum_lua"
+	"dvoreckov_www"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"dark_seer_vacuum_lua"
+		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"tualet"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
