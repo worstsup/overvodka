@@ -8266,7 +8266,7 @@
 				"armor_per_stack"		"2 4 6 8"
 				"base_move_slow"		"18 20 22 24"
 				"move_slow_per_stack"	"3 6 9 12"
-				"stack_limit"			"4"
+				"stack_limit"			"5"
 				"goo_duration_creep"			"10.0"
 				"AbilityCastRange"
 				{
@@ -8280,7 +8280,7 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"	"12"
+					"value"	"11"
 					"special_bonus_unique_earthshaker" "-9"
 				}
 		}
@@ -8433,7 +8433,7 @@
 		"AbilityValues"
 		{
 				"burn_damage"			"15 30 45 60"
-				"burn_damage_pct"		"1.5 2.5 3.5 4.5"
+				"burn_damage_pct"		"2.0 3.0 4.0 5.0"
 				"burn_duration"			"4.0"
 				"break_duration"
 				{
@@ -8487,7 +8487,7 @@
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-			"damage_per_armor"			"0.25"
+			"damage_per_armor"			"0.30"
 		}
 	}
 	"earthshaker_slugger"

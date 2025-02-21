@@ -26,8 +26,9 @@ function modifier_arsen_tg_blocker:OnCreated( kv )
 		self.origin = self.parent:GetOrigin()
 
 		-- replace model for even soldiers
-		self:GetParent():SetOriginalModel( "models/heroes/mars/mars_soldier.vmdl" )
+		self:GetParent():SetOriginalModel( "models/arsen/arsen_arena.vmdl" )
 		self:GetParent():SetRenderAlpha( 0 )
+		self:GetParent():SetModelScale( 1.4 )
 		self:GetParent().model = 1
 
 		-- Start interval

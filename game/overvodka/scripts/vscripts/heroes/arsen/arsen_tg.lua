@@ -12,11 +12,15 @@ function arsen_tg:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
+function arsen_tg:Precache( context )
+	PrecacheResource( "particle", "particles/arsen_tg.vpcf", context )
+end
 --------------------------------------------------------------------------------
 function arsen_tg:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
-
+	GridNav:DestroyTreesAroundPoint( point, self:GetSpecialValueFor("radius"), false )
 	CreateModifierThinker(
 		caster, -- player source
 		self, -- ability source

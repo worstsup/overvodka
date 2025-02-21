@@ -146,26 +146,15 @@ function modifier_arsen_tg_thinker:SummonBlockers()
 	end
 end
 
---------------------------------------------------------------------------------
--- Graphics & Animations
 function modifier_arsen_tg_thinker:PlayEffects()
-	-- Get Resources
-	local particle_cast = "particles/units/heroes/hero_mars/mars_arena_of_blood.vpcf"
+	local particle_cast = "particles/arsen_tg.vpcf"
 	local sound_cast = "tgk"
-	-- Hero_Mars.Block_Projectile
-
-	-- Get data
-	-- colloseum radius = radius + 50
 	local radius = self.radius + 50
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( radius, 0, 0 ) )
 	ParticleManager:SetParticleControl( effect_cast, 2, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 3, self:GetParent():GetOrigin() )
-
-	-- buff particle
 	self:AddParticle(
 		effect_cast,
 		false, -- bDestroyImmediately
@@ -174,7 +163,5 @@ function modifier_arsen_tg_thinker:PlayEffects()
 		false, -- bHeroEffect
 		false -- bOverheadEffect
 	)
-
-	-- Play sound
 	EmitSoundOn( sound_cast, self:GetParent() )
 end
