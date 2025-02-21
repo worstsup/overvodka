@@ -4523,7 +4523,7 @@
 		    }
 		    "radius"
 		    {
-		        "value"	"700"
+		        "value"	"600"
 		        "special_bonus_unique_disruptor_8" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
@@ -4937,7 +4937,7 @@
 				"radius"				"10000"
 				"duration"
 				{
-					"value"	"2.6 2.9 3.2 3.5"
+					"value"	"2.6 3.0 3.4 3.8"
 					"special_bonus_unique_gyrocopter_3" "+0.5"
 				}
 				"vision_radius"			"0"
@@ -5414,8 +5414,8 @@
 				"value"		"750"
 				"affected_by_aoe_increase"	"1"
 			}
-			"inside_radius_bonus_damage_pct"	"25"
-			"outside_radius_bonus_damage_pct"	"-25"
+			"inside_radius_bonus_damage_pct"	"20"
+			"outside_radius_bonus_damage_pct"	"-20"
 		}
 	}
 	"ursa_maul"
@@ -6077,13 +6077,12 @@
 				}
 				"schoolboys_hp"
 				{
-					"value"	"300 500 700 900"
-					"special_bonus_unique_phoenix_4" "+900"
+					"value"	"4 4 5 6"
+					"special_bonus_unique_phoenix_4" "+2"
 				}
 				"schoolboys_dmg"
 				{
 					"value"	"20 40 60 80"
-					"special_bonus_unique_phoenix_4" "+80"
 				}
 		}
 		"OnAbilityPhaseStart"
@@ -6097,7 +6096,6 @@
     		}
 		"OnSpellStart"
 		{
-					
 			"SpawnUnit"
 			{
 				"UnitName"		"npc_rivendare_1"
@@ -6405,7 +6403,7 @@
 				"schoolboys_hp"
 				{
 					"value"	"100 200 300 400"
-					"special_bonus_unique_phoenix_6" "+200"
+					"special_bonus_unique_phoenix_6" "+150"
 
 				}
 				"schoolboys_dmg"
@@ -8463,7 +8461,7 @@
 		"MaxLevel"						"1"
 		"AbilityValues"
 		{
-				"return_damage"				
+				"return_damage"
 				{
 					"value"	"50"
 					"CalculateSpellDamageTooltip"	"1"
@@ -9662,7 +9660,7 @@
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"70 60 50"
+		"AbilityCooldown"				"80 70 60"
 		"AbilityManaCost"				"150 200 250"
 		"AbilityValues"
 		{
@@ -9845,7 +9843,7 @@
     	"BaseClass"           "ability_lua"
     	"ScriptFile"          "heroes/cheater/custom_critical_strike.lua"
    		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-   		"AbilityCooldown"     "25"
+   		"AbilityCooldown"     "28"
    		"AbilityManaCost"     "80 100 120 140"
    		"FightRecapLevel"	  "1"
 		"MaxLevel"			  "4"
@@ -10587,7 +10585,7 @@
 				"cr"			"900 1000 1100 1200"
 				"freeze_duration"
 				{
-					"value"	"0.4"
+					"value"	"0.1 0.2 0.3 0.4"
 					"special_bonus_unique_juggernaut_blade_dance_lifesteal" "+0.2"
 				}
 				"freeze_cooldown"		"0.4"
@@ -11973,7 +11971,7 @@
 			"blaster_vision" "700"
         	"damage"
 			{
-				"value"	"125 200 275 350"
+				"value"	"150 200 250 300"
 			}
 			"int_damage"
 			{
@@ -12804,7 +12802,7 @@
 				}
 				"cooldown_reduction"
 				{
-					"value"	"25"
+					"value"	"15 20 25"
 				}
 				"add_blasters"	"2"
 				"blasters_damage_pct" "50 75 100"
@@ -12840,13 +12838,8 @@
 			}
 		}
 	}
-	//=================================================================================================================
-	// Ability: Bloodseeker's Thirst
-	//=================================================================================================================
 	"bloodseeker_sanguivore"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
 		"AbilityCastPoint"				"0.3"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
@@ -12855,27 +12848,20 @@
 		"IsBreakable"					"1"
 		"HasShardUpgrade"				"0"
 		"HasScepterUpgrade"				"0"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 			"base_heal"							"25"
 			"heal_hp_pct_per_level"				
 			{
 				"value"										"1.5"
-
 			}
-			
 			"creep_lifesteal_reduction_pct"		"40"
 			"deny_lifesteal_reduction_pct"						"0"
-
 			"half_bonus_aoe"		
 			{
 				"value"		"300"
 				"affected_by_aoe_increase"	"1"
 			}
-
 			"max_hp_percent_heal_tooltip"
 			{
 				"dynamic_value"				"true"

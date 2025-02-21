@@ -1304,7 +1304,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_damage"			"100"
+				"bonus_damage"			"85"
 				"corruption_armor"		"-10"
 				"corruption_duration"	"7.0"
 				"bonus_damage_per_kill"	"4"
@@ -1936,7 +1936,7 @@
     "ItemQuality"                   "epic"
     "AbilityValues"
     {
-            "bonus_strength"                    "45"
+            "bonus_strength"                    "40"
             "bonus_health"                      "0"
             "health_regen_percent_per_second"   "1.8"
             "bonus_damage"              "50"
@@ -2772,7 +2772,7 @@
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"BaseClass"					 	"item_datadriven"
 		"AbilityTextureName"			"recipe"
-		"ItemCost"						"500"
+		"ItemCost"						"100"
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_bablokrad"
 		"ItemRequirements"
@@ -2793,10 +2793,10 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"AbilityCooldown"				"60"
 		"AbilityCastRange"				"600"
-		"ItemCost"						"1500"
+		"ItemCost"						"1000"
 		"ItemPermanent"					"0"
-		"ItemInitialCharges"			"5"
-		"ItemDisplayCharges"			"5"
+		"ItemInitialCharges"			"3"
+		"ItemDisplayCharges"			"3"
 		"AbilityValues"
 		{
 			"gold"					"15"
@@ -2823,7 +2823,7 @@
 		"AbilityValues"
 		{
 			"radius"					"800"
-			"damage"					"2"
+			"damage"					"2.5"
 			"attack_destroy"			"10"
 			"duration"					"6"
 			"hp"						"450"
@@ -2831,7 +2831,7 @@
 			"mana_regen"				"6"
 			"cast_range"				"225"
 			"spell_lifesteal"			"20"
-			"mana_tooltip"				"8"
+			"mana_tooltip"				"10"
 			"lifesteal_multiplier"		"4"
 		}
 	}
@@ -3111,7 +3111,7 @@
 		"BaseClass"						"item_datadriven"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		"ItemCost"						"600"
+		"ItemCost"						"800"
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_drobe"
 
@@ -3238,7 +3238,7 @@
 	"item_recipe_hand_of_midas"
 	{
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"550"	
+		"ItemCost"						"450"	
 		"ItemShopTags"					""
 		"ItemAliases"					"hom"
 		"ItemRecipe"					"1"
@@ -3272,7 +3272,7 @@
 		"ItemDisassembleRule"				"DOTA_ITEM_DISASSEMBLE_NEVER"
 		"SpeciallyBannedFromNeutralSlot"		"1"
 		"AbilityManaCost"				"0"
-		"ItemCost"						"1000"
+		"ItemCost"						"900"
 		"ItemShopTags"					"attack_speed;hard_to_tag"
 		"ItemQuality"					"common"
 		"ItemAliases"					"hand of midas"

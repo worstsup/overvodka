@@ -1,6 +1,5 @@
 modifier_rivendare_lua = class({})
---------------------------------------------------------------------------------
--- Classifications
+
 function modifier_rivendare_lua:IsHidden()
 	return false
 end
@@ -13,13 +12,14 @@ function modifier_rivendare_lua:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_rivendare_lua:OnCreated( kv )
-	-- references
+	if not IsServer() then return end
+	self.k = 0
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
+	self.health_increments = 1
+	self.hero_attack_multiplier = 1
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
 	local nFXIndex = ParticleManager:CreateParticle( "particles/doom_bringer_doom_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
@@ -28,7 +28,7 @@ function modifier_rivendare_lua:OnCreated( kv )
 end
 
 function modifier_rivendare_lua:OnRefresh( kv )
-	-- references
+	if not IsServer() then return end
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -41,31 +41,76 @@ function modifier_rivendare_lua:OnDestroy( kv )
 
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_rivendare_lua:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
+		MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+        MODIFIER_PROPERTY_HEALTHBAR_PIPS,
+        MODIFIER_PROPERTY_DISABLE_HEALING,
+		MODIFIER_EVENT_ON_ATTACK_LANDED
 	}
 
 	return funcs
 end
+function modifier_rivendare_lua:OnAttackLanded(keys)
+    if not IsServer() then return end
+    if keys.target == self:GetParent() then
+        if keys.attacker:GetTeamNumber() == self:GetParent():GetTeamNumber() then
+            if self:GetParent():GetHealthPercent() > 50 then
+                self:GetParent():SetHealth(self:GetParent():GetHealth() - 10)
+            else 
+                self:GetParent():Kill(nil, keys.attacker)
+            end
+            return
+        end
+        local new_health = self:GetParent():GetHealth() - self.health_increments
+        if keys.attacker:IsRealHero() then
+            new_health = self:GetParent():GetHealth() - (self.health_increments * self.hero_attack_multiplier)
+        end
+        new_health = math.floor(new_health)
+        if new_health <= 0 then
+            self:GetParent():Kill(nil, keys.attacker)
+        else
+            self:GetParent():SetHealth(new_health)
+        end
+    end
+end
+
+function modifier_rivendare_lua:GetDisableHealing()
+    return 1
+end
+
+function modifier_rivendare_lua:GetModifierHealthBarPips()
+    return self:GetParent():GetMaxHealth()
+end
+
+function modifier_rivendare_lua:GetAbsoluteNoDamageMagical()
+    return 1
+end
+
+function modifier_rivendare_lua:GetAbsoluteNoDamagePhysical()
+    return 1
+end
+
+function modifier_rivendare_lua:GetAbsoluteNoDamagePure()
+    return 1
+end
+
 function modifier_rivendare_lua:OnIntervalThink()
-	-- find enemies
 	if self:GetParent():IsAlive() and not self:GetParent():IsInvisible() and not self:GetParent():IsOutOfGame() then
 		local enemies = FindUnitsInRadius(
-			self:GetParent():GetTeamNumber(),	-- int, your team number
-			self:GetParent():GetOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			0,	-- int, flag filter
-			0,	-- int, order filter
-			false	-- bool, can grow cache
+			self:GetParent():GetTeamNumber(),
+			self:GetParent():GetOrigin(),
+			nil,
+			self.radius,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			0,
+			0,
+			false
 		)
-
-	-- damage enemies
 		for _,enemy in pairs(enemies) do
 			local debuff = enemy:AddNewModifier(
 				self:GetParent(),
@@ -75,7 +120,14 @@ function modifier_rivendare_lua:OnIntervalThink()
 					duration = self.duration,
 				}
 			)
-
+			local Talented = self:GetParent():GetOwner():FindAbilityByName("special_bonus_unique_phoenix_dive_damage")
+			if Talented:GetLevel() == 1 then
+				if self.k % 10 == 0 then
+					self.damage = enemy:GetMaxHealth() * 8 * 0.01
+					ApplyDamage({ attacker = self:GetParent(), victim = enemy, damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility() })
+				end
+				self.k = self.k + 1
+			end
 		end
 	end
 end

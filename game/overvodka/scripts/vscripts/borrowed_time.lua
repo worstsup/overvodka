@@ -7,7 +7,6 @@ function BorrowedTimeActivate( event )
 	if caster:HasModifier("modifier_item_nullifier_mute") then return end
 	local threshold = ability:GetLevelSpecialValueFor( "hp_threshold" , ability:GetLevel() - 1  )
 	local hp = threshold * caster:GetMaxHealth() / 100
-	local cooldown = ability:GetCooldown( ability:GetLevel() )
 	local dur = ability:GetLevelSpecialValueFor( "duration" , ability:GetLevel() - 1  )
 	local strong = ability:GetLevelSpecialValueFor( "strong" , ability:GetLevel() - 1  )
 	local forbidden_items = 
@@ -16,17 +15,15 @@ function BorrowedTimeActivate( event )
                 "item_lesh",
                 "item_refresher"
             }
-	-- Apply the modifier
 	if caster:GetHealth() < hp and ability:GetCooldownTimeRemaining() == 0 then
 		if strong == 1 then
 			BorrowedTimePurge( event )
 		end
 		ability:ApplyDataDrivenModifier( caster, caster, "modifier_borrowed_time", { duration = dur })
-		ability:StartCooldown( cooldown )
+		ability:UseResources( false, false, false, true )
 		caster:Stop()
 		caster:EmitSound("secret")
 		if caster:HasScepter() then
-    -- Reset cooldown for abilities that is not rearm
         	for i = 0, caster:GetAbilityCount() - 1 do
             	local abil = caster:GetAbilityByIndex( i )
             	if abil and abil ~= event.ability then

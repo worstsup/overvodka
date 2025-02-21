@@ -2024,8 +2024,8 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "300"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "4"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
        
@@ -2098,8 +2098,8 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "500"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "4"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
        
@@ -2172,8 +2172,8 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "700"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "5"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
        
@@ -2246,8 +2246,8 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "900"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "6"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
        
@@ -2293,8 +2293,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "160"
-        "AttackDamageMax"       "160"
+        "AttackDamageMin"       "80"
+        "AttackDamageMax"       "80"
         "AttackRate"            "1.5"
         "AttackAnimationPoint"  "0.55"
         "AttackAcquisitionRange" "500"
@@ -2320,8 +2320,8 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "1800"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "8"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
        
@@ -2652,7 +2652,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "600"
+        "StatusHealth"          "550"
         "StatusHealthRegen"     "5"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
