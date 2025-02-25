@@ -325,11 +325,11 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 		"DOTA_Tooltip_ability_evelone_nose"		"ОГРОМНЫЙ НОСЯРА"
-
+"DOTA_Tooltip_ability_evelone_nose_Description" "Огромный нос Вадима чувствует каждого противника, находящегося перед ним на расстоянии %cone_radius%."
 		"DOTA_Tooltip_ability_evelone_r"		"ОЧЕРЕДНОЙ БАН"
-
+"DOTA_Tooltip_ability_evelone_r_Description" "Эвелон сгорает от очередного беспричинного бана его канала и начинает охоту на тупых админов твича, устраивая темную ночь на карте и ограничивая их обзор, получая свободное перемещение, бонус к скорости передвижения, а также накладывая безмолвие на всех врагов в радиусе %silence_radius% около него."
 		"DOTA_Tooltip_modifier_evelone_r"		"Очередной бан"
-
+"DOTA_Tooltip_modifier_evelone_r_Description" "Эвелон получает свободное перемещение, а его скорость передвижения увеличена."
 		"DOTA_Tooltip_ability_gaster_blaster"	"ГАСТЕР БЛАСТЕР"
 		"DOTA_Tooltip_ability_gaster_blaster_Description" "Санс призывает Гастер бластер в указанную точку, который спустя %blast_delay% сек. стреляет смертельным лучом в ближайшего видимого врага в радиусе %blaster_radius%. Если враг в радиусе не был найден, то бластер выстрелит в направлении Санса."
 		"DOTA_Tooltip_ability_gaster_blaster_damage" "УРОН: "
