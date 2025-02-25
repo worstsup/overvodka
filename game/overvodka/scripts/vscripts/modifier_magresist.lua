@@ -16,7 +16,7 @@ end
 
 function modifier_magresist:CheckState()
 	local state = {
-		[MODIFIER_STATE_MAGIC_IMMUNE] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
 	}
 
 	return state

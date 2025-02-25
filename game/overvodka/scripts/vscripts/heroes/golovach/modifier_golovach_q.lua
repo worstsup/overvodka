@@ -1,7 +1,5 @@
 modifier_golovach_q = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_golovach_q:IsHidden()
 	return true
 end
@@ -14,10 +12,7 @@ function modifier_golovach_q:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_golovach_q:OnCreated( kv )
-	-- references
 	self.reduction_back = self:GetAbility():GetSpecialValueFor( "back_damage_reduction" )
 	self.angle_back = self:GetAbility():GetSpecialValueFor( "back_angle" )
 	self.max_threshold = self:GetAbility():GetSpecialValueFor( "quill_release_threshold" )
@@ -27,7 +22,6 @@ function modifier_golovach_q:OnCreated( kv )
 end
 
 function modifier_golovach_q:OnRefresh( kv )
-	-- references
 	self.reduction_back = self:GetAbility():GetSpecialValueFor( "back_damage_reduction" )
 	self.angle_back = self:GetAbility():GetSpecialValueFor( "back_angle" )
 	self.max_threshold = self:GetAbility():GetSpecialValueFor( "quill_release_threshold" )
@@ -37,8 +31,6 @@ function modifier_golovach_q:OnDestroy( kv )
 
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_golovach_q:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
@@ -73,8 +65,6 @@ function modifier_golovach_q:OnAttackLanded( params )
 	end
 end
 
---------------------------------------------------------------------------------
--- helper
 function modifier_golovach_q:ThresholdLogic( damage, target )
 	local random_chance = RandomInt(1, 2)
 	if damage > 0 and random_chance == 1 then
@@ -103,14 +93,10 @@ function modifier_golovach_q:ThresholdLogic( damage, target )
 		end
 	end
 end
---------------------------------------------------------------------------------
--- Graphics & Animations
 function modifier_golovach_q:PlayEffects( bBack, direction )
-	-- Get Resources
 	local particle_cast_back = "particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
 	local particle_cast_side = "particles/units/heroes/hero_bristleback/bristleback_side_dmg.vpcf"
 	local sound_cast = "Hero_Bristleback.Bristleback"
-
 	local effect_cast = nil
 	if bBack then
 		effect_cast = ParticleManager:CreateParticle( particle_cast_back, PATTACH_ABSORIGIN, self:GetParent() )

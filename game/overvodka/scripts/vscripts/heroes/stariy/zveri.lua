@@ -17,12 +17,12 @@ function Tricks (keys)
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
+	if target:TriggerSpellAbsorb(ability) then return end
 	local damage = ability:GetSpecialValueFor("damage")
 	local disarm_duration = ability:GetSpecialValueFor("disarm_duration")
 	local hex_duration = ability:GetSpecialValueFor("hex_duration")
 	local stun_duration = ability:GetSpecialValueFor("stun_duration")
 	local silence_duration = ability:GetSpecialValueFor("disarm_duration")
-	if target:TriggerSpellAbsorb(ability) then return end
 
 	if Chance == 1 then
 		ability:ApplyDataDrivenModifier( target, target, "modifier_stariy_disarmed", { Duration = disarm_duration })

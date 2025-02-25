@@ -626,7 +626,7 @@
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO | DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"vovacho"
-		"AbilityCooldown"				"25 23 21 19"
+		"AbilityCooldown"				"30 27 24 21"
 		"AbilityManaCost"				"75 105 135 165"
 		"precache"
 		{
@@ -795,102 +795,38 @@
 	//==========================
 	"ebanko_r"
 	{
-		"BaseClass"             "ability_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityTextureName"    "minis"
-		"AbilityType"           "DOTA_ABILITY_TYPE_ULTIMATE"
-		"MaxLevel"              "3"
-		"HasScepterUpgrade"     "1"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ebanko/ebanko_r"
+		"AbilityBehavior"			    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"AbilityTextureName"			"minis"
+		"AbilityType"		  			"DOTA_ABILITY_TYPE_ULTIMATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCooldown"			    "60 55 50"
+		"HasScepterUpgrade"				"1"
+		"AbilityManaCost"				"75 150 225"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"precache"
+		"AbilityValues"
 		{
-			"particle"    "particles/econ/items/luna/luna_selemene_returns/luna_selemene_eye_2.vpcf"
-			"particle"    "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf"
-			"particle"    "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok_drips.vpcf"
-			"particle"    "particles/repel/omniknight_repel_buff.vpcf"
-		}
-		"AbilityCastRange"              "0"
-		"AbilityCastPoint"              "0.0 0.0 0.0"
-		"AbilityCooldown"               "60 55 50"
-		"AbilityValues"    
-		{
-				"bonus_damage"
-				{
-					"value"	"60 100 140"
-					"special_bonus_unique_bane_9" "+75"
-				}
-				"bonus_attack_speed"        "80 120 160"
-				"duration"
-				{
-					"value"			"9 11 13"
-					"special_bonus_unique_alchemist_4" "+5"
-				}
-				"hp_regen"     
-				{
-					"value"			"0"
-					"special_bonus_unique_abaddon_5" "+30"
-				}
-				"bonus_movespeed"	"20 25 30"
-				"model_scale"     "1.5"
-				"magresist"		  "50"
-		}
-	 
-		"OnSpellStart"
-		{
-			"RunScript"
+			"bonus_damage"
 			{
-				"ScriptFile"	"heroes/ebanko/ebanko_r.lua"
-				"Function"		"ebanko_r"
+				"value"	"50 80 110"
+				"special_bonus_unique_bane_9" "+75"
 			}
-			
-			"FireSound"
+			"bonus_attack_speed"        "80 120 160"
+			"duration"
 			{
-				"EffectName" "ebi_menya"
-				"Target"     "CASTER"
+				"value"			"9 11 13"
+				"special_bonus_unique_alchemist_4" "+5"
 			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_ebanko_r"
+			"hp_regen"     
 			{
-				"IsBuff" "1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
-					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%hp_regen"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%bonus_movespeed"
-				}
+				"value"			"0"
+				"special_bonus_unique_abaddon_5" "+30"
 			}
-	 
-			"modifier_ebanko_r_effect"
-			{
-				"IsHidden"			"1"
-				"IsBuff"            "1"
-				"EffectName"        "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok_drips.vpcf"
-				"EffectAttachType"    "follow_origin"
-			}
-	 
-			"modifier_ebanko_r_effect2"
-			{
-				"IsHidden"			"1"
-				"IsBuff" "1"
-				"EffectName"    "particles/bloodseeker_bloodrage_eztzhok_new.vpcf"
-				"EffectAttachType"  "follow_overhead"
-			}
-			"modifier_ebanko_r_effect_scepter"
-			{
-			"IsBuff" "1"
-			"States"
-				{
-					"MODIFIER_STATE_DEBUFF_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			"Properties"
-				{
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magresist"
-				}
-			}
+			"bonus_movespeed"	"15 20 25"
+			"model_scale"     "1.5"
+			"scepter_duration"	"5"
 		}
 	}
 	//=================================================================================================================
@@ -1160,6 +1096,7 @@
 		"AbilityCastPoint"				"0.4"
 		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"250 400 550"
+		"AbilityCastRange"				"1100"
 		"HasScepterUpgrade"             "1"
 		"AbilityValues"
 		{
@@ -1640,7 +1577,7 @@
 		"AbilityManaCost"				"400 600 800"
 		"AbilityValues"
 		{
-				"duration"						"20"
+				"duration"						"18"
 				"bonus_strength"				"100 200 300"
 				"model_scale"					"200"
 				"bonus_intellect"				"100 200 300"
@@ -1774,7 +1711,7 @@
 				"spell_amp"		"3 6 9 12 15"
 				"reg_2"
 				{
-					"value"	"10 20 30 40 50"
+					"value"	"10 20 25 30 35"
 					"special_bonus_unique_grimstroke_2" "+15"
 				}
 		}
@@ -1853,7 +1790,7 @@
     {
             "reflect_duration"
             {
-            	"value"	"2.5 3.0 3.5 4.0"
+            	"value"	"2.0 2.5 3.0 3.5"
             	"special_bonus_unique_furion_6" "+1"
             }
             "stun_duration"
@@ -1974,7 +1911,7 @@
 		{
 				"damage"					
 				{
-					"value"                       "100 200 300 400"
+					"value"                       "80 160 240 320"
 					"special_bonus_unique_enigma_5" "+200"
 				}
 				"distance"					"900"
@@ -3854,7 +3791,7 @@
 		"MaxLevel"						"1"
 		"HasShardUpgrade"				"1"
 		"AbilityCastRange"				"500"
-		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"50"
 		"AbilityValues"
@@ -3906,7 +3843,7 @@
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"AbilityCastRange"				"900"
-		"AbilityCastPoint"				"0.45"
+		"AbilityCastPoint"				"0.40"
 		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"200"
 		"AbilityValues"
@@ -4000,7 +3937,7 @@
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
-		"AbilityCooldown"				"70"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"200"
 		"AbilityValues"
 		{
@@ -4079,7 +4016,7 @@
 		"AbilityCastRange"				"10000"
 		"AbilityCastPoint"				"0.1 0.1 0.1 0.1"
 		"AbilityChannelTime"			"0.5"
-		"AbilityCooldown"				"60"
+		"AbilityCooldown"				"55"
 		"AbilityManaCost"				"200"
 		"AoERadius" "300"
 		"AbilityValues"
@@ -4937,7 +4874,7 @@
 				"radius"				"10000"
 				"duration"
 				{
-					"value"	"2.6 3.0 3.4 3.8"
+					"value"	"3.0 3.5 4.0 4.5"
 					"special_bonus_unique_gyrocopter_3" "+0.5"
 				}
 				"vision_radius"			"0"
@@ -4964,7 +4901,7 @@
         {
 				"duration"
 				{
-					"value"	"5.5 6.0 6.5 7.0"
+					"value"	"6.0 6.5 7.0 7.5"
 				}
 				"buff"
 				{
@@ -6627,7 +6564,7 @@
 
         "precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_mirana.vsndevts"
+			"soundfile"			"soundevents/fruits.vsndevts"
 			"particle"			"particles/invoker_chaos_meteor_mell_1.vpcf"
 			"particle"			"particles/invoker_chaos_meteor_mell_2.vpcf"
 			"particle"			"particles/invoker_chaos_meteor_mell_3.vpcf"
@@ -6644,8 +6581,8 @@
 			}
 			"RunScript"
 			{
-						"ScriptFile"    "heroes/mellstroy/mell.lua"
-						"Function"      "Meteor"
+				"ScriptFile"    "heroes/mellstroy/mell.lua"
+				"Function"      "Meteor"
 			}
 
 		}
@@ -6666,6 +6603,7 @@
 			"modifier_mell"
 		    {
 		        "ThinkInterval"  "1.5"
+				"IsHidden"	"1"
 		        "OnIntervalThink"
 		        {
 					"RunScript"
@@ -7524,7 +7462,7 @@
                 	"value"	"340 360 380"
                 }
                 "beam_radius"       "200"
-                "beam_dps"          "100 125 150"
+                "beam_dps"          "100"
                 "linger_time"       "5.0 6.0 7.0"
                 "linger_create_interval"       "0.1"
                 "damage_interval"   "0.1"
@@ -7730,7 +7668,6 @@
 					"RequiresFacet"			"zuus_divine_rampage"
 				}
 		}
-		
 	}
 	//=================================================================================================================
 	// ВОВЧИК
@@ -7746,6 +7683,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bane.vsndevts"
+			"soundfile"	"soundevents/vovchik.vsndevts"
 			"particle"	"particles/units/heroes/hero_bane/bane_sap.vpcf"
 			"particle"	"particles/econ/items/wraith_king/wraith_king_arcana/wk_arc_reincarn_bone_explosion_style2.vpcf"
 		}
@@ -8594,7 +8532,7 @@
 				"bonus_as"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_ironwood_treant"	"=20 =40 =60 =80"
+					"special_bonus_facet_furion_ironwood_treant"	"=15 =30 =45 =60"
 					"RequiresFacet"	"furion_ironwood_treant"
 					"special_bonus_unique_naga_siren_5" "+70"
 				}
@@ -9022,11 +8960,6 @@
 		"AbilityTextureName"			"serega_blink"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
-			"particle"	"particles/units/heroes/hero_antimage/antimage_spell_blink.vpcf"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityCastPoint"				"0.4"
@@ -9087,6 +9020,7 @@
 			"particle"	"particles/units/heroes/hero_siren/naga_siren_siren_song_cast.vpcf"
 			"particle"	"particles/units/heroes/hero_siren/naga_siren_song_aura.vpcf"
 			"particle"	"particles/units/heroes/hero_siren/naga_siren_song_debuff.vpcf"
+			"soundfile"	"soundevents/serega_stop.vsndevts"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -9138,6 +9072,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
+			"soundfile"	"soundevents/serega_sven.vsndevts"
 			"particle"	"particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_ti6.vpcf"
 			"particle"	"particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_hit_ti6.vpcf"
 			"model"		"litvin/models/heroes/lit/sven_new.vmdl"
@@ -9262,7 +9197,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
-		"AbilityCastPoint"				"0.6"
+		"AbilityCastPoint"				"0.7"
 		"AbilityCooldown"				"22 20 18 16"
 		"AbilityManaCost"				"70 90 110 130"
 		"AbilityValues"
@@ -9289,8 +9224,8 @@
 				"bonus_damage_vs_heroes"		"25"
 				"disarm_duration"
 				{
-					"value"	"2.0"
-					"special_bonus_unique_ogre_magi_dumb_luck_mana" "+1.0"
+					"value"	"0.0"
+					"special_bonus_unique_ogre_magi_dumb_luck_mana" "+2.0"
 				}
 				"slow"
 				{
@@ -9391,15 +9326,15 @@
 		"AbilityManaCost"				"60 80 100 120"
 		"AbilityValues"
 		{
-				"ministun_duration"	"1.5 1.7 1.9 2.1"
+				"ministun_duration"	"1.1 1.3 1.5 1.7"
 				"slow"
 				{
 					"value" "40"
 				}
 				"AbilityCooldown"
 				{
-					"value"	"15"
-					"special_bonus_unique_chen_3" "-5"
+					"value"	"21 19 17 15"
+					"special_bonus_unique_chen_3" "-4"
 				}
 				"armor"	"3 6 9 12"
 				"str_damage"
@@ -9407,7 +9342,11 @@
 					"value"	"0"
 					"special_bonus_scepter"	"+150"
 				}
-				"armor_duration"			"6.0"
+				"armor_duration"
+				{
+					"value"	"4.0"
+					"special_bonus_unique_ogre_magi" "+2.0"
+				}
 				"chance"
 				{
 					"value"	"-1"
@@ -9591,7 +9530,7 @@
 		"MaxLevel"              "1"
 		"IsGrantedByShard"      "1"
 		"AbilityCooldown"		"35"
-		"AbilityManaCost"		"100"
+		"AbilityManaCost"		"150"
 		"AbilityCastPoint"		"0.5"
 		"AbilityValues"
 		{
@@ -9933,7 +9872,7 @@
     	"AbilityBehavior"         		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     	"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
     	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-    	"AbilityCooldown"     			"40" 
+    	"AbilityCooldown"     			"60"
     	"AbilityManaCost"     			"300"
     	"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -11102,6 +11041,7 @@
 		{
 			"particle"	"particles/units/heroes/hero_arc_warden/arc_warden_magnetic_cast.vpcf"
 			"particle"	"particles/papich_w.vpcf"
+			"soundfile"	"soundevents/papich_w.vsndevts"
 		}
 		"AbilityValues"
 		{
@@ -11154,7 +11094,7 @@
 				"value"	"0"
 				"special_bonus_unique_wraith_king_10" "+1"
 			}
-		}	
+		}
 	}
 	"papich_q_clone"
 	{
@@ -11251,6 +11191,8 @@
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts"
 			"particle"					"particles/econ/items/troll_warlord/troll_ti10_shoulder/troll_ti10_whirling_axe_melee.vpcf"
+			"soundfile"					"soundevents/papich_w_clone.vsndevts"
+			"particle"					"particles/econ/items/bloodseeker/bloodseeker_crownfall_immortal/bloodseeker_crownfall_immortal_rupture.vpcf"
 		}
 		"AbilityValues"
 		{
@@ -11486,7 +11428,14 @@
 				"GrantsGold"		"15"
 				"GrantsXP"		"20"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"SpawnUnit"
 			{
@@ -11498,7 +11447,14 @@
 				"GrantsGold"		"25"
 				"GrantsXP"		"40"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"SpawnUnit"
 			{
@@ -11510,7 +11466,14 @@
 				"GrantsGold"		"35"
 				"GrantsXP"		"60"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"SpawnUnit"
 			{
@@ -11522,7 +11485,14 @@
 				"GrantsGold"		"45"
 				"GrantsXP"		"80"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"SpawnUnit"
 			{
@@ -11534,7 +11504,14 @@
 				"GrantsGold"		"45"
 				"GrantsXP"		"80"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"FireSound"
 			{
@@ -11587,7 +11564,14 @@
 				"GrantsGold"		"45"
 				"GrantsXP"		"80"
 				"OnSpawn"
-				{}
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
 			}
 			"FireSound"
 			{
@@ -12881,6 +12865,41 @@
 				"value"								"0"
 				"special_bonus_scepter"				"0"
 			}
+		}
+	}
+	"evelone_nose"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/evelone/evelone_nose"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityValues"
+		{
+				"cone_radius" "600"
+				"cone_angle" "120"
+		}
+	}
+	"evelone_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/evelone/evelone_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"			"night_stalker_darkness"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"90 85 80"
+		"AbilityManaCost"				"100 200 300"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityValues"
+		{
+			"duration" "12"
+			"bonus_movespeed" "20 25 30"
+			"vision_reduction"	"500"
+			"silence_radius"	"350"
 		}
 	}
 }

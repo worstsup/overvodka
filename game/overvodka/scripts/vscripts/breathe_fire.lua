@@ -1,7 +1,5 @@
 breathe_fire = class({})
 
---------------------------------------------------------------------------------
-
 function breathe_fire:OnSpellStart()
 	self.start_radius = self:GetSpecialValueFor( "start_radius" )
 	self.end_radius = self:GetSpecialValueFor( "end_radius" )

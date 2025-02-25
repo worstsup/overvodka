@@ -102,17 +102,15 @@ end
 function modifier_golovach_run:PlayEffects1()
     local particle_cast = "particles/muerta_ultimate_form_screen_effect_new.vpcf"
 
-    -- Create Particle
     local effect_cast = ParticleManager:CreateParticleForPlayer( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner() )
     ParticleManager:SetParticleControl( effect_cast, 1, Vector(1,0,0) )
 
-    -- buff particle
     self:AddParticle(
         effect_cast,
-        false, -- bDestroyImmediately
-        false, -- bStatusEffect
-        -1, -- iPriority
-        false, -- bHeroEffect
-        false -- bOverheadEffect
+        false,
+        false,
+        -1,
+        false,
+        false
     )
 end

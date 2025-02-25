@@ -1,9 +1,16 @@
-LinkLuaModifier( "modifier_birzha_stunned", "modifier_birzha_dota_modifiers.lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_birzha_stunned_purge", "modifier_birzha_dota_modifiers.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_papich_e_clone_thinker", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_papich_e_clone_debuff", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
-
+LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 papich_e_clone = class({})
+
+function papich_e_clone:Precache(context)
+    PrecacheResource( "particle", "particles/ancient_apparition_ice_blast_initial_ti5_new.vpcf", context )
+    PrecacheResource( "particle", "particles/shredder_whirling_death_new.vpcf", context )
+    PrecacheResource( "particle", "particles/econ/items/omniknight/omni_crimson_witness_2021/omniknight_crimson_witness_2021_degen_aura_debuff.vpcf", context )
+    PrecacheResource( "soundfile", "soundevents/papich_e_clone_start.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_clone_exp.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_clone_success.vsndevts", context )
+end
 
 function papich_e_clone:GetCooldown(level)
     return self.BaseClass.GetCooldown( self, level )
@@ -235,7 +242,7 @@ function papich_e_clone_slam:OnProjectileHit_ExtraData(target, location, data)
             if not enemy:IsMagicImmune() then
                 damageTable.victim = enemy
                 ApplyDamage(damageTable)
-                enemy:AddNewModifier( self:GetCaster(), self.ice_blast_ability, "modifier_birzha_stunned_purge", { duration = stun_duration * (1-enemy:GetStatusResistance()) } )
+                enemy:AddNewModifier( self:GetCaster(), self.ice_blast_ability, "modifier_generic_stunned_lua", { duration = stun_duration * (1-enemy:GetStatusResistance()) } )
             end
         end
     end

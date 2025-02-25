@@ -1,14 +1,21 @@
 papich_innate = class({})
 LinkLuaModifier( "modifier_papich_innate", "heroes/papich/papich_innate", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
 random_chance = 0
 function papich_innate:OnSpellStart()
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_papich_innate", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
---------------------------------------------------------------------------------
+
+function papich_innate:Precache( context )
+	PrecacheResource( "soundfile", "soundevents/papich_innate_1.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_innate_2.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_innate_3.vsndevts", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_spirit_breaker/spirit_breaker_haste_owner.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/dark_willow/dark_willow_immortal_2021/dw_2021_willow_wisp_spell_impact_filler_smoke.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/sven/sven_ti10_helmet/sven_ti10_helmet_gods_strength.vpcf", context )
+end
+
 modifier_papich_innate = class({})
---------------------------------------------------------------------------------
 function modifier_papich_innate:IsPurgable()
 	return false
 end
@@ -31,12 +38,8 @@ function modifier_papich_innate:OnCreated( kv )
 	random_chance = random_chance + 1
 end
 
---------------------------------------------------------------------------------
-
 function modifier_papich_innate:OnRemoved()
 end
-
---------------------------------------------------------------------------------
 
 function modifier_papich_innate:DeclareFunctions()
 	local funcs = 
@@ -72,4 +75,3 @@ end
 function modifier_papich_innate:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
---------------------------------------------------------------------------------

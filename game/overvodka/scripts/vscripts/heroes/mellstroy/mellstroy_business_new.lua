@@ -1,33 +1,15 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 mellstroy_business_new = class({})
 LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mellstroy_business_new", "heroes/mellstroy/modifier_mellstroy_business_new", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Passive Modifier
 function mellstroy_business_new:GetIntrinsicModifierName()
 	return "modifier_generic_orb_effect_lua"
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function mellstroy_business_new:OnSpellStart()
 end
 
---------------------------------------------------------------------------------
--- Orb Effects
 function mellstroy_business_new:OnOrbImpact( params )
-	-- get reference
 	local duration = self:GetSpecialValueFor( "duration" )
 	local gold_cost = self:GetSpecialValueFor( "gold_cost" )
 	local percent = self:GetSpecialValueFor( "percent" )
@@ -42,14 +24,13 @@ function mellstroy_business_new:OnOrbImpact( params )
 	local sound_cast = "biznes"
 	EmitSoundOn( sound_cast, self:GetCaster() )
 	if self:GetCaster():HasScepter() then
-		damage = damage * 2
+		damage = damage * 1.5
 	end
 	ApplyDamage({attacker = self:GetCaster(), victim = params.target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_PURE})
-	-- add debuff
 	params.target:AddNewModifier(
-		self:GetCaster(), -- player source
-		self, -- ability source
-		"modifier_mellstroy_business_new", -- modifier name
-		{ duration = duration } -- kv
+		self:GetCaster(),
+		self,
+		"modifier_mellstroy_business_new",
+		{ duration = duration }
 	)
 end

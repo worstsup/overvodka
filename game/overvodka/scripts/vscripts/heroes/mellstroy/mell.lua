@@ -15,7 +15,7 @@ function Meteor(keys)
 	local ability_level = ability:GetLevel() - 1
 	local player = caster:GetPlayerOwnerID()
 	local gold = PlayerResource:GetGold(player)
-	local target = caster:GetCursorPosition() + 5
+	local target = Vector(1000,1000,0)
 	tartar = {}
 	k = k + 1
 	local caster_loc = caster:GetAttachmentOrigin(DOTA_PROJECTILE_ATTACHMENT_ATTACK_1)
@@ -36,6 +36,7 @@ function Meteor(keys)
 		eff = "particles/invoker_chaos_meteor_mell_5.vpcf"
 	end
 	local projectile_direction = (target - caster:GetAbsOrigin()):Normalized()
+	projectile_direction.z = 0
 	local arrow_projectile = {
 		Ability				= ability,
 		EffectName			= eff,

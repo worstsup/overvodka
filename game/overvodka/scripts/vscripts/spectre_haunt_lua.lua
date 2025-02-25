@@ -1,14 +1,3 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 spectre_haunt_lua = class({})
 LinkLuaModifier( "modifier_spectre_haunt_lua", "modifier_spectre_haunt_lua.lua", LUA_MODIFIER_MOTION_NONE )
 

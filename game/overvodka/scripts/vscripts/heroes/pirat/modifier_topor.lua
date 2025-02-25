@@ -1,5 +1,5 @@
 modifier_topor = class({})
---------------------------------------------------------------------------------
+
 function modifier_topor:IsPurgable()
 	return false
 end
@@ -13,7 +13,6 @@ function modifier_topor:OnCreated( kv )
 	self.range = self:GetAbility():GetSpecialValueFor( "range" )
 	self.attack = self:GetParent():GetAttackCapability()
 	if self.attack == DOTA_UNIT_CAP_RANGED_ATTACK then
-		-- no bonus for originally ranged enemies
 		self.range = 0
 		self.projectile = 0
 	end
@@ -24,29 +23,28 @@ function modifier_topor:OnCreated( kv )
 	self:OnIntervalThink()
 end
 
---------------------------------------------------------------------------------
 function modifier_topor:OnIntervalThink()
 	self:PlayEffects()
 	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),	-- int, your team number
-		self:GetParent():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.slow_radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetParent():GetTeamNumber(),
+		self:GetParent():GetOrigin(),
+		nil,
+		self.slow_radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
 	for _,enemy in pairs(enemies) do
 		enemy:AddNewModifier(
-			caster, -- player source
-			self, -- ability source
-			"modifier_razor_plasma_field_lua", -- modifier name
+			caster,
+			self,
+			"modifier_razor_plasma_field_lua",
 			{
 				duration = 1,
 				slow = self.slow,
-			} -- kv
+			}
 		)
 	end
 	local projectile_direction =  (self:GetParent():GetCursorPosition() + 5 - self:GetParent():GetAbsOrigin()):Normalized()
@@ -294,14 +292,12 @@ end
 function modifier_topor:GetAttackSound()
 	return "Hero_TrollWarlord.Attack"
 end
---------------------------------------------------------------------------------
 
 function modifier_topor:GetModifierAttackSpeedBonus_Constant( params )
 	return self.as
 end
 function modifier_topor:PlayEffects()
 	local particle_cast = "particles/ti9_jungle_axe_attack_blur_counterhelix_new.vpcf"
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

@@ -4,8 +4,6 @@ LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_l
 LinkLuaModifier( "modifier_serega_sven", "heroes/pirat/modifier_serega_sven", LUA_MODIFIER_MOTION_NONE )
 tartar = {}
 
---------------------------------------------------------------------------------
--- Ability Start
 function serega_sven:OnSpellStart()
 	-- unit identifier
 	local caster = self:GetCaster()
@@ -27,7 +25,7 @@ function serega_sven:OnSpellStart()
 			self:GetCaster(), -- player source
 			self, -- ability source
 			"modifier_serega_sven", -- modifier name
-			{ duration = 3 } -- kv
+			{ duration = 2.5 } -- kv
 		)
 	end
 	local info = {

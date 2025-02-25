@@ -7,6 +7,14 @@ LinkLuaModifier( "modifier_papich_e_heal", "heroes/papich/papich_e.lua", LUA_MOD
 LinkLuaModifier( "modifier_papich_bkb", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE )
 papich_e = class({})
 
+function papich_e:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/papich_e_fly.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_plane.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_start.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_end.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/papich_e_plane_start.vsndevts", context )
+end
+
 function papich_e:GetIntrinsicModifierName()
     return "modifier_papich_e_passive"
 end

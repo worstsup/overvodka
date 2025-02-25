@@ -1,10 +1,10 @@
 function BorrowedTimeActivate( event )
-	-- Variables
 	local caster = event.caster
 	local ability = event.ability
 	if caster:HasModifier("modifier_silver_edge_debuff") then return end
 	if caster:HasModifier("modifier_break") then return end
 	if caster:HasModifier("modifier_item_nullifier_mute") then return end
+	if not caster:IsAlive() then return end
 	local threshold = ability:GetLevelSpecialValueFor( "hp_threshold" , ability:GetLevel() - 1  )
 	local hp = threshold * caster:GetMaxHealth() / 100
 	local dur = ability:GetLevelSpecialValueFor( "duration" , ability:GetLevel() - 1  )
@@ -33,15 +33,11 @@ function BorrowedTimeActivate( event )
         	for i = 0, 8 do
             	local current_item = caster:GetItemInSlot(i)
             	local should_refresh = true
-
-            	-- If this item is forbidden, do not refresh it
             	for _,forbidden_item in pairs(forbidden_items) do
                 	if current_item and (current_item:GetName() == forbidden_item or current_item:GetPurchaser() ~= caster) then
                     	should_refresh = false
                 	end
             	end
-
-            -- Refresh
             	if current_item and should_refresh then
                 	current_item:EndCooldown()
             	end
@@ -50,27 +46,16 @@ function BorrowedTimeActivate( event )
 	end
 end
 
---[[
-	Author: Noya
-	Date: 9.1.2015.
-	Heals for twice the damage taken
-]]
 function BorrowedTimeHeal( event )
-	-- Variables
 	local damage = event.DamageTaken
 	local caster = event.caster
 	local ability = event.ability
 	if caster:HasModifier("modifier_item_nullifier_mute") then return end
-	
 	caster:Heal(damage*2, caster)
 end
 
 function BorrowedTimePurge( event )
 	local caster = event.caster
-
-	print("stronk dispel")
-
-	-- Strong Dispel
 	local RemovePositiveBuffs = false
 	local RemoveDebuffs = true
 	local BuffsCreatedThisFrameOnly = false

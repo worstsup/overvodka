@@ -1,7 +1,5 @@
 modifier_golovach_hidden = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_golovach_hidden:IsHidden()
 	return true
 end
@@ -18,19 +16,13 @@ function modifier_golovach_hidden:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_golovach_hidden:OnCreated( kv )
 	if IsServer() then
-		-- references
 		self.distance = kv.r
 		self.direction = Vector(kv.x,kv.y,0):Normalized()
 		self.speed = 900
 		self.damage = 100
-
 		self.origin = self:GetParent():GetOrigin()
-
-		-- apply motion controller
 		if self:ApplyHorizontalMotionController() == false then
 			self:Destroy()
 		end
@@ -39,15 +31,11 @@ end
 
 function modifier_golovach_hidden:OnRefresh( kv )
 	if IsServer() then
-		-- references
 		self.distance = kv.r
 		self.direction = Vector(kv.x,kv.y,0):Normalized()
 		self.speed = 900
 		self.damage = 100
-
 		self.origin = self:GetParent():GetOrigin()
-
-		-- apply motion controller
 		if self:ApplyHorizontalMotionController() == false then 
 			self:Destroy()
 		end
@@ -60,21 +48,13 @@ function modifier_golovach_hidden:OnDestroy( kv )
 	end
 end
 
---------------------------------------------------------------------------------
--- Motion Effects
 function modifier_golovach_hidden:UpdateHorizontalMotion( me, dt )
 	local pos = self:GetParent():GetOrigin()
-	
-	-- stop if already past distance
 	if (pos-self.origin):Length2D()>=self.distance then
 		self:Destroy()
 		return
 	end
-
-	-- set position
 	local target = pos + self.direction * (self.speed*dt)
-
-	-- change position
 	self:GetParent():SetOrigin( target )
 end
 
@@ -84,8 +64,6 @@ function modifier_golovach_hidden:OnHorizontalMotionInterrupted()
 	end
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_golovach_hidden:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,

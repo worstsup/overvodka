@@ -1,5 +1,7 @@
 mellstroy_casino = class({})
+
 loses = 0
+
 function mellstroy_casino:OnSpellStart()
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()

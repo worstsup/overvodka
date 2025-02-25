@@ -15,7 +15,7 @@ end
 function item_byebye_boots:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
-    ProjectileManager:ProjectileDodge(caster)  --Disjoints disjointable incoming projectiles.
+    ProjectileManager:ProjectileDodge(caster)
 	
 	ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, caster)
 	EmitSoundOn( "byebye", caster )
@@ -53,7 +53,6 @@ function modifier_item_byebye_boots:DeclareFunctions()
     {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE,
     }
-
     return funcs
 end
 

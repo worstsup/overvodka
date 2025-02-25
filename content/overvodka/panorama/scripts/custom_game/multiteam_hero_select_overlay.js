@@ -82,7 +82,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
 			"npc_dota_hero_storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
 			"npc_dota_hero_necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
-			"npc_dota_hero_morphling": "file://{images}/heroes/npc_dota_hero_sans.png"
+			"npc_dota_hero_morphling": "file://{images}/heroes/npc_dota_hero_sans.png",
+			"npc_dota_hero_faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png"
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -127,7 +128,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"rattletrap": "file://{images}/heroes/npc_dota_hero_vihorkov.png",
 			"storm_spirit": "file://{images}/heroes/npc_dota_hero_rostik.png",
 			"necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
-			"morphling": "file://{images}/heroes/npc_dota_hero_sans.png"
+			"morphling": "file://{images}/heroes/npc_dota_hero_sans.png",
+			"faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png"
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

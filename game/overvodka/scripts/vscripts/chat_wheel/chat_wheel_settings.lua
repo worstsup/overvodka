@@ -168,40 +168,63 @@ CHAT_WHEEL_LIST = {
         ForAll = true,
         Sound = "UUI_SOUNDS.OooNice",
     },
-
+    [28] = {
+        Name = "zavarushka",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.Zavarushka",
+    },
+    [29] = {
+        Name = "edim_govno",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.EdimGovno",
+    },
+    [30] = {
+        Name = "circus",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.Circus",
+    },
+    [31] = {
+        Name = "ya_shas",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.YaShas",
+    },
     --Текстовые
 
-    [28] = {
+    [32] = {
         Name = "zxc",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [29] = {
+    [33] = {
         Name = "pathefic",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [30] = {
+    [34] = {
         Name = "silence",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [31] = {
+    [36] = {
         Name = "kto_ya",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [32] = {
+    [36] = {
         Name = "ne_vse_poimut",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [33] = {
+    [37] = {
         Name = "neveroyatno_horosh",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [34] = {
+    [38] = {
         Name = "go_na_mid",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,

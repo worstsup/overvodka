@@ -8,6 +8,9 @@ papich_q_end						= class({})
 
 function papich_q:Precache( context )
 	PrecacheResource( "particle", "particles/papich_q.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/question1.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/question2.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/question3.vsndevts", context )
 end
 
 function papich_q:GetAssociatedSecondaryAbilities()

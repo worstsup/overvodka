@@ -487,7 +487,7 @@ end
 function modifier_peterka_e_debuff:UpdateHorizontalMotion( me, dt )
 	local caster = self:GetCaster()
 	local target = caster:GetOrigin() + caster:GetForwardVector() * 190
-
+	self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = 0.1 } )
 	me:SetOrigin( target )
 end
 

@@ -1,20 +1,20 @@
 modifier_serega_blink = class({})
---------------------------------------------------------------------------------
+
 function modifier_serega_blink:IsPurgable()
 	return false
 end
 function modifier_serega_blink:IsHidden()
 	return true
 end
+
 function modifier_serega_blink:OnCreated( kv )
+	if not IsServer() then return end
 	self.k = 0
 	self:StartIntervalThink( 1.1 )
 	self:OnIntervalThink()
 end
 
---------------------------------------------------------------------------------
 function modifier_serega_blink:OnIntervalThink()
-	-- load data
 	self.duration = self:GetAbility():GetSpecialValueFor( "illusion_duration" )
 	self.outgoing = self:GetAbility():GetSpecialValueFor( "illusion_outgoing_damage" )
 	self.incoming = self:GetAbility():GetSpecialValueFor( "illusion_incoming_damage" )
@@ -24,30 +24,30 @@ function modifier_serega_blink:OnIntervalThink()
 	self.distance = 72
 	if self.k == 1 then
 		local illusions = CreateIllusions(
-			self:GetCaster(), -- hOwner
-			self:GetCaster(), -- hHeroToCopy
+			self:GetCaster(),
+			self:GetCaster(),
 			{
 				outgoing_damage = self.outgoing,
 				incoming_damage = self.incoming,
 				duration = self.duration,
-			}, -- hModiiferKeys
-			2, -- nNumIllusions
-			self.distance, -- nPadding
-			false, -- bScramblePosition
-			true -- bFindClearSpace
+			},
+			2,
+			self.distance,
+			false,
+			true
 		)
 	end
 	if self.k == 2 then
 		local enemies = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),	-- int, your team number
-			self:GetCaster():GetOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			0,	-- int, flag filter
-			0,	-- int, order filter
-			false	-- bool, can grow cache
+			self:GetCaster():GetTeamNumber(),
+			self:GetCaster():GetOrigin(),
+			nil,
+			self.radius,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			0,
+			0,
+			false
 		)
 		for _,enemy in pairs(enemies) do
 			self.mana_pct = enemy:GetMaxMana() * self.mana_burn * 0.01
@@ -57,15 +57,15 @@ function modifier_serega_blink:OnIntervalThink()
 	end
 	if self.k == 3 then
 		local enemies = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),	-- int, your team number
-			self:GetCaster():GetOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			0,	-- int, flag filter
-			FIND_CLOSEST,	-- int, order filter
-			false	-- bool, can grow cache
+			self:GetCaster():GetTeamNumber(),
+			self:GetCaster():GetOrigin(),
+			nil,
+			self.radius,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			0,
+			FIND_CLOSEST,
+			false
 		)
 		self.t = 0
 		for _,enemy in pairs(enemies) do
@@ -76,7 +76,7 @@ function modifier_serega_blink:OnIntervalThink()
 				attacker = self:GetCaster(),
 				damage = self.mana_damage,
 				damage_type = DAMAGE_TYPE_MAGICAL,
-				ability = self, --Optional.
+				ability = self,
 			}
 			ApplyDamage(damageTable)
 			self:PlayEffectsNew(enemy)
@@ -98,18 +98,14 @@ end
 function modifier_serega_blink:OnDestroy()
 end
 
---------------------------------------------------------------------------------
-
 function modifier_serega_blink:PlayEffects(target)
 	local particle_cast = "particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf"
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
 function modifier_serega_blink:PlayEffectsNew(target)
 	local particle_cast = "particles/antimage_manavoid_basher_cast_gold_new.vpcf"
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( 500, 0, 0 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )

@@ -13,7 +13,7 @@ function modifier_otec:OnCreated( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_lion" then
 		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_enigma_2")
 		if Talented:GetLevel() == 1 then
-			self.bonus_agility = self.bonus_agility + 200
+			self.bonus_agility = self.bonus_agility + 150
 		end
 	end
 end

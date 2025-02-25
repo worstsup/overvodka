@@ -6,7 +6,7 @@ vihor_r = class({})
 function vihor_r:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/techies/techies_arcana/techies_suicide_arcana.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_marci/marci_bodyguard_radius.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_marci/marci_bodyguard_radius_glow.vpcf", context)
     PrecacheResource("particle", "particles/vihor_r_start.vpcf", context)
     PrecacheResource("particle", "particles/vihor_r.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/arc_warden/arc_warden_frostivus_2023/arc_warden_magnetic_frostivus_start.vpcf", context)
@@ -43,7 +43,7 @@ function modifier_vihor_r:OnCreated()
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
     if not IsServer() then return end
     local particle_1 = ParticleManager:CreateParticle("particles/vihor_r_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_marci/marci_bodyguard_radius.vpcf", PATTACH_WORLDORIGIN, nil)
+    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_marci/marci_bodyguard_radius_glow.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 1, Vector(self.radius + 50, self.radius + 50, self.radius + 50))
     self:AddParticle(particle, false, false, -1, false, false)
@@ -102,25 +102,26 @@ function modifier_vihor_r_debuff:OnCreated(kv)
     self.min_health = 1
     self.target = self:GetCaster():GetAbsOrigin() + RandomVector(100)
     self.tick_damage = self:GetAbility():GetSpecialValueFor("tick_damage")
+    self.interval = 0.2
     self:GetParent():Stop()
-    self:StartIntervalThink(0.2)
+    self:StartIntervalThink(self.interval)
 end
 
 function modifier_vihor_r_debuff:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local caster = self:GetCaster()
-    self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * 0.2
+    self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * self.interval
     ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })
     if self:GetParent():GetHealthPercent() <= 3 then
         self.min_health = 0
         self:GetParent():Kill(self:GetAbility(), self:GetCaster())
     end
-    AddFOWViewer(parent:GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetAbility():GetSpecialValueFor("radius"), 0.2, false)
+    AddFOWViewer(parent:GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetAbility():GetSpecialValueFor("radius"), self.interval, false)
     if not parent:IsMoving() then
         parent:MoveToPosition(self.target)
     end
-    if GameRules:GetGameTime() % 1.2 < 0.2 then
+    if GameRules:GetGameTime() % 1.2 < self.interval then
         local debuff_radius = self:GetAbility():GetSpecialValueFor("radius")
         local enemies = FindUnitsInRadius(
             caster:GetTeamNumber(),

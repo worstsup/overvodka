@@ -1,6 +1,15 @@
 LinkLuaModifier("modifier_papich_r", "heroes/papich/papich_r", LUA_MODIFIER_MOTION_NONE)
 
 papich_r = class({})
+
+function papich_r:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/papich_r_spawn.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/papich_r_end.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/papich_r_appear.vsndevts", context )
+    PrecacheResource( "particle", "particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_nether_swap_v3_explosion.vpcf", context )
+    PrecacheResource( "particle", "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", context)
+end
+
 function papich_r:OnAbilityPhaseStart()
     EmitSoundOn("papich_r_appear", self:GetCaster())
 end

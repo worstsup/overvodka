@@ -20,8 +20,7 @@ end
 function golovach_r:Spawn()
 	if not IsServer() then return end
 end
---------------------------------------------------------------------------------
--- Ability Start
+
 function golovach_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local duration = self:GetSpecialValueFor( "duration" )

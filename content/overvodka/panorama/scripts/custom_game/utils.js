@@ -327,6 +327,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_sans"
     }
+    if (HeroName == "npc_dota_hero_faceless_void")
+    {
+        OvervodkaName = "npc_dota_hero_evelone"
+    }
     return OvervodkaName	
 }
 

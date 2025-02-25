@@ -5,29 +5,23 @@ function papich_w_clone:IsHiddenWhenStolen() return false end
 function papich_w_clone:IsRefreshable() return true end
 function papich_w_clone:IsStealable() return true end
 function papich_w_clone:IsNetherWardStealable() return true end
--------------------------------------------
 
 function papich_w_clone:OnSpellStart()
 	if IsServer() then
 		local caster = self:GetCaster()
 		local caster_loc = caster:GetAbsOrigin()
-
-		-- Parameters
 		local axe_radius = self:GetSpecialValueFor("axe_radius")
 		local max_range = self:GetSpecialValueFor("max_range")
 		local axe_movement_speed = self:GetSpecialValueFor("axe_movement_speed")
 		local whirl_duration = self:GetSpecialValueFor("whirl_duration")
 		local direction = caster:GetForwardVector()
-		-- Emit sounds
 		caster:EmitSound("papich_w_clone")
 		caster:EmitSound("Hero_TrollWarlord.WhirlingAxes.Melee")
 		if (math.random(1,100) <= 25) and (caster:GetName() == "npc_dota_hero_troll_warlord") then
 			caster:EmitSound("troll_warlord_troll_whirlingaxes_0"..math.random(1,6))
 		end
-		-- Create a unique table with stored hit enemies
 		local index = DoUniqueString("index")
 		self[index] = {}
-		-- Set the particle
 		local axe_pfx = {}
 		local axe_loc = {}
 		local axe_random = {}
@@ -39,9 +33,6 @@ function papich_w_clone:OnSpellStart()
 		end
 		local counter = 0
 		caster:StartGesture(ACT_DOTA_CAST_ABILITY_2)
-		-- Projectile logic
-		-- Note: Most of it is purely cosmetical, it's basicly just checking if new units are in the increasing range
-		-- Why? Because trollolololo
 		Timers:CreateTimer(FrameTime(), function()
 			counter = counter + FrameTime()
 			caster_loc = caster:GetAbsOrigin()
@@ -91,14 +82,12 @@ function papich_w_clone:DoAxeStuff(index,range,caster_loc)
 			table.insert(self[index],enemy)
 		end
 		ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = self:GetAbilityDamageType()})
-		-- Imbued Axes
 		caster:PerformAttack(enemy, true, true, true, true, false, true, true)
 		enemy:AddNewModifier(caster, self, "modifier_papich_w_clone", {duration = blind_duration * (1 - enemy:GetStatusResistance()), blind_stacks = blind_stacks})
 		enemy:EmitSound("Hero_TrollWarlord.WhirlingAxes.Target")
 	end
 end
 
--------------------------------------------
 modifier_papich_w_clone = class({})
 function modifier_papich_w_clone:IsDebuff() return true end
 function modifier_papich_w_clone:IsHidden() return false end
@@ -106,7 +95,6 @@ function modifier_papich_w_clone:IsPurgable() return true end
 function modifier_papich_w_clone:IsPurgeException() return false end
 function modifier_papich_w_clone:IsStunDebuff() return false end
 function modifier_papich_w_clone:RemoveOnDeath() return true end
--------------------------------------------
 
 function modifier_papich_w_clone:DeclareFunctions()
 	local decFuns =

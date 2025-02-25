@@ -10,11 +10,11 @@ function mellstroy_casino_allin:OnSpellStart()
     local ability_cost = PlayerResource:GetGold(player_id) * 0.5
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
-    if random_chance <= 50 then -- 50% chance to give double the cost 
+    if random_chance <= 50 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
-        caster:EmitSound("jackpot") -- Play gold pickup sound\
+        caster:EmitSound("jackpot")
         if k == 0 then
             caster:AddNewModifier(caster, self, "modifier_mell_one", { duration = 3 })
         end
@@ -26,15 +26,13 @@ function mellstroy_casino_allin:OnSpellStart()
         end
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
         k = k + 1
-    else -- 50% chance to give nothing
-        caster:EmitSound("lose") -- play cancel sound for no reward
+    else
+        caster:EmitSound("lose")
     end
     if k >= 3 then
         self:SetActivated( false )
     end
 end
 
--- Register the ability
 function mellstroy_casino_allin:OnUpgrade()
-    -- This ability has only one level, so no additional behavior needed
 end

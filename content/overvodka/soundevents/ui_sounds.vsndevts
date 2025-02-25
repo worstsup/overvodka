@@ -407,4 +407,52 @@
         distance_max = "2500.0"
         event_type = "2.0"
     }
+    UUI_SOUNDS.Zavarushka = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/zavarushka.vsnd"
+        ]
+        volume = "1.5"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.YaShas = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/ya_shas.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Circus = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/circus.vsnd"
+        ]
+        volume = "2.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.EdimGovno = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/edim_govno.vsnd"
+        ]
+        volume = "2.5"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
 }

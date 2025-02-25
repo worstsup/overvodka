@@ -87,9 +87,7 @@ function modifier_item_drobe:OnAttackLanded(params)
     self:GetParent():EmitSound("drobe_cast")
 end
 function modifier_item_drobe:PlayEffects(target)
-    -- Get Resources
     local particle_cast = "particles/kotl_ti10_blinding_light_groundring_new.vpcf"
-
     local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
     ParticleManager:SetParticleControl( effect_cast, 1, target:GetAbsOrigin() )
     ParticleManager:ReleaseParticleIndex(effect_cast)

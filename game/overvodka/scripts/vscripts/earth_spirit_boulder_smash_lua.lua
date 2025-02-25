@@ -2,8 +2,6 @@ earth_spirit_boulder_smash_lua = class({})
 LinkLuaModifier( "modifier_earth_spirit_boulder_smash_lua", "modifier_earth_spirit_boulder_smash_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 
---------------------------------------------------------------------------------
--- Custom KV
 function earth_spirit_boulder_smash_lua:GetCastRange( vLocation, hTarget )
 	if IsServer() then
 		local radius = self:GetSpecialValueFor("rock_search_aoe")

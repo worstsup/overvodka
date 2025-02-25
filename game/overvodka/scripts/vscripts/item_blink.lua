@@ -1,5 +1,5 @@
 function item_blink_datadriven_on_spell_start(keys)
-	ProjectileManager:ProjectileDodge(keys.caster)  --Disjoints disjointable incoming projectiles.
+	ProjectileManager:ProjectileDodge(keys.caster)
 	
 	ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, keys.caster)
 	EmitSoundOn( "byebye", keys.caster )

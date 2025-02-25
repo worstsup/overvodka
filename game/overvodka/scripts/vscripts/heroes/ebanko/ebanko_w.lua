@@ -2,11 +2,11 @@ ebanko_w = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ebanko_w", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ebanko_w_slow", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
---------------------------------------------------------------------------------
+
 function ebanko_w:GetIntrinsicModifierName()
 	return "modifier_ebanko_w"
 end
---------------------------------------------------------------------------------
+
 function ebanko_w:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
@@ -50,7 +50,6 @@ function ebanko_w:OnSpellStart()
 
 end
 
---------------------------------------------------------------------------------
 function ebanko_w:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_tusk/tusk_walruspunch_start.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
@@ -100,7 +99,6 @@ function modifier_ebanko_w:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
 function modifier_ebanko_w:OnCreated( kv )
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
@@ -119,7 +117,6 @@ end
 function modifier_ebanko_w:OnDestroy()
 end
 
---------------------------------------------------------------------------------
 function modifier_ebanko_w:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
@@ -130,6 +127,7 @@ end
 function modifier_ebanko_w:GetModifierProcAttack_Feedback( params )
 	if not IsServer() then return end
 	if self.parent:PassivesDisabled() then return end
+	if self.parent:IsIllusion() then return end
 	local filter = UnitFilter(
 		params.target,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -182,7 +180,6 @@ function modifier_ebanko_w:Bash(target)
 	self:PlayEffects1( target )
 end
 
---------------------------------------------------------------------------------
 function modifier_ebanko_w:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_tusk/tusk_walruspunch_start.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )

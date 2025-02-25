@@ -1430,11 +1430,11 @@
 		"ProjectileSpeed"		"0"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"22"
-		"AttributeStrengthGain"		"3.200000"
+		"AttributeStrengthGain"		"3.0"
 		"AttributeBaseIntelligence"		"18"
-		"AttributeIntelligenceGain"		"1.800000"
+		"AttributeIntelligenceGain"		"1.5"
 		"AttributeBaseAgility"		"12"
-		"AttributeAgilityGain"		"1.800000"
+		"AttributeAgilityGain"		"1.8"
 		"StatusHealthRegen"		"1.0"
 		"MovementSpeed"		"315"
 		"HealthBarOffset"	"270"
@@ -1680,9 +1680,9 @@
 		"Ability10"		"special_bonus_unique_ogre_magi_4"
 		"Ability11"		"special_bonus_unique_chen_5"
 		"Ability12"		"special_bonus_unique_chen_3"
-		"Ability13"		"special_bonus_unique_ogre_magi_dumb_luck_mana"
+		"Ability13"		"special_bonus_unique_ogre_magi"
 		"Ability14"		"special_bonus_unique_chen_11"
-		"Ability15"		"special_bonus_unique_ogre_magi"
+		"Ability15"		"special_bonus_unique_ogre_magi_dumb_luck_mana"
 		"Ability16"		"special_bonus_unique_ogre_magi_3"
 		"Ability17"		"special_bonus_unique_ogre_magi_2"
 		"Facets"
@@ -2287,5 +2287,90 @@
 		"MovementSpeed"		"285"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 		"HealthBarOffset"		"230"
+	}
+	"npc_dota_hero_faceless_void"
+	{
+		"Model"		"models/heroes/faceless_void/faceless_void.vmdl"
+		"HeroSelectSoundEffect"		"Hero_FacelessVoid.Pick"
+		"SoundSet"		"Hero_FacelessVoid"
+		"Enabled"		"1"
+		"ModelScale"		"0.900000"
+		"LoadoutScale"		"0.900000"
+		"GibType"		"default"
+		"Ability1"		"faceless_void_time_walk"
+		"Ability2"		"faceless_void_time_dilation"	
+		"Ability3"		"faceless_void_time_lock"
+		"Ability4"		"faceless_void_time_walk_reverse"
+		"Ability5"		"evelone_nose"
+		"Ability6"		"evelone_r"
+
+		"Ability10"		"special_bonus_unique_faceless_void_6"
+		"Ability11"		"special_bonus_unique_faceless_void_7"
+		"Ability12"		"special_bonus_unique_faceless_void_3"
+		"Ability13"		"special_bonus_unique_faceless_void_8"
+		"Ability14"		"special_bonus_unique_faceless_void"
+		"Ability15"		"special_bonus_unique_faceless_void_5"
+		"Ability16"		"special_bonus_unique_faceless_void_4"
+		"Ability17"		"special_bonus_unique_faceless_void_2"
+
+		"Facets"
+		{
+			"faceless_void_temporal_impunity"
+			{
+				"Icon"				"armor"
+				"Color"				"Green"
+				"GradientID"		"0"
+				"Deprecated"		"true"
+			}
+			"faceless_void_chronosphere"
+			{
+				"Icon"				"area_of_effect"
+				"Color"				"Green"
+				"GradientID"		"0"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+
+			"faceless_void_time_zone"
+			{
+				"Icon"				"chrono_cube"
+				"Color"				"Purple"
+				"GradientID"		"1"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"generic_hidden"
+					}
+				}
+			}
+		}
+
+		"ArmorPhysical"		"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"37"
+		"AttackDamageMax"		"43"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.500000"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"20"
+		"AttributeStrengthGain"		"2.600000"
+		"AttributeBaseAgility"		"21"
+		"AttributeAgilityGain"		"3.3"
+		"AttributeBaseIntelligence"		"15"
+		"AttributeIntelligenceGain"		"1.500000"
+		"StatusHealthRegen"		"1"
+		"MovementSpeed"		"300"
+		"MovementTurnRate"		"0.900000"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

@@ -2,30 +2,27 @@ vihor_e = class({})
 LinkLuaModifier( "modifier_vihor_e", "heroes/vihor/vihor_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_vihor_e_debuff", "heroes/vihor/vihor_e", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
 function vihor_e:GetIntrinsicModifierName()
 	return "modifier_vihor_e"
 end
+
 function vihor_e:Precache(context)
     PrecacheResource("particle", "particles/econ/courier/courier_greevil_purple/courier_greevil_purple_ambient_2.vpcf", context)
-	PrecacheResource( "soundfile", "soundevents/vihor_e.vsndevts", context )
+	PrecacheResource("soundfile", "soundevents/vihor_e.vsndevts", context )
 end
+
 modifier_vihor_e = class({})
 
---------------------------------------------------------------------------------
 function modifier_vihor_e:IsHidden()
 	return true
 end
-
 function modifier_vihor_e:IsDebuff()
 	return false
 end
-
 function modifier_vihor_e:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
 function modifier_vihor_e:OnCreated( kv )
 	self.duration = self:GetAbility():GetSpecialValueFor("hex_duration")
 	self.blocked = self:GetAbility():GetSpecialValueFor("blocked")
@@ -45,7 +42,6 @@ end
 function modifier_vihor_e:OnDestroy( kv )
 end
 
---------------------------------------------------------------------------------
 function modifier_vihor_e:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
@@ -74,9 +70,17 @@ function modifier_vihor_e:OnAttackLanded( params )
 end
 
 modifier_vihor_e_debuff = class({})
+
 function modifier_vihor_e_debuff:IsDebuff()
 	return true
 end
+function modifier_vihor_e_debuff:IsPurgable()
+	return false
+end
+function modifier_vihor_e_debuff:IsHidden()
+	return false
+end
+
 function modifier_vihor_e_debuff:OnCreated( kv )
 	self.damage = self:GetAbility():GetSpecialValueFor("damage")
 	self:StartIntervalThink( 1 )

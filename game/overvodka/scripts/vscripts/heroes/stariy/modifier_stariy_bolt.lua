@@ -1,6 +1,5 @@
 modifier_stariy_bolt = class({})
---------------------------------------------------------------------------------
--- Classifications
+
 function modifier_stariy_bolt:IsHidden()
 	return true
 end
@@ -13,10 +12,7 @@ function modifier_stariy_bolt:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_stariy_bolt:OnCreated( kv )
-	-- references
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -32,7 +28,6 @@ function modifier_stariy_bolt:OnCreated( kv )
 end
 
 function modifier_stariy_bolt:OnRefresh( kv )
-	-- references
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -53,7 +48,6 @@ function modifier_stariy_bolt:OnIntervalThink()
 	if self:GetParent():IsIllusion() then return end
 	if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 	if not self:GetParent():IsAlive() then return end
-	-- find enemies
 	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
 	if self:GetParent():HasModifier("modifier_break") then return end
 	if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
@@ -62,18 +56,16 @@ function modifier_stariy_bolt:OnIntervalThink()
 		self.radius = self.radius_0
 	end
 	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),	-- int, your team number
-		self:GetParent():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetParent():GetTeamNumber(),
+		self:GetParent():GetOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
-
-	-- damage enemies
 	for _,enemy in pairs(enemies) do
 		local debuff = enemy:AddNewModifier(
 			self:GetParent(),
@@ -83,18 +75,11 @@ function modifier_stariy_bolt:OnIntervalThink()
 				duration = self.duration,
 			}
 		)
-		-- enemy:AddNewModifier(
-		-- 	self:GetParent(),
-		--	self:GetAbility(),
-		--	"modifier_generic_stunned_lua", 
-		--	{duration = self.microstun}
-		--)
 		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
 		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
 			dmg = 0
 		end
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-		-- Play effects
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )
 		if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
@@ -105,8 +90,6 @@ function modifier_stariy_bolt:OnIntervalThink()
 	end
 end
 
---------------------------------------------------------------------------------
--- Graphics & Animations
 function modifier_stariy_bolt:PlayEffects( target )
 	local particle_cast = "particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start_bolt_parent.vpcf"
 

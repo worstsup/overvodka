@@ -9,6 +9,8 @@ function ashab_dogon:Precache( context )
 	PrecacheResource( "particle", "particles/econ/items/primal_beast/primal_beast_2022_prestige/primal_beast_2022_prestige_onslaught_charge_mesh.vpcf", context )
 	PrecacheResource( "particle", "particles/spirit_breaker_charge_target_new.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/dogon.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/ashab_oi.vsndevts", context )
 end
 
 function ashab_dogon:Spawn()
@@ -21,9 +23,9 @@ function ashab_dogon:OnSpellStart()
 	local target = self:GetCursorTarget()
 	if target:TriggerSpellAbsorb(self) then return end
 	caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_ashab_dogon", -- modifier name
-		{ target = target:entindex() } -- kv
+		caster,
+		self,
+		"modifier_ashab_dogon",
+		{ target = target:entindex() }
 	)
 end
