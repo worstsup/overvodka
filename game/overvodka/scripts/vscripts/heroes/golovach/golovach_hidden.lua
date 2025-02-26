@@ -3,8 +3,6 @@ LinkLuaModifier( "modifier_golovach_hidden", "heroes/golovach/modifier_golovach_
 LinkLuaModifier( "modifier_golovach_slow", "heroes/golovach/modifier_golovach_slow", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 
---------------------------------------------------------------------------------
--- Custom KV
 function golovach_hidden:IsStealable()
 	return false
 end
@@ -12,61 +10,38 @@ function golovach_hidden:GetCastRange( vLocation, hTarget )
 	if IsServer() then
 		local radius = 200
 		local max = 2000
-
-		-- if there is remnant around caster, cast immediately (cast range become global)
 		if self:SearchRemnant( self:GetCaster():GetOrigin(), radius ) then
 			return max
 		end
-
-		-- if there is NO remnant around point, stop
 		if (not hTarget) and (not self:SearchRemnant( vLocation, radius )) then
 			return max
 		end
-
-		-- else, walk to target
 		return self.BaseClass.GetCastRange( self, vLocation, hTarget )
 	end
 end
 
---------------------------------------------------------------------------------
--- Custom cast
 function golovach_hidden:CastFilterResultTarget( hTarget )
-	-- unable to target self
 	if self:GetCaster() == hTarget then
 		return UF_FAIL_CUSTOM
 	end
-
 	local nResult = UnitFilter( hTarget, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_NONE, self:GetCaster():GetTeamNumber() )
 	if nResult ~= UF_SUCCESS then
 		return nResult
 	end
-
 	return UF_SUCCESS
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function golovach_hidden:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 	local point = self:GetCursorPosition()
-
-	-- load data
 	local radius = 200
-
-	-- paramenters
 	local dirX = 0
 	local dirY = 0
 	local kicked = nil
 	local isRemnant = false
-
-	-- find remnant in area
 	local remnant = self:SearchRemnant( caster:GetOrigin(), radius )
-
-	-- if remnant exists
 	if remnant then
-		-- set direction
 		dirX = point.x-caster:GetOrigin().x
 		dirY = point.y-caster:GetOrigin().y
 		kicked = remnant

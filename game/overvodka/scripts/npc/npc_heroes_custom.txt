@@ -2298,7 +2298,7 @@
 		"LoadoutScale"		"0.900000"
 		"GibType"		"default"
 		"Ability1"		"faceless_void_time_walk"
-		"Ability2"		"faceless_void_time_dilation"	
+		"Ability2"		"evelone_w"	
 		"Ability3"		"faceless_void_time_lock"
 		"Ability4"		"faceless_void_time_walk_reverse"
 		"Ability5"		"evelone_nose"

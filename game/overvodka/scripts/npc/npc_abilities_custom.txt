@@ -436,7 +436,6 @@
 	"MaxLevel"             	 "4"
 	"HasScepterUpgrade"      "1"
 	"IsBreakable"			 "1"
-	
 	"AbilityValues"
 	{
 			"bonus_attribute"             "1"
@@ -592,7 +591,6 @@
 						"Function"      "modifier_test_on_attack_passive"
 					}
 				}
-				
 				"OnDestroy"
 				{
 					"RunScript"
@@ -602,7 +600,6 @@
 					}
 				}
 			}
-
 			"modifier_test_damage"
 			{
 				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
@@ -12900,6 +12897,31 @@
 			"bonus_movespeed" "20 25 30"
 			"vision_reduction"	"500"
 			"silence_radius"	"350"
+		}
+	}
+	"evelone_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/evelone/evelone_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityTextureName"			"parit"
+		"AOERadius"						"%radius"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"800"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"60 80 100 120"
+		"AbilityValues"
+		{
+			"radius"
+			{
+				"value"	"500 550 600 650"
+			}
+			"duration"				"7 8 9 10"
+			"crit_chance"			"100"
+			"crit_bonus"			"120 140 160 180"
 		}
 	}
 }

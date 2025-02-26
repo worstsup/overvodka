@@ -1,24 +1,3 @@
--- Created by Elfansoer
---[[
-	Usage parameters
-		kv.start_radius (0)
-		kv.end_radius (0)
-		kv.width (100)
-		kv.speed (0)
-
-		kv.target_team
-		kv.target_type
-		kv.target_flags
-
-		kv.IsCircle (1) -- 0: expanding radius, 1: expanding donut with width (hollow inside)
-
-	Callback set after creating modifier:
-		modifier:SetCallback( function( unit ) ... end ) -- MANDATORY
-		modifier:SetEndCallback( function() ... end )
-
-
-]]
---------------------------------------------------------------------------------
 modifier_generic_ring_lua = class({})
 
 --------------------------------------------------------------------------------

@@ -1,0 +1,90 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf61:version{39d3ce1d-9442-4407-9b78-8317145b1732} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_nBehaviorVersion = 12
+	m_nFirstMultipleOverride_BackwardCompat = 6
+	m_flConstantRadius = 0.0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 300.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 62
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_splash.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_warp.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_wake.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_flash_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_star.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_flash.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_drops_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_rings.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_ring.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_foam_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_spray_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_aoe_light.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_droplets_b_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_droplets_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/brewmaster_cinder_brew_aoe_bubbles_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/warlock_upheaval_new.vpcf"
+		},
+	]
+}

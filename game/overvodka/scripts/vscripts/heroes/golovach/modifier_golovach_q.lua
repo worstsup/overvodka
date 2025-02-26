@@ -3,11 +3,9 @@ modifier_golovach_q = class({})
 function modifier_golovach_q:IsHidden()
 	return true
 end
-
 function modifier_golovach_q:IsDebuff()
 	return false
 end
-
 function modifier_golovach_q:IsPurgable()
 	return false
 end
@@ -17,7 +15,6 @@ function modifier_golovach_q:OnCreated( kv )
 	self.angle_back = self:GetAbility():GetSpecialValueFor( "back_angle" )
 	self.max_threshold = self:GetAbility():GetSpecialValueFor( "quill_release_threshold" )
 	self.ability_proc = "golovach_hidden"
-
 	self.threshold = 0
 end
 
@@ -28,7 +25,6 @@ function modifier_golovach_q:OnRefresh( kv )
 end
 
 function modifier_golovach_q:OnDestroy( kv )
-
 end
 
 function modifier_golovach_q:DeclareFunctions()
@@ -56,7 +52,6 @@ function modifier_golovach_q:OnAttackLanded( params )
 		local attacker_direction = VectorToAngles( attacker_vector ).y
 		local angle_diff = AngleDiff( facing_direction, attacker_direction )
 		angle_diff = math.abs(angle_diff)
-		-- calculate damage reduction
 		if angle_diff > (180-self.angle_back) then
 			reduction = self.reduction_back
 			self:ThresholdLogic( params.damage, params.attacker )
@@ -106,8 +101,8 @@ function modifier_golovach_q:PlayEffects( bBack, direction )
 			self:GetParent(),
 			PATTACH_POINT_FOLLOW,
 			"attach_hitloc",
-			self:GetParent():GetOrigin(), -- unknown
-			true -- unknown, true
+			self:GetParent():GetOrigin(),
+			true
 		)
 		EmitSoundOn( sound_cast, self:GetParent() )
 	else
@@ -118,11 +113,10 @@ function modifier_golovach_q:PlayEffects( bBack, direction )
 			self:GetParent(),
 			PATTACH_POINT_FOLLOW,
 			"attach_hitloc",
-			self:GetParent():GetOrigin(), -- unknown
-			true -- unknown, true
+			self:GetParent():GetOrigin(),
+			true
 		)
 		ParticleManager:SetParticleControlForward( effect_cast, 3, -direction )
-
 	end
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

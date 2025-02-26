@@ -5,12 +5,10 @@ LinkLuaModifier( "modifier_serega_sven", "heroes/pirat/modifier_serega_sven", LU
 tartar = {}
 
 function serega_sven:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 	local point = self:GetCursorPosition()
 	tartar = {}
-	-- load data
 	if target then
 		point = target:GetOrigin()
 	end
@@ -105,13 +103,10 @@ function serega_sven:OnSpellStart()
 		vVelocity = projectile_direction * projectile_speed,
 	}
 	ProjectileManager:CreateLinearProjectile(info)
-	-- play effects
 	local sound_cast = "serega_sven"
 	EmitSoundOn( sound_cast, caster )
 end
 
---------------------------------------------------------------------------------
--- Projectile
 function serega_sven:OnProjectileHit( target, location )
 	if not target then return end
 	for _,v in ipairs(tartar) do  
@@ -127,18 +122,14 @@ function serega_sven:OnProjectileHit( target, location )
 		attacker = self:GetCaster(),
 		damage = damage,
 		damage_type = self:GetAbilityDamageType(),
-		ability = self, --Optional.
+		ability = self,
 	}
-
-	-- stun
 	target:AddNewModifier(
 		self:GetCaster(), -- player source
 		self, -- ability source
 		"modifier_generic_stunned_lua", -- modifier name
 		{ duration = stun } -- kv
 	)
-
-	-- knockback
 	local knockback = target:AddNewModifier(
 		self:GetCaster(), -- player source
 		self, -- ability source
@@ -154,38 +145,26 @@ function serega_sven:OnProjectileHit( target, location )
 			}
 	)
 	local callback = function()
-		-- damage on landed
 		local damageTable = {
 			victim = target,
 			attacker = self:GetCaster(),
 			damage = damage,
 			damage_type = self:GetAbilityDamageType(),
-			ability = self, --Optional.
+			ability = self,
 		}
 		ApplyDamage(damageTable)
-
-		-- play effects
 		local sound_cast = "Hero_Lion.ImpaleTargetLand"
 		EmitSoundOn( sound_cast, target )
 	end
 	knockback:SetEndCallback( callback )
 	table.insert(tartar, target)
-	-- play effects
 	self:PlayEffects( target )
 end
 
---------------------------------------------------------------------------------
 function serega_sven:PlayEffects( target )
-	-- Get Resources
 	local particle_cast = "particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_hit_ti6.vpcf"
 	local sound_cast = "Hero_Lion.ImpaleHitTarget"
-
-	-- Get Data
-
-	-- -- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- Create Sound
 	EmitSoundOn( sound_cast, target )
 end

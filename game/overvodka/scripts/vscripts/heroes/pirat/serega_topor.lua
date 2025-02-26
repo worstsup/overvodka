@@ -18,34 +18,30 @@ function serega_topor:Spawn()
 end
 
 function serega_topor:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local topor_duration = self:GetSpecialValueFor( "topor_duration" )
 	caster:AddNewModifier( caster, self, "modifier_topor", { duration = topor_duration } )
-	-- load data
 	local radius = self:GetSpecialValueFor( "radius" )
 	local speed = self:GetSpecialValueFor( "speed" )
 	local buff_duration = self:GetSpecialValueFor( "buff_duration" )
-	-- play effects
 	local effect = self:PlayEffects( radius, speed )
 	local effect_new = self:PlayEffectsNew( )
-	-- create ring
 	caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_marci_sidekick_lua", -- modifier name
-		{ duration = buff_duration } -- kv
+		caster,
+		self,
+		"modifier_marci_sidekick_lua",
+		{ duration = buff_duration }
 	)
 	local pulse = caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_generic_ring_lua", -- modifier name
+		caster,
+		self,
+		"modifier_generic_ring_lua",
 		{
 			end_radius = radius,
 			speed = speed,
 			target_team = DOTA_UNIT_TARGET_TEAM_ENEMY,
 			target_type = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		} -- kv
+		}
 	)
 	pulse:SetCallback( function( enemy )
 		self:OnHit( enemy )
@@ -74,15 +70,14 @@ function serega_topor:OnHit( enemy )
 	}
 	ApplyDamage(damageTable)
 	enemy:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = duration})
-	-- slow
 	enemy:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_serega_topor", -- modifier name
+		caster,
+		self,
+		"modifier_serega_topor",
 		{
 			duration = duration,
 			slow = slow,
-		} -- kv
+		}
 	)
 	local sound_cast = "Ability.PlasmaFieldImpact"
 	EmitSoundOn( sound_cast, enemy )
@@ -93,9 +88,7 @@ function serega_topor:PlayEffects( radius, speed )
 	local sound_cast = "serega_topor"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( speed, radius, 1 ) )
-
 	EmitGlobalSound( sound_cast )
-
 	return effect_cast
 end
 

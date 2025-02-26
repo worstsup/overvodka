@@ -1,11 +1,9 @@
 eldzhey_w = class({})
 
---------------------------------------------------------------------------------
 function eldzhey_w:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
---------------------------------------------------------------------------------
 function eldzhey_w:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCaster()
@@ -64,7 +62,6 @@ function eldzhey_w:OnSpellStart()
 	self:PlayEffects1( target, radius )
 end
 
---------------------------------------------------------------------------------
 function eldzhey_w:PlayEffects1( target, radius )
 	local particle_cast = "particles/eldzhey_w_cast.vpcf"
 	local particle_target = "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"

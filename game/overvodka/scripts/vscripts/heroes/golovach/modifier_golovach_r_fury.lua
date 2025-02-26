@@ -1,54 +1,40 @@
---------------------------------------------------------------------------------
 modifier_golovach_r_fury = class({})
---------------------------------------------------------------------------------
--- Classifications
+
 function modifier_golovach_r_fury:IsHidden()
 	return false
 end
 function modifier_golovach_r_fury:IsDebuff()
 	return false
 end
-
 function modifier_golovach_r_fury:IsPurgable()
 	return false
 end
---------------------------------------------------------------------------------
--- Initializations
+
 function modifier_golovach_r_fury:OnCreated( kv )
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
-	-- references
 	self.bonus_as = self:GetAbility():GetSpecialValueFor( "flurry_bonus_attack_speed" )
 	self.recovery = self:GetAbility():GetSpecialValueFor( "time_between_flurries" )
 	self.charges = self:GetAbility():GetSpecialValueFor( "charges_per_flurry" )
 	self.timer = self:GetAbility():GetSpecialValueFor( "max_time_window_per_hit" )
-
 	self.radius = self:GetAbility():GetSpecialValueFor( "pulse_radius" )
 	self.damage = self:GetAbility():GetSpecialValueFor( "pulse_damage" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "pulse_debuff_duration" )
 	if not IsServer() then return end
-
 	self.counter = self.charges
 	self:SetStackCount( self.counter )
-
 	self.success = 0
-
-	-- create anmiation modifier
 	self.animation = self.parent:AddNewModifier(
-		self.parent, -- player source
-		self.ability, -- ability source
-		"modifier_golovach_r_animation", -- modifier name
-		{} -- kv
+		self.parent,
+		self.ability,
+		"modifier_golovach_r_animation",
+		{}
 	)
-
-	-- play effects
 	self:PlayEffects1()
 	self:PlayEffects2( self.parent, self.counter )
-
 end
 
 function modifier_golovach_r_fury:OnRefresh( kv )
-	
 end
 
 function modifier_golovach_r_fury:OnRemoved()
@@ -56,35 +42,24 @@ end
 
 function modifier_golovach_r_fury:OnDestroy()
 	if not IsServer() then return end
-
-	-- destroy animation modifier
 	if not self.animation:IsNull() then
 		self.animation:Destroy()
 	end
-
-	-- check main modifier
 	local main = self.parent:FindModifierByNameAndCaster( "modifier_golovach_r", self.parent )
 	if not main then return end
-
-	-- check if forced destroy by main modifier
 	if self.forced then return end
-
-	-- create recovery modifier
 	self.parent:AddNewModifier(
-		self.parent, -- player source
-		self.ability, -- ability source
-		"modifier_golovach_r_recovery", -- modifier name
+		self.parent,
+		self.ability,
+		"modifier_golovach_r_recovery",
 		{
 			duration = self.recovery,
 			success = self.success,
-		} -- kv
+		}
 	)
-
 	if self.success~=1 then return end
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_golovach_r_fury:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_IGNORE_ATTACKSPEED_LIMIT,
@@ -92,7 +67,6 @@ function modifier_golovach_r_fury:DeclareFunctions()
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
 	}
-
 	return funcs
 end
 
@@ -101,17 +75,11 @@ function modifier_golovach_r_fury:GetModifierAttackSpeed_Limit()
 end
 
 function modifier_golovach_r_fury:GetModifierProcAttack_Feedback( params )
-	-- start combo timer
 	self:StartIntervalThink( self.timer )
-
-	-- reduce counter
 	self.counter = self.counter - 1
 	self:SetStackCount( self.counter )
-
-	-- play effects
 	self:EditEffects2( self.counter )
 	self:PlayEffects3( self.parent, params.target )
-
 	if self.counter<=0 then
 		self.success = 1
 		self:Pulse( params.target:GetOrigin() )
@@ -135,56 +103,45 @@ function modifier_golovach_r_fury:GetActivityTranslationModifiers()
 	return "flurry_attack_a"
 end
 
---------------------------------------------------------------------------------
--- Interval Effects
 function modifier_golovach_r_fury:OnIntervalThink()
-	-- combo timer expires
 	self:Destroy()
 end
 
---------------------------------------------------------------------------------
--- Helper
 function modifier_golovach_r_fury:Pulse( center )
-		-- create pulse
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),	-- int, your team number
-		center,	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self.parent:GetTeamNumber(),
+		center,
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
-
-	-- precache damage
 	local damageTable = {
-		-- victim = target,
 		attacker = self.parent,
 		damage = self.damage,
 		damage_type = DAMAGE_TYPE_MAGICAL,
-		ability = self.ability, --Optional.
+		ability = self.ability,
 	}
 
 	for _,enemy in pairs(enemies) do
-		-- damage
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
 		local direction = enemy:GetOrigin()-self:GetParent():GetOrigin()
 		direction.z = 0
 		direction = direction:Normalized()
-		-- slow
 		enemy:AddNewModifier(
-			self.parent, -- player source
-			self.ability, -- ability source
-			"modifier_golovach_r_debuff", -- modifier name
-			{ duration = self.duration } -- kv
+			self.parent,
+			self.ability,
+			"modifier_golovach_r_debuff",
+			{ duration = self.duration }
 		)
 		enemy:AddNewModifier(
-				self.parent, -- player source
-				self.ability, -- ability source
-				"modifier_generic_arc_lua", -- modifier name
+				self.parent,
+				self.ability,
+				"modifier_generic_arc_lua",
 				{
 					dir_x = direction.x,
 					dir_y = direction.y,
@@ -192,11 +149,9 @@ function modifier_golovach_r_fury:Pulse( center )
 					distance = 0,
 					height = 100,
 					activity = ACT_DOTA_FLAIL,
-				} -- kv
+				}
 			)
 	end
-
-	-- play effects
 	self:PlayEffects4( center, self.radius )
 end
 
@@ -205,19 +160,14 @@ function modifier_golovach_r_fury:ForceDestroy()
 	self:Destroy()
 end
 
---------------------------------------------------------------------------------
--- Graphics & Animations
 function modifier_golovach_r_fury:ShouldUseOverheadOffset()
 	return true
 end
 
 function modifier_golovach_r_fury:PlayEffects1()
-	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_marci/marci_unleash_buff.vpcf"
 	local sound_cast = "Hero_Marci.Unleash.Charged"
 	local sound_cast2 = "Hero_Marci.Unleash.Charged.2D"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_POINT_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -225,8 +175,8 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"eye_l",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -234,8 +184,8 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"eye_r",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -243,8 +193,8 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"attach_attack1",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -252,8 +202,8 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"attach_attack2",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -261,8 +211,8 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"attach_attack1",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -270,45 +220,33 @@ function modifier_golovach_r_fury:PlayEffects1()
 		self:GetParent(),
 		PATTACH_POINT_FOLLOW,
 		"attach_attack2",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
-
-	-- buff particle
 	self:AddParticle(
 		effect_cast,
-		false, -- bDestroyImmediately
-		false, -- bStatusEffect
-		-1, -- iPriority
-		false, -- bHeroEffect
-		false -- bOverheadEffect
+		false,
+		false,
+		-1,
+		false,
+		false
 	)
-
-	-- Create Sound
 	EmitSoundOn( sound_cast, self:GetParent() )
 	EmitSoundOnClient( sound_cast2, self:GetParent():GetPlayerOwner() )
 end
 
 function modifier_golovach_r_fury:PlayEffects2( caster, counter )
-	-- Get Resources
 	local particle_cast = "particles/marci_unleash_stack_golovach.vpcf"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_OVERHEAD_FOLLOW, caster )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( 0, counter, 0 ) )
-	-- ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- buff particle
 	self:AddParticle(
 		effect_cast,
-		false, -- bDestroyImmediately
-		false, -- bStatusEffect
-		1, -- iPriority
-		false, -- bHeroEffect
-		true -- bOverheadEffect
+		false,
+		false,
+		1,
+		false,
+		true
 	)
-
-	-- save index for later
 	self.effect_cast = effect_cast
 end
 
@@ -317,10 +255,7 @@ function modifier_golovach_r_fury:EditEffects2( counter )
 end
 
 function modifier_golovach_r_fury:PlayEffects3( caster, target )
-	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_marci/marci_unleash_attack.vpcf"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, caster )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -328,23 +263,18 @@ function modifier_golovach_r_fury:PlayEffects3( caster, target )
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
 function modifier_golovach_r_fury:PlayEffects4( point, radius )
-	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_marci/marci_unleash_pulse.vpcf"
 	local sound_cast = "golovach_r_hit"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, point )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(radius,radius,radius) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- Create Sound
 	EmitSoundOnLocationWithCaster( point, sound_cast, self:GetParent() )
 end

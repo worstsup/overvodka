@@ -14,6 +14,7 @@ function golovach_e:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/golovach_e.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/golovach_e_fail.vsndevts", context )
 end
+
 function golovach_e:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
