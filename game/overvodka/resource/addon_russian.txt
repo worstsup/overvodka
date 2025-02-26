@@ -326,8 +326,13 @@
 
 		"DOTA_Tooltip_ability_evelone_nose"		"ОГРОМНЫЙ НОСЯРА"
 		"DOTA_Tooltip_ability_evelone_nose_Description" "Огромный нос Вадима чувствует каждого противника, находящегося перед ним на расстоянии %cone_radius%."
+		"DOTA_Tooltip_ability_evelone_nose_cone_radius" "ДАЛЬНОСТЬ: "
+		"DOTA_Tooltip_ability_evelone_nose_cone_angle" "УГОЛ ОБЗОРА: "
 		"DOTA_Tooltip_ability_evelone_r"		"ОЧЕРЕДНОЙ БАН"
 		"DOTA_Tooltip_ability_evelone_r_Description" "Эвелон сгорает от очередного беспричинного бана его канала и начинает охоту на тупых админов твича, устраивая темную ночь на карте и ограничивая их обзор, получая свободное перемещение, бонус к скорости передвижения, а также накладывая безмолвие на всех врагов в радиусе %silence_radius% около него."
+		"DOTA_Tooltip_ability_evelone_r_duration" "ДЛИТЕЛЬНОСТЬ: "
+		"DOTA_Tooltip_ability_evelone_r_bonus_movespeed" "%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ: "
+		"DOTA_Tooltip_ability_evelone_r_silence_radius" "РАДИУС БЕЗМОЛВИЯ: "
 		"DOTA_Tooltip_modifier_evelone_r"		"Очередной бан"
 		"DOTA_Tooltip_modifier_evelone_r_Description" "Эвелон получает свободное перемещение, скорость передвижения увеличена"
 
