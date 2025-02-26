@@ -7,6 +7,8 @@ function evelone_w:Precache(context)
     PrecacheResource("particle", "particles/evelone_w.vpcf", context)
     PrecacheResource("particle", "particles/evelone_w_night.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_crit_impact.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/evelone_w.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/evelone_w_hit.vsndevts", context)
 end
 
 function evelone_w:GetCooldown(level)
@@ -31,7 +33,7 @@ function evelone_w:OnSpellStart()
     local point = self:GetCursorPosition()
     local duration = self:GetSpecialValueFor("duration")
     local thinker = CreateModifierThinker(caster, self, "modifier_evelone_w_smoke", {duration = duration, target_point_x = point.x , target_point_y = point.y}, point, caster:GetTeamNumber(), false)
-    caster:EmitSound("kakao")
+    caster:EmitSound("evelone_w")
 end
 
 modifier_evelone_w_smoke = class({})
@@ -131,6 +133,7 @@ function modifier_evelone_w_smoke_buff:PlayEffects( target )
 	)
 	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetOrigin()-target:GetOrigin()):Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
+    target:EmitSound("evelone_w_hit")
 end
 
 function modifier_evelone_w_smoke_buff:RollChance( chance )
