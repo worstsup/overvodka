@@ -4,10 +4,6 @@ DebugPanel = DebugPanel or {
 		409188637, -- Worstsup
 		885116894, -- dolbayobi
 		349446348, -- mefisto
-		1836839493, -- dev
-		1362960359, -- zmbvlv
-		389577160, -- streamer
-		1248303404, -- sega
 		466290701, -- timoxa
 	},
 	SelectedBot = {}

@@ -5,6 +5,7 @@ function eldzhey_w:GetAOERadius()
 end
 
 function eldzhey_w:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCaster()
 	local heal = self:GetSpecialValueFor("heal")
