@@ -1,26 +1,19 @@
 modifier_sasavot_w = class({})
 
---------------------------------------------------------------------------------
--- Initializations
 
 function modifier_sasavot_w:IsHidden( kv )
 	return false
 end
-
 function modifier_sasavot_w:IsDebuff( kv )
 	return false
 end
-
 function modifier_sasavot_w:IsPurgable( kv )
 	return false
 end
-
 function modifier_sasavot_w:RemoveOnDeath( kv )
 	return false
 end
 
---------------------------------------------------------------------------------
--- Life cycle
 
 function modifier_sasavot_w:OnCreated( kv )
 	self:SetStackCount(1)
@@ -38,8 +31,6 @@ function modifier_sasavot_w:OnRefresh( kv )
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
 end
 
---------------------------------------------------------------------------------
--- Declare functions
 
 function modifier_sasavot_w:DeclareFunctions()
 	local funcs = {
@@ -48,26 +39,22 @@ function modifier_sasavot_w:DeclareFunctions()
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 	}
-
 	return funcs
 end
 
---------------------------------------------------------------------------------
--- Declared functions
-
 function modifier_sasavot_w:OnAttack( params )
 	if IsServer() then
-		-- filter
 		pass = false
 		if params.attacker==self:GetParent() then
 			pass = true
 		end
-
-		-- logic
 		if pass then
-			-- check if it is the same target
 			if self.currentTarget==params.target then
-				self:AddStack()
+				if params.target:HasModifier("modifier_sasavot_r_new_secondary") then
+					self:SetStackCount(10)
+				else
+					self:AddStack()
+				end
 			else
 				self:ResetStack()
 				self.currentTarget = params.target
@@ -97,11 +84,8 @@ function modifier_sasavot_w:GetModifierPhysicalArmorBonus( params )
 	return self:GetStackCount() * self.stack_multiplier_armor * passive
 end
 
---------------------------------------------------------------------------------
--- Helper functions
 
 function modifier_sasavot_w:AddStack()
-	-- check if it is not maximum
 	if not self:GetParent():PassivesDisabled() then
 		if self:GetStackCount() < self.max_stacks then
 			self:IncrementStackCount()

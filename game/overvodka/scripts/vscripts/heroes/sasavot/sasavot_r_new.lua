@@ -46,8 +46,8 @@ end
 
 function modifier_sasavot_r_new:OnTakeDamage(params)
     if params.attacker == self.target and params.unit ~= self.caster and params.unit:IsRealHero() then
-        self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 20})
-        self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary_self", {duration = 20})
+        self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 15})
+        self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary_self", {duration = 15})
         self:Destroy()
     end
 end
@@ -75,7 +75,6 @@ function modifier_sasavot_r_new_secondary_self:IsPurgable()
 end
 
 function modifier_sasavot_r_new_secondary_self:OnCreated( kv )
-	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "damage_bonus" )
 end
 
 function modifier_sasavot_r_new_secondary_self:OnDestroy( kv )
@@ -93,7 +92,7 @@ function modifier_sasavot_r_new_secondary_self:GetModifierPreAttack_CriticalStri
 	if IsServer() then
 		if params.target:HasModifier("modifier_sasavot_r_new_secondary") then
 			self.record = params.record
-			return self.crit_bonus
+			return self:GetAbility():GetSpecialValueFor( "damage_bonus" )
 		end
 	end
 end
@@ -180,8 +179,8 @@ end
 
 function modifier_sasavot_r_new_secondary:OnIntervalThink()
     self.t = self.t + 1
-    if self.t == 10 then
-        self.Pct = self.Pct - 25
+    if self.t == 8 then
+        self.Pct = self.Pct - 30
         self.t = 0
     end
     if not IsServer() then return end
@@ -193,7 +192,6 @@ function modifier_sasavot_r_new_secondary:OnIntervalThink()
         self:Destroy()
         return
     end
-    AddFOWViewer(self.target:GetTeamNumber(), self.caster:GetAbsOrigin(), 300, 0.5, false)
     AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300 + self.durationPassed * 15, 0.5, false)
     self.durationPassed = self.durationPassed + 0.5
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
@@ -207,8 +205,9 @@ function modifier_sasavot_r_new_secondary:OnDestroy()
     self:GetCaster():RemoveModifierByName("modifier_sasavor_r_new_secondary_self")
     StopSoundOn("sasavot_r_tick", self.target)
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
-    if self.durationPassed >= 19 and distance <= self.radius and not self.damageDealt then
-        self.target:Kill(self:GetAbility(), self.caster)
+    if self.durationPassed >= 14 and distance <= self.radius and not self.damageDealt then
+        self.damage_needed = self.target:GetMaxHealth() * self:GetAbility():GetSpecialValueFor("dmg_pct") * 0.01
+        ApplyDamage({victim = self.target, attacker = self.caster, damage = self.damage_needed, damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility()})
         EmitGlobalSound("sasavot_r_success")
     end
 end

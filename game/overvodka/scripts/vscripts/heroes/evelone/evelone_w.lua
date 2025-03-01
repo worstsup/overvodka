@@ -100,8 +100,8 @@ end
 function modifier_evelone_w_smoke_buff:GetModifierPreAttack_CriticalStrike(params)
     if IsServer() then
         if self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then return end
-        if not self:GetParent():IsRealHero() then return end
         if self:GetParent():IsIllusion() then return end
+        if not self:GetParent():IsRealHero() then return end
         if not params.target:HasModifier("modifier_evelone_w_smoke_buff") then return end
         if self:RollChance(self:GetAbility():GetSpecialValueFor("crit_chance")) then
             self.record = params.record

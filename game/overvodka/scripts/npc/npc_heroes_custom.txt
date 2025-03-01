@@ -1419,7 +1419,7 @@
 				}
 			}
 		}
-		"ArmorPhysical"		"2"
+		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"27"
 		"AttackDamageMax"		"37"
@@ -2290,17 +2290,18 @@
 	}
 	"npc_dota_hero_faceless_void"
 	{
-		"Model"		"models/heroes/faceless_void/faceless_void.vmdl"
-		"HeroSelectSoundEffect"		"Hero_FacelessVoid.Pick"
+		"Model"		"models/evelone/evelone.vmdl"
+		"HeroSelectSoundEffect"		"evelone_start"
+		"DisableWearables"			"1"
 		"SoundSet"		"Hero_FacelessVoid"
 		"Enabled"		"1"
-		"ModelScale"		"0.900000"
-		"LoadoutScale"		"0.900000"
+		"ModelScale"		"1.25"
+		"LoadoutScale"		"1.0"
 		"GibType"		"default"
-		"Ability1"		"faceless_void_time_walk"
+		"Ability1"		"evelone_q"
 		"Ability2"		"evelone_w"	
-		"Ability3"		"faceless_void_time_lock"
-		"Ability4"		"faceless_void_time_walk_reverse"
+		"Ability3"		"evelone_e"
+		"Ability4"		"generic_hidden"
 		"Ability5"		"evelone_nose"
 		"Ability6"		"evelone_r"
 
@@ -2324,7 +2325,7 @@
 			}
 			"faceless_void_chronosphere"
 			{
-				"Icon"				"area_of_effect"
+				"Icon"				"slow"
 				"Color"				"Green"
 				"GradientID"		"0"
 
@@ -2339,9 +2340,9 @@
 
 			"faceless_void_time_zone"
 			{
-				"Icon"				"chrono_cube"
-				"Color"				"Purple"
-				"GradientID"		"1"
+				"Icon"				"illusion"
+				"Color"				"Yellow"
+				"GradientID"		"0"
 
 				"Abilities"
 				{
@@ -2358,7 +2359,7 @@
 		"AttackDamageMin"		"37"
 		"AttackDamageMax"		"43"
 		"AttackRate"		"1.700000"
-		"AttackAnimationPoint"		"0.500000"
+		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"		"600"
 		"AttackRange"		"150"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
@@ -2371,6 +2372,7 @@
 		"StatusHealthRegen"		"1"
 		"MovementSpeed"		"300"
 		"MovementTurnRate"		"0.900000"
+		"HealthBarOffset"	"280"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

@@ -2024,7 +2024,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "4"
+        "StatusHealth"          "3"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -2098,7 +2098,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "4"
+        "StatusHealth"          "3"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -2172,7 +2172,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "5"
+        "StatusHealth"          "4"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -2246,7 +2246,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "6"
+        "StatusHealth"          "5"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -2320,7 +2320,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "8"
+        "StatusHealth"          "7"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"

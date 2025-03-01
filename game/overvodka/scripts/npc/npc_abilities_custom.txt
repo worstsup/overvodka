@@ -5998,7 +5998,6 @@
 				{
 					"value" "0 0 0 1"
 					"special_bonus_unique_phoenix_4" "-1"
-
 				}
 				"schoolboys_number5"
 				{
@@ -6011,7 +6010,7 @@
 				}
 				"schoolboys_hp"
 				{
-					"value"	"4 4 5 6"
+					"value"	"3 3 4 5"
 					"special_bonus_unique_phoenix_4" "+2"
 				}
 				"schoolboys_dmg"
@@ -6974,6 +6973,7 @@
 		"Innate"						"1"
 		"IsBreakable"					"1"
 		"AbilityCastRange"				"0"
+		"HasScepterUpgrade"				"0"
 		"AbilityCastPoint"				"0.2"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityValues"
@@ -7444,7 +7444,7 @@
         "MaxLevel"                      "3"
         "IsOnCastBar"                   "1"
         "HasScepterUpgrade"				"1"
-        "AbilityChannelTime"            "6.0"
+        "AbilityChannelTime"            "5.0"
         "AbilityManaCost"               "250 500 750"
         "AbilityValues"
         {
@@ -7453,7 +7453,7 @@
         			"value"	"80 75 70"
         			"special_bonus_unique_keeper_of_the_light_7" "-15"
         		}
-        		"dur_tooltip"		"6.0"
+        		"dur_tooltip"		"5.0"
                 "beam_speed"
                 {
                 	"value"	"340 360 380"
@@ -7548,15 +7548,31 @@
 		}
 		"AbilityValues"
         {
-        		"AbilityCooldown"
-        		{
-        			"value"	"12"
-        			"special_bonus_unique_keeper_of_the_light_14" "-3"
-        		}
-        		 "stun_duration"	"1.3 1.7 2.1 2.5"
-        		 "hex_duration"		"1.3 1.7 2.1 2.5"
-        		 "silence_duration"	"2.0 2.5 3.0 3.5"
-        		 "disarm_duration"	"2.0 2.5 3.0 3.5"
+				"AbilityCooldown"
+				{
+					"value"	"12"
+					"special_bonus_unique_keeper_of_the_light_14" "-3"
+				}
+				"stun_duration"
+				{
+					"value"	"1.3 1.7 2.1 2.5"
+					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+1"
+				}
+				"hex_duration"
+				{
+					"value"	"1.3 1.7 2.1 2.5"
+					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+1"
+				}
+				"silence_duration"
+				{
+					"value"	"2.0 2.5 3.0 3.5"
+					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+1"
+				}
+				"disarm_duration"
+				{
+					"value"	"2.0 2.5 3.0 3.5"
+					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+1"
+				}
         		 "damage"
         		 {
         		 	"value"	"75 150 225 300"
@@ -7575,6 +7591,7 @@
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"IsBreakable"					"1"
+		"HasScepterUpgrade"				"1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"     	"DAMAGE_TYPE_MAGICAL"
@@ -7605,7 +7622,7 @@
 				"ms"
 				{
 					"value"	"0"
-					"special_bonus_facet_zuus_livewire"	"-25"
+					"special_bonus_facet_zuus_livewire"	"-14 -21 -28 -35"
 					"RequiresFacet"			"zuus_livewire"
 				}
 				"damage"
@@ -7615,13 +7632,17 @@
 				"damage_percent"
 				{
 					"value"	"0"
-					"special_bonus_unique_keeper_of_the_light_illuminate_cooldown" "+5"
 				}
 				"microstun"
 				{
 					"value"	"0"
 				}
 				"interval"				"0.1"
+				"beam_radius"       "200"
+                "beam_dps"          "100"
+                "linger_time"       "1.0"
+                "linger_create_interval"       "0.1"
+                "damage_interval"   "0.1"
 		}
 	}
 	//=================================================================================================================
@@ -7650,8 +7671,8 @@
 				}
 				"bonus_ms"
 				{
-					"value"	"10"
-					"special_bonus_unique_keeper_of_the_light_11" "+7"
+					"value"	"0"
+					"special_bonus_unique_keeper_of_the_light_11" "+12"
 				}
 				"spell_amp"
 				{
@@ -7661,7 +7682,7 @@
 				"regen"
 				{
 					"value" "0"
-					"special_bonus_facet_zuus_divine_rampage"	"+3"
+					"special_bonus_facet_zuus_divine_rampage"	"+4"
 					"RequiresFacet"			"zuus_divine_rampage"
 				}
 		}
@@ -8153,7 +8174,6 @@
 				"model_scale"					"50"
 				"bonus_status"					"20"
 		}
-		
 	}
 	//=================================================================================================================
 	// КОНЧАЙ
@@ -8213,7 +8233,7 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"	"11"
+					"value"	"12"
 					"special_bonus_unique_earthshaker" "-9"
 				}
 		}
@@ -8301,7 +8321,7 @@
 		"AbilityValues"
 		{
 				"duration"				"5 6 7"
-				"radius"				"450"
+				"radius"				"525"
 				"width"					"100"
 				"spear_damage"
 				{
@@ -8420,7 +8440,7 @@
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-			"damage_per_armor"			"0.30"
+			"damage_per_armor"			"0.25"
 		}
 	}
 	"earthshaker_slugger"
@@ -10903,15 +10923,16 @@
 		{
 			"AbilityCooldown"
 			{
-				"value"	"35"
+				"value"	"40"
 			}
-			"dur_tooltip"	"20"
+			"dur_tooltip"	"15"
+			"dmg_pct"		"10 20 30"
 			"damage_needed"
 			{
 				"value"	"300 450 600"
 				"special_bonus_unique_bloodseeker_4" "+600"
 			}
-			"damage_bonus"	"15 20 25"
+			"damage_bonus"	"115 125 135"
 			"radius"	"2500 2750 3000"
 		}
 	}
@@ -11928,8 +11949,8 @@
     	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
     	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
     	"AbilityUnitTargetFlags"   "DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
-    	"AbilityCastRange"         "650 700 750 800"
-    	"AbilityManaCost"          "100 115 130 145"
+    	"AbilityCastRange"         "650"
+    	"AbilityManaCost"          "100 125 150 175"
     	"AbilityCastPoint"		   "0.2"
     	"AbilityValues" 
     	{
@@ -12604,7 +12625,7 @@
 				"damage"
 				{
 					"value" "75 150 225 300"
-					"special_bonus_unique_nyx_4" "+100"
+					"special_bonus_unique_nyx_4" "+75"
 				}
 				"fissure_range"
 				{
@@ -12617,7 +12638,7 @@
 				"fissure_radius"				"250"
 				"stun_duration"
 				{
-					"value"	"0.7 0.8 0.9 1.0"
+					"value"	"0.4 0.5 0.6 0.7"
 					"special_bonus_unique_nyx_jolt_cooldown" "+0.5"
 				}
 				"facet_walk"
@@ -12669,7 +12690,7 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"ally_lift_duration"		"1.0"
-				"ally_range"				"750 875 1000 1125"
+				"ally_range"				"750"
 				"enemy_range"				"400 475 550 625"
 				"enemy_lift_duration"		"0.8 1.2 1.6 2.0"
 				"fall_animation"			"0.2"
@@ -12715,7 +12736,7 @@
 				"blast_speed"			"1000"
 				"blast_stun_duration"
 				{
-					"value"	"1.25"
+					"value"	"1.0"
 				}
 				"blast_delay"    "0.9"
         		"blaster_radius" "700"
@@ -12742,7 +12763,7 @@
 		"AbilityTextureName"			"sans_scepter"
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"90"
+		"AbilityCooldown"				"100"
 		"AbilityManaCost"				"300"
 		"AoERadius"						"600"
 		"AbilityValues"
@@ -12888,6 +12909,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityTextureName"			"evelone_r"
 		"AbilityCastPoint"				"0.3"
+		"HasScepterUpgrade"				"1"
 		"AbilityCooldown"				"90 85 80"
 		"AbilityManaCost"				"100 200 300"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
@@ -12895,11 +12917,12 @@
 		{
 			"duration" 
 			{
-				"value" "12"
+				"value" "10 12 14"
 			}
 			"bonus_movespeed" 
 			{
-				"value" "20 25 30"
+				"value" "10 15 20"
+				"special_bonus_unique_faceless_void_3" "+10"
 			}
 			"vision_reduction"	
 			{
@@ -12910,6 +12933,7 @@
 				"value" "350"
 				"affected_by_aoe_increase" "1"
 			}
+			"vision_duration"	"5"
 		}
 	}
 	"evelone_w"
@@ -12919,22 +12943,24 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityTextureName"			"evelone_w"
 		"AOERadius"						"%radius"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastRange"				"800"
 		"AbilityCooldown"				"30"
-		"AbilityManaCost"				"60 80 100 120"
+		"AbilityManaCost"				"75 100 125 150"
 		"AbilityValues"
 		{
 			"radius"
 			{
 				"value"	"500 550 600 650"
+				"affected_by_aoe_increase"	"1"
 			}
 			"duration"
 			{
-				"value"	"7 8 9 10"
+				"value"	"6 7 8 9"
+				"special_bonus_unique_faceless_void_7" "+2"
 			}
 			"crit_chance"
 			{
@@ -12943,7 +12969,117 @@
 			"crit_bonus"
 			{
 				"value"	"120 140 160 180"
+				"special_bonus_unique_faceless_void" "+40"
 			}
+			"miss_chance"
+			{
+				"value"	"20 30 40 50"
+				"special_bonus_unique_faceless_void_4" "+50"
+			}
+		}
+	}
+	"evelone_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/evelone/evelone_e"
+		"AbilityTextureName"			"evelone_e"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"IsBreakable"					"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityValues"
+		{
+				"AbilityCooldown"
+				{
+					"value"	"10.5 10 9.5 9.0"
+				}
+				"AbilityCastRange"
+				{
+					"value"	"550 600 650 700"
+					"affected_by_aoe_increase"	"1"
+				}
+				"duration"
+				{
+					"value"	"3 4 5 6"
+					"special_bonus_unique_faceless_void_8" "+2"
+				}
+				"radius"
+				{
+					"value"	"550 600 650 700"
+					"affected_by_aoe_increase"	"1"
+				}
+				"illusion_outgoing_damage"
+				{
+					"value"	"-75 -65 -55 -45"
+					"special_bonus_unique_faceless_void_6" "+15"
+				}
+				"illusion_outgoing_tooltip"
+				{
+					"value"	"25 35 45 55"
+					"special_bonus_unique_faceless_void_6" "+15"
+				}
+				"illusion_incoming_damage"			"150 130 110 90"
+				"illusion_incoming_damage_total_tooltip"			"250 230 210 190"
+				"interval"				"0.1"
+				"hasfacet"
+				{
+					"value"	"0"
+					"special_bonus_facet_faceless_void_time_zone" "+1"
+				}
+		}
+	}
+	"evelone_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/evelone/evelone_q"
+		"AbilityBehavior"			    "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"SpellImmunityType"			 	"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitDamageType"		 	"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"			"evelone_q"
+		"AbilityManaCost"			    "50 60 70 80"
+		"HasShardUpgrade"				"1"
+		"AbilityCastAnimation"		    "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"			    "0.15"
+		"AbilityValues"
+		{
+			"base_damage"		   "60 80 100 120"
+			"attack_damage"
+			{
+				"value"		"-50"
+				"special_bonus_unique_faceless_void_5" "+30"
+			}
+			"damage_tooltip"
+			{
+				"value"		"50"
+				"special_bonus_unique_faceless_void_5" "+30"
+			}
+			"armor"					"-2 -4 -6 -8"
+			"duration"		 		"3"
+			"range"
+			{
+				"value"									"450 500 550 600"
+			}
+			"speed"									 "2000"
+			"slowing"
+			{
+				"value"	"0"
+				"special_bonus_facet_faceless_void_chronosphere" "-20"
+			}
+			"AbilityCharges"
+			{
+				"value"										"0"
+				"special_bonus_unique_faceless_void_2"			 "+2"
+			}
+			"AbilityCooldown"
+			{
+				"value"										"12"
+				"special_bonus_unique_faceless_void_2"			  "=0"
+			}
+			"AbilityChargeRestoreTime"		"14"
 		}
 	}
 }

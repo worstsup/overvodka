@@ -421,7 +421,7 @@
 			"duration"				"3.5"
 			"bonus_damage"			"28"
 			"bonus_armor"			"5"
-			"bonus_all"				"10"
+			"bonus_all"				"8"
 		}
 	}
 	//=================================================================================================================
@@ -1304,7 +1304,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_damage"			"85"
+				"bonus_damage"			"75"
 				"corruption_armor"		"-10"
 				"corruption_duration"	"7.0"
 				"bonus_damage_per_kill"	"4"
@@ -2161,8 +2161,8 @@
             "phase_duration"            "4.0"
             "phase_movement_speed"      "25"
             "bonus_movement_speed"      "60"
-            "bonus_damage"              "48"
-            "bonus_all_stats"       "30"
+            "bonus_damage"              "40"
+            "bonus_all_stats"       "25"
 			"bonus_as"				"25"
 			"bonus_armor"			"5"
             "bonus_health"          "0"

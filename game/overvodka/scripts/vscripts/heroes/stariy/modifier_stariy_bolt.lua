@@ -1,5 +1,5 @@
 modifier_stariy_bolt = class({})
-
+peterka = 0
 function modifier_stariy_bolt:IsHidden()
 	return true
 end
@@ -22,7 +22,7 @@ function modifier_stariy_bolt:OnCreated( kv )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
 	self.radius_0 = self.radius
-	self.radius_1 = self.radius + 200
+	self.radius_1 = self.radius + 150
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
 end
@@ -36,7 +36,7 @@ function modifier_stariy_bolt:OnRefresh( kv )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
 	self.radius_0 = self.radius
-	self.radius_1 = self.radius + 200
+	self.radius_1 = self.radius + 150
 	self.cooldown = self:GetAbility():GetCooldown(1)
 end
 
@@ -75,15 +75,25 @@ function modifier_stariy_bolt:OnIntervalThink()
 				duration = self.duration,
 			}
 		)
+		if self:GetParent():HasScepter() then
+			CreateModifierThinker( self:GetParent(), self:GetAbility(), "modifier_stariy_lasers_linger_thinker", { duration = self:GetAbility():GetSpecialValueFor( "linger_time" ) }, enemy:GetAbsOrigin(), self:GetParent():GetTeamNumber(), false )
+		end
 		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
 		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
 			dmg = 0
+			if peterka == 0 then
+				EmitSoundOn( "stariy_peterka", self:GetParent() )
+			end
+			peterka = peterka + 1
+			if peterka == 10 then
+				peterka = 0
+			end
 		end
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )
 		if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
-			self:GetAbility():StartCooldown(1.0)
+			self:GetAbility():StartCooldown(self:GetAbility():GetCooldown(1) - 2)
 		else
 			self:GetAbility():UseResources(false, false, false, true)
 		end

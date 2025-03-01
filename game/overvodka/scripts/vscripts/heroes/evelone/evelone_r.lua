@@ -10,7 +10,9 @@ evelone_r = class({})
 function evelone_r:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf", context)
     PrecacheResource("particle", "particles/evelone_r_aura.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear_aura.vpcf", context)
     PrecacheResource("particle", "particles/evelone_r_effect.vpcf", context)
+    PrecacheResource("model", "models/evelone/evelone_ultimate.vmdl", context )
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/evelone_r_1.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/evelone_r_2.vsndevts", context)
@@ -21,10 +23,12 @@ end
 function evelone_r:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
-
+    local vision_duration = self:GetSpecialValueFor("vision_duration")
     local cast_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(cast_particle)
-    
+    if caster:HasScepter() then
+        AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 10000, vision_duration, false)
+    end
     caster:AddNewModifier(caster, self, "modifier_evelone_r", {duration = duration})
     EmitGlobalSound("Hero_Nightstalker.Darkness")
     EmitGlobalSound("evelone_r_ambient")
@@ -98,16 +102,21 @@ end
 function modifier_evelone_r:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_MODEL_CHANGE,
     }
 end
 
 function modifier_evelone_r:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("bonus_movespeed")
 end
+function modifier_evelone_r:GetModifierModelChange()
+    return "models/evelone/evelone_ultimate.vmdl"
+end
 
 function modifier_evelone_r:CheckState()
     return {
-        [MODIFIER_STATE_FLYING] = true
+        [MODIFIER_STATE_FLYING] = true,
+        [MODIFIER_STATE_FORCED_FLYING_VISION] = true,
     }
 end
 

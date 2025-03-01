@@ -50,6 +50,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_5opka.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_sans.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_evelone.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_faceless_void.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_faceless_void.png" />
 	</Panel>
 </root>

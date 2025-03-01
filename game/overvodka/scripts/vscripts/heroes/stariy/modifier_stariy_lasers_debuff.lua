@@ -13,7 +13,8 @@ end
 function modifier_stariy_lasers_debuff:OnCreated( kv )
 	if IsServer() then
 		self.beam_dps = self:GetAbility():GetSpecialValueFor( "beam_dps" )
-		self.beam_dps_pct = self:GetAbility():GetSpecialValueFor( "beam_dps_pct" )
+		local ability = self:GetCaster():FindAbilityByName( "stariy_lasers" )
+		self.beam_dps_pct = ability:GetSpecialValueFor( "beam_dps_pct" )
 		self.damage_interval = self:GetAbility():GetSpecialValueFor( "damage_interval" )
 		self:OnIntervalThink()
 		self:StartIntervalThink( self.damage_interval )

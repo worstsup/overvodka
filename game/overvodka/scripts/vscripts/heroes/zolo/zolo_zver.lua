@@ -1,9 +1,7 @@
 zolo_zver = class({})
 LinkLuaModifier( "modifier_zolo_zver", "heroes/zolo/modifier_zolo_zver", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_disarm", "heroes/zolo/modifier_zolo_disarm", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
---------------------------------------------------------------------------------
 function zolo_zver:OnAbilityPhaseStart()
 	self:PlayEffects3()
 end
@@ -64,14 +62,16 @@ function zolo_zver:OnSpellStart()
 			)
 			enemy:AddNewModifier(
 				caster, 
-				self, 
-				"modifier_generic_knockback_lua", 
+				self,
+				"modifier_knockback",
 				{
+					center_x = caster:GetAbsOrigin().x,
+					center_y = caster:GetAbsOrigin().y,
+					center_z = caster:GetAbsOrigin().z,
 					duration = duration,
-					distance = distance,
-					height = 30,
-					direction_x = enemy_direction.x,
-					direction_y = enemy_direction.y,
+					knockback_duration = duration,
+					knockback_distance = distance,
+					knockback_height = 30
 				}
 			)
 			caught = true

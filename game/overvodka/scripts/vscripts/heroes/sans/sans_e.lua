@@ -164,7 +164,9 @@ function modifier_sans_e:OnCreated( params )
 		local caster = self:GetCaster()
 		local ability = self:GetAbility()
 		self.parent = self:GetParent()
-		if self.parent:IsDebuffImmune() or self.parent:IsMagicImmune() then return end
+		if self.parent ~= caster then
+			if self.parent:IsDebuffImmune() or self.parent:IsMagicImmune() then return end
+		end
 		self.z_height = 0
 		self.duration = params.duration
 		self.lift_animation = ability:GetSpecialValueFor("lift_animation")

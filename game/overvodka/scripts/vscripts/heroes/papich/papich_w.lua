@@ -84,7 +84,7 @@ function modifier_papich_w_attack_speed:OnCreated()
 		if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
 			k = k + 1
 			if self:GetCaster():HasScepter() then
-				k = k + 1
+				k = k + 0.5
 			end
 		end
 	elseif self:GetAuraOwner() and self:GetAuraOwner():HasModifier("modifier_papich_w_thinker_attack_speed") then
@@ -94,7 +94,7 @@ function modifier_papich_w_attack_speed:OnCreated()
 		if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
 			k = k + 1
 			if self:GetCaster():HasScepter() then
-				k = k + 1
+				k = k + 0.5
 			end
 		end
 	else
@@ -104,14 +104,13 @@ end
 function modifier_papich_w_attack_speed:OnDestroy()
 	k = k - 1
 	if self:GetCaster():HasScepter() then
-		k = k - 1
+		k = k - 0.5
 	end
 end
 function modifier_papich_w_attack_speed:DeclareFunctions()
 	return {MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 			MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
 			MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
-			MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
 			MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,}
 end
 
@@ -122,11 +121,6 @@ function modifier_papich_w_attack_speed:GetModifierAttackSpeedBonus_Constant()
 	return self.attack_speed_bonus
 end
 function modifier_papich_w_attack_speed:GetModifierBonusStats_Strength()
-	if self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() and self:GetCaster():HasScepter() then
-		return -self.stolen
-	end
-end
-function modifier_papich_w_attack_speed:GetModifierBonusStats_Agility()
 	if self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() and self:GetCaster():HasScepter() then
 		return -self.stolen
 	end

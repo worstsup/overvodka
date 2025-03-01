@@ -19,6 +19,10 @@ function modifier_evelone_nose:IsPurgable() return false end
 
 function modifier_evelone_nose:OnCreated()
     if IsServer() then
+        if self:GetParent():IsIllusion() then
+            self:Destroy()
+            return
+        end
         self.vision_radius = 100
         self:StartIntervalThink(FrameTime())
         self.already_created = 0
