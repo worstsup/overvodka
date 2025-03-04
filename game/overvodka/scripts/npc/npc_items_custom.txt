@@ -2307,7 +2307,7 @@
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "govno"
 	"AbilityCooldown"				"0.4"
-    "ItemCost"                      "8750"
+    "ItemCost"                      "7550"
 		"AbilityValues"
 		{
 				"dodge_chance_pct"			"20"
@@ -2386,13 +2386,13 @@
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"750"	
+		"ItemCost"						"1350"
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_govno"
 		"ItemRequirements"
 		{
-			"01"						"item_charik_new;item_ultimate_orb;item_vanguard"
+			"01"						"item_charik_new;item_blade_of_alacrity;item_vanguard"
 		}
 	}
 	"item_aegis"
