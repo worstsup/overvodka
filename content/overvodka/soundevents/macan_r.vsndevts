@@ -1,4 +1,4 @@
-"bandoleros"
+"macan_r"
 {
   "operator_stacks"
   {
@@ -14,10 +14,10 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/bandoleros.vsnd"
+               "value0"    "sounds/abilities/macan_r.vsnd"
             }
           }
-          "volume"      {  "value"   "3.00000" }
+          "volume"      {  "value"   "3.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }

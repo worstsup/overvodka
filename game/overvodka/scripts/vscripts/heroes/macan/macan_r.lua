@@ -12,7 +12,8 @@ function macan_r:Precache( context )
 	PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
 	PrecacheResource( "soundfile", "soundevents/zavod.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/ezda.vsndevts", context )
-	PrecacheResource( "soundfile", "soundevents/bandoleros.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/macan_r.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/macan_r_gay.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/glox.vsndevts", context )
 end
 
@@ -30,7 +31,6 @@ function macan_r:OnSpellStart()
 		"modifier_macan_r_charge",
 		{ duration = duration }
 	)
-
 	self.sub = caster:FindAbilityByName( "macan_r_release" )
 	if not self.sub or self.sub:IsNull() then
 		self.sub = caster:AddAbility( "macan_r_release" )
@@ -127,7 +127,7 @@ function modifier_macan_r:OnCreated( kv )
 		return
 	end
 	EmitSoundOn( "ezda", self:GetCaster() )
-	EmitSoundOn( "bandoleros", self:GetCaster() )
+	EmitSoundOn( "macan_r_gay", self:GetCaster() )
 	self.damageTable = {
 		attacker = self.parent,
 		damage = damage,
@@ -145,7 +145,7 @@ end
 function modifier_macan_r:OnDestroy()
 	if not IsServer() then return end
 	StopSoundOn( "ezda", self:GetCaster() )
-	StopSoundOn( "bandoleros", self:GetCaster() )
+	StopSoundOn( "macan_r_gay", self:GetCaster() )
 	EmitSoundOn( "glox", self:GetCaster() )
 	self.parent:RemoveHorizontalMotionController(self)
 	FindClearSpaceForUnit( self.parent, self.parent:GetOrigin(), false )

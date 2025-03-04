@@ -13,6 +13,7 @@ function modifier_stariy_bolt:IsPurgable()
 end
 
 function modifier_stariy_bolt:OnCreated( kv )
+	if not IsServer() then return end
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -28,6 +29,7 @@ function modifier_stariy_bolt:OnCreated( kv )
 end
 
 function modifier_stariy_bolt:OnRefresh( kv )
+	if not IsServer() then return end
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -92,11 +94,7 @@ function modifier_stariy_bolt:OnIntervalThink()
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )
-		if self:GetParent():HasScepter() and self:GetParent():HasModifier("modifier_stariy_fly") then
-			self:GetAbility():StartCooldown(self:GetAbility():GetCooldown(1) - 2)
-		else
-			self:GetAbility():UseResources(false, false, false, true)
-		end
+		self:GetAbility():UseResources(false, false, false, true)
 	end
 end
 

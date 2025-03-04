@@ -582,14 +582,13 @@
 		"AbilityValues"
 		{
 			"bonus_attack_speed"	"120"
-			"minibash_chance"		"30"
-			"bash_damage"			"200"
-			"bash_stun"				"0.1"
+			"minibash_chance"		"40"
+			"bash_damage"			"50"
 			"cleave_percent" 		"100"
 			"cleave_radius" 		"650"
-			"attack_speed_slow" 	"-30"
-			"movement_speed_slow" 	"-10"
-			"slow_duration"			"2"
+			"attack_speed_slow" 	"-100"
+			"movement_speed_slow" 	"-80"
+			"slow_duration"			"0.3"
 		}
 	}
 	"item_recipe_aegis_hero"
@@ -2044,6 +2043,7 @@
     "AbilityValues"
     {
             "phase_duration"            "4.0"
+			"spell_amp"					"12"
             "phase_movement_speed"      "20"
             "bonus_movement_speed"      "55"
             "bonus_damage"              "28"
@@ -2055,7 +2055,7 @@
             "bonus_health"          "0"
             "bonus_mana"            "0.5"
 			"bonus_mana_tooltip"	"50"
-            "spell_amp"				"12"
+			"cast_amp"				"15"
     }
     
     "OnSpellStart"
@@ -2093,7 +2093,7 @@
                 "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
                 "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
                 "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "%bonus_mregen"
-
+				"MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" 	"%spell_amp"
             }
         }
         "modifier_item_jordan_active"
@@ -2110,7 +2110,7 @@
             "Properties"
             {
                 "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%phase_movement_speed"
-                "MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" 		"%spell_amp"
+				"MODIFIER_PROPERTY_CASTTIME_PERCENTAGE"				"%cast_amp"
             }
             
             "States"

@@ -18,10 +18,11 @@ function vovchik:CastFilterResultTarget( hTarget )
 end
 
 function vovchik:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-	local damage = target:GetHealth() * 0.3
-	local heal = target:GetHealth() * 0.3
+	local damage = target:GetHealth() * 0.25
+	local heal = target:GetHealth() * 0.25
 	if target:TriggerSpellAbsorb( self ) then
 		return
 	end

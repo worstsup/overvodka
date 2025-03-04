@@ -1,4 +1,4 @@
-"pres"
+"stariy_ult_start"
 {
   "operator_stacks"
   {
@@ -14,12 +14,12 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/pres.vsnd"
+               "value0"    "sounds/abilities/stariy_ult_start.vsnd"
             }
           }
-          "volume"      {  "value"   "2.00000" }
-          "pitch_rand_min"  {  "value"   "-0.05000" }
-          "pitch_rand_max"  {  "value"   "0.050000" }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "0.0" }
+          "pitch_rand_max"  {  "value"   "0.0" }
           "pitch"       {  "value"   "1.000000" }
           "soundlevel"    {  "value"   "100.00000" }
           "distance_max"   {  "value"   "10000.000" }

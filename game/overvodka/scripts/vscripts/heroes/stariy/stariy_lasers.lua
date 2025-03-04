@@ -5,9 +5,6 @@ LinkLuaModifier( "modifier_stariy_lasers_linger_thinker", "heroes/stariy/modifie
 LinkLuaModifier( "modifier_stariy_lasers_debuff", "heroes/stariy/modifier_stariy_lasers_debuff", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_stariy_fly", "heroes/stariy/modifier_stariy_fly", LUA_MODIFIER_MOTION_NONE )
 
-
-----------------------------------------------------------------------------------------
-
 function stariy_lasers:Precache( context )
 	PrecacheResource( "particle", "particles/staff_beam_new.vpcf", context )
 	PrecacheResource( "particle", "particles/creatures/aghanim/aghanim_beam_channel.vpcf", context )
@@ -18,18 +15,20 @@ function stariy_lasers:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/stariy_ult.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/stariy_ult_start.vsndevts", context )
 end
 
---------------------------------------------------------------------------------
-
-function stariy_lasers:ProcsMagicStick()
-	return false
+function stariy_lasers:GetCastAnimation()
+	return ACT_DOTA_CAST_ABILITY_2
 end
 
---------------------------------------------------------------------------------
+function stariy_lasers:GetChannelAnimation()
+	return ACT_DOTA_CAST_ABILITY_6
+end
 
 function stariy_lasers:OnAbilityPhaseStart()
-	EmitSoundOn( "old_start", self:GetCaster() )
+	EmitSoundOn( "stariy_ult_start", self:GetCaster() )
 	self.radius = self:GetSpecialValueFor( "radius" )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_stariy_fly", {duration = 1.5} )
 	if IsServer() then
@@ -48,7 +47,7 @@ function stariy_lasers:OnAbilityPhaseStart()
 end
 
 function stariy_lasers:OnAbilityPhaseInterrupted()
-	StopSoundOn( "old_start", self:GetCaster() )
+	StopSoundOn( "stariy_ult_start", self:GetCaster() )
 	self:GetCaster():RemoveModifierByName( "modifier_stariy_fly" )
 	ParticleManager:DestroyParticle( self.nChannelFX, false )
 	for k,enemy in pairs ( self.vecTargets ) do
@@ -57,16 +56,12 @@ function stariy_lasers:OnAbilityPhaseInterrupted()
 		end
 	end
 end
---------------------------------------------------------------------------------
 
 function stariy_lasers:OnSpellStart()
 	if IsServer() then
 		EmitSoundOn( "Hero_Phoenix.SunRay.Cast", self:GetCaster() )
 		EmitSoundOn( "stariy_ult", self:GetCaster() )
 		EmitSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
-		if self:GetCaster():HasScepter() then
-        	self:GetCaster():GetAbilityByIndex( 2 ):EndCooldown()
-		end
 		self.Projectiles = {}
 
 		for k,enemy in pairs ( self.vecTargets ) do
@@ -107,8 +102,6 @@ function stariy_lasers:OnSpellStart()
 	end
 end
 
--------------------------------------------------------------------------------
-
 function stariy_lasers:OnProjectileThinkHandle( nProjectileHandle )
 	if IsServer() then
 		local Projectile = nil
@@ -135,7 +128,6 @@ function stariy_lasers:OnProjectileThinkHandle( nProjectileHandle )
 	end
 end
 
--------------------------------------------------------------------------------
 local function isUnitInTable(unit, table)
     for _, u in ipairs(table) do
         if u == unit then
@@ -144,7 +136,6 @@ local function isUnitInTable(unit, table)
     end
     return false
 end
-
 
 function stariy_lasers:OnChannelThink( flInterval )
 	if IsServer() then
@@ -185,8 +176,6 @@ function stariy_lasers:OnChannelThink( flInterval )
 		end
 	end
 end
-
--------------------------------------------------------------------------------
 
 function stariy_lasers:OnChannelFinish( bInterrupted )
 	if IsServer() then

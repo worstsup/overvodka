@@ -1,5 +1,6 @@
 evelone_e = class({})
 LinkLuaModifier( "modifier_evelone_e", "heroes/evelone/evelone_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_evelone_e_illusions", "heroes/evelone/evelone_e", LUA_MODIFIER_MOTION_NONE )
 
 function evelone_e:Precache(context)
     PrecacheResource("particle", "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift.vpcf", context)
@@ -20,11 +21,9 @@ modifier_evelone_e = class({})
 function modifier_evelone_e:IsHidden()
 	return true
 end
-
 function modifier_evelone_e:IsDebuff()
 	return false
 end
-
 function modifier_evelone_e:IsPurgable()
 	return false
 end
@@ -86,6 +85,7 @@ function modifier_evelone_e:OnIntervalThink()
 		    true
 	    )
         illusion = self.illusions[1]
+		illusion:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_evelone_e_illusions", {duration = -1})
 		if self:GetAbility():GetSpecialValueFor("hasfacet") == 0 then
         	illusion:SetAbsOrigin(self:GetParent():GetAbsOrigin())
         	FindClearSpaceForUnit(illusion, self:GetParent():GetAbsOrigin(), true)
@@ -126,4 +126,33 @@ function modifier_evelone_e:PlayEffectsNew( target )
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
     ParticleManager:SetParticleControl( effect_cast, 3, self:GetParent():GetOrigin() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
+end
+
+modifier_evelone_e_illusions = class({})
+
+function modifier_evelone_e_illusions:IsHidden()
+	return true
+end
+function modifier_evelone_e_illusions:IsDebuff()
+	return false
+end
+function modifier_evelone_e_illusions:IsPurgable()
+	return false
+end
+
+function modifier_evelone_e_illusions:OnCreated()
+	if not IsServer() then return end
+end
+
+function modifier_evelone_e_illusions:DeclareFunctions()
+    local funcs = 
+    {
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    }
+    return funcs
+end
+
+
+function modifier_evelone_e_illusions:GetModifierMoveSpeedBonus_Percentage()
+    return self:GetAbility():GetSpecialValueFor("ms_illusion")
 end

@@ -33,6 +33,11 @@ function modifier_sasavot_r_new:OnIntervalThink()
 
     if self.target:IsAlive() and self.caster:IsAlive() then
         AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300, 0.5, false)
+        if self.target:HasModifier("modifier_sasavot_shard") then
+            self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 15})
+            self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary_self", {duration = 15})
+            self:Destroy()
+        end
     else
         self:Destroy()
     end

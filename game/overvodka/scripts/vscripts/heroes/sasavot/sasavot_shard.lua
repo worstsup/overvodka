@@ -7,9 +7,9 @@ function sasavot_shard:OnSpellStart()
 	if target:TriggerSpellAbsorb( self ) then return end
 	local duration = self:GetSpecialValueFor( "duration" )
 	target:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_sasavot_shard", -- modifier name
-		{ duration = duration } -- kv
+		caster,
+		self,
+		"modifier_sasavot_shard",
+		{ duration = duration }
 	)
 end

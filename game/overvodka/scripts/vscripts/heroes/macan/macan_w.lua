@@ -25,7 +25,7 @@ function macan_w:CastFilterResultTarget( hTarget )
 
 	local nResult = UnitFilter(
 		hTarget,
-		DOTA_UNIT_TARGET_TEAM_BOTH,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
 		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
 		self:GetCaster():GetTeamNumber()
@@ -122,8 +122,7 @@ function macan_w:OnSpellStart()
 				end
 			end
 			GridNav:DestroyTreesAroundPoint( enemy:GetOrigin(), radius, false )
-			local allied = enemy:GetTeamNumber()==caster:GetTeamNumber()
-			self:PlayEffects1( enemy:GetOrigin(), radius, allied )
+			self:PlayEffects1( enemy:GetOrigin(), radius )
 		end)
 		self:PlayEffects3( caster, enemy, duration )
 		self:PlayEffects4( caster )
@@ -131,12 +130,9 @@ function macan_w:OnSpellStart()
 
 end
 
-function macan_w:PlayEffects1( point, radius, allied )
+function macan_w:PlayEffects1( point, radius )
 	local particle_cast = "particles/units/heroes/hero_marci/marci_dispose_land_aoe.vpcf"
 	local sound_cast = "Hero_Marci.Grapple.Impact"
-	if allied then
-		sound_cast = "Hero_Marci.Grapple.Impact.Ally"
-	end
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, point )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(radius, 0, 0) )

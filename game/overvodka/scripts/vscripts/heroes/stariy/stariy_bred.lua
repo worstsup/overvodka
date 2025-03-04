@@ -7,6 +7,7 @@ function stariy_bred:Precache(context)
 end
 
 function stariy_bred:OnSpellStart()
+	if not IsServer() then return end
 	EmitSoundOn( "stariy_bred", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_bred", { duration = self:GetSpecialValueFor( "duration" ) } )
 end

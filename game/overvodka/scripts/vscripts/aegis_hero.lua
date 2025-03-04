@@ -62,25 +62,23 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
 	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
 	if not params.attacker:IsIllusion() and self.critProc then
 		local duration = self:GetAbility():GetSpecialValueFor("slow_duration")
-        local damage = self:GetAbility():GetSpecialValueFor("bash_damage")
+        local damage_pct = self:GetAbility():GetSpecialValueFor("bash_damage")
         local cleave_damage = self:GetAbility():GetSpecialValueFor("cleave_percent")
         local cleave_radius = self:GetAbility():GetSpecialValueFor("cleave_radius")
-        local bash_stun = self:GetAbility():GetSpecialValueFor("bash_stun")
 		local caster = self:GetCaster()
 	    if not self:GetCaster():IsHero() then
 	        caster = caster:GetOwner()
 	    end
+		local damage = self:GetParent():GetAverageTrueAttackDamage(nil) * damage_pct * 0.01
+		print(damage)
         ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
         if not params.attacker:IsRangedAttacker() then
         	local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
 			DoCleaveAttack( self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf" )
-			if not params.target:HasModifier("modifier_generic_stunned_lua") then
-				params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = bash_stun})
-			end
+			params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_item_aegis_hero_slow", {duration = duration})
 		end
         params.target:EmitSound("DOTA_Item.MKB.melee")
         params.target:EmitSound("DOTA_Item.MKB.Minibash")
-        params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_item_aegis_hero_slow", {duration = duration})
     end
 end
 

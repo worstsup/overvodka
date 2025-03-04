@@ -449,7 +449,7 @@
         [
             "sounds/chat_wheel/edim_govno.vsnd"
         ]
-        volume = "2.5"
+        volume = "3.0"
         pitch = "1.00000"
         soundlevel = "100.0"
         distance_max = "2500.0"
