@@ -228,12 +228,12 @@
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"40"
-		"AbilityManaCost"				"100"
+		"AbilityManaCost"				"75"
 		"AbilitySharedCooldown"			"hqd"
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"3400"
+		"ItemCost"						"2700"
 		"ItemShopTags"					"str;damage;hard_to_tag"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bkb;black king bar"
@@ -245,9 +245,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-			"bonus_strength"		"20"
-			"bonus_damage"			"30"
-			"duration"				"5"
+			"bonus_strength"		"15"
+			"bonus_damage"			"25"
+			"duration"				"4.5"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"60"
@@ -266,7 +266,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"250"	
+		"ItemCost"						"1000"	
 		"ItemShopTags"					""
 		
 		// Recipe
@@ -275,7 +275,7 @@
 		"ItemResult"					"item_hqd_maxx"
 		"ItemRequirements"
 		{
-			"01"						"item_hqd;item_ogre_axe;item_blades_of_attack"
+			"01"						"item_hqd"
 		}
 	}
 	//=================================================================================================================
@@ -293,12 +293,12 @@
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"35"
-		"AbilityManaCost"				"150"
+		"AbilityManaCost"				"100"
 		"AbilitySharedCooldown"			"hqd"
 
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"5500"
+		"ItemCost"						"3700"
 		"ItemShopTags"					"str;damage;hard_to_tag"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bkb;black king bar"
@@ -310,9 +310,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-			"bonus_strength"		"30"
-			"bonus_damage"			"45"
-			"duration"				"6"
+			"bonus_strength"		"20"
+			"bonus_damage"			"35"
+			"duration"				"5"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"70"
@@ -331,7 +331,7 @@
 		
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"650"	
+		"ItemCost"						"1000"	
 		"ItemShopTags"					""
 		
 		// Recipe
@@ -340,7 +340,7 @@
 		"ItemResult"					"item_pasito"
 		"ItemRequirements"
 		{
-			"01"						"item_hqd_maxx;item_ogre_axe;item_blades_of_attack"
+			"01"						"item_hqd_maxx"
 		}
 	}
 "item_phase_boots"
@@ -675,179 +675,195 @@
 		}
   	}
 	"item_invis_sword_datadriven"
-{
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"                     "item_datadriven"
-    "ID"                            "1152"  //Valve's version of this item uses the ID "152".
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-    "Model"                         "models/props_gameplay/red_box.vmdl" 
-    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "amul"
-    "FightRecapLevel"               "1"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "28.0"
-    "AbilityManaCost"               "75"
-    "AbilityCastPoint"              "0"
-
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "6200"
-    "ItemShopTags"                  "damage;attack_speed;movespeed;hard_to_tag"
-    "ItemQuality"                   "epic"
-    "ItemAliases"                   "sb;invis;shadow blade"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-	
-	"precache"
+	{
+		"BaseClass"                     "item_datadriven"
+		"ID"                            "1152" 
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"Model"                         "models/props_gameplay/red_box.vmdl" 
+		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"            "amul"
+		"FightRecapLevel"               "1"
+		"AbilityCooldown"               "28.0"
+		"AbilityManaCost"               "75"
+		"AbilityCastPoint"              "0"
+		"ItemCost"                      "6200"
+		"ItemShopTags"                  "damage;attack_speed;movespeed;hard_to_tag"
+		"ItemQuality"                   "epic"
+		"ItemAliases"                   "sb;invis;shadow blade"
+		"ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		
+		"precache"
+			{
+				"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
+				"particle"	"particles/items3_fx/glimmer_cape_initial.vpcf"		
+			}
+			
+		
+		"AbilityValues"
 		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
-			"particle"	"particles/items3_fx/glimmer_cape_initial.vpcf"		
+				"bonus_damage"                              "32"
+				"bonus_attack_speed"                        "70"
+				"duration"                         			"10.0"
+				"bonus_movement_speed"  					"20"
+				"debuff_duration"							"4.0"
+				"radius"                					"600"
 		}
 		
-    
-    "AbilityValues"
-    {
-            "bonus_damage"                              "32"
-            "bonus_attack_speed"                        "70"
-            "duration"                         			"10.0"
-            "bonus_movement_speed"  					"20"
-            "radius"                "600"
-    }
-    
-    "OnSpellStart"
+		"OnSpellStart"
+			{
+
+				"FireSound"
+				{
+					"Target"		"CASTER"
+					"EffectName"	"Item.GlimmerCape.Activate"
+				}
+
+				"ApplyModifier"
+				{
+					"ModifierName" 	"modifier_invisible"
+					"Target"
+					{
+						"Center"	"CASTER"
+						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+					}
+					"Duration"		"%duration"
+				}
+
+				"ApplyModifier"
+				{
+					"ModifierName" 	"modifier_windwalk"
+					"Target"
+					{
+						"Center"	"CASTER"
+						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+					}
+					"Duration"		"%duration"
+				}
+			}
+		
+		"Modifiers"
 		{
-
-			"FireSound"
+				"modifier_item_invis_sword_datadriven"
 			{
-				"Target"		"CASTER"
-				"EffectName"	"Item.GlimmerCape.Activate"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" 	"modifier_invisible"
-				"Target"
-				{
-					"Center"	"CASTER"
-					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				}
-				"Duration"		"%duration"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" 	"modifier_windwalk"
-				"Target"
-				{
-					"Center"	"CASTER"
-					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				}
-				"Duration"		"%duration"
-			}
-		}
-    
-    "Modifiers"
-    {
-			"modifier_item_invis_sword_datadriven"
-        {
-            "Passive"           "1"
-            "IsHidden"          "1"
-            "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-            
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
-                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_attack_speed"
-            }
-        }
-			"modifier_windwalk"
-			{
+				"Passive"           "1"
 				"IsHidden"          "1"
-				"IsBuff"			"1"
-				"Duration"          "%duration"
-				"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
-				"EffectAttachType"	"follow_origin"
+				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+				
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_attack_speed"
 				}
-				
-				"States"
+			}
+				"modifier_windwalk"
 				{
-					"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-				
-				"OnAttackLanded"
-				{
-					"RemoveModifier"
+					"IsHidden"          "1"
+					"IsBuff"			"1"
+					"Duration"          "%duration"
+					"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Properties"
 					{
-						"ModifierName" 	"modifier_invisible"
-						"Target"		"CASTER"
+						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
+					}
+					
+					"States"
+					{
+						"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
+						"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+					}
+					
+					"OnAttackLanded"
+					{
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_invisible"
+							"Target"		"CASTER"
+						}
+
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_windwalk"
+							"Target"		"CASTER"
+						}
+
+						"ApplyModifier"
+						{
+							"ModifierName" 	"modifier_break"
+							"Target"		"TARGET"
+							"Duration"		"%debuff_duration"
+						}
+						"ApplyModifier"
+						{
+							"ModifierName" 	"modifier_visib"
+							"Target"		"TARGET"
+							"Duration"		"%debuff_duration"
+						}
 					}
 
-					"RemoveModifier"
+					"OnAbilityExecuted"
 					{
-						"ModifierName" 	"modifier_windwalk"
-						"Target"		"CASTER"
-					}
-				}
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_invisible"
+							"Target"		"CASTER"
+						}
 
-				"OnAbilityExecuted"
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_windwalk"
+							"Target"		"CASTER"
+						}
+					}
+				}	
+			"modifier_truesight_datadriven"
+			{
+				"Passive"           "1"
+				"IsHidden"          "1"
+		
+				"ThinkInterval"  "0.03"
+				"OnIntervalThink"
 				{
 					"RemoveModifier"
 					{
-						"ModifierName" 	"modifier_invisible"
-						"Target"		"CASTER"
+						"Target"
+						{
+							"Center"    "TARGET"
+							"Radius"    "%radius"
+							"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+							"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+						}
+						"ModifierName"  "modifier_truesight"
 					}
-
-					"RemoveModifier"
+					"ApplyModifier"
 					{
-						"ModifierName" 	"modifier_windwalk"
-						"Target"		"CASTER"
+						"Target"
+						{
+							"Center"    "TARGET"
+							"Radius"    "%radius"
+							"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+							"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+						}
+						"ModifierName"  "modifier_truesight"
+						"Duration"      "0.50"
+					}           
+				}       
+			}
+			"modifier_visib"
+				{
+					"IsHidden"          "1"
+					"IsDebuff"			"1"
+					"Duration"          "%duration"
+					"States"
+					{
+						"MODIFIER_STATE_PROVIDES_VISION"	"MODIFIER_STATE_VALUE_ENABLED"
 					}
 				}
-			}	
-		"modifier_truesight_datadriven"
-        {
-            "Passive"           "1"
-            "IsHidden"          "1"
-    
-            "ThinkInterval"  "0.03"
-            "OnIntervalThink"
-            {
-                "RemoveModifier"
-                {
-                    "Target"
-                    {
-                        "Center"    "TARGET"
-                        "Radius"    "%radius"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-                        "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-                        "Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-                    }
-                    "ModifierName"  "modifier_truesight"
-                }
-                "ApplyModifier"
-                {
-                    "Target"
-                    {
-                        "Center"    "TARGET"
-                        "Radius"    "%radius"
-                        "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-                        "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-                        "Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-                    }
-                    "ModifierName"  "modifier_truesight"
-                    "Duration"      "0.50"
-                }           
-            }       
-        }
-    }
-}
-"item_recipe_invis_sword_datadriven"
+		}
+	}
+	"item_recipe_invis_sword_datadriven"
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
@@ -963,146 +979,152 @@
 		}
 	}
 	"item_manta_datadriven"
-{
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"                     "item_datadriven"
-    "ID"                            "1147"  //Valve's version of this item uses the ID "147".
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-    "Model"                         "models/props_gameplay/red_box.vmdl" 
-    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "ipho"
-    
-    // Stats        
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "30.0"  //This is the cooldown when used by ranged units.
-    "AbilityCastPoint"              "0.0"
-    "AbilityManaCost"               "165"
-    
-    // Item Info
-    //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                      "5200"
-    "ItemShopTags"                  "agi;str;int;attack_speed;move_speed;hard_to_tag"
-    "ItemQuality"                   "epic"
-    "ItemDisassembleRule"           "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    
-    "AbilityValues"
-    {
-            "bonus_strength"                                    "10"
-            "bonus_agility"                                     "28"
-            "bonus_intelligence"                                "10"
-            "bonus_attack_speed"                                "15"
-            "bonus_movement_speed_percentage"                   "10"
-            "illusion_duration"                 "14.0"
-            "illusion_outgoing_damage"          "-30.0"       
-            "illusion_outgoing_tooltip"         "70.0"
-            "illusion_incoming_damage"          "100.0"
-            "illusion_incoming_damage_total_tooltip"            "100.0"
-            "duration"                                     		"14.0"
-            "bonus_movement_speed"                              "15"
-    }
-    
-    "OnSpellStart"
-    {
-        "RunScript"
-        {
-            "ScriptFile"        "iphone"
-            "Function"          "IphoneNew"
-        }
-		"ApplyModifier"
+	{
+		"BaseClass"                     "item_datadriven"
+		"ID"                            "1147"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model"                         "models/props_gameplay/red_box.vmdl" 
+		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"            "ipho"
+		"AbilityCooldown"               "25.0" 
+		"AbilityCastPoint"              "0.0"
+		"AbilityManaCost"               "125"
+		"ItemCost"                      "5200"
+		"ItemShopTags"                  "agi;str;int;attack_speed;move_speed;hard_to_tag"
+		"ItemQuality"                   "epic"
+		"ItemDisassembleRule"           "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		"ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		
+		"AbilityValues"
+		{
+				"bonus_strength"                                    "10"
+				"bonus_agility"                                     "28"
+				"bonus_intelligence"                                "10"
+				"bonus_attack_speed"                                "15"
+				"bonus_movement_speed_percentage"                   "10"
+				"illusion_duration"                 "14.0"
+				"illusion_outgoing_damage"          "-45.0"
+				"illusion_outgoing_tooltip"         "55.0"
+				"illusion_incoming_damage"          "100.0"
+				"illusion_incoming_damage_total_tooltip"            "200.0"
+				"duration"                                     		"14.0"
+				"bonus_movement_speed"                              "15"
+				"stun_dur"							"0.4"
+				"invis_damage"						"175"
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
 			{
-				"ModifierName" 	"modifier_invisible"
-				"Target"
-				{
-					"Center"	"CASTER"
-					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				}
-				"Duration"		"%duration"
+				"ScriptFile"        "iphone"
+				"Function"          "IphoneNew"
 			}
+			"ApplyModifier"
+				{
+					"ModifierName" 	"modifier_invisible"
+					"Target"
+					{
+						"Center"	"CASTER"
+						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+					}
+					"Duration"		"%duration"
+				}
 
-		"ApplyModifier"
-			{
-				"ModifierName" 	"modifier_windwalk"
-				"Target"
+			"ApplyModifier"
 				{
-					"Center"	"CASTER"
-					"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+					"ModifierName" 	"modifier_windwalk"
+					"Target"
+					{
+						"Center"	"CASTER"
+						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+					}
+					"Duration"		"%duration"
 				}
-				"Duration"		"%duration"
-			}
-    }
-    
-    "Modifiers"
-    {
-        "modifier_item_manta_datadriven"
-        {
-            "Passive"           "1"
-            "IsHidden"          "1"
-            "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-            
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"                        "%bonus_strength"
-                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"                         "%bonus_agility"
-                "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"                       "%bonus_intelligence"
-                
-                //Attack speed from Yasha-derived items affect your illusions.
-                "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT_SECONDARY"        "%bonus_attack_speed"
-                
-                //Movement speed from Yasha-derived items does not stack with itself but does stack with other percentage-based movement speed bonuses.
-                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE"           "%bonus_movement_speed_percentage"
-            }
-        }
-		"modifier_windwalk"
+		}
+		
+		"Modifiers"
+		{
+			"modifier_item_manta_datadriven"
 			{
+				"Passive"           "1"
 				"IsHidden"          "1"
-				"IsBuff"			"1"
-				"Duration"          "%duration"
+				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+				
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
-				}
-				
-				"States"
-				{
-					"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-				
-				"OnAttackLanded"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName" 	"modifier_invisible"
-						"Target"		"CASTER"
-					}
-
-					"RemoveModifier"
-					{
-						"ModifierName" 	"modifier_windwalk"
-						"Target"		"CASTER"
-					}
-				}
-
-				"OnAbilityExecuted"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName" 	"modifier_invisible"
-						"Target"		"CASTER"
-					}
-
-					"RemoveModifier"
-					{
-						"ModifierName" 	"modifier_windwalk"
-						"Target"		"CASTER"
-					}
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"                        "%bonus_strength"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"                         "%bonus_agility"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"                       "%bonus_intelligence"
+					
+					//Attack speed from Yasha-derived items affect your illusions.
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT_SECONDARY"        "%bonus_attack_speed"
+					
+					//Movement speed from Yasha-derived items does not stack with itself but does stack with other percentage-based movement speed bonuses.
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE"           "%bonus_movement_speed_percentage"
 				}
 			}
-    }
-}
-"item_recipe_manta_datadriven"
+			"modifier_windwalk"
+				{
+					"IsHidden"          "1"
+					"IsBuff"			"1"
+					"Duration"          "%duration"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
+					}
+					
+					"States"
+					{
+						"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
+						"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+					}
+					
+					"OnAttackLanded"
+					{
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_invisible"
+							"Target"		"CASTER"
+						}
+
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_windwalk"
+							"Target"		"CASTER"
+						}
+						"ApplyModifier"
+						{
+							"ModifierName" 	"modifier_stunned"
+							"Target"		"TARGET"
+							"Duration"		"%stun_dur"
+						}
+						"Damage"
+						{
+							"Target"	"TARGET"
+							"Type"		"DAMAGE_TYPE_PHYSICAL"
+							"Damage"	"%invis_damage"
+						}
+					}
+
+					"OnAbilityExecuted"
+					{
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_invisible"
+							"Target"		"CASTER"
+						}
+
+						"RemoveModifier"
+						{
+							"ModifierName" 	"modifier_windwalk"
+							"Target"		"CASTER"
+						}
+					}
+				}
+		}
+	}
+	"item_recipe_manta_datadriven"
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
@@ -1938,7 +1960,7 @@
             "bonus_strength"                    "40"
             "bonus_health"                      "0"
             "health_regen_percent_per_second"   "1.8"
-            "bonus_damage"              "50"
+            "bonus_damage"              "35"
             "lifesteal_percent"         "25"
             "duration"					"4"
     }
@@ -1949,12 +1971,16 @@
             "Target"            "CASTER"
             "ModifierName"      "modifier_undead"
         }
-        
         "FireSound"
         {
             "EffectName"        "lvinoe"
             "Target"            "CASTER"
         }
+		"RunScript"
+		{
+			"ScriptFile"	"borrowed_time.lua"
+			"Function"		"BorrowedTimePurge"
+		}
     }
     "Modifiers"
     {
@@ -2272,20 +2298,24 @@
 			"01"						"item_balbe;item_skadi"
 		}
 	}
-"item_govno"
-{
+	"item_govno"
+	{
     "BaseClass"                     "item_datadriven"
     "ID"                            "1032"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "govno"
+	"AbilityCooldown"				"0.4"
     "ItemCost"                      "8750"
 		"AbilityValues"
 		{
 				"dodge_chance_pct"			"20"
 				"bonus_movement_speed"		"10"
-				"bonus_all_stats"			"25"
+				"bonus_strength"			"10"
+				"bonus_agility"				"28"
+				"bonus_health"				"250"
+				"bonus_hpregen"				"7"
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
 		}
@@ -2301,9 +2331,10 @@
             "Properties"
 				{
                 "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%bonus_movement_speed"
-				"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_all_stats"
-                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_all_stats"
-                "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_all_stats"
+				"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"
+                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_agility"
+				"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
+				"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_hpregen"
 				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%bonus_magic_resist"
 				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
 				}
@@ -2349,8 +2380,8 @@
 				}
 			}			
 		}
-}
-"item_recipe_govno"
+	}
+	"item_recipe_govno"
 	{
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
@@ -3075,13 +3106,14 @@
 		"ItemCost"					"3500"
 		"AbilityValues"
 		{
-			"bonus_all_stats"			"15"
+			"bonus_strength"			"10"
+			"bonus_agility"				"18"
 			"bonus_attack_speed_stats"  "30"
 			"bonus_ms"					"10"
 			"bonus_magresist"			"15"
-			"percent_min"				"40"
-			"percent_heal"				"30"
-			"time_to_heal"				"4"
+			"percent_min"				"35"
+			"percent_heal"				"25"
+			"time_to_heal"				"3"
 		}
 	}
 	"item_drobe"
@@ -3228,7 +3260,7 @@
 			"bonus_hp"				"175"
 			"bonus_attackspeed"		"10"
 			"bonus_mana_regen"		"5"
-			"chance"				"30"
+			"chance"				"25"
 			"crit"					"200"
 		}
 	}

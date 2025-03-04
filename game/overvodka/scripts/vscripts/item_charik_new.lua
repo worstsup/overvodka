@@ -32,7 +32,6 @@ function modifier_item_charik_new:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
-		MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
@@ -40,12 +39,12 @@ function modifier_item_charik_new:DeclareFunctions()
 end
 function modifier_item_charik_new:GetModifierBonusStats_Strength()
     if not self:GetAbility() then return end
-    return self:GetAbility():GetSpecialValueFor('bonus_all_stats')
+    return self:GetAbility():GetSpecialValueFor('bonus_strength')
 end
 
 function modifier_item_charik_new:GetModifierBonusStats_Agility()
     if not self:GetAbility() then return end
-    return self:GetAbility():GetSpecialValueFor('bonus_all_stats')
+    return self:GetAbility():GetSpecialValueFor('bonus_agility')
 end
 
 function modifier_item_charik_new:GetModifierAttackSpeedBonus_Constant()
@@ -61,11 +60,6 @@ end
 function modifier_item_charik_new:GetModifierMoveSpeedBonus_Percentage()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_ms')
-end
-
-function modifier_item_charik_new:GetModifierBonusStats_Intellect()
-    if not self:GetAbility() then return end
-    return self:GetAbility():GetSpecialValueFor('bonus_all_stats')
 end
 
 
@@ -100,18 +94,18 @@ function modifier_item_charik_new_regen:OnIntervalThink()
                 return
             end
             self.standing_time = self.standing_time + 0.1
-            if self.standing_time >= 2.0 and k == 0 then
+            if self.standing_time >= 1.0 and k == 0 then
             	EmitSoundOn( "smok2", self:GetParent())
             	parent:AddNewModifier(parent, ability, "modifier_item_charik_new_regen_effect", {duration = 2})
             	k = 1
             end
-            if self.standing_time >= 4.0 then
+            if self.standing_time >= 3.0 then
                 local healAmount = parent:GetMaxHealth() * 0.3
                 parent:Heal(healAmount, ability)
                 local manaRestore = parent:GetMaxMana() * 0.3
                 parent:GiveMana(manaRestore)
 
-                local particle = ParticleManager:CreateParticle("particles/dev/library/base_dust_hit_smoke.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+                local particle = ParticleManager:CreateParticle("particles/econ/events/compendium_2024/compendium_2024_teleport_endcap_smoke.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
                 ParticleManager:ReleaseParticleIndex(particle)
 
                 ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))

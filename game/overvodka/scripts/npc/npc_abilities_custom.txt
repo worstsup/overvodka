@@ -3597,7 +3597,7 @@
 				"knockback_height"		"0"
 				"damage"
 				{
-					"value"	"100 150 200 300 350 400 450"
+					"value"	"100 150 200 250 300 350 400"
 					"levelkey"				"quaslevel"
 				}
 		}
@@ -4786,12 +4786,6 @@
 					"value"	"1.0"
 					"special_bonus_unique_huskar_7" "-0.4"
 				}
-				"ms"
-				{
-					"value"	"0"
-					"RequiresFacet" "axe_one_man_army"
-					"special_bonus_facet_axe_one_man_army" "+1"
-				}
 		}
 	}
 	//=================================================================================================================
@@ -4832,9 +4826,15 @@
 				"impact_damage"
 				{	
 					"value"	"80 160 240 320"
-					"special_bonus_unique_huskar_6" "+150"
+					"special_bonus_unique_huskar_6" "+80"
 				}
 				"castrange"		"480 525 570 615"
+				"stack_steal"
+				{
+					"value"	"0"
+					"RequiresFacet" "axe_one_man_army"
+					"special_bonus_facet_axe_one_man_army" "+4 +6 +8 +10"
+				}
 		}
 	}
 	//=================================================================================================================

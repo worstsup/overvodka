@@ -24,7 +24,7 @@ function modifier_macan_e:OnCreated( kv )
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
+	self.stack_steal = self:GetParent():FindAbilityByName("macan_w"):GetSpecialValueFor( "stack_steal" )
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
 end
@@ -34,7 +34,7 @@ function modifier_macan_e:OnRefresh( kv )
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
+	self.stack_steal = self:GetParent():FindAbilityByName("macan_w"):GetSpecialValueFor( "stack_steal" )
 	self:StartIntervalThink( self.interval )
 	self:OnIntervalThink()
 end
@@ -47,15 +47,44 @@ function modifier_macan_e:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_EVENT_ON_ABILITY_FULLY_CAST
 	}
-
 	return funcs
 end
+
+function modifier_macan_e:OnAbilityFullyCast( params )
+	if IsServer() then
+		local ability = params.ability
+		local caster = self:GetParent()
+		if ability:GetName() == "macan_w" and params.target:IsRealHero() and not params.target:IsIllusion() then
+			local target = params.target
+			if target:HasModifier("modifier_macan_e_debuff") then
+				local debuff = target:FindModifierByName("modifier_macan_e_debuff")
+				local stacks_to_steal = self.stack_steal
+				if stacks_to_steal > 0 then
+					for i = 1, stacks_to_steal do
+						self:AddStack(self.duration)
+						target:AddNewModifier(
+							self:GetParent(),
+							self:GetAbility(),
+							"modifier_macan_e_debuff",
+							{
+								stack_duration = self.duration,
+							}
+						)
+					end
+				end
+			end
+		end
+	end
+end
+
+
 function modifier_macan_e:OnIntervalThink()
 	if self:GetParent():IsIllusion() then return end
 	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
 	if self:GetParent():HasModifier("modifier_break") then return end
+	self.stack_steal = self:GetParent():FindAbilityByName("macan_w"):GetSpecialValueFor( "stack_steal" )
 	local enemies = FindUnitsInRadius(
 		self:GetParent():GetTeamNumber(),
 		self:GetParent():GetOrigin(),
@@ -86,9 +115,6 @@ end
 
 function modifier_macan_e:GetModifierBonusStats_Strength()
 	return self:GetStackCount() * self.agi_gain
-end
-function modifier_macan_e:GetModifierMoveSpeedBonus_Percentage( params )
-	return self:GetStackCount() * self.ms
 end
 
 function modifier_macan_e:AddStack( duration )
@@ -129,7 +155,6 @@ end
 
 function modifier_macan_e_debuff:OnCreated( kv )
 	self.stat_loss = self:GetAbility():GetSpecialValueFor( "stat_loss" )
-	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.duration = kv.stack_duration
 	if IsServer() then
 		self:AddStack( self.duration )
@@ -138,7 +163,6 @@ end
 
 function modifier_macan_e_debuff:OnRefresh( kv )
 	self.stat_loss = self:GetAbility():GetSpecialValueFor( "stat_loss" )
-	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.duration = kv.stack_duration
 
 	if IsServer() then
@@ -152,9 +176,7 @@ end
 function modifier_macan_e_debuff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 	}
-
 	return funcs
 end
 
@@ -162,9 +184,6 @@ function modifier_macan_e_debuff:GetModifierBonusStats_Strength()
 	return self:GetStackCount() * -self.stat_loss
 end
 
-function modifier_macan_e_debuff:GetModifierMoveSpeedBonus_Percentage( params )
-	return self:GetStackCount() * -self.ms
-end
 
 function modifier_macan_e_debuff:AddStack( duration )
 	local mod = self:GetParent():AddNewModifier(
