@@ -1,7 +1,5 @@
 modifier_litvin_conditions = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_litvin_conditions:IsHidden()
 	return true
 end
@@ -46,7 +44,6 @@ function modifier_litvin_conditions:OnCreated( kv )
 			duration = duration,
 			distance = 0,
 			height = height,
-			-- fix_end = true,
 			fix_duration = false,
 			isStun = true,
 			activity = ACT_DOTA_FLAIL,

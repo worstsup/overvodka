@@ -9,6 +9,10 @@ function dvoreckov_q:IsStealable()
 	return false
 end
 
+function dvoreckov_q:ProcsMagicStick()
+	return false
+end
+
 function dvoreckov_q:OnSpellStart()
 	local caster = self:GetCaster()
 	if caster:GetUnitName() == "npc_dota_hero_invoker" then
@@ -89,6 +93,10 @@ function dvoreckov_w:Precache( context )
 end
 
 function dvoreckov_w:IsStealable()
+	return false
+end
+
+function dvoreckov_w:ProcsMagicStick()
 	return false
 end
 
@@ -195,6 +203,10 @@ function dvoreckov_e:IsStealable()
 	return false
 end
 
+function dvoreckov_e:ProcsMagicStick()
+	return false
+end
+
 function dvoreckov_e:Precache( context )
 	PrecacheResource( "particle", "particles/econ/items/invoker/invoker_ti6/invoker_ti6_exort_orb.vpcf", context )
 end
@@ -289,6 +301,10 @@ dvoreckov_empty_1 = class({})
 dvoreckov_empty_2 = class({})
 
 function dvoreckov_r:IsStealable()
+	return false
+end
+
+function dvoreckov_r:ProcsMagicStick()
 	return false
 end
 

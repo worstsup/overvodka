@@ -19,7 +19,7 @@ function mellstroy_casino:OnSpellStart()
     end
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
-    if random_chance <= 2 then
+    if random_chance <= 3 then
         local reward = ability_cost * 10
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
@@ -39,7 +39,7 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    elseif random_chance <= 56 or loses >= 5 then
+    elseif random_chance <= 60 or loses >= 5 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)

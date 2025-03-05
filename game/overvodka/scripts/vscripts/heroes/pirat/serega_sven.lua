@@ -1,6 +1,5 @@
 serega_sven = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_serega_sven", "heroes/pirat/modifier_serega_sven", LUA_MODIFIER_MOTION_NONE )
 tartar = {}
 
@@ -46,6 +45,7 @@ function serega_sven:OnSpellStart()
 	ProjectileManager:CreateLinearProjectile(info)
 	local xx = projectile_direction.x
 	local yy = projectile_direction.y
+	projectile_direction.z = 0
 	projectile_direction.x = xx * (3 ^ 0.5) / 2 - (yy / 2)
 	projectile_direction.y = (xx / 2) + (yy * (3 ^ 0.5) / 2)
 	info = {
@@ -125,14 +125,14 @@ function serega_sven:OnProjectileHit( target, location )
 		ability = self,
 	}
 	target:AddNewModifier(
-		self:GetCaster(), -- player source
-		self, -- ability source
-		"modifier_generic_stunned_lua", -- modifier name
-		{ duration = stun } -- kv
+		self:GetCaster(),
+		self,
+		"modifier_generic_stunned_lua",
+		{ duration = stun }
 	)
 	local knockback = target:AddNewModifier(
-		self:GetCaster(), -- player source
-		self, -- ability source
+		self:GetCaster(),
+		self,
 		"modifier_knockback",
 			{
 				center_x = 0,
@@ -144,19 +144,16 @@ function serega_sven:OnProjectileHit( target, location )
 				knockback_height = 350
 			}
 	)
-	local callback = function()
-		local damageTable = {
-			victim = target,
-			attacker = self:GetCaster(),
-			damage = damage,
-			damage_type = self:GetAbilityDamageType(),
-			ability = self,
-		}
-		ApplyDamage(damageTable)
-		local sound_cast = "Hero_Lion.ImpaleTargetLand"
-		EmitSoundOn( sound_cast, target )
-	end
-	knockback:SetEndCallback( callback )
+	local damageTable = {
+		victim = target,
+		attacker = self:GetCaster(),
+		damage = damage,
+		damage_type = self:GetAbilityDamageType(),
+		ability = self,
+	}
+	ApplyDamage(damageTable)
+	local sound_cast = "Hero_Lion.ImpaleTargetLand"
+	EmitSoundOn( sound_cast, target )
 	table.insert(tartar, target)
 	self:PlayEffects( target )
 end

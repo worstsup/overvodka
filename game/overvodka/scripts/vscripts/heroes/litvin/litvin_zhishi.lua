@@ -11,7 +11,7 @@ end
 function litvin_zhishi:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
---------------------------------------------------------------------------------
+
 function litvin_zhishi:OnAbilityPhaseStart()
 	local point = self:GetCursorPosition()
 	EmitSoundOnLocationWithCaster( point, "zhishi_start", self:GetCaster() )
@@ -43,7 +43,6 @@ function litvin_zhishi:OnSpellStart()
 		0,
 		false
 	)
-
 	for _,enemy in pairs(enemies) do
 		enemy:AddNewModifier(
 			caster,
@@ -53,7 +52,7 @@ function litvin_zhishi:OnSpellStart()
 				duration = duration,
 				x = point.x,
 				y = point.y,
-			} -- kv
+			}
 		)
 	end
 	GridNav:DestroyTreesAroundPoint( point, tree, false )
@@ -70,7 +69,6 @@ function litvin_zhishi:OnSpellStart()
 	self:PlayEffects( origin, direction, point, radius )
 end
 
---------------------------------------------------------------------------------
 function litvin_zhishi:PlayEffects( origin, direction, point, radius )
 	local particle_cast_a = "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
 	local particle_cast_b = "particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"

@@ -4,13 +4,12 @@ end
 
 local MUSIC_ZONE_CENTER = Vector(2240, -3136, 137)
 local MUSIC_ZONE_RADIUS = 400
-local MUSIC_SOUND = "babulka"
+local MUSIC_SOUND = "overvodka_song"
 
 function MusicZoneTrigger:Init()
     if GameRules:GetGameModeEntity() == nil then
         return
     end
-    PrecacheResource( "soundfile", "soundevents/babulka.vsndevts", context ) 
     ListenToGameEvent("npc_spawned", Dynamic_Wrap(MusicZoneTrigger, "OnNPCSpawned"), self)
     self:StartThinker()
 end
