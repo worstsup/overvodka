@@ -25,7 +25,6 @@ end
 function modifier_litvin_enrage:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-
 		MODIFIER_PROPERTY_MODEL_SCALE,
 	}
 

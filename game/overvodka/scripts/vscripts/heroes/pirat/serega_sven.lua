@@ -19,10 +19,10 @@ function serega_sven:OnSpellStart()
 	local projectile_direction = (point-caster:GetOrigin()):Normalized()
 	if target:IsRealHero() then
 		target:AddNewModifier(
-			self:GetCaster(), -- player source
-			self, -- ability source
-			"modifier_serega_sven", -- modifier name
-			{ duration = 2.5 } -- kv
+			self:GetCaster(),
+			self,
+			"modifier_serega_sven",
+			{ duration = 2.5 }
 		)
 	end
 	local info = {

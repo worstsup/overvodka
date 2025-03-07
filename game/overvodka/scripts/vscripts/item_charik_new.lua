@@ -86,7 +86,7 @@ function modifier_item_charik_new_regen:OnIntervalThink()
 
     local parent = self:GetParent()
     local ability = self:GetAbility()
-
+    if parent:IsIllusion() then return end
     if ability:IsCooldownReady() and parent:IsAlive() then
         if not parent:IsMoving() then
         	if parent:GetHealth() >= parent:GetMaxHealth() * 0.4 and parent:GetMana() >= parent:GetMaxMana() * 0.4 then
@@ -110,7 +110,6 @@ function modifier_item_charik_new_regen:OnIntervalThink()
 
                 ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
                 t = 1
-                -- Reset standing time
                 self.standing_time = 0
                 k = 0
             end

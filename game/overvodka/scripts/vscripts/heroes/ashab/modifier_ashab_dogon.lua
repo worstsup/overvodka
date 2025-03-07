@@ -133,10 +133,15 @@ function modifier_ashab_dogon:DeclareFunctions()
 		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_IGNORE_MOVESPEED_LIMIT,
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 	}
 
 	return funcs
 end
+
+function modifier_ashab_dogon:GetOverrideAnimation()
+	return ACT_DOTA_POOF_END
+end 
 
 function modifier_ashab_dogon:OnOrder( params )
 	if params.unit~=self.parent then return end
@@ -296,6 +301,8 @@ end
 function modifier_ashab_dogon:GetEffectName()
 	return "particles/econ/items/primal_beast/primal_beast_2022_prestige/primal_beast_2022_prestige_onslaught_charge_mesh.vpcf"
 end
+
+
 
 function modifier_ashab_dogon:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
