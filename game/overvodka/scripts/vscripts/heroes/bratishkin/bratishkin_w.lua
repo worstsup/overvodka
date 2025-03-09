@@ -45,22 +45,19 @@ function bratishkin_w:OnSpellStart()
     local caster_loc = caster:GetAbsOrigin()
     local distance = self:GetCastRange(caster_loc,caster)
     local direction
-
     if target_loc == caster_loc or self:HasTalent("special_bonus_unique_legion_commander_8") then
         direction = caster:GetForwardVector()
     else
         direction = (target_loc - caster_loc):Normalized()
     end
-
     local index = DoUniqueString("bratishkin_w")
     self[index] = {}
-
     local projectile =
     {
         Ability             = self,
         EffectName          = "particles/bratishkin_w.vpcf",
         vSpawnOrigin        = caster_loc,
-        fDistance           = 1100,
+        fDistance           = self:GetSpecialValueFor("distance"),
         fStartRadius        = 175,
         fEndRadius          = 225,
         Source              = caster,
@@ -74,7 +71,6 @@ function bratishkin_w:OnSpellStart()
         bProvidesVision     = false,
         ExtraData           = {index = index, damage = damage}
     }
-
     if self:HasTalent("special_bonus_unique_legion_commander_8") then
         for i = 1, 12 do
             ProjectileManager:CreateLinearProjectile(projectile)
@@ -95,37 +91,26 @@ end
 
 function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
     if target then
-
         local was_hit = false
-
         for _, stored_target in ipairs(self[ExtraData.index]) do
             if target == stored_target then
                 was_hit = true
                 break
             end
         end
-
         if was_hit then
             return false
         end
-
         table.insert(self[ExtraData.index],target)
-
         local distance_knock = self:GetSpecialValueFor("distance_knock")
-
         local direction = (target:GetAbsOrigin() - location):Normalized()
-
         local knockback = target:AddNewModifier( self:GetCaster(), self, "modifier_generic_knockback_lua", { duration = 0.75, distance = distance_knock, height = 0, direction_x = direction.x, direction_y = direction.y})
-        
         local damage = self:GetSpecialValueFor("damage")
-
         ApplyDamage({victim = target, attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
-
         local callback = function()
             local duration = self:GetSpecialValueFor('duration')
             target:AddNewModifier(self:GetCaster(), self, "modifier_dark_willow_debuff_fear", {duration = duration})
         end
-
         knockback:SetEndCallback( callback )
     else
         self[ExtraData.index]["count"] = self[ExtraData.index]["count"] or 0

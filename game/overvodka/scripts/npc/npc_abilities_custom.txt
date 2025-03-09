@@ -12515,11 +12515,23 @@
 		{
             "manacost_from_current_mana"        "6"
             "base_manacost"                     "40"
-			"bonus_armor_knight"				"3 6 9 12"
+			"bonus_armor_knight"
+			{
+				"value"	"2 4 6 8"
+				"special_bonus_unique_legion_commander_4" "+6"
+			}
 			"bat_knight"						"2.0"
 			"bonus_range_knight"				"40 80 120 160"
-			"slow_knight"						"-10"
-			"minibash_chance"					"20"
+			"slow_knight"
+			{
+				"value"	"-10"
+				"special_bonus_unique_legion_commander_5" "+10"
+			}
+			"minibash_chance"
+			{
+				"value" "20"
+				"special_bonus_unique_legion_commander_6" "+5"
+			}
 			"root_duration"						"0.6 0.8 1.0 1.2"
 			"cleave"
 			{
@@ -12530,7 +12542,7 @@
 			"cleave_radius"
 			{
 				"value"							"0"
-				"special_bonus_facet_slark_leeching_leash" "+500"
+				"special_bonus_facet_slark_leeching_leash" "+550"
 				"RequiresFacet"					"slark_leeching_leash"
 			}
 			"double_attack"
@@ -12558,11 +12570,23 @@
 		{
             "manacost_from_current_mana"        "6"
             "base_manacost"                     "40"
-			"bonus_armor_knight"				"3 6 9 12"
+			"bonus_armor_knight"
+			{
+				"value"	"2 4 6 8"
+				"special_bonus_unique_legion_commander_4" "+6"
+			}
 			"bat_knight"						"2.0"
 			"bonus_range_knight"				"40 80 120 160"
-			"slow_knight"						"-10"
-			"minibash_chance"					"20"
+			"slow_knight"
+			{
+				"value"	"-10"
+				"special_bonus_unique_legion_commander_5" "+10"
+			}
+			"minibash_chance"
+			{
+				"value" "20"
+				"special_bonus_unique_legion_commander_6" "+5"
+			}
 			"root_duration"						"0.6 0.8 1.0 1.2"
 			"cleave"
 			{
@@ -12573,7 +12597,7 @@
 			"cleave_radius"
 			{
 				"value"							"0"
-				"special_bonus_facet_slark_leeching_leash" "+500"
+				"special_bonus_facet_slark_leeching_leash" "+550"
 				"RequiresFacet"					"slark_leeching_leash"
 			}
 			"double_attack"
@@ -12608,14 +12632,25 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityCastPoint"				"0.25"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"HasScepterUpgrade"				"1"
-		"AbilityCastRange"				"1100"
 		"AbilityManaCost"				"75 100 125 150"
 		"AbilityCastAnimation"		  	"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityValues"
 		{
-			"damage"					"100 200 300 400"
-			"distance"					"1100"
+			"damage"
+			{
+				"value"	"80 160 240 320"
+				"special_bonus_unique_legion_commander_9" "+100"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"800"
+				"special_bonus_unique_legion_commander_3" "+300"
+			}
+			"distance"
+			{
+				"value"	"800"
+				"special_bonus_unique_legion_commander_3" "+300"
+			}
 			"distance_knock"			"400"
 			"duration"					"0.8 1.0 1.2 1.4"
 			"AbilityCooldown"
@@ -12637,12 +12672,21 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.3"		
-		"AbilityCooldown"				"30"
+		"HasScepterUpgrade"				"1"
 		"AbilityManaCost"				"80 100 120 140"
 		"AbilityValues"
 		{
-			"radius"		"600"
-			"channel_duration"		"2.5 3 3.5 4"
+			"AbilityCooldown"
+			{
+				"value"	"35"
+				"special_bonus_unique_legion_commander_pta_movespeed" "-5"
+			}
+			"radius"				"600"
+			"channel_duration"
+			{
+				"value"	"2.5 3 3.5 4"
+				"special_bonus_unique_legion_commander_7" "+1"
+			}
 		}
 	}
 	"bratishkin_r"
@@ -12656,12 +12700,14 @@
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"HasShardUpgrade"				"1"
 		"AbilityCastRange"              "600 750 900"
 		"AbilityCastPoint"              "0.3"
-		"AbilityCooldown"               "30.0 25.0 20.0"
+		"AbilityCooldown"               "35.0 30.0 25.0"
 		"AbilityValues"
 		{
-			"bonus_dmg_pct"         "4"
+			"bonus_dmg_pct"         "5"
+			"attacks_needed"		"20"
 		}
 	}
 }

@@ -79,6 +79,11 @@
 			m_OffsetMin = [ 11.0, 0.0, 0.0 ]
 			m_OffsetMax = [ 11.0, 0.0, 0.0 ]
 		},
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMin = [ 220, 20, 60 ]
+			m_ColorMax = [ 255, 0, 0 ]
+		},
 	]
 	m_Operators = 
 	[
@@ -712,20 +717,20 @@
 			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_flow_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_flow_ti6_new.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_glow_ti6.vpcf"
 			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_graphic_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_graphic_ti6_new.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_graphic_2_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_graphic_2_ti6_new.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_wave_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_wave_ti6_new.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_invoker/invoker_deafening_blast_dust_b.vpcf"
@@ -741,13 +746,13 @@
 			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_streaks_ti6.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_swipe_left_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_swipe_left_ti6_new.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_glyphs_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_glyphs_ti6_new.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_glyphs_shadow_ti6.vpcf"
+			m_ChildRef = resource:"particles/invoker_deafening_blast_glyphs_shadow_ti6_new.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_swipe_right_ti6.vpcf"

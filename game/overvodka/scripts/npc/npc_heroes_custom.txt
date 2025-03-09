@@ -2266,19 +2266,17 @@
 		{
 			"slark_leeching_leash" 
 			{
+				"Icon"				"strength"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+			"slark_dark_reef_renegade"
+			{
 				"Icon"				"agility"
 				"Color"				"Green"
 				"GradientID"		"2"
 			}
-			
-			"slark_dark_reef_renegade"
-			{
-				"Icon"				"cooldown"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
 		}
-
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"37"
@@ -2293,7 +2291,7 @@
 		"AttributeBaseStrength"		"20"
 		"AttributeStrengthGain"		"2.1"
 		"AttributeBaseAgility"		"21"
-		"AttributeAgilityGain"		"2.5"
+		"AttributeAgilityGain"		"2.8"
 		"AttributeBaseIntelligence"		"16"
 		"AttributeIntelligenceGain"		"1.5"
 		"StatusHealthRegen"		"0.25"
