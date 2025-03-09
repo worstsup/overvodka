@@ -51,6 +51,33 @@ function bratishkin_q_knight:OnSpellStart()
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:ReleaseParticleIndex(particle)
+    local illusions = FindUnitsInRadius(
+        self:GetCaster():GetTeamNumber(),
+        self:GetCaster():GetAbsOrigin(),
+        nil,
+        6000,
+        DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        FIND_ANY_ORDER,
+        false
+    )
+
+    for _, unit in pairs(illusions) do
+        if unit:IsIllusion() and unit:GetPlayerOwnerID() == self:GetCaster():GetPlayerOwnerID() then
+            if unit:HasModifier("modifier_bratishkin_q_knight") then
+                unit:RemoveModifierByName("modifier_bratishkin_q_knight")
+            end
+            unit:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_q_knight", {})
+            unit:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_q_knight_upgrade", {})
+            unit:SetModel("models/bratishkin/knight/base.vmdl")
+            unit:SetOriginalModel("models/bratishkin/knight/base.vmdl")
+            if not unit.weapon then
+                unit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/sven/weapon_ruling_sword.vmdl"})
+                unit.weapon:FollowEntityMerge(unit, "attach_sword")
+            end
+        end
+    end
 end
 
 modifier_bratishkin_q_knight = class({})
@@ -75,6 +102,38 @@ function modifier_bratishkin_q_knight:OnCreated()
         self:GetCaster():SwapAbilities(info[1], info[2], false, true)
     end
     self:GetParent():FindAbilityByName("bratishkin_q_base"):UseResources(false, false, false, true)
+    self:StartIntervalThink(0.2)
+end
+
+function modifier_bratishkin_q_knight:OnIntervalThink()
+    if not IsServer() then return end
+    local illusions = FindUnitsInRadius(
+        self:GetCaster():GetTeamNumber(),
+        self:GetCaster():GetAbsOrigin(),
+        nil,
+        6000,
+        DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        FIND_ANY_ORDER,
+        false
+    )
+
+    for _, unit in pairs(illusions) do
+        if unit:IsIllusion() and unit:GetPlayerOwnerID() == self:GetCaster():GetPlayerOwnerID() then
+            if unit:HasModifier("modifier_bratishkin_q_knight") then
+                unit:RemoveModifierByName("modifier_bratishkin_q_knight")
+            end
+            unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_bratishkin_q_knight", {})
+            unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_bratishkin_q_knight_upgrade", {})
+            unit:SetModel("models/bratishkin/knight/base.vmdl")
+            unit:SetOriginalModel("models/bratishkin/knight/base.vmdl")
+            if not unit.weapon then
+                unit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/sven/weapon_ruling_sword.vmdl"})
+                unit.weapon:FollowEntityMerge(unit, "attach_sword")
+            end
+        end
+    end
 end
 
 function modifier_bratishkin_q_knight:DeclareFunctions()

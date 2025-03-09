@@ -232,7 +232,7 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 		"DOTA_Tooltip_ability_bratishkin_q_knight" "ПРАВЕДНАЯ ФОРМА"
-		"DOTA_Tooltip_ability_bratishkin_q_knight_description" "Братишкин обретает форму рыцаря, получая бонус к броне и дальности атаки, при этом замедляя своё передвижение и скорость атаки.\nНаходясь в обычной форме, Вован имеет шанс %minibash_chance%%% при атаке наложить на врага оцепенение.\nПереключение формы расходует %base_manacost% + %manacost_from_current_mana%%% от текущей маны героя."
+		"DOTA_Tooltip_ability_bratishkin_q_knight_description" "Братишкин обретает форму рыцаря, меняя основной атрибут на силу, получая бонус к броне и дальности атаки, при этом замедляя своё передвижение и скорость атаки.\nНаходясь в обычной форме, Вован имеет шанс %minibash_chance%%% при атаке наложить на врага оцепенение.\nПереключение формы расходует %base_manacost% + %manacost_from_current_mana%%% от текущей маны героя."
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bonus_armor_knight" "ДОП. БРОНЯ:"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bat_knight" "БАЗОВЫЙ ИНТЕРВАЛ АТАК:"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bonus_range_knight" "ДОП. ДАЛЬНОСТЬ АТАКИ:"
@@ -242,7 +242,7 @@
 		"DOTA_Tooltip_ability_bratishkin_q_knight_cleave" "%ПРОРУБАЮЩИЙ УРОН:"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_cleave_radius" "ДАЛЬНОСТЬ ПРОРУБАЮЩЕГО УРОНА:"
 		"DOTA_Tooltip_ability_bratishkin_q_base" "ПРАВЕДНАЯ ФОРМА"
-		"DOTA_Tooltip_ability_bratishkin_q_base_description" "Братишкин обретает форму рыцаря, получая бонус к броне и дальности атаки, при этом замедляя своё передвижение и скорость атаки.\nНаходясь в обычной форме, Вован имеет шанс %minibash_chance%%% при атаке наложить на врага оцепенение.\nПереключение формы расходует %base_manacost% + %manacost_from_current_mana%%% от текущей маны героя."
+		"DOTA_Tooltip_ability_bratishkin_q_base_description" "Братишкин обретает форму рыцаря, меняя основной атрибут на силу, получая бонус к броне и дальности атаки, при этом замедляя своё передвижение и скорость атаки.\nНаходясь в обычной форме, Вован имеет шанс %minibash_chance%%% при атаке наложить на врага оцепенение.\nПереключение формы расходует %base_manacost% + %manacost_from_current_mana%%% от текущей маны героя."
 		"DOTA_Tooltip_ability_bratishkin_q_base_bonus_armor_knight" "ДОП. БРОНЯ:"
 		"DOTA_Tooltip_ability_bratishkin_q_base_bat_knight" "БАЗОВЫЙ ИНТЕРВАЛ АТАК:"
 		"DOTA_Tooltip_ability_bratishkin_q_base_bonus_range_knight" "ДОП. ДАЛЬНОСТЬ АТАКИ:"

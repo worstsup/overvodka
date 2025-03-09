@@ -2,9 +2,12 @@ LinkLuaModifier("modifier_bratishkin_r_debuff", "heroes/bratishkin/bratishkin_r"
 LinkLuaModifier("modifier_bratishkin_r_shard", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
 
 bratishkin_r = class({})
-
+t = 0
 function bratishkin_r:Precache(context)
     PrecacheResource("particle", "particles/bratishkin_r.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/bratishkin_r_1.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/bratishkin_r_2.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/bratishkin_r_3.vsndevts", context)
 end
 
 function bratishkin_r:GetIntrinsicModifierName()
@@ -66,7 +69,16 @@ function modifier_bratishkin_r_debuff:OnStackCountChanged(previous_stacks)
         end
         self.effect = ParticleManager:CreateParticle("particles/bratishkin_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
         ParticleManager:ReleaseParticleIndex(self.effect)
-        EmitSoundOn("gennadiy_start", parent)
+        if t == 0 then
+            EmitSoundOn("bratishkin_r_1", parent)
+            t = 1
+        elseif t == 1 then
+            EmitSoundOn("bratishkin_r_2", parent)
+            t = 2
+        else
+            EmitSoundOn("bratishkin_r_3", parent)
+            t = 0
+        end
     end
 end
 
@@ -107,6 +119,7 @@ end
 function modifier_bratishkin_r_shard:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker ~= self:GetParent() then return end
+    if params.attacker:IsIllusion() then return end
     if not params.target or not params.target:IsHero() or params.target:GetTeamNumber() == self:GetParent():GetTeamNumber() then return end
     if not self:GetParent():HasModifier("modifier_item_aghanims_shard") then return end
     self.attack_count = (self.attack_count or 0) + 1

@@ -37,4 +37,23 @@ function bratishkin_q_base:OnSpellStart()
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:ReleaseParticleIndex(particle)
+    local illusions = FindUnitsInRadius(
+        self:GetCaster():GetTeamNumber(),
+        self:GetCaster():GetAbsOrigin(),
+        nil,
+        6000,
+        DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        FIND_ANY_ORDER,
+        false
+    )
+
+    for _, unit in pairs(illusions) do
+        if unit:IsIllusion() and unit:GetPlayerOwnerID() == self:GetCaster():GetPlayerOwnerID() then
+            if unit:HasModifier("modifier_bratishkin_q_knight") then
+                unit:RemoveModifierByName("modifier_bratishkin_q_knight")
+            end
+        end
+    end
 end

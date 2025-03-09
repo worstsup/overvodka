@@ -2244,7 +2244,7 @@
 		"ModelScale"		"1.3"
 		"LoadoutScale"		"1.4"
 		"HealthBarOffset"	"270"
-		"HeroSelectSoundEffect"		"Hero_Slark.Pick"
+		"HeroSelectSoundEffect"		"bratishkin_start"
 		"GibType"		"default"
 		"Ability1"		"bratishkin_q_knight"
 		"Ability2"		"bratishkin_w"
