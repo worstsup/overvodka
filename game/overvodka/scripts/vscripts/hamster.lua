@@ -86,19 +86,31 @@ function modifier_hamster:GetModifierIncomingDamage_Percentage()
 end
 
 function modifier_hamster:OnTakeDamage( params )
-	if not IsServer() then return end
-	if params.unit~=self:GetParent() then return end
-	
-	local attacker = params.attacker
-	if attacker:IsRealHero() and not attacker:IsIllusion() then
-		local current_time = GameRules:GetGameTime()
-		local entindex = attacker:entindex()
-		if not self.gold_cooldowns[entindex] or (current_time - self.gold_cooldowns[entindex]) >= 0.8 then
-			attacker:ModifyGold(self.gold, true, 0)
-			SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, attacker, self.gold, nil)
-			self.gold_cooldowns[entindex] = current_time
-		end
-	end
+    if not IsServer() then return end
+    if params.unit ~= self:GetParent() then return end
+
+    local attacker = params.attacker
+    if attacker:IsRealHero() and not attacker:IsIllusion() then
+        local current_time = GameRules:GetGameTime()
+        local entindex = attacker:entindex()
+        if attacker:GetUnitName() == "npc_dota_hero_slark" then
+            return
+        else
+            if not self.gold_cooldowns[entindex] or (current_time - self.gold_cooldowns[entindex]) >= 0.8 then
+                attacker:ModifyGold(self.gold, true, 0)
+                SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, attacker, self.gold, nil)
+                self.gold_cooldowns[entindex] = current_time
+                local slark_gold = math.floor(self.gold * 0.5)
+                local all_heroes = HeroList:GetAllHeroes()
+                for _, hero in ipairs(all_heroes) do
+                    if hero:IsRealHero() and not hero:IsIllusion() and hero:GetUnitName() == "npc_dota_hero_slark" then
+                        hero:ModifyGold(slark_gold, true, 0)
+                        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, hero, slark_gold, nil)
+                    end
+                end
+            end
+        end
+    end
 end
 
 function modifier_hamster:GetEffectName()

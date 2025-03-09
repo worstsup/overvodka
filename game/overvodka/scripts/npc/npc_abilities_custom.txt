@@ -12502,11 +12502,12 @@
 		"BaseClass"						        "ability_lua"
 		"ScriptFile"					        "heroes/bratishkin/bratishkin_q_knight"
 		"AbilityUnitTargetType"					"DOTA_UNIT_TARGET_SELF"
-		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"		            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_NO"
-		"AbilityTextureName"			        "otchim"
+		"AbilityTextureName"			        "bratishkin_q_knight"
 		"AbilityCooldown"				        "10 8 6 4"
+		"IsBreakable"							"1"
 		"AbilityManaCost"				        "40"
         "AbilityType"					        "DOTA_ABILITY_TYPE_BASIC"
         "LinkedAbility"                         "bratishkin_q_base"
@@ -12515,9 +12516,28 @@
             "manacost_from_current_mana"        "6"
             "base_manacost"                     "40"
 			"bonus_armor_knight"				"3 6 9 12"
-			"bat_knight"						"1.8"
-			"bonus_range_knight"				"30 60 90 120"
+			"bat_knight"						"2.0"
+			"bonus_range_knight"				"40 80 120 160"
 			"slow_knight"						"-10"
+			"minibash_chance"					"20"
+			"root_duration"						"0.6 0.8 1.0 1.2"
+			"cleave"
+			{
+				"value"							"0"
+				"special_bonus_facet_slark_leeching_leash" "+20 +30 +40 +50"
+				"RequiresFacet"					"slark_leeching_leash"
+			}
+			"cleave_radius"
+			{
+				"value"							"0"
+				"special_bonus_facet_slark_leeching_leash" "+500"
+				"RequiresFacet"					"slark_leeching_leash"
+			}
+			"double_attack"
+			{
+				"value"	"0"
+				"special_bonus_facet_slark_dark_reef_renegade" "+1"
+			}
 		}
 	}
 	"bratishkin_q_base"
@@ -12525,11 +12545,12 @@
 		"BaseClass"						        "ability_lua"
 		"ScriptFile"					        "heroes/bratishkin/bratishkin_q_base"
 		"AbilityUnitTargetType"					"DOTA_UNIT_TARGET_SELF"
-		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitTargetType"		            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_NO"
-		"AbilityTextureName"			        "abuse"
+		"AbilityTextureName"			        "bratishkin_q_base"
 		"AbilityCooldown"				        "10 8 6 4"
+		"IsBreakable"							"1"
 		"AbilityManaCost"				        "40"
         "AbilityType"					        "DOTA_ABILITY_TYPE_BASIC"
         "LinkedAbility"                         "bratishkin_q_knight"
@@ -12538,9 +12559,109 @@
             "manacost_from_current_mana"        "6"
             "base_manacost"                     "40"
 			"bonus_armor_knight"				"3 6 9 12"
-			"bat_knight"						"1.8"
-			"bonus_range_knight"				"30 60 90 120"
+			"bat_knight"						"2.0"
+			"bonus_range_knight"				"40 80 120 160"
 			"slow_knight"						"-10"
+			"minibash_chance"					"20"
+			"root_duration"						"0.6 0.8 1.0 1.2"
+			"cleave"
+			{
+				"value"							"0"
+				"special_bonus_facet_slark_leeching_leash" "+20 +30 +40 +50"
+				"RequiresFacet"					"slark_leeching_leash"
+			}
+			"cleave_radius"
+			{
+				"value"							"0"
+				"special_bonus_facet_slark_leeching_leash" "+500"
+				"RequiresFacet"					"slark_leeching_leash"
+			}
+			"double_attack"
+			{
+				"value"	"0"
+				"special_bonus_facet_slark_dark_reef_renegade" "+1"
+			}
+		}
+	}
+	"bratishkin_innate"
+	{
+		"BaseClass"                 	"ability_datadriven"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityBehavior"           	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityValues"
+		{
+			"pct"	"50"
+		}
+	}
+	"bratishkin_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/bratishkin/bratishkin_w"
+		"AbilityTextureName"			"bratishkin_w"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"			 	"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"		  	"SPELL_DISPELLABLE_YES_STRONG"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastPoint"				"0.25"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"HasScepterUpgrade"				"1"
+		"AbilityCastRange"				"1100"
+		"AbilityManaCost"				"75 100 125 150"
+		"AbilityCastAnimation"		  	"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityValues"
+		{
+			"damage"					"100 200 300 400"
+			"distance"					"1100"
+			"distance_knock"			"400"
+			"duration"					"0.8 1.0 1.2 1.4"
+			"AbilityCooldown"
+			{
+				"value"								 "28 26 24 22"
+			}
+		}
+	}
+	"bratishkin_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/bratishkin/bratishkin_e"
+		"AbilityTextureName"			"bratishkin_e"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"				"0.3"		
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"80 100 120 140"
+		"AbilityValues"
+		{
+			"radius"		"600"
+			"channel_duration"		"2.5 3 3.5 4"
+		}
+	}
+	"bratishkin_r"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"					"heroes/bratishkin/bratishkin_r"
+		"AbilityTextureName"			"bratishkin_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastRange"              "600 750 900"
+		"AbilityCastPoint"              "0.3"
+		"AbilityCooldown"               "30.0 25.0 20.0"
+		"AbilityValues"
+		{
+			"bonus_dmg_pct"         "4"
 		}
 	}
 }

@@ -70,7 +70,6 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
 	        caster = caster:GetOwner()
 	    end
 		local damage = self:GetParent():GetAverageTrueAttackDamage(nil) * damage_pct * 0.01
-		print(damage)
         ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
         if not params.attacker:IsRangedAttacker() then
         	local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
