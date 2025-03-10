@@ -10,6 +10,7 @@ function mellstroy_business_new:OnSpellStart()
 end
 
 function mellstroy_business_new:OnOrbImpact( params )
+	if self:GetCaster():PassivesDisabled() then return end
 	local duration = self:GetSpecialValueFor( "duration" )
 	local gold_cost = self:GetSpecialValueFor( "gold_cost" )
 	local percent = self:GetSpecialValueFor( "percent" )

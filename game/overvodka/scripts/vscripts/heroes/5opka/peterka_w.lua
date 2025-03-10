@@ -32,6 +32,7 @@ function modifier_peterka_w:OnIntervalThink()
     if not IsServer() then return end
     if not self.parent:IsAlive() then return end
     if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
+    if self.parent:PassivesDisabled() then return end
     local items = Entities:FindAllByClassnameWithin("dota_item_drop", self.parent:GetAbsOrigin(), self.radius)
 
     for _, item_entity in pairs(items) do

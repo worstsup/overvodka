@@ -232,7 +232,7 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Difficulty: DEPENDS ON YOUR LUCK"
 
 		"DOTA_Tooltip_ability_bratishkin_q_knight" "RIGHTEOUS FORM"
-		"DOTA_Tooltip_ability_bratishkin_q_knight_description" "Bratishkin takes the form of a knight, gaining bonus armor and attack range, while slowing his movement and attack speed.\nWhile in his normal form, Vovan has a %minibash_chance%%% chance to stun an enemy when attacking.\nSwitching forms costs %base_manacost% + %manacost_from_current_mana%%% of the hero's current mana."
+		"DOTA_Tooltip_ability_bratishkin_q_knight_description" "Bratishkin takes the form of a knight, changing his main attribute to strength, gaining bonus armor and attack range, while slowing his movement and attack speed.\nWhile in his normal form, Vovan has a %minibash_chance%%% chance to stun an enemy when attacking.\nSwitching forms costs %base_manacost% + %manacost_from_current_mana%%% of the hero's current mana."
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bonus_armor_knight" "BONUS ARMOR:"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bat_knight" "BASE ATTACK TIME:"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_bonus_range_knight" "BONUS ATTACK RANGE:"

@@ -45,7 +45,7 @@ function modifier_imba_batrider_sticky_napalm_handler_new:IsHidden()	return true
 
 function modifier_imba_batrider_sticky_napalm_handler_new:OnIntervalThink()
 	if not IsServer() then return end
-
+	if self:GetCaster():PassivesDisabled() then return end
 	if self:GetCaster():IsAlive() and self:GetAbility():IsFullyCastable() and not self:GetAbility():IsInAbilityPhase() and not self:GetCaster():IsInvisible() and not self:GetCaster():IsHexed() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsIllusion() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
 		local targets = FindUnitsInRadius(
 			self:GetCaster():GetTeamNumber(),	-- int, your team number

@@ -635,7 +635,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
 	GameRules:SetPreGameTime( 10.0 )
-	GameRules:SetStrategyTime( 10.0 )
+	GameRules:SetStrategyTime( 15.0 )
 	if self.m_bFastPlay then
 		GameRules:SetStrategyTime( 1.0 )
 	end

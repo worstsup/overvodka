@@ -24,16 +24,13 @@ end
 
 function modifier_sans_innate:OnTakeDamage(keys)
     if IsServer() then
-        -- Critical recursion prevention check
+        if self:GetParent():PassivesDisabled() then return end
         if keys.attacker == self:GetParent() and
            keys.unit ~= self:GetParent() and
            keys.damage > 0 and
            keys.inflictor ~= self:GetAbility() then
-            
             local victim = keys.unit
             local damage = keys.damage
-            
-            -- Get or create debuff
             local debuff = victim:FindModifierByName("modifier_sans_innate_debuff")
             local is_new = false
             local duration = self:GetAbility():GetSpecialValueFor("dur_tooltip")
@@ -49,16 +46,11 @@ function modifier_sans_innate:OnTakeDamage(keys)
             end
 
             if debuff then
-                -- Calculate remaining damage before refresh
                 local remaining_time = is_new and duration or debuff:GetRemainingTime()
                 local carried_damage = debuff.damage_per_second * remaining_time
-                
-                -- Add new damage and refresh duration
                 debuff.total_damage = carried_damage + (damage * damage_pct)
                 debuff:ForceRefresh()
                 debuff:SetDuration(duration, true)
-                
-                -- Update damage values
                 debuff.damage_per_second = debuff.total_damage / duration
                 debuff:SetStackCount(math.floor(debuff.total_damage + 0.5))
             end
@@ -84,8 +76,6 @@ function modifier_sans_innate_debuff:OnIntervalThink()
         end
 
         local damage_to_deal = math.min(self.damage_per_second, self.total_damage)
-        
-        -- Critical damage flag to prevent recursion
         ApplyDamage({
             victim = self:GetParent(),
             attacker = self:GetCaster(),

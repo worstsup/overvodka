@@ -13,7 +13,10 @@ function modifier_custom_evasion:OnRemoved()
 end
 function modifier_custom_evasion:OnIntervalThink()
     if not IsServer() then return end
-
+    if self:GetParent():PassivesDisabled() then
+        self.current_evasion = 0
+        return
+    end
     local caster = self:GetParent()
     local max_evasion = self:GetAbility():GetSpecialValueFor( "max_evasion" )
     local mid_evasion = self:GetAbility():GetSpecialValueFor( "mid_evasion" )

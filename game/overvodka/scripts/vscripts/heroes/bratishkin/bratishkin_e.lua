@@ -55,6 +55,8 @@ end
 
 modifier_bratishkin_e_primary = class({})
 
+function modifier_bratishkin_e_primary:IsHidden() return true end
+
 function modifier_bratishkin_e_primary:OnCreated()
     if not IsServer() then return end
     if self:GetCaster():HasModifier("modifier_bratishkin_q_knight") then

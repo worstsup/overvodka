@@ -278,6 +278,7 @@
 		"DOTA_Tooltip_modifier_bratishkin_q_base_root" "Оцепенение"
 		"DOTA_Tooltip_modifier_bratishkin_e_primary" "АСУ"
 		"DOTA_Tooltip_modifier_bratishkin_e_primary_scepter" "АСУ"
+		"DOTA_Tooltip_modifier_bratishkin_e_primary_scepter_description" "Герой неуязвим и атакует всех врагов в радиусе"
 		"DOTA_Tooltip_ability_bratishkin_r" "ШЕФЧИК"
 		"DOTA_Tooltip_ability_bratishkin_r_description" "Будучи шефом твича, Братишкин имеет возможность влиять на репутацию выбранного противника, наложив на него эффект, из-за которого тот будет получать больше урона от Братишкина.\nЭффекты стакаются и действуют на протяжении всей игры."
 		"DOTA_Tooltip_ability_bratishkin_r_bonus_dmg_pct" "%ДОП. УРОН ПО ГЕРОЮ ЗА ЭФФЕКТ:"

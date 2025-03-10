@@ -4321,7 +4321,7 @@
 		"HasScepterUpgrade"			"1"
 		"AbilityCastPoint"				"0.1 0.1 0.1"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_7"
-		"AbilityCooldown"				"20 10 5"
+		"AbilityCooldown"				"12 8 4"
 		"AbilityManaCost"				"50"
 		"AbilityCastRange"				"600 800 1000"
 		"AbilityValues"
@@ -4492,7 +4492,7 @@
 				"armor"          "4 6 8 10"
 				"slow"
 				{
-					"value"	"5 10 15 20"
+					"value"	"10 15 20 25"
 					"special_bonus_unique_huskar_2" "+10"
 				}
 				"att"
@@ -4624,13 +4624,13 @@
 			}
 			"turn_rate"
 			{
-				"value"	"100"
+				"value"	"90"
 				"special_bonus_scepter" "+30"
 			}
 			"base_power"				"0"
 			"movement_turn_rate"
 			{
-				"value"	"70"
+				"value"	"60"
 				"special_bonus_scepter" "+30"
 			}
 			"stun_duration"				"0.8"
@@ -4809,7 +4809,7 @@
 				{
 					"value"	"0"
 					"RequiresFacet" "axe_one_man_army"
-					"special_bonus_facet_axe_one_man_army" "+4 +6 +8 +10"
+					"special_bonus_facet_axe_one_man_army" "+2 +4 +6 +8"
 				}
 		}
 	}
@@ -6322,6 +6322,7 @@
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
 		"HasScepterUpgrade"				"1"
+		"IsBreakable"					"1"
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinda_slow.vpcf"
@@ -7057,7 +7058,7 @@
 				"interval"				"0.1"
 				"beam_radius"       "200"
                 "beam_dps"          "100"
-                "linger_time"       "1.0"
+                "linger_time"       "0.8"
                 "linger_create_interval"       "0.1"
                 "damage_interval"   "0.1"
 		}
@@ -9048,6 +9049,7 @@
     	"AbilityTextureName"      		"antiaim"
     	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
     	"FightRecapLevel"				"1"
+		"IsBreakable"					"1"
 		"MaxLevel"						"4"
 		"AbilityCastRange"				"550"
 		"AbilityValues"
@@ -10171,15 +10173,16 @@
 	}
 	"imba_batrider_sticky_napalm"
 	{
-		"BaseClass"					"ability_lua"
+		"BaseClass"						"ability_lua"
 		"ScriptFile"					"hero_batrider"
 		"AbilityTextureName"			"ashab_mohito"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
+		"IsBreakable"					"1"
 		"Innate"						"1"
-		"MaxLevel"					"1"
+		"MaxLevel"						"1"
 		"precache"
 		{
 			"particle"	"particles/batrider_stickynapalm_impact_new.vpcf"
@@ -10227,6 +10230,7 @@
 		"AbilityCastRange"				"550"
 		"AbilityCastPoint"				"0"
 		"AbilityManaCost"				"0"
+		"IsBreakable"					"1"
 		"AbilityModifierSupportValue"	"0.5"
 		"AbilityValues"
 		{
@@ -10341,7 +10345,7 @@
 				"value"	"30"
 			}
 			"dur_tooltip"	"15"
-			"dmg_pct"		"10 20 30"
+			"dmg_pct"		"15 30 45"
 			"damage_needed"
 			{
 				"value"	"300 450 600"
@@ -11427,7 +11431,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"775"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"17"
+		"AbilityCooldown"				"24 22 20 18"
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityValues"
 		{
@@ -11918,6 +11922,7 @@
 		"ScriptFile"					"heroes/5opka/peterka_w"
 		"AbilityTextureName"			"peterka_w"
 		"FightRecapLevel"				"1"
+		"IsBreakable"					"1"
 		"MaxLevel"						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -12244,6 +12249,7 @@
 		"Innate"				"1"
 		"MaxLevel"				"1"
 		"AbilityCooldown"				"1"
+		"IsBreakable"					"1"
 		"AbilityValues"
 		{
 			"dur_tooltip"	"5"
