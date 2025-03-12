@@ -9,6 +9,8 @@ function bratishkin_q_base:GetManaCost(iLevel)
     return base_cost + (self:GetCaster():GetMana() / 100 * manacost_from_current_mana)
 end
 
+function bratishkin_q_base:IsStealable() return false end
+
 function bratishkin_q_base:Precache( context )
     PrecacheResource( "particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green.vpcf", context )
     PrecacheResource( "particle", "particles/econ/items/dark_willow/dark_willow_chakram_immortal/dark_willow_chakram_immortal_bramble_root.vpcf", context )

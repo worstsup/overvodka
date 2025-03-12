@@ -247,7 +247,7 @@
 		{
 			"bonus_strength"		"15"
 			"bonus_damage"			"25"
-			"duration"				"4.5"
+			"duration"				"4.75"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"60"
@@ -312,7 +312,7 @@
 		{
 			"bonus_strength"		"20"
 			"bonus_damage"			"35"
-			"duration"				"5"
+			"duration"				"5.5"
 			"max_level"				"1"
 			"model_scale"			"30"     // Percentage over model scale
 			"magic_resist"			"70"

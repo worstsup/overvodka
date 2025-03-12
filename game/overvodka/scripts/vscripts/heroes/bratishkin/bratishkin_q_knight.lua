@@ -95,14 +95,20 @@ function modifier_bratishkin_q_knight:OnCreated()
     self.model = self:GetParent():GetModelName()
     self:GetParent():SetModel("models/bratishkin/knight/base.vmdl")
     self:GetParent():SetOriginalModel("models/bratishkin/knight/base.vmdl")
+    if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
+        self:GetParent():SetModelScale(1.5)
+        self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
+    end
     self:GetParent().weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/sven/weapon_ruling_sword.vmdl"})
 	self:GetParent().weapon:FollowEntityMerge(self:GetParent(), "attach_sword")
     self:GetParent():SetPrimaryAttribute(DOTA_ATTRIBUTE_STRENGTH)
-    for _, info in pairs(self.abilities_list) do
-        self:GetCaster():SwapAbilities(info[1], info[2], false, true)
+    if not self:GetParent():IsIllusion() then
+        for _, info in pairs(self.abilities_list) do
+            self:GetCaster():SwapAbilities(info[1], info[2], false, true)
+        end
+        self:GetParent():FindAbilityByName("bratishkin_q_base"):UseResources(false, false, false, true)
+        self:StartIntervalThink(0.2)
     end
-    self:GetParent():FindAbilityByName("bratishkin_q_base"):UseResources(false, false, false, true)
-    self:StartIntervalThink(0.2)
 end
 
 function modifier_bratishkin_q_knight:OnIntervalThink()
@@ -138,6 +144,7 @@ end
 
 function modifier_bratishkin_q_knight:DeclareFunctions()
     local funcs = {
+        MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
         MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
@@ -145,6 +152,10 @@ function modifier_bratishkin_q_knight:DeclareFunctions()
         MODIFIER_EVENT_ON_ATTACK_LANDED
     }
     return funcs
+end
+
+function modifier_bratishkin_q_knight:GetModifierPreAttack_BonusDamage()
+    return self:GetAbility():GetSpecialValueFor("bonus_damage_knight")
 end
 
 function modifier_bratishkin_q_knight:GetModifierPhysicalArmorBonus()
@@ -167,6 +178,9 @@ function modifier_bratishkin_q_knight:GetModifierBaseAttackTimeConstant()
 end
 
 function modifier_bratishkin_q_knight:GetModifierAttackRangeBonus()
+    if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
+        return -250
+    end
     return self:GetAbility():GetSpecialValueFor("bonus_range_knight")
 end
 
@@ -178,12 +192,22 @@ function modifier_bratishkin_q_knight:OnDestroy()
     if not IsServer() then return end
     self:GetParent():SetModel(self.model)
     self:GetParent():SetOriginalModel(self.model)
-    self:GetParent():SetPrimaryAttribute(DOTA_ATTRIBUTE_AGILITY)
-    self:GetParent().weapon:RemoveSelf()
-    for _, info in pairs(self.abilities_list) do
-        self:GetCaster():SwapAbilities(info[2], info[1], false, true)
+    if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
+        self:GetParent():SetPrimaryAttribute(DOTA_ATTRIBUTE_ALL)
+        self:GetParent():SetModelScale(0.75)
+        self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
+    else
+        self:GetParent():SetPrimaryAttribute(DOTA_ATTRIBUTE_AGILITY)
     end
-    self:GetParent():FindAbilityByName("bratishkin_q_knight"):UseResources(false, false, false, true)
+    if self:GetParent().weapon then
+        self:GetParent().weapon:RemoveSelf()
+    end
+    if not self:GetParent():IsIllusion() then
+        for _, info in pairs(self.abilities_list) do
+            self:GetCaster():SwapAbilities(info[2], info[1], false, true)
+        end
+        self:GetParent():FindAbilityByName("bratishkin_q_knight"):UseResources(false, false, false, true)
+    end
 end
 
 modifier_bratishkin_q_knight_upgrade = class({})
@@ -215,17 +239,17 @@ function modifier_bratishkin_q_base:OnAttackStart(params)
 	if not IsServer() then return end
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
-	if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
-		self.critProc = true
-	else
-		self.critProc = false
-	end
 end
 
 function modifier_bratishkin_q_base:OnAttackLanded(params)
     if self:GetParent():PassivesDisabled() then return end
     if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
+    if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
+		self.critProc = true
+	else
+		self.critProc = false
+	end
 	if not params.attacker:IsIllusion() and self.critProc and not params.attacker:HasModifier("modifier_bratishkin_q_knight") then
 		local duration = self:GetAbility():GetSpecialValueFor("root_duration")
         params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_bratishkin_q_base_root", {duration = duration})

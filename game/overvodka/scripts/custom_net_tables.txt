@@ -4,6 +4,7 @@
 	[
 		"game_state",
 		"players",
-		"globals"
+		"globals",
+		"vector_targeting",
 	]
 }

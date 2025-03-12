@@ -49,17 +49,17 @@ function modifier_item_aegis_hero:OnAttackStart(params)
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
 	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
-	if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
-		self.critProc = true
-	else
-		self.critProc = false
-	end
 end
 
 function modifier_item_aegis_hero:OnAttackLanded(params)
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
 	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
+	if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
+		self.critProc = true
+	else
+		self.critProc = false
+	end
 	if not params.attacker:IsIllusion() and self.critProc then
 		local duration = self:GetAbility():GetSpecialValueFor("slow_duration")
         local damage_pct = self:GetAbility():GetSpecialValueFor("bash_damage")

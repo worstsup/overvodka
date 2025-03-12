@@ -1,6 +1,4 @@
-// Dota Heroes File
-// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
-// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+// Overvodka Heroes File
 "DOTAHeroes"
 {
 	"npc_dota_hero_pudge"
@@ -689,6 +687,7 @@
 		"Ability17"		"special_bonus_unique_gyrocopter_3"
 		"Ability18"		"special_bonus_unique_gyrocopter_2"
 		"Ability19"		"special_bonus_unique_rubick_5"
+		"Ability20"		"bratishkin_q_base"
 		"Facets"
 		{
 			"rubick_frugal_filch" 
@@ -2289,13 +2288,13 @@
 		"ProjectileSpeed"		"0"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"20"
-		"AttributeStrengthGain"		"2.1"
-		"AttributeBaseAgility"		"21"
-		"AttributeAgilityGain"		"2.8"
+		"AttributeStrengthGain"		"2.2"
+		"AttributeBaseAgility"		"22"
+		"AttributeAgilityGain"		"3.0"
 		"AttributeBaseIntelligence"		"16"
 		"AttributeIntelligenceGain"		"1.5"
 		"StatusHealthRegen"		"0.25"
-		"MovementSpeed"		"300"
+		"MovementSpeed"		"305"
 		"MovementTurnRate"		"0.700000"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"

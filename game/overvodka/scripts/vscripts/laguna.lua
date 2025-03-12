@@ -11,7 +11,12 @@ function Dmg (keys)
     local maxmana = caster:GetMaxMana() * 0.9
     local nowmana = caster:GetMana()
     if target:TriggerSpellAbsorb(ability) then return end
-    -- dmg + mana
+    if caster:HasModifier("modifier_otec_start") then
+        EmitGlobalSound("Ability.LagunaBlade")
+    else
+        EmitSoundOn("Ability.LagunaBlade", caster)
+    end
+    EmitSoundOn("suii", target)
     local dadada = demeg + caster:GetMaxMana() * 0.15
     if istrtr == 15 then
         if nowmana >= maxmana * 0.9 then
@@ -19,7 +24,6 @@ function Dmg (keys)
         end
     end
     local damage_table = {}
-    -- aghanim buff
     local units = FindUnitsInRadius(caster:GetTeamNumber(), target_location, nil, 350, target_teams, target_types, 0, 0, false)
 
     damage_table.damage = dadada

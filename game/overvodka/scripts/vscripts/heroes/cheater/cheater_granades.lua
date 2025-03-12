@@ -7,7 +7,7 @@ LinkLuaModifier( "modifier_cheater_smoke", "heroes/cheater/modifier_cheater_smok
 function cheater_granades:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
-
+Chance = 0
 --------------------------------------------------------------------------------
 function cheater_granades:OnSpellStart()
 	local caster = self:GetCaster()
@@ -35,18 +35,17 @@ function cheater_granades:OnSpellStart()
 		vVelocity = projectile_direction * projectile_speed,
 	}
 	ProjectileManager:CreateLinearProjectile(info)
-	Chance = RandomInt(1,3)
-	if Chance == 1 then
+	if Chance == 0 then
 		self:PlayEffects( point )
-	elseif Chance == 2 then
+	elseif Chance == 1 then
 		self:PlayEffects2( point )
-	elseif Chance == 3 then
+	elseif Chance == 2 then
 		self:PlayEffects4( point )
 	end
 end
 --------------------------------------------------------------------------------
 function cheater_granades:OnProjectileHit( target, location )
-	if Chance == 1 then
+	if Chance == 0 then
 		local duration = self:GetSpecialValueFor( "duration" )
 		CreateModifierThinker(
 			self:GetCaster(),
@@ -57,7 +56,8 @@ function cheater_granades:OnProjectileHit( target, location )
 			self:GetCaster():GetTeamNumber(),
 			false
 		)
-	elseif Chance == 2 then
+		Chance = 1
+	elseif Chance == 1 then
 		local slow_duration = self:GetSpecialValueFor( "slow_dur" )
 		local damage = self:GetSpecialValueFor( "damage_exp" )
 		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
@@ -107,7 +107,8 @@ function cheater_granades:OnProjectileHit( target, location )
 		end
 		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", self:GetCaster())
 		 self:PlayEffects3( location )
-	elseif Chance == 3 then
+		 Chance = 2
+	elseif Chance == 2 then
 		local duration = self:GetSpecialValueFor( "duration" )
 		CreateModifierThinker(
 			self:GetCaster(),
@@ -118,6 +119,7 @@ function cheater_granades:OnProjectileHit( target, location )
 			self:GetCaster():GetTeamNumber(),
 			false
 		)
+		Chance = 0
 	end
 
 end

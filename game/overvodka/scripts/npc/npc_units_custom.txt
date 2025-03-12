@@ -1,4 +1,4 @@
-// Units File
+// Overvodka Units File
 "DOTAUnits"
 {
 	"Version"	"1"

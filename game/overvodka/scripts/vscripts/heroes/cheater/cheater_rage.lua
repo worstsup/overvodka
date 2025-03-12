@@ -5,7 +5,6 @@ LinkLuaModifier( "modifier_cheater_rage", "heroes/cheater/modifier_cheater_rage"
 function cheater_rage:OnSpellStart()
 	local caster = self:GetCaster()
 	caster:StartGesture(ACT_DOTA_CAST_ABILITY_6)
-	-- load data
 	local duration = self:GetDuration()
 	caster:AddNewModifier(
 		caster,

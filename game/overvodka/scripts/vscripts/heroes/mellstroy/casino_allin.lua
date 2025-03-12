@@ -10,7 +10,7 @@ function mellstroy_casino_allin:OnSpellStart()
     local ability_cost = PlayerResource:GetGold(player_id) * 0.5
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
-    if random_chance <= 50 then
+    if random_chance <= 60 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)

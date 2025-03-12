@@ -24,6 +24,7 @@ function modifier_otec_start:RemoveOnDeath()
 end
 
 function modifier_otec_start:OnCreated()
+	if not IsServer() then return end
 	local particle = ParticleManager:CreateParticle( "particles/units/heroes/hero_nyx_assassin/nyx_assassin_vendetta_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl( particle, 0, self:GetParent():GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( particle )
@@ -50,6 +51,7 @@ function modifier_otec_start:CheckState()
 end
 
 function modifier_otec_start:OnDestroy()
+	if not IsServer() then return end
 	for i = 1, 6 do
 		local ability = self:GetParent():GetAbilityByIndex(i)
 		if ability then

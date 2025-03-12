@@ -251,10 +251,6 @@
 		},
 		{
 			_class = "C_OP_PositionLock"
-			m_TransformInput = 
-			{
-				m_nControlPoint = 6
-			}
 		},
 	]
 	m_Renderers = 

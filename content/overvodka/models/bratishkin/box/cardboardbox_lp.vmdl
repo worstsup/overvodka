@@ -30,7 +30,7 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/bratishkin/box/CardboardBox_LP.fbx"
-						import_scale = 100.0
+						import_scale = 1.7
 						import_filter = 
 						{
 							exclude_by_default = false

@@ -24,6 +24,7 @@ require('server/debug_panel')
 require('chat_wheel/chat_wheel')
 require('server/server')
 require('music_zone_trigger')
+require('vector_targeting')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -52,6 +53,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/sans_base_attack.vpcf", context)
 		PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_pugna.vsndevts", context)
     --Cache new particles
+		PrecacheResource( "particle", "particles/ui_mouseactions/range_finder_cone.vpcf", context )
        	PrecacheResource( "particle", "particles/econ/events/nexon_hero_compendium_2014/teleport_end_nexon_hero_cp_2014.vpcf", context )
        	PrecacheResource( "particle", "particles/leader/leader_overhead.vpcf", context )
        	PrecacheResource( "particle", "particles/last_hit/last_hit.vpcf", context )

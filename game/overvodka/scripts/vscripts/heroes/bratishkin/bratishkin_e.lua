@@ -7,6 +7,7 @@ function bratishkin_e:Precache(context)
     PrecacheResource("particle", "particles/econ/items/riki/riki_crownfall_immortal_weapon/riki_crownfall_immortal_tricks_cast.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/riki/riki_crownfall_immortal_weapon/riki_crownfall_immortal_tricks_end.vpcf", context)
     PrecacheResource("particle", "particles/bratishkin_e.vpcf", context)
+    PrecacheResource("particle", "particles/bratishkin_e_scepter.vpcf", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_riki.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/bratishkin_e.vsndevts", context)
     PrecacheResource("model", "models/bratishkin/box/cardboardbox_lp.vmdl", context)
@@ -37,6 +38,9 @@ function bratishkin_e:OnSpellStart()
     local caster = self:GetCaster()
     local origin = caster:GetAbsOrigin()
     local duration = self:GetSpecialValueFor("channel_duration")
+    if caster:HasModifier("modifier_bratishkin_q_base_haste") then
+        caster:RemoveModifierByName("modifier_bratishkin_q_base_haste")
+    end
     if caster:HasScepter() then
         caster:AddNewModifier(caster, self, "modifier_bratishkin_e_primary_scepter", {duration = duration})
     else
@@ -96,9 +100,33 @@ end
 function modifier_bratishkin_e_primary:IsPurgable() return false end
 
 function modifier_bratishkin_e_primary:DeclareFunctions()
-    local funcs = { MODIFIER_PROPERTY_ATTACK_RANGE_BONUS }
+    local funcs = {
+        MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
+        MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+        MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
+    }
     return funcs
 end
+
+function modifier_bratishkin_e_primary:GetModifierBonusStats_Strength()
+    if self:GetCaster():GetPrimaryAttribute() == DOTA_ATTRIBUTE_STRENGTH then
+        local bonus_percent = self:GetAbility():GetSpecialValueFor("att_bonus")
+        return self:GetCaster():GetBaseStrength() * bonus_percent / 100
+    end
+    return 0
+end
+
+function modifier_bratishkin_e_primary:GetModifierBonusStats_Agility()
+    local bonus_percent = self:GetAbility():GetSpecialValueFor("att_bonus")
+    local primary = self:GetCaster():GetPrimaryAttribute()
+    if primary == DOTA_ATTRIBUTE_AGILITY then
+        return self:GetCaster():GetBaseAgility() * bonus_percent / 100
+    elseif primary == DOTA_ATTRIBUTE_ALL then
+        return self:GetCaster():GetBaseAgility() * bonus_percent * 1.5 / 100
+    end
+    return 0
+end
+
 
 function modifier_bratishkin_e_primary:GetModifierAttackRangeBonus()
     return self:GetAbility():GetSpecialValueFor("radius")
@@ -111,7 +139,8 @@ function modifier_bratishkin_e_primary:CheckState()
         [MODIFIER_STATE_UNSELECTABLE]   = true,
         [MODIFIER_STATE_OUT_OF_GAME]    = true,
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
-        [MODIFIER_STATE_NO_UNIT_COLLISION] = true
+        [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_MAGIC_IMMUNE] = true
     }
     return state
 end
@@ -151,7 +180,7 @@ function modifier_bratishkin_e_primary_scepter:OnCreated()
     local cast_particle = ParticleManager:CreateParticle("particles/econ/items/riki/riki_crownfall_immortal_weapon/riki_crownfall_immortal_tricks_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(cast_particle, 0, self:GetParent():GetAbsOrigin())
 
-    local particle = ParticleManager:CreateParticle("particles/bratishkin_e.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local particle = ParticleManager:CreateParticle("particles/bratishkin_e_scepter.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 1, Vector(radius, 0, radius))
     ParticleManager:SetParticleControl(particle, 2, Vector(radius, 0, radius))
@@ -186,12 +215,34 @@ end
 function modifier_bratishkin_e_primary_scepter:IsPurgable() return false end
 
 function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
-    local funcs = { 
+    local funcs = {
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
-        MODIFIER_PROPERTY_MODEL_CHANGE 
- }
+        MODIFIER_PROPERTY_MODEL_CHANGE,
+        MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+        MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
+    }
     return funcs
 end
+
+function modifier_bratishkin_e_primary_scepter:GetModifierBonusStats_Strength()
+    if self:GetCaster():GetPrimaryAttribute() == DOTA_ATTRIBUTE_STRENGTH then
+        local bonus_percent = self:GetAbility():GetSpecialValueFor("att_bonus")
+        return self:GetCaster():GetBaseStrength() * bonus_percent / 100
+    end
+    return 0
+end
+
+function modifier_bratishkin_e_primary_scepter:GetModifierBonusStats_Agility()
+    local bonus_percent = self:GetAbility():GetSpecialValueFor("att_bonus")
+    local primary = self:GetCaster():GetPrimaryAttribute()
+    if primary == DOTA_ATTRIBUTE_AGILITY then
+        return self:GetCaster():GetBaseAgility() * bonus_percent / 100
+    elseif primary == DOTA_ATTRIBUTE_ALL then
+        return self:GetCaster():GetBaseAgility() * bonus_percent * 1.5 / 100
+    end
+    return 0
+end
+
 
 function modifier_bratishkin_e_primary_scepter:GetModifierAttackRangeBonus()
     return self:GetAbility():GetSpecialValueFor("radius")
@@ -208,7 +259,8 @@ function modifier_bratishkin_e_primary_scepter:CheckState()
         [MODIFIER_STATE_OUT_OF_GAME]    = true,
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-        [MODIFIER_STATE_DISARMED] = true
+        [MODIFIER_STATE_DISARMED] = true,
+        [MODIFIER_STATE_MAGIC_IMMUNE] = true
     }
 end
 
