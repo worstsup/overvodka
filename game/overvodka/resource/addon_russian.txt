@@ -252,7 +252,7 @@
 		"DOTA_Tooltip_ability_bratishkin_innate" "НЕПОДКУПНОСТЬ"
 		"DOTA_Tooltip_ability_bratishkin_innate_description" "Братишкин не скуп на деньги, поэтому не получает золота с тапанья хомяка. Зато за каждый удар по хомяку от другого героя он получает %pct%%% от полученного им золота."
 		"DOTA_Tooltip_ability_bratishkin_w"	"СЕКУНДУ"
-		"DOTA_Tooltip_ability_bratishkin_w_description" "Братишкин своей рукой отталкивает от себя нарушителей, нанося им урон и накладывая страх"
+		"DOTA_Tooltip_ability_bratishkin_w_description" "Братишкин своей рукой отталкивает от себя нарушителей, нанося им урон и накладывая страх."
 		"DOTA_Tooltip_ability_bratishkin_w_damage" "УРОН:"
 		"DOTA_Tooltip_ability_bratishkin_w_distance_knock" "ДАЛЬНОСТЬ ОТТАЛКИВАНИЯ:"
 		"DOTA_Tooltip_ability_bratishkin_w_duration"	"ДЛИТЕЛЬНОСТЬ СТРАХА:"
