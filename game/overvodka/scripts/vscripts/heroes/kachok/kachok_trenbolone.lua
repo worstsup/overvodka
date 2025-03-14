@@ -5,6 +5,5 @@ kachok_trenbolone = class({})
 function kachok_trenbolone:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
-
     caster:AddNewModifier(caster, self, "modifier_kachok_trenbolone", { duration = duration })
 end

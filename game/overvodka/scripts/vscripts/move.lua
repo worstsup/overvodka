@@ -3,8 +3,7 @@ function TricksMaster(keys)
 	local ability = keys.ability
 	local level = ability:GetLevel() - 1
 	local duration = ability:GetSpecialValueFor("duration")
-	if caster:HasModifier("modifier_silver_edge_debuff") then return end
-	if caster:HasModifier("modifier_break") then return end
+	if caster:PassivesDisabled() then return end
 	if caster:IsIllusion() == false then
 		if ability:GetCooldownTimeRemaining() == 0 then
 			ability:UseResources( false, false, false, true )

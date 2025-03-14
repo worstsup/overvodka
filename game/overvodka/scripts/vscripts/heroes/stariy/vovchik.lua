@@ -38,7 +38,6 @@ function vovchik:OnSpellStart()
 	self:PlayEffects( target )
 end
 
---------------------------------------------------------------------------------
 function vovchik:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_bane/bane_sap.vpcf"
 	local particle_cast_new = "particles/econ/items/wraith_king/wraith_king_arcana/wk_arc_reincarn_bone_explosion_style2.vpcf"

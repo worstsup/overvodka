@@ -1,22 +1,16 @@
 modifier_batya_radiance = class({})
---------------------------------------------------------------------------------
--- Classifications
+
 function modifier_batya_radiance:IsHidden()
 	return true
 end
-
 function modifier_batya_radiance:IsDebuff()
 	return false
 end
-
 function modifier_batya_radiance:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_batya_radiance:OnCreated( kv )
-	-- references
 	self.base_damage = self:GetAbility():GetSpecialValueFor( "base_damage" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -29,7 +23,6 @@ function modifier_batya_radiance:OnCreated( kv )
 end
 
 function modifier_batya_radiance:OnRefresh( kv )
-	-- references
 	self.base_damage = self:GetAbility():GetSpecialValueFor( "base_damage" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
@@ -39,30 +32,26 @@ end
 function modifier_batya_radiance:OnDestroy( kv )
 end
 function modifier_batya_radiance:OnIntervalThink()
-	-- find enemies
 	if not self:GetParent():IsAlive() then return end
-	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
-	if self:GetParent():HasModifier("modifier_break") then return end
+	if self:GetParent():PassivesDisabled() then return end
 	self.dmg = self.base_damage * self.interval
 	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),	-- int, your team number
-		self:GetParent():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetParent():GetTeamNumber(),
+		self:GetParent():GetOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
 	self.damageTable = {
-		-- victim = target,
 		attacker = self:GetParent(),
 		damage = self.dmg,
 		damage_type = self:GetAbility():GetAbilityDamageType(),
-		ability = self:GetAbility(), --Optional.
+		ability = self:GetAbility(),
 	}
-	-- damage enemies
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )

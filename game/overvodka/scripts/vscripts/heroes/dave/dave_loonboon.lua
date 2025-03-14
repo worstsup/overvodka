@@ -3,16 +3,21 @@ LinkLuaModifier( "modifier_dave_loonboon", "heroes/dave/dave_loonboon", LUA_MODI
 LinkLuaModifier( "modifier_dave_loonboon_plants", "heroes/dave/dave_loonboon", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
+function dave_loonboon:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/dave_loonboon.vsndevts", context )
+    PrecacheResource( "particle", "particles/invoker_chaos_meteor_dave.vpcf", context )
+    PrecacheResource( "particle", "particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf", context )
+end
+
 hit = false
 function dave_loonboon:OnSpellStart()
+    if not IsServer() then return end
     EmitSoundOn( "dave_loonboon", self:GetCaster() )
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_dave_loonboon", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 
 function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
     if not target then return end
-
     local caster = self:GetCaster()
     local ability = self
     local radius = self:GetSpecialValueFor("radius")
@@ -28,8 +33,6 @@ function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability = ability,
         })
-
-        -- Find the nearest other enemy
         local enemies = FindUnitsInRadius(
             caster:GetTeamNumber(),
             target:GetAbsOrigin(),
@@ -79,7 +82,6 @@ function dave_loonboon:OnProjectileHitHandle(target, location, projectilehandle)
     end
 end
 
---------------------------------------------------------------------------------
 modifier_dave_loonboon = class({})
 
 function modifier_dave_loonboon:IsPurgable()
@@ -108,6 +110,7 @@ function modifier_dave_loonboon:OnCreated( kv )
 end
 
 function modifier_dave_loonboon:OnIntervalThink()
+    if not IsServer() then return end
     local plants = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
         self:GetParent():GetAbsOrigin(),
         nil,
@@ -180,7 +183,6 @@ function modifier_dave_loonboon:OnRemoved()
     end
 end
 
---------------------------------------------------------------------------------
 
 function modifier_dave_loonboon:DeclareFunctions()
     local funcs = 
@@ -197,7 +199,7 @@ function modifier_dave_loonboon:CheckState()
 
     return state
 end
---------------------------------------------------------------------------------
+
 function modifier_dave_loonboon:GetModifierMoveSpeedBonus_Percentage( params )
     return self.move_speed
 end
@@ -211,7 +213,7 @@ function modifier_dave_loonboon:GetEffectAttachType()
 end
 
 modifier_dave_loonboon_plants = class({})
---------------------------------------------------------------------------------
+
 function modifier_dave_loonboon_plants:IsPurgable()
     return false
 end
@@ -220,12 +222,10 @@ function modifier_dave_loonboon_plants:OnCreated( kv )
     self.bonus_as_aura = self:GetAbility():GetSpecialValueFor( "bonus_as_aura" )
 end
 
---------------------------------------------------------------------------------
 
 function modifier_dave_loonboon_plants:OnRemoved()
 end
 
---------------------------------------------------------------------------------
 
 function modifier_dave_loonboon_plants:DeclareFunctions()
     local funcs = 
@@ -235,8 +235,6 @@ function modifier_dave_loonboon_plants:DeclareFunctions()
 
     return funcs
 end
-
---------------------------------------------------------------------------------
 
 function modifier_dave_loonboon_plants:GetModifierAttackSpeedBonus_Constant( params )
     return self.bonus_as_aura

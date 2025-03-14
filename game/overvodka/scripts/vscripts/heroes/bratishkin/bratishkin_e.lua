@@ -140,7 +140,8 @@ function modifier_bratishkin_e_primary:CheckState()
         [MODIFIER_STATE_OUT_OF_GAME]    = true,
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-        [MODIFIER_STATE_MAGIC_IMMUNE] = true
+        [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
     return state
 end
@@ -260,7 +261,8 @@ function modifier_bratishkin_e_primary_scepter:CheckState()
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_DISARMED] = true,
-        [MODIFIER_STATE_MAGIC_IMMUNE] = true
+        [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
 end
 

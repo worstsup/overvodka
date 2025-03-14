@@ -1,23 +1,16 @@
 modifier_zolo_zver = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_zolo_zver:IsHidden()
 	return true
 end
-
 function modifier_zolo_zver:IsDebuff()
 	return false
 end
-
 function modifier_zolo_zver:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_zolo_zver:OnCreated( kv )
-	-- references
 	self.bonus_damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_vs_heroes" )
 	self.bonus_crit = self:GetAbility():GetSpecialValueFor( "crit_mult" )
 end
@@ -31,8 +24,6 @@ end
 function modifier_zolo_zver:OnDestroy()
 end
 
---------------------------------------------------------------------------------
--- Modifier Effects
 function modifier_zolo_zver:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_POST_CRIT,

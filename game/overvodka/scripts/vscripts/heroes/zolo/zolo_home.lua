@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_zolo_home", "heroes/zolo/zolo_home", LUA_MODIFIER_MOTION_NONE)
 zolo_home = class({})
---------------------------------------------------------------------------------
+
 function zolo_home:OnSpellStart()
 	local caster = self:GetCaster()
 	local team = caster:GetTeam()
@@ -13,17 +13,17 @@ function zolo_home:OnSpellStart()
 	local distance = 0
 	local num = self:GetSpecialValueFor( "illusion_num" )
 	local illusions = CreateIllusions(
-		caster, -- hOwner
-		caster, -- hHeroToCopy
+		caster,
+		caster,
 		{
 			outgoing_damage = outgoing,
 			incoming_damage = incoming,
 			duration = duration,
-		}, -- hModiiferKeys
-		num, -- nNumIllusions
-		distance, -- nPadding
-		false, -- bScramblePosition
-		true -- bFindClearSpace
+		},
+		num,
+		distance,
+		false,
+		true
 	)
 	local invis_duration = self:GetSpecialValueFor("invis_duration")
 	local max_range = self:GetSpecialValueFor("blink_range")
@@ -54,7 +54,6 @@ function zolo_home:OnSpellStart()
 	self:PlayEffects( origin_point, difference_vector )
 end
 
---------------------------------------------------------------------------------
 function zolo_home:PlayEffects( origin, direction )
 	local particle_cast_a = "particles/econ/events/spring_2021/blink_dagger_spring_2021_start_lvl2.vpcf"
 	local sound_cast_a = "Hero_QueenOfPain.Blink_out"

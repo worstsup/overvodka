@@ -50,8 +50,7 @@ function modifier_serega_radiance:OnIntervalThink()
 	if self:GetParent():IsIllusion() then
 		self.dmg = self.dmg / 2
 	end
-	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
-	if self:GetParent():HasModifier("modifier_break") then return end
+	if self:GetParent():PassivesDisabled() then return end
 	local enemies = FindUnitsInRadius(
 		self:GetParent():GetTeamNumber(),
 		self:GetParent():GetOrigin(),

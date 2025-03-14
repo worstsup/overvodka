@@ -89,7 +89,7 @@ function modifier_item_balbe_active:IsPurgable()
 end
 
 function modifier_item_balbe_active:GetTexture()
-    return "items/balbe"
+    return "balbe"
 end
 
 function modifier_item_balbe_active:OnCreated()

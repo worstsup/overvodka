@@ -308,7 +308,6 @@ function modifier_sans_e:VerticalMotion(unit, dt)
 		self.current_time = self.current_time + dt
 
 		local max_height = self:GetAbility():GetSpecialValueFor("max_height")
-		-- Check if it shall lift up
 		if self.current_time <= self.lift_animation  then
 			self.z_height = self.z_height + ((dt / self.lift_animation) * max_height)
 			unit:SetAbsOrigin(GetGroundPosition(unit:GetAbsOrigin(), unit) + Vector(0,0,self.z_height))
@@ -329,7 +328,6 @@ end
 
 function modifier_sans_e:HorizontalMotion(unit, dt)
 	if IsServer() then
-
 		self.distance = self.distance or 0
 		if (self.current_time > (self.duration - self.fall_animation)) then
 			if self.changed_target then
@@ -400,8 +398,6 @@ function modifier_sans_e_root:IsHidden() return true end
 function modifier_sans_e_root:IsPurgable() return false end
 function modifier_sans_e_root:IsPurgeException() return false end
 
--------------------------------------------
-
 function modifier_sans_e_root:CheckState()
 	local state =
 		{
@@ -467,7 +463,6 @@ function modifier_sans_e_thinker_orange:OnIntervalThink()
         FIND_ANY_ORDER,
         false
     )
-
     for _, enemy in pairs(enemies) do
         local current_pos = enemy:GetAbsOrigin()
         if not self.enemy_data[enemy] then
@@ -497,7 +492,6 @@ function modifier_sans_e_thinker_orange:OnIntervalThink()
             end
         end
     end
-
     for enemy, _ in pairs(self.enemy_data) do
         if not enemy:IsAlive() or (enemy:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > self.radius then
             self.enemy_data[enemy] = nil

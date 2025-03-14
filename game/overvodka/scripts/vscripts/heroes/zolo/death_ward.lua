@@ -7,8 +7,6 @@ function CreateWard(keys)
 	local level = ability:GetLevel()
 	local particle_cast = "particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf"
 	local rot_radius = ability:GetSpecialValueFor("rot_radius")
-
-	-- Create Particle
 	if level == 1 then
 		caster.death_ward = CreateUnitByName("npc_batya_1", position, true, caster, nil, caster:GetTeam())
 	end

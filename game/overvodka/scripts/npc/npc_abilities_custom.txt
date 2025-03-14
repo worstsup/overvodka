@@ -464,6 +464,7 @@
 		"precache"
 		{
 			"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
+			"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
 			"soundfile" "soundevents/opasvo.vsndevts"
 		}
 		"AbilityValues"
@@ -5310,17 +5311,13 @@
 	//=================================================================================================================
 	// ПРОГРЕВ ПОЛЕЙ СРАЖЕНИЙ
 	//=================================================================================================================
-	"underlord_firestorm_lua"
+	"silvername_r"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"underlord_firestorm_lua"
+		"ScriptFile"					"heroes/silvername/silvername_r"
 		"AbilityTextureName"			"tetris"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_abyssal_underlord.vsndevts"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
@@ -5345,11 +5342,7 @@
 					"special_bonus_unique_phoenix_2" "+30"
 				}
 				"wave_interval"				"0.3"
-				"burn_damage"				"0"
-				"burn_interval"				"1.0"
-				"burn_duration"				"0.15"
-				"first_wave_delay"			"0.0"
-				"building_damage"			"33"
+				"stun_duration"				"0.15"
 		}
 	}
 	"phoenix_dying_light"
@@ -5854,12 +5847,11 @@
 			}
 		}
 	}
-	"orlov_fly"
+	"silvername_shard"
 	{
-
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"orlov"
-		"ScriptFile"					"orlov_fly"
+		"ScriptFile"					"heroes/silvername/silvername_shard"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -5871,17 +5863,7 @@
 		"AbilityManaCost"				"150"
 		"AbilityValues"
 		{
-				"duration"
-				{
-					"value"	"7"
-				}
-				"bonus_strength"				"0"
-				"move_speed"
-				{
-					"value"	"550"
-				}
-				"model_scale"					"0"
-				"evasion"				"50"
+				"duration" "7"
 		}
 		
 	}
@@ -5894,7 +5876,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
 		"IsBreakable"					"1"
-		"DependentOnAbility"			"underlord_firestorm_lua"
+		"DependentOnAbility"			"silvername_r"
 		"Innate"						"1"
 		"MaxLevel"					"4"
 		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
@@ -6981,7 +6963,7 @@
 		{
 				"AbilityCooldown"
 				{
-					"value"	"5"
+					"value"	"6"
 					"special_bonus_unique_keeper_of_the_light_2" "-1"
 				}
 				"AbilityCastRange"

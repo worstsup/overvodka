@@ -1,47 +1,27 @@
--- Created by Elfansoer
---[[
-Ability checklist (erase if done/checked):
-- Scepter Upgrade
-- Break behavior
-- Linken/Reflect behavior
-- Spell Immune/Invulnerable/Invisible behavior
-- Illusion behavior
-- Stolen behavior
-]]
---------------------------------------------------------------------------------
 modifier_zolo_disarm = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_zolo_disarm:IsHidden()
 	return false
 end
-
 function modifier_zolo_disarm:IsDebuff()
 	return true
 end
-
 function modifier_zolo_disarm:IsPurgable()
 	return true
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_zolo_disarm:OnCreated( kv )
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
 end
-
 function modifier_zolo_disarm:OnRefresh( kv )
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow" )
 end
 
 function modifier_zolo_disarm:OnRemoved()
 end
-
 function modifier_zolo_disarm:OnDestroy()
 end
 
---------------------------------------------------------------------------------
 function modifier_zolo_disarm:CheckState()
 	local state = {
 		[MODIFIER_STATE_DISARMED] = true,

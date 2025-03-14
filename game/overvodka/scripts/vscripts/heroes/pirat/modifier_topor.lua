@@ -233,8 +233,6 @@ function modifier_topor:OnDestroy()
 	self:GetParent():SetAttackCapability( self.attack )
 end
 
---------------------------------------------------------------------------------
-
 function modifier_topor:DeclareFunctions()
 	local funcs = 
 	{

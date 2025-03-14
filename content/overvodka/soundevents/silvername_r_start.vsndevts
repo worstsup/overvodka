@@ -1,4 +1,4 @@
-"start"
+"silvername_r_start"
 {
   "operator_stacks"
   {
@@ -14,7 +14,7 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/start.vsnd"
+               "value0"    "sounds/abilities/silvername_r_start.vsnd"
             }
           }
           "volume"      {  "value"   "2.00000" }

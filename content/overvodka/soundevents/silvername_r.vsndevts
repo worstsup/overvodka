@@ -1,4 +1,4 @@
-"tetris"
+"silvername_r"
 {
   "operator_stacks"
   {
@@ -14,7 +14,7 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/tetris.vsnd"
+               "value0"    "sounds/abilities/silvername_r.vsnd"
             }
           }
           "volume"      {  "value"   "1.00000" }

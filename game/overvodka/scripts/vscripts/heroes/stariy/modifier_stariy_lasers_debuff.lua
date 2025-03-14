@@ -1,14 +1,9 @@
 
 modifier_stariy_lasers_debuff = class({})
 
---------------------------------------------------------------------------------
-
 function modifier_stariy_lasers_debuff:IsHidden()
 	return true
 end
-
-
------------------------------------------------------------------------------
 
 function modifier_stariy_lasers_debuff:OnCreated( kv )
 	if IsServer() then
@@ -18,20 +13,15 @@ function modifier_stariy_lasers_debuff:OnCreated( kv )
 		self.damage_interval = self:GetAbility():GetSpecialValueFor( "damage_interval" )
 		self:OnIntervalThink()
 		self:StartIntervalThink( self.damage_interval )
-
 		EmitSoundOn( "Hero_Huskar.Burning_Spear", self:GetParent() )
 	end
 end
-
------------------------------------------------------------------------------
 
 function modifier_stariy_lasers_debuff:OnDestroy()
 	if IsServer() then
 		StopSoundOn( "Hero_Huskar.Burning_Spear", self:GetParent() )
 	end
 end
-
------------------------------------------------------------------------------
 
 function modifier_stariy_lasers_debuff:OnIntervalThink()
 	if IsServer() then
@@ -52,5 +42,3 @@ function modifier_stariy_lasers_debuff:OnIntervalThink()
 		ParticleManager:ReleaseParticleIndex( nFXIndex )
 	end
 end
-
------------------------------------------------------------------------------

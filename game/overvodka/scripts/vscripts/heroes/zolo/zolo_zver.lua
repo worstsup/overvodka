@@ -19,22 +19,17 @@ function zolo_zver:OnSpellStart()
 	local duration = self:GetSpecialValueFor("knockback_duration")
 	local distance = self:GetSpecialValueFor("knockback_distance")
 	local enemies = FindUnitsInRadius(
-		caster:GetTeamNumber(),	-- int, your team number
-		caster:GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		caster:GetTeamNumber(),
+		caster:GetOrigin(),
+		nil,
+		radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		0,
+		false
 	)
-	local buff = caster:AddNewModifier(
-		caster, 
-		self, 
-		"modifier_zolo_zver", 
-		{  }
-	)
+	local buff = caster:AddNewModifier(caster, self, "modifier_zolo_zver", {})
 	local origin = caster:GetOrigin()
 	local cast_direction = (point-origin+Vector(50,50,0)):Normalized()
 	local cast_angle = VectorToAngles( cast_direction ).y

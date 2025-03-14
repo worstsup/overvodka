@@ -81,9 +81,9 @@ end
 
 
 function modifier_macan_e:OnIntervalThink()
+	if not self:GetParent():IsAlive() then return end
 	if self:GetParent():IsIllusion() then return end
-	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
-	if self:GetParent():HasModifier("modifier_break") then return end
+	if self:GetParent():PassivesDisabled() then return end
 	self.stack_steal = self:GetParent():FindAbilityByName("macan_w"):GetSpecialValueFor( "stack_steal" )
 	local enemies = FindUnitsInRadius(
 		self:GetParent():GetTeamNumber(),

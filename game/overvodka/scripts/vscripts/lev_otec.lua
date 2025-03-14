@@ -12,6 +12,7 @@ function Lev_Otec:OnSpellStart()
 	if not IsServer() then return end
 	EmitGlobalSound( "lev_r_start" )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_otec_start", { duration = -1 } )
+	self:EndCooldown()
 end
 
 modifier_otec_start = class({})
@@ -59,6 +60,7 @@ function modifier_otec_start:OnDestroy()
 			lev_ability:SetActivated(true)
 		end
 	end
+	self:GetAbility():UseResources( false, false, false, true )
 end
 
 function modifier_otec_start:DeclareFunctions()

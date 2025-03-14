@@ -46,8 +46,7 @@ function modifier_stariy_bolt:OnIntervalThink()
 	if self:GetParent():IsIllusion() then return end
 	if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 	if not self:GetParent():IsAlive() then return end
-	if self:GetParent():HasModifier("modifier_silver_edge_debuff") then return end
-	if self:GetParent():HasModifier("modifier_break") then return end
+	if self:GetParent():PassivesDisabled() then return end
 	local enemies = FindUnitsInRadius(
 		self:GetParent():GetTeamNumber(),
 		self:GetParent():GetOrigin(),

@@ -65,19 +65,29 @@ end
 
 modifier_item_charik_new_regen = class({})
 
-function modifier_item_charik_new_regen:IsHidden() return true end
-function modifier_item_charik_new_regen:IsPurgable() return false end
-function modifier_item_charik_new_regen:RemoveOnDeath() return false end
+function modifier_item_charik_new_regen:IsHidden() 
+    return true 
+end
+
+function modifier_item_charik_new_regen:IsPurgable() 
+    return false 
+end
+
+function modifier_item_charik_new_regen:RemoveOnDeath() 
+    return false 
+end
+
 function modifier_item_charik_new_regen:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
 end
+
 function modifier_item_charik_new_regen:OnCreated()
     if not IsServer() then return end
     self.standing_time = 0
-    k = 0
-    t = 0
+    self.k = false
+    self.t = false
     self:StartIntervalThink(0.1)
 end
 
@@ -86,45 +96,55 @@ function modifier_item_charik_new_regen:OnIntervalThink()
 
     local parent = self:GetParent()
     local ability = self:GetAbility()
+
     if parent:IsIllusion() then return end
-    if ability:IsCooldownReady() and parent:IsAlive() then
+    if not parent:IsAlive() then 
+        self.standing_time = 0 
+        return 
+    end
+    if ability:IsCooldownReady() then
+        local percent_min = ability:GetSpecialValueFor("percent_min") / 100
+        local percent_heal = ability:GetSpecialValueFor("percent_heal") / 100
+        if parent:GetHealth() >= parent:GetMaxHealth() * percent_min and parent:GetMana() >= parent:GetMaxMana() * percent_min then
+            self.standing_time = 0
+            return
+        end
+
         if not parent:IsMoving() then
-        	if parent:GetHealth() >= parent:GetMaxHealth() * 0.4 and parent:GetMana() >= parent:GetMaxMana() * 0.4 then
-                self.standing_time = 0
-                return
-            end
             self.standing_time = self.standing_time + 0.1
-            if self.standing_time >= 1.0 and k == 0 then
-            	EmitSoundOn( "smok2", self:GetParent())
-            	parent:AddNewModifier(parent, ability, "modifier_item_charik_new_regen_effect", {duration = 2})
-            	k = 1
+            if self.standing_time >= 1.0 and not self.k then
+                EmitSoundOn("smok2", parent)
+                parent:AddNewModifier(parent, ability, "modifier_item_charik_new_regen_effect", { duration = 2 })
+                self.k = true
             end
             if self.standing_time >= 3.0 then
-                local healAmount = parent:GetMaxHealth() * 0.3
+                local healAmount = parent:GetMaxHealth() * percent_heal
                 parent:Heal(healAmount, ability)
-                local manaRestore = parent:GetMaxMana() * 0.3
+                local manaRestore = parent:GetMaxMana() * percent_heal
                 parent:GiveMana(manaRestore)
 
                 local particle = ParticleManager:CreateParticle("particles/econ/events/compendium_2024/compendium_2024_teleport_endcap_smoke.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
                 ParticleManager:ReleaseParticleIndex(particle)
-
                 ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))
-                t = 1
+                self.t = true
                 self.standing_time = 0
-                k = 0
+                self.k = false
             end
         else
-        	if t == 0 then
-        		StopSoundOn("smok2", self:GetParent())
-        		parent:RemoveModifierByName("modifier_item_charik_new_regen_effect")
-        	end
+            if not self.t then
+                StopSoundOn("smok2", parent)
+                parent:RemoveModifierByName("modifier_item_charik_new_regen_effect")
+            end 
             self.standing_time = 0
+            self.k = false
         end
     else
-    	t = 0
-        self.standing_time = 0 
+        self.t = false
+        self.standing_time = 0
+        self.k = false
     end
 end
+
 function modifier_item_charik_new_regen:OnTakeDamage(params)
     if not IsServer() then return end
     if params.unit == self:GetParent() then
@@ -132,11 +152,21 @@ function modifier_item_charik_new_regen:OnTakeDamage(params)
     end
 end
 
+
 modifier_item_charik_new_regen_effect = class({})
+
 function modifier_item_charik_new_regen_effect:GetTexture()
-  	return "items/charik"
+    return "charik"
 end
 
-function modifier_item_charik_new_regen_effect:IsHidden() return false end
-function modifier_item_charik_new_regen_effect:IsPurgable() return false end
-function modifier_item_charik_new_regen_effect:RemoveOnDeath() return false end
+function modifier_item_charik_new_regen_effect:IsHidden() 
+    return false 
+end
+
+function modifier_item_charik_new_regen_effect:IsPurgable() 
+    return false 
+end
+
+function modifier_item_charik_new_regen_effect:RemoveOnDeath() 
+    return false 
+end
