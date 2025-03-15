@@ -11,6 +11,8 @@ function serega_topor:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_scepter.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_sidekick_self_buff.vpcf", context )
 	PrecacheResource( "particle", "particles/status_fx/status_effect_marci_sidekick.vpcf", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf", context )
+	PrecacheResource( "particle", "particles/ti9_jungle_axe_attack_blur_counterhelix_new.vpcf", context )
 end
 
 function serega_topor:Spawn()

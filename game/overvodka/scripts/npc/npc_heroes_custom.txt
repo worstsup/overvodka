@@ -296,11 +296,8 @@
 		"Enabled"		"1"
 		"ModelScale"		"0.700000"
 		"LoadoutScale"		"0.700000"
-		"VersusScale"		"0.70000"
-		"SpectatorLoadoutScale" "0.8"
 		"HeroSelectSoundEffect"		"lev_start"
 		"GibType"		"default"
-		"NameAliases"	"Demon Witch"
 		"Ability1"		"lina_laguna_blade_datadriven"
 		"Ability2"		"Megumin_mana_aura"
 		"Ability3"		"nyx_assassin_spiked_carapace_datadriven"
@@ -334,7 +331,7 @@
 		"AttributeBaseIntelligence"		"20"
 		"AttributeIntelligenceGain"		"3.000000"
 		"AttributeBaseAgility"		"15"
-		"AttributeAgilityGain"		"1.7"
+		"AttributeAgilityGain"		"1.4"
 		"MovementSpeed"		"290"
 		"Facets"
 		{
@@ -897,9 +894,9 @@
 		"ModelScale"		"2.0000"
 		"VersusScale"		"0.950000"
 		"GibType"		"fire"
-		"Ability1"		"orlov_murloc"
-		"Ability2"		"orlov_rivendare"
-		"Ability3"		"borrowed_time_datadriven"
+		"Ability1"		"silvername_murloc"
+		"Ability2"		"silvername_rivendare"
+		"Ability3"		"silvername_secret"
 		"Ability4"		"silvername_shard"
 		"Ability5"		"beastmaster_inner_beast"
 		"Ability6"		"silvername_r"
@@ -951,7 +948,6 @@
 		"MovementSpeed"		"280"
 		"MovementTurnRate"		"0.900000"
 		"HealthBarOffset"		"350"
-		
 	}
 	"npc_dota_hero_bounty_hunter"
 	{
@@ -1968,7 +1964,7 @@
 			}
 		}
 
-		"ArmorPhysical"		"1"
+		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"24"
 		"AttackDamageMax"		"34"
@@ -1984,8 +1980,8 @@
 		"AttributeStrengthGain"		"1.7"
 		"AttributeBaseIntelligence"		"23"
 		"AttributeIntelligenceGain"		"3.5"
-		"AttributeBaseAgility"		"19"
-		"AttributeAgilityGain"		"2.2"
+		"AttributeBaseAgility"		"17"
+		"AttributeAgilityGain"		"2.0"
 		"StatusHealthRegen"	"0.5"
 		"MovementSpeed"		"300"
 		"MovementTurnRate"		"0.800000"

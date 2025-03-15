@@ -1871,7 +1871,7 @@
         }
 		"RunScript"
 		{
-			"ScriptFile"	"borrowed_time.lua"
+			"ScriptFile"	"heroes/silvername/silvername_secret"
 			"Function"		"BorrowedTimePurge"
 		}
     }
@@ -2183,7 +2183,7 @@
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
     "AbilityTextureName"            "govno"
-	"AbilityCooldown"				"0.4"
+	"AbilityCooldown"				"0.6"
     "ItemCost"                      "7550"
 		"AbilityValues"
 		{
@@ -3093,6 +3093,7 @@
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"magic_crystalis"
+		"AbilityCooldown"				"0.4"
 		"AbilityValues"
 		{
 			"bonus_damage"			"15"
@@ -3126,6 +3127,7 @@
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"magic_daedalus"
+		"AbilityCooldown"				"0.4"
 		"AbilityValues"
 		{
 			"bonus_damage"			"15"

@@ -2,6 +2,11 @@ LinkLuaModifier("modifier_dave_ambient", "heroes/dave/dave_ambient", LUA_MODIFIE
 
 dave_ambient = class({})
 
+function dave_ambient:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/dave_ambient_1.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/dave_ambient_2.vsndevts", context )
+end
+
 function dave_ambient:GetIntrinsicModifierName()
     return "modifier_dave_ambient"
 end

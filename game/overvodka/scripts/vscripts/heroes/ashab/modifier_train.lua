@@ -1,5 +1,5 @@
 modifier_train = class({})
---------------------------------------------------------------------------------
+
 function modifier_train:IsPurgable()
 	return false
 end
@@ -22,7 +22,7 @@ function modifier_train:DeclareFunctions()
 	}
 	return funcs
 end
---------------------------------------------------------------------------------
+
 function modifier_train:GetModifierModelScale( params )
 	return self.model_scale
 end

@@ -48,8 +48,9 @@ function modifier_item_magic_crystalis:GetModifierTotalDamageOutgoing_Percentage
     if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
         if params.damage_type ~= DAMAGE_TYPE_MAGICAL then return end
         if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS) ~= DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS then
-            if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) then
+            if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) and self:GetAbility():IsCooldownReady() then
                 params.target:EmitSound("magic_crit")
+                self:GetAbility():UseResources(false, false, false, true)
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, params.target, params.original_damage + (params.original_damage / 100 * (self:GetAbility():GetSpecialValueFor("crit") - 100)), nil)
                 return self:GetAbility():GetSpecialValueFor("crit") - 100
             end
@@ -119,10 +120,10 @@ end
 function modifier_item_magic_daedalus:GetModifierTotalDamageOutgoing_Percentage(params)
     if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
         if params.damage_type ~= DAMAGE_TYPE_MAGICAL then return end
-        --if params.original_damage < 100 then return end
         if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS) ~= DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS then
-            if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) then
+            if RollPercentage(self:GetAbility():GetSpecialValueFor("chance")) and self:GetAbility():IsCooldownReady() then
                 params.target:EmitSound("magic_crit")
+                self:GetAbility():UseResources(false, false, false, true)
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, params.target, params.original_damage + (params.original_damage / 100 * (self:GetAbility():GetSpecialValueFor("crit") - 100)), nil)
                 return self:GetAbility():GetSpecialValueFor("crit") - 100
             end

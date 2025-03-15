@@ -1329,7 +1329,7 @@
 				"damage"
 				{
 					"value"	"100 200 300 400"
-					"special_bonus_unique_grimstroke_1" "+150"
+					"special_bonus_unique_grimstroke_1" "+100"
 				}
 				"radius"
 				{
@@ -4574,7 +4574,7 @@
 				"value"	"250"
 				"special_bonus_unique_axe" "+125"
 			}
-			"max_distance"				"9000"
+			"max_distance"				"8000 8500 9000"
 			"knockback_distance"
 			{
 				"value"	"300"
@@ -5364,7 +5364,7 @@
 	//=================================================================================================================
 	// БАРОН РИВЕНДЕР
 	//=================================================================================================================
-	"orlov_rivendare"
+	"silvername_rivendare"
 	{
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"BaseClass"             		"ability_datadriven"
@@ -5525,7 +5525,7 @@
 	"rivendare_lua"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"rivendare_lua"
+		"ScriptFile"					"heroes/silvername/rivendare_lua"
 		"AbilityTextureName"			"taunt"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
@@ -5557,7 +5557,7 @@
 	//=================================================================================================================
 	// СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА
 	//=================================================================================================================
-	"borrowed_time_datadriven"
+	"silvername_secret"
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -5590,10 +5590,10 @@
 		}
 
 		"precache"
-		{	
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+		{
 			"particle"  "particles/units/heroes/hero_abaddon/abaddon_borrowed_time.vpcf"
 			"particle"	"particles/status_fx/status_effect_abaddon_borrowed_time.vpcf"
+			"particle"	"particles/faceless_void_arcana_deny_symbol_question_new.vpcf"
 		}
 
 		"OnSpellStart"
@@ -5601,19 +5601,13 @@
 			"ApplyModifier"
 			{
 				"Target" 		"CASTER"
-				"ModifierName"	"modifier_borrowed_time"
+				"ModifierName"	"modifier_silvername_secret"
 				"Duration"		"%duration"
-			}
-			
-			"FireSound"
-			{
-				"Target" 		"CASTER"
-				"EffectName"	"Hero_Abaddon.BorrowedTime"	
 			}
 
 			"RunScript"
 			{
-				"ScriptFile"	"borrowed_time.lua"
+				"ScriptFile"	"heroes/silvername/silvername_secret"
 				"Function"		"BorrowedTimePurge"
 			}
 			
@@ -5621,7 +5615,7 @@
 
 		"Modifiers"
 		{
-			"modifier_borrowed_time_passive"
+			"modifier_silvername_secret_passive"
 			{
 				"Passive"			"1"
 				"IsHidden"			"1"
@@ -5630,13 +5624,13 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"borrowed_time.lua"
+						"ScriptFile"	"heroes/silvername/silvername_secret"
 						"Function"		"BorrowedTimeActivate"
 					}
 				}
 			}
 
-			"modifier_borrowed_time"
+			"modifier_silvername_secret"
 			{
 				"IsBuff"			"1"
 
@@ -5653,7 +5647,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"borrowed_time.lua"
+						"ScriptFile"	"heroes/silvername/silvername_secret"
 						"Function"		"BorrowedTimeHeal"
 						"DamageTaken"	"%attack_damage"
 					}
@@ -5684,7 +5678,7 @@
 	//=================================================================================================================
 	// МУРЛОКИ
 	//=================================================================================================================
-	"orlov_murloc"
+	"silvername_murloc"
 	{
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"BaseClass"             		"ability_datadriven"
@@ -7140,6 +7134,7 @@
 		"precache"
 		{
 			"particle"	"particles/base_statue_destruction_gold_lvl2_new.vpcf"
+			"soundfile"	"soundevents/slushay.vsndevts"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -7226,6 +7221,8 @@
 		"precache"
 		{
 			 "particle" "particles/clockwerk_para_rocket_flare_mew.vpcf"
+			 "soundfile" "soundevents/rocket.vsndevts"
+			 "soundfile" "soundevents/rocket_hit.vsndevts"
 		}
 		"OnSpellStart"
 		{
@@ -7284,6 +7281,10 @@
 		"AbilityManaCost"				"80 115 150 185"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
+		"precache"
+		{
+			"soundfile" "soundevents/ashab_car.vsndevts"
+		}
 		"AbilityValues"
 		{
 				"schoolboys_number"			"1 0 0 0"
@@ -10500,8 +10501,8 @@
 		"AbilityManaCost"				"100 200 300"
 		"AbilityValues"
 		{
-				"pounce_distance"		"500 700 900"
-				"pounce_speed"			"800 1000 1200"
+				"pounce_distance"		"600 800 1000"
+				"pounce_speed"			"900 1100 1300"
 				"pounce_acceleration"	"7000.0"
 				"pounce_radius"			"115"
 				"leash_duration"		"1.5 2.0 2.5"
@@ -11576,10 +11577,10 @@
 			"jump_delay" "0.25"
 			"jump_count" "3"
 			"radius_jump" "600"
-			"stun_duration" "0.3 0.4 0.5 0.6"
+			"stun_duration" "0.1 0.2 0.3 0.4"
 			"chance"
 			{
-				"value"	"25"
+				"value"	"20"
 				"special_bonus_unique_disruptor_consecutive_strike_damage" "+10"
 			}
 			"arc_damage_percent" "3 4 5 6"
@@ -12488,7 +12489,7 @@
 			"cleave"
 			{
 				"value"							"0"
-				"special_bonus_facet_slark_leeching_leash" "+20 +30 +40 +50"
+				"special_bonus_facet_slark_leeching_leash" "+30 +40 +50 +60"
 				"RequiresFacet"					"slark_leeching_leash"
 			}
 			"cleave_radius"
@@ -12544,7 +12545,7 @@
 			"cleave"
 			{
 				"value"							"0"
-				"special_bonus_facet_slark_leeching_leash" "+20 +30 +40 +50"
+				"special_bonus_facet_slark_leeching_leash" "+30 +40 +50 +60"
 				"RequiresFacet"					"slark_leeching_leash"
 			}
 			"cleave_radius"
@@ -12664,7 +12665,7 @@
 		"AbilityValues"
 		{
 			"bonus_dmg_pct"         "6"
-			"attacks_needed"		"20"
+			"attacks_needed"		"15"
 		}
 	}
 }
