@@ -18,11 +18,6 @@
 					m_entityName = "self"
 				},
 				{
-					m_iControlPoint = 1
-					m_iAttachType = "PATTACH_WORLDORIGIN"
-					m_entityName = "self"
-				},
-				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_entityName = "self"
@@ -347,7 +342,7 @@
 			m_ChildRef = resource:"particles/neutral_fx/black_dragon_fireball_lava_b.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/neutral_fx/black_dragon_fireball_projectile.vpcf"
+			m_ChildRef = resource:"particles/black_dragon_fireball_projectile_new.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/neutral_fx/black_dragon_fireball_ember.vpcf"

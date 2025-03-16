@@ -18,7 +18,7 @@ function BorrowedTimeActivate( event )
 		if strong == 1 then
 			BorrowedTimePurge( event )
 		end
-		ability:ApplyDataDrivenModifier( caster, caster, "modifier_borrowed_time", { duration = dur })
+		ability:ApplyDataDrivenModifier( caster, caster, "modifier_silvername_secret", { duration = dur })
 		ability:UseResources( false, false, false, true )
 		caster:Stop()
 		caster:EmitSound("secret")

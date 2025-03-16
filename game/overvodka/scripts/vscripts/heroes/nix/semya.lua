@@ -6,6 +6,10 @@ function StealDamage(keys)
 		target:RemoveModifierByName("modifier_Doljan_RapBattle_debuff")
 		return
 	end
+	if not caster:IsAlive() or not target:IsAlive() then
+		target:RemoveModifierByName("modifier_Doljan_RapBattle_debuff")
+		return
+	end
 	local buff = "modifier_steal_damage_buff"
 	local debuff = "modifier_steal_damage_debuff"
 	local buff_ms = "modifier_steal_ms_buff"

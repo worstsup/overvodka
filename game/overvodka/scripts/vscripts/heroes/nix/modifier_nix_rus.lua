@@ -1,5 +1,5 @@
 modifier_nix_rus = class({})
---------------------------------------------------------------------------------
+
 function modifier_nix_rus:IsPurgable()
 	return false
 end
@@ -13,28 +13,27 @@ function modifier_nix_rus:OnCreated( kv )
 		self:StartIntervalThink( 0.25 )
 	end
 	k = 0
+    local particle = ParticleManager:CreateParticle("particles/nix_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(particle, 1, Vector(self.radius + 25, self.radius + 25, self.radius + 25))
+    self:AddParticle(particle, false, false, -1, false, false)
 end
-
---------------------------------------------------------------------------------
 
 function modifier_nix_rus:OnRemoved()
 end
-
---------------------------------------------------------------------------------
 
 function modifier_nix_rus:OnIntervalThink()
 	if IsServer() then
 		k = k + 1
 		local enemies = FindUnitsInRadius(
-			self:GetParent():GetTeamNumber(),	-- int, your team number
-			self:GetParent():GetAbsOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,	-- int, flag filter
-			0,	-- int, order filter
-			false	-- bool, can grow cache
+			self:GetParent():GetTeamNumber(),
+			self:GetParent():GetAbsOrigin(),
+			nil,
+			self.radius,
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+			0,
+			false
 		)
 		for _,unit in pairs(enemies) do
 			unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_axe_berserkers_call_lol_debuff", {duration = 0.5})
@@ -48,8 +47,6 @@ function modifier_nix_rus:OnIntervalThink()
 	end
 end
 
---------------------------------------------------------------------------------
-
 function modifier_nix_rus:DeclareFunctions()
 	local funcs = 
 	{
@@ -60,18 +57,12 @@ function modifier_nix_rus:DeclareFunctions()
 	return funcs
 end
 
-
---------------------------------------------------------------------------------
-
 function modifier_nix_rus:GetModifierModelScale( params )
 	return self.model_scale
 end
 
 function modifier_nix_rus:GetModifierBonusStats_Strength( params )
 	return self.bonus_strength
-end
-function modifier_nix_rus:GetEffectName()
-	return "particles/centaur_ti6_warstomp_gold_new.vpcf"
 end
 
 function modifier_nix_rus:GetEffectAttachType()

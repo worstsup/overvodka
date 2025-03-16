@@ -1,6 +1,5 @@
 modifier_sasavot_w = class({})
 
-
 function modifier_sasavot_w:IsHidden( kv )
 	return false
 end
@@ -14,20 +13,15 @@ function modifier_sasavot_w:RemoveOnDeath( kv )
 	return false
 end
 
-
 function modifier_sasavot_w:OnCreated( kv )
+	if not IsServer() then return end
 	self:SetStackCount(1)
-	self.stack_multiplier = self:GetAbility():GetSpecialValueFor("attack_speed")
-	self.stack_multiplier_armor = self:GetAbility():GetSpecialValueFor("armor")
-	self.stack_multiplier_spell = self:GetAbility():GetSpecialValueFor("spell")
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
 	self.currentTarget = {}
 end
 
 function modifier_sasavot_w:OnRefresh( kv )
-	self.stack_multiplier = self:GetAbility():GetSpecialValueFor("attack_speed")
-	self.stack_multiplier_armor = self:GetAbility():GetSpecialValueFor("armor")
-	self.stack_multiplier_spell = self:GetAbility():GetSpecialValueFor("spell")
+	if not IsServer() then return end
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
 end
 
@@ -62,26 +56,24 @@ function modifier_sasavot_w:OnAttack( params )
 		end
 	end
 end
-function modifier_sasavot_w:GetModifierSpellAmplify_Percentage( params )
-	local passive = 1
+
+function modifier_sasavot_w:GetModifierSpellAmplify_Percentage()
 	if self:GetParent():PassivesDisabled() then
-		passive = 0
+		return 0
 	end
-	return self:GetStackCount() * self.stack_multiplier_spell * passive
+	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("spell")
 end
-function modifier_sasavot_w:GetModifierAttackSpeedBonus_Constant( params )
-	local passive = 1
+function modifier_sasavot_w:GetModifierAttackSpeedBonus_Constant()
 	if self:GetParent():PassivesDisabled() then
-		passive = 0
+		return 0
 	end
-	return self:GetStackCount() * self.stack_multiplier * passive
+	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("attack_speed")
 end
-function modifier_sasavot_w:GetModifierPhysicalArmorBonus( params )
-	local passive = 1
+function modifier_sasavot_w:GetModifierPhysicalArmorBonus()
 	if self:GetParent():PassivesDisabled() then
-		passive = 0
+		return 0
 	end
-	return self:GetStackCount() * self.stack_multiplier_armor * passive
+	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("armor")
 end
 
 

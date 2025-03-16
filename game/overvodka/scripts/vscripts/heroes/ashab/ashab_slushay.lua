@@ -2,6 +2,12 @@ ashab_slushay = class({})
 LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ashab_slushay_buff", "heroes/ashab/modifier_ashab_slushay_buff", LUA_MODIFIER_MOTION_NONE )
 
+function ashab_slushay:OnAbilityUpgrade( hAbility )
+	if not IsServer() then return end
+	self.BaseClass.OnAbilityUpgrade( self, hAbility )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_tidehunter_7" )
+end
+
 function ashab_slushay:OnSpellStart()
 	local caster = self:GetCaster()
 	local reduction_radius = self:GetSpecialValueFor("radius")

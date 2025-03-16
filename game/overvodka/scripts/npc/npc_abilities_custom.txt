@@ -904,6 +904,7 @@
 					"value"	"0"
 					"special_bonus_facet_terrorblade_soul_fragment" "+30"
 				}
+				"root_duration" "1"
 		}
 		"precache"
 		{
@@ -1014,7 +1015,7 @@
 								{
 									"ModifierName"  "modifier_rrr"
 									"Target"        "TARGET"
-									"Duration"      "1"
+									"Duration"      "%root_duration"
 								}
 								"FireEffect"
 					{
@@ -7157,8 +7158,14 @@
 				}
 				"AbilityCharges"
 				{
-					"value"	"1"
-					"special_bonus_unique_tidehunter_7" "+1"
+					"value"										"0"
+					"special_bonus_unique_tidehunter_7"			 "+2"
+				}
+				"AbilityCooldown"
+				{
+					"value"										"13 12 11 10"
+					"special_bonus_unique_tidehunter_3" "-2"
+					"special_bonus_unique_tidehunter_7"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -7546,6 +7553,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
+			"soundfile"	"soundevents/konchai.vsndevts"
 			"particle"	"particles/bristleback_viscous_nasal_goo_new.vpcf"
 			"particle"	"particles/bristleback_viscous_nasal_goo_debuff_new.vpcf"
 		}
@@ -7724,6 +7732,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_doombringer.vsndevts"
+			"soundfile"	"soundevents/baza.vsndevts"
 			"particle"	"particles/units/heroes/hero_doom_bringer/doom_infernal_blade.vpcf"
 			"particle"	"particles/units/heroes/hero_doom_bringer/doom_infernal_blade_impact.vpcf"
 			"particle"	"particles/units/heroes/hero_doom_bringer/doom_infernal_blade_debuff.vpcf"
@@ -7944,6 +7953,11 @@
 		"AbilityCooldown"				"32 30 28 26"
 		"AbilityManaCost"				"120"
 		"AbilityModifierSupportValue"	"5.0"
+		"precache"
+		{
+			"particle"	"particles/nix_w.vpcf"
+			"soundfile" "soundevents/semya.vsndevts"
+		}
 		"AbilityValues"
 		{
 				"duration"					"10"
@@ -8004,7 +8018,7 @@
 				{
 					"AttachEffect"
 					{
-						"EffectName"	"particles/econ/items/razor/razor_arcana/razor_arcana_static_link.vpcf"
+						"EffectName"	"particles/nix_w.vpcf"
 						"EffectAttachType"	"start_at_customorigin"
 						"Target"		"TARGET"
 
@@ -9080,12 +9094,18 @@
 		{
 				"AbilityCharges"
 				{
-					"value"	"1"
-					"special_bonus_unique_nyx_carapace_reflect_duration" "+1"
+					"value"										"0"
+					"special_bonus_unique_nyx_carapace_reflect_duration"			 "+2"
+				}
+				"AbilityCooldown"
+				{
+					"value"										"22 20 18 16"
+					"special_bonus_unique_clinkz_8" "-4"
+					"special_bonus_unique_nyx_carapace_reflect_duration"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
-					"value"	"22.0 20.0 18.0 16.0"
+					"value"	"22 20 18 16"
 					"special_bonus_unique_clinkz_8" "-4"
 				}
 				"damage"			"50 100 150 200"
@@ -9546,8 +9566,13 @@
 				}
 				"AbilityCharges"
 				{
-					"value"	"1"
-					"special_bonus_unique_bloodseeker_rupture_charges" "+1"
+					"value"										"0"
+					"special_bonus_unique_bloodseeker_rupture_charges"			 "+2"
+				}
+				"AbilityCooldown"
+				{
+					"value"										"20"
+					"special_bonus_unique_bloodseeker_rupture_charges"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -10212,7 +10237,7 @@
 			"particle"	"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green_mid.vpcf"
 			"particle"	"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf"
 			"particle"	"particles/black_king_bar_avatar_sasavot.vpcf"
-			"particle"	"particles/econ/events/ti9/radiance_owner_ti9.vpcf"
+			"particle"	"particles/sasavot_e.vpcf"
 		}
 		"AbilityValues"
 		{
@@ -11320,13 +11345,19 @@
     	{
 			"AbilityCharges"
 			{
-				"value"	"1"
-				"special_bonus_unique_nyx_vendetta_damage" "+1"
+				"value"										"0"
+				"special_bonus_unique_nyx_vendetta_damage"			 "+2"
+			}
+			"AbilityCooldown"
+			{
+				"value"										"14 12 10 8"
+				"special_bonus_unique_morphling_8" "-2"
+				"special_bonus_unique_nyx_vendetta_damage"			  "=0"
 			}
 			"AbilityChargeRestoreTime"
 			{
 				"value"	"14 12 10 8"
-				"special_bonus_unique_morphling_8" "-3"
+				"special_bonus_unique_morphling_8" "-2"
 			}
         	"blast_delay"
 			{
@@ -12446,7 +12477,7 @@
 				"value"										"12"
 				"special_bonus_unique_faceless_void_2"			  "=0"
 			}
-			"AbilityChargeRestoreTime"		"14"
+			"AbilityChargeRestoreTime"		"12"
 		}
 	}
 	"bratishkin_q_knight"

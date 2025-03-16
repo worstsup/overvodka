@@ -115,7 +115,7 @@ function modifier_sasavot_debuff:OnTakeDamage(keys)
     end
 end
 function modifier_sasavot_debuff:GetEffectName()
-    return "particles/econ/events/ti9/radiance_owner_ti9.vpcf"
+    return "particles/sasavot_e.vpcf"
 end
 function modifier_sasavot_debuff:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW

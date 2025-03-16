@@ -7,32 +7,31 @@ LinkLuaModifier( "modifier_arsen_tg_wall_aura", "heroes/arsen/modifier_arsen_tg_
 LinkLuaModifier( "modifier_arsen_tg_spear_aura", "heroes/arsen/modifier_arsen_tg_spear_aura", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_arsen_tg_projectile_aura", "heroes/arsen/modifier_arsen_tg_projectile_aura", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
 function arsen_tg:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
 function arsen_tg:Precache( context )
 	PrecacheResource( "particle", "particles/arsen_tg.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/tgk.vsndevts", context )
 end
---------------------------------------------------------------------------------
+
 function arsen_tg:OnSpellStart()
 	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	GridNav:DestroyTreesAroundPoint( point, self:GetSpecialValueFor("radius"), false )
 	CreateModifierThinker(
-		caster, -- player source
-		self, -- ability source
-		"modifier_arsen_tg_thinker", -- modifier name
-		{  }, -- kv
+		caster,
+		self,
+		"modifier_arsen_tg_thinker",
+		{  },
 		point,
 		caster:GetTeamNumber(),
 		false
 	)
 end
 
---------------------------------------------------------------------------------
 arsen_tg.projectiles = {}
 function arsen_tg:OnProjectileHitHandle( target, location, id )
 	local data = self.projectiles[id]

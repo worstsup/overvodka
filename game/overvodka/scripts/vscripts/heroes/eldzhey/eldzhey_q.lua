@@ -4,6 +4,7 @@ LinkLuaModifier( "modifier_eldzhey_q", "heroes/eldzhey/eldzhey_q", LUA_MODIFIER_
 function eldzhey_q:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_terrorblade/terrorblade_mirror_image.vpcf", context )
+	PrecacheResource( "particle", "particles/eldzhey_q_illusions.vpcf", context)
 	PrecacheResource( "soundfile", "soundevents/tima.vsndevts", context )
 end
 
@@ -28,7 +29,6 @@ function eldzhey_q:OnSpellStart()
 		true
 	)
 	local illusion = illusions[1]
-	local illusion_1 = illusions[2]
 	self:SetContextThink( DoUniqueString( "eldzhey_q" ),function()
 		illusion:AddNewModifier(
 			caster,
@@ -41,18 +41,21 @@ function eldzhey_q:OnSpellStart()
 		EmitSoundOn( sound_cast, illusion )
 
 	end, FrameTime()*2)
-	self:SetContextThink( DoUniqueString( "eldzhey_q" ),function()
-		illusion_1:AddNewModifier(
-			caster,
-			self,
-			"modifier_eldzhey_q",
-			{ duration = duration }
-		)
+	if num == 2 then
+		local illusion_1 = illusions[2]
+		self:SetContextThink( DoUniqueString( "eldzhey_q" ),function()
+			illusion_1:AddNewModifier(
+				caster,
+				self,
+				"modifier_eldzhey_q",
+				{ duration = duration }
+			)
 
-		local sound_cast = "tima"
-		EmitSoundOn( sound_cast, illusion )
+			local sound_cast = "tima"
+			EmitSoundOn( sound_cast, illusion )
 
-	end, FrameTime()*2)
+		end, FrameTime()*2)
+	end
 end
 
 local MODIFIER_PRIORITY_MONKAGIGA_EXTEME_HYPER_ULTRA_REINFORCED_V9 = 10001
@@ -97,7 +100,7 @@ function modifier_eldzhey_q:GetEffectAttachType()
 end
 
 function modifier_eldzhey_q:GetStatusEffectName()
-	return "particles/status_fx/status_effect_terrorblade_reflection.vpcf"
+	return "particles/eldzhey_q_illusions.vpcf"
 end
 
 function modifier_eldzhey_q:StatusEffectPriority()

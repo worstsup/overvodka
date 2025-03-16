@@ -7,6 +7,7 @@ function arsen_konchai:GetBehavior()
 	return behavior
 end
 
+
 function arsen_konchai:OnSpellStart()
 	caster = self:GetCaster()
 	target = self:GetCursorTarget()
@@ -22,15 +23,15 @@ function arsen_konchai:OnSpellStart()
 	}
 	local radius = self:GetSpecialValueFor("radius_scepter")
 	local enemies = FindUnitsInRadius(
-		self:GetCaster():GetTeamNumber(),	-- int, your team number
-		self:GetCaster():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetCaster():GetTeamNumber(),
+		self:GetCaster():GetOrigin(),
+		nil,
+		radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+		0,
+		false
 	)
 
 	for _,enemy in pairs(enemies) do
@@ -42,28 +43,16 @@ function arsen_konchai:OnSpellStart()
 end
 
 function arsen_konchai:OnProjectileHit( hTarget, vLocation )
-	-- cancel if got linken
 	if hTarget == nil or hTarget:IsInvulnerable() then
 		return
 	end
-
 	local stack_duration = self:GetSpecialValueFor("goo_duration")
-	--local buff_duration = self:GetSpecialValueFor("self_duration")
-	-- Add modifier
 	hTarget:AddNewModifier(
-		self:GetCaster(), -- player source
-		self, -- ability source
-		"modifier_arsen_konchai", -- modifier name
-		{ duration = stack_duration } -- kv
+		self:GetCaster(),
+		self,
+		"modifier_arsen_konchai",
+		{ duration = stack_duration }
 	)
-	--if hTarget:IsRealHero() then
-	--	caster:AddNewModifier(
-	--	caster, -- player source
-	--	self, -- ability source
-	--	"modifier_arsen_konchai_buff", -- modifier name
-	--	{ duration = buff_duration } -- kv
-	--)
-	--end
 	if self:GetCaster():HasScepter() then
 		self:GetCaster():PerformAttack(hTarget, true, true, true, true, true, false, true)
 	end

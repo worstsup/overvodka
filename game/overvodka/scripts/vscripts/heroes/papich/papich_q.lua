@@ -224,11 +224,6 @@ function modifier_papich_q:OnIntervalThink()
 						duration = self.silence_duration,
 					}
 				)
-			elseif GameRules:IsDaytime() and self.caster:HasScepter() then
-				target:Heal(damage, self.ability)
-				if target:IsHero() then
-					SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, target, damage, nil)
-				end
 			end
 			target:EmitSound("Hero_KeeperOfTheLight.Illuminate.Target")
 			target:EmitSound("Hero_KeeperOfTheLight.Illuminate.Target.Secondary")

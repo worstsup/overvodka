@@ -254,14 +254,10 @@ function modifier_bratishkin_e_primary_scepter:GetModifierModelChange()
 end
 
 function modifier_bratishkin_e_primary_scepter:CheckState()
-    return {   
-        [MODIFIER_STATE_INVULNERABLE]   = true,
-        [MODIFIER_STATE_UNSELECTABLE]   = true,
-        [MODIFIER_STATE_OUT_OF_GAME]    = true,
+    return {
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_DISARMED] = true,
-        [MODIFIER_STATE_MAGIC_IMMUNE] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
 end

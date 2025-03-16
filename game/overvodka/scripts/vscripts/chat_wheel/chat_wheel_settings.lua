@@ -192,39 +192,51 @@ CHAT_WHEEL_LIST = {
         ForAll = true,
         Sound = "UUI_SOUNDS.YaShas",
     },
+    [32] = {
+        Name = "marmok_intro",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.MarmokIntro",
+    },
+    [33] = {
+        Name = "linganguli",
+        Type = CHAT_WHEEL_TYPES.SOUND,
+        ForAll = true,
+        Sound = "UUI_SOUNDS.Linganguli",
+    },
     --Текстовые
 
-    [32] = {
+    [34] = {
         Name = "zxc",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [33] = {
+    [35] = {
         Name = "pathefic",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [34] = {
+    [36] = {
         Name = "silence",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [36] = {
+    [37] = {
         Name = "kto_ya",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [36] = {
+    [38] = {
         Name = "ne_vse_poimut",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [37] = {
+    [39] = {
         Name = "neveroyatno_horosh",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,
     },
-    [38] = {
+    [40] = {
         Name = "go_na_mid",
         Type = CHAT_WHEEL_TYPES.TEXT,
         ForAll = true,

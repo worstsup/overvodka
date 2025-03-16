@@ -50,7 +50,7 @@ function modifier_topor:OnIntervalThink()
 	local projectile_direction =  (self:GetParent():GetCursorPosition() + 5 - self:GetParent():GetAbsOrigin()):Normalized()
 	local arrow_projectile = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -72,7 +72,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = (xx * (2 ^ 0.5) / 2) + (yy * (2 ^ 0.5) / 2)
 	local arrow_projectile_1 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -92,7 +92,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = -(xx * (2 ^ 0.5) / 2) + (yy * (2 ^ 0.5) / 2)
 	local arrow_projectile_2 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -112,7 +112,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = (xx * (2 ^ 0.5) / 2) - (yy * (2 ^ 0.5) / 2)
 	local arrow_projectile_3 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -132,7 +132,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = -(xx * (2 ^ 0.5) / 2) - (yy * (2 ^ 0.5) / 2)
 	local arrow_projectile_4 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -152,7 +152,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = -yy
 	local arrow_projectile_5 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -172,7 +172,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = xx
 	local arrow_projectile_6 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -192,7 +192,7 @@ function modifier_topor:OnIntervalThink()
 	projectile_direction.y = -xx
 	local arrow_projectile_7 = {
 		Ability				= self,
-		EffectName			= "particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_ranged.vpcf",
+		EffectName			= "particles/pirat_r_axe.vpcf",
 		vSpawnOrigin		= self:GetParent():GetAbsOrigin(),
 		fDistance			= 600,
 		fStartRadius		= 115,
@@ -284,7 +284,7 @@ function modifier_topor:GetModifierModelScale()
 end
 
 function modifier_topor:GetModifierProjectileName()
-	return "particles/units/heroes/hero_troll_warlord/troll_warlord_base_attack.vpcf"
+	return "particles/pirat_r_attack.vpcf"
 end
 
 function modifier_topor:GetAttackSound()

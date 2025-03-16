@@ -455,4 +455,28 @@
         distance_max = "2500.0"
         event_type = "2.0"
     }
+    UUI_SOUNDS.MarmokIntro = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/marmok_intro.vsnd"
+        ]
+        volume = "3.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Linganguli = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/linganguli.vsnd"
+        ]
+        volume = "3.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
 }

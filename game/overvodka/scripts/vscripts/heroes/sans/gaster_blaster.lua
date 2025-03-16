@@ -8,7 +8,11 @@ function gaster_blaster:Precache(context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_start.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_shoot.vsndevts", context)
 end
-
+function gaster_blaster:OnAbilityUpgrade( hAbility )
+	if not IsServer() then return end
+	self.BaseClass.OnAbilityUpgrade( self, hAbility )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_nyx_vendetta_damage" )
+end
 function gaster_blaster:OnSpellStart()
     local caster = self:GetCaster()
     local target_point = self:GetCursorPosition()

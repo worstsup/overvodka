@@ -3,12 +3,17 @@ LinkLuaModifier( "modifier_cheater_granades", "heroes/cheater/modifier_cheater_g
 LinkLuaModifier( "modifier_cheater_slow", "heroes/cheater/modifier_cheater_slow", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_cheater_smoke", "heroes/cheater/modifier_cheater_smoke", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
+function cheater_granades:OnAbilityUpgrade( hAbility )
+	if not IsServer() then return end
+	self.BaseClass.OnAbilityUpgrade( self, hAbility )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_nyx_carapace_reflect_duration" )
+end
+
 function cheater_granades:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 Chance = 0
---------------------------------------------------------------------------------
+
 function cheater_granades:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
@@ -43,7 +48,7 @@ function cheater_granades:OnSpellStart()
 		self:PlayEffects4( point )
 	end
 end
---------------------------------------------------------------------------------
+
 function cheater_granades:OnProjectileHit( target, location )
 	if Chance == 0 then
 		local duration = self:GetSpecialValueFor( "duration" )
@@ -124,7 +129,6 @@ function cheater_granades:OnProjectileHit( target, location )
 
 end
 
-------------------------------------------------------------------------------
 function cheater_granades:PlayEffects( point )
 	local particle_cast = "particles/viper_immortal_ti8_nethertoxin_proj_new.vpcf"
 	local sound_cast = "molotov_throw"

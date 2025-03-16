@@ -3,18 +3,20 @@ LinkLuaModifier( "modifier_sasavot_q", "heroes/sasavot/modifier_sasavot_q", LUA_
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
---------------------------------------------------------------------------------
--- Custom KV
--- AOE Radius
 function sasavot_q:GetCastPoint()
 	return self:GetSpecialValueFor( "total_cast_time_tooltip" )
 end
+
 function sasavot_q:GetAOERadius()
  	return self:GetSpecialValueFor( "scepter_radius" )
 end
 
---------------------------------------------------------------------------------
--- Ability Phase Start
+function sasavot_q:OnAbilityUpgrade( hAbility )
+	if not IsServer() then return end
+	self.BaseClass.OnAbilityUpgrade( self, hAbility )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_bloodseeker_rupture_charges" )
+end
+
 function sasavot_q:OnAbilityPhaseInterrupted()
 	if self.modifier then
 		local modifier = self:RetATValue( self.modifier )
@@ -28,34 +30,22 @@ end
 function sasavot_q:OnAbilityPhaseStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
 	local debuff_duration = 4
-
 	local modifier = target:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_sasavot_q", -- modifier name
-		{ duration = debuff_duration } -- kv
+		caster,
+		self,
+		"modifier_sasavot_q",
+		{ duration = debuff_duration }
 	)
-
 	self.modifier = self:AddATValue( modifier )
-
-	-- play effects
 	local sound_cast = "Ability.AssassinateLoad"
 	EmitSoundOnClient( sound_cast, caster:GetPlayerOwner() )
-
-	return true -- if success
+	return true
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 function sasavot_q:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-	-- local point = self:GetCursorPosition()
-
-	-- load data
 	local projectile_name = "particles/clockwerk_2022_cc_rocket_flare_new.vpcf"
 	local projectile_speed = self:GetSpecialValueFor("projectile_speed")
 
@@ -66,14 +56,14 @@ function sasavot_q:OnSpellStart()
 		
 		EffectName = projectile_name,
 		iMoveSpeed = projectile_speed,
-		bDodgeable = true,                           -- Optional
+		bDodgeable = true,
 		ExtraData = { modifier = self.modifier }
 	}
 	ProjectileManager:CreateTrackingProjectile(info)
 	self.modifier = nil
 	local mod = caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
+		caster,
+		self,
 		"modifier_knockback",
 			{
 				center_x = target:GetAbsOrigin().x,
@@ -85,23 +75,19 @@ function sasavot_q:OnSpellStart()
 				knockback_height = 75,
 			}
 	)
-	-- effects
 	local sound_cast = "Ability.Assassinate"
 	EmitSoundOn( sound_cast, caster )
 	local sound_target = "Hero_Sniper.AssassinateProjectile"
 	EmitSoundOn( sound_cast, target )
 	EmitSoundOn( "sasavot_q_start", caster )
 end
---------------------------------------------------------------------------------
--- Projectile
+
 function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
-	-- cancel if gone
 	if (not target) or target:IsInvulnerable() or target:IsOutOfGame() or target:TriggerSpellAbsorb( self ) then
 		return
 	end
 	local radius = self:GetSpecialValueFor("scepter_radius")
 	local health_damage = self:GetSpecialValueFor("health_damage")
-	-- apply damage
 	local stun_duration = self:GetSpecialValueFor("stun_duration")
 	local damage = self:GetSpecialValueFor("damage")
 	local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
@@ -124,26 +110,20 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 			attacker = self:GetCaster(),
 			damage = dmg,
 			damage_type = DAMAGE_TYPE_MAGICAL,
-			ability = self, --Optional.
+			ability = self,
 		}
 		ApplyDamage(damageTable)
 	end
-
-	-- stun
 	target:Interrupt()
 	local modifier = self:RetATValue( extradata.modifier )
 	if not modifier:IsNull() then
 		modifier:Destroy()
 	end
-
-	-- effects
 	local sound_cast = "Hero_Sniper.AssassinateDamage"
 	EmitSoundOn( sound_cast, target )
 	EmitSoundOn( "sasavot_q", target )
 end
 
---------------------------------------------------------------------------------
--- Helper: Ability Table (AT)
 function sasavot_q:GetAT()
 	if self.abilityTable==nil then
 		self.abilityTable = {}
