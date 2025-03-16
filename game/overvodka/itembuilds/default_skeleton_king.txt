@@ -18,6 +18,7 @@
 			"item"		"item_balbe"
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
+			"item"		"item_ultimate_scepter"
 			"item"		"item_chapman_green"
 
 		}
@@ -25,7 +26,6 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_magic_aegis"
-			"item"		"item_ultimate_scepter"
 			"item"		"item_govno"
 			"item"		"item_magic_daedalus"
 			"item"		"item_suchiy"

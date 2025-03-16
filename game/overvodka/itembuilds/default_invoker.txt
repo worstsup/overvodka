@@ -18,6 +18,7 @@
 			"item"		"item_balbe"
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
+			"item"		"item_ultimate_scepter"
 			"item"		"item_chapman_green"
 
 		}
@@ -27,12 +28,10 @@
 			"item"		"item_magic_aegis"
 			"item"		"item_armlet_datadriven"
 			"item"		"item_magic_daedalus"
-			"item"		"item_ultimate_scepter"
 			"item"		"item_pasito"
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{
-			"item"		"item_aghanims_shard"
 			"item"		"item_nikes"
 			"item"		"item_drobe"
 			"item"		"item_waka"
@@ -43,7 +42,8 @@
 		{
 			"item"		"item_kaska"
 			"item"		"item_govno"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_aghanims_shard"
+			"item"		"item_elixir_collector"
 		}
 	}
 }

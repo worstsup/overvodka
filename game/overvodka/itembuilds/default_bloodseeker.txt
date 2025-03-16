@@ -30,20 +30,12 @@
 			"item"		"item_pasito"
 			"item"		"item_abyssal_blade"
 		}
-		"#DOTA_Item_Build_Mid_Items"
-		{
-			"item"		"item_magic_aegis"
-			"item"		"item_jordan"
-			"item"		"item_magic_daedalus"
-			"item"		"item_arcane_blink"
-			"item"		"item_yasha_and_kaya"
-			"item"		"item_pasito"
-		}
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_kaska"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_govno"
+			"item"		"item_armature_strike"
 		}
 	}
 }
