@@ -101,7 +101,6 @@ function modifier_papich_w_clone:DeclareFunctions()
 		{
 			MODIFIER_PROPERTY_MISS_PERCENTAGE
 		}
-		
 	return decFuns
 end
 
@@ -111,6 +110,7 @@ function modifier_papich_w_clone:OnCreated(params)
 	self:StartIntervalThink(1)
 end
 function modifier_papich_w_clone:OnIntervalThink()
+	if not IsServer() then return end
 	self.dmg = self:GetParent():GetHealth() * self.blood_damage * 0.01
 	ApplyDamage({ victim = self:GetParent(), attacker = self:GetCaster(), damage = self.dmg, damage_type = DAMAGE_TYPE_PURE })
 end

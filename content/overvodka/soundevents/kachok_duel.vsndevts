@@ -1,4 +1,4 @@
-"opasvo_1"
+"kachok_duel"
 {
   "operator_stacks"
   {
@@ -14,7 +14,7 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/opasvo_1.vsnd"
+               "value0"    "sounds/abilities/kachok_duel.vsnd"
             }
           }
           "volume"      {  "value"   "3.00000" }

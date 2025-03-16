@@ -7,7 +7,7 @@ function bigrussianboss_ultimate_start(keys)
 	local modifier_duel = "modifier_brb_test"
 	if target:TriggerSpellAbsorb(ability) then return end
 	if target:IsIllusion() == false then
-		caster:EmitSound("opasvo_1")
+		caster:EmitSound("kachok_duel")
 		caster.legion_commander_duel_datadriven_particle = ParticleManager:CreateParticle("particles/duel/legion_duel_ring_arcana.vpcf", PATTACH_ABSORIGIN, target)
 		local center_point = target_origin + ((caster_origin - target_origin) / 1)
 		ParticleManager:SetParticleControl(caster.legion_commander_duel_datadriven_particle, 0, center_point)  --The center position.
@@ -82,7 +82,7 @@ function modifier_test_on_destroy(keys)
 	local caster = keys.caster
 	local target = keys.target
 	
-	caster:StopSound("opasvo_1")
+	caster:StopSound("kachok_duel")
 	
 	if caster.legion_commander_duel_datadriven_particle ~= nil then
 		ParticleManager:DestroyParticle(caster.legion_commander_duel_datadriven_particle, false)

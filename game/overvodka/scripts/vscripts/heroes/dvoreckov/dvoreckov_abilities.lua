@@ -2063,7 +2063,7 @@ function dvoreckov_qwe:HandleExplosionEffects()
                 knockback_distance = 100,
                 knockback_height = 0
             }
-            if not unit:HasModifier("modifier_knockback") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:IsMagicImmune() then
+            if not unit:HasModifier("modifier_knockback") and not unit:IsMagicImmune() and not unit:IsDebuffImmune() then
                 unit:AddNewModifier(unit, nil, "modifier_knockback", knockbackProperties)
                 unit:AddNewModifier(self:GetCaster(), nil, "modifier_dvoreckov_qwe_debuff", { duration = 1 })
                 ParticleManager:CreateParticle("particles/units/heroes/hero_huskar/huskar_inner_fire.vpcf", PATTACH_CUSTOMORIGIN, nil)
@@ -2177,7 +2177,7 @@ function modifier_dvoreckov_qwe:OnIntervalThink()
 					knockback_distance = 200,
 					knockback_height = 200
 				}
-				if not enemy:HasModifier("modifier_knockback") and not enemy:HasModifier("modifier_black_king_bar_immune") and not enemy:IsMagicImmune() then
+				if not enemy:HasModifier("modifier_knockback") and not enemy:IsDebuffImmune() and not enemy:IsMagicImmune() then
 					enemy:AddNewModifier( enemy, nil, "modifier_knockback", knockbackProperties )
 				end
 			end

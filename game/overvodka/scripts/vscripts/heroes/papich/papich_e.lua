@@ -73,7 +73,6 @@ end
 
 function modifier_papich_e_passive:OnIntervalThink()
     if not IsServer() then return end
-    if self:GetParent():IsTempestDouble() then return end
     if not self:GetParent():IsAlive() then return end
     if not self.ability or not self.parent or self.parent:IsIllusion() then return end
     if not self.ability:IsCooldownReady() then
@@ -114,6 +113,9 @@ function modifier_papich_e_passive:OnIntervalThink()
         end
         if self.parent:HasModifier("modifier_serega_sven") then
             self.parent:RemoveModifierByName("modifier_serega_sven")
+        end
+        if self.parent:HasModifier("modifier_knockback") then
+            self.parent:RemoveModifierByName("modifier_knockback")
         end
         if self.parent:IsMoving() or self.parent:IsChanneling() or self.parent:IsAttacking() then
             self.parent:Stop()

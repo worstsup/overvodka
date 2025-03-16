@@ -1,4 +1,4 @@
-"opasvo"
+"trenbolone"
 {
   "operator_stacks"
   {
@@ -14,7 +14,7 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/opasvo.vsnd"
+               "value0"    "sounds/abilities/trenbolone.vsnd"
             }
           }
           "volume"      {  "value"   "3.00000" }

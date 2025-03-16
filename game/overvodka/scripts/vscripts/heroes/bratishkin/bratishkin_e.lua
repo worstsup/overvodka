@@ -221,6 +221,7 @@ function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS
     }
     return funcs
 end
@@ -259,7 +260,12 @@ function modifier_bratishkin_e_primary_scepter:CheckState()
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_DISARMED] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
+        [MODIFIER_STATE_ATTACK_IMMUNE] = true
     }
+end
+
+function modifier_bratishkin_e_primary_scepter:GetModifierMagicalResistanceBonus()
+    return 100
 end
 
 function modifier_bratishkin_e_primary_scepter:OnIntervalThink()

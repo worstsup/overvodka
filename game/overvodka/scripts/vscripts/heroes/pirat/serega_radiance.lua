@@ -95,7 +95,7 @@ function modifier_serega_radiance:OnIntervalThink()
 	end
 end
 function modifier_serega_radiance:GetModifierEvasion_Constant()
-	if self:GetParent():PassivesDisabled() then return 0
+	if self:GetParent():PassivesDisabled() then return 0 end
 	return self.miss
 end
 function modifier_serega_radiance:PlayEffects( target )

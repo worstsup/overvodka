@@ -15,6 +15,7 @@ function papich_q_clone:Precache(context)
 end
 
 function papich_q_clone:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	caster:AddNewModifier(
 		caster,
@@ -39,6 +40,7 @@ function modifier_papich_q_clone_blood:OnCreated(params)
 	self:StartIntervalThink(1)
 end
 function modifier_papich_q_clone_blood:OnIntervalThink()
+	if not IsServer() then return end
 	self.dmg = self:GetParent():GetHealth() * self.blood_damage * 0.01
 	ApplyDamage({ victim = self:GetParent(), attacker = self:GetCaster(), damage = self.dmg, damage_type = DAMAGE_TYPE_PURE })
 end

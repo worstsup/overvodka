@@ -1889,6 +1889,8 @@
 		"DOTA_Tooltip_ability_kachok_trenbolone_bonus_range" "ДОП. ДАЛЬНОСТЬ АТАКИ:"
 		"DOTA_Tooltip_ability_kachok_trenbolone_base_attack_time" "БАЗОВЫЙ ИНТЕРВАЛ АТАК:"
 		"DOTA_Tooltip_ability_kachok_trenbolone_bonus_as"	"ДОП. СКОРОСТЬ АТАКИ:"
+		"DOTA_Tooltip_modifier_kachok_trenbolone" "Вколол тренболон"
+		"DOTA_Tooltip_modifier_kachok_trenbolone_description" "Дальность и скорость атаки увеличена, базовый интервал атак снижен"
 		"DOTA_Tooltip_modifier_kachok_abstention" "Получено силы"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel_river"								"Король мида"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel_river_Description"					"Скорость передвижения, восстановление здоровья, урон от атак и броня увеличены."

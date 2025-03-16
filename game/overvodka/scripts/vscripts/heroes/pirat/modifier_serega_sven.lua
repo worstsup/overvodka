@@ -8,6 +8,7 @@ function modifier_serega_sven:IsHidden()
 end
 function modifier_serega_sven:OnCreated( kv )
 	if not IsServer() then return end
+	if self:GetParent():GetModelName() == "models/bratishkin/knight/base.vmdl" then self:Destroy() end
 end
 function modifier_serega_sven:OnRemoved()
 end

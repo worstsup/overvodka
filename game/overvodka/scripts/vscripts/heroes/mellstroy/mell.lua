@@ -19,7 +19,6 @@ function Meteor(keys)
 	tartar = {}
 	k = k + 1
 	local caster_loc = caster:GetAttachmentOrigin(DOTA_PROJECTILE_ATTACHMENT_ATTACK_1)
-	local cast_direction = caster:GetForwardVector()
 	local meteor_count = 1
 	local distince = 900
 	local eff = "particles/invoker_chaos_meteor_mell_1.vpcf"
@@ -35,7 +34,7 @@ function Meteor(keys)
 	if k == 5 then
 		eff = "particles/invoker_chaos_meteor_mell_5.vpcf"
 	end
-	local projectile_direction = (target - caster:GetAbsOrigin()):Normalized()
+	local projectile_direction = caster:GetForwardVector()
 	projectile_direction.z = 0
 	local arrow_projectile = {
 		Ability				= ability,

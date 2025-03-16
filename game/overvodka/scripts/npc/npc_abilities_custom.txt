@@ -461,12 +461,6 @@
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"80 125 170"
-		"precache"
-		{
-			"model"		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-			"particle"	"particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf"
-			"soundfile" "soundevents/opasvo.vsndevts"
-		}
 		"AbilityValues"
 		{
 			"base_attack_time"
@@ -502,7 +496,6 @@
 		{
 			"particle"				"particles/duel/legion_duel_ring_arcana.vpcf"
 			"particle"				"particles/units/heroes/hero_legion_commander/legion_commander_duel_victory.vpcf"
-			"soundfile"				"soundevents/opasvo_1.vsndevts"
 		}
 
 		"AbilityCastRange"				"175"
