@@ -10,6 +10,7 @@
 		"BanSound"		"pudge_pud_anger_01"
 		"IdleSoundLoop"		"Hero_Pudge.IdleLoop"
 		"HeroSelectSoundEffect"		"step_start"
+		"SimilarHeroes"  "7,53,62"
 		"Enabled"		"1"
 		"GibType"		"default"
 		"Ability1"		"kachok_pure_protein"
