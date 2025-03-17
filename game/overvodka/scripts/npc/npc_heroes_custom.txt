@@ -303,7 +303,7 @@
 		"HeroSelectSoundEffect"		"lev_start"
 		"SimilarHeroes"  "17,42,74"
 		"GibType"		"default"
-		"Ability1"		"lina_laguna_blade_datadriven"
+		"Ability1"		"lev_suiii"
 		"Ability2"		"Megumin_mana_aura"
 		"Ability3"		"nyx_assassin_spiked_carapace_datadriven"
 		"Ability4"		"ram_ElFura"
