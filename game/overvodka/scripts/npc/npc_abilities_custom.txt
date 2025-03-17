@@ -1296,7 +1296,7 @@
 		}
 	}
 	//=================================================================================================================
-	// Lina: Laguna Blade (Lua version)
+	// SUII АХАХ
 	//=================================================================================================================
 	"lev_suiii"
 	{
@@ -1319,7 +1319,6 @@
 			"particle"          "particles/econ/items/lina/lina_ti6/lina_ti6_laguna_blade.vpcf"
 		}
 		"AbilityCastRange"              "700"
-		"AOERadius"						"%radius"
 		"AbilityCastPoint"              "0.45 0.45 0.45 0.45"
 		"AbilityCooldown"               "24.0 22.0 20.0 18.0"
 		"AbilityManaCost"               "150 200 250 300"
