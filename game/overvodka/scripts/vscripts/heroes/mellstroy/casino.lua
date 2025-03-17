@@ -3,6 +3,7 @@ mellstroy_casino = class({})
 loses = 0
 
 function mellstroy_casino:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
     local hero_level = caster:GetLevel()
@@ -39,7 +40,7 @@ function mellstroy_casino:OnSpellStart()
             caster:ModifyAgility(1)
             caster:ModifyIntellect(1)
         end
-    elseif random_chance <= 60 or loses >= 5 then
+    elseif random_chance <= 60 or loses >= 3 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)

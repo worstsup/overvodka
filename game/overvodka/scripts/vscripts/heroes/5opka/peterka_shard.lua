@@ -1,6 +1,9 @@
 peterka_shard = class({})
+
 function peterka_shard:IsStealable() return false end
+
 function peterka_shard:OnSpellStart()
+    if not IsServer() then return end
     EmitGlobalSound("Item.PickUpGemWorld")
 	local newItem = CreateItem( "item_bag_of_gold_2", nil, nil )
     local newItem2 = CreateItem( "item_bag_of_gold_2", nil, nil )

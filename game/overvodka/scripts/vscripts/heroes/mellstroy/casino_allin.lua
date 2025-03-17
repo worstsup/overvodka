@@ -4,6 +4,7 @@ LinkLuaModifier( "modifier_mell_three", "heroes/mellstroy/modifier_mell_three", 
 mellstroy_casino_allin = class({})
 k = 0
 function mellstroy_casino_allin:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local player_id = caster:GetPlayerID()
     local hero_level = caster:GetLevel()

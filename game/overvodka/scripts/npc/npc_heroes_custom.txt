@@ -671,7 +671,7 @@
 		"VersusScale"		"0.70"
 		"LoadoutScale"		"0.70"
 		"SimilarHeroes"  "17,10,74"
-		"HeroSelectSoundEffect"		"mru_start"
+		"HeroSelectSoundEffect"		"overvodka_song"
 		"GibType"		"default"
 		"Ability1"		"worstsup_q"
 		"Ability2"		"worstsup_w"

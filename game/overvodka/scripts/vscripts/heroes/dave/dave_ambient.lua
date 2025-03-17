@@ -4,7 +4,6 @@ dave_ambient = class({})
 
 function dave_ambient:Precache(context)
     PrecacheResource( "soundfile", "soundevents/dave_ambient_1.vsndevts", context )
-	PrecacheResource( "soundfile", "soundevents/dave_ambient_2.vsndevts", context )
 end
 
 function dave_ambient:GetIntrinsicModifierName()
@@ -53,15 +52,6 @@ if IsServer() then
             return
         end
         local gameTime = GameRules:GetDOTATime(false, false)
-        if gameTime >= 600 and self.musicPlaying ~= "dave_ambient_2" then
-            StopSoundOn(self.musicPlaying, self:GetParent())
-            self.musicPlaying = "dave_ambient_2"
-            EmitSoundOn(self.musicPlaying, self:GetParent())
-        elseif gameTime < 600 and self.musicPlaying ~= "dave_ambient_1" then
-            StopSoundOn(self.musicPlaying, self:GetParent())
-            self.musicPlaying = "dave_ambient_1"
-            EmitSoundOn(self.musicPlaying, self:GetParent())
-        end
     end
 
     function modifier_dave_ambient:StopMusicLoop()

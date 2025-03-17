@@ -1,7 +1,5 @@
 modifier_axe_berserkers_call_lol_debuff = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_axe_berserkers_call_lol_debuff:IsHidden()
 	return false
 end
@@ -18,8 +16,6 @@ function modifier_axe_berserkers_call_lol_debuff:IsPurgable()
 	return false
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_axe_berserkers_call_lol_debuff:OnCreated( kv )
 	self.lose_strength = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("str_loss") * 0.01
 	self.as_loss = self:GetAbility():GetSpecialValueFor( "as_loss" )

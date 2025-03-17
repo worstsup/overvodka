@@ -3,6 +3,7 @@ LinkLuaModifier( "modifier_peterka_r_thinker", "heroes/5opka/peterka_r", LUA_MOD
 LinkLuaModifier( "modifier_peterka_r", "heroes/5opka/peterka_r", LUA_MODIFIER_MOTION_NONE )
 
 function peterka_r:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition() + Vector(10, 0, 0)
 	CreateModifierThinker(

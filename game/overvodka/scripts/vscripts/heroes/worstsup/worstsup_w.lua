@@ -12,7 +12,7 @@ end
 function worstsup_w:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-    
+    if not IsServer() then return end
     local projectile_info = {
         Target = target,
         Source = caster,
@@ -25,7 +25,6 @@ function worstsup_w:OnSpellStart()
         iVisionRadius = 200,
         iVisionTeamNumber = caster:GetTeamNumber()
     }
-    
     ProjectileManager:CreateTrackingProjectile(projectile_info)
 end
 

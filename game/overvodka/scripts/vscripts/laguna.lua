@@ -2,15 +2,15 @@ function Dmg (keys)
 	local ability = keys.ability
     local caster = keys.caster
     local target = keys.target
+    if target:TriggerSpellAbsorb(ability) then return end
     local demeg = ability:GetSpecialValueFor("damage")
     local istrtr = ability:GetSpecialValueFor("istrtr")
     local target_location = target:GetAbsOrigin()
     local target_teams = ability:GetAbilityTargetTeam()
     local target_types = ability:GetAbilityTargetType()
     local target_flags = ability:GetAbilityTargetFlags()
-    local maxmana = caster:GetMaxMana() * 0.9
+    local maxmana = caster:GetMaxMana()
     local nowmana = caster:GetMana()
-    if target:TriggerSpellAbsorb(ability) then return end
     if caster:HasModifier("modifier_otec_start") then
         EmitGlobalSound("Ability.LagunaBlade")
     else

@@ -8,6 +8,7 @@ function ebanko_w:GetIntrinsicModifierName()
 end
 
 function ebanko_w:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 	if target:TriggerSpellAbsorb( self ) then

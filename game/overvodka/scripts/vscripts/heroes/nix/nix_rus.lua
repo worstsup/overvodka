@@ -10,6 +10,7 @@ function nix_rus:Precache(context)
 end
 
 function nix_rus:OnSpellStart()
+	if not IsServer() then return end
 	EmitSoundOn( "nix_rus", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_nix_rus", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
