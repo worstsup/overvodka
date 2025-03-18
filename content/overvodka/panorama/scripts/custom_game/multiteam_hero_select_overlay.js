@@ -83,7 +83,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
 			"npc_dota_hero_morphling": "file://{images}/heroes/npc_dota_hero_sans.png",
 			"npc_dota_hero_faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png",
-			"npc_dota_hero_slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png"
+			"npc_dota_hero_slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png",
+			"npc_dota_hero_weaver": "file://{images}/heroes/npc_dota_hero_azazin.png"
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -129,7 +130,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"necrolyte": "file://{images}/heroes/npc_dota_hero_5opka.png",
 			"morphling": "file://{images}/heroes/npc_dota_hero_sans.png",
 			"faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png",
-			"slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png"
+			"slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png",
+			"weaver": "file://{images}/heroes/npc_dota_hero_azazin.png"
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
