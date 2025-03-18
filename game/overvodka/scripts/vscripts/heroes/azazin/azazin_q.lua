@@ -1,10 +1,14 @@
 LinkLuaModifier("modifier_azazin_q_pull", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL)
 
 azazin_q = class({})
-
+k = 0
 function azazin_q:Precache(context)
     PrecacheResource("particle", "particles/azazin_q.vpcf", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_hero_pudge.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/azazin_q_1.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/azazin_q_2.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/azazin_q_3.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/azazin_q.vsndevts", context)
 	PrecacheResource("model", "models/props_tree/ti7/ggbranch.vmdl", context)
 end
 
@@ -37,9 +41,18 @@ function azazin_q:OnSpellStart()
         bDodgeable = true,
         bProvidesVision = false,
     }
-
     ProjectileManager:CreateTrackingProjectile(info)
-    caster:EmitSound("Hero_Pudge.AttackHookRetract")
+	caster:EmitSound("azazin_q")
+	if k == 0 then
+		EmitSoundOnLocationWithCaster(caster:GetAbsOrigin(),"azazin_q_1", caster)
+		k = 1
+	elseif k == 1 then
+		EmitSoundOnLocationWithCaster(caster:GetAbsOrigin(),"azazin_q_2", caster)
+		k = 2
+	elseif k == 2 then
+		EmitSoundOnLocationWithCaster(caster:GetAbsOrigin(),"azazin_q_3", caster)
+		k = 0
+	end
 end
 
 function azazin_q:OnProjectileHit(target, location)
@@ -54,7 +67,7 @@ function azazin_q:OnProjectileHit(target, location)
     local effective_distance = math.min(current_distance, max_pull)
     local pull_distance = effective_distance - min_pull
     if pull_distance <= 0 then 
-        return
+        pull_distance = -pull_distance
     end
     if target:IsMagicImmune() or target:IsDebuffImmune() then
         local direction = (target:GetAbsOrigin() - caster:GetAbsOrigin()):Normalized()
@@ -138,6 +151,7 @@ end
 function modifier_azazin_q_pull:OnDestroy()
     if not IsServer() then return end
     self:GetParent():RemoveHorizontalMotionController(self)
+	self:GetCaster():StopSound("azazin_q")
     local parent = self:GetParent()
     if self.other_ent and not self.other_ent:IsNull() then
         local new_forward = (self.other_ent:GetAbsOrigin() - parent:GetAbsOrigin()):Normalized()

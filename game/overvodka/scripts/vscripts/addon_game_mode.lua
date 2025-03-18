@@ -346,6 +346,7 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/kachok_duel.vsndevts", context ) -- dont delete
 		PrecacheResource( "soundfile", "soundevents/trenbolone.vsndevts", context) -- dont delete
 		PrecacheResource( "soundfile", "soundevents/sharik.vsndevts", context )
+		PrecacheResource("soundfile", "soundevents/azazin_q_1.vsndevts", context)
 		PrecacheResource( "soundfile", "soundevents/zolo_tabletki.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/scar.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/scout.vsndevts", context )
