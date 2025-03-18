@@ -1334,6 +1334,10 @@
 					"value"	"0"
 					"special_bonus_unique_lion_2" "+350"
 				}
+				"pctmana"
+				{
+					"value" "15"
+				}
 				"facet_dmg"
 				{
 					"value"	"0"
@@ -1343,10 +1347,6 @@
 				"facet_pct"
 				{
 					"value" "90"
-				}
-				"pctmana"
-				{
-					"value" "15"
 				}
 		}
 	}
@@ -12598,6 +12598,30 @@
 		{
 			"bonus_dmg_pct"         "6"
 			"attacks_needed"		"15"
+		}
+	}
+	"azazin_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/azazin/azazin_q"
+		"AbilityTextureName"			"sans_shard"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"25.0"
+		"AbilityManaCost"				"100"
+		"AbilityValues"
+		{
+				"cast_range"	"700 800 900 1000"
+				"min_pull"		"100"
+				"max_pull"		"800"
+				"radius"		"450"
+				"ring_duration"	"3 4 5 6"
 		}
 	}
 }
