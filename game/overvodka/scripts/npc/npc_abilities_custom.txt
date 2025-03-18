@@ -1436,10 +1436,11 @@
 	}
 	"lev_freak"
 	{
-		"BaseClass"             "ability_lua"
+		"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/lev/lev_freak"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"FightRecapLevel"               "1"
 		"AbilityTextureName"            "fri"
 		"AbilityCooldown"               "17 16 15 14"
