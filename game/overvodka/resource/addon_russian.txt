@@ -239,6 +239,7 @@
 		"DOTA_Tooltip_ability_azazin_q_cast_range" "ДАЛЬНОСТЬ ПРИМЕНЕНИЯ:"
 		"DOTA_Tooltip_ability_azazin_q_radius" "РАДИУС ДЕРЕВЬЕВ:"
 		"DOTA_Tooltip_ability_azazin_q_ring_duration" "ДЛИТЕЛЬНОСТЬ ДЕРЕВЬЕВ:"
+		"DOTA_Tooltip_ability_azazin_e" "ПЫЛАЮЩИЕ ПЕРДАКИ"
 		
 
 		"DOTA_Tooltip_ability_bratishkin_q_knight" "ПРАВЕДНАЯ ФОРМА"

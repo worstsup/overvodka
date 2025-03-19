@@ -12560,7 +12560,58 @@
 				"min_pull"		"100"
 				"max_pull"		"800"
 				"radius"		"450"
-				"ring_duration"	"3 4 5 6"
+				"ring_duration"	"2.5 3.0 3.5 4.0"
+		}
+	}
+	"azazin_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/azazin/azazin_r"
+		"AbilityTextureName"			"azazin_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCooldown"				"1.5"
+		"AbilityManaCost"				"30 60 90"
+		"AbilityValues"
+		{
+			"mana_cost_per_second"		"15 30 45"
+			"radius"					"450"
+			"damage"					"20 40 60"
+			"movespeed_slow"			"-15 -20 -25"
+			"attack_speed_slow"			"-30 -60 -90"
+			"gold_per_second"			"10 20 30"
+		}
+	}
+	"azazin_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/azazin/azazin_e"
+	  	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	  	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	  	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"IsBreakable"					"1"
+	   	"AbilityTextureName" 			"otchim"
+		"AbilityValues"
+		{
+			"required_hits"		
+			{
+				"value"			"5"
+			}
+			"counter_duration"	"5"
+			"stun_duration"		"0.4"
+			"effect_duration"	"5"
+			"tick_damage"		"15 30 45 60"
+			"armor_reduction"	"-2 -4 -6 -8"
+			"bonus_damage"		"30 60 90 120"
+			"lifesteal"		
+			{
+				"value"			"40 50 60"
+			}
 		}
 	}
 }
