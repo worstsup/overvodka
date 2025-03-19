@@ -1,13 +1,13 @@
 function Damage(event)
 	local caster = event.caster
 	local ability = event.ability
-	local damage = ability:GetSpecialValueFor("damage") * ability:GetSpecialValueFor("spinner_damage_tick")
-	local dmg_scepter = ability:GetSpecialValueFor("dmg_scepter") * caster:GetStrength() * 0.01 * ability:GetSpecialValueFor("spinner_damage_tick")
+	local damage = ability:GetSpecialValueFor("damage") * ability:GetSpecialValueFor("damage_tick")
+	local dmg_scepter = ability:GetSpecialValueFor("dmg_scepter") * caster:GetStrength() * 0.01 * ability:GetSpecialValueFor("damage_tick")
 	local dmg = damage + dmg_scepter
 	local targets = FindUnitsInRadius(caster:GetTeamNumber(),
 		caster:GetAbsOrigin(),
 		nil,
-		ability:GetSpecialValueFor("spinner_radius"),
+		ability:GetSpecialValueFor("radius"),
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
 		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
@@ -24,11 +24,11 @@ function BladeFuryStop( event )
 	caster:StopSound("gennadiy")
 end
 
-function AzazinModifier (keys)
+function GolmiyModifier (keys)
 	local caster = keys.caster
 	local ability = keys.ability
 	local target = keys.target
 	local duration = ability:GetLevelSpecialValueFor("duration", (ability:GetLevel() - 1))
 	
-	ability:ApplyDataDrivenModifier( caster, caster, "modifier_spinner", { Duration = duration })
+	ability:ApplyDataDrivenModifier( caster, caster, "modifier_golmiy_gennadiy", { Duration = duration })
 end

@@ -156,8 +156,10 @@ function modifier_azazin_q_pull:OnDestroy()
     local parent = self:GetParent()
     if self.other_ent and not self.other_ent:IsNull() then
         local new_forward = (self.other_ent:GetAbsOrigin() - parent:GetAbsOrigin()):Normalized()
-        parent:SetForwardVector(new_forward)
-		parent:MoveToTargetToAttack(self.other_ent)
+        if parent:IsRealHero() then
+            parent:SetForwardVector(new_forward)
+		    parent:MoveToTargetToAttack(self.other_ent)
+        end
         local midpoint = (parent:GetAbsOrigin() + self.other_ent:GetAbsOrigin()) * 0.5
         self:SpawnTreeRing(midpoint)
         if self:GetAbility():GetSpecialValueFor("wark_through_trees") == 1 then
