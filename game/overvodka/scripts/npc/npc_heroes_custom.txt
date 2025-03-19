@@ -436,7 +436,7 @@
 		"HeroSelectSoundEffect"		"artem_start"
 		"SimilarHeroes"  "2,36,51"
 		"Ability1"		"megumin_meteors"
-		"Ability2"		"acid_spray_datadriven"
+		"Ability2"		"golmiy_blev"
 		"Ability3"		"chislo"
 		"Ability4"		"track_datadriven"
 		"Ability5"		"venomancer_poison_sting_datadriven"

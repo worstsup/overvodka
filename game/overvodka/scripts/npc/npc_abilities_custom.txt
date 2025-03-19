@@ -2768,18 +2768,33 @@
 				}
 		}
     }
-	"acid_spray_datadriven"
+	//=================================================================================================================
+	// БЛЕВАЛИЙ
+	//=================================================================================================================
+	"golmiy_blev"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/golmiy/golmiy_blev"
+		"AbilityTextureName"			"alchemist_acid_spray_lua"
+		"AbilityTextureName"			"bleval"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"precache"
+		{	
+			"soundfile"	"soundevents/blue.vsndevts"
+			"particle"	"particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
+			"particle"	"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
+		}
+
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityTextureName"			"bleval"
-		"AOERadius"						"%radius"
 		"AbilityCastPoint"				"0.2"
 		"AbilityCastRange"				"900"
 		"AbilityCooldown"				"23.0"
 		"AbilityHealthCost"				"75 130 185 240"
+
 		"AbilityValues"
 		{
 				"radius"
@@ -2801,82 +2816,6 @@
 					"value"	"0"
 					"special_bonus_facet_brewmaster_drunken_master"	"-15"
 				}
-		}
-	
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_alchemist.vsndevts"
-			"particle"  "particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-		}
-	
-		"OnSpellStart"
-		{
-		 	"CreateThinker"
-		 	{
-		 		"ModifierName"	"modifier_acid_spray_thinker"
-		 		"Target" 		"POINT"
-		 	}
-		} 
-	
-		"Modifiers"
-		{
-			"modifier_acid_spray_thinker"
-			{
-				"Aura"					"modifier_acid_spray"
-				"Aura_Radius"			"%radius"
-				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
-				"Aura_Flags"			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-				"Duration"				"%duration"
-	
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"acid_spray.lua"
-						"Function"		"AcidSpraySound"
-					}
-	
-					"AttachEffect"
-					{
-						"EffectName"		"particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"			"TARGET"
-						"ControlPoints"
-						{
-							"00" "0 0 0"
-							"01" "%radius 1 1"
-							"15" "25 150 25"
-							"16" "0 0 0"
-						}
-					}
-				}
-			}
-	
-			"modifier_acid_spray"
-			{
-				"IsDebuff"		"1"
-				"ThinkInterval"	"%tick_rate"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magic_reduction"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
-				}
-				"OnIntervalThink"
-				{
-					"FireSound"
-					{
-						"EffectName" 	"Hero_Alchemist.AcidSpray.Damage"
-						"Target"		"TARGET"
-					}
-					"Damage"
-					{
-						"Target"		 "TARGET"
-						"Type"			 "DAMAGE_TYPE_MAGICAL"
-						"Damage"		 "%damage"
-					}
-				}
-			}
 		}
 	}
 	"brewmaster_belligerent"
