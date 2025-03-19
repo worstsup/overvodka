@@ -234,13 +234,30 @@
 		"npc_dota_hero_slark_npedesc1"				"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
+
 		"DOTA_Tooltip_ability_azazin_q" "СОБЕСЕДОВАНИЕ"
 		"DOTA_Tooltip_ability_azazin_q_Description" "Азазин протягивает руку к выбранному противнику, которая тянет героя и цель друг к другу, и закрывает его с собой на собеседование, создавая круг из деревьев, преграждающих путь и скрывающих героев от врагов снаружи."
 		"DOTA_Tooltip_ability_azazin_q_cast_range" "ДАЛЬНОСТЬ ПРИМЕНЕНИЯ:"
 		"DOTA_Tooltip_ability_azazin_q_radius" "РАДИУС ДЕРЕВЬЕВ:"
 		"DOTA_Tooltip_ability_azazin_q_ring_duration" "ДЛИТЕЛЬНОСТЬ ДЕРЕВЬЕВ:"
 		"DOTA_Tooltip_ability_azazin_e" "ПЫЛАЮЩИЕ ПЕРДАКИ"
-		
+		"DOTA_Tooltip_ability_azazin_e_Description" "С каждой атакой, Азазин всё сильнее и сильнее поджигает жопу врага, и на %required_hits%-ю атаку по врагу его очко окончательно взрывается, герой получает оглушение и начинает гореть, получая периодический урон на протяжении %effect_duration% сек.\nСчётчик атак на вражеском герое длится %counter_duration% сек."
+		"DOTA_Tooltip_ability_azazin_e_counter_duration" "ДЛИТЕЛЬНОСТЬ СЧЕТЧИКА:"
+		"DOTA_Tooltip_ability_azazin_e_stun_duration" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
+		"DOTA_Tooltip_ability_azazin_e_effect_duration" "ДЛИТЕЛЬНОСТЬ ГОРЕНИЯ:"
+		"DOTA_Tooltip_ability_azazin_e_tick_damage" "УРОН В СЕКУНДУ:"
+		"DOTA_Tooltip_ability_azazin_e_armor_reduction" "СНИЖЕНИЕ БРОНИ:"
+		"DOTA_Tooltip_ability_azazin_e_bonus_damage" "ДОП. УРОН:"
+		"DOTA_Tooltip_ability_azazin_e_lifesteal" "%ВАМПИРИЗМ:"
+		"DOTA_Tooltip_ability_azazin_r" "ВОЙСЧЕНДЖЕР"
+		"DOTA_Tooltip_ability_azazin_r_Description" "Азазин меняет свой облик, перевоплощаясь в прекрасную девушку, находясь рядом с которой враги не могут устоять и начинают отдавать ей свои деньги, теряя свою скорость атаки и передвижения. Находясь в облике женщины, Азазин расходует %mana_cost_per_second% маны в секунду."
+		"DOTA_Tooltip_ability_azazin_r_mana_cost_per_second" "МАНА В СЕКУНДУ:"
+		"DOTA_Tooltip_ability_azazin_r_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_azazin_r_damage" "УРОН:"
+		"DOTA_Tooltip_ability_azazin_r_movespeed_slow" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_azazin_r_attack_speed_slow" "ЗАМЕДЛЕНИЕ АТАКИ:"
+		"DOTA_Tooltip_ability_azazin_r_gold_per_second" "ЗОЛОТО В СЕКУНДУ:"
+
 
 		"DOTA_Tooltip_ability_bratishkin_q_knight" "ПРАВЕДНАЯ ФОРМА"
 		"DOTA_Tooltip_ability_bratishkin_q_knight_description" "Братишкин обретает форму рыцаря, меняя основной атрибут на силу, получая бонус к урону, броне и дальности атаки, при этом замедляя своё передвижение и скорость атаки.\nНаходясь в обычной форме, Вован имеет шанс %minibash_chance%%% при атаке наложить на врага оцепенение.\nПереключение формы расходует %base_manacost% + %manacost_from_current_mana%%% от текущей маны героя."
