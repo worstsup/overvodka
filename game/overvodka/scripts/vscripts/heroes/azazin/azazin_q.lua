@@ -1,5 +1,6 @@
 LinkLuaModifier("modifier_azazin_q_pull", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL)
-
+LinkLuaModifier("modifier_azazin_q_tree_walk_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_azazin_q_tree_walk", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
 azazin_q = class({})
 k = 0
 function azazin_q:Precache(context)
@@ -25,7 +26,7 @@ function azazin_q:OnSpellStart()
 
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-
+    if target:TriggerSpellAbsorb(self) then return end
     if not target or target:IsInvulnerable() then
         return
     end
@@ -159,6 +160,9 @@ function modifier_azazin_q_pull:OnDestroy()
 		parent:MoveToTargetToAttack(self.other_ent)
         local midpoint = (parent:GetAbsOrigin() + self.other_ent:GetAbsOrigin()) * 0.5
         self:SpawnTreeRing(midpoint)
+        if self:GetAbility():GetSpecialValueFor("wark_through_trees") == 1 then
+            CreateModifierThinker(self:GetCaster(), self:GetAbility(), "modifier_azazin_q_tree_walk_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self:GetCaster():GetTeamNumber(), false)
+        end
     end
 end
 
@@ -184,3 +188,22 @@ function modifier_azazin_q_pull:CheckState()
     }
 end
 
+modifier_azazin_q_tree_walk_aura = class({})
+function modifier_azazin_q_tree_walk_aura:IsHidden() return true end
+function modifier_azazin_q_tree_walk_aura:IsPurgable() return false end
+function modifier_azazin_q_tree_walk_aura:IsAura() return true end
+function modifier_azazin_q_tree_walk_aura:GetModifierAura() return "modifier_azazin_q_tree_walk" end
+function modifier_azazin_q_tree_walk_aura:GetAuraDuration() return 0.1 end
+function modifier_azazin_q_tree_walk_aura:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") + 100 end
+function modifier_azazin_q_tree_walk_aura:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
+function modifier_azazin_q_tree_walk_aura:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO end
+function modifier_azazin_q_tree_walk_aura:GetAuraSearchFlags() return 0 end
+
+modifier_azazin_q_tree_walk = class({})
+function modifier_azazin_q_tree_walk:IsHidden() return true end
+function modifier_azazin_q_tree_walk:IsPurgable() return false end
+function modifier_azazin_q_tree_walk:CheckState()
+    return {
+        [MODIFIER_STATE_ALLOW_PATHING_THROUGH_TREES] = self:GetCaster() == self:GetParent(),
+    }
+end

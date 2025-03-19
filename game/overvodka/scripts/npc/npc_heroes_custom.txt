@@ -2337,7 +2337,7 @@
 		"GibType"		"goo"
 		"GibTintColor"	"98 124 97 255"
 		"Ability1"		"azazin_q"
-		"Ability2"		"weaver_shukuchi"
+		"Ability2"		"generic_hidden"
 		"Ability3"		"azazin_e"
 		"Ability4"		"generic_hidden"
 		"Ability5"		"generic_hidden"
