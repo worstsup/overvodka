@@ -1,11 +1,8 @@
---------------------------------------------------------------------------------
 mellstroy_shavel = class({})
 LinkLuaModifier( "modifier_mellstroy_shavel", "heroes/mellstroy/modifier_mellstroy_shavel", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mellstroy_shavel_debuff", "heroes/mellstroy/modifier_mellstroy_shavel_debuff", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
---------------------------------------------------------------------------------
--- Init Abilities
 function mellstroy_shavel:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", context )
@@ -37,23 +34,20 @@ function mellstroy_shavel:OnSpellStart()
 	if target:HasModifier("modifier_generic_knockback_lua") then
 		target:RemoveModifierByName("modifier_generic_knockback_lua")
 	end
-	-- add modifier
 	local mod = target:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_mellstroy_shavel_debuff", -- modifier name
-		{ duration = duration } -- kv
+		caster,
+		self,
+		"modifier_mellstroy_shavel_debuff",
+		{ duration = duration }
 	)
 	self.modifiers[mod] = true
 
 	caster:AddNewModifier(
-		caster, -- player source
-		self, -- ability source
-		"modifier_mellstroy_shavel", -- modifier name
-		{ duration = duration } -- kv
+		caster,
+		self,
+		"modifier_mellstroy_shavel",
+		{ duration = duration }
 	)
-
-	-- play effects
 	if target:IsCreep() then
 		EmitSoundOn( "shavel", caster )
 	else
@@ -61,8 +55,6 @@ function mellstroy_shavel:OnSpellStart()
 	end
 end
 
---------------------------------------------------------------------------------
--- Ability Channeling
 function mellstroy_shavel:GetChannelTime()
 	return self:GetSpecialValueFor( "channel_time" )
 end

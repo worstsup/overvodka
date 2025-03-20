@@ -2774,14 +2774,14 @@
 	{
 		"BaseClass"						"item_lua"
 		"ScriptFile"					"item_byebye_boots"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"Model"							"models/props_gameplay/red_box.vmdl"
 		"AbilityTextureName"			"byebye_boots"
-		"FightRecapLevel"				"1"
-		"AbilityCastRange"				"0"
-		"AbilityCastPoint"				"3.0"
-		"AbilityCooldown"				"30"
-		"AbilityManaCost"				"0"
+		"AbilityCastPoint"				"0.0"
+		"AbilityChannelTime"			"3.0"
+		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"75"
 		"ItemCost"						"3250"
 		"AbilitySharedCooldown" 		"byebye"
 		"AbilityValues"
@@ -2791,80 +2791,23 @@
 	}
 	"item_byebye"
 	{
-		"BaseClass"						"item_datadriven"
-		"ID"							"1001"  //Valve's version of this item uses the ID "1".
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"item_byebye"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"Model"							"models/props_gameplay/red_box.vmdl"
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"byebye"
-		"FightRecapLevel"				"1"
-		"AbilityCastRange"				"0"
-		"AbilityCastPoint"				"3.0"
-		"AbilityCooldown"				"40.0"
+		"AbilityCastPoint"				"0.0"
+		"AbilityChannelTime"			"3.0"
+		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCooldown"				"50"
 		"AbilityManaCost"				"0"
 		"ItemStackable"					"1"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
 		"ItemDisplayCharges"			"1"
 		"ItemCost"						"250"
 		"AbilitySharedCooldown" 		"byebye"
-		"SideShop"						"1"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"AbilityValues"
-		{
-				"max_blink_range"				"12000"
-		}
-		"OnAbilityPhaseStart"
-		{
-			"FireSound"
-			{
-				"Target"            "CASTER"
-				"EffectName"        "byebye_start"
-			}
-			"FireEffect"
-			{
-				"EffectName"	"particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf"
-				"EffectAttachType"	"follow_origin"
-				"Target"		"CASTER"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_lol_slow"
-				"Target" 		"CASTER"
-				"Duration"		"3"
-			}
-		}
-		"OnAbilityPhaseInterrupted"
-		{
-			"RemoveModifier"
-			{
-				"ModifierName"	"modifier_lol_slow"
-				"Target" 		"CASTER"
-			}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"item_blink.lua"
-				"Function"				"item_blink_datadriven_on_spell_start"
-				"MaxBlinkRange"			"%max_blink_range"
-			}
-			"SpendCharge"
-			{}
-		}
-		"Modifiers"
-		{
-			"modifier_lol_slow"
-			{
-				"Passive"               "0"
-				"IsHidden"              "1"
-				"IsBuff"                "0"
-				"IsDebuff"              "0"
-				"IsPurgable"            "0"
-			}
-		}
 	}
 	"item_recipe_cuirass_2"
 	{

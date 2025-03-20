@@ -2314,10 +2314,10 @@
 		"DOTA_Tooltip_ability_item_armlet_active_datadriven_dmg" "+$damage"
 
 		"DOTA_Tooltip_Ability_item_byebye_boots" "BYE-BYE BOOTS"
-		"DOTA_Tooltip_Ability_item_byebye_boots_Description" "<h1>Использование: Bye-Bye!</h1>После задержки в <font color='#FFFFFF'>3</font> секунды телепортирует владельца на фонтан."
+		"DOTA_Tooltip_Ability_item_byebye_boots_Description" "<h1>Использование: Bye-Bye!</h1>ПРЕРЫВАЕМАЯ — После задержки в <font color='#FFFFFF'>3</font> секунды телепортирует владельца в выбранную точку карты."
 		"DOTA_Tooltip_Ability_item_byebye_boots_bonus_movement_speed"	"+$move_speed"
 		"DOTA_Tooltip_Ability_item_byebye" "BYE-BYE"
-		"DOTA_Tooltip_Ability_item_byebye_Description" "<h1>Использование: Bye-Bye!</h1>После задержки в <font color='#FFFFFF'>3</font> секунды телепортирует владельца на фонтан."
+		"DOTA_Tooltip_Ability_item_byebye_Description" "<h1>Использование: Bye-Bye!</h1>ПРЕРЫВАЕМАЯ — После задержки в <font color='#FFFFFF'>3</font> секунды телепортирует владельца на фонтан."
 
 		"DOTA_Tooltip_ability_item_elixir_collector" "СБОРЩИК ЭЛИКСИРА"
 		"DOTA_Tooltip_ability_item_elixir_collector_Description"		"<h1>Активное: Поставить</h1>Ставит сборщик эликсира в указанную точку, который выкачивает %mana_tooltip%%% от макс. маны в секунду у всех вражеских героев в радиусе %radius%. Под эффектом сборщика вампиризм заклинаниями от этого предмета в %lifesteal_multiplier% раза. Длительность: %duration% сек."
