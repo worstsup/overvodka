@@ -898,7 +898,7 @@
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
-		"ItemStockMax"					"1"
+		"ItemStockMax"					"2"
 		"ItemStockInitial"				"1"
 		"ItemStockTime"					"135.0"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES"
@@ -909,9 +909,9 @@
 		"AbilityValues"
 		{
 			"lifetime"				"360"
-			"vision_range_tooltip"	"1600"
+			"vision_range_tooltip"	"1300"
 			"health"				"200"
-			"duration_minutes_tooltip"				"6"
+			"duration_minutes_tooltip"				"5"
 		}
 	}
 	
@@ -937,7 +937,7 @@
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
-		"ItemStockMax"					"8"
+		"ItemStockMax"					"4"
 		"ItemStockInitial"				"3"
 		"ItemStockTime"					"80"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES"
@@ -951,7 +951,7 @@
 			"vision_range"							"0"
 			"true_sight_range"						"1000"
 			"health"								"200"
-			"duration_minutes_tooltip"				"7"
+			"duration_minutes_tooltip"				"6"
 		}
 	}
 	"item_manta_datadriven"
@@ -985,7 +985,7 @@
 				"illusion_incoming_damage_total_tooltip"            "200.0"
 				"duration"                                     		"14.0"
 				"bonus_movement_speed"                              "15"
-				"stun_dur"							"0.4"
+				"stun_dur"							"1.0"
 				"invis_damage"						"175"
 		}
 		
@@ -1277,7 +1277,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_damage"			"75"
+				"bonus_damage"			"80"
 				"corruption_armor"		"-10"
 				"corruption_duration"	"7.0"
 				"bonus_damage_per_kill"	"4"
@@ -2062,8 +2062,8 @@
 		"AbilityValues"
 		{
 				"phase_duration"            "4.0"
-				"phase_movement_speed"      "25"
-				"bonus_movement_speed"      "60"
+				"phase_movement_speed"      "20"
+				"bonus_movement_speed"      "55"
 				"bonus_damage"              "40"
 				"bonus_all_stats"       "25"
 				"bonus_as"				"25"

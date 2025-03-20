@@ -5983,14 +5983,6 @@
 		    {
 		    	"IsBuff" "1"
 		    	"IsHidden" "1"
-		    	"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "100"
-				}
-				"States"
-		        {
-		            "MODIFIER_STATE_SILENCED"   "MODIFIER_STATE_VALUE_ENABLED"
-		        }
 		    	"OnCreated"
             	{
 		    	}
