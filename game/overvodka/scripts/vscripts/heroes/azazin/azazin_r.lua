@@ -50,25 +50,13 @@ end
 function modifier_azazin_r:IsPurgable()
 	return false
 end
-function modifier_azazin_r:IsAura()
-    return true
-end
 
-function modifier_azazin_r:GetAuraRadius()
-    return self:GetAbility():GetSpecialValueFor("radius")
-end
+function modifier_azazin_r:IsAura() return true end
+function modifier_azazin_r:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") end
+function modifier_azazin_r:GetModifierAura() return "modifier_azazin_r_debuff" end
+function modifier_azazin_r:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_azazin_r:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
 
-function modifier_azazin_r:GetModifierAura()
-    return "modifier_azazin_r_debuff"
-end
-
-function modifier_azazin_r:GetAuraSearchTeam()
-    return DOTA_UNIT_TARGET_TEAM_ENEMY
-end
-
-function modifier_azazin_r:GetAuraSearchType()
-    return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
 function modifier_azazin_r:OnCreated( kv )
 	if not IsServer() then return end
 	local damage = self:GetAbility():GetSpecialValueFor( "damage" )

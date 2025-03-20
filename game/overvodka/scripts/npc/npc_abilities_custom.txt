@@ -2556,7 +2556,7 @@
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 	}
-	"Azazin_Spinner"
+	"golmiy_gennadiy"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityType"            "DOTA_ABILITY_TYPE_ULTIMATE"	
@@ -2582,13 +2582,13 @@
 		
 		"AbilityValues"
 		{
-				"spinner_damage_tick"	"0.25"
-				"spinner_radius"
+				"damage_tick"	"0.25"
+				"radius"
 				{
 					"value"	"350"
 					"affected_by_aoe_increase"	"1"
 				}
-				"spinner_tooltip"
+				"radius_tooltip"
 				{
 					"value"	"410"
 					"affected_by_aoe_increase"	"1"
@@ -2608,21 +2608,19 @@
         		{
             		"Target"            "CASTER"
             		"EffectName"        "gennadiy_start"
-
         		}
     		}
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"Spinner.lua"
-				"Function"		"AzazinModifier"
+				"ScriptFile"	"heroes/golmiy/golmiy_gennadiy"
+				"Function"		"GolmiyModifier"
 			}			
 		}
-
 		"Modifiers"
 		{
-			"modifier_spinner"
+			"modifier_golmiy_gennadiy"
 			{	
 				"OverrideAnimation"     	"ACT_DOTA_CAST_ABILITY_5"
 				"States"
@@ -2647,7 +2645,7 @@
 						}
 						"ControlPoints"
 						{
-							"05"	"%spinner_tooltip 0 0"
+							"05"	"%radius_tooltip 0 0"
 						}					
 					}
 					"FireSound"
@@ -2661,26 +2659,21 @@
 					}			
 				}
 				
-				"ThinkInterval"  "%spinner_damage_tick"
+				"ThinkInterval"  "%damage_tick"
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
-						"ScriptFile" "Spinner.lua"
+						"ScriptFile" "heroes/golmiy/golmiy_gennadiy"
 						"Function"		"Damage"
 					}	
 
 				}
 				"OnDestroy"
 				{
-					"FireSound"
-					{
-						"EffectName"	"Hero_Juggernaut.BladeFuryStop"
-						"Target" 		"CASTER"
-					}
 					"RunScript"
 					{
-						"ScriptFile"	"Spinner.lua"
+						"ScriptFile"	"heroes/golmiy/golmiy_gennadiy"
 						"Function"		"BladeFuryStop"
 					}
 				}
@@ -2690,7 +2683,7 @@
 	//=================================================================================================================
 	// Взрывные метеоры
 	//=================================================================================================================
-	"megumin_meteors"
+	"golmiy_penaltiy"
     {
     	"BaseClass"                 "ability_datadriven"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_POINT"
@@ -2709,7 +2702,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"meteor.lua"
+				"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
 				"Function"				"Meteor"
 			}
 		}
@@ -2719,13 +2712,13 @@
 			
 			"RunScript"
 			{
-				"ScriptFile"			"meteor.lua"
+				"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
 				"Function"				"MeteorHit"
 			}
 		}
 		"Modifiers"
 		{
-			"megumin_meteor_fired_debuff"
+			"modifier_golmiy_penaltiy"
 			{
 				"IsDebuff"      "1"
 				"IsHidden"	"0"
@@ -2738,7 +2731,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"			"meteor.lua"
+						"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
 						"Function"				"MeteorHitDamage"
 					}
 				}
@@ -2831,7 +2824,7 @@
 			"damage_duration_respawn"	"0"
 		}		
 	}
-	"chislo"
+	"golmiy_chislo"
 	{
 		"BaseClass"              "ability_datadriven"
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -2860,7 +2853,7 @@
 
 		"Modifiers"
 		{
-			"modifier_ns_TricksMaster"
+			"modifier_golmiy_chislo"
 			{
 				"Passive"       "1"
 				"IsHidden"		"1"
@@ -2870,8 +2863,8 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"            "move.lua"
-						"Function"              "TricksMaster"
+						"ScriptFile"            "heroes/golmiy/golmiy_chislo.lua"
+						"Function"              "TwentyThree"
 					}
 				}      
 			}
@@ -2903,61 +2896,60 @@
 			}
 		}
 	}
-	"venomancer_poison_sting_datadriven"
-{
-    "BaseClass"                     "ability_datadriven"
-    "AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"   
-    "SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-    "AbilityTextureName"            "kost"
-	"MaxLevel" "1"
-	"RequiredLevel"					"-1"
-	"Innate"						"1"
-    "AbilityValues"
-    {
-            "duration"
-            {
-            	"value"	"0.5"
-            	"special_bonus_unique_ursa_2" "+0.5"
-            }
-            "damage"                    "0"
-            "movement_speed"            "-23"
-            "bonus_attack_range"        "100"
-    }	
+	"golmiy_kostil"
+	{
+		"BaseClass"                     "ability_datadriven"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"   
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"            "kost"
+		"MaxLevel" "1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityValues"
+		{
+				"duration"
+				{
+					"value"	"0.5"
+					"special_bonus_unique_ursa_2" "+0.5"
+				}
+				"damage"                    "0"
+				"movement_speed"            "-23"
+				"bonus_attack_range"        "100"
+		}	
+		"Modifiers"
+		{
+			"modifier_golmiy_kostil"
+			{
+				"Passive"   "1"
+				"IsHidden"  "1"
 
-    "Modifiers"
-    {
-        "modifier_poison_sting_datadriven"
-        {
-            "Passive"   "1"
-            "IsHidden"  "1"
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"  "modifier_golmiy_kostil_debuff"
+						"Target"        "TARGET"
+					}
+				}
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"  "%bonus_attack_range"
+				}
+			}
 
-            "OnAttackLanded"
-            {
-                "ApplyModifier"
-                {
-                    "ModifierName"  "modifier_poison_sting_debuff_datadriven"
-                    "Target"        "TARGET"
-                }
-            }
-			"Properties"
-            {
-                "MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"  "%bonus_attack_range"
-            }
-        }
-
-        "modifier_poison_sting_debuff_datadriven"
-        {
-            "IsDebuff"  "1"
-            "Duration"  "%duration"
-            "Properties"
-            {
-                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
-            }
-        }
-    }
-}
+			"modifier_golmiy_kostil_debuff"
+			{
+				"IsDebuff"  "1"
+				"Duration"  "%duration"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
+				}
+			}
+		}
+	}
 	//=================================================================================================================
 	// РЭП
 	//=================================================================================================================
@@ -3934,7 +3926,7 @@
                 "debuff_duration"            "1"
         }
     }
-    "track_datadriven"
+    "golmiy_golbet"
 	{
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -3980,12 +3972,12 @@
 
 			"ApplyModifier"
 			{
-				"ModifierName"	"modifier_track_datadriven"
+				"ModifierName"	"modifier_golmiy_golbet"
 				"Target"		"TARGET"
 			}
 			"RunScript"
 			{
-				"ScriptFile"	"track.lua"
+				"ScriptFile"	"heroes/golmiy/golmiy_golbet"
 				"Function"		"LinkenCheck"
 				"Target"		"TARGET"
 			}
@@ -4066,7 +4058,7 @@
 				}
 			}
 
-			"modifier_track_datadriven"
+			"modifier_golmiy_golbet"
 			{
 				"Duration"	"%duration"
 				"IsHidden"	"1"
@@ -4075,7 +4067,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"track.lua"
+						"ScriptFile"	"heroes/golmiy/golmiy_golbet"
 						"Function"		"Track"
 						"Target"
 						{
@@ -6034,7 +6026,8 @@
 		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityCastPoint"				"0.5"
-		"MaxLevel"						"1"
+		"MaxLevel"						"4"
+		"DependentOnAbility"			"mellstroy_amam"
 		"Innate"						"1"
 		"AbilityCooldown"				"6"
 		"HasScepterUpgrade"				"1"
@@ -6045,6 +6038,7 @@
 					"value"	"50"
 					"special_bonus_unique_bounty_hunter_2" "+400"
 				}
+				"jackpot_chance"	"1 2 3 4"
 				"each_level"					"50"
 		}	
 	}

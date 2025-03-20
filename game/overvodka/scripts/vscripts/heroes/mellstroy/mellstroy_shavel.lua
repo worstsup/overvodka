@@ -19,24 +19,23 @@ function mellstroy_shavel:GetChannelAnimation()
 	return ACT_DOTA_GENERIC_CHANNEL_1
 end
 
---------------------------------------------------------------------------------
--- Ability Start
 mellstroy_shavel.modifiers = {}
 function mellstroy_shavel:OnSpellStart()
-	-- unit identifier
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
-	-- cancel if linken
 	if target:TriggerSpellAbsorb( self ) then
 		caster:Interrupt()
 		return
 	end
-
-	-- load data
 	local duration = self:GetSpecialValueFor( "channel_time" )
 	if target:HasModifier("modifier_generic_motion") then
 		target:RemoveModifierByName("modifier_generic_motion")
+	end
+	if target:HasModifier("modifier_knockback") then
+		target:RemoveModifierByName("modifier_knockback")
+	end
+	if target:HasModifier("modifier_generic_knockback_lua") then
+		target:RemoveModifierByName("modifier_generic_knockback_lua")
 	end
 	-- add modifier
 	local mod = target:AddNewModifier(

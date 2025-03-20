@@ -54,7 +54,7 @@ function modifier_vihor_r:OnIntervalThink()
     if not IsServer() then return end
     local units = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
     for _, unit in pairs(units) do
-        if not unit:HasModifier("modifier_vihor_r_debuff") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:HasModifier("modifier_primal_beast_onslaught_lua") then
+        if not unit:HasModifier("modifier_vihor_r_debuff") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:HasModifier("modifier_macan_r") then
             unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_vihor_r_debuff", {duration = self:GetRemainingTime()})
         end
     end

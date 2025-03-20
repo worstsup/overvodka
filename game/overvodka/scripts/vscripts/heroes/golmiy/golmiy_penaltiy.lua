@@ -100,7 +100,7 @@ function MeteorHit(keys)
 	end
 	ApplyDamage({attacker = caster, victim = target, ability = ability, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
 	target:AddNewModifier(caster, ability, "modifier_stunned", {duration = stun_time})
-	ability:ApplyDataDrivenModifier( caster, target, "megumin_meteor_fired_debuff", { Duration = 5 } )
+	ability:ApplyDataDrivenModifier( caster, target, "modifier_golmiy_penaltiy", { Duration = 5 } )
 	table.insert(tartar, target)
 end
 

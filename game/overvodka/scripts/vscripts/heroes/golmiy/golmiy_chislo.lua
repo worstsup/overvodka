@@ -1,4 +1,4 @@
-function TricksMaster(keys)
+function TwentyThree(keys)
 	local caster = keys.caster	
 	local ability = keys.ability
 	local level = ability:GetLevel() - 1
