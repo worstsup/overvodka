@@ -6034,7 +6034,8 @@
 		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityCastPoint"				"0.5"
-		"MaxLevel"						"1"
+		"MaxLevel"						"4"
+		"DependentOnAbility"			"mellstroy_amam"
 		"Innate"						"1"
 		"AbilityCooldown"				"6"
 		"HasScepterUpgrade"				"1"
@@ -6045,6 +6046,7 @@
 					"value"	"50"
 					"special_bonus_unique_bounty_hunter_2" "+400"
 				}
+				"jackpot_chance"	"1 2 3 4"
 				"each_level"					"50"
 		}	
 	}

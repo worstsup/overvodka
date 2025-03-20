@@ -10,6 +10,7 @@ function mellstroy_casino:OnSpellStart()
     local gold = PlayerResource:GetGold(player_id)
     local base_cost = self:GetSpecialValueFor( "base_cost" )
     local each_level = self:GetSpecialValueFor( "each_level" )
+    local jackpot_chance = self:GetSpecialValueFor( "jackpot_chance" )
     local ability_cost = base_cost + (each_level * hero_level)
     if gold < ability_cost then
         caster:EmitSound("nomoney")
@@ -20,7 +21,7 @@ function mellstroy_casino:OnSpellStart()
     end
     PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
-    if random_chance <= 3 then
+    if random_chance <= jackpot_chance then
         local reward = ability_cost * 10
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
