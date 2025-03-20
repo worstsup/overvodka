@@ -1204,7 +1204,7 @@
 		"DOTA_Tooltip_ability_mellstroy_meteors_gold_cost" "СТОИМОСТЬ СПОСОБНОСТИ:"
 		"DOTA_Tooltip_mellstroy_meteor_slowed_debuff" "Замедление"
 		"DOTA_Tooltip_ability_mellstroy_amam" "АМ АМ АМ"
-		"DOTA_Tooltip_ability_mellstroy_amam_Description" "Потратив внушительную сумму денег, Меллстрой увеличивается в размерах и получает максимальную скорость, а также врубает басы, которые сотрясают землю, оглушая всех врагов в радиусе и нанося им урон, но на время действия способности герой получает безмолвие.\n<font color='#FFFFFF'>За каждого оглушённого толчком вражеского героя Меллстрой получает дополнительное золото.</font>"
+		"DOTA_Tooltip_ability_mellstroy_amam_Description" "Потратив внушительную сумму денег, Меллстрой увеличивается в размерах и врубает басы, которые сотрясают землю, оглушая всех врагов в радиусе и нанося им урон.\n<font color='#FFFFFF'>За каждого оглушённого толчком вражеского героя Меллстрой получает дополнительное золото.</font>"
 		"DOTA_Tooltip_ability_mellstroy_amam_damage" "УРОН ОТ ТОЛЧКА:"
 		"DOTA_Tooltip_ability_mellstroy_amam_stun_dur" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ ОТ ТОЛЧКА:"
 		"DOTA_Tooltip_ability_mellstroy_amam_radius" "РАДИУС:"
