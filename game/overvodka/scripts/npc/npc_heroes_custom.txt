@@ -2332,7 +2332,7 @@
 		"ModelScale"		"1.3"
 		"LoadoutScale"		"0.7"
 		"HealthBarOffset"   "270"
-		"SimilarHeroes"		"62,32,44"
+		"SimilarHeroes"		"1,41,8"
 		"HeroSelectSoundEffect"		"azazin_start"
 		"GibType"		"goo"
 		"GibTintColor"	"98 124 97 255"
