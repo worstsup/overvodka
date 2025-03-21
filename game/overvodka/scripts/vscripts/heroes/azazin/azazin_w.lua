@@ -1,5 +1,6 @@
 LinkLuaModifier( "modifier_azazin_w", "heroes/azazin/azazin_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_azazin_w_target", "heroes/azazin/azazin_w", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_azazin_w_root", "heroes/azazin/azazin_w", LUA_MODIFIER_MOTION_NONE )
 
 azazin_w = class({})
 k = 0
@@ -8,6 +9,7 @@ function azazin_w:Precache(context)
     PrecacheResource("particle", "particles/azazin_w_radius.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_death.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/hoodwink/hoodwink_2022_taunt/hoodwink_2022_taunt_blossom_music_notes.vpcf", context)
+    PrecacheResource("particle", "particles/azazin_w_root.vpcf", context)
     PrecacheResource("soundfile", "soundevents/azazin_w_1.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/azazin_w_2.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/azazin_w_3.vsndevts", context)
@@ -34,7 +36,8 @@ function azazin_w:OnSpellStart()
     local caster = self:GetCaster()
     local position = caster:GetAbsOrigin()
     local duration = self:GetSpecialValueFor("duration")
-    local taunt = CreateUnitByName("npc_dota_azazin_clone", self:GetCursorPosition(), false, caster, caster, caster:GetTeamNumber())
+    local point = self:GetCursorPosition()
+    local taunt = CreateUnitByName("npc_dota_azazin_clone", point, false, caster, caster, caster:GetTeamNumber())
     local playerID = caster:GetPlayerID()
     taunt:SetControllableByPlayer(playerID, true)
     taunt:SetOwner(caster)
@@ -53,6 +56,21 @@ function azazin_w:OnSpellStart()
     elseif k == 2 then
         taunt:EmitSound("azazin_w_3")
         k = 0
+    end
+    if caster:HasModifier("modifier_item_aghanims_shard") then
+        local targets = FindUnitsInRadius(caster:GetTeamNumber(),
+            point,
+            nil,
+            self:GetSpecialValueFor("radius"),
+            DOTA_UNIT_TARGET_TEAM_ENEMY,
+            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+            DOTA_UNIT_TARGET_FLAG_NONE,
+            FIND_ANY_ORDER,
+            false
+        )
+        for _,unit in pairs(targets) do
+            unit:AddNewModifier( caster, self, "modifier_azazin_w_root", { duration = self:GetSpecialValueFor( "root_duration" ) } )
+        end
     end
 end
 
@@ -164,6 +182,18 @@ function modifier_azazin_w_target:OnIntervalThink( kv )
     end
 end
 
+function modifier_azazin_w_target:DeclareFunctions()
+    local decFuncs = 
+    {
+        MODIFIER_PROPERTY_DISABLE_HEALING
+    }
+    return decFuncs
+end
+
+function modifier_azazin_w_target:GetDisableHealing()
+    return self:GetAbility():GetSpecialValueFor("disable_healing")
+end
+
 function modifier_azazin_w_target:IsHidden()
     return true
 end
@@ -174,4 +204,22 @@ end
 
 function modifier_azazin_w_target:OnDestroy()
     if not IsServer() then return end
+end
+
+modifier_azazin_w_root = class({})
+function modifier_azazin_w_root:IsHidden() return false end
+function modifier_azazin_w_root:IsPurgable() return true end
+function modifier_azazin_w_root:CheckState()
+    local state = {
+        [MODIFIER_STATE_ROOTED] = true
+    }
+    return state
+end
+
+function modifier_azazin_w_root:GetEffectName()
+    return "particles/azazin_w_root.vpcf"
+end
+
+function modifier_azazin_w_root:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end

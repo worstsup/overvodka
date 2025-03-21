@@ -12541,11 +12541,19 @@
 		"AbilityManaCost"				"100"
 		"AbilityValues"
 		{
-				"cast_range"	"700 800 900 1000"
+				"cast_range"
+				{
+					"value"	"700 750 800 850"
+					"special_bonus_unique_visage_1" "+150"
+				}
 				"min_pull"		"100"
 				"max_pull"		"800"
 				"radius"		"450"
-				"ring_duration"	"2.5 3.0 3.5 4.0"
+				"ring_duration"	
+				{
+					"value"	"2.75 3.0 3.25 3.5"
+					"special_bonus_unique_visage_grave_chill_duration" "+1"
+				}
 				"wark_through_trees"
 				{
 					"value"	"0"
@@ -12566,14 +12574,22 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"				"1.5"
-		"AbilityManaCost"				"30 60 90"
+		"AbilityManaCost"				"25 50 75"
 		"AbilityValues"
 		{
 			"mana_cost_per_second"		"15 30 45"
 			"radius"					"450"
-			"damage"					"20 40 60"
+			"damage"
+			{
+				"value"	"15 30 45"
+				"special_bonus_unique_visage_7" "+20"
+			}
 			"movespeed_slow"			"-15 -20 -25"
-			"attack_speed_slow"			"-30 -60 -90"
+			"attack_speed_slow"
+			{
+				"value"	"-20 -40 -60"
+				"special_bonus_unique_visage_3" "-20"
+			}
 			"gold_per_second"			"10 20 30"
 		}
 	}
@@ -12594,7 +12610,11 @@
 				"value"			"5"
 				"special_bonus_unique_visage_6" "-1"
 			}
-			"counter_duration"	"5"
+			"counter_duration"
+			{
+				"value"	"6"
+				"special_bonus_unique_visage_8" "+2"
+			}
 			"stun_duration"		"0.4"
 			"effect_duration"	"5"
 			"tick_damage"		"15 30 45 60"
@@ -12604,10 +12624,16 @@
 				"value"	"0 0 0 0"
 				"special_bonus_scepter" "+20 +40 +60 +80"
 			}
-			"lifesteal"		
+			"lifesteal"
 			{
 				"value"			"0"
 				"special_bonus_scepter" "+30"
+			}
+			"break_duration"
+			{
+				"value"	"0"
+				"special_bonus_facet_weaver_hivemind" "+2"
+				"RequiresFacet"	"weaver_hivemind"
 			}
 		}
 	}
@@ -12625,13 +12651,25 @@
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"32 30 28 26"
 		"AbilityManaCost"				"105 115 125 135"
+		"HasShardUpgrade"				"1"
 		"AbilityValues"
 		{
 			"duration"		
 			{
 				"value"					"4 5 6 7"
+				"special_bonus_unique_visage_4" "+1"
 			}
 			"radius"				"450"
+			"disable_healing"
+			{
+				"value"	"0"
+				"special_bonus_unique_visage_5" "+1"
+			}
+			"root_duration"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+1.5"
+			}
 		}
 	}
 }

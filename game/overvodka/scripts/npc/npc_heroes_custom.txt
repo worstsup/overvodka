@@ -2326,14 +2326,14 @@
 	"npc_dota_hero_weaver"
 	{
 		"Model"				"models/azazin/azazin.vmdl"
-		"SoundSet"			"Hero_Weaver"
+		"SoundSet"			"Hero_ArcWarden"
 		"DisableWearables" 	"1"
 		"Enabled"			"1"
 		"ModelScale"		"1.3"
 		"LoadoutScale"		"0.7"
 		"HealthBarOffset"   "270"
 		"SimilarHeroes"		"62,32,44"
-		"HeroSelectSoundEffect"		"Hero_Weaver.Pick"
+		"HeroSelectSoundEffect"		"azazin_start"
 		"GibType"		"goo"
 		"GibTintColor"	"98 124 97 255"
 		"Ability1"		"azazin_q"
@@ -2352,19 +2352,18 @@
 		"Ability15"		"special_bonus_unique_visage_1"
 		"Ability16"		"special_bonus_unique_visage_5"
 		"Ability17"		"special_bonus_unique_visage_6"
-
 		"Facets"
 		{
 			"weaver_skitterstep"
 			{
-				"Icon"				"speed"
-				"Color"				"Red"
+				"Icon"				"tree"
+				"Color"				"Green"
 				"GradientID"		"0"
 			}			
 			"weaver_hivemind"
 			{
-				"Icon"				"xp"
-				"Color"				"Blue"
+				"Icon"				"fist"
+				"Color"				"Red"
 				"GradientID"		"1"
 			}
 		}
@@ -2377,7 +2376,7 @@
 		"AttackAnimationPoint"		"0.550000"
 		"AttackAcquisitionRange"		"800"
 		"AttackRange"		"425"
-		"ProjectileModel"		"particles/units/heroes/hero_weaver/weaver_base_attack.vpcf"
+		"ProjectileModel"		"particles/units/heroes/hero_arc_warden/arc_warden_base_attack.vpcf"
 		"ProjectileSpeed"		"900"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"16"
@@ -2389,8 +2388,8 @@
 		"StatusHealthRegen"		"1.25"
 		"StatusManaRegen"	"0.5"
 		"MovementSpeed"		"305"
-		"particle_folder"		"particles/units/heroes/hero_weaver"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
+		"particle_folder"		"particles/units/heroes/hero_arc_warden"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_arc_warden.vsndevts"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

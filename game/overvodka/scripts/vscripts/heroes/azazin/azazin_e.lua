@@ -67,6 +67,9 @@ function modifier_azazin_e:OnAttackLanded(params)
             end
             target:AddNewModifier(self:GetParent(), ability, "modifier_generic_stunned_lua", { duration = stun_duration })
             target:AddNewModifier(self:GetParent(), ability, "modifier_azazin_e_debuff", { duration = effect_duration })
+            if self:GetAbility():GetSpecialValueFor("break_duration") > 0 then
+                target:AddNewModifier(self:GetParent(), ability, "modifier_break", { duration = self:GetAbility():GetSpecialValueFor("break_duration") })
+            end
             if k == 0 then
                 EmitSoundOn("azazin_e_1", target)
                 k = 1
