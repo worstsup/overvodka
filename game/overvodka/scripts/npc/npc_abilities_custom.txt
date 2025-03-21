@@ -12605,4 +12605,27 @@
 			}
 		}
 	}
+	"azazin_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/azazin/azazin_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"	
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"			   
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityTextureName"			"azazin_w"
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"32 30 28 26"
+		"AbilityManaCost"				"105 115 125 135"
+		"AbilityValues"
+		{
+			"duration"		
+			{
+				"value"					"4 5 6 7"
+			}
+			"radius"				"450"
+		}
+	}
 }
