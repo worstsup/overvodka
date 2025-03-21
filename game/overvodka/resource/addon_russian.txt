@@ -253,6 +253,7 @@
 		"DOTA_Tooltip_ability_azazin_e_armor_reduction" "СНИЖЕНИЕ БРОНИ:"
 		"DOTA_Tooltip_ability_azazin_e_bonus_damage" "ДОП. УРОН:"
 		"DOTA_Tooltip_ability_azazin_e_lifesteal" "%ВАМПИРИЗМ:"
+		"DOTA_Tooltip_ability_azazin_e_scepter_description" "При поджигании пердака врагу герой получает эффект на %effect_duration% сек., дарующий ему %bonus_damage% доп. урона от атак и %lifesteal%%% вампиризма."
 		"DOTA_Tooltip_modifier_azazin_e_caster" "Пылающие пердаки"
 		"DOTA_Tooltip_modifier_azazin_e_caster_description" "Герой имеет доп. урон с атак и вампиризм"
 		"DOTA_Tooltip_modifier_azazin_e_enemy" "Пылающие пердаки"
@@ -274,6 +275,8 @@
 		"DOTA_Tooltip_Facet_weaver_skitterstep" "ДЕРЕВОЛАЗ"
 		"DOTA_Tooltip_Facet_weaver_skitterstep_description" "Азазин может проходить сквозь деревья, созданные способностью СОБЕСЕДОВАНИЕ."
 		"DOTA_Tooltip_ability_azazin_q_Facet_weaver_skitterstep" "Герой может проходить сквозь деревья, созданные этой способностью."
+		"DOTA_Tooltip_ability_special_bonus_unique_visage_6" "-1 атака для ПЫЛАЮЩИЕ ПЕРДАКИ"
+
 
 
 

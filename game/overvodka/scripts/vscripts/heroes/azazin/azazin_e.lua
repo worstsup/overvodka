@@ -62,7 +62,9 @@ function modifier_azazin_e:OnAttackLanded(params)
         enemyMod:SetDuration(counter_duration, true)
         if enemyMod:GetStackCount() >= required_hits then
             enemyMod:Destroy()
-            self:GetParent():AddNewModifier(self:GetParent(), ability, "modifier_azazin_e_caster", { duration = counter_duration })
+            if self:GetParent():HasScepter() then
+                self:GetParent():AddNewModifier(self:GetParent(), ability, "modifier_azazin_e_caster", { duration = effect_duration })
+            end
             target:AddNewModifier(self:GetParent(), ability, "modifier_generic_stunned_lua", { duration = stun_duration })
             target:AddNewModifier(self:GetParent(), ability, "modifier_azazin_e_debuff", { duration = effect_duration })
             if k == 0 then
@@ -150,23 +152,17 @@ function modifier_azazin_e_caster:OnCreated()
     ParticleManager:SetParticleControl(self.particle, 0, self:GetParent():GetAbsOrigin())
     self:AddParticle(self.particle1, false, false, -1, false, false)
     self:AddParticle(self.particle, false, false, -1, false, true)
-    self.record = nil
 end
 
 function modifier_azazin_e_caster:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
+        MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     }
 end
 
-function modifier_azazin_e_caster:GetModifierProcAttack_BonusDamage_Physical(params)
-    if not IsServer() then return end
-    if params.target:IsWard() then return end
-    if self:GetParent():IsIllusion() then return end
-    local damage = self:GetAbility():GetSpecialValueFor("bonus_damage")
-    self.record = params.record
-    return damage
+function modifier_azazin_e_caster:GetModifierPreAttack_BonusDamage()
+    return self:GetAbility():GetSpecialValueFor("bonus_damage")
 end
 
 function modifier_azazin_e_caster:OnTakeDamage(params)
@@ -175,13 +171,11 @@ function modifier_azazin_e_caster:OnTakeDamage(params)
     if self:GetParent() == params.unit then return end
     if params.unit:IsBuilding() then return end
     if params.unit:IsWard() then return end
-    if (params.inflictor == nil or params.inflictor:GetAbilityName() == "item_revenants_brooch") and not self:GetParent():IsIllusion() and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then 
-        if params.record ~= self.record then return end
+    if params.inflictor == nil and not self:GetParent():IsIllusion() then
         local heal = self:GetAbility():GetSpecialValueFor("lifesteal") / 100 * params.damage
         self:GetParent():Heal(heal, self:GetAbility())
         local effect_cast = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.attacker)
         ParticleManager:ReleaseParticleIndex(effect_cast)
-        self:Destroy()
     end
 end
 

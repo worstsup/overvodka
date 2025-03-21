@@ -12585,22 +12585,29 @@
 	  	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 	  	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"IsBreakable"					"1"
-	   	"AbilityTextureName" 			"otchim"
+		"HasScepterUpgrade"				"1"
+	   	"AbilityTextureName" 			"azazin_e"
 		"AbilityValues"
 		{
 			"required_hits"		
 			{
 				"value"			"5"
+				"special_bonus_unique_visage_6" "-1"
 			}
 			"counter_duration"	"5"
 			"stun_duration"		"0.4"
 			"effect_duration"	"5"
 			"tick_damage"		"15 30 45 60"
 			"armor_reduction"	"-2 -4 -6 -8"
-			"bonus_damage"		"30 60 90 120"
+			"bonus_damage"
+			{
+				"value"	"0 0 0 0"
+				"special_bonus_scepter" "+20 +40 +60 +80"
+			}
 			"lifesteal"		
 			{
-				"value"			"40 50 60"
+				"value"			"0"
+				"special_bonus_scepter" "+30"
 			}
 		}
 	}
