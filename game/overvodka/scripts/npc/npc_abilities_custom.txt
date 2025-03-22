@@ -12618,7 +12618,7 @@
 			"stun_duration"		"0.4"
 			"effect_duration"	"5"
 			"tick_damage"		"15 30 45 60"
-			"armor_reduction"	"-2 -4 -6 -8"
+			"armor_reduction"	"-1 -2 -3 -4"
 			"bonus_damage"
 			{
 				"value"	"0 0 0 0"
@@ -12669,6 +12669,24 @@
 				"value"	"0"
 				"special_bonus_shard"	"+1.5"
 			}
+		}
+	}
+	"azazin_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/azazin/azazin_innate"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"4"
+		"Innate"						"1"
+		"DependentOnAbility"			"azazin_r"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+				"damage_per_burn"		"0"
+				"mana_per_hit"			"10 20 30 40"
 		}
 	}
 }
