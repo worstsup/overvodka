@@ -232,6 +232,7 @@
 		"npc_dota_hero_morphling_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_faceless_void_npedesc1"		"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_slark_npedesc1"				"Сложность персонажа: СРЕДНЯЯ"
+		"npc_dota_hero_weaver_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 

@@ -25,7 +25,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zombill.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_senya.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_mrus.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_sega.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_lev.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_vova.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_step.png" />
@@ -52,6 +51,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_evelone.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_bratishkin.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_azazin.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_weaver.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_weaver.png" />
 	</Panel>
 </root>
