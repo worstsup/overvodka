@@ -245,6 +245,7 @@
 		"DOTA_Tooltip_ability_azazin_w_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_azazin_w_radius"	"РАДИУС:"
 		"DOTA_Tooltip_ability_azazin_w_shard_description" "При появлении Гузлик накладывает на всех врагов в радиусе оцепенение на %root_duration% сек."
+		"DOTA_Tooltip_modifier_azazin_w_root" "Оцепенение"
 		"DOTA_Tooltip_ability_azazin_e" "ПЫЛАЮЩИЕ ПЕРДАКИ"
 		"DOTA_Tooltip_ability_azazin_e_Description" "С каждой атакой, Азазин всё сильнее и сильнее поджигает жопу врага, и на %required_hits%-ю атаку по врагу его очко окончательно взрывается, герой получает оглушение и начинает гореть, получая периодический урон на протяжении %effect_duration% сек.\nСчётчик атак на вражеском герое длится %counter_duration% сек."
 		"DOTA_Tooltip_ability_azazin_e_counter_duration" "ДЛИТЕЛЬНОСТЬ СЧЕТЧИКА:"

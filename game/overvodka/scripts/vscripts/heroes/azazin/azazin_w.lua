@@ -166,10 +166,11 @@ end
 
 function modifier_azazin_w_target:OnIntervalThink( kv )
     if not IsServer() then return end
+    if self:GetParent():IsDebuffImmune() or self:GetParent():IsMagicImmune() then return end
     local parent = self:GetParent()
     for i = 0, 5 do
-        for p = 0, 5 do
-            parent:SwapItems(i, p)
+        for j = 0, 5 do
+            parent:SwapItems(i, j)
         end
     end
     for i = 0, parent:GetAbilityCount() - 1 do
