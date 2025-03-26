@@ -1,6 +1,7 @@
 minion_banana = class({})
 
-LinkLuaModifier("modifier_minion_banana_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_minion_banana_root_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_minion_banana_movespeed_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
 
 function minion_banana:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile.vpcf", context)
@@ -48,7 +49,8 @@ function minion_banana:OnProjectileHit_ExtraData(target, location, extraData)
     local caster = self:GetCaster()
     local radius = extraData.radius
     local root_duration = self:GetSpecialValueFor("root_duration")
-    local slow_amount = self:GetSpecialValueFor("banana_slow")
+    local banana_slow = self:GetSpecialValueFor("banana_slow")
+    local slow_duration = self:GetSpecialValueFor("slow_duration")
 
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
@@ -63,39 +65,53 @@ function minion_banana:OnProjectileHit_ExtraData(target, location, extraData)
     )
 
     for _, enemy in ipairs(enemies) do
-        enemy:AddNewModifier(caster, self, "modifier_minion_banana_debuff", {duration = root_duration})
+        enemy:AddNewModifier(caster, self, "modifier_minion_banana_root_debuff", {duration = root_duration})
+        enemy:AddNewModifier(caster, self, "modifier_minion_banana_movespeed_debuff", {duration = slow_duration})
     end
 
     EmitSoundOnLocationWithCaster(location, "Hero_MonkeyKing.Spring.Target", caster)
 end
 
 
-modifier_minion_banana_debuff = class({})
+modifier_minion_banana_root_debuff = class({})
 
-function modifier_minion_banana_debuff:IsDebuff() return true end
-function modifier_minion_banana_debuff:IsPurgable() return true end
-function modifier_minion_banana_debuff:GetEffectName()
+function modifier_minion_banana_root_debuff:IsDebuff() return true end
+function modifier_minion_banana_root_debuff:IsPurgable() return true end
+
+function modifier_minion_banana_root_debuff:GetEffectName()
     return "particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root.vpcf"
 end
 
-function modifier_minion_banana_debuff:GetEffectAttachType()
+function modifier_minion_banana_root_debuff:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function modifier_minion_banana_debuff:OnCreated(kv)
+function modifier_minion_banana_root_debuff:OnCreated(kv)
     if not IsServer() then return end
 end
 
-function modifier_minion_banana_debuff:DeclareFunctions()
-    return {MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE}
-end
-
-function modifier_minion_banana_debuff:CheckState()
+function modifier_minion_banana_root_debuff:CheckState()
     return {
         [MODIFIER_STATE_ROOTED] = true
     }
 end
 
-function modifier_minion_banana_debuff:GetModifierMoveSpeedBonus_Percentage()
+
+modifier_minion_banana_movespeed_debuff = class({})
+
+function modifier_minion_banana_movespeed_debuff:IsDebuff() return true end
+function modifier_minion_banana_movespeed_debuff:IsPurgable() return true end
+
+function modifier_minion_banana_movespeed_debuff:OnCreated(kv)
+    if not IsServer() then return end
+end
+
+function modifier_minion_banana_movespeed_debuff:DeclareFunctions()
+    return {MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE}
+end
+
+function modifier_minion_banana_movespeed_debuff:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("banana_slow")
 end
+
+

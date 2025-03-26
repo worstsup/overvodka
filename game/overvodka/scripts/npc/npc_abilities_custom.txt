@@ -12745,6 +12745,7 @@
 			"banana_radius"	"500"
 			"root_duration"	"1.5"
 			"banana_slow"	"-20"
+			"slow_duration"	"3"
 		}
 	}
 }
