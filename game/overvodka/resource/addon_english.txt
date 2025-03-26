@@ -233,6 +233,12 @@
 		"npc_dota_hero_slark_npedesc1"				"Difficulty: MEDIUM"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Difficulty: DEPENDS ON YOUR LUCK"
 
+		"DOTA_Tooltip_ability_minion_slow" "БАНАНЧИКИ"
+		"DOTA_Tooltip_ability_azazin_q_Description" "Миньоньчик швыряет бананчики во врагов, замедляя их передвижение на %slow%%%. Замедление складывается до %max_stacks% раз."
+		"DOTA_Tooltip_ability_minion_slow_slow" "ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_minion_slow_duration" "ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
+		"DOTA_Tooltip_ability_minion_slow_max_stacks" "МАКСИМУМ ЭФФЕКТОВ:"
+
 		"DOTA_Tooltip_ability_azazin_q" "СОБЕСЕДОВАНИЕ"
 		"DOTA_Tooltip_ability_azazin_q_Description" "Азазин протягивает руку к выбранному противнику, которая тянет героя и цель друг к другу, и закрывает его с собой на собеседование, создавая круг из деревьев, преграждающих путь и скрывающих героев от врагов снаружи."
 		"DOTA_Tooltip_ability_azazin_q_cast_range" "ДАЛЬНОСТЬ ПРИМЕНЕНИЯ:"
