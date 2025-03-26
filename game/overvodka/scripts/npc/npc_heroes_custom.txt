@@ -2402,7 +2402,7 @@
 		"SimilarHeroes"	"62,44,63"
 		"HeroSelectSoundEffect"		"Hero_Riki.Pick"
 		"GibType"		"default"
-		"Ability1"		"riki_smoke_screen"
+		"Ability1"		"minion_banana"
 		"Ability2"		"riki_blink_strike"
 		"Ability3"		"riki_tricks_of_the_trade"
 		"Ability4"		"riki_innate_backstab"
