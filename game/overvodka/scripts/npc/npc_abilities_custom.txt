@@ -5158,7 +5158,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"750"
 		"AbilityCastPoint"				"1.0"
-		"AbilityCooldown"				"70.0"
+		"AbilityCooldown"				"85.0"
 		"AbilityManaCost"				"200 400 600"
 		"AbilityValues"
 		{
@@ -5168,7 +5168,7 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"wave_duration"				"11.0"
-				"wave_count"				"30 38 46"
+				"wave_count"				"28 35 42"
 				"wave_damage"
 				{
 					"value"	"30 50 70"
@@ -5517,7 +5517,7 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"murloc"
-		"AbilityManaCost"				"35"
+		"AbilityManaCost"				"35 40 45 50"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
@@ -5686,8 +5686,8 @@
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"					"1"
 		"IsGrantedByShard"				"1"
-		"AbilityCooldown"				"20"
-		"AbilityManaCost"				"150"
+		"AbilityCooldown"				"26"
+		"AbilityManaCost"				"150"	
 		"AbilityValues"
 		{
 				"duration" "7"
@@ -5718,7 +5718,7 @@
 			}
 			"bonus_attack_speed"
 			{
-				"value"									"15 30 45 60"
+				"value"									"10 20 30 40"
 			}
 			"attack_speed_per_unit"		
 			{
@@ -6975,8 +6975,8 @@
 		{
 				"attack_damage"
 				{
-					"value"	"40 80 120 160"
-					"special_bonus_unique_tidehunter_5" "+75"
+					"value"	"35 65 95 125"
+					"special_bonus_unique_tidehunter_5" "+100"
 				}
 				"reduction_duration"
 				{
@@ -7134,7 +7134,7 @@
 				"schoolboys_duration"
 				{
 					"value"	"10"
-					"special_bonus_unique_tidehunter" "+10"
+					"special_bonus_unique_tidehunter" "+5"
 				}
 				"schoolboys_hp"
 				{
@@ -7973,8 +7973,8 @@
 		{
 				"AbilityCooldown"
 				{
-					"value"	"7.0"
-					"special_bonus_unique_naga_siren_6" "-3"
+					"value"	"6.0"
+					"special_bonus_unique_naga_siren_6" "-2"
 				}
 				"chance_pct"			"100"
 				"damage"
@@ -7984,7 +7984,7 @@
 				}
 				"duration"
 				{
-					"value"	"1.0 1.2 1.4 1.6"
+					"value"	"1.0"
 					"special_bonus_unique_naga_siren_3" "+0.4"
 				}
 				"knockback_duration"	"0.6"
@@ -9592,7 +9592,7 @@
 		  		"value"	"500"
 				"affected_by_aoe_increase"	"1"
 		  	}
-            "fear_duration"             "1 1.5 2.0 2.5"
+            "fear_duration"             "0.8 1.2 1.6 2"
 		  	"fear_radius"
 		  	{
 		  		"value"	"500"
@@ -9759,7 +9759,7 @@
 				}
            		"radius"                            "200"
             	"damage"                            "90 180 270 360"
-            	"lifesteal_pct"					"10"
+            	"lifesteal_pct"					"0"
             	"hui_chance"					 "15"
 				"debuff_immune"
 				{
@@ -11351,7 +11351,7 @@
 				"delay"					"0.2"
 				"damage"				"130 260 390"
 				"move_slow"				"80"
-				"slow_duration"			"0.8 1.2 1.6"
+				"slow_duration"			"0.6 0.9 1.2"
 				"hasfacet"
 				{
 					"value"												"0"
@@ -11414,7 +11414,7 @@
 		"AbilityValues"
 		{
 			"duration"					"5"
-			"damage"					"25 50 75 100"
+			"damage"					"20 40 60 80"
 			"int_multi"
 			{
 				"value"	"35"
@@ -11457,7 +11457,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCooldown"				"27 24 21 18"
+		"AbilityCooldown"				"23"
 		"AbilityManaCost"				"90 120 150 180"
 		"AbilityValues"
 		{
@@ -11466,7 +11466,7 @@
 					"value"	"5"
 					"special_bonus_unique_storm_spirit_5" "+2"
 				}
-				"duration"						"0.6"
+				"duration"						"0.4"
 				"overload_damage"
 				{
 					"value"	"25 50 75 100"
