@@ -1639,14 +1639,14 @@
 		"BaseClass"					"npc_dota_creep_neutral"
 		"SoundSet"					"n_creep_Ranged"
 		"Level"						"2"
-		"ModelScale" 					"0.35"
+		"ModelScale" 				"0.35"
 		"IsNeutralUnitType"			"1"
 		"Ability1"					"minion_slow"
 		"Ability2"					"creep_piercing"
 		"Ability3"					"neutral_upgrade"
 		"Ability4"					""
 		"ArmorPhysical"				"1"			// Physical protection.
-		"MagicalResistance"				"25"
+		"MagicalResistance"			"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"25"		// Damage range min.
 		"AttackDamageMax"			"30"		// Damage range max.
@@ -1684,14 +1684,14 @@
 		"BaseClass"					"npc_dota_creep_neutral"
 		"SoundSet"					"n_creep_Ranged"
 		"Level"						"3"
-		"ModelScale" 					"0.4"
+		"ModelScale" 				"0.4"
 		"IsNeutralUnitType"			"1"
 		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1
 		"Ability2"					"creep_piercing"			// Ability 2
 		"Ability3"					"neutral_upgrade"			// Ability 3
 		"Ability4"					""			// Ability 4
 		"ArmorPhysical"				"2"			// Physical protection.
-		"MagicalResistance"				"25"
+		"MagicalResistance"			"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"30"		// Damage range min.
 		"AttackDamageMax"			"36"		// Damage range max.
@@ -1711,7 +1711,7 @@
 		"MovementSpeed"				"310"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
 		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusHealthRegen"			"2.5"		// Health regeneration rate.
 		"StatusMana"				"125"		// Base mana.
 		"StatusManaRegen"			"3"		// Mana regeneration rate.		 
 		"VisionDaytimeRange"		"1800"		// Range of vision during day light.
