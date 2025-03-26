@@ -12685,8 +12685,24 @@
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-				"damage_per_burn"		"0"
-				"mana_per_hit"			"10 20 30 40"
+			"damage_per_burn"		"0"
+			"mana_per_hit"			"10 20 30 40"
+		}
+	}
+	"minion_slow"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"					"units/minion/minion_slow"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"minion_slow"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"slow" 			"5"
+			"duration" 		"2"
+			"max_stacks" 	"5"
 		}
 	}
 }

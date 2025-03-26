@@ -557,7 +557,7 @@
 						source_filename = "models/minion/minonattack.fbx"
 						import_bone_scales = false
 						start_frame = -1
-						end_frame = -1
+						end_frame = 20
 						framerate = -1.0
 						reverse = false
 					},

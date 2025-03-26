@@ -1641,7 +1641,7 @@
 		"Level"						"2"
 		"ModelScale" 					"0.35"
 		"IsNeutralUnitType"			"1"
-		"Ability1"					"harpy_scout_take_off"
+		"Ability1"					"minion_slow"
 		"Ability2"					"creep_piercing"
 		"Ability3"					"neutral_upgrade"
 		"Ability4"					""
@@ -1655,8 +1655,8 @@
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"300"		// Range within a target can be acquired.
 		"AttackRange"				"300"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"1200"		// Speed of projectile.		     
+		"ProjectileModel"			"particles/minion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"600"		// Speed of projectile.		     
 		"RingRadius"				"50"
 		"HealthBarOffset"			"180"
 		"BountyXP"					"200"		// Experience earn.
@@ -1700,8 +1700,8 @@
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"300"		// Range within a target can be acquired.
 		"AttackRange"				"450"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"1200"		// Speed of projectile.		     
+		"ProjectileModel"			"particles/minion_base_attack_purple.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"600"		// Speed of projectile.		     
 		"RingRadius"				"50"
 		"HealthBarOffset"			"190"
 		"BountyXP"					"200"		// Experience earn.
