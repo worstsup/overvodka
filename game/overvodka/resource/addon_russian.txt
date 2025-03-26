@@ -232,6 +232,7 @@
 		"npc_dota_hero_morphling_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_faceless_void_npedesc1"		"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_slark_npedesc1"				"Сложность персонажа: СРЕДНЯЯ"
+		"npc_dota_hero_weaver_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 
@@ -275,6 +276,9 @@
 		"DOTA_Tooltip_modifier_azazin_r_description" "Герой превратился в девушку и замедляет всех врагов рядом"
 		"DOTA_Tooltip_modifier_azazin_r_debuff" "Войсченджер"
 		"DOTA_Tooltip_modifier_azazin_r_debuff_description" "Находясь рядом с дамой, вы замедлены и отдаёте ей свои деньги"
+		"DOTA_Tooltip_ability_azazin_innate" "100% КРИНЖ"
+		"DOTA_Tooltip_ability_azazin_innate_description" "Каждое действие Азазина создаёт невероятный кринж, из-за чего при ударе по врагам их мана выжигается."
+		"DOTA_Tooltip_ability_azazin_innate_mana_per_hit" "СЖИГАНИЕ МАНЫ ЗА УДАР:"
 		"DOTA_Tooltip_Facet_weaver_skitterstep" "ДЕРЕВОЛАЗ"
 		"DOTA_Tooltip_Facet_weaver_skitterstep_description" "Азазин может проходить сквозь деревья, созданные способностью СОБЕСЕДОВАНИЕ."
 		"DOTA_Tooltip_ability_azazin_q_Facet_weaver_skitterstep" "Герой может проходить сквозь деревья, созданные этой способностью."

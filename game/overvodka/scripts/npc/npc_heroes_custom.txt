@@ -2340,7 +2340,7 @@
 		"Ability2"		"azazin_w"
 		"Ability3"		"azazin_e"
 		"Ability4"		"generic_hidden"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"azazin_innate"
 		"Ability6"		"azazin_r"
 		"Ability7"		"generic_hidden"
 
@@ -2369,8 +2369,8 @@
 		}
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"		"37"
-		"AttackDamageMax"		"43"
+		"AttackDamageMin"		"36"
+		"AttackDamageMax"		"40"
 		"AttackRate"		"1.800000"
 		"BaseAttackSpeed"		"120"
 		"AttackAnimationPoint"		"0.550000"

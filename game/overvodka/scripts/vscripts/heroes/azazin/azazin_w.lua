@@ -145,6 +145,7 @@ function modifier_azazin_w:OnDestroy()
     local radius = self:GetAbility():GetSpecialValueFor("radius")
     self.tauntdeath = ParticleManager:CreateParticle("particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_death.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(self.tauntdeath, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(self.tauntdeath, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(self.tauntdeath)
 end
 
