@@ -1648,8 +1648,8 @@
 		"ArmorPhysical"				"1"			// Physical protection.
 		"MagicalResistance"			"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"25"		// Damage range min.
-		"AttackDamageMax"			"30"		// Damage range max.
+		"AttackDamageMin"			"22"		// Damage range min.
+		"AttackDamageMax"			"26"		// Damage range max.
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"125"		
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
@@ -1686,7 +1686,7 @@
 		"Level"						"3"
 		"ModelScale" 				"0.4"
 		"IsNeutralUnitType"			"1"
-		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1
+		"Ability1"					"minion_purple_blob"			// Ability 1
 		"Ability2"					"creep_piercing"			// Ability 2
 		"Ability3"					"neutral_upgrade"			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -1694,7 +1694,7 @@
 		"MagicalResistance"			"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"30"		// Damage range min.
-		"AttackDamageMax"			"36"		// Damage range max.
+		"AttackDamageMax"			"34"		// Damage range max.
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"150"		
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.

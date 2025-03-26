@@ -12706,4 +12706,23 @@
 			"max_stacks" 	"5"
 		}
 	}
+	"minion_purple_blob"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"					"units/minion/minion_purple_blob"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"minion_purple_blob"
+		"MaxLevel"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"damage_base"	"100"
+			"damage_pct"	"15"
+			"duration"		"0.8"
+			"radius"		"800"
+		}
+	}
 }

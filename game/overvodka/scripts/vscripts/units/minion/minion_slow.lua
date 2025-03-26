@@ -53,7 +53,7 @@ function modifier_minion_slow_debuff:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function modifier_minion_slow_debuff:GetEffectName()
-    return "particles/generic_gameplay/generic_slowed_cold.vpcf"
+    return "particles/skeletonking_hellfireblast_debuff_new.vpcf"
 end
 
 function modifier_minion_slow_debuff:GetEffectAttachType()
