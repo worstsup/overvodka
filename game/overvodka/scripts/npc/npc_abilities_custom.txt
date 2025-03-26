@@ -12741,10 +12741,10 @@
 		"MaxLevel"						"1"
 		"AbilityValues"
 		{
-			"banana_speed"	"100"	
-			"banana_radius"	"1000"
+			"banana_speed"	"600"	
+			"banana_radius"	"500"
 			"root_duration"	"1.5"
-			"banana_slow"	"20"
+			"banana_slow"	"-20"
 		}
 	}
 }

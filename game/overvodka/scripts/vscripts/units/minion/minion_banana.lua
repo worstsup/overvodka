@@ -2,19 +2,34 @@ minion_banana = class({})
 
 LinkLuaModifier("modifier_minion_banana_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
 
+function minion_banana:Precache(context)
+    PrecacheResource("particle", "particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile.vpcf", context)
+    PrecacheResource("particle", "particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", context)
+end
+
+function minion_banana:GetAOERadius()
+    return self:GetSpecialValueFor("banana_radius")
+end
+
 function minion_banana:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local target_point = self:GetCursorPosition()
     local projectile_speed = self:GetSpecialValueFor("banana_speed")
     local radius = self:GetSpecialValueFor("banana_radius")
 
+    local direction = (target_point - caster:GetAbsOrigin()):Normalized()
+    local distance = (target_point - caster:GetAbsOrigin()):Length2D()
     local projectile = {
-        Target = target_point,
-        Source = caster,
         Ability = self,
-        EffectName = "particles/units/heroes/hero_monkey_king/monkey_king_strike.vpcf",
-        iMoveSpeed = projectile_speed,
+        EffectName = "particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile.vpcf",
         vSpawnOrigin = caster:GetAbsOrigin(),
+        fDistance = distance,
+        fStartRadius = 50,
+        fEndRadius = 50,
+        Source = caster,
+        vVelocity = direction * projectile_speed,
         bDodgeable = false,
         bProvidesVision = true,
         iVisionRadius = 300,
@@ -23,8 +38,9 @@ function minion_banana:OnSpellStart()
     }
 
     ProjectileManager:CreateLinearProjectile(projectile)
-    caster:EmitSound("Hero_MonkeyKing.IllusoryOrb")  -- Use a banana-like sound
+    caster:EmitSound("Hero_MonkeyKing.IllusoryOrb")
 end
+
 
 function minion_banana:OnProjectileHit_ExtraData(target, location, extraData)
     if not location then return end
@@ -47,7 +63,7 @@ function minion_banana:OnProjectileHit_ExtraData(target, location, extraData)
     )
 
     for _, enemy in ipairs(enemies) do
-        enemy:AddNewModifier(caster, self, "modifier_minion_banana_debuff", {duration = root_duration, slow = slow_amount})
+        enemy:AddNewModifier(caster, self, "modifier_minion_banana_debuff", {duration = root_duration})
     end
 
     EmitSoundOnLocationWithCaster(location, "Hero_MonkeyKing.Spring.Target", caster)
@@ -59,7 +75,7 @@ modifier_minion_banana_debuff = class({})
 function modifier_minion_banana_debuff:IsDebuff() return true end
 function modifier_minion_banana_debuff:IsPurgable() return true end
 function modifier_minion_banana_debuff:GetEffectName()
-    return "particles/generic_gameplay/generic_root.vpcf"
+    return "particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root.vpcf"
 end
 
 function modifier_minion_banana_debuff:GetEffectAttachType()
@@ -68,14 +84,18 @@ end
 
 function modifier_minion_banana_debuff:OnCreated(kv)
     if not IsServer() then return end
-    self.slow = kv.slow
-    self:GetParent():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_rooted", {duration = self:GetDuration()})
 end
 
 function modifier_minion_banana_debuff:DeclareFunctions()
     return {MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE}
 end
 
+function modifier_minion_banana_debuff:CheckState()
+    return {
+        [MODIFIER_STATE_ROOTED] = true
+    }
+end
+
 function modifier_minion_banana_debuff:GetModifierMoveSpeedBonus_Percentage()
-    return -self.slow
+    return self:GetAbility():GetSpecialValueFor("banana_slow")
 end
