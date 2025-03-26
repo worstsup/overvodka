@@ -1187,11 +1187,11 @@
 		"Ability7"		"imba_batrider_sticky_napalm_new"
 
 		"Ability10"		"special_bonus_unique_tidehunter_9"
-		"Ability11"		"special_bonus_unique_tidehunter_5"
+		"Ability11"		"special_bonus_unique_tidehunter"
 		"Ability12"		"special_bonus_unique_tidehunter_2"
 		"Ability13"		"special_bonus_unique_tidehunter_3"
 		"Ability14"		"special_bonus_unique_tidehunter_8"
-		"Ability15"		"special_bonus_unique_tidehunter"
+		"Ability15"		"special_bonus_unique_tidehunter_5"
 		"Ability16"		"special_bonus_unique_tidehunter_7"
 		"Ability17"		"special_bonus_unique_tidehunter_10"
 		"Facets"
