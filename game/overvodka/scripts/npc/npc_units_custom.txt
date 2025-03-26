@@ -1631,36 +1631,25 @@
         "HasInventory"				"1"
     }
     //=================================================================================	
-// Neutral: Harpy Scout
-//=================================================================================
+	// Neutral: Minion
+	//=================================================================================
 	"npc_dota_neutral_harpy_scout"	
 	{
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/creeps/neutral_creeps/n_creep_harpy_a/n_creep_harpy_a.vmdl"	// Model.
+		"Model"						"models/minion/minion.vmdl"
 		"BaseClass"					"npc_dota_creep_neutral"
 		"SoundSet"					"n_creep_Ranged"
 		"Level"						"2"
-		"ModelScale" 					"0.85"
+		"ModelScale" 					"0.35"
 		"IsNeutralUnitType"			"1"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"harpy_scout_take_off"			// Ability 1
-		"Ability2"					"creep_piercing"			// Ability 2
-		"Ability3"					"neutral_upgrade"			// Ability 3
-		"Ability4"					""			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
+		"Ability1"					"harpy_scout_take_off"
+		"Ability2"					"creep_piercing"
+		"Ability3"					"neutral_upgrade"
+		"Ability4"					""
 		"ArmorPhysical"				"1"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
 		"MagicalResistance"				"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"28"		// Damage range min.
-		"AttackDamageMax"			"34"		// Damage range max.
+		"AttackDamageMin"			"25"		// Damage range min.
+		"AttackDamageMax"			"30"		// Damage range max.
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"125"		
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
@@ -1668,112 +1657,65 @@
 		"AttackRange"				"300"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
 		"RingRadius"				"50"
 		"HealthBarOffset"			"180"
-
-		// Bounty
-		//----------------------------------------------------------------
 		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"50"		// Gold earned min.
-		"BountyGoldMax"				"50"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
+		"BountyGoldMin"				"100"		// Gold earned min.
+		"BountyGoldMax"				"100"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"280"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"400"		// Base health.
+		"StatusHealth"				"300"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"200"		// Base mana.
 		"StatusManaRegen"			"1"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1200"		// Range of vision during day light.
 		"VisionNighttimeRange"		"800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
 
-//=================================================================================	
-// Neutral: Harpy Storm
-//=================================================================================
+	//=================================================================================	
+	// Neutral: Purple Minion
+	//=================================================================================
 	"npc_dota_neutral_harpy_storm"	
 	{
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/creeps/neutral_creeps/n_creep_harpy_b/n_creep_harpy_b.vmdl"	// Model.
+		"Model"						"models/minion/minon_purple.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creep_neutral"
 		"SoundSet"					"n_creep_Ranged"
 		"Level"						"3"
-		"ModelScale" 					"0.925"
+		"ModelScale" 					"0.4"
 		"IsNeutralUnitType"			"1"
-
-		// Abilities
-		//----------------------------------------------------------------
 		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1
 		"Ability2"					"creep_piercing"			// Ability 2
 		"Ability3"					"neutral_upgrade"			// Ability 3
 		"Ability4"					""			// Ability 4
-
-		// Armor
-		//----------------------------------------------------------------
 		"ArmorPhysical"				"2"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
 		"MagicalResistance"				"25"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"30"		// Damage range min.
 		"AttackDamageMax"			"36"		// Damage range max.
 		"AttackRate"				"2"		// Speed of attack.
-		"BaseAttackSpeed"			"125"		
+		"BaseAttackSpeed"			"150"		
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"300"		// Range within a target can be acquired.
 		"AttackRange"				"450"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
 		"RingRadius"				"50"
 		"HealthBarOffset"			"190"
-
-		// Bounty
-		//----------------------------------------------------------------
 		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"50"		// Gold earned min.
-		"BountyGoldMax"				"50"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
+		"BountyGoldMin"				"100"		// Gold earned min.
+		"BountyGoldMax"				"100"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"310"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"500"		// Base health.
+		"StatusHealth"				"450"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"125"		// Base mana.
 		"StatusManaRegen"			"3"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1800"		// Range of vision during day light.
 		"VisionNighttimeRange"		"1800"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}

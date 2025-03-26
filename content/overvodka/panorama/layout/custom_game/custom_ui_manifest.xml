@@ -17,7 +17,6 @@
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
 		<CustomUIElement type="EndScreen" 			layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" />
 		<CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ursa.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_litvin.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_mellstroy.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ilin.png" />
@@ -51,6 +50,8 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_evelone.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_bratishkin.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_azazin.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_weaver.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_stray.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_riki.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_riki.png" />
 	</Panel>
 </root>
