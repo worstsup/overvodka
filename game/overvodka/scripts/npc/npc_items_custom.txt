@@ -405,7 +405,7 @@
 	"item_balbe"
 	{
 		"BaseClass"						"item_lua"
-		"ScriptFile"					"balbe"
+		"ScriptFile"					"items/balbe"
 		"AbilityTextureName" 			"balbe"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown"				"8.0"
@@ -499,81 +499,81 @@
 			"01"						"item_ghost;item_kaya"
 		}
 	}
-//=================================
-// ЛЕЩ
-//=================================
+	//=================================
+	// ЛЕЩ
+	//=================================
 	"item_lesh"
-{
-    "BaseClass"                     "item_datadriven"
-    "ID"                            "1104"  //Valve's version of this item uses the ID "104".
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY" 
-    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "Model"                         "models/props_gameplay/red_box.vmdl"
-    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "leshec"
-	"AbilityUnitDamageType"	   		"DAMAGE_TYPE_PURE"
-	"ItemStackable"					"1"
-	"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-	"ItemPermanent"					"0"
-	"ItemInitialCharges"			"1"
-	"ItemDisplayCharges"			"1"
-	"ItemStockInitial"				"1"
-	"ItemStockMax"					"1"
-	"ItemStockTime"					"9999.0"
-	"precache"
 	{
-		"soundfile"			"soundevents/ailesh.vsndevts"
+		"BaseClass"                     "item_datadriven"
+		"ID"                            "1104"  //Valve's version of this item uses the ID "104".
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY" 
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"Model"                         "models/props_gameplay/red_box.vmdl"
+		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"            "leshec"
+		"AbilityUnitDamageType"	   		"DAMAGE_TYPE_PURE"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		"ItemDisplayCharges"			"1"
+		"ItemStockInitial"				"1"
+		"ItemStockMax"					"1"
+		"ItemStockTime"					"9999.0"
+		"precache"
+		{
+			"soundfile"			"soundevents/ailesh.vsndevts"
+		}
+		"AbilityCastRange"              "300"
+		"AbilityCastPoint"              "0.0"
+		"AbilityCooldown"               "40.0"
+		"AbilityManaCost"               "0"
+		"ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemCost"                      "700"
+		"ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
+		"ItemQuality"                   "rare"  
+		"AbilityValues"
+		{
+				"range_tooltip"         "300"
+				"stun_duration"         "1"
+		}
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"        "items/item_lesh.lua"
+				"Function"          "lesh_start"
+			}
+			"SpendCharge"
+				{}	
+		}
+		"Modifiers"
+		{
+			"modifier_item_abyssal_blade_datadriven_active"
+			{
+				"Duration"              "%stun_duration"
+				"Passive"               "0"
+				"IsHidden"              "0"
+				"IsBuff"                "0"
+				"IsDebuff"              "1"
+				"IsPurgable"            "1"
+				
+				"EffectName"            "particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"      "follow_overhead"
+				"OverrideAnimation"     "ACT_DOTA_DISABLED"
+				
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
 	}
-    "AbilityCastRange"              "300"
-    "AbilityCastPoint"              "0.0"
-    "AbilityCooldown"               "40.0"
-    "AbilityManaCost"               "0"
-    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-    "ItemCost"                      "700"
-    "ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
-    "ItemQuality"                   "rare"  
-    "AbilityValues"
-    {
-            "range_tooltip"         "300"
-            "stun_duration"         "1"
-    }
-    "OnSpellStart"
-    {
-        "RunScript"
-        {
-            "ScriptFile"        "item_dagon.lua"
-            "Function"          "item_dagon_datadriven_on_spell_start"
-        }
-		"SpendCharge"
-			{}	
-    }
-    "Modifiers"
-    {
-		"modifier_item_abyssal_blade_datadriven_active"
-        {
-            "Duration"              "%stun_duration"
-            "Passive"               "0"
-            "IsHidden"              "0"
-            "IsBuff"                "0"
-            "IsDebuff"              "1"
-            "IsPurgable"            "1"
-            
-            "EffectName"            "particles/generic_gameplay/generic_stunned.vpcf"
-            "EffectAttachType"      "follow_overhead"
-            "OverrideAnimation"     "ACT_DOTA_DISABLED"
-            
-            "States"
-            {
-                "MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
-            }
-        }
-    }
-}
 	"item_aegis_hero"
 	{
 		"BaseClass" 					"item_lua"
-		"ScriptFile" 					"aegis_hero"
+		"ScriptFile" 					"items/aegis_hero"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -608,7 +608,7 @@
 	"item_magic_aegis"
   	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"magic_aegis"
+		"ScriptFile"				"items/magic_aegis"
   		"AbilityTextureName"		"magic_aegis"
   		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemCost"					"8000"
@@ -644,7 +644,7 @@
 	"item_octarine_vodka"
   	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"octarine_vodka"
+		"ScriptFile"				"items/octarine_vodka"
   		"AbilityTextureName"		"octarine_vodka"
   		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ItemCost"					"4800"
@@ -993,7 +993,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"        "iphone"
+				"ScriptFile"        "items/iphone"
 				"Function"          "IphoneNew"
 			}
 			"ApplyModifier"
@@ -1373,7 +1373,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items_burgers.lua"
+				"ScriptFile"	"items/items_burgers.lua"
 				"Function"		"AddStat"
 				"str"			"%bonus_str"
 			}
@@ -1410,7 +1410,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items_burgers.lua"
+				"ScriptFile"	"items/items_burgers.lua"
 				"Function"		"AddStat"
 				"agi"			"%bonus_agi"
 			}
@@ -1447,7 +1447,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items_burgers.lua"
+				"ScriptFile"	"items/items_burgers.lua"
 				"Function"		"AddStat"
 				"int"			"%bonus_int"
 			}
@@ -1806,7 +1806,7 @@
 	"item_onehp"
 	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"item_onehp"
+		"ScriptFile"				"items/item_onehp"
 		"AbilityTextureName"		"onehp"
 		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown"			"90"
@@ -2116,7 +2116,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"            "item_scadi.lua"
+						"ScriptFile"            "items/item_nikes"
 						"Function"              "modifier_item_skadi_datadriven_on_orb_impact"
 						"ColdDurationMelee"     "%cold_duration_melee"
 						"ColdDurationRanged"    "%cold_duration_ranged"
@@ -2227,7 +2227,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"backtrack.lua"
+						"ScriptFile"	"items/item_govno.lua"
 						"Function"		"BacktrackHealth"
 					}
 				}
@@ -2249,7 +2249,7 @@
 	
 							"RunScript"
 							{
-								"ScriptFile"	"backtrack.lua"
+								"ScriptFile"	"items/item_govno.lua"
 								"Function"		"BacktrackHeal"
 							}
 						}
@@ -2375,7 +2375,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"			"item_mask_of_madness.lua"
+						"ScriptFile"			"items/item_mask_of_madness.lua"
 						"Function"				"modifier_item_mask_of_madness_datadriven_on_orb_impact"
 					}
 				}
@@ -2441,7 +2441,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"		"item_assault.lua"
+						"ScriptFile"		"items/item_assault.lua"
 						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_interval_think"
 					}
 				}
@@ -2450,7 +2450,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"		"item_assault.lua"
+						"ScriptFile"		"items/item_assault.lua"
 						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_interval_think"
 					}
 				}
@@ -2459,7 +2459,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"		"item_assault.lua"
+						"ScriptFile"		"items/item_assault.lua"
 						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_destroy"
 					}
 				}
@@ -2522,7 +2522,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"item_armlet.lua"
+				"ScriptFile"			"items/item_armlet.lua"
 				"Function"				"item_armlet_datadriven_on_spell_start"
 			}
 			
@@ -2590,7 +2590,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"item_armlet.lua"
+				"ScriptFile"			"items/item_armlet.lua"
 				"Function"				"item_armlet_active_datadriven_on_spell_start"
 			}
 			
@@ -2605,7 +2605,7 @@
 		{		
 			"RunScript"
 			{
-				"ScriptFile"					"item_armlet.lua"
+				"ScriptFile"					"items/item_armlet.lua"
 				"Function"						"item_armlet_active_datadriven_on_unequip"
 				"UnholyTicksToFullEffect"		"%unholy_ticks_to_full_effect"
 				"UnholyBonusStrength"			"%unholy_bonus_strength"
@@ -2637,7 +2637,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"					"item_armlet.lua"
+						"ScriptFile"					"items/item_armlet.lua"
 						"Function"						"modifier_item_armlet_active_datadriven_on_interval_think_damage"
 						"UnholyHealthDrainPerSecond"	"%unholy_health_drain_per_second"
 						"UnholyHealthDrainInterval"		"%unholy_health_drain_interval"
@@ -2655,7 +2655,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"					"item_armlet.lua"
+						"ScriptFile"					"items/item_armlet.lua"
 						"Function"						"modifier_item_armlet_active_datadriven_apply_tick_strength_on_interval_think"
 						"UnholyTicksToFullEffect"		"%unholy_ticks_to_full_effect"
 						"UnholyBonusStrength"			"%unholy_bonus_strength"
@@ -2691,7 +2691,7 @@
 	"item_bablokrad"
 	{
 		"BaseClass"						"item_lua"
-		"ScriptFile" 					"item_bablokrad"
+		"ScriptFile" 					"items/item_bablokrad"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl"	
 		"AbilityTextureName"			"bablokrad"
@@ -2716,7 +2716,7 @@
 	"item_elixir_collector"
 	{
 		"BaseClass"						"item_lua"
-		"ScriptFile"					"elixir_collector"
+		"ScriptFile"					"items/elixir_collector"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"Model"							"models/props_gameplay/red_box.vmdl"		
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -2773,7 +2773,7 @@
 	"item_byebye_boots"
 	{
 		"BaseClass"						"item_lua"
-		"ScriptFile"					"item_byebye_boots"
+		"ScriptFile"					"items/item_byebye_boots"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"Model"							"models/props_gameplay/red_box.vmdl"
 		"AbilityTextureName"			"byebye_boots"
@@ -2792,7 +2792,7 @@
 	"item_byebye"
 	{
 		"BaseClass"						"item_lua"
-		"ScriptFile"					"item_byebye"
+		"ScriptFile"					"items/item_byebye"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"Model"							"models/props_gameplay/red_box.vmdl"
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -2825,7 +2825,7 @@
 	"item_cuirass_2"
 	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"cuirass"
+		"ScriptFile"				"items/cuirass"
 		"AbilityTextureName"		"oboyudno"
 		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"			"35"
@@ -2867,7 +2867,7 @@
 	"item_oboyudno_2"
 	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"oboyudno_2"
+		"ScriptFile"				"items/oboyudno_2"
 		"AbilityTextureName"		"oboyudno_2"
 		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"			"30"
@@ -2917,7 +2917,7 @@
 	"item_charik_new"
 	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"item_charik_new"
+		"ScriptFile"				"items/item_charik_new"
 		"AbilityTextureName"		"charik"
 		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown"			"25"
@@ -2937,7 +2937,7 @@
 	"item_drobe"
 	{
 		"BaseClass" 					"item_lua"
-		"ScriptFile" 					"drobe"
+		"ScriptFile" 					"items/drobe"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -2988,7 +2988,7 @@
 		"BaseClass"				   "item_lua"
 		"Model"					   "models/props_gameplay/red_box.vmdl" 
 		"Effect"				   "particles/generic_gameplay/dropped_item.vpcf"
-		"ScriptFile"			   "armature_strike"
+		"ScriptFile"			   "items/armature_strike"
 		"AbilityTextureName"	   "armature_strike"
 		"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
     	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -3031,7 +3031,7 @@
 	"item_magic_crystalis"
 	{
 		"BaseClass" 					"item_lua"
-		"ScriptFile" 					"magic_crit"
+		"ScriptFile" 					"items/magic_crit"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -3065,7 +3065,7 @@
 	"item_magic_daedalus"
 	{
 		"BaseClass" 					"item_lua"
-		"ScriptFile" 					"magic_crit"
+		"ScriptFile" 					"items/magic_crit"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"

@@ -1,5 +1,5 @@
-LinkLuaModifier("modifier_item_balbe", "balbe", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_balbe_active", "balbe", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_balbe", "items/balbe", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_balbe_active", "items/balbe", LUA_MODIFIER_MOTION_NONE)
 
 item_balbe = class({})
 

@@ -55,7 +55,6 @@ function modifier_sans_r:DeclareFunctions()
     }
 end
 
--- Fixed getter functions to work on both client and server
 function modifier_sans_r:GetModifierMoveSpeedBonus_Percentage()
     if self:GetAbility() then
         return self:GetAbility():GetSpecialValueFor("bonus_ms")

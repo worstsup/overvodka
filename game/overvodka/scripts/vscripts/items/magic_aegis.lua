@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_item_magic_aegis", "magic_aegis", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_magic_aegis", "items/magic_aegis", LUA_MODIFIER_MOTION_NONE)
 
 item_magic_aegis = class({})
 

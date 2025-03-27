@@ -1,4 +1,4 @@
-LinkLuaModifier( "modifier_item_magic_crystalis", "magic_crit", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_magic_crystalis", "items/magic_crit", LUA_MODIFIER_MOTION_NONE )
 
 item_magic_crystalis = class({})
 
@@ -58,7 +58,7 @@ function modifier_item_magic_crystalis:GetModifierTotalDamageOutgoing_Percentage
     end
 end
 
-LinkLuaModifier( "modifier_item_magic_daedalus", "magic_crit", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_magic_daedalus", "items/magic_crit", LUA_MODIFIER_MOTION_NONE )
 
 item_magic_daedalus = class({})
 

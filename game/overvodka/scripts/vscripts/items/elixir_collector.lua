@@ -1,7 +1,7 @@
-LinkLuaModifier("modifier_elixir_collector_buff", "elixir_collector", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_elixir_collector_debuff", "elixir_collector", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_elixir_collector_buff_hero", "elixir_collector", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_elixir_collector", "elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_elixir_collector_buff", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_elixir_collector_debuff", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_elixir_collector_buff_hero", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_elixir_collector", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
 
 item_elixir_collector = class({})
 

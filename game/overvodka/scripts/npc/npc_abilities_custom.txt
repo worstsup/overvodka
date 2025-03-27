@@ -6596,7 +6596,7 @@
 	"hamster"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"hamster"
+		"ScriptFile"					"units/hamster/hamster"
 		"AbilityTextureName"			"hamster"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"

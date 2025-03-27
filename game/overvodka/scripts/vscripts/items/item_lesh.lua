@@ -1,4 +1,4 @@
-function item_dagon_datadriven_on_spell_start(keys)
+function lesh_start(keys)
     local target = keys.target
     if target:TriggerSpellAbsorb(keys.ability) then return end
     local target_maxHealth = target:GetMaxHealth()

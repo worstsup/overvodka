@@ -1,5 +1,5 @@
-LinkLuaModifier("modifier_item_bablokrad", "item_bablokrad", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_bablokrad_cooldown", "item_bablokrad", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_bablokrad", "items/item_bablokrad", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_bablokrad_cooldown", "items/item_bablokrad", LUA_MODIFIER_MOTION_NONE)
 
 item_bablokrad = class({})
 

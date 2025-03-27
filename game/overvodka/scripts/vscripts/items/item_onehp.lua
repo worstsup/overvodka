@@ -1,5 +1,5 @@
-LinkLuaModifier( "modifier_item_onehp", "item_onehp", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_onehp_active", "item_onehp", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_onehp", "items/item_onehp", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_onehp_active", "items/item_onehp", LUA_MODIFIER_MOTION_NONE )
 
 item_onehp = class({})
 

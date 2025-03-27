@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_item_octarine_vodka", "octarine_vodka", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_octarine_vodka", "items/octarine_vodka", LUA_MODIFIER_MOTION_NONE)
 
 item_octarine_vodka = class({})
 

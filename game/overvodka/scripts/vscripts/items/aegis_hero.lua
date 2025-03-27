@@ -1,5 +1,5 @@
-LinkLuaModifier("modifier_item_aegis_hero", "aegis_hero", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_aegis_hero_slow", "aegis_hero", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_aegis_hero", "items/aegis_hero", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_aegis_hero_slow", "items/aegis_hero", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 item_aegis_hero = class({})
 

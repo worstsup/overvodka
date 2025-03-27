@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_armature_strike_crit", "armature_strike", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_armature_strike", "armature_strike", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_armature_strike_crit", "items/armature_strike", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_armature_strike", "items/armature_strike", LUA_MODIFIER_MOTION_NONE)
 
 item_armature_strike = class({})
 function item_armature_strike:GetIntrinsicModifierName() 

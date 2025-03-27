@@ -1,55 +1,54 @@
-LinkLuaModifier("modifier_item_oboyudno_2", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_aura_buff", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_aura_buff_armor", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_aura_debuff", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_aura_debuff_armor", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_ship_magic_armor", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_bristback_ship", "boss_items", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_birzha_blade_mail", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_birzha_blade_mail_active", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_2", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_2_aura_buff", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_2_aura_buff_armor", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_2_aura_debuff", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_2_aura_debuff_armor", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_ship_magic_armor", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_birzha_blade_mail", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_birzha_blade_mail_active", "items/cuirass", LUA_MODIFIER_MOTION_NONE)
 
-item_oboyudno_2 = class({})
+item_cuirass_2 = class({})
 
-function item_oboyudno_2:GetIntrinsicModifierName()
-    return "modifier_item_oboyudno_2"
+function item_cuirass_2:GetIntrinsicModifierName()
+    return "modifier_item_cuirass_2"
 end
 
-function item_oboyudno_2:OnSpellStart()
+function item_cuirass_2:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
     self:GetCaster():Purge( false, true, false, false, false)
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_birzha_blade_mail_active", {duration = duration} )
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_lotus_orb_active", {duration = duration} )
-    self:GetCaster():EmitSound("oboyudno_2")
+    self:GetCaster():EmitSound("oboyudno")
     self:GetCaster():EmitSound("DOTA_Item.BladeMail.Activate")
 end
 
-modifier_item_oboyudno_2 = class({})
+modifier_item_cuirass_2 = class({})
 
-function modifier_item_oboyudno_2:IsHidden() return true end
-function modifier_item_oboyudno_2:IsPurgable() return false end
-function modifier_item_oboyudno_2:IsPurgeException() return false end
-function modifier_item_oboyudno_2:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
+function modifier_item_cuirass_2:IsHidden() return true end
+function modifier_item_cuirass_2:IsPurgable() return false end
+function modifier_item_cuirass_2:IsPurgeException() return false end
+function modifier_item_cuirass_2:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
-function modifier_item_oboyudno_2:OnCreated()
+function modifier_item_cuirass_2:OnCreated()
 	if not IsServer() then return end
 
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_aura_buff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_aura_buff", {})
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_aura_debuff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_2_aura_buff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_2_aura_buff", {})
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_2_aura_debuff", {})
 	end
 end
 
-function modifier_item_oboyudno_2:OnDestroy()
+function modifier_item_cuirass_2:OnDestroy()
 	if IsServer() then
-		if not self:GetCaster():HasModifier("modifier_item_oboyudno_2") then
-			self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_aura_buff")
-			self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_aura_debuff")
+		if not self:GetCaster():HasModifier("modifier_item_cuirass_2") then
+			self:GetCaster():RemoveModifierByName("modifier_item_cuirass_2_aura_buff")
+			self:GetCaster():RemoveModifierByName("modifier_item_cuirass_2_aura_debuff")
 		end
 	end
 end
 
-function modifier_item_oboyudno_2:DeclareFunctions()
+function modifier_item_cuirass_2:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
@@ -60,37 +59,37 @@ function modifier_item_oboyudno_2:DeclareFunctions()
 	}
 end
 
-function modifier_item_oboyudno_2:GetModifierPhysicalArmorBonus()
+function modifier_item_cuirass_2:GetModifierPhysicalArmorBonus()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_armor_stats')
 end
 
-function modifier_item_oboyudno_2:GetModifierConstantHealthRegen()
+function modifier_item_cuirass_2:GetModifierConstantHealthRegen()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_hpregen')
 end
 
-function modifier_item_oboyudno_2:GetModifierAttackSpeedBonus_Constant()
+function modifier_item_cuirass_2:GetModifierAttackSpeedBonus_Constant()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_attack_speed_stats')
 end
 
-function modifier_item_oboyudno_2:GetModifierPreAttack_BonusDamage()
+function modifier_item_cuirass_2:GetModifierPreAttack_BonusDamage()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_damage_stats')
 end
 
-function modifier_item_oboyudno_2:GetModifierBonusStats_Intellect()
+function modifier_item_cuirass_2:GetModifierBonusStats_Intellect()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_int_stats')
 end
 
-function modifier_item_oboyudno_2:OnAttackLanded(params)
+function modifier_item_cuirass_2:OnAttackLanded(params)
 	if not IsServer() then return end
 	if not self:GetAbility() then return end
 	if params.attacker ~= self:GetParent() and params.target == self:GetParent() then
 		if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then return end
-		if self:GetParent():FindAllModifiersByName("modifier_item_oboyudno_2")[1] ~= self then return end
+		if self:GetParent():FindAllModifiersByName("modifier_item_cuirass_2")[1] ~= self then return end
 		if self:GetParent():HasModifier("modifier_item_birzha_blade_mail") then return end
 		if self:GetAbility():GetName() == "item_birzha_blade_mail" then
 			if params.attacker:IsMagicImmune() then return end
@@ -100,322 +99,322 @@ function modifier_item_oboyudno_2:OnAttackLanded(params)
 	end
 end
 
-modifier_item_oboyudno_2_aura_buff = class({})
+modifier_item_cuirass_2_aura_buff = class({})
 
-function modifier_item_oboyudno_2_aura_buff:IsDebuff() return false end
-function modifier_item_oboyudno_2_aura_buff:AllowIllusionDuplicate() return true end
-function modifier_item_oboyudno_2_aura_buff:IsHidden() return true end
-function modifier_item_oboyudno_2_aura_buff:IsPurgable() return false end
+function modifier_item_cuirass_2_aura_buff:IsDebuff() return false end
+function modifier_item_cuirass_2_aura_buff:AllowIllusionDuplicate() return true end
+function modifier_item_cuirass_2_aura_buff:IsHidden() return true end
+function modifier_item_cuirass_2_aura_buff:IsPurgable() return false end
 
-function modifier_item_oboyudno_2_aura_buff:GetAuraRadius()
+function modifier_item_cuirass_2_aura_buff:GetAuraRadius()
 	return 1200
 end
 
-function modifier_item_oboyudno_2_aura_buff:GetAuraSearchFlags()
+function modifier_item_cuirass_2_aura_buff:GetAuraSearchFlags()
 	return DOTA_UNIT_TARGET_FLAG_NONE
 end
 
-function modifier_item_oboyudno_2_aura_buff:GetAuraSearchTeam()
+function modifier_item_cuirass_2_aura_buff:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
 end
 
-function modifier_item_oboyudno_2_aura_buff:GetAuraSearchType()
+function modifier_item_cuirass_2_aura_buff:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING
 end
 
-function modifier_item_oboyudno_2_aura_buff:GetModifierAura()
-	return "modifier_item_oboyudno_2_aura_buff_armor"
+function modifier_item_cuirass_2_aura_buff:GetModifierAura()
+	return "modifier_item_cuirass_2_aura_buff_armor"
 end
 
-function modifier_item_oboyudno_2_aura_buff:IsAura()
+function modifier_item_cuirass_2_aura_buff:IsAura()
 	return true
 end
 
-modifier_item_oboyudno_2_aura_buff_armor = class({})
+modifier_item_cuirass_2_aura_buff_armor = class({})
 
-function modifier_item_oboyudno_2_aura_buff_armor:GetTexture()
+function modifier_item_cuirass_2_aura_buff_armor:GetTexture()
   	return "cuiras"
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:OnCreated()
+function modifier_item_cuirass_2_aura_buff_armor:OnCreated()
 	self.aura_as_ally = self:GetAbility():GetSpecialValueFor("bonus_attack_speed_aura")
 	self.aura_armor_ally = self:GetAbility():GetSpecialValueFor("bonus_armor_aura")
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:IsHidden() return true end
-function modifier_item_oboyudno_2_aura_buff_armor:IsPurgable() return false end
-function modifier_item_oboyudno_2_aura_buff_armor:IsDebuff() return false end
+function modifier_item_cuirass_2_aura_buff_armor:IsHidden() return true end
+function modifier_item_cuirass_2_aura_buff_armor:IsPurgable() return false end
+function modifier_item_cuirass_2_aura_buff_armor:IsDebuff() return false end
 
-function modifier_item_oboyudno_2_aura_buff_armor:DeclareFunctions()
+function modifier_item_cuirass_2_aura_buff_armor:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS
 	}
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:GetModifierAttackSpeedBonus_Constant()
+function modifier_item_cuirass_2_aura_buff_armor:GetModifierAttackSpeedBonus_Constant()
 	return self.aura_as_ally
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:GetModifierPhysicalArmorBonus()
+function modifier_item_cuirass_2_aura_buff_armor:GetModifierPhysicalArmorBonus()
 	return self.aura_armor_ally
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:GetEffectName()
+function modifier_item_cuirass_2_aura_buff_armor:GetEffectName()
 	return "particles/items_fx/aura_assault.vpcf"
 end
 
-function modifier_item_oboyudno_2_aura_buff_armor:GetEffectAttachType()
+function modifier_item_cuirass_2_aura_buff_armor:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
-modifier_item_oboyudno_2_aura_debuff = class({})
+modifier_item_cuirass_2_aura_debuff = class({})
 
-function modifier_item_oboyudno_2_aura_debuff:IsDebuff() return false end
-function modifier_item_oboyudno_2_aura_debuff:AllowIllusionDuplicate() return true end
-function modifier_item_oboyudno_2_aura_debuff:IsHidden() return true end
-function modifier_item_oboyudno_2_aura_debuff:IsPurgable() return false end
+function modifier_item_cuirass_2_aura_debuff:IsDebuff() return false end
+function modifier_item_cuirass_2_aura_debuff:AllowIllusionDuplicate() return true end
+function modifier_item_cuirass_2_aura_debuff:IsHidden() return true end
+function modifier_item_cuirass_2_aura_debuff:IsPurgable() return false end
 
-function modifier_item_oboyudno_2_aura_debuff:GetAuraRadius()
+function modifier_item_cuirass_2_aura_debuff:GetAuraRadius()
 	return 1200
 end
 
-function modifier_item_oboyudno_2_aura_debuff:GetAuraSearchFlags()
+function modifier_item_cuirass_2_aura_debuff:GetAuraSearchFlags()
 	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
 end
 
-function modifier_item_oboyudno_2_aura_debuff:GetAuraSearchTeam()
+function modifier_item_cuirass_2_aura_debuff:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
-function modifier_item_oboyudno_2_aura_debuff:GetAuraSearchType()
+function modifier_item_cuirass_2_aura_debuff:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING
 end
 
-function modifier_item_oboyudno_2_aura_debuff:GetModifierAura()
-	return "modifier_item_oboyudno_2_aura_debuff_armor"
+function modifier_item_cuirass_2_aura_debuff:GetModifierAura()
+	return "modifier_item_cuirass_2_aura_debuff_armor"
 end
 
-function modifier_item_oboyudno_2_aura_debuff:IsAura()
+function modifier_item_cuirass_2_aura_debuff:IsAura()
 	return true
 end
 
-modifier_item_oboyudno_2_aura_debuff_armor = class({})
+modifier_item_cuirass_2_aura_debuff_armor = class({})
 
-function modifier_item_oboyudno_2_aura_debuff_armor:GetTexture()
+function modifier_item_cuirass_2_aura_debuff_armor:GetTexture()
   	return "byebye"
 end
 
-function modifier_item_oboyudno_2_aura_debuff_armor:OnCreated()
+function modifier_item_cuirass_2_aura_debuff_armor:OnCreated()
 	self.aura_armor_enemy = self:GetAbility():GetSpecialValueFor("minus_armor_aura")
 end
 
-function modifier_item_oboyudno_2_aura_debuff_armor:IsHidden() return true end
-function modifier_item_oboyudno_2_aura_debuff_armor:IsPurgable() return false end
-function modifier_item_oboyudno_2_aura_debuff_armor:IsDebuff() return true end
+function modifier_item_cuirass_2_aura_debuff_armor:IsHidden() return true end
+function modifier_item_cuirass_2_aura_debuff_armor:IsPurgable() return false end
+function modifier_item_cuirass_2_aura_debuff_armor:IsDebuff() return true end
 
-function modifier_item_oboyudno_2_aura_debuff_armor:DeclareFunctions()
+function modifier_item_cuirass_2_aura_debuff_armor:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS
 	}
 end
 
-function modifier_item_oboyudno_2_aura_debuff_armor:GetModifierPhysicalArmorBonus()
+function modifier_item_cuirass_2_aura_debuff_armor:GetModifierPhysicalArmorBonus()
 	return self.aura_armor_enemy
 end
 
-LinkLuaModifier("modifier_item_oboyudno_2_3", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_3_aura_buff", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_3_aura_buff_armor", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_3_aura_debuff", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_oboyudno_2_3_aura_debuff_armor", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_magical_oboyudno_2_active", "oboyudno_2", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_3", "cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_3_aura_buff", "cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_3_aura_buff_armor", "cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_3_aura_debuff", "cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cuirass_3_aura_debuff_armor", "cuirass", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_magical_cuirass_active", "cuirass", LUA_MODIFIER_MOTION_NONE)
 
-item_oboyudno_2_3 = class({})
+item_cuirass_3 = class({})
 
-function item_oboyudno_2_3:GetIntrinsicModifierName()
-    return "modifier_item_oboyudno_2_3"
+function item_cuirass_3:GetIntrinsicModifierName()
+    return "modifier_item_cuirass_3"
 end
 
-function item_oboyudno_2_3:OnSpellStart()
+function item_cuirass_3:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_magical_oboyudno_2_active", {duration = duration} )
+    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_magical_cuirass_active", {duration = duration} )
     self:GetCaster():EmitSound("DOTA_Item.Pipe.Activate")
 end
 
-modifier_item_oboyudno_2_3 = class({})
+modifier_item_cuirass_3 = class({})
 
-function modifier_item_oboyudno_2_3:IsHidden() return true end
-function modifier_item_oboyudno_2_3:IsPurgable() return false end
-function modifier_item_oboyudno_2_3:IsPurgeException() return false end
-function modifier_item_oboyudno_2_3:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
+function modifier_item_cuirass_3:IsHidden() return true end
+function modifier_item_cuirass_3:IsPurgable() return false end
+function modifier_item_cuirass_3:IsPurgeException() return false end
+function modifier_item_cuirass_3:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
-function modifier_item_oboyudno_2_3:OnCreated()
+function modifier_item_cuirass_3:OnCreated()
 	if not IsServer() then return end
 
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3_aura_buff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_buff", {})
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_debuff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3_aura_buff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_buff", {})
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_debuff", {})
 	end
 end
 
-function modifier_item_oboyudno_2_3:OnDestroy()
+function modifier_item_cuirass_3:OnDestroy()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3") then
-		self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_3_aura_buff")
-		self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_3_aura_debuff")
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3") then
+		self:GetCaster():RemoveModifierByName("modifier_item_cuirass_3_aura_buff")
+		self:GetCaster():RemoveModifierByName("modifier_item_cuirass_3_aura_debuff")
 	end
 end
 
-function modifier_item_oboyudno_2_3:DeclareFunctions()
+function modifier_item_cuirass_3:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,	
 	}
 end
 
-function modifier_item_oboyudno_2_3:GetModifierConstantHealthRegen()
+function modifier_item_cuirass_3:GetModifierConstantHealthRegen()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor("health_regen")
 end
 
-function modifier_item_oboyudno_2_3:GetModifierMagicalResistanceBonus()
+function modifier_item_cuirass_3:GetModifierMagicalResistanceBonus()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor("magical_resistance")
 end
 
-modifier_item_oboyudno_2_3_aura_buff = class({})
+modifier_item_cuirass_3_aura_buff = class({})
 
-function modifier_item_oboyudno_2_3_aura_buff:IsDebuff() return false end
-function modifier_item_oboyudno_2_3_aura_buff:AllowIllusionDuplicate() return true end
-function modifier_item_oboyudno_2_3_aura_buff:IsHidden() return true end
-function modifier_item_oboyudno_2_3_aura_buff:IsPurgable() return false end
+function modifier_item_cuirass_3_aura_buff:IsDebuff() return false end
+function modifier_item_cuirass_3_aura_buff:AllowIllusionDuplicate() return true end
+function modifier_item_cuirass_3_aura_buff:IsHidden() return true end
+function modifier_item_cuirass_3_aura_buff:IsPurgable() return false end
 
-function modifier_item_oboyudno_2_3_aura_buff:GetAuraRadius()
+function modifier_item_cuirass_3_aura_buff:GetAuraRadius()
 	return self:GetAbility():GetSpecialValueFor("radius")
 end
 
-function modifier_item_oboyudno_2_3_aura_buff:GetAuraSearchFlags()
+function modifier_item_cuirass_3_aura_buff:GetAuraSearchFlags()
 	return DOTA_UNIT_TARGET_FLAG_NONE
 end
 
-function modifier_item_oboyudno_2_3_aura_buff:GetAuraSearchTeam()
+function modifier_item_cuirass_3_aura_buff:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
 end
 
-function modifier_item_oboyudno_2_3_aura_buff:GetAuraSearchType()
+function modifier_item_cuirass_3_aura_buff:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING
 end
 
-function modifier_item_oboyudno_2_3_aura_buff:GetModifierAura()
-	return "modifier_item_oboyudno_2_3_aura_buff_armor"
+function modifier_item_cuirass_3_aura_buff:GetModifierAura()
+	return "modifier_item_cuirass_3_aura_buff_armor"
 end
 
-function modifier_item_oboyudno_2_3_aura_buff:IsAura()
+function modifier_item_cuirass_3_aura_buff:IsAura()
 	return true
 end
 
-modifier_item_oboyudno_2_3_aura_buff_armor = class({})
+modifier_item_cuirass_3_aura_buff_armor = class({})
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:GetTexture()
+function modifier_item_cuirass_3_aura_buff_armor:GetTexture()
   	return "cuiras2"
 end
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:OnCreated()
+function modifier_item_cuirass_3_aura_buff_armor:OnCreated()
 	self.magical_resistance_aura = self:GetAbility():GetSpecialValueFor("magical_resistance_aura")
 	self.health_regen_aura = self:GetAbility():GetSpecialValueFor("health_regen_aura")
 end
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:IsHidden() return false end
-function modifier_item_oboyudno_2_3_aura_buff_armor:IsPurgable() return false end
-function modifier_item_oboyudno_2_3_aura_buff_armor:IsDebuff() return false end
+function modifier_item_cuirass_3_aura_buff_armor:IsHidden() return false end
+function modifier_item_cuirass_3_aura_buff_armor:IsPurgable() return false end
+function modifier_item_cuirass_3_aura_buff_armor:IsDebuff() return false end
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:DeclareFunctions()
+function modifier_item_cuirass_3_aura_buff_armor:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 	}
 end
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:GetModifierConstantHealthRegen()
+function modifier_item_cuirass_3_aura_buff_armor:GetModifierConstantHealthRegen()
 	return self.health_regen_aura
 end
 
-function modifier_item_oboyudno_2_3_aura_buff_armor:GetModifierMagicalResistanceBonus()
+function modifier_item_cuirass_3_aura_buff_armor:GetModifierMagicalResistanceBonus()
 	return self.magical_resistance_aura
 end
 
-modifier_item_oboyudno_2_3_aura_debuff = class({})
+modifier_item_cuirass_3_aura_debuff = class({})
 
-function modifier_item_oboyudno_2_3_aura_debuff:IsDebuff() return false end
-function modifier_item_oboyudno_2_3_aura_debuff:AllowIllusionDuplicate() return true end
-function modifier_item_oboyudno_2_3_aura_debuff:IsHidden() return true end
-function modifier_item_oboyudno_2_3_aura_debuff:IsPurgable() return false end
+function modifier_item_cuirass_3_aura_debuff:IsDebuff() return false end
+function modifier_item_cuirass_3_aura_debuff:AllowIllusionDuplicate() return true end
+function modifier_item_cuirass_3_aura_debuff:IsHidden() return true end
+function modifier_item_cuirass_3_aura_debuff:IsPurgable() return false end
 
-function modifier_item_oboyudno_2_3_aura_debuff:GetAuraRadius()
+function modifier_item_cuirass_3_aura_debuff:GetAuraRadius()
 	return self:GetAbility():GetSpecialValueFor("radius")
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff:GetAuraSearchFlags()
+function modifier_item_cuirass_3_aura_debuff:GetAuraSearchFlags()
 	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff:GetAuraSearchTeam()
+function modifier_item_cuirass_3_aura_debuff:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff:GetAuraSearchType()
+function modifier_item_cuirass_3_aura_debuff:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff:GetModifierAura()
-	return "modifier_item_oboyudno_2_3_aura_debuff_armor"
+function modifier_item_cuirass_3_aura_debuff:GetModifierAura()
+	return "modifier_item_cuirass_3_aura_debuff_armor"
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff:IsAura()
+function modifier_item_cuirass_3_aura_debuff:IsAura()
 	return true
 end
 
-modifier_item_oboyudno_2_3_aura_debuff_armor = class({})
+modifier_item_cuirass_3_aura_debuff_armor = class({})
 
-function modifier_item_oboyudno_2_3_aura_debuff_armor:GetTexture()
+function modifier_item_cuirass_3_aura_debuff_armor:GetTexture()
   	return "cuiras2"
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff_armor:OnCreated()
+function modifier_item_cuirass_3_aura_debuff_armor:OnCreated()
 	self.spell_amplify_aura = self:GetAbility():GetSpecialValueFor("enemy_amplify_aura")
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff_armor:IsHidden() return false end
-function modifier_item_oboyudno_2_3_aura_debuff_armor:IsPurgable() return false end
-function modifier_item_oboyudno_2_3_aura_debuff_armor:IsDebuff() return true end
+function modifier_item_cuirass_3_aura_debuff_armor:IsHidden() return false end
+function modifier_item_cuirass_3_aura_debuff_armor:IsPurgable() return false end
+function modifier_item_cuirass_3_aura_debuff_armor:IsDebuff() return true end
 
-function modifier_item_oboyudno_2_3_aura_debuff_armor:DeclareFunctions()
+function modifier_item_cuirass_3_aura_debuff_armor:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DIRECT_MODIFICATION
 	}
 end
 
-function modifier_item_oboyudno_2_3_aura_debuff_armor:GetModifierMagicalResistanceDirectModification()
+function modifier_item_cuirass_3_aura_debuff_armor:GetModifierMagicalResistanceDirectModification()
 	return self.spell_amplify_aura
 end
 
-modifier_item_magical_oboyudno_2_active = class({})
+modifier_item_magical_cuirass_active = class({})
 
-function modifier_item_magical_oboyudno_2_active:GetEffectName()
-	return "particles/oboyudno_23/item_oboyudno_23_effect.vpcf"
+function modifier_item_magical_cuirass_active:GetEffectName()
+	return "particles/cuirass3/item_cuirass3_effect.vpcf"
 end
 
-function modifier_item_magical_oboyudno_2_active:GetEffectAttachType()
+function modifier_item_magical_cuirass_active:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function modifier_item_magical_oboyudno_2_active:GetTexture()
+function modifier_item_magical_cuirass_active:GetTexture()
 	return "cuiras2"
 end
 
-function modifier_item_magical_oboyudno_2_active:OnCreated(keys)
+function modifier_item_magical_cuirass_active:OnCreated(keys)
     local magical_resist_active = self:GetAbility():GetSpecialValueFor("magical_resist_active")
     self.start_shield = magical_resist_active
     if not IsServer() then return end
@@ -423,7 +422,7 @@ function modifier_item_magical_oboyudno_2_active:OnCreated(keys)
     self:SetStackCount(self.remaining_health)
 end
 
-function modifier_item_magical_oboyudno_2_active:OnRefresh(keys)
+function modifier_item_magical_cuirass_active:OnRefresh(keys)
     local magical_resist_active = self:GetAbility():GetSpecialValueFor("magical_resist_active")
     self.start_shield = magical_resist_active
     if not IsServer() then return end
@@ -431,14 +430,14 @@ function modifier_item_magical_oboyudno_2_active:OnRefresh(keys)
     self:SetStackCount(self.remaining_health)
 end
 
-function modifier_item_magical_oboyudno_2_active:OnIntervalThink()
+function modifier_item_magical_cuirass_active:OnIntervalThink()
     if not IsServer() then return end
     if self.remaining_health <= 0 then
         self:Destroy()
     end
 end
 
-function modifier_item_magical_oboyudno_2_active:DeclareFunctions()
+function modifier_item_magical_cuirass_active:DeclareFunctions()
     local funcs = {
         MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
         MODIFIER_PROPERTY_TOOLTIP,
@@ -447,11 +446,11 @@ function modifier_item_magical_oboyudno_2_active:DeclareFunctions()
     return funcs
 end
 
-function modifier_item_magical_oboyudno_2_active:OnTooltip()
+function modifier_item_magical_cuirass_active:OnTooltip()
 	return self:GetStackCount()
 end
 
-function modifier_item_magical_oboyudno_2_active:GetModifierTotal_ConstantBlock(kv)
+function modifier_item_magical_cuirass_active:GetModifierTotal_ConstantBlock(kv)
     if not IsServer() then return end
     local original_shield_amount = self.remaining_health
     if kv.damage_type == DAMAGE_TYPE_MAGICAL then
@@ -470,7 +469,7 @@ function modifier_item_magical_oboyudno_2_active:GetModifierTotal_ConstantBlock(
 	end
 end
 
-function modifier_item_magical_oboyudno_2_active:GetModifierIncomingSpellDamageConstant(params)
+function modifier_item_magical_cuirass_active:GetModifierIncomingSpellDamageConstant(params)
     if (not IsServer()) then
         if params.report_max then
             return self.start_shield
@@ -494,11 +493,11 @@ function modifier_item_ship_magic_armor:GetAttributes()  return MODIFIER_ATTRIBU
 
 function modifier_item_ship_magic_armor:OnCreated()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3_aura_buff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_buff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3_aura_buff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_buff", {})
 	end
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3_aura_debuff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_debuff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3_aura_debuff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_debuff", {})
 	end
 	if not self:GetCaster():HasModifier("modifier_item_bristback_ship") then
 		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_bristback_ship", {})
@@ -508,11 +507,11 @@ end
 
 function modifier_item_ship_magic_armor:OnIntervalThink()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3_aura_buff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_buff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3_aura_buff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_buff", {})
 	end
-	if not self:GetCaster():HasModifier("modifier_item_oboyudno_2_3_aura_debuff") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_oboyudno_2_3_aura_debuff", {})
+	if not self:GetCaster():HasModifier("modifier_item_cuirass_3_aura_debuff") then
+		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_cuirass_3_aura_debuff", {})
 	end
 	if not self:GetCaster():HasModifier("modifier_item_bristback_ship") then
 		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_bristback_ship", {})
@@ -522,8 +521,8 @@ end
 function modifier_item_ship_magic_armor:OnDestroy()
 	if not IsServer() then return end
 	if not self:GetCaster():HasModifier("modifier_item_ship_magic_armor") then
-		self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_3_aura_buff")
-		self:GetCaster():RemoveModifierByName("modifier_item_oboyudno_2_3_aura_debuff")
+		self:GetCaster():RemoveModifierByName("modifier_item_cuirass_3_aura_buff")
+		self:GetCaster():RemoveModifierByName("modifier_item_cuirass_3_aura_debuff")
 		self:GetCaster():RemoveModifierByName("modifier_item_bristback_ship")
 	end
 end
@@ -554,7 +553,7 @@ end
 function item_ship_magic_armor:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_magical_oboyudno_2_active", {duration = duration} )
+    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_magical_cuirass_active", {duration = duration} )
     self:GetCaster():EmitSound("DOTA_Item.Pipe.Activate")
 end
 

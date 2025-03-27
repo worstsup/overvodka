@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_item_byebye_boots", "item_byebye_boots", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_byebye_boots", "items/item_byebye_boots", LUA_MODIFIER_MOTION_NONE)
 
 item_byebye_boots = class({})
 

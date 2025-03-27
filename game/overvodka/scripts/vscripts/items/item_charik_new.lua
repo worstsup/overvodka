@@ -1,6 +1,6 @@
-LinkLuaModifier("modifier_item_charik_new", "item_charik_new", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_charik_new_regen", "item_charik_new", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_item_charik_new_regen_effect", "item_charik_new", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_charik_new", "items/item_charik_new", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_charik_new_regen", "items/item_charik_new", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_charik_new_regen_effect", "items/item_charik_new", LUA_MODIFIER_MOTION_NONE)
 item_charik_new = class({})
 
 function item_charik_new:GetIntrinsicModifierName()

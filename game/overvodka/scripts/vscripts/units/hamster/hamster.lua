@@ -1,5 +1,5 @@
 hamster = class({})
-LinkLuaModifier( "modifier_hamster", "hamster", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_hamster", "units/hamster/hamster", LUA_MODIFIER_MOTION_NONE )
 
 function hamster:GetIntrinsicModifierName()
 	return "modifier_hamster"

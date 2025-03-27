@@ -222,7 +222,6 @@ function modifier_sans_field:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 	}
-
 	return funcs
 end
 
