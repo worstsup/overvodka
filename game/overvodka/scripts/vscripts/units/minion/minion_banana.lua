@@ -3,12 +3,6 @@ minion_banana = class({})
 LinkLuaModifier("modifier_minion_banana_root_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_minion_banana_movespeed_debuff", "units/minion/minion_banana", LUA_MODIFIER_MOTION_NONE)
 
-function minion_banana:Precache(context)
-    PrecacheResource("particle", "particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile.vpcf", context)
-    PrecacheResource("particle", "particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", context)
-end
-
 function minion_banana:GetAOERadius()
     return self:GetSpecialValueFor("banana_radius")
 end
@@ -24,11 +18,11 @@ function minion_banana:OnSpellStart()
     local distance = (target_point - caster:GetAbsOrigin()):Length2D()
     local projectile = {
         Ability = self,
-        EffectName = "particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile.vpcf",
+        EffectName = "particles/minion_banana.vpcf",
         vSpawnOrigin = caster:GetAbsOrigin(),
         fDistance = distance,
-        fStartRadius = 50,
-        fEndRadius = 50,
+        fStartRadius = 100,
+        fEndRadius = 120,
         Source = caster,
         vVelocity = direction * projectile_speed,
         bDodgeable = false,
@@ -39,7 +33,8 @@ function minion_banana:OnSpellStart()
     }
 
     ProjectileManager:CreateLinearProjectile(projectile)
-    caster:EmitSound("Hero_MonkeyKing.IllusoryOrb")
+    EmitSoundOnLocationWithCaster(caster:GetAbsOrigin(), "minion_banana", caster)
+    EmitSoundOnLocationWithCaster(caster:GetAbsOrigin(), "minion_banana_hello", caster)
 end
 
 
@@ -79,7 +74,7 @@ function modifier_minion_banana_root_debuff:IsDebuff() return true end
 function modifier_minion_banana_root_debuff:IsPurgable() return true end
 
 function modifier_minion_banana_root_debuff:GetEffectName()
-    return "particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root.vpcf"
+    return "particles/minion_banana_root.vpcf"
 end
 
 function modifier_minion_banana_root_debuff:GetEffectAttachType()

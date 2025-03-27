@@ -251,6 +251,12 @@
 		"DOTA_Tooltip_ability_minion_purple_blob_damage_pct" "%УРОН ОТ ТЕКУЩЕГО ЗДОРОВЬЯ:"
 		"DOTA_Tooltip_ability_minion_purple_blob_duration" "ДЛИТЕЛЬНОСТЬ БЕССИЛИЯ:"
 		"DOTA_Tooltip_ability_minion_purple_blob_radius" "РАДИУС ПОИСКА ВРАГА:"
+		"DOTA_Tooltip_ability_minion_banana" "БРОСИТЬ БАНАНЧИК"
+		"DOTA_Tooltip_ability_minion_banana_description" "Миньон бросает банан в выбранную точку, накладывающий оцепенение на всех врагов в радиусе %banana_radius% на %root_duration% сек. и замедляющий их передвижение."
+		"DOTA_Tooltip_ability_minion_banana_banana_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_minion_banana_root_duration" "ДЛИТЕЛЬНОСТЬ ОЦЕПЕНЕНИЯ:"
+		"DOTA_Tooltip_ability_minion_banana_banana_slow" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_minion_banana_slow_duration" "ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
 
 		"DOTA_Tooltip_ability_azazin_q" "СОБЕСЕДОВАНИЕ"
 		"DOTA_Tooltip_ability_azazin_q_Description" "Азазин протягивает руку к выбранному противнику, которая тянет героя и цель друг к другу, и закрывает его с собой на собеседование, создавая круг из деревьев, преграждающих путь и скрывающих героев от врагов снаружи."
