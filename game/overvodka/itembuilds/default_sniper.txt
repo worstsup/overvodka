@@ -33,7 +33,7 @@
 		"#DOTA_Item_Build_Core_Items"
 		{
 			"item"		"item_bloodthorn"
-			"item"		"item_assault"
+			"item"		"item_minion_generator"
 			"item"		"item_boots_of_bearing"
 		}
 		"#DOTA_Item_Build_Luxury"

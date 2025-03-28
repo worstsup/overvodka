@@ -34,11 +34,11 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
-                        "item"		"item_armlet_datadriven"
-                        "item"		"item_cuirass_2"
+            "item"		"item_armlet_datadriven"
+            "item"		"item_cuirass_2"
 			"item"		"item_govno"
-                        "item"		"item_revenants_brooch"
-                        "item"		"item_bloodstone"
+            "item"		"item_revenants_brooch"
+            "item"		"item_bloodstone"
 		}
 	}
 }

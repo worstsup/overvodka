@@ -40,6 +40,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_ultimate_scepter"
+			"item"		"item_minion_generator"
 			"item"		"item_kaska"
 			"item"		"item_govno"
 			"item"		"item_aghanims_shard"

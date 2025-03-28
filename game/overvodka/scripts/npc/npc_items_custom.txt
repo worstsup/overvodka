@@ -3122,7 +3122,7 @@
 		"ItemDisplayCharges"			"1"
 		"ItemStackable"					"0"
 		"ItemPermanent"					"1"
-		"ItemDisassembleRule"				"DOTA_ITEM_DISASSEMBLE_NEVER"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
 		"SpeciallyBannedFromNeutralSlot"		"1"
 		"AbilityManaCost"				"0"
 		"ItemCost"						"900"
@@ -3136,6 +3136,79 @@
 				"bonus_attack_speed"	"25"
 				"xp_multiplier"			"2.1"
 				"bonus_gold"			"100"
+		}
+	}
+	"item_helm_of_the_dominator"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_CREEP"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"45.0"
+		"MaxUpgradeLevel"				"1"
+		"ItemBaseLevel"					"1"
+		"AbilityManaCost"				"0"
+		"ItemCost"						"2625"
+		"AbilitySharedCooldown" 		"dominator"
+		"AbilityValues"
+		{
+				"bonus_stats"			"6"
+				"bonus_armor"			"6"
+				"bonus_regen"			"6"
+				"health_min"			"1000"
+				"speed_base"			"380"
+				"bounty_gold"			"100"
+				"creep_bonus_damage"			"25"
+				"creep_bonus_hp_regen"			"12"
+				"creep_bonus_mp_regen"			"4"
+				"creep_bonus_armor"			"4"
+				"model_scale"			"0"
+				"count_limit"			"1"
+				"creep_ability_level_increase"			"0"
+		}
+	}
+	"item_recipe_minion_generator"
+	{
+		"BaseClass"				 "item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"		"item_recipe"
+		"ItemCost"					"250"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_minion_generator"
+		"ItemRequirements"
+		{
+			"01"	"item_assault;item_helm_of_the_dominator"
+		}
+	}
+	
+	"item_minion_generator"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items/minion_generator"
+		"AbilityTextureName"		"chapman_green"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCooldown"			"45.0"
+		"AbilityCastPoint"			"0.1"
+		"AbilityManaCost"			"100"
+		"AbilityCastRange"			"600"
+		"ItemCost"					"8000"
+		"AbilitySharedCooldown" 	"dominator"
+		
+		"AbilityValues"
+		{
+			"bonus_armor_stats"			 		"16"
+			"bonus_attack_speed_stats"		  	"30"
+			"bonus_hp_regen"					"8"
+			"bonus_all_stats"					"6"
+			"bonus_armor_aura"			 		"5"
+			"bonus_attack_speed_aura"		  	"30"
+			"minus_armor_aura"			 		"-5"
+			"bonus_attack_speed_minion"			"90"
+			"bonus_movespeed_minion"			"30"
+			"minion_duration"					"60"
+			"radius"							"1200"
 		}
 	}
 }

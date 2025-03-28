@@ -9664,7 +9664,7 @@
 			}
 			"RunScript"
 			{
-				"ScriptFile"	"screamer.lua"
+				"ScriptFile"	"heroes/golovach/golovach_w"
 				"Function"		"Damage"
 			}
 			"FireSound"
@@ -9687,9 +9687,9 @@
 			}
 			"ApplyModifier"
 			{
-							"Target"		"CASTER"
-							"ModifierName"	"modifier_invisible"
-							"Duration" "%invis_duration"
+				"Target"		"CASTER"
+				"ModifierName"	"modifier_invisible"
+				"Duration" "%invis_duration"
 			} 
     	}
 
@@ -12737,7 +12737,7 @@
 		"AbilityCastRange"				"800"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCooldown"				"10"
-		"AbilityManaCost"				"80"
+		"AbilityManaCost"				"75"
 		"MaxLevel"						"1"
 		"AbilityValues"
 		{

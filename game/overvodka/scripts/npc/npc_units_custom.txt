@@ -1633,7 +1633,7 @@
     //=================================================================================	
 	// Neutral: Minion
 	//=================================================================================
-	"npc_dota_neutral_harpy_scout"	
+	"npc_dota_neutral_harpy_scout"
 	{
 		"Model"						"models/minion/minion.vmdl"
 		"BaseClass"					"npc_dota_creep_neutral"
@@ -1669,8 +1669,8 @@
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"200"		// Base mana.
 		"StatusManaRegen"			"1"		// Mana regeneration rate.		 
-		"VisionDaytimeRange"		"1200"		// Range of vision during day light.
-		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
@@ -1714,8 +1714,8 @@
 		"StatusHealthRegen"			"2.5"		// Health regeneration rate.
 		"StatusMana"				"125"		// Base mana.
 		"StatusManaRegen"			"3"		// Mana regeneration rate.		 
-		"VisionDaytimeRange"		"1800"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1800"		// Range of vision at night time.
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}

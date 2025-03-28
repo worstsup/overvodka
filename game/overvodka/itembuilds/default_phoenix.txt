@@ -24,7 +24,7 @@
 		{
 			"item"		"item_boots_of_bearing"
 			"item"		"item_bloodthorn"
-			"item"		"item_assault"
+			"item"		"item_minion_generator"
 			"item"		"item_magic_aegis"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_pasito"
