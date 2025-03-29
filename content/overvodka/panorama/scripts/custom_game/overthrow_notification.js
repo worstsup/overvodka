@@ -38,7 +38,34 @@ function OnHamsterSpawn( msg ) {
 
 	$.Schedule( 10, ClearItemSpawnMessage );
 }
-		
+
+function GoldenRainAnnounce( msg ) {
+	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$.GetContextPanel().SetHasClass( "golden_rain_started", true );
+	$( "#GoldenRain_TextOne" ).html = true;
+	$( "#GoldenRain_TextTwo" ).html = true;
+	$( "#GoldenRain_TextOne" ).text = $.Localize( "#GoldenRainAnnounce" );
+	$( "#GoldenRain_TextTwo" ).text = $.Localize( "#GoldenRainAnnounceDesc" );
+	$.Schedule( 6, ClearGoldenRainMessage );
+}
+
+
+function GoldenRainStart( msg ) {
+	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$.GetContextPanel().SetHasClass( "golden_rain_started", true );
+	$( "#GoldenRain_TextOne" ).html = true;
+	$( "#GoldenRain_TextTwo" ).html = true;
+	$( "#GoldenRain_TextOne" ).text = $.Localize( "#GoldenRainStart" );
+	$( "#GoldenRain_TextTwo" ).text = $.Localize( "#GoldenRainDesc" );
+	$.Schedule( 10, ClearGoldenRainMessage );
+}
+
+function ClearGoldenRainMessage() {
+	$.GetContextPanel().SetHasClass( "golden_rain_started", false );
+	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$( "#GoldenRain" ).text = "";
+}
+
 function ClearItemSpawnMessage()
 {
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
@@ -166,6 +193,8 @@ function ClearKillMessage()
 	GameEvents.Subscribe( "item_will_spawn", OnItemWillSpawn );
 	GameEvents.Subscribe( "item_has_spawned", OnItemHasSpawned );
 	GameEvents.Subscribe( "hamster_spawn", OnHamsterSpawn );
+	GameEvents.Subscribe( "golden_rain_start", GoldenRainStart );
+	GameEvents.Subscribe( "golden_rain_announce", GoldenRainAnnounce );
 	GameEvents.Subscribe( "overthrow_item_drop", OnItemDrop );
     GameEvents.Subscribe( "time_remaining", AlertTimer );
     GameEvents.Subscribe( "overtime_alert", OnOvertimeStart );

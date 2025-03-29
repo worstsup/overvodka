@@ -6,6 +6,16 @@ function ThrowCoin( args )
 	if coinAttach ~= -1 then
 		coinSpawn = args.caster:GetAttachmentOrigin( coinAttach )
 	end
+	if k == 23 then
+		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_announce", {} )
+		EmitGlobalSound( "golden_rain_announce" )
+	end
+	if k == 25 then
+		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_start", {} )
+		args.caster:AddAbility("golden_rain")
+		args.caster:FindAbilityByName("golden_rain"):SetLevel(1)
+		args.caster:CastAbilityNoTarget(args.caster:FindAbilityByName("golden_rain"), -1)
+	end
 	if k == 53 then
 		CustomGameEventManager:Send_ServerToAllClients( "item_has_spawned", {} )
 		EmitGlobalSound( "hamster_announce" )
@@ -24,7 +34,15 @@ function ThrowCoin( args )
 		)
 		hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 30})
 	end
---	print( coinSpawn )
+	if k == 83 then
+		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_announce", {} )
+		EmitGlobalSound( "golden_rain_announce" )
+	end
+	if k == 85 then
+		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_start", {} )
+		args.caster:FindAbilityByName("golden_rain"):SetLevel(2)
+		args.caster:CastAbilityNoTarget(args.caster:FindAbilityByName("golden_rain"), -1)
+	end
 	k = k + 1
 	GameRules:GetGameModeEntity().COverthrowGameMode:SpawnGoldEntity( coinSpawn )
 end

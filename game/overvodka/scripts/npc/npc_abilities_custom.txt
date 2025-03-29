@@ -12748,4 +12748,22 @@
 			"slow_duration"	"3"
 		}
 	}
+	"golden_rain"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/golden_rain"
+		"MaxLevel"						"2"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCastPoint"				"0.05"
+		"AbilityCooldown"				"0.0"
+		"AbilityManaCost"				"0"
+		"AbilityValues"
+		{
+				"radius" 	"600"
+				"duration"	"20.0"
+				"xp"		"75 150"
+				"gold"  	"75 150"
+		}
+	}
 }

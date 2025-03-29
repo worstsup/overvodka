@@ -38,6 +38,14 @@ function Precache( context )
 		PrecacheItemByNameSync( "item_treasure_chest", context )
 
 	--Cache the creature models
+
+		PrecacheResource( "soundfile", "soundevents/golden_rain.vsndevts", context )
+		PrecacheResource( "soundfile", "soundevents/golden_rain_announce.vsndevts", context )
+		PrecacheResource( "particle", "particles/golden_rain_start.vpcf", context )
+		PrecacheResource( "particle", "particles/golden_rain_wave.vpcf", context )
+		PrecacheResource( "particle", "particles/econ/items/monkey_king/mk_ti9_immortal/mk_ti9_immortal_army_radius.vpcf", context )
+		PrecacheResource( "particle", "particles/mk_ti9_immortal_army_radius_b_new.vpcf", context )
+
 		PrecacheUnitByNameSync( "npc_dota_creature_basic_zombie", context )
         PrecacheUnitByNameSync( "npc_dota_creature_berserk_zombie", context )
         PrecacheUnitByNameSync( "npc_dota_treasure_courier", context )
@@ -208,6 +216,7 @@ function Precache( context )
     	PrecacheResource("particle", "particles/minion_banana_root.vpcf", context)
     	PrecacheResource("soundfile", "soundevents/minion_banana.vsndevts", context)
     	PrecacheResource("soundfile", "soundevents/minion_banana_hello.vsndevts", context)
+		PrecacheResource("particle", "particles/minion_generator_spawn.vpcf", context)
 
 		PrecacheResource( "particle", "particles/units/heroes/hero_slark/slark_essence_shift.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/ogre_magi/ogre_magi_arcana/ogre_magi_arcana_hand_of_midas.vpcf", context )

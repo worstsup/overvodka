@@ -157,7 +157,7 @@ end
 modifier_item_minion_generator_aura_buff_armor = class({})
 
 function modifier_item_minion_generator_aura_buff_armor:GetTexture()
-  	return "items/cuiras"
+  	return "minion_generator"
 end
 
 function modifier_item_minion_generator_aura_buff_armor:OnCreated()
@@ -226,7 +226,7 @@ end
 modifier_item_minion_generator_aura_debuff_armor = class({})
 
 function modifier_item_minion_generator_aura_debuff_armor:GetTexture()
-  	return "items/cuiras"
+  	return "minion_generator"
 end
 
 function modifier_item_minion_generator_aura_debuff_armor:OnCreated()

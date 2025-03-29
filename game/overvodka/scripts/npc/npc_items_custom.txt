@@ -2982,7 +2982,6 @@
 			"01"	"item_greater_crit;item_oblivion_staff"
 		}
 	}
-	
 	"item_armature_strike"
 	{
 		"BaseClass"				   "item_lua"
@@ -3027,7 +3026,6 @@
 			"01"						"item_oblivion_staff"
 		}
 	}
-
 	"item_magic_crystalis"
 	{
 		"BaseClass" 					"item_lua"
@@ -3061,7 +3059,6 @@
 			"01"						"item_ultimate_orb;item_magic_crystalis"
 		}
 	}
-
 	"item_magic_daedalus"
 	{
 		"BaseClass" 					"item_lua"
@@ -3160,10 +3157,10 @@
 				"health_min"			"1000"
 				"speed_base"			"380"
 				"bounty_gold"			"100"
-				"creep_bonus_damage"			"25"
-				"creep_bonus_hp_regen"			"12"
-				"creep_bonus_mp_regen"			"4"
-				"creep_bonus_armor"			"4"
+				"creep_bonus_damage"	"25"
+				"creep_bonus_hp_regen"	"12"
+				"creep_bonus_mp_regen"	"4"
+				"creep_bonus_armor"		"4"
 				"model_scale"			"0"
 				"count_limit"			"1"
 				"creep_ability_level_increase"			"0"
@@ -3182,12 +3179,11 @@
 			"01"	"item_assault;item_helm_of_the_dominator"
 		}
 	}
-	
 	"item_minion_generator"
 	{
 		"BaseClass"					"item_lua"
 		"ScriptFile"				"items/minion_generator"
-		"AbilityTextureName"		"chapman_green"
+		"AbilityTextureName"		"minion_generator"
 		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityCooldown"			"45.0"
 		"AbilityCastPoint"			"0.1"
@@ -3195,7 +3191,6 @@
 		"AbilityCastRange"			"600"
 		"ItemCost"					"8000"
 		"AbilitySharedCooldown" 	"dominator"
-		
 		"AbilityValues"
 		{
 			"bonus_armor_stats"			 		"16"

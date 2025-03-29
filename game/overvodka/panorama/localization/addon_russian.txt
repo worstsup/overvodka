@@ -21,6 +21,10 @@
 	"HamsterSpawn"									"СКОРЕЕ ТАПАЙТЕ ХОМЯЧКА!"
 	"HamsterSpawnAnnounce"							"ВРЕМЯ HAMSTER KOMBAT!"
 	"HamsterWillSpawn"								"СКОРО В МИДЕ ПОЯВИТСЯ HAMSTER KOMBAT!"
+	"GoldenRainStart"								"НАЧАЛСЯ ЗОЛОТОЙ ДОЖДЬ!"
+	"GoldenRainDesc"								"УСПЕЙТЕ ЗАРАБОТАТЬ КАК МОЖНО БОЛЬШЕ!"
+	"GoldenRainAnnounce"							"СКОРО НАЧНЁТСЯ ЗОЛОТОЙ ДОЖДЬ!"
+	"GoldenRainAnnounceDesc"						"НЕ УПУСТИТЕ ЭТОТ МОМЕНТ!"
 
 	"RecentScore"									"+{d:score}"
 

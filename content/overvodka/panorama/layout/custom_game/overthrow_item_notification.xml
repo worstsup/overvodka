@@ -18,6 +18,10 @@
 				<Label hittest="false" id="Overtime_Instructions" class="TitleFont" text="#OvertimeInstructions" />
 				<Label hittest="false" id="Overtime_Goal" class="TitleFont" text="" />
 			</Panel>
+			<Panel hittest="false" id="GoldenRain" text="">
+				<Label hittest="false" id="GoldenRain_TextOne" class="TitleFont" text="" html="true" />
+				<Label hittest="false" id="GoldenRain_TextTwo" class="TitleFont" text="" html="true" />
+			</Panel>
 			<Panel hittest="false" id="AlertMessage" text="">
 				<Label hittest="false" id="AlertMessage_Chest" class="TitleFont" text="" html="true" />
 				<Label hittest="false" id="AlertMessage_Delivery" class="TitleFont" text="" html="true" />

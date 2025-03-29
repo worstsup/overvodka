@@ -38,7 +38,6 @@ function modifier_item_balbe:DeclareFunctions()
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
     }
-
     return funcs
 end
 function modifier_item_balbe:GetModifierAttackSpeedBonus_Constant()

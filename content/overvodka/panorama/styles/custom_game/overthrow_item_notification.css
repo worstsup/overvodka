@@ -198,6 +198,62 @@
     font-size: 40px;
     font-weight: bold;
 }
+#GoldenRain
+{
+    flow-children: down;
+    horizontal-align: center;
+    opacity: 0;
+    transform: scaleX(2) scaleY(2);
+    margin-top: 80px;
+    transition-property: transform, opacity, visibility;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    visibility: collapse;
+    border: 0px solid blue;
+}
+.golden_rain_started #GoldenRain
+{
+    opacity: 1;
+    transform: scaleX(1) scaleY(1);
+    visibility: visible;
+}
+#GoldenRain_TextOne
+{
+    color: gold;
+    horizontal-align: center;
+    text-shadow: 4px 4px 4px #121212;
+    font-size: 54px;
+    font-weight: bold;
+    animation-name: glowPulse;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+#GoldenRain_TextTwo
+{
+    color: gold;
+    horizontal-align: center;
+    text-shadow: 4px 4px 4px #121212;
+    font-size: 28px;
+    font-weight: bold;
+    animation-name: floatText;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 'glowPulse' {
+    0% { text-shadow: 4px 4px 4px #121212; }
+    50% { text-shadow: 0 0 20px gold, 0 0 30px gold; }
+    100% { text-shadow: 4px 4px 4px #121212; }
+}
+
+@keyframes 'floatText' {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
 
 .item_has_spawned #AlertMessage
 {
