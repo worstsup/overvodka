@@ -196,7 +196,7 @@ function modifier_evelone_q_damage:OnCreated()
 	local duration = self:GetAbility():GetSpecialValueFor("duration")
     local hit_blood
     if not parent:IsDebuffImmune() then
-        parent:AddNewModifier(caster, self:GetAbility(), "modifier_evelone_q_debuff", { duration = duration })
+        parent:AddNewModifier(caster, self:GetAbility(), "modifier_evelone_q_debuff", { duration = duration * (1 - parent:GetStatusResistance()) })
     end
     if caster:HasModifier("modifier_evelone_r") then
         hit_blood = ParticleManager:CreateParticle("particles/evelone_q_hit_ulti.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())

@@ -22,13 +22,13 @@ function chillguy_e:OnSpellStart()
 		caster, -- player source
 		self, -- ability source
 		"modifier_chillguy_e", -- modifier name
-		{ duration = duration } -- kv
+		{ duration = duration * (1 - target:GetStatusResistance()) } -- kv
 	)
 	target:AddNewModifier(
 		caster, -- player source
 		self, -- ability source
 		"modifier_chillguy_blind", -- modifier name
-		{ duration = blindness_dur } -- kv
+		{ duration = blindness_dur * (1 - target:GetStatusResistance()) } -- kv
 	)
 	local effect_cast = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_blink_arrival_flash.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 3, self:GetCaster():GetOrigin() )

@@ -38,7 +38,7 @@ function arsen_testosteron:OnSpellStart()
 			caster,
 			self,
 			"modifier_arsen_testosteron_debuff",
-			{ duration = duration }
+			{ duration = duration * (1 - enemy:GetStatusResistance()) }
 		)
 	end
 	caster:AddNewModifier(

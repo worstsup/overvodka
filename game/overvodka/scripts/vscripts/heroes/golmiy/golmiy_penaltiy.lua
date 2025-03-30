@@ -99,8 +99,8 @@ function MeteorHit(keys)
 		caster:ModifyGold(gold, false, 0)
 	end
 	ApplyDamage({attacker = caster, victim = target, ability = ability, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
-	target:AddNewModifier(caster, ability, "modifier_stunned", {duration = stun_time})
-	ability:ApplyDataDrivenModifier( caster, target, "modifier_golmiy_penaltiy", { Duration = 5 } )
+	target:AddNewModifier(caster, ability, "modifier_stunned", {duration = stun_time * (1 - target:GetStatusResistance())})
+	ability:ApplyDataDrivenModifier( caster, target, "modifier_golmiy_penaltiy", { Duration = 5 * (1 - target:GetStatusResistance()) } )
 	table.insert(tartar, target)
 end
 

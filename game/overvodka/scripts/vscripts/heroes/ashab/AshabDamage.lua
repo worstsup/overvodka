@@ -9,5 +9,5 @@ function RocketsDamage (keys)
 	if target:TriggerSpellAbsorb(ability) then return end
 	caster:ModifyGold(gold, false, 0)
 	ApplyDamage({ victim = target, attacker = caster, damage = damage, damage_type = damage_type })
-	target:AddNewModifier( caster, self, "modifier_stunned", { duration = duration } )
+	target:AddNewModifier( caster, self, "modifier_stunned", { duration = duration * (1 - target:GetStatusResistance()) } )
 end

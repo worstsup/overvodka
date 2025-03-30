@@ -136,7 +136,7 @@ function modifier_golovach_r_fury:Pulse( center )
 			self.parent,
 			self.ability,
 			"modifier_golovach_r_debuff",
-			{ duration = self.duration }
+			{ duration = self.duration * (1 - enemy:GetStatusResistance()) }
 		)
 		enemy:AddNewModifier(
 				self.parent,

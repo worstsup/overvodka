@@ -63,7 +63,7 @@ end
 function vihor_q:OnProjectileHit( hTarget, vLocation )
 	local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), vLocation, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 	for _, enemy in pairs(targets) do
-		enemy:AddNewModifier( self:GetCaster(), self, "modifier_vihor_q_slow", { duration = self.duration } )
+		enemy:AddNewModifier( self:GetCaster(), self, "modifier_vihor_q_slow", { duration = self.duration * (1 - enemy:GetStatusResistance()) } )
 		ApplyDamage({victim = enemy, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
 	end
 	self:PlayEffects2( hTarget )

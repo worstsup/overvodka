@@ -51,7 +51,7 @@ function arsen_konchai:OnProjectileHit( hTarget, vLocation )
 		self:GetCaster(),
 		self,
 		"modifier_arsen_konchai",
-		{ duration = stack_duration }
+		{ duration = stack_duration * (1 - hTarget:GetStatusResistance()) }
 	)
 	if self:GetCaster():HasScepter() then
 		self:GetCaster():PerformAttack(hTarget, true, true, true, true, true, false, true)

@@ -43,8 +43,8 @@ function ebanko_w:OnSpellStart()
 				knockback_height = 300
 			}
 		)
-		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration })
-		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration })
+		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration * (1 - target:GetStatusResistance()) })
+		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration * (1 - target:GetStatusResistance()) })
 	end
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
@@ -175,7 +175,7 @@ function modifier_ebanko_w:Bash(target)
 			}
 		)
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
-		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_ebanko_w_slow", { duration = self.slow_duration })
+		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_ebanko_w_slow", { duration = self.slow_duration * (1 - target:GetStatusResistance()) })
 	end
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
