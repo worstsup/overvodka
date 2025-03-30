@@ -239,6 +239,7 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 		"DOTA_Tooltip_ability_stray_r"	"ДЕДУШКА ГАНС"
+		"DOTA_Tooltip_ability_stray_r_shard_description" "Ганс начинает брать врагов на таран: в радиусе %radius% танк разрушает все деревья, а также отталкивает всех врагов, нанося им %taran_damage% магического урона."
 		"DOTA_Tooltip_modifier_stray_r" "Дедушка Ганс"
 		"DOTA_Tooltip_ability_special_bonus_unique_riki_5" "Беспрепятственное передвижение в танке"
 		"DOTA_Tooltip_ability_special_bonus_unique_riki_5_description" ""
