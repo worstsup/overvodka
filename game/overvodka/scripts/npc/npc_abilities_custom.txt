@@ -12784,7 +12784,11 @@
 			"range"			 		"600 800 1000"
 			"mv"				 	"550"
 			"armor"			 		"20 40 60"
-			"dmg"			 		"100 250 400"
+			"dmg"
+			{
+				"value"	"100 200 300"
+				"special_bonus_unique_riki_9" "+100"
+			}
 			"bat"					"1.6"
 			"duration"			 	"15"
 			"free"
@@ -12794,6 +12798,62 @@
 			}
 			"radius" "300"
 			"taran_damage" "200"
+		}
+	}
+	"stray_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stray/stray_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"stray_w"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"20 18 16 14"
+		"AbilityManaCost"				"45 60 75 90"
+		"AbilityCastRange"				"600"
+		"AbilityValues"
+		{
+			"damage"					"100 175 250 325"
+		}
+	}
+	"stray_w_facet"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stray/stray_w_facet"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"stray_w_facet"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"20 18 16 14"
+		"AbilityManaCost"				"45 60 75 90"
+		"AbilityCastRange"				"600"
+		"AbilityValues"
+		{
+			"damage"					"100 175 250 325"
+			"debuff_duration"
+			{
+				"value"	"0"
+				"special_bonus_facet_riki_contract_killer" "+4"
+				"RequiresFacet"	"riki_contract_killer"
+			}
+			"slow"
+			{
+				"value"	"0"
+				"special_bonus_facet_riki_contract_killer" "-15"
+				"ReqiuresFacet"	"riki_contract_killer"
+			}
+			"damage_per_second"
+			{
+				"value"	"0"
+				"special_bonus_facet_riki_contract_killer" "+15 +30 +45 +60"
+				"ReqiuresFacet"	"riki_contract_killer"
+			}
 		}
 	}
 }

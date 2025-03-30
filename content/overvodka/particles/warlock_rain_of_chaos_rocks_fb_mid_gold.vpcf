@@ -2173,4 +2173,10 @@
 			}
 		},
 	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/monkey_king_plus_2018_weapon_ambient_decal_gold.vpcf"
+		},
+	]
 }

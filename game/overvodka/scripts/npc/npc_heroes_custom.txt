@@ -2403,8 +2403,8 @@
 		"SimilarHeroes"	"62,44,63"
 		"HeroSelectSoundEffect"		"Hero_Riki.Pick"
 		"GibType"		"default"
-		"Ability1"		"generic_hidden"
-		"Ability2"		"riki_blink_strike"
+		"Ability1"		"rostik_e"
+		"Ability2"		"stray_w"
 		"Ability3"		"riki_tricks_of_the_trade"
 		"Ability4"		"generic_hidden"
 		"Ability5"		"generic_hidden"
@@ -2425,6 +2425,15 @@
 				"Icon"				"xp"
 				"Color"				"Gray"
 				"GradientID"		"3"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"stray_w_facet"
+						"ReplaceAbility"   	"stray_w"
+						"AutoLevelAbility"	"false"
+					}
+				}
 			}			
 			"riki_exterminator" 
 			{
