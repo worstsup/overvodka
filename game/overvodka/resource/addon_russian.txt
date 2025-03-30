@@ -239,7 +239,15 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 		"DOTA_Tooltip_ability_stray_r"	"ДЕДУШКА ГАНС"
+		"DOTA_Tooltip_ability_stray_r_Description"	""
+		"DOTA_Tooltip_ability_stray_r_range"	"ДАЛЬНОСТЬ АТАКИ:"
+		"DOTA_Tooltip_ability_stray_r_mv"	"СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_stray_r_armor"	"ДОП. БРОНЯ:"
+		"DOTA_Tooltip_ability_stray_r_dmg"	"ДОП. УРОН:"
+		"DOTA_Tooltip_ability_stray_r_bat"	"ИНТЕРВАЛ АТАК:"
+		"DOTA_Tooltip_ability_stray_r_duration"	"ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_modifier_stray_r" "Дедушка Ганс"
+		"DOTA_Tooltip_modifier_stray_r_Description"	""
 		"DOTA_Tooltip_ability_special_bonus_unique_riki_5" "Беспрепятственное передвижение в танке"
 		"DOTA_Tooltip_ability_special_bonus_unique_riki_5_description" ""
 
