@@ -12766,4 +12766,31 @@
 				"gold"  	"75 150"
 		}
 	}
+	"stray_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stray/stray_r"
+		"AbilityTextureName"			"stray_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior" 				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"AbilityCooldown"		   		"80"
+		"AbilityManaCost"		   		"200 300 400"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"				"0.2"
+		"AbilityValues"
+		{
+			"range"			 		"600 800 1000"
+			"mv"				 	"550"
+			"armor"			 		"20 40 60"
+			"dmg"			 		"100 200 300"
+			"bat"					"1.8"
+			"duration"			 	"15"
+			"free"
+			{
+				"value"	"0"
+				"special_bonus_unique_riki_5" "+1"
+			}
+		}
+	}
 }
