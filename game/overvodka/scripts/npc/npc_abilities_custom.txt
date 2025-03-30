@@ -12777,7 +12777,8 @@
 		"AbilityCooldown"		   		"80"
 		"AbilityManaCost"		   		"200 300 400"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.2"
+		"AbilityCastPoint"				"0.3"
+		"HasShardUpgrade"				"1"
 		"AbilityValues"
 		{
 			"range"			 		"600 800 1000"
@@ -12791,6 +12792,8 @@
 				"value"	"0"
 				"special_bonus_unique_riki_5" "+1"
 			}
+			"radius" "300"
+			"taran_damage" "200"
 		}
 	}
 }

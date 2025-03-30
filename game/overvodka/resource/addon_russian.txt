@@ -246,6 +246,7 @@
 		"DOTA_Tooltip_ability_stray_r_dmg"	"ДОП. УРОН:"
 		"DOTA_Tooltip_ability_stray_r_bat"	"ИНТЕРВАЛ АТАК:"
 		"DOTA_Tooltip_ability_stray_r_duration"	"ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_ability_stray_r_shard_description" "Ганс начинает брать врагов на таран: в радиусе %radius% танк разрушает все деревья, а также отталкивает всех врагов, нанося им %taran_damage% магического урона."
 		"DOTA_Tooltip_modifier_stray_r" "Дедушка Ганс"
 		"DOTA_Tooltip_modifier_stray_r_Description"	""
 		"DOTA_Tooltip_ability_special_bonus_unique_riki_5" "Беспрепятственное передвижение в танке"
