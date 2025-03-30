@@ -7,8 +7,10 @@ function stray_r:Precache(context)
     PrecacheResource("model", "models/stray/tiger_h1.vmdl", context)
     PrecacheResource("soundfile", "soundevents/stray_r.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/stray_r_shoot.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/stray_r_tank.vsndevts", context)
     PrecacheResource("particle", "particles/units/heroes/hero_techies/techies_base_attack.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", context)
+    PrecacheResource("particle", "particles/dire_fx/bad_ancient002_destroy_smoke_upper.vpcf", context)
 end
 
 function stray_r:GetCooldown(level)
@@ -32,18 +34,21 @@ end
 modifier_stray_r = class({}) 
 
 function modifier_stray_r:IsPurgable() return false end
-
 function modifier_stray_r:OnCreated()
     if not IsServer() then return end
+    local particle = ParticleManager:CreateParticle("particles/dire_fx/bad_ancient002_destroy_smoke_upper.vpcf", PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     self.free = false
     if self:GetAbility():GetSpecialValueFor("free") == 1 then
         self.free = true
     end
+    EmitSoundOn("stray_r_tank", self:GetParent())
     self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
 end
 
 function modifier_stray_r:OnDestroy()
     if not IsServer() then return end
+    StopSoundOn("stray_r_tank", self:GetParent())
     if not self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
         self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
     end

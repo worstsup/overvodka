@@ -1,4 +1,4 @@
-"golden_rain"
+"stray_w_3"
 {
   "operator_stacks"
   {
@@ -14,12 +14,12 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/golden_rain.vsnd"
+               "value0"    "sounds/abilities/stray_w_3.vsnd"
             }
           }
-          "volume"      {  "value"   "2.0" }
-          "pitch_rand_min"  {  "value"   "0.0" }
-          "pitch_rand_max"  {  "value"   "0.0" }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
           "pitch"       {  "value"   "1.000000" }
           "soundlevel"    {  "value"   "100.00000" }
           "distance_max"   {  "value"   "10000.000" }
