@@ -24,6 +24,7 @@ end
 function stray_r:OnSpellStart()
     if not IsServer() then return end
     self:GetCaster():EmitSound("stray_r")
+    StopGlobalSound("stray_scepter")
     local duration = self:GetSpecialValueFor('duration')
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_stray_r", {duration = duration})
     if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
@@ -44,13 +45,18 @@ function modifier_stray_r:OnCreated()
     end
     EmitSoundOn("stray_r_tank", self:GetParent())
     self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
+    if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
+        self:GetParent():SetModelScale(1.8)
+    end
 end
 
 function modifier_stray_r:OnDestroy()
     if not IsServer() then return end
     StopSoundOn("stray_r_tank", self:GetParent())
-    if not self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
+    if self:GetParent():GetUnitName() ~= "npc_dota_hero_rubick" then
         self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
+    else
+        self:GetParent():SetModelScale(0.75)
     end
 end
 

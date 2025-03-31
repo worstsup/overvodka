@@ -37,6 +37,9 @@ function golden_rain:OnAbilityPhaseStart()
 		AddFOWViewer( team, self.random_point, self:GetSpecialValueFor( "radius" ), self:GetSpecialValueFor( "duration" ) + 1, false )
 	end
     EmitGlobalSound( "golden_rain" )
+    StopGlobalSound( "5opka_r" )
+    StopGlobalSound( "stray_scepter" )
+    StopGlobalSound( "evelone_r_ambient" )
     self.delay_duration = 1.5
     CreateModifierThinker(
         self:GetCaster(),
