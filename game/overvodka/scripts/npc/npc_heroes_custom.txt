@@ -2403,9 +2403,9 @@
 		"SimilarHeroes"	"62,44,63"
 		"HeroSelectSoundEffect"		"Hero_Riki.Pick"
 		"GibType"		"default"
-		"Ability1"		"rostik_e"
+		"Ability1"		"stray_q"
 		"Ability2"		"stray_w"
-		"Ability3"		"riki_tricks_of_the_trade"
+		"Ability3"		"generic_hidden"
 		"Ability4"		"generic_hidden"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"stray_r"
@@ -2422,9 +2422,9 @@
 		{
 			"riki_contract_killer" 	
 			{
-				"Icon"				"xp"
-				"Color"				"Gray"
-				"GradientID"		"3"
+				"Icon"				"snot"
+				"Color"				"Green"
+				"GradientID"		"0"
 				"Abilities"
 				{
 					"Ability1"
@@ -2437,9 +2437,9 @@
 			}			
 			"riki_exterminator" 
 			{
-				"Icon"				"agility"
-				"Color"				"Purple"
-				"GradientID"		"2"
+				"Icon"				"gold"
+				"Color"				"Yellow"
+				"GradientID"		"0"
 			}
 		}
 		"HealthBarOffset"	"270"
