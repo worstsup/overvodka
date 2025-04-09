@@ -57,20 +57,18 @@ function azazin_w:OnSpellStart()
         taunt:EmitSound("azazin_w_3")
         k = 0
     end
-    if caster:HasModifier("modifier_item_aghanims_shard") then
-        local targets = FindUnitsInRadius(caster:GetTeamNumber(),
-            point,
-            nil,
-            self:GetSpecialValueFor("radius"),
-            DOTA_UNIT_TARGET_TEAM_ENEMY,
-            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_NONE,
-            FIND_ANY_ORDER,
-            false
-        )
-        for _,unit in pairs(targets) do
-            unit:AddNewModifier( caster, self, "modifier_azazin_w_root", { duration = self:GetSpecialValueFor( "root_duration" ) } )
-        end
+    local targets = FindUnitsInRadius(caster:GetTeamNumber(),
+        point,
+        nil,
+        self:GetSpecialValueFor("radius"),
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false
+    )
+    for _,unit in pairs(targets) do
+        unit:AddNewModifier( caster, self, "modifier_azazin_w_root", { duration = self:GetSpecialValueFor( "root_duration" ) } )
     end
 end
 
@@ -161,7 +159,7 @@ modifier_azazin_w_target = class({})
 
 function modifier_azazin_w_target:OnCreated()
     if not IsServer() then return end
-    
+    self.talent = self:GetAbility():GetSpecialValueFor("disarm") == 1
     self:StartIntervalThink(FrameTime())
 end
 
@@ -191,7 +189,12 @@ function modifier_azazin_w_target:DeclareFunctions()
     }
     return decFuncs
 end
-
+function modifier_azazin_w_target:CheckState()
+    local state = {
+        [MODIFIER_STATE_SILENCED] = self.talent
+    }
+    return state
+end
 function modifier_azazin_w_target:GetDisableHealing()
     return self:GetAbility():GetSpecialValueFor("disable_healing")
 end

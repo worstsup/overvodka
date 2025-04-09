@@ -221,7 +221,10 @@ function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
-        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE
     }
     return funcs
 end
@@ -245,6 +248,17 @@ function modifier_bratishkin_e_primary_scepter:GetModifierBonusStats_Agility()
     return 0
 end
 
+function modifier_bratishkin_e_primary_scepter:GetAbsoluteNoDamageMagical()
+    return 1
+end
+
+function modifier_bratishkin_e_primary_scepter:GetAbsoluteNoDamagePhysical()
+    return 1
+end
+
+function modifier_bratishkin_e_primary_scepter:GetAbsoluteNoDamagePure()
+    return 1
+end
 
 function modifier_bratishkin_e_primary_scepter:GetModifierAttackRangeBonus()
     return self:GetAbility():GetSpecialValueFor("radius")

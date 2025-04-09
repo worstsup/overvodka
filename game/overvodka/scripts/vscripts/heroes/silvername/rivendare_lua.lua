@@ -51,7 +51,6 @@ function modifier_rivendare_lua:OnRefresh( kv )
 end
 
 function modifier_rivendare_lua:OnDestroy( kv )
-
 end
 
 function modifier_rivendare_lua:DeclareFunctions()

@@ -63,8 +63,9 @@ end
 function modifier_stray_r:DeclareFunctions()
     local decFuncs = 
     {
-        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE,
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
@@ -80,16 +81,21 @@ function modifier_stray_r:CheckState()
     return 
     {
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = self.free
     }
 end
 
-function modifier_stray_r:GetModifierMoveSpeed_Absolute()
+function modifier_stray_r:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor('mv')
 end
 
 function modifier_stray_r:GetModifierPhysicalArmorBonus()
     return self:GetAbility():GetSpecialValueFor('armor')
+end
+
+function modifier_stray_r:GetModifierMagicalResistanceBonus()
+    return self:GetAbility():GetSpecialValueFor('magic_resist')
 end
 
 function modifier_stray_r:GetModifierPreAttack_BonusDamage()
@@ -127,7 +133,7 @@ function modifier_stray_r_shard:OnCreated(params)
     if not IsServer() then return end
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
     self.damage = self:GetAbility():GetSpecialValueFor("taran_damage")
-    self:StartIntervalThink(0.1)
+    self:StartIntervalThink(0.15)
 end
 
 function modifier_stray_r_shard:OnDestroy()
@@ -152,8 +158,8 @@ function modifier_stray_r_shard:OnIntervalThink()
 			        center_x = self:GetParent():GetAbsOrigin().x,
 			        center_y = self:GetParent():GetAbsOrigin().y,
 			        center_z = self:GetParent():GetAbsOrigin().z,
-			        duration = 0.3,
-			        knockback_duration = 0.3,
+			        duration = 0.2,
+			        knockback_duration = 0.2,
 			        knockback_distance = 300,
 			        knockback_height = 50
 			    }

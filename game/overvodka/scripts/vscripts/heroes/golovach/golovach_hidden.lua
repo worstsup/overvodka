@@ -47,72 +47,56 @@ function golovach_hidden:OnSpellStart()
 		kicked = remnant
 		isRemnant = true
 	else
-		-- check target exist
 		if target then
-			-- set direction
 			dirX = target:GetOrigin().x-caster:GetOrigin().x
 			dirY = target:GetOrigin().y-caster:GetOrigin().y
 			kicked = target
 		else
-			-- nothing happened.
 			self:RefundManaCost()
 			self:EndCooldown()
 			return
 		end
 	end
-
-	-- kick target
 	self:Kick( kicked, dirX, dirY, isRemnant )
 end
 
---------------------------------------------------------------------------------
--- Projectile
 function golovach_hidden:OnProjectileHit_ExtraData( hTarget, vLocation, extraData )
 	if not hTarget then return end
-
-	-- damage
 	local damageTable = {
 		victim = hTarget,
 		attacker = self:GetCaster(),
 		damage = extraData.damage,
 		damage_type = DAMAGE_TYPE_MAGICAL,
-		ability = self, --Optional.
+		ability = self,
 	}
 	ApplyDamage(damageTable)
-
-	-- stun
 	if extraData.isRemnant==1 then
 		hTarget:AddNewModifier(
-			self:GetCaster(), -- player source
-			self, -- ability source
-			"modifier_generic_stunned_lua", -- modifier name
+			self:GetCaster(),
+			self,
+			"modifier_generic_stunned_lua",
 			{
 				duration = extraData.stun,
-			} -- kv
+			}
 		)
 	end
-
-	-- effects
 	local sound_target = "Hero_EarthSpirit.BoulderSmash.Damage"
 	EmitSoundOn( sound_target, hTarget )
 
 	return false
 end
 
---------------------------------------------------------------------------------
--- Helpers
 function golovach_hidden:SearchRemnant( point, radius )
-	-- find remnant in area
 	local remnants = FindUnitsInRadius(
-		self:GetCaster():GetTeamNumber(),	-- int, your team number
-		point,	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_BOTH,	-- int, team filter
-		DOTA_UNIT_TARGET_ALL,	-- int, type filter
-		DOTA_UNIT_TARGET_FLAG_INVULNERABLE,	-- int, flag filter
-		FIND_CLOSEST,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetCaster():GetTeamNumber(),
+		point,
+		nil,
+		radius,
+		DOTA_UNIT_TARGET_TEAM_BOTH,
+		DOTA_UNIT_TARGET_ALL,
+		DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+		FIND_CLOSEST,
+		false
 	)
 
 	local ret = nil
@@ -125,7 +109,6 @@ function golovach_hidden:SearchRemnant( point, radius )
 end
 
 function golovach_hidden:Kick( target, x, y, isRemnant )
-	-- get data
 	self:PlayEffects1( target )
 	local damage = 100
 	local stun = 0
@@ -133,18 +116,16 @@ function golovach_hidden:Kick( target, x, y, isRemnant )
 	local speed = 900
 	local distance = 800
 	local mod = target:AddNewModifier(
-		self:GetCaster(), -- player source
-		self, -- ability source
-		"modifier_golovach_hidden", -- modifier name
+		self:GetCaster(),
+		self,
+		"modifier_golovach_hidden",
 		{
 			x = x,
 			y = y,
 			r = distance,
-		} -- kv
+		}
 	)
 	local slow = target:AddNewModifier(self:GetCaster(), self, "modifier_golovach_slow", { duration = 3 })
-
-	-- create projectile
 	local info = {
 		Source = self:GetCaster(),
 		Ability = self,
@@ -174,37 +155,23 @@ function golovach_hidden:Kick( target, x, y, isRemnant )
 		}
 	}
 	ProjectileManager:CreateLinearProjectile(info)
-
-	-- play effects
 	self:PlayEffects2( target, Vector(x,y,0):Normalized(), distance/speed )
 end
---------------------------------------------------------------------------------
--- Graphics and Animation
 function golovach_hidden:PlayEffects1( target )
-	-- Get Resources
 	local particle_cast = "particles/dark_seer_punch_glove_attack_new.vpcf"
 	local sound_cast = "golovach_punch"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetCaster():GetOrigin())
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- Create Sound
 	EmitSoundOn( sound_cast, self:GetCaster() )
 end
 
 function golovach_hidden:PlayEffects2( target, direction, duration )
-	-- Get Resources
 	local particle_cast = "particles/units/heroes/hero_earth_spirit/espirit_bouldersmash_target.vpcf"
 	local sound_target = "Hero_EarthSpirit.BoulderSmash.Target"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControlForward( effect_cast, 1, direction )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( duration, 0, 0 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-
-	-- Create Sound
 	EmitSoundOn( sound_target, target )
 end

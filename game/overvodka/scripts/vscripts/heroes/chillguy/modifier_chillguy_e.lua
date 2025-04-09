@@ -31,7 +31,6 @@ end
 
 function modifier_chillguy_e:OnDestroy()
 	if not IsServer() then return end
-	-- stop sound
 	local sound_cast = "chillguy_photo"
 	StopSoundOn( sound_cast, self:GetParent() )
 end

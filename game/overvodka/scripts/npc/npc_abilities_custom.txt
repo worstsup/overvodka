@@ -1149,7 +1149,7 @@
 		}
 		"AbilityCastRange"              "0"
 		"AbilityCastPoint"              "0.33 0.33 0.33 0.33"
-		"AbilityCooldown"               "22.0 20.0 18.0 16.0"
+		"AbilityCooldown"               "26.0 24.0 22.0 20.0"
 		"AbilityManaCost"               "60 90 120 150"
 		"AbilityValues"
 		{
@@ -1251,7 +1251,7 @@
 			"stun_duration"
             {
             	"value"	"0.8 1.2 1.6 2.0"
-            	"special_bonus_unique_dazzle_2" "+1.0"
+            	"special_bonus_unique_dazzle_2" "+0.6"
             }
 			"fireblast_damage"
             {
@@ -1270,13 +1270,13 @@
 	{
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"otchim"
-		"ScriptFile"					"lev_otec"
+		"ScriptFile"					"heroes/lev/lev_otec"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"90 80 70"
+		"AbilityCooldown"				"90 85 80"
 		"AbilityManaCost"				"400 600 800"
 		"AbilityValues"
 		{
@@ -1369,7 +1369,7 @@
 				"spell_amp"		"3 6 9 12 15"
 				"reg_2"
 				{
-					"value"	"10 20 25 30 35"
+					"value"	"10 15 20 25 30"
 					"special_bonus_unique_grimstroke_2" "+15"
 				}
 		}
@@ -1443,7 +1443,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"FightRecapLevel"               "1"
 		"AbilityTextureName"            "fri"
-		"AbilityCooldown"               "17 16 15 14"
+		"AbilityCooldown"               "20"
 		"AbilityCastPoint"              "0 0 0 0"
 		"AbilityManaCost"               "150 140 130 120"
 		"AbilityValues"
@@ -1455,12 +1455,12 @@
 				}
 				"stun_duration"
 				{
-					"value"	"0.8 1.2 1.6 2.0" 
-					"special_bonus_unique_furion_7" "+0.4"
+					"value"	"0.8 1.0 1.2 1.4" 
+					"special_bonus_unique_furion_7" "+0.6"
 				}
 		}
 	}
-	"ram_ElFura"
+	"lev_smeh"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityTextureName"			"hah"
@@ -1484,7 +1484,7 @@
 		{
 				"damage"					
 				{
-					"value"                       "80 160 240 320"
+					"value"                       "50 100 150 200"
 					"special_bonus_unique_enigma_5" "+200"
 				}
 				"distance"					"900"
@@ -1543,7 +1543,7 @@
 			}
 			"ApplyModifier"
 			{
-				"ModifierName"	"modifier_elfura_debuff"
+				"ModifierName"	"modifier_lev_smeh_debuff"
 				"Target" 		"TARGET"
 				"Duration"		"1.25"
 			}
@@ -1551,7 +1551,7 @@
 		
 		"Modifiers"
 		{
-			"modifier_elfura_debuff"
+			"modifier_lev_smeh_debuff"
 			{
 				"Passive"			"0"
 				"IsHidden"			"1"
@@ -1584,21 +1584,21 @@
 					}
 					"RunScript"
 					{
-						"ScriptFile"        "ElFura.lua"
-						"Function"          "ElFura"
+						"ScriptFile"        "heroes/lev/lev_smeh"
+						"Function"          "lev_smeh"
 					}
 				}
 				"OnDestroy"
 				{
 					"ApplyModifier"
 					{
-						"ModifierName"	"modifier_elfura_debuff_2"
+						"ModifierName"	"modifier_lev_smeh_debuff_2"
 						"Target" 		"TARGET"
 						"Duration"		"%duration"
 					}
 				}
 			}
-			"modifier_elfura_debuff_2"
+			"modifier_lev_smeh_debuff_2"
 			{
 				"Passive"			"0"
 				"IsHidden"			"1"
@@ -1696,8 +1696,8 @@
 				}
 				"schoolboys_dmg"
 				{
-					"value"	"35 55 75 95"
-					"special_bonus_unique_weaver_3" "+95"
+					"value"	"40 55 70 85"
+					"special_bonus_unique_weaver_3" "+85"
 				}
 				"phase_duration"
 				{
@@ -4116,19 +4116,19 @@
 		"AbilityTextureName"			"code"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"FightRecapLevel"				"1"
-		"HasScepterUpgrade"			"1"
+		"HasScepterUpgrade"				"1"
 		"AbilityCastPoint"				"0.1 0.1 0.1"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_7"
-		"AbilityCooldown"				"12 8 4"
+		"AbilityCooldown"				"9 6 3"
 		"AbilityManaCost"				"50"
-		"AbilityCastRange"				"600 800 1000"
+		"AbilityCastRange"				"800 1000 1200"
 		"AbilityValues"
 		{
 			"projectile_speed"				"1500"
 			"stolen_debuff_amp"				"10 20 30"
 			"cast_range_scepter"			
 			{
-				"value"						"1200"
+				"value"						"1400"
 				"RequiresScepter"			"1"
 			}
 			"duration"
@@ -5731,9 +5731,7 @@
 				"ScriptFile"    "heroes/mellstroy/mell.lua"
 				"Function"      "Meteor"
 			}
-
 		}
-			
 		"OnProjectileHitUnit"
 		{
 			"DeleteOnHit"				"0"
@@ -5788,7 +5786,6 @@
 				}
 			}
 		}
-		
 		"AbilityValues"
 		{
 				"meteor_stun"
@@ -5807,7 +5804,7 @@
 				"dur_tooltip" "4"
 				"gold"
 				{
-					"value"	"25 50 75 100"
+					"value"	"30 60 90 120"
 					"special_bonus_unique_bounty_hunter_3" "+50"
 				}
 				"gold_cost"
@@ -5965,7 +5962,7 @@
 		        }
 		        "interv"	"1.5"
 		        "duration"          "9 12 15"
-		        "bonus_gold" "80 160 240"
+		        "bonus_gold" "90 180 270"
 		        "gold_cost"	"700 1550 2400"
 		}
 	}
@@ -6033,7 +6030,7 @@
 		}
 	}
 	//=================================================================================================================
-	// ЧТО ЗА БИЗНЕС?
+	// ЧТО ЗА БИЗНЕС? (старая версия)
 	//=================================================================================================================
 	"mellstroy_business_new"
 	{
@@ -6086,6 +6083,46 @@
 		}
 	}
 	//=================================================================================================================
+	// ЧТО ЗА БИЗНЕС? (новая версия)
+	//=================================================================================================================
+	"mellstroy_business"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/mellstroy/mellstroy_business"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"biznes"
+		"HasScepterUpgrade"				"1"
+		"AbilityGoldCost"				"100 200 300 400"
+		"AbilityValues"
+		{
+			"AbilityCooldown"
+			{
+				"value"	"18 16 14 12"
+				"special_bonus_unique_bounty_hunter_jinada_no_cooldown" "-6"
+			}
+			"gold_cost" 		"100 200 300 400"
+			"shield"
+			{
+				"value"	"100 200 300 400"
+				"special_bonus_scepter" "x1.5"
+			}
+			"duration"			"10"
+			"shield_from_gold"
+			{
+				"value"	"0"
+				"special_bonus_facet_bounty_hunter_shuriken" "+10"
+				"RequiresFacet"	"1"
+			}
+			"bonus_movespeed"
+			{
+				"value"	"0"
+				"special_bonus_unique_bounty_hunter_4" "+10"
+			}
+		}
+	}
+	//=================================================================================================================
 	// ALL-IN
 	//=================================================================================================================
 	"mellstroy_casino_allin"
@@ -6102,7 +6139,7 @@
 		"AbilityValues"
 		{
 				"base_cost"					"50"
-				"each_level"					"50"
+				"each_level"				"50"
 		}
 	}
 	//=================================================================================================================
@@ -6130,11 +6167,9 @@
 			{
 				"value"		"0"
 			}
-
 			"bonus_gold_cap"
 			{
 				"value"				"0"
-				
 			}
 			"starting_gold_bonus"
 			{
@@ -6714,7 +6749,7 @@
         		"damage"
         		{
         			"value"	"75 150 225 300"
-        			"special_bonus_unique_keeper_of_the_light_8" "+200"
+        			"special_bonus_unique_keeper_of_the_light_8" "+150"
         		}
         }															
 	}
@@ -6778,7 +6813,7 @@
 				"interval"				"0.1"
 				"beam_radius"       "200"
                 "beam_dps"          "100"
-                "linger_time"       "0.8"
+                "linger_time"       "0.6"
                 "linger_create_interval"       "0.1"
                 "damage_interval"   "0.1"
 		}
@@ -8498,7 +8533,7 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"	"18 17 16 15"
+					"value"	"18 16 14 12"
 					"special_bonus_unique_chen_3" "-4"
 				}
 				"armor"	"3 6 9 12"
@@ -8549,7 +8584,7 @@
 		"AbilityCastRange"				"900"
 		"AOERadius"						"%radius"
 		"AbilityCastPoint"				"0.35 0.35 0.35"
-		"AbilityCooldown"				"80 75 70"
+		"AbilityCooldown"				"70 65 60"
 		"AbilityManaCost"				"150 250 350"
 		"AbilityValues"
 		{
@@ -9098,7 +9133,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"800"
 		"AbilityCastPoint"				"0.35"
-		"AbilityCooldown"				"20.0 18.0 16.0 14.0"
+		"AbilityCooldown"				"26.0 24.0 22.0 20.0"
 		"AbilityManaCost"				"60 100 140 180"
 		"AbilityDamage"					"50 100 150 200"
 		"AbilityValues"
@@ -9214,7 +9249,7 @@
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"550 550 550"
 		"AbilityCastPoint"				"0.5"
 		"AbilityManaCost"				"65 100 135 170"
@@ -10096,7 +10131,7 @@
 				"value"	"30"
 			}
 			"dur_tooltip"	"15"
-			"dmg_pct"		"15 30 45"
+			"dmg_pct"		"30 45 60"
 			"damage_needed"
 			{
 				"value"	"300 450 600"
@@ -10133,7 +10168,7 @@
 		"AbilityCastPoint"				"0.5 0.5 0.5 0.5"
 		"AbilityCooldown"				"20"
 		"AbilityChannelTime"			"0.01"
-		"AbilityManaCost"				"200 220 240 260"
+		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
 				"damage_per_second"		"10000.0 10000.0 10000.0 10000.0"
@@ -10260,7 +10295,7 @@
 		"AbilityTextureName"			"papich_r"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityCooldown"				"80 75 70"
+		"AbilityCooldown"				"70 65 60"
 		"AbilityManaCost"				"200"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"				"1.0"
@@ -11980,7 +12015,7 @@
 				}
 				"cooldown_reduction"
 				{
-					"value"	"15 20 25"
+					"value"	"10 15 20"
 				}
 				"add_blasters"	"2"
 				"blasters_damage_pct" "50 75 100"
@@ -12131,13 +12166,13 @@
 		{
 			"radius"
 			{
-				"value"	"500 550 600 650"
+				"value"	"450 500 550 600"
 				"affected_by_aoe_increase"	"1"
 			}
 			"duration"
 			{
 				"value"	"5.0 5.5 6.0 6.5"
-				"special_bonus_unique_faceless_void_7" "+2"
+				"special_bonus_unique_faceless_void_7" "+1"
 			}
 			"crit_chance"
 			{
@@ -12146,7 +12181,7 @@
 			"crit_bonus"
 			{
 				"value"	"120 140 160 180"
-				"special_bonus_unique_faceless_void" "+40"
+				"special_bonus_unique_faceless_void" "+30"
 			}
 			"miss_chance"
 			{
@@ -12491,7 +12526,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastRange"				"700"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"30 28 26 24"
+		"AbilityCooldown"				"28 26 24 22"
 		"AbilityManaCost"				"100"
 		"AbilityValues"
 		{
@@ -12505,7 +12540,7 @@
 				"radius"		"450"
 				"ring_duration"	
 				{
-					"value"	"2.75 3.0 3.25 3.5"
+					"value"	"3.0 3.5 4.0 4.5"
 					"special_bonus_unique_visage_grave_chill_duration" "+1"
 				}
 				"wark_through_trees"
@@ -12528,21 +12563,21 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"				"1.5"
-		"AbilityManaCost"				"25 50 75"
+		"AbilityManaCost"				"20 40 60"
 		"AbilityValues"
 		{
 			"mana_cost_per_second"		"15 30 45"
 			"radius"					"450"
 			"damage"
 			{
-				"value"	"15 30 45"
+				"value"	"20 40 60"
 				"special_bonus_unique_visage_7" "+20"
 			}
 			"movespeed_slow"			"-15 -20 -25"
 			"attack_speed_slow"
 			{
 				"value"	"-20 -40 -60"
-				"special_bonus_unique_visage_3" "-20"
+				"special_bonus_unique_visage_3" "-25"
 			}
 			"gold_per_second"			"10 20 30"
 		}
@@ -12561,15 +12596,18 @@
 		{
 			"required_hits"		
 			{
-				"value"			"5"
-				"special_bonus_unique_visage_6" "-1"
+				"value"			"4"
 			}
 			"counter_duration"
 			{
-				"value"	"6"
+				"value"	"8"
 				"special_bonus_unique_visage_8" "+2"
 			}
-			"stun_duration"		"0.4"
+			"stun_duration"
+			{
+				"value"	"0.6"
+				"special_bonus_unique_visage_6" "+0.6"
+			}
 			"effect_duration"	"5"
 			"tick_damage"		"15 30 45 60"
 			"armor_reduction"	"-1 -2 -3 -4"
@@ -12581,12 +12619,12 @@
 			"lifesteal"
 			{
 				"value"			"0"
-				"special_bonus_scepter" "+30"
+				"special_bonus_scepter" "+50"
 			}
 			"break_duration"
 			{
 				"value"	"0"
-				"special_bonus_facet_weaver_hivemind" "+2"
+				"special_bonus_facet_weaver_hivemind" "+3"
 				"RequiresFacet"	"weaver_hivemind"
 			}
 		}
@@ -12602,8 +12640,8 @@
 		"AbilityTextureName"			"azazin_w"
 		"AbilityCastRange"				"800"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"30 28 26 24"
-		"AbilityManaCost"				"105 115 125 135"
+		"AbilityCooldown"				"28 26 24 22"
+		"AbilityManaCost"				"75 85 95 105"
 		"HasShardUpgrade"				"1"
 		"AbilityValues"
 		{
@@ -12616,12 +12654,16 @@
 			"disable_healing"
 			{
 				"value"	"0"
+				"special_bonus_shard" "+1"
+			}
+			"disarm"
+			{
+				"value"	"0"
 				"special_bonus_unique_visage_5" "+1"
 			}
 			"root_duration"
 			{
-				"value"	"0"
-				"special_bonus_shard"	"+1.5"
+				"value"	"1.0 1.4 1.8 2.2"
 			}
 		}
 	}
@@ -12639,7 +12681,7 @@
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-			"damage_per_burn"		"0"
+			"damage_per_burn"		"1"
 			"mana_per_hit"			"10 20 30 40"
 		}
 	}
@@ -12736,14 +12778,15 @@
 		"AbilityValues"
 		{
 			"range"			 		"600 800 1000"
-			"mv"				 	"550"
+			"mv"				 	"30"
 			"armor"			 		"20 40 60"
+			"magic_resist"			"50 60 70"
 			"dmg"
 			{
-				"value"	"125 250 375"
+				"value"	"175 350 525"
 				"special_bonus_unique_riki_9" "+100"
 			}
-			"bat"					"1.6"
+			"bat"					"1.4"
 			"duration"			 	"15"
 			"free"
 			{
@@ -12751,7 +12794,7 @@
 				"special_bonus_unique_riki_5" "+1"
 			}
 			"radius" "300"
-			"taran_damage" "200"
+			"taran_damage" "100"
 		}
 	}
 	"stray_w"
@@ -12776,7 +12819,7 @@
 			}
 			"damage"
 			{
-				"value"	"100 175 250 325"
+				"value"	"100 200 300 400"
 				"special_bonus_unique_riki_2" "+125"
 			}
 		}
@@ -12803,7 +12846,7 @@
 			}
 			"damage"
 			{
-				"value"	"100 175 250 325"
+				"value"	"100 200 300 400"
 				"special_bonus_unique_riki_2" "+125"
 			}
 			"debuff_duration"
@@ -12878,13 +12921,13 @@
 		{
 			"damage_steal"
 			{
-				"value"	"2 3 4 5"
+				"value"	"3 4 5 6"
 				"special_bonus_unique_riki_7" "+1"
 			}
 			"as_steal"
 			{
 				"value"	"0"
-				"special_bonus_unique_riki_6" "+5"
+				"special_bonus_unique_riki_6" "+10"
 			}
 			"duration"
 			{
@@ -12904,7 +12947,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"80"
+		"AbilityCooldown"				"70"
 		"AbilityManaCost"				"250"
 		"AbilityValues"
 		{
@@ -12939,13 +12982,14 @@
 		"MaxLevel"						"1"			
 		"Innate"						"1"
 		"IsBreakable"					"1"
-		"AbilityCooldown"				"20"
+		"AbilityCooldown"				"18"
 		"AbilityTextureName"			"stray_innate"
 		"AbilityValues"
 		{
 			"bonus_damage"				"20"
+			"bonus_tooltip"				"120"
 			"radius"					"200"
-			"duration"					"1"
+			"duration"					"1.5"
 			"slow"						"-50"
 		}
 	}

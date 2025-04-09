@@ -9,6 +9,7 @@ function lesh_start(keys)
     local special_damage = target_maxHealth * 0.4
     keys.caster:EmitSound("ailesh")
     keys.target:EmitSound("ailesh")
+    if target:IsDebuffImmune() then return end
     keys.ability:ApplyDataDrivenModifier(keys.caster, keys.target, "modifier_item_abyssal_blade_datadriven_active", nil)
     ApplyDamage({victim = keys.target, attacker = keys.caster, damage = special_damage, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS})
 end

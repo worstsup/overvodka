@@ -49,34 +49,28 @@ function modifier_stray_e:OnAttackLanded(params)
 
     self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_buff_stack", { duration = duration } )
     self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_buff", { duration = duration } )
+    if self:GetParent():IsIllusion() then
+        local original_hero = self:GetParent():GetOwner()
+        if original_hero then
+            original_hero:AddNewModifier( original_hero, self:GetAbility(), "modifier_stray_e_damage_buff_stack", { duration = duration } )
+            original_hero:AddNewModifier( original_hero, self:GetAbility(), "modifier_stray_e_damage_buff", { duration = duration } )
+        end
+    end
     params.target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_debuff_stack", { duration = duration * (1-params.target:GetStatusResistance()) } )
     params.target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_debuff", { duration = duration * (1-params.target:GetStatusResistance()) } )
 
     if self:GetAbility():GetSpecialValueFor("as_steal") > 0 then
         self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_buff_stack", { duration = duration } )
         self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_buff", { duration = duration } )
+        if self:GetParent():IsIllusion() then
+            local original_hero = self:GetParent():GetOwner()
+            if original_hero then
+                original_hero:AddNewModifier( original_hero, self:GetAbility(), "modifier_stray_e_attack_speed_buff_stack", { duration = duration } )
+                original_hero:AddNewModifier( original_hero, self:GetAbility(), "modifier_stray_e_attack_speed_buff", { duration = duration } )
+            end
+        end
         params.target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_debuff_stack", { duration = duration * (1-params.target:GetStatusResistance()) } )
         params.target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_debuff", { duration = duration * (1-params.target:GetStatusResistance()) } )
-    end
-end
-
-function modifier_stray_e:AttackTargetSuriken(target)
-    if not IsServer() then return end
-    if target:IsWard() then return end
-    if target:IsBoss() then return end
-    local duration = self:GetAbility():GetSpecialValueFor("duration")
-    local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift_gold.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
-    ParticleManager:SetParticleControl( effect_cast, 1, self:GetParent():GetOrigin() + Vector( 0, 0, 64 ) )
-    ParticleManager:ReleaseParticleIndex( effect_cast )
-    self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_buff_stack", { duration = duration } )
-    self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_buff", { duration = duration } )
-    target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_debuff_stack", { duration = duration * (1-target:GetStatusResistance()) } )
-    target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_damage_debuff", { duration = duration * (1-target:GetStatusResistance()) } )
-    if self:GetAbility():GetSpecialValueFor("as_steal") > 0 then
-        self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_buff_stack", { duration = duration } )
-        self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_buff", { duration = duration } )
-        target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_debuff_stack", { duration = duration * (1-target:GetStatusResistance()) } )
-        target:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_stray_e_attack_speed_debuff", { duration = duration * (1-target:GetStatusResistance()) } )
     end
 end
 
@@ -92,8 +86,10 @@ end
 
 function modifier_stray_e_damage_buff:OnIntervalThink()
     if not IsServer() then return end
+    local ability = self:GetAbility()
+    if not ability then return end
     local modifier = self:GetParent():FindAllModifiersByName("modifier_stray_e_damage_buff_stack")
-    local damage_steal = self:GetAbility():GetSpecialValueFor("damage_steal")
+    local damage_steal = ability:GetSpecialValueFor("damage_steal")
     self:SetStackCount(#modifier * damage_steal)
 end
 
@@ -120,6 +116,8 @@ end
 
 function modifier_stray_e_damage_debuff:OnIntervalThink()
     if not IsServer() then return end
+    local ability = self:GetAbility()
+    if not ability then return end
     local modifier = self:GetParent():FindAllModifiersByName("modifier_stray_e_damage_debuff_stack")
     local damage_steal = self:GetAbility():GetSpecialValueFor("damage_steal")
     self:SetStackCount(#modifier * damage_steal)

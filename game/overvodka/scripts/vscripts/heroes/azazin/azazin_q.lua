@@ -155,7 +155,9 @@ function modifier_azazin_q_pull:OnDestroy()
 	self:GetCaster():StopSound("azazin_q")
     local parent = self:GetParent()
     if self.other_ent and not self.other_ent:IsNull() then
-        local new_forward = (self.other_ent:GetAbsOrigin() - parent:GetAbsOrigin()):Normalized()
+        local diff = self.other_ent:GetAbsOrigin() - parent:GetAbsOrigin()
+        diff.z = 0
+        local new_forward = diff:Normalized()
         if parent:IsRealHero() then
             parent:SetForwardVector(new_forward)
 		    parent:MoveToTargetToAttack(self.other_ent)

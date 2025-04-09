@@ -53,6 +53,7 @@ function stray_scepter:OnSpellStart()
 	for _,hero in pairs(heroes) do
 		i = i+1
 		local illusion = illusions[i]
+		illusion:SetOwner(caster)
 		illusion:SetControllableByPlayer( -1, false )
 		FindClearSpaceForUnit( illusion, hero:GetOrigin(), false )
 		local sound_cast = "Hero_Spectre.Haunt"
@@ -135,7 +136,6 @@ function modifier_stray_scepter:CheckState()
 		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
 		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
 	}
-
 	return state
 end
 

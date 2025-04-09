@@ -67,6 +67,7 @@ function stray_w:OnSpellStart()
         self:GetCaster():FaceTowards(target:GetAbsOrigin())
         ApplyDamage({ victim = target, attacker = self:GetCaster(), ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL })
         FindClearSpaceForUnit(self:GetCaster(), self:GetCaster():GetAbsOrigin(), true)
+        FindClearSpaceForUnit(target, target:GetAbsOrigin(), true)
     end
     knockback:SetEndCallback( callback )
 end

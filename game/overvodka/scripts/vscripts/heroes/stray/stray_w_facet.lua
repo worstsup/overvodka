@@ -70,6 +70,7 @@ function stray_w_facet:OnSpellStart()
         ApplyDamage({ victim = target, attacker = self:GetCaster(), ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL })
         target:AddNewModifier(self:GetCaster(), self, "modifier_stray_w_facet",{duration = self:GetSpecialValueFor("debuff_duration") * (1 - target:GetStatusResistance())})
         FindClearSpaceForUnit(self:GetCaster(), self:GetCaster():GetAbsOrigin(), true)
+        FindClearSpaceForUnit(target, target:GetAbsOrigin(), true)
     end
     knockback:SetEndCallback( callback )
 end

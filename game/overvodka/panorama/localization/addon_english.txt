@@ -1,70 +1,70 @@
 "addon"
 {
-	"PointsToWin"									"Ещё {d:points_to_win}"
-	"PointsToWin_CloseToVictory"					"Ещё {d:points_to_win}"
-	"PointsToWin_VeryCloseToVictory"				"Ещё {d:points_to_win}!"
-	"PointsToWin_Victory"							"Победа!"
+	"PointsToWin" "More {d:points_to_win}"
+	"PointsToWin_CloseToVictory" "More {d:points_to_win}"
+	"PointsToWin_VeryCloseToVictory" "More {d:points_to_win}!"
+	"PointsToWin_Victory" "Victory!"
 
-	"InstructionsTitle"								"OVERVODKA"
-	"InstructionsObjective"							"ЦЕЛЬ"
-	"InstructionsObjectiveText"						"Уничтожайте врагов! Наберите необходимое число убийств первыми или совершите наибольшее число убийств к концу раунда, и победа будет за вами."
-	"InstructionsHowToPlay"							"ПРАВИЛА"
-	"InstructionsLines"								"— Трон Мидаса даёт дополнительное бабло и опыт.<br>
-													— Хватайте гигантские монеты в центре карты, чтобы получить ещё больше золота.<br>
-													— Следите за картой: на ней показано, где появятся сундуки с предметами.<br>
-													— Чем меньше убийств у вашей команды, тем лучше предметы, которые вы получите из сундуков.<br>
-													— Убивайте всех, кто не в вашей команде (сфокусируйтесь на ильине)."
-
+	"InstructionsTitle" "OVERVODKA"
+	"InstructionsObjective" "OBJECTIVE"
+	"InstructionsObjectiveText" "Destroy your enemies! Get the required number of kills first, or have the most kills by the end of the round, and victory will be yours."
+	"InstructionsHowToPlay" "RULES"
+	"InstructionsLines" "- Midas Throne gives extra loot and experience.<br>
+	- Grab the giant coins in the center of the map to get even more gold.<br>
+	- Keep an eye on the map: it shows where item chests will spawn.<br>
+	- The fewer kills your team has, the better the items you get from the chests.<br>
+	- Kill everyone who is not on your team (focus on Ilyin)."
 	"Scoreboard_Goal"								"Цель"
-
-	"Chest"											"НЕЙТРАЛЬНЫЙ ПРЕДМЕТ"
-	"ItemWillSpawn"									"ВОТ-ВОТ БУДЕТ ДОСТАВЛЕН!"
-	"ItemHasSpawned"								"СКОРО ПОЯВИТСЯ HAMSTER KOMBAT! ПРИГОТОВЬТЕСЬ ТАПАТЬ ХОМЯЧКА!"
-	"HamsterSpawn"									"ВРЕМЯ HAMSTER KOMBAT! СКОРЕЕ ТАПАЙТЕ ХОМЯЧКА!"
+	"Chest" "NEUTRAL ITEM"
+	"ItemWillSpawn" "ABOUT TO BE DELIVERED!"
+	"ItemHasSpawned" "GET READY TO TAP YOUR HAMSTER!"
+	"HamsterSpawn" "TAP YOUR HAMSTER NOW!"
+	"HamsterSpawnAnnounce" "IT'S HAMSTER KOMBAT TIME!"
+	"HamsterWillSpawn" "HAMSTER KOMBAT WILL BE APPEARING SOON IN THE MID!"
+	"GoldenRainStart" "IT'S BEEN A GOLDEN RAIN!"
+	"GoldenRainDesc" "EARN AS MUCH AS YOU CAN!"
+	"GoldenRainAnnounce" "IT'S BEEN A GOLDEN RAIN!"
+	"GoldenRainAnnounceDesc" "DON'T MISS THIS MOMENT!"
 
 	"RecentScore"									"+{d:score}"
 
-	"Unassigned"      								"Неопределившиеся"
-	"Spectator"       								"Наблюдатели"
-	"Neutrals"        								"Нейтральная команда"
-	"NoTeam"          								"Нет команды"
+	"Unassigned" "Undecided"
+	"Spectator" "Observers"
+	"Neutrals" "Neutral Team"
+	"NoTeam" "No Team"
 
-	"DOTA_GoodGuys"   								"Бирюзовые Сигмы"
-	"DOTA_BadGuys"    								"Жёлтые Нормисы"
-	"DOTA_Custom1"    								"Розовые Щавели"
-	"DOTA_Custom2"    								"Оранжевые Хайпики"
-	"DOTA_Custom3"    								"Синие Скуфы"
-	"DOTA_Custom4"    								"Зелёные Альтушки"
-	"DOTA_Custom5"    								"Коричневые Найк Про"
-	"DOTA_Custom6"    								"Голубые Зумеры"
-	"DOTA_Custom7"    								"Оливковые Краши"
-	"DOTA_Custom8"    								"Фиолетовые Вайбики"
-	
-	"OverthrowHeroPickup"							"{s:hero_id}"
-	"OverthrowTextPickup"							"ПОЛУЧИЛ"
+	"DOTA_GoodGuys" "Turquoise Sigmas"
+	"DOTA_BadGuys" "Yellow Normises"
+	"DOTA_Custom1" "Pink Sorrels"
+	"DOTA_Custom2" "Orange Hypeeks"
+	"DOTA_Custom3" "Blue Skufs"
+	"DOTA_Custom4" "Green Altushki"
+	"DOTA_Custom5" "Brown Nike Pros"
+	"DOTA_Custom6" "Blue Zoomers"
+	"DOTA_Custom7" "Olive Crushies"
+	"DOTA_Custom8" "Purple Vibeeks" 
+
+	"OverthrowHeroPickup" "{s:hero_id}" 
+	"OverthrowTextPickup" "RECEIVED"
 	"OverthrowItemPickup"							"{s:item_id}!"
 
-	"Remaining"										"ОСТАЛОСЬ"
+	"Remaining" "REMAINING"
 
-	"Overtime"										"ДОБАВОЧНОЕ ВРЕМЯ!"
-	"OvertimeInstructions"							"УБИВАЙТЕ, ЧТОБЫ ПОБЕДИТЬ"
+	"Overtime" "OVERTIME!"
+	"OvertimeInstructions" "KILL TO WIN"
 
-	"KillMessageHero"								"{s:hero_id}"
-	"KillMessageText"								"ЗАЕБАШИЛ ЛИДЕРА"
-	"KillMessageBounty"								"И ПОЛУЧАЕТ 500 ЗОЛОТА СВЕРХУ!"
-	
-	"addonname"										"OVERVODKA"
-	"overthrow_game_info_header_objective"			"Цель:"
-	"overthrow_brief_description"					"Уничтожайте, ебите врагов! Первый, кто наберёт достаточно убийств, победит!"
-	"overthrow_game_info_header_how_to_play"		"Подсказки:"
-	"overthrow_game_info_throne"					"<span class='midas_throne'>Трон Мидаса</span> даёт дополнительные <span class='gold'>золото</span> и <span class='xp'>опыт</span>"
-	"overthrow_game_info_coins"						"Хватайте гигантские монеты <span class='overboss'>в центре карты</span>, чтобы получить ещё больше <span class='gold'>золота</span>."
-	"overthrow_game_info_items"						"Следите за <span class='treasure'>картой</span>: на ней показано, где появятся сундуки с <span class='items'>нейтральными предметами</span>."
-	"overthrow_game_info_tips_header"				"Советы:"
-	"overthrow_game_info_tip01"						"Текущий лидер имеет золотую корону, и вы получите дополнительное золото за его убийство."
-	"overthrow_game_info_tip03"						"Возможно, чтобы убить сильного врага, вам придётся использовать ЛЕЩ и действовать сообща с другими противниками."
-	"overthrow_game_info_tip04"						"Чем меньше убийств совершила ваша команда, тем сильнее нейтральные предметы, которые вы получаете из сундуков."
+	"KillMessageHero" "{s:hero_id}"
+	"KillMessageText" "FUCKED UP THE LEADER"
+	"KillMessageBounty" "AND GET 500 GOLD ON TOP!"
 
+	"addonname" "OVERVODKA"
+	"overthrow_game_info_header_objective" "Objective:"
+	"overthrow_brief_description" "Destroy, fuck your enemies! The first one to get enough kills wins!"
+
+	"overthrow_game_info_header_how_to_play" "HAMSTER KOMBAT:"
+	"overvodka_hamster_description" "At a random time between 8 and 12 minutes of the game, a hamster will appear in a random spot on the mid, for each hit on which you will receive 200 gold! Don't forget to tap the hamster in time!"
+	"overvodka_gold_rain_header" "GOLDEN RAIN:"
+	"overvodka_gold_rain" "Twice per game (before and after the Hamster), a golden rain will start in a random place near the center, getting caught in it will give you 150/300 gold and experience per second. The best opportunity for a comeback, right?"
 	//crow_mask_66_comment
 	//crow_mask_67_comment
 	//crow_mask_68_comment
