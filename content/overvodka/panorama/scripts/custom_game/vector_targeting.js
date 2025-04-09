@@ -17,7 +17,7 @@ var vectorRange = 800;
 var useDual = false;
 var currentlyActiveVectorTargetAbility;
 
-const defaultAbilities = ["bratishkin_w", "test_vector_targeting_lua", "dark_seer_wall_of_replica", "void_spirit_aether_remnant", "broodmother_sticky_snare"];
+const defaultAbilities = ["pangolier_swashbuckle", "clinkz_burning_army", "dark_seer_wall_of_replica", "void_spirit_aether_remnant", "broodmother_sticky_snare"];
 const ignoreAbilites = ["tusk_walrus_kick", "marci_companion_run"]
 
 //Mouse Callback to check whever this ability was quick casted or not

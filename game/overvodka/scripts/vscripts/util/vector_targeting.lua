@@ -9,9 +9,13 @@ ListenToGameEvent("game_rules_state_change", function()
 end, nil)
 
 function VectorTarget:Init()
+	print("[VT] Initializing VectorTarget...")
 	local mode = GameRules:GetGameModeEntity()
+	mode:SetExecuteOrderFilter(Dynamic_Wrap(VectorTarget, 'OrderFilter'), VectorTarget)
 	ListenToGameEvent('dota_player_learned_ability', Dynamic_Wrap(VectorTarget, 'OnAbilityLearned'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(VectorTarget, 'OnItemBought'), self)
+	ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(VectorTarget, 'OnItemPickup'), self)
+
 	CustomGameEventManager:RegisterListener("check_ability", Dynamic_Wrap(VectorTarget, "OnAbilityCheck"))
 end
 
@@ -24,7 +28,7 @@ function VectorTarget:OrderFilter(event)
 	local behavior = ability:GetBehaviorInt()
 
 	-- check if the ability exists and if it is Vector targeting
-	if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING) ~= 0 or (ability and ability:GetAbilityName() == "puchkov_hurricane") then
+	if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING) ~= 0 then
 
 		if event.order_type == DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION then
 			ability.vectorTargetPosition2 = Vector(event.position_x, event.position_y, 0)
@@ -75,7 +79,6 @@ function VectorTarget:OnAbilityLearned(event)
 	if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING) ~= 0 then
 		VectorTarget:UpdateNettable(ability)
 	end
-
 end
 
 function VectorTarget:OnItemPickup(event)
@@ -136,10 +139,6 @@ end
 
 function CDOTABaseAbility:GetVectorDirection()
 	return self.vectorTargetDirection
-end 
-
-function CDOTABaseAbility:GetTargetPositionCheck()
-	return self.vectorTargetPoisitioncheck
 end 
 
 function CDOTABaseAbility:OnVectorCastStart(vStartLocation, vDirection)

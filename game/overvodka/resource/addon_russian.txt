@@ -435,12 +435,12 @@
 		"DOTA_Tooltip_ability_bratishkin_innate" "НЕПОДКУПНОСТЬ"
 		"DOTA_Tooltip_ability_bratishkin_innate_description" "Братишкин не скуп на деньги, поэтому не получает золота с тапанья хомяка. Зато за каждый удар по хомяку от другого героя он получает %pct%%% от полученного им золота."
 		"DOTA_Tooltip_ability_bratishkin_w"	"СЕКУНДУ"
-		"DOTA_Tooltip_ability_bratishkin_w_description" "Братишкин своей рукой отталкивает от себя нарушителей, нанося им урон и накладывая страх."
+		"DOTA_Tooltip_ability_bratishkin_w_description" "Братишкин своей рукой отталкивает нарушителей в выбранном направлении, нанося им урон и накладывая страх, заставляющих их бежать в направлении руки."
 		"DOTA_Tooltip_ability_bratishkin_w_damage" "УРОН:"
 		"DOTA_Tooltip_ability_bratishkin_w_distance_knock" "ДАЛЬНОСТЬ ОТТАЛКИВАНИЯ:"
 		"DOTA_Tooltip_ability_bratishkin_w_duration"	"ДЛИТЕЛЬНОСТЬ СТРАХА:"
-		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8" "СЕКУНДУ вокруг героя"
-		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8_description" ""
+		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8" "+4% к доп. урону за эффект от ШЕФЧИК"
+		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8_description" "Увеличивает урон за все наложенные эффекты"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_3" "+300 к дальности применения СЕКУНДУ"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_7" "+1 сек. к длительности АСУ"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_6" "+5% к шансу оцепенения от ПРАВЕДНАЯ ФОРМА"
@@ -475,6 +475,7 @@
 		"DOTA_Tooltip_Facet_slark_dark_reef_renegade" "ДВОЙНАЯ НАГЛОСТЬ"
 		"DOTA_Tooltip_Facet_slark_dark_reef_renegade_description" "В обычной форме при атаке Братишкин имеет шанс совершить двойную атаку."
 		"DOTA_Tooltip_ability_bratishkin_q_base_Facet_slark_dark_reef_renegade" "В обычной форме при атаке Братишкин вместе с наложением оцепенения совершит двойную атаку."
+		"DOTA_Tooltip_modifier_bratishkin_w_fear" "Страх"
 
 
 		"DOTA_Tooltip_ability_evelone_nose"		"ОГРОМНЫЙ НОСЯРА"
@@ -2516,7 +2517,7 @@
 		"DOTA_Tooltip_ability_item_drobe_bonus_range" "+$attack_range"
 
 		"DOTA_Tooltip_ability_gaster_blaster"	"ГАСТЕР БЛАСТЕР"
-		"DOTA_Tooltip_ability_gaster_blaster_Description" "Санс призывает Гастер бластер в указанную точку, который спустя %blast_delay% сек. стреляет смертельным лучом в ближайшего видимого врага в радиусе %blaster_radius%. Если враг в радиусе не был найден, то бластер выстрелит в направлении Санса."
+		"DOTA_Tooltip_ability_gaster_blaster_Description" "Санс призывает Гастер бластер в указанную точку, который спустя %blast_delay% сек. стреляет смертельным лучом указанном направлении."
 		"DOTA_Tooltip_ability_gaster_blaster_damage" "УРОН: "
 		"DOTA_Tooltip_ability_gaster_blaster_int_damage" "%ИНТЕЛЛЕКТА В УРОН: "
 		"DOTA_Tooltip_ability_gaster_blaster_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Happy</font>"

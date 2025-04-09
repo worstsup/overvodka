@@ -8,16 +8,25 @@ function gaster_blaster:Precache(context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_start.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_shoot.vsndevts", context)
 end
+
 function gaster_blaster:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
 	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_nyx_vendetta_damage" )
 end
-function gaster_blaster:OnSpellStart()
+
+function gaster_blaster:GetBehavior()
+    return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING
+end
+
+function gaster_blaster:GetVectorTargetRange()
+    return 10000
+end
+
+function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
     local caster = self:GetCaster()
-    local target_point = self:GetCursorPosition()
+    local target_point = self:GetVectorPosition()
     local delay = self:GetSpecialValueFor("blast_delay")
-    local blaster_radius = self:GetSpecialValueFor("blaster_radius")
     local laser_length = self:GetSpecialValueFor("laser_length")
     local laser_width = self:GetSpecialValueFor("laser_width")
     local dmg = self:GetSpecialValueFor("damage") + self:GetSpecialValueFor("int_damage") * self:GetCaster():GetIntellect(false) * 0.01
@@ -62,29 +71,11 @@ function gaster_blaster:OnSpellStart()
     end
     local blaster = CreateUnitByName("npc_gaster_blaster", target_point, false, caster, caster, caster:GetTeamNumber())
     blaster:AddNewModifier(caster, self, "modifier_gaster_blaster", {duration = delay + 0.5})
-    
-    local enemies = FindUnitsInRadius(
-        caster:GetTeamNumber(),
-        target_point,
-        nil,
-        blaster_radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_CLOSEST,
-        false
-    )
-    local pt = caster
-    local vDirection = (caster:GetAbsOrigin() - target_point + Vector(3,3,0)):Normalized()
-    if #enemies > 0 then
-        local target = enemies[1]
-        pt = target
-        vDirection = (target:GetAbsOrigin() - target_point):Normalized()
-    end
-    blaster:SetForwardVector(vDirection)
+    local direction_new = self:GetVectorDirection()
+    blaster:SetForwardVector(direction_new)
     Timers:CreateTimer(delay, function()
         if not blaster:IsNull() and blaster:IsAlive() then
-            local laser_end = target_point + vDirection * laser_length
+            local laser_end = target_point + direction_new * laser_length
             local units = FindUnitsInLine(
                 caster:GetTeamNumber(),
                 target_point,
@@ -122,10 +113,10 @@ function gaster_blaster:OnSpellStart()
             return Vector(x * cos - y * sin, x * sin + y * cos, 0)
         end
         local angle = math.rad(40)
-        local offset1 = RotateVector2D(vDirection, angle) * 200
-        local offset2 = RotateVector2D(vDirection, -angle) * 200
-        local dir_1 = (pt:GetAbsOrigin() - (target_point + offset1)):Normalized()
-        local dir_2 = (pt:GetAbsOrigin() - (target_point + offset2)):Normalized()
+        local offset1 = RotateVector2D(direction_new, angle) * 200
+        local offset2 = RotateVector2D(direction_new, -angle) * 200
+        local dir_1 = RotateVector2D(direction_new, -angle/2)
+        local dir_2 = RotateVector2D(direction_new, angle/2)
         CreateBlaster(target_point + offset1, dir_1)
         CreateBlaster(target_point + offset2, dir_2)
     end

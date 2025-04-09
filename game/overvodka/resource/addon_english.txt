@@ -436,8 +436,8 @@
 		"DOTA_Tooltip_ability_bratishkin_w_damage" "DAMAGE:"
 		"DOTA_Tooltip_ability_bratishkin_w_distance_knock" "KNOCK OFF RANGE:"
 		"DOTA_Tooltip_ability_bratishkin_w_duration" "FEAR DURATION:"
-		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8" "1 SECOND around the hero"
-		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8_description" ""
+		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8" "+4% to additional damage for the effect of TWITCH BOSS"
+		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_8_description" "Increases damage for all applied effects"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_3" "+300 to the range of 1 SECOND"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_7" "+1 sec. to the duration of BANWORD"
 		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_6" "+5% to the chance of being rooted by RIGHTEOUS FORM"
@@ -470,6 +470,7 @@
 		"DOTA_Tooltip_Facet_slark_dark_reef_renegade" "DOUBLE LEASH"
 		"DOTA_Tooltip_Facet_slark_dark_reef_renegade_description" "In normal form, Bratishkin has a chance to double attack when attacking."
 		"DOTA_Tooltip_ability_bratishkin_q_base_Facet_slark_dark_reef_renegade" "In normal form, Bratishkin will double attack when attacking and apply Root."
+		"DOTA_Tooltip_modifier_bratishkin_w_fear" "Fear"
 
 		"DOTA_Tooltip_ability_evelone_nose" "HUGE NOSE"
 		"DOTA_Tooltip_ability_evelone_nose_Description" "Vadim's huge nose senses every enemy up to %cone_radius% away from him and reveals invisibility."
@@ -2494,7 +2495,7 @@
 		"DOTA_Tooltip_ability_item_drobe_bonus_range" "+$attack_range"
 
 		"DOTA_Tooltip_ability_gaster_blaster" "GASTER BLASTER"
-		"DOTA_Tooltip_ability_gaster_blaster_Description" "Sans summons a Gaster Blaster at a target location, which fires a beam at the nearest visible enemy within %blaster_radius% after %blast_delay% seconds. If no enemy is found within the radius, the blaster will fire in Sans' direction."
+		"DOTA_Tooltip_ability_gaster_blaster_Description" "Sans summons a Gaster Blaster at the target location, which fires a deadly beam in the target direction after %blast_delay% seconds."
 		"DOTA_Tooltip_ability_gaster_blaster_damage" "DAMAGE: "
 		"DOTA_Tooltip_ability_gaster_blaster_int_damage" "%INTELLIGENCE TO DAMAGE: "
 		"DOTA_Tooltip_ability_gaster_blaster_laser_width" "BEAM WIDTH: "

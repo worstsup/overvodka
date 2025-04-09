@@ -1,22 +1,19 @@
 LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_bratishkin_w_fear", "heroes/bratishkin/bratishkin_w", LUA_MODIFIER_MOTION_HORIZONTAL)
 bratishkin_w = class({})
 t = 0
 function bratishkin_w:Precache(context)
     PrecacheResource( "particle", "particles/bratishkin_w.vpcf", context )
+    PrecacheResource( "particle", "particles/econ/items/omniknight/omni_crimson_witness_2021/omniknight_crimson_witness_2021_degen_aura_debuff.vpcf", context )
+    PrecacheResource( "particle", "particles/status_fx/status_effect_dark_willow_wisp_fear.vpcf", context )
     PrecacheResource( "soundfile", "soundevents/bratishkin_w_1.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/bratishkin_w.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/bratishkin_w_2.vsndevts", context )
 end
 
-function bratishkin_w:HasTalent(talentName)
-    if self:GetCaster():FindAbilityByName(talentName) ~= nil then
-        local ability = self:GetCaster():FindAbilityByName(talentName)
-        if ability and ability:GetLevel() > 0 then
-            return true
-        end
-    end
-    return false
+function bratishkin_w:GetBehavior()
+    return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING
 end
 
 function bratishkin_w:GetCooldown(level)
@@ -30,34 +27,21 @@ end
 function bratishkin_w:GetManaCost(level)
     return self.BaseClass.GetManaCost(self, level)
 end
-
-function bratishkin_w:GetBehavior()
-    if self:HasTalent("special_bonus_unique_legion_commander_8") then
-        return DOTA_ABILITY_BEHAVIOR_NO_TARGET
-    end
-    return DOTA_ABILITY_BEHAVIOR_POINT
+function bratishkin_w:GetVectorTargetRange()
+	return self:GetSpecialValueFor("distance")
 end
-
-function bratishkin_w:OnSpellStart()
+function bratishkin_w:OnVectorCastStart(vStartLocation, vDirection)
     if not IsServer() then return end
     local caster = self:GetCaster()
-    local target_loc = self:GetCursorPosition()
-    local caster_loc = caster:GetAbsOrigin()
-    local distance = self:GetCastRange(caster_loc,caster)
-    local direction
-    if target_loc == caster_loc or self:HasTalent("special_bonus_unique_legion_commander_8") then
-        direction = caster:GetForwardVector()
-    else
-        direction = (target_loc - caster_loc):Normalized()
-    end
+    local direction = self:GetVectorDirection()
     local index = DoUniqueString("bratishkin_w")
     self[index] = {}
     local projectile =
     {
         Ability             = self,
         EffectName          = "particles/bratishkin_w.vpcf",
-        vSpawnOrigin        = caster_loc,
-        fDistance           = self:GetSpecialValueFor("distance"),
+        vSpawnOrigin        = self:GetVectorPosition(),
+        fDistance           = self:GetVectorTargetRange(),
         fStartRadius        = 175,
         fEndRadius          = 225,
         Source              = caster,
@@ -71,14 +55,7 @@ function bratishkin_w:OnSpellStart()
         bProvidesVision     = false,
         ExtraData           = {index = index, damage = damage}
     }
-    if self:HasTalent("special_bonus_unique_legion_commander_8") then
-        for i = 1, 12 do
-            ProjectileManager:CreateLinearProjectile(projectile)
-            projectile.vVelocity = RotatePosition(Vector(0,0,0), QAngle(0,30*i,0), caster:GetForwardVector()) * 1000
-        end
-    else
-        ProjectileManager:CreateLinearProjectile(projectile)
-    end
+    ProjectileManager:CreateLinearProjectile(projectile)
     self:GetCaster():EmitSound("bratishkin_w")
     if t == 0 then
         self:GetCaster():EmitSound("bratishkin_w_1")
@@ -90,6 +67,7 @@ function bratishkin_w:OnSpellStart()
 end
 
 function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
+    if not IsServer() then return end
     if target then
         local was_hit = false
         for _, stored_target in ipairs(self[ExtraData.index]) do
@@ -101,17 +79,30 @@ function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
         if was_hit then
             return false
         end
-        table.insert(self[ExtraData.index],target)
+        table.insert(self[ExtraData.index], target)
         local distance_knock = self:GetSpecialValueFor("distance_knock")
         local direction = (target:GetAbsOrigin() - location):Normalized()
-        local knockback = target:AddNewModifier( self:GetCaster(), self, "modifier_generic_knockback_lua", { duration = 0.75 * (1 - target:GetStatusResistance()), distance = distance_knock, height = 0, direction_x = direction.x, direction_y = direction.y})
+        local knockback = target:AddNewModifier( self:GetCaster(), self, "modifier_generic_knockback_lua", 
+            { duration = 0.75, distance = distance_knock, height = 0, direction_x = direction.x, direction_y = direction.y })
         local damage = self:GetSpecialValueFor("damage")
-        ApplyDamage({victim = target, attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+        ApplyDamage({
+            victim = target, 
+            attacker = self:GetCaster(), 
+            damage = damage, 
+            damage_type = DAMAGE_TYPE_MAGICAL, 
+            ability = self
+        })
         local callback = function()
-            local duration = self:GetSpecialValueFor('duration')
-            target:AddNewModifier(self:GetCaster(), self, "modifier_dark_willow_debuff_fear", {duration = duration * (1 - target:GetStatusResistance())})
+            local duration = self:GetSpecialValueFor("duration")
+            local fear_speed = self:GetSpecialValueFor("fear_speed") or 300
+            target:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_w_fear", {
+                duration = duration * (1 - target:GetStatusResistance()),
+                dir_x = direction.x,
+                dir_y = direction.y,
+                speed = fear_speed,
+            })
         end
-        knockback:SetEndCallback( callback )
+        knockback:SetEndCallback(callback)
     else
         self[ExtraData.index]["count"] = self[ExtraData.index]["count"] or 0
         self[ExtraData.index]["count"] = self[ExtraData.index]["count"] + 1
@@ -119,4 +110,66 @@ function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
             self[ExtraData.index] = nil
         end
     end
+end
+
+modifier_bratishkin_w_fear = class({})
+
+function modifier_bratishkin_w_fear:IsHidden() 
+    return false 
+end
+
+function modifier_bratishkin_w_fear:IsDebuff() 
+    return true 
+end
+
+function modifier_bratishkin_w_fear:IsPurgable() 
+    return true 
+end
+
+function modifier_bratishkin_w_fear:RemoveOnDeath() 
+    return true 
+end
+
+function modifier_bratishkin_w_fear:OnCreated(kv)
+    if not IsServer() then return end
+    self.duration = kv.duration or 1.5
+    self.dir = Vector(kv.dir_x or 0, kv.dir_y or 0, 0):Normalized()
+    self:GetParent():MoveToPosition( self:GetParent():GetAbsOrigin() + self.dir * 2000 )
+end
+
+
+function modifier_bratishkin_w_fear:OnDestroy()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+end
+
+function modifier_bratishkin_w_fear:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
+	}
+
+	return funcs
+end
+
+function modifier_bratishkin_w_fear:GetModifierProvidesFOWVision()
+	return 1
+end
+
+function modifier_bratishkin_w_fear:CheckState()
+    return {
+        [MODIFIER_STATE_SILENCED] = true,
+        [MODIFIER_STATE_DISARMED] = true,
+        [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+        [MODIFIER_STATE_FEARED] = true,
+    }
+end
+function modifier_bratishkin_w_fear:GetStatusEffectName()
+	return "particles/status_fx/status_effect_dark_willow_wisp_fear.vpcf"
+end
+function modifier_bratishkin_w_fear:GetEffectName()
+    return "particles/econ/items/omniknight/omni_crimson_witness_2021/omniknight_crimson_witness_2021_degen_aura_debuff.vpcf"
+end
+
+function modifier_bratishkin_w_fear:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end

@@ -6597,10 +6597,7 @@
 		"AbilityCooldown"				"0"
 		"AbilityValues"
 		{
-				"gold"
-				{
-					"value"	"200"
-				}
+			"gold" "200"
 		}
 	}
 	//=================================================================================================================
@@ -8579,7 +8576,6 @@
 		{
 			"particle"		"particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf"
 			"particle"		"particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot_gold.vpcf"
-			"soundfile"		"sounds/weapons/hero/witch_doctor/deathward_build.vsnd"
 		}
 		"AbilityCastRange"				"900"
 		"AOERadius"						"%radius"
@@ -8788,10 +8784,6 @@
 		"AbilityTextureName"			"aimlock"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"3"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
@@ -11148,7 +11140,7 @@
     	"BaseClass"                "ability_lua"
     	"ScriptFile"               "heroes/sans/gaster_blaster.lua"
     	"AbilityTextureName"	   "gaster_blaster"
-    	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT"
+    	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
     	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
     	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
     	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
@@ -11179,7 +11171,6 @@
 				"value"	"0.9"
 				"special_bonus_unique_morphling_1" "-0.2"
 			}
-        	"blaster_radius" "700"
 			"blaster_vision" "700"
         	"damage"
 			{
@@ -11945,10 +11936,7 @@
 		"AbilityValues"
 		{
 				"blast_speed"			"1000"
-				"blast_stun_duration"
-				{
-					"value"	"1.0"
-				}
+				"blast_stun_duration"	"1.0"
 				"blast_delay"    "0.9"
         		"blaster_radius" "700"
 				"blaster_vision" "700"
@@ -12425,13 +12413,13 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/bratishkin/bratishkin_w"
 		"AbilityTextureName"			"bratishkin_w"
+		"AbilityBehavior"          		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"			 	"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"		  	"SPELL_DISPELLABLE_YES_STRONG"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityCastPoint"				"0.25"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityManaCost"				"75 100 125 150"
 		"AbilityCastAnimation"		  	"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityValues"
@@ -12453,6 +12441,7 @@
 			}
 			"distance_knock"			"400"
 			"duration"					"1.0 1.3 1.6 1.9"
+			"fear_speed"				"300"
 			"AbilityCooldown"
 			{
 				"value"								 "21 19 17 15"
@@ -12510,7 +12499,11 @@
 		"AbilityCooldown"               "30.0 25.0 20.0"
 		"AbilityValues"
 		{
-			"bonus_dmg_pct"         "6"
+			"bonus_dmg_pct"
+			{
+				"value"	"6"
+				"special_bonus_unique_legion_commander_8" "+4"
+			}
 			"attacks_needed"		"15"
 		}
 	}
@@ -12991,6 +12984,25 @@
 			"radius"					"200"
 			"duration"					"1.5"
 			"slow"						"-50"
+		}
+	}
+	"test_vector_targeting_lua"
+	{
+		"BaseClass"     					"ability_lua"
+		"ScriptFile"    					"vector_targeting_lua"
+		"SpellImmunityType"  				"SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel"    				"1"
+		"AbilityTextureName"				"mirana_arrow"
+		"AbilityCastRange"   				"%range"
+		"AbilityCastPoint"   				"0.3"
+		"AbilityCooldown"    				"35 32 29 26 23 20"
+		"AbilityManaCost"    				"120 130 140 150 160 170"
+		"AbilityUnitTargetTeam"   			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"   			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"   			"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityValues"
+		{
+				"range" 						"600 650 700 750 800 850"
 		}
 	}
 }
