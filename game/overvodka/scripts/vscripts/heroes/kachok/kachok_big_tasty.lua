@@ -6,7 +6,7 @@ function kachok_big_tasty:OnSpellStart()
     local caster = self:GetCaster()
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(particle)
-
+    caster:StartGesture(ACT_DOTA_CAST_ABILITY_2)
     EmitSoundOn("vkusno", caster)
 
     caster:AddNewModifier(caster, self, "modifier_kachok_big_tasty_transformation", { duration = self:GetSpecialValueFor("transformation_time") })

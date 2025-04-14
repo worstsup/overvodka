@@ -1,0 +1,81 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc39:version{1ceecb0d-4093-4729-ab18-b76886c64cde} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/stint/stint.fbx"
+						import_scale = 100.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = 
+							[
+								"AvatarTeethLower",
+								"AvatarTeethUpper",
+								"AvatarEyelashes",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "avatarbody.vmat"
+								to = "models/stint/stint_skin.vmat"
+							},
+							{
+								from = "avatarhead.vmat"
+								to = "models/stint/stint_head.vmat"
+							},
+							{
+								from = "avatarlefteyeball.vmat"
+								to = "models/stint/stint_eye.vmat"
+							},
+							{
+								from = "avatarrighteyeball.vmat"
+								to = "models/stint/stint_eye.vmat"
+							},
+							{
+								from = "outfit_bottom.vmat"
+								to = "models/stint/stint_pants.vmat"
+							},
+							{
+								from = "outfit_shoes.vmat"
+								to = "models/stint/stint_boots.vmat"
+							},
+							{
+								from = "outfit_top.vmat"
+								to = "models/stint/stint_shirt.vmat"
+							},
+							{
+								from = "avatareyelashes.vmat"
+								to = "models/stint/stint_shirt.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		document_sub_type = "ModelDocSubType_None"
+	}
+}

@@ -49,7 +49,6 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                     DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                     0
                 )
-                
                 local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
                 ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
                 ParticleManager:SetParticleControl(particle, 1, laser_end)
@@ -129,7 +128,6 @@ function modifier_gaster_blaster:IsPurgable() return false end
 
 function modifier_gaster_blaster:OnCreated()
     if not IsServer() then return end
-
     local parent = self:GetParent()
     parent:EmitSound("gaster_blaster_start")
 end

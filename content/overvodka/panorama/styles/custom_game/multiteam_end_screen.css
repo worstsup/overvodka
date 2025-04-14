@@ -430,3 +430,65 @@
 .Hamstergod .RatingRankIcon{
 	background-image: url("file://{images}/custom_game/ranks/hamstergod.png");
 }
+
+#TelegramButton{
+	height: 100px;
+	margin-left: 300px;
+	margin-top: 50px;
+	align: left top;
+	flow-children: left;
+}
+
+#TelegramButton:hover .TelegramText{
+	text-shadow: 0px 0px 8px 2 #afe3ff11;
+}
+
+#TelegramButton:hover #TelegramPanel{
+	border: 1px solid white;
+	border-brush: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #9cc6dd ), color-stop( 0.55, #7098b5 ), to( #82c2e5 ) );
+	box-shadow: 0px 0px 16px #afe3ff11;
+}
+
+#TelegramButton:hover #TelegramIcon{
+	border: 1px solid white;
+	border-brush: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #9cc6dd ), color-stop( 0.55, #7098b5 ), to( #82c2e5 ) );
+	box-shadow: 0px 0px 16px #afe3ff11;
+}
+
+#TelegramIcon{
+	border-radius: 150px;
+	width: 100px;
+	height: 100px;
+	border: 1px solid white;
+	border-brush: rgba(0, 0, 0, 0);
+
+	transition-property: border-brush, box-shadow;
+	transition-duration: .2s;
+}
+
+#TelegramPanel{
+	width: 350px;
+	height: 75px;
+	margin-left: -25px;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#26292fef), color-stop(0.5, #181c2aef), to(#0c0f19ef));
+    box-shadow: 0px 6px 24px -8px rgba(0, 0, 0, 0.8);
+	border: 1px solid white;
+	border-brush: rgba(0, 0, 0, 0);
+	align: left center;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+
+	transition-property: border-brush, box-shadow;
+	transition-duration: .2s;
+}
+
+.TelegramText{
+	margin-left: 25px;
+	font-size: 35px;
+	text-transform: uppercase;
+	align: center center;
+	letter-spacing: 1px;
+	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #9cc6dd ), color-stop( 0.55, #7098b5 ), to( #82c2e5 ) );
+	transition-property: text-shadow;
+	transition-duration: .2s;
+}

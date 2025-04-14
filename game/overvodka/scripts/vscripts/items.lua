@@ -169,8 +169,6 @@ function COverthrowGameMode:SpecialItemAdd( event )
 			spawnedItem = t5
 		end
 	end
-
-	-- add the item to the inventory and broadcast
 	owner:AddItemByName( spawnedItem )
 	EmitGlobalSound("Overthrow.Item.Claimed")
 	local overthrow_item_drop =

@@ -33,8 +33,7 @@ function modifier_kachok_trenbolone:DeclareFunctions()
         MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
-        MODIFIER_PROPERTY_MODEL_CHANGE,
-        MODIFIER_PROPERTY_MODEL_SCALE
+        MODIFIER_PROPERTY_MODEL_CHANGE
     }
 end
 
@@ -52,8 +51,4 @@ end
 
 function modifier_kachok_trenbolone:GetModifierModelChange()
     return "models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl"
-end
-
-function modifier_kachok_trenbolone:GetModifierModelScale()
-    return 20
 end

@@ -3,13 +3,11 @@
 {
 	"npc_dota_hero_pudge"
 	{
-		"Model"		"models/heroes/pudge/pudge.vmdl"
-		"IdleExpression"		"scenes/pudge/pudge_exp_idle_01.vcd"
+		"Model"		"models/kachok/kachok.vmdl"
+		"DisableWearables"	"1"
 		"SoundSet"		"Hero_Pudge"
-		"PickSound"		"pudge_pud_spawn_10"
-		"BanSound"		"pudge_pud_anger_01"
-		"IdleSoundLoop"		"Hero_Pudge.IdleLoop"
 		"HeroSelectSoundEffect"		"step_start"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 		"SimilarHeroes"  "7,53,62"
 		"Enabled"		"1"
 		"GibType"		"default"
@@ -29,8 +27,8 @@
 		"Ability17"		"special_bonus_unique_pudge_1"
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"ModelScale"		"0.6"
-		"LoadoutScale"		"0.6"
+		"ModelScale"		"0.9"
+		"LoadoutScale"		"1.2"
 		"AttackDamageMin"		"34"
 		"AttackDamageMax"		"40"
 		"AttackRate"		"1.700000"
@@ -47,6 +45,7 @@
 		"AttributeAgilityGain"		"1.400000"
 		"StatusHealthRegen"		"2.5"
 		"MovementSpeed"		"275"
+		"HealthBarOffset"	"230"
 		"MovementTurnRate"		"0.700000"
 		"Facets"
 		{
@@ -2461,6 +2460,76 @@
 		"AttributeIntelligenceGain"		"1.8"
 		"StatusHealthRegen"		"2.5"
 		"MovementSpeed"		"315"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+	}
+	"npc_dota_hero_omniknight"
+	{
+		"Model"		"models/heroes/omniknight/omniknight.vmdl"
+		"SoundSet"		"Hero_Omniknight"
+		"Enabled"		"1"
+		"ModelScale"		"0.740000"
+		"LoadoutScale"		"0.74"
+		"SimilarHeroes"		"102,111,50"
+		"HeroSelectSoundEffect"		"Hero_Omniknight.Pick"
+		"GibType"		"default"
+		"Ability1"		"omniknight_purification"
+		"Ability2"		"omniknight_martyr"
+		"Ability3"		"omniknight_hammer_of_purity"
+		"Ability4"		"omniknight_degen_aura"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"omniknight_guardian_angel"
+
+		"Ability10"		"special_bonus_unique_omniknight_5"
+		"Ability11"		"special_bonus_attack_base_damage_35"
+		"Ability12"		"special_bonus_unique_omniknight_2"
+		"Ability13"		"special_bonus_unique_omniknight_7"
+		"Ability14"		"special_bonus_unique_omniknight_guardian_angel_duration"
+		"Ability15"		"special_bonus_unique_omniknight_6"
+		"Ability16"		"special_bonus_unique_omniknight_1"
+		"Ability17"		"special_bonus_unique_omniknight_4"
+		
+		"Facets"
+		{
+			"omniknight_omnipresent"		
+			{
+				"Icon"				"damage"
+				"Color"				"Gray"
+				"GradientID"		"3"
+			}
+
+			"omniknight_dmgheals"
+			{
+				"Icon"				"healing"
+				"Color"				"Yellow"
+				"GradientID"		"0"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"omniknight_healing_hammer"
+					}
+				}
+			}
+		}
+		"ArmorPhysical"		"2"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"31"
+		"AttackDamageMax"		"41"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.433000"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttackRangeBuffer"			"550"		
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"3.10000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.0000"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"2.100000"
+		"MovementSpeed"		"310"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 }

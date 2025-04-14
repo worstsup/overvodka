@@ -10,6 +10,7 @@
 		"StrategyPhase"									"Strategy Time"
 
 		"LOADING_SCREEN_Telegramm"						"Our Telegram"
+		"END_SCREEN_Telegramm"							"OVERVODKA"
 		"PLAYER_HUD_High_five"							"High Five!"
 		"PLAYER_HUD_Seasonal1"							"Duel!"
 		"PLAYER_HUD_Seasonal2"							"Baloon!"
@@ -556,7 +557,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_sadist_heal_bonus" "-10 sec cooldown 42 ATTACK"
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_heartstopper_regen_duration" "+0.4 sec stun from WHAT'S WRONG?"
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_5" "Immune to effects during WHAT'S WRONG?"
-		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_2" "+100 damage from 42 ATTACK"
+		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_2" "+75 damage from 42 ATTACK"
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_3" "+50 damage per second from GIRL ON THE LIST"
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos_4" "-8 sec cooldown WHAT AM I DOING?"
 		"DOTA_Tooltip_ability_special_bonus_unique_necrophos" "Coins give the hero twice as much gold"

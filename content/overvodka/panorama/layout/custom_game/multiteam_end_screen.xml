@@ -30,6 +30,12 @@
 			<Button id="CloseButton" onactivate="Game.FinishGame();">
 				<Label text="#CustomEndScreenClose" />
 			</Button>
+			<Panel id="TelegramButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka')">
+				<Panel id="TelegramPanel">
+					<Label class="TelegramText" text="#END_SCREEN_Telegramm" />
+				</Panel>
+				<Image id="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

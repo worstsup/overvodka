@@ -2321,7 +2321,7 @@
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"mask_of_quadrobe"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"30.0"
+		"AbilityCooldown"				"25.0"
 		"AbilityManaCost"				"100"
 		"ItemCost"						"6000"
 		
@@ -2386,7 +2386,7 @@
 				"Passive"			"0"
 				"IsHidden"			"0"
 				
-				"EffectName"			"particles/units/heroes/hero_marci/marci_unleash_buff.vpcf"
+				"EffectName"			"particles/quadrobe_buff.vpcf"
 				"EffectAttachType"		"follow_origin"
 					
 				"Properties"

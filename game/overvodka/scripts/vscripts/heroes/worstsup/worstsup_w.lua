@@ -42,6 +42,8 @@ function worstsup_w:OnProjectileHit(target, location)
             duration = self:GetSpecialValueFor("duration")
         })
     end
+    local damage = caster:GetIntellect(false) * self:GetSpecialValueFor("int_damage") * 0.01
+    ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self})
     return true
 end
 

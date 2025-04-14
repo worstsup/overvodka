@@ -369,7 +369,15 @@ function COverthrowGameMode:OnItemPickUp( event )
 	local item = EntIndexToHScript( event.ItemEntityIndex )
 	local owner = EntIndexToHScript( event.HeroEntityIndex )
 	r = 300
-	--r = RandomInt(200, 400)
+	local function RemoveItemByName(unit, itemName)
+		for i = 0, 8 do
+			local item = unit:GetItemInSlot(i)
+			if item and item:GetAbilityName() == itemName then
+				unit:RemoveItem(item)
+				break
+			end
+		end
+	end
 	if event.itemname == "item_bag_of_gold" then
 		if owner:GetUnitName() == "npc_dota_hero_necrolyte" then
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
@@ -390,12 +398,10 @@ function COverthrowGameMode:OnItemPickUp( event )
 				r = 600
 			end
 			if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
-					r = 0
+				r = 0
 			end
 			local Team = PlayerResource:GetTeam(playerID)
-
 			local newR = ChangeValueByTeamPlace(r, Team)
-
 			PlayerResource:ModifyGold( playerID, newR, false, 0 )
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
@@ -422,31 +428,27 @@ function COverthrowGameMode:OnItemPickUp( event )
 		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
 		UTIL_Remove( item )
 	elseif event.itemname == "item_treasure_chest" then
-		print( "Special Item Picked Up" )
-
-		if item.GetAbilityName ~= nil then
-			--print( "Item is named: - " .. item:GetAbilityName() )
-		end
-
+		local treasureItemName = event.itemname
 		local hContainer = item:GetContainer()
-
-		for k,v in pairs ( self.itemSpawnLocationsInUse ) do
+		for k, v in pairs(self.itemSpawnLocationsInUse) do
 			if v.hDrop == hContainer then
-				--print( '^^^DROP CONTAINER!' )
 				if v.hItemDestinationRevealer then
 					v.hItemDestinationRevealer:RemoveSelf()
-					ParticleManager:DestroyParticle( v.nItemDestinationParticles, false )
-					DoEntFire( v.world_effects_name, "Stop", "0", 0, self, self )
+					ParticleManager:DestroyParticle(v.nItemDestinationParticles, false)
+					DoEntFire(v.world_effects_name, "Stop", "0", 0, self, self)
 				end
-				
-				table.insert( self.itemSpawnLocations, v )
-				table.remove( self.itemSpawnLocationsInUse, k )
+				table.insert(self.itemSpawnLocations, v)
+				table.remove(self.itemSpawnLocationsInUse, k)
 				break
 			end
 		end
-		
-		COverthrowGameMode:SpecialItemAdd( event )
-		UTIL_Remove( item ) -- otherwise it pollutes the player inventory
+		COverthrowGameMode:SpecialItemAdd(event)
+		Timers:CreateTimer(0.03, function()
+			RemoveItemByName(owner, treasureItemName)
+			UTIL_Remove(item)
+			local bonusItem = CreateItem("item_madstone_bundle", owner, owner)
+			owner:AddItem(bonusItem)
+		end)
 	end
 end
 
