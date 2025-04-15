@@ -3593,23 +3593,26 @@
 					"special_bonus_unique_enchantress_2" "+5"
 				}
 				"stun_duration"		"1"
+				"mute_duration"		"1"
 				"silence_duration"	"1.5"
 				"disarm_duration"	"1.5"
-				"mute_duration"		"1"
 				"illusion_duration"
 				{
-					"value"	"2"
+					"value"	"0"
 					"RequiresShard"	"1"
+					"special_bonus_shard" "+2"
 				}
 				"illusion_damage_outgoing"
 				{
-					"value"	"50"
+					"value"	"0"
 					"RequiresShard"	"1"
+					"special_bonus_shard" "+50"
 				}
 				"illusion_damage_incoming"
 				{
-					"value"	"200"
+					"value"	"0"
 					"RequiresShard"	"1"
+					"special_bonus_shard" "+200"
 				}
 		}
 	}
