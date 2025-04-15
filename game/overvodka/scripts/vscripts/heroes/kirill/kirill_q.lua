@@ -2,9 +2,12 @@ kirill_q = class({})
 
 LinkLuaModifier( "modifier_kirill_q", "heroes/kirill/kirill_q", LUA_MODIFIER_MOTION_NONE )
 
+function kirill_q:Precache( context )
+	PrecacheResource( "soundfile", "soundevents/prov.vsndevts", context )
+end
+
 function kirill_q:OnSpellStart()
 	EmitSoundOn( "prov", self:GetCaster() )
-
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_kirill_q", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 
@@ -34,7 +37,6 @@ function modifier_kirill_q:DeclareFunctions()
 		MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 	}
-
 	return funcs
 end
 
@@ -43,7 +45,6 @@ function modifier_kirill_q:CheckState()
 		[MODIFIER_STATE_FLYING] = true,
 		[MODIFIER_STATE_UNSELECTABLE] = self.scepter,
 	}
-
 	return state
 end
 

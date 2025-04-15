@@ -3626,9 +3626,10 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+			"soundfile" "soundevents/blya.vsndevts"
 			"particle"	"particles/units/heroes/hero_earthshaker/earthshaker_fissure.vpcf"
 			"particle"	"particles/rubick_fissure.vpcf"
-			"particle"     "particles/econ/items/earthshaker/deep_magma/deep_magma_cyan/deep_magma_cyan_fissure.vpcf"
+			"particle"  "particles/econ/items/earthshaker/deep_magma/deep_magma_cyan/deep_magma_cyan_fissure.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -3677,10 +3678,10 @@
 	//=================================================================================================================
 	// ВЫКЛЮЧИТЬ МОНИТОР
 	//=================================================================================================================
-	"disruptor_static_storm_lua"
+	"kirill_r"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"disruptor_static_storm_lua.lua"
+		"ScriptFile"					"heroes/kirill/kirill_r"
 		"AbilityTextureName"			"acer"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"3"
@@ -3688,6 +3689,7 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts"
+			"soundfile" "soundevents/komp.vsndevts"
 			"particle"  "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
 			"particle"	"particles/kirill_r_black.vpcf"
 		}

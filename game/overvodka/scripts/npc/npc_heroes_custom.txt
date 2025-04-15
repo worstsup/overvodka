@@ -602,7 +602,7 @@
 		"Ability3"		"kirill_e"
 		"Ability4"		"slardar_seaborn_sentinel"
 		"Ability5"		"generic_hidden"
-		"Ability6"		"disruptor_static_storm_lua"
+		"Ability6"		"kirill_r"
 		"Ability7"		""
 		"Ability8"		""
 		"Ability10"		"special_bonus_unique_disruptor_9"

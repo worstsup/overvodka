@@ -1,22 +1,45 @@
-modifier_disruptor_static_storm_lua = class({})
+kirill_r = class({})
+LinkLuaModifier( "modifier_kirill_r", "heroes/kirill/kirill_r", LUA_MODIFIER_MOTION_NONE )
 
-function modifier_disruptor_static_storm_lua:IsHidden()
+function kirill_r:GetAOERadius()
+	return self:GetSpecialValueFor( "radius" )
+end
+
+function kirill_r:OnSpellStart()
+	local caster = self:GetCaster()
+	local point = self:GetCursorPosition()
+	CreateModifierThinker(
+		caster,
+		self,
+		"modifier_kirill_r",
+		{},
+		point,
+		caster:GetTeamNumber(),
+		false
+	)
+	local sound_cast_2 = "komp"
+	EmitSoundOn( sound_cast_2, caster )
+end
+
+modifier_kirill_r = class({})
+
+function modifier_kirill_r:IsHidden()
 	return false
 end
 
-function modifier_disruptor_static_storm_lua:IsDebuff()
+function modifier_kirill_r:IsDebuff()
 	return true
 end
 
-function modifier_disruptor_static_storm_lua:IsStunDebuff()
+function modifier_kirill_r:IsStunDebuff()
 	return false
 end
 
-function modifier_disruptor_static_storm_lua:IsPurgable()
+function modifier_kirill_r:IsPurgable()
 	return true
 end
 
-function modifier_disruptor_static_storm_lua:OnCreated( kv )
+function modifier_kirill_r:OnCreated( kv )
 	if not IsServer() then return end
 	self.owner = kv.isProvidedByAura~=1
 	if not self.owner then return end
@@ -39,13 +62,13 @@ function modifier_disruptor_static_storm_lua:OnCreated( kv )
 	EmitSoundOn( self.sound_loop, self:GetParent() )
 end
 
-function modifier_disruptor_static_storm_lua:OnRefresh( kv )
+function modifier_kirill_r:OnRefresh( kv )
 end
 
-function modifier_disruptor_static_storm_lua:OnRemoved()
+function modifier_kirill_r:OnRemoved()
 end
 
-function modifier_disruptor_static_storm_lua:OnDestroy()
+function modifier_kirill_r:OnDestroy()
 	if not IsServer() then return end
 	if self.owner then
 		StopSoundOn( self.sound_loop, self:GetParent() )
@@ -56,7 +79,7 @@ function modifier_disruptor_static_storm_lua:OnDestroy()
 	end
 end
 
-function modifier_disruptor_static_storm_lua:DeclareFunctions()
+function modifier_kirill_r:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_BONUS_DAY_VISION,
 		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
@@ -66,25 +89,25 @@ function modifier_disruptor_static_storm_lua:DeclareFunctions()
 	return funcs
 end
 
-function modifier_disruptor_static_storm_lua:GetModifierMoveSpeedBonus_Percentage()
+function modifier_kirill_r:GetModifierMoveSpeedBonus_Percentage()
 	return -20
 end
 
-function modifier_disruptor_static_storm_lua:GetBonusDayVision()
+function modifier_kirill_r:GetBonusDayVision()
 	return -2000
 end
 
-function modifier_disruptor_static_storm_lua:GetBonusNightVision()
+function modifier_kirill_r:GetBonusNightVision()
 	return -1000
 end
-function modifier_disruptor_static_storm_lua:CheckState()
+function modifier_kirill_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_NOT_ON_MINIMAP] = true,
 	}
 	return state
 end
 
-function modifier_disruptor_static_storm_lua:OnIntervalThink()
+function modifier_kirill_r:OnIntervalThink()
 	self.pulse = self.pulse + 1
 	local enemies = FindUnitsInRadius(
 		self:GetCaster():GetTeamNumber(),
@@ -122,31 +145,31 @@ function modifier_disruptor_static_storm_lua:OnIntervalThink()
 	end
 end
 
-function modifier_disruptor_static_storm_lua:IsAura()
+function modifier_kirill_r:IsAura()
 	return self.owner
 end
 
-function modifier_disruptor_static_storm_lua:GetModifierAura()
-	return "modifier_disruptor_static_storm_lua"
+function modifier_kirill_r:GetModifierAura()
+	return "modifier_kirill_r"
 end
 
-function modifier_disruptor_static_storm_lua:GetAuraRadius()
+function modifier_kirill_r:GetAuraRadius()
 	return self.radius
 end
 
-function modifier_disruptor_static_storm_lua:GetAuraDuration()
+function modifier_kirill_r:GetAuraDuration()
 	return 0.3
 end
 
-function modifier_disruptor_static_storm_lua:GetAuraSearchTeam()
+function modifier_kirill_r:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
-function modifier_disruptor_static_storm_lua:GetAuraSearchType()
+function modifier_kirill_r:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
 end
 
-function modifier_disruptor_static_storm_lua:PlayEffects1( duration )
+function modifier_kirill_r:PlayEffects1( duration )
 	local particle_cast = "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
@@ -155,7 +178,7 @@ function modifier_disruptor_static_storm_lua:PlayEffects1( duration )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
-function modifier_disruptor_static_storm_lua:PlayEffects2( target )
+function modifier_kirill_r:PlayEffects2( target )
 	local particle_cast = "particles/kirill_r_black.vpcf"
 	local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_ABSORIGIN_FOLLOW , target, target:GetTeamNumber() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
