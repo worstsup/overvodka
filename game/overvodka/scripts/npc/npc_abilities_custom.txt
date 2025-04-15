@@ -3572,149 +3572,27 @@
 				}
 		}
 	}
-	//==================================
-	//АБУЗЕР
-	//===================================
-	"kirill_abuser"
+	//=================================================================================================================
+	// 	АБУЗЕР
+	//=================================================================================================================
+	"kirill_w"
 	{
-		"BaseClass"             "ability_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityTextureName"            "abuse"
-		"HasShardUpgrade"               "1"
-		"precache"
-		{
-			"soundfile"         "soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
-			"particle"          "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-		}
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/kirill/kirill_w"
+		"AbilityTextureName"			"abuse"
+		"FightRecapLevel"				"1"
+		"HasShardUpgrade"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityValues"
 		{
-				"duration"                "0.6 0.8 1.0 1.2"
-				"crit_chance"             "3 4 5 6"
-				"crit_tooltip"            "12 16 20 24"
-		}
-		"Modifiers"
-		{
-			"modifier_coup_de_grace_datadriven"
-			{
-				"Passive"   "1"
-				"IsHidden"  "1"
-				"OnAttackLanded"
-				{
-					"Random"
-					{
-						"Chance"            "%crit_chance"
-						"OnSuccess"
-						{
-							"ApplyModifier"
-							{
-								"ModifierName"  "modifier_kirilldis"
-								"Target"        "TARGET"
-								"Duration"      "%duration"
-							}
-							"FireSound"
-							{
-								"EffectName"	"chto"
-								"Target"		"CASTER"
-							}
-						}
-					}
-					"Random"
-					{
-						"Chance"            "%crit_chance"
-						"OnSuccess"
-						{
-							"ApplyModifier"
-							{
-									"ModifierName"  "modifier_kirillmute"
-									"Target"        "TARGET"
-									"Duration"      "%duration"
-							}
-							"FireSound"
-							{
-								"EffectName"	"chto"
-								"Target"		"CASTER"
-							}
-						}
-					}
-					"Random"
-					{
-						"Chance"            "%crit_chance"
-						"OnSuccess"
-						{
-							"ApplyModifier"
-							{
-								
-									"ModifierName"  "modifier_kirillbash"
-									"Target"        "TARGET"
-									"Duration"      "%duration"
-							}
-							"FireSound"
-							{
-								"EffectName"	"chto"
-								"Target"		"CASTER"
-							}
-						}
-					}
-					"Random"
-					{
-						"Chance"            "%crit_chance"
-						"OnSuccess"
-						{
-							"ApplyModifier"
-							{
-									"ModifierName"  "modifier_kirillslow"
-									"Target"        "TARGET"
-									"Duration"      "%duration"
-							}
-							"FireSound"
-							{
-								"EffectName"	"chto"
-								"Target"		"CASTER"
-							}
-						}
-					}
-				}
-			}
-			"modifier_kirilldis"
-			{
-				"IsDebuff"  "1"
-				"Duration"  "%duration"
-				"States"
-				{
-					"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-			}
-			"modifier_kirillmute"
-			{
-				"IsDebuff"  "1"
-				"Duration"  "%duration"
-				"States"
-				{
-					"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_MUTED"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-			"modifier_kirillbash"
-			{
-				"IsDebuff"  "1"
-				"Duration"  "%duration"
-				"States"
-				{
-					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-			"modifier_kirillslow"
-			{
-				"IsDebuff"  "1"
-				"Duration"  "%duration"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"-50"
-				}
-			}
+				"chance"	"10 20 30 40"
+				"stun_duration"		"1"
+				"silence_duration"	"1.5"
+				"disarm_duration"	"1.5"
+				"mute_duration"		"1"
 		}
 	}
 	//=================================================================================================================

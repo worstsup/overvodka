@@ -598,7 +598,7 @@
 		"HeroSelectSoundEffect"		"kirill_start"
 		"GibType"		"default"
 		"Ability1"		"Provor"
-		"Ability2"		"kirill_abuser"
+		"Ability2"		"kirill_w"
 		"Ability3"		"earthshaker_fissure_lua"
 		"Ability4"		"slardar_seaborn_sentinel"
 		"Ability5"		"generic_hidden"
