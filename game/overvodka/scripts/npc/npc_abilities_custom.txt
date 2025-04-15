@@ -3688,10 +3688,8 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts"
-			"particle"	"particles/units/heroes/hero_disruptor/disruptor_static_storm.vpcf"
-			"particle"	"particles/disruptor_static_storm_bolt_hero_new.vpcf"
-			"particle"     "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
-			"particle"     "particles/underlord_2021_immortal_darkrift_ambient_black_new.vpcf"
+			"particle"  "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
+			"particle"	"particles/kirill_r_black.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -3710,13 +3708,13 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"pulses"					"20"
-				"damage_max"				"250 350 450"
+				"damage_max"				"100 200 300"
 				"duration"
 				{
 					"value"	"4.0 5.0 6.0"
 					"special_bonus_unique_enchantress_3" "+1"
 				}
-				"damage_tooltip"			"75 125 175"
+				"damage_tooltip"			"50 75 100"
 				"move_speed_tooltip"			"20"
 		}
 	}

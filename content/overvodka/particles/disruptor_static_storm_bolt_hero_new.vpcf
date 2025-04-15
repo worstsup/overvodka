@@ -57,7 +57,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 1.0
+				m_flLiteralValue = 10.0
 				m_NamedValue = ""
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
@@ -136,12 +136,15 @@
 	[
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_disruptor/disruptor_static_storm_boltconnections_bot.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_disruptor/disruptor_static_storm_boltbodysparks.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_disruptor/disruptor_static_storm_bolt_child.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/shivas_guard_fall2022_active_black_new.vpcf"

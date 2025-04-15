@@ -1,7 +1,5 @@
 modifier_disruptor_static_storm_lua = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_disruptor_static_storm_lua:IsHidden()
 	return false
 end
@@ -18,51 +16,30 @@ function modifier_disruptor_static_storm_lua:IsPurgable()
 	return true
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_disruptor_static_storm_lua:OnCreated( kv )
-
 	if not IsServer() then return end
-
-	-- check if it is thinker or aura targets
 	self.owner = kv.isProvidedByAura~=1
 	if not self.owner then return end
-
-	-- references
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.pulses = self:GetAbility():GetSpecialValueFor( "pulses" )
 	local duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	local damage = self:GetAbility():GetSpecialValueFor( "damage_max" )
-	
-	-- calculate interval
 	local interval = duration/self.pulses
-
-	-- calculate damage
 	local max_tick_damage = damage*interval
 	self.tick_damage = max_tick_damage/self.pulses
 	self.pulse = 0
-
-	-- precache damage
 	self.damageTable = {
-		-- victim = target,
 		attacker = self:GetCaster(),
-		-- damage = 500,
 		damage_type = self:GetAbility():GetAbilityDamageType(),
-		ability = self:GetAbility(), --Optional.
+		ability = self:GetAbility(),
 	}
-
-	-- Start interval
 	self:StartIntervalThink( interval )
-	-- self:OnIntervalThink()
-
-	-- play effects
 	self:PlayEffects1( duration )
 	self.sound_loop = "Hero_Disruptor.StaticStorm"
 	EmitSoundOn( self.sound_loop, self:GetParent() )
 end
 
 function modifier_disruptor_static_storm_lua:OnRefresh( kv )
-	
 end
 
 function modifier_disruptor_static_storm_lua:OnRemoved()
@@ -70,9 +47,7 @@ end
 
 function modifier_disruptor_static_storm_lua:OnDestroy()
 	if not IsServer() then return end
-
 	if self.owner then
-		-- end sound
 		StopSoundOn( self.sound_loop, self:GetParent() )
 		local sound_stop = "Hero_Disruptor.StaticStorm.End"
 		EmitSoundOn( sound_stop, self:GetParent() )
@@ -102,54 +77,51 @@ end
 function modifier_disruptor_static_storm_lua:GetBonusNightVision()
 	return -1000
 end
---------------------------------------------------------------------------------
--- Status Effects
 function modifier_disruptor_static_storm_lua:CheckState()
 	local state = {
 		[MODIFIER_STATE_NOT_ON_MINIMAP] = true,
 	}
-
 	return state
 end
 
---------------------------------------------------------------------------------
--- Interval Effects
 function modifier_disruptor_static_storm_lua:OnIntervalThink()
-	-- increment pulse
 	self.pulse = self.pulse + 1
-
-	-- find enemies
 	local enemies = FindUnitsInRadius(
-		self:GetCaster():GetTeamNumber(),	-- int, your team number
-		self:GetParent():GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self:GetCaster():GetTeamNumber(),
+		self:GetParent():GetOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
-
-	-- set damage
 	self.damageTable.damage = self.tick_damage * self.pulse
 
 	for _,enemy in pairs(enemies) do
-		-- damage enemies
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-		-- effects
-		self:PlayEffects2(enemy)
+		local teammates = FindUnitsInRadius(
+			self:GetCaster():GetTeamNumber(),
+			enemy:GetOrigin(),
+			nil,
+			self.radius,
+			DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			0,
+			FIND_ANY_ORDER,
+			false
+		)
+		if enemy:IsRealHero() and not enemy:IsDebuffImmune() then
+			self:PlayEffects2(enemy)
+		end
 	end
-
-	-- check for pulses
 	if self.pulse >= self.pulses then
 		self:Destroy()
 	end
 end
 
---------------------------------------------------------------------------------
--- Aura Effects
 function modifier_disruptor_static_storm_lua:IsAura()
 	return self.owner
 end
@@ -174,13 +146,8 @@ function modifier_disruptor_static_storm_lua:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
 end
 
---------------------------------------------------------------------------------
--- Graphics & Animations
 function modifier_disruptor_static_storm_lua:PlayEffects1( duration )
-	-- Get Resources
 	local particle_cast = "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( self.radius, self.radius, self.radius ) )
@@ -189,10 +156,7 @@ function modifier_disruptor_static_storm_lua:PlayEffects1( duration )
 end
 
 function modifier_disruptor_static_storm_lua:PlayEffects2( target )
-	-- Get Resources
-	local particle_cast = "particles/disruptor_static_storm_bolt_hero_new.vpcf"
-
-	-- Create Particle
-	local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_OVERHEAD_FOLLOW, target, target:GetTeamNumber() )
+	local particle_cast = "particles/kirill_r_black.vpcf"
+	local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_ABSORIGIN_FOLLOW , target, target:GetTeamNumber() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

@@ -5,7 +5,6 @@ LinkLuaModifier("modifier_kirill_w_silence", "heroes/kirill/kirill_w", LUA_MODIF
 LinkLuaModifier("modifier_kirill_w_disarm", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_kirill_w_mute", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
 
-
 function kirill_w:GetIntrinsicModifierName()
     return "modifier_kirill_w"
 end
