@@ -162,6 +162,7 @@
 		"npc_dota_hero_slark" 				"БРАТИШКИН"
 		"npc_dota_hero_weaver"				"АЗАЗИН"
 		"npc_dota_hero_riki"				"STRAY228"
+		"npc_dota_hero_omniknight"			"СТИНТ"
 		"npc_dota_hero_morphling"			"САНС"
 		"npc_dota_lone_druid_bear1"			"СЭМ"
 		"npc_dota_lone_druid_bear2"			"СЭМ"
@@ -240,6 +241,10 @@
 		"npc_dota_hero_weaver_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_riki_npedesc1"				"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
+
+		"DOTA_Tooltip_ability_stint_innate" "I NEED MORE POWER"
+		"DOTA_Tooltip_ability_stint_innate_description" "Время перезарядки предметов и способностей героя уменьшается за каждое очко силы."
+		"DOTA_Tooltip_ability_stint_innate_str_pct"	"%УМЕНЬШЕНИЕ ЗА ЕДИНИЦУ СИЛЫ:"
 
 		"DOTA_Tooltip_ability_stray_r"	"ДЕДУШКА ГАНС"
 		"DOTA_Tooltip_ability_stray_r_description" "Любящий дедушка Ганс Бочаров приходит на помощь Стрею, усаживая его в свой Тигр и даруя доп. дальность атаки, броню, невосприимчивость к эффектам и доп. скорость передвижения на %duration% сек. Танк имеет фиксированный интервал выстрелов, равный %bat% сек."

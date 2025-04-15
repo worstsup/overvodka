@@ -20,6 +20,16 @@
 
 "CustomEvents"
 {
+	"custom_indicator"
+	{
+		"ability"	"int"
+		"behavior"	"int"
+		"event"		"byte"
+		"unit"		"int"
+		"worldX"	"float"
+		"worldY"	"float"
+		"worldZ"	"float"
+	}
 	"chat_wheel_console_command"
     {
         "command"           "string"
@@ -36,7 +46,6 @@
 		"leading_team"				"short"
 		"kills_remaining"			"short"
 	}
-
 	"countdown_timer"
 	{
 		"timer_reminder"			"short"

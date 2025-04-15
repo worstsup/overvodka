@@ -34,13 +34,18 @@ function bratishkin_w:OnVectorCastStart(vStartLocation, vDirection)
     if not IsServer() then return end
     local caster = self:GetCaster()
     local direction = self:GetVectorDirection()
+    local caster_origin = caster:GetAbsOrigin()
+    if caster_origin.x == vStartLocation.x and caster_origin.y == vStartLocation.y then
+        vStartLocation = caster_origin + caster:GetForwardVector() * 50
+        direction = caster:GetForwardVector()
+    end
     local index = DoUniqueString("bratishkin_w")
     self[index] = {}
     local projectile =
     {
         Ability             = self,
         EffectName          = "particles/bratishkin_w.vpcf",
-        vSpawnOrigin        = self:GetVectorPosition(),
+        vSpawnOrigin        = vStartLocation,
         fDistance           = self:GetVectorTargetRange(),
         fStartRadius        = 175,
         fEndRadius          = 225,

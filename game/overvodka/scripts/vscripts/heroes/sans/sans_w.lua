@@ -3,120 +3,138 @@ sans_w = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_bone_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_walk", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
+
+function sans_w:IsDualVectorDirection()
+	return true
+end
+
+function sans_w:GetVectorTargetRange()
+    return self:GetSpecialValueFor("fissure_range")
+end
 
 function sans_w:OnAbilityPhaseStart()
 	EmitSoundOn("sans_encount", self:GetCaster())
+	return true
 end
 
-function sans_w:OnSpellStart()
+function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition() + Vector(2,2,0)
-
-	local damage = self:GetSpecialValueFor("damage")
-	local distance = self:GetCastRange( point, caster )
-	local duration = self:GetSpecialValueFor("fissure_duration")
-	local radius = self:GetSpecialValueFor( "fissure_radius" )
-	local stun_duration = self:GetSpecialValueFor("stun_duration")
-
-	local block_width = 24
-	local block_delta = 8.25
-
-	local direction = point-caster:GetOrigin()
+	local center = self:GetVectorPosition()
+	
+	local target_point = center + direction_new
+	local direction = (target_point - center)
 	direction.z = 0
 	direction = direction:Normalized()
-	local wall_vector = direction * distance
-
-	local block_spacing = (block_delta+2*block_width)
-	local blocks = distance/block_spacing
-	local block_pos = caster:GetHullRadius() + block_delta + block_width
-	local start_pos = caster:GetOrigin() + direction*block_pos
-
-	for i=1,blocks do
-		local block_vec = caster:GetOrigin() + direction*block_pos
-		local blocker = CreateModifierThinker(
-			caster, 
-			self,
-			"modifier_sans_w_thinker",
-			{ duration = duration },
-			block_vec,
-			caster:GetTeamNumber(),
-			true
-		)
-		blocker:SetHullRadius( block_width )
-		block_pos = block_pos + block_spacing
-	end
-
-	local end_pos = start_pos + wall_vector
-	local units = FindUnitsInLine(
-		caster:GetTeamNumber(),
-		start_pos,
-		end_pos,
-		nil,
-		radius,
-		DOTA_UNIT_TARGET_TEAM_BOTH,
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0
-	)
-
-	local damageTable = {
-		attacker = caster,
-		damage = damage,
-		damage_type = DAMAGE_TYPE_MAGICAL,
-		ability = self,
-	}
-
-	for _,unit in pairs(units) do
-		FindClearSpaceForUnit( unit, unit:GetOrigin(), true )
-
-		if unit:GetTeamNumber()~=caster:GetTeamNumber() then
-			damageTable.victim = unit
-			ApplyDamage(damageTable)
-			unit:AddNewModifier(
+	local caster_origin = caster:GetAbsOrigin()
+    if caster_origin.x == vStartLocation.x and caster_origin.y == vStartLocation.y then
+        vStartLocation = caster_origin + caster:GetForwardVector() * 50
+        direction = caster:GetForwardVector()
+    end
+	local damage = self:GetSpecialValueFor("damage")
+	local total_distance = self:GetCastRange(center, caster)
+	local half_distance = total_distance / 2
+	local duration = self:GetSpecialValueFor("fissure_duration")
+	local radius = self:GetSpecialValueFor("fissure_radius")
+	local stun_duration = self:GetSpecialValueFor("stun_duration")
+	local block_width = 24
+	local block_delta = 8.25
+	local block_spacing = (block_delta + 2*block_width)
+	local startingOffset = (block_delta + block_width) * 0.5
+	local damagedUnits = {}
+	local directions = { direction, -direction }
+	for _, currDirection in ipairs(directions) do
+		local block_pos = startingOffset
+		local start_pos = center + currDirection * block_pos
+		local wall_vector = currDirection * half_distance
+		local blocks = math.floor( half_distance / block_spacing )
+		for i = 1, blocks do
+			local block_vec = center + currDirection * block_pos
+			local blocker = CreateModifierThinker(
 				caster, 
 				self,
-				"modifier_generic_stunned_lua",
-				{ duration = stun_duration }
+				"modifier_sans_w_thinker",
+				{ duration = duration },
+				block_vec,
+				caster:GetTeamNumber(),
+				true
 			)
-			unit:AddNewModifier(
+			blocker:SetHullRadius( block_width )
+			block_pos = block_pos + block_spacing
+		end
+		local end_pos = start_pos + wall_vector
+		local units = FindUnitsInLine(
+			caster:GetTeamNumber(),
+			start_pos,
+			end_pos,
+			nil,
+			radius,
+			DOTA_UNIT_TARGET_TEAM_BOTH,
+			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			0
+		)
+
+		local damageTable = {
+			attacker = caster,
+			damage = damage,
+			damage_type = DAMAGE_TYPE_MAGICAL,
+			ability = self,
+		}
+
+		for _, unit in pairs(units) do
+			if not damagedUnits[unit:entindex()] then
+				FindClearSpaceForUnit( unit, unit:GetOrigin(), true )
+				if unit:GetTeamNumber() ~= caster:GetTeamNumber() then
+					damageTable.victim = unit
+					ApplyDamage(damageTable)
+					unit:AddNewModifier(
+						caster, 
+						self,
+						"modifier_generic_stunned_lua",
+						{ duration = stun_duration }
+					)
+					unit:AddNewModifier(
+						caster,
+						self,
+						"modifier_knockback",
+						{
+							center_x = caster:GetAbsOrigin().x,
+							center_y = caster:GetAbsOrigin().y,
+							center_z = caster:GetAbsOrigin().z,
+							duration = 0.3,
+							knockback_duration = 0.3,
+							knockback_distance = 150,
+							knockback_height = 50
+						}
+					)
+					EmitSoundOn("sans_damage", unit)
+				end
+				damagedUnits[unit:entindex()] = true
+			end
+		end
+		self:PlayEffects( start_pos, end_pos, duration )
+		if caster:HasModifier("modifier_sans_r") then
+			CreateModifierThinker(
 				caster,
 				self,
-				"modifier_knockback",
+				"modifier_sans_w_bone_thinker",
 				{
-					center_x = caster:GetAbsOrigin().x,
-					center_y = caster:GetAbsOrigin().y,
-					center_z = caster:GetAbsOrigin().z,
-					duration = 0.3,
-					knockback_duration = 0.3,
-					knockback_distance = 150,
-					knockback_height = 50
-				})
-			EmitSoundOn("sans_damage", unit)
+					duration = duration,
+					start_pos_x = start_pos.x,
+					start_pos_y = start_pos.y,
+					start_pos_z = start_pos.z,
+					end_pos_x = end_pos.x,
+					end_pos_y = end_pos.y,
+					end_pos_z = end_pos.z,
+					direction_x = currDirection.x,
+					direction_y = currDirection.y,
+				},
+				start_pos,
+				caster:GetTeamNumber(),
+				false
+			)
 		end
 	end
-	self:PlayEffects( start_pos, end_pos, duration )
-	if caster:HasModifier("modifier_sans_r") then
-        CreateModifierThinker(
-            caster,
-            self,
-            "modifier_sans_w_bone_thinker",
-            {
-                duration = duration,
-                start_pos_x = start_pos.x,
-                start_pos_y = start_pos.y,
-                start_pos_z = start_pos.z,
-                end_pos_x = end_pos.x,
-                end_pos_y = end_pos.y,
-                end_pos_z = end_pos.z,
-                direction_x = direction.x,
-                direction_y = direction.y,
-            },
-            start_pos,
-            caster:GetTeamNumber(),
-            false
-        )
-    end
 end
 
 function sans_w:PlayEffects( start_pos, end_pos, duration )

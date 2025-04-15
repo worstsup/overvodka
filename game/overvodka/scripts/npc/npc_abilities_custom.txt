@@ -11811,9 +11811,10 @@
 			"particle"	"particles/rubick_fissure.vpcf"
 			"particle"  "particles/sans_wall.vpcf"
 			"particle"  "particles/sans_wall_w.vpcf"
+			"particle"	"particles/ui_mouseactions/custom_range_finder_cone_dual.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -13005,6 +13006,19 @@
 		"AbilityValues"
 		{
 				"range" 						"600 650 700 750 800 850"
+		}
+	}
+	"stint_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stint/stint_innate"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"			
+		"Innate"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"str_pct"	"0.09"
 		}
 	}
 }
