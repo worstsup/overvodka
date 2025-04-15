@@ -29,6 +29,7 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
     local delay = self:GetSpecialValueFor("blast_delay")
     local laser_length = self:GetSpecialValueFor("laser_length")
     local laser_width = self:GetSpecialValueFor("laser_width")
+    local caster_origin = caster:GetAbsOrigin()
     local dmg = self:GetSpecialValueFor("damage") + self:GetSpecialValueFor("int_damage") * self:GetCaster():GetIntellect(false) * 0.01
     AddFOWViewer(caster:GetTeamNumber(), target_point, self:GetSpecialValueFor("blaster_vision"), 2, false)
     local function CreateBlaster(position, direction)
@@ -71,6 +72,10 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
     local blaster = CreateUnitByName("npc_gaster_blaster", target_point, false, caster, caster, caster:GetTeamNumber())
     blaster:AddNewModifier(caster, self, "modifier_gaster_blaster", {duration = delay + 0.5})
     local direction_new = self:GetVectorDirection()
+    if caster_origin.x == vStartLocation.x and caster_origin.y == vStartLocation.y then
+        vStartLocation = caster_origin + caster:GetForwardVector() * 50
+        direction_new = caster:GetForwardVector()
+    end
     blaster:SetForwardVector(direction_new)
     Timers:CreateTimer(delay, function()
         if not blaster:IsNull() and blaster:IsAlive() then

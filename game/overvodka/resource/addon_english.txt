@@ -161,6 +161,7 @@
 		"npc_dota_hero_slark" 		  "BRATISHKIN"
 		"npc_dota_hero_weaver"				"AZAZIN KREET"
 		"npc_dota_hero_riki"				"STRAY228"
+		"npc_dota_hero_omniknight"			"STINT"
 		"npc_dota_hero_morphling" "SANS"
 		"npc_dota_lone_druid_bear1" "SAM"
 		"npc_dota_lone_druid_bear2" "SAM"
