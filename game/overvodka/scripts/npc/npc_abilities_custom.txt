@@ -3530,18 +3530,16 @@
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
-	"Provor"
+	"kirill_q"
 	{
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"koleso"
-		"ScriptFile"					"provor"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"ScriptFile"					"heroes/kirill/kirill_q"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"		
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.0"
 		"HasScepterUpgrade"				"1"
 		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"75 100 125 150"
@@ -3555,8 +3553,8 @@
 				"bonus_strength"				"0"
 				"move_speed"
 				{
-					"value"	"10 11 12 13"
-					"special_bonus_unique_enchantress_5" "+5"
+					"value"	"10"
+					"special_bonus_unique_enchantress_5" "+10"
 				}
 				"model_scale"					"-70"
 				"bonus_intellect"				"0"
@@ -3586,22 +3584,42 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityValues"
 		{
-				"chance"	"10 20 30 40"
+				"chance"
+				{
+					"value"	"10 15 20 25"
+					"special_bonus_unique_enchantress_2" "+5"
+				}
 				"stun_duration"		"1"
 				"silence_duration"	"1.5"
 				"disarm_duration"	"1.5"
 				"mute_duration"		"1"
+				"illusion_duration"
+				{
+					"value"	"2"
+					"RequiresShard"	"1"
+				}
+				"illusion_damage_outgoing"
+				{
+					"value"	"50"
+					"RequiresShard"	"1"
+				}
+				"illusion_damage_incoming"
+				{
+					"value"	"200"
+					"RequiresShard"	"1"
+				}
 		}
 	}
 	//=================================================================================================================
 	// РЕДАКТОР
 	//=================================================================================================================
-	"earthshaker_fissure_lua"
+	"kirill_e"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"earthshaker_fissure_lua.lua"
+		"ScriptFile"					"heroes/kirill/kirill_e"
 		"AbilityTextureName"			"redak"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
@@ -3619,21 +3637,23 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"600 800 1000 1200"
+		"AbilityCastRange"				"600 700 800 900"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"25"
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
+				"AbilityCooldown"
+				{
+					"value"	"25"
+					"special_bonus_unique_enchantress_6" "-6"
+				}
 				"damage"
 				{
 					"value" "150 200 250 300"
-					"special_bonus_unique_enchantress_6" "+200"
 				}
 				"fissure_range"
 				{
-					"value"	"600 750 900 1050"
-					"special_bonus_unique_enchantress_2" "+150"
+					"value"	"600 700 800 900"
 				}
 				"fissure_duration"
 				{
@@ -3645,6 +3665,12 @@
 				{
 					"value"	"1.2 1.3 1.4 1.5"
 					"special_bonus_unique_disruptor_9" "+0.5"
+				}
+				"jump_end"
+				{
+					"value"	"0"
+					"special_bonus_facet_meepo_codependent" "+1"
+					"RequiresFacet"	"meepo_codependent"
 				}
 		}
 	}
@@ -4589,7 +4615,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"						"4"
 		"Innate"						"1"
-		"DependentOnAbility"			"kirill_abuser"
+		"DependentOnAbility"			"kirill_w"
 		"HasScepterUpgrade"				"0"
 		"IsBreakable"					"0"
 		"AbilityValues"

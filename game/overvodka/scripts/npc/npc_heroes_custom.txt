@@ -597,9 +597,9 @@
 		"VersusScale"		"0.93"
 		"HeroSelectSoundEffect"		"kirill_start"
 		"GibType"		"default"
-		"Ability1"		"Provor"
+		"Ability1"		"kirill_q"
 		"Ability2"		"kirill_w"
-		"Ability3"		"earthshaker_fissure_lua"
+		"Ability3"		"kirill_e"
 		"Ability4"		"slardar_seaborn_sentinel"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"disruptor_static_storm_lua"
@@ -607,9 +607,9 @@
 		"Ability8"		""
 		"Ability10"		"special_bonus_unique_disruptor_9"
 		"Ability11"		"special_bonus_unique_enchantress_5"
-		"Ability12"		"special_bonus_unique_enchantress_2"
+		"Ability12"		"special_bonus_unique_enchantress_6"
 		"Ability13"		"special_bonus_unique_enchantress_4"
-		"Ability14"		"special_bonus_unique_enchantress_6"
+		"Ability14"		"special_bonus_unique_enchantress_2"
 		"Ability15"		"special_bonus_unique_enchantress_3"
 		"Ability16"		"special_bonus_unique_razor_2"
 		"Ability17"		"special_bonus_unique_lich_4"
@@ -620,12 +620,19 @@
 				"Icon"				"summons"
 				"Color"				"Blue"
 				"GradientID"		"2"
-			}			
+			}		
+			"meepo_codependent" 
+			{
+				"Icon"				"illusion"
+				"Color"				"Yellow"
+				"GradientID"		"1"
+			}						
 			"meepo_pack_rat" 
 			{
 				"Icon"				"item"
 				"Color"				"Yellow"
 				"GradientID"		"1"
+				"Deprecated"		"1"
 
 				"Abilities"
 				{
@@ -635,6 +642,7 @@
 					}
 				}
 			}
+
 		}
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"

@@ -67,11 +67,6 @@ golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
-		if spawnedUnit:GetUnitName() == "npc_dota_hero_meepo" then
-			if spawnedUnit:HasModifier("modifier_item_aghanims_shard") then
-				spawnedUnit:AddItemByName("item_lesh")
-			end
-		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)

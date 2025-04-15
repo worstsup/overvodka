@@ -1,10 +1,20 @@
-modifier_provor = class({})
+kirill_q = class({})
 
-function modifier_provor:IsPurgable()
+LinkLuaModifier( "modifier_kirill_q", "heroes/kirill/kirill_q", LUA_MODIFIER_MOTION_NONE )
+
+function kirill_q:OnSpellStart()
+	EmitSoundOn( "prov", self:GetCaster() )
+
+	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_kirill_q", { duration = self:GetSpecialValueFor( "duration" ) } )
+end
+
+modifier_kirill_q = class({})
+
+function modifier_kirill_q:IsPurgable()
 	return false
 end
 
-function modifier_provor:OnCreated( kv )
+function modifier_kirill_q:OnCreated( kv )
 	self.move_speed = self:GetAbility():GetSpecialValueFor( "move_speed" )
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_agility = self:GetAbility():GetSpecialValueFor( "bonus_agility" )
@@ -16,7 +26,7 @@ function modifier_provor:OnCreated( kv )
 	end
 end
 
-function modifier_provor:DeclareFunctions()
+function modifier_kirill_q:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
@@ -28,7 +38,7 @@ function modifier_provor:DeclareFunctions()
 	return funcs
 end
 
-function modifier_provor:CheckState()
+function modifier_kirill_q:CheckState()
 	local state = {
 		[MODIFIER_STATE_FLYING] = true,
 		[MODIFIER_STATE_UNSELECTABLE] = self.scepter,
@@ -37,18 +47,18 @@ function modifier_provor:CheckState()
 	return state
 end
 
-function modifier_provor:GetModifierModelScale( params )
+function modifier_kirill_q:GetModifierModelScale( params )
 	return self.model_scale
 end
 
-function modifier_provor:GetModifierIncomingDamage_Percentage( params )
+function modifier_kirill_q:GetModifierIncomingDamage_Percentage( params )
 	return self.resist
 end
 
-function modifier_provor:GetModifierMoveSpeedBonus_Percentage( params )
+function modifier_kirill_q:GetModifierMoveSpeedBonus_Percentage( params )
 	return self.move_speed
 end
 
-function modifier_provor:GetModifierBonusStats_Agility( params )
+function modifier_kirill_q:GetModifierBonusStats_Agility( params )
 	return self.agility
 end
