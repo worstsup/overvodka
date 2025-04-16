@@ -49,7 +49,7 @@
 		"MovementTurnRate"		"0.700000"
 		"Facets"
 		{
-			"pudge_fresh_meat" 	
+			"kachok_facet_trenbolone"
 			{
 				"Icon"				"meat"
 				"Color"				"green"
@@ -65,14 +65,7 @@
 					}
 				}
 			}
-			"pudge_flayers_hook" 
-			{
-				"Icon"				"pudge_hook"
-				"Color"				"Red"
-				"GradientID"		"0"
-				"Deprecated"		"true"
-			}
-			"pudge_rotten_core"
+			"kachok_facet_test"
 			{
 				"Icon"				"pudge_hook"
 				"Color"				"Red"
@@ -87,6 +80,18 @@
 						"AutoLevelAbility" "false"
 					}
 				}
+			}
+			"pudge_fresh_meat" 	
+			{
+				"Deprecated"		"true"
+			}
+			"pudge_flayers_hook" 
+			{
+				"Deprecated"		"true"
+			}
+			"pudge_rotten_core"
+			{
+				"Deprecated"		"true"
 			}
 		}
 	}
@@ -2179,52 +2184,41 @@
 		"Ability5"		"evelone_nose"
 		"Ability6"		"evelone_r"
 
-		"Ability10"		"special_bonus_unique_faceless_void_6"
-		"Ability11"		"special_bonus_unique_faceless_void_3"
-		"Ability12"		"special_bonus_unique_faceless_void_7"
-		"Ability13"		"special_bonus_unique_faceless_void_8"
-		"Ability14"		"special_bonus_unique_faceless_void"
-		"Ability15"		"special_bonus_unique_faceless_void_5"
-		"Ability16"		"special_bonus_unique_faceless_void_4"
-		"Ability17"		"special_bonus_unique_faceless_void_2"
+		"Ability10"		"special_bonus_unique_evelone_1"
+		"Ability11"		"special_bonus_unique_evelone_2"
+		"Ability12"		"special_bonus_unique_evelone_3"
+		"Ability13"		"special_bonus_unique_evelone_4"
+		"Ability14"		"special_bonus_unique_evelone_5"
+		"Ability15"		"special_bonus_unique_evelone_6"
+		"Ability16"		"special_bonus_unique_evelone_7"
+		"Ability17"		"special_bonus_unique_evelone_8"
 
 		"Facets"
 		{
-			"faceless_void_temporal_impunity"
-			{
-				"Icon"				"armor"
-				"Color"				"Green"
-				"GradientID"		"0"
-				"Deprecated"		"true"
-			}
-			"faceless_void_chronosphere"
+			"evelone_facet_q"
 			{
 				"Icon"				"slow"
 				"Color"				"Green"
 				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"generic_hidden"
-					}
-				}
 			}
-
-			"faceless_void_time_zone"
+			"evelone_facet_e"
 			{
 				"Icon"				"illusion"
 				"Color"				"Yellow"
 				"GradientID"		"0"
+			}
+			"faceless_void_temporal_impunity"
+			{
+				"Deprecated"		"true"
+			}
+			"faceless_void_chronosphere"
+			{
+				"Deprecated"		"true"
+			}
 
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"generic_hidden"
-					}
-				}
+			"faceless_void_time_zone"
+			{
+				"Deprecated"		"true"
 			}
 		}
 
@@ -2269,27 +2263,35 @@
 		"Ability6"		"bratishkin_r"
 		"Ability7"		"bratishkin_q_base"
 
-		"Ability10"		"special_bonus_unique_legion_commander_9"
-		"Ability11"		"special_bonus_unique_legion_commander_pta_movespeed"
-		"Ability12"		"special_bonus_unique_legion_commander_6"
-		"Ability13"		"special_bonus_unique_legion_commander_4"
-		"Ability14"		"special_bonus_unique_legion_commander_5"
-		"Ability15"		"special_bonus_unique_legion_commander_3"
-		"Ability16"		"special_bonus_unique_legion_commander_7"
-		"Ability17"		"special_bonus_unique_legion_commander_8"
+		"Ability10"		"special_bonus_unique_bratishkin_1"
+		"Ability11"		"special_bonus_unique_bratishkin_2"
+		"Ability12"		"special_bonus_unique_bratishkin_3"
+		"Ability13"		"special_bonus_unique_bratishkin_4"
+		"Ability14"		"special_bonus_unique_bratishkin_5"
+		"Ability15"		"special_bonus_unique_bratishkin_6"
+		"Ability16"		"special_bonus_unique_bratishkin_7"
+		"Ability17"		"special_bonus_unique_bratishkin_8"
 		"Facets"
 		{
-			"slark_leeching_leash" 
+			"bratishkin_facet_knight"
 			{
 				"Icon"				"strength"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
-			"slark_dark_reef_renegade"
+			"bratishkin_facet_base"
 			{
 				"Icon"				"agility"
 				"Color"				"Green"
 				"GradientID"		"2"
+			}
+			"slark_leeching_leash" 
+			{
+				"Deprecated"	"true"
+			}
+			"slark_dark_reef_renegade"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0"
@@ -2336,27 +2338,35 @@
 		"Ability6"		"azazin_r"
 		"Ability7"		"generic_hidden"
 
-		"Ability10"		"special_bonus_unique_visage_8"
-		"Ability11"		"special_bonus_unique_visage_7"
-		"Ability12"		"special_bonus_unique_visage_grave_chill_duration"
-		"Ability13"		"special_bonus_unique_visage_3"
-		"Ability14"		"special_bonus_unique_visage_4"
-		"Ability15"		"special_bonus_unique_visage_1"
-		"Ability16"		"special_bonus_unique_visage_5"
-		"Ability17"		"special_bonus_unique_visage_6"
+		"Ability10"		"special_bonus_unique_azazin_1"
+		"Ability11"		"special_bonus_unique_azazin_2"
+		"Ability12"		"special_bonus_unique_azazin_3"
+		"Ability13"		"special_bonus_unique_azazin_4"
+		"Ability14"		"special_bonus_unique_azazin_5"
+		"Ability15"		"special_bonus_unique_azazin_6"
+		"Ability16"		"special_bonus_unique_azazin_7"
+		"Ability17"		"special_bonus_unique_azazin_8"
 		"Facets"
 		{
-			"weaver_skitterstep"
+			"azazin_facet_q"
 			{
 				"Icon"				"tree"
 				"Color"				"Green"
 				"GradientID"		"0"
-			}			
-			"weaver_hivemind"
+			}
+			"azazin_facet_e"
 			{
 				"Icon"				"fist"
 				"Color"				"Red"
 				"GradientID"		"1"
+			}
+			"weaver_skitterstep"
+			{
+				"Deprecated"	"true"
+			}			
+			"weaver_hivemind"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"1"
@@ -2402,17 +2412,23 @@
 		"Ability5"		"stray_innate"
 		"Ability6"		"stray_r"
 
-		"Ability10"		"special_bonus_unique_riki_7"
-		"Ability11"		"special_bonus_unique_riki_8"
-		"Ability12"		"special_bonus_unique_riki_2"
-		"Ability13"		"special_bonus_unique_riki_3"
-		"Ability14"		"special_bonus_unique_riki_1"
-		"Ability15"		"special_bonus_unique_riki_9"
-		"Ability16"		"special_bonus_unique_riki_6"
-		"Ability17"		"special_bonus_unique_riki_5"
+		"Ability10"		"special_bonus_unique_stray_1"
+		"Ability11"		"special_bonus_unique_stray_2"
+		"Ability12"		"special_bonus_unique_stray_3"
+		"Ability13"		"special_bonus_unique_stray_4"
+		"Ability14"		"special_bonus_unique_stray_5"
+		"Ability15"		"special_bonus_unique_stray_6"
+		"Ability16"		"special_bonus_unique_stray_7"
+		"Ability17"		"special_bonus_unique_stray_8"
 		"Facets"
 		{
-			"riki_contract_killer" 	
+			"stray_facet_q"
+			{
+				"Icon"				"gold"
+				"Color"				"Yellow"
+				"GradientID"		"0"
+			}
+			"stray_facet_w"
 			{
 				"Icon"				"snot"
 				"Color"				"Green"
@@ -2426,12 +2442,14 @@
 						"AutoLevelAbility"	"false"
 					}
 				}
+			}
+			"riki_contract_killer" 	
+			{
+				"Deprecated"	"true"
 			}			
 			"riki_exterminator" 
 			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"0"
+				"Deprecated"	"true"
 			}
 		}
 		"HealthBarOffset"	"270"
