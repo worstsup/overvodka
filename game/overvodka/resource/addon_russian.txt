@@ -1978,7 +1978,6 @@
 		"DOTA_Tooltip_Ability_special_bonus_unique_ebanko_8" "+{s:bonus_duration} сек. к длительности ПО-КИТАЙСКИ"
 
 		"DOTA_Tooltip_modifier_dark_willow_debuff_fear"	   "Страх"
-		"DOTA_Tooltip_Ability_special_bonus_unique_alchemist_4" "+5 секунд к длительности ПО-КИТАЙСКИ"
 		"DOTA_Tooltip_Ability_special_bonus_unique_lion_2" " SUII АХАХ наносит урон в радиусе 350 вокруг цели"
 		"DOTA_Tooltip_Ability_special_bonus_unique_pudge_6" "+200 к радиусу ПЕРЕДОЗ"
 		"DOTA_Tooltip_Ability_special_bonus_unique_pudge_7" "ПОШЛА ТЫ НАХУЙ! накладывает ЗАГЛУШЕНИЕ"
