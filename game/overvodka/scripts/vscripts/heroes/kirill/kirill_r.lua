@@ -125,17 +125,6 @@ function modifier_kirill_r:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-		local teammates = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),
-			enemy:GetOrigin(),
-			nil,
-			self.radius,
-			DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-			0,
-			FIND_ANY_ORDER,
-			false
-		)
 		if enemy:IsRealHero() and not enemy:IsDebuffImmune() then
 			self:PlayEffects2(enemy)
 		end
@@ -180,6 +169,6 @@ end
 
 function modifier_kirill_r:PlayEffects2( target )
 	local particle_cast = "particles/kirill_r_black.vpcf"
-	local effect_cast = ParticleManager:CreateParticleForTeam( particle_cast, PATTACH_ABSORIGIN_FOLLOW , target, target:GetTeamNumber() )
+	local effect_cast = ParticleManager:CreateParticleForPlayer(particle_cast, PATTACH_ABSORIGIN_FOLLOW, target, target:GetPlayerOwner())
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
