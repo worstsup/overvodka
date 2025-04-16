@@ -729,7 +729,7 @@
 				"duration"
 				{
 					"value"	"1.0 1.4 1.8 2.2"
-					"special_bonus_unique_bane_10" "+0.5"
+					"special_bonus_unique_ebanko_3" "+0.5"
 				}
 				"damage"				"75"
 				"AbilityCastRange"
@@ -823,18 +823,18 @@
 				"damage"
 				{
 					"value"		"150 275 400 525"
-					"special_bonus_unique_pudge_5" "+150"
+					"special_bonus_unique_ebanko_4" "+150"
 				}
 				"knockback_height"	"300"
 				"chance"
 				{
 					"value"	"0"
-					"special_bonus_unique_pugna_3" "+12"
+					"special_bonus_unique_ebanko_7" "+12"
 				}
 				"stack"
 				{
 					"value"	"0"
-					"special_bonus_facet_kunkka_high_tide"		"+40"
+					"special_bonus_facet_ebanko_w"		"+40"
 				}
 				"dur"
 				{
@@ -842,6 +842,48 @@
 				}
 				"slow"	"15 20 25 30"
 				"slow_duration"	"2"
+		}
+	}
+	//=================================================================================================================
+	// КАКАО
+	//=================================================================================================================
+	"ebanko_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ebanko/ebanko_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityTextureName"			"parit"
+		"AOERadius"						"%radius"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastRange"				"600"
+		"AbilityCooldown"				"25"
+		"AbilityManaCost"				"40 60 80 100"
+		"precache"
+		{
+			"particle"	"particles/riki_smokebomb_ebanko.vpcf"
+		}
+		"AbilityValues"
+		{
+			"radius"
+			{
+				"value"	"350 425 500 575"
+				"special_bonus_unique_ebanko_2" "+100"
+				"affected_by_aoe_increase"	"1"
+			}
+			"duration"				"4 5 6 7"
+			"evasion"
+			{
+				"value" 			"0"
+				"special_bonus_unique_ebanko_6" "+50"
+			}
+			"heal"
+			{
+				"value" "0"
+				"special_bonus_facet_ebanko_e"	"+5"
+			}
 		}
 	}
 	//==========================
@@ -900,13 +942,13 @@
 			"bonus_damage"
 			{
 				"value"	"50 80 110"
-				"special_bonus_unique_bane_9" "+75"
+				"special_bonus_unique_ebanko_5" "+75"
 			}
 			"bonus_attack_speed"        "80 120 160"
 			"duration"
 			{
 				"value"			"9 11 13"
-				"special_bonus_unique_alchemist_4" "+5"
+				"special_bonus_unique_ebanko_8" "+5"
 			}
 			"hp_regen"     
 			{
@@ -918,46 +960,131 @@
 			"scepter_duration"	"5"
 		}
 	}
+	"special_bonus_unique_eldzhey_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_eldzhey_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	//=================================================================================================================
-	// КАКАО
+	// САЙОНАРА БОЙ
 	//=================================================================================================================
-	"ebanko_e"
+	"eldzhey_q"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/ebanko/ebanko_e"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityTextureName"			"parit"
-		"AOERadius"						"%radius"
-		"AbilityCastPoint"				"0.4"
-		"AbilityCastRange"				"600"
-		"AbilityCooldown"				"25"
-		"AbilityManaCost"				"40 60 80 100"
-		"precache"
-		{
-			"particle"	"particles/riki_smokebomb_ebanko.vpcf"
-		}
+		"ScriptFile"					"heroes/eldzhey/eldzhey_q.lua"
+		"AbilityTextureName"			"fei"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCastPoint"				"0.15"
+		"AbilityCooldown"				"16"
+		"AbilityManaCost"				"80 90 100 110"
 		"AbilityValues"
 		{
-			"radius"
-			{
-				"value"	"350 425 500 575"
-				"special_bonus_unique_bane_8" "+100"
-				"affected_by_aoe_increase"	"1"
-			}
-			"duration"				"4 5 6 7"
-			"evasion"
-			{
-				"value" 			"0"
-				"special_bonus_unique_abaddon_4" "+50"
-			}
-			"heal"
-			{
-				"value" "0"
-				"special_bonus_facet_kunkka_grog"	"+5"
-			}
+				"illusion_duration"
+				{
+					"value" "14.0"
+					"special_bonus_unique_eldzhey_3" "+4"
+				}
+				"illusion_outgoing_damage"
+				{
+					"value"	"-55 -50 -45 -40"
+					"special_bonus_unique_eldzhey_2" "+8"
+				}
+				"illusion_outgoing_tooltip"			
+				{
+            			"value"					"45.0 50.0 55.0 60.0"
+            			"special_bonus_unique_eldzhey_2" "+8"
+            		}
+				"illusion_incoming_damage"			"120.0"
+				"illusion_incoming_damage_total_tooltip"			"220.0"
+				"num"
+				{
+					"value"	"1"
+					"special_bonus_unique_eldzhey_8" "+1"
+				}
+		}
+	}
+	//=================================================================================================================
+	// ЗОЖ
+	//=================================================================================================================
+	"eldzhey_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/eldzhey/eldzhey_w"
+		"AbilityTextureName"			"novape"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"precache"
+		{
+			"particle"	"particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"
+			"particle"	"particles/eldzhey_w_cast.vpcf"
+			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
+		}
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"               "18.0"
+    	"AbilityManaCost"               "100 120 140 160"
+		"AbilityValues"
+		{
+			"heal"                  
+            {
+            	"value"	"150 250 350 450"
+            	"special_bonus_unique_eldzhey_5" "+400"
+            }
+            "AbilityCastRange"
+            {
+            	"value" "400"
+            }	
+            "radius"
+            {
+            	"value" "400"
+            }
+            "damagebyfacet"
+            {
+            	"value"	"0"
+            	"special_bonus_facet_eldzhey_w"	"+1"
+            }
 		}
 	}
 	//=================================================================================================================
@@ -984,7 +1111,7 @@
 				"bonus_damage"
 				{
 					"value"	"20 40 60 80"
-					"special_bonus_unique_axe_2" "+60"
+					"special_bonus_unique_eldzhey_6" "+60"
 				}
 				"enemy_movespeed_bonus_pct" "0"
 				"radius"                    "0"
@@ -992,7 +1119,7 @@
 				"chance"
 				{
 					"value"	"0"
-					"special_bonus_facet_terrorblade_soul_fragment" "+30"
+					"special_bonus_facet_eldzhey_e" "+30"
 				}
 				"root_duration" "1"
 		}
@@ -1129,47 +1256,69 @@
 		}
 	}
 	//=================================================================================================================
-	// ЗОЖ
+	// ДИСКОННЕКТ
 	//=================================================================================================================
-	"eldzhey_w"
+	"eldzhey_shard"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/eldzhey/eldzhey_shard"
+   		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    	"AbilityTextureName"            "galim"
+    	"MaxLevel"						"1"
+		"IsGrantedByShard"              "1"
+    	"AbilityCastPoint"              "0.0"
+    	"AbilityCooldown"               "40"
+    	"AbilityManaCost"               "100"
+    	"AbilityValues"
+    	{
+    	    "bonus_range"         					"150"
+   	        "bonus_ms"    							"15"
+    	    "duration"                    			"6.0"
+    	}
+	}
+	//=================================================================================================================
+	// КОНЦЕРТ
+	//=================================================================================================================
+	"eldzhey_r"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/eldzhey/eldzhey_w"
-		"AbilityTextureName"			"novape"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"precache"
-		{
-			"particle"	"particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"
-			"particle"	"particles/eldzhey_w_cast.vpcf"
-			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
-		}
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"ScriptFile"					"heroes/eldzhey/eldzhey_r"
+		"AbilityTextureName"			"srsr"
+		"AbilityBehavior"		  		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"               "18.0"
-    	"AbilityManaCost"               "100 120 140 160"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam"	 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
+		"AbilityCooldown"           	"90 80 70"
+		"AbilityManaCost"           	"125 175 225"
+		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
-			"heal"                  
-            {
-            	"value"	"150 250 350 450"
-            	"special_bonus_unique_abaddon_6" "+400"
-            }
-            "AbilityCastRange"
-            {
-            	"value" "400"
-            }	
-            "radius"
-            {
-            	"value" "400"
-            }
-            "damagebyfacet"
-            {
-            	"value"	"0"
-            	"special_bonus_facet_terrorblade_condemned"	"+1"
-            }
+			"damage"          
+		    {
+		        "value"	"30 40 50"
+		        "special_bonus_unique_eldzhey_7" "+40"
+		    }
+		    "radius"
+		    {
+		        "value"	"600"
+		        "special_bonus_unique_eldzhey_4" "+75"
+		        "affected_by_aoe_increase"	"1"
+		    }
+		    "AbilityCastRange"
+		    {
+		        "value"	"600"
+		        "special_bonus_unique_eldzhey_4" "+75"
+		        "affected_by_aoe_increase"	"1"
+		    }
+			"damage_pct"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+1.5"
+			}
+		    "duration"          "5 6 7"
 		}
 	}
 	"shkolnik_r"
@@ -1914,28 +2063,6 @@
 				}
 			}
 		}
-	}
-	//=================================================================================================================
-	// ДИСКОННЕКТ
-	//=================================================================================================================
-	"eldzhey_shard"
-	{
-		"BaseClass"             		"ability_lua"
-		"ScriptFile"					"heroes/eldzhey/eldzhey_shard"
-   		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    	"AbilityTextureName"            "galim"
-    	"MaxLevel"						"1"
-		"IsGrantedByShard"              "1"
-    	"AbilityCastPoint"              "0.0"
-    	"AbilityCooldown"               "40"
-    	"AbilityManaCost"               "100"
-    	"AbilityValues"
-    	{
-    	    "bonus_range"         					"150"
-   	        "bonus_ms"    							"15"
-    	    "duration"                    			"6.0"
-    	}
 	}
 	//=================================================================================================================
 	// ПОДСОЛНУХ
@@ -3873,50 +4000,6 @@
 		}
 	}
 	//=================================================================================================================
-	// КОНЦЕРТ
-	//=================================================================================================================
-	"eldzhey_r"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/eldzhey/eldzhey_r"
-		"AbilityTextureName"			"srsr"
-		"AbilityBehavior"		  		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityUnitTargetTeam"	 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
-		"AbilityCooldown"           	"90 80 70"
-		"AbilityManaCost"           	"125 175 225"
-		"HasScepterUpgrade"				"1"
-		"AbilityValues"
-		{
-			"damage"          
-		    {
-		        "value"	"30 40 50"
-		        "special_bonus_unique_tusk_5" "+40"
-		    }
-		    "radius"
-		    {
-		        "value"	"600"
-		        "special_bonus_unique_disruptor_8" "+75"
-		        "affected_by_aoe_increase"	"1"
-		    }
-		    "AbilityCastRange"
-		    {
-		        "value"	"600"
-		        "special_bonus_unique_disruptor_8" "+75"
-		        "affected_by_aoe_increase"	"1"
-		    }
-			"damage_pct"
-			{
-				"value"	"0"
-				"special_bonus_scepter"	"+1.5"
-			}
-		    "duration"          "5 6 7"
-		}
-	}
-	//=================================================================================================================
 	// ВПИСКА
 	//=================================================================================================================
 	"dvoreckov_qwe"
@@ -4197,47 +4280,6 @@
 				"value"						"0"
 				"special_bonus_facet_rubick_frugal_filch"	"40 50 60"				
 			}
-		}
-	}
-	//=================================================================================================================
-	// САЙОНАРА БОЙ
-	//=================================================================================================================
-	"eldzhey_q"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/eldzhey/eldzhey_q.lua"
-		"AbilityTextureName"			"fei"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCastPoint"				"0.15"
-		"AbilityCooldown"				"16"
-		"AbilityManaCost"				"80 90 100 110"
-		"AbilityValues"
-		{
-				"illusion_duration"
-				{
-					"value" "14.0"
-					"special_bonus_unique_disruptor_7" "+4"
-				}
-				"illusion_outgoing_damage"
-				{
-					"value"	"-55 -50 -45 -40"
-					"special_bonus_unique_pudge_4" "+8"
-				}
-				"illusion_outgoing_tooltip"			
-				{
-            			"value"					"45.0 50.0 55.0 60.0"
-            			"special_bonus_unique_pudge_4" "+8"
-            		}
-				"illusion_incoming_damage"			"120.0"
-				"illusion_incoming_damage_total_tooltip"			"220.0"
-				"num"
-				{
-					"value"	"1"
-					"special_bonus_unique_muerta_dead_shot_damage" "+1"
-				}
 		}
 	}
 	//=================================================================================================================
