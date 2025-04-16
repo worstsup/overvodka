@@ -25,6 +25,7 @@ require('chat_wheel/chat_wheel')
 require('server/server')
 require('music_zone_trigger')
 require('util/vector_targeting')
+require('util/functions')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
