@@ -3554,6 +3554,30 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	"special_bonus_unique_kirill_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kirill_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kirill_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kirill_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	"kirill_q"
 	{
 		"BaseClass"						"ability_lua"
@@ -3585,18 +3609,18 @@
 				"bonus_agility"
 				{
 					"value"	"45 55 65 75"
-					"special_bonus_unique_razor_2" "+20"
+					"special_bonus_unique_kirill_7" "+20"
 				}
 				"has_facet"
 				{
 					"value"	"0"
-					"special_bonus_facet_meepo_more_meepo" "+1"
+					"special_bonus_facet_kirill_facet_q" "+1"
 				}
 				"duration_increase"
 				{
 					"value"	"0"
-					"special_bonus_facet_meepo_more_meepo" "+0.4"
-					"RequiresFacet"	"meepo_more_meepo"
+					"special_bonus_facet_kirill_facet_q" "+0.4"
+					"RequiresFacet"	"kirill_facet_q"
 				}
 		}
 	}
@@ -3620,7 +3644,7 @@
 				"chance"
 				{
 					"value"	"10 15 20 25"
-					"special_bonus_unique_enchantress_2" "+5"
+					"special_bonus_unique_kirill_5" "+5"
 				}
 				"stun_duration"		"1"
 				"mute_duration"		"1"
@@ -3692,7 +3716,7 @@
 				"fissure_duration"
 				{
 					"value"	"3.0 5.0 7.0 9.0"
-					"special_bonus_unique_lich_4" "+50"
+					"special_bonus_unique_kirill_8" "+50"
 				}
 				"fissure_radius"				"250"
 				"stun_duration"
@@ -3703,8 +3727,8 @@
 				"jump_end"
 				{
 					"value"	"0"
-					"special_bonus_facet_meepo_codependent" "+1"
-					"RequiresFacet"	"meepo_codependent"
+					"special_bonus_facet_kirill_facet_e" "+1"
+					"RequiresFacet"	"kirill_facet_e"
 				}
 		}
 	}
@@ -3746,7 +3770,7 @@
 				"duration"
 				{
 					"value"	"4.0 5.0 6.0"
-					"special_bonus_unique_enchantress_3" "+1"
+					"special_bonus_unique_kirill_6" "+1"
 				}
 				"damage_tooltip"			"50 75 100"
 				"move_speed_tooltip"			"20"

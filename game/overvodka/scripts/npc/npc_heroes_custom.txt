@@ -586,13 +586,6 @@
 		"IdleExpression"		"scenes/meepo/meepo_exp_idle_01.vcd"
 		"SoundSet"		"Hero_Meepo"
 		"Enabled"		"1"
-		"HeroUnlockOrder"		"3"
-		"Role"			"Carry,Escape,Nuker,Disabler,Initiator,Pusher"
-		"Rolelevels"	"2,2,2,1,1,1"
-		"Complexity"	"3"
-		"Team"		"Bad"
-		"HeroID"		"82"
-		"HeroOrderID"	"91"
 		"ModelScale"		"0.930000"
 		"VersusScale"		"0.93"
 		"HeroSelectSoundEffect"		"kirill_start"
@@ -605,44 +598,36 @@
 		"Ability6"		"kirill_r"
 		"Ability7"		""
 		"Ability8"		""
-		"Ability10"		"special_bonus_unique_kirill_2"
-		"Ability11"		"special_bonus_unique_kirill_1"
+		"Ability10"		"special_bonus_unique_kirill_1"
+		"Ability11"		"special_bonus_unique_kirill_2"
 		"Ability12"		"special_bonus_unique_kirill_3"
 		"Ability13"		"special_bonus_unique_kirill_4"
-		"Ability14"		"special_bonus_unique_enchantress_2"
-		"Ability15"		"special_bonus_unique_enchantress_3"
-		"Ability16"		"special_bonus_unique_razor_2"
-		"Ability17"		"special_bonus_unique_lich_4"
+		"Ability14"		"special_bonus_unique_kirill_5"
+		"Ability15"		"special_bonus_unique_kirill_6"
+		"Ability16"		"special_bonus_unique_kirill_7"
+		"Ability17"		"special_bonus_unique_kirill_8"
 		"Facets"
 		{
-			"meepo_more_meepo" 
+			"kirill_facet_q" 
 			{
 				"Icon"				"summons"
 				"Color"				"Blue"
 				"GradientID"		"2"
-			}		
-			"meepo_codependent" 
+			}
+			"kirill_facet_e" 
 			{
 				"Icon"				"illusion"
 				"Color"				"Yellow"
 				"GradientID"		"1"
-			}						
-			"meepo_pack_rat" 
-			{
-				"Icon"				"item"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-				"Deprecated"		"1"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"			"meepo_pack_rat"
-					}
-				}
 			}
-
+			"meepo_more_meepo"
+			{
+				"Deprecated"	"true"
+			}
+			"meepo_codependent"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -667,7 +652,7 @@
 		"MovementTurnRate"		"0.90000"
 		"particle_folder"		"particles/units/heroes/hero_meepo"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_meepo.vsndevts"
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_meepo.vsndevts"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_rubick"
 	{
