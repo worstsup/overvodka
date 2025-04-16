@@ -3718,7 +3718,6 @@
 		"AbilityTextureName"			"acer"
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"3"
-		"HasScepterUpgrade"				"1"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts"
