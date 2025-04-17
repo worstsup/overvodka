@@ -1482,18 +1482,18 @@
 				"schoolboys_number4"
 				{
 					"value" "0 0 0 7"
-					"special_bonus_unique_razor_4" "+5"
-					"special_bonus_unique_weaver_3" "-12"
+					"special_bonus_unique_shkolnik_5" "+5"
+					"special_bonus_unique_shkolnik_7" "-12"
 				}
 				"schoolboys_number_5"
 				{
 					"value" "4 5 6 7"
-					"special_bonus_unique_razor_4" "+5"
+					"special_bonus_unique_shkolnik_5" "+5"
 				}
 				"schoolboys_number_6"
 				{
 					"value" "0 0 0 0"
-					"special_bonus_unique_weaver_3" "+12"
+					"special_bonus_unique_shkolnik_7" "+12"
 				}
 				"schoolboys_duration"
 				{
@@ -1502,17 +1502,17 @@
 				"schoolboys_hp"
 				{
 					"value"	"150 250 350 450"
-					"special_bonus_unique_weaver_3" "+450"
+					"special_bonus_unique_shkolnik_7" "+450"
 				}
 				"schoolboys_dmg"
 				{
 					"value"	"40 55 70 85"
-					"special_bonus_unique_weaver_3" "+85"
+					"special_bonus_unique_shkolnik_7" "+85"
 				}
 				"phase_duration"
 				{
 					"value"	"0.03"
-					"special_bonus_unique_weaver_2" "+15"
+					"special_bonus_unique_shkolnik_3" "+15"
 				}
 		}
 		"OnSpellStart"
@@ -1660,18 +1660,18 @@
 			"stun_duration"
             {
             	"value"	"0.8 1.2 1.6 2.0"
-            	"special_bonus_unique_dazzle_2" "+0.6"
+            	"special_bonus_unique_shkolnik_6" "+0.6"
             }
 			"fireblast_damage"
             {
             	"value"	"100 175 250 325"
-            	"special_bonus_unique_dazzle_1" "+150"
+            	"special_bonus_unique_shkolnik_1" "+150"
             }
             "armor"
             {
             	"value"	"0 0 0 0"
-            	"special_bonus_facet_sniper_ghillie_suit"	"-2 -4 -6 -8"
-            	"RequiresFacet"			"sniper_ghillie_suit"
+            	"special_bonus_facet_shkolnik_w"	"-2 -4 -6 -8"
+            	"RequiresFacet"			"shkolnik_w"
             }
 		}
 	}
@@ -1697,14 +1697,14 @@
 				"blink_range"           
 				{
 					"value"	"700 750 800 850"
-					"special_bonus_unique_weaver_4"	"+200"
+					"special_bonus_unique_shkolnik_2"	"+200"
 				}
 				"min_blink_range"       "200"
 				"immun"
 				{
 					"value"	"0"
-					"RequiresFacet" "sniper_scattershot"
-					"special_bonus_facet_sniper_scattershot"	"+2"
+					"RequiresFacet" "shkolnik_e"
+					"special_bonus_facet_shkolnik_e"	"+2"
 				}
 		}
 		"OnSpellStart"
@@ -1804,17 +1804,17 @@
 			"duration"
 			{
 				"value"	"5"
-				"special_bonus_unique_bane_11" "+1"
+				"special_bonus_unique_shkolnik_4" "+1"
 			}
 			"damage"
 			{	
 				"value"			"100 175 250"
-				"special_bonus_unique_lina_4" "+100"
+				"special_bonus_unique_shkolnik_8" "+100"
 			}
 			"damage_tooltip"
 			{
 				"value"	"400 700 1000"
-				"special_bonus_unique_lina_4" "+400"
+				"special_bonus_unique_shkolnik_8" "+400"
 			}
 			"starting_aoe"		"100"
 			"distance"			"900"
@@ -1934,12 +1934,12 @@
 				"damage"
 				{
 					"value"	"100 200 300 400"
-					"special_bonus_unique_grimstroke_1" "+100"
+					"special_bonus_unique_lev_2" "+100"
 				}
 				"radius"
 				{
 					"value"	"0"
-					"special_bonus_unique_lion_2" "+350"
+					"special_bonus_unique_lev_8" "+350"
 				}
 				"pctmana"
 				{
@@ -1948,8 +1948,8 @@
 				"facet_dmg"
 				{
 					"value"	"0"
-					"special_bonus_facet_lion_fist_of_death"	"+15"
-					"RequiresFacet"			"lion_fist_of_death"
+					"special_bonus_facet_lev_q"	"+15"
+					"RequiresFacet"			"lev_q"
 				}
 				"facet_pct"
 				{
@@ -1980,7 +1980,7 @@
 				"reg_2"
 				{
 					"value"	"10 15 20 25 30"
-					"special_bonus_unique_grimstroke_2" "+15"
+					"special_bonus_unique_lev_4" "+15"
 				}
 		}
 		
@@ -2064,12 +2064,12 @@
 				"reflect_duration"
 				{
 					"value"	"1.0 1.5 2.0 2.5"
-					"special_bonus_unique_furion_6" "+1"
+					"special_bonus_unique_lev_7" "+1"
 				}
 				"stun_duration"
 				{
 					"value"	"0.8 1.0 1.2 1.4" 
-					"special_bonus_unique_furion_7" "+0.6"
+					"special_bonus_unique_lev_5" "+0.6"
 				}
 		}
 	}
@@ -2101,14 +2101,14 @@
 				"damage"					
 				{
 					"value"                       "50 100 150 200"
-					"special_bonus_unique_enigma_5" "+200"
+					"special_bonus_unique_lev_3" "+200"
 				}
 				"distance"					"900"
 				"slow_pct"					"-15 -20 -25 -30"
 				"duration"
 				{
 					"value"	"1.5"
-					"special_bonus_unique_grimstroke_3" "+0.7"
+					"special_bonus_unique_lev_1" "+0.7"
 				}
 		}
 		
@@ -2291,13 +2291,18 @@
 				"move_speed_start"
 				{
 					"value"	"500"
-					"special_bonus_facet_lion_essence_eater"	"+200"
+					"special_bonus_facet_lev_r"	"+200"
 				}
 				"bonus_strength"				"100 200 300"
 				"model_scale"					"200"
 				"move_speed"
 				{
 					"value"	"550"
+				}
+				"bonus_agility"
+				{
+					"value"	"0 0 0"
+					"special_bonus_unique_lev_6"	"+150"
 				}
 		}
 	}
@@ -2312,19 +2317,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
-	"special_bonus_unique_dave_2"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
 	"special_bonus_unique_dave_3"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-	"special_bonus_unique_dave_4"
 	{
         "BaseClass"						"special_bonus_base"														
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
@@ -2375,7 +2368,7 @@
 				"AbilityCharges"
 				{
 					"value"	"1"
-					"special_bonus_unique_dazzle_5" "+1"
+					"special_bonus_unique_dave_8" "+1"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -2384,12 +2377,12 @@
 				"base_damage"
 				{
 					"value"	"20 30 40 50"
-					"special_bonus_unique_disruptor_2" "+200%"
+					"special_bonus_unique_dave_7" "+200%"
 				}
 				"base_hp"
 				{
 					"value"	"150 220 290 360"
-					"special_bonus_unique_disruptor_2" "+200%"
+					"special_bonus_unique_dave_7" "+200%"
 				}
 				"duration"
 				{
@@ -2401,12 +2394,12 @@
 				"count4"
 				{
 					"value"	"0 0 0 1"
-					"special_bonus_unique_disruptor_2" "-1"
+					"special_bonus_unique_dave_7" "-1"
 				}
 				"count5"
 				{
 					"value"	"0 0 0 0"
-					"special_bonus_unique_disruptor_2" "+1"
+					"special_bonus_unique_dave_7" "+1"
 				}
 		}
 		
@@ -2543,7 +2536,7 @@
 				"duration"
 				{
 					"value"	"15.0"
-					"special_bonus_unique_disruptor_5" "+5.0"
+					"special_bonus_unique_dave_6" "+5.0"
 				}
 				"count1"
 				{
@@ -3385,12 +3378,12 @@
 				"move_speed"
 				{
 					"value"	"10"
-					"special_bonus_unique_disruptor_4" "+10"
+					"special_bonus_unique_dave_1" "+10"
 				}
 				"bonus_as_aura"
 				{
 					"value"	"100 150 200"
-					"special_bonus_unique_enigma_3" "+60"
+					"special_bonus_unique_dave_5" "+60"
 				}
 				"radius"
 				{
@@ -3405,14 +3398,14 @@
 				"stun_dur"
 				{
 					"value"	"0.3 0.4 0.5"
-					"special_bonus_unique_enigma_4" "+0.2"
+					"special_bonus_unique_dave_3" "+0.2"
 				}
 				"damage"		"100 200 300"
 				"interval"	"1.5"
 				"hasfacet"
 				{
 					"value"	"0"
-					"special_bonus_facet_tinker_translocator"	"+1"
+					"special_bonus_facet_dave_r"	"+1"
 				}
 		}
 	}

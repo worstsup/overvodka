@@ -33,7 +33,7 @@ function lev_suiii:OnSpellStart()
     end
     damage_table.ability = self
     if caster:GetUnitName() == "npc_dota_hero_lion" then
-        local Talent = caster:FindAbilityByName("special_bonus_unique_lion_2")
+        local Talent = caster:FindAbilityByName("special_bonus_unique_lev_8")
         if Talent:GetLevel() == 1 then
             for i,unit in ipairs(units) do
                 damage_table.victim = unit

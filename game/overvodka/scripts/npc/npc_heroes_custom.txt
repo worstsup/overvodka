@@ -259,28 +259,35 @@
 		"Ability4"		"shkolnik_shard"
 		"Ability5"		"shkolnik_innate"
 		"Ability6"		"shkolnik_r"
-		"Ability10"		"special_bonus_unique_dazzle_1"
-		"Ability11"		"special_bonus_unique_weaver_4"
-		"Ability12"		"special_bonus_unique_weaver_2"
-		"Ability13"		"special_bonus_unique_bane_11"
-		"Ability14"		"special_bonus_unique_razor_4"
-		"Ability15"		"special_bonus_unique_dazzle_2"
-		"Ability16"		"special_bonus_unique_weaver_3"
-		"Ability17"		"special_bonus_unique_lina_4"
+		"Ability10"		"special_bonus_unique_shkolnik_1"
+		"Ability11"		"special_bonus_unique_shkolnik_2"
+		"Ability12"		"special_bonus_unique_shkolnik_3"
+		"Ability13"		"special_bonus_unique_shkolnik_4"
+		"Ability14"		"special_bonus_unique_shkolnik_5"
+		"Ability15"		"special_bonus_unique_shkolnik_6"
+		"Ability16"		"special_bonus_unique_shkolnik_7"
+		"Ability17"		"special_bonus_unique_shkolnik_8"
 		"Facets"
 		{
-			"sniper_ghillie_suit" 
+			"shkolnik_w"
 			{
 				"Icon"				"vision"
 				"Color"				"Yellow"
 				"GradientID"		"0"
 			}
-
-			"sniper_scattershot" 	
+			"shkolnik_e"
 			{
 				"Icon"				"nuke"
 				"Color"				"Red"
 				"GradientID"		"0"
+			}
+			"sniper_ghillie_suit" 
+			{
+				"Deprecated"		"true"
+			}
+			"sniper_scattershot" 	
+			{
+				"Deprecated"		"true"
 			}
 		}
 		"ArmorPhysical"		"-1"
@@ -329,14 +336,14 @@
 		"Ability4"		"lev_smeh"
 		"Ability5"		"energosik"
 		"Ability6"		"Lev_Otec"
-		"Ability10"		"special_bonus_unique_grimstroke_3"
-		"Ability11"		"special_bonus_unique_grimstroke_1"
-		"Ability12"		"special_bonus_unique_enigma_5"
-		"Ability13"		"special_bonus_unique_grimstroke_2"
-		"Ability14"		"special_bonus_unique_furion_7"
-		"Ability15"		"special_bonus_unique_enigma_2"
-		"Ability16"		"special_bonus_unique_furion_6"
-		"Ability17"		"special_bonus_unique_lion_2"
+		"Ability10"		"special_bonus_unique_lev_1"
+		"Ability11"		"special_bonus_unique_lev_2"
+		"Ability12"		"special_bonus_unique_lev_3"
+		"Ability13"		"special_bonus_unique_lev_4"
+		"Ability14"		"special_bonus_unique_lev_5"
+		"Ability15"		"special_bonus_unique_lev_6"
+		"Ability16"		"special_bonus_unique_lev_7"
+		"Ability17"		"special_bonus_unique_lev_8"
 		"StatusHealthRegen"		"0.5"
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -360,17 +367,25 @@
 		"MovementSpeed"		"290"
 		"Facets"
 		{
-			"lion_essence_eater" 
+			"lev_r" 
 			{
 				"Icon"				"nuke"
 				"Color"				"Purple"
 				"GradientID"		"2"
 			}
-			"lion_fist_of_death" 
+			"lev_q" 
 			{
 				"Icon"				"fist"
 				"Color"				"Red"
 				"GradientID"		"2"
+			}
+			"lion_essence_eater" 
+			{
+				"Deprecated"		"true"
+			}
+			"lion_fist_of_death" 
+			{
+				"Deprecated"		"true"
 			}
 
 		}
@@ -392,17 +407,17 @@
 		"Ability5"		"dave_scepter"
 		"Ability6"		"dave_loonboon"
 		"Ability7"		"dave_ambient"
-		"Ability10"		"special_bonus_unique_disruptor_4"
+		"Ability10"		"special_bonus_unique_dave_1"
 		"Ability11"		"special_bonus_mana_reduction_8"
-		"Ability12"		"special_bonus_unique_enigma_4"
+		"Ability12"		"special_bonus_unique_dave_3"
 		"Ability13"		"special_bonus_movement_speed_35"
-		"Ability14"		"special_bonus_unique_enigma_3"
-		"Ability15"		"special_bonus_unique_disruptor_5"
-		"Ability16"		"special_bonus_unique_disruptor_2"
-		"Ability17"		"special_bonus_unique_dazzle_5"
+		"Ability14"		"special_bonus_unique_dave_5"
+		"Ability15"		"special_bonus_unique_dave_6"
+		"Ability16"		"special_bonus_unique_dave_7"
+		"Ability17"		"special_bonus_unique_dave_8"
 		"Facets"
 		{
-			"tinker_repair_bots"
+			"dave_armor"
 			{
 				"Icon"				"armor_broken"
 				"Color"				"Red"
@@ -417,12 +432,19 @@
 					}
 				}
 			}
-
-			"tinker_translocator"
+			"dave_r"
 			{
 				"Icon"				"sun"
 				"Color"				"Yellow"
 				"GradientID"		"2"
+			}
+			"tinker_repair_bots"
+			{
+				"Deprecated"		"true"
+			}
+			"tinker_translocator"
+			{
+				"Deprecated"		"true"
 			}
 		}
 		"ArmorPhysical"		"2"
