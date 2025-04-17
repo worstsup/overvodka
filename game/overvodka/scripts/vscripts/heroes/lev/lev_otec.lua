@@ -105,6 +105,7 @@ function modifier_otec:OnCreated()
 	self.move_speed = self:GetAbility():GetSpecialValueFor( "move_speed" )
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_strength = self:GetAbility():GetSpecialValueFor( "bonus_strength" )
+	self.bonus_agility = self:GetAbility():GetSpecialValueFor( "bonus_agility" )
 end
 
 function modifier_otec:OnRemoved()
@@ -116,6 +117,7 @@ function modifier_otec:DeclareFunctions()
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+		MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
 	}
 	return funcs
 end
@@ -130,4 +132,8 @@ end
 
 function modifier_otec:GetModifierMoveSpeed_Limit( params )
 	return self.move_speed
+end
+
+function modifier_otec:GetModifierBonusStats_Agility( params )
+	return self.bonus_agility
 end
