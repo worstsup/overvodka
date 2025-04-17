@@ -407,17 +407,17 @@
 		"Ability5"		"dave_scepter"
 		"Ability6"		"dave_loonboon"
 		"Ability7"		"dave_ambient"
-		"Ability10"		"special_bonus_unique_disruptor_4"
+		"Ability10"		"special_bonus_unique_dave_1"
 		"Ability11"		"special_bonus_mana_reduction_8"
-		"Ability12"		"special_bonus_unique_enigma_4"
+		"Ability12"		"special_bonus_unique_dave_3"
 		"Ability13"		"special_bonus_movement_speed_35"
-		"Ability14"		"special_bonus_unique_enigma_3"
-		"Ability15"		"special_bonus_unique_disruptor_5"
-		"Ability16"		"special_bonus_unique_disruptor_2"
-		"Ability17"		"special_bonus_unique_dazzle_5"
+		"Ability14"		"special_bonus_unique_dave_5"
+		"Ability15"		"special_bonus_unique_dave_6"
+		"Ability16"		"special_bonus_unique_dave_7"
+		"Ability17"		"special_bonus_unique_dave_8"
 		"Facets"
 		{
-			"tinker_repair_bots"
+			"dave_armor"
 			{
 				"Icon"				"armor_broken"
 				"Color"				"Red"
@@ -432,12 +432,19 @@
 					}
 				}
 			}
-
-			"tinker_translocator"
+			"dave_r"
 			{
 				"Icon"				"sun"
 				"Color"				"Yellow"
 				"GradientID"		"2"
+			}
+			"tinker_repair_bots"
+			{
+				"Deprecated"		"true"
+			}
+			"tinker_translocator"
+			{
+				"Deprecated"		"true"
 			}
 		}
 		"ArmorPhysical"		"2"

@@ -2317,19 +2317,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
-	"special_bonus_unique_dave_2"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
 	"special_bonus_unique_dave_3"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-	"special_bonus_unique_dave_4"
 	{
         "BaseClass"						"special_bonus_base"														
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
@@ -2380,7 +2368,7 @@
 				"AbilityCharges"
 				{
 					"value"	"1"
-					"special_bonus_unique_dazzle_5" "+1"
+					"special_bonus_unique_dave_8" "+1"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -2389,12 +2377,12 @@
 				"base_damage"
 				{
 					"value"	"20 30 40 50"
-					"special_bonus_unique_disruptor_2" "+200%"
+					"special_bonus_unique_dave_7" "+200%"
 				}
 				"base_hp"
 				{
 					"value"	"150 220 290 360"
-					"special_bonus_unique_disruptor_2" "+200%"
+					"special_bonus_unique_dave_7" "+200%"
 				}
 				"duration"
 				{
@@ -2406,12 +2394,12 @@
 				"count4"
 				{
 					"value"	"0 0 0 1"
-					"special_bonus_unique_disruptor_2" "-1"
+					"special_bonus_unique_dave_7" "-1"
 				}
 				"count5"
 				{
 					"value"	"0 0 0 0"
-					"special_bonus_unique_disruptor_2" "+1"
+					"special_bonus_unique_dave_7" "+1"
 				}
 		}
 		
@@ -2548,7 +2536,7 @@
 				"duration"
 				{
 					"value"	"15.0"
-					"special_bonus_unique_disruptor_5" "+5.0"
+					"special_bonus_unique_dave_6" "+5.0"
 				}
 				"count1"
 				{
@@ -3390,12 +3378,12 @@
 				"move_speed"
 				{
 					"value"	"10"
-					"special_bonus_unique_disruptor_4" "+10"
+					"special_bonus_unique_dave_1" "+10"
 				}
 				"bonus_as_aura"
 				{
 					"value"	"100 150 200"
-					"special_bonus_unique_enigma_3" "+60"
+					"special_bonus_unique_dave_5" "+60"
 				}
 				"radius"
 				{
@@ -3410,14 +3398,14 @@
 				"stun_dur"
 				{
 					"value"	"0.3 0.4 0.5"
-					"special_bonus_unique_enigma_4" "+0.2"
+					"special_bonus_unique_dave_3" "+0.2"
 				}
 				"damage"		"100 200 300"
 				"interval"	"1.5"
 				"hasfacet"
 				{
 					"value"	"0"
-					"special_bonus_facet_tinker_translocator"	"+1"
+					"special_bonus_facet_dave_r"	"+1"
 				}
 		}
 	}
