@@ -1,6 +1,5 @@
 const CustomSkillPanelButton = $("#CustomSkillPanelButton")
 const CustomSkillPanel = $("#CustomSkillPanel")
-
 const COMBOS = [
     "dvoreckov_www","dvoreckov_qqq","dvoreckov_eee",
     "dvoreckov_qww","dvoreckov_qqw","dvoreckov_wee",
@@ -45,6 +44,7 @@ function CreatePanel(Abilities){
     }
 }
 function TogglePanel(){
+    Game.EmitSound("UUI_SOUNDS.ButtonPress");
     CustomSkillPanel.SetHasClass("Show", !CustomSkillPanel.BHasClass("Show"))
     const isHidden = CustomSkillPanel.BHasClass("Hidden");
     if (isHidden) {

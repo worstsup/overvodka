@@ -11,6 +11,7 @@ let SelectedCategory = -1
 // 2 - Дуо
 
 function ToggleLeaderboard(){
+    Game.EmitSound("UUI_SOUNDS.Leaderboard");
     LeaderboardMain.SetHasClass("Show", !LeaderboardMain.BHasClass("Show"))
 
     if(SelectedCategory == -1){

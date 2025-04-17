@@ -1,5 +1,41 @@
 <!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
+    UUI_SOUNDS.OvervodkaPrime = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_logo_rollover_01.vsnd"
+        ]
+        volume = "1.5"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Leaderboard = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_topmenu_select_03.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.ButtonPress = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_generic_button_click_01.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
     UUI_SOUNDS.NoGold = {
         type = "dota_src1_3d"
         vsnd_files =
