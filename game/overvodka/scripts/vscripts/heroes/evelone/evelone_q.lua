@@ -44,7 +44,7 @@ end
 function evelone_q:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
-	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_faceless_void_2" )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_evelone_8" )
 end
 
 

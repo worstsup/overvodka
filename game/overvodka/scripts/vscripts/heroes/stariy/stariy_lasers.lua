@@ -135,7 +135,7 @@ end
 
 function stariy_lasers:PlayEffects1()
 	local particle_precast = "particles/stariy_lasers_wings.vpcf"
-	self.effect_precast = ParticleManager:CreateParticle( particle_precast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )	
+	self.effect_precast = ParticleManager:CreateParticle( particle_precast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 end
 function stariy_lasers:StopEffects1( success )
 
