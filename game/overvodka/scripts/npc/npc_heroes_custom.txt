@@ -1129,17 +1129,31 @@
 		"Ability17"		"special_bonus_unique_keeper_of_the_light_illuminate_cooldown"
 		"Facets"
 		{
-			"zuus_livewire"	
+			"stariy_r_facet"
 			{
-				"Icon"				"range"
+				"Icon"				"teleport"
+				"Color"				"Blue"
+				"GradientID"		"0"
+			}
+			"stariy_e_facet"
+			{
+				"Icon"				"movement"
 				"Color"				"Blue"
 				"GradientID"		"1"
+			}
+			"stariy_w_facet"
+			{
+				"Icon"				"unique"
+				"Color"				"Green"
+				"GradientID"		""
+			}
+			"zuus_livewire"	
+			{
+				"Deprecated" "true"
 			}			
 			"zuus_divine_rampage" 
 			{
-				"Icon"				"nuke"
-				"Color"				"Gray"
-				"GradientID"		"3"
+				"Deprecated" "true"
 			}
 		}
 		"ArmorPhysical"		"2"

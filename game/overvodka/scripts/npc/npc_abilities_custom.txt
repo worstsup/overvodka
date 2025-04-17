@@ -6704,6 +6704,29 @@
                 	"value" "800"
                 	"affected_by_aoe_increase"	"1"
                 }
+				"pull_drag_speed"
+				{
+					"value"	"0"
+					"special_bonus_facet_stariy_r_facet" "+250"
+					"RequiresFacet"	"stariy_r_facet"
+				}
+				"pull_radius"
+				{
+					"value"	"0"
+					"special_bonus_facet_stariy_r_facet" "+1000"
+					"RequiresFacet"	"stariy_r_facet"
+				}
+				"cooldown_pull"
+				{
+					"value"	"0"
+					"special_bonus_facet_stariy_r_facet" "+10"
+					"RequiresFacet"	"stariy_r_facet"
+				}
+				"has_facet"
+				{
+					"value"	"0"
+					"special_bonus_facet_stariy_r_facet" "+1"
+				}
         }
     }
     //=================================================================================================================
@@ -6839,8 +6862,8 @@
 				"duration"
 				{
 					"value"	"0"
-					"special_bonus_facet_zuus_livewire"	"+1.0"
-					"RequiresFacet"			"zuus_livewire"
+					"special_bonus_facet_stariy_e_facet"	"+1.0"
+					"RequiresFacet"			"stariy_e_facet"
 				}
 				"radius"
 				{
@@ -6850,8 +6873,8 @@
 				"ms"
 				{
 					"value"	"0"
-					"special_bonus_facet_zuus_livewire"	"-14 -21 -28 -35"
-					"RequiresFacet"			"zuus_livewire"
+					"special_bonus_facet_stariy_e_facet"	"-14 -21 -28 -35"
+					"RequiresFacet"			"stariy_e_facet"
 				}
 				"damage"
 				{
@@ -6908,8 +6931,8 @@
 				"regen"
 				{
 					"value" "0"
-					"special_bonus_facet_zuus_divine_rampage"	"+4"
-					"RequiresFacet"			"zuus_divine_rampage"
+					"special_bonus_facet_stariy_w_facet"	"+4"
+					"RequiresFacet"			"stariy_w_facet"
 				}
 				"as_slow"	"-30"
 		}

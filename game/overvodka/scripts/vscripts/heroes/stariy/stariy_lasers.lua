@@ -4,6 +4,9 @@ LinkLuaModifier( "modifier_stariy_lasers_thinker", "heroes/stariy/modifier_stari
 LinkLuaModifier( "modifier_stariy_lasers_linger_thinker", "heroes/stariy/modifier_stariy_lasers_linger_thinker", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_stariy_lasers_debuff", "heroes/stariy/modifier_stariy_lasers_debuff", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_stariy_fly", "heroes/stariy/modifier_stariy_fly", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_stariy_lasers_pull_thinker", "heroes/stariy/stariy_lasers", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_stariy_lasers_pull", "heroes/stariy/stariy_lasers", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_stariy_lasers_pull_cooldown", "heroes/stariy/stariy_lasers", LUA_MODIFIER_MOTION_NONE )
 
 function stariy_lasers:Precache( context )
 	PrecacheResource( "particle", "particles/staff_beam_new.vpcf", context )
@@ -12,6 +15,8 @@ function stariy_lasers:Precache( context )
 	PrecacheResource( "particle", "particles/creatures/aghanim/staff_beam_linger.vpcf", context )
 	PrecacheResource( "particle", "particles/creatures/aghanim/staff_beam_tgt_ring.vpcf", context )
 	PrecacheResource( "particle", "particles/creatures/aghanim/aghanim_debug_ring.vpcf", context )
+	PrecacheResource("particle", "particles/stariy_lasers_facet.vpcf", context)
+	PrecacheResource( "particle", "particles/stariy_lasers_wings.vpcf", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts", context )
@@ -28,16 +33,36 @@ function stariy_lasers:GetChannelAnimation()
 end
 
 function stariy_lasers:OnAbilityPhaseStart()
-	EmitSoundOn( "stariy_ult_start", self:GetCaster() )
+	local caster = self:GetCaster()
+	EmitSoundOn( "stariy_ult_start", caster )
 	self.radius = self:GetSpecialValueFor( "radius" )
-	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_stariy_fly", {duration = 1.5} )
+	self.facet = (self:GetSpecialValueFor("has_facet") == 1)
+	caster:AddNewModifier( caster, self, "modifier_stariy_fly", {duration = 1.5} )
 	if IsServer() then
-		StartSoundEventFromPositionReliable( "Aghanim.StaffBeams.WindUp", self:GetCaster():GetAbsOrigin() )
-		self.nChannelFX = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_channel.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
-		self.vecTargets = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
+		self:PlayEffects1()
+		if not caster:HasModifier("modifier_stariy_lasers_pull_cooldown") and self.facet then 
+			caster:AddNewModifier(caster, self, "modifier_stariy_lasers_pull_cooldown", {duration = self:GetSpecialValueFor("cooldown_pull")})
+			self.thinker = CreateModifierThinker(
+				caster,
+				self,
+				"modifier_stariy_lasers_pull_thinker",
+				{},
+				caster:GetOrigin(),
+				caster:GetTeamNumber(),
+				false
+			)
+			local radius = self:GetSpecialValueFor( "pull_radius" )
+	
+			self.effect_radius = ParticleManager:CreateParticle( "particles/stariy_lasers_facet.vpcf", PATTACH_ABSORIGIN, caster )
+			ParticleManager:SetParticleControl( self.effect_radius, 0, caster:GetOrigin() )
+			ParticleManager:SetParticleControl( self.effect_radius, 1, Vector(radius,radius, 0) )
+		 end
+		StartSoundEventFromPositionReliable( "Aghanim.StaffBeams.WindUp", caster:GetAbsOrigin() )
+		self.nChannelFX = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_channel.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
+		self.vecTargets = FindUnitsInRadius( caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
 		for k,enemy in pairs ( self.vecTargets ) do
 			if enemy ~= nil then
-				enemy.nWarningFXIndex = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_debug_ring.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster() )
+				enemy.nWarningFXIndex = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_debug_ring.vpcf", PATTACH_CUSTOMORIGIN, caster )
 				ParticleManager:SetParticleControl( enemy.nWarningFXIndex, 0, enemy:GetAbsOrigin() )
 				enemy.vSourceLoc = enemy:GetAbsOrigin()
 			end
@@ -50,6 +75,9 @@ function stariy_lasers:OnAbilityPhaseInterrupted()
 	StopSoundOn( "stariy_ult_start", self:GetCaster() )
 	self:GetCaster():RemoveModifierByName( "modifier_stariy_fly" )
 	ParticleManager:DestroyParticle( self.nChannelFX, false )
+	if self.thinker then self.thinker:Destroy() end
+	self.thinker = nil
+	self:StopEffects1( false )
 	for k,enemy in pairs ( self.vecTargets ) do
 		if enemy ~= nil then
 			ParticleManager:DestroyParticle(enemy.nWarningFXIndex, false)
@@ -59,6 +87,8 @@ end
 
 function stariy_lasers:OnSpellStart()
 	if IsServer() then
+		if self.thinker then self.thinker:Destroy() end
+		self.thinker = nil
 		EmitSoundOn( "Hero_Phoenix.SunRay.Cast", self:GetCaster() )
 		EmitSoundOn( "stariy_ult", self:GetCaster() )
 		EmitSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
@@ -99,9 +129,26 @@ function stariy_lasers:OnSpellStart()
 			end
 		end
 		self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_stariy_fly", {duration = 6,} )
+		self:StopEffects1( true )
 	end
 end
 
+function stariy_lasers:PlayEffects1()
+	local particle_precast = "particles/stariy_lasers_wings.vpcf"
+	self.effect_precast = ParticleManager:CreateParticle( particle_precast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )	
+end
+function stariy_lasers:StopEffects1( success )
+
+	if self.effect_radius then 
+		ParticleManager:DestroyParticle( self.effect_radius, false )
+		ParticleManager:ReleaseParticleIndex(self.effect_radius)
+		self.effect_radius = nil
+	end
+	if not success then
+		ParticleManager:DestroyParticle( self.effect_precast, true )
+	end
+	ParticleManager:ReleaseParticleIndex( self.effect_precast )
+end
 function stariy_lasers:OnProjectileThinkHandle( nProjectileHandle )
 	if IsServer() then
 		local Projectile = nil
@@ -193,3 +240,98 @@ function stariy_lasers:OnChannelFinish( bInterrupted )
 		end
 	end
 end
+
+modifier_stariy_lasers_pull_thinker = class({
+	IsHidden 				= function(self) return true end,
+	IsPurgable 				= function(self) return false end,
+})
+
+
+function modifier_stariy_lasers_pull_thinker:OnCreated( kv )
+	self.radius = self:GetAbility():GetSpecialValueFor( "pull_radius" )
+end
+
+
+function modifier_stariy_lasers_pull_thinker:OnDestroy()
+	if IsServer() then
+	 	UTIL_Remove( self:GetParent())
+	end
+end
+
+function modifier_stariy_lasers_pull_thinker:IsAura()
+	return true
+end
+
+function modifier_stariy_lasers_pull_thinker:GetModifierAura()
+	return "modifier_stariy_lasers_pull"
+end
+
+function modifier_stariy_lasers_pull_thinker:GetAuraRadius()
+	return self.radius
+end
+
+function modifier_stariy_lasers_pull_thinker:GetAuraDuration()
+	return 0.1
+end
+
+function modifier_stariy_lasers_pull_thinker:GetAuraSearchTeam()
+	return DOTA_UNIT_TARGET_TEAM_ENEMY
+end
+
+function modifier_stariy_lasers_pull_thinker:GetAuraSearchType()
+	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+end
+
+function modifier_stariy_lasers_pull_thinker:GetAuraSearchFlags()
+	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+end
+
+modifier_stariy_lasers_pull = {}
+
+function modifier_stariy_lasers_pull:IsHidden()
+	return false
+end
+
+function modifier_stariy_lasers_pull:IsDebuff()
+	return true
+end
+
+function modifier_stariy_lasers_pull:IsStunDebuff()
+	return true
+end
+
+function modifier_stariy_lasers_pull:IsPurgable()
+	return true
+end
+
+function modifier_stariy_lasers_pull:OnCreated( kv )
+	self.pull_speed = self:GetAbility():GetSpecialValueFor( "pull_drag_speed" )
+	self.center = self:GetCaster():GetAbsOrigin()
+	self:StartIntervalThink(FrameTime())
+end
+
+
+function modifier_stariy_lasers_pull:OnIntervalThink()
+	if IsClient() then return end
+	local direction = self.center - self:GetParent():GetOrigin()
+	direction.z = 0
+	direction = direction:Normalized()
+	local point = self:GetParent():GetOrigin() + direction * self.pull_speed * FrameTime()
+
+ 	self:GetParent():SetOrigin(point)
+end
+
+function modifier_stariy_lasers_pull:OnDestroy()
+	if IsServer() then
+		local parent = self:GetParent()
+		FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+	end
+end
+
+modifier_stariy_lasers_pull_cooldown = class({
+	IsHidden 				= function(self) return false end,
+	IsPurgable 				= function(self) return false end,
+	IsDebuff 				= function(self) return false end,
+	IsBuff                  = function(self) return true end,
+	RemoveOnDeath 			= function(self) return false end,
+})
