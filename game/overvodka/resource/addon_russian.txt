@@ -1299,7 +1299,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_keeper_of_the_light_11" "+12% к скорости передвижения от БРЕД"
 		"DOTA_Tooltip_modifier_bred" "Бред"
 		"DOTA_Tooltip_modifier_bred_Description" "Урон от заклинаний увеличен, получаемый урон уменьшен, но ваша скорость атаки снижена."
-		"DOTA_Tooltip_ability_stariy_lasers_Facet_stariy_r_facet"						"Способность притягивает всех врагов в радиусе %pull_radius% со скоростью %pull_drag_speed%."
+		"DOTA_Tooltip_ability_stariy_lasers_Facet_stariy_r_facet"						"Во время применения способность притягивает всех врагов в радиусе %pull_radius% со скоростью %pull_drag_speed%."
 		"DOTA_Tooltip_Facet_stariy_r_facet"													"БОГ ЛАЗЕРОВ"
 		"DOTA_Tooltip_Facet_stariy_r_facet_Description"									"При применении способности ЛАЗЕРЫ герой притягивает врагов."
 		"DOTA_Tooltip_ability_stariy_bolt_Facet_stariy_e_facet"						"Способность замедляет врагов."
