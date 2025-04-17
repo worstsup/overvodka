@@ -157,7 +157,7 @@ function modifier_dvoreckov_qqq:OnIntervalThink()
 	self:GetParent():Script_ReduceMana( self.mana, self:GetAbility() )
 	self:GetCaster():GiveMana( self.mana )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_enigma_6")
+		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_1")
 		if Talented:GetLevel() == 1 then
 			ApplyDamage(damageTable)
 		end
@@ -536,8 +536,10 @@ function dvoreckov_qqe:OnSpellStart()
 	if not self:GetSpecialValueFor("talent") == 1 then
 		target,point = self:FindValidPoint( point )
 	end
+	local radius = self:GetSpecialValueFor( "radius" )
 	local channel = self:GetChannelTime()
 	local leaptime = self:GetSpecialValueFor( "airtime_duration" )
+	AddFOWViewer( caster:GetTeamNumber(), point, radius, channel+leaptime, false )
 	caster:AddNewModifier(
 		caster,
 		self,
@@ -625,6 +627,7 @@ end
 
 function modifier_dvoreckov_qqe:OnDestroy()
 	if not IsServer() then return end
+	GridNav:DestroyTreesAroundPoint( self.point, self.radius, false )
 	FindClearSpaceForUnit( self.parent, self.parent:GetOrigin(), false )
 	local sound_cast1 = "Hero_Dawnbreaker.Solar_Guardian.Channel"
 	local sound_cast2 = "suda"
@@ -1405,7 +1408,7 @@ function modifier_dvoreckov_eee:OnRefresh( kv )
 	end
 	self.hastalent = self:GetAbility():GetSpecialValueFor("hastalent")
 	if self.hastalent == 1 then
-		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * 0.6 + self.damage
+		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * self:GetAbility():GetSpecialValueFor("damage_percent") * 0.01 + self.damage
 	end
 	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_bonus" )
 	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )
@@ -1809,7 +1812,7 @@ function dvoreckov_qee:OnSpellStart()
 	}
 	ProjectileManager:CreateLinearProjectile(info)
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-			local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_oracle_2")
+			local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_7")
 			if Talented:GetLevel() == 1 then
         		ProjectileManager:CreateLinearProjectile(info2)
 				ProjectileManager:CreateLinearProjectile(info3)
@@ -1858,7 +1861,7 @@ function dvoreckov_qee:OnProjectileHit_ExtraData( target, location, data )
 		}
 	)
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_pudge_7")
+		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_6")
 		if Talented:GetLevel() == 1 then
         	target:AddNewModifier(
 				self:GetCaster(),

@@ -557,18 +557,30 @@
 		"Ability15"		"dvoreckov_qqw"
 		"Ability16"		"dvoreckov_qwe"
 
-		"Ability17"		"special_bonus_unique_enigma_6"
-		"Ability18"		"special_bonus_unique_abaddon_3"
-		"Ability19"		"special_bonus_unique_abaddon_2"
-		"Ability20"		"special_bonus_unique_pudge_6"
-		"Ability21"		"special_bonus_unique_earth_spirit_5"
-		"Ability22"		"special_bonus_unique_pudge_7"
-		"Ability23"		"special_bonus_unique_oracle_2"
-		"Ability24"		"special_bonus_unique_invoker_additional_chaos_meteors"
+		"Ability17"		"special_bonus_unique_dvoreckov_1"
+		"Ability18"		"special_bonus_unique_dvoreckov_2"
+		"Ability19"		"special_bonus_unique_dvoreckov_3"
+		"Ability20"		"special_bonus_unique_dvoreckov_4"
+		"Ability21"		"special_bonus_unique_dvoreckov_5"
+		"Ability22"		"special_bonus_unique_dvoreckov_6"
+		"Ability23"		"special_bonus_unique_dvoreckov_7"
+		"Ability24"		"special_bonus_unique_dvoreckov_8"
 		"Ability25"		"dvoreckov_innate"
 
 		"Facets"
 		{
+			"dvoreckov_facet_magic"
+			{
+				"Icon"				"unique"
+				"Color"				"Purple"
+				"GradientID"		"0"
+			}
+			"dvoreckov_facet_phys"
+			{
+				"Icon"				"damage"
+				"Color"				"Yellow"
+				"GradientID"		"0"
+			}
 			"invoker_agnostic"
 			{
 				"Deprecated"		"true"
@@ -583,18 +595,14 @@
 			}			
 			"invoker_wex_focus"
 			{
-				"Icon"				"invoker_wex"
-				"Color"				"Purple"
-				"GradientID"		"0"
+				"Deprecated"		"true"
 			}
 			"invoker_exort_focus"
 			{
-				"Icon"				"invoker_exort"
-				"Color"				"Yellow"
-				"GradientID"		"0"
+				"Deprecated"		"true"
 			}
 		}
-
+		"AbilityTalentStart"		"17"
 		"ArmorPhysical"		"0"
 		"StatusHealthRegen"		"0.5"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -725,25 +733,17 @@
 		"Ability20"		"bratishkin_q_base"
 		"Facets"
 		{
-			"rubick_mana" 
+			"rubick_frugal_filch" 
 			{
 				"Icon"				"mana"
 				"Color"				"Purple"
 				"GradientID"		"2"
 			}
-			"rubick_radius" 
+			"rubick_arcane_accumulation" 
 			{
 				"Icon"				"area_of_effect"
 				"Color"				"Green"
 				"GradientID"		"0"
-			}
-			"rubick_frugal_filch" 
-			{
-				"Deprecated"	"true"
-			}
-			"rubick_arcane_accumulation" 
-			{
-				"Deprecated"	"true"
 			}
 		}
 		"AbilityTalentStart"	"12"

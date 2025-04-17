@@ -4155,14 +4155,14 @@
 				"attack_speed_per_instance"
 				{
 					"value"	"0"
-					"special_bonus_facet_invoker_exort_focus"	"5 10 15 20 25 30 35"
-					"RequiresFacet"					"invoker_exort_focus"
+					"special_bonus_facet_dvoreckov_facet_phys"	"5 10 15 20 25 30 35"
+					"RequiresFacet"					"dvoreckov_facet_phys"
 				}
 				"cdr"
 				{
 					"value"	"0"
-					"special_bonus_facet_invoker_wex_focus"	"2 3 4 5 6 7 8"
-					"RequiresFacet"					"invoker_wex_focus"
+					"special_bonus_facet_dvoreckov_facet_magic"	"2 3 4 5 6 7 8"
+					"RequiresFacet"					"dvoreckov_facet_magic"
 				}
 				"move_speed_per_instance"	"2 3 4 5 6 7 8"
 		}
@@ -4192,14 +4192,14 @@
 			"bonus_damage_per_instance"	
 			{
 				"value"	"0"
-				"special_bonus_facet_invoker_exort_focus"	"5 10 15 20 25 30 35"
-				"RequiresFacet"					"invoker_exort_focus"
+				"special_bonus_facet_dvoreckov_facet_phys"	"5 10 15 20 25 30 35"
+				"RequiresFacet"					"dvoreckov_facet_phys"
 			}
 			"dmg"
 			{
 				"value"	"0"
-				"special_bonus_facet_invoker_wex_focus"	"1 2 3 4 5 6 7"
-				"RequiresFacet"					"invoker_wex_focus"
+				"special_bonus_facet_dvoreckov_facet_magic"	"1 2 3 4 5 6 7"
+				"RequiresFacet"					"dvoreckov_facet_magic"
 			}
 		}
 	}
@@ -4413,7 +4413,7 @@
 			"damage"
 			{
 				"value"	"50 100 150 200 250 300 350"
-				"special_bonus_unique_abaddon_3" "+150"
+				"special_bonus_unique_dvoreckov_2" "+150"
 				"levelkey"				"quaslevel"
 			}
 			"radius_tree"				"300"
@@ -4443,13 +4443,13 @@
 			"rot_radius"			
 			{
 				"value"                  "400"
-				"special_bonus_unique_pudge_6" "+200"
+				"special_bonus_unique_dvoreckov_4" "+200"
 				"affected_by_aoe_increase"	"1"
 			}
 			"AbilityCastRange"
 			{
 				"value"                  "400"
-				"special_bonus_unique_pudge_6" "+200"
+				"special_bonus_unique_dvoreckov_4" "+200"
 				"affected_by_aoe_increase"	"1"
 			}
 			"rot_tick"				"0.3"
@@ -4547,7 +4547,7 @@
 				"buffed_attacks"				
 				{
 					"value" 				"6"
-					"special_bonus_unique_abaddon_2" "+3"
+					"special_bonus_unique_dvoreckov_3" "+3"
 				}
 				"attack_speed_bonus"		"350"
 				"attack_range_bonus"
@@ -4566,7 +4566,12 @@
 				"hastalent"
 				{
 					"value"	"0"
-					"special_bonus_unique_earth_spirit_5" "+1"
+					"special_bonus_unique_dvoreckov_5" "+1"
+				}
+				"damage_percent"
+				{
+					"value"	"0"
+					"special_bonus_unique_dvoreckov_5" "+60"
 				}
 		}
 	}
@@ -4665,7 +4670,7 @@
 				"talent"
 				{
 					"value"	"0"
-					"special_bonus_unique_invoker_additional_chaos_meteors" "+1"
+					"special_bonus_unique_dvoreckov_8" "+1"
 				}
 				"max_offset_distance"			"100"
 		}
