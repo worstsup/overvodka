@@ -874,6 +874,7 @@ LinkLuaModifier( "modifier_dvoreckov_www", "heroes/dvoreckov/dvoreckov_abilities
 
 function dvoreckov_www:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dark_seer/dark_seer_vacuum.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/unitazik.vsndevts", context )
 end
 
 function dvoreckov_www:GetAOERadius()
@@ -1024,6 +1025,13 @@ end
 dvoreckov_qww = class({})
 LinkLuaModifier( "modifier_dvoreckov_qww", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_qww:Precache( context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_ignite.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/drunk.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/razbil.vsndevts", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_ignite_debuff.vpcf", context )
+end
 
 function dvoreckov_qww:OnSpellStart()
 	local caster = self:GetCaster()

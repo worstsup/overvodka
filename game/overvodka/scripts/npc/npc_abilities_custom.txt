@@ -749,8 +749,9 @@
 		"AbilityManaCost"				"75 105 135 165"
 		"precache"
 		{
-			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"		
-			"particle"		"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_prison.vpcf"
+			"soundfile"		"soundevents/ebanul_moroz.vsndevts"
+			"soundfile"		"soundevents/zima_holoda.vsndevts"
+			"particle"		"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
 		}
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
 		"AbilityModifierSupportValue"	"0.5"
@@ -843,11 +844,6 @@
 		"AbilityManaCost"				"80 120 160 200"
 		"AbilityCastRange"				"150"
 		"AbilityCastPoint"				"0.35"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_tusk/tusk_walruspunch_start.vpcf"
-			"particle"  "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
-		}
 		"AbilityValues"
 		{
 				"damage"
@@ -891,10 +887,6 @@
 		"AbilityCastRange"				"600"
 		"AbilityCooldown"				"25"
 		"AbilityManaCost"				"40 60 80 100"
-		"precache"
-		{
-			"particle"	"particles/riki_smokebomb_ebanko.vpcf"
-		}
 		"AbilityValues"
 		{
 			"radius"
@@ -944,11 +936,6 @@
 				"stun_duration"		"1.75"
 				"aoe_radius"		"0"
 				"knockback_distance"	"1600"
-		}
-		"precache"
-		{
-			"particle"  "particles/units/heroes/hero_tusk/tusk_walruskick_tgt.vpcf"
-			"particle" "particles/units/heroes/hero_sniper/sniper_assassinate.vpcf"
 		}
 	}
 	//=========================
@@ -4354,12 +4341,6 @@
 		"AbilityTextureName"			"vodka"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
-			"particle"	"particles/units/heroes/hero_ogre_magi/ogre_magi_ignite.vpcf"
-			"particle"	"particles/units/heroes/hero_ogre_magi/ogre_magi_ignite_debuff.vpcf"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -4728,7 +4709,7 @@
                 "radius"                    "500"
                 "blast_damage"
                 {
-                	"value"	"25 50 75 100 125 150 175 200 225 250 275 300 325 350 375 400 425 450 475 500 525"
+                	"value"	"50 75 100 125 150 175 200 225 250 275 300 325 350 375 400 425 450 475 500 525"
                 	"levelkey"				"quaslevel"
                 }
                 "channel_duration"          "9.0"

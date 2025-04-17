@@ -1,6 +1,12 @@
 ebanko_shard = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
+function ebanko_shard:Precache( context )
+	PrecacheResource( "soundfile", "soundevents/fof.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/ya_tebya.vsndevts", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf", context )
+end
+
 function ebanko_shard:OnSpellStart()
 	if not IsServer() then return end
 	local caster = self:GetCaster()
