@@ -126,10 +126,6 @@ end
 function COverthrowGameMode:OnHeroFinishSpawn( event )
 	local hPlayerHero = EntIndexToHScript( event.heroindex )
 	if hPlayerHero ~= nil and hPlayerHero:IsRealHero() then
-		local hTP = hPlayerHero:FindItemInInventory( "item_tpscroll" )
-		if hTP ~= nil then
-			UTIL_Remove( hTP )
-		end
 	end
 end
 
