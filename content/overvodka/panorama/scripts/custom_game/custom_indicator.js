@@ -1,4 +1,3 @@
-// Created by Elfansoer
 "use strict";
 
 const BEHAVIOR_EVENT_START = 0;
