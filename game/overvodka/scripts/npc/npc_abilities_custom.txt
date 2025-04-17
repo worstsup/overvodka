@@ -3446,8 +3446,6 @@
     	"MaxLevel"					"1"
 	}
 
-
-
 	"special_bonus_unique_golmiy_1"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -3485,12 +3483,6 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	"special_bonus_unique_golmiy_7"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-	"special_bonus_unique_golmiy_8"
 	{
         "BaseClass"						"special_bonus_base"														
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
@@ -3559,12 +3551,12 @@
 				"meteor_stun"
 				{
 					"value"		"1.0 1.2 1.4 1.6"
-					"special_bonus_unique_dazzle_3" "+1.0"
+					"special_bonus_unique_golmiy_5" "+1.0"
 				}
 				"damage"			
 				{
 					"value"		"100 200 300 400"
-					"special_bonus_unique_viper_3" "+150"
+					"special_bonus_unique_golmiy_4" "+150"
 				}
 				"think_damage"
 				{
@@ -3573,7 +3565,7 @@
 				"gold"
 				{
 					"value"	"0"
-					"special_bonus_facet_brewmaster_roll_out_the_barrel" "+100"
+					"special_bonus_facet_golmiy_facet_q" "+100"
 				}
 		}
     }
@@ -3609,7 +3601,7 @@
 				"radius"
 				{
 					"value"	"550 600 650 700"
-					"special_bonus_unique_dazzle_4" "+100"
+					"special_bonus_unique_golmiy_2" "+100"
 					"affected_by_aoe_increase"	"1"
 				}
 				"duration"			"4.0 6.0 8.0 10.0"
@@ -3617,13 +3609,13 @@
 				"magic_reduction"
 				{
 					"value"			"-11 -15 -19 -23"
-					"special_bonus_unique_razor_3" "-10"
+					"special_bonus_unique_golmiy_6" "-10"
 				}
 				"tick_rate"				"1.0"
 				"slow"
 				{
 					"value"	"0"
-					"special_bonus_facet_brewmaster_drunken_master"	"-15"
+					"special_bonus_facet_golmiy_facet_w"	"-15"
 				}
 		}
 	}
@@ -3663,7 +3655,7 @@
 				"duration"
 				{
 					"value"	"2 3 4 5"
-					"special_bonus_unique_weaver_5" "+1"
+					"special_bonus_unique_golmiy_3" "+1"
 				}
 				"movespeed"			   "23"
 				"dermo"                "23"
@@ -3693,11 +3685,11 @@
 			    "EffectAttachType"	"follow_overhead"
 				"Properties"
 				{
-                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%movespeed"
-				"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%dermo"
-				"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%dermo"
-				"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%percent_heal"
-				"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%percent_heal"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%movespeed"
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%dermo"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%dermo"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%percent_heal"
+					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%percent_heal"
 				}
 			}
 			"modifier_eff"
@@ -3912,7 +3904,7 @@
 				"duration"
 				{
 					"value"	"0.5"
-					"special_bonus_unique_ursa_2" "+0.5"
+					"special_bonus_unique_golmiy_1" "+0.5"
 				}
 				"movement_speed"            "-23"
 				"bonus_attack_range"        "100"

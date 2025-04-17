@@ -461,27 +461,35 @@
 		"Ability4"		"golmiy_golbet"
 		"Ability5"		"golmiy_kostil"
 		"Ability6"		"golmiy_gennadiy"
-		"Ability10"		"special_bonus_unique_ursa_2"
-		"Ability11"		"special_bonus_unique_dazzle_4"
-		"Ability12"		"special_bonus_unique_weaver_5"
-		"Ability13"		"special_bonus_unique_viper_3"
-		"Ability14"		"special_bonus_unique_dazzle_3"
-		"Ability15"		"special_bonus_unique_razor_3"
+		"Ability10"		"special_bonus_unique_golmiy_1"
+		"Ability11"		"special_bonus_unique_golmiy_2"
+		"Ability12"		"special_bonus_unique_golmiy_3"
+		"Ability13"		"special_bonus_unique_golmiy_4"
+		"Ability14"		"special_bonus_unique_golmiy_5"
+		"Ability15"		"special_bonus_unique_golmiy_6"
 		"Ability16"		"special_bonus_spell_lifesteal_20"
-		"Ability17"		"special_bonus_unique_viper_2"
+		"Ability17"		"special_bonus_unique_golmiy_7"
 		"Facets"
 		{
-			"brewmaster_roll_out_the_barrel"
+			"golmiy_facet_q"
 			{
 				"Icon"				"nuke"
 				"Color"				"Red"
 				"GradientID"		"1"
 			}
-			"brewmaster_drunken_master"
+			"golmiy_facet_w"
 			{
 				"Icon"				"speed"
 				"Color"				"Yellow"
 				"GradientID"		"1"
+			}
+			"brewmaster_roll_out_the_barrel"
+			{
+				"Deprecated"	"true"
+			}
+			"brewmaster_drunken_master"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"-1"
@@ -541,23 +549,14 @@
 		{
 			"invoker_agnostic"
 			{
-				"Icon"				"invoker_passive"
-				"Color"				"Purple"
-				"GradientID"		"0"
 				"Deprecated"		"true"
 			}			
 			"invoker_elitist"
 			{
-				"Icon"				"invoker_active"
-				"Color"				"Gray"
-				"GradientID"		"0"
 				"Deprecated"		"true"
 			}
 			"invoker_quas_focus"
 			{
-				"Icon"				"invoker_quas"
-				"Color"				"Blue"
-				"GradientID"		"0"
 				"Deprecated"		"true"
 			}			
 			"invoker_wex_focus"
@@ -595,10 +594,6 @@
 		"MovementSpeed"		"290"
 		"StatusManaRegen"	"1.0"
 		"HealthBarOffset"	"280"
-		"precache"
-		{
-			"soundfile" "soundevents/vpiska_start.vsndevts"
-		}
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_meepo"

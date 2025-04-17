@@ -1,6 +1,12 @@
 const CustomSkillPanelButton = $("#CustomSkillPanelButton")
 const CustomSkillPanel = $("#CustomSkillPanel")
 
+const COMBOS = [
+    "dvoreckov_www","dvoreckov_qqq","dvoreckov_eee",
+    "dvoreckov_qww","dvoreckov_qqw","dvoreckov_wee",
+    "dvoreckov_wwe","dvoreckov_qqe","dvoreckov_qee",
+    "dvoreckov_qwe"
+  ];
 function GetDotaHud() {
     var rootUI = $.GetContextPanel();
     while (rootUI.id != "Hud" && rootUI.GetParent() != null) {
@@ -40,6 +46,45 @@ function CreatePanel(Abilities){
 }
 function TogglePanel(){
     CustomSkillPanel.SetHasClass("Show", !CustomSkillPanel.BHasClass("Show"))
+    const isHidden = CustomSkillPanel.BHasClass("Hidden");
+    if (isHidden) {
+        for (let i=0; i<10; i++) {
+          const icon = $(`#SkillIcon${i}`);
+          const row = Math.floor(i / 3);
+          const col = i % 3;
+
+          let x = col * 173;
+          let y = row * 57;
+
+          if (i === 9) {
+              x = 173;
+              y = 169;
+          }
+
+          icon.style.x = `${x}px`;
+          icon.style.y = `${y}px`;
+          const name = COMBOS[i] || "";
+          if (name) {
+            icon.abilityname = name;
+            icon.RemoveClass("Hidden");
+            icon.SetPanelEvent("onmouseover", () => {
+              $.DispatchEvent("DOTAShowAbilityTooltip", icon, name);
+            });
+            icon.SetPanelEvent("onmouseout",  () => {
+              $.DispatchEvent("DOTAHideAbilityTooltip");
+            });
+          } else {
+            icon.AddClass("Hidden");
+          }
+        }
+        CustomSkillPanel.RemoveClass("Hidden");
+      } else {
+        CustomSkillPanel.AddClass("Hidden");
+        for (let i=0; i<10; i++) {
+          const icon = $(`#SkillIcon${i}`);
+          icon.AddClass("Hidden");
+        }
+      }
 }
 function UpdatePanel(){
     let queryUnit = Players.GetLocalPlayerPortraitUnit();

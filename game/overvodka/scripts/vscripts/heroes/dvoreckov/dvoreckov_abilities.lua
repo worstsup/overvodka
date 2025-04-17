@@ -437,43 +437,6 @@ function dvoreckov_qqe:Precache( context )
 	PrecacheResource( "particle", "particles/dvoreckov_qqe.vpcf", context )
 end
 
-function dvoreckov_qqe:Spawn()
-	if not IsServer() then
-		CustomIndicator:RegisterAbility( self )
-		return
-	end
-end
-
-function dvoreckov_qqe:CreateCustomIndicator()
-	local particle_cast1 = "particles/ui_mouseactions/range_finder_tp_dest.vpcf"
-	local particle_cast2 = "particles/ui_mouseactions/range_finder_aoe.vpcf"
-	self.effect_cast1 = ParticleManager:CreateParticle( particle_cast1, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
-	self.effect_cast2 = ParticleManager:CreateParticle( particle_cast2, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
-end
-
-function dvoreckov_qqe:UpdateCustomIndicator( loc )
-	local origin = self:GetCaster():GetAbsOrigin()
-	local radius = self:GetSpecialValueFor( "radius" )
-	local offset = self:GetSpecialValueFor( "max_offset_distance" )
-	local target, point = self:FindValidPoint( loc )
-
-	ParticleManager:SetParticleControl( self.effect_cast1, 0, origin )
-	ParticleManager:SetParticleControl( self.effect_cast1, 2, target:GetAbsOrigin() )
-	ParticleManager:SetParticleControl( self.effect_cast1, 3, Vector( offset, 1, 1 ) )
-	ParticleManager:SetParticleControl( self.effect_cast1, 4, point )
-
-	ParticleManager:SetParticleControl( self.effect_cast2, 2, point )
-	ParticleManager:SetParticleControl( self.effect_cast2, 3, Vector( radius, 1, 1 ) )
-end
-
-function dvoreckov_qqe:DestroyCustomIndicator()
-	ParticleManager:DestroyParticle( self.effect_cast1, false )
-	ParticleManager:ReleaseParticleIndex( self.effect_cast1 )
-
-	ParticleManager:DestroyParticle( self.effect_cast2, false )
-	ParticleManager:ReleaseParticleIndex( self.effect_cast2 )
-end
-
 function dvoreckov_qqe:FindValidPoint( point )
 	local caster = self:GetCaster()
 	local offset = self:GetSpecialValueFor( "max_offset_distance" )

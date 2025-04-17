@@ -6,9 +6,26 @@
 		<include src="file://{resources}/scripts/custom_game/overthrow_skill_panel.js" />
 	</scripts>
 	<Panel hittest="false" class="OverthrowNotification">
-		<Button class="Hidden" id="CustomSkillPanelButton" onactivate="TogglePanel()">
+		<Button id="CustomSkillPanelButton" class="Hidden ToggleButton" onactivate="TogglePanel()">
+			<Label class="ButtonText" text="#dvoreckov_panel_list" />
+			<Panel class="ButtonGlow" />
 		</Button>
-		<Panel id="CustomSkillPanel" hittest="false">
+		<Panel id="CustomSkillPanel" class="Hidden SkillPanel" hittest="true" h-align="left" v-align="top" x="300" y="380">
+			<Button id="CloseButton" class="CloseButton" onactivate="TogglePanel()">
+				<Label class="CloseButtonText" text="#dvoreckov_panel_close" />
+			</Button>
+			<Panel id="SkillGrid" class="SkillGrid" flowChildren="1" wrap="1">
+				<DOTAAbilityImage id="SkillIcon0" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon1" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon2" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon3" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon4" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon5" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon6" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon7" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon8" class="SkillIcon"/>
+				<DOTAAbilityImage id="SkillIcon9" class="SkillIcon"/>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>
