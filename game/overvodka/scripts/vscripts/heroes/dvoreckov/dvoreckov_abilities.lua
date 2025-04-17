@@ -1946,6 +1946,12 @@ LinkLuaModifier( "modifier_dvoreckov_qwe", "heroes/dvoreckov/dvoreckov_abilities
 LinkLuaModifier( "modifier_dvoreckov_qwe_debuff", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dvoreckov_qwe_nonchanneled", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 
+function dvoreckov_qwe:Precache(context)
+	PrecacheResource( "soundfile", "soundevents/vpis.vsndevts", context )
+	PrecacheResource( "particle_folder", "particles/booom", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_huskar/huskar_inner_fire.vpcf", context )
+end
+
 function dvoreckov_qwe:GetChannelAnimation()
     if self:GetCaster():HasScepter() then
         return ACT_DOTA_IDLE

@@ -7,7 +7,7 @@
 	<Panel>
 		<CustomUIElement type="HudTopBar"			layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overthrow_item_notification.xml" />
-		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overthrow_skill_panel.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/dvoreckov_skill_panel.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/player_hud.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/debug_panel.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/leaderboard_rating.xml" />

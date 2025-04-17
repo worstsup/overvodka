@@ -32,7 +32,6 @@ function stray_q:OnSpellStart()
         local image_count = self:GetSpecialValueFor("illusion_count")
         local image_out_dmg = self:GetSpecialValueFor("outgoing_damage")
         local incoming_damage = self:GetSpecialValueFor("incoming_damage")
-
         local vRandomSpawnPos = {
             Vector(108, 0, 0),
             Vector(108, 108, 0),
@@ -43,7 +42,6 @@ function stray_q:OnSpellStart()
             Vector(-108, -108, 0),
             Vector(0, -108, 0),
         }
-
         for i = 1, image_count do
             local illusions = CreateIllusions(
                 self:GetCaster(),

@@ -1,9 +1,9 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/custom_game/overthrow_skill_panel.css" />
+		<include src="file://{resources}/styles/custom_game/dvoreckov_skill_panel.css" />
 	</styles>
 	<scripts>
-		<include src="file://{resources}/scripts/custom_game/overthrow_skill_panel.js" />
+		<include src="file://{resources}/scripts/custom_game/dvoreckov_skill_panel.js" />
 	</scripts>
 	<Panel hittest="false" class="OverthrowNotification">
 		<Button id="CustomSkillPanelButton" class="Hidden ToggleButton" onactivate="TogglePanel()">
