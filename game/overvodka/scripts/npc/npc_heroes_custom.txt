@@ -714,28 +714,36 @@
 		"Ability9"		"rubick_hidden2"
 		"Ability10"		"silencer_brain_drain"
 		"Ability11"		"wisp_spirits"
-		"Ability12"		"special_bonus_unique_gyrocopter_6"
-		"Ability13"		"special_bonus_unique_huskar_2"
-		"Ability14"		"special_bonus_unique_gyrocopter_5"
-		"Ability15"		"special_bonus_unique_huskar_3"
+		"Ability12"		"special_bonus_unique_worstsup_1"
+		"Ability13"		"special_bonus_unique_worstsup_2"
+		"Ability14"		"special_bonus_unique_worstsup_3"
+		"Ability15"		"special_bonus_unique_worstsup_4"
 		"Ability16"		"special_bonus_unique_rubick_6"
-		"Ability17"		"special_bonus_unique_gyrocopter_3"
-		"Ability18"		"special_bonus_unique_gyrocopter_2"
+		"Ability17"		"special_bonus_unique_worstsup_6"
+		"Ability18"		"special_bonus_unique_worstsup_7"
 		"Ability19"		"special_bonus_unique_rubick_5"
 		"Ability20"		"bratishkin_q_base"
 		"Facets"
 		{
-			"rubick_frugal_filch" 
+			"rubick_mana" 
 			{
 				"Icon"				"mana"
 				"Color"				"Purple"
 				"GradientID"		"2"
 			}
-			"rubick_arcane_accumulation" 
+			"rubick_radius" 
 			{
 				"Icon"				"area_of_effect"
 				"Color"				"Green"
 				"GradientID"		"0"
+			}
+			"rubick_frugal_filch" 
+			{
+				"Deprecated"	"true"
+			}
+			"rubick_arcane_accumulation" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"AbilityTalentStart"	"12"
