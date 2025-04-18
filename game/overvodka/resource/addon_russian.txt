@@ -1742,6 +1742,7 @@
 		"DOTA_Tooltip_modifier_dvoreckov_qww" "Вас хуёвит от честной водки"
 		"DOTA_Tooltip_modifier_dvoreckov_eee" "Выстрелы Дворецкова"
 		"DOTA_Tooltip_modifier_dvoreckov_eee_debuff" "Выстрелы Дворецкова"
+		"DOTA_Tooltip_modifier_dvoreckov_eee_debuff_description" "Сопротивление магии снижено на %dMODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS%%%"
 		"DOTA_Tooltip_ability_dvoreckov_qww"       "Честная водка"
 		"DOTA_Tooltip_ability_dvoreckov_qww_duration"       "ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
 		"DOTA_Tooltip_ability_dvoreckov_qww_stun_duration"       "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"

@@ -16,6 +16,7 @@ function stariy_bolt:Precache(context)
 	PrecacheResource( "soundfile", "soundevents/stariy_peterka.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/yo.vsndevts", context )
 end
 
 function stariy_bolt:GetIntrinsicModifierName()

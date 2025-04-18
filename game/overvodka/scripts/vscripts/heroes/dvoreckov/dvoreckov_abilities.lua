@@ -1,5 +1,626 @@
+dvoreckov_q = class({})
+LinkLuaModifier( "modifier_dvoreckov_q", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_q:Precache( context )
+	PrecacheResource( "particle", "particles/econ/items/invoker/invoker_ti6/invoker_ti6_wex_orb.vpcf", context )
+end
+
+function dvoreckov_q:IsStealable()
+	return false
+end
+
+function dvoreckov_q:ProcsMagicStick()
+	return false
+end
+
+function dvoreckov_q:OnSpellStart()
+	local caster = self:GetCaster()
+	if caster:GetUnitName() == "npc_dota_hero_invoker" then
+
+		local modifier = caster:AddNewModifier(
+			caster,
+			self,
+			"modifier_dvoreckov_q",
+			{}
+		)
+		self.invoke:AddOrb( modifier, "particles/econ/items/invoker/invoker_ti6/invoker_ti6_wex_orb.vpcf" )
+	end
+end
+
+function dvoreckov_q:OnUpgrade()
+	if not self.invoke then
+		local invoke = self:GetCaster():FindAbilityByName( "dvoreckov_r" )
+		if invoke:GetLevel()<1 then invoke:UpgradeAbility(true) end
+		self.invoke = invoke
+	else
+		self.invoke:UpdateOrb("modifier_dvoreckov_q", self:GetLevel())
+	end
+end
+
+modifier_dvoreckov_q = class({})
+
+function modifier_dvoreckov_q:IsHidden()
+	return false
+end
+function modifier_dvoreckov_q:IsDebuff()
+	return false
+end
+
+function modifier_dvoreckov_q:GetAttributes()
+	return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_MULTIPLE 
+end
+function modifier_dvoreckov_q:IsPurgable()
+	return false
+end
+
+function modifier_dvoreckov_q:OnCreated( kv )
+	self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" )
+	self.regen_sss = self.regen * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_dvoreckov_q:OnRefresh( kv )
+	self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" )
+	self.regen_sss = self.regen * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_dvoreckov_q:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
+		self.regen = self.regen_sss
+	else
+		self.regen = self:GetAbility():GetSpecialValueFor( "health_regen_per_instance" )
+	end
+end
+function modifier_dvoreckov_q:OnDestroy( kv )
+end
+function modifier_dvoreckov_q:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+	}
+
+	return funcs
+end
+function modifier_dvoreckov_q:GetModifierConstantHealthRegen()
+	return self.regen
+end
+
+dvoreckov_w = class({})
+LinkLuaModifier( "modifier_dvoreckov_w", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_w:Precache( context )
+	PrecacheResource( "particle", "particles/econ/items/invoker/invoker_ti6/invoker_ti6_quas_orb.vpcf", context )
+end
+
+function dvoreckov_w:IsStealable()
+	return false
+end
+
+function dvoreckov_w:ProcsMagicStick()
+	return false
+end
+
+function dvoreckov_w:OnSpellStart()
+	local caster = self:GetCaster()
+	if caster:GetUnitName() == "npc_dota_hero_invoker" then
+		local modifier = caster:AddNewModifier(
+			caster,
+			self,
+			"modifier_dvoreckov_w",
+			{  }
+		)
+		self.invoke:AddOrb( modifier, "particles/econ/items/invoker/invoker_ti6/invoker_ti6_quas_orb.vpcf" )
+	end
+end
+
+function dvoreckov_w:OnUpgrade()
+	if not self.invoke then
+		local invoke = self:GetCaster():FindAbilityByName( "dvoreckov_r" )
+		if invoke:GetLevel()<1 then invoke:UpgradeAbility(true) end
+		self.invoke = invoke
+	else
+		self.invoke:UpdateOrb("modifier_dvoreckov_w", self:GetLevel())
+	end
+end
+
+modifier_dvoreckov_w = class({})
+
+function modifier_dvoreckov_w:IsHidden()
+	return false
+end
+
+function modifier_dvoreckov_w:IsDebuff()
+	return false
+end
+
+function modifier_dvoreckov_w:GetAttributes()
+	return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_MULTIPLE 
+end
+
+function modifier_dvoreckov_w:IsPurgable()
+	return false
+end
+
+function modifier_dvoreckov_w:OnCreated( kv )
+	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	self.as_bonus_sss = self.as_bonus * 2
+	self.ms_bonus_sss = self.ms_bonus * 2
+	self.cdr_sss = self.cdr * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_dvoreckov_w:OnRefresh( kv )
+	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+	self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+	self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	self.as_bonus_sss = self.as_bonus * 2
+	self.ms_bonus_sss = self.ms_bonus * 2
+	self.cdr_sss = self.cdr * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_dvoreckov_w:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
+		self.as_bonus = self.as_bonus_sss
+		self.ms_bonus = self.ms_bonus_sss
+		self.cdr = self.cdr_sss
+	else
+		self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_per_instance" )
+		self.ms_bonus = self:GetAbility():GetSpecialValueFor( "move_speed_per_instance" )
+		self.cdr = self:GetAbility():GetSpecialValueFor( "cdr" )
+	end
+end
+function modifier_dvoreckov_w:OnDestroy( kv )
+
+end
+
+function modifier_dvoreckov_w:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+		MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
+	}
+
+	return funcs
+end
+
+function modifier_dvoreckov_w:GetModifierMoveSpeedBonus_Percentage()
+	return self.ms_bonus
+end
+function modifier_dvoreckov_w:GetModifierPercentageCooldown()
+	return self.cdr
+end
+function modifier_dvoreckov_w:GetModifierAttackSpeedBonus_Constant()
+	return self.as_bonus
+end
+
+dvoreckov_e = class({})
+LinkLuaModifier( "modifier_dvoreckov_e", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_e:IsStealable()
+	return false
+end
+
+function dvoreckov_e:ProcsMagicStick()
+	return false
+end
+
+function dvoreckov_e:Precache( context )
+	PrecacheResource( "particle", "particles/econ/items/invoker/invoker_ti6/invoker_ti6_exort_orb.vpcf", context )
+end
+
+function dvoreckov_e:OnSpellStart()
+	local caster = self:GetCaster()
+	if caster:GetUnitName() == "npc_dota_hero_invoker" then
+		local modifier = caster:AddNewModifier(
+			caster,
+			self,
+			"modifier_dvoreckov_e",
+			{  }
+		)
+
+		self.invoke:AddOrb( modifier, "particles/econ/items/invoker/invoker_ti6/invoker_ti6_exort_orb.vpcf" )
+	end
+end
+
+function dvoreckov_e:OnUpgrade()
+	if not self.invoke then
+		local invoke = self:GetCaster():FindAbilityByName( "dvoreckov_r" )
+		if invoke:GetLevel()<1 then invoke:UpgradeAbility(true) end
+		self.invoke = invoke
+	else
+		self.invoke:UpdateOrb("modifier_dvoreckov_e", self:GetLevel())
+	end
+end
+
+modifier_dvoreckov_e = class({})
+
+function modifier_dvoreckov_e:IsHidden()
+	return false
+end
+
+function modifier_dvoreckov_e:IsDebuff()
+	return false
+end
+
+function modifier_dvoreckov_e:GetAttributes()
+	return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_MULTIPLE 
+end
+
+function modifier_dvoreckov_e:IsPurgable()
+	return false
+end
+
+function modifier_dvoreckov_e:OnCreated( kv )
+	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	self.damage_sss = self.damage * 2
+	self.dmg_sss = self.dmg * 2
+	self:StartIntervalThink(0.5)
+end
+
+function modifier_dvoreckov_e:OnRefresh( kv )
+	self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+	self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	self.damage_sss = self.damage * 2
+	self.dmg_sss = self.dmg * 2
+	self:StartIntervalThink(0.5)
+end
+function modifier_dvoreckov_e:OnIntervalThink()
+	if self:GetParent():HasModifier("modifier_dvoreckov_qqw") then
+		self.damage = self.damage_sss
+		self.dmg = self.dmg_sss
+	else
+		self.damage = self:GetAbility():GetSpecialValueFor( "bonus_damage_per_instance" )
+		self.dmg = self:GetAbility():GetSpecialValueFor( "dmg" )
+	end
+end
+function modifier_dvoreckov_e:OnDestroy( kv )
+
+end
+
+function modifier_dvoreckov_e:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+	}
+
+	return funcs
+end
+function modifier_dvoreckov_e:GetModifierPreAttack_BonusDamage()
+	return self.damage
+end
+function modifier_dvoreckov_e:GetModifierSpellAmplify_Percentage()
+	return self.dmg
+end
+
+dvoreckov_r = class({})
+dvoreckov_empty_1 = class({})
+dvoreckov_empty_2 = class({})
+
+function dvoreckov_r:Precache( context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_invoker/invoker_invoke.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/kipil.vsndevts", context )
+end
+
+function dvoreckov_r:IsStealable()
+	return false
+end
+
+function dvoreckov_r:ProcsMagicStick()
+	return false
+end
+
+orb_manager = {}
+ability_manager = {}
+
+orb_manager.orb_order = "qwe"
+orb_manager.invoke_list = {
+	["qqq"] = "dvoreckov_qqq",
+	["qqw"] = "dvoreckov_qqw",
+	["qqe"] = "dvoreckov_qqe",
+	["www"] = "dvoreckov_www",
+	["qww"] = "dvoreckov_qww",
+	["wwe"] = "dvoreckov_wwe",
+	["eee"] = "dvoreckov_eee",
+	["qee"] = "dvoreckov_qee",
+	["wee"] = "dvoreckov_wee",
+	["qwe"] = "dvoreckov_qwe",
+}
+orb_manager.modifier_list = {
+	["q"] = "modifier_dvoreckov_q",
+	["w"] = "modifier_dvoreckov_w",
+	["e"] = "modifier_dvoreckov_e",
+
+	["modifier_dvoreckov_q"] = "q",
+	["modifier_dvoreckov_w"] = "w",
+	["modifier_dvoreckov_e"] = "e",
+}
+
+function dvoreckov_r:OnSpellStart()
+	local caster = self:GetCaster()
+	local ability_name = self.orb_manager:GetInvokedAbility()
+	self.ability_manager:Invoke( ability_name )
+	self:PlayEffects()
+end
+
+function dvoreckov_r:OnUpgrade()
+	self.orb_manager = orb_manager:init()
+	self.ability_manager = ability_manager:init()
+	self.ability_manager.caster = self:GetCaster()
+	self.ability_manager.ability = self
+	local empty1 = self:GetCaster():FindAbilityByName( "dvoreckov_empty_1" )
+	local empty2 = self:GetCaster():FindAbilityByName( "dvoreckov_empty_2" )
+	table.insert(self.ability_manager.ability_slot,empty1)
+	table.insert(self.ability_manager.ability_slot,empty2)
+end
+
+function dvoreckov_r:AddOrb( modifier, particle )
+	self.orb_manager:Add( modifier, particle )
+end
+
+function dvoreckov_r:UpdateOrb( modifer_name, level )
+	updates = self.orb_manager:UpdateOrb( modifer_name, level )
+	self.ability_manager:UpgradeAbilities()
+end
+
+function dvoreckov_r:GetOrbLevel( orb_name )
+	if not self.orb_manager.status[orb_name] then return 0 end
+	return self.orb_manager.status[orb_name].level
+end
+
+function dvoreckov_r:GetOrbInstances( orb_name )
+	if not self.orb_manager.status[orb_name] then return 0 end
+	return self.orb_manager.status[orb_name].instances
+end
+
+function dvoreckov_r:GetOrbs()
+	local ret = {}
+	for k,v in pairs(self.orb_manager.status) do
+		ret[k] = v.level
+	end
+	return ret
+end
+
+function dvoreckov_r:PlayEffects()
+	local particle_cast = "particles/units/heroes/hero_invoker/invoker_invoke.vpcf"
+	local sound_cast = "kipil"
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_POINT_FOLLOW, self:GetCaster() )
+	ParticleManager:SetParticleControlEnt(
+		effect_cast,
+		0,
+		self:GetCaster(),
+		PATTACH_POINT_FOLLOW,
+		"attach_hitloc",
+		Vector(0,0,0),
+		true
+	)
+	ParticleManager:ReleaseParticleIndex( effect_cast )
+	EmitSoundOn( sound_cast, self:GetCaster() )
+end
+
+function orb_manager:init()
+	local ret = {}
+	ret.MAX_ORB = 3
+	ret.status = {}
+	ret.modifiers = {}
+	ret.names = {}
+	for k,v in pairs(self) do
+		ret[k] = v
+	end
+	return ret
+end
+
+function orb_manager:Add( modifier, particle )
+	local orb_name = self.modifier_list[modifier:GetName()]
+	if not self.status[orb_name] then
+		self.status[orb_name] = {
+			["instances"] = 0,
+			["level"] = modifier:GetAbility():GetLevel(),
+		}
+	end
+	if modifier:GetCaster().invoked_orbs_particle == nil then
+        modifier:GetCaster().invoked_orbs_particle = {}
+    end
+
+    if modifier:GetCaster().invoked_orbs_particle_attach == nil then
+        modifier:GetCaster().invoked_orbs_particle_attach = {}
+        modifier:GetCaster().invoked_orbs_particle_attach[1] = "attach_orb1"
+        modifier:GetCaster().invoked_orbs_particle_attach[2] = "attach_orb2"
+        modifier:GetCaster().invoked_orbs_particle_attach[3] = "attach_orb3"
+    end
+	if modifier:GetCaster().invoked_orbs_particle[1] ~= nil then
+        ParticleManager:DestroyParticle(modifier:GetCaster().invoked_orbs_particle[1], false)
+        modifier:GetCaster().invoked_orbs_particle[1] = nil
+    end
+
+    modifier:GetCaster().invoked_orbs_particle[1] = modifier:GetCaster().invoked_orbs_particle[2]
+    modifier:GetCaster().invoked_orbs_particle[2] = modifier:GetCaster().invoked_orbs_particle[3]
+    modifier:GetCaster().invoked_orbs_particle[3] = ParticleManager:CreateParticle(particle, PATTACH_OVERHEAD_FOLLOW, modifier:GetCaster())
+    ParticleManager:SetParticleControlEnt(modifier:GetCaster().invoked_orbs_particle[3], 1, modifier:GetCaster(), PATTACH_POINT_FOLLOW, modifier:GetCaster().invoked_orbs_particle_attach[1], modifier:GetCaster():GetAbsOrigin(), false)
+
+    local temp_attachment_point = modifier:GetCaster().invoked_orbs_particle_attach[1]
+    modifier:GetCaster().invoked_orbs_particle_attach[1] = modifier:GetCaster().invoked_orbs_particle_attach[2]
+    modifier:GetCaster().invoked_orbs_particle_attach[2] = modifier:GetCaster().invoked_orbs_particle_attach[3]
+    modifier:GetCaster().invoked_orbs_particle_attach[3] = temp_attachment_point
+
+	table.insert(self.modifiers,modifier)
+	table.insert(self.names,orb_name)
+	self.status[orb_name].instances = self.status[orb_name].instances + 1
+	if #self.modifiers>self.MAX_ORB then
+		self.status[self.names[1]].instances = self.status[self.names[1]].instances - 1
+		if not self.modifiers[1]:IsNull() then
+            self.modifiers[1]:Destroy()
+        end
+
+		table.remove(self.modifiers,1)
+		table.remove(self.names,1)
+	end
+end
+
+function orb_manager:GetInvokedAbility()
+	local key = ""
+	for i=1,string.len(self.orb_order) do
+		k = string.sub(self.orb_order,i,i)
+
+		if self.status[k] then 
+			for i=1,self.status[k].instances do
+				key = key .. k
+			end
+		end
+	end
+	return self.invoke_list[key]
+end
+
+function orb_manager:UpdateOrb( modifer_name, level )
+	for _,modifier in pairs(self.modifiers) do
+		if modifier:GetName()==modifer_name then
+			modifier:ForceRefresh()
+		end
+	end
+	local orb_name = self.modifier_list[modifer_name]
+	if not self.status[orb_name] then
+		self.status[orb_name] = {
+			["instances"] = 0,
+			["level"] = level,
+		}
+	else
+		self.status[orb_name].level = level
+	end
+end
+
+function ability_manager:init()
+	local ret = {}
+	ret.abilities = {}
+	ret.ability_slot = {}
+	ret.MAX_ABILITY = 2
+	for k,v in pairs(self) do
+		ret[k] = v
+	end
+	return ret
+end
+
+function ability_manager:Invoke( ability_name )
+	if not ability_name then return end
+
+	local ability = self:GetAbilityHandle( ability_name )
+	ability.orbs = self.ability:GetOrbs()
+	if self.ability_slot[1] and self.ability_slot[1]==ability then
+		self.ability:RefundManaCost()
+		self.ability:EndCooldown()
+		return
+	end
+	local exist = 0
+	for i=1,#self.ability_slot do
+		if self.ability_slot[i]==ability then
+			exist = i
+		end
+	end
+	if exist>0 then
+		self:InvokeExist( exist )
+		self.ability:RefundManaCost()
+		self.ability:EndCooldown()
+		return
+	end
+	self:InvokeNew( ability )
+	if self.caster:HasScepter() then
+		self.ability:EndCooldown()
+	end
+end
+
+function ability_manager:InvokeExist( slot )
+	for i=slot,2,-1 do
+		self.caster:SwapAbilities( 
+			self.ability_slot[slot-1]:GetAbilityName(),
+			self.ability_slot[slot]:GetAbilityName(),
+			true,
+			true
+		)
+
+		self.ability_slot[slot], self.ability_slot[slot-1] = self.ability_slot[slot-1], self.ability_slot[slot]
+	end
+end
+
+function ability_manager:InvokeNew( ability )
+	if #self.ability_slot<self.MAX_ABILITY then
+		table.insert(self.ability_slot,ability)
+	else
+		self.caster:SwapAbilities( 
+			ability:GetAbilityName(),
+			self.ability_slot[#self.ability_slot]:GetAbilityName(),
+			true,
+			false
+		)
+		self.ability_slot[#self.ability_slot] = ability
+	end
+	self:InvokeExist( #self.ability_slot )
+end
+
+function ability_manager:GetAbilityHandle( ability_name )
+	local ability = self.abilities[ability_name]
+	if not ability then
+		ability = self.caster:FindAbilityByName( ability_name )
+		self.abilities[ability_name] = ability
+		if not ability then
+			ability = self.caster:AddAbility( ability_name )
+			self.abilities[ability_name] = ability
+		end
+		self:InitAbility( ability )
+	end
+	return ability
+end
+
+function ability_manager:InitAbility( ability )
+	ability:SetLevel(1)
+	ability.GetOrbSpecialValueFor = function( self, key_name, orb_name )
+		if not IsServer() then return 0 end
+		if not self.orbs[orb_name] then return 0 end
+		return self:GetLevelSpecialValueFor( key_name, self.orbs[orb_name] )
+	end
+end 
+
+function ability_manager:UpgradeAbilities()
+	for _,ability in pairs(self.abilities) do
+		ability.orbs = self.ability:GetOrbs()
+	end
+end
+
+function ability_manager:GetValueQuas(ability, caster, value)
+    local quas = caster:FindAbilityByName("dvoreckov_q")
+    if quas then
+        local level = quas:GetLevel() - 1
+        return ability:GetLevelSpecialValueFor(value, level)
+    end
+    return 0
+end
+
+function ability_manager:GetValueWex(ability, caster, value)
+    local wex = caster:FindAbilityByName("dvoreckov_w")
+    if wex then
+        local level = wex:GetLevel() - 1
+        return ability:GetLevelSpecialValueFor(value, level)
+    end
+    return 0
+end
+
+function ability_manager:GetValueExort(ability, caster, value)
+    local exort = caster:FindAbilityByName("dvoreckov_e")
+    if exort then
+        local level = exort:GetLevel() - 1
+        return ability:GetLevelSpecialValueFor(value, level)
+    end
+    return 0
+end
+
 dvoreckov_qqq = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqq", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_qqq:Precache(context)
+	PrecacheResource("soundfile", "soundevents/hehe.vsndevts", context )
+	PrecacheResource("particle", "particles/units/heroes/hero_lion/lion_spell_mana_drain.vpcf", context)
+end
 
 dvoreckov_qqq.modifiers = {}
 function dvoreckov_qqq:OnSpellStart()
@@ -84,11 +705,11 @@ end
 
 function modifier_dvoreckov_qqq:OnCreated( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.mana = self:GetAbility():GetOrbSpecialValueFor( "mana_per_second", "q" )
-		self.slow = -self:GetAbility():GetOrbSpecialValueFor( "movespeed", "q" )
+		self.mana = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "mana_per_second")
+		self.slow = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "movespeed")
 	else
-		self.mana = 100
-		self.slow = 20
+		self.mana = 120
+		self.slow = -20
 	end
 	self.radius = self:GetAbility():GetSpecialValueFor( "break_distance" )
 	local interval = self:GetAbility():GetSpecialValueFor( "tick_interval" )
@@ -121,7 +742,6 @@ function modifier_dvoreckov_qqq:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 	}
-
 	return funcs
 end
 
@@ -201,11 +821,16 @@ end
 
 dvoreckov_qqw = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqw", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_dvoreckov_qqw_debuff", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_qqw:Precache(context)
+	PrecacheResource("soundfile", "soundevents/sasi.vsndevts", context )
+	PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_ghost_walk.vpcf", context)
+end
 
 function dvoreckov_qqw:OnSpellStart()
 	local caster = self:GetCaster()
-	local duration = self:GetOrbSpecialValueFor( "duration", "q" )
+	local duration =  ability_manager:GetValueQuas(self, self:GetCaster(), "duration")
+	
 	caster:AddNewModifier(
 		caster,
 		self,
@@ -224,7 +849,6 @@ function dvoreckov_qqw:PlayEffects()
 end
 
 modifier_dvoreckov_qqw = class({})
-local intPack = require( "util/intPack" )
 function modifier_dvoreckov_qqw:IsHidden()
 	return false
 end
@@ -237,68 +861,11 @@ function modifier_dvoreckov_qqw:IsPurgable()
 	return false
 end
 
-function modifier_dvoreckov_qqw:IsAura()
-	return true
-end
-
-function modifier_dvoreckov_qqw:GetModifierAura()
-	return "modifier_dvoreckov_qqw_debuff"
-end
-
-function modifier_dvoreckov_qqw:GetAuraRadius()
-	return self.radius
-end
-
-function modifier_dvoreckov_qqw:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_ENEMY
-end
-
-function modifier_dvoreckov_qqw:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
-
-function modifier_dvoreckov_qqw:GetAuraDuration()
-	return self.aura_duration
-end
 
 function modifier_dvoreckov_qqw:OnCreated( kv )
-	if IsServer() then
-		self.radius = self:GetAbility():GetSpecialValueFor( "area_of_effect" )
-		self.aura_duration = self:GetAbility():GetSpecialValueFor( "aura_fade_time" )
-		self.self_slow = self:GetAbility():GetSpecialValueFor( "self_slow" )
-		self.enemy_slow = self:GetAbility():GetSpecialValueFor( "enemy_slow" )
-		local sign = 0
-		if self.self_slow<0 then sign = 2 end
-		local tbl = {
-			sign,
-			math.abs(self.self_slow),
-		}
-		self:SetStackCount( intPack.Pack( tbl, 60 ) )
-	else
-		local tbl = intPack.Unpack( self:GetStackCount(), 2, 60 )
-		self.self_slow = (1-tbl[1])*tbl[2]
-		self:SetStackCount( 0 )
-	end
 end
 
 function modifier_dvoreckov_qqw:OnRefresh( kv )
-	if IsServer() then
-		self.radius = self:GetAbility():GetSpecialValueFor( "area_of_effect" )
-		self.aura_duration = self:GetAbility():GetSpecialValueFor( "aura_fade_time" )
-		self.self_slow = self:GetAbility():GetOrbSpecialValueFor( "self_slow", "w" )
-		self.enemy_slow = self:GetAbility():GetOrbSpecialValueFor( "enemy_slow", "q" )
-		local sign = 0
-		if self.self_slow<0 then sign = 2 end
-		local tbl = {
-			sign,
-			math.abs(self.self_slow),
-		}
-		self:SetStackCount( intPack.Pack( tbl, 60 ) )
-	else
-		local tbl = intPack.Unpack( self:GetStackCount(), 2, 60 )
-		self.self_slow = (1-tbl[1])*tbl[2]
-		self:SetStackCount( 0 )
-	end
 end
 
 function modifier_dvoreckov_qqw:OnDestroy( kv )
@@ -306,17 +873,11 @@ end
 
 function modifier_dvoreckov_qqw:DeclareFunctions()
 	local funcs = {
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_INVISIBILITY_LEVEL,
 		MODIFIER_EVENT_ON_ABILITY_EXECUTED,
 		MODIFIER_EVENT_ON_ATTACK,
 	}
-
 	return funcs
-end
-
-function modifier_dvoreckov_qqw:GetModifierMoveSpeedBonus_Percentage()
-	return self.self_slow
 end
 
 function modifier_dvoreckov_qqw:GetModifierInvisibilityLevel()
@@ -346,79 +907,7 @@ function modifier_dvoreckov_qqw:CheckState()
 	local state = {
 		[MODIFIER_STATE_INVISIBLE] = true,
 	}
-
 	return state
-end
-
-modifier_dvoreckov_qqw_debuff = class({})
-local intPack = require( "util/intPack" )
-function modifier_dvoreckov_qqw_debuff:IsHidden()
-	return false
-end
-
-function modifier_dvoreckov_qqw_debuff:IsDebuff()
-	return true
-end
-
-function modifier_dvoreckov_qqw_debuff:IsPurgable()
-	return false
-end
-
-function modifier_dvoreckov_qqw_debuff:OnCreated( kv )
-	if IsServer() then
-		self.enemy_slow = self:GetAbility():GetOrbSpecialValueFor( "enemy_slow", "q" )
-		local sign = 0
-		if self.enemy_slow<0 then sign = 2 end
-		local tbl = {
-			sign,
-			math.abs(self.enemy_slow),
-		}
-		self:SetStackCount( intPack.Pack( tbl, 60 ) )
-	else
-		local tbl = intPack.Unpack( self:GetStackCount(), 2, 60 )
-		self.enemy_slow = (1-tbl[1])*tbl[2]
-		self:SetStackCount( 0 )
-	end
-end
-
-function modifier_dvoreckov_qqw_debuff:OnRefresh( kv )
-	if IsServer() then
-		self.enemy_slow = self:GetAbility():GetOrbSpecialValueFor( "enemy_slow", "q" )
-		local sign = 0
-		if self.enemy_slow<0 then sign = 2 end
-		local tbl = {
-			sign,
-			math.abs(self.enemy_slow),
-		}
-		self:SetStackCount( intPack.Pack( tbl, 60 ) )
-	else
-		local tbl = intPack.Unpack( self:GetStackCount(), 2, 60 )
-		self.enemy_slow = (1-tbl[1])*tbl[2]
-		self:SetStackCount( 0 )
-	end
-end
-
-function modifier_dvoreckov_qqw_debuff:OnDestroy( kv )
-
-end
-
-function modifier_dvoreckov_qqw_debuff:DeclareFunctions()
-	local funcs = {
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-	}
-
-	return funcs
-end
-function modifier_dvoreckov_qqw_debuff:GetModifierMoveSpeedBonus_Percentage()
-	return self.enemy_slow
-end
-
-function modifier_dvoreckov_qqw_debuff:GetEffectName()
-	return "particles/units/heroes/hero_invoker/invoker_ghost_walk_debuff.vpcf"
-end
-
-function modifier_dvoreckov_qqw_debuff:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
 end
 
 dvoreckov_qqe = class({})
@@ -429,6 +918,7 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.l
 
 function dvoreckov_qqe:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dawnbreaker.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/suda.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_damage.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_healing_buff.vpcf", context )
@@ -595,7 +1085,7 @@ function modifier_dvoreckov_qqe:OnCreated( kv )
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.damage = self:GetAbility():GetOrbSpecialValueFor( "base_damage", "e" )
+		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "base_damage")
 	else
 		self.damage = 100
 	end
@@ -765,8 +1255,8 @@ function modifier_dvoreckov_qqe_leap:OnCreated( kv )
 	self.ability = self:GetAbility()
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.damage = self:GetAbility():GetOrbSpecialValueFor( "land_damage", "e" )
-		self.duration = self:GetAbility():GetOrbSpecialValueFor( "land_stun_duration", "q" )
+		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "land_damage")
+		self.duration = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "land_stun_duration")
 	else
 		self.damage = 300
 		self.duration = 2.0
@@ -881,14 +1371,9 @@ function dvoreckov_www:Precache( context )
 end
 
 function dvoreckov_www:GetAOERadius()
-	local base_radius = self:GetSpecialValueFor("radius")
     if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-        local orb_ability = self:GetCaster():FindAbilityByName("dvoreckov_w")
-        if orb_ability then
-            return base_radius + (orb_ability:GetLevel() * 60)
-        end
+        return ability_manager:GetValueWex(self, self:GetCaster(), "radius")
     end
-    
     return 700
 end
 
@@ -900,7 +1385,7 @@ function dvoreckov_www:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		radius = self:GetOrbSpecialValueFor( "radius", "w" )
+		radius = ability_manager:GetValueWex(self, self:GetCaster(), "radius")
 	else
 		radius = 700
 	end
@@ -959,9 +1444,9 @@ end
 
 function modifier_dvoreckov_www:OnCreated( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.damage = self:GetAbility():GetOrbSpecialValueFor( "damage", "w" )
+		self.damage = ability_manager:GetValueWex(self:GetAbility(), self:GetCaster(), "damage")
 	else
-		self.damage = 400
+		self.damage = 300
 	end
 	if not IsServer() then return end
 	self.abilityDamageType = self:GetAbility():GetAbilityDamageType()
@@ -1084,7 +1569,7 @@ function dvoreckov_qww:OnProjectileHit( target, location )
 	local duration = self:GetSpecialValueFor( "duration" )
 	local stun_duration = 0
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		stun_duration = self:GetOrbSpecialValueFor( "stun_duration", "w" )
+		stun_duration = ability_manager:GetValueWex(self, self:GetCaster(), "stun_duration")
 	else
 		stun_duration = 2.0
 	end
@@ -1126,9 +1611,9 @@ function modifier_dvoreckov_qww:OnCreated( kv )
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow_movement_speed_pct" )
 	local damage = 0
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		damage = self:GetAbility():GetOrbSpecialValueFor( "burn_damage", "q" )
+		damage = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "burn_damage")
 	else
-		damage = 40 + (20 * self:GetCaster():GetLevel() / 3)
+		damage = 40 + (10 * self:GetCaster():GetLevel() / 3)
 	end
 	if not IsServer() then return end
 	local interval = 0.5
@@ -1146,9 +1631,9 @@ function modifier_dvoreckov_qww:OnRefresh( kv )
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow_movement_speed_pct" )
 	local damage = 0
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		damage = self:GetAbility():GetOrbSpecialValueFor( "burn_damage", "q" )
+		damage = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "burn_damage")
 	else
-		damage = 140
+		damage = 40 + (10 * self:GetCaster():GetLevel() / 3)
 	end
 	
 	if not IsServer() then return end
@@ -1189,6 +1674,13 @@ end
 
 dvoreckov_wwe = class({})
 LinkLuaModifier( "modifier_dvoreckov_wwe", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+
+function dvoreckov_wwe:Precache( context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_pudge/pudge_rot_recipient.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/rotik.vsndevts", context )
+end
 
 function dvoreckov_wwe:ProcsMagicStick()
 	return false
@@ -1242,8 +1734,8 @@ end
 function modifier_dvoreckov_wwe:OnCreated( kv )
 	self.rot_radius = self:GetAbility():GetSpecialValueFor( "rot_radius" )
     if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.rot_slow = self:GetAbility():GetOrbSpecialValueFor( "rot_slow", "e" )
-		self.rot_damage = self:GetAbility():GetOrbSpecialValueFor( "rot_damaged", "w" )
+		self.rot_slow = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "rot_slow")
+		self.rot_damage = ability_manager:GetValueWex(self:GetAbility(), self:GetCaster(), "rot_damaged")
 	else
 		self.rot_slow = -21
 		self.rot_damage = 40
@@ -1307,8 +1799,7 @@ function modifier_dvoreckov_wwe:OnIntervalThink()
 end
 
 function modifier_dvoreckov_wwe:Burn()
-
-	self.parent:SpendMana( self.manacost, self:GetAbility() )
+	self:GetCaster():SpendMana( self.manacost, self:GetAbility() )
 	if self:GetParent() ~= self:GetCaster() then
 		return 0
 	end
@@ -1341,10 +1832,15 @@ LinkLuaModifier( "modifier_dvoreckov_eee", "heroes/dvoreckov/dvoreckov_abilities
 LinkLuaModifier( "modifier_dvoreckov_eee_debuff", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 
 function dvoreckov_eee:Precache( context )
-	PrecacheResource( "particle", "particles/econ/items/snapfire/snapfire_fall20_immortal/snapfire_fall20_immortal_lil_projectile.vpcf", context )
+	PrecacheResource("particle", "particles/econ/items/snapfire/snapfire_fall20_immortal/snapfire_fall20_immortal_lil_projectile.vpcf", context )
+	PrecacheResource("particle", "particles/units/heroes/hero_snapfire/hero_snapfire_shells_buff.vpcf", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_sniper/sniper_headshot_slow.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_snapfire.vsndevts", context)
+	PrecacheResource( "soundfile", "soundevents/dimon.vsndevts", context )
 end
 
 function dvoreckov_eee:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local duration = self:GetDuration()
 	caster:AddNewModifier(
@@ -1372,9 +1868,9 @@ end
 
 function modifier_dvoreckov_eee:OnCreated( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.attacks = self:GetAbility():GetOrbSpecialValueFor( "buffed_attacks", "e" )
-		self.damage = self:GetAbility():GetOrbSpecialValueFor( "damage", "e" )
-		self.range_bonus = self:GetAbility():GetOrbSpecialValueFor( "attack_range_bonus", "e" )
+		self.attacks = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "buffed_attacks")
+		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "damage")
+		self.range_bonus = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "attack_range_bonus")
 	else
 		self.attacks = 6
 		self.damage = 105
@@ -1398,9 +1894,9 @@ end
 
 function modifier_dvoreckov_eee:OnRefresh( kv )
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.attacks = self:GetAbility():GetOrbSpecialValueFor( "buffed_attacks", "e" )
-		self.damage = self:GetAbility():GetOrbSpecialValueFor( "damage", "e" )
-		self.range_bonus = self:GetAbility():GetOrbSpecialValueFor( "attack_range_bonus", "e" )
+		self.attacks = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "buffed_attacks")
+		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "damage")
+		self.range_bonus = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "attack_range_bonus")
 	else
 		self.attacks = 6
 		self.damage = 105
@@ -1563,9 +2059,9 @@ end
 function modifier_dvoreckov_eee_debuff:OnCreated( kv )
 	if not IsServer() then return end
 	if self:GetAbility() and self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.slow = - (self:GetAbility():GetOrbSpecialValueFor( "attack_speed_slow_per_stack", "e" ) )
+		self.slow = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "attack_speed_slow_per_stack")
 	else
-		self.slow = -3
+		self.slow = 3
 	end
 	self:SetStackCount( 1 )
 end
@@ -1586,7 +2082,6 @@ function modifier_dvoreckov_eee_debuff:DeclareFunctions()
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 	}
-
 	return funcs
 end
 
@@ -1609,6 +2104,19 @@ dvoreckov_qee = class({})
 LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua.lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_silenced_lua", "modifier_generic_silenced_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_muted_lua", "modifier_generic_muted_lua.lua", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_qee:Precache(context)
+	PrecacheResource("soundfile", "soundevents/ebalo.vsndevts", context)
+	PrecacheResource("particle", "particles/econ/items/drow/drow_arcana/drow_arcana_silence_wave.vpcf", context)
+	PrecacheResource("particle", "particles/econ/items/drow/drow_arcana/drow_arcana_silence_impact_dust.vpcf", context)
+end
+
+function dvoreckov_qee:GetBehavior()
+    if self:GetCaster():HasTalent("special_bonus_unique_dvoreckov_7") then
+        return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_HIDDEN + DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE
+    end
+    return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_HIDDEN + DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE
+end
 
 function dvoreckov_qee:OnSpellStart()
 	local caster = self:GetCaster()
@@ -1835,11 +2343,11 @@ function dvoreckov_qee:OnProjectileHit_ExtraData( target, location, data )
 	local silence = 0
 	local damage = 0
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		silence = self:GetOrbSpecialValueFor( "silence_duration", "q" )
-		damage = self:GetOrbSpecialValueFor( "damage", "e" )
+		silence = ability_manager:GetValueQuas(self, self:GetCaster(), "silence_duration")
+		damage = ability_manager:GetValueExort(self, self:GetCaster(), "damage")
 	else
 		silence = 3.0
-		damage = 400
+		damage = 300
 	end
 	local duration = self:GetSpecialValueFor( "knockback_duration" )
 	local max_dist = self:GetSpecialValueFor( "knockback_distance_max" )
@@ -1890,6 +2398,12 @@ end
 
 dvoreckov_wee = dvoreckov_wee or class({})
 LinkLuaModifier( "modifier_dvoreckov_wee", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
+function dvoreckov_wee:Precache(context)
+	PrecacheResource("soundfile", "soundevents/pubg.vsndevts", context )
+	PrecacheResource("particle", "particles/units/heroes/hero_undying/undying_fg_aura.vpcf", context)
+end
+
 function dvoreckov_wee:OnSpellStart()
 	self:GetCaster():EmitSound("pubg")
 	self:GetCaster():StartGesture(ACT_DOTA_SPAWN)
@@ -1904,10 +2418,10 @@ end
 
 function modifier_dvoreckov_wee:OnCreated()
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.str_percentage = self:GetAbility():GetOrbSpecialValueFor( "str_percentage", "e")
-		self.duration       = self:GetAbility():GetOrbSpecialValueFor( "duration", "w" )
+		self.str_percentage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "str_percentage")
+		self.duration       = ability_manager:GetValueWex(self:GetAbility(), self:GetCaster(), "duration")
 	else
-		self.str_percentage = 60
+		self.str_percentage = 70
 		self.duration       = 15
 	end
 	if not IsServer() then return end
