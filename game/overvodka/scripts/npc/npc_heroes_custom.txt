@@ -1927,10 +1927,10 @@
 		"AttributeStrengthGain"			"2.2"
 		"AttributeBaseIntelligence"		"20"
 		"AttributeIntelligenceGain"		"3.0"
-		"AttributeBaseAgility"			"14"
-		"AttributeAgilityGain"			"1.4"
+		"AttributeBaseAgility"			"16"
+		"AttributeAgilityGain"			"1.8"
 		"StatusHealthRegen"		"0.5"
-		"MovementSpeed"		"275"
+		"MovementSpeed"		"280"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_rattletrap"
