@@ -632,9 +632,8 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetCanSellAnywhere( true )
 
 	local nTeamSize = GameRules:GetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS )
-	--print( '^^^Setting BANS PER TEAM to Team Size = ' .. nTeamSize )
 	GameRules:SetCustomGameBansPerTeam( 1 )
-	GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+	GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end

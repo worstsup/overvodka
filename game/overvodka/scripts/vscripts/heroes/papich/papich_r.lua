@@ -30,7 +30,7 @@ function papich_r:OnSpellStart()
         self.knight:RemoveModifierByName("modifier_papich_r")
     end
     if target then
-        local spawn_point = self:GetCaster():GetAbsOrigin() + RandomVector(250)
+        local spawn_point = self:GetCursorPosition()
         local knight = CreateUnitByName( target:GetUnitName(), spawn_point, true, self:GetCaster(), self:GetCaster(), self:GetCaster():GetTeamNumber()  )
         if knight then
             self.knight = knight
