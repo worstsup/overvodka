@@ -132,7 +132,7 @@ function modifier_rivendare_lua:OnIntervalThink()
 					duration = self.duration,
 				}
 			)
-			local Talented = self:GetParent():GetOwner():FindAbilityByName("special_bonus_unique_phoenix_dive_damage")
+			local Talented = self:GetParent():GetOwner():FindAbilityByName("special_bonus_unique_silvername_8")
 			if Talented:GetLevel() == 1 then
 				if self.k % 10 == 0 then
 					self.damage = enemy:GetMaxHealth() * 8 * 0.01
