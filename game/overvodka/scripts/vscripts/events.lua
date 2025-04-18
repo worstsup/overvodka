@@ -100,7 +100,7 @@ function COverthrowGameMode:OnNPCSpawned( event )
       	spawnedUnit.bFirstSpawned = true
         local ab = spawnedUnit:FindAbilityByName("sidet")
 		if ab then
-            	ab:SetLevel(1)
+            ab:SetLevel(1)
 		end
 		local ash = spawnedUnit:FindAbilityByName("imba_batrider_sticky_napalm_new")
 		if ash then
@@ -126,10 +126,6 @@ end
 function COverthrowGameMode:OnHeroFinishSpawn( event )
 	local hPlayerHero = EntIndexToHScript( event.heroindex )
 	if hPlayerHero ~= nil and hPlayerHero:IsRealHero() then
-		local hTP = hPlayerHero:FindItemInInventory( "item_tpscroll" )
-		if hTP ~= nil then
-			UTIL_Remove( hTP )
-		end
 	end
 end
 

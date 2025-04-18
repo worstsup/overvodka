@@ -3,6 +3,11 @@ LinkLuaModifier( "modifier_ebanko_e_smoke_buff", "heroes/ebanko/ebanko_e", LUA_M
 
 ebanko_e = class({})
 
+function ebanko_e:Precache(context)
+    PrecacheResource("particle", "particles/riki_smokebomb_ebanko.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/kakao.vsndevts", context )
+end
+
 function ebanko_e:GetCooldown(level)
     return self.BaseClass.GetCooldown( self, level )
 end

@@ -7,6 +7,13 @@ function ebanko_w:GetIntrinsicModifierName()
 	return "modifier_ebanko_w"
 end
 
+function ebanko_w:Precache( context )
+	PrecacheResource( "soundfile", "soundevents/fof.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/ya_tebya.vsndevts", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_tusk/tusk_walruspunch_start.vpcf", context )
+end
+
 function ebanko_w:OnSpellStart()
 	if not IsServer() then return end
 	local caster = self:GetCaster()
