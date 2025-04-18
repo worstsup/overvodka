@@ -1043,13 +1043,13 @@
 		"Ability17"		"special_bonus_unique_bounty_hunter_jinada_no_cooldown"
 		"Facets"
 		{
-			"bounty_hunter_shuriken"
+			"mellstroy_e"
 			{
 				"Icon"				"nuke"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
-			"bounty_hunter_mugging"
+			"mellstroy_gold"
 			{
 				"Icon"				"gold"
 				"Color"				"Yellow"
@@ -1062,6 +1062,14 @@
 						"AutoLevelAbility" "true"
 					}
 				}
+			}
+			"bounty_hunter_shuriken"
+			{
+				"Deprecated"	"true"
+			}
+			"bounty_hunter_mugging"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"3"
@@ -1944,10 +1952,10 @@
 		"AttributeStrengthGain"			"2.2"
 		"AttributeBaseIntelligence"		"20"
 		"AttributeIntelligenceGain"		"3.0"
-		"AttributeBaseAgility"			"14"
-		"AttributeAgilityGain"			"1.4"
+		"AttributeBaseAgility"			"16"
+		"AttributeAgilityGain"			"1.8"
 		"StatusHealthRegen"		"0.5"
-		"MovementSpeed"		"275"
+		"MovementSpeed"		"280"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
 	"npc_dota_hero_rattletrap"
