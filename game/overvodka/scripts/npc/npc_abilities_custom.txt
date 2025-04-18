@@ -6559,6 +6559,89 @@
 			}
 		}
 	}
+
+	//===================================================================================================================
+	//													MELLSTROY
+	//===================================================================================================================
+
+	"special_bonus_unique_mellstroy_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mellstroy_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mellstroy_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mellstroy_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mellstroy_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mellstroy_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// ЩАВЕЛЬ
+	//=================================================================================================================
+	"mellstroy_shavel"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/mellstroy/mellstroy_shavel"
+		"AbilityTextureName"			"shavel"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_CHANNELLED  | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AOERadius"						"%splash_radius"
+		"AbilityCastPoint"				"0.25"
+		"AbilityCastRange"				"400"
+		"AbilityCooldown"				"26 24 22 20"
+		"AbilityGoldCost"				"100 200 300 400"
+		"AbilityDamage" 				"100 150 200 250"
+		"AbilityValues"
+		{
+			"splash_radius"				"500"
+			"interval"					"0.4"
+			"ministun"					"0.3"
+			"cast_range"				"400"
+			"animation_rate"			"1.5"
+			"channel_time"	
+			{
+				"value"	"1"
+				"special_bonus_unique_bounty_hunter_9" "+0.3"
+			}
+			"gold_cost"				"100 200 300 400"
+		}
+	}
 	//=================================================================================================================
 	// SWEET BONANZA
 	//=================================================================================================================
@@ -6681,7 +6764,147 @@
 				"ms_pct" "-100"
 		}
     }
-    //=================================================================================================================
+	//=================================================================================================================
+	// ЧТО ЗА БИЗНЕС? (старая версия)
+	//=================================================================================================================
+	"mellstroy_business_new"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/mellstroy/mellstroy_business_new"
+		"AbilityTextureName"			"biznes"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"HasScepterUpgrade"				"1"
+		"IsBreakable"					"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinda_slow.vpcf"
+		}
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"175"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		"AbilityGoldCost"				"40 80 120 160"
+		"AbilityValues"
+		{
+				"AbilityCooldown"
+				{
+					"value"	"6 5 4 3"
+					"special_bonus_unique_bounty_hunter_jinada_no_cooldown" "=0"
+				}
+				"gold_cost"				"40 80 120 160"
+				"duration"			"2.0"
+				"bonus_movespeed"
+				{
+					"value"	"-15"
+					"special_bonus_unique_bounty_hunter_4" "-8"
+				}
+				"bonus_attackspeed"		"-15 -30 -45 -60"
+				"percent"
+				{
+					"value" "0 0 0 0"
+					"special_bonus_facet_bounty_hunter_shuriken" "+3"
+				}
+				"multiple"
+				{
+					"value"	"1"
+					"special_bonus_scepter"	"+0.5"
+				}
+		}
+	}
+	//=================================================================================================================
+	// ЧТО ЗА БИЗНЕС? (новая версия)
+	//=================================================================================================================
+	"mellstroy_business"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/mellstroy/mellstroy_business"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"biznes"
+		"HasScepterUpgrade"				"1"
+		"AbilityGoldCost"				"100 200 300 400"
+		"AbilityValues"
+		{
+			"AbilityCooldown"
+			{
+				"value"	"18"
+				"special_bonus_unique_bounty_hunter_jinada_no_cooldown" "-6"
+			}
+			"gold_cost" 		"100 200 300 400"
+			"shield"
+			{
+				"value"	"100 200 300 400"
+				"special_bonus_scepter" "x1.5"
+			}
+			"duration"			"10"
+			"shield_from_gold"
+			{
+				"value"	"0"
+				"special_bonus_facet_bounty_hunter_shuriken" "+10"
+				"RequiresFacet"	"1"
+			}
+			"bonus_movespeed"
+			{
+				"value"	"0"
+				"special_bonus_unique_bounty_hunter_4" "+10"
+			}
+		}
+	}
+	//=================================================================================================================
+	// КРУТИТЬ
+	//=================================================================================================================
+	"mellstroy_casino"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"casino"
+		"ScriptFile"					"heroes/mellstroy/casino"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityCastPoint"				"0.5"
+		"MaxLevel"						"4"
+		"DependentOnAbility"			"mellstroy_amam"
+		"Innate"						"1"
+		"AbilityCooldown"				"6"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+				"base_cost"
+				{
+					"value"	"50"
+					"special_bonus_unique_bounty_hunter_2" "+400"
+				}
+				"jackpot_chance"	"1 2 3 4"
+				"each_level"					"50"
+		}	
+	}
+	//=================================================================================================================
+	// ALL-IN
+	//=================================================================================================================
+	"mellstroy_casino_allin"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"casino_allin"
+		"ScriptFile"					"heroes/mellstroy/casino_allin"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityCastPoint"				"0.5"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"              "1"
+		"AbilityCooldown"				"45"
+		"AbilityValues"
+		{
+				"base_cost"					"50"
+				"each_level"				"50"
+		}
+	}
+	//=================================================================================================================
 	// АМ АМ АМ
 	//=================================================================================================================
     "mellstroy_amam"
@@ -6830,182 +7053,6 @@
 		        "duration"          "9 12 15"
 		        "bonus_gold" "90 180 270"
 		        "gold_cost"	"700 1550 2400"
-		}
-	}
-	//=================================================================================================================
-	// КРУТИТЬ
-	//=================================================================================================================
-	"mellstroy_casino"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"casino"
-		"ScriptFile"					"heroes/mellstroy/casino"
-		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilityCastPoint"				"0.5"
-		"MaxLevel"						"4"
-		"DependentOnAbility"			"mellstroy_amam"
-		"Innate"						"1"
-		"AbilityCooldown"				"6"
-		"HasScepterUpgrade"				"1"
-		"AbilityValues"
-		{
-				"base_cost"
-				{
-					"value"	"50"
-					"special_bonus_unique_bounty_hunter_2" "+400"
-				}
-				"jackpot_chance"	"1 2 3 4"
-				"each_level"					"50"
-		}	
-	}
-	//=================================================================================================================
-	// ЩАВЕЛЬ
-	//=================================================================================================================
-	"mellstroy_shavel"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/mellstroy/mellstroy_shavel"
-		"AbilityTextureName"			"shavel"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_CHANNELLED  | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AOERadius"						"%splash_radius"
-		"AbilityCastPoint"				"0.25"
-		"AbilityCastRange"				"400"
-		"AbilityCooldown"				"26 24 22 20"
-		"AbilityGoldCost"				"100 200 300 400"
-		"AbilityDamage" 				"100 150 200 250"
-		"AbilityValues"
-		{
-			"splash_radius"				"500"
-			"interval"					"0.4"
-			"ministun"					"0.3"
-			"cast_range"				"400"
-			"animation_rate"			"1.5"
-			"channel_time"	
-			{
-				"value"	"1"
-				"special_bonus_unique_bounty_hunter_9" "+0.3"
-			}
-			"gold_cost"				"100 200 300 400"
-		}
-	}
-	//=================================================================================================================
-	// ЧТО ЗА БИЗНЕС? (старая версия)
-	//=================================================================================================================
-	"mellstroy_business_new"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/mellstroy/mellstroy_business_new"
-		"AbilityTextureName"			"biznes"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"HasScepterUpgrade"				"1"
-		"IsBreakable"					"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinda_slow.vpcf"
-		}
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"175"
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
-		"AbilityGoldCost"				"40 80 120 160"
-		"AbilityValues"
-		{
-				"AbilityCooldown"
-				{
-					"value"	"6 5 4 3"
-					"special_bonus_unique_bounty_hunter_jinada_no_cooldown" "=0"
-				}
-				"gold_cost"				"40 80 120 160"
-				"duration"			"2.0"
-				"bonus_movespeed"
-				{
-					"value"	"-15"
-					"special_bonus_unique_bounty_hunter_4" "-8"
-				}
-				"bonus_attackspeed"		"-15 -30 -45 -60"
-				"percent"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_facet_bounty_hunter_shuriken" "+3"
-				}
-				"multiple"
-				{
-					"value"	"1"
-					"special_bonus_scepter"	"+0.5"
-				}
-		}
-	}
-	//=================================================================================================================
-	// ЧТО ЗА БИЗНЕС? (новая версия)
-	//=================================================================================================================
-	"mellstroy_business"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/mellstroy/mellstroy_business"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityTextureName"			"biznes"
-		"HasScepterUpgrade"				"1"
-		"AbilityGoldCost"				"100 200 300 400"
-		"AbilityValues"
-		{
-			"AbilityCooldown"
-			{
-				"value"	"18"
-				"special_bonus_unique_bounty_hunter_jinada_no_cooldown" "-6"
-			}
-			"gold_cost" 		"100 200 300 400"
-			"shield"
-			{
-				"value"	"100 200 300 400"
-				"special_bonus_scepter" "x1.5"
-			}
-			"duration"			"10"
-			"shield_from_gold"
-			{
-				"value"	"0"
-				"special_bonus_facet_bounty_hunter_shuriken" "+10"
-				"RequiresFacet"	"1"
-			}
-			"bonus_movespeed"
-			{
-				"value"	"0"
-				"special_bonus_unique_bounty_hunter_4" "+10"
-			}
-		}
-	}
-	//=================================================================================================================
-	// ALL-IN
-	//=================================================================================================================
-	"mellstroy_casino_allin"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"casino_allin"
-		"ScriptFile"					"heroes/mellstroy/casino_allin"
-		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityCastPoint"				"0.5"
-		"MaxLevel"						"1"
-		"IsGrantedByShard"              "1"
-		"AbilityCooldown"				"45"
-		"AbilityValues"
-		{
-				"base_cost"					"50"
-				"each_level"				"50"
 		}
 	}
 	//=================================================================================================================
