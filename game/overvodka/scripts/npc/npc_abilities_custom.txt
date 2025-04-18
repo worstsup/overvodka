@@ -5006,6 +5006,39 @@
 				"move_speed_tooltip"			"20"
 		}
 	}
+	//=================================================================================================================
+	// КОРОЛЬ МИДА
+	//=================================================================================================================
+	"slardar_seaborn_sentinel"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"4"
+		"Innate"						"1"
+		"DependentOnAbility"			"kirill_w"
+		"HasScepterUpgrade"				"0"
+		"IsBreakable"					"0"
+		"AbilityValues"
+		{			
+			"river_speed"					"5"
+			"puddle_regen"				
+			{
+				"value"						"1 2 3 4 5"
+				"special_bonus_scepter"		"+0"
+			}
+			"puddle_armor"				
+			{
+				"value"						"0 1 2 3 4"
+				"special_bonus_scepter"		"+0"
+			}
+			"puddle_status_resistance"			
+			{
+				"value"						"0"
+				"special_bonus_scepter"		"+0"
+			}
+            "river_speed_tooltip"			"5"
+			"river_damage"					"3 6 9 12 15"
+		}
+	}
 
 	//===================================================================================================================
 	//													WORSTSUP
@@ -5215,22 +5248,58 @@
 			}
 		}
 	}
-	//=================================================================================================================
-	// Spectre: Reality (Lua version)
-	//=================================================================================================================
-	"spectre_reality_lua"
+
+	//===================================================================================================================
+	//													MACAN
+	//===================================================================================================================
+
+	"special_bonus_unique_macan_1"
 	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"spectre_haunt_lua.lua"
-		"AbilityTextureName"			"stri"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		"IsGrantedByScepter"            "1"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"1"
-		"AbilityManaCost"				"0"
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_macan_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
 	// РАЗЪЕБАТЬ ЧАРТЫ
@@ -5254,12 +5323,12 @@
 				"attack_damage"
 				{
 					"value"	"20 40 60 80"
-					"special_bonus_unique_muerta_dead_shot_range" "+20"
+					"special_bonus_unique_macan_4" "+20"
 				}
 				"attack_interval"
 				{
 					"value"	"0.3"
-					"special_bonus_unique_huskar_5" "-0.1"
+					"special_bonus_unique_macan_7" "-0.1"
 				}
 				"attack_radius"			"450"
 				"attack_targets"			"2"
@@ -5268,7 +5337,7 @@
 				"roaming_duration"
 				{
 					"value"	"6.0"
-					"special_bonus_unique_huskar_4" "+2"
+					"special_bonus_unique_macan_6" "+2"
 				}
 				"bol"
 				{
@@ -5310,19 +5379,19 @@
 				"stun_duration"
 				{
 					"value"	"1.0 1.2 1.4 1.6"
-					"special_bonus_unique_axe_4" "+0.5"
+					"special_bonus_unique_macan_3" "+0.5"
 				}
 				"impact_damage"
 				{	
 					"value"	"80 160 240 320"
-					"special_bonus_unique_huskar_6" "+80"
+					"special_bonus_unique_macan_1" "+80"
 				}
 				"castrange"		"480 525 570 615"
 				"stack_steal"
 				{
 					"value"	"0"
-					"RequiresFacet" "axe_one_man_army"
-					"special_bonus_facet_axe_one_man_army" "+2 +4 +6 +8"
+					"RequiresFacet" "macan_w"
+					"special_bonus_facet_macan_w" "+2 +4 +6 +8"
 				}
 		}
 	}
@@ -5352,7 +5421,7 @@
 				"AbilityCastRange"
 				{
 					"value"	"450 500 550 600"
-					"special_bonus_unique_muerta_calling_hp_regen" "+50"
+					"special_bonus_unique_macan_2" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
 				"duration"
@@ -5362,13 +5431,13 @@
 				"radius"
 				{
 					"value"	"450 500 550 600"
-					"special_bonus_unique_muerta_calling_hp_regen" "+50"
+					"special_bonus_unique_macan_2" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
 				"interval"
 				{
 					"value"	"1.0"
-					"special_bonus_unique_huskar_7" "-0.4"
+					"special_bonus_unique_macan_5" "-0.4"
 				}
 		}
 	}
@@ -5434,7 +5503,7 @@
 			"knockback_radius"
 			{
 				"value"	"250"
-				"special_bonus_unique_axe" "+125"
+				"special_bonus_unique_macan_8" "+125"
 			}
 			"max_distance"				"8000 8500 9000"
 			"knockback_distance"
@@ -5500,6 +5569,19 @@
 				"crit_bonus"				"140"
 		}
 	}
+	"axe_one_man_army"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"armor_pct_as_strength"			"0"
+			"radius"					"10000"
+			"bonus_linger_duration"		"0"
+		}
+	}
 	"riki_innate_backstab"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -5528,36 +5610,6 @@
 				"special_bonus_facet_riki_contract_killer"	"0"
 			}
 		}			
-	}
-	"slardar_seaborn_sentinel"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"MaxLevel"						"4"
-		"Innate"						"1"
-		"DependentOnAbility"			"kirill_w"
-		"HasScepterUpgrade"				"0"
-		"IsBreakable"					"0"
-		"AbilityValues"
-		{			
-			"river_speed"					"5"
-			"puddle_regen"				
-			{
-				"value"						"1 2 3 4 5"
-				"special_bonus_scepter"		"+0"
-			}
-			"puddle_armor"				
-			{
-				"value"						"0 1 2 3 4"
-				"special_bonus_scepter"		"+0"
-			}
-			"puddle_status_resistance"			
-			{
-				"value"						"0"
-				"special_bonus_scepter"		"+0"
-			}
-            "river_speed_tooltip"			"5"
-			"river_damage"					"3 6 9 12 15"
-		}
 	}
 	//=================================================================================================================
 	// ПАТРИОТИЗМ
@@ -5861,57 +5913,239 @@
 				"bonus_intellect"				"0"
 		}
 	}
-	//=================================================================================================================
-	// ПРОГРЕВ ПОЛЕЙ СРАЖЕНИЙ
-	//=================================================================================================================
-	"silvername_r"
+
+	//===================================================================================================================
+	//													SILVERNAME
+	//===================================================================================================================
+
+	"special_bonus_unique_silvername_2"
 	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/silvername/silvername_r"
-		"AbilityTextureName"			"tetris"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"3"
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"750"
-		"AbilityCastPoint"				"1.0"
-		"AbilityCooldown"				"85.0"
-		"AbilityManaCost"				"200 400 600"
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_silvername_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// МУРЛОКИ
+	//=================================================================================================================
+	"silvername_murloc"
+	{
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"			"murloc"
+		"AbilityManaCost"				"35 40 45 50"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
 		{
-				"radius"
+				"AbilityCooldown"
 				{
-					"value"	"600"
-					"affected_by_aoe_increase"	"1"
+					"value"	"10 8 6 4"
+					"special_bonus_unique_silvername_5" "-2"
 				}
-				"wave_duration"				"11.0"
-				"wave_count"				"28 35 42"
-				"wave_damage"
+				"schoolboys_number"			"1 0 0 0"
+				"schoolboys_number2"			"0 1 0 0"
+				"schoolboys_number3"			"0 0 1 0"
+				"schoolboys_number4"
 				{
-					"value"	"30 50 70"
-					"special_bonus_unique_phoenix_2" "+30"
+					"value" "0 0 0 1"
+					"special_bonus_unique_silvername_2" "-1"
 				}
-				"wave_interval"				"0.3"
-				"stun_duration"				"0.15"
+				"schoolboys_number5"
+				{
+					"value" "0 0 0 0"
+					"special_bonus_unique_silvername_2" "+1"
+				}
+				"schoolboys_duration"
+				{
+					"value"	"20"
+					"special_bonus_unique_silvername_3" "+10"
+				}
+				"schoolboys_hp"
+				{
+					"value"	"100 200 300 400"
+					"special_bonus_unique_silvername_2" "+150"
+
+				}
+				"schoolboys_dmg"
+				{
+					"value"	"10 20 30 40"
+				}
+				"phase"
+				{
+					"value"   "0.03"
+					"special_bonus_facet_silvername_q"	"35"
+				}
+		}
+		"OnAbilityPhaseStart"
+    		{
+        		"FireSound"
+        		{
+            		"Target"            "CASTER"
+            		"EffectName"        "murloc"
+
+        		}
+    		}
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_murloc_1"
+				"Target" 		"CASTER"
+				"Duration"		"%schoolboys_duration"
+				"UnitCount"		"%schoolboys_number"
+				"UnitLimit"		"100"
+				"GrantsGold"	"25"
+				"GrantsXP"		"0"
+				"SpawnRadius"	"200"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%phase"
+					}
+				}
+			}
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_murloc_2"
+				"Target" 		"CASTER"
+				"Duration"		"%schoolboys_duration"
+				"UnitCount"		"%schoolboys_number2"
+				"UnitLimit"		"100"
+				"GrantsGold"	"25"
+				"GrantsXP"		"0"
+				"SpawnRadius"	"200"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%phase"
+					}
+				}
+			}
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_murloc_3"
+				"Target" 		"CASTER"
+				"Duration"		"%schoolboys_duration"
+				"UnitCount"		"%schoolboys_number3"
+				"UnitLimit"		"100"
+				"GrantsGold"	"25"
+				"GrantsXP"		"0"
+				"SpawnRadius"	"200"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%phase"
+					}
+				}
+			}
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_murloc_4"
+				"Target" 		"CASTER"
+				"Duration"		"%schoolboys_duration"
+				"UnitCount"		"%schoolboys_number4"
+				"UnitLimit"		"100"
+				"GrantsGold"	"25"
+				"GrantsXP"		"0"
+				"SpawnRadius"	"200"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%phase"
+					}
+				}
+			}
+			"SpawnUnit"
+			{
+				"UnitName"		"npc_murloc_5"
+				"Target" 		"CASTER"
+				"Duration"		"%schoolboys_duration"
+				"UnitCount"		"%schoolboys_number5"
+				"UnitLimit"		"100"
+				"GrantsGold"	"25"
+				"GrantsXP"		"0"
+				"SpawnRadius"	"200"
+				"OnSpawn"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_phased"
+						"Target"		"TARGET"
+						"Duration"		"%phase"
+					}
+				}
+			}
 		}
 	}
-	"phoenix_dying_light"
+	//=================================================================================================================
+	// ПОЛКОВОДЕЦ (ПАССИВКА МУРЛОКА)
+	//=================================================================================================================
+	"hill_troll_rally"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
+		"MaxLevel"				"1"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"		
 		"IsBreakable"					"1"
+		"AbilityTextureName"			"polk"
 		"AbilityValues"
 		{
-			"radius"					
+			"radius"
 			{
-				"value"			"0"
-				"affected_by_aoe_increase"	"0"
+				"value" "1200"
+				"affected_by_aoe_increase"	"1"
 			}
-			"damage_pct"				"0"
+			"damage_bonus"
+			{
+				"value" "10"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -5929,18 +6163,30 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
 		{
-				"schoolboys_number"			"1 0 0 0"
-				"schoolboys_number2"			"0 1 0 0"
-				"schoolboys_number3"			"0 0 1 0"
+				"schoolboys_number"
+				{
+					"value" "1 0 0 0"
+					"special_bonus_unique_silvername_4" "-1"
+				}
+				"schoolboys_number2"
+				{
+					"value" "0 1 0 0"
+					"special_bonus_unique_silvername_4" "-1"
+				}
+				"schoolboys_number3"
+				{
+					"value" "0 0 1 0"
+					"special_bonus_unique_silvername_4" "-1"
+				}
 				"schoolboys_number4"
 				{
 					"value" "0 0 0 1"
-					"special_bonus_unique_phoenix_4" "-1"
+					"special_bonus_unique_silvername_4" "-1"
 				}
 				"schoolboys_number5"
 				{
 					"value" "0 0 0 0"
-					"special_bonus_unique_phoenix_4" "+1"
+					"special_bonus_unique_silvername_4" "+1"
 				}
 				"schoolboys_duration"
 				{
@@ -5949,7 +6195,7 @@
 				"schoolboys_hp"
 				{
 					"value"	"3 3 4 5"
-					"special_bonus_unique_phoenix_4" "+2"
+					"special_bonus_unique_silvername_4" "+2"
 				}
 				"schoolboys_dmg"
 				{
@@ -6125,20 +6371,16 @@
 		"AbilityValues"
 		{
 				"hp_threshold"				"20"
-				"AbilityCooldown"
-				{
-					"value"	"60.0"
-					"special_bonus_unique_phoenix_dive_damage" "-10"
-				}
+				"AbilityCooldown"			"60.0"
 				"duration"
 				{
 					"value"	"1.5 2.0 2.5 3.0"
-					"special_bonus_unique_phoenix_1" "+2"
+					"special_bonus_unique_silvername_7" "+2"
 				}
 				"strong"
 				{
 					"value"	"0"
-					"special_bonus_facet_phoenix_facet_immolate" "+1"
+					"special_bonus_facet_silvername_e" "+1"
 				}
 		}
 
@@ -6209,191 +6451,25 @@
 			}
 		}
 	}
-	"hill_troll_rally"
+	"phoenix_dying_light"
 	{
-		"MaxLevel"				"1"
-		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"1"
 		"IsBreakable"					"1"
-		"AbilityTextureName"			"polk"
 		"AbilityValues"
 		{
-			"radius"
+			"radius"					
 			{
-				"value" "1200"
-				"affected_by_aoe_increase"	"1"
+				"value"			"0"
+				"affected_by_aoe_increase"	"0"
 			}
-			"damage_bonus"
-			{
-				"value" "10"
-			}
+			"damage_pct"				"0"
 		}
 	}
 	//=================================================================================================================
-	// МУРЛОКИ
+	// ДРУГ ПТИЦ
 	//=================================================================================================================
-	"silvername_murloc"
-	{
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"murloc"
-		"AbilityManaCost"				"35 40 45 50"
-		"AbilityCastPoint"				"0.4"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
-		"AbilityValues"
-		{
-				"AbilityCooldown"
-				{
-					"value"	"10 8 6 4"
-					"special_bonus_unique_phoenix_5" "-2"
-				}
-				"schoolboys_number"			"1 0 0 0"
-				"schoolboys_number2"			"0 1 0 0"
-				"schoolboys_number3"			"0 0 1 0"
-				"schoolboys_number4"
-				{
-					"value" "0 0 0 1"
-					"special_bonus_unique_phoenix_6" "-1"
-				}
-				"schoolboys_number5"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_unique_phoenix_6" "+1"
-				}
-				"schoolboys_duration"
-				{
-					"value"	"20"
-					"special_bonus_unique_phoenix_3" "+10"
-				}
-				"schoolboys_hp"
-				{
-					"value"	"100 200 300 400"
-					"special_bonus_unique_phoenix_6" "+150"
-
-				}
-				"schoolboys_dmg"
-				{
-					"value"	"10 20 30 40"
-				}
-				"phase"
-				{
-					"value"   "0.03"
-					"special_bonus_facet_phoenix_hotspot"	"35"
-				}
-		}
-		"OnAbilityPhaseStart"
-    		{
-        		"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "murloc"
-
-        		}
-    		}
-		"OnSpellStart"
-		{
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_5"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number5"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-		}
-	}
 	"silvername_shard"
 	{
 		"BaseClass"						"ability_lua"
@@ -6415,7 +6491,44 @@
 		
 	}
 	//=================================================================================================================
-	// Beastmaster: Inner Beast
+	// ПРОГРЕВ ПОЛЕЙ СРАЖЕНИЙ
+	//=================================================================================================================
+	"silvername_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_r"
+		"AbilityTextureName"			"tetris"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"3"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"750"
+		"AbilityCastPoint"				"1.0"
+		"AbilityCooldown"				"85.0"
+		"AbilityManaCost"				"200 400 600"
+		"AbilityValues"
+		{
+				"radius"
+				{
+					"value"	"600"
+					"affected_by_aoe_increase"	"1"
+				}
+				"wave_duration"				"11.0"
+				"wave_count"				"28 35 42"
+				"wave_damage"
+				{
+					"value"	"30 50 70"
+					"special_bonus_unique_silvername_6" "+30"
+				}
+				"wave_interval"				"0.3"
+				"stun_duration"				"0.15"
+		}
+	}
+	//=================================================================================================================
+	// СВИНОБРАЗИЯ
 	//=================================================================================================================
 	"beastmaster_inner_beast"
 	{
@@ -6444,19 +6557,6 @@
 			{
 				"value"									"2 3 4 5"				
 			}
-		}
-	}
-	"axe_one_man_army"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
-		"IsBreakable"					"1"
-		"AbilityValues"
-		{
-			"armor_pct_as_strength"			"0"
-			"radius"					"10000"
-			"bonus_linger_duration"		"0"
 		}
 	}
 	//=================================================================================================================
