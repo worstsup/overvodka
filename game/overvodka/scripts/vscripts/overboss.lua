@@ -7,7 +7,7 @@ function ThrowCoin( args )
 	if coinAttach ~= -1 then
 		coinSpawn = args.caster:GetAttachmentOrigin( coinAttach )
 	end
-	if k == 8 or k == 16 or k == 30 or k == 40 or k == 64 or k == 74 or k == 92 or k == 100 then
+	if k == 6 or k == 16 or k == 32 or k == 44 or k == 64 or k == 74 or k == 94 or k == 102 then
 		SpawnBombardiro()
 	end
 	if k == 23 then

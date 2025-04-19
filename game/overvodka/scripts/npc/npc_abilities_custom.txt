@@ -4902,10 +4902,11 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
-			"soundfile" "soundevents/blya.vsndevts"
+			"soundfile" "soundevents/sahur_e_start.vsndevts"
+			"soundfile"	"soundevents/sahur_e.vsndevts"
 			"particle"	"particles/units/heroes/hero_earthshaker/earthshaker_fissure.vpcf"
 			"particle"	"particles/rubick_fissure.vpcf"
-			"particle"  "particles/econ/items/earthshaker/deep_magma/deep_magma_cyan/deep_magma_cyan_fissure.vpcf"
+			"particle"  "particles/econ/items/earthshaker/deep_magma/deep_magma_default/deep_magma_default_fissure.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -4965,6 +4966,7 @@
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts"
 			"soundfile" "soundevents/komp.vsndevts"
+			"soundfile"	"soundevents/sahur_r.vsndevts"
 			"particle"  "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
 			"particle"	"particles/kirill_r_black.vpcf"
 		}

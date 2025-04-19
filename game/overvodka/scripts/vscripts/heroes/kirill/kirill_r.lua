@@ -19,6 +19,7 @@ function kirill_r:OnSpellStart()
 	)
 	local sound_cast_2 = "komp"
 	EmitSoundOn( sound_cast_2, caster )
+	EmitSoundOnLocationWithCaster(point, "sahur_r", caster)
 end
 
 modifier_kirill_r = class({})
@@ -58,8 +59,6 @@ function modifier_kirill_r:OnCreated( kv )
 	}
 	self:StartIntervalThink( interval )
 	self:PlayEffects1( duration )
-	self.sound_loop = "Hero_Disruptor.StaticStorm"
-	EmitSoundOn( self.sound_loop, self:GetParent() )
 end
 
 function modifier_kirill_r:OnRefresh( kv )
@@ -71,9 +70,6 @@ end
 function modifier_kirill_r:OnDestroy()
 	if not IsServer() then return end
 	if self.owner then
-		StopSoundOn( self.sound_loop, self:GetParent() )
-		local sound_stop = "Hero_Disruptor.StaticStorm.End"
-		EmitSoundOn( sound_stop, self:GetParent() )
 
 		UTIL_Remove( self:GetParent() )
 	end

@@ -2,6 +2,12 @@ kirill_e = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_kirill_e_thinker", "heroes/kirill/kirill_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_kirill_e_jump", "heroes/kirill/kirill_e", LUA_MODIFIER_MOTION_BOTH )
+
+function kirill_e:OnAbilityPhaseStart()
+	EmitSoundOn("sahur_e_start", self:GetCaster())
+	return true
+end
+
 function kirill_e:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
@@ -86,9 +92,8 @@ function kirill_e:OnSpellStart()
 end
 
 function kirill_e:PlayEffects( start_pos, end_pos, duration )
-	local particle_cast = "particles/econ/items/earthshaker/deep_magma/deep_magma_cyan/deep_magma_cyan_fissure.vpcf"
-	local sound_cast = "Hero_EarthShaker.Fissure"
-	local sound_cast_2 = "blya"
+	local particle_cast = "particles/econ/items/earthshaker/deep_magma/deep_magma_default/deep_magma_default_fissure.vpcf"
+	local sound_cast = "sahur_e"
 	local caster = self:GetCaster()
 	local effect_cast = assert(loadfile("rubick_spell_steal_lua/rubick_spell_steal_lua_arcana"))(self, particle_cast, PATTACH_WORLDORIGIN, caster )
 	ParticleManager:SetParticleControl( effect_cast, 0, start_pos )
@@ -97,8 +102,6 @@ function kirill_e:PlayEffects( start_pos, end_pos, duration )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOnLocationWithCaster( start_pos, sound_cast, caster )
 	EmitSoundOnLocationWithCaster( end_pos, sound_cast, caster )
-	EmitSoundOnLocationWithCaster( start_pos, sound_cast_2, caster )
-	EmitSoundOnLocationWithCaster( end_pos, sound_cast_2, caster )
 end
 
 modifier_kirill_e_jump = class({})
