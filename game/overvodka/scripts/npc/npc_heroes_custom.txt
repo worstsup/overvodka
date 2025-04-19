@@ -634,6 +634,7 @@
 		"Enabled"		"1"
 		"ModelScale"		"0.930000"
 		"VersusScale"		"0.93"
+		"SimilarHeroes"  "70,8,1"
 		"HeroSelectSoundEffect"		"kirill_start"
 		"GibType"		"default"
 		"Ability1"		"kirill_q"
