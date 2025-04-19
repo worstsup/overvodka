@@ -1,6 +1,7 @@
 arsen_testosteron = class({})
 LinkLuaModifier( "modifier_arsen_testosteron", "heroes/arsen/modifier_arsen_testosteron", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_arsen_testosteron_debuff", "heroes/arsen/modifier_arsen_testosteron_debuff", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_arsen_testosteron_str", "heroes/arsen/arsen_testosteron", LUA_MODIFIER_MOTION_NONE )
 
 function arsen_testosteron:Precache( context )
 	PrecacheResource( "particle", "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf", context )
@@ -33,6 +34,17 @@ function arsen_testosteron:OnSpellStart()
 		0,
 		false
 	)
+	local hero_enemies = FindUnitsInRadius(
+		caster:GetTeamNumber(),
+		point,
+		nil,
+		radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		0,
+		false
+	)
 	for _,enemy in pairs(enemies) do
 		enemy:AddNewModifier(
 			caster,
@@ -50,6 +62,15 @@ function arsen_testosteron:OnSpellStart()
 	if #enemies>0 then
 		local sound_cast = "Hero_Axe.Berserkers_Call"
 		EmitSoundOn( sound_cast, self:GetCaster() )
+		if self:GetSpecialValueFor("str_per_hero") > 0 then
+			local str_gain = self:GetSpecialValueFor("str_per_hero") * #hero_enemies
+			caster:AddNewModifier(
+				caster,
+				self,
+				"modifier_arsen_testosteron_str",
+				{ duration = buff_duration, str_gain = str_gain }
+			)
+		end
 	end
 	self:PlayEffects(radius)
 end
@@ -59,4 +80,20 @@ function arsen_testosteron:PlayEffects(radius)
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( radius, radius, radius ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
+end
+
+modifier_arsen_testosteron_str = class({})
+function modifier_arsen_testosteron_str:IsHidden() return true end
+function modifier_arsen_testosteron_str:IsPurgable() return false end
+
+function modifier_arsen_testosteron_str:OnCreated(kv)
+	if not IsServer() then return end
+	self.str_gain = kv.str_gain or 0
+end
+
+function modifier_arsen_testosteron_str:DeclareFunctions()
+	return { MODIFIER_PROPERTY_STATS_STRENGTH_BONUS }
+end
+function modifier_arsen_testosteron_str:GetModifierBonusStats_Strength()
+	return self.str_gain
 end

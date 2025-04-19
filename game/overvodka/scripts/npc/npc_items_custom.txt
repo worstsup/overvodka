@@ -3212,7 +3212,7 @@
 		"ScriptFile" 					"items/rocket_launcher"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl"	
-		"AbilityTextureName"			"bablokrad"
+		"AbilityTextureName"			"rocket_launcher"
 		"AbilityCooldown"				"60"
 		"ItemPurchasable"				"0"
 		"ItemCost"						"0"

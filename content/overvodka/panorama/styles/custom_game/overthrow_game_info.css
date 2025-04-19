@@ -76,7 +76,18 @@ Label
     max-width: 800px;
     margin-right: 92px;
 }
-
+#BombardiroHeader
+{
+    margin-top: 30px;
+    color: #00ff40;
+}
+#BombardiroDescription
+{
+    color: #62ff5d;
+    font-size: 25px;
+    max-width: 800px;
+    margin-right: 92px;
+}
 #ObjectiveHeader
 {
 	margin-top: 30px;

@@ -753,9 +753,9 @@
 			"soundfile"		"soundevents/ebanul_moroz.vsndevts"
 			"soundfile"		"soundevents/zima_holoda.vsndevts"
 			"particle"		"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
+			"particle"		"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
 		}
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
-		"AbilityModifierSupportValue"	"0.5"
 		"AbilityValues"
 		{
 				"duration"
@@ -773,6 +773,24 @@
 				{
 					"value"	"600"
 					"affected_by_aoe_increase"	"1"
+				}
+				"slow_dur"
+				{
+					"value"	"0"
+					"special_bonus_facet_ebanko_q" "+2"
+					"RequiresFacet"	"ebanko_q"
+				}
+				"as_slow"
+				{
+					"value"	"0 0 0 0"
+					"special_bonus_facet_ebanko_q" "-20 -40 -60 -80"
+					"RequiresFacet"	"ebanko_q"
+				}
+				"ms_slow"
+				{
+					"value"	"0 0 0 0"
+					"special_bonus_facet_ebanko_q" "-20"
+					"RequiresFacet"	"ebanko_q"
 				}
 		}
 		"OnSpellStart"
@@ -812,16 +830,38 @@
 						"Damage"		"%damage"
 					}
 				}
-					"ThinkInterval"  "1"
-					"OnIntervalThink"
+				"ThinkInterval"  "1"
+				"OnIntervalThink"
+				{
+					"Damage"
 					{
-						"Damage"
-						{
-							"Target"		"TARGET"
-							"Type"			"DAMAGE_TYPE_MAGICAL"
-							"Damage"		"%damage"
-						}
-					}			
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+				"OnDestroy"
+				{
+					"ApplyModifier"
+					{
+						"Target"        "TARGET"
+						"ModifierName"  "modifier_ebanko_q_slow"
+						"Duration"		"%slow_dur"
+					}
+				}			
+			}
+			"modifier_ebanko_q_slow"
+			{
+				"Duration"	"%duration"
+				"IsDebuff"	"1"
+				"IsPurgable"	"1"
+				"EffectName"	"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
+				"EffectAttachType"	"attach_origin"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as_slow"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%ms_slow"
+				}
 			}
 		}
 	}
@@ -4804,7 +4844,7 @@
 		"ScriptFile"					"heroes/kirill/kirill_q"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"		
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"HasScepterUpgrade"				"1"
@@ -4888,6 +4928,14 @@
 					"special_bonus_shard" "+200"
 				}
 		}
+	}
+	"sahur_hit"
+	{
+		"BaseClass"	"ability_lua"
+		"ScriptFile" "heroes/kirill/sahur_hit"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"
 	}
 	//=================================================================================================================
 	// РЕДАКТОР
@@ -8576,6 +8624,11 @@
 					"value"	"4"
 					"special_bonus_unique_earthshaker_6" "+2"
 				}
+				"str_per_hero"
+				{
+					"value"	"0"
+					"special_bonus_facet_arsen_facet_testosteron" "+3 +6 +9 +12"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -8616,7 +8669,7 @@
 				"break_duration"
 				{
 					"value"	"0"
-					"special_bonus_facet_earthshaker_slugger"		"+4"
+					"special_bonus_facet_arsen_facet_baza"		"+4"
 				}
 				"ministun_duration"
 				{
@@ -8668,60 +8721,6 @@
 			"damage_per_armor"			"0.25"
 		}
 	}
-	"earthshaker_slugger"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"4"
-		"DependentOnAbility"			"heroes/arsen/arsen_baza"
-		"IsBreakable"					"1"
-		"AbilityValues"
-		{
-			"projectile_body_on_kill"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_initial_impact_radius"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_speed"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_distance"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_width_creep"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-				"affected_by_aoe_increase"	"0"
-			}
-			"projectile_body_width_hero"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-				"affected_by_aoe_increase"	"0"
-			}
-			"projectile_body_vision"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-				"affected_by_aoe_increase"	"0"
-			}
-			"projectile_body_damage_creep"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_damage_hero"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-			"projectile_body_damage_additional_percent_health"
-			{
-				"special_bonus_facet_earthshaker_slugger"		"=0"
-			}
-		}
-	}
 	//=================================================================================================================
 	// ПРИВАТНЫЙ ТГ-КАНАЛ
 	//=================================================================================================================
@@ -8769,14 +8768,14 @@
 				"golt"
 				{
 					"value"	"0"
-					"special_bonus_facet_earthshaker_tectonic_buildup" "+1"
-					"RequiresFacet"	"earthshaker_tectonic_buildup"
+					"special_bonus_facet_arsen_facet_tgk" "+1"
+					"RequiresFacet"	"arsen_facet_tgk"
 				}
 				"gold_tooltip"
 				{
 					"value"	"0"
-					"special_bonus_facet_earthshaker_tectonic_buildup" "+80"
-					"RequiresFacet"	"earthshaker_tectonic_buildup"
+					"special_bonus_facet_arsen_facet_tgk" "+80"
+					"RequiresFacet"	"arsen_facet_tgk"
 				}
 				"immunity"
 				{

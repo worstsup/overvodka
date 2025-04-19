@@ -124,16 +124,22 @@
 		"Ability17"		"special_bonus_unique_ebanko_8"
 		"Facets"
 		{
+			"ebanko_q"
+			{
+				"Icon"				"snowflake"
+				"Color"				"Blue"
+				"GradientID"		"2"
+			}
 			"ebanko_w"
 			{
-				"Icon"				"cooldown"
-				"Color"				"Blue"
+				"Icon"				"damage"
+				"Color"				"Red"
 				"GradientID"		"2"
 			}
 			"ebanko_e"
 			{
-				"Icon"				"armor"
-				"Color"				"Yellow"
+				"Icon"				"unique"
+				"Color"				"Green"
 				"GradientID"		"2"
 			}
 			"kunkka_high_tide"	
@@ -641,7 +647,7 @@
 		"Ability2"		"kirill_w"
 		"Ability3"		"kirill_e"
 		"Ability4"		"slardar_seaborn_sentinel"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"sahur_hit"
 		"Ability6"		"kirill_r"
 		"Ability7"		""
 		"Ability8"		""
@@ -1340,24 +1346,31 @@
 		"Ability17"		"special_bonus_unique_earthshaker"
 		"Facets"
 		{
+			"arsen_facet_testosteron"
+			{
+				"Icon"	"fist"
+				"Color" "Red"
+				"GradientID"	"1"
+			}
+			"arsen_facet_tgk"
+			{
+				"Icon"				"gold"
+				"Color"				"Yellow"
+				"GradientID"		"1"
+			}
+			"arsen_facet_baza"
+			{
+				"Icon"				"debuff"
+				"Color"				"green"
+				"GradientID"		"1"
+			}
 			"earthshaker_tectonic_buildup" 
 			{
-				"Icon"				"area_of_effect"
-				"Color"				"Red"
-				"GradientID"		"1"
+				"Deprecated"	"true"
 			}
 			"earthshaker_slugger" 
 			{
-				"Icon"				"movement"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"earthshaker_slugger"
-					}
-				}
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"1"

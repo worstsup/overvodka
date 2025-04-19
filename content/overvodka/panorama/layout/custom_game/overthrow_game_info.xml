@@ -13,6 +13,8 @@
 		<Label id="HamsterDescription" text="#overvodka_hamster_description" />
 		<Label id="GoldRainHeader" class="Header" html="true" text="#overvodka_gold_rain_header" />
 		<Label id="GoldRainDescription" text="#overvodka_gold_rain" />
+		<Label id="BombardiroHeader" class="Header" html="true" text="#overvodka_bombardiro_header" />
+		<Label id="BombardiroDescription" text="#overvodka_bombardiro" />
 	</Panel>
 </root>
 
