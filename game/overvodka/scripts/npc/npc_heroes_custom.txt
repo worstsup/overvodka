@@ -634,6 +634,7 @@
 		"DisableWearables"	"1"
 		"ModelScale"		"1.5"
 		"LoadoutScale"		"1.2"
+		"SimilarHeroes"		"70,8,1"
 		"HeroSelectSoundEffect"		"sahur_start"
 		"GibType"		"default"
 		"Ability1"		"kirill_q"
