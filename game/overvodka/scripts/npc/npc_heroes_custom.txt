@@ -1033,14 +1033,14 @@
 		"Ability4"		"mellstroy_casino"
 		"Ability5"		"mellstroy_casino_allin"
 		"Ability6"		"mellstroy_amam"
-		"Ability10"		"special_bonus_unique_bounty_hunter"
-		"Ability11"		"special_bonus_unique_bounty_hunter_4"
-		"Ability12"		"special_bonus_unique_bounty_hunter_9"
-		"Ability13"		"special_bonus_unique_bounty_hunter_3"
-		"Ability14"		"special_bonus_unique_bounty_hunter_8"
+		"Ability10"		"special_bonus_unique_mellstroy_1"
+		"Ability11"		"special_bonus_unique_mellstroy_2"
+		"Ability12"		"special_bonus_unique_mellstroy_3"
+		"Ability13"		"special_bonus_unique_mellstroy_4"
+		"Ability14"		"special_bonus_unique_mellstroy_5"
 		"Ability15"		"special_bonus_gold_income_300"
-		"Ability16"		"special_bonus_unique_bounty_hunter_2"
-		"Ability17"		"special_bonus_unique_bounty_hunter_jinada_no_cooldown"
+		"Ability16"		"special_bonus_unique_mellstroy_7"
+		"Ability17"		"special_bonus_unique_mellstroy_8"
 		"Facets"
 		{
 			"mellstroy_e"
@@ -1113,23 +1113,23 @@
 		"Ability4"		"litvin_litenergy"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"litvin_zhishi"
-		"Ability10"		"special_bonus_unique_ancient_apparition_5"
-		"Ability11"		"special_bonus_unique_ancient_apparition_1"
-		"Ability12"		"special_bonus_unique_ancient_apparition_2"
-		"Ability13"		"special_bonus_unique_ancient_apparition_6"
-		"Ability14"		"special_bonus_unique_ancient_apparition_3"
-		"Ability15"		"special_bonus_unique_ancient_apparition_8"
-		"Ability16"		"special_bonus_unique_ancient_apparition_ice_vortex_duration"
-		"Ability17"		"special_bonus_unique_ancient_apparition_7"
+		"Ability10"		"special_bonus_unique_litvin_1"
+		"Ability11"		"special_bonus_unique_litvin_2"
+		"Ability12"		"special_bonus_unique_litvin_3"
+		"Ability13"		"special_bonus_unique_litvin_4"
+		"Ability14"		"special_bonus_unique_litvin_5"
+		"Ability15"		"special_bonus_unique_litvin_6"
+		"Ability16"		"special_bonus_unique_litvin_7"
+		"Ability17"		"special_bonus_unique_litvin_8"
 		"Facets"
 		{
-			"ursa_grudge_bearer" 
+			"litvin_d" 
 			{
 				"Icon"				"damage"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
-			"ursa_debuff_reduce"
+			"litvin_w"
 			{
 				"Icon"				"cooldown"
 				"Color"				"Blue"
@@ -1142,6 +1142,14 @@
 						"AbilityName"	"generic_hidden"
 					}
 				}
+			}
+			"ursa_grudge_bearer" 
+			{
+				"Deprecated"	"true"
+			}
+			"ursa_debuff_reduce"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"1"
