@@ -1,5 +1,12 @@
 eldzhey_w = class({})
 
+function eldzhey_w:Precache( context )
+	PrecacheResource( "particle", "particles/eldzhey_w_cast.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/nepar.vsndevts", context )
+end
+
 function eldzhey_w:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end

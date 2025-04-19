@@ -19,11 +19,11 @@
 		},
 		{
 			MaxPlayers = 10
-			map = "forest_solo"
+			map = "overvodka_solo"
 		},
 		{
 			MaxPlayers = 10
-			map = "desert_duo"
+			map = "overvodka_duo"
 		},
 		{
 			MaxPlayers = 9
@@ -35,11 +35,11 @@
 	IsTemplate = false
 	maps = 
 	[
-		"forest_solo",
-		"desert_duo",
+		"overvodka_solo",
+		"overvodka_duo",
 	]
 	CheckAFKPlayers = false
-	DefaultMap = "forest_solo"
+	DefaultMap = "overvodka_solo"
 	Default_Keys = [  ]
 	DisableIK = false
 	hero_picker = null

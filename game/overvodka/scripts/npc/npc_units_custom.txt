@@ -3665,4 +3665,28 @@
 		"HealthBarOffset"			"270"
 		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
 	}
+	"npc_bombardiro"
+	{
+		"BaseClass"					"npc_dota_base"
+		"Model"						"models/bombardiro/bombardiro.vmdl"
+		"ModelScale"				"2.5"
+		"Level"						"10"
+		"Ability1"					"bombardiro_fly"
+		"Ability2"					"bombardiro_bombs"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"RingRadius"				"70"
+		"HealthBarOffset"			"160"
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementSpeed"				"1000"
+		"MovementTurnRate"			"6"
+		"StatusHealth"				"5000"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_SOFT"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
 }	

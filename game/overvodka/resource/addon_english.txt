@@ -172,6 +172,7 @@
 		"npc_dota_lone_druid_bear4" "SAM"
 		"npc_dota_elixir_collector" "ELIXIR COLLECTOR"
 		"npc_dota_c4_bomb"	"C4"
+		"npc_bombardiro"	"BOMBARDIRO CROCODILO"
 		"npc_rivendare_1" "Baron Rivendare"
 		"npc_rivendare_2" "Baron Rivendare"
 		"npc_rivendare_3" "Baron Rivendare"

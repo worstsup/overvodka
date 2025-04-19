@@ -2,6 +2,12 @@ shkolnik_w = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_shkolnik_armor", "heroes/shkolnik/shkolnik_w", LUA_MODIFIER_MOTION_NONE )
 
+function shkolnik_w:Precache(context)
+	PrecacheResource( "particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf", context )
+	PrecacheResource( "particle", "particles/marci_unleash_stack_number_new.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/dvoika.vsndevts", context )
+end
+
 function shkolnik_w:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()

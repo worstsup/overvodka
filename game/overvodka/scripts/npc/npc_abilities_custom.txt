@@ -122,6 +122,7 @@
 					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_OUT_OF_GAME"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
@@ -1106,12 +1107,6 @@
 		"AbilityTextureName"			"novape"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"particle"	"particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"
-			"particle"	"particles/eldzhey_w_cast.vpcf"
-			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
@@ -1625,12 +1620,6 @@
 		"AbilityTextureName"            "dvaa"
 		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
-			"particle"	"particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf"
-			"particle"      "particles/marci_unleash_stack_number_new.vpcf"
-		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -10683,7 +10672,9 @@
     	"AbilityManaCost"               "100 125 150 175"
     	"precache"
     	{
-    	    "particle"          "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
+			"particle"			"particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_projectile_blue.vpcf"
+			"particle"			"particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_owner_blue.vpcf"
+			"particle"			"particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
     	}
     	"AbilityValues"
     	{
@@ -13969,6 +13960,43 @@
 		"AbilityValues"
 		{
 			"str_pct"	"0.09"
+		}
+	}
+	"bombardiro_fly"
+	{
+		"BaseClass"           "ability_lua"
+		"ScriptFile"          "units/bombardiro/bombardiro_fly"
+		"AbilityType"		  "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"			  "1"
+		"AbilityCooldown"     "0"
+		"AbilityValues"
+		{
+			"speed"     "800"
+		}
+	}
+	"bombardiro_bombs"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/bombardiro/bombardiro_bombs"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AoERadius"						"%radius"
+		"AbilityTextureName"			"bombardiro_bombs"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"1"
+		"AbilityCastRange"				"900"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"1"
+		"AbilityManaCost"				"0"
+		
+		"AbilityValues"
+		{
+			"damage"					"30"
+			"radius"					"400"
+			"duration"					"1.5"
 		}
 	}
 }

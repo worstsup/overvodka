@@ -1,10 +1,14 @@
 k = 0
 require( "utility_functions" )
+
 function ThrowCoin( args )
 	local coinAttach = args.caster:ScriptLookupAttachment( "coin_toss_point" )
 	local coinSpawn = Vector( 0, 0, 0 )
 	if coinAttach ~= -1 then
 		coinSpawn = args.caster:GetAttachmentOrigin( coinAttach )
+	end
+	if k == 8 or k == 16 or k == 30 or k == 40 or k == 64 or k == 74 or k == 92 or k == 100 then
+		SpawnBombardiro()
 	end
 	if k == 23 then
 		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_announce", {} )

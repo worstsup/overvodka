@@ -4,6 +4,7 @@ shkolnik_r = class({})
 
 function shkolnik_r:Precache( context )
     PrecacheResource( "particle", "particles/units/heroes/hero_queenofpain/queen_sonic_wave.vpcf", context )
+    PrecacheResource( "soundfile", "soundevents/ivn.vsndevts", context )
 end
 
 function shkolnik_r:GetCooldown(level)

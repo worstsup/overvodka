@@ -52,6 +52,11 @@ function Precache( context )
         PrecacheUnitByNameSync( "npc_dota_treasure_courier", context )
         PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", context)
     	PrecacheResource("soundfile", "soundevents/armature.vsndevts", context)
+		PrecacheResource("soundfile", "soundevents/bombardiro.vsndevts", context)
+		PrecacheResource("soundfile", "soundevents/bombardiro_plane_sound.vsndevts", context)
+		PrecacheResource("particle", "particles/bombardiro_bombs_marker.vpcf", context)
+    	PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_calldown_first.vpcf", context)
+    	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts", context)
     	PrecacheResource("soundfile", "soundevents/armature_crit.vsndevts", context)
 		PrecacheResource("soundfile", "soundevents/5opka_start.vsndevts", context)
 		PrecacheResource("soundfile", "soundevents/magic_crit.vsndevts", context)
@@ -158,6 +163,7 @@ function Precache( context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_troll_warlord", context )
 		PrecacheResource( "particle_folder", "particles/units/heroes/hero_keeper_of_the_light", context )
 		PrecacheResource( "particle_folder", "particles/econ/events/ti11/balloon", context )
+		PrecacheResource( "model", "models/bombardiro/bombardiro.vmdl", context )
 		PrecacheResource( "model", "models/coin.vmdl", context )
 		PrecacheResource( "model", "models/kachok/kachok.vmdl", context )
 		PrecacheResource( "model", "models/stray/stray.vmdl", context )
@@ -282,10 +288,7 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/lev_start.vsndevts", context )
 
 		PrecacheResource( "soundfile", "soundevents/ailesh.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/nepar.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/ivn.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/zveni.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/dvoika.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/sho.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/smeh.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/redbull.vsndevts", context )
@@ -591,7 +594,7 @@ function COverthrowGameMode:InitGameMode()
 	-- Show the ending scoreboard immediately
 	--GameRules:SetCustomGameEndDelay( 0 )
 	--GameRules:SetCustomVictoryMessageDuration( 10 )
-	if GetMapName() == "desert_duo" then
+	if GetMapName() == "overvodka_duo" then
 		GameRules:SetCustomGameSetupTimeout( 3 )
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
@@ -744,17 +747,13 @@ function COverthrowGameMode:EndGame( victoryTeam )
 			overBoss:CastAbilityNoTarget( celebrate, -1 )
 		end
 	end
-	
 	local tTeamScores = {}
 	for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
 		tTeamScores[team] = self:GetTeamHeroKills(team)
 	end
 	GameRules:SetPostGameTeamScores( tTeamScores )
-
 	local sortedTeams = self:GetSortedValidTeams()
-
 	Server:OnGameEnded(sortedTeams)
-
 	GameRules:SetGameWinner( victoryTeam )
 end
 
@@ -800,11 +799,8 @@ end
 
 function COverthrowGameMode:GetCountMissingTeams()
 	local MaxTeamsCount = #self.m_GatheredShuffledTeams
-
 	local CurrentActiveTeams = #self:GetSortedValidActiveTeams()
-
 	local Diff = MaxTeamsCount - CurrentActiveTeams
-
 	return Diff
 end
 
@@ -814,11 +810,8 @@ end
 
 function COverthrowGameMode:OnPlayerDisconnected(event)
 	local PlayerID = event.PlayerID
-
 	local Team = PlayerResource:GetTeam(PlayerID)
-
 	local ActiveTeams = self:GetSortedValidActiveTeams()
-
 	local bTeamActive = false
 	for _, TeamInfo in ipairs(ActiveTeams) do
 		if TeamInfo.teamID == Team then
@@ -826,13 +819,9 @@ function COverthrowGameMode:OnPlayerDisconnected(event)
 			break
 		end
 	end
-
 	if bTeamActive == true then return end
-
 	print("Team Disconnected: "..Team)
-
 	self.TEAMS_MISSING = self:GetCountMissingTeams()
-
 	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
 	self:ReduceCountdownTimer(1)
 

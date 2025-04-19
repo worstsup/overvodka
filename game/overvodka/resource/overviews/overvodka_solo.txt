@@ -1,0 +1,8 @@
+overvodka_solo
+{
+	material materials/overviews/overvodka_solo.vmat
+	pos_x -5632
+	pos_y 5632
+	scale 11.000
+}
+

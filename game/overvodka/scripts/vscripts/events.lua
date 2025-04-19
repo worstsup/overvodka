@@ -25,9 +25,9 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		self.TEAMS_MISSING = self:GetCountMissingTeams()
 		self:ReduceCountdownTimer(self.TEAMS_MISSING)
 		
-		if GetMapName() == "forest_solo" then
+		if GetMapName() == "overvodka_solo" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_SINGLES
-		elseif GetMapName() == "desert_duo" then
+		elseif GetMapName() == "overvodka_duo" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_DUOS
 		elseif GetMapName() == "temple_quartet" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_QUADS

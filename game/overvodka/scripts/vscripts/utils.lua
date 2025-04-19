@@ -264,11 +264,11 @@ function GetRealHero(hAttacker)
 end
 
 function IsSolo()
-	return GetMapName() == "forest_solo"
+	return GetMapName() == "overvodka_solo"
 end
 
 function IsDuo()
-	return GetMapName() == "desert_duo"
+	return GetMapName() == "overvodka_duo"
 end
 
 function GetCurrentCategory()
