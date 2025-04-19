@@ -36,7 +36,7 @@
 					<Panel id="DecorLine3" class="DecorLine" hittest="false" />
 					<Panel id="DecorLine4" class="DecorLine" hittest="false" />
 
-					<Label id="CallKeyBind" text="{s:callkeybind}"/>
+					<Label id="CallKeyBind" text="бинд:{s:callkeybind}"/>
 
 					<Panel class="CenterIcon" hittest="false" />
 

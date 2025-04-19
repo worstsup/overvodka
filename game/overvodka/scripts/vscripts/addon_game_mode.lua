@@ -633,7 +633,7 @@ function COverthrowGameMode:InitGameMode()
 
 	local nTeamSize = GameRules:GetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS )
 	GameRules:SetCustomGameBansPerTeam( 1 )
-	GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+	GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end

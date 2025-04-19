@@ -818,14 +818,6 @@
 				"Icon"				"strength"
 				"Color"				"Red"
 				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"generic_hidden"
-					}
-				}
 			}
 			"macan_r"
 			{

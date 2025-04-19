@@ -41,7 +41,10 @@ function ChatWheel:OnPlayerSelectedItem(event)
 
     if self.Players[PlayerID] == nil then return end
 
-    if not Server:IsPlayerSubscribed(PlayerID) then return end
+    if not Server:IsPlayerSubscribed(PlayerID) then 
+        SendErrorToPlayer(PlayerID, "#PLAYER_HUD_Error_ChatWheel_NotSubscribed")
+        return
+    end
 
     local ItemID = tonumber(event.item_id)
     local LineID = tonumber(event.line_id)
@@ -60,7 +63,10 @@ function ChatWheel:OnPlayerSelectedLine(event)
 
     if self.Players[PlayerID] == nil then return end
 
-    if not Server:IsPlayerSubscribed(PlayerID) then return end
+    if not Server:IsPlayerSubscribed(PlayerID) then 
+        SendErrorToPlayer(PlayerID, "#PLAYER_HUD_Error_ChatWheel_NotSubscribed")
+        return
+    end
 
     local LineID = tonumber(event.line_id)
 

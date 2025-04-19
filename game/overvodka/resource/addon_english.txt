@@ -14,7 +14,7 @@
 		"PLAYER_HUD_High_five"							"High Five!"
 		"PLAYER_HUD_Seasonal1"							"Duel!"
 		"PLAYER_HUD_Seasonal2"							"Baloon!"
-
+		"PLAYER_HUD_Error_ChatWheel_NotSubscribed"		"Availible only with Overvodka Prime"
 		"dvoreckov_panel_close"							"Close"
 		"dvoreckov_panel_list"							"List"
 

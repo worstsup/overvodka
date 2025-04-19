@@ -130,10 +130,12 @@ function SelectItem(ItemID){
 }
 
 function ToggleChatWheelSettings(){
+    Game.EmitSound("UUI_SOUNDS.ChatWheelOpen");
     SettingsBody.SetHasClass("Show", !SettingsBody.BHasClass("Show"))
 }
 
 function CloseChatWheelSettings(){
+    Game.EmitSound("UUI_SOUNDS.ChatWheelClose");
     SettingsBody.RemoveClass("Show")
 }
 
@@ -224,7 +226,7 @@ function GetOrCreateItem(Container, ItemID){
 }
 
 function OpenCallBody(){
-    if(!IsPlayerSubscribed(LocalPID)){return}
+    //if(!IsPlayerSubscribed(LocalPID)){return}
     bCallBodyIsActive = true
     MAIN_PANEL.AddClass("ShowCall")
 
@@ -455,6 +457,5 @@ function angle(cx, cy, ex, ey) {
     CreateKeyBind()
 
     GameEvents.Subscribe("chat_wheel_say_line", OnSayLine)
-
-    MAIN_PANEL.SetHasClass("IsSubscribed", IsPlayerSubscribed(LocalPID))
+    MAIN_PANEL.SetHasClass("IsSubscribed", true)
 })();

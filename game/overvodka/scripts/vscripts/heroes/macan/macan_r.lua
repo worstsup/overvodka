@@ -7,7 +7,7 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.l
 
 function macan_r:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_charge_active.vpcf", context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_impact.vpcf", context )
+	PrecacheResource( "particle", "particles/macan_r_trail.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_chargeup.vpcf", context )
 	PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
 	PrecacheResource( "soundfile", "soundevents/zavod.vsndevts", context )
@@ -144,6 +144,7 @@ end
 
 function modifier_macan_r:OnDestroy()
 	if not IsServer() then return end
+	self:StopEffects()
 	StopSoundOn( "ezda", self:GetCaster() )
 	StopSoundOn( "macan_r_gay", self:GetCaster() )
 	EmitSoundOn( "glox", self:GetCaster() )
@@ -186,8 +187,8 @@ end
 function modifier_macan_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_MAGIC_IMMUNE] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
 	}
-
 	return state
 end
 function modifier_macan_r:GetModifierDisableTurning()
@@ -214,7 +215,7 @@ end
 
 function modifier_macan_r:GetModifierModelScale()
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_axe" then
-		local Talent = self:GetCaster():FindAbilityByName("special_bonus_unique_axe")
+		local Talent = self:GetCaster():FindAbilityByName("special_bonus_unique_macan_8")
 		if Talent:GetLevel() == 1 then
 			return -25
 		end
@@ -315,10 +316,17 @@ function modifier_macan_r:GetEffectAttachType()
 end
 
 function modifier_macan_r:PlayEffects( target, radius )
-	local particle_cast = "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_impact.vpcf"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
-	ParticleManager:SetParticleControl( effect_cast, 1, Vector( radius, radius, radius ) )
-	ParticleManager:ReleaseParticleIndex( effect_cast )
+	local particle_cast = "particles/macan_r_trail.vpcf"
+	self.effect_cast_trail = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
+	ParticleManager:SetParticleControl( self.effect_cast_trail, 1, Vector( radius, radius, radius ) )
+	ParticleManager:ReleaseParticleIndex( self.effect_cast_trail )
+end
+
+function modifier_macan_r:StopEffects()
+	if self.effect_cast_trail then
+		ParticleManager:DestroyParticle( self.effect_cast_trail, false )
+		ParticleManager:ReleaseParticleIndex( self.effect_cast_trail )
+	end
 end
 
 modifier_macan_r_charge = class({})

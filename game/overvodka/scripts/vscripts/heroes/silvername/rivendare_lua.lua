@@ -111,6 +111,7 @@ function modifier_rivendare_lua:GetAbsoluteNoDamagePure()
 end
 
 function modifier_rivendare_lua:OnIntervalThink()
+	if not IsServer() then return end
 	if self:GetParent():IsAlive() and not self:GetParent():IsInvisible() and not self:GetParent():IsOutOfGame() then
 		local enemies = FindUnitsInRadius(
 			self:GetParent():GetTeamNumber(),
@@ -133,7 +134,7 @@ function modifier_rivendare_lua:OnIntervalThink()
 				}
 			)
 			local Talented = self:GetParent():GetOwner():FindAbilityByName("special_bonus_unique_silvername_8")
-			if Talented:GetLevel() == 1 then
+			if Talented and Talented:GetLevel() == 1 then
 				if self.k % 10 == 0 then
 					self.damage = enemy:GetMaxHealth() * 8 * 0.01
 					ApplyDamage({ attacker = self:GetParent(), victim = enemy, damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility() })
@@ -163,7 +164,7 @@ function modifier_rivendare_lua_debuff:IsPurgable()
 end
 
 function modifier_rivendare_lua_debuff:OnCreated( kv )
-	if self:GetCaster():IsAlive() == 0 then return end
+	if not self:GetCaster():IsAlive() then return end
 	if IsServer() then
 		self:GetParent():SetForceAttackTarget( self:GetCaster())
 		self:GetParent():MoveToTargetToAttack( self:GetCaster())

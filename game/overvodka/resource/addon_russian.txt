@@ -15,7 +15,7 @@
 		"PLAYER_HUD_High_five"							"Дать пять!"
 		"PLAYER_HUD_Seasonal1"							"Удар по лицу!"
 		"PLAYER_HUD_Seasonal2"							"Эх шарик..."
-
+		"PLAYER_HUD_Error_ChatWheel_NotSubscribed"		"Доступно только с Overvodka Prime"
 		"dvoreckov_panel_close"							"Закрыть"
 		"dvoreckov_panel_list"							"Список"
 		"custom_end_screen_legend_rating"				"Рейтинг"
@@ -1469,8 +1469,7 @@
 		"DOTA_Tooltip_modifier_hill_troll_rally"	"Полководец"
 		"DOTA_Tooltip_Facet_silvername_e" "ОРЛИНОЕ ЧУТЬЁ"
 		"DOTA_Tooltip_Facet_silvername_e_Description" "Срабатывание способности СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА применяет на владельца сильное развеивание."
-		"DOTA_Tooltip_ability_phoenix_dying_light"						"ОРЛИНОЕ ЧУТЬЁ"
-		"DOTA_Tooltip_ability_phoenix_dying_light_Description"			"Срабатывание способности СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА применяет на владельца сильное развеивание."
+		"DOTA_Tooltip_ability_silvername_secret_facet_silvername_e"						"Срабатывание способности применяет на владельца сильное развеивание."
 		"DOTA_Tooltip_Facet_silvername_q"							"ТОПДЕК"
 		"DOTA_Tooltip_Facet_silvername_q_Description"				"Мурлоки могут проходить сквозь других существ."
 		"DOTA_Tooltip_ability_silvername_murloc_Facet_silvername_q"		"Мурлоки могут проходить сквозь других существ."
