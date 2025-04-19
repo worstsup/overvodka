@@ -344,6 +344,9 @@
 		"DOTA_Tooltip_ability_minion_banana_banana_slow" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_minion_banana_slow_duration" "ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
 
+		"DOTA_Tooltip_ability_item_rocket_launcher"		"СИГНАЛЬНАЯ РАКЕТА"
+		"DOTA_Tooltip_ability_item_rocket_launcher_description" "<h1>Активное: Призыв Бомбардиро</h1>Запускает сигнальную ракету над собой, призывая Bombardiro Crocodilo, который пролетит через точку, в которой находится владелец в момент запуска."
+
 		"DOTA_Tooltip_Ability_item_minion_generator"	"ГЕНЕРАТОР МИНЬОНОВ"
 		"DOTA_Tooltip_Ability_item_minion_generator_description" "<h1>Активное: PAPOY!</h1>Призывает в выбранную точку миньона, имеющего увеличенную на %bonus_attack_speed_minion% скорость атаки и увеличенную на %bonus_movespeed_minion%%% скорость передвижения. Миньон живёт %minion_duration% сек.\n\n<h1>Пассивное: Аура Миньончиков</h1> Увеличивает броню союзных построек и существ на %bonus_armor_aura%, а их скорость атаки — на %bonus_attack_speed_aura%. Снижает броню врагов на %minus_armor_aura%.<br><br>Радиус: %radius%"
 		"DOTA_Tooltip_modifier_item_minion_generator_aura_buff_armor"				"Генератор Миньонов"
@@ -1653,7 +1656,7 @@
 		"DOTA_Tooltip_ability_kirill_e_fissure_duration" "ДЛИТЕЛЬНОСТЬ СТЕНЫ:"
 		"DOTA_Tooltip_ability_kirill_e_stun_duration" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
 		"DOTA_Tooltip_ability_kirill_e_damage" "УРОН:"
-		"DOTA_Tooltip_facet_kirill_facet_e" "КОЛЕСО"
+		"DOTA_Tooltip_facet_kirill_facet_e" "TUNG JUMP"
 		"DOTA_Tooltip_facet_kirill_facet_e_description" "Герой прыгает в конец стены от TUNG BLOCK."
 		"DOTA_Tooltip_ability_kirill_e_facet_kirill_facet_e" "После применения способности герой прыгает в конец созданной стены."
 		"DOTA_Tooltip_ability_kirill_r" "РАЗБИТЬ МОНИТОР"

@@ -54,6 +54,24 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "eye_l"
+						parent_bone = "Head"
+						relative_origin = [ 8.624613, 23.837364, 18.704966 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "eye_r"
+						parent_bone = "Head"
+						relative_origin = [ -8.562828, 23.66095, 20.213921 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 			{

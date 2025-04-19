@@ -102,7 +102,8 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_chapman_red",
 		"item_chapman_green",
 		"item_chapman_indigo",
-		"item_chapman_pink"
+		"item_chapman_pink",
+		"item_rocket_launcher"
 	}
 
 	local tier4 =
@@ -111,7 +112,8 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_cubin",
 		"item_burger_sobolev",
 		"item_burger_oblomoff",
-		"item_burger_larin"
+		"item_burger_larin",
+		"item_rocket_launcher"
 	}
 
 	local tier5 =
@@ -120,7 +122,8 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_cubin",
 		"item_burger_sobolev",
 		"item_burger_oblomoff",
-		"item_burger_larin"
+		"item_burger_larin",
+		"item_rocket_launcher"
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )

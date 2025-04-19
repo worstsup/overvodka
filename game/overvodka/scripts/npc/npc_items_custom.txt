@@ -3206,4 +3206,22 @@
 			"radius"							"1200"
 		}
 	}
+	"item_rocket_launcher"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile" 					"items/rocket_launcher"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Model"							"models/props_gameplay/red_box.vmdl"	
+		"AbilityTextureName"			"bablokrad"
+		"AbilityCooldown"				"60"
+		"ItemPurchasable"				"0"
+		"ItemCost"						"0"
+		"ItemPermanent"					"0"
+		"ItemSellable"					"0"
+		"ItemInitialCharges"			"1"
+		"ItemDisplayCharges"			"1"
+		"AbilityValues"
+		{
+		}
+	}
 }
