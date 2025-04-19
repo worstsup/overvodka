@@ -1632,7 +1632,7 @@
 		"DOTA_Tooltip_Facet_kirill_facet_q"							"МОРАЛЬНОЕ ДАВЛЕНИЕ"
 		"DOTA_Tooltip_Facet_kirill_facet_q_Description"				"Убийства навсегда увеличивают длительность способности АНОМАЛЬНЫЙ РОСТ."
 		"DOTA_Tooltip_modifier_kirill_q" "Аномальный рост"
-		"DOTA_Tooltip_modifier_kirill_q_Description" " уменьшился в размерах, его скорость и ловкость увеличены"
+		"DOTA_Tooltip_modifier_kirill_q_Description" "Tung Tung Tung Sahur уменьшился в размерах, его скорость и ловкость увеличены"
 		"DOTA_Tooltip_modifier_kirill_w_disarm" "Бессилие"
 		"DOTA_Tooltip_modifier_kirill_w_mute" "Заглушение"
 		"DOTA_Tooltip_modifier_kirill_w_stun" "Оглушение"
