@@ -1835,6 +1835,12 @@
 		"Ability17"		"special_bonus_unique_juggernaut_blade_fury_cooldown"
 		"Facets"
 		{
+			"golovach_facet_innate"
+			{
+				"Icon"	"fist"
+				"Color"	"Green"
+				"GradientID"	"1"
+			}
 			"juggernaut_bladestorm" 
 			{
 				"Icon"				"spinning"

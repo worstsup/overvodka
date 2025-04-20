@@ -5,6 +5,10 @@ function modifier_golovach_innate:IsHidden()
 end
 
 function modifier_golovach_innate:OnCreated( kv )
+	if not IsServer() then return end
+	if self:GetAbility():GetSpecialValueFor("has_facet") == 1 then
+		self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_golovach_innate_facet_bonus", {})
+	end
 	self.reincarnate_time = self:GetAbility():GetSpecialValueFor( "reincarnate_time" )
 	self.slow_radius = self:GetAbility():GetSpecialValueFor( "slow_radius" )
 	self.slow_duration = self:GetAbility():GetSpecialValueFor( "slow_duration" )
@@ -59,6 +63,15 @@ function modifier_golovach_innate:ReincarnateTime( params )
 	if IsServer() then
 		if self:GetAbility():IsFullyCastable() then
 			self:Reincarnate()
+			if self:GetAbility():GetSpecialValueFor("has_facet") == 1 then
+				local bonusMod = self:GetParent():FindModifierByName("modifier_golovach_innate_facet_bonus")
+				if bonusMod then
+					bonusMod:IncrementStackCount()
+					if self:GetParent():HasScepter() then
+						bonusMod:IncrementStackCount()
+					end
+				end
+			end
 			return self.reincarnate_time
 		end
 		return 0
@@ -120,4 +133,37 @@ function modifier_golovach_innate:PlayEffects()
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( self.reincarnate_time, 0, 0 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( sound_cast, self:GetParent() )
+end
+
+modifier_golovach_innate_facet_bonus = class({})
+
+function modifier_golovach_innate_facet_bonus:IsHidden()
+	if self:GetStackCount() > 0 then
+    	return false
+	else
+		return true
+	end
+end
+
+function modifier_golovach_innate_facet_bonus:IsPurgable()
+    return false
+end
+
+function modifier_golovach_innate_facet_bonus:RemoveOnDeath()
+    return false
+end
+
+function modifier_golovach_innate_facet_bonus:DeclareFunctions()
+    return {
+		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+    }
+end
+
+function modifier_golovach_innate_facet_bonus:GetModifierPreAttack_BonusDamage()
+	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("facet_damage")
+end
+
+function modifier_golovach_innate_facet_bonus:GetModifierAttackSpeedBonus_Constant()
+	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("facet_as")
 end
