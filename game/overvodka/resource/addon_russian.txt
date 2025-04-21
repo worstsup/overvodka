@@ -1669,6 +1669,7 @@
 		"DOTA_Tooltip_ability_kirill_r_radius" "РАДИУС:"
 		"DOTA_Tooltip_ability_kirill_r_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_kirill_r_damage_tooltip" "УРОН В СЕКУНДУ:"
+		"DOTA_Tooltip_ability_kirill_r_move_speed_tooltip" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_slardar_seaborn_sentinel" "КОРОЛЬ МИДА"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel" "Король мида"
 		"DOTA_Tooltip_modifier_slardar_seaborn_sentinel_Description" "Скорость передвижения, восстановление здоровье, урон и броня героя увеличены."

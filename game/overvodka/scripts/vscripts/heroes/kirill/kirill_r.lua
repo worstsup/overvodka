@@ -86,7 +86,7 @@ function modifier_kirill_r:DeclareFunctions()
 end
 
 function modifier_kirill_r:GetModifierMoveSpeedBonus_Percentage()
-	return -20
+	return self:GetAbility():GetSpecialValueFor("move_speed_tooltip")
 end
 
 function modifier_kirill_r:GetBonusDayVision()
