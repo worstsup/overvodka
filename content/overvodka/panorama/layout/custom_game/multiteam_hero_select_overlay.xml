@@ -6,6 +6,8 @@
 
     <scripts>
         <include src="file://{resources}/scripts/custom_game/multiteam_hero_select_overlay.js" />
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/model_scene_fix.js" />
     </scripts>
 
   <Panel class="HeroSelectOverlayRoot">
