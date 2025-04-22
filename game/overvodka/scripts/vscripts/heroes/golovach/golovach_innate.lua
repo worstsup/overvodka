@@ -8,3 +8,7 @@ LinkLuaModifier( "modifier_generic_silenced_lua", "modifier_generic_silenced_lua
 function golovach_innate:GetIntrinsicModifierName()
 	return "modifier_golovach_innate"
 end
+
+function golovach_innate:IsRefreshable()
+	return false 
+end
