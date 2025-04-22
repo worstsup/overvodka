@@ -98,6 +98,10 @@ function COverthrowGameMode:OnNPCSpawned( event )
 	end
 	if spawnedUnit.bFirstSpawned == nil then
       	spawnedUnit.bFirstSpawned = true
+		local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
+		if sahur then
+			sahur:SetLevel(1)
+		end
         local ab = spawnedUnit:FindAbilityByName("sidet")
 		if ab then
             ab:SetLevel(1)
