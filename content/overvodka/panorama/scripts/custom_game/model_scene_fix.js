@@ -1,7 +1,33 @@
 const DotaHUD = GetDotaHud()
 let Fixed = false
 const HEROES_TO_DELETE = [
-    "npc_dota_hero_riki"
+    "npc_dota_hero_pudge",
+    "npc_dota_hero_kunkka",
+    "npc_dota_hero_tinker",
+    "npc_dota_hero_invoker",
+    "npc_dota_hero_meepo",
+    "npc_dota_hero_axe",
+    "npc_dota_hero_phoenix",
+    "npc_dota_hero_bounty_hunter",
+    "npc_dota_hero_ursa",
+    "npc_dota_hero_zuus",
+    "npc_dota_hero_tidehunter",
+    "npc_dota_hero_earthshaker",
+    "npc_dota_hero_furion",
+    "npc_dota_hero_clinkz",
+    "npc_dota_hero_ogre_magi",
+    "npc_dota_hero_ancient_apparition",
+    "npc_dota_hero_bloodseeker",
+    "npc_dota_hero_juggernaut",
+    "npc_dota_hero_skeleton_king",
+    "npc_dota_hero_rattletrap",
+    "npc_dota_hero_storm_spirit",
+    "npc_dota_hero_necrolyte",
+    "npc_dota_hero_morphling",
+    "npc_dota_hero_faceless_void",
+    "npc_dota_hero_slark",
+    "npc_dota_hero_weaver",
+    "npc_dota_hero_riki",
 ]
 
 function FixModelScene(){
