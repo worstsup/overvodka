@@ -2578,7 +2578,7 @@
 		"GibType"		"default"
 		"Ability1"		"stint_q"
 		"Ability2"		"omniknight_martyr"
-		"Ability3"		"omniknight_hammer_of_purity"
+		"Ability3"		"stint_e"
 		"Ability4"		"stint_innate"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"omniknight_guardian_angel"

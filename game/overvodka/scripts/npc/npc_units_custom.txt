@@ -3692,8 +3692,8 @@
 	"npc_nelya"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "peterka/girlv2.vmdl"
-        "ModelScale"            "2.0"
+        "Model"                 "models/heroes/marci/marci_base.vmdl"
+        "ModelScale"            "1.5"
 		"SoundSet"				"Hero_Marci"
         "Level"                 "50"
         "HasInventory"          "0"
@@ -3706,14 +3706,14 @@
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "1800"
-        "AttackRange"           "128"
+        "AttackRange"           "200"
         "BountyGoldMin"         "25"
         "BountyGoldMax"         "25"
 		"RingRadius"				"70"
 		"HealthBarOffset"			"160"
 		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
+        "MovementSpeed"         "600"
         "MovementTurnRate"      "1"
         "StatusHealth"          "1000"
         "StatusHealthRegen"     "0"
@@ -3727,5 +3727,59 @@
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "0"
         "IsSummoned"            "1"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef" "25350"
+				}
+				"Wearable2"
+				{
+					"ItemDef" "25351"
+				}
+				"Wearable3"
+				{
+					"ItemDef" "25356"
+				}
+				"Wearable4"
+				{
+					"ItemDef" "25357"
+				}
+			}
+		}
+	}
+	"npc_inator"
+	{
+		"BaseClass"					"npc_dota_base_additive"
+		"Model"						"models/stint/inator.vmdl"
+		"Level"						"0"
+		"ModelScale"				"1.3"
+		"ArmorPhysical"				"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"0"	
+		"AttackDamageMax"			"0"	
+		"AttackRate"				"1.0"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"	
+		"AttackRange"				"0"	
+		"ProjectileModel"			""	
+		"ProjectileSpeed"			"0"	
+		"HealthBarOffset"			"145"							 		
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"BountyXP"					"100"	
+		"BountyGoldMin"				"100"
+		"BountyGoldMax"				"100"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"0"
+		"StatusHealth"				"10"
+		"StatusHealthRegen"			"0"
+		"VisionDaytimeRange"		"600"
+		"VisionNighttimeRange"		"600"
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
 	}
 }	

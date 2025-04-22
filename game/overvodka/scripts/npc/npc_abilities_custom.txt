@@ -14030,12 +14030,36 @@
 		"AbilityCastRange"				"600 650 700 750"
 		"AbilityValues"
 		{
-			"duration" 		"3.5 4.0 4.5 5.0"
-			"base_damage" 	"20 30 40 50"
-			"level_damage" 	"4"
-			"hits"			"1 2 2 3"
-			"shield" 		"50"
-			"radius"		"600 650 700 750"
+			"duration" 			"3.5 4.0 4.5 5.0"
+			"base_damage" 		"20 30 40 50"
+			"level_damage" 		"4"
+			"hits"				"1 2 2 3"
+			"shield" 			"50"
+			"radius"			"600 650 700 750"
+			"cooldown_single" 	"1.0"
+		}
+	}
+	"stint_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stint/stint_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"otchim"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"26 24 22 20"
+		"AbilityManaCost"				"100 115 130 145"
+		"AbilityValues"
+		{
+			"duration"		
+			{
+				"value"					"6"
+			}
+			"radius"					"450"
+			"hit_destroy"				"3 4 5 6"
+			"pct_damage"				"1"
 		}
 	}
 }

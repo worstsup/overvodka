@@ -248,6 +248,7 @@
 		"DOTA_Tooltip_ability_stint_innate" "I NEED MORE POWER"
 		"DOTA_Tooltip_ability_stint_innate_description" "Время перезарядки предметов и способностей героя уменьшается за каждое очко силы."
 		"DOTA_Tooltip_ability_stint_innate_str_pct"	"%УМЕНЬШЕНИЕ ЗА ЕДИНИЦУ СИЛЫ:"
+		"npc_inator"	"ИНАТОР"
 
 		"DOTA_Tooltip_ability_bombardiro_bombs" "БОМБЫ БОМБАРДИРО"
 
