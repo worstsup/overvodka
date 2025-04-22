@@ -3185,7 +3185,7 @@
 		"ScriptFile"				"items/minion_generator"
 		"AbilityTextureName"		"minion_generator"
 		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCooldown"			"45.0"
+		"AbilityCooldown"			"30.0"
 		"AbilityCastPoint"			"0.1"
 		"AbilityManaCost"			"100"
 		"AbilityCastRange"			"600"
@@ -3202,6 +3202,8 @@
 			"minus_armor_aura"			 		"-5"
 			"bonus_attack_speed_minion"			"90"
 			"bonus_movespeed_minion"			"30"
+			"bonus_damage_minion"				"50"
+			"cdr_minion"						"50"
 			"minion_duration"					"60"
 			"radius"							"1200"
 		}

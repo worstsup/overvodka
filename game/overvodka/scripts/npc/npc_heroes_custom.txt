@@ -2564,7 +2564,7 @@
 		"AttributeIntelligenceGain"		"1.8"
 		"StatusHealthRegen"		"2.5"
 		"MovementSpeed"		"315"
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+		"VoiceFile"		""
 	}
 	"npc_dota_hero_omniknight"
 	{

@@ -41,7 +41,9 @@ function modifier_item_minion_generator_minion_as:RemoveOnDeath() return false e
 function modifier_item_minion_generator_minion_as:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE ,
+		MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
     }
 end
 
@@ -57,6 +59,20 @@ function modifier_item_minion_generator_minion_as:GetModifierMoveSpeedBonus_Perc
         return self:GetAbility():GetSpecialValueFor("bonus_movespeed_minion")
     end
     return 0
+end
+
+function modifier_item_minion_generator_minion_as:GetModifierDamageOutgoing_Percentage()
+	if self:GetAbility() then
+		return self:GetAbility():GetSpecialValueFor("bonus_damage_minion")
+	end
+	return 0
+end
+
+function modifier_item_minion_generator_minion_as:GetModifierPercentageCooldown()
+	if self:GetAbility() then
+		return self:GetAbility():GetSpecialValueFor("cdr_minion")
+	end
+	return 0
 end
 
 modifier_item_minion_generator = class({})

@@ -1668,7 +1668,7 @@
 		"StatusHealth"				"300"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"200"		// Base mana.
-		"StatusManaRegen"			"1"		// Mana regeneration rate.		 
+		"StatusManaRegen"			"2"		// Mana regeneration rate.		 
 		"VisionDaytimeRange"		"800"		// Range of vision during day light.
 		"VisionNighttimeRange"		"600"		// Range of vision at night time.
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
