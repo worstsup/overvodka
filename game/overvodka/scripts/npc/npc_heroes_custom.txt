@@ -2576,7 +2576,7 @@
 		"SimilarHeroes"		"102,111,50"
 		"HeroSelectSoundEffect"		"Hero_Omniknight.Pick"
 		"GibType"		"default"
-		"Ability1"		"bombardiro_bombs"
+		"Ability1"		"stint_q"
 		"Ability2"		"omniknight_martyr"
 		"Ability3"		"omniknight_hammer_of_purity"
 		"Ability4"		"stint_innate"

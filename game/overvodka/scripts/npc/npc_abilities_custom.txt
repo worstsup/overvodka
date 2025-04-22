@@ -14015,4 +14015,27 @@
 			"duration"					"1.5"
 		}
 	}
+	"stint_q"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/stint/stint_q"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"            "tasty"
+		"AbilityCooldown"               "30 28 26 24"
+		"AbilityManaCost"               "100 120 140 160"
+		"AbilityCastRange"				"600 650 700 750"
+		"AbilityValues"
+		{
+			"duration" 		"3.5 4.0 4.5 5.0"
+			"base_damage" 	"20 30 40 50"
+			"level_damage" 	"4"
+			"hits"			"1 2 2 3"
+			"shield" 		"50"
+			"radius"		"600 650 700 750"
+		}
+	}
 }
