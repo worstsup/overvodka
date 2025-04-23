@@ -6,6 +6,7 @@ function papich_r:Precache(context)
     PrecacheResource( "soundfile", "soundevents/papich_r_spawn.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/papich_r_end.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/papich_r_appear.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/fof.vsndevts", context )
     PrecacheResource( "particle", "particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_nether_swap_v3_explosion.vpcf", context )
     PrecacheResource( "particle", "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", context)
 end
@@ -136,13 +137,11 @@ function modifier_papich_r:DeclareFunctions()
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_MODEL_SCALE,
-        MODIFIER_EVENT_ON_ATTACK_LANDED,
+        MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND,
     }
 end
-function modifier_papich_r:OnAttackLanded( params )
-    if params.attacker ~= self:GetParent() then return end
-    local sound_cast = "fof"
-    EmitSoundOn( sound_cast, params.target )
+function modifier_papich_r:GetAttackSound()
+    return "fof"
 end
 function modifier_papich_r:GetModifierModelChange()
     return "arthas/papich_maniac.vmdl"

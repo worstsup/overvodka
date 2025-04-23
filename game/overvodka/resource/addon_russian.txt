@@ -1622,7 +1622,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_macan_4" "+{s:bonus_attack_damage} к урону от РАЗЪЕБАТЬ ЧАРТЫ"
 		"DOTA_Tooltip_ability_special_bonus_unique_macan_5" "-{s:bonus_interval} сек. интервала кражи от ДВОРОВАЯ ЗАКАЛКА"
 		"DOTA_Tooltip_ability_special_bonus_unique_macan_6" "+{s:bonus_roaming_duration} сек. к длительности РАЗЪЕБАТЬ ЧАРТЫ"
-		"DOTA_Tooltip_ability_special_bonus_unique_macan_7" "+{s:bonus_attack_interval} сек. от интервала атак РАЗЪЕБАТЬ ЧАРТЫ"
+		"DOTA_Tooltip_ability_special_bonus_unique_macan_7" "-{s:bonus_attack_interval} сек. от интервала атак РАЗЪЕБАТЬ ЧАРТЫ"
 		"DOTA_Tooltip_ability_special_bonus_unique_macan_8" "МАШИНА увеличивается в 1.5 раза"
 		
 
@@ -1869,7 +1869,7 @@
 		"DOTA_Tooltip_ability_lev_freak_reflect_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_lev_freak_stun_duration"  "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
 		"DOTA_Tooltip_ability_lev_smeh" "СМЕХ"
-		"DOTA_Tooltip_ability_lev_smeh_Description" "Лев дико ржёт и отталкивает врагов, нанося им урон, замедляя и накладывая безмолвие."
+		"DOTA_Tooltip_ability_lev_smeh_Description" "Лев дико ржёт и отталкивает врагов, замедляя их и накладывая безмолвие."
 		"DOTA_Tooltip_ability_lev_smeh_damage" "УРОН:"
 		"DOTA_Tooltip_ability_lev_smeh_distance" "ДИСТАНЦИЯ:"
 		"DOTA_Tooltip_ability_lev_smeh_slow_pct" "%ЗАМЕДЛЕНИЕ:"
@@ -1900,7 +1900,7 @@
 		"DOTA_Tooltip_modifier_otec_start_description" "Вы невидимы, ваша скорость передвижения и интеллект увеличен"
 		"DOTA_Tooltip_ability_special_bonus_unique_lev_1" "+{s:bonus_duration} сек. к длительности СМЕХ"
 		"DOTA_Tooltip_ability_special_bonus_unique_lev_2" "+{s:bonus_damage} к базовому урону от SUIII АХАХ"
-		"DOTA_Tooltip_ability_special_bonus_unique_lev_3" "+{s:bonus_damage} к урону от СМЕХ"
+		"DOTA_Tooltip_ability_special_bonus_unique_lev_3" "СМЕХ наносит {s:bonus_damage} урона"
 		"DOTA_Tooltip_ability_special_bonus_unique_lev_4" "+{s:bonus_reg_2}% к регенерации от макс. маны ШОКОЛАДИ"
 		"DOTA_Tooltip_ability_special_bonus_unique_lev_5" "+{s:bonus_stun_duration} сек. к длительности оглушения от ФРИК"
 		"DOTA_Tooltip_ability_special_bonus_unique_lev_6" "+{s:bonus_bonus_agility} к ловкости от ОТЕЦ"

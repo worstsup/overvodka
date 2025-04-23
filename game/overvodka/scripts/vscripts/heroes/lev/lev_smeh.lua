@@ -1,4 +1,4 @@
-function ElFura(keys)
+function lev_smeh(keys)
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability

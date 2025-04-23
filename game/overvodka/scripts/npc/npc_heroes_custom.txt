@@ -702,7 +702,7 @@
 		"StatusManaRegen"	"0.25"
 		"VisionDaytimeRange"		"1800"
 		"HealthBarOffset"	"250"
-		"MovementSpeed"		"310"
+		"MovementSpeed"		"300"
 		"MovementTurnRate"		"0.90000"
 		"particle_folder"		"particles/units/heroes/hero_meepo"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_meepo.vsndevts"
