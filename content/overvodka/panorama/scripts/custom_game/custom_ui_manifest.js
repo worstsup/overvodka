@@ -1,8 +1,8 @@
 GameUI.CustomUIConfig().multiteam_top_scoreboard =
 {
-	reorder_team_scores: true,
-	LeftInjectXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_left.xml",
-	TeamOverlayXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_team_overlay.xml"
+ reorder_team_scores: true,
+ LeftInjectXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_left.xml",
+ TeamOverlayXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_team_overlay.xml"
 };
 
 GameUI.CustomUIConfig().team_select = 
@@ -48,33 +48,3 @@ GameUI.CustomUIConfig().team_icons[DOTATeam_t.DOTA_TEAM_CUSTOM_5] = "file://{ima
 GameUI.CustomUIConfig().team_icons[DOTATeam_t.DOTA_TEAM_CUSTOM_6] = "file://{images}/custom_game/team_icons/team_icon_boar_01.png";
 GameUI.CustomUIConfig().team_icons[DOTATeam_t.DOTA_TEAM_CUSTOM_7] = "file://{images}/custom_game/team_icons/team_icon_snake_01.png";
 GameUI.CustomUIConfig().team_icons[DOTATeam_t.DOTA_TEAM_CUSTOM_8] = "file://{images}/custom_game/team_icons/team_icon_horse_01.png";
-
-HidePickScreen();
-function HidePickScreen() {
-  var PreGame = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame");
-  var StrategyMinimap = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("StrategyMinimap");
-  if (StrategyMinimap) {
-    for (var i = 0; i < StrategyMinimap.GetChildCount(); i++) {
-      StrategyMinimap.GetChild(i).style.opacity = "0";
-    }
-    let map = Game.GetMapInfo().map_display_name;
-    if (map == "overvodka_solo") {
-      map = "overvodka_solo";
-    }
-    if (map == "overvodka_duo") {
-      map = "overvodka_duo";
-    }
-    StrategyMinimap.style.backgroundImage = 'url("file://{images}/custom_game/' + map + '.png")';
-    StrategyMinimap.style.backgroundSize = "100% 100%";
-  }
-  if (!Game.GameStateIsAfter(2)) {
-    if (hidden == false) {
-      hidden = true;
-      PreGame.style.opacity = "0";
-    }
-    $.Schedule(0.1, HidePickScreen);
-  } else {
-    PreGame.style.opacity = "1";
-    delete hidden;
-  }
-}

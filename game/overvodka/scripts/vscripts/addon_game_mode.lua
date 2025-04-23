@@ -40,6 +40,47 @@ function Precache( context )
 
 	--Cache the creature models
 
+		if GetMapName() == "dota" then
+			PrecacheResource("particle", "particles/base_attacks/ranged_goodguy.vpcf", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_melee/creep_bad_melee.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_small.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_spawn_a/n_creep_satyr_spawn_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_ranged_v2.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_worg_small/n_creep_worg_small.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole_c/n_creep_tadpole_c.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl", context)
+			PrecacheResource("model", "models/creeps/pine_cone/pine_cone.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_v2.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_c/n_creep_satyr_c.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_big.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_centaur_med/n_creep_centaur_med.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_vulture_b/n_creep_vulture_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/ice_biome/frostbitten/n_creep_frostbitten_swollen01.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_golem_b/n_creep_golem_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_vulture_a/n_creep_vulture_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_troll_dark_b/n_creep_troll_dark_b.vmdl", context)
+			PrecacheResource("model", "models/creeps/ice_biome/giant/ice_giant01.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_spawn_a/n_creep_satyr_spawn_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl", context)
+		end
+
 		PrecacheResource( "soundfile", "soundevents/golden_rain.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/golden_rain_announce.vsndevts", context )
 		PrecacheResource( "particle", "particles/golden_rain_start.vpcf", context )
@@ -474,13 +515,14 @@ function COverthrowGameMode:InitGameMode()
   
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
-  	MusicZoneTrigger:Init()
+	if GetMapName() ~= "dota" then
+  		MusicZoneTrigger:Init()
+	end
 	DebugPanel:Init()
 
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 35 )
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(XP_PER_LEVEL_TABLE)
-	GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_lesh")
 
 	self.m_bFillWithBots = GlobalSys:CommandLineCheck( "-addon_bots" )
 	self.m_bFastPlay = GlobalSys:CommandLineCheck( "-addon_fastplay" )
@@ -565,16 +607,15 @@ function COverthrowGameMode:InitGameMode()
 	self.TeamKills = {}
 
 	---------------------------------------------------------------------------
-
+	
 	self:GatherAndRegisterValidTeams()
 
 	GameRules:GetGameModeEntity().COverthrowGameMode = self
 
 	-- Adding Many Players
-	if GetMapName() == "desert_quintet" then
+	if GetMapName() == "dota" then
 		GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
 		GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 5 )
-		GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_CUSTOM_1, 5 )
 		self.m_GoldRadiusMin = 300
 		self.m_GoldRadiusMax = 1400
 		self.m_GoldDropPercent = 8
@@ -593,7 +634,6 @@ function COverthrowGameMode:InitGameMode()
 	end
 
 	--GameRules:SetCustomGameTeamMaxPlayers( 1, 5 )
-
 	--GameRules:SetCustomGameSetupTimeout( 3 )--Убрать когда нужно будет убрать зрителей
 
 	-- Show the ending scoreboard immediately
@@ -625,12 +665,20 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
-	GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
+	if GetMapName() == "dota" then
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
+		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
+		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
+		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_byebye")
+	else
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
+		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
+		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
+		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_lesh")
+	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
-	GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 	GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_byebye" )
 	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( COverthrowGameMode, "BountyRunePickupFilter" ), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( COverthrowGameMode, "ExecuteOrderFilter" ), self )
@@ -645,7 +693,7 @@ function COverthrowGameMode:InitGameMode()
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end
-	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 30.0 )
+	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 60.0 )
 
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )
@@ -655,26 +703,25 @@ function COverthrowGameMode:InitGameMode()
 	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
 	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
-
-	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
-	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
-	Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
-	Convars:RegisterCommand( "overthrow_force_end_game", function(...) return self:EndGame( DOTA_TEAM_GOODGUYS ) end, "Force the game to end.", FCVAR_CHEAT )
-	Convars:RegisterCommand( "overthrow_team_leaved", function(...) 
-			local Data = {
-				team = 2,
-				last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
-				bonus_gold = self.GoldBonusPerTeam,
-				bonus_xp = self.XpBonusPerTeam,
-				time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
-				missing_teams = self.TEAMS_MISSING
-			}
-			return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
-		end, "Show team leave encounter", FCVAR_CHEAT )
-	Convars:RegisterCommand( "overthrow_chat_wheel_say", function(...) 
-			return CustomGameEventManager:Send_ServerToAllClients("chat_wheel_say_line", {caller_player = 1, item_id = 1})
-		end, "Show team leave encounter", FCVAR_CHEAT )
-	Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
+		Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
+		Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
+		Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
+		Convars:RegisterCommand( "overthrow_force_end_game", function(...) return self:EndGame( DOTA_TEAM_GOODGUYS ) end, "Force the game to end.", FCVAR_CHEAT )
+		Convars:RegisterCommand( "overthrow_team_leaved", function(...) 
+				local Data = {
+					team = 2,
+					last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+					bonus_gold = self.GoldBonusPerTeam,
+					bonus_xp = self.XpBonusPerTeam,
+					time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
+					missing_teams = self.TEAMS_MISSING
+				}
+				return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
+			end, "Show team leave encounter", FCVAR_CHEAT )
+		Convars:RegisterCommand( "overthrow_chat_wheel_say", function(...) 
+				return CustomGameEventManager:Send_ServerToAllClients("chat_wheel_say_line", {caller_player = 1, item_id = 1})
+			end, "Show team leave encounter", FCVAR_CHEAT )
+		Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
 
 	COverthrowGameMode:SetUpFountains()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
@@ -936,7 +983,6 @@ function COverthrowGameMode:OnThink()
 	for nPlayerID = 0, (DOTA_MAX_TEAM_PLAYERS-1) do
 		self:UpdatePlayerColor( nPlayerID )
 	end
-	
 	self:UpdateScoreboard()
 	-- Stop thinking if game is paused
 	if GameRules:IsGamePaused() == true then
@@ -988,26 +1034,33 @@ end
 ---------------------------------------------------------------------------
 function COverthrowGameMode:GatherAndRegisterValidTeams()
 --	print( "GatherValidTeams:" )
-
 	local foundTeams = {}
-	for _, playerStart in pairs( Entities:FindAllByClassname( "info_player_start_dota" ) ) do
-		foundTeams[  playerStart:GetTeam() ] = true
-	end
-
-	local numTeams = TableCount(foundTeams)
-	print( "GatherValidTeams - Found spawns for a total of " .. numTeams .. " teams" )
-	
 	local foundTeamsList = {}
-	for t, _ in pairs( foundTeams ) do
-		table.insert( foundTeamsList, t )	
-	end
+	local numTeams
+	if GetMapName() ~= "dota" then
+		for _, playerStart in pairs( Entities:FindAllByClassname( "info_player_start_dota" ) ) do
+			foundTeams[  playerStart:GetTeam() ] = true
+		end
 
-	if numTeams == 0 then
-		print( "GatherValidTeams - NO team spawns detected, defaulting to GOOD/BAD" )
+		numTeams = TableCount(foundTeams)
+		print( "GatherValidTeams - Found spawns for a total of " .. numTeams .. " teams" )
+		
+		for t, _ in pairs( foundTeams ) do
+			table.insert( foundTeamsList, t )	
+		end
+
+		if numTeams == 0 then
+			print( "GatherValidTeams - NO team spawns detected, defaulting to GOOD/BAD" )
+			table.insert( foundTeamsList, DOTA_TEAM_GOODGUYS )
+			table.insert( foundTeamsList, DOTA_TEAM_BADGUYS )
+			numTeams = 2
+		end
+	else
 		table.insert( foundTeamsList, DOTA_TEAM_GOODGUYS )
 		table.insert( foundTeamsList, DOTA_TEAM_BADGUYS )
 		numTeams = 2
 	end
+
 
 	local maxPlayersPerValidTeam = math.floor( 10 / numTeams )
 
@@ -1173,8 +1226,7 @@ function COverthrowGameMode:AssignTeams()
 			vecTeamNeededPlayers[ nTeamNumber ] = vecTeamNeededPlayers[ nTeamNumber ] - 1
 		end
 	end
-		
-	if self.m_bFillWithBots == true then
-		GameRules:BotPopulate()
-	end
+	--if self.m_bFillWithBots == true then
+	GameRules:BotPopulate()
+	--end
 end

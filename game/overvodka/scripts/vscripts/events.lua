@@ -266,34 +266,21 @@ function COverthrowGameMode:OnEntityKilled( event )
 	local heroTeam = hero:GetTeam()
 	local extraTime = 0
 	if killedUnit:GetUnitName() == "npc_dota_roshan" then
-		if hero:IsRealHero() == true then
-			hero:AddItemByName("item_aegis")
-		end
 	end
 
 	if killedUnit:IsRealHero() then
 		self.allSpawned = true
-		--print("Hero has been killed")
-		--Add extra time if killed by Necro Ult
 		if hero:IsRealHero() == true then
 			if event.entindex_inflictor ~= nil then
 				local inflictor_index = event.entindex_inflictor
 				if inflictor_index ~= nil then
 					local ability = EntIndexToHScript( event.entindex_inflictor )
-					if ability ~= nil then
-						if ability:GetAbilityName() ~= nil then
-							if ability:GetAbilityName() == "necrolyte_reapers_scythe" then
-								print("Killed by Necro Ult")
-								extraTime = 20
-							end
-						end
-					end
 				end
 			end
 		end
 		if hero:IsRealHero() and heroTeam ~= killedTeam then
 			--print("Granting killer xp")
-			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false then
+			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
 				local memberID = hero:GetPlayerID()
 				PlayerResource:ModifyGold( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )

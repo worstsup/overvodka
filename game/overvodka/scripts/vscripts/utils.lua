@@ -268,7 +268,7 @@ function IsSolo()
 end
 
 function IsDuo()
-	return GetMapName() == "overvodka_duo"
+	return (GetMapName() == "overvodka_duo" or GetMapName() == "dota")
 end
 
 function GetCurrentCategory()

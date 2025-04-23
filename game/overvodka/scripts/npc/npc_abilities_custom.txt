@@ -14021,7 +14021,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"AbilityTextureName"            "tasty"
+		"AbilityTextureName"            "stint_w"
 		"AbilityCooldown"               "30 28 26 24"
 		"AbilityManaCost"               "100 120 140 160"
 		"AbilityCastRange"				"600 650 700 750"
