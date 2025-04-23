@@ -265,8 +265,6 @@ function COverthrowGameMode:OnEntityKilled( event )
 	local hero = EntIndexToHScript( event.entindex_attacker )
 	local heroTeam = hero:GetTeam()
 	local extraTime = 0
-	if killedUnit:GetUnitName() == "npc_dota_roshan" then
-	end
 
 	if killedUnit:IsRealHero() then
 		self.allSpawned = true
@@ -280,7 +278,7 @@ function COverthrowGameMode:OnEntityKilled( event )
 		end
 		if hero:IsRealHero() and heroTeam ~= killedTeam then
 			--print("Granting killer xp")
-			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
+			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false then
 				local memberID = hero:GetPlayerID()
 				PlayerResource:ModifyGold( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )
