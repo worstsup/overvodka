@@ -515,7 +515,7 @@
 				"bonus_attribute"             "1"
 				"AbilityCooldown"
 				{
-					"value"	"15 13 11 9"
+					"value"	"16 14 12 10"
 				}
 		}
 	}

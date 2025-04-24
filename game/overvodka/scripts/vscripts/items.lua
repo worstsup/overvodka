@@ -79,7 +79,8 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_chapman_green",
 		"item_chapman_indigo",
 		"item_chapman_pink",
-		"item_byebye"
+		"item_byebye",
+		"item_rocket_launcher"
 	}
 
 	local tier2 =
@@ -89,7 +90,8 @@ function COverthrowGameMode:SpecialItemAdd( event )
 		"item_chapman_red",
 		"item_chapman_green",
 		"item_chapman_indigo",
-		"item_chapman_pink"
+		"item_chapman_pink",
+		"item_rocket_launcher"
 	}
 
 	local tier3 =

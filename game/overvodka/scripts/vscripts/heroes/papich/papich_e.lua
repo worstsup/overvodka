@@ -13,6 +13,7 @@ function papich_e:Precache(context)
 	PrecacheResource( "soundfile", "soundevents/papich_e_start.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/papich_e_end.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/papich_e_plane_start.vsndevts", context )
+    PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
 end
 
 function papich_e:GetIntrinsicModifierName()
@@ -190,6 +191,7 @@ function modifier_papich_e_command:CheckState()
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
         [MODIFIER_STATE_SILENCED] = true,
         [MODIFIER_STATE_MUTED] = true,
+        [MODIFIER_STATE_INVULNERABLE] = true,
     }
 
     return state
