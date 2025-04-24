@@ -27,7 +27,7 @@ function evelone_r:OnSpellStart()
     local cast_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(cast_particle)
     if caster:HasScepter() then
-        AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 10000, vision_duration, false)
+        AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 12000, vision_duration, false)
     end
     caster:AddNewModifier(caster, self, "modifier_evelone_r", {duration = duration})
     EmitGlobalSound("evelone_night")

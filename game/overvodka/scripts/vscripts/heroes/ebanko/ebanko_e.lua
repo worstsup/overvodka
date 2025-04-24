@@ -53,7 +53,7 @@ function modifier_ebanko_e_smoke:GetAuraSearchTeam()
 end
 
 function modifier_ebanko_e_smoke:GetAuraSearchType()
-    return DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+    return DOTA_UNIT_TARGET_HERO
 end
 
 function modifier_ebanko_e_smoke:GetModifierAura()

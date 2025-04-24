@@ -49,6 +49,7 @@ function modifier_azazin_e:OnAttackLanded(params)
     if params.no_attack_cooldown then return end
     if self:GetParent():PassivesDisabled() then return end
     if self:GetParent():IsIllusion() then return end
+    if params.target:IsBuilding() then return end
 
     local target = params.target
     local ability = self:GetAbility()

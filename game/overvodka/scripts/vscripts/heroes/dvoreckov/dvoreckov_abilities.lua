@@ -2560,7 +2560,9 @@ function dvoreckov_qwe:HandleExplosionEffects()
             if not unit:HasModifier("modifier_knockback") and not unit:IsMagicImmune() and not unit:IsDebuffImmune() then
                 unit:AddNewModifier(unit, nil, "modifier_knockback", knockbackProperties)
                 unit:AddNewModifier(self:GetCaster(), nil, "modifier_dvoreckov_qwe_debuff", { duration = 1 })
-                ParticleManager:CreateParticle("particles/units/heroes/hero_huskar/huskar_inner_fire.vpcf", PATTACH_CUSTOMORIGIN, nil)
+                local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_huskar/huskar_inner_fire.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster() )
+				ParticleManager:SetParticleControl( nFXIndex, 0, self:GetCaster():GetOrigin() )
+				ParticleManager:SetParticleControl( nFXIndex, 1, Vector ( self:GetSpecialValueFor("radius")+100, self:GetSpecialValueFor("radius")+100, self:GetSpecialValueFor("radius")+100 ) )
             end
         end
         local vPos = self:GetCaster():GetOrigin() + RandomVector(RandomInt(50, self.effect_radius))

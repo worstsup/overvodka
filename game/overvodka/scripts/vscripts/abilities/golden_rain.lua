@@ -74,6 +74,9 @@ end
 function golden_rain:RandomPointAroundCaster()
     local radius_min = 2000
     local radius_max = 2500
+    if GetMapName() == "dota" then
+        radius_max = 3000
+    end
     local random_radius = RandomFloat(radius_min, radius_max)
     local random_angle = RandomFloat(0, 2 * math.pi)
     local offset = Vector(math.cos(random_angle) * random_radius, math.sin(random_angle) * random_radius, 0)
