@@ -13404,8 +13404,8 @@
 		{
 			"bonus_dmg_pct"
 			{
-				"value"	"2"
-				"special_bonus_unique_bratishkin_8" "+4"
+				"value"	"4"
+				"special_bonus_unique_bratishkin_8" "+2"
 			}
 			"attacks_needed"		"15"
 		}

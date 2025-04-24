@@ -1,31 +1,31 @@
-LinkLuaModifier("modifier_bratishkin_r_debuff", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_bratishkin_r_shard", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_bratishkin_r_dota_debuff", "heroes/bratishkin/bratishkin_r_dota", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_bratishkin_r_dota_shard", "heroes/bratishkin/bratishkin_r_dota", LUA_MODIFIER_MOTION_NONE)
 
-bratishkin_r = class({})
+bratishkin_r_dota = class({})
 t = 0
-function bratishkin_r:Precache(context)
+function bratishkin_r_dota:Precache(context)
     PrecacheResource("particle", "particles/bratishkin_r.vpcf", context)
     PrecacheResource("soundfile", "soundevents/bratishkin_r_1.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/bratishkin_r_2.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/bratishkin_r_3.vsndevts", context)
 end
 
-function bratishkin_r:GetIntrinsicModifierName()
-    return "modifier_bratishkin_r_shard"
+function bratishkin_r_dota:GetIntrinsicModifierName()
+    return "modifier_bratishkin_r_dota_shard"
 end
 
-function bratishkin_r:OnSpellStart()
+function bratishkin_r_dota:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
     if not target:IsHero() then return end
-    local modifier = target:FindModifierByNameAndCaster("modifier_bratishkin_r_debuff", caster)
+    local modifier = target:FindModifierByNameAndCaster("modifier_bratishkin_r_dota_debuff", caster)
     local is_new = false
     if not modifier then
         modifier = target:AddNewModifier(
             caster,
             self,
-            "modifier_bratishkin_r_debuff",
+            "modifier_bratishkin_r_dota_debuff",
             {duration = -1}
         )
         is_new = true
@@ -40,27 +40,27 @@ function bratishkin_r:OnSpellStart()
     end
 end
 
-modifier_bratishkin_r_debuff = class({})
+modifier_bratishkin_r_dota_debuff = class({})
 
-function modifier_bratishkin_r_debuff:IsHidden() return false end
-function modifier_bratishkin_r_debuff:IsDebuff() return true end
-function modifier_bratishkin_r_debuff:IsPurgable() return false end
-function modifier_bratishkin_r_debuff:RemoveOnDeath() return false end
-function modifier_bratishkin_r_debuff:GetAttributes() return MODIFIER_ATTRIBUTE_PERMANENT end
+function modifier_bratishkin_r_dota_debuff:IsHidden() return false end
+function modifier_bratishkin_r_dota_debuff:IsDebuff() return true end
+function modifier_bratishkin_r_dota_debuff:IsPurgable() return false end
+function modifier_bratishkin_r_dota_debuff:RemoveOnDeath() return false end
+function modifier_bratishkin_r_dota_debuff:GetAttributes() return MODIFIER_ATTRIBUTE_PERMANENT end
 
-function modifier_bratishkin_r_debuff:OnCreated()
+function modifier_bratishkin_r_dota_debuff:OnCreated()
     if IsServer() then
         self:StartIntervalThink(0.2)
     end
 end
 
-function modifier_bratishkin_r_debuff:OnIntervalThink()
+function modifier_bratishkin_r_dota_debuff:OnIntervalThink()
     if not self:GetParent():IsAlive() then
         self:SetDuration(-1, true)
     end
 end
 
-function modifier_bratishkin_r_debuff:OnStackCountChanged(previous_stacks)
+function modifier_bratishkin_r_dota_debuff:OnStackCountChanged(previous_stacks)
     if IsServer() then
         local parent = self:GetParent()
         local stack_count = self:GetStackCount()
@@ -82,14 +82,14 @@ function modifier_bratishkin_r_debuff:OnStackCountChanged(previous_stacks)
     end
 end
 
-function modifier_bratishkin_r_debuff:DeclareFunctions()
+function modifier_bratishkin_r_dota_debuff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_TOOLTIP
     }
 end
 
-function modifier_bratishkin_r_debuff:GetModifierIncomingDamage_Percentage(keys)
+function modifier_bratishkin_r_dota_debuff:GetModifierIncomingDamage_Percentage(keys)
     if keys.attacker == self:GetCaster() then
         local bonus_dmg_pct = self:GetAbility():GetSpecialValueFor("bonus_dmg_pct")
         return self:GetStackCount() * bonus_dmg_pct
@@ -97,26 +97,26 @@ function modifier_bratishkin_r_debuff:GetModifierIncomingDamage_Percentage(keys)
     return 0
 end
 
-function modifier_bratishkin_r_debuff:OnTooltip()
+function modifier_bratishkin_r_dota_debuff:OnTooltip()
     return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("bonus_dmg_pct")
 end
 
-function modifier_bratishkin_r_debuff:GetTexture()
+function modifier_bratishkin_r_dota_debuff:GetTexture()
     return "bratishkin_r"
 end
 
 
-modifier_bratishkin_r_shard = class({})
+modifier_bratishkin_r_dota_shard = class({})
 
-function modifier_bratishkin_r_shard:IsHidden() return true end
-function modifier_bratishkin_r_shard:IsPurgable() return false end
-function modifier_bratishkin_r_shard:RemoveOnDeath() return false end
+function modifier_bratishkin_r_dota_shard:IsHidden() return true end
+function modifier_bratishkin_r_dota_shard:IsPurgable() return false end
+function modifier_bratishkin_r_dota_shard:RemoveOnDeath() return false end
 
-function modifier_bratishkin_r_shard:DeclareFunctions()
+function modifier_bratishkin_r_dota_shard:DeclareFunctions()
     return { MODIFIER_EVENT_ON_ATTACK_LANDED }
 end
 
-function modifier_bratishkin_r_shard:OnAttackLanded(params)
+function modifier_bratishkin_r_dota_shard:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker ~= self:GetParent() then return end
     if params.attacker:IsIllusion() then return end
@@ -128,10 +128,10 @@ function modifier_bratishkin_r_shard:OnAttackLanded(params)
         local caster = self:GetParent()
         local ability = self:GetAbility()
         local target = params.target
-        local modifier = target:FindModifierByNameAndCaster("modifier_bratishkin_r_debuff", caster)
+        local modifier = target:FindModifierByNameAndCaster("modifier_bratishkin_r_dota_debuff", caster)
         local is_new = false
         if not modifier then
-            modifier = target:AddNewModifier(caster, ability, "modifier_bratishkin_r_debuff", { duration = -1 })
+            modifier = target:AddNewModifier(caster, ability, "modifier_bratishkin_r_dota_debuff", { duration = -1 })
             is_new = true
         end
         if modifier then
