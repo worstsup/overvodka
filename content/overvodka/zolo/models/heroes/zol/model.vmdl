@@ -575,6 +575,7 @@
 								motion_type = "Uniform"
 							},
 						]
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_RUN"
 						activity_weight = 1
 						weight_list_name = ""
@@ -597,6 +598,7 @@
 					{
 						_class = "AnimFile"
 						name = "Breathing_Idle"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_IDLE"
 						activity_weight = 1
 						weight_list_name = ""
@@ -619,6 +621,7 @@
 					{
 						_class = "AnimFile"
 						name = "Cross_Punch"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_ATTACK"
 						activity_weight = 1
 						weight_list_name = ""
@@ -656,6 +659,7 @@
 								motion_type = "Uniform"
 							},
 						]
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_DIE"
 						activity_weight = 1
 						weight_list_name = ""
@@ -678,6 +682,7 @@
 					{
 						_class = "AnimFile"
 						name = "Spell_Cast"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_1"
 						activity_weight = 1
 						weight_list_name = ""
@@ -700,6 +705,7 @@
 					{
 						_class = "AnimFile"
 						name = "zolo_tables"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_3"
 						activity_weight = 1
 						weight_list_name = ""
@@ -722,6 +728,7 @@
 					{
 						_class = "AnimFile"
 						name = "ZOLORAGE2004"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_2"
 						activity_weight = 1
 						weight_list_name = ""
@@ -739,6 +746,29 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = 70.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "Breathing_Idle1"
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_CAPTURE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "zolo/models/heroes/zol/Breathing Idle.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
 						reverse = false
 					},
 				]

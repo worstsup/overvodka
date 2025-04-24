@@ -69,18 +69,36 @@ golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
-		if GetMapName() == "dota" and spawnedUnit.bFirstSpawned == nil then
+		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
-			if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
-				spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
+			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
+			if sahur then
+				sahur:SetLevel(1)
 			end
-			if spawnedUnit:GetUnitName() == "npc_dota_hero_slark" then
-				spawnedUnit:SwapAbilities("bratishkin_r","bratishkin_r_dota", false, true)
+			local ash = spawnedUnit:FindAbilityByName("imba_batrider_sticky_napalm_new")
+			if ash then
+				ash:SetLevel(1)
 			end
-			if spawnedUnit:GetUnitName() == "npc_dota_hero_necrolyte" then
-				spawnedUnit:SwapAbilities("peterka_w","peterka_w_dota", false, true)
+			local pap = spawnedUnit:FindAbilityByName("papich_facet_regen")
+			if pap then
+				pap:SetLevel(1)
 			end
-		end
+			local dave = spawnedUnit:FindAbilityByName("dave_ambient")
+			if dave then
+				dave:SetLevel(1)
+			end
+			if GetMapName() == "dota" then
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
+					spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
+				end
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_slark" then
+					spawnedUnit:SwapAbilities("bratishkin_r","bratishkin_r_dota", false, true)
+				end
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_necrolyte" then
+					spawnedUnit:SwapAbilities("peterka_w","peterka_w_dota", false, true)
+				end
+			end
+	  	end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
@@ -110,29 +128,6 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			end
 		end
 	end
-	if spawnedUnit.bFirstSpawned == nil then
-      	spawnedUnit.bFirstSpawned = true
-		local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
-		if sahur then
-			sahur:SetLevel(1)
-		end
-        local ab = spawnedUnit:FindAbilityByName("sidet")
-		if ab then
-            ab:SetLevel(1)
-		end
-		local ash = spawnedUnit:FindAbilityByName("imba_batrider_sticky_napalm_new")
-		if ash then
-			ash:SetLevel(1)
-		end
-		local pap = spawnedUnit:FindAbilityByName("papich_facet_regen")
-		if pap then
-			pap:SetLevel(1)
-		end
-		local dave = spawnedUnit:FindAbilityByName("dave_ambient")
-		if dave then
-			dave:SetLevel(1)
-		end
-      end
 	
 end
 ---------------------------------------------------------
@@ -341,7 +336,7 @@ end
 
 function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 	--print("Setting time for respawn")
-	if killedTeam == self.leadingTeam and self.isGameTied == false then
+	if killedTeam == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -15
 		end
@@ -352,6 +347,18 @@ function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 		end
 		killedUnit:SetTimeUntilRespawn( 20 + extraTime )
 	else
+		if killedUnit:FindItemInInventory("item_aegis") then
+			extraTime = -5
+		end
+		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
+			if killedUnit:IsReincarnating() then
+				extraTime = -6
+			end
+		end
+		killedUnit:SetTimeUntilRespawn( 10 + extraTime )
+	end
+	if GetMapName() == "dota" then
+		extraTime = killedUnit:GetLevel() * 2
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -5
 		end

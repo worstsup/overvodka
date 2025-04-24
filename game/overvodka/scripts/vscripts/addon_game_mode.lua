@@ -531,7 +531,7 @@ function COverthrowGameMode:InitGameMode()
 
 	self.m_TeamColors = {}
 	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
-	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }		--		Yellow
+	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 136, 8, 8 }
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue
@@ -648,6 +648,7 @@ function COverthrowGameMode:InitGameMode()
 	end
 	if GetMapName() == "dota" then
 		GameRules:SetPreGameTime( 90.0 )
+		GameRules:SetCustomGameSetupTimeout( 3 )
 	else
 		GameRules:SetPreGameTime( 10.0 )
 	end

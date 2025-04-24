@@ -35,8 +35,8 @@
 	"Neutrals"        								"Нейтральная команда"
 	"NoTeam"          								"Нет команды"
 
-	"DOTA_GoodGuys"   								"Бирюзовые Сигмы"
-	"DOTA_BadGuys"    								"Жёлтые Нормисы"
+	"DOTA_GoodGuys"   								"TEAM EVELONE"
+	"DOTA_BadGuys"    								"TEAM SASAVOT"
 	"DOTA_Custom1"    								"Розовые Щавели"
 	"DOTA_Custom2"    								"Оранжевые Хайпики"
 	"DOTA_Custom3"    								"Синие Скуфы"

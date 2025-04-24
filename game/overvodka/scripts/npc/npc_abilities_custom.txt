@@ -4764,7 +4764,7 @@
 		{
 			"bash_chance"
 			{
-				"value" "25"
+				"value" "20"
 			}
 			"bonus_damage"
 			{
@@ -4779,7 +4779,7 @@
 	"roshan_spell_block"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityCooldown"				"5.0"
+		"AbilityCooldown"				"10.0"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}
 	"neutral_upgrade"
@@ -4791,12 +4791,12 @@
 		{
 				"max_level"				"30"
 				"increase_time"			"60"
-				"increase_damage"		"15"
-				"increase_aspd"			"10"
-				"increase_health"		"120"
-				"increase_armor"		"1"
-				"increase_gold"			"7"
-				"increase_xp"			"30"
+				"increase_damage"		"5"
+				"increase_aspd"			"5"
+				"increase_health"		"40"
+				"increase_armor"		"0.5"
+				"increase_gold"			"5"
+				"increase_xp"			"20"
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	}

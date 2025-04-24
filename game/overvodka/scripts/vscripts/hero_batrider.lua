@@ -63,7 +63,7 @@ function modifier_imba_batrider_sticky_napalm_handler:OnIntervalThink()
 			break
 		end
 		self:GetCaster():SetCursorPosition(pointd)
-		self:GetAbility():CastAbilityOnPosition(pointd, "imba_batrider_sticky_napalm_new", self:GetCaster():GetPlayerID())
+		self:GetCaster():CastAbilityOnPosition(pointd, "imba_batrider_sticky_napalm_new", self:GetCaster():GetPlayerID())
 	end
 end
 
