@@ -54,6 +54,7 @@ function modifier_stray_innate:OnAttackLanded( params )
     if self:GetParent():PassivesDisabled() then return end
     if not self:GetAbility():IsFullyCastable() then return end
     if self:GetParent():IsIllusion() then return end
+    if not params.attacker:IsRealHero() then return end
     if params.attacker:IsAttackImmune() or params.attacker:IsInvulnerable() then return end
     if params.attacker:GetUnitName() == "npc_nelya" then return end
     if params.attacker:IsBuilding() then return end

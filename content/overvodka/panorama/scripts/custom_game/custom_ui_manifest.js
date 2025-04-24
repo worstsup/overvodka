@@ -4,7 +4,14 @@ GameUI.CustomUIConfig().multiteam_top_scoreboard =
  LeftInjectXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_left.xml",
  TeamOverlayXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_team_overlay.xml"
 };
-
+if (Game.GetMapInfo().map_display_name == "dota"){
+  GameUI.CustomUIConfig().multiteam_top_scoreboard =
+    {
+    reorder_team_scores: false,
+    LeftInjectXMLFile: "",
+    TeamOverlayXMLFile: "file://{resources}/layout/custom_game/overthrow_scoreboard_team_overlay.xml"
+    };
+}
 GameUI.CustomUIConfig().team_select = 
 {
     "bShowSpectatorTeam" : false
@@ -22,6 +29,10 @@ GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTIO
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false );
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_CLOCK, false );
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_HEADER, false );
+
+if (Game.GetMapInfo().map_display_name == "dota"){
+  GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, true );
+}
 
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ENDGAME, false );
 

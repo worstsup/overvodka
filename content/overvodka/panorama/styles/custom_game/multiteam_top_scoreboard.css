@@ -2,7 +2,7 @@
 
 @define ANIM_TIME: 0.75s;
 @define EXTRA_PADDING: 50px;
-@define M_EXTRA_PADDING: 0px;
+@define M_EXTRA_PADDING: 50px;
 .CustomHudRoot {
     width: 100%;
     height: 100%;

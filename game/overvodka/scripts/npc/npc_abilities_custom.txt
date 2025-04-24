@@ -500,6 +500,25 @@
 				}
 		}
 	}
+	"kachok_abstention_dota"
+	{
+		"BaseClass"              "ability_lua"
+		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"ScriptFile"             "heroes/kachok/kachok_abstention_dota"
+		"AbilityTextureName"     "nosex"
+		"AbilityType"          	 "DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"             	 "4"
+		"HasScepterUpgrade"      "1"
+		"IsBreakable"			 "1"
+		"AbilityValues"
+		{
+				"bonus_attribute"             "1"
+				"AbilityCooldown"
+				{
+					"value"	"15 13 11 9"
+				}
+		}
+	}
 	//=================================
 	//ТРЕНБОЛОН
 	//=================================
@@ -7510,8 +7529,6 @@
 		"AbilityManaCost"				"100 200 300"
 		"AbilityValues"
 		{
-				"blink_range"			"10000"
-				"min_blink_range"		"200"
 				"radius"
 				{
 					"value"	"500 600 700"

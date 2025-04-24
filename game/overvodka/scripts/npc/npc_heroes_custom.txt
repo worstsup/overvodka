@@ -15,7 +15,7 @@
 		"Ability2"		"kachok_big_tasty"
 		"Ability3"		"kachok_abstention"
 		"Ability4"		"ursa_maul"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"kachok_abstention_dota"
 		"Ability6"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_kachok_1"
 		"Ability11"		"special_bonus_unique_kachok_2"

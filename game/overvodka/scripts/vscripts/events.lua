@@ -17,6 +17,8 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
 			--self.TEAM_KILLS_TO_WIN = 20
 			nCOUNTDOWNTIMER = 1501
+		elseif GetMapName() == "dota" then
+			nCOUNTDOWNTIMER = 15000
 		else
 			--self.TEAM_KILLS_TO_WIN = 15
 			nCOUNTDOWNTIMER = 1501
@@ -67,6 +69,12 @@ golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
+		if GetMapName() == "dota" and spawnedUnit.bFirstSpawned == nil then
+			spawnedUnit.bFirstSpawned = true
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
+				spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
+			end
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
@@ -374,8 +382,14 @@ function COverthrowGameMode:OnItemPickUp( event )
 		for i = 1, #heroes do
 			local playerID = heroes[i]:GetPlayerID()
 			r = 300
+			if GetMapName() == "dota" then
+				r = 50
+			end
 			if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
 				r = 600
+				if GetMapName() == "dota" then
+					r = 100
+				end
 			end
 			if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
 				r = 0

@@ -40,6 +40,14 @@ function SpawnBombardiro()
 		Vector(4500, -4500, 0),
 		Vector(-4500, -4500, 0)
 	}
+    if GetMapName() == "dota" then
+        spawnPoints = {
+            Vector(8000, 8000, 0),
+            Vector(-8000, 8000, 0),
+            Vector(8000, -8000, 0),
+            Vector(-8000, -8000, 0)
+        }
+    end
 	local spawnLocation = spawnPoints[RandomInt(1, #spawnPoints)]
     bombardiro = CreateUnitByName("npc_bombardiro", spawnLocation, true, undefined, undefined, DOTA_TEAM_NEUTRALS)
 	bombardiro:FindAbilityByName("bombardiro_fly"):SetLevel(1)

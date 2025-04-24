@@ -515,6 +515,9 @@ function ScoreboardUpdater_InitializeScoreboard( scoreboardConfig, scoreboardPan
 	if (typeof (scoreboardConfig.shouldReorder) === 'undefined') {
 		// default to true
 		scoreboardConfig.shouldReorder = true;
+		if (Game.GetMapInfo().map_display_name == "dota"){
+			scoreboardConfig.shouldReorder = false;
+		}
 	}
 	_ScoreboardUpdater_UpdateAllTeamsAndPlayers( scoreboardConfig, scoreboardPanel );
 	return { "scoreboardConfig": scoreboardConfig, "scoreboardPanel":scoreboardPanel }

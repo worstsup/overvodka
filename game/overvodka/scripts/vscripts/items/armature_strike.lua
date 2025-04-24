@@ -63,6 +63,7 @@ end
 function modifier_armature_strike:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     if params.target:IsWard() then return end
+    if params.target:IsBuilding() then return end
     if self:GetParent():FindAllModifiersByName("modifier_armature_strike")[1] ~= self then return end
     if self.critProc then
         params.target:EmitSound("armature_crit")

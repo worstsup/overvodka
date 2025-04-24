@@ -42,6 +42,9 @@ function Precache( context )
 
 		if GetMapName() == "dota" then
 			PrecacheResource("particle", "particles/base_attacks/ranged_goodguy.vpcf", context)
+			PrecacheResource("particle", "particles/base_attacks/ranged_siege_good.vpcf", context)
+			PrecacheResource("particle", "particles/base_attacks/ranged_siege_bad.vpcf", context)
+			PrecacheResource("particle", "particles/overboss_chalice_splash.vpcf", context)
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged.vmdl", context)
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl", context)
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl", context)
@@ -79,6 +82,14 @@ function Precache( context )
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_spawn_a/n_creep_satyr_spawn_a.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_furbolg/n_creep_furbolg_disrupter.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_a/n_creep_satyr_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_melee/creep_bad_flagbearer.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_siege/creep_bad_siege.vmdl", context)
+			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet_mage.vmdl", context)
 		end
 
 		PrecacheResource( "soundfile", "soundevents/golden_rain.vsndevts", context )
@@ -584,7 +595,7 @@ function COverthrowGameMode:InitGameMode()
 	self.itemSpawnLocations = nil
 	self.KILLS_TO_WIN_SINGLES = 50
 	self.KILLS_TO_WIN_DUOS = 50
-	self.KILLS_TO_WIN_TRIOS = 35
+	self.KILLS_TO_WIN_TRIOS = 200
 	self.KILLS_TO_WIN_QUADS = 50
 	self.KILLS_TO_WIN_QUINTS = 50
 
@@ -644,7 +655,11 @@ function COverthrowGameMode:InitGameMode()
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
-	GameRules:SetPreGameTime( 10.0 )
+	if GetMapName() == "dota" then
+		GameRules:SetPreGameTime( 90.0 )
+	else
+		GameRules:SetPreGameTime( 10.0 )
+	end
 	GameRules:SetStrategyTime( 15.0 )
 	if self.m_bFastPlay then
 		GameRules:SetStrategyTime( 1.0 )
@@ -659,22 +674,22 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:SetUseUniversalShopMode( true )
 	GameRules:SetSuggestAbilitiesEnabled( true )
 	GameRules:SetSuggestItemsEnabled( true )
+	GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_DOUBLEDAMAGE , true ) --Double Damage
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_HASTE, true ) --Haste
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true ) --Illusion
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
 	if GetMapName() == "dota" then
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
-		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
-		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
 		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_byebye")
+		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
-		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
-		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
 		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_lesh")
+		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -921,7 +936,7 @@ function COverthrowGameMode:UpdateScoreboard()
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
 	end
-
+	
 	-- reverse-sort by score
 	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
 
@@ -1226,7 +1241,7 @@ function COverthrowGameMode:AssignTeams()
 			vecTeamNeededPlayers[ nTeamNumber ] = vecTeamNeededPlayers[ nTeamNumber ] - 1
 		end
 	end
-	--if self.m_bFillWithBots == true then
-	GameRules:BotPopulate()
-	--end
+	if self.m_bFillWithBots == true then
+		GameRules:BotPopulate()
+	end
 end

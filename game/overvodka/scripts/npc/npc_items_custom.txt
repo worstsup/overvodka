@@ -2292,9 +2292,9 @@
 		"AbilityValues"
 		{
 				"reincarnate_time"		"5.0"
-				"disappear_time"		"120.0"
+				"disappear_time"		"300.0"
 				"disappear_time_minutes_tooltip"		"2"
-				"disappear_time_turbo"  "120.0"
+				"disappear_time_turbo"  "300.0"
 		}
 	}
 	"item_recipe_mask_of_quadrobe"

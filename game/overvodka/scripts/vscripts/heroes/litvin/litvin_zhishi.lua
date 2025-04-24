@@ -23,15 +23,11 @@ function litvin_zhishi:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	local origin = caster:GetOrigin()
-	local max_range = self:GetSpecialValueFor("blink_range")
 	local radius = self:GetSpecialValueFor( "radius" )
 	local tree = self:GetSpecialValueFor( "radius_tree" )
 	local duration = self:GetSpecialValueFor( "duration" )
 	local buff_dur = self:GetSpecialValueFor( "buff_dur" )
 	local direction = (point - origin)
-	if direction:Length2D() > max_range then
-		direction = direction:Normalized() * max_range
-	end
 	local enemies = FindUnitsInRadius(
 		caster:GetTeamNumber(),
 		point,
