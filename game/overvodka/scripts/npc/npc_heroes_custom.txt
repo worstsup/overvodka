@@ -2352,7 +2352,7 @@
 		"Ability3"		"bratishkin_e"
 		"Ability4"		"generic_hidden"
 		"Ability5"		"bratishkin_innate"
-		"Ability6"		"bratishkin_r"
+		"Ability6"		"bratishkin_r_dota"
 		"Ability7"		"bratishkin_q_base"
 
 		"Ability10"		"special_bonus_unique_bratishkin_1"

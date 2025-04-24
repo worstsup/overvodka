@@ -13385,6 +13385,31 @@
 			"attacks_needed"		"15"
 		}
 	}
+	"bratishkin_r_dota"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"					"heroes/bratishkin/bratishkin_r_dota"
+		"AbilityTextureName"			"bratishkin_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"HasShardUpgrade"				"1"
+		"AbilityCastRange"              "700 800 900"
+		"AbilityCastPoint"              "0.3"
+		"AbilityCooldown"               "40.0 35.0 30.0"
+		"AbilityValues"
+		{
+			"bonus_dmg_pct"
+			{
+				"value"	"4"
+				"special_bonus_unique_bratishkin_8" "+2"
+			}
+			"attacks_needed"		"15"
+		}
+	}
 	"special_bonus_unique_azazin_1"
 	{
         "BaseClass"						"special_bonus_base"														
