@@ -1233,6 +1233,7 @@
 		"precache"
 		{
 			"soundfile"                 "soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
+			"soundfile"					"soundevents/parit.vsndevts"
 			"particle"                  "particles/units/heroes/hero_windrunner/windrunner_windrun.vpcf"
 			"particle"				 	"particles/compendium_2024_teleport_endcap_smoke_new.vpcf"
 		}

@@ -7,6 +7,8 @@ LinkLuaModifier( "modifier_papich_e_heal", "heroes/papich/papich_e.lua", LUA_MOD
 LinkLuaModifier( "modifier_papich_bkb", "heroes/papich/papich_e.lua", LUA_MODIFIER_MOTION_NONE )
 papich_e = class({})
 
+function papich_e:IsRefreshable() return false end
+
 function papich_e:Precache(context)
     PrecacheResource( "soundfile", "soundevents/papich_e_fly.vsndevts", context )
 	PrecacheResource( "soundfile", "soundevents/papich_e_plane.vsndevts", context )
@@ -25,6 +27,9 @@ function papich_e:OnChargeFinish( interrupt )
     local max_duration = self:GetSpecialValueFor( "chargeup_time" )
     local max_distance = self:GetSpecialValueFor( "max_distance" )
     local speed = self:GetSpecialValueFor( "charge_speed" )
+    if GetMapName() == "dota" then
+        speed = speed + 500
+    end
     local charge_duration = max_duration
     local mod = caster:FindModifierByName( "modifier_papich_e_charge" )
     if mod then
@@ -143,9 +148,6 @@ function modifier_papich_e_passive:OnIntervalThink()
            { duration = duration }
         )
         self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
-        caster:FaceTowards(point)
-        caster:FaceTowards(point)
-        caster:FaceTowards(point)
         local mod = caster:AddNewModifier(
            caster,
             self.ability,

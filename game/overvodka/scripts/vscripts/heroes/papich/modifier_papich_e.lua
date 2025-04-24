@@ -15,6 +15,7 @@ end
 function modifier_papich_e:OnCreated( kv )
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
+	self.dir = self.parent:GetForwardVector():Normalized()
 	self.speed = self:GetAbility():GetSpecialValueFor( "charge_speed" )
 	self.turn_speed = self:GetAbility():GetSpecialValueFor( "turn_rate" )
 	self.gold = self:GetAbility():GetSpecialValueFor( "gold" )
@@ -33,8 +34,9 @@ function modifier_papich_e:OnCreated( kv )
 			break
 		end
     end
+	self:SetDirection( self.point )
     self.k = 0
-	self.tree_radius = 120
+	self.tree_radius = 240
 	self.height = 50
 	self.duration = 0.3
 	if not IsServer() then return end
@@ -231,6 +233,9 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 		self.speed = 100
 	else
 		self.speed = 1600
+		if GetMapName() == "dota" then
+			self.speed = 2000
+		end
 	end
 	if distance < 500 or (GetMapName() ~= "dota" and distance > 11000) or (GetMapName() == "dota" and distance > 20000) then
 		if self.k == 0 then

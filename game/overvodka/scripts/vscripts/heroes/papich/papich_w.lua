@@ -53,7 +53,7 @@ function modifier_papich_w_thinker_attack_speed:GetAuraDuration()				return 1.0 
 function modifier_papich_w_thinker_attack_speed:GetAuraRadius()				return self.radius end
 function modifier_papich_w_thinker_attack_speed:GetAuraSearchFlags()			return DOTA_UNIT_TARGET_FLAG_NONE end
 function modifier_papich_w_thinker_attack_speed:GetAuraSearchTeam()			return DOTA_UNIT_TARGET_TEAM_BOTH end
-function modifier_papich_w_thinker_attack_speed:GetAuraSearchType()			return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BUILDING end
+function modifier_papich_w_thinker_attack_speed:GetAuraSearchType()			return DOTA_UNIT_TARGET_HERO end
 function modifier_papich_w_thinker_attack_speed:GetModifierAura()				return "modifier_papich_w_attack_speed" end
 
 
@@ -71,7 +71,7 @@ function modifier_papich_w_thinker_evasion:GetAuraDuration()				return 0.1 end
 function modifier_papich_w_thinker_evasion:GetAuraRadius()				return self.radius end
 function modifier_papich_w_thinker_evasion:GetAuraSearchFlags()			return DOTA_UNIT_TARGET_FLAG_NONE end
 function modifier_papich_w_thinker_evasion:GetAuraSearchTeam()			return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
-function modifier_papich_w_thinker_evasion:GetAuraSearchType()			return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BUILDING end
+function modifier_papich_w_thinker_evasion:GetAuraSearchType()			return DOTA_UNIT_TARGET_HERO end
 function modifier_papich_w_thinker_evasion:GetModifierAura()				return "modifier_papich_w_evasion" end
 
 

@@ -17,6 +17,14 @@ function item_rocket_launcher:OnSpellStart()
             Vector(4000, -4000, 0),
             Vector(-4000, -4000, 0)
         }
+        if GetMapName() == "dota" then
+            spawnPoints = {
+                Vector(8000, 8000, 0),
+                Vector(-8000, 8000, 0),
+                Vector(8000, -8000, 0),
+                Vector(-8000, -8000, 0)
+            }
+        end
         local spawnLocation = spawnPoints[RandomInt(1, #spawnPoints)]
         bombardiro = CreateUnitByName("npc_bombardiro", spawnLocation, true, undefined, undefined, self:GetCaster():GetTeamNumber())
         bombardiro:FindAbilityByName("bombardiro_fly"):SetLevel(0)
@@ -42,7 +50,6 @@ function modifier_bombardiro_fly_rocket_launcher:OnCreated(kv)
     local rel = spawn_pos - center
     local opposite = center - rel
     self.center = Vector(center.x, center.y, spawn_pos.z)
-    self.opposite = Vector(opposite.x, opposite.y, spawn_pos.z)
     self.phase = 1
     Timers:CreateTimer(0.1, function()
         self:MoveTo(self.center)
@@ -70,6 +77,9 @@ function modifier_bombardiro_fly_rocket_launcher:DeclareFunctions()
     }
 end
 function modifier_bombardiro_fly_rocket_launcher:GetModifierMoveSpeed_Absolute()
+    if GetMapName() == "dota" then
+        return 1200
+    end
     return 900
 end
 
@@ -122,8 +132,8 @@ function modifier_bombardiro_fly_rocket_launcher:OnIntervalThink()
     end
     if self.phase == 1 and (pos - self.center):Length2D() < 50 then
         self.phase = 2
-        self:MoveTo(self.opposite)
-    elseif self.phase == 2 and (pos - self.opposite):Length2D() < 50 then
+        self:MoveTo(self.center + self:GetParent():GetForwardVector() * 4000)
+    elseif self.phase == 2 and (pos - self.center):Length2D() > 4000 then
         parent:ForceKill(false)
         self:Destroy()
     end
