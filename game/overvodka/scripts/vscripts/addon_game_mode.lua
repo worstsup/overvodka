@@ -685,6 +685,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
 		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_tpscroll" )
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
+		GameRules:GetGameModeEntity():SetTowerBackdoorProtectionEnabled( true )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
