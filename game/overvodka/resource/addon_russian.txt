@@ -2283,6 +2283,8 @@
 		"DOTA_Tooltip_modifier_golovach_r"					"Донаты"
 		"DOTA_Tooltip_modifier_golovach_r_fury"				"Осталось ударов"
 		"DOTA_Tooltip_modifier_golovach_r_recovery"			"Перезарядка ударов"
+		"DOTA_Tooltip_modifier_golovach_r_debuff"			"Донаты"
+		"DOTA_Tooltip_modifier_golovach_r_debuff_Description"			"Ваши скорость атаки и передвижения снижены"
 		"DOTA_Tooltip_ability_golovach_q" "С ЛОКТЯ"
 		"DOTA_Tooltip_ability_golovach_q_Description" "Сиега наказывает врага, бьющего его в спину, ударяя его с локтя и отталкивая, а также замедляя его и уменьшая входящий урон по себе на %slow_dur_tooltip% сек."
 		"DOTA_Tooltip_ability_golovach_q_percent" "%ШАНС:"
