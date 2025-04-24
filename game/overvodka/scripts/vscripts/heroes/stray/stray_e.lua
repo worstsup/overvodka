@@ -40,6 +40,8 @@ function modifier_stray_e:OnAttackLanded(params)
     if params.attacker:IsIllusion() and not params.attacker:HasModifier("modifier_stray_scepter") then return end
     if params.attacker:PassivesDisabled() then return end
     if params.target:IsWard() then return end
+    if params.target:IsBuilding() then return end
+    if not params.target:IsRealHero() then return end
 
     local duration = self:GetAbility():GetSpecialValueFor("duration")
 

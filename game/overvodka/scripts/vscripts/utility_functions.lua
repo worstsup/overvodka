@@ -54,6 +54,26 @@ function SpawnBombardiro()
 	bombardiro:FindAbilityByName("bombardiro_bombs"):SetLevel(1)
 end
 
+function SpawnHamster()
+    EmitGlobalSound( "kirill_start" )
+	CustomGameEventManager:Send_ServerToAllClients( "hamster_spawn", {} )
+	local hamsterSpawn
+    if GetMapName() == "dota" then
+        hamsterSpawn = Vector( math.random(-800, 0), math.random(-800, 0), 0 )
+    else
+        hamsterSpawn = Vector(math.random(100, 300), math.random(100, 300), 0)
+    end
+	local hamster = CreateUnitByName(
+		"npc_hamster",
+		hamsterSpawn,
+		true,
+		undefined,
+		undefined,
+		DOTA_TEAM_NEUTRALS
+	)
+	hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 30})
+end
+
 function PickRandomShuffle( reference_list, bucket )
     if ( #reference_list == 0 ) then
         return nil

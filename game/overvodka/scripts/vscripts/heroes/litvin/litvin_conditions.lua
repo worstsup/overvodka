@@ -8,7 +8,7 @@ function litvin_conditions:GetAOERadius()
 end
 
 function litvin_conditions:CastFilterResultTarget( hTarget )
-	if self:GetCaster() == hTarget then
+	if self:GetCaster() == hTarget or hTarget:IsBuilding() then
 		return UF_FAIL_CUSTOM
 	end
 
@@ -16,7 +16,7 @@ function litvin_conditions:CastFilterResultTarget( hTarget )
 end
 
 function litvin_conditions:GetCustomCastErrorTarget( hTarget )
-	if self:GetCaster() == hTarget then
+	if self:GetCaster() == hTarget or hTarget:IsBuilding() then
 		return "#dota_hud_error_cant_cast_on_self"
 	end
 

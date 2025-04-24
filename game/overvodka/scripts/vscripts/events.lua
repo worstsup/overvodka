@@ -53,12 +53,15 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		end
 
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		--print( "OnGameRulesStateChange: Game In Progress" )
-		self.countdownEnabled = true
-		CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
-		DoEntFire( "center_experience_ring_particles", "Start", "0", 0, self, self  )
+		if GetMapName() ~= "dota" then
+			self.countdownEnabled = true
+			CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
+			DoEntFire( "center_experience_ring_particles", "Start", "0", 0, self, self  )
 
-		GameRules:GetGameModeEntity():SetAnnouncerDisabled( true ) -- Disable the normal announcer at game start
+			GameRules:GetGameModeEntity():SetAnnouncerDisabled( true ) -- Disable the normal announcer at game start
+		else
+			self.countdownEnabled = false
+		end
 	end
 end
 

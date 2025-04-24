@@ -7,6 +7,7 @@ function serega_sven:OnSpellStart()
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 	local point = self:GetCursorPosition()
+	if target:TriggerSpellAbsorb( self ) then return end
 	tartar = {}
 	if target then
 		point = target:GetOrigin()
@@ -112,7 +113,6 @@ function serega_sven:OnProjectileHit( target, location )
 	for _,v in ipairs(tartar) do  
 		if v == target then return end
 	end
-	if target:TriggerSpellAbsorb( self ) then return end
 
 	local stun = self:GetSpecialValueFor( "duration" )
 	local damage = self:GetAbilityDamage()

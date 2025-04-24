@@ -245,6 +245,7 @@ function modifier_bratishkin_q_base:OnAttackLanded(params)
     if self:GetParent():PassivesDisabled() then return end
     if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
+    if params.target:IsBuilding() then return end
     if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
 		self.critProc = true
 	else

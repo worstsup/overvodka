@@ -20,23 +20,12 @@ function ThrowCoin( args )
 		args.caster:FindAbilityByName("golden_rain"):SetLevel(1)
 		args.caster:CastAbilityNoTarget(args.caster:FindAbilityByName("golden_rain"), -1)
 	end
-	if k == 53 then
+	if k == 53 or k == 110 then
 		CustomGameEventManager:Send_ServerToAllClients( "item_has_spawned", {} )
 		EmitGlobalSound( "hamster_announce" )
 	end
-	if k == 55 then
-		EmitGlobalSound( "kirill_start" )
-		CustomGameEventManager:Send_ServerToAllClients( "hamster_spawn", {} )
-		local hamsterSpawn = Vector( math.random(100, 300), math.random(100, 300), 0 )
-		local hamster = CreateUnitByName(
-			"npc_hamster",
-			hamsterSpawn,
-			true,
-			undefined,
-			undefined,
-			DOTA_TEAM_NEUTRALS
-		)
-		hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 30})
+	if k == 55 or k == 112 then
+		SpawnHamster()
 	end
 	if k == 83 then
 		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_announce", {} )
@@ -46,24 +35,6 @@ function ThrowCoin( args )
 		CustomGameEventManager:Send_ServerToAllClients( "golden_rain_start", {} )
 		args.caster:FindAbilityByName("golden_rain"):SetLevel(2)
 		args.caster:CastAbilityNoTarget(args.caster:FindAbilityByName("golden_rain"), -1)
-	end
-	if k == 110 then
-		CustomGameEventManager:Send_ServerToAllClients( "item_has_spawned", {} )
-		EmitGlobalSound( "hamster_announce" )
-	end
-	if k == 112 then
-		EmitGlobalSound( "kirill_start" )
-		CustomGameEventManager:Send_ServerToAllClients( "hamster_spawn", {} )
-		local hamsterSpawn = Vector( math.random(100, 300), math.random(100, 300), 0 )
-		local hamster = CreateUnitByName(
-			"npc_hamster",
-			hamsterSpawn,
-			true,
-			undefined,
-			undefined,
-			DOTA_TEAM_NEUTRALS
-		)
-		hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 30})
 	end
 	k = k + 1
 	GameRules:GetGameModeEntity().COverthrowGameMode:SpawnGoldEntity( coinSpawn )
