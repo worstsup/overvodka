@@ -2122,7 +2122,7 @@
 		"Ability5"		"peterka_innate"
 		"Ability6"		"peterka_r"
 		"Ability7"		"peterka_e_release"
-
+		"Ability8"		"peterka_w_dota"
 		"Ability10"		"special_bonus_mp_regen_250"
 		"Ability11"		"special_bonus_unique_necrophos_heartstopper_regen_duration"
 		"Ability12"		"special_bonus_unique_necrophos_3"
@@ -2352,8 +2352,9 @@
 		"Ability3"		"bratishkin_e"
 		"Ability4"		"generic_hidden"
 		"Ability5"		"bratishkin_innate"
-		"Ability6"		"bratishkin_r_dota"
+		"Ability6"		"bratishkin_r"
 		"Ability7"		"bratishkin_q_base"
+		"Ability8"		"bratishkin_r_dota"
 
 		"Ability10"		"special_bonus_unique_bratishkin_1"
 		"Ability11"		"special_bonus_unique_bratishkin_2"

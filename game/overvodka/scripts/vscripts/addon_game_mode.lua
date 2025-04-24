@@ -174,10 +174,7 @@ function Precache( context )
 		PrecacheResource( "particle", "particles/units/heroes/hero_legion_commander/legion_commander_duel_victory.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/items/zeus/lightning_weapon_fx/zuus_base_attack_immortal_lightning.vpcf", context )
-		PrecacheResource( "particle", "particles/c4_explosion.vpcf", context )
-		PrecacheResource( "particle", "particles/doom_bringer_doom_ring_bomb.vpcf", context )
 		PrecacheResource( "particle", "particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf", context )
-		PrecacheResource( "particle", "particles/units/heroes/hero_alchemist/alchemist_unstable_concoction_timer.vpcf", context )
 		PrecacheResource( "particle", "particles/rubick_faceless_void_chronosphere_new.vpcf", context )
 		PrecacheResource( "particle", "particles/marci_unleash_stack_number_two.vpcf", context )
 		PrecacheResource( "particle", "particles/marci_unleash_stack_number_one.vpcf", context )
@@ -288,7 +285,6 @@ function Precache( context )
 		PrecacheResource( "model", "models/items/beastmaster/hawk/fotw_eagle/fotw_eagle.vmdl", context )
 		PrecacheResource( "model", "models/creeps/mega_greevil/mega_greevil.vmdl", context )
 		PrecacheResource( "model", "models/items/courier/carty_dire/carty_dire_flying.vmdl", context )
-		PrecacheResource( "model", "cheater/models/heroes/cheat/c4_1.vmdl", context )
 		PrecacheResource( "model", "nix/model.vmdl", context )
 		PrecacheResource( "model", "sans/sans_rig.vmdl", context )
 		PrecacheResource( "model", "sans/blaster.vmdl", context )
@@ -421,11 +417,6 @@ function Precache( context )
 		PrecacheResource( "soundfile", "soundevents/awp.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/awp_draw.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/tazer.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/c4_activate.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/c4.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/c4_defused.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/bomb_defusing.vsndevts", context )
-		PrecacheResource( "soundfile", "soundevents/bomb_planted.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/oboyudno.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/oboyudno_2.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/vibes.vsndevts", context )
@@ -674,7 +665,6 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:SetUseUniversalShopMode( true )
 	GameRules:SetSuggestAbilitiesEnabled( true )
 	GameRules:SetSuggestItemsEnabled( true )
-	GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_DOUBLEDAMAGE , true ) --Double Damage
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_HASTE, true ) --Haste
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true ) --Illusion
@@ -683,18 +673,20 @@ function COverthrowGameMode:InitGameMode()
 	if GetMapName() == "dota" then
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
-		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_byebye")
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
+		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_tpscroll" )
+		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
 		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_lesh")
+		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_byebye" )
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
+		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
-	GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_byebye" )
 	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( COverthrowGameMode, "BountyRunePickupFilter" ), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( COverthrowGameMode, "ExecuteOrderFilter" ), self )
 
@@ -965,7 +957,7 @@ function COverthrowGameMode:UpdateScoreboard()
 	end
 	local allHeroes = HeroList:GetAllHeroes()
 	for _,entity in pairs( allHeroes) do
-		if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore then
+		if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore and GetMapName() ~= "dota" then
 			if entity:IsAlive() == true then
 				-- Attaching a particle to the leading team heroes
 				local existingParticle = entity:Attribute_GetIntValue( "particleID", -1 )

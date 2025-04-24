@@ -3130,8 +3130,8 @@
 		"SuggestLategame"				"1"
 		"AbilityValues"
 		{
-				"bonus_attack_speed"	"25"
-				"xp_multiplier"			"2.1"
+				"bonus_attack_speed"	"20"
+				"xp_multiplier"			"1.5"
 				"bonus_gold"			"100"
 		}
 	}

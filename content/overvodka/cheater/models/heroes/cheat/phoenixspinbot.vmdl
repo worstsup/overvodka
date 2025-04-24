@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc38:version{81520c21-94aa-45fa-a458-34731c145969} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc39:version{1ceecb0d-4093-4729-ab18-b76886c64cde} -->
 {
 	rootNode = 
 	{
@@ -474,7 +474,8 @@
 					{
 						_class = "AnimFile"
 						name = "JETER"
-						activity_name = ""
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_CAPTURE"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -496,6 +497,7 @@
 					{
 						_class = "AnimFile"
 						name = "SPINBOT"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_6"
 						activity_weight = 1
 						weight_list_name = ""
@@ -518,6 +520,7 @@
 					{
 						_class = "AnimFile"
 						name = "SPINBOTSHOOT"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_ATTACK"
 						activity_weight = 1
 						weight_list_name = ""
@@ -540,6 +543,7 @@
 					{
 						_class = "AnimFile"
 						name = "Action"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_2"
 						activity_weight = 1
 						weight_list_name = ""
@@ -562,6 +566,7 @@
 					{
 						_class = "AnimFile"
 						name = "SPINBOTdeath"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_DIE"
 						activity_weight = 1
 						weight_list_name = ""
@@ -584,6 +589,7 @@
 					{
 						_class = "AnimFile"
 						name = "Armature_Armature_ArmatureAction"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_IDLE"
 						activity_weight = 1
 						weight_list_name = ""
@@ -606,6 +612,7 @@
 					{
 						_class = "AnimFile"
 						name = "spinbothopstandalone"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_CAST_ABILITY_1"
 						activity_weight = 1
 						weight_list_name = ""
@@ -628,6 +635,7 @@
 					{
 						_class = "AnimFile"
 						name = "spinbot_run"
+						is_default_idle_anim = false
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -650,6 +658,7 @@
 					{
 						_class = "AnimFile"
 						name = "Hop_standalone"
+						is_default_idle_anim = false
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -672,6 +681,7 @@
 					{
 						_class = "AnimFile"
 						name = "SPINBOTrub"
+						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_RUN"
 						activity_weight = 1
 						weight_list_name = ""

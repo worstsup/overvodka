@@ -74,6 +74,12 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
 				spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_slark" then
+				spawnedUnit:SwapAbilities("bratishkin_r","bratishkin_r_dota", false, true)
+			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_necrolyte" then
+				spawnedUnit:SwapAbilities("peterka_w","peterka_w_dota", false, true)
+			end
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
@@ -138,6 +144,15 @@ end
 function COverthrowGameMode:OnHeroFinishSpawn( event )
 	local hPlayerHero = EntIndexToHScript( event.heroindex )
 	if hPlayerHero ~= nil and hPlayerHero:IsRealHero() then
+		if GetMapName() ~= "dota" then
+			for i = 0, 8 do
+				local item = hPlayerHero:GetItemInSlot(i)
+				if item and item:GetAbilityName() == "item_tpscroll" then
+					hPlayerHero:RemoveItem(item)
+					break
+				end
+			end
+		end
 	end
 end
 
@@ -286,7 +301,7 @@ function COverthrowGameMode:OnEntityKilled( event )
 		end
 		if hero:IsRealHero() and heroTeam ~= killedTeam then
 			--print("Granting killer xp")
-			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false then
+			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
 				local memberID = hero:GetPlayerID()
 				PlayerResource:ModifyGold( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )
