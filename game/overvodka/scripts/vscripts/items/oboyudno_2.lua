@@ -87,6 +87,7 @@ end
 function modifier_item_oboyudno_2:OnAttackLanded(params)
 	if not IsServer() then return end
 	if not self:GetAbility() then return end
+	if params.attacker:IsBuilding() then return end
 	if params.attacker ~= self:GetParent() and params.target == self:GetParent() then
 		if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then return end
 		if self:GetParent():FindAllModifiersByName("modifier_item_oboyudno_2")[1] ~= self then return end

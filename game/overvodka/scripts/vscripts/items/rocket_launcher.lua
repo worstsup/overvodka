@@ -132,7 +132,7 @@ function modifier_bombardiro_fly_rocket_launcher:OnIntervalThink()
     end
     if self.phase == 1 and (pos - self.center):Length2D() < 50 then
         self.phase = 2
-        self:MoveTo(self.center + self:GetParent():GetForwardVector() * 4000)
+        self:MoveTo(self.center + self:GetParent():GetForwardVector() * 10000)
     elseif self.phase == 2 and (pos - self.center):Length2D() > 4000 then
         parent:ForceKill(false)
         self:Destroy()

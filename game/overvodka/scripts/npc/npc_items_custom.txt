@@ -187,7 +187,7 @@
 
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"45"
+		"AbilityCooldown"				"50"
 		"AbilityManaCost"				"50"
 		"AbilitySharedCooldown"			"hqd"
 
@@ -227,7 +227,7 @@
 
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"40"
+		"AbilityCooldown"				"45"
 		"AbilityManaCost"				"75"
 		"AbilitySharedCooldown"			"hqd"
 
@@ -292,7 +292,7 @@
 
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"35"
+		"AbilityCooldown"				"40"
 		"AbilityManaCost"				"100"
 		"AbilitySharedCooldown"			"hqd"
 

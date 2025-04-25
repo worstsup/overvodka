@@ -63,6 +63,7 @@ end
 function modifier_item_drobe:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     if params.target:IsWard() then return end
+    if params.target:IsBuilding() then return end
     if params.attacker:IsIllusion() then return end
     if self:GetParent():FindAllModifiersByName("modifier_item_drobe")[1] ~= self then return end
     if params.no_attack_cooldown then return end

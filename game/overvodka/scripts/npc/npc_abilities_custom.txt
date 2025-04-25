@@ -7301,6 +7301,7 @@
 				"schoolboys_dmg"
 				{
 					"value"	"40 120 200 280"
+					"special_bonus_unique_litvin_5" "+100"
 				}
 		}
 		"OnSpellStart"
@@ -7944,7 +7945,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"600"

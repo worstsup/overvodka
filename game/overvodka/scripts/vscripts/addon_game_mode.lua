@@ -45,9 +45,22 @@ function Precache( context )
 			PrecacheResource("particle", "particles/base_attacks/ranged_siege_good.vpcf", context)
 			PrecacheResource("particle", "particles/base_attacks/ranged_siege_bad.vpcf", context)
 			PrecacheResource("particle", "particles/overboss_chalice_splash.vpcf", context)
+			PrecacheResource("particle", "particles/sasavot_tower_proj.vpcf", context)
 			PrecacheResource("particle", "particles/units/heroes/hero_witchdoctor/witchdoctor_base_attack.vpcf", context)
+			PrecacheResource("particle", "particles/sasavot_tower_dest.vpcf", context)
+			PrecacheResource("particle", "particles/evelone_tower_dest.vpcf", context)
+			PrecacheResource("particle", "particles/evelone_tower_proj.vpcf", context)
+			PrecacheResource("particle", "particles/evelone_barracks_dest.vpcf", context)
+			PrecacheResource("particle", "particles/econ/items/effigies/status_fx_effigies/base_statue_destruction_gold.vpcf", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet.vmdl", context)
 			PrecacheResource("model", "models/props_gameplay/aegis.vmdl", context)
+			PrecacheResource("model", "models/toilet/toilet.vmdl", context)
+			PrecacheResource("model", "models/slots/safe/safe.vmdl", context)
+			PrecacheResource("model", "models/slots/roulete_table.vmdl", context)
+			PrecacheResource("model", "models/slots/tower_slot.vmdl", context)
+			PrecacheResource("model", "models/hydrant/cap.vmdl", context)
+			PrecacheResource("model", "models/pozhar/pozhar.vmdl", context)
+			PrecacheResource("model", "models/hydrant/hydrant.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ancient_frog/n_creep_ancient_frog_mage.vmdl", context)
 			PrecacheResource("model", "models/props_gameplay/rune_goldxp.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl", context)
@@ -67,7 +80,6 @@ function Precache( context )
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_beast/n_creep_beast.vmdl", context)
 			PrecacheResource("model", "models/creeps/pine_cone/pine_cone.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_berserker.vmdl", context)
-			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_v2.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_satyr_c/n_creep_satyr_c.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl", context)
@@ -225,6 +237,8 @@ function Precache( context )
 		PrecacheResource( "model", "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl", context )
 		PrecacheResource( "model", "models/tung_sahur/tung_tung_tung_sahur.vmdl", context )
 		PrecacheResource( "model", "models/bombardiro/bombardiro.vmdl", context )
+		PrecacheResource( "model", "models/griffins/peter.vmdl", context )
+		PrecacheResource( "model", "models/griffins/chris.vmdl", context )
 		PrecacheResource( "model", "models/coin.vmdl", context )
 		PrecacheResource( "model", "models/kachok/kachok.vmdl", context )
 		PrecacheResource( "model", "models/stray/stray.vmdl", context )
@@ -538,8 +552,10 @@ function COverthrowGameMode:InitGameMode()
 	self.m_bFastPlay = GlobalSys:CommandLineCheck( "-addon_fastplay" )
 
 	self.m_TeamColors = {}
-	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
-	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 136, 8, 8 }
+	if GetMapName() ~= "dota" then
+		self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
+		self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 136, 8, 8 }
+	end
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
 	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue

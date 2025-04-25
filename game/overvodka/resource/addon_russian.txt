@@ -8,7 +8,8 @@
 		"BanPhase"										"Запрет"
 		"HeroPickPhase"									"Выбор героя"
 		"StrategyPhase"									"Планирование"
-
+		"DOTA_GoodGuys" "TEAM EVELONE"
+		"DOTA_BadGuys" "TEAM SASAVOT"
 		"LOADING_SCREEN_Telegramm"						"Наш Телеграм"
 		"END_SCREEN_Telegramm"							"OVERVODKA"
 		"LOADING_SCREEN_DotaDash"						"Наши друзья"
@@ -251,6 +252,8 @@
 		"npc_inator"	"ИНАТОР"
 
 		"DOTA_Tooltip_ability_bombardiro_bombs" "БОМБЫ БОМБАРДИРО"
+		"npc_dota_neutral_granite_golem"	"ПИТЕР ГРИФФИН"
+		"npc_dota_neutral_rock_golem"		"КРИС ГРИФФИН"
 
 		"DOTA_Tooltip_ability_stray_r"	"ДЕДУШКА ГАНС"
 		"DOTA_Tooltip_ability_stray_r_description" "Любящий дедушка Ганс Бочаров приходит на помощь Стрею, усаживая его в свой Тигр и даруя доп. дальность атаки, броню, невосприимчивость к эффектам и доп. скорость передвижения на %duration% сек. Танк имеет фиксированный интервал выстрелов, равный %bat% сек."

@@ -10,7 +10,5 @@ modifier_subscriber_effect = class({
 
 function modifier_subscriber_effect:OnCreated()
     if IsServer() then
-        local fx = ParticleManager:CreateParticle("particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-        self:AddParticle(fx, false, false, -1, false, false)
     end
 end

@@ -2877,8 +2877,8 @@
         "MagicalResistance"     "50"
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "260"
-        "AttackDamageMax"       "260"
+        "AttackDamageMin"       "380"
+        "AttackDamageMax"       "380"
         "AttackRate"            "1.4"
         "AttackAnimationPoint"  "0.5"
         "AttackAcquisitionRange" "500"
@@ -3790,7 +3790,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -3824,7 +3824,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -3887,7 +3887,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -3921,7 +3921,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -3985,7 +3985,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4019,7 +4019,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4083,7 +4083,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4117,7 +4117,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4179,7 +4179,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -4213,7 +4213,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4276,7 +4276,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4310,7 +4310,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4374,7 +4374,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/tower_good.vmdl"// Model.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
 		"SoundSet"					"Tower.Water"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -4408,7 +4408,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4463,6 +4463,297 @@
 		}
 	}
 	//=================================================================================
+// Creeps: Good Tower 1 TOP
+//=================================================================================
+	"npc_dota_goodguys_tower1_top"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
+		"SoundSet"					"Tower.Water"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower90"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		"wearable"					"14293"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"130"
+		"HealthBarOffset"			"260"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}	
+
+//=================================================================================
+// Creeps: Good Tower 1 MID
+//=================================================================================
+	"npc_dota_goodguys_tower1_mid"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
+		"SoundSet"					"Tower.Water"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower45"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"130"
+		"HealthBarOffset"			"260"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}	
+
+//=================================================================================
+// Creeps: Good Tower 1 BOT
+//=================================================================================
+	"npc_dota_goodguys_tower1_bot"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/slots/tower_slot.vmdl"// Model.
+		"SoundSet"					"Tower.Water"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower90"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/evelone_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"130"
+		"HealthBarOffset"			"260"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}	
+	//=================================================================================
 // Creeps: Bad Tower 2 TOP
 //=================================================================================
 	"npc_dota_badguys_tower2_top"
@@ -4470,7 +4761,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4504,7 +4795,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4567,7 +4858,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -4601,7 +4892,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4664,7 +4955,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4698,7 +4989,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4761,7 +5052,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4795,7 +5086,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4849,7 +5140,296 @@
 			"attack_long_range"		"500"
 		}
 	}	
+//=================================================================================
+// Creeps: Bad Tower 1 TOP
+//=================================================================================
+	"npc_dota_badguys_tower1_top"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
+		"SoundSet"					"Tower.Fire"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower90"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		"wearable"					"14294"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
 
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"120"
+		"HealthBarOffset"			"280"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}	
+
+//=================================================================================
+// Creeps: Bad Tower 1 MID
+//=================================================================================
+	"npc_dota_badguys_tower1_mid"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
+		"SoundSet"					"Tower.Fire"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower45"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"120"
+		"HealthBarOffset"			"280"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}	
+//=================================================================================
+// Creeps: Bad Tower 1 BOT
+//=================================================================================
+	"npc_dota_badguys_tower1_bot"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
+		"SoundSet"					"Tower.Fire"					// Name of sound set.
+		"MinimapIcon"				"minimap_tower90"
+		"MinimapIconSize"			"320"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"creep_siege"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"12"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"88"		// Damage range min.
+		"AttackDamageMax"			"92"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"BaseAttackSpeed"			"110"
+		"AttackRate"				"0.9"		// Speed of attack.
+		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"			// Hull type used for navigation/locomotion.
+		"ProjectileCollisionSize"	"50"
+		"RingRadius"				"120"
+		"HealthBarOffset"			"280"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"1.0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1800"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		"AttackRangeActivityModifiers"
+		{
+			"attack_normal_range"	"0"
+			"attack_long_range"		"500"
+		}
+	}
 //=================================================================================
 // Creeps: Bad Tower 3 MID
 //=================================================================================
@@ -4858,7 +5438,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -4892,7 +5472,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -4955,7 +5535,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
@@ -4989,7 +5569,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -5052,7 +5632,7 @@
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
-		"Model"						"models/props_structures/dire_tower002.vmdl"// Model.
+		"Model"						"models/hydrant/hydrant.vmdl"// Model.
 		"SoundSet"					"Tower.Fire"					// Name of sound set.
 		"MinimapIcon"				"minimap_tower45"
 		"MinimapIconSize"			"320"
@@ -5086,7 +5666,7 @@
 		"AttackAnimationPoint"		"0.6"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"700"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/sasavot_tower_proj.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
 
 		// Attributes
@@ -5140,4 +5720,235 @@
 			"attack_long_range"		"500"
 		}
 	}
+	"npc_dota_badguys_fort"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_fort"	// Class of entity of link to.
+		"Model"						"models/pozhar/pozhar.vmdl"	// Model.
+		"SoundSet"					"Creep_Good_Melee"					// Name of sound set.
+		"MinimapIcon"				"minimap_ancient"
+		"MinimapIconSize"			"400"
+		"HealthBarOffset"			"400"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		
+		"Ability1"					"backdoor_protection_in_base"			// Ability 1.
+		"Ability2"					"creep_siege"			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		"Ability6"					""			// Ability 6 - Extra.
+		"Ability7"					""			// Ability 7 - Extra.
+		"Ability8"					""			// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"23"		// Physical protection.
+		"MagicalResistance"				"0"			// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"0"			// Damage range min.
+		"AttackDamageMax"			"0"			// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0"			// Speed of attack.
+		"AttackAnimationPoint"		"0"			// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"0"			// Range within a target can be acquired.
+		"AttackRange"				"0"			// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"			// Gold earned min.
+		"BountyGoldMax"				"0"			// Gold earned max.
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BUILDING"			// Hull type used for navigation/locomotion.
+		"RingRadius"				"350"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"			// Speed
+		"MovementTurnRate"			"0"			// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"4500"		// Base health.
+		"StatusHealthRegen"			"12"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"2600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"2600"		// Range of vision at night time.
+	}
+	//=================================================================================
+// Neutral: Chris Griffin
+//=================================================================================
+	"npc_dota_neutral_rock_golem"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/griffins/chris.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creep_neutral"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"5"
+		"IsAncient"					"1"
+		"ModelScale" 					"1.5"
+		"IsNeutralUnitType"			"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"ancient_rock_golem_weakening_aura"			// Ability 1
+		"Ability2"					"neutral_upgrade"			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"4"			// Physical protection.
+		"MagicalResistance"				"30"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"22"		// Damage range min.
+		"AttackDamageMax"			"24"		// Damage range max.	
+		"AttackRate"				"2"		// Speed of attack.
+		"BaseAttackSpeed"			"150"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"220"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"95"		// Experience earn.
+		"BountyGoldMin"				"37"		// Gold earned min.
+		"BountyGoldMax"				"43"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"270"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"800"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"400"		// Base mana.
+		"StatusManaRegen"			"1"			// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}								  
+
+//=================================================================================
+// Neutral: Peter Griffin
+//=================================================================================
+	"npc_dota_neutral_granite_golem"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/griffins/peter.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creep_neutral"
+		"SoundSet"					"n_creep_Melee"
+		"Level"						"6"
+		"IsAncient"					"1"
+		"ModelScale" 				"1.8"
+		"IsNeutralUnitType"			"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"granite_golem_hp_aura"			// Ability 1
+		"Ability2"					"neutral_upgrade"			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"8"			// Physical protection.
+		"MagicalResistance"				"30"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"80"		// Damage range min.
+		"AttackDamageMax"			"84"		// Damage range max.	
+		"AttackRate"				"2"		// Speed of attack.
+		"BaseAttackSpeed"			"150"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"128"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"260"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"124"		// Experience earn.
+		"BountyGoldMin"				"76"		// Gold earned min.
+		"BountyGoldMax"				"80"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"270"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1500"		// Base health.
+		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
+		"StatusMana"				"600"		// Base mana.
+		"StatusManaRegen"			"1.5"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}	
 }	

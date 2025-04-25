@@ -54,6 +54,7 @@ end
 function modifier_item_aegis_hero:OnAttackLanded(params)
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
+	if params.target:IsBuilding() then return end
 	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
 	if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
 		self.critProc = true

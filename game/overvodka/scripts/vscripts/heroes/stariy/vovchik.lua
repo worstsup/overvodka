@@ -6,7 +6,7 @@ function vovchik:CastFilterResultTarget( hTarget )
 	local nResult = UnitFilter(
 		hTarget,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
+		DOTA_UNIT_TARGET_HERO,
 		immune,
 		self:GetCaster():GetTeamNumber()
 	)
