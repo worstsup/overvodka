@@ -125,6 +125,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 				if spawnedUnit:GetUnitName() == "npc_dota_hero_weaver" then
 					spawnedUnit:SwapAbilities("azazin_e","azazin_e_dota", false, true)
 				end
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_riki" then
+					spawnedUnit:SwapAbilities("stray_r","stray_r_dota", false, true)
+				end
 			end
 	  	end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then

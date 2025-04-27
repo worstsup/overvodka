@@ -926,7 +926,13 @@ function dvoreckov_qqe:Precache( context )
 	PrecacheResource( "particle", "particles/dvoreckov_qqe_impact.vpcf", context )
 	PrecacheResource( "particle", "particles/dvoreckov_qqe.vpcf", context )
 end
-
+function dvoreckov_qqe:GetCooldown( level )
+    local base_cd = self.BaseClass.GetCooldown( self, level )
+    if GetMapName() == "overvodka_5x5" then
+        return base_cd + self:GetSpecialValueFor("dota_bonus_cooldown")
+    end
+    return base_cd
+end
 function dvoreckov_qqe:FindValidPoint( point )
 	local caster = self:GetCaster()
 	local offset = self:GetSpecialValueFor( "max_offset_distance" )
@@ -963,7 +969,6 @@ end
 function dvoreckov_qqe:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
-
 function dvoreckov_qqe:CastFilterResultLocation( vLoc )
 	if IsClient() then
 		if self.custom_indicator then
@@ -1040,7 +1045,6 @@ function dvoreckov_qqe:OnSpellStart()
 			y = point.y,
 		}
 	)
-
 	self.point = point
 end
 

@@ -31,8 +31,7 @@ function modifier_otec_start:OnCreated()
 	ParticleManager:ReleaseParticleIndex( particle )
 	self.bonus_intellect = self:GetAbility():GetSpecialValueFor( "bonus_intellect" )
 	self.move_speed_start = self:GetAbility():GetSpecialValueFor( "move_speed_start" )
-	self:GetParent():GiveMana( 300 )  
-	self:GetParent():GetAbilityByIndex(0):EndCooldown()
+	self:GetParent():GiveMana( 300 )
 	for i = 1, 6 do
 		local ability = self:GetParent():GetAbilityByIndex(i)
 		if ability then

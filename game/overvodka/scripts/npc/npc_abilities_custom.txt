@@ -1544,8 +1544,8 @@
 				}
 				"schoolboys_hp"
 				{
-					"value"	"150 250 350 450"
-					"special_bonus_unique_shkolnik_7" "+450"
+					"value"	"100 175 250 325"
+					"special_bonus_unique_shkolnik_7" "+325"
 				}
 				"schoolboys_dmg"
 				{
@@ -4668,6 +4668,7 @@
 					"special_bonus_unique_dvoreckov_8" "+1"
 				}
 				"max_offset_distance"			"100"
+				"dota_bonus_cooldown"			"30"
 		}
 	}
 	//=================================================================================================================
@@ -11786,7 +11787,7 @@
             		"value"	"0"
             		"special_bonus_unique_clockwerk_4" "+5"
             	}
-				"dota_damage" "75 150 225"
+				"dota_damage" 				"75 150 225"
             	"slow"						 "-55"
         }
 	}
@@ -13894,6 +13895,41 @@
 			{
 				"value"	"175 350 525"
 				"special_bonus_unique_stray_6" "+100"
+			}
+			"bat"					"1.4"
+			"duration"			 	"15"
+			"free"
+			{
+				"value"	"0"
+				"special_bonus_unique_stray_8" "+1"
+			}
+			"radius" "300"
+			"taran_damage" "100"
+		}
+	}
+	"stray_r_dota"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/stray/stray_r_dota"
+		"AbilityTextureName"			"stray_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior" 				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"AbilityCooldown"		   		"80"
+		"AbilityManaCost"		   		"200 300 400"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"				"0.3"
+		"HasShardUpgrade"				"1"
+		"AbilityValues"
+		{
+			"range"			 		"600 800 1000"
+			"mv"				 	"30"
+			"armor"			 		"10 20 30"
+			"magic_resist"			"30 45 60"
+			"dmg"
+			{
+				"value"	"125 250 325"
+				"special_bonus_unique_stray_6" "+75"
 			}
 			"bat"					"1.4"
 			"duration"			 	"15"
