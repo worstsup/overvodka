@@ -4,7 +4,6 @@
 ---------------------------------------------------------------------------
 function COverthrowGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
-	--print( "OnGameRulesStateChange: " .. nNewState )
 
 	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		self:AssignTeams()
@@ -12,18 +11,15 @@ function COverthrowGameMode:OnGameRulesStateChange()
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
-			--self.TEAM_KILLS_TO_WIN = 25
 			nCOUNTDOWNTIMER = 1501
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
-			--self.TEAM_KILLS_TO_WIN = 20
 			nCOUNTDOWNTIMER = 1501
 		elseif GetMapName() == "dota" then
 			nCOUNTDOWNTIMER = 15000
 		else
-			--self.TEAM_KILLS_TO_WIN = 15
 			nCOUNTDOWNTIMER = 1501
 		end
-
+		
 		self.TEAMS_MISSING = self:GetCountMissingTeams()
 		self:ReduceCountdownTimer(self.TEAMS_MISSING)
 		
@@ -58,9 +54,32 @@ function COverthrowGameMode:OnGameRulesStateChange()
 			CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
 			DoEntFire( "center_experience_ring_particles", "Start", "0", 0, self, self  )
 
-			GameRules:GetGameModeEntity():SetAnnouncerDisabled( true ) -- Disable the normal announcer at game start
+			GameRules:GetGameModeEntity():SetAnnouncerDisabled( true )
 		else
 			self.countdownEnabled = false
+			local towers = Entities:FindAllByClassname( "npc_dota_tower" )
+			for _, tower in pairs( towers ) do
+				if not tower or tower:IsNull() then
+				elseif tower:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+					tower:SetModel( "models/slots/tower_slot.vmdl" )
+					tower:SetOriginalModel( "models/slots/tower_slot.vmdl" )
+				elseif tower:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+					tower:SetModel( "models/hydrant/hydrant.vmdl" )
+					tower:SetOriginalModel( "models/hydrant/hydrant.vmdl" )
+				end
+			end
+			local roshan = Entities:FindAllByClassname( "npc_dota_roshan" )
+			for _, rosh in pairs( roshan ) do
+				if rosh and not rosh:IsNull() then
+					AddFOWViewer( DOTA_TEAM_GOODGUYS, rosh:GetAbsOrigin(), 200, 2, false )
+					AddFOWViewer( DOTA_TEAM_BADGUYS, rosh:GetAbsOrigin(), 200, 2, false )
+					Timers:CreateTimer(0.1, function()
+						rosh:SetModel( "models/shrek/shrek.vmdl" )
+						rosh:SetOriginalModel( "models/shrek/shrek.vmdl" )
+						rosh:SetModelScale( 4 )
+					end)
+				end
+			end
 		end
 	end
 end
@@ -99,6 +118,12 @@ function COverthrowGameMode:OnNPCSpawned( event )
 				end
 				if spawnedUnit:GetUnitName() == "npc_dota_hero_necrolyte" then
 					spawnedUnit:SwapAbilities("peterka_w","peterka_w_dota", false, true)
+				end
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_rubick" then
+					spawnedUnit:SwapAbilities("worstsup_q","worstsup_q_dota", false, true)
+				end
+				if spawnedUnit:GetUnitName() == "npc_dota_hero_weaver" then
+					spawnedUnit:SwapAbilities("azazin_e","azazin_e_dota", false, true)
 				end
 			end
 	  	end

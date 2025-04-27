@@ -11,6 +11,7 @@ function modifier_papich_e_charge:IsPurgable()
 end
 
 function modifier_papich_e_charge:OnCreated( kv )
+	if not IsServer() then return end
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 	EmitSoundOn( "papich_e_start", self.parent )
@@ -37,6 +38,7 @@ function modifier_papich_e_charge:OnCreated( kv )
     caster:FaceTowards(self.point)
 	self:StartIntervalThink( FrameTime() )
 	self.filter = FilterManager:AddExecuteOrderFilter( self.OrderFilter, self )
+	self:SetDirection( self.point )
 	self:PlayEffects1()
 	self:PlayEffects2()
 end
@@ -69,16 +71,6 @@ function modifier_papich_e_charge:GetMinHealth()
 end
 function modifier_papich_e_charge:OnOrder( params )
 	if params.unit~=self:GetParent() then return end
-	if 	params.order_type==DOTA_UNIT_ORDER_MOVE_TO_POSITION or
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_DIRECTION
-	then
-		self:SetDirection( self.point )
-	elseif 
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET
-	then
-		self:SetDirection( self.point )
-	end	
 end
 
 function modifier_papich_e_charge:SetDirection( location )

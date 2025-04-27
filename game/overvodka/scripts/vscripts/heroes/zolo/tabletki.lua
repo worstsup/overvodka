@@ -4,5 +4,8 @@ function Tabletki(keys)
 	local bonus_strength = ability:GetSpecialValueFor("bonus_strength")
 	caster:EmitSound("zolo_tabletki")
 	caster:ModifyStrength(bonus_strength)
-	caster:CalculateStatBonus()
+	caster:CalculateStatBonus(true)
+	if GetMapName() == "dota" then
+		ability:StartCooldown(60)
+	end
 end

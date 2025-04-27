@@ -52,6 +52,13 @@ function Precache( context )
 			PrecacheResource("particle", "particles/evelone_tower_proj.vpcf", context)
 			PrecacheResource("particle", "particles/evelone_barracks_dest.vpcf", context)
 			PrecacheResource("particle", "particles/econ/items/effigies/status_fx_effigies/base_statue_destruction_gold.vpcf", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_melee_mega.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_melee/radiant_flagbearer_mega.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_melee/creep_bad_melee_mega.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged_mega.vmdl", context)
+			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_melee/creep_bad_flagbearer_mega.vmdl", context)
+			PrecacheResource("model", "models/heroes/attachto_ghost/attachto_ghost.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet.vmdl", context)
 			PrecacheResource("model", "models/props_gameplay/aegis.vmdl", context)
 			PrecacheResource("model", "models/toilet/toilet.vmdl", context)
@@ -61,8 +68,8 @@ function Precache( context )
 			PrecacheResource("model", "models/hydrant/cap.vmdl", context)
 			PrecacheResource("model", "models/pozhar/pozhar.vmdl", context)
 			PrecacheResource("model", "models/hydrant/hydrant.vmdl", context)
+			PrecacheResource("model", "models/props_gameplay/rune_water.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_ancient_frog/n_creep_ancient_frog_mage.vmdl", context)
-			PrecacheResource("model", "models/props_gameplay/rune_goldxp.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl", context)
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged.vmdl", context)
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl", context)
@@ -109,7 +116,7 @@ function Precache( context )
 			PrecacheResource("model", "models/creeps/lane_creeps/creep_bad_siege/creep_bad_siege.vmdl", context)
 			PrecacheResource("model", "models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet_mage.vmdl", context)
 		end
-
+		PrecacheResource( "model", "models/props_gameplay/rune_goldxp.vmdl", context)
 		PrecacheResource( "soundfile", "soundevents/golden_rain.vsndevts", context )
 		PrecacheResource( "soundfile", "soundevents/golden_rain_announce.vsndevts", context )
 		PrecacheResource( "particle", "particles/golden_rain_start.vpcf", context )
@@ -138,6 +145,7 @@ function Precache( context )
     	PrecacheResource("particle", "particles/armature_cast.vpcf", context)
 		PrecacheResource("particle", "particles/quadrobe_buff.vpcf", context)
 		PrecacheResource("particle", "particles/sans_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/econ/events/ti11/duel/dueling_glove_projectile.vpcf", context)
 		PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_pugna.vsndevts", context)
     --Cache new particles
 		PrecacheResource( "particle", "particles/minion_generator_aura.vpcf", context )
@@ -237,6 +245,7 @@ function Precache( context )
 		PrecacheResource( "model", "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl", context )
 		PrecacheResource( "model", "models/tung_sahur/tung_tung_tung_sahur.vmdl", context )
 		PrecacheResource( "model", "models/bombardiro/bombardiro.vmdl", context )
+		PrecacheResource( "model", "models/shrek/shrek.vmdl", context)
 		PrecacheResource( "model", "models/griffins/peter.vmdl", context )
 		PrecacheResource( "model", "models/griffins/chris.vmdl", context )
 		PrecacheResource( "model", "models/coin.vmdl", context )
@@ -500,42 +509,42 @@ end
 function COverthrowGameMode:InitGameMode()
 	print( "Overthrow is loaded." )
 	XP_PER_LEVEL_TABLE = {
-    0, -- 1
-    200, -- 2
-    600, -- 3
-    1080, -- 4
-    1680, -- 5
-    2300, -- 6	 
-    3940, -- 7	 
-    4600, -- 8
-    5280, -- 9
-    6080, -- 10
-	6900,  --- 11
-	7740,  --- 12
-	8640,  --- 13
-	9865,  --- 14
-	11115, --- 15
-	12390, --- 16
-	13690, --- 17
-	15015, --- 18
-	16415, --- 19
-	17905, --- 20
-	19405, --- 21
-	21155, --- 22
-	23155, --- 23
-	25405, --- 24
-	27905, --- 25
-	30655, --- 26
-	33655, --- 27
-	36905, --- 28
-	40405, --- 29
-	44405, --- 30
-	48655, --- 31
-	52155, --- 32
-	56905, --- 33
-	58905, --- 34
-	62905, --- 35
-  }
+	0, -- 1
+	200, -- 2
+	600, -- 3
+	1080, -- 4
+	1680, -- 5
+	2300, -- 6
+	2940, -- 7
+	3600, -- 8
+	4280, -- 9
+	5080, -- 10
+	5900,  --- 11
+	6740,  --- 12
+	7640,  --- 13
+	8865,  --- 14
+	10115, --- 15
+	11390, --- 16
+	12690, --- 17
+	14015, --- 18
+	15415, --- 19
+	16905, --- 20
+	18405, --- 21
+	20155, --- 22
+	22155, --- 23
+	24405, --- 24
+	26905, --- 25
+	29655, --- 26
+	32655, --- 27
+	35905, --- 28
+	39405, --- 29
+	43405, --- 30
+	47655, --- 31
+	51155, --- 32
+	55905, --- 33
+	57905, --- 34
+	61905, --- 35
+	}
   
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
@@ -676,7 +685,6 @@ function COverthrowGameMode:InitGameMode()
 	else
 		GameRules:SetPreGameTime( 10.0 )
 	end
-	GameRules:SetStrategyTime( 15.0 )
 	if self.m_bFastPlay then
 		GameRules:SetStrategyTime( 1.0 )
 	end
@@ -686,8 +694,6 @@ function COverthrowGameMode:InitGameMode()
 	--GameRules:SetHideKillMessageHeaders( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
-	GameRules:SetHideKillMessageHeaders( true )
-	GameRules:SetUseUniversalShopMode( true )
 	GameRules:SetSuggestAbilitiesEnabled( true )
 	GameRules:SetSuggestItemsEnabled( true )
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_DOUBLEDAMAGE , true ) --Double Damage
@@ -698,10 +704,18 @@ function COverthrowGameMode:InitGameMode()
 	if GetMapName() == "dota" then
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_WATER, true ) -- Water
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
 		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_tpscroll" )
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
 		GameRules:GetGameModeEntity():SetTowerBackdoorProtectionEnabled( true )
+		GameRules:GetGameModeEntity():SetDaynightCycleDisabled( false )
+		GameRules:GetGameModeEntity():SetDaynightCycleAdvanceRate( 1.0 )
+		GameRules:GetGameModeEntity():SetUseDefaultDOTARuneSpawnLogic(true)
+		GameRules:SetHideKillMessageHeaders( false )
+		GameRules:SetUseUniversalShopMode( false )
+		GameRules:SetTimeOfDay( 0.25 )
+		GameRules:SetStrategyTime( 20.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
@@ -709,6 +723,9 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_byebye" )
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
+		GameRules:SetHideKillMessageHeaders( true )
+		GameRules:SetUseUniversalShopMode( true )
+		GameRules:SetStrategyTime( 15.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -971,7 +988,6 @@ function COverthrowGameMode:UpdateScoreboard()
 	end
 	-- Leader effects (moved from OnTeamKillCredit)
 	local leader = sortedTeams[1].teamID
-	--print("Leader = " .. leader)
 	self.leadingTeam = leader
 	self.runnerupTeam = sortedTeams[2].teamID
 	self.leadingTeamScore = sortedTeams[1].teamScore
@@ -1017,7 +1033,6 @@ function COverthrowGameMode:OnThink()
 		self:UpdatePlayerColor( nPlayerID )
 	end
 	self:UpdateScoreboard()
-	-- Stop thinking if game is paused
 	if GameRules:IsGamePaused() == true then
         return 1
     end
@@ -1037,7 +1052,6 @@ function COverthrowGameMode:OnThink()
 			CustomGameEventManager:Send_ServerToAllClients( "timer_alert", {} )
 		end
 		if nCOUNTDOWNTIMER <= 0 then
-			--Check to see if there's a tie
 			if self.isGameTied == false then
 				GameRules:SetCustomVictoryMessage( self.m_VictoryMessages[self.leadingTeam] )
 				COverthrowGameMode:EndGame( self.leadingTeam )
@@ -1054,7 +1068,6 @@ function COverthrowGameMode:OnThink()
 	end
 	
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		--Spawn Gold Bags
 		COverthrowGameMode:ThinkGoldDrop()
 		COverthrowGameMode:ThinkSpecialItemDrop()
 	end
@@ -1066,7 +1079,6 @@ end
 -- Scan the map to see which teams have spawn points
 ---------------------------------------------------------------------------
 function COverthrowGameMode:GatherAndRegisterValidTeams()
---	print( "GatherValidTeams:" )
 	local foundTeams = {}
 	local foundTeamsList = {}
 	local numTeams
@@ -1115,12 +1127,10 @@ function COverthrowGameMode:GatherAndRegisterValidTeams()
 	end
 end
 
--- Spawning individual camps
 function COverthrowGameMode:spawncamp(campname)
 	spawnunits(campname)
 end
 
--- Simple Custom Spawn
 function spawnunits(campname)
 	local spawndata = spawncamps[campname]
 	local NumberToSpawn = spawndata.NumberToSpawn --How many to spawn
@@ -1136,10 +1146,8 @@ function spawnunits(campname)
 			"berserk_zombie"
 	    }
 	local r = randomCreature[RandomInt(1,#randomCreature)]
-	--print(r)
     for i = 1, NumberToSpawn do
         local creature = CreateUnitByName( "npc_dota_creature_" ..r , SpawnLocation:GetAbsOrigin() + RandomVector( RandomFloat( 0, 200 ) ), true, nil, nil, DOTA_TEAM_NEUTRALS )
-        --print ("Spawning Camps")
         creature:SetInitialGoalEntity( waypointlocation )
     end
 end
@@ -1148,11 +1156,6 @@ end
 -- Event: Filter for inventory full
 --------------------------------------------------------------------------------
 function COverthrowGameMode:ExecuteOrderFilter( filterTable )
-	--[[
-	for k, v in pairs( filterTable ) do
-		print("EO: " .. k .. " " .. tostring(v) )
-	end
-	]]
 
 	local orderType = filterTable["order_type"]
 	if ( orderType ~= DOTA_UNIT_ORDER_PICKUP_ITEM or filterTable["issuer_player_id_const"] == -1 ) then
@@ -1164,7 +1167,6 @@ function COverthrowGameMode:ExecuteOrderFilter( filterTable )
 		end
 		local pickedItem = item:GetContainedItem()
 
-		--print(pickedItem:GetAbilityName())
 		if pickedItem == nil then
 			return true
 		end
@@ -1182,16 +1184,13 @@ function COverthrowGameMode:ExecuteOrderFilter( filterTable )
 					numBackpackItems = numBackpackItems + 1
 				end
 			end
-			--print( '^^^Backpack slots = ' .. numBackpackItems )
 			if numBackpackItems < 3 then
 				bAllowPickup = true
 			end
 
 			if bAllowPickup then
-				--print("inventory has space")
 				return true
 			else
-				--print("Moving to target instead")
 				local position = item:GetAbsOrigin()
 				filterTable["position_x"] = position.x
 				filterTable["position_y"] = position.y
@@ -1206,13 +1205,11 @@ end
 
 --------------------------------------------------------------------------------
 function COverthrowGameMode:AssignTeams()
-	--print( "Assigning teams" )
 	local vecTeamValid = {}
 	local vecTeamNeededPlayers = {}
 	for nTeam = 0, (DOTA_TEAM_COUNT-1) do
 		local nMax = GameRules:GetCustomGameTeamMaxPlayers( nTeam )
 		if nMax > 0 then
-			--print( "Found team " .. nTeam .. " with max players " .. nMax )
 			vecTeamNeededPlayers[ nTeam ] = nMax
 			vecTeamValid[ nTeam ] = true
 		else

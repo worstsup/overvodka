@@ -23,7 +23,15 @@ SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     1248303404, -- sega
     1133110680, -- buyer
     466290701,  -- timoxa
-    1362960359  -- kirill
+    1362960359,  -- zombill
+    
+    601410669, -- sasavot
+    293769213, -- evelone
+    115296681, -- byowl
+    306910654, -- iceicell
+    437492432, -- rostik999
+    1247711531, -- helin
+    1296693692, -- rostikfacekid
 }
 
 SERVER_RANKS_DEFINITION = {

@@ -195,9 +195,6 @@ function modifier_worstsup_q_thinker:GetAuraSearchFlags()
 end
 
 function modifier_worstsup_q_thinker:GetAuraEntityReject( hEntity )
-	if IsServer() then
-		if hEntity:GetUnitName()=="npc_dota_faceless_void" then return true end
-	end
 
 	return false
 end

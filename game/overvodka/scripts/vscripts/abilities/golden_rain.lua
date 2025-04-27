@@ -32,7 +32,7 @@ function golden_rain:OnAbilityPhaseStart()
             	self.random_point.x,
             	self.random_point.y,
             	DOTA_MINIMAP_EVENT_HINT_LOCATION,
-            	3
+            	5
         	)
 		AddFOWViewer( team, self.random_point, self:GetSpecialValueFor( "radius" ), self:GetSpecialValueFor( "duration" ) + 1, false )
 	end
@@ -75,7 +75,8 @@ function golden_rain:RandomPointAroundCaster()
     local radius_min = 2000
     local radius_max = 2500
     if GetMapName() == "dota" then
-        radius_max = 3000
+        radius_min = 0
+        radius_max = 0
     end
     local random_radius = RandomFloat(radius_min, radius_max)
     local random_angle = RandomFloat(0, 2 * math.pi)
@@ -112,6 +113,10 @@ function modifier_golden_rain_thinker:OnCreated( kv )
     self.radius = self.ability:GetSpecialValueFor( "radius" )
     self.xp = self.ability:GetSpecialValueFor("xp")
     self.gold = self.ability:GetSpecialValueFor("gold")
+    if GetMapName() == "dota" then
+        self.gold = self.gold - 25
+        self.xp = self.xp - 25
+    end
     local particle = ParticleManager:CreateParticle("particles/econ/items/monkey_king/mk_ti9_immortal/mk_ti9_immortal_army_radius.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 1, Vector(self.radius + 25, self.radius + 25, self.radius + 25))

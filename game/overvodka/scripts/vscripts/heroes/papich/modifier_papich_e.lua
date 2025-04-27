@@ -13,9 +13,9 @@ function modifier_papich_e:IsPurgable()
 end
 
 function modifier_papich_e:OnCreated( kv )
+	if not IsServer() then return end
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
-	self.dir = self.parent:GetForwardVector():Normalized()
 	self.speed = self:GetAbility():GetSpecialValueFor( "charge_speed" )
 	self.turn_speed = self:GetAbility():GetSpecialValueFor( "turn_rate" )
 	self.gold = self:GetAbility():GetSpecialValueFor( "gold" )

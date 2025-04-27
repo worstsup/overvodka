@@ -860,8 +860,8 @@
        
         // Armor
         //----------------------------------------------------------------
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -928,8 +928,8 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -1007,8 +1007,8 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -1084,8 +1084,8 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -1157,8 +1157,8 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+       "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -1617,16 +1617,26 @@
         // General
         //
         "BaseClass"                    "npc_dota_roshan"    // Class of entity of link to.
+		"Model"						"models/creeps/roshan/roshan.vmdl"	// Model.
         "StatusHealthRegen"     "100"
+		"ModelScale"			"1"
         "AttackDamageMin"       "150"
         "AttackDamageMax"       "150"
         "ArmorPhysical"				"35"			// Physical protection.
-        "MagicalResistance"				"60"	
+        "MagicalResistance"				"60"
+		"Ability1"					"roshan_revengeroar"	// Ability 1.
+		"Ability2"					"roshan_slam"			// Ability 2.
+		"Ability3"					"roshan_inherent_buffs"			// Ability 3.
+		"Ability4"					"roshan_devotion"	// Ability 4.
+		"Ability5"					"roshan_bash"		// Ability 5.
+		"Ability6"					"roshan_spell_block"		// Ability 6 - Extra.
+		"Ability7"					"roshan_grab_and_throw"						// Ability 7 - Extra.
+		"Ability8"					""						// Ability 8 - Extra.
         // Bounty
         //----------------------------------------------------------------
-        "BountyXP"                    "2500"        // Experience earn.
-        "BountyGoldMin"                "1000"        // Gold earned min.
-        "BountyGoldMax"                "1000"        // Gold earned max.
+        "BountyXP"                    "1000"        // Experience earn.
+        "BountyGoldMin"                "500"        // Gold earned min.
+        "BountyGoldMax"                "500"        // Gold earned max.
         "DisableClumpingBehavior"  "1"
         "HasInventory"				"1"
     }
@@ -1660,8 +1670,8 @@
 		"RingRadius"				"50"
 		"HealthBarOffset"			"180"
 		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"100"		// Gold earned min.
-		"BountyGoldMax"				"100"		// Gold earned max.
+		"BountyGoldMin"				"50"		// Gold earned min.
+		"BountyGoldMax"				"50"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"280"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
@@ -1705,8 +1715,8 @@
 		"RingRadius"				"50"
 		"HealthBarOffset"			"190"
 		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"100"		// Gold earned min.
-		"BountyGoldMax"				"100"		// Gold earned max.
+		"BountyGoldMin"				"60"		// Gold earned min.
+		"BountyGoldMax"				"60"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"310"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
@@ -5804,7 +5814,7 @@
 		"VisionDaytimeRange"		"2600"		// Range of vision during day light.
 		"VisionNighttimeRange"		"2600"		// Range of vision at night time.
 	}
-	//=================================================================================
+//=================================================================================
 // Neutral: Chris Griffin
 //=================================================================================
 	"npc_dota_neutral_rock_golem"
@@ -5851,9 +5861,9 @@
 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"95"		// Experience earn.
-		"BountyGoldMin"				"37"		// Gold earned min.
-		"BountyGoldMax"				"43"		// Gold earned max.
+		"BountyXP"					"120"		// Experience earn.
+		"BountyGoldMin"				"60"		// Gold earned min.
+		"BountyGoldMax"				"70"		// Gold earned max.
 
 		// Movement
 		//----------------------------------------------------------------
@@ -5925,9 +5935,9 @@
 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"124"		// Experience earn.
-		"BountyGoldMin"				"76"		// Gold earned min.
-		"BountyGoldMax"				"80"		// Gold earned max.
+		"BountyXP"					"150"		// Experience earn.
+		"BountyGoldMin"				"80"		// Gold earned min.
+		"BountyGoldMax"				"100"		// Gold earned max.
 
 		// Movement
 		//----------------------------------------------------------------

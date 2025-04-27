@@ -19,6 +19,16 @@ function modifier_minion_slow_passive:DeclareFunctions()
     }
 end
 
+function modifier_minion_slow_passive:OnCreated()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    if GetMapName() ~= "dota" then
+        parent:SetMinimumGoldBounty(150)
+        parent:SetMaximumGoldBounty(150)
+        parent:SetDeathXP(250)
+    end
+end
+
 function modifier_minion_slow_passive:OnAttackLanded(params)
     if not IsServer() then return end
     if self:GetParent():PassivesDisabled() then return end

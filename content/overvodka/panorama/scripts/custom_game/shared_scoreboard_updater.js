@@ -314,6 +314,7 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 	teamPanel.SetHasClass( "no_players", (teamPlayers.length == 0) )
 	teamPanel.SetHasClass( "one_player", (teamPlayers.length == 1) )
 	teamPanel.SetHasClass( "ten_players", (teamPlayers.length == 10) )
+	teamPanel.SetHasClass( "ten_players", (Game.GetMapInfo().map_display_name != "dota") )
 	
 	if ( teamsInfo.max_team_players < teamPlayers.length )
 	{

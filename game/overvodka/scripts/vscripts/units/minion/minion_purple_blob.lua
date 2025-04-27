@@ -42,6 +42,12 @@ end
 
 function modifier_minion_purple_blob_passive:OnCreated(kv)
     if not IsServer() then return end
+    local parent = self:GetParent()
+    if GetMapName() ~= "dota" then
+        parent:SetMinimumGoldBounty(200)
+        parent:SetMaximumGoldBounty(200)
+        parent:SetDeathXP(250)
+    end
     self.triggered = false
     self:StartIntervalThink(0.1)
 end

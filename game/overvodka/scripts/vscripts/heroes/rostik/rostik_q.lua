@@ -129,8 +129,8 @@ function rostik_q_throw:OnProjectileHit_ExtraData(target, location, ExtraData)
 		nil,
 		radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_NONE,
 		0,
 		false
 	)
@@ -216,8 +216,8 @@ function modifier_rostik_q:OnIntervalThink()
 		nil,
 		self.radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_NONE,
 		0,
 		false
 	)

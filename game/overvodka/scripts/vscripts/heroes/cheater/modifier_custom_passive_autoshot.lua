@@ -18,7 +18,7 @@ function modifier_custom_passive_autoshot:OnIntervalThink()
 
     local attack_interval = parent:GetSecondsPerAttack(true)
     local attack_range = parent:Script_GetAttackRange()
-    if parent:IsStunned() or parent:IsDisarmed() or parent:IsCommandRestricted() then return end
+    if parent:IsStunned() or parent:IsDisarmed() or parent:IsCommandRestricted() or parent:IsInvisible() then return end
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
         parent:GetAbsOrigin(),

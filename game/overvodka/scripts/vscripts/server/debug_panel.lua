@@ -875,7 +875,7 @@ end
 function modifier_debug_panel_vision:OnIntervalThink()
 	local parent = self:GetParent()
 
-	AddFOWViewer(parent:GetTeamNumber(), Vector(0,0,0), 6000, 0.4, false)
+	AddFOWViewer(parent:GetTeamNumber(), Vector(0,0,0), 10000, 0.4, false)
 end
 
 modifier_debug_panel_free_spells_aura = class({

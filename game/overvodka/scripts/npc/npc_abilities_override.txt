@@ -302,7 +302,10 @@
 	"item_radiance"							"REMOVE"
 	"item_black_king_bar"					"REMOVE"
 	"item_octarine_core"					"REMOVE"
-	//"item_tpscroll"							"REMOVE"
+	"item_tpscroll"
+	{
+		"AbilityCooldown"					"60"
+	}
 	"item_helm_of_the_overlord"				"REMOVE"
 
 	//=================================================================================================================
@@ -326,7 +329,7 @@
 	//=================================================================================================================
 	//"item_ward_sentry"
 	//{
-	//	"ItemCost"						"100"
+	//	"ItemCost"						"75"
 	//	"AbilityValues"
 	//	{
 	//		"lifetime"				"360"

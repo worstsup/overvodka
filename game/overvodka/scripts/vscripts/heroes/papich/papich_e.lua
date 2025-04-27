@@ -38,19 +38,6 @@ function papich_e:OnChargeFinish( interrupt )
         mod:Destroy()
     end
 
-    local distance = max_distance * charge_duration/max_duration
-    local duration = distance/speed
-    local caster = self:GetCaster()
-    local team = caster:GetTeam()
-    local point = 0
-    local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
-    for _,fountainEnt in pairs( fountainEntities ) do
-        if fountainEnt:GetTeamNumber() == caster:GetTeamNumber() then
-            point = fountainEnt:GetAbsOrigin()
-            break
-        end
-    end
-    caster:FaceTowards(point)
     if interrupted then return end
     caster:AddNewModifier(
         caster,
@@ -124,9 +111,7 @@ function modifier_papich_e_passive:OnIntervalThink()
         if self.parent:HasModifier("modifier_knockback") then
             self.parent:RemoveModifierByName("modifier_knockback")
         end
-        if self.parent:IsMoving() or self.parent:IsChanneling() or self.parent:IsAttacking() then
-            self.parent:Stop()
-        end
+        self.parent:Stop()
         local caster = self:GetParent()
         local team = caster:GetTeam()
         local point = 0
@@ -145,7 +130,7 @@ function modifier_papich_e_passive:OnIntervalThink()
            caster,
            self.ability,
            "modifier_papich_e_command",
-           { duration = duration }
+           { duration = duration+0.1 }
         )
         self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
         local mod = caster:AddNewModifier(

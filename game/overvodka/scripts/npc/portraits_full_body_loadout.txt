@@ -11272,15 +11272,7 @@
 		"PortraitAllowAnimatedPortrait"		"1"
 		"GodraysFXColor"		"0.600000 0.282338 0.200000"
 		"GroundfogFXColor"		"0.600000 0.282338 0.200000"
-		"summons"
-		{
-			"npc_dota_rattletrap_cog"
-			{
-				"Position"		"31.321976 -40.506134 0.000000"
-				"Angles"		"-0.000000 -15.598436 0.000000"
-				"Scale"		"0.680341"
-			}
-		}
+		"summons"	""
 	}
 	"npc_dota_hero_razor"
 	{

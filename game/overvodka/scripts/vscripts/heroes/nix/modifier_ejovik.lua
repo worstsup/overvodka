@@ -36,8 +36,6 @@ function modifier_ejovik:DeclareFunctions()
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
-		MODIFIER_PROPERTY_MODEL_SCALE,
-		MODIFIER_PROPERTY_MODEL_SCALE_ANIMATE_TIME,
 		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
 		MODIFIER_PROPERTY_BONUS_DAY_VISION,
 		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
@@ -87,13 +85,6 @@ function modifier_ejovik:GetModifierAttackSpeedBonus_Constant( params )
 end
 function modifier_ejovik:GetModifierModelChange( params )
 	return "nix/pc_nightmare_mushroom.vmdl"
-end
-function modifier_ejovik:GetModifierModelScaleAnimateTime( params )
-	return 0
-end
-function modifier_ejovik:GetModifierModelScale( params )
-	if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then return 16000 end
-	return 0
 end
 function modifier_ejovik:GetEffectName()
 	if not self.shard then return end

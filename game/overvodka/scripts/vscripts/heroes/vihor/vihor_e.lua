@@ -54,7 +54,7 @@ function modifier_vihor_e:OnAttackLanded( params )
 		if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 		if params.attacker == self:GetParent() then return end
 		if params.target ~= self:GetParent() then return end
-		if params.attacker:IsTower() then return end
+		if not params.attacker:IsRealHero() then return end
 		local random_chance = RandomInt(1, 100)
 		if random_chance <= self.chance then
 			params.attacker:AddNewModifier( params.attacker, self:GetAbility(), "modifier_shadow_shaman_voodoo", { duration = self.duration } )
