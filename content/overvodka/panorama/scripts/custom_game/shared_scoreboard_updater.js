@@ -314,7 +314,7 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 	teamPanel.SetHasClass( "no_players", (teamPlayers.length == 0) )
 	teamPanel.SetHasClass( "one_player", (teamPlayers.length == 1) )
 	teamPanel.SetHasClass( "ten_players", (teamPlayers.length == 10) )
-	teamPanel.SetHasClass( "ten_players", (Game.GetMapInfo().map_display_name != "dota") )
+	teamPanel.SetHasClass( "ten_players", (Game.GetMapInfo().map_display_name != "overvodka_5x5") )
 	
 	if ( teamsInfo.max_team_players < teamPlayers.length )
 	{
@@ -516,7 +516,7 @@ function ScoreboardUpdater_InitializeScoreboard( scoreboardConfig, scoreboardPan
 	if (typeof (scoreboardConfig.shouldReorder) === 'undefined') {
 		// default to true
 		scoreboardConfig.shouldReorder = true;
-		if (Game.GetMapInfo().map_display_name == "dota"){
+		if (Game.GetMapInfo().map_display_name == "overvodka_5x5"){
 			scoreboardConfig.shouldReorder = false;
 		}
 	}

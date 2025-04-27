@@ -5,7 +5,7 @@ function Tabletki(keys)
 	caster:EmitSound("zolo_tabletki")
 	caster:ModifyStrength(bonus_strength)
 	caster:CalculateStatBonus(true)
-	if GetMapName() == "dota" then
+	if GetMapName() == "overvodka_5x5" then
 		ability:StartCooldown(60)
 	end
 end

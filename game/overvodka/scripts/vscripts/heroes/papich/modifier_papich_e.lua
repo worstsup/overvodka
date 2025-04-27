@@ -233,11 +233,11 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 		self.speed = 100
 	else
 		self.speed = 1600
-		if GetMapName() == "dota" then
+		if GetMapName() == "overvodka_5x5" then
 			self.speed = 2000
 		end
 	end
-	if distance < 500 or (GetMapName() ~= "dota" and distance > 11000) or (GetMapName() == "dota" and distance > 20000) then
+	if distance < 500 or (GetMapName() ~= "overvodka_5x5" and distance > 11000) or (GetMapName() == "overvodka_5x5" and distance > 20000) then
 		if self.k == 0 then
 			self:GetCaster():ModifyGold(self.gold, false, 0)
 			EmitSoundOn( "papich_e_plane_start", self:GetCaster() )

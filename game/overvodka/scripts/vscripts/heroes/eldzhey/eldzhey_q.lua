@@ -11,6 +11,9 @@ end
 function eldzhey_q:OnSpellStart()
 	local caster = self:GetCaster()
 	local duration = self:GetSpecialValueFor( "illusion_duration" )
+	if GetMapName() == "overvodka_5x5" then
+		duration = duration + self:GetSpecialValueFor( "dota_bonus_duration" )
+	end
 	local outgoing = self:GetSpecialValueFor( "illusion_outgoing_damage" )
 	local incoming = self:GetSpecialValueFor( "illusion_incoming_damage" )
 	local distance = 72

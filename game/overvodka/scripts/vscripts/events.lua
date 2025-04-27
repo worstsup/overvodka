@@ -14,7 +14,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 			nCOUNTDOWNTIMER = 1501
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
 			nCOUNTDOWNTIMER = 1501
-		elseif GetMapName() == "dota" then
+		elseif GetMapName() == "overvodka_5x5" then
 			nCOUNTDOWNTIMER = 15000
 		else
 			nCOUNTDOWNTIMER = 1501
@@ -49,7 +49,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		end
 
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		if GetMapName() ~= "dota" then
+		if GetMapName() ~= "overvodka_5x5" then
 			self.countdownEnabled = true
 			CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
 			DoEntFire( "center_experience_ring_particles", "Start", "0", 0, self, self  )
@@ -109,7 +109,7 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			if dave then
 				dave:SetLevel(1)
 			end
-			if GetMapName() == "dota" then
+			if GetMapName() == "overvodka_5x5" then
 				if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
 					spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
 				end
@@ -167,7 +167,7 @@ end
 function COverthrowGameMode:OnHeroFinishSpawn( event )
 	local hPlayerHero = EntIndexToHScript( event.heroindex )
 	if hPlayerHero ~= nil and hPlayerHero:IsRealHero() then
-		if GetMapName() ~= "dota" then
+		if GetMapName() ~= "overvodka_5x5" then
 			for i = 0, 8 do
 				local item = hPlayerHero:GetItemInSlot(i)
 				if item and item:GetAbilityName() == "item_tpscroll" then
@@ -324,7 +324,7 @@ function COverthrowGameMode:OnEntityKilled( event )
 		end
 		if hero:IsRealHero() and heroTeam ~= killedTeam then
 			--print("Granting killer xp")
-			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
+			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
 				local memberID = hero:GetPlayerID()
 				PlayerResource:ModifyGold( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )
@@ -364,7 +364,7 @@ end
 
 function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 	--print("Setting time for respawn")
-	if killedTeam == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "dota" then
+	if killedTeam == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -15
 		end
@@ -385,7 +385,7 @@ function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 		end
 		killedUnit:SetTimeUntilRespawn( 10 + extraTime )
 	end
-	if GetMapName() == "dota" then
+	if GetMapName() == "overvodka_5x5" then
 		extraTime = killedUnit:GetLevel() * 2
 		if killedUnit:FindItemInInventory("item_aegis") then
 			extraTime = -5
@@ -432,12 +432,12 @@ function COverthrowGameMode:OnItemPickUp( event )
 		for i = 1, #heroes do
 			local playerID = heroes[i]:GetPlayerID()
 			r = 300
-			if GetMapName() == "dota" then
+			if GetMapName() == "overvodka_5x5" then
 				r = 50
 			end
 			if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
 				r = 600
-				if GetMapName() == "dota" then
+				if GetMapName() == "overvodka_5x5" then
 					r = 100
 				end
 			end

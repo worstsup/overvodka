@@ -27,7 +27,7 @@ function papich_e:OnChargeFinish( interrupt )
     local max_duration = self:GetSpecialValueFor( "chargeup_time" )
     local max_distance = self:GetSpecialValueFor( "max_distance" )
     local speed = self:GetSpecialValueFor( "charge_speed" )
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         speed = speed + 500
     end
     local charge_duration = max_duration

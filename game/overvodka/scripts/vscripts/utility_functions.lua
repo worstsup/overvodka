@@ -40,7 +40,7 @@ function SpawnBombardiro()
 		Vector(4500, -4500, 0),
 		Vector(-4500, -4500, 0)
 	}
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         spawnPoints = {
             Vector(8000, 8000, 0),
             Vector(-8000, 8000, 0),
@@ -58,7 +58,7 @@ function SpawnHamster()
     EmitGlobalSound( "kirill_start" )
 	CustomGameEventManager:Send_ServerToAllClients( "hamster_spawn", {} )
 	local hamsterSpawn
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         hamsterSpawn = Vector( math.random(-800, 0), math.random(-800, 0), 0 )
     else
         hamsterSpawn = Vector(math.random(100, 300), math.random(100, 300), 0)

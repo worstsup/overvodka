@@ -74,7 +74,7 @@ end
 function golden_rain:RandomPointAroundCaster()
     local radius_min = 2000
     local radius_max = 2500
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         radius_min = 0
         radius_max = 0
     end
@@ -113,7 +113,7 @@ function modifier_golden_rain_thinker:OnCreated( kv )
     self.radius = self.ability:GetSpecialValueFor( "radius" )
     self.xp = self.ability:GetSpecialValueFor("xp")
     self.gold = self.ability:GetSpecialValueFor("gold")
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         self.gold = self.gold - 25
         self.xp = self.xp - 25
     end

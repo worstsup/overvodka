@@ -112,7 +112,7 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     local parent = self:GetParent()
     local caster = self:GetCaster()
     self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * self.interval
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         self.dmg = self.dmg + self:GetAbility():GetSpecialValueFor("dota_damage") * self.interval
     end
     ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })

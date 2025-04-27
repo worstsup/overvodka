@@ -10,12 +10,8 @@
 	map_options = 
 	[
 		{
-			MaxPlayers = 16
-			map = "temple_quartet"
-		},
-		{
 			MaxPlayers = 10
-			map = "dota"
+			map = "overvodka_5x5"
 		},
 		{
 			MaxPlayers = 10
@@ -24,11 +20,7 @@
 		{
 			MaxPlayers = 10
 			map = "overvodka_duo"
-		},
-		{
-			MaxPlayers = 9
-			map = "mines_trio"
-		},
+		}
 	]
 	HideInTools = false
 	IsPlayable = true
@@ -37,7 +29,7 @@
 	[
 		"overvodka_solo",
 		"overvodka_duo",
-		"dota"
+		"overvodka_5x5"
 	]
 	CheckAFKPlayers = false
 	DefaultMap = "overvodka_solo"

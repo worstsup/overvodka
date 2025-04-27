@@ -17,7 +17,7 @@ function item_rocket_launcher:OnSpellStart()
             Vector(4000, -4000, 0),
             Vector(-4000, -4000, 0)
         }
-        if GetMapName() == "dota" then
+        if GetMapName() == "overvodka_5x5" then
             spawnPoints = {
                 Vector(8000, 8000, 0),
                 Vector(-8000, 8000, 0),
@@ -77,7 +77,7 @@ function modifier_bombardiro_fly_rocket_launcher:DeclareFunctions()
     }
 end
 function modifier_bombardiro_fly_rocket_launcher:GetModifierMoveSpeed_Absolute()
-    if GetMapName() == "dota" then
+    if GetMapName() == "overvodka_5x5" then
         return 1200
     end
     return 900

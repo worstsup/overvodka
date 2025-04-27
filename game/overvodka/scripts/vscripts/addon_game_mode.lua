@@ -40,7 +40,7 @@ function Precache( context )
 
 	--Cache the creature models
 
-		if GetMapName() == "dota" then
+		if GetMapName() == "overvodka_5x5" then
 			PrecacheResource("particle", "particles/base_attacks/ranged_goodguy.vpcf", context)
 			PrecacheResource("particle", "particles/base_attacks/ranged_siege_good.vpcf", context)
 			PrecacheResource("particle", "particles/base_attacks/ranged_siege_bad.vpcf", context)
@@ -548,7 +548,7 @@ function COverthrowGameMode:InitGameMode()
   
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
-	if GetMapName() ~= "dota" then
+	if GetMapName() ~= "overvodka_5x5" then
   		MusicZoneTrigger:Init()
 	end
 	DebugPanel:Init()
@@ -561,7 +561,7 @@ function COverthrowGameMode:InitGameMode()
 	self.m_bFastPlay = GlobalSys:CommandLineCheck( "-addon_fastplay" )
 
 	self.m_TeamColors = {}
-	if GetMapName() ~= "dota" then
+	if GetMapName() ~= "overvodka_5x5" then
 		self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
 		self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 136, 8, 8 }
 	end
@@ -648,7 +648,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity().COverthrowGameMode = self
 
 	-- Adding Many Players
-	if GetMapName() == "dota" then
+	if GetMapName() == "overvodka_5x5" then
 		GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
 		GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 5 )
 		self.m_GoldRadiusMin = 300
@@ -679,7 +679,7 @@ function COverthrowGameMode:InitGameMode()
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
-	if GetMapName() == "dota" then
+	if GetMapName() == "overvodka_5x5" then
 		GameRules:SetPreGameTime( 90.0 )
 		GameRules:SetCustomGameSetupTimeout( 3 )
 	else
@@ -701,7 +701,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true ) --Illusion
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
 	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
-	if GetMapName() == "dota" then
+	if GetMapName() == "overvodka_5x5" then
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_WATER, true ) -- Water
@@ -999,7 +999,7 @@ function COverthrowGameMode:UpdateScoreboard()
 	end
 	local allHeroes = HeroList:GetAllHeroes()
 	for _,entity in pairs( allHeroes) do
-		if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore and GetMapName() ~= "dota" then
+		if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore and GetMapName() ~= "overvodka_5x5" then
 			if entity:IsAlive() == true then
 				-- Attaching a particle to the leading team heroes
 				local existingParticle = entity:Attribute_GetIntValue( "particleID", -1 )
@@ -1082,7 +1082,7 @@ function COverthrowGameMode:GatherAndRegisterValidTeams()
 	local foundTeams = {}
 	local foundTeamsList = {}
 	local numTeams
-	if GetMapName() ~= "dota" then
+	if GetMapName() ~= "overvodka_5x5" then
 		for _, playerStart in pairs( Entities:FindAllByClassname( "info_player_start_dota" ) ) do
 			foundTeams[  playerStart:GetTeam() ] = true
 		end

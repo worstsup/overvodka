@@ -22,7 +22,7 @@ end
 function modifier_minion_slow_passive:OnCreated()
     if not IsServer() then return end
     local parent = self:GetParent()
-    if GetMapName() ~= "dota" then
+    if GetMapName() ~= "overvodka_5x5" then
         parent:SetMinimumGoldBounty(150)
         parent:SetMaximumGoldBounty(150)
         parent:SetDeathXP(250)

@@ -2071,7 +2071,7 @@
 		"DOTA_Tooltip_modifier_rubick_spell_steal"	"Смена кода"
 		
 		"DOTA_Tooltip_ability_eldzhey_q"   "SAYONARA BOY"
-		"DOTA_Tooltip_ability_eldzhey_q_Description"  "Элджей призывает своего клона сайонара боя."
+		"DOTA_Tooltip_ability_eldzhey_q_Description"  "Элджей призывает своего клона сайонара боя. \nВ режиме 5x5 длительность иллюзий увеличена на %dota_bonus_duration% сек."
 		"DOTA_Tooltip_ability_eldzhey_q_illusion_duration"   "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_eldzhey_q_illusion_outgoing_tooltip"  "%УРОН САЙОНАРА БОЯ:"
 		"DOTA_Tooltip_ability_eldzhey_q_illusion_incoming_damage_total_tooltip"   "%УРОН ПО САЙОНАРА БОЮ:"
