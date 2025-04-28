@@ -68,6 +68,12 @@ function modifier_bombardiro_fly_rocket_launcher:OnCreated(kv)
     	DOTA_TEAM_GOODGUYS,
     	DOTA_TEAM_BADGUYS
 	}
+    Timers:CreateTimer(20, function()
+        if parent and parent:IsAlive() then
+            parent:ForceKill(false)
+            UTIL_Remove(parent)
+        end
+    end)
     self:StartIntervalThink(0.05)
 end
 

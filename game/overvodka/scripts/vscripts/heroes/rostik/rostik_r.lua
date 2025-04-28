@@ -296,7 +296,7 @@ function modifier_rostik_r_thinker:OnCreated( kv )
 	if not IsServer() then return end
 	self.abilityDamageType = self:GetAbility():GetAbilityDamageType()
 	self.abilityTargetTeam = self:GetAbility():GetAbilityTargetTeam()
-	self.abilityTargetType = self:GetAbility():GetAbilityTargetType()
+	self.abilityTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
 	self.abilityTargetFlags = self:GetAbility():GetAbilityTargetFlags()
 	local start_range = -50
 	self.direction = Vector( kv.x, kv.y, 0 )

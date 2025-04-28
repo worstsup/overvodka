@@ -38,7 +38,8 @@ end
 
 function modifier_golovach_run:OnIntervalThink()
     if not IsServer() then return end
-    if self.target == nil or not self.target:IsAlive() or ( self.target:IsInvisible() and not self:GetParent():CanEntityBeSeenByMyTeam(self.target) ) then
+    local distance = (self.target:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
+    if self.target == nil or not self.target:IsAlive() or ( self.target:IsInvisible() and not self:GetParent():CanEntityBeSeenByMyTeam(self.target) ) or distance > 3000 then
         if not self:IsNull() then
             self:Destroy()
             return
