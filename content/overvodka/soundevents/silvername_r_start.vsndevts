@@ -22,7 +22,7 @@
           "pitch_rand_max"  {  "value"   "0.15000" }
           "pitch"       {  "value"   "0.900000" }
           "soundlevel"    {  "value"   "100.00000" }
-          "distance_max"   {  "value"   "10000.000" }
+          "distance_max"   {  "value"   "3000.000" }
           "event_type"    {  "value"   "1.000000" }
         }
       }
