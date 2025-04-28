@@ -3,13 +3,26 @@ LinkLuaModifier("modifier_sasavot_r_new_secondary", "heroes/sasavot/sasavot_r_ne
 LinkLuaModifier("modifier_sasavot_r_new_secondary_self", "heroes/sasavot/sasavot_r_new.lua", LUA_MODIFIER_MOTION_NONE)
 sasavot_r_new = class({})
 
+function sasavot_r_new:GetCastRange(location, target)
+    local range = self:GetSpecialValueFor("cast_range")
+    if GetMapName() == "overvodka_5x5" then
+        range = range - range * self:GetSpecialValueFor("dota_range_pct") * 0.01
+    end
+    return range
+end
+
 function sasavot_r_new:OnSpellStart()
     local target = self:GetCursorTarget()
     local caster = self:GetCaster()
 
     if target:TriggerSpellAbsorb(self) then return end
     EmitSoundOnClient("sasavot_r_new_start", self:GetCaster():GetPlayerOwner())
-    target:AddNewModifier(caster, self, "modifier_sasavot_r_new", {duration = -1})
+    if GetMapName() == "overvodka_5x5" then
+        target:AddNewModifier(caster, self, "modifier_sasavot_r_new_secondary", {duration = 15})
+        caster:AddNewModifier(caster, self, "modifier_sasavot_r_new_secondary_self", {duration = 15})
+    else
+        target:AddNewModifier(caster, self, "modifier_sasavot_r_new", {duration = -1})
+    end
 end
 
 modifier_sasavot_r_new = class({})
@@ -214,6 +227,9 @@ function modifier_sasavot_r_new_secondary:OnDestroy()
         self.damage_needed = self.target:GetMaxHealth() * self:GetAbility():GetSpecialValueFor("dmg_pct") * 0.01
         ApplyDamage({victim = self.target, attacker = self.caster, damage = self.damage_needed, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS, ability = self:GetAbility()})
         EmitGlobalSound("sasavot_r_success")
+        local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/lifestealer/ls_ti10_immortal/ls_ti10_immortal_infest_radial_burst_blood.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.target )
+        ParticleManager:SetParticleControl(effect_cast, 0, self.target:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex( effect_cast )
     end
 end
 function modifier_sasavot_r_new_secondary:GetEffectName()

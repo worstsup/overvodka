@@ -10872,7 +10872,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"900 1000 1100 1200"
+		"AbilityCastRange"				"800 850 900 950"
 		"AbilityCastPoint"				"0.05"
 		"AbilityCooldown"				"30.0 26.0 22.0 18.0"
 		"AbilityManaCost"				"140 125 110 95"
@@ -10884,7 +10884,7 @@
 		"AbilityValues"
 		{
 				"duration"				"5.0"
-				"cr"			"900 1000 1100 1200"
+				"cr"			"800 850 900 950"
 				"freeze_duration"
 				{
 					"value"	"0.1 0.2 0.3 0.4"
@@ -11208,7 +11208,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityChannelTime"			"4.0"
 		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_3"
-		"AbilityCooldown"				"20.0"
+		"AbilityCooldown"				"25.0"
 		"AbilityManaCost"				"50 65 80 95"
 		"precache"
 		{
@@ -11276,7 +11276,6 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastRange"				"1200 1400 1600"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 		"AbilityCastPoint"				"0.2"
 		"HasScepterUpgrade"				"0"
@@ -11290,6 +11289,7 @@
 			"particle"	"particles/venomancer_noxious_contagion_buff_overhead_virus_new.vpcf"
 			"particle"	"particles/units/heroes/hero_demonartist/hero_demonartist_track_shield.vpcf"
 			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+			"particle"	"particles/econ/items/lifestealer/ls_ti10_immortal/ls_ti10_immortal_infest_radial_burst_blood.vpcf"
 		}
 		"AbilityValues"
 		{
@@ -11306,6 +11306,8 @@
 			}
 			"damage_bonus"	"120 140 160"
 			"radius"	"2500 2750 3000"
+			"dota_range_pct"	"25"
+			"cast_range"	"1200 1400 1600"
 		}
 	}
 	"juggernaut_bladeform"

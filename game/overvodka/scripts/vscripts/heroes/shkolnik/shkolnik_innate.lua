@@ -37,6 +37,8 @@ function modifier_shkolnik_innate:OnAttackStart( params )
 	if IsServer() then
 		if params.target~=self:GetParent() then return end
 		if params.attacker:IsMagicImmune() then return end
+		if params.attacker:IsDebuffImmune() then return end
+		if params.attacker:IsBuilding() then return end
 		if self:GetParent():PassivesDisabled() then return end
 		params.attacker:AddNewModifier(
 			self:GetParent(), 

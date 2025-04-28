@@ -565,7 +565,7 @@ function UpdateTeamLeaved(){
     let fx_panel = $.CreatePanel("DOTAParticleScenePanel", $("#EffectPreview"), "", {
         class: "PreviewPanelSize",
         hittest: "false",
-        particleName: "particles/econ/events/summer_2021/summer_2021_emblem_effect.vpcf",
+        particleName: "particles/overvodka_prime_effect.vpcf",
         startActive: "true",
         particleonly: "false",
         cameraOrigin: "0 -250 225",
