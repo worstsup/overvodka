@@ -1,9 +1,11 @@
 LinkLuaModifier("modifier_subscriber_effect", "modifiers/modifier_subscriber_effect", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_win_condition", "modifiers/modifier_win_condition", LUA_MODIFIER_MOTION_NONE)
 
 GAME_CATEGORY_DEFINITIONS = {
 	NONE = 0,
 	SOLO = 1,
-	DUO = 2
+	DUO = 2,
+	DOTA = 3,
 }
 
 function SendErrorToPlayer(PID, errorText, errorSound)
@@ -271,11 +273,17 @@ function IsDuo()
 	return GetMapName() == "overvodka_duo"
 end
 
+function Is5v5()
+	return GetMapName() == "overvodka_5x5"
+end
+
 function GetCurrentCategory()
 	if IsSolo() then 
 		return GAME_CATEGORY_DEFINITIONS.SOLO
 	elseif IsDuo() then 
 		return GAME_CATEGORY_DEFINITIONS.DUO
+	elseif Is5v5() then
+		return GAME_CATEGORY_DEFINITIONS.DOTA
 	end
 
 	return GAME_CATEGORY_DEFINITIONS.NONE

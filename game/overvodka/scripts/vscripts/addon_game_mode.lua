@@ -856,7 +856,7 @@ function COverthrowGameMode:EndGame( victoryTeam )
 	end
 	GameRules:SetPostGameTeamScores( tTeamScores )
 	local sortedTeams = self:GetSortedValidTeams()
-	Server:OnGameEnded(sortedTeams)
+	Server:OnGameEnded(sortedTeams, victoryTeam)
 	GameRules:SetGameWinner( victoryTeam )
 end
 
@@ -905,6 +905,24 @@ function COverthrowGameMode:GetCountMissingTeams()
 	local CurrentActiveTeams = #self:GetSortedValidActiveTeams()
 	local Diff = MaxTeamsCount - CurrentActiveTeams
 	return Diff
+end
+
+function COverthrowGameMode:GetValidTeamPlayers()
+	local Teams = {}
+
+	for _, team in pairs( self.m_GatheredShuffledTeams ) do
+		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
+			Teams[team] = {}
+			for i = 1, PlayerResource:GetPlayerCountForTeam(team) do
+				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
+				if PlayerID ~= -1 then
+					table.insert(Teams[team], PlayerID)
+				end
+			end
+		end
+	end
+
+	return Teams
 end
 
 function COverthrowGameMode:IsFirstBlooded()

@@ -55,6 +55,8 @@ SERVER_DOUBLE_RATING_TIME = 10
 
 SERVER_RATING_WHEN_ABANDONED_GAME = -100
 
+SERVER_RATING_WHEN_ABANDONED_GAME_5V5 = -200
+
 --Настройки рейтинга
 SERVER_RATING = {
     [GAME_CATEGORY_DEFINITIONS.SOLO] = {
@@ -207,6 +209,16 @@ SERVER_RATING = {
             max_less3 = -35,
             min_full_after_epic = -55,
             max_full_after_epic = -75,
+        },
+    },
+    [GAME_CATEGORY_DEFINITIONS.DOTA] = {
+        {
+            min = 90,
+            max = 110,
+        },
+        {
+            min = -90,
+            max = -110,
         },
     }
 }

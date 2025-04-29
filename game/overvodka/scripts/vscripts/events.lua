@@ -8,13 +8,17 @@ function COverthrowGameMode:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		self:AssignTeams()
 
+		if Is5v5() then
+			self:ReplaceWinContidion()
+		end
+
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
 			nCOUNTDOWNTIMER = 1501
 		elseif numberOfPlayers > 4 and numberOfPlayers <= 7 then
 			nCOUNTDOWNTIMER = 1501
-		elseif GetMapName() == "overvodka_5x5" then
+		elseif Is5v5() then
 			nCOUNTDOWNTIMER = 15000
 		else
 			nCOUNTDOWNTIMER = 1501
@@ -49,7 +53,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		end
 
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		if GetMapName() ~= "overvodka_5x5" then
+		if not Is5v5() then
 			self.countdownEnabled = true
 			CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
 			DoEntFire( "center_experience_ring_particles", "Start", "0", 0, self, self  )
@@ -82,6 +86,27 @@ function COverthrowGameMode:OnGameRulesStateChange()
 			end
 		end
 	end
+end
+
+function COverthrowGameMode:ReplaceWinContidion()
+    local Structures = FindUnitsInRadius(
+        DOTA_TEAM_GOODGUYS,
+        Vector(0,0,0),
+        nil,
+        999999,
+        DOTA_UNIT_TARGET_TEAM_BOTH,
+        DOTA_UNIT_TARGET_BUILDING,
+        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+        FIND_ANY_ORDER,
+        false
+    )
+    for _, Structure in ipairs(Structures) do
+        if Structure:IsBuilding() then
+            if Structure:IsFort() then
+                Structure:AddNewModifier(Structure, nil, "modifier_win_condition", {})
+            end
+        end
+    end
 end
 
 --------------------------------------------------------------------------------

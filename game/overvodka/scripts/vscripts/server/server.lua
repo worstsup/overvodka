@@ -25,7 +25,7 @@ function Server:Init()
     self.ThinkerEnt = SpawnEntityFromTableSynchronous("info_target", {targetname="server_thinker"})
 end
 
-function Server:OnGameEnded(Teams)
+function Server:OnGameEnded(Teams, VictoryTeam)
 
     if IsInToolsMode() or GameRules:IsCheatMode() then return end
 
@@ -43,11 +43,11 @@ function Server:OnGameEnded(Teams)
         if #Teams < 3 then return end
     elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DUO then
         if #Teams < 2 then return end
+    elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DOTA then
+        if #Teams < 2 then return end
     end
 
     local MatchID = tostring(GameRules:Script_GetMatchID())
-
-    print("[Server] Saving data to server!")
     
     local CountNotLeaved = 0
     for PlayerID, PlayerInfo in pairs(self.Players) do
@@ -56,6 +56,27 @@ function Server:OnGameEnded(Teams)
         end
     end
 
+    local ValidPlayers = COverthrowGameMode:GetValidTeamPlayers()
+    local bCanBeRated = false
+    local i = 0
+    if Is5v5() then
+        for TeamID, PlayerList in pairs(ValidPlayers) do
+            if #PlayerList >= 3 then
+                i = i + 1
+
+                if i == 2 then
+                    bCanBeRated = true
+                end
+            end
+        end
+
+        if bCanBeRated == false then
+            return
+        end
+    end
+
+    print("[Server] Saving data to server!")
+
     for PlayerID, PlayerInfo in pairs(self.Players) do
         local Hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
         if Hero then
@@ -63,8 +84,11 @@ function Server:OnGameEnded(Teams)
             local Kills = PlayerResource:GetKills(PlayerID)
             local Deaths = PlayerResource:GetDeaths(PlayerID)
             local Assists = PlayerResource:GetAssists(PlayerID)
-            local Rating = self:CalculateRating(PlayerID, Teams)
+            local Rating = self:CalculateRating(PlayerID, Teams, VictoryTeam)
             local bWin = Rating >= 45
+            if Is5v5() then
+                bWin = VictoryTeam == PlayerResource:GetTeam(PlayerID)
+            end
             local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
 
             if PlayerInfo.doubled then
@@ -76,7 +100,11 @@ function Server:OnGameEnded(Teams)
             end
 
             if bLeaved then
-                Rating = SERVER_RATING_WHEN_ABANDONED_GAME
+                if Is5v5() then
+                    Rating = SERVER_RATING_WHEN_ABANDONED_GAME_5V5
+                else
+                    Rating = SERVER_RATING_WHEN_ABANDONED_GAME
+                end
             end
 
             local PlayerData = {
@@ -98,7 +126,7 @@ function Server:OnGameEnded(Teams)
     end
 end
 
-function Server:CalculateRating(PlayerID, Teams)
+function Server:CalculateRating(PlayerID, Teams, VictoryTeam)
     local PlayerTeam = PlayerResource:GetTeam(PlayerID)
     local TeamTop = 0
     local bKillsDone = false
@@ -115,6 +143,14 @@ function Server:CalculateRating(PlayerID, Teams)
                 bKillsDone = true
             end
             break
+        end
+    end
+
+    if Is5v5() then
+        if VictoryTeam == PlayerTeam then
+            TeamTop = 1
+        else
+            TeamTop = 2
         end
     end
 
@@ -218,6 +254,8 @@ function Server:CalculateRating(PlayerID, Teams)
                 Rating = RandomInt(RatingTable.min_less3, RatingTable.max_less3)
             end
         end
+    elseif Is5v5() then
+        Rating = RandomInt(RatingTable.min, RatingTable.max)
     end
 
     return Rating

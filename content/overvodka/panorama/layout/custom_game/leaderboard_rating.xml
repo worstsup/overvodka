@@ -37,6 +37,10 @@
         <Panel id="LeaderboardMain">
             <Panel class="ButtonsRow" hittest="false">
                 <Panel id="Buttons" class="Wrapper" hittest="false">
+                    <Panel id="Category3" class="CategoryButton" hittest="true" onactivate="SelectCategory(3)">
+                        <Panel class="CategoryButtonBack" hittest="false" />
+                        <Label class="CategoryButtonText" text="5x5"/>
+                    </Panel>
                     <Panel id="Category1" class="CategoryButton" hittest="true" onactivate="SelectCategory(1)">
                         <Panel class="CategoryButtonBack" hittest="false" />
                         <Label class="CategoryButtonText" text="Solo"/>

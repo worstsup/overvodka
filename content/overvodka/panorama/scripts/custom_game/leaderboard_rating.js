@@ -9,13 +9,14 @@ let SelectedCategory = -1
 // Обозначения категорий:
 // 1 - Соло
 // 2 - Дуо
+// 3 - 5 на 5
 
 function ToggleLeaderboard(){
     Game.EmitSound("UUI_SOUNDS.Leaderboard");
     LeaderboardMain.SetHasClass("Show", !LeaderboardMain.BHasClass("Show"))
 
     if(SelectedCategory == -1){
-        SelectCategory(1)
+        SelectCategory(3)
     }
 }
 
