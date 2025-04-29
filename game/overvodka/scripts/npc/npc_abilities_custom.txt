@@ -1135,17 +1135,17 @@
 				"illusion_duration"
 				{
 					"value" "14.0"
-					"special_bonus_unique_eldzhey_3" "+4"
+					"special_bonus_unique_eldzhey_3" "+3"
 				}
 				"illusion_outgoing_damage"
 				{
 					"value"	"-55 -50 -45 -40"
-					"special_bonus_unique_eldzhey_2" "+8"
+					"special_bonus_unique_eldzhey_2" "+10"
 				}
 				"illusion_outgoing_tooltip"			
 				{
             			"value"					"45.0 50.0 55.0 60.0"
-            			"special_bonus_unique_eldzhey_2" "+8"
+            			"special_bonus_unique_eldzhey_2" "+10"
             	}
 				"illusion_incoming_damage"			"120.0"
 				"illusion_incoming_damage_total_tooltip"			"220.0"
@@ -1376,14 +1376,13 @@
     	"AbilityTextureName"            "galim"
     	"MaxLevel"						"1"
 		"IsGrantedByShard"              "1"
-    	"AbilityCastPoint"              "0.0"
-    	"AbilityCooldown"               "40"
+    	"AbilityCooldown"               "30"
     	"AbilityManaCost"               "100"
     	"AbilityValues"
     	{
     	    "bonus_range"         					"150"
    	        "bonus_ms"    							"15"
-    	    "duration"                    			"6.0"
+    	    "duration"                    			"10.0"
     	}
 	}
 	//=================================================================================================================
@@ -3194,74 +3193,35 @@
 	//=================================================================================================================
 	// ТЫКВА
 	//=================================================================================================================
-	"medusa_mana_shield"
+	"dave_e"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"		
-		"AbilitySound"					"Hero_Medusa.ManaShield.On"
-		"AbilityTextureName"            "shield"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/dave/dave_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"shield"
+		"SpellDispellableType"		  	"SPELL_DISPELLABLE_NO"
 		"MaxLevel"						"5"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
+		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
-			"damage_per_mana"		
+			"damage_per_mana"
 			{
-				"value"								"1.5 1.7 1.9 2.1 2.3"
+				"value"	"1.5 1.7 1.9 2.1 2.3"
+				"special_bonus_scepter" "+0.6"
 			}
-
-			"illusion_damage_per_mana"
+			"barrier_duration"
 			{
-				"value"								"1.0 1.2 1.4 1.6 1.8"
+				"value"	"0"
+				"special_bonus_scepter"	"+10"
+				"RequiresScepter"	"1"
 			}
-
-			"absorption_pct"						"98"
-			"damage_per_mana_per_level"				"0"
-			"aspd_increase_smoothness"						"0.015"
-			"aspd_increase_rate_pct"					
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=3"
-
-			}
-			"aspd_increase_max_tooltip"
-			{
-				"value"													"0"
-				"special_bonus_facet_medusa_mana_pact"		"=30"
-			}
-			"aspd_increase_buff_duration"			
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=15"
-
-			}			
-			"aspd_increase_mana_cost_pct"							
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=3"
-
-			}			
-			"aspd_increase_max_aspd_time"						
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=10"
-
-			}			
-			"attack_buff_cooldown"					
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=35"
-
-			}			
-			"min_duration"							
-			{
-				"value"						"0"
-				"special_bonus_facet_medusa_mana_pact"		"=3"
-
-			}			
-
+			"absorption_pct"		"98"
+			"manacost"	"30"
+			"cooldown"	"30"
+			"radius"	"900"
 		}
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 	}
 	//==================================================================================================================
 	// МОРОЗНЫЙ ГОРОХОСТРЕЛ
@@ -3380,15 +3340,14 @@
 		"ScriptFile"					"heroes/dave/dave_scepter"
 		"AbilityTextureName"			"dave_scepter"
 		"FightRecapLevel"				"1"
-		"IsGrantedByScepter"			"1"
 		"MaxLevel"						"1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityValues"
 		{
-				"damage"	"25"
+				"damage"	"15"
 		}
 	}
 	//==================================================================================================================
@@ -4342,7 +4301,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"35"
 		"AbilityManaCost"				"200"
 		"AbilityValues"
 		{
@@ -4639,7 +4598,7 @@
 		"AoERadius" "300"
 		"AbilityValues"
 		{
-				"airtime_duration"				"0.5"
+				"airtime_duration"				"1.0"
 				"radius"
 				{
 					"value"	"300"
@@ -4719,7 +4678,7 @@
                 "radius"                    "500"
                 "blast_damage"
                 {
-                	"value"	"50 75 100 125 150 175 200 225 250 275 300 325 350 375 400 425 450 475 500 525"
+                	"value"	"80 100 120 140 160 180 200 220 240 260 280 300 320 340 360 380 400 420 440 460"
                 	"levelkey"				"quaslevel"
                 }
                 "channel_duration"          "9.0"
@@ -5053,7 +5012,7 @@
 		{
 				"radius"
 				{
-					"value"	"400 500 600"
+					"value"	"500 550 600"
 					"affected_by_aoe_increase"	"1"
 				}
 				"pulses"					"20"
@@ -7328,12 +7287,12 @@
 				}
 				"schoolboys_hp"
 				{
-					"value"	"500 1000 1500 2000"
+					"value"	"300 500 700 900"
 					"special_bonus_unique_litvin_5" "+1500"
 				}
 				"schoolboys_dmg"
 				{
-					"value"	"40 120 200 280"
+					"value"	"40 80 120 160"
 					"special_bonus_unique_litvin_5" "+100"
 				}
 		}
@@ -7890,6 +7849,7 @@
 					"value"	"600"
 					"affected_by_aoe_increase"	"1"
 				}
+				"creep_mult"	"1.5"
 				"ms"
 				{
 					"value"	"0"
@@ -9982,10 +9942,10 @@
 			"mid_range"				"550"
 			"max_evasion"			"30 40 50 60"
 			"close_range"			"300"
-			"mid_evasion"			"20 25 30 35"
+			"mid_evasion"			"15 20 25 30"
 			"min_evasion"
 			{
-				"value"	"15"
+				"value"	"10"
 				"special_bonus_unique_clinkz_9" "+10"
 			}
 		}
@@ -10132,6 +10092,7 @@
 					"value"	"4.0 4.5 5.0 5.5"
 					"special_bonus_unique_clinkz_10" "+0.5"
 				}
+				"dota_bonus_cooldown"	"30"
 		}
 	}
 	"custom_critical_strike"
@@ -12561,8 +12522,8 @@
 		"FightRecapLevel"				"1"
 		"IsBreakable"					"1"
 		"MaxLevel"						"4"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityValues"
 		{
@@ -13455,7 +13416,7 @@
 				"value"	"6"
 				"special_bonus_unique_bratishkin_8" "+4"
 			}
-			"attacks_needed"		"15"
+			"attacks_needed"		"20"
 		}
 	}
 	"bratishkin_r_dota"

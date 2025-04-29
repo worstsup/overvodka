@@ -2,16 +2,25 @@ LinkLuaModifier("modifier_custom_vision_aura", "heroes/cheater/modifier_custom_v
 LinkLuaModifier("modifier_custom_vision_aura_lol", "heroes/cheater/modifier_custom_vision_aura_lol.lua", LUA_MODIFIER_MOTION_NONE)
 custom_vision_aura = class({})
 
+function custom_vision_aura:GetCooldown( level )
+    local base_cd = self.BaseClass.GetCooldown( self, level )
+    if GetMapName() == "overvodka_5x5" then
+        return base_cd + self:GetSpecialValueFor("dota_bonus_cooldown")
+    end
+    return base_cd
+end
+
 function custom_vision_aura:GetIntrinsicModifierName()
     return "modifier_custom_vision_aura"
 end
+
 function custom_vision_aura:OnSpellStart()
     if not IsServer() then return end
 
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor( "duration" )
     caster:AddNewModifier(caster, self, "modifier_custom_vision_aura_lol", { duration = duration })
-    AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 10000, duration, false)
+    AddFOWViewer(caster:GetTeamNumber(), Vector(0, 0, 0), 12000, duration, false)
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
         Vector(0, 0, 0),

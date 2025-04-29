@@ -72,16 +72,23 @@ function golden_rain:OnSpellStart()
 end
 
 function golden_rain:RandomPointAroundCaster()
-    local radius_min = 2000
-    local radius_max = 2500
     if GetMapName() == "overvodka_5x5" then
-        radius_min = 0
-        radius_max = 0
+        local points = {
+            Vector(0, 0, 0),
+            Vector(-1600, 900, 0),
+            Vector(1300, -1300, 0),
+            Vector(-2400, 1600, 0),
+            Vector(2300, -2300, 0)
+        }
+        return points[RandomInt(1, #points)]
+    else
+        local radius_min = 2000
+        local radius_max = 2500
+        local random_radius = RandomFloat(radius_min, radius_max)
+        local random_angle = RandomFloat(0, 2 * math.pi)
+        local offset = Vector(math.cos(random_angle) * random_radius, math.sin(random_angle) * random_radius, 0)
+        return self:GetCaster():GetAbsOrigin() + offset
     end
-    local random_radius = RandomFloat(radius_min, radius_max)
-    local random_angle = RandomFloat(0, 2 * math.pi)
-    local offset = Vector(math.cos(random_angle) * random_radius, math.sin(random_angle) * random_radius, 0)
-    return self:GetCaster():GetAbsOrigin() + offset
 end
 
 function golden_rain:PlayEffects( point )

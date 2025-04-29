@@ -81,6 +81,9 @@ function modifier_stariy_bolt:OnIntervalThink()
 				peterka = 0
 			end
 		end
+		if enemy:IsCreep() then
+			dmg = dmg * self:GetAbility():GetSpecialValueFor("creep_mult")
+		end
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 		self:PlayEffectsNew( self:GetParent() )
 		self:PlayEffects( enemy )

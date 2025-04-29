@@ -51,11 +51,11 @@ SERVER_RANKS_DEFINITION = {
 SERVER_TIP_COOLDOWN = 40
 
 --Длительность возможности поставить Дабл рейт
-SERVER_DOUBLE_RATING_TIME = 10
+SERVER_DOUBLE_RATING_TIME = 20
 
 SERVER_RATING_WHEN_ABANDONED_GAME = -100
 
-SERVER_RATING_WHEN_ABANDONED_GAME_5V5 = -200
+SERVER_RATING_WHEN_ABANDONED_GAME_5V5 = -150
 
 --Настройки рейтинга
 SERVER_RATING = {
@@ -213,12 +213,12 @@ SERVER_RATING = {
     },
     [GAME_CATEGORY_DEFINITIONS.DOTA] = {
         {
-            min = 90,
-            max = 110,
+            min = 80,
+            max = 100,
         },
         {
-            min = -90,
-            max = -110,
+            min = -80,
+            max = -100,
         },
     }
 }

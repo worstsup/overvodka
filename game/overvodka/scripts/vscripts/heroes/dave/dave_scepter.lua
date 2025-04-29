@@ -2,11 +2,6 @@ LinkLuaModifier("modifier_dave_scepter", "heroes/dave/dave_scepter", LUA_MODIFIE
 
 dave_scepter = class({})
 
-function dave_scepter:Precache(context)
-    PrecacheResource("particle", "particles/dave_missile.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/dave_scepter.vsndevts", context)
-end
-
 function dave_scepter:GetIntrinsicModifierName()
     return "modifier_dave_scepter"
 end
@@ -48,7 +43,7 @@ function dave_scepter:OnProjectileHit(target, location)
     if not target then return end
 
     local max_hp = target:GetMaxHealth()
-    local damage = max_hp * 0.25
+    local damage = max_hp * self:GetSpecialValueFor("damage") / 100
     ApplyDamage({
         victim = target,
         attacker = self:GetCaster(),

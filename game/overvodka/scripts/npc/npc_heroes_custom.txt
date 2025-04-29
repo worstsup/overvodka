@@ -192,8 +192,8 @@
 		"Ability5"		"generic_hidden"
 		"Ability6"		"eldzhey_r"
 		"Ability10"		"special_bonus_mp_regen_3"
-		"Ability11"		"special_bonus_unique_eldzhey_2"
-		"Ability12"		"special_bonus_unique_eldzhey_3"
+		"Ability11"		"special_bonus_unique_eldzhey_3"
+		"Ability12"		"special_bonus_unique_eldzhey_2"
 		"Ability13"		"special_bonus_unique_eldzhey_4"
 		"Ability14"		"special_bonus_unique_eldzhey_5"
 		"Ability15"		"special_bonus_unique_eldzhey_6"
@@ -408,9 +408,9 @@
 		"VersusScale"		"1.0"
 		"Ability1"		"dave_peashooter"
 		"Ability2"		"Pocik_penek"
-		"Ability3"		"medusa_mana_shield"
+		"Ability3"		"dave_e"
 		"Ability4"		"dave_peashooter_freeze"
-		"Ability5"		"dave_scepter"
+		"Ability5"		"generic_hidden"
 		"Ability6"		"dave_loonboon"
 		"Ability7"		"dave_ambient"
 		"Ability10"		"special_bonus_unique_dave_1"
@@ -423,6 +423,21 @@
 		"Ability17"		"special_bonus_unique_dave_8"
 		"Facets"
 		{
+			"dave_old_scepter"
+			{
+				"Icon"				"vortex_out"
+				"Color"				"Green"
+				"GradientID"		"2"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"dave_scepter"
+						"AbilityIndex"	"4"
+						"AutoLevelAbility" "true"
+					}
+				}
+			}
 			"dave_armor"
 			{
 				"Icon"				"armor_broken"
@@ -467,11 +482,11 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"0"
 		"AttributeStrengthGain"		"0.0"
-		"AttributeBaseIntelligence"		"30"
-		"AttributeIntelligenceGain"		"2.6"
+		"AttributeBaseIntelligence"		"34"
+		"AttributeIntelligenceGain"		"3.2"
 		"AttributeBaseAgility"		"17"
 		"AttributeAgilityGain"		"1.4"
-		"MovementSpeed"		"290"
+		"MovementSpeed"		"300"
 		"StatusManaRegen"	"0.75"
 		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
 	}
