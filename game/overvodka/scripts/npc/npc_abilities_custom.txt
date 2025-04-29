@@ -5180,7 +5180,7 @@
 				{
 					"value"	"6.0 6.5 7.0 7.5"
 				}
-				"int_damage"	"150 175 200 225"
+				"int_damage"	"125 150 175 200"
 				"buff"
 				{
 					"value"	"0"
@@ -8793,6 +8793,58 @@
 				}
 		}
 	}
+	//===================================================================================================================
+	//													NIX
+	//===================================================================================================================
+
+	"special_bonus_unique_nix_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_nix_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	//=================================================================================================================
 	// ЕЖОВИК
 	//=================================================================================================================
@@ -8815,44 +8867,44 @@
 				"duration"
 				{
 					"value"	"6"
-					"special_bonus_unique_naga_siren_2" "+2"
+					"special_bonus_unique_nix_3" "+2"
 				}
 				"bonus_mag"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=25 =30 =35 =40"
-					"RequiresFacet"	"furion_soothing_saplings"
-					"special_bonus_unique_naga_siren_5" "+15"
+					"special_bonus_facet_nix_levin"				"=25 =30 =35 =40"
+					"RequiresFacet"	"nix_levin"
+					"special_bonus_unique_nix_5" "+15"
 				}
 				"bonus_resist"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=25 =30 =35 =40"
-					"RequiresFacet"	"furion_soothing_saplings"
+					"special_bonus_facet_nix_levin"				"=25 =30 =35 =40"
+					"RequiresFacet"	"nix_levin"
 				}
 				"bonus_mp"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=5 =10 =15 =20"
-					"RequiresFacet"	"furion_soothing_saplings"
+					"special_bonus_facet_nix_levin"				"=5 =10 =15 =20"
+					"RequiresFacet"	"nix_levin"
 				}
 				"evasion"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_ironwood_treant"	"=15 =30 =45 =60"
-					"RequiresFacet"	"furion_ironwood_treant"
+					"special_bonus_facet_nix_pravin"	"=15 =30 =45 =60"
+					"RequiresFacet"	"nix_pravin"
 				}
 				"bonus_as"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_ironwood_treant"	"=15 =30 =45 =60"
-					"RequiresFacet"	"furion_ironwood_treant"
-					"special_bonus_unique_naga_siren_5" "+70"
+					"special_bonus_facet_nix_pravin"	"=15 =30 =45 =60"
+					"RequiresFacet"	"nix_pravin"
+					"special_bonus_unique_nix_5" "+70"
 				}
 				"bonus_range"
 				{
 					"value"	"100 150 200 250"
-					"special_bonus_unique_naga_siren_4" "+100"
+					"special_bonus_unique_nix_2" "+100"
 				}
 				"bonus_vision"
 				{
@@ -8894,27 +8946,27 @@
 				"damage_steal"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_ironwood_treant"	"=5 =10 =15 =20"
-					"RequiresFacet"	"furion_ironwood_treant"
-					"special_bonus_unique_naga_siren"	"+10"
+					"special_bonus_facet_nix_pravin"	"=5 =10 =15 =20"
+					"RequiresFacet"	"nix_pravin"
+					"special_bonus_unique_nix_6"	"+10"
 				}
 				"break_distance"
 				{
 					"value"	"800"
-					"special_bonus_unique_naga_siren_net_breaks" "+600"
+					"special_bonus_unique_nix_8" "+600"
 				}
 				"dps"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=30 =60 =90 =120"
-					"RequiresFacet"	"furion_soothing_saplings"
+					"special_bonus_facet_nix_levin"				"=20 =40 =60 =80"
+					"RequiresFacet"	"nix_levin"
 				}
 				"magresist"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"=2 =4 =6 =8"
-					"RequiresFacet"	"furion_soothing_saplings"
-					"special_bonus_unique_naga_siren"	"+4"
+					"special_bonus_facet_nix_levin"				"=2 =4 =6 =8"
+					"RequiresFacet"	"nix_levin"
+					"special_bonus_unique_nix_6"	"+4"
 				}
 				"ms"
 				{
@@ -9078,32 +9130,32 @@
 				"AbilityCooldown"
 				{
 					"value"	"6.0"
-					"special_bonus_unique_naga_siren_6" "-2"
+					"special_bonus_unique_nix_7" "-2"
 				}
 				"chance_pct"			"100"
 				"damage"
 				{
 					"value"	"25 50 75 100"
-					"special_bonus_facet_furion_soothing_saplings"				"x3"
+					"special_bonus_facet_nix_levin"				"x3"
 				}
 				"duration"
 				{
 					"value"	"1.0"
-					"special_bonus_unique_naga_siren_3" "+0.4"
+					"special_bonus_unique_nix_4" "+0.4"
 				}
 				"knockback_duration"	"0.6"
 				"knockback_height"		"350"
 				"armor"
 				{
 					"value" "0"
-					"special_bonus_facet_furion_ironwood_treant"	"-2 -4 -6 -8"
-					"RequiresFacet"	"furion_ironwood_treant"
+					"special_bonus_facet_nix_pravin"	"-2 -4 -6 -8"
+					"RequiresFacet"	"nix_pravin"
 				}
 				"armor_duration"
 				{
 					"value" "0"
-					"special_bonus_facet_furion_ironwood_treant"	"=5"
-					"RequiresFacet"	"furion_ironwood_treant"
+					"special_bonus_facet_nix_pravin"	"=5"
+					"RequiresFacet"	"nix_pravin"
 				}
 		}
 	}
@@ -9129,7 +9181,7 @@
 				"AbilityCastRange"
 				{
 					"value"	"800"
-					"special_bonus_unique_naga_siren_net_cooldown" "+100"
+					"special_bonus_unique_nix_1" "+100"
 					"affected_by_aoe_increase"	"1"
 				}
 				"duration"						"10"
@@ -9139,20 +9191,20 @@
 				"radius"
 				{
 					"value"	"800"
-					"special_bonus_unique_naga_siren_net_cooldown" "+100"
+					"special_bonus_unique_nix_1" "+100"
 					"affected_by_aoe_increase"	"1"
 				}
 				"as_loss"
 				{
 					"value" "0"
-					"special_bonus_facet_furion_ironwood_treant"	"+30 +65 +100"
-					"RequiresFacet"	"furion_ironwood_treant"
+					"special_bonus_facet_nix_pravin"	"+30 +65 +100"
+					"RequiresFacet"	"nix_pravin"
 				}
 				"dps"
 				{
 					"value"	"0"
-					"special_bonus_facet_furion_soothing_saplings"				"+70 +140 +210"
-					"RequiresFacet"	"furion_soothing_saplings"
+					"special_bonus_facet_nix_levin"				"+50 +100 +150"
+					"RequiresFacet"	"nix_levin"
 				}
 		}
 	}
