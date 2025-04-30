@@ -1278,23 +1278,27 @@
 		"Ability6"		"Ashab_rocket"
 		"Ability7"		"imba_batrider_sticky_napalm_new"
 
-		"Ability10"		"special_bonus_unique_tidehunter_9"
-		"Ability11"		"special_bonus_unique_tidehunter"
-		"Ability12"		"special_bonus_unique_tidehunter_2"
-		"Ability13"		"special_bonus_unique_tidehunter_3"
-		"Ability14"		"special_bonus_unique_tidehunter_8"
-		"Ability15"		"special_bonus_unique_tidehunter_5"
-		"Ability16"		"special_bonus_unique_tidehunter_7"
-		"Ability17"		"special_bonus_unique_tidehunter_10"
+		"Ability10"		"special_bonus_unique_ashab_1"
+		"Ability11"		"special_bonus_unique_ashab_2"
+		"Ability12"		"special_bonus_unique_ashab_3"
+		"Ability13"		"special_bonus_unique_ashab_4"
+		"Ability14"		"special_bonus_unique_ashab_5"
+		"Ability15"		"special_bonus_unique_ashab_6"
+		"Ability16"		"special_bonus_unique_ashab_7"
+		"Ability17"		"special_bonus_unique_ashab_8"
 		"Facets"
 		{
-			"tidehunter_kraken_swell"
+			"ashab_q_facet"
 			{
 				"Icon"				"armor"
 				"Color"				"Green"
 				"GradientID"		"2"
 			}
-			"tidehunter_sizescale"
+			"tidehunter_kraken_swell"
+			{
+				"Deprecated" "true"
+			}
+			"ashab_r_facet"
 			{
 				"Icon"				"overshadow"
 				"Color"				"Green"
@@ -1312,6 +1316,10 @@
 						"AbilityName"	"tidehunter_krill_eater"
 					}
 				}
+			}
+			"tidehunter_sizescale"
+			{
+				"Deprecated" "true"
 			}
 		}
 		"ArmorPhysical"		"0"
@@ -1351,14 +1359,14 @@
 		"Ability5"		"rattletrap_armor_power"
 		"Ability6"		"arsen_tg"
 		"Ability7"		"generic_hidden"
-		"Ability10"		"special_bonus_unique_earthshaker_3"
-		"Ability11"		"special_bonus_unique_earthshaker_6"
-		"Ability12"		"special_bonus_unique_earthshaker_4"
-		"Ability13"		"special_bonus_unique_earthshaker_2"
-		"Ability14"		"special_bonus_unique_earthshaker_echo_cd"
-		"Ability15"		"special_bonus_unique_earthshaker_totem_damage"
-		"Ability16"		"special_bonus_unique_ember_spirit_1"
-		"Ability17"		"special_bonus_unique_earthshaker"
+		"Ability10"		"special_bonus_unique_arsen_1"
+		"Ability11"		"special_bonus_unique_arsen_2"
+		"Ability12"		"special_bonus_unique_arsen_3"
+		"Ability13"		"special_bonus_unique_arsen_4"
+		"Ability14"		"special_bonus_unique_arsen_5"
+		"Ability15"		"special_bonus_unique_arsen_6"
+		"Ability16"		"special_bonus_unique_arsen_7"
+		"Ability17"		"special_bonus_unique_arsen_8"
 		"Facets"
 		{
 			"arsen_facet_testosteron"
@@ -1500,27 +1508,35 @@
 		"Ability4"		"serega_song"
 		"Ability5"		"serega_radiance"
 		"Ability6"		"serega_topor"
-		"Ability10"		"special_bonus_unique_techies_3"
-		"Ability11"		"special_bonus_unique_antimage_manavoid_aoe"
-		"Ability12"		"special_bonus_unique_antimage_7"
-		"Ability13"		"special_bonus_unique_antimage_3"
-		"Ability14"		"special_bonus_unique_antimage_6"
-		"Ability15"		"special_bonus_unique_antimage_8"
-		"Ability16"		"special_bonus_unique_antimage_5"
-		"Ability17"		"special_bonus_unique_antimage_2"
+		"Ability10"		"special_bonus_unique_serega_1"
+		"Ability11"		"special_bonus_unique_serega_2"
+		"Ability12"		"special_bonus_unique_serega_3"
+		"Ability13"		"special_bonus_unique_serega_4"
+		"Ability14"		"special_bonus_unique_serega_5"
+		"Ability15"		"special_bonus_unique_serega_6"
+		"Ability16"		"special_bonus_unique_serega_7"
+		"Ability17"		"special_bonus_unique_serega_8"
 		"Facets"
 		{
-			"antimage_magebanes_mirror" 
+			"serega_magic_facet" 
 			{
 				"Icon"				"mana"
 				"Color"				"Blue"
 				"GradientID"		"1"
 			}
-			"antimage_mana_thirst" 
+			"serega_physical_facet" 
 			{
 				"Icon"				"armor"
 				"Color"				"red"
 				"GradientID"		"1"
+			}
+			"antimage_magebanes_mirror" 
+			{
+				"Deprecated"	"true"
+			}
+			"antimage_mana_thirst" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0"
@@ -1569,17 +1585,17 @@
 		"Ability6"		"cheater_rage"
 		"Ability7"		"leaping_stride"
 		"Ability8"		"custom_passive_autoshot"
-		"Ability10"		"special_bonus_unique_clinkz_1"
+		"Ability10"		"special_bonus_unique_cheater_1"
 		"Ability11"		"special_bonus_strength_8"
 		"Ability12"		"special_bonus_movement_speed_30"
-		"Ability13"		"special_bonus_unique_clinkz_9"
-		"Ability14"		"special_bonus_unique_clinkz_8"
-		"Ability15"		"special_bonus_unique_clinkz_7"
-		"Ability16"		"special_bonus_unique_clinkz_4"
-		"Ability17"		"special_bonus_unique_nyx_carapace_reflect_duration"
+		"Ability13"		"special_bonus_unique_cheater_4"
+		"Ability14"		"special_bonus_unique_cheater_5"
+		"Ability15"		"special_bonus_unique_cheater_6"
+		"Ability16"		"special_bonus_unique_cheater_7"
+		"Ability17"		"special_bonus_unique_cheater_8"
 		"Facets"
 		{
-			"clinkz_suppressive_fire" 
+			"cheater_wallhack_facet" 
 			{
 				"Icon"				"vision"
 				"Color"				"Gray"
@@ -1594,7 +1610,7 @@
 					}
 				}
 			}
-			"clinkz_engulfing_step" 
+			"cheater_antiaim_facet" 
 			{
 				"Icon"				"teleport"
 				"Color"				"Yellow"
@@ -1608,6 +1624,14 @@
 						"AutoLevelAbility" "false"
 					}
 				}
+			}
+			"clinkz_suppressive_fire" 
+			{
+				"Deprecated"	"true"
+			}
+			"clinkz_engulfing_step" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0"
@@ -1655,27 +1679,35 @@
 		"Ability5"		"generic_hidden"
 		"Ability6"		"ogre_magi_dumb_luck"
 		"Ability7"		"zolo_batya"
-		"Ability10"		"special_bonus_unique_ogre_magi_4"
-		"Ability11"		"special_bonus_unique_chen_5"
-		"Ability12"		"special_bonus_unique_chen_3"
-		"Ability13"		"special_bonus_unique_ogre_magi"
-		"Ability14"		"special_bonus_unique_chen_11"
-		"Ability15"		"special_bonus_unique_ogre_magi_dumb_luck_mana"
-		"Ability16"		"special_bonus_unique_ogre_magi_3"
-		"Ability17"		"special_bonus_unique_ogre_magi_2"
+		"Ability10"		"special_bonus_unique_zolo_1"
+		"Ability11"		"special_bonus_unique_zolo_2"
+		"Ability12"		"special_bonus_unique_zolo_3"
+		"Ability13"		"special_bonus_unique_zolo_4"
+		"Ability14"		"special_bonus_unique_zolo_5"
+		"Ability15"		"special_bonus_unique_zolo_6"
+		"Ability16"		"special_bonus_unique_zolo_7"
+		"Ability17"		"special_bonus_unique_zolo_8"
 		"Facets"
 		{
-			"ogre_magi_fat_chance" 
+			"zolo_q_facet" 
 			{
 				"Icon"				"rng"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
-			"ogre_magi_learning_curve" 
+			"zolo_e_facet" 
 			{
 				"Icon"				"ogre"
 				"Color"				"Blue"
 				"GradientID"		"1"
+			}
+			"ogre_magi_fat_chance" 
+			{
+				"Deprecated"	"true"
+			}
+			"ogre_magi_learning_curve" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"HealthBarOffset"		"270"
@@ -1720,27 +1752,35 @@
 		"Ability6"		"chillguy_r"
 		"Ability7"		"generic_hidden"
 
-		"Ability10"		"special_bonus_unique_slark_6"
-		"Ability11"		"special_bonus_unique_slark"
-		"Ability12"		"special_bonus_unique_slark_2"
-		"Ability13"		"special_bonus_unique_slark_8"
-		"Ability14"		"special_bonus_unique_slark_5"
-		"Ability15"		"special_bonus_unique_slark_7"
-		"Ability16"		"special_bonus_unique_slark_3"
-		"Ability17"		"special_bonus_unique_slark_4"
+		"Ability10"		"special_bonus_unique_chillguy_1"
+		"Ability11"		"special_bonus_unique_chillguy_2"
+		"Ability12"		"special_bonus_unique_chillguy_3"
+		"Ability13"		"special_bonus_unique_chillguy_4"
+		"Ability14"		"special_bonus_unique_chillguy_5"
+		"Ability15"		"special_bonus_unique_chillguy_6"
+		"Ability16"		"special_bonus_unique_chillguy_7"
+		"Ability17"		"special_bonus_unique_chillguy_8"
 		"Facets"
 		{
-			"ancient_apparition_bone_chill" 
+			"chillguy_e_facet" 
 			{
 				"Icon"				"debuff"
 				"Color"				"Gray"
 				"GradientID"		"3"
 			}
-			"ancient_apparition_exposure" 
+			"chillguy_w_facet" 
 			{
 				"Icon"				"area_of_effect"
 				"Color"				"Blue"
 				"GradientID"		"0"
+			}
+			"ancient_apparition_bone_chill" 
+			{
+				"Deprecated"	"true"
+			}
+			"ancient_apparition_exposure" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"1"
@@ -1782,27 +1822,35 @@
 		"Ability4"		"sasavot_shard"
 		"Ability5"		"bloodseeker_sanguivore"
 		"Ability6"		"sasavot_r_new"
-		"Ability10"		"special_bonus_unique_bloodseeker_5"
-		"Ability11"		"special_bonus_unique_bloodseeker_2"
-		"Ability12"		"special_bonus_unique_bloodseeker_6"
-		"Ability13"		"special_bonus_unique_bloodseeker_7"
-		"Ability14"		"special_bonus_unique_bloodseeker_3"
-		"Ability15"		"special_bonus_unique_juggernaut_5"
-		"Ability16"		"special_bonus_unique_bloodseeker_rupture_charges"
-		"Ability17"		"special_bonus_unique_bloodseeker_4"
+		"Ability10"		"special_bonus_unique_sasavot_1"
+		"Ability11"		"special_bonus_unique_sasavot_2"
+		"Ability12"		"special_bonus_unique_sasavot_3"
+		"Ability13"		"special_bonus_unique_sasavot_4"
+		"Ability14"		"special_bonus_unique_sasavot_5"
+		"Ability15"		"special_bonus_unique_sasavot_6"
+		"Ability16"		"special_bonus_unique_sasavot_7"
+		"Ability17"		"special_bonus_unique_sasavot_8"
 		"Facets"
 		{
-			"bloodseeker_arterial_spray" 
+			"sasavot_e_facet" 
 			{
 				"Icon"				"movement"
 				"Color"				"Red"
 				"GradientID"		"1"
 			}
-			"bloodseeker_bloodrush" 
+			"sasavot_q_facet" 
 			{
 				"Icon"				"speed"
 				"Color"				"Gray"
 				"GradientID"		"1"
+			}
+			"bloodseeker_arterial_spray" 
+			{
+				"Deprecated"	"true"
+			}
+			"bloodseeker_bloodrush" 
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0.3"
@@ -1845,14 +1893,14 @@
 		"Ability4"		"golovach_hidden"
 		"Ability5"		"golovach_innate"
 		"Ability6"		"golovach_r"
-		"Ability10"		"special_bonus_unique_abaddon_immolation"
-		"Ability11"		"special_bonus_unique_juggernaut_3"
-		"Ability12"		"special_bonus_unique_juggernaut_healing_ward_heal"
-		"Ability13"		"special_bonus_unique_juggernaut_blade_fury_movespeed"
-		"Ability14"		"special_bonus_unique_juggernaut_blade_dance_lifesteal"
-		"Ability15"		"special_bonus_unique_juggernaut_2"
-		"Ability16"		"special_bonus_unique_juggernaut_omnislash_duration"
-		"Ability17"		"special_bonus_unique_juggernaut_blade_fury_cooldown"
+		"Ability10"		"special_bonus_unique_golovach_1"
+		"Ability11"		"special_bonus_unique_golovach_2"
+		"Ability12"		"special_bonus_unique_golovach_3"
+		"Ability13"		"special_bonus_unique_golovach_4"
+		"Ability14"		"special_bonus_unique_golovach_5"
+		"Ability15"		"special_bonus_unique_golovach_6"
+		"Ability16"		"special_bonus_unique_golovach_7"
+		"Ability17"		"special_bonus_unique_golovach_8"
 		"Facets"
 		{
 			"golovach_facet_innate"
@@ -1861,13 +1909,13 @@
 				"Color"	"Green"
 				"GradientID"	"1"
 			}
-			"juggernaut_bladestorm" 
+			"golovach_facet_e" 
 			{
 				"Icon"				"spinning"
 				"Color"				"Yellow"
 				"GradientID"		"1"
 			}
-			"juggernaut_agigain"
+			"golovach_facet_r"
 			{
 				"Icon"				"agility"
 				"Color"				"Red"
@@ -1880,6 +1928,14 @@
 						"AbilityName"	"juggernaut_bladeform"
 					}
 				}
+			}
+			"juggernaut_bladestorm" 
+			{
+				"Deprecated"	"true"
+			}
+			"juggernaut_agigain"
+			{
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0"

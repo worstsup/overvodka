@@ -14,7 +14,7 @@ end
 function sasavot_q:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
-	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_bloodseeker_rupture_charges" )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_sasavot_7" )
 end
 
 function sasavot_q:OnAbilityPhaseInterrupted()

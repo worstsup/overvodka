@@ -6,7 +6,7 @@ LinkLuaModifier( "modifier_cheater_smoke", "heroes/cheater/modifier_cheater_smok
 function cheater_granades:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
-	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_nyx_carapace_reflect_duration" )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_cheater_8" )
 end
 
 function cheater_granades:GetAOERadius()
