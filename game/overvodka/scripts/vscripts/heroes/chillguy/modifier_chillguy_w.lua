@@ -19,12 +19,10 @@ function modifier_chillguy_w:OnCreated( kv )
 	self.manacost = self:GetAbility():GetSpecialValueFor( "mana_cost_per_second" )
 	self.manacost_percent = self:GetAbility():GetSpecialValueFor( "mana_cost_percent" )
 	local interval = 1
-	-- precache
 	self.parent = self:GetParent()
 	self.parent:AddNewModifier(self.parent, self:GetAbility(), "modifier_chillguy_w_debuff", {})
 	self:Burn()
 	self:StartIntervalThink( interval )
-	-- play effects
 	local sound_loop = "chillguy_music"
 	EmitSoundOn( sound_loop, self.parent )
 end
@@ -43,11 +41,9 @@ function modifier_chillguy_w:OnDestroy()
 end
 
 function modifier_chillguy_w:OnIntervalThink()
-	-- check mana
 	local mana = self.parent:GetMana()
 	self.mp = self.manacost + self.manacost_percent * self.parent:GetMaxMana() * 0.01
 	if mana < self.mp then
-		-- turn off
 		if self:GetAbility():GetToggleState() then
 			self:GetAbility():ToggleAbility()
 		end
@@ -60,20 +56,19 @@ function modifier_chillguy_w:Burn()
 	self.mp = self.manacost + self.manacost_percent * self.parent:GetMaxMana() * 0.01
 	self.parent:SpendMana( self.mp, self:GetAbility() )
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),	-- int, your team number
-		self.parent:GetOrigin(),	-- point, center point
-		nil,	-- handle, cacheUnit. (not known)
-		self.radius,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-		DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,	-- int, type filter
-		0,	-- int, flag filter
-		0,	-- int, order filter
-		false	-- bool, can grow cache
+		self.parent:GetTeamNumber(),
+		self.parent:GetOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
 	)
 	local damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	local damage_pct = self:GetAbility():GetSpecialValueFor( "damage_pct" )
 	for _,enemy in pairs(enemies) do
-		-- apply damage
 		local damage_new = damage_pct * enemy:GetMaxHealth() * 0.01 + damage
 		self.damageTable = {
 			attacker = self:GetParent(),
@@ -84,6 +79,24 @@ function modifier_chillguy_w:Burn()
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
 		self:PlayEffects( enemy )
+	end
+	local friends = FindUnitsInRadius(
+		self.parent:GetTeamNumber(),
+		self.parent:GetOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		FIND_ANY_ORDER,
+		false
+	)
+	for _,ally in pairs(friends) do
+		if ally ~= self.parent then
+			local heal = (self:GetAbility():GetSpecialValueFor( "damage_pct" ) * ally:GetMaxHealth() * 0.01 + damage) * self:GetAbility():GetSpecialValueFor("heal") * 0.01
+			ally:Heal( heal, self:GetAbility() )
+			SendOverheadEventMessage( ally, OVERHEAD_ALERT_HEAL, ally, heal, nil )
+		end
 	end
 end
 
@@ -98,11 +111,7 @@ end
 function modifier_chillguy_w:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_leshrac/leshrac_pulse_nova.vpcf"
 	local sound_cast = "Hero_Leshrac.Pulse_Nova_Strike"
-
-	-- radius
 	local radius = 100
-
-	-- Create Particle
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -110,8 +119,8 @@ function modifier_chillguy_w:PlayEffects( target )
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(radius,0,0) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
@@ -126,8 +135,8 @@ function modifier_chillguy_w:PlayEffects2()
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		Vector(0,0,0), -- unknown
-		true -- unknown, true
+		Vector(0,0,0),
+		true
 	)
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(self.radius,0,0) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )

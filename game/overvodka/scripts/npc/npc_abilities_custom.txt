@@ -3495,6 +3495,7 @@
 		"AbilityCooldown"				"23"
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.15"
         "precache"
 		{
 			"particle"			"particles/invoker_chaos_meteor_new.vpcf"
@@ -3955,7 +3956,7 @@
 		"AbilityCastPoint"				"1.0"
 		"AbilityCooldown"				"90 80 70"
 		"AbilityManaCost"				"200 350 500"
-
+	
 		"precache"
 		{
 			"particle" 	"particles/econ/items/juggernaut/jugg_ti8_sword/juggernaut_blade_fury_abyssal.vpcf"
@@ -10343,6 +10344,10 @@
 		"AbilityManaCost"				"25 30 35 40"
 		"AbilityValues"
 		{
+				"damage"
+				{
+					"value"	"30 60 90 120"
+				}
 				"mana_cost_per_second"
 				{
 					"value"	"25 30 35 40"
@@ -10362,10 +10367,6 @@
 				{
 					"value"	"600"
 					"affected_by_aoe_increase"	"1"
-				}
-				"damage"
-				{
-					"value"	"30 60 90 120"
 				}
 				"damage_pct"
 				{
@@ -10389,6 +10390,7 @@
 					"special_bonus_facet_ancient_apparition_exposure" "-50"
 					"RequiresFacet"	"ancient_apparition_exposure"
 				}
+				"heal" "50"
 		}
 	}
 	"chillguy_e"
@@ -10421,7 +10423,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"28.0"
-					"special_bonus_unique_slark_5" "-10"
+					"special_bonus_unique_slark_5" "-8"
 				}
 				"duration"
 				{
@@ -10463,7 +10465,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.0"
 		"HasScepterUpgrade"				"1"
-		"AbilityCooldown"				"80"
+		"AbilityCooldown"				"80 75 70"
 		"AbilityManaCost"				"150 300 450"
 		"AbilityValues"
 		{
@@ -10475,7 +10477,7 @@
 				}
 				"bonus_ms"					"30 45 60"
 				"model_scale"				"50"
-				"spell_amp"					"30 40 50"
+				"spell_amp"					"15 25 35"
 		}
 	}
 	"chillzone"

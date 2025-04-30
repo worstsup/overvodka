@@ -1,7 +1,5 @@
 modifier_chillguy_w_shard = class({})
 
---------------------------------------------------------------------------------
--- Classifications
 function modifier_chillguy_w_shard:IsDebuff()
 	return true
 end
@@ -10,8 +8,6 @@ function modifier_chillguy_w_shard:IsStunDebuff()
 	return true
 end
 
---------------------------------------------------------------------------------
--- Initializations
 function modifier_chillguy_w_shard:OnCreated( kv )
 	if not IsServer() then return end
 	self.slow = self:GetAbility():GetSpecialValueFor("slow")
@@ -29,8 +25,6 @@ end
 function modifier_chillguy_w_shard:OnDestroy()
 end
 
---------------------------------------------------------------------------------
--- Status Effects
 function modifier_chillguy_w_shard:CheckState()
 	local state = {
 		[MODIFIER_STATE_SILENCED] = false
@@ -48,11 +42,11 @@ end
 function modifier_chillguy_w_shard:GetModifierMoveSpeedBonus_Percentage( params )
 	return self.slow
 end
+
 function modifier_chillguy_w_shard:GetModifierAttackSpeedBonus_Constant( params )
 	return self.slow_as
 end
---------------------------------------------------------------------------------
--- Graphics & Animations
+
 function modifier_chillguy_w_shard:GetEffectName()
 	return "particles/econ/events/fall_2021/bottle_fall_2021_ring_green.vpcf"
 end
