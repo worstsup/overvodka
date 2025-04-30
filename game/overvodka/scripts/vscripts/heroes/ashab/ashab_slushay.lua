@@ -5,7 +5,7 @@ LinkLuaModifier( "modifier_ashab_slushay_buff", "heroes/ashab/modifier_ashab_slu
 function ashab_slushay:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
-	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_tidehunter_7" )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_ashab_7" )
 end
 
 function ashab_slushay:OnSpellStart()
