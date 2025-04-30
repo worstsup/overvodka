@@ -3956,12 +3956,10 @@
 		"AbilityCastPoint"				"1.0"
 		"AbilityCooldown"				"90 80 70"
 		"AbilityManaCost"				"200 350 500"
-	
 		"precache"
 		{
-			"particle" 	"particles/econ/items/juggernaut/jugg_ti8_sword/juggernaut_blade_fury_abyssal.vpcf"
+			"particle" 	"particles/speed_r.vpcf"
 		}
-		
 		"AbilityValues"
 		{
 				"damage_tick"	"0.25"
@@ -4018,7 +4016,7 @@
 				{
 					"AttachEffect"
 					{
-						"EffectName"        "particles/econ/items/juggernaut/jugg_ti8_sword/juggernaut_blade_fury_abyssal.vpcf"
+						"EffectName"        "particles/speed_r.vpcf"
 						"EffectAttachType"  "follow_origin"
 						"Target"
 						{
