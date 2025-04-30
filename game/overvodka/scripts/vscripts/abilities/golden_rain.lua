@@ -74,7 +74,7 @@ end
 function golden_rain:RandomPointAroundCaster()
     if GetMapName() == "overvodka_5x5" then
         local points = {
-            Vector(0, 0, 0),
+            Vector(-576, -384, 0),
             Vector(-1600, 900, 0),
             Vector(1300, -1300, 0),
             Vector(-2400, 1600, 0),
