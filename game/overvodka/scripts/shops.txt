@@ -18,19 +18,21 @@
 		"item"		"item_tango"
 		"item"		"item_enchanted_mango"
 		"item"		"item_clarity"
+		"item"		"item_smoke_of_deceit"
+		"item"		"item_blood_grenade"
 	}
 
 	"attributes"
 	{
+		"item"		"item_nikes"
+		"item"		"item_jordan"
+		"item"		"item_magic_aegis"
+		"item"		"item_aegis_hero"	
+		"item"		"item_charik_new"
 		"item"		"item_manta_datadriven"
 		"item"		"item_suchiy"
 		"item"		"item_invis_sword_datadriven"
 		"item"		"item_badun"	
-		"item"		"item_magic_aegis"
-		"item"		"item_charik_new"
-		"item"		"item_nikes"
-		"item"		"item_jordan"	
-		"item"		"item_aegis_hero"
 		"item"		"item_drobe"
 		"item"		"item_mask_of_quadrobe"
 		"item"		"item_armlet_datadriven"
@@ -71,9 +73,11 @@
 		"item"		"item_gem"
 		"item"		"item_lifesteal"
 		"item"		"item_voodoo_mask"
-		"item"		"item_shadow_amulet"	
+		"item"		"item_shadow_amulet"
+		"item"		"item_tpscroll"
+		"item"		"item_magic_wand"	
 		"item"		"item_ghost"
-		"item"		"item_blink"		
+		"item"		"item_blink"	
 	}	
 	
 	// Level 1 - Green Recipes
