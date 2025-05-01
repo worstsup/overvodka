@@ -1,4 +1,4 @@
-"artem_start"
+"speed_bark"
 {
   "operator_stacks"
   {
@@ -14,15 +14,15 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/artem_start.vsnd"
+               "value0"    "sounds/abilities/speed_bark.vsnd"
             }
           }
-          "volume"      {  "value"   "2.0" }
-          "pitch_rand_min"  {  "value"   "-0.02" }
-          "pitch_rand_max"  {  "value"   "0.05" }
+          "volume"      {  "value"   "1.8" }
+          "pitch_rand_min"  {  "value"   "-0.03" }
+          "pitch_rand_max"  {  "value"   "0.03" }
           "pitch"       {  "value"   "1.000000" }
           "soundlevel"    {  "value"   "100.00000" }
-          "distance_max"   {  "value"   "10000.000" }
+          "distance_max"   {  "value"   "1600.000" }
           "event_type"    {  "value"   "1.000000" }
         }
       }

@@ -3,6 +3,7 @@ LinkLuaModifier( "modifier_speed_bark_effect", "heroes/golmiy/speed_bark", LUA_M
 speed_bark = class({})
 
 function speed_bark:Precache( context )
+    PrecacheResource( "soundfile", "soundevents/speed_bark.vsndevts", context)
     PrecacheResource( "particle", "particles/speed_bark_cast.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_blue.vpcf", context )
@@ -34,6 +35,7 @@ function speed_bark:OnSpellStart()
         caster
     )
     ParticleManager:ReleaseParticleIndex(p)
+    EmitSoundOn("speed_bark", caster)
 end
 
 modifier_speed_bark_effect = class({})

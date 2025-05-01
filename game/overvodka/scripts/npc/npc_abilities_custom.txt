@@ -3488,7 +3488,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
-	// ПЕНАЛЬТИЙ
+	// PENALTY
 	//=================================================================================================================
 	"golmiy_penaltiy"
     {
@@ -3498,7 +3498,7 @@
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"        	"futbik"
         "MaxLevel"                  	"4"
-		"AbilityCooldown"				"23"
+		"AbilityCooldown"				"28"
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityCastRange"				"1200"
 		"AbilityCastPoint"				"0.15"
@@ -3570,6 +3570,9 @@
 				}
 		}
     }
+	//=================================================================================================================
+	// BARK
+	//=================================================================================================================
 	"speed_bark"
 	{
 		"BaseClass"						"ability_lua"
@@ -3579,14 +3582,14 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastPoint"				"0.5"
+		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"30"
 		"AbilityHealthCost"				"75 130 185 240"
 		"AbilityValues"
 		{
 			"radius"
 			{
-				"value"	"550 600 650 700"
+				"value"	"650 700 750 800"
 				"special_bonus_unique_golmiy_2" "+100"
 				"affected_by_aoe_increase"	"1"
 			}
@@ -3611,6 +3614,35 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// CR7
+	//=================================================================================================================
+	"speed_cr7"
+	{
+    	"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/golmiy/speed_cr7"
+    	"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+    	"MaxLevel"						"4"
+    	"AbilityTextureName"            "twenty"
+    	"AbilityManaCost"               "50"
+    	"AbilityValues"
+    	{
+			"cooldown_reduction"	"7"
+			"mana_hp_regen"			"7"
+			 "duration"
+			{
+				"value"	"3"
+				"special_bonus_unique_golmiy_3" "+1"
+			}
+			"AbilityCooldown"
+			{
+				"value"	"32 30 28 26"
+				"special_bonus_unique_golmiy_1" "-4"
+			}
+    	}
+	}
 	"brewmaster_belligerent"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_INNATE_UI"
@@ -3625,81 +3657,6 @@
 		}		
 	}
 	//=================================================================================================================
-	// 23
-	//=================================================================================================================
-	"golmiy_chislo"
-	{
-		"BaseClass"              "ability_datadriven"
-		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     "twenty"
-		"AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
-		"precache"
-		{
-			"particle"	"particles/golmy_2.vpcf"
-			"particle"	"particles/econ/courier/courier_greevil_blue/courier_greevil_blue_ambient_3.vpcf"
-		}
-		"MaxLevel"              	"4"
-		"AbilityCooldown"         	"23"
-		"IsBreakable"				"1"
-	  
-		"AbilityValues"
-		{
-				"duration"
-				{
-					"value"	"2 3 4 5"
-					"special_bonus_unique_golmiy_3" "+1"
-				}
-				"movespeed"			   "23"
-				"dermo"                "23"
-				"percent_heal"		   "2.3"
-		}
-
-		"Modifiers"
-		{
-			"modifier_golmiy_chislo"
-			{
-				"Passive"       "1"
-				"IsHidden"		"1"
-		  
-				"ThinkInterval"  "0.1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"            "heroes/golmiy/golmiy_chislo.lua"
-						"Function"              "TwentyThree"
-					}
-				}      
-			}
-			"modifier_movement_speed"
-			{
-				"EffectName"	"particles/golmy_2.vpcf"
-			    "EffectAttachType"	"follow_overhead"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%movespeed"
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%dermo"
-					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%dermo"
-					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%percent_heal"
-					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%percent_heal"
-				}
-			}
-			"modifier_eff"
-			{
-				"IsHidden"	"1"
-				"EffectName"	"particles/econ/courier/courier_greevil_blue/courier_greevil_blue_ambient_3.vpcf"
-			    "EffectAttachType"	"follow_origin"
-			}
-			"modifier_bkb"
-			{
-				"States"
-				{
-					"MODIFIER_STATE_DEBUFF_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-	}
-	//=================================================================================================================
 	// GOLBET
 	//=================================================================================================================
 	"golmiy_golbet"
@@ -3712,7 +3669,6 @@
 		"MaxLevel"						"1"
 		"IsGrantedByShard"              "1"
 		"AbilityTextureName"			"golbet"
-
 		"precache"
 		{
 			"soundfile"		"soundevents/stavka.vsndevts"
@@ -3878,64 +3834,25 @@
 			}
 		}
 	}
-	//=================================================================================================================
-	// КОСТЫЛЬ
-	//=================================================================================================================
-	"golmiy_kostil"
+	"speed_innate"
 	{
-		"BaseClass"                     "ability_datadriven"
-		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"   
-		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityTextureName"            "kost"
-		"MaxLevel" "1"
+		"BaseClass" 					"ability_lua"
+		"ScriptFile"					"heroes/golmiy/speed_innate"
+    	"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
+    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    	"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
+		"IsBreakable"					"1"
+		"AbilityTextureName"			"otchim"
+		"AbilityCooldown"				"1"
 		"AbilityValues"
 		{
-				"duration"
-				{
-					"value"	"0.5"
-					"special_bonus_unique_golmiy_1" "+0.5"
-				}
-				"movement_speed"            "-23"
-				"bonus_attack_range"        "100"
-		}	
-		"Modifiers"
-		{
-			"modifier_golmiy_kostil"
-			{
-				"Passive"   "1"
-				"IsHidden"  "1"
-
-				"OnAttackLanded"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"  "modifier_golmiy_kostil_debuff"
-						"Target"        "TARGET"
-					}
-				}
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"  "%bonus_attack_range"
-				}
-			}
-
-			"modifier_golmiy_kostil_debuff"
-			{
-				"IsDebuff"  "1"
-				"Duration"  "%duration"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%movement_speed"
-				}
-			}
+			"ms_pct"	"1.0"
 		}
 	}
 	//=================================================================================================================
-	// ГЕННАДИЙ
+	// SHAKE
 	//=================================================================================================================
 	"golmiy_gennadiy"
 	{
@@ -4831,7 +4748,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"		
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"	
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"HasScepterUpgrade"				"1"
 		"AbilityCooldown"				"30"
