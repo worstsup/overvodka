@@ -746,9 +746,9 @@
 						animgraph_additive = false
 						source_filename = "models/speed/speed_spell2.fbx"
 						import_bone_scales = false
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
+						start_frame = 5
+						end_frame = 106
+						framerate = 100.0
 						reverse = false
 					},
 					{

@@ -16,6 +16,9 @@ function Damage(event)
 
 	for _,unit in pairs(targets) do
 		ApplyDamage({victim = unit, attacker = caster, damage = dmg, damage_type = DAMAGE_TYPE_PURE, ability = ability})
+		local heal = ability:GetSpecialValueFor("lifesteal") * dmg * 0.01
+		caster:Heal( heal, ability )
+		SendOverheadEventMessage( caster, OVERHEAD_ALERT_HEAL, caster, heal, nil )
 	end
 end
 

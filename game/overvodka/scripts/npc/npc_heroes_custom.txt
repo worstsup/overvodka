@@ -499,7 +499,7 @@
 		"HeroSelectSoundEffect"		"artem_start"
 		"SimilarHeroes"  "2,36,51"
 		"Ability1"		"golmiy_penaltiy"
-		"Ability2"		"golmiy_blev"
+		"Ability2"		"speed_bark"
 		"Ability3"		"golmiy_chislo"
 		"Ability4"		"golmiy_golbet"
 		"Ability5"		"golmiy_kostil"
@@ -510,7 +510,7 @@
 		"Ability13"		"special_bonus_unique_golmiy_4"
 		"Ability14"		"special_bonus_unique_golmiy_5"
 		"Ability15"		"special_bonus_unique_golmiy_6"
-		"Ability16"		"special_bonus_spell_lifesteal_20"
+		"Ability16"		"special_bonus_unique_golmiy_8"
 		"Ability17"		"special_bonus_unique_golmiy_7"
 		"Facets"
 		{
