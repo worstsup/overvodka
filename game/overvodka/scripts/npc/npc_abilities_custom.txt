@@ -3584,7 +3584,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"30"
-		"AbilityHealthCost"				"75 130 185 240"
+		"AbilityHealthCost"				"70 140 210 280"
 		"AbilityValues"
 		{
 			"radius"
@@ -3844,7 +3844,7 @@
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
 		"IsBreakable"					"1"
-		"AbilityTextureName"			"otchim"
+		"AbilityTextureName"			"speed_innate"
 		"AbilityCooldown"				"1"
 		"AbilityValues"
 		{
@@ -3854,14 +3854,14 @@
 	//=================================================================================================================
 	// SHAKE
 	//=================================================================================================================
-	"golmiy_gennadiy"
+	"speed_shake"
 	{
-		"BaseClass"             		"ability_datadriven"
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/golmiy/speed_shake"
 		"AbilityType"            		"DOTA_ABILITY_TYPE_ULTIMATE"	
 		"MaxLevel"               		"3"
 		"AbilityTextureName" 			"gena"
 		"RequiredLevel"          		"6"
-		"LevelsBetweenUpgrades"  		"6"
 		"HasScepterUpgrade"         	"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -3872,12 +3872,6 @@
 		"AbilityCastPoint"				"1.0"
 		"AbilityCooldown"				"90 80 70"
 		"AbilityManaCost"				"200 350 500"
-		"precache"
-		{
-			"particle" 	"particles/speed_r.vpcf"
-			"soundfile"	"soundevents/gennadiy_start.vsndevts"
-			"soundfile"	"soundevents/gennadiy.vsndevts"
-		}
 		"AbilityValues"
 		{
 				"damage_tick"	"0.25"
@@ -3886,18 +3880,13 @@
 					"value"	"350"
 					"affected_by_aoe_increase"	"1"
 				}
-				"radius_tooltip"
-				{
-					"value"	"410"
-					"affected_by_aoe_increase"	"1"
-				}
 				"duration"					"10 11 12"
 				"damage"					"80 160 240"
 				"magic_resist"				"50 60 70"
 				"dmg_scepter"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+50"
+					"special_bonus_scepter"	"+20"
 				}
 				"lifesteal"
 				{
@@ -3905,83 +3894,6 @@
 					"special_bonus_unique_golmiy_8"	"+25"
 				}
 		}
-		"OnAbilityPhaseStart"
-    		{
-        		"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "gennadiy_start"
-        		}
-    		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/golmiy/golmiy_gennadiy"
-				"Function"		"GolmiyModifier"
-			}			
-		}
-		"Modifiers"
-		{
-			"modifier_golmiy_gennadiy"
-			{	
-				"OverrideAnimation"     	"ACT_DOTA_CAST_ABILITY_5"
-				"States"
-				{
-					"MODIFIER_STATE_DEBUFF_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_DISARMED"			"MODIFIER_STATE_VALUE_ENABLED"
-				}
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magic_resist"
-				}
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"        "particles/speed_r.vpcf"
-						"EffectAttachType"  "follow_origin"
-						"Target"
-						{
-							"Center"  	"CASTER"
-							"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-						}
-						"ControlPoints"
-						{
-							"05"	"%radius_tooltip 0 0"
-						}					
-					}
-					"FireSound"
-					{
-						"EffectName"	"gennadiy"
-						"Target"
-						{
-							"Center"  	"CASTER"
-							"Flags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-						}
-					}			
-				}
-				
-				"ThinkInterval"  "%damage_tick"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile" "heroes/golmiy/golmiy_gennadiy"
-						"Function"		"Damage"
-					}	
-
-				}
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/golmiy/golmiy_gennadiy"
-						"Function"		"BladeFuryStop"
-					}
-				}
-			}
-		}	
 	}
 
 	//===================================================================================================================

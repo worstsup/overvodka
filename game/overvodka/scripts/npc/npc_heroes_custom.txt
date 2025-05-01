@@ -504,7 +504,7 @@
 		"Ability3"		"speed_cr7"
 		"Ability4"		"golmiy_golbet"
 		"Ability5"		"speed_innate"
-		"Ability6"		"golmiy_gennadiy"
+		"Ability6"		"speed_shake"
 		"Ability10"		"special_bonus_unique_golmiy_1"
 		"Ability11"		"special_bonus_unique_golmiy_2"
 		"Ability12"		"special_bonus_unique_golmiy_3"

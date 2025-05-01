@@ -307,6 +307,7 @@
 		"AbilityCooldown"					"60"
 	}
 	"item_helm_of_the_overlord"				"REMOVE"
+	"item_hand_of_midas"				"REMOVE"
 
 	//=================================================================================================================
 	// Remove Tome of Knowledge

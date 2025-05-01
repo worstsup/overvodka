@@ -15,6 +15,10 @@ function dave_e:GetIntrinsicModifierName()
     return "modifier_dave_e"
 end
 
+function dave_e:IsStealable()
+    return false
+end
+
 function dave_e:GetBehavior()
     if self:GetCaster():HasScepter() then
         return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE
