@@ -1955,7 +1955,7 @@
 		"AttributeStrengthGain"		"2.1"
 		"AttributeBaseIntelligence"		"14"
 		"AttributeIntelligenceGain"		"1.4"
-		"AttributeBaseAgility"		"34"
+		"AttributeBaseAgility"		"26"
 		"AttributeAgilityGain"		"2.9"
 		"StatusHealthRegen"		"0.5"
 		"MovementSpeed"		"300"

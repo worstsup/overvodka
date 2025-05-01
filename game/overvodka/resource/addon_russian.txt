@@ -1121,7 +1121,7 @@
 		"DOTA_Tooltip_ability_gunnar_bash_armor" "СНИЖЕНИЕ БРОНИ:"
 		"DOTA_Tooltip_ability_gunnar_bash_armor_duration" "ДЛИТЕЛЬНОСТЬ СНИЖЕНИЯ БРОНИ:"
 		"DOTA_Tooltip_ability_gunnar_bash_facet_nix_pravin" "Способность снижает броню противнику."
-		"DOTA_Tooltip_ability_gunnar_bash_facet_nix_levin" "Урон от способности увеличивается в 3 раза."
+		"DOTA_Tooltip_ability_gunnar_bash_facet_nix_levin" "Урон от способности увеличивается в 2 раза."
 		"DOTA_Tooltip_ability_nix_rus" "ДРЕВНИЙ РУС"
 		"DOTA_Tooltip_ability_nix_rus_scepter_Description" "Способность накладывает бессилие на всех врагов в радиусе."
 		"DOTA_Tooltip_ability_nix_rus_Description" "Никс становится древним русом, получая дополнительную силу и уменьшая её всем окружающим ящерам."
