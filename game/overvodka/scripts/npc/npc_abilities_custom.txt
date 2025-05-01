@@ -3481,6 +3481,12 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	"special_bonus_unique_golmiy_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	//=================================================================================================================
 	// ПЕНАЛЬТИЙ
 	//=================================================================================================================
@@ -3499,6 +3505,7 @@
         "precache"
 		{
 			"particle"			"particles/invoker_chaos_meteor_new.vpcf"
+			"soundfile"			"soundevents/penal.vsndevts"
 		}
 		"OnSpellStart"
 		{
@@ -3563,54 +3570,45 @@
 				}
 		}
     }
-	//=================================================================================================================
-	// БЛЕВАЛИЙ
-	//=================================================================================================================
-	"golmiy_blev"
+	"speed_bark"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/golmiy/golmiy_blev"
-		"AbilityTextureName"			"alchemist_acid_spray_lua"
+		"ScriptFile"					"heroes/golmiy/speed_bark"
 		"AbilityTextureName"			"bleval"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"4"
-		"precache"
-		{	
-			"soundfile"	"soundevents/blue.vsndevts"
-			"particle"	"particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-			"particle"	"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
-		}
-
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastPoint"				"0.2"
-		"AbilityCastRange"				"900"
-		"AbilityCooldown"				"23.0"
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"30"
 		"AbilityHealthCost"				"75 130 185 240"
-
 		"AbilityValues"
 		{
-				"radius"
-				{
-					"value"	"550 600 650 700"
-					"special_bonus_unique_golmiy_2" "+100"
-					"affected_by_aoe_increase"	"1"
-				}
-				"duration"			"4.0 6.0 8.0 10.0"
-				"damage"				"40 50 60 70"
-				"magic_reduction"
-				{
-					"value"			"-11 -15 -19 -23"
-					"special_bonus_unique_golmiy_6" "-10"
-				}
-				"tick_rate"				"1.0"
-				"slow"
-				{
-					"value"	"0"
-					"special_bonus_facet_golmiy_facet_w"	"-15"
-				}
+			"radius"
+			{
+				"value"	"550 600 650 700"
+				"special_bonus_unique_golmiy_2" "+100"
+				"affected_by_aoe_increase"	"1"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"550 600 650 700"
+				"special_bonus_unique_golmiy_2" "+100"
+				"affected_by_aoe_increase"	"1"
+			}
+			"duration"	"5 6 7 8"
+			"magic_resist"
+			{
+				"value"			"12 15 18 21"
+				"special_bonus_unique_golmiy_6" "+10"
+			}
+			"armor"	"2 4 6 8"
+			"movespeed"
+			{
+				"value"	"0"
+				"special_bonus_facet_golmiy_facet_w"	"+15"
+				"RequiresFacet"	"golmiy_facet_w"
+			}
 		}
 	}
 	"brewmaster_belligerent"
@@ -3717,11 +3715,12 @@
 
 		"precache"
 		{
-			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
+			"soundfile"		"soundevents/stavka.vsndevts"
+			"particle"		"particles/speed_shard_start.vpcf"
 			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_trail.vpcf"
+			"particle"		"particles/speed_shard_trail.vpcf"
 			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_haste.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_shield.vpcf"
+			"particle"		"particles/speed_shard_shield.vpcf"
 		}
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -3761,7 +3760,7 @@
 			}
 			"FireEffect"
 			{
-				"EffectName"	"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_cast.vpcf"
+				"EffectName"	"particles/speed_shard_start.vpcf"
 				"EffectAttachType"	"start_at_customorigin"
 
 				"ControlPointEntities"
@@ -3788,7 +3787,7 @@
 				{
 					"AttachEffect"
 					{
-						"EffectName"        "particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_trail.vpcf"
+						"EffectName"        "particles/speed_shard_trail.vpcf"
 						"EffectAttachType"  "follow_origin"
 						"Target"            "TARGET"
 
@@ -3801,7 +3800,7 @@
 
 					"AttachEffect"
 					{
-						"EffectName"        "particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_shield.vpcf"
+						"EffectName"        "particles/speed_shard_shield.vpcf"
 						"EffectAttachType"  "follow_overhead"
 						"Target"            "TARGET"
 					}
@@ -3959,6 +3958,8 @@
 		"precache"
 		{
 			"particle" 	"particles/speed_r.vpcf"
+			"soundfile"	"soundevents/gennadiy_start.vsndevts"
+			"soundfile"	"soundevents/gennadiy.vsndevts"
 		}
 		"AbilityValues"
 		{
@@ -3980,6 +3981,11 @@
 				{
 					"value"	"0"
 					"special_bonus_scepter"	"+50"
+				}
+				"lifesteal"
+				{
+					"value"	"0"
+					"special_bonus_unique_golmiy_8"	"+25"
 				}
 		}
 		"OnAbilityPhaseStart"

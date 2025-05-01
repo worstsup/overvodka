@@ -14,6 +14,7 @@ function Track( keys )
 	local target = keys.target
 	local targetLocation = target:GetAbsOrigin() 
 	local ability = keys.ability
+	local player_id = caster:GetPlayerID()
 	local bonus_gold_self = ability:GetLevelSpecialValueFor("bonus_gold_self", (ability:GetLevel() - 1))
 	local bonus_gold = ability:GetLevelSpecialValueFor("bonus_gold", (ability:GetLevel() - 1))
 	local bonus_gold_radius = ability:GetLevelSpecialValueFor("bonus_gold_radius", (ability:GetLevel() - 1))
@@ -26,7 +27,7 @@ function Track( keys )
 			end
 		end
 	else
-		caster:ModifyGold(-500, true, 0)
+		PlayerResource:SpendGold(player_id, bonus_gold, 4)
 	end
 	target:RemoveModifierByName("modifier_track_aura_datadriven") 
 end
