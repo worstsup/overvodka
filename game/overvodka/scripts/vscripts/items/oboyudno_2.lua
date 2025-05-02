@@ -16,11 +16,12 @@ end
 function item_oboyudno_2:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    self:GetCaster():Purge( false, true, false, false, false)
-    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_birzha_blade_mail_active", {duration = duration} )
-    self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_item_lotus_orb_active", {duration = duration} )
-    self:GetCaster():EmitSound("oboyudno_2")
-    self:GetCaster():EmitSound("DOTA_Item.BladeMail.Activate")
+	local target = self:GetCursorTarget()
+    target:Purge( false, true, false, false, false)
+    target:AddNewModifier( self:GetCaster(), self, "modifier_item_birzha_blade_mail_active", {duration = duration} )
+    target:AddNewModifier( self:GetCaster(), self, "modifier_item_lotus_orb_active", {duration = duration} )
+    target:EmitSound("oboyudno_2")
+    target:EmitSound("DOTA_Item.BladeMail.Activate")
 end
 
 modifier_item_oboyudno_2 = class({})
@@ -134,7 +135,7 @@ end
 modifier_item_oboyudno_2_aura_buff_armor = class({})
 
 function modifier_item_oboyudno_2_aura_buff_armor:GetTexture()
-  	return "cuiras"
+  	return "oboyudno_2"
 end
 
 function modifier_item_oboyudno_2_aura_buff_armor:OnCreated()

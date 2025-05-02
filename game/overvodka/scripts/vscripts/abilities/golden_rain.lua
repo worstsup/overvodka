@@ -121,8 +121,8 @@ function modifier_golden_rain_thinker:OnCreated( kv )
     self.xp = self.ability:GetSpecialValueFor("xp")
     self.gold = self.ability:GetSpecialValueFor("gold")
     if GetMapName() == "overvodka_5x5" then
-        self.gold = self.gold - 25
-        self.xp = self.xp - 25
+        self.gold = self.gold * 0.5
+        self.xp = self.xp * 0.5
     end
     local particle = ParticleManager:CreateParticle("particles/econ/items/monkey_king/mk_ti9_immortal/mk_ti9_immortal_army_radius.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())

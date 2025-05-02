@@ -1,5 +1,4 @@
 macan_r = class({})
-macan_r_release = class({})
 LinkLuaModifier( "modifier_macan_r_charge", "heroes/macan/macan_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_macan_r", "heroes/macan/macan_r", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua.lua", LUA_MODIFIER_MOTION_BOTH )
@@ -31,30 +30,10 @@ function macan_r:OnSpellStart()
 		"modifier_macan_r_charge",
 		{ duration = duration }
 	)
-	self.sub = caster:FindAbilityByName( "macan_r_release" )
-	if not self.sub or self.sub:IsNull() then
-		self.sub = caster:AddAbility( "macan_r_release" )
-	end
-	self.sub.main = self
-	self.sub:SetLevel( self:GetLevel() )
-
-	caster:SwapAbilities(
-		self:GetAbilityName(),
-		self.sub:GetAbilityName(),
-		false,
-		true
-	)
-	self.sub:UseResources( false, false, false, true )
 end
 
 function macan_r:OnChargeFinish( interrupt )
 	local caster = self:GetCaster()
-	caster:SwapAbilities(
-		self:GetAbilityName(),
-		self.sub:GetAbilityName(),
-		true,
-		false
-	)
 	local max_duration = self:GetSpecialValueFor( "chargeup_time" )
 	local max_distance = self:GetSpecialValueFor( "max_distance" )
 	local speed = self:GetSpecialValueFor( "charge_speed" )
@@ -76,10 +55,6 @@ function macan_r:OnChargeFinish( interrupt )
 		"modifier_macan_r",
 		{ duration = duration }
 	)
-end
-
-function macan_r_release:OnSpellStart()
-	self.main:OnChargeFinish( false )
 end
 
 modifier_macan_r = class({})
@@ -108,7 +83,7 @@ function modifier_macan_r:OnCreated( kv )
 	self.stun = self:GetAbility():GetSpecialValueFor( "stun_duration" )
 	local damage = self:GetAbility():GetSpecialValueFor( "knockback_damage" )
 
-	self.tree_radius = 120
+	self.tree_radius = 160
 	self.height = 50
 	self.duration = 0.3
 
@@ -249,7 +224,7 @@ function modifier_macan_r:HitLogic()
 		self.parent:GetOrigin(),
 		nil,
 		self.radius,
-		DOTA_UNIT_TARGET_TEAM_BOTH,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
 		self.abilityTargetType,
 		self.abilityTargetFlags,
 		0,

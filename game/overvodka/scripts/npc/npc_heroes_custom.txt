@@ -378,12 +378,12 @@
 			{
 				"Icon"				"damage"
 				"Color"				"Red"
-				"GradientID"		"2"
+				"GradientID"		"0"
 			}
 			"lev_q" 
 			{
-				"Icon"				"fist"
-				"Color"				"Blue"
+				"Icon"				"unique"
+				"Color"				"Red"
 				"GradientID"		"2"
 			}
 			"lion_essence_eater" 
@@ -547,13 +547,13 @@
 		"AttackRange"		"150"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
 		"AttributeBaseStrength"		"23"
-		"AttributeStrengthGain"		"2.3"
+		"AttributeStrengthGain"		"2.0"
 		"AttributeBaseAgility"		"23"
 		"AttributeAgilityGain"		"2.3"
 		"AttributeBaseIntelligence"		"23"
 		"AttributeIntelligenceGain"		"2.3"
 		"StatusHealthRegen"		"0.5"
-		"MovementSpeed"		"305"
+		"MovementSpeed"		"300"
 		"HealthBarOffset"	"250"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
 		"VoiceFile"			""

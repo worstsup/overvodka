@@ -117,7 +117,7 @@ function modifier_dave_loonboon:OnIntervalThink()
         12000,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
         DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_NONE,
+        DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED,
         FIND_ANY_ORDER,
         false)
     for _,unit in pairs(plants) do

@@ -1,5 +1,6 @@
 LinkLuaModifier("modifier_chef_d_debuff", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_chef_d_buff", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_d_buff_facet", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
 
 chef_d = class({})
 
@@ -82,6 +83,9 @@ function chef_d:OnProjectileHit_ExtraData(htarget, vLocation, table)
     for _, ally in pairs(allies) do
         ally:HealWithParams(heal, self, false, true, self:GetCaster(), false)
         ally:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_buff", {duration = duration})
+        if self:GetSpecialValueFor("burn_dur") > 0 then
+            ally:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_buff_facet", {duration = self:GetSpecialValueFor("burn_dur")})
+        end
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal, self:GetCaster():GetPlayerOwner())
         local particle = ParticleManager:CreateParticle("particles/items3_fx/fish_bones_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally)
         ParticleManager:ReleaseParticleIndex(particle)
@@ -186,4 +190,19 @@ end
 
 function modifier_chef_d_buff:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
+end
+
+modifier_chef_d_buff_facet = class({})
+function modifier_chef_d_buff_facet:IsHidden() return true end
+function modifier_chef_d_buff_facet:IsPurgable() return true end
+function modifier_chef_d_buff_facet:OnCreated()
+    if not IsServer() then return end
+    self.heal_burn = self:GetAbility():GetSpecialValueFor("heal_burn")
+    self:StartIntervalThink(1)
+end
+
+function modifier_chef_d_buff_facet:OnIntervalThink()
+    if not IsServer() then return end
+    self:GetParent():HealWithParams(self.heal_burn, self:GetAbility(), false, true, self:GetCaster(), false)
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self:GetParent(), self.heal_burn, self:GetCaster():GetPlayerOwner())
 end
