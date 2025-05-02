@@ -620,11 +620,11 @@
         "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
         "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
         "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
-        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/nevermore.vmat" // Текстура фона для портрета
-        "PortraitBackgroundColor1"  "0.8 0.0 0.0" // Цвет градиента фона 1
-        "PortraitBackgroundColor2"  "0.8 0.0 0.0" // Цвет градиента фона 2
-        "PortraitBackgroundColor3"  "0.8 0.0 0.0" // Цвет градиента фона 3
-        "PortraitBackgroundColor4"  "0.8 0.0 0.0" // Цвет градиента фона 4
+        "PortraitBackgroundTexture" "materials/vgui/hud/heroportraits/portraitbackground_qop_arcana.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.8 0.4 0.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.8 0.4 0.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.8 0.4 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.8 0.4 0.0" // Цвет градиента фона 4
         "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
         "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
         "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света

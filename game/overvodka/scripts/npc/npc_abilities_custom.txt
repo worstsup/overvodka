@@ -1950,7 +1950,7 @@
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"   
 		"FightRecapLevel"               "2"
-		"AbilityTextureName"            "imba"
+		"AbilityTextureName"            "chef_q"
 		"HasScepterUpgrade"             "1"
 		"precache"
 		{
@@ -1992,7 +1992,7 @@
 		"ScriptFile"					"heroes/lev/chef_w"
 		"AbilityBehavior"			   	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam"		 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityTextureName"            "shoko"
+		"AbilityTextureName"            "chef_w"
 		"AbilityCastPoint"			  	"0.2"
 		"AbilityCooldown"               "40 35 30 25 20"  
 		"MaxLevel"						"5"

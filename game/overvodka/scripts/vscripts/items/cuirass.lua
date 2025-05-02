@@ -162,14 +162,6 @@ function modifier_item_cuirass_2_aura_buff_armor:GetModifierPhysicalArmorBonus()
 	return self.aura_armor_ally
 end
 
-function modifier_item_cuirass_2_aura_buff_armor:GetEffectName()
-	return "particles/items_fx/aura_assault.vpcf"
-end
-
-function modifier_item_cuirass_2_aura_buff_armor:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
-end
-
 modifier_item_cuirass_2_aura_debuff = class({})
 
 function modifier_item_cuirass_2_aura_debuff:IsDebuff() return false end
@@ -622,17 +614,6 @@ function modifier_item_birzha_blade_mail:OnAttackLanded(params)
 end
 
 modifier_item_birzha_blade_mail_active = class({})
-
-function modifier_item_birzha_blade_mail_active:GetTexture()
-	if self:GetAbility() then
-		if self:GetAbility():GetName() == "item_birzha_blade_mail" then
-	  		return "item_blade_mail"
-	  	else
-	  		return "cuiras"
-	  	end
-	end
-	return "item_blade_mail"
-end
 
 function modifier_item_birzha_blade_mail_active:IsPurgable()
 	return false

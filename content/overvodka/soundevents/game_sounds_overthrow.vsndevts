@@ -3,7 +3,7 @@
 	Overthrow.Item.Warning = 
 	{
 		type = "dota_src1_3d"
-		volume = 0.5
+		volume = 0.4
 		pitch = 1.0
 		soundlevel = 90.0
 		limiter_on = 1.0
@@ -12,7 +12,7 @@
 	Overthrow.Item.Spawn = 
 	{
 		type = "dota_src1_3d"
-		volume = 0.5
+		volume = 0.4
 		pitch = 1.0
 		soundlevel = 90.0
 		limiter_on = 1.0
@@ -21,7 +21,7 @@
 	Overthrow.Item.Claimed = 
 	{
 		type = "dota_src1_3d"
-		volume = 0.5
+		volume = 0.4
 		pitch = 1.0
 		soundlevel = 90.0
 		limiter_on = 1.0
