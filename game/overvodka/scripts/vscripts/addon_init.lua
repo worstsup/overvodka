@@ -10,3 +10,7 @@ ListenToGameEvent("chat_wheel_console_command", function (data, event)
         SendToConsole(data.command)
     end
 end, nil)
+
+if IsServer() then
+    return
+end
