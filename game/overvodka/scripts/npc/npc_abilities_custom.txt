@@ -1954,21 +1954,23 @@
 		"HasScepterUpgrade"             "1"
 		"precache"
 		{
-			"soundfile"			"soundevents/suii.vsndevts"
-			"soundfile"         "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
-			"particle"          "particles/econ/items/lina/lina_ti6/lina_ti6_laguna_blade.vpcf"
+			"soundfile"			"soundevents/chef_q_1.vsndevts"
+			"soundfile"			"soundevents/chef_q_2.vsndevts"
+			"soundfile"			"soundevents/chef_q_3.vsndevts"
+			"particle"          "particles/econ/items/beastmaster/bm_shoulder_ti7/bm_shoulder_ti7_roar.vpcf"
 		}
 		"AbilityCastRange"              "700"
-		"AbilityCastPoint"              "0.45 0.45 0.45 0.45"
-		"AbilityCooldown"               "24.0 22.0 20.0 18.0"
+		"AbilityCastPoint"              "0.2"
+		"AbilityCooldown"               "28.0 26.0 24.0 22.0"
 		"AbilityManaCost"               "150 200 250 300"
 		"AbilityValues"
 		{
 				"damage"
 				{
-					"value"	"100 200 300 400"
+					"value"	"75 150 225 300"
 					"special_bonus_unique_lev_2" "+100"
 				}
+				"duration" "1.0 1.25 1.5 1.75"
 				"radius"
 				{
 					"value"	"0"
@@ -1990,91 +1992,29 @@
 				}
 		}
 	}
-	//=================================================================================================================
-	// ШОКОЛАДИ
-	//=================================================================================================================
-	"Megumin_mana_aura"
+	"chef_w"
 	{
-		"BaseClass"                     "ability_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/lev/chef_w"
+		"AbilityBehavior"			   	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"		 	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityTextureName"            "shoko"
-		"AOERadius"                     "900"
+		"AbilityCastPoint"			  	"0.2"
 		"AbilityCooldown"               "40 35 30 25 20"  
 		"MaxLevel"						"5"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
 		"AbilityValues"
 		{
-				"mana_regen"        "2 3 4 5 6"
-				"global_radius"        "9000"
-				"radius"                    "900"
-				"spell_amp"		"3 6 9 12 15"
-				"reg_2"
-				{
-					"value"	"10 15 20 25 30"
-					"special_bonus_unique_lev_4" "+15"
-				}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_Megumin_mana_aura"
+			"mana_regen_passive"		"2 3 4 5 6"
+			"radius"					"900"
+			"mana_regen_active"
 			{
-				"Passive"               "1"
-				"Aura_ApplyToCaster"            "1"
-				"IsHidden"              "1"
-				"Aura"                  "modifier_Megumin_mana_auravision"
-				"Aura_Radius"           "%global_radius"
-				"Aura_Teams"            "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types"            "DOTA_UNIT_TARGET_HERO"
+				"value"	"10 15 20 25 30"
+				"special_bonus_unique_lev_4" "+15"
 			}
-
-			"modifier_Megumin_mana_auravision"
-			{
-				"IsBuff"	"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"        "%mana_regen"
-					"MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE"   "%spell_amp"
-				}
-			}
-			
-			"modifier_Megumin_mana_active"
-			{
-				"Passive"           "0"
-				"IsHidden"          "1"
-				"IsDebuff"          "0"
-				
-				"EffectName" "particles/econ/events/winter_major_2016/radiant_fountain_regen_wm_lvl3.vpcf"
-				"EffectAttachType"  "follow_origin"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%reg_2"
-				}
-			}
-		}
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"  "modifier_Megumin_mana_active"
-				"Target"
-				{
-					"Center"    "CASTER"
-					"Radius"    "%radius"
-					"Teams"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-					"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				}
-				"Duration"      "1"
-			}
-			"FireSound"
-			{
-				"EffectName" "sho"
-				"Target" 	 "CASTER"
-			}
+			"duration"					"1.0"
+			"spell_damage"		  		"3 6 9 12 15"
 		}
 	}
 	//=================================================================================================================
@@ -2356,7 +2296,7 @@
 		"AbilityManaCost"				"200 300 400"
 		"AbilityValues"
 		{
-				"damage"		"50 100 150"
+				"damage"		"40 80 120"
 				"duration"		"15"
 				"move_speed"
 				{

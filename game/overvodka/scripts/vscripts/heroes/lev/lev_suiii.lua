@@ -1,7 +1,23 @@
 lev_suiii = class({})
 
+LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
+
 function lev_suiii:GetAOERadius()
     return self:GetSpecialValueFor( "radius" )
+end
+
+function lev_suiii:OnAbilityPhaseStart()
+    local sounds = {"chef_q_1", "chef_q_2", "chef_q_3"}
+    self.playedSoundIndex = RandomInt(1, #sounds)
+    EmitSoundOn(sounds[self.playedSoundIndex], self:GetCaster())
+    return true
+end
+
+function lev_suiii:OnAbilityPhaseInterrupted()
+    local sounds = {"chef_q_1", "chef_q_2", "chef_q_3"}
+    if self.playedSoundIndex then
+        StopSoundOn(sounds[self.playedSoundIndex], self:GetCaster())
+    end
 end
 
 function lev_suiii:OnSpellStart()
@@ -47,23 +63,18 @@ function lev_suiii:OnSpellStart()
         damage_table.victim = target
         ApplyDamage(damage_table)
     end
-    if caster:HasModifier("modifier_otec_start") then
-        EmitGlobalSound("Ability.LagunaBlade")
-    else
-        EmitSoundOn("Ability.LagunaBlade", caster)
-    end
-    EmitSoundOn("suii", target)
+    target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
 end
 
 function lev_suiii:PlayEffects( target )
-	local particle_cast = "particles/econ/items/lina/lina_ti6/lina_ti6_laguna_blade.vpcf"
+	local particle_cast = "particles/econ/items/beastmaster/bm_shoulder_ti7/bm_shoulder_ti7_roar.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_CUSTOMORIGIN, nil )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
 		0,
 		self:GetCaster(),
 		PATTACH_POINT_FOLLOW,
-		"attach_attack1",
+		"attach_mouth",
 		Vector(0,0,0),
 		true
 	)

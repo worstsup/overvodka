@@ -137,7 +137,7 @@
 		"npc_dota_hero_kunkka" "EBANKO"
 		"npc_dota_hero_terrorblade" "ELDZEY"
 		"npc_dota_hero_sniper" "STUPID KID"
-		"npc_dota_hero_lion" "LEV"
+		"npc_dota_hero_lion" "CHEF"
 		"npc_dota_hero_tinker" "CRAZY DAVE (PvZ)"
 		"npc_dota_hero_brewmaster" "ISHOWSPEED"
 		"npc_dota_hero_meepo"      "TUNG TUNG TUNG SAHUR"

@@ -337,7 +337,7 @@
 		"SimilarHeroes"  "17,42,74"
 		"GibType"		"default"
 		"Ability1"		"lev_suiii"
-		"Ability2"		"Megumin_mana_aura"
+		"Ability2"		"chef_w"
 		"Ability3"		"lev_freak"
 		"Ability4"		"lev_smeh"
 		"Ability5"		"energosik"
