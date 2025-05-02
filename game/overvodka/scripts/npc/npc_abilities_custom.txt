@@ -1938,9 +1938,6 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
-	//=================================================================================================================
-	// SUII АХАХ
-	//=================================================================================================================
 	"lev_suiii"
 	{
 		"BaseClass"						"ability_lua"
@@ -2342,7 +2339,54 @@
 				}
 		}
 	}
-
+	"chef_r"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"otchim"
+		"ScriptFile"					"heroes/lev/chef_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"80 75 70"
+		"AbilityManaCost"				"200 300 400"
+		"AbilityValues"
+		{
+				"damage"		"50 100 150"
+				"duration"		"15"
+				"move_speed"
+				{
+					"value"		"15 20 25"
+				}
+				"radius"
+				{
+					"value"		"900"
+					"affected_by_aoe_increase"	"1"
+				}
+				"AbilityCastRange"
+				{
+					"value"		"900"
+					"affected_by_aoe_increase"	"1"
+				}
+				"disarm_duration"
+				{
+					"value"		"0.4"
+				}
+				"slow_duration"	"1.0"
+				"slow"			"-15 -20 -25"
+				"aoe_radius"	"250"
+				"max_enemies"
+				{
+					"value"	"1"
+					"special_bonus_unique_lev_6" "+1"
+				}
+				"interval"		"0.5"
+		}
+	}
 	//===================================================================================================================
 	//													CRAZY DAVE (PVZ)
 	//===================================================================================================================
@@ -4946,7 +4990,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastPoint"				"0.6"
-		"AbilityCooldown"				"80.0 75.0 70.0 65.0"
+		"AbilityCooldown"				"75.0"
 		"AbilityManaCost"				"150 200 250 300"
 		"AbilityValues"
 		{
@@ -4972,7 +5016,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastPoint"				"0.6"
-		"AbilityCooldown"				"80.0 75.0 70.0 65.0"
+		"AbilityCooldown"				"75.0"
 		"AbilityManaCost"				"150 200 250 300"
 		"AbilityCastRange"				"1000"
 		"AbilityValues"
@@ -13276,7 +13320,7 @@
 				}
 				"duration"
 				{
-					"value"	"3 4 5 6"
+					"value"	"6"
 					"special_bonus_unique_evelone_4" "+2"
 				}
 				"radius"
@@ -13334,10 +13378,10 @@
 				"special_bonus_unique_evelone_6" "+30"
 			}
 			"armor"					"-2 -4 -6 -8"
-			"duration"		 		"3"
+			"duration"		 		"4"
 			"range"
 			{
-				"value"				"450 500 550 600"
+				"value"				"550 600 650 700"
 			}
 			"speed"					"2000"
 			"slowing"
@@ -14434,4 +14478,5 @@
 		"ScriptFile"		"units/rosh/rosh_model_change"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	}
+	
 }

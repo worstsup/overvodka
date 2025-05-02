@@ -297,7 +297,7 @@ function Precache( context )
 		PrecacheResource( "model", "models/items/courier/hamster_courier/hamster_courier_lv7.vmdl", context )
 		PrecacheResource( "model", "models/heroes/troll_warlord/troll_warlord.vmdl", context )
 		PrecacheResource( "particle", "particles/neutral_fx/black_dragon_fireball_lava_a.vpcf", context )
-		
+		PrecacheResource( "particle", "particles/chef_base_attack.vpcf", context )
 		PrecacheResource( "particle", "particles/minion_base_attack.vpcf", context )
 		PrecacheResource( "particle", "particles/minion_base_attack_purple.vpcf", context )
 		PrecacheResource( "particle", "particles/skeletonking_hellfireblast_debuff_new.vpcf", context )
@@ -690,6 +690,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:SetHeroSelectPenaltyTime( 0.0 )
 	GameRules:SetShowcaseTime( 0.0 )
 	GameRules:SetIgnoreLobbyTeamsInCustomGame( false )
+	GameRules:SetSafeToLeave(true)
 	--GameRules:SetHideKillMessageHeaders( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
@@ -1173,7 +1174,6 @@ end
 -- Event: Filter for inventory full
 --------------------------------------------------------------------------------
 function COverthrowGameMode:ExecuteOrderFilter( filterTable )
-
 	local orderType = filterTable["order_type"]
 	if ( orderType ~= DOTA_UNIT_ORDER_PICKUP_ITEM or filterTable["issuer_player_id_const"] == -1 ) then
 		return true
