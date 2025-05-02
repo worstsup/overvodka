@@ -54,16 +54,18 @@ function lev_suiii:OnSpellStart()
             for i,unit in ipairs(units) do
                 damage_table.victim = unit
                 ApplyDamage(damage_table)
+                unit:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
             end
         else
             damage_table.victim = target
             ApplyDamage(damage_table)
+            target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
         end
     else
         damage_table.victim = target
         ApplyDamage(damage_table)
+        target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
     end
-    target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
 end
 
 function lev_suiii:PlayEffects( target )
