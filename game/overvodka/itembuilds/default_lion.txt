@@ -25,6 +25,7 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_holy_locket"
+			"item"		"item_swag"
 			"item"		"item_oboyudno_2"
 			"item"		"item_pasito"
 			"item"		"item_suchiy"

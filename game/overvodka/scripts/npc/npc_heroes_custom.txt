@@ -469,7 +469,7 @@
 				"Deprecated"		"true"
 			}
 		}
-		"ArmorPhysical"		"2"
+		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"8"
 		"AttackDamageMax"		"12"
@@ -483,7 +483,7 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"0"
 		"AttributeStrengthGain"		"0.0"
-		"AttributeBaseIntelligence"		"34"
+		"AttributeBaseIntelligence"		"32"
 		"AttributeIntelligenceGain"		"3.2"
 		"AttributeBaseAgility"		"17"
 		"AttributeAgilityGain"		"1.4"
@@ -1654,8 +1654,8 @@
 		"AttributeStrengthGain"		"1.8"
 		"AttributeBaseAgility"		"25"
 		"AttributeAgilityGain"		"2.7"
-		"AttributeBaseIntelligence"		"21"
-		"AttributeIntelligenceGain"		"2.2"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"1.8"
 		"StatusHealthRegen"		"0.25"
 		"StatusManaRegen"	"0"
 		"MovementSpeed"		"300"

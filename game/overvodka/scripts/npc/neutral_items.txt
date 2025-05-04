@@ -17,7 +17,6 @@
 			
 			"items"
 			{
-				"item_trusty_shovel"			  	"0"
 				"item_occult_bracelet"				"1"
 				"item_unstable_wand"				"1"
 				"item_mana_draught"					"1"
@@ -146,7 +145,6 @@
 			{
 				"item_desolator_2"					"1"
 				"item_fallen_sky"					"1"
-				"item_demonicon"					"1"
 				"item_minotaur_horn"				"1"
 				"item_spider_legs"					"1"
 				"item_panic_button"					"1"

@@ -1212,7 +1212,7 @@
 		"ShouldBeSuggested"				"1"
 		"AbilityValues"
 		{
-				"bonus_intellect"		"20"
+				"bonus_intellect"		"15"
 				"bonus_strength"		"5"
 				"bonus_agility"			"5"
 				"bonus_hp_regen"		"15"
@@ -1280,7 +1280,7 @@
 				"bonus_damage"			"80"
 				"corruption_armor"		"-10"
 				"corruption_duration"	"7.0"
-				"bonus_damage_per_kill"	"4"
+				"bonus_damage_per_kill"	"3"
 				"bonus_damage_per_assist"	"2"
 				"max_damage"			"50"
 		}
@@ -3178,6 +3178,50 @@
 		"ItemDisplayCharges"			"1"
 		"AbilityValues"
 		{
+		}
+	}
+	"item_swag"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items/swag"
+		"AbilityTextureName"		"swag"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType"		"SPELL_DISPELLABLE_YES"
+		"AbilityCastRange"			"900"
+		"AbilityCooldown"			"24"
+		"AbilityManaCost"			"150"
+		"ItemCost"					"5000"
+		"AbilitySharedCooldown"		"pavise"
+		"AbilityValues"
+		{
+			"initial_fade_delay"		"0.3"
+			"secondary_fade_delay"		"0.5"
+			"active_movement_speed"		"20"
+			"duration"					"10"
+			"bonus_magical_armor"		"25"
+			"barrier_block"				"500"
+			"bonus_armor"			"4"
+			"bonus_all_stats"		"4"
+			"self_movement_speed"	"25"
+			"bonus_mana"			"300"
+			"bonus_health"			"175"
+			"target_attack_speed"	"60"
+			"target_armor"			"5"
+		}
+	}
+	"item_recipe_swag"
+	{
+		"BaseClass"				 "item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"		"item_recipe"
+		"ItemCost"					"275"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_swag"
+		"ItemRequirements"
+		{
+			"01"	"item_glimmer_cape;item_solar_crest"
 		}
 	}
 }

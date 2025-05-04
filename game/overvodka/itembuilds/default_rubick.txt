@@ -42,6 +42,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
+			"item"		"item_swag"
 			"item"		"item_pasito"
 			"item"		"item_armature_strike"
 		}

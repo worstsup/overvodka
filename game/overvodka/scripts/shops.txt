@@ -55,7 +55,7 @@
 		"item"		"item_oboyudno_2"
 		"item"		"item_elixir_collector"
 		"item"		"item_minion_generator"
-		"item"		"item_javelin"
+		"item"		"item_swag"
 		"item"		"item_claymore"				
 		"item"		"item_mithril_hammer"	
 	}

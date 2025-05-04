@@ -2425,7 +2425,7 @@
 		"FightRecapLevel"				"1"
 		"AbilityCastRange"				"300"
 		"AbilityCastPoint"				"0.35 0.35 0.35 0.35"
-		"AbilityCooldown"				"20"
+		"AbilityCooldown"				"32 28 24 20"
 		"AbilityManaCost"				"75 100 125 150"
 		"AOERadius"						"600"
 		"AbilityValues"
@@ -3213,7 +3213,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityValues"
 		{
-				"damage"	"15"
+				"damage"	"10"
 		}
 	}
 	//==================================================================================================================
@@ -5880,7 +5880,7 @@
 			}
 			"damage_bonus"
 			{
-				"value" "10"
+				"value" "8"
 			}
 		}
 	}
@@ -6107,7 +6107,7 @@
 		"AbilityValues"
 		{
 				"hp_threshold"				"20"
-				"AbilityCooldown"			"60.0"
+				"AbilityCooldown"			"75 70 65 60"
 				"duration"
 				{
 					"value"	"1.5 2.0 2.5 3.0"
@@ -9478,7 +9478,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastPoint"				"0.7"
-		"AbilityCooldown"				"22 20 18 16"
+		"AbilityCooldown"				"16"
 		"AbilityManaCost"				"70 90 110 130"
 		"AbilityValues"
 		{
@@ -9931,13 +9931,13 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"										"22 20 18 16"
+					"value"										"23 22 21 20"
 					"special_bonus_unique_cheater_5" "-4"
 					"special_bonus_unique_cheater_8"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
-					"value"	"22 20 18 16"
+					"value"	"23 22 21 20"
 					"special_bonus_unique_cheater_5" "-4"
 				}
 				"damage"			"50 100 150 200"
@@ -11815,7 +11815,7 @@
             		"value"	"0"
             		"special_bonus_unique_clockwerk_4" "+5"
             	}
-				"dota_damage" 				"75 150 225"
+				"dota_damage" 				"50 100 150"
             	"slow"						 "-55"
         }
 	}

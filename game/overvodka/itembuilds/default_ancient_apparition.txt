@@ -34,6 +34,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
+			"item"		"item_swag"
             "item"		"item_armlet_datadriven"
             "item"		"item_cuirass_2"
 			"item"		"item_govno"

@@ -38,6 +38,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_swag"
 			"item"		"item_arcane_blink"
            	"item"      "item_wind_waker"
             "item"      "item_devastator"

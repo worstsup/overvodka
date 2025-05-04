@@ -2275,6 +2275,18 @@
 		"DOTA_Tooltip_modifier_item_birzha_blade_mail_active" "Абаюдна!"
 		"DOTA_Tooltip_modifier_item_birzha_blade_mail_active_Description" "Возвращает урон атакующим существам"
 
+		"DOTA_Tooltip_ability_item_swag" "АППАРАТ СВАГАОБЕСПЕЧЕНИЯ"
+		"DOTA_Tooltip_ability_item_swag_description"						"<h1>Активное: СВАГА</h1> После задержки в %initial_fade_delay% сек. даёт владельцу или выбранному союзнику невидимость, +%active_movement_speed%%% к скорости передвижения, +%target_armor% к броне, +%target_attack_speed% к скорости атаки и барьер, поглощающий до %barrier_block% урона. Действует %duration% сек.<br><br>Не останавливает прерываемые способности."
+		"DOTA_Tooltip_ability_item_swag_bonus_magical_armor"			"%+$spell_resist"
+		"DOTA_Tooltip_ability_item_swag_bonus_armor"					"+$armor"
+		"DOTA_Tooltip_ability_item_swag_bonus_health"				"+$health"
+		"DOTA_Tooltip_ability_item_swag_bonus_all_stats"				"+$all"
+		"DOTA_Tooltip_ability_item_swag_self_movement_speed"			"+$move_speed"
+		"DOTA_Tooltip_ability_item_swag_bonus_mana"					"+$mana"
+		"DOTA_Tooltip_modifier_item_swag_active" "СВАГА ИМЕЕТСЯ"
+		"DOTA_Tooltip_modifier_item_swag_active_description" "Броня увеличена на %dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%, передвижение ускорено на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%% и атака ускорена на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%"
+		"DOTA_Tooltip_modifier_item_swag_invis" "Невидим"
+
 		"DOTA_Tooltip_Ability_item_cuirass_2" "ОБОЮДНО"
 		"DOTA_Tooltip_Ability_item_cuirass_2_Description" "<h1>Активное: Абаюдна!</h1>Развеивает с владельца большинство отрицательных эффектов и увеличивает возвращение урона от всех источников на %return_damage%%%, а также создаёт вокруг цели щит, отражающий большинство направленных заклинаний обратно во врага. Длится %duration% сек.\n\n<h1>Пассивное: Взаимно</h1>Возвращает %return_damage_passive% + %return_damage_passive_percentage%%% урона от каждой атаки атакующим вас существам."
 		"DOTA_Tooltip_Ability_item_cuirass_2_bonus_armor_stats" "+$armor"
