@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_litvin_litenergy", "heroes/litvin/modifier_litvin_lit
 --------------------------------------------------------------------------------
 
 function litvin_litenergy:OnSpellStart()
-	EmitGlobalSound( "litenergy" )
+	EmitSoundOn( "litenergy", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_litvin_litenergy", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 --------------------------------------------------------------------------------

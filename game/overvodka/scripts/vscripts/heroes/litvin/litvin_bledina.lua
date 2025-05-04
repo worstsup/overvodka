@@ -4,8 +4,7 @@ LinkLuaModifier( "modifier_litvin_bledina", "heroes/litvin/modifier_litvin_bledi
 --------------------------------------------------------------------------------
 
 function litvin_bledina:OnSpellStart()
-	EmitGlobalSound( "bledina" )
-
+	EmitSoundOn( "bledina", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_litvin_bledina", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 --------------------------------------------------------------------------------\

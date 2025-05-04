@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_bratishkin_r_debuff", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_bratishkin_r_shard", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
-
+LinkLuaModifier("modifier_bratishkin_r_buff", "heroes/bratishkin/bratishkin_r", LUA_MODIFIER_MOTION_NONE)
 bratishkin_r = class({})
 t = 0
 function bratishkin_r:Precache(context)
@@ -18,6 +18,9 @@ function bratishkin_r:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
+    if not caster:HasModifier("modifier_bratishkin_r_buff") then
+        caster:AddNewModifier(caster, self, "modifier_bratishkin_r_buff", {duration = -1})
+    end
     if not target:IsHero() then return end
     local modifier = target:FindModifierByNameAndCaster("modifier_bratishkin_r_debuff", caster)
     local is_new = false
@@ -38,6 +41,37 @@ function bratishkin_r:OnSpellStart()
         end
         modifier:ForceRefresh()
     end
+end
+
+modifier_bratishkin_r_buff = class({})
+function modifier_bratishkin_r_buff:IsHidden() return true end
+function modifier_bratishkin_r_buff:IsPurgable() return false end
+function modifier_bratishkin_r_buff:RemoveOnDeath() return false end
+function modifier_bratishkin_r_buff:GetAttributes() return MODIFIER_ATTRIBUTE_PERMANENT end
+function modifier_bratishkin_r_buff:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK
+    }
+end
+
+function modifier_bratishkin_r_buff:GetModifierPreAttack_CriticalStrike( params )
+	if IsServer() then
+        local modifier = params.target:FindModifierByNameAndCaster("modifier_bratishkin_r_debuff", self:GetParent())
+        if modifier and modifier:GetStackCount() > 0 then
+            self.record = params.record
+            local bonus_dmg_pct = self:GetAbility():GetSpecialValueFor("bonus_dmg_pct")
+            return modifier:GetStackCount() * bonus_dmg_pct + 100
+        end
+	end
+end
+
+function modifier_bratishkin_r_buff:GetModifierProcAttack_Feedback( params )
+	if IsServer() then
+		if self.record then
+			self.record = nil
+		end
+	end
 end
 
 modifier_bratishkin_r_debuff = class({})
@@ -84,17 +118,8 @@ end
 
 function modifier_bratishkin_r_debuff:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-        MODIFIER_PROPERTY_TOOLTIP
+        MODIFIER_PROPERTY_TOOLTIP,
     }
-end
-
-function modifier_bratishkin_r_debuff:GetModifierIncomingDamage_Percentage(keys)
-    if keys.attacker == self:GetCaster() then
-        local bonus_dmg_pct = self:GetAbility():GetSpecialValueFor("bonus_dmg_pct")
-        return self:GetStackCount() * bonus_dmg_pct
-    end
-    return 0
 end
 
 function modifier_bratishkin_r_debuff:OnTooltip()

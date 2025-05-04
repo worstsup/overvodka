@@ -78,7 +78,6 @@
 			"items"
 			{
 				"item_serrated_shiv"				"1"
-				"item_nemesis_curse"				"1"
 				"item_gale_guard"					"1"
 				"item_gunpowder_gauntlets"			"1"
 				"item_whisper_of_the_dread"			"1"

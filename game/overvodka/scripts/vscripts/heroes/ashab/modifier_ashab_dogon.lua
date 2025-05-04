@@ -57,7 +57,7 @@ function modifier_ashab_dogon:OnCreated( kv )
 
 	-- play effects
 	local sound_cast = "dogon"
-	EmitGlobalSound( sound_cast )
+	EmitSoundOn( sound_cast, self:GetCaster() )
 end
 
 function modifier_ashab_dogon:OnRefresh( kv )

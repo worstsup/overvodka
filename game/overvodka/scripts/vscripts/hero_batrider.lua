@@ -8,6 +8,8 @@ modifier_imba_batrider_sticky_napalm				= class({})
 function imba_batrider_sticky_napalm:IsStealable()
 	return false
 end
+function imba_batrider_sticky_napalm:ProcsMagicStick() return false end
+
 function imba_batrider_sticky_napalm:GetIntrinsicModifierName()
 	return "modifier_imba_batrider_sticky_napalm_handler"
 end

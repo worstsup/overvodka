@@ -91,7 +91,7 @@ function serega_topor:PlayEffects( radius, speed )
 	local sound_cast = "serega_topor"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( speed, radius, 1 ) )
-	EmitGlobalSound( sound_cast )
+	EmitSoundOn( sound_cast, self:GetCaster() )
 	return effect_cast
 end
 
