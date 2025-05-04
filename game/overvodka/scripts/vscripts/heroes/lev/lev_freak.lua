@@ -89,13 +89,15 @@ function modifier_lev_freak:OnTakeDamage(event)
     if not IsServer() then return end
     local parent = self:GetParent()
     local attacker = event.attacker
-    local damage = event.damage
+    if event.damage_flags and bit.band(event.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= 0 then
+        return
+    end
     if event.unit == parent and attacker:GetTeamNumber() ~= parent:GetTeamNumber() and not attacker:IsBuilding() then
         if not parent.carapaced_units[ attacker:entindex() ] then
             attacker:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.stun_duration })
             parent.carapaced_units[ attacker:entindex() ] = attacker
         end
-        ApplyDamage({victim = attacker,attacker = parent,damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility(),})
+        ApplyDamage({victim = attacker,attacker = parent,damage = event.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility(),damage_flags  = DOTA_DAMAGE_FLAG_REFLECTION})
         local particle = ParticleManager:CreateParticle("particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_counter_slash.vpcf", PATTACH_ABSORIGIN_FOLLOW, attacker)
         ParticleManager:SetParticleControlEnt(particle, 1, attacker, PATTACH_POINT_FOLLOW, "attach_hitloc", attacker:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(particle, 3, attacker, PATTACH_POINT_FOLLOW, "attach_hitloc", attacker:GetAbsOrigin(), true)
