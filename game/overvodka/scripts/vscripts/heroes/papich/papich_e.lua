@@ -67,6 +67,7 @@ end
 function modifier_papich_e_passive:OnIntervalThink()
     if not IsServer() then return end
     if self:GetParent():IsTempestDouble() then return end
+    if self:GetParent():PassivesDisabled() then return end
     if not self:GetParent():IsAlive() then return end
     if not self.ability or not self.parent or self.parent:IsIllusion() then return end
     if not self.ability:IsCooldownReady() then

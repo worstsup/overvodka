@@ -992,7 +992,7 @@
 		"IsGrantedByShard"              "1"
 		"AbilityValues"
 		{
-				"damage"			"600"
+				"damage"			"200"
 				"stun_duration"		"1.75"
 				"aoe_radius"		"0"
 				"knockback_distance"	"1600"
@@ -11696,6 +11696,7 @@
     	"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     	"AbilityType"				"DOTA_ABILITY_TYPE_BASIC"
     	"FightRecapLevel"			"1"
+		"IsBreakable"				"1"
 		"MaxLevel"					"4"
 		"AbilityValues"
 		{

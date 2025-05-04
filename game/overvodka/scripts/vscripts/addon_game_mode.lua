@@ -720,6 +720,8 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetUseUniversalShopMode( false )
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
+		GameRules:SetCustomGameBansPerTeam( 5 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
@@ -730,6 +732,12 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
 		GameRules:SetStrategyTime( 15.0 )
+		if GetMapName() == "overvodka_duo" then
+			GameRules:SetCustomGameBansPerTeam( 2 )
+		else
+			GameRules:SetCustomGameBansPerTeam( 1 )
+		end
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -742,8 +750,6 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetCanSellAnywhere( true )
 
 	local nTeamSize = GameRules:GetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS )
-	GameRules:SetCustomGameBansPerTeam( 1 )
-	GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end
