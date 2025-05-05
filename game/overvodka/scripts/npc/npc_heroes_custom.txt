@@ -408,7 +408,7 @@
 		"ModelScale"		"1.20000"
 		"VersusScale"		"1.0"
 		"Ability1"		"dave_peashooter"
-		"Ability2"		"Pocik_penek"
+		"Ability2"		"dave_sunflower"
 		"Ability3"		"dave_e"
 		"Ability4"		"dave_peashooter_freeze"
 		"Ability5"		"generic_hidden"

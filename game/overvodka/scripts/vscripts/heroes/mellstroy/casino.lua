@@ -2,6 +2,14 @@ mellstroy_casino = class({})
 
 loses = 0
 
+function mellstroy_casino:GetGoldCost( lvl )
+    local base_cost = self:GetSpecialValueFor( "base_cost" )
+    local each_level = self:GetSpecialValueFor( "each_level" )
+    local hero_level = self:GetCaster():GetLevel()
+    local ability_cost = base_cost + (each_level * hero_level)
+    return ability_cost
+end
+
 function mellstroy_casino:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
@@ -19,7 +27,6 @@ function mellstroy_casino:OnSpellStart()
         end
         return
     end
-    PlayerResource:SpendGold(player_id, ability_cost, 4)
     local random_chance = RandomInt(1, 100)
     if random_chance <= jackpot_chance then
         local reward = ability_cost * 10
@@ -57,7 +64,4 @@ function mellstroy_casino:OnSpellStart()
         caster:EmitSound("lose")
         loses = loses + 1
     end
-end
-
-function mellstroy_casino:OnUpgrade()
 end
