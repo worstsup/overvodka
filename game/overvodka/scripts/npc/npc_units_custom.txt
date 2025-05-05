@@ -2342,259 +2342,7 @@
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
 	}
-	"npc_subo_1"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
-        "AttackRate"            "1.4"
-        "AttackAnimationPoint"  "0.5"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "250"
-
-
-        "Ability1"					"ogre_bruiser_ogre_smash"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "300"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_subo_2"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "80"
-        "AttackDamageMax"       "80"
-        "AttackRate"            "1.4"
-        "AttackAnimationPoint"  "0.5"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "250"
-
-
-        "Ability1"					"ogre_bruiser_ogre_smash"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "100"
-        "BountyGoldMax"         "100"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "500"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_subo_3"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "120"
-        "AttackDamageMax"       "120"
-        "AttackRate"            "1.4"
-        "AttackAnimationPoint"  "0.5"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "250"
-
-
-        "Ability1"					"ogre_bruiser_ogre_smash"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "150"
-        "BountyGoldMax"         "150"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "700"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_subo_4"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "50"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "160"
-        "AttackDamageMax"       "160"
-        "AttackRate"            "1.4"
-        "AttackAnimationPoint"  "0.5"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "250"
-
-
-        "Ability1"					"ogre_bruiser_ogre_smash"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "200"
-        "BountyGoldMax"         "200"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "900"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_subo_5"
+	"npc_subo"
 	{
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
@@ -2606,22 +2354,23 @@
         "MagicalResistance"     "50"
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "260"
-        "AttackDamageMax"       "260"
+        "AttackDamageMin"       "40"
+        "AttackDamageMax"       "40"
         "AttackRate"            "1.4"
         "AttackAnimationPoint"  "0.5"
         "AttackAcquisitionRange" "500"
         "AttackRange"           "250"
         "Ability1"				"ogre_bruiser_ogre_smash"
-        "BountyGoldMin"         "200"
-        "BountyGoldMax"         "200"
+        "BountyGoldMin"         "50"
+        "BountyGoldMax"         "50"
+		"BountyXP"				"50"
 		"RingRadius"			"70"
 		"HealthBarOffset"		"160"
 		"BoundsHullName"		"DOTA_HULL_SIZE_SMALL"
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"         "360"
         "MovementTurnRate"      "0.4"
-        "StatusHealth"          "2400"
+        "StatusHealth"          "300"
         "StatusHealthRegen"     "5"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -2634,229 +2383,34 @@
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
 	}
-	"npc_car_1"
+	"npc_ashab_car"
 	{
-        "BaseClass"             "npc_dota_creature"
+        "BaseClass"				"npc_dota_base_additive"
         "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
         "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "1"
+        "Level"                 "0"
         "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-        "AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-        "Ability1"					"ashab_car_aura"
+        "ArmorPhysical"         "0"
+        "MagicalResistance"     "0"
+        "AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
         "BountyGoldMin"         "50"
         "BountyGoldMax"         "50"
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"			"70"
+		"HealthBarOffset"		"160"
+		"BoundsHullName"		"DOTA_HULL_SIZE_SMALL"
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
+        "MovementSpeed"         "350"
+		"FollowRange"			"250"
         "MovementTurnRate"      "0.4"
-        "StatusHealth"          "200"
-        "StatusHealthRegen"     "5"
+        "StatusHealth"          "1"
+        "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
         "VisionDaytimeRange"    "600"
         "VisionNighttimeRange"  "300"
         "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "0"
-        "IsSummoned"            "1"
-	}
-	"npc_car_2"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "2"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-        "AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-        "Ability1"					"ashab_car_aura"
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
-        "MovementTurnRate"      "0.4"
-        "StatusHealth"          "400"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "0"
-        "IsSummoned"            "1"
-	}
-	"npc_car_3"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "3"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-
-        "Ability1"					"ashab_car_aura"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "600"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "0"
-        "IsSummoned"            "1"
-	}
-	"npc_car_4"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "4"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-
-        "Ability1"					"ashab_car_aura"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "800"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "0"
-        "IsSummoned"            "1"
-	}
-	"npc_car_5"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
-        "ModelScale"            "2"
-		"SoundSet"		"Hero_PrimalBeast"
-        "Level"                 "4"
-        "HasInventory"          "0"
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-
-        "Ability1"					"ashab_car_aura"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "1600"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        "CombatClassDefend"		"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
         "AutoAttacksByDefault"  "0"
         "IsSummoned"            "1"
 	}
@@ -2925,81 +2479,6 @@
 
 		//Inventory
 		"HasInventory"				"0"
-	}
-	"npc_skiter_1"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/gyro/gyro.vmdl"
-        "ModelScale"            "1.0"
-		"SoundSet"		"Hero_Gyrocopter"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "200"
-        "AttackDamageMax"       "200"
-        "BaseAttackSpeed"		"325"
-        "AttackRate"            "1.7"
-        "AttackAnimationPoint"  "0.200000"
-        "AttackAcquisitionRange" "800"
-        "ProjectileSpeed"		"3000"
-        "AttackRange"           "465"
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "200"
-        "BountyGoldMax"         "200"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "400"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "1500"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"//Arcane Inverter
-		{
-		"Wearable1" {"ItemDef" "18979"}//back("Arcane Inverter - Back")
-		"Wearable2" {"ItemDef" "18978"}//head("Arcane Inverter - Head")
-		"Wearable3" {"ItemDef" "18976"}//misc("Arcane Inverter - Misc")
-		"Wearable4" {"ItemDef" "18974"}//("Arcane Inverter - Weapon")
-		"Wearable5" {"ItemDef" "18975"}//offhand_weapon("Arcane Inverter - Missile")
-		}
-		}
 	}
 	"npc_batya_1"
 	{

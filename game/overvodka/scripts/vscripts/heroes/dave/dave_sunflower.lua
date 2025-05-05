@@ -26,6 +26,7 @@ function dave_sunflower:GetAOERadius()
 end
 
 function dave_sunflower:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local point = self:GetCursorPosition()
     if point == self:GetCaster():GetAbsOrigin() then

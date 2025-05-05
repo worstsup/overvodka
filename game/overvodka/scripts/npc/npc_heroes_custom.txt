@@ -1308,19 +1308,6 @@
 				"Icon"				"overshadow"
 				"Color"				"Green"
 				"GradientID"		"0"
-
-				"KeyValueOverrides"
-				{
-					"AttributeBaseStrength"		"25"
-					"AttributeStrengthGain"		"2.8"
-				}
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"tidehunter_krill_eater"
-					}
-				}
 			}
 			"tidehunter_sizescale"
 			{

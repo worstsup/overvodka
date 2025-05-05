@@ -1,0 +1,30 @@
+litvin_subo = class({})
+
+function litvin_subo:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/subo.vsndevts", context )
+    PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", context )
+end
+
+function litvin_subo:OnSpellStart()
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    local point = self:GetCursorPosition()
+    local duration = self:GetSpecialValueFor("duration")
+    local base_damage = self:GetSpecialValueFor("base_dmg")
+    local base_hp = self:GetSpecialValueFor("base_hp")
+    local gold = self:GetSpecialValueFor("gold")
+    local xp = self:GetSpecialValueFor("xp")
+    local subo = CreateUnitByName("npc_subo", point, true, caster, caster, caster:GetTeamNumber())
+    FindClearSpaceForUnit(subo, point, true)
+    subo:SetControllableByPlayer(caster:GetPlayerID(), false)
+    subo:SetOwner(caster)
+    subo:AddNewModifier(caster, self, "modifier_kill", {duration = duration})
+    subo:SetMaxHealth(base_hp)
+    subo:SetHealth(base_hp)
+    subo:SetBaseDamageMin(base_damage)
+    subo:SetBaseDamageMax(base_damage)
+    subo:SetMaximumGoldBounty(gold)
+    subo:SetMinimumGoldBounty(gold)
+    subo:SetDeathXP(xp)
+    EmitSoundOn("subo", caster)
+end
