@@ -66,7 +66,6 @@ function eldzhey_w:OnSpellStart()
 			self:PlayEffects2( target, enemy )
 		end
 	end
-
 	self:PlayEffects1( target, radius )
 end
 

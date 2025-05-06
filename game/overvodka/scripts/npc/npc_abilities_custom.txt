@@ -758,7 +758,8 @@
 	//=================================================================================================================
 	"ebanko_q"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ebanko/ebanko_q"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -767,13 +768,6 @@
 		"AbilityTextureName"			"vovacho"
 		"AbilityCooldown"				"30 27 24 21"
 		"AbilityManaCost"				"75 105 135 165"
-		"precache"
-		{
-			"soundfile"		"soundevents/ebanul_moroz.vsndevts"
-			"soundfile"		"soundevents/zima_holoda.vsndevts"
-			"particle"		"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
-			"particle"		"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
-		}
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
 		"AbilityValues"
 		{
@@ -811,77 +805,6 @@
 					"special_bonus_facet_ebanko_q" "-20"
 					"RequiresFacet"	"ebanko_q"
 				}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/ebanko/ebanko_q.lua"
-				"Function"		"ebanko_q"	
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_ebanko_q"
-			{
-				"Duration"	"%duration"
-				"IsDebuff"	"1"
-				"IsPurgable"	"1"
-				"EffectName"	"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
-				"EffectAttachType"	"attach_origin"
-				"States"
-				{
-					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_ROOTED"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_DISABLED"
-				}
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/ebanko/ebanko_q.lua"
-						"Function"		"ebanko_q_start"				
-					}
-					"Damage"
-					{
-						"Target"		"TARGET"
-						"Type"			"DAMAGE_TYPE_MAGICAL"
-						"Damage"		"%damage"
-					}
-				}
-				"ThinkInterval"  "1"
-				"OnIntervalThink"
-				{
-					"Damage"
-					{
-						"Target"		"TARGET"
-						"Type"			"DAMAGE_TYPE_MAGICAL"
-						"Damage"		"%damage"
-					}
-				}
-				"OnDestroy"
-				{
-					"ApplyModifier"
-					{
-						"Target"        "TARGET"
-						"ModifierName"  "modifier_ebanko_q_slow"
-						"Duration"		"%slow_dur"
-					}
-				}			
-			}
-			"modifier_ebanko_q_slow"
-			{
-				"Duration"		"%slow_dur"
-				"IsDebuff"	"1"
-				"IsPurgable"	"1"
-				"EffectName"	"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
-				"EffectAttachType"	"attach_origin"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as_slow"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%ms_slow"
-				}
-			}
 		}
 	}
 	//==========================
@@ -1508,8 +1431,9 @@
 	//=================================================================================================================
 	"shkolnik_peremena"
 	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/shkolnik/shkolnik_peremena"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"shkolota"
 		"AbilityCooldown"				"30"
@@ -1518,24 +1442,10 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
 		{
-				"schoolboys_number"			"4 0 0 0"
-				"schoolboys_number2"			"0 5 0 0"
-				"schoolboys_number3"			"0 0 6 0"
-				"schoolboys_number4"
+				"schoolboys_number"
 				{
-					"value" "0 0 0 7"
-					"special_bonus_unique_shkolnik_5" "+5"
-					"special_bonus_unique_shkolnik_7" "-12"
-				}
-				"schoolboys_number_5"
-				{
-					"value" "4 5 6 7"
-					"special_bonus_unique_shkolnik_5" "+5"
-				}
-				"schoolboys_number_6"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_unique_shkolnik_7" "+12"
+					"value"	"4 5 6 7"
+					"special_bonus_unique_shkolnik_5" "+3"
 				}
 				"schoolboys_duration"
 				{
@@ -1544,130 +1454,13 @@
 				"schoolboys_hp"
 				{
 					"value"	"100 175 250 325"
-					"special_bonus_unique_shkolnik_7" "+325"
+					"special_bonus_unique_shkolnik_7" "x2"
 				}
 				"schoolboys_dmg"
 				{
-					"value"	"40 55 70 85"
-					"special_bonus_unique_shkolnik_7" "+85"
+					"value"	"40 50 60 70"
+					"special_bonus_unique_shkolnik_7" "x2"
 				}
-				"phase_duration"
-				{
-					"value"	"0.03"
-					"special_bonus_unique_shkolnik_3" "+15"
-				}
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"	"peremena"
-				"Target" 		"CASTER"
-			}
-					
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_schoolboy_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"250"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase_duration"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_schoolboy_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"30"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"250"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase_duration"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_schoolboy_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"35"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"250"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase_duration"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_schoolboy_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"40"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"250"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase_duration"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_schoolboy_6"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number_6"
-				"UnitLimit"		"100"
-				"GrantsGold"	"45"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"250"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase_duration"
-					}
-				}
-			}
 		}
 	}
 	//=================================================================================================================
@@ -1716,14 +1509,10 @@
 	//=================================================================================================================
 	"shkolnik_e"
 	{
-		"BaseClass"             "ability_datadriven"
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/shkolnik/shkolnik_e"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityTextureName"            "zvonk"
-		"precache"
-		{
-			"particle"          "particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
-			"particle"          "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
-		}
 		"AbilityCastRange"              "0"
 		"AbilityCastPoint"              "0.33 0.33 0.33 0.33"
 		"AbilityCooldown"               "26.0 24.0 22.0 20.0"
@@ -1735,64 +1524,11 @@
 					"value"	"700 750 800 850"
 					"special_bonus_unique_shkolnik_2"	"+200"
 				}
-				"min_blink_range"       "200"
 				"immun"
 				{
 					"value"	"0"
 					"RequiresFacet" "shkolnik_e"
 					"special_bonus_facet_shkolnik_e"	"+2"
-				}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"    "blink.lua"
-				"Function"      "Blink"
-				"Target"        "POINT"
-			}
-
-			"FireSound"
-			{
-				"EffectName"    "zveni"
-				"Target"        "CASTER"
-			}
-
-			"AttachEffect"
-			{
-				"EffectName"    "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
-				"Target"        "CASTER"
-				"EffectAttachType"  "attach_hitloc"
-			}
-
-			"FireSound"
-			{
-				"EffectName"    "zveni"
-				"Target"        "CASTER"
-			}
-
-			"AttachEffect"
-			{
-				"EffectName"    "particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
-				"Target"        "CASTER"
-				"EffectAttachType"  "follow_origin"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"  "Modifier_immunov"
-				"Target"    "CASTER"
-				"duration"	"%immun"
-			}
-		}
-		"Modifiers"
-		{
-			"Modifier_immunov"
-				{
-					"IsBuff" "1"
-					"States"
-					{
-						"MODIFIER_STATE_DEBUFF_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
-					}
 				}
 		}
 	}
@@ -2611,7 +2347,8 @@
 	//=================================================================================================================
 	"golmiy_penaltiy"
     {
-    	"BaseClass"                 	"ability_datadriven"
+    	"BaseClass"                 	"ability_lua"
+		"ScriptFile"					"heroes/golmiy/golmiy_penaltiy"
 		"AbilityBehavior"           	"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
@@ -2621,51 +2358,6 @@
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityCastRange"				"1200"
 		"AbilityCastPoint"				"0.15"
-        "precache"
-		{
-			"particle"			"particles/invoker_chaos_meteor_new.vpcf"
-			"soundfile"			"soundevents/penal.vsndevts"
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
-				"Function"				"Meteor"
-			}
-		}
-		"OnProjectileHitUnit"
-		{
-			"DeleteOnHit"				"0"
-			
-			"RunScript"
-			{
-				"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
-				"Function"				"MeteorHit"
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_golmiy_penaltiy"
-			{
-				"IsDebuff"      "1"
-				"IsHidden"	"0"
-				
-				"EffectName"    "particles/units/heroes/hero_invoker/invoker_chaos_meteor_burn_debuff.vpcf"
-				"EffectAttachType"  "follow_origin"
-
-				"ThinkInterval" 	"1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"			"heroes/golmiy/golmiy_penaltiy.lua"
-						"Function"				"MeteorHitDamage"
-					}
-				}
-			}
-		}
-		
 		"AbilityValues"
 		{
 				"meteor_stun"
@@ -2682,6 +2374,7 @@
 				{
 					"value"	"10 20 30 40"
 				}
+				"fire_duration" "5"
 				"gold"
 				{
 					"value"	"0"
@@ -3610,12 +3303,10 @@
 				"AbilityCastPoint"
 				{
 					"value"	"0.5"
-					"special_bonus_scepter" "-0.5"
 				}
 				"total_cast_time_tooltip"
 				{
 					"value"	"0.5"
-					"special_bonus_scepter" "-0.5"
 				}
         		"AbilityCastRange"
         		{
@@ -4599,308 +4290,6 @@
 				"special_bonus_facet_riki_contract_killer"	"0"
 			}
 		}			
-	}
-	//=================================================================================================================
-	// ПАТРИОТИЗМ
-	//=================================================================================================================
-	"patriotizm"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"patriotizm"
-		"AbilityTextureName"			"patr"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"IsBreakable"				"1"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    	"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-		"AbilityCooldown"				"5 4 3 2"
-		"AbilityValues"
-		{
-				"chance"
-				{
-					"value"	"35"
-					"special_bonus_unique_undying_2"	"+25"
-				}
-				"illusion_duration"					"3.0"
-				"stun_duration"
-				{
-					"value"	"0"
-					"special_bonus_facet_undying_rotting_mitts"	"+0.3"
-					"RequiresFacet"	"undying_rotting_mitts"
-				}
-				"illusion_outgoing_damage"			"-40"		 
-				"illusion_outgoing_tooltip"			"60"
-				"illusion_incoming_damage"			"80"
-				"illusion_incoming_damage_total_tooltip"			"180"
-		}
-	}
-	"lone_druid_spirit_bear"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"DisplayAdditionalHeroes"	"1"
-		"AbilitySound"					"Hero_LoneDruid.SpiritBear.Cast"
-		"AbilityTextureName"			"sam"
-		"HasScepterUpgrade"			"1"
-		"AbilityCastPoint"				"0.5 0.5 0.5 0.5"
-		"AbilityCooldown"				"1500"
-		"AbilityManaCost"				"75 75 75 75"
-		"AbilityValues"
-		{
-			"bear_hp"
-			{
-				"value"	"1100 1400 1700 2000"
-				"special_bonus_unique_undying_4"		"+800"
-			}			
-			"bear_regen_tooltip"	"5 6 7 8"
-			"bear_bat"
-			{
-				"value"					"1.5 1.4 1.3 1.2"
-			}
-			"bear_armor"				"0 2 4 6"
-			"backlash_damage"			
-			{
-				"value"					"20.0"
-			}
-			"bear_movespeed"			
-			{
-				"value"			"300 330 360 390"
-				"special_bonus_unique_lone_druid_11"		"+30"
-
-			}
-			"bear_magic_resistance"
-			{
-				"value"			"10"
-			}
-			"bonus_bear_hp"
-			{
-				"value"					"0"
-				"special_bonus_unique_undying_4"		"+800"
-			}
-			"bonus_bear_armor"
-			{
-				"value"				"0"
-				"special_bonus_unique_undying_3"	"+7"
-			}
-			"damage_gain_per_druid_level"			"5"
-			"hp_gain_per_druid_level"				"90"
-
-			"bear_attack_leash_range"
-			{
-				"value"					"1100"
-			}
-		}
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
-	}
-	"lone_druid_spirit_bear_return"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-		"HasScepterUpgrade"             "1"
-		"AbilityTextureName"			"komne"
-		"AbilityCooldown"				"20.0"
-		"AbilityCastPoint"				"0"
-		"AbilityChannelTime"			"2.0"
-		"MaxLevel"						"1"
-		"AbilityManaCost"				"0"
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityValues"
-		{
-			"channel_tooltip"
-			{
-				"value" "2"
-			}
-		}
-	}
-	//=================================================================================================================
-	// Spirit Breaker: Greater Bash (Lua version)
-	//=================================================================================================================
-	"spirit_breaker_greater_bash_lua"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"spirit_breaker_greater_bash_lua"
-		"AbilityTextureName"			"gaf"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityValues"
-		{
-				"AbilityCooldown"
-				{
-					"value"	"4.0"
-					"special_bonus_unique_undying_5"	"-4.0"
-				}
-				"chance_pct"			"20"
-				"damage"				"30"
-				"duration"				"1.0"
-				"knockback_duration"	"0.5"
-				"knockback_distance"	"150"
-				"knockback_height"		"50"
-				"bonus_movespeed_pct"	"17"
-				"movespeed_duration"	"3.0"
-		}
-	}
-	//=================================================================================================================
-	// Earth Spirit: Boulder Smash (Lua version)
-	//=================================================================================================================
-	"earth_spirit_boulder_smash_lua"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"earth_spirit_boulder_smash_lua"
-		"AbilityTextureName"			"tinik"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_earth_spirit.vsndevts"
-			"particle"	"particles/units/heroes/hero_earth_spirit/espirit_bouldersmash_target.vpcf"
-			"particle"	"particles/units/heroes/hero_earth_spirit/espirit_bouldersmash_caster.vpcf"
-		}
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"350"
-		"AbilityCastPoint"				"0.01"
-		"AbilityManaCost"				"125 150 175 200"
-		"AbilityValues"
-		{
-				"AbilityCooldown"
-				{
-					"value"	"25.0"
-					"special_bonus_unique_undying_7" "-5.0"
-				}
-				"radius"				"180"
-				"rock_search_aoe"				"200"
-				"rock_damage"			"100 200 300 400"
-				"stun_duration"			"0.5 1.0 1.5 2.0"
-				"speed"					"900"
-				"unit_distance"
-				{
-					"value"	"700.0 800.0 900.0 1000.0"
-					"special_bonus_unique_undying_6" "+200"
-				}
-				"rock_distance"			"2000.0"
-				"remnant_smash_radius_tooltip"			"200"
-		}
-	}
-	"dropchik"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"drop"
-		"ScriptFile"					"dropchik"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.0"
-		"HasShardUpgrade"				"1"
-		"AbilityCooldown"				"70"
-		"AbilityManaCost"				"200 250 300"
-		"AbilityValues"
-		{
-				"duration"
-				{
-					"value"	"15"
-					"special_bonus_unique_undying_8" "+5"
-				}
-				"bonus_strength"				"100 200 300"
-				"move_speed"
-				{
-					"value"	"200 250 300"
-					"special_bonus_unique_undying" "+100"
-				}
-				"model_scale"					"100"
-				"bonus_intellect"				"0"
-				"drdr"
-				{
-					"value" "0"
-					"special_bonus_facet_undying_ripped"	"+3"
-					"RequiresFacet" "undying_ripped"
-				}
-				"bonus_range" "100"
-		}
-	}
-	//=================================================================================================================
-	// Lone Druid: Spirit Link
-	//=================================================================================================================
-	"lone_druid_spirit_link"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"FightRecapLevel"				"1"
-		"AbilitySound"					"Hero_LoneDruid.Rabid"
-		"HasScepterUpgrade"				"0"
-		"DependentOnAbility"			"dropchik"
-		"MaxLevel"						"1"
-		"RequiredLevel"					"-1"
-		"Innate"						"1"
-		"AbilityCastAnimation"			"ACT_DOTA_OVERRIDE_ABILITY_2"
-		"AbilityCastGestureSlot"		"DEFAULT"
-		"AbilityCastRange"			"1200"
-		"IsBreakable"					"1"
-		"AbilityValues"
-		{
-				"bonus_attack_speed"		
-				{
-					"value"			"0"		
-				}
-				"lifesteal_percent"			
-				{
-					"value"				"15 30 45 60"
-				}
-				"armor_sharing"				
-				{
-					"value"  	"0"
-				}
-				"lifesteal_both_ways"
-				{
-					"value"					"1"
-				}
-				"duration"					"0"
-				"active_bonus"				"0"
-				"AbilityCooldown"
-				{
-					"value"					"0"
-				}
-				"AbilityManaCost"
-				{
-					"value"					"0"
-				}
-		}
-	}
-	"sidet"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"sidet"
-		"ScriptFile"					"sidet"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"20"
-		"AbilityManaCost"				"50"
-		"AbilityValues"
-		{
-				"duration"						"5"
-				"bonus_strength"				"0"
-				"hpregen"						"10"
-				"move_speed"					"0"
-				"model_scale"					"0"
-				"bonus_intellect"				"0"
-		}
 	}
 
 	//===================================================================================================================
@@ -6199,155 +5588,34 @@
 	//=================================================================================================================
 	"litvin_subo"
 	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/litvin/litvin_subo"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityTextureName"			"subo"
 		"AbilityCooldown"				"28 27 26 25"
 		"AbilityManaCost"				"60 100 140 180"
 		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"400"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
-				"schoolboys_number"			"1 0 0 0"
-				"schoolboys_number2"		"0 1 0 0"
-				"schoolboys_number3"		"0 0 1 0"
-				"schoolboys_number4"
-				{
-					"value" "0 0 0 1"
-					"special_bonus_unique_litvin_5" "-1"
-				}
-				"schoolboys_number5"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_unique_litvin_5" "+1"
-				}
-				"schoolboys_duration"
+				"duration"
 				{
 					"value"	"15"
 				}
-				"schoolboys_hp"
+				"base_hp"
 				{
 					"value"	"300 500 700 900"
 					"special_bonus_unique_litvin_5" "+1500"
 				}
-				"schoolboys_dmg"
+				"base_dmg"
 				{
 					"value"	"40 80 120 160"
 					"special_bonus_unique_litvin_5" "+100"
 				}
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "subo"
-
-        		}	
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_subo_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"50"
-				"GrantsXP"		"100"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_subo_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"100"
-				"GrantsXP"		"200"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_subo_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"150"
-				"GrantsXP"		"300"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_subo_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"200"
-				"GrantsXP"		"400"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_subo_5"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number5"
-				"UnitLimit"		"100"
-				"GrantsGold"	"200"
-				"GrantsXP"		"400"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
+				"xp" "40 60 80 100"
+				"gold" "50 100 150 200"
 		}
 	}
 	//=================================================================================================================
@@ -7056,237 +6324,31 @@
 	//=================================================================================================================
 	"ashab_car"
 	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/ashab/ashab_car"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityTextureName"			"car"
 		"AbilityCooldown"				"40"
 		"AbilityManaCost"				"80 115 150 185"
+		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
-		"precache"
-		{
-			"soundfile" "soundevents/ashab_car.vsndevts"
-		}
 		"AbilityValues"
 		{
-				"schoolboys_number"			"1 0 0 0"
-				"schoolboys_number2"			"0 1 0 0"
-				"schoolboys_number3"			"0 0 1 0"
-				"schoolboys_number4"
-				{
-					"value" "0 0 0 1"
-				}
-				"schoolboys_number5"
-				{
-					"value" "0 0 0 0"
-				}
-				"schoolboys_duration"
+				"duration"
 				{
 					"value"	"10"
 					"special_bonus_unique_ashab_2" "+5"
 				}
-				"schoolboys_hp"
-				{
-					"value"	"200 400 600 800"
-				}
-				"schoolboys_dmg"
-				{
-					"value"	"0"
-				}
+				"base_hp"	"1 2 2 3"
+				"radius"	"500"
 				"hpregen"	"2 3 4 5"
 				"bonus_ms" "10 14 18 22"
 				"bonus_as"	"30 45 60 75"
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "ashab_car"
-
-        		}	
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_car_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"50"
-				"GrantsXP"		"100"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_car_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"100"
-				"GrantsXP"		"200"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_car_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"150"
-				"GrantsXP"		"300"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_car_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"200"
-				"GrantsXP"		"400"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_car_5"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number5"
-				"UnitLimit"		"100"
-				"GrantsGold"	"250"
-				"GrantsXP"		"100"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-		}
-	}
-	"ashab_car_aura"
-	{
-		"BaseClass"                     "ability_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityTextureName"            "car_aura"
-		"AbilityCastRange"              "500"
-		"FightRecapLevel"				"1"
-		"MaxLevel"				  		"8"
-		"AbilityValues"
-		{
-				"hp_regen"        "2 2 3 3 4 4 5 5"
-				"radius"                    "500"
-				"bonus_ms"	"10 10 14 14 18 18 22 22"
-				"bonus_as"	"30 30 45 45 60 60 75 75"
-		}
-		
-		"Modifiers"
-		{
-			"modifier_ashab_car_aura"
-			{
-				"Passive"               "1"
-				"Aura_ApplyToCaster"            "0"
-				"IsHidden"              "1"
-				"Aura"                  "modifier_ashab_car_buff"
-				"Aura_Radius"           "%radius"
-				"Aura_Teams"            "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types"            "DOTA_UNIT_TARGET_HERO"
-				"EffectName"    "particles/econ/items/juggernaut/jugg_fall20_immortal/jugg_fall20_immortal_healing_ward.vpcf"
-            	"EffectAttachType"  "follow_origin"
-			}
-
-			"modifier_ashab_car_buff"
-			{
-				"IsBuff"	"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"        "%hp_regen"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"     "%bonus_ms"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_as"
-				}
-			}
-		}
-	}
-	"tidehunter_krill_eater"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
-		"AbilityValues"
-		{
-			"model_scale_base"				"0"
-			"model_scale_per_level"			"0"
-			
-			"attack_range_base"				"0"
-			"attack_range_per_level"		"0"
-
-			"anchor_smash_radius_base"		"0"
-			"anchor_smash_radius_per_level"	"0"
-
-			"health_bar_offset_base"		"165"
-			"health_bar_offset_per_level"	"0"
-
-			"base_strength_tooltip"			"0"
-			"strength_gain_tooltip"			"0"
-
-			"attack_range_tooltip"
-			{
-				"dynamic_value"				"false"
-			}
-			"anchor_smash_range_tooltip"
-			{
-				"dynamic_value"				"false"
-			}
+				"gold"	"50"
+				"xp"	"100"
+				"aura_duration"	"1"
 		}
 	}
 	//=================================================================================================================
@@ -10589,19 +9651,57 @@
 				}
 		}
 	}
-	"juggernaut_bladeform"
+	//===================================================================================================================
+	//													ПАПИЧ
+	//===================================================================================================================
+
+	"special_bonus_unique_papich_1"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"MaxLevel"						"1"
-		"IsBreakable"					"1"
-		"AbilityValues"
-		{
-			"max_stacks"				"0"
-			"stack_gain_time"			"0.0"
-			"agi_bonus_pct_per_stack"	"0.0"
-			"movement_speed_pct_per_stack"		"0"
-			"linger_duration"			"0"
-		}
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_papich_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	"papich_q"
 	{
@@ -10624,7 +9724,7 @@
 				"range"
 				{
 					"value"	"1000"
-					"special_bonus_unique_wraith_king_3" "+200"
+					"special_bonus_unique_papich_2" "+200"
 				}
 				"speed"					"1050.0 1050.0 1050.0 1050.0"
 				"vision_radius"			"800 1000 1200 1400"
@@ -10642,12 +9742,12 @@
 				"AbilityCastRange"
 				{
 					"value"	"1200"
-					"special_bonus_unique_wraith_king_3" "+200"
+					"special_bonus_unique_papich_2" "+200"
 				}
 				"range_tooltip"
 				{
 					"value"	"1200"
-					"special_bonus_unique_wraith_king_3" "+200"
+					"special_bonus_unique_papich_2" "+200"
 				}
 				"transient_form_ms_reduction"				"70"
 				"silence_duration"
@@ -10724,14 +9824,14 @@
 				"duration"
 				{
 					"value"	"5"
-					"special_bonus_unique_phantom_assassin_7" "+1"
+					"special_bonus_unique_papich_4" "+1"
 				}
 				"attack_speed_bonus"		"20 30 40 50"
 				"evasion_chance"			"100"
 				"intellect_steal_pct"
 				{
 					"value"	"20 25 30 35"
-					"special_bonus_unique_wraith_king_4" "+10"
+					"special_bonus_unique_papich_5" "+10"
 				}
 				"slow"	"10 15 20 25"
 		}
@@ -10757,13 +9857,13 @@
 			"outgoing_damage"
 			{
 				"value"	"65 75 85"
-				"special_bonus_unique_wraith_king_11" "+15"
+				"special_bonus_unique_papich_6" "+15"
 			}
 			"incoming_damage"		   "150 125 100"
 			"innate_activated"
 			{
 				"value"	"0"
-				"special_bonus_unique_wraith_king_10" "+1"
+				"special_bonus_unique_papich_7" "+1"
 			}
 		}
 	}
@@ -10821,7 +9921,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"25"
-					"special_bonus_unique_wraith_king_2" "-6"
+					"special_bonus_unique_papich_3" "-6"
 				}
 				"duration"
 				{
@@ -10937,7 +10037,7 @@
     		"regen"
     		{
     			"value"	"0"
-    			"special_bonus_facet_skeleton_king_facet_cursed_blade" "+40"
+    			"special_bonus_facet_papich_asket" "+40"
     		}
     	}
 	}
@@ -10956,7 +10056,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"130 120 110 100"
-				"special_bonus_unique_phantom_assassin_3" "-10"
+				"special_bonus_unique_papich_1" "-10"
 			}
 			"hp_percent"
 			{
@@ -11000,13 +10100,13 @@
 			"gold"
 			{
 				"value"	"0"
-				"special_bonus_facet_skeleton_king_facet_bone_guard" "+400"
-				"RequiresFacet"	"skeleton_king_facet_bone_guard"
+				"special_bonus_facet_papich_e_gold" "+400"
+				"RequiresFacet"	"papich_e_gold"
 			}
 			"bkb_duration"
 			{
 				"value"	"0"
-				"special_bonus_unique_phantom_assassin_4"	"+5"
+				"special_bonus_unique_papich_8"	"+5"
 			}
 		}
 	}
@@ -11024,6 +10124,58 @@
 		        		"value"	"3 4 5"
 		        }
 		}
+	}
+	//===================================================================================================================
+	//												ИГОРЬ ВИХОРЬКОВ
+	//===================================================================================================================
+
+	"special_bonus_unique_vihor_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_vihor_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	"vihor_r"
 	{
@@ -11045,20 +10197,20 @@
             	"radius"
             	{
             		"value"	"750"
-					"special_bonus_unique_clockwerk" "+150"
+					"special_bonus_unique_vihor_5" "+150"
             		"affected_by_aoe_increase"	"1"
             	}
             	"AbilityCastRange"
             	{
             		"value"	"750"
-					"special_bonus_unique_clockwerk" "+150"
+					"special_bonus_unique_vihor_5" "+150"
             		"affected_by_aoe_increase"	"1"
             	}
             	"duration_to_explosion"             "7 8 9"
             	"damage"
             	{
             		"value"	"200 400 600"
-            		"special_bonus_unique_clockwerk_3" "+150"
+            		"special_bonus_unique_vihor_4" "+150"
             	}
             	"stun_duration"
             	{
@@ -11067,7 +10219,7 @@
             	"tick_damage"
             	{
             		"value"	"0"
-            		"special_bonus_unique_clockwerk_4" "+5"
+            		"special_bonus_unique_vihor_8" "+5"
             	}
 				"dota_damage" 				"50 100 150"
             	"slow"						 "-55"
@@ -11090,7 +10242,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"5"
-					"special_bonus_unique_clockwerk_7" "-0.5"
+					"special_bonus_unique_vihor_1" "-0.5"
 				}
 				"hex_duration"
 				{
@@ -11099,7 +10251,7 @@
 				"damage"
 				{
 					"value"	"30 60 90 120"
-					"special_bonus_unique_clockwerk_flare_damage" "+60"
+					"special_bonus_unique_vihor_6" "+60"
 				}
 				"chance"
 				{
@@ -11113,7 +10265,7 @@
 				"blocked"
 				{
 					"value"	"0"
-					"special_bonus_facet_rattletrap_hookup" "+1"
+					"special_bonus_facet_vihor_heal" "+1"
 				}
 		}
 	}
@@ -11139,7 +10291,7 @@
 				"damage_percent"
 				{
 					"value"	"10"
-					"special_bonus_unique_clockwerk_hookshot_damage" "+5"
+					"special_bonus_unique_vihor_2" "+5"
 				}
 				"duration"						"8.0"
 				"illusion_outgoing_damage"
@@ -11155,7 +10307,7 @@
 				"facet"
 				{
 					"value"	"0"
-					"special_bonus_facet_rattletrap_expanded_armature"	"+1"
+					"special_bonus_facet_vihor_illusion"	"+1"
 				}
 		}
 	}
@@ -11192,7 +10344,7 @@
 				"damage"
 				{
 					"value"	"75 150 225 300"
-					"special_bonus_unique_clockwerk_5" "+100"
+					"special_bonus_unique_vihor_3" "+100"
 				}
 				"duration_fly"						"2.0"
 				"bonus_speed"						"15"
@@ -11211,7 +10363,7 @@
 				"AbilityChargeRestoreTime"
 				{
 					"value"	"17 16 15 14"
-					"special_bonus_unique_clockwerk_6" "-4"
+					"special_bonus_unique_vihor_7" "-4"
 				}
 		}
 	}

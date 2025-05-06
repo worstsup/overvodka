@@ -16,6 +16,7 @@ function serega_blink:OnSpellStart()
 	local origin = caster:GetOrigin()
 	local max_range = self:GetSpecialValueFor("blink_range")
 	local direction = (point - origin)
+	ProjectileManager:ProjectileDodge(caster)
 	if direction:Length2D() > max_range then
 		direction = direction:Normalized() * max_range
 	end
