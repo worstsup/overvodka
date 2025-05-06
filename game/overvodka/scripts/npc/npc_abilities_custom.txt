@@ -758,7 +758,8 @@
 	//=================================================================================================================
 	"ebanko_q"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ebanko/ebanko_q"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -767,13 +768,6 @@
 		"AbilityTextureName"			"vovacho"
 		"AbilityCooldown"				"30 27 24 21"
 		"AbilityManaCost"				"75 105 135 165"
-		"precache"
-		{
-			"soundfile"		"soundevents/ebanul_moroz.vsndevts"
-			"soundfile"		"soundevents/zima_holoda.vsndevts"
-			"particle"		"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
-			"particle"		"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
-		}
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
 		"AbilityValues"
 		{
@@ -811,77 +805,6 @@
 					"special_bonus_facet_ebanko_q" "-20"
 					"RequiresFacet"	"ebanko_q"
 				}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/ebanko/ebanko_q.lua"
-				"Function"		"ebanko_q"	
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_ebanko_q"
-			{
-				"Duration"	"%duration"
-				"IsDebuff"	"1"
-				"IsPurgable"	"1"
-				"EffectName"	"particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf"
-				"EffectAttachType"	"attach_origin"
-				"States"
-				{
-					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_ROOTED"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_DISABLED"
-				}
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/ebanko/ebanko_q.lua"
-						"Function"		"ebanko_q_start"				
-					}
-					"Damage"
-					{
-						"Target"		"TARGET"
-						"Type"			"DAMAGE_TYPE_MAGICAL"
-						"Damage"		"%damage"
-					}
-				}
-				"ThinkInterval"  "1"
-				"OnIntervalThink"
-				{
-					"Damage"
-					{
-						"Target"		"TARGET"
-						"Type"			"DAMAGE_TYPE_MAGICAL"
-						"Damage"		"%damage"
-					}
-				}
-				"OnDestroy"
-				{
-					"ApplyModifier"
-					{
-						"Target"        "TARGET"
-						"ModifierName"  "modifier_ebanko_q_slow"
-						"Duration"		"%slow_dur"
-					}
-				}			
-			}
-			"modifier_ebanko_q_slow"
-			{
-				"Duration"		"%slow_dur"
-				"IsDebuff"	"1"
-				"IsPurgable"	"1"
-				"EffectName"	"particles/econ/items/crystal_maiden/cm_screeauk/cm_screeauk_arcana_body_ambient.vpcf"
-				"EffectAttachType"	"attach_origin"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%as_slow"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%ms_slow"
-				}
-			}
 		}
 	}
 	//==========================
