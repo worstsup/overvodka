@@ -1700,7 +1700,7 @@
 		"DOTA_Tooltip_ability_dvoreckov_qww_slow_movement_speed_pct" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_dvoreckov_qwe"         "Вписка"
 		"DOTA_Tooltip_ability_dvoreckov_qwe_Description"  "Дворецков устраивает жёсткую вписку, обстреливая врагов ебнутыми метеоритами. \n <font color='#FFFFFF'> Урон от взрывов зависит от суммарного уровня всех трёх сфер. </font>"
-		"DOTA_Tooltip_ability_dvoreckov_qwe_scepter_Description" "Способность применяется мгновенно, позволяет передвигаться, атаковать и применять заклинания во время действия способности. Враги всё ещё могут её прервать. Герой передвигается с фиксированной скоростью %scepter_slow%."
+		"DOTA_Tooltip_ability_dvoreckov_qwe_scepter_Description" "Позволяет передвигаться, атаковать и применять заклинания во время действия способности. Враги всё ещё могут её прервать. Герой передвигается с фиксированной скоростью %scepter_slow%."
 		"DOTA_Tooltip_ability_dvoreckov_qwe_blast_damage" "УРОН ОТ ВЗРЫВА:"
 		"DOTA_Tooltip_ability_dvoreckov_qwe_effect_radius" "РАДИУС:"
 		"DOTA_Tooltip_ability_dvoreckov_qwe_channel_duration" "ДЛИТЕЛЬНОСТЬ:"

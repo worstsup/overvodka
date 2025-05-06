@@ -1586,14 +1586,10 @@
 	//=================================================================================================================
 	"shkolnik_e"
 	{
-		"BaseClass"             "ability_datadriven"
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/shkolnik/shkolnik_e"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityTextureName"            "zvonk"
-		"precache"
-		{
-			"particle"          "particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
-			"particle"          "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
-		}
 		"AbilityCastRange"              "0"
 		"AbilityCastPoint"              "0.33 0.33 0.33 0.33"
 		"AbilityCooldown"               "26.0 24.0 22.0 20.0"
@@ -1605,64 +1601,11 @@
 					"value"	"700 750 800 850"
 					"special_bonus_unique_shkolnik_2"	"+200"
 				}
-				"min_blink_range"       "200"
 				"immun"
 				{
 					"value"	"0"
 					"RequiresFacet" "shkolnik_e"
 					"special_bonus_facet_shkolnik_e"	"+2"
-				}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"    "blink.lua"
-				"Function"      "Blink"
-				"Target"        "POINT"
-			}
-
-			"FireSound"
-			{
-				"EffectName"    "zveni"
-				"Target"        "CASTER"
-			}
-
-			"AttachEffect"
-			{
-				"EffectName"    "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
-				"Target"        "CASTER"
-				"EffectAttachType"  "attach_hitloc"
-			}
-
-			"FireSound"
-			{
-				"EffectName"    "zveni"
-				"Target"        "CASTER"
-			}
-
-			"AttachEffect"
-			{
-				"EffectName"    "particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
-				"Target"        "CASTER"
-				"EffectAttachType"  "follow_origin"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"  "Modifier_immunov"
-				"Target"    "CASTER"
-				"duration"	"%immun"
-			}
-		}
-		"Modifiers"
-		{
-			"Modifier_immunov"
-				{
-					"IsBuff" "1"
-					"States"
-					{
-						"MODIFIER_STATE_DEBUFF_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
-					}
 				}
 		}
 	}
@@ -3437,12 +3380,10 @@
 				"AbilityCastPoint"
 				{
 					"value"	"0.5"
-					"special_bonus_scepter" "-0.5"
 				}
 				"total_cast_time_tooltip"
 				{
 					"value"	"0.5"
-					"special_bonus_scepter" "-0.5"
 				}
         		"AbilityCastRange"
         		{
