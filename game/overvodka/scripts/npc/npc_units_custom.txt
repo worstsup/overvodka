@@ -860,7 +860,7 @@
        
         // Armor
         //----------------------------------------------------------------
-        "ArmorPhysical"         "4"
+        "ArmorPhysical"         "0"
         "MagicalResistance"     "25"
        
         // Attack
@@ -928,15 +928,15 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "4"
+        "ArmorPhysical"         "0"
         "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "55"
-        "AttackDamageMax"       "55"
+        "AttackDamageMin"       "50"
+        "AttackDamageMax"       "50"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1007,15 +1007,15 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "4"
+        "ArmorPhysical"         "0"
         "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "70"
-        "AttackDamageMax"       "70"
+        "AttackDamageMin"       "60"
+        "AttackDamageMax"       "60"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1084,15 +1084,15 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "4"
+        "ArmorPhysical"         "0"
         "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "85"
-        "AttackDamageMax"       "85"
+        "AttackDamageMin"       "70"
+        "AttackDamageMax"       "70"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1153,19 +1153,19 @@
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/heroes/ursa/ursa.vmdl"
         "ModelScale"            "0.5"
-		"SoundSet"		"Hero_Ursa"
+		"SoundSet"				"Hero_Ursa"
         "Level"                 "50"
         "HasInventory"          "0"
        
-       "ArmorPhysical"         "4"
+      	"ArmorPhysical"         "0"
         "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "170"
-        "AttackDamageMax"       "170"
+        "AttackDamageMin"       "140"
+        "AttackDamageMax"       "140"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"

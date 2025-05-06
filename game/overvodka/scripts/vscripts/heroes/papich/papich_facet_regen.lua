@@ -8,15 +8,19 @@ end
 
 modifier_papich_facet_regen_no_enemies = modifier_papich_facet_regen_no_enemies or class({})
 
-function modifier_papich_facet_regen_no_enemies:IsHidden() return true end
+function modifier_papich_facet_regen_no_enemies:IsHidden()
+    if self:GetStackCount() == 40 then
+        return false
+    end
+    return true
+end
 function modifier_papich_facet_regen_no_enemies:IsPurgable() return false end
 function modifier_papich_facet_regen_no_enemies:RemoveOnDeath() return false end
 
 function modifier_papich_facet_regen_no_enemies:OnCreated()
     if not IsServer() then return end
-
     self.radius = 600
-    self:StartIntervalThink(1)
+    self:StartIntervalThink(0.2)
 end
 
 function modifier_papich_facet_regen_no_enemies:OnRefresh()
@@ -41,7 +45,7 @@ function modifier_papich_facet_regen_no_enemies:OnIntervalThink()
     )
 
     if #enemies == 0 then
-        self:SetStackCount(1)
+        self:SetStackCount(40)
     else
         self:SetStackCount(0)
     end
@@ -54,7 +58,7 @@ function modifier_papich_facet_regen_no_enemies:DeclareFunctions()
 end
 
 function modifier_papich_facet_regen_no_enemies:GetModifierHPRegenAmplify_Percentage()
-    if self:GetStackCount() == 1 then
+    if self:GetStackCount() == 40 then
         return 40
     end
     return 0

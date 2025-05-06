@@ -1847,14 +1847,6 @@
 				"Icon"				"agility"
 				"Color"				"Red"
 				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"juggernaut_bladeform"
-					}
-				}
 			}
 			"juggernaut_bladestorm" 
 			{
@@ -1892,7 +1884,7 @@
 		"SoundSet"		"Hero_Nevermore"
 		"DisableWearables"	"1"
 		"Enabled"		"1"
-		"PickSound"		"anus"
+		"PickSound"		""
 		"ModelScale"		"1.30000"
 		"VersusScale"		"1.30000"
 		"LoadoutScale"		"1.2"
@@ -1912,44 +1904,35 @@
 		"Ability9"		"papich_e_clone"
 		"Ability18"		"papich_e_clone_slam"
 		"Ability19"		"papich_facet_regen"
-		"Ability10"		"special_bonus_unique_phantom_assassin_3"
-		"Ability11"		"special_bonus_unique_wraith_king_3"
-		"Ability12"		"special_bonus_unique_wraith_king_2"
-		"Ability13"		"special_bonus_unique_phantom_assassin_7"
-		"Ability14"		"special_bonus_unique_wraith_king_4"
-		"Ability15"		"special_bonus_unique_wraith_king_11"
-		"Ability16"		"special_bonus_unique_wraith_king_10"
-		"Ability17"		"special_bonus_unique_phantom_assassin_4"
+		"Ability10"		"special_bonus_unique_papich_1"
+		"Ability11"		"special_bonus_unique_papich_2"
+		"Ability12"		"special_bonus_unique_papich_3"
+		"Ability13"		"special_bonus_unique_papich_4"
+		"Ability14"		"special_bonus_unique_papich_5"
+		"Ability15"		"special_bonus_unique_papich_6"
+		"Ability16"		"special_bonus_unique_papich_7"
+		"Ability17"		"special_bonus_unique_papich_8"
 		"Facets"
 		{
-			"skeleton_king_facet_bone_guard" 
+			"papich_e_gold"
 			{
 				"Icon"				"gold"
 				"Color"				"Yellow"
 				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"generic_hidden"
-					}
-				}
 			}
-
-			"skeleton_king_facet_cursed_blade"
+			"papich_asket"
 			{
 				"Icon"				"damage"
 				"Color"				"Red"
 				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"generic_hidden"
-					}
-				}
+			}
+			"skeleton_king_facet_bone_guard" 
+			{
+				"Deprecated"	"true"
+			}
+			"skeleton_king_facet_cursed_blade"
+			{
+				"Deprecated"	"true"
 			}
 		}
 
@@ -1993,27 +1976,35 @@
 		"Ability5"		"generic_hidden"
 		"Ability6"		"vihor_r"
 		"Ability7"		"generic_hidden"
-		"Ability10"		"special_bonus_unique_clockwerk_7"
-		"Ability11"		"special_bonus_unique_clockwerk_hookshot_damage"
-		"Ability12"		"special_bonus_unique_clockwerk_5"
-		"Ability13"		"special_bonus_unique_clockwerk_3"
-		"Ability14"		"special_bonus_unique_clockwerk"
-		"Ability15"		"special_bonus_unique_clockwerk_flare_damage"
-		"Ability16"		"special_bonus_unique_clockwerk_6"
-		"Ability17"		"special_bonus_unique_clockwerk_4"
+		"Ability10"		"special_bonus_unique_vihor_1"
+		"Ability11"		"special_bonus_unique_vihor_2"
+		"Ability12"		"special_bonus_unique_vihor_3"
+		"Ability13"		"special_bonus_unique_vihor_4"
+		"Ability14"		"special_bonus_unique_vihor_5"
+		"Ability15"		"special_bonus_unique_vihor_6"
+		"Ability16"		"special_bonus_unique_vihor_7"
+		"Ability17"		"special_bonus_unique_vihor_8"
 		"Facets"
 		{
-			"rattletrap_hookup" 
+			"vihor_heal"
 			{
 				"Icon"				"healing"
 				"Color"				"Green"
 				"GradientID"		"0"
 			}
-			"rattletrap_expanded_armature" 
+			"vihor_illusion"
 			{
 				"Icon"				"illusion"
 				"Color"				"Red"
 				"GradientID"		"2"
+			}
+			"rattletrap_hookup" 
+			{
+				"Deprecated" "true"
+			}
+			"rattletrap_expanded_armature" 
+			{
+				"Deprecated" "true"
 			}
 		}
 		"ArmorPhysical"		"1"
