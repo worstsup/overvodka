@@ -20,7 +20,8 @@ function modifier_kachok_trenbolone:OnCreated( kv )
 
     if not IsServer() then return end
 
-    local transformParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local transformParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf", PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(transformParticle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(transformParticle)
 end
 

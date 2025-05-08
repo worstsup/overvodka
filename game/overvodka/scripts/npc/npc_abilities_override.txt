@@ -1,4 +1,3 @@
-
 // Dota Abilities Override File
 "DOTAAbilities"
 {

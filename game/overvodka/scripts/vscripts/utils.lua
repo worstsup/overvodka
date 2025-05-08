@@ -222,7 +222,7 @@ if IsServer() then
 				new_hero:HeroLevelUp(false)
 			end
 		end
-
+		
 		if (restoreItems == true) then
 			for _, itemData in pairs(allHeroItems) do
 				local item = new_hero:AddItemByName(itemData.itemName)

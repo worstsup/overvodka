@@ -182,8 +182,8 @@ end
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
     local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-        ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
-        ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
-        ParticleManager:ReleaseParticleIndex(effect_cast)
+    ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(effect_cast)
     UTIL_Remove(self:GetParent())
 end

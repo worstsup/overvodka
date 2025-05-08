@@ -3,7 +3,7 @@ LinkLuaModifier("modifier_kachok_trenbolone", "heroes/kachok/modifier_kachok_tre
 kachok_trenbolone = class({})
 
 function kachok_trenbolone:Precache(context)
-    PrecacheResource("particle", "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf", context)
     PrecacheResource("model", "models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl", context)
 end
 
