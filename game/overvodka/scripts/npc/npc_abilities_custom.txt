@@ -1861,42 +1861,8 @@
 		}
     }
 	//=================================================================================================================
-	// ОТЕЦ
+	// ГНЕВ ШЕФА
 	//=================================================================================================================
-	"Lev_Otec"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"otchim"
-		"ScriptFile"					"heroes/lev/lev_otec"
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"90 85 80"
-		"AbilityManaCost"				"400 600 800"
-		"AbilityValues"
-		{
-				"duration"						"15"
-				"bonus_intellect"				"100 200 300"
-				"move_speed_start"
-				{
-					"value"	"500"
-					"special_bonus_facet_lev_r"	"+200"
-				}
-				"bonus_strength"				"100 200 300"
-				"model_scale"					"200"
-				"move_speed"
-				{
-					"value"	"550"
-				}
-				"bonus_agility"
-				{
-					"value"	"0 0 0"
-					"special_bonus_unique_lev_6"	"+150"
-				}
-		}
-	}
 	"chef_r"
 	{
 		"BaseClass"						"ability_lua"
@@ -4343,8 +4309,9 @@
 	//=================================================================================================================
 	"silvername_murloc"
 	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_murloc"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"murloc"
 		"AbilityManaCost"				"35 40 45 50"
@@ -4357,151 +4324,27 @@
 					"value"	"10 8 6 4"
 					"special_bonus_unique_silvername_5" "-2"
 				}
-				"schoolboys_number"			"1 0 0 0"
-				"schoolboys_number2"			"0 1 0 0"
-				"schoolboys_number3"			"0 0 1 0"
-				"schoolboys_number4"
-				{
-					"value" "0 0 0 1"
-					"special_bonus_unique_silvername_2" "-1"
-				}
-				"schoolboys_number5"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_unique_silvername_2" "+1"
-				}
-				"schoolboys_duration"
+				"duration"
 				{
 					"value"	"20"
 					"special_bonus_unique_silvername_3" "+10"
 				}
-				"schoolboys_hp"
+				"base_hp"
 				{
 					"value"	"100 200 300 400"
 					"special_bonus_unique_silvername_2" "+150"
-
 				}
-				"schoolboys_dmg"
+				"base_dmg"
 				{
 					"value"	"10 20 30 40"
 				}
 				"phase"
 				{
-					"value"   "0.03"
-					"special_bonus_facet_silvername_q"	"35"
+					"value"   "0"
+					"special_bonus_facet_silvername_q"	"+35"
 				}
-		}
-		"OnAbilityPhaseStart"
-    		{
-        		"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "murloc"
-
-        		}
-    		}
-		"OnSpellStart"
-		{
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_murloc_5"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number5"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"%phase"
-					}
-				}
-			}
+				"gold"	"25"
+				"xp"	"40"
 		}
 	}
 	//=================================================================================================================
@@ -4509,8 +4352,8 @@
 	//=================================================================================================================
 	"hill_troll_rally"
 	{
-		"MaxLevel"				"1"
-		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"		
+		"MaxLevel"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"		
 		"IsBreakable"					"1"
 		"AbilityTextureName"			"polk"
 		"AbilityValues"
@@ -4531,9 +4374,13 @@
 	//=================================================================================================================
 	"silvername_rivendare"
 	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_rivendare"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastRange"				"350"
 		"AbilityTextureName"			"rivendare"
 		"AbilityCooldown"				"40 36 32 28"
 		"AbilityManaCost"				"100 150 200 250"
@@ -4541,194 +4388,23 @@
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
 		{
-				"schoolboys_number"
-				{
-					"value" "1 0 0 0"
-					"special_bonus_unique_silvername_4" "-1"
-				}
-				"schoolboys_number2"
-				{
-					"value" "0 1 0 0"
-					"special_bonus_unique_silvername_4" "-1"
-				}
-				"schoolboys_number3"
-				{
-					"value" "0 0 1 0"
-					"special_bonus_unique_silvername_4" "-1"
-				}
-				"schoolboys_number4"
-				{
-					"value" "0 0 0 1"
-					"special_bonus_unique_silvername_4" "-1"
-				}
-				"schoolboys_number5"
-				{
-					"value" "0 0 0 0"
-					"special_bonus_unique_silvername_4" "+1"
-				}
-				"schoolboys_duration"
+				"duration"
 				{
 					"value"	"10"
 				}
-				"schoolboys_hp"
+				"base_hp"
 				{
 					"value"	"3 3 4 5"
-					"special_bonus_unique_silvername_4" "+2"
+					"special_bonus_unique_silvername_4" "+1"
 				}
-				"schoolboys_dmg"
+				"base_dmg"
 				{
 					"value"	"20 40 60 80"
 				}
-		}
-		"OnAbilityPhaseStart"
-    		{
-        		"FireSound"
-        		{
-            		"Target"            "CASTER"
-            		"EffectName"        "baron"
-
-        		}
-    		}
-		"OnSpellStart"
-		{
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_rivendare_1"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_rivendare_2"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number2"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_rivendare_3"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number3"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_rivendare_4"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number4"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_rivendare_5"
-				"Target" 		"CASTER"
-				"Duration"		"%schoolboys_duration"
-				"UnitCount"		"%schoolboys_number5"
-				"UnitLimit"		"100"
-				"GrantsGold"	"25"
-				"GrantsXP"		"0"
-				"SpawnRadius"	"200"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-				}
-			}
-		}
-	}
-	//=================================================================================================================
-	// АГР РИВЕНДЕРА
-	//=================================================================================================================
-	"rivendare_lua"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/silvername/rivendare_lua"
-		"AbilityTextureName"			"taunt"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_slark/slark_essence_shift.vpcf"
-		}
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityValues"
-		{
-				"AbilityCastRange"
-				{
-					"value"	"300"
-				}
-				"duration"
-				{
-					"value"	"0.15"
-				}
-				"radius"
-				{
-					"value"	"300"
-				}
-				"interval"				"0.1"
+				"gold" "40 50 60 70"
+				"xp" "50 75 100 125"
+				"radius"	"300"
+				"interval"	"0.1"
 		}
 	}
 	//=================================================================================================================
@@ -12591,6 +12267,16 @@
 				"range" 						"600 650 700 750 800 850"
 		}
 	}
+	//===================================================================================================================
+	//													СТИНТ
+	//===================================================================================================================
+
+	"special_bonus_unique_stint_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	"stint_innate"
 	{
 		"BaseClass"						"ability_lua"
@@ -12675,6 +12361,7 @@
 		"AbilityTextureName"			"otchim"
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.2"
+		"HasScepterUpgrade"				"1"
 		"AbilityCooldown"				"26 24 22 20"
 		"AbilityManaCost"				"100 115 130 145"
 		"AbilityValues"
@@ -12682,17 +12369,66 @@
 			"duration"		
 			{
 				"value"					"6"
+				"special_bonus_unique_stint_1" "+1.5"
 			}
 			"radius"					"450"
 			"hit_destroy"				"3 4 5 6"
 			"pct_damage"				"1"
+			"inators"
+			{
+				"value"	"4"
+				"special_bonus_facet_stint_inator"	"+1"
+			}
+			"damage_first"	"50 75 100 125"
+			"fire_duration"	"2 3 4 5"
+			"damage_second"	"3.0 3.5 4.0 4.5"
+			"duration_third" "1.4 1.8 2.2 2.6"
+			"cdr_fourth"	"125 150 175 200"
+			"duration_fifth" "0.5 1.0 1.5 2.0"
+			"gold"	"50 60 70 80"
+			"xp" "60 90 120 150"
+			"inator_effects"
+			{
+				"value"	"1"
+				"special_bonus_scepter"	"+1"
+			}
+			"chance"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+20"
+			}
+		}
+	}
+	"stint_w"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile" 				"heroes/stint/stint_w"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastRange"			"800"
+		"AbilityCastPoint"			"0.2"
+		"HasShardUpgrade"			"1"
+		"AbilityCooldown"			"40 35 30 25"
+		"AbilityManaCost"			"80 105 130 155"
+		"AbilityTextureName"		"stint_w"
+		"AbilityValues"
+		{
+			"investment"	 		"200 250 300 350"
+			"chance_bad"	 		"50"
+			"chance_1_5"	 		"36"
+			"chance_2"		 		"17"
+			"chance_2_5"	 		"7"
+			"max_debt"		 		"1000"
+			"shard_max_debt" 		"1250"
 		}
 	}
 	"rosh_model_change"
 	{
-		"BaseClass"			"ability_lua"
-		"ScriptFile"		"units/rosh/rosh_model_change"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"units/rosh/rosh_model_change"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	}
 	
 }

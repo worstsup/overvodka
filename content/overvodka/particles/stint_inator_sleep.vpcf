@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf61:version{39d3ce1d-9442-4407-9b78-8317145b1732} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nBehaviorVersion = 12
+	m_nMaxParticles = 0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/econ/items/naga/naga_ti10_immortal_head/naga_ti10_immortal_song_proj.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/naga/naga_ti10_immortal_head/naga_ti10_immortal_song_pulse.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/naga/naga_ti10_immortal_head/naga_ti10_immortal_song_jellyfish.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/naga/naga_ti10_immortal_head/naga_ti10_immortal_song_waves.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_furion/furion_sprout_healing_aoe_pulses.vpcf"
+		},
+	]
+}

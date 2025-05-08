@@ -432,8 +432,15 @@ end
 -- Event: OnItemPickUp
 --------------------------------------------------------------------------------
 function COverthrowGameMode:OnItemPickUp( event )
+	VectorTarget:OnItemPickup(event)
 	local item = EntIndexToHScript( event.ItemEntityIndex )
-	local owner = EntIndexToHScript( event.HeroEntityIndex )
+	local owner
+	if event.HeroEntityIndex then
+		owner = EntIndexToHScript(event.HeroEntityIndex)
+	elseif event.UnitEntityIndex then
+		owner = EntIndexToHScript(event.UnitEntityIndex)
+	end
+	if not owner:IsRealHero() then owner = owner:GetOwner() end
 	r = 300
 	local function RemoveItemByName(unit, itemName)
 		for i = 0, 8 do

@@ -1513,20 +1513,16 @@
 
 		"DrawParticlesWhileHidden"	"1"
 	}
-	"npc_rivendare_1"
+	"npc_rivendare"
 	{
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/heroes/abaddon/abaddon.vmdl"
         "ModelScale"            "0.8"
-		"SoundSet"		"Hero_Abaddon"
+		"SoundSet"				"Hero_Abaddon"
         "Level"                 "50"
         "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
+        "ArmorPhysical"         "0"
+        "MagicalResistance"     "0"
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
         "AttackDamageMin"       "20"
@@ -1535,48 +1531,26 @@
         "AttackAnimationPoint"  "0.55"
         "AttackAcquisitionRange" "500"
         "AttackRange"           "175"
-
-
-        "Ability1"					"rivendare_lua"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
         "BountyGoldMin"         "25"
         "BountyGoldMax"         "25"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
+		"RingRadius"			"70"
+		"HealthBarOffset"		"160"
+		"BoundsHullName"		"DOTA_HULL_SIZE_SMALL"	
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"         "365"
         "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
         "StatusHealth"          "3"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
         "VisionDaytimeRange"    "600"
         "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
         "TeamName"              "DOTA_TEAM_NEUTRALS"
         "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
-   
 		"Creature"
 		{
 			"AttachWearables"//Endless Night
@@ -1589,303 +1563,7 @@
 			}
 		}
 	}
-	"npc_rivendare_2"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/abaddon/abaddon.vmdl"
-        "ModelScale"            "0.8"
-		"SoundSet"		"Hero_Abaddon"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
-        "AttackRate"            "1.5"
-        "AttackAnimationPoint"  "0.55"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "175"
-        "Ability1"					"rivendare_lua"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "50"
-        "BountyGoldMax"         "50"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "385"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "3"
-        "StatusHealthRegen"     "0"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"//Endless Night
-			{
-				"Wearable1" {"ItemDef" "13264"}//mount("Endless Night Mount")
-				"Wearable2" {"ItemDef" "13263"}//shoulder("Endless Night Shoulder")
-				"Wearable3" {"ItemDef" "13262"}//back("Endless Night Cape")
-				"Wearable4" {"ItemDef" "13236"}//head("Endless Night Head")
-				"Wearable5" {"ItemDef" "13235"}//("Endless Night Sword")
-			}
-		}
-	}
-	"npc_rivendare_3"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/abaddon/abaddon.vmdl"
-        "ModelScale"            "0.8"
-		"SoundSet"		"Hero_Abaddon"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "60"
-        "AttackDamageMax"       "60"
-        "AttackRate"            "1.5"
-        "AttackAnimationPoint"  "0.55"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "175"
-        "Ability1"					"rivendare_lua"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "75"
-        "BountyGoldMax"         "75"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "405"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "4"
-        "StatusHealthRegen"     "0"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"//Endless Night
-			{
-				"Wearable1" {"ItemDef" "13264"}//mount("Endless Night Mount")
-				"Wearable2" {"ItemDef" "13263"}//shoulder("Endless Night Shoulder")
-				"Wearable3" {"ItemDef" "13262"}//back("Endless Night Cape")
-				"Wearable4" {"ItemDef" "13236"}//head("Endless Night Head")
-				"Wearable5" {"ItemDef" "13235"}//("Endless Night Sword")
-			}
-		}
-	}
-	"npc_rivendare_4"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/abaddon/abaddon.vmdl"
-        "ModelScale"            "0.8"
-		"SoundSet"		"Hero_Abaddon"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "80"
-        "AttackDamageMax"       "80"
-        "AttackRate"            "1.5"
-        "AttackAnimationPoint"  "0.55"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "175"
-        "Ability1"					"rivendare_lua"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "100"
-        "BountyGoldMax"         "100"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "425"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "5"
-        "StatusHealthRegen"     "0"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"//Endless Night
-			{
-				"Wearable1" {"ItemDef" "13264"}//mount("Endless Night Mount")
-				"Wearable2" {"ItemDef" "13263"}//shoulder("Endless Night Shoulder")
-				"Wearable3" {"ItemDef" "13262"}//back("Endless Night Cape")
-				"Wearable4" {"ItemDef" "13236"}//head("Endless Night Head")
-				"Wearable5" {"ItemDef" "13235"}//("Endless Night Sword")
-			}
-		}
-	}
-	"npc_rivendare_5"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/abaddon/abaddon.vmdl"
-        "ModelScale"            "0.8"
-		"SoundSet"		"Hero_Abaddon"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "80"
-        "AttackDamageMax"       "80"
-        "AttackRate"            "1.5"
-        "AttackAnimationPoint"  "0.55"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "175"
-        "Ability1"					"rivendare_lua"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "100"
-        "BountyGoldMax"         "100"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "425"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "7"
-        "StatusHealthRegen"     "0"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"//Endless Night
-			{
-				"Wearable1" {"ItemDef" "13264"}//mount("Endless Night Mount")
-				"Wearable2" {"ItemDef" "13263"}//shoulder("Endless Night Shoulder")
-				"Wearable3" {"ItemDef" "13262"}//back("Endless Night Cape")
-				"Wearable4" {"ItemDef" "13236"}//head("Endless Night Head")
-				"Wearable5" {"ItemDef" "13235"}//("Endless Night Sword")
-			}
-		}
-	}
-	"npc_murloc_1"
+	"npc_murloc"
 	{
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/creeps/mega_greevil/mega_greevil.vmdl"
@@ -1894,8 +1572,8 @@
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "25"
        
         // Attack
         //----------------------------------------------------------------
@@ -1907,8 +1585,6 @@
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "600"
         "AttackRange"           "175"
-
-
         "Ability1"					"hill_troll_rally"				// Ability 1
        
         // Bounty
@@ -1934,270 +1610,8 @@
         "StatusHealthRegen"     "5"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
         "VisionDaytimeRange"    "600"
         "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_murloc_2"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/mega_greevil/mega_greevil.vmdl"
-        "ModelScale"            "1.0"
-		"SoundSet"				"Greevil"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "20"
-        "AttackDamageMax"       "20"
-        "AttackRate"            "1.1"
-        "AttackAnimationPoint"  "0.3"
-        "AttackAcquisitionRange" "600"
-        "AttackRange"           "175"
-
-
-        "Ability1"					"hill_troll_rally"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "200"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_murloc_3"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/mega_greevil/mega_greevil.vmdl"
-        "ModelScale"            "1.0"
-		"SoundSet"				"Greevil"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "30"
-        "AttackDamageMax"       "30"
-        "AttackRate"            "1.1"
-        "AttackAnimationPoint"  "0.3"
-        "AttackAcquisitionRange" "600"
-        "AttackRange"           "175"
-
-
-        "Ability1"					"hill_troll_rally"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "300"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_murloc_4"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/mega_greevil/mega_greevil.vmdl"
-        "ModelScale"            "1.0"
-		"SoundSet"				"Greevil"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
-        "AttackRate"            "1.1"
-        "AttackAnimationPoint"  "0.3"
-        "AttackAcquisitionRange" "600"
-        "AttackRange"           "175"
-
-
-        "Ability1"					"hill_troll_rally"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "400"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
-        "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-        "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-        "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
-        "IsSummoned"            "1"
-	}
-	"npc_murloc_5"
-	{
-        "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/mega_greevil/mega_greevil.vmdl"
-        "ModelScale"            "1.0"
-		"SoundSet"				"Greevil"
-        "Level"                 "50"
-        "HasInventory"          "0"
-       
-        "ArmorPhysical"         "5"
-        "MagicalResistance"     "50"
-       
-        // Attack
-        //----------------------------------------------------------------
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
-        "AttackRate"            "1.1"
-        "AttackAnimationPoint"  "0.3"
-        "AttackAcquisitionRange" "600"
-        "AttackRange"           "175"
-
-
-        "Ability1"					"hill_troll_rally"				// Ability 1
-       
-        // Bounty
-        //----------------------------------------------------------------
-        "BountyGoldMin"         "25"
-        "BountyGoldMax"         "25"
-       
-        // Bounds
-        //----------------------------------------------------------------
-		"RingRadius"				"70"
-		"HealthBarOffset"			"160"
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"	
-       
-        // Movement
-        //----------------------------------------------------------------
-        "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "360"
-        "MovementTurnRate"      "0.4"
-       
-        // Status
-        //----------------------------------------------------------------
-        "StatusHealth"          "550"
-        "StatusHealthRegen"     "5"
-        "StatusMana"            "0"
-        "StatusManaRegen"       "0"
-       
-        // Vision
-        //----------------------------------------------------------------
-        "VisionDaytimeRange"    "600"
-        "VisionNighttimeRange"  "300"
-       
-        // Team
-        //----------------------------------------------------------------
         "TeamName"              "DOTA_TEAM_NEUTRALS"
         "CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
