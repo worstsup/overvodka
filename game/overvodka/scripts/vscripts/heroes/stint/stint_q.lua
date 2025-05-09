@@ -90,6 +90,15 @@ end
 function modifier_stint_q_trigger:OnCreated()
     if not IsServer() then return end
     self.attacker_next_spawn = {}
+    self.dispel = self:GetAbility():GetSpecialValueFor("dispel")
+    if self.dispel > 0 then
+        self:StartIntervalThink(self.dispel)
+        self:OnIntervalThink()
+    end
+end
+
+function modifier_stint_q_trigger:OnIntervalThink()
+    self:GetParent():Purge( false, true, false, true, false )
 end
 
 function modifier_stint_q_trigger:OnTakeDamage(params)

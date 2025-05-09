@@ -3,48 +3,53 @@ LinkLuaModifier("modifier_stint_w_debt", "heroes/stint/stint_w", LUA_MODIFIER_MO
 stint_w = class({})
 
 function stint_w:Precache(context)
-    -- pre-cache particles
-    PrecacheResource("particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_lich/lich_frost_nova.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_emp.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_chaos_meteor_explosion.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_bane/bane_nightmare.vpcf", context)
+    PrecacheResource("particle", "particles/stint_counter.vpcf", context)
+    PrecacheResource("particle", "particles/stint_debt.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/stint_w.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts", context)
 end
 
--- Use GetGoldCost to define the wager amount per level
-function stint_w:GetGoldCost(level)
-    return self:GetSpecialValueFor("investment")
+function stint_w:CastFilterResultTarget( hTarget )
+    if not IsServer() then
+        return UF_SUCCESS
+    end
+    local filterResult = UnitFilter(
+        hTarget,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        self:GetCaster():GetTeamNumber()
+    )
+    if filterResult ~= UF_SUCCESS then
+        return filterResult
+    end
+    local cost = self:GetSpecialValueFor("investment")
+    local playerID = hTarget:GetPlayerID()
+    if PlayerResource:GetGold(playerID) < cost then
+        return UF_FAIL_CUSTOM
+    end
+
+    return UF_SUCCESS
 end
 
--- Custom cast error: check both caster and target have enough gold
-function stint_w:GetCustomCastErrorTarget(target)
-    local cost = self:GetGoldCost(self:GetLevel())
-    if self:GetCaster():GetGold() < cost then
-        return "dota_hud_error_not_enough_gold"
-    end
-    if target:GetGold() < cost then
-        return "dota_hud_error_not_enough_gold"
-    end
-    return nil
+function stint_w:GetCustomCastErrorTarget( hTarget )
+    return "#dota_hud_error_stint_enemy_no_gold"
 end
 
 function stint_w:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-
-    -- retrieve values
-    local cost      = self:GetGoldCost(self:GetLevel())
-    local ch_bad    = self:GetSpecialValueFor("chance_bad")
-    local ch_15     = self:GetSpecialValueFor("chance_1_5")
-    local ch_2      = self:GetSpecialValueFor("chance_2")
-    local ch_25     = self:GetSpecialValueFor("chance_2_5")
-    local max_debt  = self:GetSpecialValueFor("max_debt")
-    local shard_max = self:GetSpecialValueFor("shard_max_debt")
-
-    -- roll multiplier for each participant
-    local function rollMult()
-        local r = RandomInt(1,100)
+    local cost   = self:GetSpecialValueFor("investment")
+    local casterID = caster:GetPlayerOwnerID()
+    PlayerResource:SpendGold(casterID, cost, DOTA_ModifyGold_Unspecified)
+    local targetID = target:GetPlayerOwnerID()
+    local target_gold = PlayerResource:GetGold(targetID)
+    PlayerResource:SpendGold(targetID, cost, DOTA_ModifyGold_Unspecified)
+    target_gold = PlayerResource:GetGold(targetID)
+    EmitSoundOn("stint_w", caster)
+    local function roll(ch_bad, ch_15, ch_2, ch_25)
+        local r = RandomInt(1, 100)
         if r <= ch_bad then return 0 end
         r = r - ch_bad
         if r <= ch_15 then return 1.5 end
@@ -52,99 +57,143 @@ function stint_w:OnSpellStart()
         if r <= ch_2 then return 2 end
         return 2.5
     end
-    local mC = rollMult()
-    local mT = rollMult()
+    local ch_bad   = self:GetSpecialValueFor("chance_bad")
+    local ch_15    = self:GetSpecialValueFor("chance_1_5")
+    local ch_2     = self:GetSpecialValueFor("chance_2")
+    local ch_25    = self:GetSpecialValueFor("chance_2_5")
+    local max_debt = self:GetSpecialValueFor("max_debt")
 
-    -- both succeed: refund caster's wager
-    if mC > 1 and mT > 1 then
-        PlayerResource:ModifyGold(caster:GetPlayerOwnerID(), cost, false, 0)
-        -- particles
-        local p1 = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-        ParticleManager:DestroyParticle(p1, false)
-        ParticleManager:ReleaseParticleIndex(p1)
-        local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-        ParticleManager:DestroyParticle(p2, false)
-        ParticleManager:ReleaseParticleIndex(p2)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, cost, nil)
+    local mC = roll(ch_bad, ch_15, ch_2, ch_25)
+    local mT = roll(ch_bad, ch_15, ch_2, ch_25)
+    print(string.format("[Stint W] %s rolled %.1fx, %s rolled %.1fx", caster:GetName(), mC, target:GetName(), mT))
+    local part1_caster = math.floor(mC) + 10
+    local part2_caster
+    if mC == 1.5 or mC == 2.5 then
+        part2_caster = 28
+    end
+    local part1_target = math.floor(mT) + 10
+    local part2_target
+    if mT == 1.5 or mT == 2.5 then
+        part2_target = 28
+    end
+    local effect_caster = ParticleManager:CreateParticle("particles/stint_counter.vpcf", PATTACH_OVERHEAD_FOLLOW, caster)
+    ParticleManager:SetParticleControl(effect_caster, 1, Vector(part1_caster, 0, 0))
+    ParticleManager:SetParticleControl(effect_caster, 2, Vector(part2_caster, 0, 0))
+    local effect_target = ParticleManager:CreateParticle("particles/stint_counter.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
+    ParticleManager:SetParticleControl(effect_target, 1, Vector(part1_target, 0, 0))
+    ParticleManager:SetParticleControl(effect_target, 2, Vector(part2_target, 0, 0))
+    ParticleManager:ReleaseParticleIndex(effect_caster)
+    ParticleManager:ReleaseParticleIndex(effect_target)
+    if self:GetSpecialValueFor("heal") > 0 then
+        if mC > 0 then
+            local heal = self:GetSpecialValueFor("heal") * cost * mC * 0.01
+            self:GetCaster():HealWithParams(heal, self, false, true, self:GetCaster(), false)
+            SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self:GetCaster(), heal, self:GetCaster():GetPlayerOwner())
+        end
+    end
+    if mC == 0 and mT == 0 then
         return
     end
-
-    -- determine winner/loser
-    local winner, loser, mW
-    if mC > 1 and mT <= 1 then
-        winner, loser, mW = caster, target, mC
-    elseif mT > 1 and mC <= 1 then
-        winner, loser, mW = target, caster, mT
-    else
-        -- neither succeeded: failure particles/message
-        local p3 = ParticleManager:CreateParticle("particles/units/heroes/hero_lich/lich_frost_nova.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-        ParticleManager:DestroyParticle(p3, false)
-        ParticleManager:ReleaseParticleIndex(p3)
-        local p4 = ParticleManager:CreateParticle("particles/units/heroes/hero_lich/lich_frost_nova.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-        ParticleManager:DestroyParticle(p4, false)
-        ParticleManager:ReleaseParticleIndex(p4)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_DAMAGE, caster, 0, nil)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_DAMAGE, target, 0, nil)
+    if mC > 0 and mT > 0 then
+        local reward_caster = cost * mC
+        local reward_target = cost * mT
+        caster:ModifyGold(reward_caster, false, 0)
+        target:ModifyGold(reward_target, false, 0)
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, reward_caster, nil)
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, target, reward_target, nil)
+        EmitSoundOn( "Hero_OgreMagi.Fireblast.x1", caster )
         return
     end
-
-    -- compute amounts
-    local gain = cost * mW
-    local loss = cost + gain
-
-    -- player IDs
-    local loserID = loser:GetPlayerOwnerID() or loser:GetPlayerID()
-    local winnerID = winner:GetPlayerOwnerID() or winner:GetPlayerID()
-
-    -- available gold
-    local available = loser:GetGold()
-    if available >= loss then
-        PlayerResource:SpendGold(loserID, loss, 4)
-        PlayerResource:ModifyGold(winnerID, gain, false, 0)
-        -- win/lose particles
-        local p5 = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_emp.vpcf", PATTACH_ABSORIGIN_FOLLOW, winner)
-        ParticleManager:DestroyParticle(p5, false)
-        ParticleManager:ReleaseParticleIndex(p5)
-        local p6 = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_chaos_meteor_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, loser)
-        ParticleManager:DestroyParticle(p6, false)
-        ParticleManager:ReleaseParticleIndex(p6)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, winner, gain, nil)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, loser, -loss, nil)
-    else
-        -- partial payment and debt
-        PlayerResource:SpendGold(loserID, available, 4)
-        local paid = math.min(available, gain)
-        PlayerResource:ModifyGold(winnerID, paid, false, 0)
-        local unpaid = loss - available
-        local existing = loser:HasModifier("modifier_stint_w_debt") and loser:FindModifierByName("modifier_stint_w_debt"):GetStackCount() or 0
-        local cap = caster:HasShard() and shard_max or max_debt
-        local new_debt = math.min(existing + unpaid, cap)
-        if not loser:HasModifier("modifier_stint_w_debt") then
-            loser:AddNewModifier(caster, self, "modifier_stint_w_debt", {})
+    if (mC > 0 and mT == 0) or (mC == 0 and mT > 0) then
+        local winner
+        local loser
+        local mW
+        if mC > 0 then
+            winner = caster
+            loser = target
+            mW = mC
+        else
+            winner = target
+            loser = caster
+            mW = mT
         end
-        loser:FindModifierByName("modifier_stint_w_debt"):SetStackCount(new_debt)
-        if caster:HasShard() then
-            PlayerResource:ModifyGold(winnerID, unpaid, false, 0)
+        EmitSoundOn( "Hero_OgreMagi.Fireblast.x1", winner )
+        local reward_winner = cost * mW
+        local lost_money = cost * (mW - 1)
+        local loserID = loser:GetPlayerID()
+        if PlayerResource:GetGold(loserID) >= lost_money then
+            winner:ModifyGold(reward_winner, false, 0)
+            SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, winner, reward_winner, nil)
+            PlayerResource:SpendGold(loserID, lost_money, DOTA_ModifyGold_Unspecified)
+        else
+            local loser_balance = PlayerResource:GetGold(loserID)
+            winner:ModifyGold(loser_balance, false, 0)
+            SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, winner, loser_balance, nil)
+            PlayerResource:SpendGold(loserID, loser_balance, DOTA_ModifyGold_Unspecified)
+            local debt = lost_money - loser_balance
+            if loser:GetUnitName() == caster:GetUnitName() and self:GetSpecialValueFor("no_damage") == 0 then
+                ApplyDamage({
+                    victim = caster,
+                    attacker = caster,
+                    damage = debt,
+                    damage_type = DAMAGE_TYPE_PURE,
+                    ability = self
+                })
+            else
+                local stacks
+                if loser:HasModifier("modifier_stint_w_debt") then
+                    local loserMod = loser:FindModifierByName("modifier_stint_w_debt")
+                    local newstack = loserMod:GetStackCount() + debt
+                    stacks = math.min(newstack, max_debt)
+                    loserMod:SetStackCount(stacks)
+                else
+                    local debt_modifier = loser:AddNewModifier(caster, self, "modifier_stint_w_debt", {})
+                    stacks = math.min(debt, max_debt)
+                    debt_modifier:SetStackCount(stacks)
+                end
+            end
         end
-        -- debt particle
-        local p7 = ParticleManager:CreateParticle("particles/units/heroes/hero_bane/bane_nightmare.vpcf", PATTACH_OVERHEAD_FOLLOW, loser)
-        ParticleManager:DestroyParticle(p7, false)
-        ParticleManager:ReleaseParticleIndex(p7)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, winner, paid, nil)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, loser, -available, nil)
     end
 end
 
--- Modifier to track debt stacks (tooltip shows amount)
 modifier_stint_w_debt = class({})
 
-function modifier_stint_w_debt:IsHidden()      return false end
-function modifier_stint_w_debt:IsPurgable()    return false end
+function modifier_stint_w_debt:IsHidden() return false end
+function modifier_stint_w_debt:IsPurgable() return false end
 function modifier_stint_w_debt:RemoveOnDeath() return false end
 
 function modifier_stint_w_debt:OnCreated()
     if not IsServer() then return end
-    self:SetStackCount(0)
+    self.debtor = self:GetParent()
+    self.caster = self:GetCaster()
+    self.debt = self:GetStackCount()
+    self.interval = 1.0
+    self:StartIntervalThink(self.interval)
+end
+
+function modifier_stint_w_debt:OnIntervalThink()
+    if not IsServer() then return end
+    if not self.caster:HasShard() then return end
+    if math.abs(self.interval - 10.0) > 0.1 then
+        self.interval = 10.0
+        self:StartIntervalThink(self.interval)
+    end
+    local debt = self:GetStackCount()
+    if debt <= 0 then self:Destroy() return end
+    local current_balance = PlayerResource:GetGold(self.debtor:GetPlayerID())
+    local actual = math.min(current_balance, debt)
+    if actual > 0 then
+        PlayerResource:SpendGold(self.debtor:GetPlayerID(), actual, DOTA_ModifyGold_Unspecified)
+        self.caster:ModifyGold(actual, false, 0)
+        debt = debt - actual
+        self:SetStackCount(debt)
+        local effect_cast_debtor = ParticleManager:CreateParticle("particles/stint_debt.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.debtor)
+        ParticleManager:ReleaseParticleIndex(effect_cast_debtor)
+        local effect_cast_caster = ParticleManager:CreateParticle("particles/stint_debt.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
+        ParticleManager:ReleaseParticleIndex(effect_cast_caster)
+        print(string.format("[Stint W Debt] %s paid %d to %s, remaining %d", self.debtor:GetName(), actual, self.caster:GetName(), debt))
+    end
+    if debt <= 0 then self:Destroy() end
 end
 
 function modifier_stint_w_debt:DeclareFunctions()

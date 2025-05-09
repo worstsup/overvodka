@@ -2579,12 +2579,12 @@
 		"Ability6"		"generic_hidden"
 
 		"Ability10"		"special_bonus_unique_stint_1"
-		"Ability11"		"special_bonus_attack_base_damage_35"
-		"Ability12"		"special_bonus_unique_omniknight_2"
-		"Ability13"		"special_bonus_unique_omniknight_7"
-		"Ability14"		"special_bonus_unique_omniknight_guardian_angel_duration"
-		"Ability15"		"special_bonus_unique_omniknight_6"
-		"Ability16"		"special_bonus_unique_omniknight_1"
+		"Ability11"		"special_bonus_unique_stint_4"
+		"Ability12"		"special_bonus_unique_stint_3"
+		"Ability13"		"special_bonus_unique_stint_2"
+		"Ability14"		"special_bonus_unique_stint_5"
+		"Ability15"		"special_bonus_unique_stint_6"
+		"Ability16"		"special_bonus_unique_stint_7"
 		"Ability17"		"special_bonus_unique_omniknight_4"
 		
 		"Facets"
@@ -2599,19 +2599,15 @@
 			{
 				"Deprecated" "true"
 			}
+			"stint_crypto"
+			{
+				"Icon"				"gold"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
 			"omniknight_dmgheals"
 			{
-				"Icon"				"healing"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"omniknight_healing_hammer"
-					}
-				}
+				"Deprecated" "true"
 			}
 		}
 		"ArmorPhysical"		"2"

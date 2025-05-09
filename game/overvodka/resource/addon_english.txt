@@ -123,7 +123,7 @@
 
 		"DOTA_Tooltip_modifier_fountain_aura_effect_lua"					"Fontain aura"
 		"DOTA_Tooltip_modifier_fountain_aura_effect_lua_Description"		"Healing"
-
+		"dota_hud_error_stint_enemy_no_gold"			"Target doesn't have enough gold"
 		"DOTA_Tooltip_modifier_invis_revealed"			"Invis Revealed"
 
 		"DOTA_Tooltip_ability_item_bag_of_gold"			"HAMSTER COIN"

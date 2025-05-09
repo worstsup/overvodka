@@ -12248,25 +12248,6 @@
 			"slow"						"-50"
 		}
 	}
-	"test_vector_targeting_lua"
-	{
-		"BaseClass"     					"ability_lua"
-		"ScriptFile"    					"vector_targeting_lua"
-		"SpellImmunityType"  				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"    				"1"
-		"AbilityTextureName"				"mirana_arrow"
-		"AbilityCastRange"   				"%range"
-		"AbilityCastPoint"   				"0.3"
-		"AbilityCooldown"    				"35 32 29 26 23 20"
-		"AbilityManaCost"    				"120 130 140 150 160 170"
-		"AbilityUnitTargetTeam"   			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"   			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"   			"DOTA_UNIT_TARGET_FLAG_NONE"
-		"AbilityValues"
-		{
-				"range" 						"600 650 700 750 800 850"
-		}
-	}
 	"bombardiro_fly"
 	{
 		"BaseClass"           "ability_lua"
@@ -12314,6 +12295,48 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	"special_bonus_unique_stint_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_stint_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	"stint_innate"
 	{
 		"BaseClass"						"ability_lua"
@@ -12342,13 +12365,26 @@
 		"AbilityCastRange"				"600 650 700 750"
 		"AbilityValues"
 		{
-			"duration" 			"3.5 4.0 4.5 5.0"
+			"duration"
+			{
+				"value"	"3.5 4.0 4.5 5.0"
+				"special_bonus_unique_stint_2" "+1"
+			}
 			"base_damage" 		"20 30 40 50"
 			"level_damage" 		"4"
 			"hits"				"1 2 2 3"
 			"shield" 			"50"
 			"radius"			"600 650 700 750"
-			"cooldown_single" 	"1.0"
+			"cooldown_single"
+			{
+				"value"	"1.0"
+				"special_bonus_unique_stint_5"	"-0.5"
+			}
+			"dispel"
+			{
+				"value"	"0"
+				"special_bonus_unique_stint_7" "+1"
+			}
 		}
 	}
 	"stint_e"
@@ -12374,6 +12410,11 @@
 			"radius"					"450"
 			"hit_destroy"				"3 4 5 6"
 			"pct_damage"				"1"
+			"slow"
+			{
+				"value"	"0"
+				"special_bonus_unique_stint_3"	"-15"
+			}
 			"inators"
 			{
 				"value"	"4"
@@ -12410,18 +12451,36 @@
 		"AbilityCastRange"			"800"
 		"AbilityCastPoint"			"0.2"
 		"HasShardUpgrade"			"1"
-		"AbilityCooldown"			"40 35 30 25"
 		"AbilityManaCost"			"80 105 130 155"
+		"AbilityGoldCost"			"200 250 300 350"
 		"AbilityTextureName"		"stint_w"
 		"AbilityValues"
 		{
 			"investment"	 		"200 250 300 350"
 			"chance_bad"	 		"50"
-			"chance_1_5"	 		"36"
+			"chance_1_5"	 		"26"
 			"chance_2"		 		"17"
 			"chance_2_5"	 		"7"
-			"max_debt"		 		"1000"
-			"shard_max_debt" 		"1250"
+			"max_debt"
+			{
+				"value"	"700"
+				"special_bonus_shard" "+300"
+			}
+			"no_damage"
+			{
+				"value"	"0"
+				"special_bonus_unique_stint_6"	"+1"
+			}
+			"heal"
+			{
+				"value"	"0"
+				"special_bonus_facet_stint_crypto"	"+50"
+			}
+			"AbilityCooldown"
+			{
+				"value"	"40 35 30 25"
+				"special_bonus_unique_stint_4"	"-5"
+			}
 		}
 	}
 	"rosh_model_change"

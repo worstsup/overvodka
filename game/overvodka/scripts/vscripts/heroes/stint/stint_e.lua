@@ -1,13 +1,15 @@
-LinkLuaModifier( "modifier_inator_stint",    "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_1",        "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_2",        "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_2_debuff", "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_3",        "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_3_debuff", "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_4",        "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_4_buff",   "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_5",        "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_inator_5_buff",   "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_stint",       "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_1",           "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_2",           "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_2_debuff",    "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_3",           "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_3_debuff",    "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_4",           "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_4_buff",      "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_5",           "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_5_buff",      "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_slow_aura",   "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_inator_slow_effect", "heroes/stint/stint_e", LUA_MODIFIER_MOTION_NONE )
 
 stint_e = class({})
 
@@ -25,6 +27,7 @@ function stint_e:Precache(context)
     PrecacheResource("particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_combined_v2_crimson.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_walk_v2_core_perturb.vpcf", context)
     PrecacheResource("particle", "particles/stint_inator_cooldown.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_sniper/sniper_headshot_slow.vpcf", context)
     PrecacheResource("soundfile", "soundevents/inators.vsndevts", context)
 end
 
@@ -64,6 +67,9 @@ function stint_e:OnSpellStart()
     inator:SetDeathXP(xp)
     local random_modifier = RandomInt(1, inators)
     inator:AddNewModifier(self:GetCaster(), self, "modifier_inator_"..random_modifier, {})
+    if self:GetSpecialValueFor("slow") ~= 0 then
+        inator:AddNewModifier(self:GetCaster(), self, "modifier_inator_slow_aura", {})
+    end
     if self:GetCaster():HasScepter() then
         local random_modifier2 = random_modifier
         while random_modifier2 == random_modifier do
@@ -81,6 +87,61 @@ function stint_e:OnSpellStart()
 		ParticleManager:DestroyParticle(nFXIndex, false)
 		EmitSoundOn("DOTA_Item.Refresher.Activate", caster)
     end
+end
+
+modifier_inator_slow_aura = class({})
+function modifier_inator_slow_aura:IsHidden() return true end
+function modifier_inator_slow_aura:IsPurgable() return false end
+function modifier_inator_slow_aura:OnCreated()
+    if not IsServer() then return end
+end
+
+function modifier_inator_slow_aura:IsAura() return true end
+
+function modifier_inator_slow_aura:GetAuraSearchTeam()
+    return DOTA_UNIT_TARGET_TEAM_ENEMY
+end
+
+function modifier_inator_slow_aura:GetAuraSearchType()
+    return DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+end
+
+function modifier_inator_slow_aura:GetModifierAura()
+    return "modifier_inator_slow_effect"
+end
+
+function modifier_inator_slow_aura:GetAuraDuration()
+    return 0
+end
+
+function modifier_inator_slow_aura:GetAuraRadius()
+    if self:GetAbility() then
+        return self:GetAbility():GetSpecialValueFor("radius")
+    end
+end
+
+modifier_inator_slow_effect = class({})
+function modifier_inator_slow_effect:IsHidden() return false end
+function modifier_inator_slow_effect:IsDebuff() return true end
+function modifier_inator_slow_effect:IsPurgable() return false end
+function modifier_inator_slow_effect:OnCreated()
+    if not IsServer() then return end
+end
+
+function modifier_inator_slow_effect:DeclareFunctions()
+    return {MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE}
+end
+
+function modifier_inator_slow_effect:GetModifierMoveSpeedBonus_Percentage()
+    return self:GetAbility():GetSpecialValueFor("slow")
+end
+
+function modifier_inator_slow_effect:GetEffectName()
+    return "particles/units/heroes/hero_sniper/sniper_headshot_slow.vpcf"
+end
+
+function modifier_inator_slow_effect:GetEffectAttachType()
+    return PATTACH_OVERHEAD_FOLLOW
 end
 
 modifier_inator_stint = class({})
