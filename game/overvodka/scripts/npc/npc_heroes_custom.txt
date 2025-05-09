@@ -2576,7 +2576,7 @@
 		"Ability3"		"stint_e"
 		"Ability4"		"stint_innate"
 		"Ability5"		"generic_hidden"
-		"Ability6"		"generic_hidden"
+		"Ability6"		"stint_r"
 
 		"Ability10"		"special_bonus_unique_stint_1"
 		"Ability11"		"special_bonus_unique_stint_4"
@@ -2585,7 +2585,7 @@
 		"Ability14"		"special_bonus_unique_stint_5"
 		"Ability15"		"special_bonus_unique_stint_6"
 		"Ability16"		"special_bonus_unique_stint_7"
-		"Ability17"		"special_bonus_unique_omniknight_4"
+		"Ability17"		"special_bonus_unique_stint_8"
 		
 		"Facets"
 		{
