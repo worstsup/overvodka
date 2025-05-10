@@ -29,7 +29,8 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_weaver",
     "npc_dota_hero_riki",
     "npc_dota_hero_brewmaster",
-    "npc_dota_hero_lion"
+    "npc_dota_hero_lion",
+    "npc_dota_hero_omniknight",
 ]
 
 function FixModelScene(){
