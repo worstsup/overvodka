@@ -213,6 +213,7 @@ PrecacheUtils.models = {
 		"golovach/golovach.vmdl",
 		"ebanko/ebanko.vmdl",
 		"rostik/rostik.vmdl",
+		"models/stint/stint.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -364,6 +365,7 @@ PrecacheUtils.sounds = {
 		"soundevents/papich_q_clone_success.vsndevts",
 		"soundevents/golovach_start.vsndevts",
 		"soundevents/onehp.vsndevts",
+		"soundevents/stint_start.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_marci.vsndevts",

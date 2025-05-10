@@ -99,7 +99,7 @@ function modifier_stint_r_1:OnIntervalThink()
                 false
             )
             for _, enemy in pairs(enemies) do
-                enemy:AddNewModifier(parent, self:GetAbility(), "modifier_stint_r_1_debuff", { duration = 0.05 })
+                enemy:AddNewModifier(parent, self:GetAbility(), "modifier_stint_r_1_debuff", { duration = 0.1 })
             end
         end
     end

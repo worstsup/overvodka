@@ -401,9 +401,12 @@ end
 function modifier_inator_3_debuff:OnCreated( kv )
 	self.rate = 1.5
 	if not IsServer() then return end
+    self.threshold = self:GetAbility():GetSpecialValueFor("awake_damage")
+    self.damageTaken = 0
 end
 
 function modifier_inator_3_debuff:OnRefresh( kv )
+    self.threshold = self:GetAbility():GetSpecialValueFor("awake_damage")
 end
 function modifier_inator_3_debuff:OnRemoved()
 end
@@ -414,8 +417,8 @@ function modifier_inator_3_debuff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION_RATE,
+        MODIFIER_EVENT_ON_TAKEDAMAGE,
 	}
-
 	return funcs
 end
 
@@ -431,7 +434,6 @@ function modifier_inator_3_debuff:CheckState()
 	local state = {
 		[MODIFIER_STATE_NIGHTMARED] = true,
 		[MODIFIER_STATE_STUNNED] = true,
-		[MODIFIER_STATE_INVULNERABLE] = true,
 	}
 
 	return state
@@ -452,6 +454,17 @@ end
 function modifier_inator_3_debuff:StatusEffectPriority()
 	return MODIFIER_PRIORITY_NORMAL
 end
+
+function modifier_inator_3_debuff:OnTakeDamage(params)
+    if not IsServer() then return end
+    if params.unit == self:GetParent() and params.damage > 0 then
+        self.damageTaken = self.damageTaken + params.damage
+        if self.damageTaken > self.threshold then
+            self:Destroy()
+        end
+    end
+end
+
 
 modifier_inator_4 = class({})
 function modifier_inator_4:IsHidden() return true end
