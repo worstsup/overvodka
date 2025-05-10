@@ -12,6 +12,7 @@ function stint_q:Precache(context)
     PrecacheResource("particle", "particles/econ/items/crystal_maiden/ti9_immortal_staff/cm_ti9_golden_staff_lvlup_globe_spawn.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", context)
+    PrecacheResource("particle", "particles/econ/items/marci/marci_lotus_keeper/marci_lotus_back_ambient_flower.vpcf", context)
 end
 
 function stint_q:OnSpellStart()
@@ -108,6 +109,7 @@ function modifier_stint_q_trigger:OnTakeDamage(params)
     local attacker = params.attacker
     if params.unit ~= parent then return end
     if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
+    if not attacker:IsAlive() then return end
     local radius = ability:GetSpecialValueFor("radius")
     if (attacker:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > radius then
         return

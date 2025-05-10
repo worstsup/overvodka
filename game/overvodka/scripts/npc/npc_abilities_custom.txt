@@ -12370,7 +12370,7 @@
 				"special_bonus_unique_stint_2" "+1"
 			}
 			"base_damage" 		"20 30 40 50"
-			"level_damage" 		"4"
+			"level_damage" 		"6"
 			"hits"				"1 2 2 3"
 			"shield" 			"35 40 45 50"
 			"radius"
@@ -12470,10 +12470,10 @@
 		"AbilityValues"
 		{
 			"investment"	 		"200 250 300 350"
-			"chance_bad"	 		"50"
-			"chance_1_5"	 		"26"
-			"chance_2"		 		"17"
-			"chance_2_5"	 		"7"
+			"chance_bad"	 		"40"
+			"chance_1_5"	 		"30"
+			"chance_2"		 		"20"
+			"chance_2_5"	 		"10"
 			"max_debt"
 			{
 				"value"	"700"

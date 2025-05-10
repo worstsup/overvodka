@@ -141,6 +141,7 @@ PrecacheUtils.units = {
     "npc_dota_creature_basic_zombie",
     "npc_dota_creature_berserk_zombie",
     "npc_dota_treasure_courier",
+	"npc_nelya",
 }
 
 PrecacheUtils.models = {

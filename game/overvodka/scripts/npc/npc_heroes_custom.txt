@@ -2626,7 +2626,7 @@
 		"AttributeStrengthGain"		"3.2"
 		"AttributeBaseAgility"		"15"
 		"AttributeAgilityGain"		"1.6"
-		"AttributeBaseIntelligence"		"17"
+		"AttributeBaseIntelligence"		"18"
 		"AttributeIntelligenceGain"		"1.7"
 		"MovementSpeed"		"310"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"

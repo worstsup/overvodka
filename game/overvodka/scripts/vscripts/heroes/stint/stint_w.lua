@@ -17,7 +17,7 @@ function stint_w:CastFilterResultTarget( hTarget )
         hTarget,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_NONE,
+        DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
         self:GetCaster():GetTeamNumber()
     )
     if filterResult ~= UF_SUCCESS then
