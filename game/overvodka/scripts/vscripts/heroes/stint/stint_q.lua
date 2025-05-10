@@ -37,7 +37,7 @@ function modifier_stint_q_barrier:IsPurgable() return true end
 function modifier_stint_q_barrier:OnCreated()
     if not IsServer() then return end
     local effect = ParticleManager:CreateParticle("particles/econ/items/crystal_maiden/ti9_immortal_staff/cm_ti9_golden_staff_lvlup_globe_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(effect, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControlEnt(effect, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
     ParticleManager:SetParticleControl(effect, 5, Vector(1, 1, 1))
     ParticleManager:ReleaseParticleIndex(effect)
     self.max_shield = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
