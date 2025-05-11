@@ -101,7 +101,7 @@ function modifier_stint_q_trigger:OnCreated()
     self.hits              = ability:GetSpecialValueFor("hits")
     self.base_damage       = ability:GetSpecialValueFor("base_damage")
     self.level_damage      = ability:GetSpecialValueFor("level_damage")
-
+    self:SetStackCount(0)
     if self.dispel > 0 then
         self:StartIntervalThink(self.dispel)
         self:OnIntervalThink()
@@ -114,6 +114,7 @@ end
 
 function modifier_stint_q_trigger:OnTakeDamage(params)
     if not IsServer() then return end
+    if self:GetStackCount() > 5 then return end
     local parent   = self:GetParent()
     local attacker = params.attacker
     if params.unit ~= parent then return end
@@ -143,6 +144,7 @@ function modifier_stint_q_trigger:OnTakeDamage(params)
         parent,
         parent:GetTeamNumber()
     )
+    nelya:SetOwner(parent)
     nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
         duration = 1.5,
         hits     = self.hits,
@@ -169,6 +171,12 @@ function modifier_stint_q_nelya:OnCreated(kv)
     self.hits        = kv.hits   or 1
     self.damage      = kv.damage or 0
     self.attack_rate = 0.9 / self.hits
+    self.mod = self:GetParent():GetOwner():FindModifierByName("modifier_stint_q_trigger")
+    if self.mod then
+        self.mod:IncrementStackCount()
+    else
+        self:Destroy()
+    end
 end
 
 function modifier_stint_q_nelya:DeclareFunctions()
@@ -216,6 +224,9 @@ end
 
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
+    if self.mod then
+        self.mod:DecrementStackCount()
+    end
     local effect_cast = ParticleManager:CreateParticle(
         "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
         PATTACH_ABSORIGIN_FOLLOW,
