@@ -6,6 +6,6 @@ function Tabletki(keys)
 	caster:ModifyStrength(bonus_strength)
 	caster:CalculateStatBonus(true)
 	if GetMapName() == "overvodka_5x5" then
-		ability:StartCooldown(60)
+		ability:StartCooldown(50)
 	end
 end

@@ -84,6 +84,7 @@ modifier_stint_q_trigger = class({})
 
 function modifier_stint_q_trigger:IsHidden()    return false end
 function modifier_stint_q_trigger:IsPurgable()  return true end
+
 function modifier_stint_q_trigger:DeclareFunctions()
     return { MODIFIER_EVENT_ON_TAKEDAMAGE }
 end
@@ -91,7 +92,16 @@ end
 function modifier_stint_q_trigger:OnCreated()
     if not IsServer() then return end
     self.attacker_next_spawn = {}
-    self.dispel = self:GetAbility():GetSpecialValueFor("dispel")
+    self.next_global_spawn = 0
+    local ability = self:GetAbility()
+    self.dispel            = ability:GetSpecialValueFor("dispel")
+    self.radius            = ability:GetSpecialValueFor("radius")
+    self.cd_single         = ability:GetSpecialValueFor("cooldown_single")
+    self.cd_global         = ability:GetSpecialValueFor("cooldown_global")
+    self.hits              = ability:GetSpecialValueFor("hits")
+    self.base_damage       = ability:GetSpecialValueFor("base_damage")
+    self.level_damage      = ability:GetSpecialValueFor("level_damage")
+
     if self.dispel > 0 then
         self:StartIntervalThink(self.dispel)
         self:OnIntervalThink()
@@ -99,45 +109,55 @@ function modifier_stint_q_trigger:OnCreated()
 end
 
 function modifier_stint_q_trigger:OnIntervalThink()
-    self:GetParent():Purge( false, true, false, true, false )
+    self:GetParent():Purge(false, true, false, true, false)
 end
 
 function modifier_stint_q_trigger:OnTakeDamage(params)
     if not IsServer() then return end
-    local ability = self:GetAbility()
-    local parent = self:GetParent()
+    local parent   = self:GetParent()
     local attacker = params.attacker
     if params.unit ~= parent then return end
     if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
     if not attacker:IsAlive() then return end
-    local radius = ability:GetSpecialValueFor("radius")
-    if (attacker:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > radius then
+    if (attacker:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > self.radius then
         return
     end
     local now = GameRules:GetGameTime()
+    if now < self.next_global_spawn then
+        return
+    end
     local key = attacker:entindex()
     local nextOK = self.attacker_next_spawn[key] or 0
-    local cd = ability:GetSpecialValueFor("cooldown_single")
     if now < nextOK then
         return
     end
-    self.attacker_next_spawn[key] = now + cd
-    local hits   = ability:GetSpecialValueFor("hits")
-    local dmg    = ability:GetSpecialValueFor("base_damage") + ability:GetSpecialValueFor("level_damage") * parent:GetLevel()
-    local fv     = RandomVector(100)
-    local nelya  = CreateUnitByName("npc_nelya", attacker:GetAbsOrigin() + fv, true, parent, parent, parent:GetTeamNumber())
-    nelya:AddNewModifier(parent, ability, "modifier_stint_q_nelya", {
+    self.next_global_spawn = now + self.cd_global
+    self.attacker_next_spawn[key] = now + self.cd_single
+    local dmg = self.base_damage + self.level_damage * parent:GetLevel()
+    local fv    = RandomVector(100)
+    local nelya = CreateUnitByName(
+        "npc_nelya",
+        attacker:GetAbsOrigin() + fv,
+        true,
+        parent,
+        parent,
+        parent:GetTeamNumber()
+    )
+    nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
         duration = 1.5,
-        hits     = hits,
+        hits     = self.hits,
         damage   = dmg,
     })
     nelya:SetForceAttackTarget(attacker)
-    local effect_cast = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, nelya)
-    ParticleManager:SetParticleControl(effect_cast, 0, nelya:GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(effect_cast)
+    local p = ParticleManager:CreateParticle(
+        "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
+        PATTACH_ABSORIGIN_FOLLOW,
+        nelya
+    )
+    ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
     EmitSoundOn("stint_q_appear", nelya)
 end
-
 
 modifier_stint_q_nelya = class({})
 
@@ -146,8 +166,8 @@ function modifier_stint_q_nelya:IsPurgable() return false end
 
 function modifier_stint_q_nelya:OnCreated(kv)
     if not IsServer() then return end
-    self.hits   = kv.hits   or 1
-    self.damage = kv.damage or 0
+    self.hits        = kv.hits   or 1
+    self.damage      = kv.damage or 0
     self.attack_rate = 0.9 / self.hits
 end
 
@@ -182,7 +202,11 @@ function modifier_stint_q_nelya:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     self.hits = self.hits - 1
     if self.hits <= 0 then
-        local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+        local effect_cast = ParticleManager:CreateParticle(
+            "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            self:GetParent()
+        )
         ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
         ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(effect_cast)
@@ -192,7 +216,11 @@ end
 
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
-    local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local effect_cast = ParticleManager:CreateParticle(
+        "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
+        PATTACH_ABSORIGIN_FOLLOW,
+        self:GetParent()
+    )
     ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(effect_cast)

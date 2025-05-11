@@ -40,7 +40,7 @@ function modifier_stint_r_1:OnCreated(kv)
     self.miss_chance    = self:GetAbility():GetSpecialValueFor("projector_miss")
     self.beam_width     = self:GetAbility():GetSpecialValueFor("projector_width")
     self.bonus_ms       = self:GetAbility():GetSpecialValueFor("bonus_ms")
-    self.bonus_as       = self:GetAbility():GetSpecialValueFor("bonus_as")
+    self.bonus_spell    = self:GetAbility():GetSpecialValueFor("bonus_spell")
     self.beam_count     = 3
     self.rotation_speed = 45
     self.particles = {}
@@ -108,7 +108,7 @@ end
 function modifier_stint_r_1:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+        MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     }
 end
 
@@ -116,8 +116,8 @@ function modifier_stint_r_1:GetModifierMoveSpeedBonus_Percentage()
     return self.bonus_ms
 end
 
-function modifier_stint_r_1:GetModifierAttackSpeedBonus_Constant()
-    return self.bonus_as
+function modifier_stint_r_1:GetModifierSpellAmplify_Percentage()
+    return self.bonus_spell
 end
 
 modifier_stint_r_1_debuff = class({})
