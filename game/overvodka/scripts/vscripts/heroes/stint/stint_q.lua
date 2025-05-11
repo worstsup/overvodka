@@ -85,80 +85,85 @@ modifier_stint_q_trigger = class({})
 function modifier_stint_q_trigger:IsHidden()    return false end
 function modifier_stint_q_trigger:IsPurgable()  return true end
 
-function modifier_stint_q_trigger:DeclareFunctions()
-    return { MODIFIER_EVENT_ON_TAKEDAMAGE }
-end
-
 function modifier_stint_q_trigger:OnCreated()
     if not IsServer() then return end
-    self.attacker_next_spawn = {}
-    self.next_global_spawn = 0
     local ability = self:GetAbility()
     self.dispel            = ability:GetSpecialValueFor("dispel")
     self.radius            = ability:GetSpecialValueFor("radius")
     self.cd_single         = ability:GetSpecialValueFor("cooldown_single")
-    self.cd_global         = ability:GetSpecialValueFor("cooldown_global")
     self.hits              = ability:GetSpecialValueFor("hits")
     self.base_damage       = ability:GetSpecialValueFor("base_damage")
     self.level_damage      = ability:GetSpecialValueFor("level_damage")
-    self:SetStackCount(0)
-    if self.dispel > 0 then
-        self:StartIntervalThink(self.dispel)
-        self:OnIntervalThink()
-    end
+    self.limit             = ability:GetSpecialValueFor("limit")
+    self.dmg = self.base_damage + self.level_damage * self:GetParent():GetLevel()
+    self:StartIntervalThink(self.cd_single)
+    self:OnIntervalThink()
 end
 
 function modifier_stint_q_trigger:OnIntervalThink()
-    self:GetParent():Purge(false, true, false, true, false)
-end
-
-function modifier_stint_q_trigger:OnTakeDamage(params)
-    if not IsServer() then return end
-    if self:GetStackCount() > 5 then return end
-    local parent   = self:GetParent()
-    local attacker = params.attacker
-    if params.unit ~= parent then return end
-    if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
-    if not attacker:IsAlive() then return end
-    if (attacker:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > self.radius then
-        return
+    local i = 0
+    local enemy_heroes = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+    for _,enemy in pairs(enemy_heroes) do
+        i = i + 1
+        if i > self.limit then break end
+        local fv    = RandomVector(100)
+        local nelya = CreateUnitByName(
+            "npc_nelya",
+            enemy:GetAbsOrigin() + fv,
+            true,
+            self:GetParent(),
+            self:GetParent(),
+            self:GetParent():GetTeamNumber()
+        )
+        nelya:SetOwner(self:GetParent())
+        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
+            duration = 1.5,
+            hits     = self.hits,
+            damage   = self.dmg,
+        })
+        nelya:SetForceAttackTarget(enemy)
+        local p = ParticleManager:CreateParticle(
+            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            nelya
+        )
+        ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
     end
-    local now = GameRules:GetGameTime()
-    if now < self.next_global_spawn then
-        return
+    local enemy_units = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+    for _,enemy in pairs(enemy_units) do
+        i = i + 1
+        if i > self.limit then break end
+        local fv    = RandomVector(100)
+        local nelya = CreateUnitByName(
+            "npc_nelya",
+            enemy:GetAbsOrigin() + fv,
+            true,
+            self:GetParent(),
+            self:GetParent(),
+            self:GetParent():GetTeamNumber()
+        )
+        nelya:SetOwner(self:GetParent())
+        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
+            duration = 1.5,
+            hits     = self.hits,
+            damage   = self.dmg,
+        })
+        nelya:SetForceAttackTarget(enemy)
+        local p = ParticleManager:CreateParticle(
+            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            nelya
+        )
+        ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
     end
-    local key = attacker:entindex()
-    local nextOK = self.attacker_next_spawn[key] or 0
-    if now < nextOK then
-        return
+    if #enemy_heroes > 0 or #enemy_units > 0 then
+        EmitSoundOn("stint_q_appear", self:GetParent())
     end
-    self.next_global_spawn = now + self.cd_global
-    self.attacker_next_spawn[key] = now + self.cd_single
-    local dmg = self.base_damage + self.level_damage * parent:GetLevel()
-    local fv    = RandomVector(100)
-    local nelya = CreateUnitByName(
-        "npc_nelya",
-        attacker:GetAbsOrigin() + fv,
-        true,
-        parent,
-        parent,
-        parent:GetTeamNumber()
-    )
-    nelya:SetOwner(parent)
-    nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
-        duration = 1.5,
-        hits     = self.hits,
-        damage   = dmg,
-    })
-    nelya:SetForceAttackTarget(attacker)
-    local p = ParticleManager:CreateParticle(
-        "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
-        PATTACH_ABSORIGIN_FOLLOW,
-        nelya
-    )
-    ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(p)
-    EmitSoundOn("stint_q_appear", nelya)
+    if self.dispel > 0 then
+        self:GetParent():Purge(false, true, false, true, false)
+    end
 end
 
 modifier_stint_q_nelya = class({})
@@ -171,12 +176,6 @@ function modifier_stint_q_nelya:OnCreated(kv)
     self.hits        = kv.hits   or 1
     self.damage      = kv.damage or 0
     self.attack_rate = 0.9 / self.hits
-    self.mod = self:GetParent():GetOwner():FindModifierByName("modifier_stint_q_trigger")
-    if self.mod then
-        self.mod:IncrementStackCount()
-    else
-        self:Destroy()
-    end
 end
 
 function modifier_stint_q_nelya:DeclareFunctions()
@@ -224,9 +223,6 @@ end
 
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
-    if self.mod then
-        self.mod:DecrementStackCount()
-    end
     local effect_cast = ParticleManager:CreateParticle(
         "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
         PATTACH_ABSORIGIN_FOLLOW,

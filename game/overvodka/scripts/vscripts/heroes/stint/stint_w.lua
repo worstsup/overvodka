@@ -63,7 +63,7 @@ function stint_w:OnSpellStart()
     local ch_25    = self:GetSpecialValueFor("chance_2_5")
     local max_debt = self:GetSpecialValueFor("max_debt")
 
-    local mC = roll(ch_bad, ch_15, ch_2, ch_25)
+    local mC = roll(0, ch_15 + ch_bad/3, ch_2 + ch_bad/3, ch_25 + ch_bad/3)
     local mT = roll(ch_bad, ch_15, ch_2, ch_25)
     print(string.format("[Stint W] %s rolled %.1fx, %s rolled %.1fx", caster:GetName(), mC, target:GetName(), mT))
     local part1_caster = math.floor(mC) + 10
