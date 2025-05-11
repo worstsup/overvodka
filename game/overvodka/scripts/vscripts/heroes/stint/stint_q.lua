@@ -12,6 +12,7 @@ function stint_q:Precache(context)
     PrecacheResource("particle", "particles/econ/items/crystal_maiden/ti9_immortal_staff/cm_ti9_golden_staff_lvlup_globe_spawn.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", context)
+    PrecacheResource("particle", "particles/econ/items/marci/marci_lotus_keeper/marci_lotus_back_ambient_flower.vpcf", context)
 end
 
 function stint_q:OnSpellStart()
@@ -37,7 +38,7 @@ function modifier_stint_q_barrier:IsPurgable() return true end
 function modifier_stint_q_barrier:OnCreated()
     if not IsServer() then return end
     local effect = ParticleManager:CreateParticle("particles/econ/items/crystal_maiden/ti9_immortal_staff/cm_ti9_golden_staff_lvlup_globe_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(effect, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControlEnt(effect, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
     ParticleManager:SetParticleControl(effect, 5, Vector(1, 1, 1))
     ParticleManager:ReleaseParticleIndex(effect)
     self.max_shield = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
@@ -83,59 +84,87 @@ modifier_stint_q_trigger = class({})
 
 function modifier_stint_q_trigger:IsHidden()    return false end
 function modifier_stint_q_trigger:IsPurgable()  return true end
-function modifier_stint_q_trigger:DeclareFunctions()
-    return { MODIFIER_EVENT_ON_TAKEDAMAGE }
-end
 
 function modifier_stint_q_trigger:OnCreated()
     if not IsServer() then return end
-    self.attacker_next_spawn = {}
-    self.dispel = self:GetAbility():GetSpecialValueFor("dispel")
-    if self.dispel > 0 then
-        self:StartIntervalThink(self.dispel)
-        self:OnIntervalThink()
-    end
+    local ability = self:GetAbility()
+    self.dispel            = ability:GetSpecialValueFor("dispel")
+    self.radius            = ability:GetSpecialValueFor("radius")
+    self.cd_single         = ability:GetSpecialValueFor("cooldown_single")
+    self.hits              = ability:GetSpecialValueFor("hits")
+    self.base_damage       = ability:GetSpecialValueFor("base_damage")
+    self.level_damage      = ability:GetSpecialValueFor("level_damage")
+    self.limit             = ability:GetSpecialValueFor("limit")
+    self.dmg = self.base_damage + self.level_damage * self:GetParent():GetLevel()
+    self:StartIntervalThink(self.cd_single)
+    self:OnIntervalThink()
 end
 
 function modifier_stint_q_trigger:OnIntervalThink()
-    self:GetParent():Purge( false, true, false, true, false )
-end
-
-function modifier_stint_q_trigger:OnTakeDamage(params)
-    if not IsServer() then return end
-    local ability = self:GetAbility()
-    local parent = self:GetParent()
-    local attacker = params.attacker
-    if params.unit ~= parent then return end
-    if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
-    local radius = ability:GetSpecialValueFor("radius")
-    if (attacker:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > radius then
-        return
+    local i = 0
+    local enemy_heroes = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false)
+    for _,enemy in pairs(enemy_heroes) do
+        i = i + 1
+        if i > self.limit then break end
+        local fv    = RandomVector(100)
+        local nelya = CreateUnitByName(
+            "npc_nelya",
+            enemy:GetAbsOrigin() + fv,
+            true,
+            self:GetParent(),
+            self:GetParent(),
+            self:GetParent():GetTeamNumber()
+        )
+        nelya:SetOwner(self:GetParent())
+        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
+            duration = 1.5,
+            hits     = self.hits,
+            damage   = self.dmg,
+        })
+        nelya:SetForceAttackTarget(enemy)
+        local p = ParticleManager:CreateParticle(
+            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            nelya
+        )
+        ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
     end
-    local now = GameRules:GetGameTime()
-    local key = attacker:entindex()
-    local nextOK = self.attacker_next_spawn[key] or 0
-    local cd = ability:GetSpecialValueFor("cooldown_single")
-    if now < nextOK then
-        return
+    local enemy_units = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false)
+    for _,enemy in pairs(enemy_units) do
+        i = i + 1
+        if i > self.limit then break end
+        local fv    = RandomVector(100)
+        local nelya = CreateUnitByName(
+            "npc_nelya",
+            enemy:GetAbsOrigin() + fv,
+            true,
+            self:GetParent(),
+            self:GetParent(),
+            self:GetParent():GetTeamNumber()
+        )
+        nelya:SetOwner(self:GetParent())
+        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
+            duration = 1.5,
+            hits     = self.hits,
+            damage   = self.dmg,
+        })
+        nelya:SetForceAttackTarget(enemy)
+        local p = ParticleManager:CreateParticle(
+            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            nelya
+        )
+        ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
     end
-    self.attacker_next_spawn[key] = now + cd
-    local hits   = ability:GetSpecialValueFor("hits")
-    local dmg    = ability:GetSpecialValueFor("base_damage") + ability:GetSpecialValueFor("level_damage") * parent:GetLevel()
-    local fv     = RandomVector(100)
-    local nelya  = CreateUnitByName("npc_nelya", attacker:GetAbsOrigin() + fv, true, parent, parent, parent:GetTeamNumber())
-    nelya:AddNewModifier(parent, ability, "modifier_stint_q_nelya", {
-        duration = 1.5,
-        hits     = hits,
-        damage   = dmg,
-    })
-    nelya:SetForceAttackTarget(attacker)
-    local effect_cast = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, nelya)
-    ParticleManager:SetParticleControl(effect_cast, 0, nelya:GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(effect_cast)
-    EmitSoundOn("stint_q_appear", nelya)
+    if #enemy_heroes > 0 or #enemy_units > 0 then
+        EmitSoundOn("stint_q_appear", self:GetParent())
+    end
+    if self.dispel > 0 then
+        self:GetParent():Purge(false, true, false, true, false)
+    end
 end
-
 
 modifier_stint_q_nelya = class({})
 
@@ -144,8 +173,8 @@ function modifier_stint_q_nelya:IsPurgable() return false end
 
 function modifier_stint_q_nelya:OnCreated(kv)
     if not IsServer() then return end
-    self.hits   = kv.hits   or 1
-    self.damage = kv.damage or 0
+    self.hits        = kv.hits   or 1
+    self.damage      = kv.damage or 0
     self.attack_rate = 0.9 / self.hits
 end
 
@@ -180,7 +209,11 @@ function modifier_stint_q_nelya:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     self.hits = self.hits - 1
     if self.hits <= 0 then
-        local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+        local effect_cast = ParticleManager:CreateParticle(
+            "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
+            PATTACH_ABSORIGIN_FOLLOW,
+            self:GetParent()
+        )
         ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
         ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(effect_cast)
@@ -190,7 +223,11 @@ end
 
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
-    local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local effect_cast = ParticleManager:CreateParticle(
+        "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
+        PATTACH_ABSORIGIN_FOLLOW,
+        self:GetParent()
+    )
     ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(effect_cast)

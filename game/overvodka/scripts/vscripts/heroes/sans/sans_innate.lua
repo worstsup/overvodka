@@ -60,6 +60,8 @@ end
 
 modifier_sans_innate_debuff = class({})
 
+function modifier_sans_innate_debuff:IsPurgable() return true end
+
 function modifier_sans_innate_debuff:OnCreated()
     if IsServer() then
         self.total_damage = 0
