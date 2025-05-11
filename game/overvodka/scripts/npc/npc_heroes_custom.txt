@@ -2048,28 +2048,37 @@
 		"Ability6"		"rostik_r"
 		"Ability7"		"rostik_q_throw"
 
-		"Ability10"		"special_bonus_unique_storm_spirit_overload_aspd"
+		"Ability10"		"special_bonus_unique_rostik_1"
 		"Ability11"		"special_bonus_hp_150"
-		"Ability12"		"special_bonus_unique_disruptor_consecutive_strike_damage"
-		"Ability13"		"special_bonus_unique_storm_spirit_5"
-		"Ability14"		"special_bonus_unique_storm_spirit"
-		"Ability15"		"special_bonus_unique_storm_spirit_8"
-		"Ability16"		"special_bonus_unique_storm_spirit_7"
-		"Ability17"		"special_bonus_unique_storm_spirit_4"
+		"Ability12"		"special_bonus_unique_rostik_3"
+		"Ability13"		"special_bonus_unique_rostik_4"
+		"Ability14"		"special_bonus_unique_rostik_5"
+		"Ability15"		"special_bonus_unique_rostik_6"
+		"Ability16"		"special_bonus_unique_rostik_7"
+		"Ability17"		"special_bonus_unique_rostik_8"
 		"Facets"
 		{
-			"storm_spirit_shock_collar"
+			"rostik_e"
 			{
 				"Icon"				"nuke"
 				"Color"				"Blue"
 				"GradientID"		"1"
 			}
 
-			"storm_spirit_static_slide"	
+			"rostik_r"	
 			{
 				"Icon"				"movement"
 				"Color"				"Gray"
 				"GradientID"		"3"
+			}
+			"storm_spirit_shock_collar"
+			{
+				"Deprecated" "true"
+			}
+
+			"storm_spirit_static_slide"	
+			{
+				"Deprecated" "true"
 			}
 		}
 
@@ -2119,27 +2128,35 @@
 		"Ability7"		"peterka_e_release"
 		"Ability8"		"peterka_w_dota"
 		"Ability10"		"special_bonus_mp_regen_250"
-		"Ability11"		"special_bonus_unique_necrophos_heartstopper_regen_duration"
-		"Ability12"		"special_bonus_unique_necrophos_3"
-		"Ability13"		"special_bonus_unique_necrophos_4"
-		"Ability14"		"special_bonus_unique_necrophos_sadist_heal_bonus"
-		"Ability15"		"special_bonus_unique_necrophos_5"
-		"Ability16"		"special_bonus_unique_necrophos_2"
-		"Ability17"		"special_bonus_unique_necrophos"
+		"Ability11"		"special_bonus_unique_peterka_2"
+		"Ability12"		"special_bonus_unique_peterka_3"
+		"Ability13"		"special_bonus_unique_peterka_4"
+		"Ability14"		"special_bonus_unique_peterka_5"
+		"Ability15"		"special_bonus_unique_peterka_6"
+		"Ability16"		"special_bonus_unique_peterka_7"
+		"Ability17"		"special_bonus_unique_peterka_8"
 		
 		"Facets"
 		{
-			"necrolyte_profane_potency" 
+			"peterka_r" 
 			{
 				"Icon"				"gold"
 				"Color"				"Yellow"
 				"GradientID"		"0"
 			}
-			"necrolyte_rapid_decay" 
+			"peterka_w" 
 			{
 				"Icon"				"speed"
 				"Color"				"Green"
 				"GradientID"		"3"
+			}
+			"necrolyte_profane_potency" 
+			{
+				"Deprecated" "true"
+			}
+			"necrolyte_rapid_decay" 
+			{
+				"Deprecated" "true"
 			}
 		}
 		
@@ -2185,18 +2202,18 @@
 		"Ability7"		"sans_innate"
 		"Ability8"		"generic_hidden"
 		"Ability9"		"generic_hidden"
-		"Ability15"		"special_bonus_unique_nyx_4"
-		"Ability16"		"special_bonus_unique_morphling_1"
-		"Ability17"		"special_bonus_unique_morphling_8"
-		"Ability18"		"special_bonus_unique_nyx_jolt_cooldown"
-		"Ability19"		"special_bonus_unique_morphling_4"
-		"Ability20"		"special_bonus_unique_morphling_10"
-		"Ability21"		"special_bonus_unique_morphling_waveform_cooldown"
-		"Ability22"		"special_bonus_unique_nyx_vendetta_damage"
+		"Ability15"		"special_bonus_unique_sans_1"
+		"Ability16"		"special_bonus_unique_sans_2"
+		"Ability17"		"special_bonus_unique_sans_3"
+		"Ability18"		"special_bonus_unique_sans_4"
+		"Ability19"		"special_bonus_unique_sans_5"
+		"Ability20"		"special_bonus_unique_sans_6"
+		"Ability21"		"special_bonus_unique_sans_7"
+		"Ability22"		"special_bonus_unique_sans_8"
 		
 		"Facets"
 		{
-			"morphling_agi"
+			"sans_e"
 			{
 				"Icon"				"area_of_effect"
 				"Color"				"Blue"
@@ -2211,7 +2228,7 @@
 				}
 			}
 
-			"morphling_str"
+			"sans_w"
 			{
 				"Icon"				"fence"
 				"Color"				"Red"
@@ -2224,6 +2241,15 @@
 						"AbilityName"	"generic_hidden"
 					}
 				}
+			}
+			"morphling_agi"
+			{
+				"Deprecated" "true"
+			}
+
+			"morphling_str"
+			{
+				"Deprecated" "true"
 			}
 		}
 		
