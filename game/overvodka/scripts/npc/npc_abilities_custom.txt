@@ -9801,6 +9801,7 @@
 		        }
 		}
 	}
+
 	//===================================================================================================================
 	//												ИГОРЬ ВИХОРЬКОВ
 	//===================================================================================================================
@@ -10062,59 +10063,52 @@
 				"radius"				"900"
 		}
 	}
-	"gaster_blaster" 
+
+	//===================================================================================================================
+	//													ROSTISLAV_999
+	//===================================================================================================================
+
+	"special_bonus_unique_rostik_1"
 	{
-    	"BaseClass"                "ability_lua"
-    	"ScriptFile"               "heroes/sans/gaster_blaster.lua"
-    	"AbilityTextureName"	   "gaster_blaster"
-    	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
-    	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
-    	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
-    	"AbilityUnitTargetFlags"   "DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
-    	"AbilityCastRange"         "650"
-    	"AbilityManaCost"          "100 125 150 175"
-    	"AbilityCastPoint"		   "0.2"
-    	"AbilityValues" 
-    	{
-			"AbilityCharges"
-			{
-				"value"										"0"
-				"special_bonus_unique_nyx_vendetta_damage"			 "+2"
-			}
-			"AbilityCooldown"
-			{
-				"value"										"14 12 10 8"
-				"special_bonus_unique_morphling_8" "-2"
-				"special_bonus_unique_nyx_vendetta_damage"			  "=0"
-			}
-			"AbilityChargeRestoreTime"
-			{
-				"value"	"14 12 10 8"
-				"special_bonus_unique_morphling_8" "-2"
-			}
-        	"blast_delay"
-			{
-				"value"	"0.9"
-				"special_bonus_unique_morphling_1" "-0.2"
-			}
-			"blaster_vision" "700"
-        	"damage"
-			{
-				"value"	"150 200 250 300"
-			}
-			"int_damage"
-			{
-				"value"	"15"
-				"special_bonus_unique_morphling_4" "+20"
-			}
-        	"laser_length"   "10000"
-        	"laser_width"
-			{
-				"value"	"150"
-				"affected_by_aoe_increase"	"1"
-			}
-    	}
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_rostik_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	"rostik_q"
 	{
@@ -10150,12 +10144,12 @@
 				"min_stun"
 				{
 					"value"	"0.4 0.6 0.8 1.0"
-					"special_bonus_unique_storm_spirit_8" "+0.8"
+					"special_bonus_unique_rostik_6" "+0.8"
 				}
 				"max_stun"
 				{
 					"value"	"1.4 1.6 1.8 2.0"
-					"special_bonus_unique_storm_spirit_8" "+0.8"
+					"special_bonus_unique_rostik_6" "+0.8"
 				}
 				"min_damage"				"0 50 100 150"
 				"max_damage"
@@ -10192,12 +10186,12 @@
 				"min_stun"
 				{
 					"value"	"0.4 0.6 0.8 1.0"
-					"special_bonus_unique_storm_spirit_8" "+0.8"
+					"special_bonus_unique_rostik_6" "+0.8"
 				}
 				"max_stun"
 				{
 					"value"	"1.8 2.0 2.2 2.4"
-					"special_bonus_unique_storm_spirit_8" "+0.8"
+					"special_bonus_unique_rostik_6" "+0.8"
 				}
 				"min_damage"				"50 100 150 200"
 				"max_damage"
@@ -10246,7 +10240,7 @@
 				"AbilityCharges"
 				{
 					"value"	"2"
-					"special_bonus_unique_storm_spirit_7" "+1"
+					"special_bonus_unique_rostik_7" "+1"
 				}
 				"AbilityChargeRestoreTime"
 				{
@@ -10262,7 +10256,7 @@
 				"hasfacet"
 				{
 					"value"												"0"
-					"special_bonus_facet_storm_spirit_static_slide"		"+1"
+					"special_bonus_facet_rostik_r"		"+1"
 				}
 				"fire_duration"
 				{
@@ -10325,7 +10319,7 @@
 			"int_multi"
 			{
 				"value"	"35"
-				"special_bonus_unique_storm_spirit" "+35"
+				"special_bonus_unique_rostik_5" "+35"
 			}
 			"radius"					"175"
 			"target_radius"
@@ -10336,7 +10330,7 @@
 			"blasts"
 			{
 				"value"	"18"
-				"special_bonus_unique_storm_spirit_4" "+6"
+				"special_bonus_unique_rostik_8" "+6"
 			}
 			"jump_delay" "0.25"
 			"jump_count" "3"
@@ -10345,7 +10339,7 @@
 			"chance"
 			{
 				"value"	"20"
-				"special_bonus_unique_disruptor_consecutive_strike_damage" "+10"
+				"special_bonus_unique_rostik_3" "+10"
 			}
 			"arc_damage_percent" "3 4 5 6"
 		}
@@ -10371,13 +10365,13 @@
 				"buff_duration"
 				{
 					"value"	"5"
-					"special_bonus_unique_storm_spirit_5" "+2"
+					"special_bonus_unique_rostik_4" "+2"
 				}
 				"duration"						"0.4"
 				"overload_damage"
 				{
 					"value"	"25 50 75 100"
-					"special_bonus_unique_storm_spirit_overload_aspd" "+20"
+					"special_bonus_unique_rostik_1" "+20"
 				}
 				"overload_aoe"
 				{
@@ -10389,8 +10383,8 @@
 				"bonus_as"
 				{
 					"value"	"0"
-					"special_bonus_facet_storm_spirit_shock_collar" "+20 +40 +60 +80"
-					"RequiresFacet"		"storm_spirit_shock_collar"
+					"special_bonus_facet_rostik_e" "+20 +40 +60 +80"
+					"RequiresFacet"		"rostik_e"
 				}
 				"spirits_duration"
 				{
@@ -10501,6 +10495,53 @@
 			}
 		}
 	}
+
+	//===================================================================================================================
+	//													5OPKA
+	//===================================================================================================================
+
+	"special_bonus_unique_peterka_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_peterka_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	"peterka_r"
 	{
 		"BaseClass"						"ability_lua"
@@ -10528,7 +10569,7 @@
 				"damage"
 				{
 					"value"	"50 75 100"
-					"special_bonus_unique_necrophos_2" "+75"
+					"special_bonus_unique_peterka_7" "+75"
 				}
 				"radius"				"700 800 900"
 				"collision_radius"		"50 50 50 50"
@@ -10540,8 +10581,8 @@
 				"gold_per_hit"
 				{
 					"value"	"0"
-					"special_bonus_facet_necrolyte_profane_potency"	"+10"
-					"RequiresFacet" "necrolyte_profane_potency"
+					"special_bonus_facet_peterka_r"	"+10"
+					"RequiresFacet" "peterka_r"
 				}
 				"stun_dur"
 				{
@@ -10558,7 +10599,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"68.0 60.0 52.0"
-					"special_bonus_unique_necrophos_sadist_heal_bonus" "-10"
+					"special_bonus_unique_peterka_5" "-10"
 				}
 		}
 	}
@@ -10592,7 +10633,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"42 39 36 33"
-				"special_bonus_unique_necrophos_4" "-8"
+				"special_bonus_unique_peterka_4" "-8"
 			}
 			"knockback_damage"
 			{
@@ -10605,12 +10646,12 @@
 			"stun_duration"
 			{
 				"value"									"0.8"
-				"special_bonus_unique_necrophos_heartstopper_regen_duration" "+0.4"
+				"special_bonus_unique_peterka_2" "+0.4"
 			}
 			"debuff_immune"
 			{
 				"value"	"0"
-				"special_bonus_unique_necrophos_5" "+1"
+				"special_bonus_unique_peterka_6" "+1"
 			}
 		}
 	}
@@ -10652,12 +10693,12 @@
 				"heal"
 				{
 					"value"	"0"
-					"special_bonus_facet_necrolyte_rapid_decay" "+40"
+					"special_bonus_facet_peterka_w" "+40"
 				}
 				"gold_mult"
 				{
 					"value"	"1"
-					"special_bonus_unique_necrophos" "+1"
+					"special_bonus_unique_peterka_8" "+1"
 				}
 		}
 	}
@@ -10687,12 +10728,12 @@
 				"heal"
 				{
 					"value"	"0"
-					"special_bonus_facet_necrolyte_rapid_decay" "+50"
+					"special_bonus_facet_peterka_w" "+50"
 				}
 				"gold_mult"
 				{
 					"value"	"1"
-					"special_bonus_unique_necrophos" "+1"
+					"special_bonus_unique_peterka_8" "+1"
 				}
 		}
 	}
@@ -10752,9 +10793,116 @@
 				"damage"
 				{
 					"value"	"60 90 120 150"
-					"special_bonus_unique_necrophos_3" "+50"
+					"special_bonus_unique_peterka_3" "+50"
 				}
 		}
+	}
+
+	//===================================================================================================================
+	//													SANS
+	//===================================================================================================================
+
+	"special_bonus_unique_sans_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_sans_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"gaster_blaster" 
+	{
+    	"BaseClass"                "ability_lua"
+    	"ScriptFile"               "heroes/sans/gaster_blaster.lua"
+    	"AbilityTextureName"	   "gaster_blaster"
+    	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
+    	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
+    	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
+    	"AbilityUnitTargetFlags"   "DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
+    	"AbilityCastRange"         "650"
+    	"AbilityManaCost"          "100 125 150 175"
+    	"AbilityCastPoint"		   "0.2"
+    	"AbilityValues" 
+    	{
+			"AbilityCharges"
+			{
+				"value"										"0"
+				"special_bonus_unique_sans_8"			 "+2"
+			}
+			"AbilityCooldown"
+			{
+				"value"										"14 12 10 8"
+				"special_bonus_unique_sans_3" "-2"
+				"special_bonus_unique_sans_8"			  "=0"
+			}
+			"AbilityChargeRestoreTime"
+			{
+				"value"	"14 12 10 8"
+				"special_bonus_unique_sans_3" "-2"
+			}
+        	"blast_delay"
+			{
+				"value"	"0.9"
+				"special_bonus_unique_sans_2" "-0.2"
+			}
+			"blaster_vision" "700"
+        	"damage"
+			{
+				"value"	"150 200 250 300"
+			}
+			"int_damage"
+			{
+				"value"	"15"
+				"special_bonus_unique_sans_5" "+20"
+			}
+        	"laser_length"   "10000"
+        	"laser_width"
+			{
+				"value"	"150"
+				"affected_by_aoe_increase"	"1"
+			}
+    	}
 	}
 	"sans_w"
 	{
@@ -10790,7 +10938,7 @@
 				"damage"
 				{
 					"value" "75 150 225 300"
-					"special_bonus_unique_nyx_4" "+75"
+					"special_bonus_unique_sans_1" "+75"
 				}
 				"fissure_range"
 				{
@@ -10804,12 +10952,12 @@
 				"stun_duration"
 				{
 					"value"	"0.4 0.5 0.6 0.7"
-					"special_bonus_unique_nyx_jolt_cooldown" "+0.5"
+					"special_bonus_unique_sans_4" "+0.5"
 				}
 				"facet_walk"
 				{
 					"value"	"0"
-					"special_bonus_facet_morphling_str" "+1"
+					"special_bonus_facet_sans_w" "+1"
 				}
 		}
 	}
@@ -10866,13 +11014,13 @@
 				"both_teams"
 				{
 					"value"	"0"
-					"special_bonus_unique_morphling_10" "+1"
+					"special_bonus_unique_sans_6" "+1"
 				}
 				"dps_pct"					"5"
 				"facet_blue"
 				{
 					"value"	"0"
-					"special_bonus_facet_morphling_agi" "+1"
+					"special_bonus_facet_sans_e" "+1"
 				}
 		}
 	}
@@ -10999,7 +11147,7 @@
 			"pct_tooltip"
 			{
 				"value"	"30"
-				"special_bonus_unique_morphling_waveform_cooldown" "+40"
+				"special_bonus_unique_sans_7" "+40"
 			}
 		}
 	}

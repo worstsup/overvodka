@@ -12,7 +12,7 @@ end
 function gaster_blaster:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
 	self.BaseClass.OnAbilityUpgrade( self, hAbility )
-	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_nyx_vendetta_damage" )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_sans_8" )
 end
 
 function gaster_blaster:GetBehavior()
