@@ -229,7 +229,7 @@
 		"DOTA_Tooltip_ability_stint_innate_description" "Cooldown of the hero's items and abilities is reduced for unit of strength."
 		"DOTA_Tooltip_ability_stint_innate_str_pct"	"%REDUCTION PER UNIT OF STRENGTH:"
 		"DOTA_Tooltip_ability_stint_q"	"NELYA"
-		"DOTA_Tooltip_ability_stint_q_description" "Stint summons Nelya to assist him, who attacks enemies within %radius% of Stint's vicinity. In addition to the attack, Nelya grants Stint a barrier equal to %shield%%% of Stint's max health.\nNelia spawns at %cooldown_single% sec. The maximum number is %limit%."
+		"DOTA_Tooltip_ability_stint_q_description" "Stint summons Nelya to follow him and attack the closest enemy within %radius% of Stint. In addition to the attack, Nelya grants Stint a barrier equal to %shield%%% of Stint's max health.\nAfter the attack, Nelya returns to Stint and attacks again after %cooldown_single% seconds."
 		"DOTA_Tooltip_ability_stint_q_Lore"	"Hero created thanks to <font color='#FFC0CB'>Happy</font>, <font color='#7DF9FF'>KFG870</font>"
 		"DOTA_Tooltip_ability_stint_q_duration"	"DURATION:"
 		"DOTA_Tooltip_ability_stint_q_base_damage"	"BASE DAMAGE:"

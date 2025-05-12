@@ -21,6 +21,7 @@ function sans_scepter:Precache(context)
     PrecacheResource("soundfile", "soundevents/sans_encount.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/sans_scepter.vsndevts", context)
 end
+
 function sans_scepter:OnAbilityPhaseStart()
 	EmitSoundOn("sans_encount", self:GetCaster())
 end
