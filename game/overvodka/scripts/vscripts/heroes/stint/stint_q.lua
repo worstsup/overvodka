@@ -149,7 +149,9 @@ function modifier_stint_q_trigger:OnIntervalThink()
             hits     = self.hits,
             damage   = self.dmg,
         })
-        nelya:SetForceAttackTarget(enemy)
+        if enemy:IsAlive() then
+            nelya:SetForceAttackTarget(enemy)
+        end
         local p = ParticleManager:CreateParticle(
             "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
             PATTACH_ABSORIGIN_FOLLOW,
@@ -209,15 +211,7 @@ function modifier_stint_q_nelya:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     self.hits = self.hits - 1
     if self.hits <= 0 then
-        local effect_cast = ParticleManager:CreateParticle(
-            "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
-            PATTACH_ABSORIGIN_FOLLOW,
-            self:GetParent()
-        )
-        ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
-        ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
-        ParticleManager:ReleaseParticleIndex(effect_cast)
-        UTIL_Remove(self:GetParent())
+        self:Destroy()
     end
 end
 
