@@ -4,6 +4,10 @@ LinkLuaModifier("modifier_stint_q_nelya",   "heroes/stint/stint_q", LUA_MODIFIER
 
 stint_q = class({})
 
+if NELYA_TRACKER == nil then
+    NELYA_TRACKER = {}
+end
+
 function stint_q:Precache(context)
     PrecacheResource("soundfile", "soundevents/stint_q.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/stint_q_appear.vsndevts", context)
@@ -101,50 +105,68 @@ function modifier_stint_q_trigger:OnCreated()
 end
 
 function modifier_stint_q_trigger:OnIntervalThink()
-    local i = 0
-    local enemy_heroes = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false)
-    for _,enemy in pairs(enemy_heroes) do
-        i = i + 1
-        if i > self.limit then break end
-        local fv    = RandomVector(100)
-        local nelya = CreateUnitByName(
-            "npc_nelya",
-            enemy:GetAbsOrigin() + fv,
-            true,
-            self:GetParent(),
-            self:GetParent(),
-            self:GetParent():GetTeamNumber()
-        )
-        nelya:SetOwner(self:GetParent())
-        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
-            duration = 1.5,
-            hits     = self.hits,
-            damage   = self.dmg,
-        })
-        nelya:SetForceAttackTarget(enemy)
-        local p = ParticleManager:CreateParticle(
-            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
-            PATTACH_ABSORIGIN_FOLLOW,
-            nelya
-        )
-        ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
-        ParticleManager:ReleaseParticleIndex(p)
+    if not IsServer() then return end
+    local caster   = self:GetParent()
+    local casterID = caster:GetPlayerOwnerID()
+    local ability  = self:GetAbility()
+    local activeCount = 0
+    for nelyaUnit, ownerID in pairs(NELYA_TRACKER) do
+        if ownerID == casterID and not nelyaUnit:IsNull() and nelyaUnit:IsAlive() then
+            activeCount = activeCount + 1
+        else
+            NELYA_TRACKER[nelyaUnit] = nil
+        end
     end
-    local enemy_units = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false)
-    for _,enemy in pairs(enemy_units) do
-        i = i + 1
-        if i > self.limit then break end
-        local fv    = RandomVector(100)
-        local nelya = CreateUnitByName(
-            "npc_nelya",
-            enemy:GetAbsOrigin() + fv,
-            true,
-            self:GetParent(),
-            self:GetParent(),
-            self:GetParent():GetTeamNumber()
+    local cap = self.limit
+    if activeCount >= cap then
+        return
+    end
+    local slotsLeft = cap - activeCount
+    local targets = {}
+    local function fillTargets(units)
+        for _, u in ipairs(units) do
+            if #targets < slotsLeft then
+                table.insert(targets, u)
+            else
+                break
+            end
+        end
+    end
+
+    local heroes = FindUnitsInRadius(
+        caster:GetTeamNumber(), caster:GetAbsOrigin(), nil,
+        self.radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        FIND_CLOSEST,
+        false
+    )
+    fillTargets(heroes)
+
+    if #targets < slotsLeft then
+        local creeps = FindUnitsInRadius(
+            caster:GetTeamNumber(), caster:GetAbsOrigin(), nil,
+            self.radius,
+            DOTA_UNIT_TARGET_TEAM_ENEMY,
+            DOTA_UNIT_TARGET_BASIC,
+            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+            FIND_CLOSEST,
+            false
         )
-        nelya:SetOwner(self:GetParent())
-        nelya:AddNewModifier(parent, self:GetAbility(), "modifier_stint_q_nelya", {
+        fillTargets(creeps)
+    end
+    for _, enemy in ipairs(targets) do
+        local fv       = RandomVector(100)
+        local spawnPos = enemy:GetAbsOrigin() + fv
+        local nelya    = CreateUnitByName(
+            "npc_nelya",
+            spawnPos,
+            true, caster, caster, caster:GetTeamNumber()
+        )
+        nelya:SetOwner(caster)
+        NELYA_TRACKER[nelya] = casterID
+        nelya:AddNewModifier(caster, ability, "modifier_stint_q_nelya", {
             duration = 1.5,
             hits     = self.hits,
             damage   = self.dmg,
@@ -152,19 +174,17 @@ function modifier_stint_q_trigger:OnIntervalThink()
         if enemy:IsAlive() then
             nelya:SetForceAttackTarget(enemy)
         end
-        local p = ParticleManager:CreateParticle(
-            "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf",
-            PATTACH_ABSORIGIN_FOLLOW,
-            nelya
-        )
+        local p = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, nelya)
         ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(p)
     end
-    if #enemy_heroes > 0 or #enemy_units > 0 then
-        EmitSoundOn("stint_q_appear", self:GetParent())
+
+    if #targets > 0 then
+        EmitSoundOn("stint_q_appear", caster)
     end
+
     if self.dispel > 0 then
-        self:GetParent():Purge(false, true, false, true, false)
+        caster:Purge(false, true, false, true, false)
     end
 end
 
@@ -194,7 +214,6 @@ function modifier_stint_q_nelya:CheckState()
         [MODIFIER_STATE_UNSELECTABLE]      = true,
         [MODIFIER_STATE_INVULNERABLE]      = true,
         [MODIFIER_STATE_NO_HEALTH_BAR]     = true,
-        [MODIFIER_STATE_MAGIC_IMMUNE]      = true,
     }
 end
 
@@ -217,6 +236,7 @@ end
 
 function modifier_stint_q_nelya:OnDestroy()
     if not IsServer() then return end
+    NELYA_TRACKER[self:GetParent()] = nil
     local effect_cast = ParticleManager:CreateParticle(
         "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
         PATTACH_ABSORIGIN_FOLLOW,
