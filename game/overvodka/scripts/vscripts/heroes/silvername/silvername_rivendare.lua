@@ -44,6 +44,7 @@ function silvername_rivendare:OnSpellStart()
     local xp = self:GetSpecialValueFor("xp")
     local base_hp = self:GetSpecialValueFor("base_hp")
     local base_damage = self:GetSpecialValueFor("base_dmg")
+    local true_hp = base_hp * 2
     local rivendare = CreateUnitByName("npc_rivendare", point, true, caster, caster, caster:GetTeamNumber())
     FindClearSpaceForUnit(rivendare, point, true)
     rivendare:SetControllableByPlayer(caster:GetPlayerID(), false)
@@ -51,11 +52,11 @@ function silvername_rivendare:OnSpellStart()
     rivendare:AddNewModifier(caster, self, "modifier_kill", {duration = duration})
     rivendare:SetMaximumGoldBounty(gold)
     rivendare:SetMinimumGoldBounty(gold)
-    rivendare:SetBaseMaxHealth(base_hp)
-    rivendare:SetMaxHealth(base_hp)
+    rivendare:SetBaseMaxHealth(true_hp)
+    rivendare:SetMaxHealth(true_hp)
     rivendare:SetBaseDamageMin(base_damage)
     rivendare:SetBaseDamageMax(base_damage)
-    rivendare:SetHealth(base_hp)
+    rivendare:SetHealth(true_hp)
     rivendare:SetDeathXP(xp)
     rivendare:AddNewModifier(self:GetCaster(), self, "modifier_rivendare_lua", {})
 end
@@ -78,7 +79,7 @@ function modifier_rivendare_lua:OnCreated( kv )
 	if not IsServer() then return end
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.health_increments = 1
-	self.hero_attack_multiplier = 1
+	self.hero_attack_multiplier = 2
 	local nFXIndex = ParticleManager:CreateParticle( "particles/doom_bringer_doom_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl( nFXIndex, 1, Vector( self.radius, 1, self.radius ) )
 	self:AddParticle( nFXIndex, false, false, -1, false, false )
@@ -137,7 +138,7 @@ function modifier_rivendare_lua:GetDisableHealing()
 end
 
 function modifier_rivendare_lua:GetModifierHealthBarPips()
-    return self:GetParent():GetMaxHealth()
+    return self:GetAbility():GetSpecialValueFor("base_hp")
 end
 
 function modifier_rivendare_lua:GetAbsoluteNoDamageMagical()

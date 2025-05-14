@@ -1377,7 +1377,6 @@
 	//===================================================================================================================
 	//													ТУПОЙ ШКОЛЬНИК
 	//===================================================================================================================
-
 	"special_bonus_unique_shkolnik_1"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -1436,7 +1435,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"shkolota"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"25"
 		"AbilityManaCost"				"75 120 165 210"
 		"AbilityCastPoint"				"0.35"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
@@ -1461,6 +1460,7 @@
 					"value"	"40 50 60 70"
 					"special_bonus_unique_shkolnik_7" "x2"
 				}
+				"pct_towers"	"50"
 		}
 	}
 	//=================================================================================================================
@@ -1521,7 +1521,7 @@
 		{
 				"blink_range"           
 				{
-					"value"	"700 750 800 850"
+					"value"	"900 950 1000 1050"
 					"special_bonus_unique_shkolnik_2"	"+200"
 				}
 				"immun"
@@ -4343,6 +4343,7 @@
 					"value"   "0"
 					"special_bonus_facet_silvername_q"	"+35"
 				}
+				"pct_towers"	"50"
 				"gold"	"25"
 				"xp"	"40"
 		}
@@ -5187,8 +5188,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"23 21 19 17"
-		"AbilityManaCost"				"50 70 90 110"
+		"AbilityCooldown"				"35 30 25 20"
+		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
 				"duration"
@@ -5402,6 +5403,82 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"MaxLevel" "3"
 		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"1.41"
+		"HasShardUpgrade"				"1"
+		"AbilityCooldown"				"60"
+		"AbilityManaCost"				"100 200 300"
+		"AbilityValues"
+		{
+				"radius"
+				{
+					"value"	"500 600 700"
+					"special_bonus_unique_litvin_7" "+200"
+					"affected_by_aoe_increase"	"1"
+				}
+				"duration"				"0.3"
+				"damage"				"200 400 600"
+				"radius_tree"			"300"
+				"buff_dur"				"10"
+				"damage_reduction"
+				{
+					"value"	"15 20 25"
+					"special_bonus_unique_litvin_3" "+10"
+				}
+				"base_hp"
+				{
+					"value" "10"
+				}
+				"level_hp"
+				{
+					"value" "2"
+				}
+				"base_mana"
+				{
+					"value" "1"
+				}
+				"level_mana"
+				{
+					"value" "1"
+				}
+				"base_miss"
+				{
+					"value"	"0"
+					"special_bonus_facet_litvin_d"	"+10"
+					"RequiresFacet"	"litvin_d"
+				}
+				"level_miss"
+				{
+					"value"	"0"
+					"special_bonus_facet_litvin_d"	"+2"
+					"RequiresFacet"	"litvin_d"
+				}
+				"ms"
+				{
+					"value"	"15"
+				}
+		}
+	}
+	"litvin_zhishi_dota"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/litvin/litvin_zhishi_dota"
+		"AbilityTextureName"			"zhishi"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+			"particle"	"particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
+			"particle"	"particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
+		}
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel" "3"
+		"AbilityCastRange"				"3000"
 		"AbilityCastPoint"				"1.41"
 		"HasShardUpgrade"				"1"
 		"AbilityCooldown"				"60"
@@ -5916,7 +5993,6 @@
 					"special_bonus_unique_ashab_1" "+200"
 				}
 				"stun_duration"			"1.2 1.4 1.6 1.8"
-				"bash_radius"			"300 300 300 300"
 				"vision_radius"			"400 400 400 400"
 				"vision_duration"		"0.94 0.94 0.94 0.94"
 				"damage"
@@ -6059,7 +6135,7 @@
 	"Ashab_rocket"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"				"60 50 40"
 		"AbilityCastRange"				"1200"
 		"AbilityManaCost"				"150 300 450"
@@ -6147,7 +6223,7 @@
 	"imba_batrider_sticky_napalm"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"hero_batrider"
+		"ScriptFile"					"heroes/ashab/ashab_innate_passive"
 		"AbilityTextureName"			"ashab_mohito"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
@@ -6186,9 +6262,9 @@
 	"imba_batrider_sticky_napalm_new"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"hero_batrider_new"
+		"ScriptFile"					"heroes/ashab/ashab_innate"
 		"AbilityTextureName"			"ashab_mohito"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"MaxLevel"	"1"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
@@ -8961,7 +9037,7 @@
             "radius"
             {
             	"value"	"0"
-            	"special_bonus_shard"	"+12000"
+            	"special_bonus_shard"	"+3000"
             }
     	}
     	"OnSpellStart"
@@ -9134,7 +9210,7 @@
 					"value"	"7"
 					"special_bonus_unique_golovach_8" "+3"
 				}
-				"charges_per_flurry"		"6 7 8"
+				"charges_per_flurry"		"5 6 7"
 				"flurry_bonus_attack_speed"	"800"
 				"time_between_flurries"		"2.0"
 				"pulse_radius"
@@ -12520,7 +12596,7 @@
 		"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"            "stint_q"
-		"AbilityCooldown"               "30 28 26 24"
+		"AbilityCooldown"               "34 32 30 28"
 		"AbilityManaCost"               "100 120 140 160"
 		"AbilityValues"
 		{
@@ -12573,7 +12649,7 @@
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.2"
 		"HasScepterUpgrade"				"1"
-		"AbilityCooldown"				"26 24 22 20"
+		"AbilityCooldown"				"28 27 26 25"
 		"AbilityManaCost"				"100 115 130 145"
 		"AbilityValues"
 		{
@@ -12587,7 +12663,7 @@
 				"value"	"450"
 				"affected_by_aoe_increase"	"1"
 			}
-			"hit_destroy"				"3 4 5 6"
+			"hit_destroy"				"3 3 4 4"
 			"pct_damage"				"1"
 			"slow"
 			{
@@ -12632,11 +12708,11 @@
 		"AbilityCastPoint"			"0.3"
 		"HasShardUpgrade"			"1"
 		"AbilityManaCost"			"80 105 130 155"
-		"AbilityGoldCost"			"200 250 300 350"
+		"AbilityGoldCost"			"150 200 250 300"
 		"AbilityTextureName"		"stint_w"
 		"AbilityValues"
 		{
-			"investment"	 		"200 250 300 350"
+			"investment"	 		"150 200 250 300"
 			"chance_bad"	 		"40"
 			"chance_1_5"	 		"30"
 			"chance_2"		 		"20"
@@ -12658,7 +12734,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"40 35 30 25"
-				"special_bonus_unique_stint_4"	"-8"
+				"special_bonus_unique_stint_4"	"-7"
 			}
 		}
 	}
@@ -12712,5 +12788,4 @@
 		"ScriptFile"				"units/rosh/rosh_model_change"
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	}
-	
 }

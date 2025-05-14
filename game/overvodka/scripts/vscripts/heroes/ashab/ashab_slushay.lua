@@ -1,6 +1,6 @@
 ashab_slushay = class({})
 LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_ashab_slushay_buff", "heroes/ashab/modifier_ashab_slushay_buff", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_ashab_slushay_buff", "heroes/ashab/ashab_slushay", LUA_MODIFIER_MOTION_NONE )
 
 function ashab_slushay:OnAbilityUpgrade( hAbility )
 	if not IsServer() then return end
@@ -14,7 +14,7 @@ function ashab_slushay:OnSpellStart()
 	local reduction_duration = self:GetSpecialValueFor("reduction_duration")
 	local bonus_damage = self:GetSpecialValueFor("attack_damage")
 	 if caster:HasModifier("modifier_item_aghanims_shard") then
-		caster:Purge( false, true, false, false, false)
+		caster:Purge( false, true, false, true, false)
 	end
 	local enemies = FindUnitsInRadius(
 		caster:GetTeamNumber(),
@@ -56,4 +56,49 @@ function ashab_slushay:PlayEffects()
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetCaster():GetOrigin() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( sound_cast, self:GetCaster() )
+end
+
+modifier_ashab_slushay_buff = class({})
+
+function modifier_ashab_slushay_buff:IsHidden()
+	return true
+end
+
+function modifier_ashab_slushay_buff:IsDebuff()
+	return false
+end
+
+function modifier_ashab_slushay_buff:IsPurgable()
+	return false
+end
+
+function modifier_ashab_slushay_buff:OnCreated( kv )
+	if not IsServer() then return end
+	self.bonus = kv.bonus
+end
+
+function modifier_ashab_slushay_buff:OnRefresh( kv )
+end
+
+function modifier_ashab_slushay_buff:OnRemoved()
+end
+
+function modifier_ashab_slushay_buff:OnDestroy()
+end
+
+function modifier_ashab_slushay_buff:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+		MODIFIER_PROPERTY_SUPPRESS_CLEAVE,
+	}
+
+	return funcs
+end
+
+function modifier_ashab_slushay_buff:GetModifierPreAttack_BonusDamage()
+	return self.bonus
+end
+
+function modifier_ashab_slushay_buff:GetSuppressCleave()
+	return 1
 end

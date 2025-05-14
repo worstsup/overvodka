@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
+
 shkolnik_peremena = class({})
 
 function shkolnik_peremena:GetCooldown(level)
@@ -26,6 +28,7 @@ function shkolnik_peremena:OnSpellStart()
         self.schoolboy:SetControllableByPlayer(caster:GetPlayerID(), true)
         FindClearSpaceForUnit(self.schoolboy, self.schoolboy:GetAbsOrigin(), true)
         self.schoolboy:AddNewModifier(self:GetCaster(), self, "modifier_kill", {duration = self:GetSpecialValueFor("schoolboys_duration")})
+        self.schoolboy:AddNewModifier(self:GetCaster(), self, "modifier_overvodka_creep", {})
         if caster:HasTalent("special_bonus_unique_shkolnik_3") then
             self.schoolboy:AddNewModifier(caster, self, "modifier_phased", {})
         end

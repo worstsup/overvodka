@@ -2789,23 +2789,23 @@
 		"ItemCost"						"250"
 		"AbilitySharedCooldown" 		"byebye"
 	}
-	"item_recipe_cuirass_2"
+	"item_recipe_oboyudno"
 	{
 		"BaseClass"				 	"item_datadriven"
 		"Model"						"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"		"item_recipe"
 		"ItemCost"					"350"
 		"ItemRecipe"				"1"
-		"ItemResult"				"item_cuirass_2"
+		"ItemResult"				"item_oboyudno"
 		"ItemRequirements"
 		{
 			"01"	"item_blade_mail;item_lotus_orb"
 		}
 	}
-	"item_cuirass_2"
+	"item_oboyudno"
 	{
 		"BaseClass"					"item_lua"
-		"ScriptFile"				"items/cuirass"
+		"ScriptFile"				"items/oboyudno"
 		"AbilityTextureName"		"oboyudno"
 		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -2843,7 +2843,7 @@
 		"ItemResult"				"item_oboyudno_2"
 		"ItemRequirements"
 		{
-			"01"	"item_cuirass_2;item_mithril_hammer"
+			"01"	"item_oboyudno;item_mithril_hammer"
 		}
 	}
 	

@@ -5,14 +5,14 @@ function modifier_topor:IsPurgable()
 end
 
 function modifier_topor:OnCreated( kv )
+	if not IsServer() then return end
 	self.as = 1000
 	self.bat = self:GetAbility():GetSpecialValueFor( "bat" )
 	self.speed = self:GetAbility():GetSpecialValueFor( "bonus_speed" )
 	self.projectile = 900
 	self.bonus_dmg = self:GetAbility():GetSpecialValueFor( "bonus_dmg" )
 	self.range = self:GetAbility():GetSpecialValueFor( "range" )
-	self.attack = self:GetParent():GetAttackCapability()
-	if self.attack == DOTA_UNIT_CAP_RANGED_ATTACK then
+	if self:GetParent():GetUnitName() == "npc_dota_hero_rubick" then
 		self.range = 0
 		self.projectile = 0
 	end
@@ -48,6 +48,7 @@ function modifier_topor:OnIntervalThink()
 		)
 	end
 	local projectile_direction =  (self:GetParent():GetCursorPosition() + 5 - self:GetParent():GetAbsOrigin()):Normalized()
+	projectile_direction.z = 0
 	local arrow_projectile = {
 		Ability				= self,
 		EffectName			= "particles/pirat_r_axe.vpcf",
@@ -230,7 +231,9 @@ end
 
 function modifier_topor:OnDestroy()
 	if not IsServer() then return end
-	self:GetParent():SetAttackCapability( self.attack )
+	if self:GetParent():GetUnitName() ~= "npc_dota_hero_rubick" then
+		self:GetParent():SetAttackCapability( DOTA_UNIT_CAP_MELEE_ATTACK )
+	end
 end
 
 function modifier_topor:DeclareFunctions()

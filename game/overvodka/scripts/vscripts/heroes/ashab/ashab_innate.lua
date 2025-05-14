@@ -1,6 +1,6 @@
 
-LinkLuaModifier("modifier_imba_batrider_sticky_napalm_handler_new", "hero_batrider_new", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_imba_batrider_sticky_napalm_new", "hero_batrider_new", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_imba_batrider_sticky_napalm_handler_new", "heroes/ashab/ashab_innate", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_imba_batrider_sticky_napalm_new", "heroes/ashab/ashab_innate", LUA_MODIFIER_MOTION_NONE)
 
 imba_batrider_sticky_napalm_new							= class({})
 modifier_imba_batrider_sticky_napalm_handler_new		= class({})

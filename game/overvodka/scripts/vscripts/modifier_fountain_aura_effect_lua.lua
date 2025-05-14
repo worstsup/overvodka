@@ -1,7 +1,5 @@
 modifier_fountain_aura_effect_lua = class({})
 
---------------------------------------------------------------------------------
-
 function modifier_fountain_aura_effect_lua:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,

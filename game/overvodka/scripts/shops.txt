@@ -51,7 +51,7 @@
 		"item"		"item_balbe"
 		"item"		"item_hqd_maxx"
 		"item"		"item_pasito"
-		"item"		"item_cuirass_2"
+		"item"		"item_oboyudno"
 		"item"		"item_oboyudno_2"
 		"item"		"item_elixir_collector"
 		"item"		"item_minion_generator"

@@ -2,7 +2,7 @@ serega_topor = class({})
 LinkLuaModifier( "modifier_serega_topor", "heroes/pirat/modifier_serega_topor", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_topor", "heroes/pirat/modifier_topor", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_marci_sidekick_lua", "modifier_marci_sidekick_lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_generic_lifesteal_lua", "modifier_generic_lifesteal_lua", LUA_MODIFIER_MOTION_NONE )
 
 function serega_topor:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_razor.vsndevts", context )
@@ -28,11 +28,11 @@ function serega_topor:OnSpellStart()
 	local speed = self:GetSpecialValueFor( "speed" )
 	local buff_duration = self:GetSpecialValueFor( "buff_duration" )
 	local effect = self:PlayEffects( radius, speed )
-	local effect_new = self:PlayEffectsNew( )
+	local effect_new = self:PlayEffectsNew()
 	caster:AddNewModifier(
 		caster,
 		self,
-		"modifier_marci_sidekick_lua",
+		"modifier_generic_lifesteal_lua",
 		{ duration = buff_duration }
 	)
 	local pulse = caster:AddNewModifier(

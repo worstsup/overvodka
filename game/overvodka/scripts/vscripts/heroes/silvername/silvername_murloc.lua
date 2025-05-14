@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
+
 silvername_murloc = class({})
 
 function silvername_murloc:Precache(context)
@@ -37,6 +39,7 @@ function silvername_murloc:OnSpellStart()
     murloc:SetMinimumGoldBounty(gold)
     murloc:SetDeathXP(xp)
     murloc:AddNewModifier(caster, self, "modifier_phased", {duration = self:GetSpecialValueFor("phase")})
+    murloc:AddNewModifier(caster, self, "modifier_overvodka_creep", {})
     local effect_cast = ParticleManager:CreateParticle("particles/items_fx/necronomicon_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, murloc)
     ParticleManager:SetParticleControl(effect_cast, 0, murloc:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(effect_cast)

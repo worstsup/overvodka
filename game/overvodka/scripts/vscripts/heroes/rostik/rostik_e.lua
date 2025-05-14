@@ -74,13 +74,8 @@ function modifier_rostik_e:OnRefresh( kv )
 	self.damageTable.damage = damage
 end
 
-function modifier_rostik_e:OnRemoved()
-	if self.parent:HasModifier("modifier_rostik_e_buff") then
-		self.parent:RemoveModifierByName("modifier_rostik_e_buff")
-	end
-end
-
 function modifier_rostik_e:OnDestroy()
+	if not IsServer() then return end
 	if self.parent:HasModifier("modifier_rostik_e_buff") then
 		self.parent:RemoveModifierByName("modifier_rostik_e_buff")
 	end

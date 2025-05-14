@@ -40,6 +40,7 @@ function stint_w:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
+    if target:TriggerSpellAbsorb(self) then return end
     local cost   = self:GetSpecialValueFor("investment")
     local casterID = caster:GetPlayerOwnerID()
     PlayerResource:SpendGold(casterID, cost, DOTA_ModifyGold_Unspecified)

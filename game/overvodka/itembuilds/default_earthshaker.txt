@@ -25,7 +25,7 @@
 		{
 			"item"		"item_nikes"
 			"item"		"item_kaska"
-            "item"		"item_cuirass_2"
+            "item"		"item_oboyudno"
 			"item"		"item_govno"
 			"item"		"item_pasito"
             "item"		"item_aghanims_shard"
