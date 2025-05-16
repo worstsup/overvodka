@@ -1030,7 +1030,7 @@
 		"DOTA_Tooltip_ability_sasavot_r_cooldown_scepter" "ПЕРЕЗАРЯДКА:"
 		"DOTA_Tooltip_ability_sasavot_r_scepter_Description" "Уменьшает перезарядку и позволяет применять эту способность, даже когда герой выведен из строя."
 		"DOTA_Tooltip_ability_sasavot_shard" "ТЕТРАДЬ СЕКСА"
-		"DOTA_Tooltip_ability_sasavot_shard_Description" "Глеб достает из кармана тетрадь секса и записывает туда свою жертву, истощая её сердце. Накладывает истощение и замедление на выбранного врага. При использовании на врага под меткой от способности МЕТКА БЛЕБА, активирует её."
+		"DOTA_Tooltip_ability_sasavot_shard_Description" "Глеб достает из кармана тетрадь секса и записывает туда свою жертву, истощая её сердце. Накладывает истощение и замедление на выбранного врага."
 		"DOTA_Tooltip_ability_sasavot_shard_Lore" "Герой создан благодаря <font color='#FFC0CB'>KOVL</font>, <font color='#1E90FF'>4aoaxa</font>, <font color='#00A86B'>TIMOXA666</font>"
 		"DOTA_Tooltip_ability_sasavot_shard_ms" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_sasavot_shard_duration" "ДЛИТЕЛЬНОСТЬ:"
