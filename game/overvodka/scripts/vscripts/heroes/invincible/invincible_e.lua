@@ -35,6 +35,21 @@ function invincible_e:OnOrbImpact( params )
 	ParticleManager:SetParticleControlEnt(effect_cast, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetOrigin(), true)
 	ParticleManager:SetParticleControlForward( effect_cast, 1, (caster:GetOrigin()-target:GetOrigin()):Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
+	local radius = self:GetSpecialValueFor("facet_radius")
+	if radius > 0 then
+		local heal = dmg * self:GetSpecialValueFor("facet_pct") * 0.01
+		local friends = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, FIND_ANY_ORDER, false)
+		for _,unit in pairs(friends) do
+			if unit ~= caster then
+				unit:HealWithParams(heal, self, false, true, caster, false)
+				SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, unit, heal, unit:GetPlayerOwner())
+				local effect_cast_unit = ParticleManager:CreateParticle( "particles/invincible_e_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, unit )
+				ParticleManager:SetParticleControl( effect_cast_unit, 0, unit:GetAbsOrigin() )
+				ParticleManager:SetParticleControl( effect_cast_unit, 1, unit:GetAbsOrigin() )
+				ParticleManager:ReleaseParticleIndex( effect_cast_unit )
+			end
+		end
+	end
 	if caster:HasShard() then
 		target:AddNewModifier( caster, self, "modifier_invincible_e_debuff", { duration = self:GetSpecialValueFor("shard_duration") } )
 		caster:AddNewModifier( caster, self, "modifier_invincible_e_buff", { duration = self:GetSpecialValueFor("shard_duration") } )

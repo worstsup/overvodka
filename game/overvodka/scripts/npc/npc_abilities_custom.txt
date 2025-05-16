@@ -12791,13 +12791,6 @@
 	//===================================================================================================================
 	//													SINISTER MARK
 	//===================================================================================================================
-
-	"special_bonus_unique_invincible_1"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
 	"special_bonus_unique_invincible_2"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -12840,6 +12833,65 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	"invincible_innate"
+    {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "heroes/invincible/invincible_innate"  
+        "MaxLevel"             			"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"IsBreakable"					"1"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityTextureName"			"invincible_innate"
+		"AbilityCooldown"				"1"
+        "AbilityValues"
+        {
+            "heal_pct"	"-30"
+			"radius"	"600"
+        }
+    }
+	"invincible_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/invincible/invincible_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"   			"vihor_q"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastPoint"				"0.25"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityManaCost"				"30 40 50 60"
+		"AbilityCooldown"				"12 11 10 9"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+			"damage_base"				"50 100 150 200"
+			"fear_duration"				"0.8 0.9 1.0 1.1"
+			"damage"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+100"
+				"RequiresScepter"		"1"
+			}
+			"secondary"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+2"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"700"
+				"special_bonus_unique_invincible_2"	"+200"
+			}
+		}
+	}
 	"invincible_w"
     {
         "BaseClass"                     "ability_lua"
@@ -12867,7 +12919,7 @@
             "end_delay"                 "0.25"
             "slow_enemy"                "-100"
             "duration_slow"             "0.3"
-            "damage_from_attack"        "100"
+            "damage_from_attack"        "50"
             "buff_attack_speed"         "60 80 100 120"
             "creep_damage"
             {
@@ -12920,6 +12972,18 @@
 					"value"	"0"
 					"special_bonus_shard"	"+5"
 					"RequiresShard"			"1"
+				}
+				"facet_radius"
+				{
+					"value"	"0"
+					"special_bonus_facet_invincible_facet_heal" "+400"
+					"RequiresFacet"	"invincible_facet_heal"
+				}
+				"facet_pct"
+				{
+					"value"	"0"
+					"special_bonus_facet_invincible_facet_heal" "+50"
+					"RequiresFacet"	"invincible_facet_heal"
 				}
 		}
 	}

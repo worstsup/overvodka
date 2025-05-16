@@ -772,7 +772,7 @@
 						source_filename = "models/invincible/Landing.fbx"
 						import_bone_scales = false
 						start_frame = -1
-						end_frame = 35
+						end_frame = 25
 						framerate = -1.0
 						reverse = false
 					},
@@ -835,6 +835,44 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = 45.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "One_Hand_Sword_Combo"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_CAST_ABILITY_1"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						source_filename = "models/invincible/One Hand Sword Combo.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = 60.0
 						reverse = false
 					},
 				]
