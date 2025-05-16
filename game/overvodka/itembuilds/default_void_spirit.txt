@@ -34,6 +34,7 @@
 			"item"		"item_invis_sword_datadriven"
             "item"		"item_armature_strike"
             "item"		"item_govno"
+            "item"		"item_ultimate_scepter"
 		}
 	}
 }
