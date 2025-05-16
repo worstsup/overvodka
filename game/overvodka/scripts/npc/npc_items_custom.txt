@@ -1441,7 +1441,8 @@
 	//=================================
 	"item_chapman_red"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1459,26 +1460,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_haste"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_chapman_green"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1496,28 +1486,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_regen"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_chapman_pink"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1535,28 +1512,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_arcane"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_chapman_yellow"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1574,27 +1538,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_illusion"
-				"Target"       "CASTER"
-				"Duration"     "0.1"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"75"
 		}
 	}
 	"item_chapman_indigo"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1612,28 +1564,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_shield"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_chapman_violet"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1651,27 +1590,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_invis"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_chapman_blue"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1689,28 +1616,15 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "700"
-		
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_doubledamage"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_cubin"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/chapman"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -1728,59 +1642,9 @@
 		"AbilityCooldown"               "30.0"
 		"AbilityManaCost"               "0"
 		"ItemCost"                      "2000"
-		"OnSpellStart"
+		"AbilityValues"
 		{
-			"FireSound"
-			{
-				"EffectName"   "chapman"
-				"Target"       "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_doubledamage"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_invis"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_shield"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_haste"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_arcane"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_regen"
-				"Target"       "CASTER"
-				"Duration"     "30"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_illusion"
-				"Target"       "CASTER"
-				"Duration"     "0.1"
-			}
-			"SpendCharge"
-				{}
+			"duration"	"30"
 		}
 	}
 	"item_onehp"
@@ -1793,8 +1657,8 @@
 		"ItemCost"					"4600"
 		"AbilityValues"
 		{
-			"bonus_health"			 	"400"
-			"bonus_mana"		  "300"
+			"bonus_health"		"400"
+			"bonus_mana"		"300"
 			"bonus_damage"		"25"
 			"duration"			"3"
 			"percent_tooltip"	"15"

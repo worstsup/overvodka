@@ -2643,4 +2643,74 @@
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		""
 	}
+	"npc_dota_hero_void_spirit"
+	{
+		"Model"						"models/invincible/invincible.vmdl"
+		"SoundSet"					"Hero_VoidSpirit"
+		"DisableWearables"			"1"
+		"Enabled"					"1"
+		"ModelScale"				"1.45"
+		"LoadoutScale"				"1.3"
+		"HeroSelectSoundEffect"		"Hero_VoidSpirit.Pick"
+		"SimilarHeroes"				"17,107,106"
+		"Ability1"					"generic_hidden"
+		"Ability2"					"invincible_w"
+		"Ability3"					"invincible_e"
+		"Ability4"					"generic_hidden"
+		"Ability5"					"generic_hidden"
+		"Ability6"					"invincible_r"
+		"Ability10"					"special_bonus_mp_regen_175"
+		"Ability11"					"special_bonus_unique_void_spirit_2"
+		"Ability12"					"special_bonus_unique_invincible_3"
+		"Ability13"					"special_bonus_unique_invincible_4"
+		"Ability14"					"special_bonus_unique_invincible_5"
+		"Ability15"					"special_bonus_unique_invincible_6"
+		"Ability16"					"special_bonus_unique_invincible_7"
+		"Ability17"					"special_bonus_unique_invincible_8"
+		
+		"Facets"
+		{
+			"invincible_facet_fly"
+			{
+				"Icon"				"armor"
+				"Color"				"Purple"
+				"GradientID"		"1"
+			}
+			"void_spirit_sanctuary" 
+			{
+				"Deprecated" "false"
+			}			
+			"void_spirit_phys_barrier"
+			{
+				"Deprecated" "true"
+			}
+			"void_spirit_aether_artifice"
+			{
+				"Deprecated" "true"
+			}
+
+		}
+		"HealthBarOffset"			"250"
+		"ArmorPhysical"				"-1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"22"
+		"AttackDamageMax"			"26"
+		"AttackRate"				"1.700000"
+		"AttackAnimationPoint"		"0.350000"
+		"AttackAcquisitionRange"	"600"
+		"AttackRange"				"175"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"2.6"
+		"AttributeBaseAgility"		"24"
+		"AttributeAgilityGain"		"3.1"
+		"AttributeBaseIntelligence"	"19"
+		"AttributeIntelligenceGain"	"1.8"
+		"StatusManaRegen"			"0.6"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.700000"
+		"particle_folder"			""
+		"GameSoundsFile"			""
+		"VoiceFile"					""
+	}
 }

@@ -108,6 +108,7 @@ PrecacheUtils.particles = {
 		"particles/viper_base_attack_new.vpcf",
 		"particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf",
         "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf",
+		"particles/chapman.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -216,6 +217,7 @@ PrecacheUtils.models = {
 		"ebanko/ebanko.vmdl",
 		"rostik/rostik.vmdl",
 		"models/stint/stint.vmdl",
+		"models/invincible/invincible.vmdl",
 }
 
 PrecacheUtils.sounds = {

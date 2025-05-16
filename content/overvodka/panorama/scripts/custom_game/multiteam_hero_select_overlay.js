@@ -85,7 +85,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png",
 			"npc_dota_hero_slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png",
 			"npc_dota_hero_weaver": "file://{images}/heroes/npc_dota_hero_azazin.png",
-			"npc_dota_hero_omniknight": "file://{images}/heroes/npc_dota_hero_stint.png"
+			"npc_dota_hero_omniknight": "file://{images}/heroes/npc_dota_hero_stint.png",
+			"npc_dota_hero_void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -133,7 +134,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"faceless_void": "file://{images}/heroes/npc_dota_hero_evelone.png",
 			"slark": "file://{images}/heroes/npc_dota_hero_bratishkin.png",
 			"weaver": "file://{images}/heroes/npc_dota_hero_azazin.png",
-			"omniknight": "file://{images}/heroes/npc_dota_hero_stint.png"
+			"omniknight": "file://{images}/heroes/npc_dota_hero_stint.png",
+			"void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
