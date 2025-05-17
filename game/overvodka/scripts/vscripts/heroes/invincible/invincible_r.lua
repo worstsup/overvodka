@@ -75,7 +75,7 @@ end
 modifier_invincible_r_slow = class({})
 function modifier_invincible_r_slow:IsHidden() return false end
 function modifier_invincible_r_slow:IsDebuff() return true end
-function modifier_invincible_r_slow:IsPurgable() return true end
+function modifier_invincible_r_slow:IsPurgable() return false end
 
 function modifier_invincible_r_slow:DeclareFunctions()
     return {
@@ -115,7 +115,7 @@ end
 modifier_invincible_r_debuff = class({})
 
 function modifier_invincible_r_debuff:IsPurgable()
-	return true
+	return false
 end
 
 function modifier_invincible_r_debuff:OnCreated( kv )
