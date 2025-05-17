@@ -972,7 +972,7 @@
 		"DOTA_Tooltip_ability_sasavot_r_cooldown_scepter" "COOLDOWN:"
 		"DOTA_Tooltip_ability_sasavot_r_scepter_Description" "Reduces cooldown and allows this ability to be used even when the hero is disabled."
 		"DOTA_Tooltip_ability_sasavot_shard" "SEX NOTEBOOK"
-		"DOTA_Tooltip_ability_sasavot_shard_Description" "Gleb takes out a sex note from his pocket and writes his victim in there, draining their heart. Applies exhaustion and slow to the target enemy. When used on an enemy marked by the BLEB MARK ability, it activates it."
+		"DOTA_Tooltip_ability_sasavot_shard_Description" "Gleb takes out a sex note from his pocket and writes his victim in there, draining their heart. Applies exhaustion and slow to the target enemy."
 		"DOTA_Tooltip_ability_sasavot_shard_Lore" "Created by <font color='#FFC0CB'>KOVL</font>, <font color='#1E90FF'>4aoaxa</font>, <font color='#00A86B'>TIMOXA666</font>"
 		"DOTA_Tooltip_ability_sasavot_shard_ms" "%MOVEMENT SLOW:"
 		"DOTA_Tooltip_ability_sasavot_shard_duration" "DURATION:"
