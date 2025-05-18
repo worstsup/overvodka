@@ -3,6 +3,7 @@
 		<include src="file://{resources}/scripts/custom_game/custom_ui_manifest.js" />
 		<include src="file://{resources}/scripts/custom_game/vector_targeting.js" />
 		<include src="file://{resources}/scripts/custom_game/custom_indicator.js" />
+		<include src="file://{resources}/scripts/custom_game/sans_updater_panel.js" />
 	</scripts>
 	<Panel>
 		<CustomUIElement type="HudTopBar"			layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />

@@ -108,6 +108,7 @@ PrecacheUtils.particles = {
 		"particles/viper_base_attack_new.vpcf",
 		"particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf",
         "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf",
+		"particles/custom_hud/spell_level_max.vpcf",
 		"particles/chapman.vpcf",
 }
 
