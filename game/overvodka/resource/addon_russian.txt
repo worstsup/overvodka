@@ -1257,8 +1257,8 @@
 		"DOTA_Tooltip_modifier_generic_disarmed_lua" "Бессилие"
 		"DOTA_Tooltip_modifier_nix_rus" "Древний Рус"
 		"DOTA_Tooltip_modifier_nix_rus_Description" "Ваша сила увеличена"
-		"DOTA_Tooltip_modifier_axe_berserkers_call_lol_debuff" "Древний Рус"
-		"DOTA_Tooltip_modifier_axe_berserkers_call_lol_debuff_Description" "Ваша сила уменьшена"
+		"DOTA_Tooltip_modifier_nix_rus_debuff" "Древний Рус"
+		"DOTA_Tooltip_modifier_nix_rus_debuff_Description" "Ваша сила уменьшена"
 		"DOTA_Tooltip_ability_vengefulspirit_soul_strike"							"НОВАЯ МЕТА"
 
 		"DOTA_Tooltip_ability_arsen_konchai" "КОНЧАЙ"

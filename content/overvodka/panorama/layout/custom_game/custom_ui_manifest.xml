@@ -32,7 +32,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_step.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_ivanov.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_kirill.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_dmb.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_stariy.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_dima.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_orlov.png" />

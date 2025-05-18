@@ -6739,7 +6739,7 @@
 				"armor"
 				{
 					"value"	"0"
-					"special_bonus_shard"	"+3"
+					"special_bonus_shard"	"+4"
 				}
 		}
 	}
@@ -7013,7 +7013,7 @@
 				"duration"						"10"
 				"model_scale"					"50"
 				"bonus_strength"				"30 60 90"
-				"str_loss"						"30 35 40"
+				"str_loss"						"-30 -35 -40"
 				"radius"
 				{
 					"value"	"800"
@@ -7023,7 +7023,7 @@
 				"as_loss"
 				{
 					"value" "0"
-					"special_bonus_facet_nix_pravin"	"+30 +65 +100"
+					"special_bonus_facet_nix_pravin"	"-30 -65 -100"
 					"RequiresFacet"	"nix_pravin"
 				}
 				"dps"
@@ -7031,6 +7031,11 @@
 					"value"	"0"
 					"special_bonus_facet_nix_levin"				"+50 +100 +150"
 					"RequiresFacet"	"nix_levin"
+				}
+				"disarm"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+1"
 				}
 		}
 	}
@@ -12872,7 +12877,7 @@
 		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
-			"damage_base"				"75 150 225 300"
+			"damage_base"				"100 175 250 325"
 			"fear_duration"				"0.8 0.9 1.0 1.1"
 			"damage"
 			{
@@ -12996,7 +13001,7 @@
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-        "AbilityCooldown"               "60"
+        "AbilityCooldown"               "60 55 50"
 		"AbilityCastPoint"				"0.2"
         "AbilityManaCost"               "100 200 300"
 		"AbilityCastRange"				"600"
