@@ -157,6 +157,13 @@ function modifier_invincible_r_debuff:DeclareFunctions()
 	return funcs
 end
 
+function modifier_invincible_r_debuff:CheckState()
+	local state = {
+		[MODIFIER_STATE_TETHERED] = true,
+	}
+	return state
+end
+
 function modifier_invincible_r_debuff:GetModifierMoveSpeed_Limit()
 	return self.limit
 end

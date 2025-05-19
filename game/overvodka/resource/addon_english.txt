@@ -1624,7 +1624,7 @@
 		"DOTA_Tooltip_modifier_kirill_r_Description" "You have disappeared from the minimap, and your vision and movement speed have been reduced"
 		"DOTA_Tooltip_ability_kirill_w" "BRAINROT"
 		"DOTA_Tooltip_ability_kirill_w_Description" "Tung Tung Tung Sahur enchants his bat. With each hit, he has a chance to apply one of 4 effects to the enemy: stun, mute, silence, or disarm. \nDoes not work on illusions."
-		"DOTA_Tooltip_ability_kirill_w_shard_Description" "The ability works on illusions. Also, when the ability is triggered, an uncontrollable illusion appears that attacks the enemy."
+		"DOTA_Tooltip_ability_kirill_w_shard_Description" "The ability works on illusions. Also, when the ability is triggered, an illusion appears that attacks the enemy."
 		"DOTA_Tooltip_ability_kirill_w_illusion_duration" "ILLUSION DURATION:"
 		"DOTA_Tooltip_ability_kirill_w_illusion_damage_outgoing" "%ILLUSION OUTGOING DAMAGE:"
 		"DOTA_Tooltip_ability_kirill_w_illusion_damage_incoming" "%ILLUSION INCOMING DAMAGE:"

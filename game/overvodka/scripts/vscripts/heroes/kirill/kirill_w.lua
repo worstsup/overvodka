@@ -62,7 +62,6 @@ function modifier_kirill_w:OnAttackLanded(params)
         illusion:SetAbsOrigin(target:GetAbsOrigin())
         FindClearSpaceForUnit(illusion, target:GetAbsOrigin(), true)
         illusion:SetOwner(parent)
-		illusion:SetControllableByPlayer( -1, false )
         local order = {
             UnitIndex = illusion:entindex(),
             OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,

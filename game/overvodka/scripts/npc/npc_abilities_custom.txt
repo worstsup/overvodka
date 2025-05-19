@@ -515,7 +515,7 @@
 				"bonus_attribute"             "1"
 				"AbilityCooldown"
 				{
-					"value"	"16 14 12 10"
+					"value"	"15 13 11 9"
 				}
 		}
 	}
@@ -3562,7 +3562,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"25"
-					"special_bonus_unique_kirill_3" "-6"
+					"special_bonus_unique_kirill_3" "-8"
 				}
 				"damage"
 				{
@@ -3633,7 +3633,7 @@
 					"special_bonus_unique_kirill_6" "+1"
 				}
 				"damage_tooltip"			"50 75 100"
-				"move_speed_tooltip"			"-20"
+				"move_speed_tooltip"			"-30"
 		}
 	}
 	//=================================================================================================================
@@ -12607,7 +12607,7 @@
 		{
 			"duration"
 			{
-				"value"	"4.5 5.0 5.5 6.0"
+				"value"	"5.0 5.5 6.0 6.5"
 				"special_bonus_unique_stint_2" "+1"
 			}
 			"base_damage"
@@ -12753,7 +12753,7 @@
 		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
 		"AbilityManaCost"			"150 200 250"
-		"AbilityCooldown"			"100 95 90"
+		"AbilityCooldown"			"90 85 80"
 		"AbilityTextureName"		"stint_r"
 		"AbilityValues"
 		{
@@ -12865,10 +12865,9 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"   			"invincible_q"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastPoint"				"0.25"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
@@ -12931,6 +12930,11 @@
                 "value"                             "50"
                 "special_bonus_facet_invincible_facet_fly"	"=100"
             }
+			"facet_movespeed_tooltip"
+			{
+				"value"	"0"
+				"special_bonus_facet_invincible_facet_fly"	"+250"
+			}
         }
     }
 	"invincible_e"
@@ -12955,7 +12959,7 @@
 				"bonus_damage"
 				{
 					"value"	"25 50 75 100"
-					"special_bonus_unique_invincible_3"	"+50"
+					"special_bonus_unique_invincible_3"	"+75"
 				}
 				"lifesteal"
 				{
@@ -12981,13 +12985,13 @@
 				"facet_radius"
 				{
 					"value"	"0"
-					"special_bonus_facet_invincible_facet_heal" "+400"
+					"special_bonus_facet_invincible_facet_heal" "+500"
 					"RequiresFacet"	"invincible_facet_heal"
 				}
 				"facet_pct"
 				{
 					"value"	"0"
-					"special_bonus_facet_invincible_facet_heal" "+50"
+					"special_bonus_facet_invincible_facet_heal" "+60"
 					"RequiresFacet"	"invincible_facet_heal"
 				}
 		}
@@ -13023,11 +13027,11 @@
 			"slow_dur"		"2.0"
 			"bonus_ms"		"20 25 30"
 			"bonus_armor"	"10 15 20"
-			"range"			"350"
+			"range"			"300"
 			"bonus_as"
 			{
 				"value"	"0"
-				"special_bonus_unique_invincible_4"	"+50"
+				"special_bonus_unique_invincible_4"	"+60"
 			}
         }
     }

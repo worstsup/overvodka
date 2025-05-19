@@ -33,6 +33,8 @@ function stint_q:OnSpellStart()
         caster:GetOwner(),
         caster:GetTeamNumber()
     )
+    nelya:SetControllableByPlayer(caster:GetPlayerID(), false)
+    nelya:SetOwner(caster)
     nelya:AddNewModifier(caster, self, "modifier_stint_q_trigger", {duration = duration})
     local p = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, nelya)
     ParticleManager:SetParticleControl(p, 0, nelya:GetAbsOrigin())

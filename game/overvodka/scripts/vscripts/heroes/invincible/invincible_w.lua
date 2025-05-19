@@ -163,7 +163,7 @@ function modifier_invincible_w:OnCreated( kv )
 	self.max_speed = self:GetAbility():GetSpecialValueFor("speed")
 	self.creep_damage = self:GetAbility():GetSpecialValueFor("creep_damage")
     if self.creep_damage == 100 then
-        self.max_speed = self.max_speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 2.0
+        self.max_speed = self.max_speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 2.5
     end
 	self.acceleration = 350
 	self.deceleration = 500
@@ -399,7 +399,7 @@ function modifier_invincible_w_end:OnCreated()
     self.speed = self:GetAbility():GetSpecialValueFor("speed")
     self.creep_damage = self:GetAbility():GetSpecialValueFor("creep_damage")
     if self.creep_damage == 100 then
-        self.speed = self.speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 2
+        self.speed = self.speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 2.5
     end
     self:StartIntervalThink(0.01)
 end
