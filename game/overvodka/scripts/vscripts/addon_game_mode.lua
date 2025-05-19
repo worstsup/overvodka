@@ -99,7 +99,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 35 )
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(XP_PER_LEVEL_TABLE)
-
+	GameRules:SetEnableAlternateHeroGrids( false )
 	self.m_bFillWithBots = GlobalSys:CommandLineCheck( "-addon_bots" )
 	self.m_bFastPlay = GlobalSys:CommandLineCheck( "-addon_fastplay" )
 
@@ -261,7 +261,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
 		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
@@ -271,7 +271,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
-		GameRules:SetStrategyTime( 15.0 )
+		GameRules:SetStrategyTime( 10.0 )
 		if GetMapName() == "overvodka_duo" then
 			GameRules:SetCustomGameBansPerTeam( 2 )
 		else

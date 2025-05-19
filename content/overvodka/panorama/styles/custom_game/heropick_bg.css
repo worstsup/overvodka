@@ -1,0 +1,56 @@
+/* Prettified by Source 2 Viewer 12.0.0.0 - https://valveresourceformat.github.io */
+#HeroPickBg
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes 'fadeOutAnimation'
+{
+    from
+    {
+        opacity: 1;
+    }
+    
+    to
+    {
+        opacity: 0;
+    }
+    
+}
+
+@keyframes 'fadeInAnimation'
+{
+    from
+    {
+        opacity: 0;
+    }
+    
+    to
+    {
+        opacity: 1;
+    }
+    
+}
+
+.FadeOut
+{
+    animation-name: fadeOutAnimation;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+}
+
+.FadeIn
+{
+    animation-name: fadeInAnimation;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+}
+
+.facets-precache
+{
+    background-image: url("s2r://panorama/images/hud/facets/icons/shuriken_png.vtex");
+    background-image: url("s2r://");
+}
+

@@ -1,0 +1,10 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/custom_loading_screen.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/overvodka_hud.js" />
+    </scripts>
+    <snippets />
+    <Panel />
+</root>

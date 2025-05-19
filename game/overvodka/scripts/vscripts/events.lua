@@ -7,7 +7,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 
 	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		self:AssignTeams()
-
+		CustomGameEventManager:Send_ServerToAllClients("hero_selection", nil)
 		if Is5v5() then
 			self:ReplaceWinContidion()
 		end
