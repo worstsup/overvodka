@@ -248,7 +248,65 @@ function HeroSelection() {
     SelectedHeroName.style.marginLeft = "0.1%"
     SelectedHeroName.style.marginTop = "-5px"
     SelectedHeroName.style.height = "70px"
+    let PreGameHeroIcons = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("StrategyScreen")
+    let PregameHeroicon = PreGameHeroIcons.FindChildTraverse("SelectedHeroDetails")
+    PregameHeroicon.style.width = "800px"
+    let HeroAbilities = PregameHeroicon.FindChildTraverse("SelectedAbilitiesContainer")
+    let PersonaSelector = PregameHeroicon.FindChildTraverse("PersonaSelector")
+    PersonaSelector.style.visibility = "collapse"
+    HeroAbilities.style.marginTop = "0px"
+    let InnateHolder = HeroAbilities.FindChildTraverse("InnateAbilityContainer")
+    // Function to safely resize elements
+    function resizeElements(elements) {
+        if (elements && elements.length > 0) {
+            for (let element of elements) {
+                if (element) {
+                    element.style.width = "64px";
+                    element.style.height = "64px";
+                }
+            }
+        }
+    }
 
+    function applyResizing() {
+        let AbilityIcons = HeroAbilities.FindChildrenWithClassTraverse("AbilityIconContainer")
+        // Get all ability icons and set their dimensions
+        if (AbilityIcons && AbilityIcons.length > 0) {
+            resizeElements(AbilityIcons);
+        }
+
+        // Find and resize talent tree
+        let talents = HeroAbilities ? HeroAbilities.FindChildrenWithClassTraverse("StatBranch") : null;
+        resizeElements(talents);
+
+        // Find and resize scepter details
+        let scepter = HeroAbilities ? HeroAbilities.FindChildrenWithClassTraverse("ScepterDetails") : null;
+        resizeElements(scepter);
+
+        // Find and resize innate abilities
+        let innate = HeroAbilities ? HeroAbilities.FindChildrenWithClassTraverse("InnateAbility") : null;
+        resizeElements(innate);
+
+        // Find and resize hit target panels
+        let hitTargets = HeroAbilities ? HeroAbilities.FindChildrenWithClassTraverse("Panel") : null;
+        resizeElements(hitTargets);
+
+        // Schedule next update
+        $.Schedule(0.1, applyResizing);
+    }
+
+    // Start the resizing loop
+    applyResizing();
+    let EnterBattleLabel = PregameHeroicon.FindChildTraverse("EnterBattle")
+    if (EnterBattleLabel) {
+        EnterBattleLabel.style.fontSize = "30px"
+        EnterBattleLabel.style.marginTop = "-15px"
+    }
+    let PanelAttribute = PregameHeroicon.FindChildTraverse("PrimaryAttribute")
+    if (PanelAttribute) {
+        PanelAttribute.style.width = "50px"
+        PanelAttribute.style.height = "50px"
+    }
 
 
     // pregame shop
@@ -432,43 +490,6 @@ function HeroSelection() {
     GridBasicsTab.style.borderRadius = "1%"
     GridUpgradesTab.style.borderRadius = "1%"
     GridNeutralsTab.style.borderRadius = "1%"
-    let PreGameHeroIcons = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("StrategyScreen")
-    let PregameHeroicon = PreGameHeroIcons.FindChildTraverse("SelectedHeroDetails")
-    PregameHeroicon.style.width = "800px"
-    let HeroAbilities = PregameHeroicon.FindChildTraverse("SelectedAbilitiesContainer")
-    let PersonaSelector = PregameHeroicon.FindChildTraverse("PersonaSelector")
-    PersonaSelector.style.visibility = "collapse"
-    HeroAbilities.style.marginTop = "0px"
-    let InnateHolder = HeroAbilities.FindChildTraverse("InnateAbilityContainer")
-    let AbilityIcons = HeroAbilities.FindChildrenWithClassTraverse("AbilityIconContainer")
-    let selectors = [
-        "#SelectedHeroAbilities > .AbilityIconContainer",
-        "#SelectedHeroAbilities > .StatBranch", 
-        "#SelectedHeroAbilities > .ScepterDetails",
-        "#SelectedHeroAbilities > .InnateAbility",
-        "#SelectedHeroAbilitiesHitTargets > Panel"
-    ]
-    for (let i = 0; i < AbilityIcons.length; i++) {
-        AbilityIcons[i].style.width = "64px";
-        AbilityIcons[i].style.height = "64px";
-    }
-    for (let selector of selectors) {
-        let elements = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildrenWithClassTraverse(selector);
-        for (let element of elements) {
-            element.style.width = "64px";
-            element.style.height = "64px";
-        }
-    }
-    let EnterBattleLabel = PregameHeroicon.FindChildTraverse("EnterBattle")
-    if (EnterBattleLabel) {
-        EnterBattleLabel.style.fontSize = "30px"
-        EnterBattleLabel.style.marginTop = "-15px"
-    }
-    let PanelAttribute = PregameHeroicon.FindChildTraverse("PrimaryAttribute")
-    if (PanelAttribute) {
-        PanelAttribute.style.width = "50px"
-        PanelAttribute.style.height = "50px"
-    }
     //PregameHeroicon.style.width = "100%"
     //PregameHeroicon.style.marginTop = "-30px"
     //talenttable.style.backgroundImage = "url('file://{images}/custom_game/int_pink/shop_button.png')";
