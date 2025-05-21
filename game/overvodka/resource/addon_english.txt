@@ -235,7 +235,7 @@
 		"dota_tooltip_ability_special_bonus_unique_zhenya_5"	"+{s:bonus_radius} 200 KG Radius"
 		"dota_tooltip_ability_special_bonus_unique_zhenya_6" 	"EAT deals damage from attack"
 		"dota_tooltip_ability_special_bonus_unique_zhenya_7"    "MUKBANG reduces enemies' strength"
-		"dota_tooltip_ability_special_bonus_unique_zhenya_8" 	"+{s:bonus_maxstack} ТЕРПИЛА Max Stacks"
+		"dota_tooltip_ability_special_bonus_unique_zhenya_8" 	"+{s:bonus_maxstack} PUSSY Max Stacks"
 		"dota_tooltip_ability_zhenya_r"							"EAT"
 		"dota_tooltip_ability_zhenya_r_facet_zhenya_facet_r"	"While using the ability, the hero can pass through obstacles."
 		"dota_tooltip_ability_zhenya_r_Description" 			"After a delay of %start_time% sec., Zhenya begins to eat selected enemies, receiving additional movement speed. An enemy caught in the stomach receives periodic damage, which depends on Zhenya's strength and heals him. The hero cannot use items."
