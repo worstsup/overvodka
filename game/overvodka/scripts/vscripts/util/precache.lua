@@ -220,6 +220,7 @@ PrecacheUtils.models = {
 		"rostik/rostik.vmdl",
 		"models/stint/stint.vmdl",
 		"models/invincible/invincible.vmdl",
+		"models/zhenya/zhenya.vmdl",
 }
 
 PrecacheUtils.sounds = {

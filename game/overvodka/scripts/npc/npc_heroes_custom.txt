@@ -2720,10 +2720,10 @@
 	}
 	"npc_dota_hero_mars"
 	{
-		"Model"						"models/heroes/mars/mars.vmdl"
-		"ModelScale"				"0.9"
-		"VersusScale"				"0.9"
-		"LoadoutScale"				"0.9"
+		"Model"						"models/zhenya/zhenya.vmdl"
+		"DisableWearables"			"1"
+		"ModelScale"				"1.2"
+		"LoadoutScale"				"1.2"
 		"SimilarHeroes"				"7,29,2"
 		"HeroSelectSoundEffect"		"zhenya_start"
 		"GibType"					"default"
@@ -2765,13 +2765,14 @@
 			}
 		}
 		"ArmorPhysical"		"-1"
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"HealthBarOffset"	"250"
+		"AttackCapabilities"	"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"26"
 		"AttackDamageMax"		"34"
 		"AttackRate"		"1.800000"
 		"AttackAnimationPoint"		"0.40000"
 		"AttackAcquisitionRange"		"600"
-		"AttackRange"		"175"
+		"AttackRange"		"150"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"23"
 		"AttributeStrengthGain"		"3.7"

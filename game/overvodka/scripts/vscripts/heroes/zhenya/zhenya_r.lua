@@ -46,6 +46,17 @@ function modifier_zhenya_r_start:CheckState()
     }
 end
 
+function modifier_zhenya_r_start:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+	}
+	return funcs
+end
+
+function modifier_zhenya_r_start:GetOverrideAnimation()
+	return ACT_DOTA_CAST_ABILITY_6
+end
+
 function modifier_zhenya_r_start:OnDestroy()
     if not IsServer() then return end
     self:GetParent():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_zhenya_r_caster", { duration = self:GetAbility():GetSpecialValueFor("duration")} )
@@ -85,6 +96,7 @@ function modifier_zhenya_r_caster:OnCreated()
     if self:GetAbility():GetSpecialValueFor("fly") == 1 then
         self.fly = true
     end
+    self.model_scale = self:GetCaster():GetModelScale()
     self:GetCaster():SetModelScale(self:GetCaster():GetModelScale() + 0.2)
     self.stack_particle = ParticleManager:CreateParticle("particles/zhenya_r_stack.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl( self.stack_particle, 1, Vector(0, 0, 0))
@@ -94,7 +106,6 @@ end
 
 function modifier_zhenya_r_caster:OnDestroy()
     if not IsServer() then return end
-    self.model_scale = 1
     self:GetAbility():SetActivated(true)
     self:GetCaster():SetModelScale(self.model_scale)
     self:GetCaster():SetRenderColor(255, 255, 255)
