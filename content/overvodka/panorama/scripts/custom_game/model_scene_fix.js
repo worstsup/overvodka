@@ -32,6 +32,7 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_lion",
     "npc_dota_hero_omniknight",
     "npc_dota_hero_void_spirit",
+    "npc_dota_hero_mars",
 ]
 
 function FixModelScene(){
