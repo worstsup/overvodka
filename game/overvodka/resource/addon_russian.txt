@@ -231,7 +231,7 @@
 		"npc_dota_hero_mars_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
-		"dota_tooltip_ability_special_bonus_unique_zhenya_1" 	"-{s:bonus_AbilityCooldown} перезарядки ЖЕНЯ ПРО ОТСОС"
+		"dota_tooltip_ability_special_bonus_unique_zhenya_1" 	"-{s:bonus_AbilityCooldown} сек. перезарядки ЖЕНЯ ПРО ОТСОС"
 		"dota_tooltip_ability_special_bonus_unique_zhenya_2" 	"+{s:bonus_duration} к длительности МУКБАНГ"
 		"dota_tooltip_ability_special_bonus_unique_zhenya_3" 	"+{s:bonus_hpregen} к восст. здоровья за заряд ТЕРПИЛА"
 		"dota_tooltip_ability_special_bonus_unique_zhenya_4"	"+{s:bonus_radius} к радиусу ЖЕНЯ ПРО ОТСОС"
