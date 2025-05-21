@@ -211,7 +211,8 @@ function HeroSelection() {
     let RightContainer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RightContainer")
     RightContainer.style.visibility = "visible"
     RightContainer.style.paddingRight = "0%"
-    RightContainer.style.position = "5% 30% 0px"
+    const aspectRatio = RightContainer.actuallayoutwidth / RightContainer.actuallayoutheight;
+    RightContainer.style.position = aspectRatio < 1.7 ? "0% 30% 0px" : "5% 30% 0px"
     let RightContainerMain = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RightContainerMain")
     RightContainerMain.style.visibility = "visible"
     RightContainerMain.style.position = "0% 0% 0px"
@@ -296,7 +297,7 @@ function PickIconsStyles()
     HeroGrid.style.height = "900px";
     HeroGrid.style.width = "100%";
     HeroGrid.style.marginTop = "0px";
-    HeroGrid.style.marginLeft = "-20px";
+    HeroGrid.style.marginLeft = "0%";
 
     let GridCategories = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("GridCategories")
     GridCategories.style.flowChildren = "down";
