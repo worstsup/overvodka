@@ -148,6 +148,7 @@ PrecacheUtils.units = {
 }
 
 PrecacheUtils.models = {
+		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",
         "models/props_gameplay/rune_goldxp.vmdl",
         "models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl",
 		"models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl",
@@ -232,6 +233,7 @@ PrecacheUtils.sounds = {
     	"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts",
     	"soundevents/armature_crit.vsndevts",
 		"soundevents/5opka_start.vsndevts",
+		"soundevents/zhenya_start.vsndevts",
 		"soundevents/invincible_start.vsndevts",
 		"soundevents/magic_crit.vsndevts",
 		"soundevents/elixir_collector.vsndevts",

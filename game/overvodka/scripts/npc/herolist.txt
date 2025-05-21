@@ -33,7 +33,7 @@
 	"npc_dota_hero_luna"				"0"
 	"npc_dota_hero_lycan"				"0"
 	"npc_dota_hero_magnataur"			"0"
-	"npc_dota_hero_mars"				"0"
+	"npc_dota_hero_mars"				"1"
 	"npc_dota_hero_medusa"				"0"
 	"npc_dota_hero_morphling"			"1"
 	"npc_dota_hero_naga_siren"			"0"

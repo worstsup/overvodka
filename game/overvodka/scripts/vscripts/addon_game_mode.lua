@@ -565,32 +565,32 @@ function COverthrowGameMode:UpdateScoreboard()
 	else
 		self.isGameTied = false
 	end
-	local allHeroes = HeroList:GetAllHeroes()
-	for _,entity in pairs( allHeroes) do
-		if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore and GetMapName() ~= "overvodka_5x5" then
-			if entity:IsAlive() == true then
-				-- Attaching a particle to the leading team heroes
-				local existingParticle = entity:Attribute_GetIntValue( "particleID", -1 )
-       			if existingParticle == -1 then
-       				local particleLeader = ParticleManager:CreateParticle( "particles/leader/leader_overhead.vpcf", PATTACH_OVERHEAD_FOLLOW, entity )
-					ParticleManager:SetParticleControlEnt( particleLeader, PATTACH_OVERHEAD_FOLLOW, entity, PATTACH_OVERHEAD_FOLLOW, "follow_overhead", entity:GetAbsOrigin(), true )
-					entity:Attribute_SetIntValue( "particleID", particleLeader )
-				end
-			else
-				local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
-				if particleLeader ~= -1 then
-					ParticleManager:DestroyParticle( particleLeader, true )
-					entity:DeleteAttribute( "particleID" )
-				end
-			end
-		else
-			local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
-			if particleLeader ~= -1 then
-				ParticleManager:DestroyParticle( particleLeader, true )
-				entity:DeleteAttribute( "particleID" )
-			end
-		end
-	end
+	--local allHeroes = HeroList:GetAllHeroes()
+	--for _,entity in pairs( allHeroes) do
+	--	if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore and GetMapName() ~= "overvodka_5x5" then
+	--		if entity:IsAlive() == true then
+	--			-- Attaching a particle to the leading team heroes
+	--			local existingParticle = entity:Attribute_GetIntValue( "particleID", -1 )
+    --   		if existingParticle == -1 then
+     --  			local particleLeader = ParticleManager:CreateParticle( "particles/leader/leader_overhead.vpcf", PATTACH_OVERHEAD_FOLLOW, entity )
+	--				ParticleManager:SetParticleControlEnt( particleLeader, PATTACH_OVERHEAD_FOLLOW, entity, PATTACH_OVERHEAD_FOLLOW, "follow_overhead", entity:GetAbsOrigin(), true )
+	--				entity:Attribute_SetIntValue( "particleID", particleLeader )
+	--			end
+	--		else
+	--			local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
+	--			if particleLeader ~= -1 then
+	--				ParticleManager:DestroyParticle( particleLeader, true )
+	--				entity:DeleteAttribute( "particleID" )
+	--			end
+	--		end
+	--	else
+	--		local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
+	--		if particleLeader ~= -1 then
+	--			ParticleManager:DestroyParticle( particleLeader, true )
+	--			entity:DeleteAttribute( "particleID" )
+	--		end
+	--	end
+	--end
 end
 
 ---------------------------------------------------------------------------

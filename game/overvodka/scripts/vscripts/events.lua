@@ -4,14 +4,14 @@
 ---------------------------------------------------------------------------
 function COverthrowGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
-
-	if nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+	if nNewState == DOTA_GAMERULES_STATE_INIT then
+        CustomGameEventManager:Send_ServerToAllClients("gamesetup", nil)
+	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		self:AssignTeams()
 		CustomGameEventManager:Send_ServerToAllClients("hero_selection", nil)
 		if Is5v5() then
 			self:ReplaceWinContidion()
 		end
-
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then

@@ -3,6 +3,7 @@ item_byebye = class({})
 function item_byebye:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
+    if caster:HasModifier("modifier_zhenya_r_caster") then return end
     EmitSoundOn("byebye_start", caster)
     ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf", PATTACH_ABSORIGIN, caster)
 end

@@ -10,109 +10,7 @@ function RemovePickBg() {
 }
 
 remove = 0
-
 bgid = 0
-
-
-    var BackgroundImages = FillBackgroundImageArray()
-
-    let ScanImage = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RadarIcon")
-    let RightMapContainers = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("GlyphScanContainer")
-    RightMapContainers.style.marginTop = "50px"
-    RightMapContainers.style.marginLeft = "244px"
-    RightMapContainers.style.marginBottom = "0px"
-    let RoshanTimer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RoshanTimerContainer")
-    RoshanTimer.style.visibility = "collapse"
-    let Minimap = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("minimap")
-    let heropanel = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("center_bg")
-    heropanel.style.width = "100%";
-    let InventoryBackgroundBot = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("inventory_items")
-    InventoryBackgroundBot.style.backgroundColor = "transparent"
-    let InventoryBackgroundTop = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("InventoryBG")
-    InventoryBackgroundTop.style.backgroundColor = "transparent"
-    InventoryBackgroundTop.style.marginBottom = "1000px"
-    let InventoryTop = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("inventory")
-    let Talents = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("StatBranchBG")
-    let RightFlare = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("right_flare")
-    RightFlare.style.height = "160px"
-    let NeutralSlot = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("inventory_neutral_craft_holder")
-    let LeftFlare = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("left_flare")
-    LeftFlare.style.height = "138px";
-    LeftFlare.style.width = "52px";
-    let LevelLabel = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("LevelLabel")
-    LevelLabel.style.textShadow = "0px 0px 0px transparent"
-    let LevelProgressBg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CircularXPProgress_BG")
-    LevelProgressBg.style.border = "0px solid transparent"
-    LevelProgressBg.style.borderRadius = "50%"
-    let LevelProgressFg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CircularXPProgress_FG")
-    LevelProgressFg.style.borderRadius = "50%"
-    let LevelBG = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("LevelBackground")
-    LevelBG.style.visibility = "collapse"
-    LevelBG.style.borderRadius = "50%";
-    let LevelBlur = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CircularXPProgressBlur_BG")
-    LevelBlur.style.visibility = "visible"
-    let LevelBlur2 = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CircularXPProgressBlur_FG")
-    LevelBlur2.style.visibility = "collapse"
-    LevelProgressBg.style.backgroundColor = "black"
-    let HeroOverlay = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PortraitGroup")
-    let ShopBg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("shop_launcher_bg")
-    ShopBg.style.width = "290px"
-    ShopBg.style.height = "73px"
-    let QuicbuyBg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("QuickBuyRows")
-    QuicbuyBg.style.marginLeft = "32px"
-    QuicbuyBg.style.paddingLeft = "2px"
-    QuicbuyBg.style.marginBottom = "65px"
-    let ShopButtonBg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("ShopButton")
-    ShopButtonBg.style.width = "94px"
-    ShopButtonBg.style.padding = "0px -0px 0px 0px"
-    ShopButtonBg.style.marginLeft = "10px"
-    let ShopContainer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("ShopCourierControls")
-    ShopContainer.style.marginLeft = "25px"
-    let ShopGold = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GoldIcon")
-
-    let CourIcon = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectCourierButton")
-    let CourBust = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CourierBurstButton")
-    let CourProtect = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("CourierShieldButton")
-    let CourGiveButton = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("DeliverItemsButton")
-    let CourDeliverSpinner = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("Spinner")
-    let StashBg = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("stash_bg")
-    StashBg.style.backgroundImage               = "url('file://{images}/custom_game/stash_bg.png')"
-    let GameInfoButton = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoButton")
-    GameInfoButton.style.backgroundColor    = "black"
-    let GameInfoIcon = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoIcon")
-    let GameInfoOpenClose = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoOpenClose")
-
-    let SearchBox = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("SearchBox")
-    let GiudeFlyoutContainer = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GuideFlyoutContainer")
-    let ShopSearchIcon = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopSearchIcon")
-    let PlaceholderText = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("PlaceholderText")
-    let SearchContainter = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("SearchContainer")
-    let ToggleMinimapShop = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ToggleMinimalShop")
-    let ShopItems_basics = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_basics").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_support = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_support").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_magics = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_magics").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_defense = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_defense").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_weapons = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_weapons").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_artifacts = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_artifacts").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_consumables = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_consumables").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_atributeslabel = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_attributes").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_weapons_armor = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_weapons_armor").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_misc = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_misc").FindChildTraverse("ShopItemsHeader")
-    let ShopItems_secretshop = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_secretshop").FindChildTraverse("ShopItemsHeader")
-    let GridBasicsTab = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridBasicsTab")
-    let GridUpgradesTab = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridUpgradesTab")
-    let GridNeutralsTab = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridNeutralsTab")
-
-    //let newUI = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("center_block")
-    //$.Msg(newUI)
-
-    //newUI.FindChildrenWithClassTraverse("TertiaryAbilityContainer")[0].style.visibility = "visible";
-    /*let AbilityLvl = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("Ability0")
-    let AbilityLvl1 = AbilityLvl.FindChildTraverse("ButtonAndLevel")
-    let AbilityLvl12 = AbilityLvl.FindChildTraverse("LevelUpTab").FindChildTraverse("LevelUpButton")
-    AbilityLvl12.style.visibility   = "visible";
-    AbilityLvl12.style.backgroundImage              = "url('file://{images}/custom_game/gold_small.png')";
-    */
 
 
 function HeroSelection() {
@@ -140,9 +38,10 @@ function HeroSelection() {
     selectionBg.style.backgroundRepeat = "no-repeat"
 
     let CustomBackground = selectionBg.FindChild( "HeroPickBg" );
-    CustomBackground.style.backgroundImage = "url('file://{images}/custom_game/overvodka_pick.png')";
+    CustomBackground.style.backgroundImage = "url('file://{resources}/videos/overvodka_pick.webm')";
     CustomBackground.style.backgroundSize = "100% 100%"
-    
+    let TitlesContainer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("TitlesContainer")
+    TitlesContainer.style.visibility = "collapse"
     // hero selection UI
     let Minimap = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreMinimapContainer")
     if (Game.GetMapInfo().map_display_name == "overvodka_5x5"){
@@ -207,18 +106,17 @@ function HeroSelection() {
     HeroBlock.style.backgroundColor = "gradient( linear, 0% -30%, 0% 100%, from(rgb(255, 255, 0) ), to( black ) )";
     let PickButton = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("LockInButton")
     PickButton.style.visibility = "visible"
-    PickButton.style.borderTop = "3px solid yellow"
+    PickButton.style.borderTop = "2px solid yellow"
     PickButton.style.borderRight = "3px solid yellow"
-    PickButton.style.backgroundColor = "black"
+    PickButton.style.boxShadow = "0 0 10px rgba(255, 255, 0, 0.3)"
     let RandomButton = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RandomButton")
     RandomButton.style.visibility = "visible"
-    RandomButton.style.borderTop = "3px solid yellow"
-    RandomButton.style.borderLeft = "2px solid yellow"
+    RandomButton.style.borderTop = "2px solid yellow"
+    RandomButton.style.boxShadow = "0 0 10px rgba(255, 255, 0, 0.3)"
     RandomButton.style.marginLeft = "-1px"
-    RandomButton.style.backgroundColor = "black"
     let PickBottom = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroPickControls")
     PickBottom.style.visibility = "visible"
-    PickBottom.style.backgroundColor = "black"
+    PickBottom.style.backgroundColor = " #FFD700"
     PickBottom.style.height = "75px"
 
 
@@ -246,7 +144,7 @@ function HeroSelection() {
     SelectedHeroDetails.style.position = "58.4% 25% 0px"
     let SelectedHeroName = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectedHeroName")
     SelectedHeroName.style.marginLeft = "0.1%"
-    SelectedHeroName.style.marginTop = "-5px"
+    SelectedHeroName.style.marginTop = "-15px"
     SelectedHeroName.style.height = "70px"
     let PreGameHeroIcons = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("StrategyScreen")
     let PregameHeroicon = PreGameHeroIcons.FindChildTraverse("SelectedHeroDetails")
@@ -300,7 +198,7 @@ function HeroSelection() {
     let EnterBattleLabel = PregameHeroicon.FindChildTraverse("EnterBattle")
     if (EnterBattleLabel) {
         EnterBattleLabel.style.fontSize = "30px"
-        EnterBattleLabel.style.marginTop = "-15px"
+        EnterBattleLabel.style.marginTop = "-25px"
     }
     let PanelAttribute = PregameHeroicon.FindChildTraverse("PrimaryAttribute")
     if (PanelAttribute) {
@@ -359,7 +257,8 @@ function HeroSelection() {
     let HeroModelOverlay = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelOverlay")
     HeroModelOverlay.style.height = "1000px"
     HeroModelOverlay.style.width = "100%"
-    
+    let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
+    HeroModelLoadout.style.marginTop = "-10%"
     let StatBranchPick = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectedHeroAbilitiesHitTargets");
     StatBranchPick.style.visibility = "collapse"
 
@@ -371,179 +270,37 @@ function HeroSelection() {
     $.Schedule(0.25, PickIconsStyles)
     $.Schedule(1, PickIconsStyles)
     $.Schedule(1.25, PickIconsStyles)
-
-    
-    
-    // hero pick  похожие
-    
-
-    // GAME INFO BLOCK
-    //let InfoBlockBg = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoPanel")
-    //InfoBlockBg.style.backgroundColor = "transparent"
-    //InfoBlockBg.style.backgroundImage     = "url('file://{images}/custom_game/game_info/infoblock.png')";
-    //InfoBlockBg.style.width   = "534px"
-    //InfoBlockBg.style.height = "800px"
-    //InfoBlockBg.style.transitionDuration = "0.4s";
-    //InfoBlockBg.style.marginTop = "5%";
-    GameInfoButton.style.transitionDelay = "0s";
-    GameInfoButton.style.transitionDuration = "0.1s";
-    GameInfoButton.style.marginTop  = "8%"
-    /*InfoBlockBg.style.backgroundColor = "transparent"
-    
-    InfoBlockBg.style.backgroundRepeat = "no-repeat"
-    InfoBlockBg.style.marginBottom = "-100px"
-    InfoBlockBg.style.width = "40%"
-    InfoBlockBg.style.height = "100%"
-    InfoBlockBg.style.borderRadius = "0px 1% 1% 0px"
-    InfoBlockBg.style.textAlign = "center"
-    InfoBlockBg.style.boxShadow = "0px 0px 0px 0px transparent"
-    InfoBlockBg.style.marginTop = "0px"
-    */
-    let InfoBlockArea = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoPanelScrollArea")
-    InfoBlockArea.style.height = "100%"
-    let PickChat = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("Chat")
-    PickChat.style.visibility = "visible"   
-    
-    //let Shop = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("shop")
-    //Shop.style.height = "100%" 
-    
-    let InfoBlockTop = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoGradientOverlayTop")
-    InfoBlockTop.style.visibility   = "collapse"
-    let InfoBlockBot = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GameInfoGradientOverlayBottom")
-    InfoBlockBot.style.visibility   = "collapse"
-
-    let SimpleShopIcon = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ToggleAdvancedShop")
-    SimpleShopIcon.style.visibility = "collapse"
-    
-
-    let CommonItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("CommonItems")
-    CommonItems.style.visibility = "collapse"
-
-    let Weapons = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ShopItems_weapons")
-    Weapons.style.height = "500px"
-
-    let GridUpgradeItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridUpgradeItems")
-    GridUpgradeItems.style.height = "1000px"
-
-    let GridUpgradesCategory = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridUpgradesCategory")
-    GridUpgradesCategory.style.height = "1000px"
-
-    let GridMainShop = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridMainShop")
-    GridMainShop.style.height = "1000px"
-
-    let GridMainStopContent = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("GridMainShopContents")
-    GridMainStopContent.style.height = "1000px"
-
-    let Main = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("Main")
-    Main.style.height = "100%"
-
-    let HeightLimiter = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("HeightLimiter")
-    HeightLimiter.style.height = "100%"
-
-    let BuildTitleContainer = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("BuildTitleContainer")
-    BuildTitleContainer.style.visibility = "collapse"
-
-    let RequestSuggestion = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("RequestSuggestion")
-    RequestSuggestion.style.visibility = "collapse"
-    let PopularItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("PopularItems")
-    PopularItems.style.visibility = "collapse"
-
-    // PROZRACHNOST SHOPA
-
-    let ItemCombines = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("ItemCombines")
-    ItemCombines.style.marginBottom = "10px"
-    ItemCombines.style.backgroundColor = "transparent"
-
-    let HeightLimiterContainer = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("HeightLimiterContainer")
-    HeightLimiterContainer.style.height = "1000px"
-    
-
-
-
-    GridUpgradeItems.style.backgroundColor = "transparent"
-    GridUpgradesCategory.style.backgroundColor = "transparent"
-    GridMainShop.style.backgroundColor = "transparent"
-    GridMainStopContent.style.backgroundColor = "transparent"
-    Main.style.backgroundColor = "transparent"
-    HeightLimiter.style.backgroundColor = "transparent"
-    HeightLimiterContainer.style.backgroundColor = "transparent"
-    SearchBox.style.backgroundColor = "transparent"
-
-
-
-    SearchContainter.style.width = "315px"
-    ToggleMinimapShop.style.paddingLeft = "8px"
-    ToggleMinimapShop.style.marginLeft = "2px"
-
-
-    // basic shop lables color
-    
-
-
-    // upgrade shop lables colors
-    
-
-    
-    let Categories = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("Categories")
-    Categories.style.paddingBottom = "0px"
-    Categories.style.paddingTop = "-0px"
-    GridBasicsTab.style.borderRadius = "1%"
-    GridUpgradesTab.style.borderRadius = "1%"
-    GridNeutralsTab.style.borderRadius = "1%"
-    //PregameHeroicon.style.width = "100%"
-    //PregameHeroicon.style.marginTop = "-30px"
-    //talenttable.style.backgroundImage = "url('file://{images}/custom_game/int_pink/shop_button.png')";
-
-    // НАЧАЛО ИГРЫ
-
-    
-
-          // $.Msg("works");
-         //  $.Msg(InterfaceID);
     }
-    /*let PreGameHeroIcons = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("HeroList")
-    let PregameHeroicon = PreGameHeroIcons.FindChildrenWithClassTraverse("HeroCard")
-    for (let i=0; i<=20; i++)
-    {
-       PregameHeroicon[i].style.washColor = "transparent"
-       PregameHeroicon[i].style.width = "51px"
-       PregameHeroicon[i].style.height = "83px"
-    }*/
 
 HeroSelection()
-//var iter = 0
 RemoveWearablesFromDotaScenePanel()
-
-
 
 function PickIconsStyles()
 {
     let PreGame = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("GridCategories");
     let PickIconArray = PreGame.FindChildrenWithClassTraverse("HeroCard")
-    //$.Msg(PreGame)
     for (let key in PickIconArray)
     {
         PickIconArray[key].style.height = "104px"
-        PickIconArray[key].style.width = "63px" 
+        PickIconArray[key].style.width = "63px"
         PickIconArray[key].style.borderRadius = "0%"
         PickIconArray[key].style.margin = "5px"
-        PickIconArray[key].style.border = "1px solid #FFD700" // Gold border
-        PickIconArray[key].style.boxShadow = "0 0 5px rgba(255, 215, 0, 0.5)" // Gold glow effect
-        
-        
+        PickIconArray[key].style.border = "1px solid #FFD700"
+        PickIconArray[key].style.boxShadow = "0 0 5px rgba(255, 215, 0, 0.5)"
         let dotaplus_level = PickIconArray[key].FindChildrenWithClassTraverse("HeroCardContents")[0].FindChildTraverse("HeroBadgeStatus")
         dotaplus_level.style.visibility = "collapse"
     }
-    
+    let MainHeroPick = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("MainHeroPickScreenContents")
+    MainHeroPick.style.marginTop = "50px"
     let HeroGrid = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroGrid")
     HeroGrid.style.height = "900px";
-    HeroGrid.style.width = "100%"; // Increased width
-    HeroGrid.style.marginTop = "-0px";
+    HeroGrid.style.width = "100%";
+    HeroGrid.style.marginTop = "0px";
     HeroGrid.style.marginLeft = "-20px";
 
     let GridCategories = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("GridCategories")
     GridCategories.style.flowChildren = "down";
-    GridCategories.style.width = "1000px"; // Added width to match HeroGrid
+    GridCategories.style.width = "1000px";
 
     let HeroCategories = GridCategories.FindChildrenWithClassTraverse("HeroCategory")
         
@@ -557,58 +314,14 @@ function PickIconsStyles()
     
 }
 
-function ChangeBackgroundImage(panel) {
-    let randomIndex = Math.floor(Math.random() * BackgroundImages.length);
-    let randomImage = BackgroundImages[randomIndex];
-    panel.style.backgroundImage = "url('file://{images}/custom_game/pick_bacground/" + randomImage + ".png')";
-
-    BackgroundImages.splice(randomIndex, 1);
-    if (BackgroundImages.length === 0) {
-        FillBackgroundImageArray();
-    }
-    
-    panel.RemoveClass("FadeOut");
-    panel.AddClass("FadeIn");
-    
-    
-    
-    $.Schedule(5, function() {      
-        panel.RemoveClass("FadeIn");        
-        panel.AddClass("FadeOut");
-        $.Schedule(0.5, function() {
-            ChangeBackgroundImage(panel);           
-        });
-    });
-}
-
-function FillBackgroundImageArray() {   
-    let img_array = []; // список всіх невикористаних картинок // lebiga
-
-    if (BackgroundImages) {
-        //$.Msg("BackgroundImages existing")
-        BackgroundImages = img_array;
-        return;
-    } else {
-        //$.Msg("BackgroundImages not exist for now")
-    }
-
-    return img_array;
-}
-
 
 function RemoveWearablesFromDotaScenePanel()
 {
-    
-    //iter = iter + 1
-    //$.Msg(iter)
     if (Game.GameStateIsAfter(5))
     {
-        //$.Msg("scene was fixed")
         return
     }
-    
     $.Schedule(0.3, RemoveWearablesFromDotaScenePanel)
-    
     let Dotascenepanel = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("Preview").FindChildInLayoutFile("Preview3DItems")
     if (Dotascenepanel) 
     {   
@@ -690,4 +403,13 @@ function RemoveWearablesFromDotaScenePanel()
         }
     }
     */
+}
+const SubscribePanel = $("#SubscribePanel")
+function ToggleSubscribePanel(){
+    Game.EmitSound("UUI_SOUNDS.OvervodkaPrime");
+    SubscribePanel.SetHasClass("Show", !SubscribePanel.BHasClass("Show"))
+}
+
+function CloseSubscribePanel(){
+    SubscribePanel.RemoveClass("Show")
 }

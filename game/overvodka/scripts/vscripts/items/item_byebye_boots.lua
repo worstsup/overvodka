@@ -6,6 +6,7 @@ item_byebye_boots = class({})
 function item_byebye_boots:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
+    if caster:HasModifier("modifier_zhenya_r_caster") then return end
     self.point = self:GetCursorPosition()
     local origin = self:GetCaster():GetOrigin()
     EmitSoundOnLocationWithCaster( self.point, "byebye_start", caster )

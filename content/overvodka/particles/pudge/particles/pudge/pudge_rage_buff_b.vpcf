@@ -1,0 +1,36 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vrfunknown:version{d15c9157-10e0-47bc-9333-1ac81da07b8d} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_Children = 
+	[
+		
+		{
+			m_ChildRef = resource:"particles/epw/pudge_rage_buff_c.vpcf"
+		},
+	]
+	m_ConstantColor = 
+	[
+		85,
+		0,
+		0,
+		255,
+	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_bUseWorldLocation = true
+			m_vecCP1Pos = 
+			[
+				255.000000,
+				0.000000,
+				0.000000,
+			]
+			m_nCP1 = 2
+		},
+	]
+	m_nBehaviorVersion = 12
+}
