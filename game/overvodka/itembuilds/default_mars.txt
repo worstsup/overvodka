@@ -32,8 +32,10 @@
 		{
 			"item"		"item_aghanims_shard"
 			"item"		"item_blink"
-            "item"		"item_waka"
+            "item"		"item_magic_daedalus"
             "item"		"item_armature_strike"
+			"item"		"item_radiance"
+			"item"		"item_elixir_collector"
 		}
 	}
 }
