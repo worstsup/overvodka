@@ -102,7 +102,7 @@ function HeroSelection() {
     
     HeroBlock.style.visibility = "visible"
     HeroBlock.style.margin = "-10px 22px 0px 0px";
-    HeroBlock.style.boxShadow = "0px 0px 10px 0px yellow"
+    HeroBlock.style.boxShadow = "0px 0px 15px 0px yellow"
     HeroBlock.style.backgroundColor = "gradient( linear, 0% -30%, 0% 100%, from(rgb(255, 255, 0) ), to( black ) )";
     let PickButton = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("LockInButton")
     PickButton.style.visibility = "visible"
