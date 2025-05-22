@@ -4,7 +4,6 @@ LinkLuaModifier( "modifier_mellstroy_shavel_debuff", "heroes/mellstroy/modifier_
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
 function mellstroy_shavel:Precache( context )
-	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", context )
 end
 

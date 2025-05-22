@@ -5675,69 +5675,18 @@
 	//=================================================================================================================
 	"stariy_zveri"
 	{
-		"BaseClass"                 "ability_datadriven"
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"				"heroes/stariy/stariy_zveri"
 		"AbilityTextureName"        "zveri"
 		"MaxLevel"                  "4"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"
-		"AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastAnimation"      "ACT_DOTA_ATTACK"
+		"AbilityCastPoint"			"0.2"
 		"AbilityManaCost"           "75 100 125 150"
-		"AbilityCastRange" 		    "600"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"				"heroes/stariy/zveri.lua"
-				"Function"					"Sound"
-			}	
-			"TrackingProjectile"
-			{
-				"Target"            "TARGET"
-				"EffectName"        "particles/econ/items/skywrath_mage/skywrath_arcana/skywrath_arcana_rod_of_atos_projectile.vpcf"
-				"Dodgeable"         "1"
-				"ProvidesVision"    "0"
-				"MoveSpeed"         "600"
-				"SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
-			}
-		}
-		"OnProjectileHitUnit"
-		{
-		    "DeleteOnHit"    "1"
-			"RunScript"
-			{
-				"ScriptFile"				"heroes/stariy/zveri.lua"
-				"Function"					"Tricks"
-			}
-		}
-		"Modifiers"
-		{
-		    "modifier_stariy_disarmed"
-		    {
-		        "IsHidden"          "0"
-		        "IsDebuff"		"1"
-		        "EffectName"	"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_disarm_ti6_debuff.vpcf"
-			    "EffectAttachType"	"follow_overhead"
-		        "States"
-		        {
-		            "MODIFIER_STATE_DISARMED"   "MODIFIER_STATE_VALUE_ENABLED"
-		        }
-		    }
-			
-		    "modifier_stariy_silenced"
-		    {
-		        "IsHidden"          "0"
-		        "IsDebuff"		"1"
-		        "EffectName"	"particles/econ/items/drow/drow_arcana/drow_arcana_silenced_v2.vpcf"
-		        "EffectAttachType"	"follow_overhead"
-		        "States"
-		        {
-		            "MODIFIER_STATE_SILENCED"   "MODIFIER_STATE_VALUE_ENABLED"
-		        }
-		    }
-		}
+		"AbilityCastRange" 		    "700"
 		"AbilityValues"
         {
 				"AbilityCooldown"
@@ -10931,7 +10880,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
-	"gaster_blaster" 
+	"gaster_blaster"
 	{
     	"BaseClass"                "ability_lua"
     	"ScriptFile"               "heroes/sans/gaster_blaster.lua"

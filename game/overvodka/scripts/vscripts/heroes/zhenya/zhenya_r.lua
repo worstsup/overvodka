@@ -216,7 +216,7 @@ function modifier_zhenya_r_target:OnCreated( kv )
     if not IsServer() then return end
     self:GetParent():AddEffects( EF_NODRAW )
     self:GetParent():AddNoDraw()
-    self.particle = ParticleManager:CreateParticleForPlayer("particles/pudge/pudgerage.vpcf", PATTACH_EYES_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner())
+    self.particle = ParticleManager:CreateParticleForPlayer("particles/pudge/pudgerage.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner())
     self:AddParticle( self.particle, false, false, -1, false, true )
 
     local tick = 6

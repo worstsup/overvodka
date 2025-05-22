@@ -2726,6 +2726,7 @@
 		"LoadoutScale"				"1.2"
 		"SimilarHeroes"				"7,29,2"
 		"HeroSelectSoundEffect"		"zhenya_start"
+		"SoundSet"					"Hero_PrimalBeast"
 		"GibType"					"default"
 		"Ability1"					"zhenya_q"
 		"Ability2"					"zhenya_w"
@@ -2783,7 +2784,7 @@
 		"StatusManaRegen"	"0.5"
 		"MovementSpeed"		"310"
 		"MovementTurnRate"		"0.800000"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_mars.vsndevts"
+		"GameSoundsFile"		""
 		"VoiceFile"		""
 	}
 }

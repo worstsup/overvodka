@@ -814,35 +814,6 @@
         "Creature"
 		{
 			"CanRespawn"				"0"
-			
-			//Basic AI State
-			//-----------------------------------------------------------------
-			"DefaultState"				"Invade"
-			
-			"States"
-			{
-				"Invade"
-				{
-					"Name"          "Invade"
-      				"Aggression"    "0.0"
-      				"Avoidance"     "60.0"
-      				"Support"       "0.0"
-      				"RoamDistance"  "500.0"
-				}
-			}
-
-			//Level Up Parameters
-			//-----------------------------------------------------------------
-			"HPGain"					"40"
-			"DamageGain"				"10"
-			"ArmorGain"					"1"
-			"MagicResistGain"			"1"
-			"MoveSpeedGain"				"1"
-			"BountyGain"				"5"
-			"XPGain"					"20"
-
-			//Ability Usage Parameters
-			//-----------------------------------------------------------------
 		}
 	}
 	//=================================================================================
