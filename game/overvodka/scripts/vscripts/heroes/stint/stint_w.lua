@@ -9,6 +9,13 @@ function stint_w:Precache(context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts", context)
 end
 
+function stint_w:GetGoldCost()
+    if self:GetCaster():HasShard() then
+        return self:GetSpecialValueFor("investment") + self:GetSpecialValueFor("bonus_shard")
+    end
+    return self:GetSpecialValueFor("investment")
+end
+
 function stint_w:CastFilterResultTarget( hTarget )
     if not IsServer() then
         return UF_SUCCESS
@@ -41,9 +48,11 @@ function stint_w:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
-    local cost   = self:GetSpecialValueFor("investment")
+    local cost = self:GetSpecialValueFor("investment")
+    if self:GetCaster():HasShard() then
+        cost = cost + self:GetSpecialValueFor("bonus_shard")
+    end
     local casterID = caster:GetPlayerOwnerID()
-    PlayerResource:SpendGold(casterID, cost, DOTA_ModifyGold_Unspecified)
     local targetID = target:GetPlayerOwnerID()
     local target_gold = PlayerResource:GetGold(targetID)
     PlayerResource:SpendGold(targetID, cost, DOTA_ModifyGold_Unspecified)
@@ -65,7 +74,13 @@ function stint_w:OnSpellStart()
     local max_debt = self:GetSpecialValueFor("max_debt")
 
     local mC = roll(0, ch_15 + ch_bad/3, ch_2 + ch_bad/3, ch_25 + ch_bad/3)
-    local mT = roll(ch_bad, ch_15, ch_2, ch_25)
+    local mT
+    if caster:HasShard() then
+        local extra = (ch_2 + ch_25) / 2
+        mT = roll(ch_bad + extra, ch_15 + extra, 0, 0)
+    else
+        mT = roll(ch_bad, ch_15, ch_2, ch_25)
+    end
     print(string.format("[Stint W] %s rolled %.1fx, %s rolled %.1fx", caster:GetName(), mC, target:GetName(), mT))
     local part1_caster = math.floor(mC) + 10
     local part2_caster
@@ -174,7 +189,6 @@ end
 
 function modifier_stint_w_debt:OnIntervalThink()
     if not IsServer() then return end
-    if not self.caster:HasShard() then return end
     if math.abs(self.interval - 10.0) > 0.1 then
         self.interval = 10.0
         self:StartIntervalThink(self.interval)

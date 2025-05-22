@@ -2340,7 +2340,7 @@
 				{
 					"value"	"10 20 30 40"
 				}
-				"fire_duration" "5"
+				"fire_duration" "3"
 				"gold"
 				{
 					"value"	"0"
@@ -2659,7 +2659,7 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"duration"					"10 11 12"
-				"damage"					"80 160 240"
+				"damage"					"80 140 200"
 				"magic_resist"				"50 60 70"
 				"dmg_scepter"
 				{
@@ -3750,12 +3750,12 @@
 		"AbilityCastPoint"				"0.6"
 		"AbilityCooldown"				"75.0"
 		"AbilityManaCost"				"150 200 250 300"
-		"AbilityCastRange"				"1000"
+		"AbilityCastRange"				"900"
 		"AbilityValues"
 		{
 				"radius"
 				{
-					"value"	"1000"
+					"value"	"900"
 					"affected_by_aoe_increase" "1"
 				}
 				"duration"
@@ -3763,7 +3763,7 @@
 					"value"	"3.0 3.5 4.0 4.5"
 					"special_bonus_unique_worstsup_6" "+0.5"
 				}
-				"vision_radius"			"1000"
+				"vision_radius"			"900"
 				"as"	"40 80 120 160"
 		}
 	}
@@ -5621,7 +5621,7 @@
         {
         		"AbilityCooldown"
         		{
-        			"value"	"80 75 70"
+        			"value"	"70 65 60"
         			"special_bonus_unique_stariy_6" "-15"
         		}
         		"dur_tooltip"		"5.0"
@@ -5811,7 +5811,7 @@
 					"value"	"600"
 					"affected_by_aoe_increase"	"1"
 				}
-				"creep_mult"	"1.5"
+				"creep_mult"	"2"
 				"ms"
 				{
 					"value"	"0"
@@ -6580,7 +6580,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCooldown"				"80 70 60"
+		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"150 225 300"
 		"AbilityValues"
 		{
@@ -6999,7 +6999,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"		
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"60"
+		"AbilityCooldown"				"80 70 60"
 		"AbilityManaCost"				"150 300 450"
 		"HasScepterUpgrade"				"1"
 		"AbilityValues"
@@ -10974,7 +10974,7 @@
 			}
 			"int_damage"
 			{
-				"value"	"15"
+				"value"	"0"
 				"special_bonus_unique_sans_5" "+20"
 			}
         	"laser_length"   "10000"
@@ -11077,7 +11077,7 @@
 					"value"	"30.0 27.0 24.0 21.0"
 				}
 				"damage"					"100 150 200 250"
-				"impact_stun_duration"		"1.0 1.25 1.5 1.75"
+				"impact_stun_duration"		"0.6 0.8 1.0 1.2"
 				"impact_radius"
 				{
 					"value"	"325"
@@ -11086,7 +11086,7 @@
 				"ally_lift_duration"		"1.0"
 				"ally_range"				"750"
 				"enemy_range"				"400 475 550 625"
-				"enemy_lift_duration"		"0.8 1.2 1.6 2.0"
+				"enemy_lift_duration"		"0.8 1.0 1.2 1.4"
 				"fall_animation"			"0.2"
 				"lift_animation"			"0.2"
 				"max_height"				"325"
@@ -12713,19 +12713,25 @@
 		"AbilityCastPoint"			"0.3"
 		"HasShardUpgrade"			"1"
 		"AbilityManaCost"			"80 105 130 155"
-		"AbilityGoldCost"			"150 200 250 300"
 		"AbilityTextureName"		"stint_w"
 		"AbilityValues"
 		{
-			"investment"	 		"150 200 250 300"
+			"investment"
+			{
+				"value"	"150 200 250 300"
+			}
+			"bonus_shard"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+100"
+			}
 			"chance_bad"	 		"40"
 			"chance_1_5"	 		"30"
 			"chance_2"		 		"20"
 			"chance_2_5"	 		"10"
 			"max_debt"
 			{
-				"value"	"700"
-				"special_bonus_shard" "+300"
+				"value"	"1000"
 			}
 			"no_damage"
 			{
@@ -12881,7 +12887,7 @@
 			"damage"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+100"
+				"special_bonus_scepter"	"+150"
 				"RequiresScepter"		"1"
 			}
 			"secondary"
@@ -12911,18 +12917,18 @@
         {
             "duration"
             {
-                "value"                             "1.5 1.75 2.0 2.25"
+                "value"                             "1.75 2.0 2.25 2.5"
 				"special_bonus_unique_invincible_8"     "+1"        
             }
             "speed"
             {
-                "value"                             "1000"
+                "value"                             "1100"
                 "special_bonus_facet_invincible_facet_fly"	"=0"             
                 "special_bonus_unique_invincible_5"     "+450"              
             }
             "end_delay"                 "0.25"
             "slow_enemy"                "-100"
-            "duration_slow"             "0.8"
+            "duration_slow"             "0.8 1.0 1.2 1.4"
             "damage_from_attack"        "50"
             "buff_attack_speed"         "60 80 100 120"
             "creep_damage"
@@ -12933,7 +12939,7 @@
 			"facet_movespeed_tooltip"
 			{
 				"value"	"0"
-				"special_bonus_facet_invincible_facet_fly"	"+250"
+				"special_bonus_facet_invincible_facet_fly"	"+300"
 			}
         }
     }
@@ -12991,7 +12997,7 @@
 				"facet_pct"
 				{
 					"value"	"0"
-					"special_bonus_facet_invincible_facet_heal" "+60"
+					"special_bonus_facet_invincible_facet_heal" "+75"
 					"RequiresFacet"	"invincible_facet_heal"
 				}
 		}
