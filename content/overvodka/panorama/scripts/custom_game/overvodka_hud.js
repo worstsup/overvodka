@@ -1,5 +1,5 @@
 (function () {
-    GameEvents.Subscribe("hero_selection", HeroSelection )    
+    GameEvents.Subscribe("hero_selection", HeroSelection )
     GameEvents.Subscribe("pre_game", RemovePickBg )
 })();
 
@@ -16,7 +16,7 @@ bgid = 0
 function HeroSelection() {
 
     // if game state is not hero pick or stategy time   
-    if ((!Game.GameStateIs(4)) && (!Game.GameStateIs(5))) 
+    if ((!Game.GameStateIs(0)) && (!Game.GameStateIs(4)) && (!Game.GameStateIs(5)))
     {
         return
     }
@@ -38,8 +38,9 @@ function HeroSelection() {
     selectionBg.style.backgroundRepeat = "no-repeat"
 
     let CustomBackground = selectionBg.FindChild( "HeroPickBg" );
-    CustomBackground.style.backgroundImage = "url('file://{resources}/videos/overvodka_pick.webm')";
-    CustomBackground.style.backgroundSize = "100% 100%"
+    let Movie = $.CreatePanel("MoviePanel", CustomBackground, "Movie", { src: "file://{resources}/videos/overvodka_pick.webm", repeat: "true", autoplay: "onload" });
+    Movie.style.width = "100%";
+    Movie.style.height = "100%";
     let TitlesContainer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("TitlesContainer")
     TitlesContainer.style.visibility = "collapse"
     // hero selection UI

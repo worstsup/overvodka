@@ -12713,19 +12713,25 @@
 		"AbilityCastPoint"			"0.3"
 		"HasShardUpgrade"			"1"
 		"AbilityManaCost"			"80 105 130 155"
-		"AbilityGoldCost"			"150 200 250 300"
 		"AbilityTextureName"		"stint_w"
 		"AbilityValues"
 		{
-			"investment"	 		"150 200 250 300"
+			"investment"
+			{
+				"value"	"150 200 250 300"
+			}
+			"bonus_shard"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+100"
+			}
 			"chance_bad"	 		"40"
 			"chance_1_5"	 		"30"
 			"chance_2"		 		"20"
 			"chance_2_5"	 		"10"
 			"max_debt"
 			{
-				"value"	"700"
-				"special_bonus_shard" "+300"
+				"value"	"1000"
 			}
 			"no_damage"
 			{

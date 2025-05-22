@@ -240,15 +240,15 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
 	GameRules:SetSuggestAbilitiesEnabled( true )
 	GameRules:SetSuggestItemsEnabled( true )
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_DOUBLEDAMAGE , true ) --Double Damage
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_HASTE, true ) --Haste
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true ) --Illusion
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true ) --Invis
-	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true ) --Arcane
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_DOUBLEDAMAGE , true )
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_HASTE, true )
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ILLUSION, true )
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_INVISIBILITY, true )
+	GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_ARCANE, true )
 	if GetMapName() == "overvodka_5x5" then
-		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true ) --Bounty
-		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true ) --Regen
-		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_WATER, true ) -- Water
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, true )
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, true )
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_WATER, true )
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( true )
 		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_tpscroll" )
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( true )
@@ -261,17 +261,17 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
 		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	else
-		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false ) --Bounty
-		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false ) --Regen
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false )
+		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false )
 		GameRules:GetGameModeEntity():SetTPScrollSlotItemOverride("item_lesh")
 		GameRules:GetGameModeEntity():SetDefaultStickyItem( "item_byebye" )
 		GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
-		GameRules:SetStrategyTime( 1000.0 )
+		GameRules:SetStrategyTime( 10.0 )
 		if GetMapName() == "overvodka_duo" then
 			GameRules:SetCustomGameBansPerTeam( 2 )
 		else
@@ -293,7 +293,7 @@ function COverthrowGameMode:InitGameMode()
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end
-	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 600.0 )
+	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 60.0 )
 
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )
