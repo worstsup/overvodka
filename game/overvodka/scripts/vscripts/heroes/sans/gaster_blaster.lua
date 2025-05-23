@@ -36,7 +36,6 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
         local blaster = CreateUnitByName("npc_gaster_blaster", position, false, caster, caster, caster:GetTeamNumber())
         blaster:AddNewModifier(caster, self, "modifier_gaster_blaster", {duration = delay + 0.5})
         blaster:SetForwardVector(direction)
-        
         Timers:CreateTimer(delay, function()
             if not blaster:IsNull() and blaster:IsAlive() then
                 local laser_end = position + direction * laser_length
@@ -50,9 +49,12 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                     DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                     0
                 )
-                local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
-                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+                local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_CUSTOMORIGIN, nil)
+                ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin())
                 ParticleManager:SetParticleControl(particle, 1, laser_end)
+                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+                ParticleManager:SetParticleAlwaysSimulate( particle )
+	            ParticleManager:SetParticleShouldCheckFoW( particle, false )
                 ParticleManager:ReleaseParticleIndex(particle)
                 blaster:EmitSound("gaster_blaster_shoot")
                 local dmg_r = dmg * self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("blasters_damage_pct") * 0.01
@@ -90,9 +92,12 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                 DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                 0
             )
-            local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
-            ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+            local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_CUSTOMORIGIN, nil)
+            ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin())
             ParticleManager:SetParticleControl(particle, 1, laser_end)
+            ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+            ParticleManager:SetParticleAlwaysSimulate( particle )
+	        ParticleManager:SetParticleShouldCheckFoW( particle, false )
             ParticleManager:ReleaseParticleIndex(particle)
             blaster:EmitSound("gaster_blaster_shoot")
             for _,unit in pairs(units) do

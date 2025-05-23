@@ -241,11 +241,11 @@ function HeroSelection() {
     let PregameInventory = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("StartingItemsInventory")
     PregameInventory.style.visibility = "visible"
     PregameInventory.style.backgroundColor = "transparent";
-    let Cmonitems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("TeamSharedItemsStrategyControl")
-    Cmonitems.style.visibility = "collapse"
-    Cmonitems.enabled = false
-    let TeamItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("StartingItemsRightColumnRow")
-    TeamItems.style.visibility = "visible"
+    //let Cmonitems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("TeamSharedItemsStrategyControl")
+    //Cmonitems.style.visibility = "collapse"
+    //Cmonitems.enabled = false
+    //let TeamItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("StartingItemsRightColumnRow")
+    //TeamItems.style.visibility = "visible"
 
     // selected hero panel
     let SelectedHeroModel = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("EconSetPreview2")

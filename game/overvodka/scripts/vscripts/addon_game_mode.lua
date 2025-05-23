@@ -271,7 +271,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
-		GameRules:SetStrategyTime( 10.0 )
+		GameRules:SetStrategyTime( 1000.0 )
 		if GetMapName() == "overvodka_duo" then
 			GameRules:SetCustomGameBansPerTeam( 2 )
 		else

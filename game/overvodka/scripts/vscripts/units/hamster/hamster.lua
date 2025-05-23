@@ -23,6 +23,9 @@ end
 function modifier_hamster:OnCreated()
 	if not IsServer() then return end
 	self.gold = 200
+	self.spawn_pos = self:GetParent():GetAbsOrigin()
+    self.max_radius = 1000
+	self.flee_radius = 700
 	self.gold_cooldowns = {}
 	self:StartIntervalThink(0.2)
 	k = 0
@@ -35,6 +38,38 @@ function modifier_hamster:OnDestroy()
 end
 
 function modifier_hamster:OnIntervalThink()
+	if not IsServer() then return end
+	local parent = self:GetParent()
+    local current_pos = parent:GetAbsOrigin()
+    local enemies = FindUnitsInRadius(
+        parent:GetTeamNumber(),
+        current_pos,
+        nil,
+        self.flee_radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false
+    )
+	if #enemies > 0 then
+        local flee_dir = Vector(0,0,0)
+        for _,enemy in ipairs(enemies) do
+            local dir = (current_pos - enemy:GetAbsOrigin()):Normalized()
+            flee_dir = flee_dir + dir
+        end
+        flee_dir = flee_dir:Normalized()
+        local desired_pos = current_pos + flee_dir * 300
+        local dist_to_spawn = (desired_pos - self.spawn_pos):Length2D()
+        if dist_to_spawn > self.max_radius then
+            desired_pos = self.spawn_pos + (desired_pos - self.spawn_pos):Normalized() * self.max_radius
+        end
+        parent:MoveToPosition(desired_pos)
+    else
+        if parent:IsMoving() then
+			parent:Stop()
+		end
+    end
 	k = k + 1
 	local current_time = GameRules:GetGameTime()
 	for entindex, last_time in pairs(self.gold_cooldowns) do
