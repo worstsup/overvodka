@@ -1397,6 +1397,10 @@
 			{
 				"Deprecated"	"true"
 			}
+			"furion_natures_profit"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -2003,6 +2007,10 @@
 				"Deprecated" "true"
 			}
 			"rattletrap_expanded_armature" 
+			{
+				"Deprecated" "true"
+			}
+			"rattletrap_junk_mail"
 			{
 				"Deprecated" "true"
 			}

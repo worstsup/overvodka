@@ -212,7 +212,7 @@ function HeroSelection() {
     let RightContainer = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RightContainer")
     RightContainer.style.visibility = "visible"
     RightContainer.style.paddingRight = "0%"
-    const aspectRatio = RightContainer.actuallayoutwidth / RightContainer.actuallayoutheight;
+    const aspectRatio = RightContainer.actualLayoutWidth / RightContainer.actualLayoutHeight;
     RightContainer.style.position = aspectRatio < 1.7 ? "0% 30% 0px" : "5% 30% 0px"
     let RightContainerMain = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RightContainerMain")
     RightContainerMain.style.visibility = "visible"
@@ -234,10 +234,10 @@ function HeroSelection() {
     PregameFastBuy.style.backgroundColor = "transparent";
     PregameFastBuy.style.margin = "-20px 0px 0px 180px";
     //PregameFastBuy.style.margin = "250px 300px 0px 270px";
-    PregameFastBuy.style.width = "1000px";
     PregameFastBuy.style.marginRight = "-10px";
+    PregameFastBuy.style.height = "360px"
     PregameFastBuy.style.boxShadow = "0px 0px 10px 0px rgba(0,0,0, 0.7)";
-
+    
     let PregameInventory = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("StartingItemsInventory")
     PregameInventory.style.visibility = "visible"
     PregameInventory.style.backgroundColor = "transparent";

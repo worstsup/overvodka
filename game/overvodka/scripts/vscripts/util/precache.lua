@@ -142,6 +142,17 @@ PrecacheUtils.units = {
     "npc_dota_treasure_courier",
 	"npc_nelya",
 	"npc_rivendare",
+	"npc_dota_courier",
+	"npc_dota_dire1",
+	"npc_dota_dire2",
+	"npc_dota_dire3",
+	"npc_dota_dire4",
+	"npc_dota_dire5",
+	"npc_dota_direr1",
+	"npc_dota_direr2",
+	"npc_dota_direr3",
+	"npc_dota_direr4",
+	"npc_dota_hero_target_dummy",
 }
 
 PrecacheUtils.models = {
@@ -218,7 +229,6 @@ PrecacheUtils.models = {
 		"models/stint/stint.vmdl",
 		"models/invincible/invincible.vmdl",
 		"models/zhenya/zhenya.vmdl",
-		"models/items/courier/butch_pudge_dog/butch_pudge_dog_flying.vmdl",
 }
 
 PrecacheUtils.sounds = {

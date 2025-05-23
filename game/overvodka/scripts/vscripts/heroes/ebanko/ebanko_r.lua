@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_ebanko_scepter", "heroes/ebanko/ebanko_r", LUA_MODIFI
 ebanko_r = class({})
 
 function ebanko_r:Precache(context)
-    PrecacheResource("particle", "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf", context)
+    PrecacheResource("particle", "particles/bloodseeker_bloodrage_eztzhok_new.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok_drips.vpcf", context)
     PrecacheResource("soundfile", "soundevents/ebi_menya.vsndevts", context )
 end
@@ -37,7 +37,7 @@ function modifier_ebanko_r:OnCreated()
     self.bonus_attack_speed = self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
     self.bonus_ms          = self:GetAbility():GetSpecialValueFor("bonus_movespeed")
     if not IsServer() then return end
-    local particle = ParticleManager:CreateParticle("particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
+    local particle = ParticleManager:CreateParticle("particles/bloodseeker_bloodrage_eztzhok_new.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
     self:AddParticle(particle, false, false, -1, false, false)
 end
 
