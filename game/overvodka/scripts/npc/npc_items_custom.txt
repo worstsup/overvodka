@@ -1901,7 +1901,7 @@
 		"AbilityCastPoint"              "0"
 		"AbilityCooldown"               "8"
 		"AbilityManaCost"               "0"
-		"ItemCost"                      "8300"
+		"ItemCost"                      "8900"
 		
 		"AbilityValues"
 		{
@@ -1909,7 +1909,7 @@
 				"phase_movement_speed"      "20"
 				"bonus_movement_speed"      "55"
 				"bonus_damage"              "40"
-				"bonus_all_stats"       "25"
+				"bonus_all_stats"       "45"
 				"bonus_as"				"25"
 				"bonus_armor"			"5"
 				"bonus_health"          "0"
@@ -2945,7 +2945,7 @@
 		"MaxUpgradeLevel"				"1"
 		"ItemBaseLevel"					"1"
 		"AbilityManaCost"				"0"
-		"ItemCost"						"2625"
+		"ItemCost"						"2550"
 		"AbilitySharedCooldown" 		"dominator"
 		"AbilityValues"
 		{
@@ -2987,7 +2987,7 @@
 		"AbilityCastPoint"			"0.1"
 		"AbilityManaCost"			"100"
 		"AbilityCastRange"			"600"
-		"ItemCost"					"8000"
+		"ItemCost"					"7925"
 		"AbilitySharedCooldown" 	"dominator"
 		"AbilityValues"
 		{
