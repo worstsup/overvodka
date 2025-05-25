@@ -819,7 +819,89 @@
 	//=================================================================================
 	// Школьник | Уровень 1
 	//=================================================================================
+	"npc_dota_courier"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_courier"	// Class of entity of link to.
+		"Model"						"models/props_gameplay/donkey.vmdl"	// Model.
+		"SoundSet"					""					// Name of sound set.
+		"Level"						"0"
+		"IsAncient"					"1"
+		"ModelScale"					"1"
+		"UnitLabel"					"courier"
+
+		// Abilities
+		//----------------------------------------------------------------		
+		"Ability1"					"courier_take_stash_items"
+		"Ability2"					"courier_go_to_secretshop"		
+		"Ability3"					"courier_return_stash_items"
+		"Ability4"					"courier_burst"	
+		"Ability5"					"courier_transfer_items"	
+		"Ability6"					"courier_shield"		
+		"Ability7"					"courier_morph"
+		"Ability8"					"courier_take_stash_and_transfer_items"
+		"Ability9"					"courier_transfer_items_to_other_player"
+		"Ability10"					"courier_go_to_enemy_secretshop"
+		"Ability11"					"courier_go_to_sideshop"
+		"Ability12"					"courier_go_to_sideshop2"
+		"Ability13"					"courier_autodeliver"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"120"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"1000"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
 	
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"35"		// Gold earned min.
+		"BountyGoldMax"				"35"		// Gold earned max.
+
+			// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"6"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_COURIER"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"200"		// Range of vision during day light.
+		"VisionNighttimeRange"		"200"		// Range of vision at night time.
+
+		// Bots
+		//----------------------------------------------------------------
+		"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
+
+		//Inventory
+		"HasInventory"				"1"
+		
+		"IdleExpression"			"scenes/default_idle.vcd"
+		
+		"WakesNeutrals"				"0"
+		"animation_transitions"
+		{
+			"ACT_DOTA_IDLE"
+			{
+		 		"regular"	"0.5"
+			}
+			"ACT_DOTA_RUN"
+			{
+				"regular"		"0.5"
+			}
+		}
+	}
 	"npc_schoolboy_1"
 	{
         "BaseClass"             "npc_dota_creature"
@@ -2015,6 +2097,24 @@
     {
     	"BaseClass"             "npc_dota_base_additive"
     	"Model"                 "sans/blaster.vmdl"
+    	"SoundSet"              "Hero_Tinker"
+    	"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    	"AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+    	"ArmorPhysical"         "0"
+    	"MagicalResistance"     "0"
+    	"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_NONE"
+    	"StatusHealth"          "1"
+    	"StatusHealthRegen"     "0"
+    	"VisionDaytimeRange"    "0"
+    	"VisionNighttimeRange"  "0"
+    	"BoundsHullName"        "DOTA_HULL_SIZE_SMALL"
+    	"IsSummoned"            "1"
+	}
+	"npc_gaster_blaster_arcana" 
+    {
+    	"BaseClass"             "npc_dota_base_additive"
+    	"Model"                 "sans/underfell_blaster.vmdl"
+		"ModelScale"            "4.0"
     	"SoundSet"              "Hero_Tinker"
     	"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
     	"AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
@@ -4438,5 +4538,25 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}	
+	}
+	"sans_arcana_loadout"
+    {
+        "BaseClass" "npc_dota_base_additive"
+        "Model" "sans/underfell_sans.vmdl"
+        "AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+        "BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+        "MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed" "450"
+        "MovementTurnRate" "10"
+        "FollowRange" "250" 
+        "StatusHealth" "1" 
+		"ModelScale"	"1.4"
+        "TeamName" "DOTA_TEAM_GOODGUYS" 
+        "CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+        "VisionDaytimeRange" "0" 
+        "VisionNighttimeRange" "0" 
+        "AttackDesire" "1.5" 
+    }
 }	

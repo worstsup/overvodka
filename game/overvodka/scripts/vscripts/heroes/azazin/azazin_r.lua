@@ -108,6 +108,7 @@ end
 function modifier_azazin_r:GetAttackSound()
 	return "Hero_DarkWillow.Attack"
 end
+
 function modifier_azazin_r:OnDestroy()
 	if not IsServer() then return end
 	StopSoundOn("azazin_r", self.parent)

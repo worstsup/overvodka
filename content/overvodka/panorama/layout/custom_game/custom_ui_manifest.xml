@@ -4,6 +4,7 @@
 		<include src="file://{resources}/scripts/custom_game/vector_targeting.js" />
 		<include src="file://{resources}/scripts/custom_game/custom_indicator.js" />
 		<include src="file://{resources}/scripts/custom_game/sans_updater_panel.js" />
+		<include src="file://{resources}/scripts/custom_game/utils.js" />
 	</scripts>
 	<Panel>
 		<CustomUIElement type="HudTopBar"			layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
@@ -55,6 +56,6 @@
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_stray.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_stint.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_invincible.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_zhenya.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_underfell_sans.png" />
 	</Panel>
 </root>

@@ -4,9 +4,19 @@ gaster_blaster = class({})
 
 function gaster_blaster:Precache(context)
     PrecacheResource("particle", "particles/sans_laser.vpcf", context)
+    PrecacheResource("particle", "particles/sans_laser_arcana.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_guided_missile.vpcf", context)
+    PrecacheResource("particle", "particles/gaster_blaster_spawn_arcana.vpcf", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_start.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_shoot.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/sans_arcana.vsndevts", context)
+end
+
+function gaster_blaster:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "gaster_blaster_arcana"
+    end
+    return "gaster_blaster"
 end
 
 function gaster_blaster:OnAbilityUpgrade( hAbility )
@@ -30,10 +40,19 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
     local laser_length = self:GetSpecialValueFor("laser_length")
     local laser_width = self:GetSpecialValueFor("laser_width")
     local caster_origin = caster:GetAbsOrigin()
+    local unit_name = "npc_gaster_blaster"
+    if caster:HasArcana() then
+        unit_name = "npc_gaster_blaster_arcana"
+    end
     local dmg = self:GetSpecialValueFor("damage") + self:GetSpecialValueFor("int_damage") * self:GetCaster():GetIntellect(false) * 0.01
     AddFOWViewer(caster:GetTeamNumber(), target_point, self:GetSpecialValueFor("blaster_vision"), 2, false)
     local function CreateBlaster(position, direction)
-        local blaster = CreateUnitByName("npc_gaster_blaster", position, false, caster, caster, caster:GetTeamNumber())
+        local blaster = CreateUnitByName(unit_name, position, false, caster, caster, caster:GetTeamNumber())
+        if caster:HasArcana() then
+            local arcana_particle = ParticleManager:CreateParticle("particles/gaster_blaster_spawn_arcana.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
+            ParticleManager:SetParticleControl(arcana_particle, 0, blaster:GetAbsOrigin())
+            ParticleManager:ReleaseParticleIndex(arcana_particle)
+        end
         blaster:AddNewModifier(caster, self, "modifier_gaster_blaster", {duration = delay + 0.5})
         blaster:SetForwardVector(direction)
         Timers:CreateTimer(delay, function()
@@ -49,14 +68,24 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                     DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                     0
                 )
-                local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_CUSTOMORIGIN, nil)
-                ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin())
-                ParticleManager:SetParticleControl(particle, 1, laser_end)
-                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+                local particle_name
+                if caster:HasArcana() then
+                    particle_name = "particles/sans_laser_arcana.vpcf"
+                else
+                    particle_name = "particles/sans_laser.vpcf"
+                end
+                local particle = ParticleManager:CreateParticle(particle_name, PATTACH_CUSTOMORIGIN, nil)
+                ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin() + Vector(0, 0, 75))
+                ParticleManager:SetParticleControl(particle, 1, laser_end + Vector(0, 0, 75))
+                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin() + Vector(0, 0, 75))
                 ParticleManager:SetParticleAlwaysSimulate( particle )
 	            ParticleManager:SetParticleShouldCheckFoW( particle, false )
                 ParticleManager:ReleaseParticleIndex(particle)
-                blaster:EmitSound("gaster_blaster_shoot")
+                if caster:HasArcana() then
+                    blaster:EmitSound("gaster_blaster_shoot_arcana")
+                else
+                    blaster:EmitSound("gaster_blaster_shoot")
+                end
                 local dmg_r = dmg * self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("blasters_damage_pct") * 0.01
                 for _, unit in pairs(units) do
                     ApplyDamage({
@@ -71,7 +100,12 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
             end
         end)
     end
-    local blaster = CreateUnitByName("npc_gaster_blaster", target_point, false, caster, caster, caster:GetTeamNumber())
+    local blaster = CreateUnitByName(unit_name, target_point, false, caster, caster, caster:GetTeamNumber())
+    if caster:HasArcana() then
+        local arcana_particle = ParticleManager:CreateParticle("particles/gaster_blaster_spawn_arcana.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
+        ParticleManager:SetParticleControl(arcana_particle, 0, blaster:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(arcana_particle)
+    end
     blaster:AddNewModifier(caster, self, "modifier_gaster_blaster", {duration = delay + 0.5})
     local direction_new = self:GetVectorDirection()
     if caster_origin.x == vStartLocation.x and caster_origin.y == vStartLocation.y then
@@ -92,14 +126,24 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                 DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                 0
             )
-            local particle = ParticleManager:CreateParticle("particles/sans_laser.vpcf", PATTACH_CUSTOMORIGIN, nil)
-            ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin())
-            ParticleManager:SetParticleControl(particle, 1, laser_end)
-            ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+            local particle_name
+            if caster:HasArcana() then
+                particle_name = "particles/sans_laser_arcana.vpcf"
+            else
+                particle_name = "particles/sans_laser.vpcf"
+            end
+            local particle = ParticleManager:CreateParticle(particle_name, PATTACH_CUSTOMORIGIN, nil)
+            ParticleManager:SetParticleControl(particle, 0, blaster:GetAbsOrigin() + Vector(0, 0, 75))
+            ParticleManager:SetParticleControl(particle, 1, laser_end + Vector(0, 0, 75))
+            ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin() + Vector(0, 0, 75))
             ParticleManager:SetParticleAlwaysSimulate( particle )
 	        ParticleManager:SetParticleShouldCheckFoW( particle, false )
             ParticleManager:ReleaseParticleIndex(particle)
-            blaster:EmitSound("gaster_blaster_shoot")
+            if caster:HasArcana() then
+                blaster:EmitSound("gaster_blaster_shoot_arcana")
+            else
+                blaster:EmitSound("gaster_blaster_shoot")
+            end
             for _,unit in pairs(units) do
                 ApplyDamage({
                     victim = unit,
@@ -139,7 +183,11 @@ function modifier_gaster_blaster:IsPurgable() return false end
 function modifier_gaster_blaster:OnCreated()
     if not IsServer() then return end
     local parent = self:GetParent()
-    parent:EmitSound("gaster_blaster_start")
+    if self:GetCaster():HasArcana() then
+        parent:EmitSound("gaster_blaster_start_arcana")
+    else
+        parent:EmitSound("gaster_blaster_start")
+    end
 end
 function modifier_gaster_blaster:CheckState()
     return {

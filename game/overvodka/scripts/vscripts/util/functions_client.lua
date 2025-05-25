@@ -22,3 +22,10 @@ function C_DOTA_BaseNPC:HasShard()
     end
     return false
 end
+
+function C_DOTA_BaseNPC:HasArcana()
+    if self:HasModifier("modifier_sans_arcana") then
+        return true
+    end
+    return false
+end

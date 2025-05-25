@@ -22,6 +22,12 @@ function CDOTA_BaseNPC:HasShard()
     if self:HasModifier("modifier_item_aghanims_shard") then
         return true
     end
+    return false
+end
 
+function CDOTA_BaseNPC:HasArcana()
+    if self:HasModifier("modifier_sans_arcana") then
+        return true
+    end
     return false
 end

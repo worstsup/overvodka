@@ -1314,6 +1314,10 @@
 				"Color"				"green"
 				"GradientID"		"1"
 			}
+			"earthshaker_reverberating_ridge"
+			{
+				"Deprecated"	"true"
+			}
 			"earthshaker_tectonic_buildup" 
 			{
 				"Deprecated"	"true"
@@ -1775,6 +1779,10 @@
 				"Color"				"Gray"
 				"GradientID"		"1"
 			}
+			"bloodseeker_old_blood" 
+			{
+				"Deprecated"	"true"
+			}
 			"bloodseeker_arterial_spray" 
 			{
 				"Deprecated"	"true"
@@ -2198,7 +2206,7 @@
 		"ModelScale"		"1.15"
 		"LoadoutScale"		"1.0"
 		"DisableWearables"	"1"
-		"HeroSelectSoundEffect"		"sans_start"
+		"HeroSelectSoundEffect"		""
 		"GibType"		"ethereal"
 		"SimilarHeroes"  "74,17,22"
 		"Ability1"		"gaster_blaster"

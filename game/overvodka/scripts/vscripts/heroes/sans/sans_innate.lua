@@ -4,11 +4,15 @@ LinkLuaModifier("modifier_sans_innate_debuff", "heroes/sans/sans_innate", LUA_MO
 sans_innate = class({})
 function sans_innate:Precache(context)
 	PrecacheResource("particle", "particles/sans_innate_debuff.vpcf", context)
+    PrecacheResource("particle", "particles/sans_innate_debuff_arcana.vpcf", context)
 end
 function sans_innate:GetIntrinsicModifierName()
     return "modifier_sans_innate"
 end
 function sans_innate:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "sans_innate_arcana"
+    end
 	return "sans_innate"
 end
 modifier_sans_innate = class({})
@@ -28,7 +32,8 @@ function modifier_sans_innate:OnTakeDamage(keys)
         if keys.attacker == self:GetParent() and
            keys.unit ~= self:GetParent() and
            keys.damage > 0 and
-           keys.inflictor ~= self:GetAbility() then
+           keys.inflictor ~= self:GetAbility() and
+           not keys.unit:IsBuilding() then
             local victim = keys.unit
             local damage = keys.damage
             local debuff = victim:FindModifierByName("modifier_sans_innate_debuff")
@@ -66,6 +71,14 @@ function modifier_sans_innate_debuff:OnCreated()
     if IsServer() then
         self.total_damage = 0
         self.damage_per_second = 0
+        local particle_name
+        if self:GetCaster():HasArcana() then
+            particle_name = "particles/sans_innate_debuff_arcana.vpcf"
+        else
+            particle_name = "particles/sans_innate_debuff.vpcf"
+        end
+        self.particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+        self:AddParticle(self.particle, false, false, -1, false, false)
         self:StartIntervalThink(1.0)
     end
 end
@@ -96,11 +109,10 @@ function modifier_sans_innate_debuff:GetAttributes()
     return MODIFIER_ATTRIBUTE_NONE
 end
 function modifier_sans_innate_debuff:GetTexture()
+    if self:GetCaster():HasArcana() then
+        return "sans_innate_arcana"
+    end
 	return "sans_innate"
 end
 function modifier_sans_innate_debuff:IsDebuff() return true end
 function modifier_sans_innate_debuff:IsPurgable() return false end
-
-function modifier_sans_innate_debuff:GetEffectName()
-    return "particles/sans_innate_debuff.vpcf"
-end

@@ -109,15 +109,30 @@ function COverthrowGameMode:ReplaceWinContidion()
     end
 end
 
+function COverthrowGameMode:OnHeroSelected(event)
+	if event.hero_unit == "npc_dota_hero_morphling" then
+		if Server:IsPlayerSubscribed(event.player_id) then
+			EmitSoundOnClient("sans_arcana_start", PlayerResource:GetPlayer(event.player_id))
+		else
+			EmitSoundOnClient("sans_start", PlayerResource:GetPlayer(event.player_id))
+		end
+	end
+end
 --------------------------------------------------------------------------------
 -- Event: OnNPCSpawned
 --------------------------------------------------------------------------------
 golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
+	if spawnedUnit:IsCourier() then
+		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_turbo_courier_invulnerable", {})
+	end
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
+			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_morphling" then
+				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_sans_arcana", {})
+			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
 				sahur:SetLevel(1)

@@ -389,7 +389,9 @@ function Server:OnNPCSpawned(event)
             unit:AddAbility("seasonal_ti11_duel"):SetLevel(1)
 
             unit:AddNewModifier(unit, nil, "modifier_subscriber_effect", {})
-
+            if unit:GetUnitName() == "npc_dota_hero_morphling" then
+                unit:AddNewModifier(unit, nil, "modifier_sans_arcana", {})
+            end
             if unit == RealHero and self.Players[PlayerID].last_time_double_show == 0 then
                 self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
 
@@ -571,7 +573,6 @@ end
 
 function Server:IsPlayerSubscribed(PlayerID)
     if not self.Players[PlayerID] then return false end
-
     return self.Players[PlayerID].ServerData.active == true
 end
 

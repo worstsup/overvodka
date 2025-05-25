@@ -3288,7 +3288,7 @@
                 "radius"                    "500"
                 "blast_damage"
                 {
-                	"value"	"80 100 120 140 160 180 200 220 240 260 280 300 320 340 360 380 400 420 440 460"
+                	"value"	"70 140 210 280 350 420 490"
                 	"levelkey"				"quaslevel"
                 }
                 "channel_duration"          "9.0"
@@ -6000,22 +6000,22 @@
 				"AbilityCooldown"
 				{
 					"value"										"13 12 11 10"
-					"special_bonus_unique_ashab_4" "-2"
 					"special_bonus_unique_ashab_7"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
 					"value"	"13 12 11 10"
-					"special_bonus_unique_ashab_4" "-2"
 				}
 				"radius"
 				{
 					"value"	"375"
+					"special_bonus_unique_ashab_4" "+75"
 					"affected_by_aoe_increase"	"1"
 				}
 				"AbilityCastRange"
 				{
 					"value"	"375"
+					"special_bonus_unique_ashab_4" "+75"
 					"affected_by_aoe_increase"	"1"
 				}
 		}
@@ -7953,13 +7953,11 @@
 				"AbilityCooldown"
 				{
 					"value"										"23 22 21 20"
-					"special_bonus_unique_cheater_5" "-4"
 					"special_bonus_unique_cheater_8"			  "=0"
 				}
 				"AbilityChargeRestoreTime"
 				{
 					"value"	"23 22 21 20"
-					"special_bonus_unique_cheater_5" "-4"
 				}
 				"damage"			"50 100 150 200"
 				"damage_exp"		"100 200 300 400"
@@ -8170,7 +8168,11 @@
 		"AbilityValues"
 		{
 				"bonus_attack_speed"			"550"
-				"focusfire_damage_reduction"	"-30 -20 -10"
+				"focusfire_damage_reduction"
+				{
+					"value"	"-30 -20 -10"
+					"special_bonus_unique_cheater_5" "+10"
+				}
 				"AbilityDuration"
 				{
 					"value"	"5.0 5.5 6.0"
@@ -10884,11 +10886,11 @@
 	{
     	"BaseClass"                "ability_lua"
     	"ScriptFile"               "heroes/sans/gaster_blaster.lua"
-    	"AbilityTextureName"	   "gaster_blaster"
     	"AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
     	"AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
     	"AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO"
     	"AbilityUnitDamageType"	   "DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"	   "gaster_blaster"
     	"AbilityUnitTargetFlags"   "DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE"
     	"AbilityCastRange"         "650"
     	"AbilityManaCost"          "100 125 150 175"
@@ -10903,13 +10905,11 @@
 			"AbilityCooldown"
 			{
 				"value"										"14 12 10 8"
-				"special_bonus_unique_sans_3" "-2"
 				"special_bonus_unique_sans_8"			  "=0"
 			}
 			"AbilityChargeRestoreTime"
 			{
 				"value"	"14 12 10 8"
-				"special_bonus_unique_sans_3" "-2"
 			}
         	"blast_delay"
 			{
@@ -10920,13 +10920,14 @@
         	"damage"
 			{
 				"value"	"150 200 250 300"
+				"special_bonus_unique_sans_3" "+75"
 			}
 			"int_damage"
 			{
 				"value"	"0"
-				"special_bonus_unique_sans_5" "+20"
+				"special_bonus_unique_sans_5" "+30"
 			}
-        	"laser_length"   "10000"
+        	"laser_length"   "15000"
         	"laser_width"
 			{
 				"value"	"150"
@@ -10946,9 +10947,12 @@
 			"soundfile" "soundevents/sans_w_wall.vsndevts"
 			"soundfile" "soundevents/sans_encount.vsndevts"
 			"soundfile" "soundevents/sans_damage.vsndevts"
+			"soundfile" "soundevents/sans_arcana.vsndevts"
 			"particle"	"particles/rubick_fissure.vpcf"
 			"particle"  "particles/sans_wall.vpcf"
+			"particle"  "particles/sans_wall_arcana.vpcf"
 			"particle"  "particles/sans_wall_w.vpcf"
+			"particle"  "particles/sans_wall_w_arcana.vpcf"
 			"particle"	"particles/ui_mouseactions/custom_range_finder_cone_dual.vpcf"
 		}
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -10958,7 +10962,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastRange"				"600 700 800 900"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"26 24 22 20"
@@ -11004,7 +11007,6 @@
 		"ScriptFile"					"heroes/sans/sans_e"
 		"MaxLevel"						"4"
 		"AbilityCastPoint"				"0.1"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityManaCost"				"70 100 130 160"
 		"precache"
 		{
@@ -11012,9 +11014,16 @@
 			"soundfile" 				"soundevents/sans_e_up.vsndevts"
 			"soundfile" 				"soundevents/sans_e_down.vsndevts"
 			"soundfile" 				"soundevents/sans_damage.vsndevts"
+			"soundfile" 				"soundevents/sans_arcana.vsndevts"
 			"particle"					"particles/sans_wall_e.vpcf"
 			"particle"					"particles/sans_wall_e_blue.vpcf"
 			"particle"					"particles/sans_wall_e_orange.vpcf"
+			"particle"					"particles/sans_wall_e_arcana.vpcf"
+			"particle"					"particles/sans_wall_e_blue_arcana.vpcf"
+			"particle"					"particles/sans_wall_e_orange_arcana.vpcf"
+			"particle"					"particles/sans_e_arcana.vpcf"
+			"particle"					"particles/sans_e_land_arcana.vpcf"
+			"particle"					"particles/sans_e_marker_arcana.vpcf"
 			"particle"					"particles/sans_e.vpcf"
 			"particle"					"particles/sans_e_land.vpcf"
 			"particle"					"particles/sans_e_marker.vpcf"
@@ -11069,7 +11078,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastRange"				"700"
 		"AbilityCastPoint"				"0.35"
 		"AbilityCooldown"				"25.0"
@@ -11097,7 +11105,6 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"MaxLevel"						"1"
 		"IsGrantedByScepter"			"1"
 		"AbilityTextureName"			"sans_scepter"
@@ -13136,12 +13143,12 @@
 				"value"	"450"
 				"affected_by_aoe_increase"	"1"
 			}
-			"strength"	"2 3 4 5"
+			"strength"	"1 2 3 4"
 			"aura_duration"	"2"
 			"strength_loss"
 			{
 				"value"	"0"
-				"special_bonus_unique_zhenya_7" "-5"
+				"special_bonus_unique_zhenya_7" "-4"
 			}
 		}
 	}
@@ -13179,7 +13186,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityTextureName"			"zhenya_r"

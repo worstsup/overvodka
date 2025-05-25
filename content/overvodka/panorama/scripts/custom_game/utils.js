@@ -7,7 +7,10 @@ function GetDotaHud() {
 	}
 	return rootUI;
 }
-
+function FindDotaHudElement(sId)
+{
+    return GetDotaHud().FindChildTraverse(sId);
+}
 function DeleteAllChildren(p) {
     if(p != null){
         let count = p.GetChildCount();
@@ -321,7 +324,14 @@ function GetOvervodkaHeroName(HeroName){
     }
     if (HeroName == "npc_dota_hero_morphling")
     {
-        OvervodkaName = "npc_dota_hero_sans"
+        if (HasArcana(HeroName))
+        {
+            OvervodkaName = "npc_dota_hero_underfell_sans"
+        }
+        else
+        {
+            OvervodkaName = "npc_dota_hero_sans"
+        }
     }
     if (HeroName == "npc_dota_hero_faceless_void")
     {
@@ -371,6 +381,37 @@ function IsPlayerSubscribed(PlayerID){
     return false
 }
 
+function HasArcana(HeroName){
+    if (HeroName == "npc_dota_hero_morphling")
+    {
+        if (HasModifier(HeroName, "modifier_sans_arcana"))
+        {
+            return true
+        }
+    }
+}
+
+function HasModifier(heroName, modifier)
+ {
+    const heroes = Entities.GetAllHeroEntities();
+    let unit = null;
+    for (let i = 0; i < heroes.length; i++) {
+        if (Entities.GetUnitName(heroes[i]) === heroName) {
+            unit = heroes[i];
+            break;
+        }
+    }
+    if (!unit) return false;
+    for (var i = 0; i < Entities.GetNumBuffs(unit); i++) 
+    {
+        if (Buffs.GetName(unit, Entities.GetBuff(unit, i)) == modifier)
+        {
+            return Entities.GetBuff(unit, i)
+        }
+    }
+    return false
+}
+
 function IsPlayerMuted(PlayerID){
     let Table = CustomNetTables.GetTableValue("players", `player_${LocalPIDPlayer}_mutes`)
     if(Table){
@@ -415,4 +456,13 @@ function GetDateString(Date, bTime){
     }
 
     return `${Day}.${Month}.${Year}${Time}`
+}
+
+function GetUniqueSceneHeroName(hero_name)
+{
+    if (hero_name == "npc_dota_hero_morphling")
+    {
+        return "sans_arcana_loadout"
+    }
+    return hero_name
 }

@@ -96,8 +96,7 @@ function modifier_zhenya_r_caster:OnCreated()
     if self:GetAbility():GetSpecialValueFor("fly") == 1 then
         self.fly = true
     end
-    self.model_scale = self:GetCaster():GetModelScale()
-    self:GetCaster():SetModelScale(self:GetCaster():GetModelScale() + 0.2)
+    self.model_scale = 20
     self.stack_particle = ParticleManager:CreateParticle("particles/zhenya_r_stack.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl( self.stack_particle, 1, Vector(0, 0, 0))
     self:AddParticle( self.stack_particle, false, false, -1, false, false)
@@ -107,7 +106,6 @@ end
 function modifier_zhenya_r_caster:OnDestroy()
     if not IsServer() then return end
     self:GetAbility():SetActivated(true)
-    self:GetCaster():SetModelScale(self.model_scale)
     self:GetCaster():SetRenderColor(255, 255, 255)
     local caster_pos = self:GetCaster():GetAbsOrigin()
     self.victims = nil
@@ -121,8 +119,13 @@ function modifier_zhenya_r_caster:DeclareFunctions()
         MODIFIER_EVENT_ON_ATTACK_START,
         MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_MODEL_SCALE,
     }
     return funcs
+end
+
+function modifier_zhenya_r_caster:GetModifierModelScale()
+    return self.model_scale
 end
 
 function modifier_zhenya_r_caster:CheckState()
@@ -143,6 +146,7 @@ function modifier_zhenya_r_caster:OnAttackStart( params )
     if not IsServer() then return end
     if params.target == nil then return end
     if params.attacker ~= self:GetParent() then return end
+    if params.target:IsDebuffImmune() or params.target:IsInvulnerable() or params.target:IsMagicImmune() then return end
     if params.attacker:IsIllusion() then return end
     if params.target:IsWard() then return end
     if params.target:HasModifier("modifier_zhenya_r_caster") then return end
@@ -151,7 +155,7 @@ function modifier_zhenya_r_caster:OnAttackStart( params )
     
     self:GetCaster():RemoveGesture(ACT_DOTA_ATTACK)
     local duration = self:GetRemainingTime()
-    self:GetCaster():SetModelScale(self:GetCaster():GetModelScale() + 0.2)
+    self.model_scale = self.model_scale + 20
     local particle = ParticleManager:CreateParticle("particles/zhenya_r_eat.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, params.target:GetAbsOrigin())
     ParticleManager:SetParticleControl( particle, 1, self:GetParent():GetOrigin() + Vector( 0, 0, 64 ) )

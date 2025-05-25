@@ -1,5 +1,5 @@
 "use strict";
-
+let heroModelPanel
 function OnUpdateHeroSelection()
 {
 	for ( var teamId of Game.GetAllTeamIDs() )
@@ -17,6 +17,22 @@ function UpdateTeam( teamId )
 	for ( var playerId of teamPlayers )
 	{
 		UpdatePlayer( teamPanel, playerId );
+	}
+}
+
+function UpdateCustomHeroModel(hero_name)
+{
+	let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
+	HeroModelLoadout.style.visibility = "collapse";
+	if (heroModelPanel) {
+		return
+	}
+
+	if (!heroModelPanel) 
+	{
+		let panel = FindDotaHudElement("StrategyScreen")
+		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
+		heroModelPanel.SetParent(panel);
 	}
 }
 
@@ -91,7 +107,13 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
-			playerPortrait.SetImage(heroImages[playerInfo.player_selected_hero]);
+			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribed(playerId)) {
+				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+				UpdateCustomHeroModel(playerInfo.player_selected_hero)
+			}
+			else {
+				playerPortrait.SetImage(heroImages[playerInfo.player_selected_hero]);
+			}
 		} else {
 			playerPortrait.SetImage("file://{images}/heroes/" + playerInfo.player_selected_hero + ".png");
 		}
@@ -141,8 +163,17 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
-			playerPortrait.SetImage(possibleHeroImages[playerInfo.possible_hero_selection]);
-		} else {
+			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 
+			{
+				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+			}
+			else
+			{
+				playerPortrait.SetImage(possibleHeroImages[playerInfo.possible_hero_selection]);
+			}
+		}
+		else
+		{
 			playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png");
 		}
 		playerPanel.SetHasClass("hero_selected", false);

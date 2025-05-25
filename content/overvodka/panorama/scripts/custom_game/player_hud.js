@@ -1,6 +1,7 @@
 const LocalPlayer = Players.GetLocalPlayer()
 const Container = $("#PlayersTitlesContainer")
 const SubscribePanel = $("#SubscribePanel")
+const ModelPreview = $("#ModelPreview")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
@@ -173,10 +174,16 @@ function SetUpKeyBind() {
 function ToggleSubscribePanel(){
     Game.EmitSound("UUI_SOUNDS.OvervodkaPrime");
     SubscribePanel.SetHasClass("Show", !SubscribePanel.BHasClass("Show"))
+    if(ModelPreview.style.visibility == "visible"){
+        ModelPreview.style.visibility = "collapse";
+    }else{
+        ModelPreview.style.visibility = "visible";
+    }
 }
 
 function CloseSubscribePanel(){
     SubscribePanel.RemoveClass("Show")
+    ModelPreview.style.visibility = "collapse";
 }
 
 function TipPlayer(){
@@ -574,7 +581,17 @@ function UpdateTeamLeaved(){
         squarePixels: "true",
         drawbackground: "true"
     });
-
+    let scene_panel = $.CreatePanel("DOTAScenePanel", $("#ModelPreview"), "", { 
+        class: "hero_model_strategy", 
+        style: "width:48%;height:80%;",
+        unit: "sans_arcana_loadout", 
+        particleonly:"false", 
+        renderdeferred:"false", 
+        antialias:"true", 
+        renderwaterreflections:"true", 
+        allowrotation: "true",
+        drawbackground: "false"
+    });
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
     GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)

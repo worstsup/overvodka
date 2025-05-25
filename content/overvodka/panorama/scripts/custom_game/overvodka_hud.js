@@ -280,15 +280,26 @@ RemoveWearablesFromDotaScenePanel()
 function PickIconsStyles()
 {
     let PreGame = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("GridCategories");
+    // Get all player panels in the pick screen
     let PickIconArray = PreGame.FindChildrenWithClassTraverse("HeroCard")
     for (let key in PickIconArray)
     {
+        let playerID = Players.GetLocalPlayer()
         PickIconArray[key].style.height = "104px"
         PickIconArray[key].style.width = "63px"
         PickIconArray[key].style.borderRadius = "0%"
         PickIconArray[key].style.margin = "5px"
-        PickIconArray[key].style.border = "1px solid #FFD700"
-        PickIconArray[key].style.boxShadow = "0 0 5px rgba(255, 215, 0, 0.5)"
+        if (IsPlayerSubscribed(playerID) && PickIconArray[key].GetAttributeInt("heroid", -1) == 10) {
+            PickIconArray[key].style.border = "1px solid #FF4500"
+            PickIconArray[key].style.boxShadow = "0 0 25px rgba(255, 69, 0, 0.8), inset 0 0 8px rgba(255, 0, 0, 0.5)"
+            if (!PickIconArray[key].FindChild("Movie")) {
+                let sans = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/underfell_sans.webm", repeat: "true", autoplay: "onload" });
+            }
+        }
+        else {
+            PickIconArray[key].style.border = "1px solid #FFD700" // Default gold border 
+            PickIconArray[key].style.boxShadow = "0 0 10px rgba(255, 215, 0, 0.5)" // Default gold glow
+        }
         let dotaplus_level = PickIconArray[key].FindChildrenWithClassTraverse("HeroCardContents")[0].FindChildTraverse("HeroBadgeStatus")
         dotaplus_level.style.visibility = "collapse"
     }

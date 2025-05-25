@@ -10,16 +10,29 @@ function sans_scepter:GetAOERadius()
     return self:GetSpecialValueFor("radius") + 50
 end
 
+function sans_scepter:GetAbilityTextureName()
+	if self:GetCaster():HasArcana() then
+		return "sans_scepter_arcana"
+	end
+	return "sans_scepter"
+end
+
 function sans_scepter:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_monkey_king/monkey_king_furarmy_ring.vpcf", context)
+	PrecacheResource("particle", "particles/sans_scepter_ground_arcana.vpcf", context)
     PrecacheResource("particle", "particles/sans_laser_2.vpcf", context)
+	PrecacheResource("particle", "particles/sans_laser_2_arcana.vpcf", context)
     PrecacheResource("particle", "particles/sans_field_formation.vpcf", context)
     PrecacheResource("particle", "particles/sans_field.vpcf", context)
+	PrecacheResource("particle", "particles/sans_field_arcana.vpcf", context)
+	PrecacheResource("particle", "particles/sans_field_formation_arcana.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_guided_missile.vpcf", context)
+	PrecacheResource("particle", "particles/gaster_blaster_spawn_arcana.vpcf", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_start.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_shoot.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/sans_encount.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/sans_scepter.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/sans_arcana.vsndevts", context)
 end
 
 function sans_scepter:OnAbilityPhaseStart()
@@ -54,15 +67,21 @@ function sans_scepter:OnSpellStart()
 	if random_chance == 4 then
 		hero_vector = GetGroundPosition(cursor_pos + Vector(-radius, 0, 0), nil)
 	end
-    local ability = self
     local caster = self:GetCaster()
     local delay = self:GetSpecialValueFor("blast_delay")
     local blaster_radius = self:GetSpecialValueFor("blaster_radius")
     local laser_length = self:GetSpecialValueFor("laser_length")
     local laser_width = self:GetSpecialValueFor("laser_width")
+	local unit_name = "npc_gaster_blaster"
+	if caster:HasArcana() then
+		unit_name = "npc_gaster_blaster_arcana"
+	end
 	GridNav:DestroyTreesAroundPoint(cursor_pos, radius, true)
     AddFOWViewer(caster:GetTeamNumber(), cursor_pos, radius + 50, duration, false)
     self:GetCaster():EmitSound("sans_scepter")
+	if self:GetCaster():HasArcana() then
+		self:GetCaster():EmitSound("sans_scepter_arcana")
+	end
     CreateModifierThinker(
 		caster,
 		self,
@@ -74,7 +93,12 @@ function sans_scepter:OnSpellStart()
 	)
     for hero = 1, num*2 do
         Timers:CreateTimer(0.15 * hero, function()
-            local blaster = CreateUnitByName("npc_gaster_blaster", hero_vector, false, caster, caster, caster:GetTeamNumber())
+            local blaster = CreateUnitByName(unit_name, hero_vector, false, caster, caster, caster:GetTeamNumber())
+			if caster:HasArcana() then
+				local arcana_particle = ParticleManager:CreateParticle("particles/gaster_blaster_spawn_arcana.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
+				ParticleManager:SetParticleControl(arcana_particle, 0, blaster:GetAbsOrigin())
+				ParticleManager:ReleaseParticleIndex(arcana_particle)
+			end
             blaster:SetAbsOrigin(hero_vector)
             blaster:AddNewModifier(caster, self, "modifier_gaster_blaster_scepter", {duration = delay + 1})
             local vDirection = (cursor_pos - blaster:GetAbsOrigin()):Normalized()
@@ -92,11 +116,21 @@ function sans_scepter:OnSpellStart()
                         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                         0
                     )
-                    local particle = ParticleManager:CreateParticle("particles/sans_laser_2.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
-                    ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+					local particle_name
+					if caster:HasArcana() then
+						particle_name = "particles/sans_laser_2_arcana.vpcf"
+					else
+						particle_name = "particles/sans_laser_2.vpcf"
+					end
+                    local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, blaster)
+                    ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin() + Vector(0, 0, 75))
                     ParticleManager:SetParticleControl(particle, 1, laser_end)
                     ParticleManager:ReleaseParticleIndex(particle)
-                    blaster:EmitSound("gaster_blaster_shoot")
+                    if caster:HasArcana() then
+						blaster:EmitSound("gaster_blaster_shoot_arcana")
+					else
+						blaster:EmitSound("gaster_blaster_shoot")
+					end
                     for _,unit in pairs(units) do
                         ApplyDamage({
                             victim = unit,
@@ -123,7 +157,13 @@ modifier_sans_scepter_thinker = class({})
 function modifier_sans_scepter_thinker:OnCreated(kv)
     if not IsServer() then return end
     local radius = kv.radius
-    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_monkey_king/monkey_king_furarmy_ring.vpcf", PATTACH_POINT, self:GetParent())
+	local particle_name
+	if self:GetCaster():HasArcana() then
+		particle_name = "particles/sans_scepter_ground_arcana.vpcf"
+	else
+		particle_name = "particles/units/heroes/hero_monkey_king/monkey_king_furarmy_ring.vpcf"
+	end
+    local particle = ParticleManager:CreateParticle(particle_name, PATTACH_POINT, self:GetParent())
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 1, Vector(radius+50,1,1))
     self:AddParticle(particle, false, false, -1, false, false)
@@ -138,7 +178,11 @@ function modifier_gaster_blaster_scepter:OnCreated()
     if not IsServer() then return end
 
     local parent = self:GetParent()
-    parent:EmitSound("gaster_blaster_start")
+    if self:GetCaster():HasArcana() then
+        parent:EmitSound("gaster_blaster_start_arcana")
+    else
+        parent:EmitSound("gaster_blaster_start")
+    end
 end
 function modifier_gaster_blaster_scepter:CheckState()
     return {
@@ -320,6 +364,9 @@ end
 
 function modifier_sans_field:PlayEffects1()
 	local particle_cast = "particles/sans_field_formation.vpcf"
+	if self:GetCaster():HasArcana() then
+		particle_cast = "particles/sans_field_formation_arcana.vpcf"
+	end
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( self.radius, 0, 0 ) )
@@ -329,6 +376,9 @@ end
 
 function modifier_sans_field:PlayEffects2()
 	local particle_cast = "particles/sans_field.vpcf"
+	if self:GetCaster():HasArcana() then
+		particle_cast = "particles/sans_field_arcana.vpcf"
+	end
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( self.radius, 0, 0 ) )

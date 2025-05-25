@@ -2624,12 +2624,7 @@ function modifier_dvoreckov_qwe:OnCreated( kv )
 	if IsServer() then
 		self.delay = self:GetAbility():GetSpecialValueFor( "delay" )
 		self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-    	local ability_level = 0
-    	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-			ability_level = self:GetCaster():FindAbilityByName("dvoreckov_w"):GetLevel() + self:GetCaster():FindAbilityByName("dvoreckov_q"):GetLevel() + self:GetCaster():FindAbilityByName("dvoreckov_e"):GetLevel() - 1
-		else
-			ability_level = self:GetCaster():GetLevel() / 3
-		end
+		ability_level = math.floor(self:GetCaster():GetLevel() / 3) - 1
 		self.blast_damage = self:GetAbility():GetLevelSpecialValueFor("blast_damage", ability_level)
 		
 		self:StartIntervalThink( self.delay )

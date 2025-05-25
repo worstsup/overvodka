@@ -10,10 +10,17 @@ function UpdateLevelPanelMax(ability_panel, hero)
     let ButtonSize = ability_panel.FindChildTraverse("ButtonSize")
     if (ButtonSize)
     {
+        let playerId = Players.GetLocalPlayer()
         let max_effect = ButtonSize.FindChildTraverse("max_effect")
         if (max_effect == null)
         {
-            max_effect = $.CreatePanel("DOTAScenePanel", ButtonSize, "max_effect", { style: "width:100%;height:100%;opacity:0;z-index:1;", map: "maps/max_level.vmap", particleonly:"false", hittest:"false", camera:"camera_1" });
+            if (IsPlayerSubscribed(playerId)){
+                max_effect = $.CreatePanel("DOTAScenePanel", ButtonSize, "max_effect", { style: "width:100%;height:100%;opacity:0;z-index:1;", map: "maps/sans_arcana.vmap", particleonly:"false", hittest:"false", camera:"camera_1" });
+            }
+            else
+            {
+                max_effect = $.CreatePanel("DOTAScenePanel", ButtonSize, "max_effect", { style: "width:100%;height:100%;opacity:0;z-index:1;", map: "maps/max_level.vmap", particleonly:"false", hittest:"false", camera:"camera_1" });
+            }
         }
         let ability_name = ability_panel.FindChildTraverse("AbilityImage").abilityname
         let ability = Entities.GetAbilityByName( hero, ability_name )

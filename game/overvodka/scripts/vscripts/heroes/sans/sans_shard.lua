@@ -4,18 +4,32 @@ LinkLuaModifier("modifier_gaster_blaster_shard", "heroes/sans/sans_shard", LUA_M
 
 function sans_shard:Precache(context)
 	PrecacheResource("particle", "particles/sans_shard.vpcf", context)
+    PrecacheResource("particle", "particles/sans_shard_arcana.vpcf", context)
     PrecacheResource("particle", "particles/sans_laser_2.vpcf", context)
+    PrecacheResource("particle", "particles/sans_laser_2_arcana.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_guided_missile.vpcf", context)
+    PrecacheResource("particle", "particles/gaster_blaster_spawn_arcana.vpcf", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_start.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/gaster_blaster_shoot.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/sans_shard.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/sans_shard_hit.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/sans_arcana.vsndevts", context)
+end
+
+function sans_shard:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "sans_shard_arcana"
+    end
+    return "sans_shard"
 end
 
 function sans_shard:OnSpellStart()
 	local target = self:GetCursorTarget()
 	local projectile_speed = self:GetSpecialValueFor("blast_speed")
 	local projectile_name = "particles/sans_shard.vpcf"
+    if self:GetCaster():HasArcana() then
+        projectile_name = "particles/sans_shard_arcana.vpcf"
+    end
 	local info = {
 		EffectName = projectile_name,
 		Ability = self,
@@ -40,6 +54,10 @@ function sans_shard:OnProjectileHit( hTarget, vLocation )
 			local sin = math.sin(angle)
 			return Vector(x * cos - y * sin, x * sin + y * cos, 0)
 		end
+        local unit_name = "npc_gaster_blaster"
+        if caster:HasArcana() then
+            unit_name = "npc_gaster_blaster_arcana"
+        end
 		local target_origin = target:GetAbsOrigin()
 		local backward_dir = -target:GetForwardVector():Normalized()
 		local angle_offset = math.rad(30)
@@ -50,10 +68,18 @@ function sans_shard:OnProjectileHit( hTarget, vLocation )
     	local delay = self:GetSpecialValueFor("blast_delay")
     	local blaster_radius = self:GetSpecialValueFor("blaster_radius")
     	local laser_width = self:GetSpecialValueFor("laser_width")
-		local blaster = CreateUnitByName("npc_gaster_blaster", target_point, false, caster, caster, caster:GetTeamNumber())
-		local blaster_2 = CreateUnitByName("npc_gaster_blaster", target_point_2, false, caster, caster, caster:GetTeamNumber())
+		local blaster = CreateUnitByName(unit_name, target_point, false, caster, caster, caster:GetTeamNumber())
+		local blaster_2 = CreateUnitByName(unit_name, target_point_2, false, caster, caster, caster:GetTeamNumber())
 		blaster:AddNewModifier(caster, self, "modifier_gaster_blaster_shard", {duration = delay + 0.5})
 		blaster_2:AddNewModifier(caster, self, "modifier_gaster_blaster_shard", {duration = delay + 0.5})
+        if caster:HasArcana() then
+            local arcana_particle = ParticleManager:CreateParticle("particles/gaster_blaster_spawn_arcana.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
+            ParticleManager:SetParticleControl(arcana_particle, 0, blaster:GetAbsOrigin())
+            ParticleManager:ReleaseParticleIndex(arcana_particle)
+            local arcana_particle_2 = ParticleManager:CreateParticle("particles/gaster_blaster_spawn_arcana.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster_2)
+            ParticleManager:SetParticleControl(arcana_particle_2, 0, blaster_2:GetAbsOrigin())
+            ParticleManager:ReleaseParticleIndex(arcana_particle_2)
+        end
 		AddFOWViewer(caster:GetTeamNumber(), target_point, self:GetSpecialValueFor("blaster_vision"), 2, false)
 		AddFOWViewer(caster:GetTeamNumber(), target_point_2, self:GetSpecialValueFor("blaster_vision"), 2, false)
 		local vDirection = (target:GetAbsOrigin() - blaster:GetAbsOrigin()):Normalized()
@@ -83,16 +109,27 @@ function sans_shard:OnProjectileHit( hTarget, vLocation )
                     DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                     0
                 )
-                local particle = ParticleManager:CreateParticle("particles/sans_laser_2.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster)
-				local particle_2 = ParticleManager:CreateParticle("particles/sans_laser_2.vpcf", PATTACH_ABSORIGIN_FOLLOW, blaster_2)
-                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin())
+                local particle_name
+                if caster:HasArcana() then
+                    particle_name = "particles/sans_laser_2_arcana.vpcf"
+                else
+                    particle_name = "particles/sans_laser_2.vpcf"
+                end
+                local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, blaster)
+				local particle_2 = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, blaster_2)
+                ParticleManager:SetParticleControl(particle, 9, blaster:GetAbsOrigin() + Vector(0, 0, 75))
                 ParticleManager:SetParticleControl(particle, 1, laser_end)
                 ParticleManager:ReleaseParticleIndex(particle)
-				ParticleManager:SetParticleControl(particle_2, 9, blaster_2:GetAbsOrigin())
+				ParticleManager:SetParticleControl(particle_2, 9, blaster_2:GetAbsOrigin() + Vector(0, 0, 75))
                 ParticleManager:SetParticleControl(particle_2, 1, laser_end)
                 ParticleManager:ReleaseParticleIndex(particle_2)
-                blaster:EmitSound("gaster_blaster_shoot")
-				blaster_2:EmitSound("gaster_blaster_shoot")
+                if caster:HasArcana() then
+                    blaster:EmitSound("gaster_blaster_shoot_arcana")
+                    blaster_2:EmitSound("gaster_blaster_shoot_arcana")
+                else
+                    blaster:EmitSound("gaster_blaster_shoot")
+                    blaster_2:EmitSound("gaster_blaster_shoot")
+                end
                 for _,unit in pairs(units) do
                     ApplyDamage({
                         victim = unit,
@@ -138,7 +175,11 @@ function modifier_gaster_blaster_shard:OnCreated()
     if not IsServer() then return end
 
     local parent = self:GetParent()
-    parent:EmitSound("gaster_blaster_start")
+    if self:GetCaster():HasArcana() then
+        parent:EmitSound("gaster_blaster_start_arcana")
+    else
+        parent:EmitSound("gaster_blaster_start")
+    end
 end
 function modifier_gaster_blaster_shard:CheckState()
     return {

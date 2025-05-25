@@ -35,15 +35,17 @@ end
 function sans_e:OnSpellStart( params )
 	local caster = self:GetCaster()
 	if caster:HasModifier("modifier_sans_e_caster") then
-		EmitSoundOn("sans_e_start", self:GetCaster())
+		EmitSoundOn("sans_e_start", caster)
 		local target_loc = self:GetCursorPosition()
 		local maximum_distance
 		if self.target:GetTeam() == caster:GetTeam() then
-			maximum_distance = self:GetSpecialValueFor("ally_range") + self:GetCaster():GetCastRangeBonus()
+			maximum_distance = self:GetSpecialValueFor("ally_range") + caster:GetCastRangeBonus()
 		else
-			maximum_distance = self:GetSpecialValueFor("enemy_range") + self:GetCaster():GetCastRangeBonus()
+			maximum_distance = self:GetSpecialValueFor("enemy_range") + caster:GetCastRangeBonus()
 		end
-
+		if caster:HasArcana() then
+			caster:StartGesture(ACT_DOTA_CAST_ABILITY_3_END)
+		end
 		if self.telekinesis_marker_pfx then
 			ParticleManager:DestroyParticle(self.telekinesis_marker_pfx, false)
 			ParticleManager:ReleaseParticleIndex(self.telekinesis_marker_pfx)
@@ -53,8 +55,13 @@ function sans_e:OnSpellStart( params )
 		if marked_distance > maximum_distance then
 			target_loc = self.target_origin + (target_loc - self.target_origin):Normalized() * maximum_distance
 		end
-
-		self.telekinesis_marker_pfx = ParticleManager:CreateParticleForTeam("particles/sans_e_marker.vpcf", PATTACH_CUSTOMORIGIN, caster, caster:GetTeam())
+		local marker_particle
+		if caster:HasArcana() then
+			marker_particle = "particles/sans_e_marker_arcana.vpcf"
+		else
+			marker_particle = "particles/sans_e_marker.vpcf"
+		end
+		self.telekinesis_marker_pfx = ParticleManager:CreateParticleForTeam(marker_particle, PATTACH_CUSTOMORIGIN, caster, caster:GetTeam())
 		ParticleManager:SetParticleControl(self.telekinesis_marker_pfx, 0, target_loc)
 		ParticleManager:SetParticleControl(self.telekinesis_marker_pfx, 1, Vector(3, 0, 0))
 		ParticleManager:SetParticleControl(self.telekinesis_marker_pfx, 2, self.target_origin)
@@ -87,12 +94,22 @@ function sans_e:OnSpellStart( params )
 		if is_ally then
 			self.target_modifier.is_ally = true
 		end
-		self.target_modifier.tele_pfx = ParticleManager:CreateParticle("particles/sans_e.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		local particle_name
+		if caster:HasArcana() then
+			particle_name = "particles/sans_e_arcana.vpcf"
+		else
+			particle_name = "particles/sans_e.vpcf"
+		end
+		self.target_modifier.tele_pfx = ParticleManager:CreateParticle(particle_name, PATTACH_CUSTOMORIGIN, caster)
 		ParticleManager:SetParticleControlEnt(self.target_modifier.tele_pfx, 0, self.target, PATTACH_POINT_FOLLOW, "attach_hitloc", self.target:GetAbsOrigin(), true)
 		ParticleManager:SetParticleControlEnt(self.target_modifier.tele_pfx, 1, self.target, PATTACH_POINT_FOLLOW, "attach_hitloc", self.target:GetAbsOrigin(), true)
 		ParticleManager:SetParticleControl(self.target_modifier.tele_pfx, 2, Vector(duration,0,0))
 		self.target_modifier:AddParticle(self.target_modifier.tele_pfx, false, false, 1, false, false)
-		caster:EmitSound("sans_e_up")
+		if caster:HasArcana() then
+			EmitSoundOn("sans_e_up_arcana", caster)
+		else
+			EmitSoundOn("sans_e_up", caster)
+		end
 		self.target_modifier.final_loc = self.target_origin
 		self.target_modifier.changed_target = false
 		caster:AddNewModifier(caster, self, "modifier_sans_e_caster", { duration = duration + FrameTime()})
@@ -102,7 +119,13 @@ end
 
 function sans_e:GetAbilityTextureName()
 	if self:GetCaster():HasModifier("modifier_sans_e_caster") then
+		if self:GetCaster():HasArcana() then
+			return "sans_e_2_arcana"
+		end
 		return "sans_e_2"
+	end
+	if self:GetCaster():HasArcana() then
+		return "sans_e_arcana"
 	end
 	return "sans_e"
 end
@@ -224,9 +247,19 @@ function modifier_sans_e:EndTransition()
 		local damage = ability:GetSpecialValueFor("damage")
 		local impact_stun_duration = ability:GetSpecialValueFor("impact_stun_duration")
 		local impact_radius = ability:GetSpecialValueFor("impact_radius")
-		parent:EmitSound("sans_e_down")
+		if caster:HasArcana() then
+			parent:EmitSound("sans_e_down_arcana")
+		else
+			parent:EmitSound("sans_e_down")
+		end
 		ParticleManager:ReleaseParticleIndex(self.tele_pfx)
-		local landing_pfx = ParticleManager:CreateParticle("particles/sans_e_land.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster())
+		local landing_particle
+		if caster:HasArcana() then
+			landing_particle = "particles/sans_e_land_arcana.vpcf"
+		else
+			landing_particle = "particles/sans_e_land.vpcf"
+		end
+		local landing_pfx = ParticleManager:CreateParticle(landing_particle, PATTACH_CUSTOMORIGIN, self:GetCaster())
 		ParticleManager:SetParticleControl(landing_pfx, 0, parent_pos)
 		ParticleManager:SetParticleControl(landing_pfx, 1, parent_pos)
 		ParticleManager:ReleaseParticleIndex(landing_pfx)
@@ -278,6 +311,9 @@ end
 
 function modifier_sans_e:PlayEffects(target)
 	local particle_cast = "particles/sans_wall_e.vpcf"
+	if self:GetCaster():HasArcana() then
+		particle_cast = "particles/sans_wall_e_arcana.vpcf"
+	end
 	local effect_cast = assert(loadfile("rubick_spell_steal_lua/rubick_spell_steal_lua_arcana"))(self, particle_cast, PATTACH_WORLDORIGIN, target )
 	ParticleManager:SetParticleControl( effect_cast, 0, target:GetAbsOrigin() + Vector(20,20,0) )
 	ParticleManager:SetParticleControl( effect_cast, 1, target:GetAbsOrigin() + Vector(-20,-20,0) )
@@ -287,6 +323,9 @@ end
 
 function modifier_sans_e:PlayEffects1(target)
 	local particle_cast = "particles/sans_wall_e_orange.vpcf"
+	if self:GetCaster():HasArcana() then
+		particle_cast = "particles/sans_wall_e_orange_arcana.vpcf"
+	end
 	local effect_cast = assert(loadfile("rubick_spell_steal_lua/rubick_spell_steal_lua_arcana"))(self, particle_cast, PATTACH_WORLDORIGIN, target )
 	ParticleManager:SetParticleControl( effect_cast, 0, target:GetAbsOrigin() + Vector(20,20,0) )
 	ParticleManager:SetParticleControl( effect_cast, 1, target:GetAbsOrigin() + Vector(-20,-20,0) )
@@ -296,6 +335,9 @@ end
 
 function modifier_sans_e:PlayEffects2(target)
 	local particle_cast = "particles/sans_wall_e_blue.vpcf"
+	if self:GetCaster():HasArcana() then
+		particle_cast = "particles/sans_wall_e_blue_arcana.vpcf"
+	end
 	local effect_cast = assert(loadfile("rubick_spell_steal_lua/rubick_spell_steal_lua_arcana"))(self, particle_cast, PATTACH_WORLDORIGIN, target )
 	ParticleManager:SetParticleControl( effect_cast, 0, target:GetAbsOrigin() + Vector(20,20,0) )
 	ParticleManager:SetParticleControl( effect_cast, 1, target:GetAbsOrigin() + Vector(-20,-20,0) )
@@ -346,6 +388,9 @@ function modifier_sans_e:HorizontalMotion(unit, dt)
 end
 
 function modifier_sans_e:GetTexture()
+	if self:GetCaster():HasArcana() then
+		return "sans_e_arcana"
+	end
 	return "sans_e"
 end
 

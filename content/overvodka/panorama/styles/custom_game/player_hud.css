@@ -154,11 +154,11 @@
 
 #SubscribePanel{
     width: 700px;
-    height: 765px;
+    height: 815px;
 
     align: center center;
 
-    margin-top: -100px;
+    margin-top: -150px;
 
     overflow: noclip;
 
@@ -182,7 +182,7 @@
 
 #SubscribePanelBody{
     width: 700px;
-    height: 515px;
+    height: 565px;
     
     align: center bottom;
 
@@ -439,6 +439,14 @@
 
     margin-right: 55px;
     margin-top: 280px;
+}
+
+#ModelPreview{
+    width: 900px;
+    height: 900px;
+    align: center center;
+    margin-top: 200px;
+    margin-right: 600px;
 }
 
 #ChatWheelPreview{

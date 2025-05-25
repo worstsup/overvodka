@@ -106,7 +106,9 @@ PrecacheUtils.particles = {
 		"particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf",
         "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf",
 		"particles/custom_hud/spell_level_max.vpcf",
+		"particles/sans_arcana_hud.vpcf",
 		"particles/chapman.vpcf",
+		"particles/sans_base_attack_arcana.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -143,16 +145,6 @@ PrecacheUtils.units = {
 	"npc_nelya",
 	"npc_rivendare",
 	"npc_dota_courier",
-	"npc_dota_dire1",
-	"npc_dota_dire2",
-	"npc_dota_dire3",
-	"npc_dota_dire4",
-	"npc_dota_dire5",
-	"npc_dota_direr1",
-	"npc_dota_direr2",
-	"npc_dota_direr3",
-	"npc_dota_direr4",
-	"npc_dota_hero_target_dummy",
 }
 
 PrecacheUtils.models = {
@@ -217,6 +209,7 @@ PrecacheUtils.models = {
 		"nix/model.vmdl",
 		"sans/sans_rig.vmdl",
 		"sans/blaster.vmdl",
+		"sans/underfell_blaster.vmdl",
 		"models/heroes/mars/mars_soldier.vmdl",
 		"sasavot/model.vmdl",
 		"arthas/untitled_1.vmdl",
@@ -229,6 +222,7 @@ PrecacheUtils.models = {
 		"models/stint/stint.vmdl",
 		"models/invincible/invincible.vmdl",
 		"models/zhenya/zhenya.vmdl",
+		"sans/underfell_sans.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -272,6 +266,7 @@ PrecacheUtils.sounds = {
 		"soundevents/bratishkin_start.vsndevts",
 		"soundevents/evelone_start.vsndevts",
 		"soundevents/sans_start.vsndevts",
+		"soundevents/sans_arcana_start.vsndevts",
 		"soundevents/arsen_start.vsndevts",
 		"soundevents/bablokrad.vsndevts",
 		"soundevents/bablokrad_mellstroy.vsndevts",

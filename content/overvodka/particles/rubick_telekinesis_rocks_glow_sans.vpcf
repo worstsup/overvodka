@@ -45,8 +45,7 @@
 		},
 		{
 			_class = "C_INIT_RandomColor"
-			m_ColorMin = [ 135, 206, 250 ]
-			m_ColorMax = [ 0, 0, 255 ]
+			m_ColorMax = [ 0, 255, 255 ]
 		},
 	]
 	m_Operators = 
