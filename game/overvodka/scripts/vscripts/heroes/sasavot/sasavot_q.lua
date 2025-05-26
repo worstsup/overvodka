@@ -39,7 +39,7 @@ function sasavot_q:OnAbilityPhaseStart()
 	)
 	self.modifier = self:AddATValue( modifier )
 	local sound_cast = "Ability.AssassinateLoad"
-	EmitSoundOnClient( sound_cast, caster:GetPlayerOwner() )
+	EmitSoundOn( sound_cast, caster )
 	return true
 end
 

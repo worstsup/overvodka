@@ -592,6 +592,7 @@ function UpdateTeamLeaved(){
         allowrotation: "true",
         drawbackground: "false"
     });
+    ModelPreview.style.visibility = "collapse";
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
     GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)

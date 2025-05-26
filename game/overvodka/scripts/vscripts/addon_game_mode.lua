@@ -271,7 +271,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
-		GameRules:SetStrategyTime( 1000.0 )
+		GameRules:SetStrategyTime( 10.0 )
 		if GetMapName() == "overvodka_duo" then
 			GameRules:SetCustomGameBansPerTeam( 2 )
 		else
@@ -286,7 +286,7 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( COverthrowGameMode, "ExecuteOrderFilter" ), self )
 
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled( true )
-	GameRules:GetGameModeEntity():SetUseTurboCouriers( false )
+	GameRules:GetGameModeEntity():SetUseTurboCouriers( true )
 	GameRules:GetGameModeEntity():SetCanSellAnywhere( true )
 
 	local nTeamSize = GameRules:GetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS )

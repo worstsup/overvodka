@@ -103,9 +103,8 @@ function modifier_sasavot_debuff:OnIntervalThink()
 end
 function modifier_sasavot_debuff:OnTakeDamage(keys)
     if not IsServer() then return end
-
     local caster = self:GetCaster()
-    if keys.unit == caster and keys.attacker:GetTeamNumber() ~= caster:GetTeamNumber() then
+    if keys.unit == caster and keys.attacker:GetTeamNumber() ~= caster:GetTeamNumber() and keys.attacker:IsHero() and not keys.attacker:IsBuilding() then
         caster:InterruptChannel()
         StopSoundOn("sasavot_dance_1", self:GetCaster())
         StopSoundOn("sasavot_dance_2", self:GetCaster())

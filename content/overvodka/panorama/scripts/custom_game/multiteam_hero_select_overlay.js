@@ -20,15 +20,20 @@ function UpdateTeam( teamId )
 	}
 }
 
-function UpdateCustomHeroModel(hero_name)
+function UpdateCustomHeroModel(hero_name, playerId)
 {
+	// Only update for local player
+	if (playerId != Game.GetLocalPlayerID()) {
+		return;
+	}
+
 	let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
 	HeroModelLoadout.style.visibility = "collapse";
 	if (heroModelPanel) {
 		return
 	}
 
-	if (!heroModelPanel) 
+	if (!heroModelPanel && hero_name === "npc_dota_hero_morphling") 
 	{
 		let panel = FindDotaHudElement("StrategyScreen")
 		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
@@ -109,7 +114,7 @@ function UpdatePlayer( teamPanel, playerId )
 		if (heroImages[playerInfo.player_selected_hero]) {
 			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribed(playerId)) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
-				UpdateCustomHeroModel(playerInfo.player_selected_hero)
+				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
 			else {
 				playerPortrait.SetImage(heroImages[playerInfo.player_selected_hero]);
