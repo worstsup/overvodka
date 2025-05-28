@@ -39,6 +39,10 @@ end
 
 function modifier_nix_rus:OnIntervalThink()
 	if IsServer() then
+		if not self:GetParent():IsAlive() then
+			self:Destroy()
+			return
+		end
 		local damage = self.dps * self.interval
 		local enemies = FindUnitsInRadius(
 			self:GetParent():GetTeamNumber(),

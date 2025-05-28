@@ -361,6 +361,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_zhenya"
     }
+    if (HeroName == "npc_dota_hero_phantom_lancer")
+    {
+        OvervodkaName = "npc_dota_hero_kolyan"
+    }
     return OvervodkaName	
 }
 

@@ -64,6 +64,168 @@
             }
         }
     }
+    "pvz/peashooter.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/enchantress.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.1 0.8 0.1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.8 0.1" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.0 0.8 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.0 0.8 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default"
+			{
+				"PortraitPosition"		"186.28 -121.04 181.11"
+				"PortraitAngles"		"26.07 144.34 0.00"
+				"PortraitFOV"		"55"
+			}
+        }
+    }
+    "tamaev/car/tamaev_car.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/rubick.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 0.4 0.6" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 0.4 0.6" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 0.4 0.6" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 0.4 0.6" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default"
+			{
+				"PortraitPosition"		"186.28 -121.04 181.11"
+				"PortraitAngles"		"26.07 144.34 0.00"
+				"PortraitFOV"		"70"
+			}
+        }
+    }
+    "pvz/peashooter_freeze.vmdl"
+    {
+        "PortraitLightPosition"		"47.84 4.52 166.77"
+		"PortraitLightAngles"		"30.28 191.43 0.00"
+		"PortraitLightFOV"		"90"
+		"PortraitLightDistance"		"66"
+		"PortraitLightColor"		"134 198 254"
+		"PortraitShadowColor"		"48 48 69"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"84 108 120"
+		"PortraitAmbientScale"		"4.750000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_glacier.vmat"
+		"PortraitBackgroundColor1"		"0 0 0"
+		"PortraitBackgroundColor2"		"1 1 1"
+		"PortraitBackgroundColor3"		"1 1 1"
+		"PortraitBackgroundColor4"		"1 1 1"
+		"PortraitLightScale"		"2.300000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"18.200 -36.780 -11.370"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"186.28 -121.04 181.11"
+				"PortraitAngles"		"26.07 144.34 0.00"
+				"PortraitFOV"		"55"
+			}
+		}
+    }
+    "models/items/beastmaster/hawk/fotw_eagle/fotw_eagle.vmdl"
+	{
+		"PortraitLightPosition"		"57.029282 -40.591393 219.000000"
+		"PortraitLightAngles"		"72.274315 144.558105 0.000000"
+		"PortraitLightFOV"		"63.000000"
+		"PortraitLightDistance"		"471.000000"
+		"PortraitLightColor"		"195 181 254"
+		"PortraitShadowColor"		"56 48 47"
+		"PortraitShadowScale"		"1.025000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientColor"		"61 28 28"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitSpecularDirection"		"0.000000 0.000000 -1.000000"
+		"PortraitSpecularPower"		"16.000000"
+		"PortraitBackgroundColor1"		"0.000000 0.000000 0.000000"
+		"PortraitBackgroundColor2"		"0.250000 0.250000 0.250000"
+		"PortraitBackgroundColor3"		"0.500000 0.500000 0.500000"
+		"PortraitBackgroundColor4"		"0.700000 0.700000 0.700000"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_gradient_btm.vmat"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"PortraitAnimationCycle"		"0.000000"
+		"PortraitAnimationRate"		"1.000000"
+		"PortraitHideHero"		"0"
+		"PortraitLightScale"		"3.650000"
+		"PortraitAmbientDirection"		"-0.033 0.968 -0.249"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"267.859985 -233.894150 267.029709"
+				"PortraitAngles"		"23.839298 139.504395 -0.000001"
+				"PortraitFOV"		"8.260926"
+				"PortraitFar"		"1500.000000"
+			}
+		}
+	}
+    "models/creeps/mega_greevil/mega_greevil.vmdl"
+	{
+		"PortraitLightPosition"		"27.29 -103.23 154.23"
+		"PortraitLightAngles"		"34.67 84.22 0.00"
+		"PortraitLightFOV"		"90"
+		"PortraitLightDistance"		"231"
+		"PortraitLightColor"		"254 238 238"
+		"PortraitShadowColor"		"93 84 84"
+		"PortraitShadowScale"		"2.300000"
+		"PortraitAmbientColor"		"167 48 25"
+		"PortraitAmbientScale"		"2.800000"
+		"PortraitSpecularColor"		"251 251 253"
+		"PortraitBackgroundColor1"		"0 0 0"
+		"PortraitBackgroundColor2"		"1 1 1"
+		"PortraitBackgroundColor3"		"1 1 1"
+		"PortraitBackgroundColor4"		"0 0 0"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_brokenlight.vmat"
+		"PortraitLightScale"		"1.800000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-16.580 57.250 -36.280"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"153.47 -71.22 88.00"
+				"PortraitAngles"		"7.38 156.17 0.00"
+				"PortraitFOV"		"26"
+			}
+		}
+	}
     "models/bombardiro/bombardiro.vmdl"
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
@@ -736,6 +898,36 @@
             }
         }
     }
+    "models/heroes/abaddon/abaddon.vmdl"
+	{
+		"PortraitLightPosition"		"-18.80 4.09 274.40"
+		"PortraitLightAngles"		"29.44 356.43 0.00"
+		"PortraitLightFOV"		"76"
+		"PortraitLightDistance"		"116"
+		"PortraitLightColor"		"136 171 254"
+		"PortraitShadowColor"		"56 56 56"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"0 38 63"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_glacier.vmat"
+		"PortraitBackgroundColor1"		".47 .34 .16"
+		"PortraitBackgroundColor2"		".47 .34 .16"
+		"PortraitBackgroundColor3"		".61 .20 1"
+		"PortraitLightScale"		"5.000000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"40.770 37.280 -13.510"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"228.53 -3.72 296.85"
+				"PortraitAngles"		"21.90 178.59 0.00"
+				"PortraitFOV"		"14"
+			}
+		}
+	}
     "sans/underfell_sans.vmdl" // Модель, для которой задаются настройки портрета
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели

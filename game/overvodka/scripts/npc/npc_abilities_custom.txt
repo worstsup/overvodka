@@ -6083,7 +6083,8 @@
 	//=================================================================================================================
 	"Ashab_rocket"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/ashab/ashab_rocket"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"				"60 50 40"
 		"AbilityCastRange"				"1200"
@@ -6093,7 +6094,6 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-
 		"AbilityValues"
 		{
 				"radius"
@@ -6118,55 +6118,6 @@
 					"RequiresFacet"	"ashab_r_facet"
 					"special_bonus_facet_ashab_r_facet"  "100 150 200"
 				}
-		}
-		"precache"
-		{
-			 "particle" "particles/clockwerk_para_rocket_flare_mew.vpcf"
-			 "soundfile" "soundevents/rocket.vsndevts"
-			 "soundfile" "soundevents/rocket_hit.vsndevts"
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"		"rocket"
-				"Target"			"CASTER"
-			}
-			"ActOnTargets"
-			{
-				"Target"
-				{
-					"Center"	"CASTER"
-					"Radius"	"%radius"
-					"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY" 
-					"Types"		"DOTA_UNIT_TARGET_HERO"
-				}
-				"Action"
-				{
-					"TrackingProjectile"
-					{
-						"Target"			"TARGET"
-						"EffectName"		"particles/clockwerk_para_rocket_flare_mew.vpcf"
-						"Dodgeable"			"0"
-						"ProvidesVision"	"0"
-						"MoveSpeed"			"600"
-						"SourceAttachment"	"DOTA_PROJECTILE_ATTACHMENT_HITLOCATION"
-					}
-				}
-			}
-		}
-		"OnProjectileHitUnit"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/ashab/AshabDamage.lua"
-				"Function"		"RocketsDamage"
-			}
-			"FireSound"
-			{
-				"EffectName"		"rocket_hit"
-				"Target"			"TARGET"
-			}
 		}
 	}
 	"imba_batrider_sticky_napalm"
@@ -13212,6 +13163,114 @@
 				"value"	"0"
 				"special_bonus_facet_zhenya_facet_r" "+1"
 			}
+		}
+	}
+	//===================================================================================================================
+	//												КОЛЯН
+	//===================================================================================================================
+	"special_bonus_unique_kolyan_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_kolyan_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"kolyan_q"
+	{
+		"BaseClass"			 			"ability_lua"
+		"ScriptFile"					"heroes/kolyan/kolyan_q"
+		"AbilityTextureName"			"windrunner_windrun"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityChannelTime"			"4.0"
+		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCooldown"				"20"
+		"AbilityManaCost"				"70 80 90 100"
+		"AbilityValues"
+		{
+			"duration"						"4"
+			"attack_damage"
+			{
+				"value"	"-60 -50 -40 -30"
+			}
+			"attack_damage_tooltip"
+			{
+				"value"	"40 50 60 70"
+			}
+			"attack_interval"				"0.5"
+			"bonus_attack_range"					
+			{
+				"value"						"100"
+			}
+		}
+	}
+	"kolyan_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/kolyan/kolyan_w"
+		"AbilityTextureName"			"bristleback_quill_spray"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"4"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastRange"				"700"
+		"AbilityCooldown"				"3"
+		"AbilityManaCost"				"25"
+		"AbilityValues"
+		{
+				"radius"				"700"
+				"quill_base_damage"		"20.0 40.0 60.0 80.0"
+				"quill_stack_damage"	"30.0 32.0 34.0 36.0"
+				"slow"					"-6"
+				"armor"					"-0.5 -1 -1.5 -2"
+				"max_damage"			"550.0"
+				"quill_stack_duration"	"12.0"
+				"angle"					"120"
 		}
 	}
 }

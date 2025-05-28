@@ -142,9 +142,10 @@
 #PlayerName
 {
 	margin-top: 4px;
-    color: #a9aaaa;
+    color: #FFD700; text-shadow: 0px 0px 1px #FFD700;
     font-size: 15px;
     text-align: center;
+    font-weight: bold;
     horizontal-align: center;
     vertical-align: center;
 	width: 100%;

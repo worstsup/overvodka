@@ -154,6 +154,7 @@ PrecacheUtils.models = {
 		"models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl",
 		"models/tung_sahur/tung_tung_tung_sahur.vmdl",
 		"models/bombardiro/bombardiro.vmdl",
+		"models/kolyan/kolyan.vmdl",
 		"models/shrek/shrek.vmdl",
 		"models/speed/ishowspeed.vmdl",
 		"models/griffins/peter.vmdl",

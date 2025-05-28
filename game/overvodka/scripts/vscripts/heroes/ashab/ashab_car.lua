@@ -5,8 +5,9 @@ ashab_car = class({})
 
 function ashab_car:Precache(context)
     PrecacheResource( "soundfile", "soundevents/ashab_car.vsndevts", context )
-    PrecacheResource( "model", "models/items/courier/carty_dire/carty_dire_flying.vmdl", context )
+    PrecacheResource( "model", "tamaev/car/tamaev_car.vmdl", context )
     PrecacheResource( "particle", "particles/ashab_car_aoe.vpcf", context )
+    PrecacheResource( "particle", "particles/ashab_car_destroy.vpcf", context )
 end
 
 function ashab_car:GetCooldown(level)
@@ -67,6 +68,14 @@ function modifier_ashab_car_passive:OnCreated()
     ParticleManager:SetParticleControl(particle, 2, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 3, self:GetParent():GetAbsOrigin())
     self:AddParticle(particle, false, false, -1, false, false)
+end
+
+function modifier_ashab_car_passive:OnDestroy()
+    if not IsServer() then return end
+    local particle = ParticleManager:CreateParticle("particles/ashab_car_destroy.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(particle)
+    UTIL_Remove(self:GetParent())
 end
 
 function modifier_ashab_car_passive:DeclareFunctions()

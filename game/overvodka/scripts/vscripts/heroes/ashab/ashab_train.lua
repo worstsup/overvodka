@@ -3,6 +3,7 @@ LinkLuaModifier( "modifier_train", "heroes/ashab/ashab_train", LUA_MODIFIER_MOTI
 
 function ashab_train:Precache(context)
 	PrecacheResource( "soundfile", "soundevents/ashab_train.vsndevts", context )
+	PrecacheResource( "particle", "particles/tamaev_train.vpcf", context )
 end
 
 function ashab_train:OnSpellStart()
@@ -18,6 +19,12 @@ function modifier_train:IsPurgable()
 end
 
 function modifier_train:OnCreated( kv )
+	local particle = ParticleManager:CreateParticle("particles/tamaev_train.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
+	ParticleManager:SetParticleControl(particle, 1, self:GetParent():GetAbsOrigin())
+	ParticleManager:SetParticleControlEnt(particle, 2, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true)
+	ParticleManager:SetParticleControl(particle, 3, self:GetParent():GetAbsOrigin())
+	self:AddParticle(particle, false, false, -1, false, false)
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_status = self:GetAbility():GetSpecialValueFor( "bonus_status" )
 	self.bonus_strength   = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("bonus_strength") * 0.01

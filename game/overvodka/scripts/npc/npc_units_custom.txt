@@ -1716,8 +1716,8 @@
 	"npc_ashab_car"
 	{
         "BaseClass"				"npc_dota_base_additive"
-        "Model"                 "models/items/courier/carty_dire/carty_dire_flying.vmdl"
-        "ModelScale"            "2"
+        "Model"                 "tamaev/car/tamaev_car.vmdl"
+        "ModelScale"            "0.75"
         "Level"                 "0"
         "HasInventory"          "0"
         "ArmorPhysical"         "0"

@@ -63,7 +63,6 @@ function UpdatePlayer( teamPanel, playerId )
 
 	var localPlayerTeamId = localPlayerInfo.player_team_id;
 	var playerPortrait = playerPanel.FindChildInLayoutFile( "PlayerPortrait" );
-	
 	if ( playerId == localPlayerInfo.player_id )
 	{
 		playerPanel.AddClass( "is_local_player" );
@@ -109,6 +108,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_omniknight": "file://{images}/heroes/npc_dota_hero_stint.png",
 			"npc_dota_hero_void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 			"npc_dota_hero_mars":	"file://{images}/heroes/npc_dota_hero_zhenya.png",
+			"npc_dota_hero_phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -165,6 +165,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"omniknight": "file://{images}/heroes/npc_dota_hero_stint.png",
 			"void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 			"mars": "file://{images}/heroes/npc_dota_hero_zhenya.png",
+			"phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
