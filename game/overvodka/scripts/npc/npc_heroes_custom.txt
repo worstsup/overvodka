@@ -2814,7 +2814,7 @@
 		"LoadoutScale"				"1.05"
 		"HeroSelectSoundEffect"		"kolyan_start"
 		"GibType"					"default"
-		"SimilarHeroes"				"109,67,89"
+		"SimilarHeroes"				"32,2,7"
 		"Ability1"					"kolyan_q"
 		"Ability2"					"kolyan_w"
 		"Ability3"					"kolyan_e"

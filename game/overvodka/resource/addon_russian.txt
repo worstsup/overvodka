@@ -245,7 +245,7 @@
 		"dota_tooltip_facet_kolyan_stacks" "ПАЦАНСКИЙ ПОДГОН"
 		"dota_tooltip_facet_kolyan_stacks_description" "Попадание семками по врагу накладывает на него 1 стак способности ЧЕРКАШИ."
 		"dota_tooltip_facet_kolyan_vision"	   "ВНИМАТЕЛЬНАЯ ОХРАНА"
-		"dota_tooltip_facet_kolyan_vision_description "Охранники имеют эффект True Sight."
+		"dota_tooltip_facet_kolyan_vision_description" "Охранники имеют эффект True Sight."
 		"dota_tooltip_ability_kolyan_innate"	"ADIDAS"
 		"dota_tooltip_ability_kolyan_innate_description" "Родной костюм Adidas даёт Коляну преимущество в бою — после каждого убийства врага он получает уклонение и восстанавливает здоровье."
 		"dota_tooltip_ability_kolyan_innate_evasion" "%ДОП. УКЛОНЕНИЕ:"
