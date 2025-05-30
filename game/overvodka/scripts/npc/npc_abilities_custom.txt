@@ -13246,9 +13246,9 @@
 		"AbilityTextureName"			"windrunner_windrun"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityChannelTime"			"4.0"
-		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCooldown"				"26 24 22 20"
 		"AbilityManaCost"				"70 80 90 100"
+		"HasShardUpgrade"				"1"
 		"AbilityValues"
 		{
 			"duration"						"4"
@@ -13272,6 +13272,11 @@
 			{
 				"value"	"0"
 				"special_bonus_unique_kolyan_7" "+50"
+			}
+			"movespeed"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+200"
 			}
 		}
 	}
@@ -13307,6 +13312,18 @@
 					"special_bonus_unique_kolyan_4"	"+4"
 				}
 				"angle"					"120"
+				"hasfacet"
+				{
+					"value"	"0"
+					"special_bonus_facet_kolyan_stacks" "+1"
+				}
+				"int_loss"				"3"
+				"all_gain"				"1"
+				"duration"
+				{
+					"value"	"10 15 20 25"
+					"special_bonus_unique_kolyan_1" "+10"
+				}
 		}
 	}
 	"kolyan_e"
@@ -13373,6 +13390,11 @@
 				"value"	"0"
 				"special_bonus_scepter"	"+60"
 				"RequiresScepter"	"1"
+			}
+			"has_facet"
+			{
+				"value"	"0"
+				"special_bonus_facet_kolyan_vision" "+1"
 			}
 		}
 	}

@@ -148,7 +148,6 @@
 				"item_fallen_sky"					"1"
 				"item_minotaur_horn"				"1"
 				"item_spider_legs"					"1"
-				"item_helm_of_the_undying"			"1"
 				"item_unrelenting_eye"				"1"
 				"item_divine_regalia"				"1"
 			}

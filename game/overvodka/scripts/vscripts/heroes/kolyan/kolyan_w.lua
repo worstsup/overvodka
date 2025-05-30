@@ -1,12 +1,17 @@
 kolyan_w = class({})
 LinkLuaModifier( "modifier_kolyan_w", "heroes/kolyan/kolyan_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_kolyan_w_stack", "heroes/kolyan/kolyan_w", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_kolyan_e", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_kolyan_e_debuff", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_kolyan_e_stack", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_kolyan_e_abilities", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
 
 function kolyan_w:Precache(context)
     PrecacheResource("particle", "particles/kolyan_w.vpcf", context)
     PrecacheResource("particle", "particles/kolyan_w_hit.vpcf", context)
     PrecacheResource("soundfile", "soundevents/kolyan_w.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts", context)
+	PrecacheResource("particle", "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift_gold.vpcf", context)
 end
 
 function kolyan_w:OnSpellStart()
@@ -53,9 +58,27 @@ function kolyan_w:OnSpellStart()
                 { stack_duration = stack_duration }
             )
             self:PlayEffects2(enemy)
+			if self:GetSpecialValueFor("hasfacet") > 0 and enemy:IsRealHero() then
+				local abil = caster:FindAbilityByName("kolyan_e")
+				if abil and abil:GetLevel() > 0 then
+					enemy:AddNewModifier(caster, abil, "modifier_kolyan_e_debuff",{stack_duration = self:GetSpecialValueFor("duration")})
+					self:PlayEffects(enemy)
+					local mod = caster:FindModifierByName("modifier_kolyan_e")
+					if mod then
+						mod:AddStack( self:GetSpecialValueFor("duration") )
+					end
+				end
+			end
         end
     end
     self:PlayEffects1()
+end
+
+function kolyan_w:PlayEffects( target )
+	local particle_cast = "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift_gold.vpcf"
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
+	ParticleManager:SetParticleControl( effect_cast, 1, self:GetCaster():GetOrigin() + Vector( 0, 0, 64 ) )
+	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
 function kolyan_w:GetAT()

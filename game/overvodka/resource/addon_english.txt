@@ -2461,7 +2461,7 @@
 		"DOTA_Tooltip_ability_item_waka_bonus_damage"							"+$damage"
 
  		"DOTA_Tooltip_ability_item_suchiy" "BITCHY COLD"
-		"DOTA_Tooltip_ability_item_suchiy_Description" "<h1>Active: Winter</h1> Brings winter to a %blast_radius% radius, slowing all enemies by %blast_movement_speed%%% for %blast_debuff_duration% seconds, dealing %blast_damage% damage, and reducing enemies' magic resistance by %spell_amp%%% for %resist_debuff_duration% seconds.\n <h1>Passive: Bitchy Cold Aura</h1> Reduces enemy attack speed by %aura_attack_speed% and health regeneration by %hp_regen_degen_aura%%% within %aura_radius%."
+		"DOTA_Tooltip_ability_item_suchiy_Description" "<h1>Active: Winter</h1> Brings winter to a %blast_radius% radius, slowing all enemies by %blast_movement_speed%%% for %blast_debuff_duration% seconds, dealing %blast_damage% damage, and reducing enemies' magic resistance by %spell_amp%%% for %resist_debuff_duration% seconds.\n <h1>Passive: Bitchy Cold Aura</h1> Reduces enemy attack speed by %aura_attack_speed% and health regeneration by %restoration_reduction_aura%%% within %aura_radius%."
 		"DOTA_Tooltip_ability_item_suchiy_bonus_strength" "+$str"
 		"DOTA_Tooltip_ability_item_suchiy_bonus_agility" "+$agi"
 		"DOTA_Tooltip_ability_item_suchiy_bonus_intellect" "+$int"

@@ -43,7 +43,7 @@ function modifier_kolyan_e:DeclareFunctions()
 end
 
 function modifier_kolyan_e:GetModifierProcAttack_Feedback( params )
-	if IsServer() and (not self:GetParent():PassivesDisabled()) then
+	if IsServer() and (not self:GetParent():PassivesDisabled()) and (not self:GetParent():IsIllusion()) then
 		local target = params.target
 		if (not target:IsHero()) or target:IsIllusion() then
 			return

@@ -5,8 +5,9 @@ kolyan_r = class({})
 function kolyan_r:Precache(context)
     PrecacheResource("soundfile", "soundevents/kolyan_r.vsndevts", context)
     PrecacheUnitByNameSync("npc_kolyan_guard", context)
-    PrecacheResource("particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_winter_wyvern/wyvern_spawn.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/sniper/sniper_charlie/sniper_base_attack_charlie.vpcf", context)
+    PrecacheResource("particle", "particles/kolyan_r_death.vpcf", context)
 end
 
 function kolyan_r:OnAbilityPhaseInterrupted()
@@ -48,10 +49,10 @@ function kolyan_r:OnSpellStart()
     guard2:SetControllableByPlayer(caster:GetPlayerID(), false)
     guard2:SetOwner(caster)
     guard2:AddNewModifier(caster, self, "modifier_kolyan_r_trigger", {duration = duration})
-    local p = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard)
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_winter_wyvern/wyvern_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard)
     ParticleManager:SetParticleControl(p, 0, guard:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    local p2 = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard2)
+    local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_winter_wyvern/wyvern_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard2)
     ParticleManager:SetParticleControl(p2, 0, guard2:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p2)
     if self:GetSpecialValueFor("num") == 3 then
@@ -67,7 +68,7 @@ function kolyan_r:OnSpellStart()
         guard3:SetControllableByPlayer(caster:GetPlayerID(), false)
         guard3:SetOwner(caster)
         guard3:AddNewModifier(caster, self, "modifier_kolyan_r_trigger", {duration = duration})
-        local p3 = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_game_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard3)
+        local p3 = ParticleManager:CreateParticle("particles/units/heroes/hero_winter_wyvern/wyvern_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, guard3)
         ParticleManager:SetParticleControl(p3, 0, guard3:GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(p3)
     end
@@ -113,6 +114,15 @@ function modifier_kolyan_r_trigger:OnIntervalThink()
     if not IsServer() then return end
     local guard  = self:GetParent()
     local caster = self:GetCaster()
+    if self:GetAbility():GetSpecialValueFor("has_facet") > 0 then
+        local everyone = FindUnitsInRadius(caster:GetTeamNumber(), guard:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+        for _,enemy in pairs(everyone) do
+            enemy:AddNewModifier(caster, self:GetAbility(), "modifier_truesight", {duration = 0.3})
+        end
+    end
+    if not caster:IsAlive() then
+        self:Destroy()
+    end
     local now = GameRules:GetGameTime()
     if not self.busy and (guard:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D() >= 2000 then
         FindClearSpaceForUnit( guard, caster:GetAbsOrigin() + RandomVector(200), false )
@@ -189,10 +199,11 @@ end
 function modifier_kolyan_r_trigger:OnDestroy()
     if not IsServer() then return end
     self:StartIntervalThink(-1)
-    --local effect_cast = ParticleManager:CreateParticle("particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    --ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
-    --ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
-    --ParticleManager:ReleaseParticleIndex(effect_cast)
+    local effect_cast = ParticleManager:CreateParticle("particles/kolyan_r_death.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(effect_cast, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(effect_cast)
     UTIL_Remove(self:GetParent())
 end
 

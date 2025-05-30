@@ -19,6 +19,13 @@ function kolyan_q:GetCastRange(location, target)
 	return cast_range
 end
 
+function kolyan_q:GetChannelTime()
+    if self:GetCaster():HasShard() then
+        return 0
+    end
+    return self:GetSpecialValueFor("duration")
+end
+
 function kolyan_q:OnSpellStart()
 	if not IsServer() then return end
 	local duration = self:GetSpecialValueFor("duration")
@@ -29,7 +36,7 @@ end
 function kolyan_q:OnChannelFinish(interrupted)
     if not IsServer() then return end
     local caster = self:GetCaster()
-
+	if caster:HasShard() then return end
     if interrupted then
         caster:RemoveModifierByName("modifier_kolyan_q")
 		StopSoundOn("kolyan_q", caster)
@@ -48,7 +55,7 @@ function modifier_kolyan_q:IsPurgable()
 end
 
 function modifier_kolyan_q:IsHidden()
-    return true
+    return (not self:GetCaster():HasShard())
 end
 
 function modifier_kolyan_q:OnCreated( kv )
@@ -71,6 +78,9 @@ end
 
 function modifier_kolyan_q:OnIntervalThink()
 	if not IsServer() then return end
+	if self:GetParent():IsStunned() or self:GetParent():IsSilenced() then
+		self:Destroy()
+	end
 	local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self:GetParent():Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FIND_ANY_ORDER, false )
 	if #enemies <= 0 then return end
     local particle = ParticleManager:CreateParticle("particles/econ/items/axe/axe_weapon_bloodchaser/axe_attack_blur_counterhelix_bloodchaser.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
@@ -88,8 +98,14 @@ function modifier_kolyan_q:DeclareFunctions()
 		MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
 		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+		(self:GetParent():HasShard() and MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE or nil),
 	}
 	return funcs
+end
+
+function modifier_kolyan_q:GetModifierMoveSpeed_Absolute()
+    return self:GetAbility():GetSpecialValueFor("movespeed")
 end
 
 function modifier_kolyan_q:GetModifierDamageOutgoing_Percentage()
@@ -108,6 +124,10 @@ end
 
 function modifier_kolyan_q:GetModifierAttackRangeBonus()
 	return self.bonus_attack_range
+end
+
+function modifier_kolyan_q:GetOverrideAnimation()
+	return ACT_DOTA_CAST_ABILITY_1
 end
 
 function modifier_kolyan_q:CheckState()
