@@ -10,11 +10,6 @@ end
 
 function modifier_generic_stunned_lua:OnCreated( kv )
 	if not IsServer() then return end
-
-	self.particle = "particles/generic_gameplay/generic_stunned.vpcf"
-	if kv.bash==1 then
-		self.particle = "particles/generic_gameplay/generic_bashed.vpcf"
-	end
 	local resist = 1-self:GetParent():GetStatusResistance()
 	local duration = kv.duration*resist
 	self:SetDuration( duration, true )
@@ -50,7 +45,7 @@ function modifier_generic_stunned_lua:GetOverrideAnimation( params )
 end
 
 function modifier_generic_stunned_lua:GetEffectName()
-	return self.particle
+	return "particles/generic_gameplay/generic_stunned.vpcf"
 end
 
 function modifier_generic_stunned_lua:GetEffectAttachType()

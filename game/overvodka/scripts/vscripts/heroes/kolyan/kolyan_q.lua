@@ -5,6 +5,8 @@ kolyan_q = class({})
 function kolyan_q:Precache(context)
     PrecacheResource("particle", "particles/kolyan_q.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/axe/axe_weapon_bloodchaser/axe_attack_blur_counterhelix_bloodchaser.vpcf", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_chen/chen_hand_of_god_aura_body_magic_immune.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/kolyan_q.vsndevts", context)
 end
 
 function kolyan_q:GetCastRange(location, target)
@@ -20,6 +22,7 @@ end
 function kolyan_q:OnSpellStart()
 	if not IsServer() then return end
 	local duration = self:GetSpecialValueFor("duration")
+	EmitSoundOn("kolyan_q", self:GetCaster())
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_kolyan_q", {duration = duration})
 end
 
@@ -29,6 +32,7 @@ function kolyan_q:OnChannelFinish(interrupted)
 
     if interrupted then
         caster:RemoveModifierByName("modifier_kolyan_q")
+		StopSoundOn("kolyan_q", caster)
         return
     end
 
@@ -54,7 +58,13 @@ function modifier_kolyan_q:OnCreated( kv )
 	if not IsServer() then return end
 	local particle = ParticleManager:CreateParticle("particles/kolyan_q.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
-	self:AddParticle( particle, false, false, -1, false, false  )
+	self:AddParticle( particle, false, false, -1, false, false )
+	if self:GetAbility():GetSpecialValueFor("immune") > 0 then
+		local immune_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_chen/chen_hand_of_god_aura_body_magic_immune.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+		ParticleManager:SetParticleControl(immune_particle, 0, self:GetParent():GetAbsOrigin())
+		ParticleManager:SetParticleControl(immune_particle, 1, self:GetParent():GetAbsOrigin())
+		self:AddParticle( immune_particle, false, false, -1, false, false )
+	end
 	self:StartIntervalThink(self.attack_interval)
     self:OnIntervalThink()
 end
@@ -77,6 +87,7 @@ function modifier_kolyan_q:DeclareFunctions()
 		MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
 		MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
 		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
+		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 	}
 	return funcs
 end
@@ -85,6 +96,10 @@ function modifier_kolyan_q:GetModifierDamageOutgoing_Percentage()
 	if IsServer() then
 		return self.attack_damage
 	end
+end
+
+function modifier_kolyan_q:GetModifierMagicalResistanceBonus()
+	return self:GetAbility():GetSpecialValueFor("immune")
 end
 
 function modifier_kolyan_q:GetModifierFixedAttackRate()
@@ -99,6 +114,7 @@ function modifier_kolyan_q:CheckState()
 	return 
 	{
 		[MODIFIER_STATE_DISARMED] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = (self:GetAbility():GetSpecialValueFor("immune") > 0),
 	}
 end
 

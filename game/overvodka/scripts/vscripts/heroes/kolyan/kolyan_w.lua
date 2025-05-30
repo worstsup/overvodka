@@ -90,7 +90,7 @@ end
 
 function kolyan_w:PlayEffects1()
 	local particle_cast = "particles/kolyan_w.vpcf"
-    local sound_cast = "kolyan_w_"..RandomInt(1,3)
+    local sound_cast = "kolyan_w_"..RandomInt(1,2)
 	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN, self:GetCaster() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( sound_cast, self:GetCaster() )

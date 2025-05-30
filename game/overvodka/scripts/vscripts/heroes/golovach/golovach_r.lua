@@ -8,6 +8,8 @@ LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MOD
 
 function golovach_r:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_marci.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/golovach_r.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/golovach_r_hit.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_cast.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_buff.vpcf", context )
 	PrecacheResource( "particle", "particles/marci_unleash_stack_golovach.vpcf", context )

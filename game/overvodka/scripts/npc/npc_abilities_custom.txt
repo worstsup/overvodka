@@ -7533,21 +7533,24 @@
 				}
 				"illusion_duration"
 				{
-					"value"	"10.0"
+					"value"	"0"
+					"special_bonus_facet_zolo_e_facet" "+10"
 					"RequiresFacet"	"zolo_e_facet"
 				}
-            		"illusion_outgoing_damage"          "-50"  
-            		"illusion_outgoing_tooltip"         
-            		{
-            			"value"					"50.0"
-            			"RequiresFacet"	"zolo_e_facet"
-            		}
-            		"illusion_incoming_damage"          "200.0"
-            		"illusion_incoming_damage_total_tooltip"
-            		{
-            			"value"	"300.0"
-            			"RequiresFacet"	"zolo_e_facet"
-            		}
+            	"illusion_outgoing_damage"          "-50"  
+            	"illusion_outgoing_tooltip"         
+            	{
+            		"value"					"0"
+					"special_bonus_facet_zolo_e_facet" "+50"
+            		"RequiresFacet"	"zolo_e_facet"
+            	}
+            	"illusion_incoming_damage"          "200.0"
+            	"illusion_incoming_damage_total_tooltip"
+            	{
+            		"value"	"0"
+					"special_bonus_facet_zolo_e_facet" "+300"
+            		"RequiresFacet"	"zolo_e_facet"
+            	}
 		}
 	}
 	//=================================================================================================================
@@ -13216,16 +13219,35 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	"kolyan_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/kolyan/kolyan_innate"
+		"DependentOnAbility"			"kolyan_r"
+		"MaxLevel"						"4"	
+		"Innate"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityValues"
+		{
+				"evasion"				"30 40 50 60"
+				"hp_regen"				"10 20 30 40"
+				"magic_resist"
+				{
+					"value"	"0"
+					"special_bonus_unique_kolyan_3"	"+25"
+				}
+				"duration"				"8"
+		}
+	}
 	"kolyan_q"
 	{
 		"BaseClass"			 			"ability_lua"
 		"ScriptFile"					"heroes/kolyan/kolyan_q"
 		"AbilityTextureName"			"windrunner_windrun"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityChannelTime"			"4.0"
 		"AbilityChannelAnimation"		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCooldown"				"20"
+		"AbilityCooldown"				"26 24 22 20"
 		"AbilityManaCost"				"70 80 90 100"
 		"AbilityValues"
 		{
@@ -13233,15 +13255,23 @@
 			"attack_damage"
 			{
 				"value"	"-60 -50 -40 -30"
+				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_damage_tooltip"
 			{
 				"value"	"40 50 60 70"
+				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_interval"				"0.5"
 			"bonus_attack_range"					
 			{
 				"value"						"100"
+				"special_bonus_unique_kolyan_6" "+100"
+			}
+			"immune"
+			{
+				"value"	"0"
+				"special_bonus_unique_kolyan_7" "+50"
 			}
 		}
 	}
@@ -13251,8 +13281,6 @@
 		"ScriptFile"					"heroes/kolyan/kolyan_w"
 		"AbilityTextureName"			"bristleback_quill_spray"
 		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
@@ -13265,12 +13293,87 @@
 		{
 				"radius"				"700"
 				"quill_base_damage"		"20.0 40.0 60.0 80.0"
-				"quill_stack_damage"	"30.0 32.0 34.0 36.0"
+				"quill_stack_damage"
+				{
+					"value"	"30.0 32.0 34.0 36.0"
+					"special_bonus_unique_kolyan_5" "+20"
+				}
 				"slow"					"-6"
 				"armor"					"-0.5 -1 -1.5 -2"
 				"max_damage"			"550.0"
-				"quill_stack_duration"	"12.0"
+				"quill_stack_duration"
+				{
+					"value"	"12.0"
+					"special_bonus_unique_kolyan_4"	"+4"
+				}
 				"angle"					"120"
+		}
+	}
+	"kolyan_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/kolyan/kolyan_e"
+		"AbilityTextureName"			"slark_essence_shift"
+		"FightRecapLevel"				"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityValues"
+		{
+				"int_loss"				"3"
+				"all_gain"				"1"
+				"duration"
+				{
+					"value"	"10 15 20 25"
+					"special_bonus_unique_kolyan_1" "+10"
+				}
+				"swap_duration"			"10"
+				"swap_chance"			"15"
+		}
+	}
+	"kolyan_r"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/kolyan/kolyan_r"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"            "stint_q"
+		"AbilityCooldown"               "70 65 60"
+		"AbilityManaCost"               "150 200 250"
+		"AbilityCastPoint"				"1.4"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"16"
+			}
+			"damage"
+			{
+				"value"	"20 40 60"
+			}
+			"radius"
+			{
+				"value"	"800"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"800"
+			}
+			"num"
+			{
+				"value"	"2"
+				"special_bonus_unique_kolyan_8" "+1"
+			}
+			"lifesteal"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+60"
+				"RequiresScepter"	"1"
+			}
 		}
 	}
 }
