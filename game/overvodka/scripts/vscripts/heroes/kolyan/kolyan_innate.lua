@@ -43,6 +43,9 @@ function modifier_kolyan_innate:OnHeroKilled(params)
     ParticleManager:SetParticleControl( self.effect_cast, 0, parent:GetAbsOrigin() )
     ParticleManager:ReleaseParticleIndex( self.effect_cast )
     EmitSoundOn("kolyan_innate", parent)
+    if RandomInt(1,2) == 1 then
+        EmitSoundOn("kolyan_innate_2", parent)
+    end
 end
 
 modifier_kolyan_innate_buff = class({})
