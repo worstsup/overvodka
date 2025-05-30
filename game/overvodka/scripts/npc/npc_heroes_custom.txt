@@ -2831,22 +2831,29 @@
 		"Ability17"					"special_bonus_unique_kolyan_8"
 		"Facets"
 		{
+			"kolyan_stacks"
+			{
+				"Icon"				"multi_arrow"
+				"Color"				"Blue"
+				"GradientID"		"2"
+			}
+			"kolyan_vision"
+			{
+				"Icon"				"vision"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
 			"phantom_lancer_convergence" 
 			{
 				"Deprecated"		"true"
 			}
 			"phantom_lancer_divergence" 
 			{
-				"Icon"				"summons"
-				"Color"				"Blue"
-				"GradientID"		"2"
+				"Deprecated"		"true"
 			}
-
 			"phantom_lancer_lancelot"
 			{
-				"Icon"				"phantom_lance"
-				"Color"				"Yellow"
-				"GradientID"		"1"
+				"Deprecated"		"true"
 			}
 		}
 		"ArmorPhysical"				"0"

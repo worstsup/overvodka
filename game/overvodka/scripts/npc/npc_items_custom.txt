@@ -1171,7 +1171,7 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"blast_speed"			"400"
-				"hp_regen_degen_aura"	"25"
+				"restoration_reduction_aura"	"25"
 				"illusion_multiplier_pct"	"150"
 				"spell_amp"			"15"				
 				"resist_debuff_duration"	"16.0"
@@ -1212,7 +1212,7 @@
 					"affected_by_aoe_increase"	"1"
 				}
 				"blast_speed"			"1000"
-				"hp_regen_degen_aura"	"25"
+				"restoration_reduction_aura"	"25"
 				"illusion_multiplier_pct"	"150"
 				"spell_amp"			"25"				
 				"resist_debuff_duration"	"10.0"
