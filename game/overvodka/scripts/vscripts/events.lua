@@ -124,9 +124,6 @@ end
 golovach_spawned = 0
 function COverthrowGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
-	if spawnedUnit:IsCourier() then
-		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_turbo_courier_invulnerable", {})
-	end
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
