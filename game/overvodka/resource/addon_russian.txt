@@ -231,6 +231,7 @@
 		"npc_dota_hero_omniknight_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_void_spirit_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_mars_npedesc1"				"Сложность персонажа: НИЗКАЯ"
+		"npc_dota_hero_phantom_lancer_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
 		"dota_tooltip_ability_special_bonus_unique_kolyan_1" "+{s:bonus_duration} сек. к длительности эффекта ЧЕРКАШИ"

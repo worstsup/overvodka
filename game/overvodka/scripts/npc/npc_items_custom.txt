@@ -1694,7 +1694,7 @@
     "ItemQuality"                   "epic"
     "AbilityValues"
     {
-            "bonus_strength"                    "40"
+            "bonus_strength"                    "45"
             "bonus_health"                      "0"
             "health_regen_percent_per_second"   "1.8"
             "bonus_damage"              "35"
@@ -2983,7 +2983,7 @@
 		"ScriptFile"				"items/minion_generator"
 		"AbilityTextureName"		"minion_generator"
 		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCooldown"			"30.0"
+		"AbilityCooldown"			"15.0"
 		"AbilityCastPoint"			"0.1"
 		"AbilityManaCost"			"100"
 		"AbilityCastRange"			"600"
