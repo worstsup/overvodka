@@ -103,7 +103,6 @@ function modifier_speed_shake:CheckState()
     local state = 
     {
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
-        [MODIFIER_STATE_DISARMED] = true,
     }
     return state
 end
@@ -111,10 +110,15 @@ end
 function modifier_speed_shake:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
-        MODIFIER_PROPERTY_OVERRIDE_ANIMATION
+        MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+        MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
     }
 end
- 
+
+function modifier_speed_shake:GetModifierProcAttack_BonusDamage_Physical( params )
+	return -params.damage
+end
+
 function modifier_speed_shake:GetOverrideAnimation()
     return ACT_DOTA_CAST_ABILITY_5
 end

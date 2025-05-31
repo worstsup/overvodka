@@ -1,28 +1,21 @@
 modifier_sasavot_w = class({})
 
-function modifier_sasavot_w:IsHidden( kv )
-	return false
-end
-function modifier_sasavot_w:IsDebuff( kv )
-	return false
-end
-function modifier_sasavot_w:IsPurgable( kv )
-	return false
-end
-function modifier_sasavot_w:RemoveOnDeath( kv )
-	return false
+function modifier_sasavot_w:IsHidden() return (self:GetStackCount() == 0) end
+function modifier_sasavot_w:IsDebuff() return false end
+function modifier_sasavot_w:IsPurgable() return false end
+function modifier_sasavot_w:RemoveOnDeath() return false end
+
+function modifier_sasavot_w:OnCreated()
+	if not IsServer() then return end
+	self:SetStackCount(0)
+	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
+	self.duration = self:GetAbility():GetSpecialValueFor("duration")
 end
 
-function modifier_sasavot_w:OnCreated( kv )
-	if not IsServer() then return end
-	self:SetStackCount(1)
-	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
-	self.currentTarget = {}
-end
-
-function modifier_sasavot_w:OnRefresh( kv )
+function modifier_sasavot_w:OnRefresh()
 	if not IsServer() then return end
 	self.max_stacks = self:GetAbility():GetSpecialValueFor("max_stacks")
+	self.duration = self:GetAbility():GetSpecialValueFor("duration")
 end
 
 
@@ -43,15 +36,12 @@ function modifier_sasavot_w:OnAttack( params )
 			pass = true
 		end
 		if pass then
-			if self.currentTarget==params.target then
-				if params.target:HasModifier("modifier_sasavot_r_new_secondary") then
-					self:SetStackCount(10)
-				else
+			if params.target:HasModifier("modifier_sasavot_r_new_secondary") then
+				for i=1,10 do
 					self:AddStack()
 				end
 			else
-				self:ResetStack()
-				self.currentTarget = params.target
+				self:AddStack()
 			end
 		end
 	end
@@ -76,17 +66,38 @@ function modifier_sasavot_w:GetModifierPhysicalArmorBonus()
 	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("armor")
 end
 
+function modifier_sasavot_w:RemoveStack()
+	self:DecrementStackCount()
+end
 
 function modifier_sasavot_w:AddStack()
 	if not self:GetParent():PassivesDisabled() then
 		if self:GetStackCount() < self.max_stacks then
+			local mod = self:GetParent():AddNewModifier(
+				self:GetParent(),
+				self:GetAbility(),
+				"modifier_sasavot_w_stack",
+				{
+					duration = self.duration,
+				}
+			)
+			mod.modifier = self
 			self:IncrementStackCount()
 		end
 	end
 end
 
-function modifier_sasavot_w:ResetStack()
-	if not self:GetParent():PassivesDisabled() then
-		self:SetStackCount(1)
+modifier_sasavot_w_stack = class({})
+
+function modifier_sasavot_w_stack:IsHidden() return true end
+function modifier_sasavot_w_stack:IsPurgable() return false end
+function modifier_sasavot_w_stack:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
+
+function modifier_sasavot_w_stack:OnCreated( kv )
+end
+
+function modifier_sasavot_w_stack:OnRemoved()
+	if IsServer() then
+		self.modifier:RemoveStack()
 	end
 end

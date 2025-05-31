@@ -1188,7 +1188,7 @@
 		"ProjectileModel"		"particles/econ/items/zeus/lightning_weapon_fx/zuus_base_attack_immortal_lightning.vpcf"
 		"ProjectileSpeed"		"1100"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		"AttributeBaseStrength"		"16"
+		"AttributeBaseStrength"		"17"
 		"AttributeStrengthGain"		"1.7"
 		"AttributeBaseIntelligence"		"22"
 		"AttributeIntelligenceGain"		"3.3"

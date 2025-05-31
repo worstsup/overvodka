@@ -24,9 +24,6 @@ function Damage(keys)
 		false)
 
 	for _,unit in pairs(targets) do
-		if caster:HasScepter() then
-			damage = damage + unit:GetHealth() / 100 * 2
-		end
 		if unit:IsRealHero() then 
 			caster:ModifyGold(bonus_gold, true, 0)
 		end
@@ -36,5 +33,5 @@ end
 
 function Back(keys)
 	local caster = keys.caster
-	caster:SetModelScale(1.3)
+	caster:SetModelScale(1.2)
 end
