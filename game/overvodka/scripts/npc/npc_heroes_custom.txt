@@ -75,7 +75,7 @@
 				{
 					"Ability1"
 					{
-						"AbilityName"	"BigRussianBoss_test"
+						"AbilityName"	"kachok_test"
 						"AbilityIndex"	"5"
 						"AutoLevelAbility" "false"
 					}

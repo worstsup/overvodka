@@ -132,7 +132,7 @@ function modifier_dave_loonboon:OnIntervalThink()
         self.radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
         FIND_CLOSEST,
         false
     )

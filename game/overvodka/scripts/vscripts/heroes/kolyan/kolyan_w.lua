@@ -14,6 +14,14 @@ function kolyan_w:Precache(context)
 	PrecacheResource("particle", "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift_gold.vpcf", context)
 end
 
+function kolyan_w:GetCooldown( level )
+    local base_cd = self.BaseClass.GetCooldown( self, level )
+    if GetMapName() == "overvodka_5x5" then
+        return base_cd + self:GetSpecialValueFor("dota_bonus_cooldown")
+    end
+    return base_cd
+end
+
 function kolyan_w:OnSpellStart()
     local caster = self:GetCaster()
     local origin = caster:GetOrigin()

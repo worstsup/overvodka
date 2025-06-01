@@ -48,7 +48,7 @@ Layer0
 	TextureTintByBaseMask "materials/default/default_basetintmask.tga"
 
 	//---- Normal Map ----
-	TextureNormal "models/pozhar/normal_up.tga"
+	TextureNormal "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Rim ----
 	g_flRimLightScale "1.000"
@@ -65,5 +65,39 @@ Layer0
 		"TextureDiffuseWarpMask" "materials/default/default_diffusemask.tga"
 		"TextureMetalnessMask" "materials/default/default_metalnessmask.tga"
 		"TextureSelfIllumMask" "materials/default/default_selfillummask.tga"
+	}
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Mask 2"
+		{
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
 	}
 }

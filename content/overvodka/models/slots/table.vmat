@@ -39,7 +39,7 @@ Layer0
 	g_vBloomColor "[1.000000 1.000000 1.000000 0.000000]"
 
 	//---- Normal Map ----
-	TextureNormal "models/slots/textures/table_normal.png"
+	TextureNormal "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Rim ----
 	g_flRimLightScale "1.000"
@@ -49,4 +49,35 @@ Layer0
 	g_flSpecularExponent "32.000"
 	g_flSpecularScale "1.000"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
+	}
 }

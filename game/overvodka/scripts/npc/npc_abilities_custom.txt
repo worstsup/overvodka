@@ -554,29 +554,21 @@
 	//=================================================================================================================
 	// Тест на жим
 	//=================================================================================================================
-	"BigRussianBoss_test"
+	"kachok_test"
 	{
-		"BaseClass"                    	"ability_datadriven" 
+		"BaseClass"                    	"ability_lua"
+		"ScriptFile"					"heroes/kachok/kachok_test"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"FightRecapLevel"				"2"
 		"AbilityTextureName"			"soska"
-
-		"precache"
-		{
-			"particle"				"particles/duel/legion_duel_ring_arcana.vpcf"
-			"particle"				"particles/units/heroes/hero_legion_commander/legion_commander_duel_victory.vpcf"
-		}
-
 		"AbilityCastRange"				"175"
 		"AbilityCooldown"               "55.0 50.0 45.0"
 		"AbilityManaCost"               "75"
 		"AbilityCastPoint"				"0.1"
-
 		"AbilityValues"
 		{
 				"duration"
@@ -589,95 +581,6 @@
 					"value"	"20 30 40"
 					"special_bonus_unique_kachok_7" "+20"
 				}
-				"damage_reduction_tt"	"0"
-				"damage_reduction"		"0"
-		}
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"test.lua"
-				"Function"		"bigrussianboss_ultimate_start"
-				"Duration"		"%duration"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_brb_test"
-			{
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
-				"IsDebuff"			"1"
-				
-				"OnDeath"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"test.lua"
-						"Function"		"modifier_test_on_death"
-						"Target"		"UNIT"
-						"RewardDamage"	"%reward_damage"
-					}
-				}
-
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"test.lua"
-						"Function"		"modifier_test_on_destroy"
-					}
-				}
-
-				"Properties"
-				{
-						"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL"		"0"
-						"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL"		"0"
-						"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE"			"0"
-						"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"		"%damage_reduction"
-						"MODIFIER_PROPERTY_DISABLE_HEALING"					"1"
-				}
-
-				"States"
-				{
-						"MODIFIER_STATE_SILENCED"				"MODIFIER_STATE_VALUE_ENABLED"
-						"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
-						"MODIFIER_STATE_MUTED"					"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-			
-			"modifier_brb_test_attack_target"
-			{
-				"IsHidden"			"1"
-
-				"ThinkInterval"  "0.1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"    "test.lua"
-						"Function"      "modifier_test_on_attack_passive"
-					}
-				}
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"    "GladSorry.lua"
-						"Function"      "GladSorryEnd"
-					}
-				}
-			}
-			"modifier_test_damage"
-			{
-				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"1"
-				}
-			}
 		}
 	}
 	//=================================================================================================================
@@ -4702,7 +4605,8 @@
 	//=================================================================================================================
 	"mellstroy_meteors"
     {
-    	"BaseClass"                 "ability_datadriven"
+    	"BaseClass"                 "ability_lua"
+		"ScriptFile"				"heroes/mellstroy/mellstroy_meteors"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
@@ -4711,84 +4615,6 @@
 		"AbilityCooldown"			"25"
 		"AbilityGoldCost"         	"150 275 400 525"
 		"AbilityCastRange"			"800"
-
-        "precache"
-		{
-			"soundfile"			"soundevents/fruits.vsndevts"
-			"particle"			"particles/invoker_chaos_meteor_mell_1.vpcf"
-			"particle"			"particles/invoker_chaos_meteor_mell_2.vpcf"
-			"particle"			"particles/invoker_chaos_meteor_mell_3.vpcf"
-			"particle"			"particles/invoker_chaos_meteor_mell_4.vpcf"
-			"particle"			"particles/invoker_chaos_meteor_mell_5.vpcf"
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"heroes/mellstroy/mell.lua"
-				"Function"				"Meteor_start"
-			}
-			"RunScript"
-			{
-				"ScriptFile"    "heroes/mellstroy/mell.lua"
-				"Function"      "Meteor"
-			}
-		}
-		"OnProjectileHitUnit"
-		{
-			"DeleteOnHit"				"0"
-			
-			"RunScript"
-			{
-				"ScriptFile"			"heroes/mellstroy/mell.lua"
-				"Function"				"MeteorHit"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_mell"
-		    {
-		        "ThinkInterval"  "1.5"
-				"IsHidden"	"1"
-		        "OnIntervalThink"
-		        {
-					"RunScript"
-					{
-						"ScriptFile"    "heroes/mellstroy/mell.lua"
-						"Function"      "Meteor"
-					}
-				}
-			}
-			"mellstroy_meteor_slowed_debuff"
-			{
-				"IsDebuff"      "1"
-				"IsHidden"	"0"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%ms_pct"
-				}
-			}
-			"mellstroy_meteor_fired_debuff"
-			{
-				"IsDebuff"      "1"
-				"IsHidden"	"0"
-				
-				"EffectName"    "particles/units/heroes/hero_invoker/invoker_chaos_meteor_burn_debuff.vpcf"
-				"EffectAttachType"  "follow_origin"
-
-				"ThinkInterval" 	"1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"			"heroes/mellstroy/mell.lua"
-						"Function"				"MeteorHitDamage"
-					}
-				}
-			}
-		}
 		"AbilityValues"
 		{
 				"meteor_stun"
@@ -4804,7 +4630,7 @@
 				{
 					"value"	"15 30 45 60"
 				}
-				"dur_tooltip" "4"
+				"fire_duration" "4"
 				"gold"
 				{
 					"value"	"30 60 90 120"
@@ -4955,7 +4781,6 @@
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-		"HasScepterUpgrade"			"1"
 		"AbilityCooldown"           "90 85 80"
 		"AbilityGoldCost"           "700 1550 2400"
 		"OnSpellStart"
@@ -13257,18 +13082,18 @@
 			"duration"						"4"
 			"attack_damage"
 			{
-				"value"	"-60 -50 -40 -30"
+				"value"	"-50 -40 -30 -20"
 				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_damage_tooltip"
 			{
-				"value"	"40 50 60 70"
+				"value"	"50 60 70 80"
 				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_interval"				"0.5"
 			"bonus_attack_range"					
 			{
-				"value"						"100"
+				"value"						"150"
 				"special_bonus_unique_kolyan_6" "+100"
 			}
 			"immune"
@@ -13279,7 +13104,7 @@
 			"movespeed"
 			{
 				"value"	"0"
-				"special_bonus_shard"	"+200"
+				"special_bonus_shard"	"+250"
 			}
 		}
 	}
@@ -13327,6 +13152,7 @@
 					"value"	"10 15 20 25"
 					"special_bonus_unique_kolyan_1" "+10"
 				}
+				"dota_bonus_cooldown"	"2"
 		}
 	}
 	"kolyan_e"
@@ -13373,7 +13199,7 @@
 			}
 			"damage"
 			{
-				"value"	"20 40 60"
+				"value"	"30 60 90"
 			}
 			"radius"
 			{
