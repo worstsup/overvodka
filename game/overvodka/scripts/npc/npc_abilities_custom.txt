@@ -5226,7 +5226,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"MaxLevel" "3"
 		"AbilityCastRange"				"0"
 		"AbilityCastPoint"				"1.41"
 		"HasShardUpgrade"				"1"
@@ -5302,7 +5301,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"MaxLevel" "3"
 		"AbilityCastRange"				"3000"
 		"AbilityCastPoint"				"1.41"
 		"HasShardUpgrade"				"1"
@@ -6473,7 +6471,8 @@
 	//=================================================================================================================
 	"nix_semya"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/nix/nix_semya"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -6485,12 +6484,6 @@
 		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
 		"AbilityCooldown"				"32 30 28 26"
 		"AbilityManaCost"				"120"
-		"AbilityModifierSupportValue"	"5.0"
-		"precache"
-		{
-			"particle"	"particles/nix_w.vpcf"
-			"soundfile" "soundevents/semya.vsndevts"
-		}
 		"AbilityValues"
 		{
 				"duration"					"10"
@@ -6523,142 +6516,6 @@
 				{
 					"value"	"0.5 1.0 1.5 2.0"
 				}
-		}
-
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"	"semya"
-				"Target"		"TARGET"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"		"modifier_Doljan_RapBattle_debuff"
-				"Target"			"TARGET"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_Doljan_RapBattle_debuff"
-			{
-				"IsDebuff"	"1"
-				"IsHidden"	"1"
-				"Duration"	"%duration"
-
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"	"particles/nix_w.vpcf"
-						"EffectAttachType"	"start_at_customorigin"
-						"Target"		"TARGET"
-
-						"ControlPointEntities"
-						{
-							"TARGET"	"attach_hitloc"
-							"CASTER"	"attach_hitloc"
-						}
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/nix/semya.lua"
-						"Function"		"StealDamage"
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/nix/semya.lua"
-						"Function"		"DealDamage"
-					}
-				}
-				
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/nix/semya.lua"
-						"Function"		"stop_sound"
-						"sound"			"semya"
-					}
-				}
-
-				"ThinkInterval"	"1"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/nix/semya.lua"
-						"Function"		"StealDamage"
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/nix/semya.lua"
-						"Function"		"DealDamage"
-					}
-				}
-			}
-			
-			"modifier_steal_damage_buff"
-			{
-				"IsPurgable"		"0"
-				"IsBuff"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"1"
-				}
-			}
-			"modifier_steal_damage_debuff"
-			{
-				"IsPurgable"		"0"
-				"IsDebuff"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"-1"
-				}
-			}
-			"modifier_steal_resist_debuff"
-			{
-				"IsPurgable"		"0"
-				"IsDebuff"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"-1"
-				}
-			}
-			"modifier_steal_resist_buff"
-			{
-				"IsPurgable"		"0"
-				"IsBuff"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"1"
-				}
-			}
-			"modifier_steal_ms_debuff"
-			{
-				"IsPurgable"		"0"
-				"IsDebuff"			"1"
-				"IsHidden"		"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"-1"
-				}
-			}
-			"modifier_steal_ms_buff"
-			{
-				"IsPurgable"		"0"
-				"IsBuff"			"1"
-				"IsHidden"		"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"1"
-				}
-			}
 		}
 	}
 	//=================================================================================================================
