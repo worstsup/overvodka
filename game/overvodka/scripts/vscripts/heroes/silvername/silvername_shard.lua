@@ -1,6 +1,10 @@
 silvername_shard = class({})
 LinkLuaModifier( "modifier_silvername_shard", "heroes/silvername/silvername_shard", LUA_MODIFIER_MOTION_NONE )
 
+function silvername_shard:Precache( context )
+	PrecacheResource( "soundfile", "soundevents/orlov.vsndevts", context )
+end
+
 function silvername_shard:OnSpellStart()
 	EmitSoundOn( "orlov", self:GetCaster() )
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_silvername_shard", { duration = self:GetSpecialValueFor( "duration" ) } )

@@ -5,6 +5,7 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.l
 
 function mellstroy_shavel:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/shavel.vsndevts", context )
 end
 
 function mellstroy_shavel:Spawn()

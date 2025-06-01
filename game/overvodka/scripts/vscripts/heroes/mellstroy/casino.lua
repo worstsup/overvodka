@@ -1,5 +1,12 @@
 mellstroy_casino = class({})
 
+function mellstroy_casino:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/nomoney.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/jackpot.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/lose.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/normalwin.vsndevts", context )
+end
+
 loses = 0
 function mellstroy_casino:OnSpellStart()
     if not IsServer() then return end

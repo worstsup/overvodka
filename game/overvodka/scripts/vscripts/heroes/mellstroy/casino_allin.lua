@@ -1,7 +1,14 @@
 LinkLuaModifier( "modifier_mell_two", "heroes/mellstroy/modifier_mell_two", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mell_one", "heroes/mellstroy/modifier_mell_one", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mell_three", "heroes/mellstroy/modifier_mell_three", LUA_MODIFIER_MOTION_NONE )
+
 mellstroy_casino_allin = class({})
+
+function mellstroy_casino:Precache(context)
+    PrecacheResource( "soundfile", "soundevents/jackpot.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/lose.vsndevts", context )
+end
+
 k = 0
 function mellstroy_casino_allin:OnSpellStart()
     if not IsServer() then return end

@@ -4773,124 +4773,17 @@
 	//=================================================================================================================
     "mellstroy_amam"
 	{
-		"BaseClass"                 "ability_datadriven"
-		"AbilityTextureName"        "amamam"
-		"MaxLevel"                  "3"
-		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"heroes/mellstroy/mellstroy_amam"
+		"AbilityTextureName"		"amamam"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"				"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-		"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-		"AbilityCooldown"           "90 85 80"
-		"AbilityGoldCost"           "700 1550 2400"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"    "heroes/mellstroy/amam.lua"
-				"Function"      "Damage"
-			}
-			"AttachEffect"
-			{
-				"Target"			"CASTER"
-				"EffectName"		"particles/earthshaker_arcana_echoslam_start_v2_new.vpcf"
-				"EffectAttachType"	"start_at_customorigin"
-				"ControlPoints"
-				{
-					"01"			"%radius %radius %radius"
-				}
-			}
-			"Knockback"
-		    {
-		        "Target"
-		        {
-		            "Center"    "CASTER"
-		            "Radius"    "%radius"
-		            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		            "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		        }
-		        "Center"            "TARGET"
-		        "Duration"          "%stun_dur"
-		        "Height"            "300"
-		        "IsFixedDistance"   "1"
-		        "Distance"			"0"
-		        "ShouldStun"        "1"    
-		    }
-		    "ApplyModifier"
-        	{
-                "ModifierName"  "modifier_mellbonus"
-                "Target"        "CASTER"
-                "Duration"	   "%duration"
-            }
-			"RunScript"
-			{
-				"ScriptFile"    "heroes/mellstroy/amam.lua"
-				"Function"      "NewSong"
-			}
-			"FireSound"
-			{
-				"EffectName"		"amamam"
-				"Target"			"CASTER"
-			}
-		}
-		"Modifiers"
-		{
-		    "modifier_mell_amam"
-		    {
-		        "ThinkInterval"  "%interv"
-		        "OnIntervalThink"
-		        {
-					"RunScript"
-					{
-						"ScriptFile"    "heroes/mellstroy/amam.lua"
-						"Function"      "Damage"
-					}
-					
-					"AttachEffect"
-					{
-						"Target"			"CASTER"
-						"EffectName"		"particles/earthshaker_arcana_echoslam_start_v2_new.vpcf"
-						"EffectAttachType"	"start_at_customorigin"
-						"ControlPoints"
-						{
-							"01"			"%radius %radius %radius"
-						}
-					}
-		            "Knockback"
-		            {
-		                "Target"
-		                {
-		                    "Center"    "CASTER"
-		                    "Radius"    "%radius"
-		                    "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		                    "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		                }
-		                "Center"            "TARGET"
-		                "Duration"          "%stun_dur"
-		                "Height"            "300"
-		                "IsFixedDistance"   "1"
-		                "Distance"			"0"
-		                "ShouldStun"        "1"    
-		            }
-		        }
-		    }
-		    "modifier_mellbonus"
-		    {
-		    	"IsBuff" "1"
-		    	"IsHidden" "1"
-		    	"OnCreated"
-            	{
-		    	}
-		    	"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/mellstroy/amam.lua"
-						"Function"		"Back"					
-					}
-				}		
-			}
-		}
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
+		"AbilityCooldown"			"90 85 80"
+		"AbilityGoldCost"			"700 1550 2400"
 		"AbilityValues"
 		{
 		        "damage"          
@@ -8916,7 +8809,7 @@
 	}
 	"golovach_innate"
 	{
-		"BaseClass"					"ability_lua"
+		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_innate"
 		"AbilityTextureName"			"golovach_innate"
 		"FightRecapLevel"				"2"
