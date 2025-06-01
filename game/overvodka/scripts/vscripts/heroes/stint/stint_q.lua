@@ -57,19 +57,32 @@ function modifier_stint_q_barrier:OnCreated()
     ParticleManager:SetParticleControlEnt(effect, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
     ParticleManager:SetParticleControl(effect, 5, Vector(1, 1, 1))
     ParticleManager:ReleaseParticleIndex(effect)
-    self.max_shield = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
-    self:SetStackCount(self.max_shield)
+    self.barrier_max = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
+    self.barrier_block = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
+    self:SetHasCustomTransmitterData( true )
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_stint_q_barrier:AddCustomTransmitterData()
+    return {
+        barrier_max = self.barrier_max,
+        barrier_block = self.barrier_block,
+    }
+end
+
+function modifier_stint_q_barrier:HandleCustomTransmitterData( data )
+    self.barrier_max = data.barrier_max
+    self.barrier_block = data.barrier_block
+end
+
+function modifier_stint_q_barrier:GetAttributes()
+    return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_stint_q_barrier:OnIntervalThink()
     self:GetParent():Purge(false, true, false, true, false)
 end
 
-function modifier_stint_q_barrier:OnRefresh()
-    if not IsServer() then return end
-    self.max_shield = self:GetAbility():GetSpecialValueFor("shield") * self:GetParent():GetMaxHealth() / 100
-    self:SetStackCount(self.max_shield)
-end
 
 function modifier_stint_q_barrier:DeclareFunctions()
     return { MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT }
@@ -77,19 +90,20 @@ end
 
 function modifier_stint_q_barrier:GetModifierIncomingDamageConstant(params)
     if IsClient() then
-        if params.report_max then
-            return self.max_shield or self:GetStackCount()
-        else 
-            return self:GetStackCount()
-        end 
-    end
-    if params.damage>=self:GetStackCount() then
-        self:Destroy()
-        return -self:GetStackCount()
-    else
-        self:SetStackCount(self:GetStackCount()-params.damage)
-        return -params.damage
-    end
+		if params.report_max then
+			return self.barrier_max
+		else
+			return self.barrier_block
+		end
+	end
+    if params.damage >= self.barrier_block then
+		self:Destroy()
+        return self.barrier_block * (-1)
+	else
+		self.barrier_block = self.barrier_block - params.damage
+        self:SendBuffRefreshToClients()
+		return params.damage * (-1)
+	end
 end
 
 function modifier_stint_q_barrier:GetEffectName()
