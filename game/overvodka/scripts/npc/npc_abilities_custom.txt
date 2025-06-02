@@ -1026,15 +1026,15 @@
 	//=================================================================================================================
 	"eldzhey_e"
 	{
-		"BaseClass"            			"ability_datadriven"
+		"BaseClass"            			"ability_lua"
+		"ScriptFile"					"heroes/eldzhey/eldzhey_e"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"            "qmar"
-		"AbilityCastPoint"              "0.3 0.3 0.3 0.3"
 		"AbilityCooldown"               "18.0"
 		"AbilityDuration"               "10"
-		"AbilityHealthCost"               "100 180 260 340"
-		"AbilityModifierSupportValue"   "0.1"
+		"AbilityHealthCost"             "100 180 260 340"
 		"AbilityValues"
 		{
 				"movespeed_bonus_pct"       "15 20 25 30"     
@@ -1056,138 +1056,6 @@
 					"special_bonus_facet_eldzhey_e" "+30"
 				}
 				"root_duration" "1"
-		}
-		"precache"
-		{
-			"soundfile"                 "soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
-			"soundfile"					"soundevents/parit.vsndevts"
-			"particle"                  "particles/units/heroes/hero_windrunner/windrunner_windrun.vpcf"
-			"particle"				 	"particles/compendium_2024_teleport_endcap_smoke_new.vpcf"
-		}
-		
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"Target"                "CASTER"
-				"EffectName"            "parit"
-			}
-			"RunScript"
-			{
-					"ScriptFile"	"heroes/eldzhey/eldzhey_e.lua"
-					"Function"		"Cooldowns"
-			}
-			"ApplyModifier"
-			{
-				"Target"                "CASTER"
-				"ModifierName"          "modifier_windrun_caster_datadriven"
-			}
-			
-			"ApplyModifier"
-			{
-				"Target"                "CASTER"
-				"ModifierName"          "modifier_windrun_debuff_aura_datadriven"
-			}
-			"ApplyModifier"
-			{
-				"Target"                "CASTER"
-				"ModifierName"          "modifier_roots"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_windrun_caster_datadriven"
-			{
-				"Duration"              "%duration"
-				
-				"EffectName"            "particles/units/heroes/hero_windrunner/windrunner_windrun.vpcf"
-				"EffectAttachType"      "follow_origin"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%movespeed_bonus_pct"
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"
-				}
-			}
-		
-			"modifier_windrun_debuff_aura_datadriven"
-			{
-				"Duration"              "%duration"
-				"EffectName"            "particles/compendium_2024_teleport_endcap_smoke_new.vpcf"
-				"EffectAttachType"      "follow_origin"
-				"IsHidden"              "1"
-				"Aura"                  "modifier_windrun_debuff_datadriven"
-				"Aura_Radius"           "%radius"
-				"Aura_Teams"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-			}
-			
-			"modifier_windrun_debuff_datadriven"
-			{
-				"IsDebuff"              "1"
-			
-				"OnCreated"
-				{
-					"RemoveModifier"
-					{
-						"Target"        "TARGET"
-						"ModifierName"  "modifier_windrun_debuff_datadriven"
-					}
-				}
-			
-				"OnDestroy"
-				{
-					"ApplyModifier"
-					{
-						"Target"        "TARGET"
-						"ModifierName"  "modifier_windrun_debuff_linger_datadriven"
-					}
-				}
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%enemy_movespeed_bonus_pct"
-				}
-			}
-			"modifier_roots"
-				{
-					"Duration"              "%duration"
-					"IsHidden"          "1"
-
-					"OnAttackLanded"
-					{
-						"Random"
-						{
-							"Chance"            "%chance"
-							"OnSuccess"
-							{
-								"ApplyModifier"
-								{
-									"ModifierName"  "modifier_rrr"
-									"Target"        "TARGET"
-									"Duration"      "%root_duration"
-								}
-								"FireEffect"
-								{
-									"Target"			"TARGET"
-									"EffectName"		"particles/econ/items/treant_protector/treant_ti10_immortal_head/treant_ti10_immortal_overgrowth_root_beam.vpcf"
-									"EffectAttachType"	"follow_origin"
-								}
-							}
-						}
-					}
-				}
-			"modifier_rrr"
-				{
-					"IsHidden"	"0"
-					"IsDebuff"	"1"
-					"States"
-					{
-						"MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
-					}
-				}
 		}
 	}
 	//=================================================================================================================
@@ -2340,182 +2208,6 @@
 	//=================================================================================================================
 	// GOLBET
 	//=================================================================================================================
-	"golmiy_golbet_datadriven"
-	{
-		"BaseClass"				"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"MaxLevel"						"1"
-		"IsGrantedByShard"              "1"
-		"AbilityTextureName"			"golbet"
-		"precache"
-		{
-			"soundfile"		"soundevents/stavka.vsndevts"
-			"particle"		"particles/speed_shard_start.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track.vpcf"
-			"particle"		"particles/speed_shard_trail.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_haste.vpcf"
-			"particle"		"particles/speed_shard_shield.vpcf"
-		}
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-		"AbilityCastRange"				"700"
-		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"33.0"
-		"AbilityManaCost"				"200"
-		"AbilityValues"
-		{
-				"aura_radius"			"0"
-				"bonus_move_speed_pct"	"0"
-				"bonus_gold_radius"		"925 925 925"
-				"bonus_gold_self"		"500"
-				"bonus_gold"			"500"
-				"duration"			"10.0"
-				"cast_range_tooltip"			"900"
-		}
-
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_track_aura_datadriven"
-				"Target"		"TARGET"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_golmiy_golbet"
-				"Target"		"TARGET"
-			}
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/golmiy/golmiy_golbet"
-				"Function"		"LinkenCheck"
-				"Target"		"TARGET"
-			}
-			"FireEffect"
-			{
-				"EffectName"	"particles/speed_shard_start.vpcf"
-				"EffectAttachType"	"start_at_customorigin"
-
-				"ControlPointEntities"
-				{
-					"CASTER" "attach_attack1"
-					"TARGET" "attach_hitloc"
-				}
-			}
-			"FireSound"
-			{
-				"EffectName"	"stavka"
-				"Target"		"TARGET"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_track_aura_datadriven"
-			{
-				"Duration"	"%duration"
-				"IsDebuff"	"1"
-
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"        "particles/speed_shard_trail.vpcf"
-						"EffectAttachType"  "follow_origin"
-						"Target"            "TARGET"
-
-						"ControlPointEntities"
-						{
-							"TARGET"	"attach_origin"
-							"TARGET"	"attach_hitloc"
-						}
-					}
-
-					"AttachEffect"
-					{
-						"EffectName"        "particles/speed_shard_shield.vpcf"
-						"EffectAttachType"  "follow_overhead"
-						"Target"            "TARGET"
-					}
-				}
-
-				"Aura" 			"modifier_track_speed_datadriven"
-				"Aura_Radius" 	"%aura_radius"
-				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_ApplyToCaster"	"1"
-
-				"ThinkInterval"  "0.5"
-				"OnIntervalThink"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_track_reveal_datadriven"
-						"Target" 		"TARGET"
-					}
-
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_track_reveal_datadriven"
-						"Target" 		"TARGET"
-						"Duration"		"0.5"
-					}
-				}
-
-				"States"
-				{
-					"MODIFIER_STATE_PROVIDES_VISION"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-
-			"modifier_golmiy_golbet"
-			{
-				"Duration"	"%duration"
-				"IsHidden"	"1"
-
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/golmiy/golmiy_golbet"
-						"Function"		"Track"
-						"Target"
-						{
-							"Center"	"TARGET"
-							"TargetFlags"		"DOTA_UNIT_TARGET_FLAG_DEAD"
-						}
-					}
-				}
-			}
-
-			"modifier_track_speed_datadriven"
-			{
-				"EffectName"	"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_haste.vpcf"
-				"EffectAttachType"	"follow_origin"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%bonus_move_speed_pct"
-				}
-			}
-
-			"modifier_track_reveal_datadriven"
-			{
-				"IsHidden"		"1"
-				"IsPurgable"	"0"
-				"Priority"		"MODIFIER_PRIORITY_HIGH"
-				"States"
-				{
-					"MODIFIER_STATE_INVISIBLE" 			"MODIFIER_STATE_VALUE_DISABLED"
-				}
-			}
-		}
-	}
-
     "golmiy_golbet"
     {
         "BaseClass"                 "ability_lua"
@@ -2533,9 +2225,7 @@
 		{
 			"soundfile"		"soundevents/stavka.vsndevts"
 			"particle"		"particles/speed_shard_start.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track.vpcf"
 			"particle"		"particles/speed_shard_trail.vpcf"
-			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_haste.vpcf"
 			"particle"		"particles/speed_shard_shield.vpcf"
 		}
         "AbilityCastRange"          "700"
@@ -2550,8 +2240,6 @@
             "duration" "10.0"
         }
     }
-
-
 	"speed_innate"
 	{
 		"BaseClass" 					"ability_lua"

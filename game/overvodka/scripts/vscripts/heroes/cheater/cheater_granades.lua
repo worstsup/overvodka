@@ -173,7 +173,6 @@ function cheater_granades:PlayEffects3( point )
     local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, point )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-    ParticleManager:ReleaseParticleIndex(effect_cast)
 end
 
 function cheater_granades:PlayEffects4( point )
