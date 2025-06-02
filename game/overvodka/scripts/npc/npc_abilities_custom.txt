@@ -7283,34 +7283,27 @@
 				"interval"				"0.5"
 		}
 	}
-	//=================================================================================================================
-	// ТАБЛЕТКИ ОТ УМА
-	//=================================================================================================================
-	"zolo_tabletki"
-	{
-		"BaseClass"             "ability_datadriven"
-		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"    "zolo_tabletki"
-		"AbilityType"           "DOTA_ABILITY_TYPE_BASIC"
-		"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_3"
-		"MaxLevel"              "1"
-		"IsGrantedByShard"      "1"
-		"AbilityCooldown"		"35"
-		"AbilityManaCost"		"100"
-		"AbilityCastPoint"		"0.5"
-		"AbilityValues"
+
+    "zolo_tabletki"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile"            "heroes/zolo/zolo_tabletki"
+        "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+        "AbilityTextureName"    "zolo_tabletki"
+        "AbilityType"           "DOTA_ABILITY_TYPE_BASIC"
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_3"
+        "MaxLevel"              "1"
+        "IsGrantedByShard"      "1"
+        "AbilityCooldown"       "35"
+        "AbilityManaCost"       "100"
+        "AbilityCastPoint"      "0.5"
+        "AbilityValues"
 		{
-				"bonus_strength"             "3"
+			"bonus_strength"            "3"
+			"dota_bonus_cooldown"		"15"
 		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"            "heroes/zolo/tabletki.lua"
-				"Function"              "Tabletki"
-			}
-		}
-	}
+    }
+
 	"ogre_magi_dumb_luck"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES | DOTA_ABILITY_BEHAVIOR_SKIP_FOR_KEYBINDS"
