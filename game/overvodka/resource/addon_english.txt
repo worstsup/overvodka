@@ -1940,6 +1940,8 @@
 		"DOTA_Tooltip_ability_golmiy_golbet_Description" "IShowSpeed ​​makes a juicy bet on the death of an enemy. If the enemy dies within %duration% sec., the bettor will multiply his winnings, otherwise he will lose everything he bet."
 		"DOTA_Tooltip_ability_golmiy_golbet_bonus_gold_self" "BET SIZE:"
 		"DOTA_Tooltip_ability_golmiy_golbet_duration" "DURATION:"
+		"DOTA_Tooltip_modifier_golmiy_golbet" "World Cup Bet"
+		"DOTA_Tooltip_modifier_golmiy_golbet_Description" "IShowSpeed made a juicy bet on your death!"
 		"DOTA_Tooltip_ability_golmiy_penaltiy_Facet_golmiy_facet_q" "When hitting an enemy, the hero gets %gold% gold."
 		"DOTA_Tooltip_Facet_golmiy_facet_q" "SALARY"
 		"DOTA_Tooltip_Facet_golmiy_facet_q_Description" "When hitting an enemy with PENALTY KICK, the hero gains gold."

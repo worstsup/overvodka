@@ -2340,7 +2340,7 @@
 	//=================================================================================================================
 	// GOLBET
 	//=================================================================================================================
-	"golmiy_golbet"
+	"golmiy_golbet_datadriven"
 	{
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -2515,6 +2515,43 @@
 			}
 		}
 	}
+
+    "golmiy_golbet"
+    {
+        "BaseClass"                 "ability_lua"
+        "ScriptFile"                "heroes/golmiy/golmiy_golbet"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+        "AbilityType"               "DOTA_ABILITY_TYPE_BASIC"
+        "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+        "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
+        "SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_YES"
+        "MaxLevel"                  "1"
+        "IsGrantedByShard"          "1"
+        "AbilityTextureName"        "golbet"
+		"precache"
+		{
+			"soundfile"		"soundevents/stavka.vsndevts"
+			"particle"		"particles/speed_shard_start.vpcf"
+			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track.vpcf"
+			"particle"		"particles/speed_shard_trail.vpcf"
+			"particle"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_haste.vpcf"
+			"particle"		"particles/speed_shard_shield.vpcf"
+		}
+        "AbilityCastRange"          "700"
+        "AbilityCastPoint"          "0.5"
+        "AbilityCooldown"           "33.0"
+        "AbilityManaCost"           "200"
+        "AbilityValues"
+        {
+            "bonus_gold_self" "500"
+            "bonus_gold" "500"
+            "bonus_gold_radius" "925"
+            "duration" "10.0"
+        }
+    }
+
+
 	"speed_innate"
 	{
 		"BaseClass" 					"ability_lua"
