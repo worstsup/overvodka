@@ -20,7 +20,6 @@ end
 
 function modifier_zolo_stopapupa:OnRefresh( kv )
 	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
-	self:PlayEffects()
 end
 
 function modifier_zolo_stopapupa:OnRemoved()

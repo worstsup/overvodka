@@ -4,7 +4,7 @@ LinkLuaModifier( "modifier_mell_three", "heroes/mellstroy/modifier_mell_three", 
 
 mellstroy_casino_allin = class({})
 
-function mellstroy_casino:Precache(context)
+function mellstroy_casino_allin:Precache(context)
     PrecacheResource( "soundfile", "soundevents/jackpot.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/lose.vsndevts", context )
 end

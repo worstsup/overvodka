@@ -7228,22 +7228,6 @@
 				}
 			}
 		}
-		"Modifiers"
-		{
-			"modifier_death_ward_datadriven"
-			{
-				"IsHidden"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"%damage"
-				}
-				"States"
-				{
-					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
 	}
 	//=================================================================================================================
 	// ВОНЬ ГРОЗНОГО ПАПКИ

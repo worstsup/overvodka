@@ -33,22 +33,27 @@ function modifier_mellstroy_business:OnCreated()
         if self:GetCaster():HasScepter() then
             gold = gold * 1.5
         end
-        self.shield = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
-        self:SetStackCount(self.shield)
+        self.barrier_max = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
+        self.barrier_block = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
+        self:SetHasCustomTransmitterData( true )
+        self:SendBuffRefreshToClients()
     end
 end
 
-function modifier_mellstroy_business:OnRefresh()
-    if IsServer() then
-        local ability = self:GetAbility()
-        local caster = self:GetCaster()
-        local gold = PlayerResource:GetGold(caster:GetPlayerID())
-        if self:GetCaster():HasScepter() then
-            gold = gold * 1.5
-        end
-        self.shield = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
-        self:SetStackCount(self.shield)
-    end
+function modifier_mellstroy_business:AddCustomTransmitterData()
+    return {
+        barrier_max = self.barrier_max,
+        barrier_block = self.barrier_block,
+    }
+end
+
+function modifier_mellstroy_business:HandleCustomTransmitterData( data )
+    self.barrier_max = data.barrier_max
+    self.barrier_block = data.barrier_block
+end
+
+function modifier_mellstroy_business:GetAttributes()
+    return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_mellstroy_business:DeclareFunctions()
@@ -60,19 +65,20 @@ end
 
 function modifier_mellstroy_business:GetModifierIncomingDamageConstant(params)
     if IsClient() then
-        if params.report_max then
-            return self.shield or self:GetStackCount()
-        else
-            return self:GetStackCount()
-        end
-    end
-    if params.damage>=self:GetStackCount() then
-        self:Destroy()
-        return -self:GetStackCount()
-    else
-        self:SetStackCount(self:GetStackCount()-params.damage)
-        return -params.damage
-    end
+		if params.report_max then
+			return self.barrier_max
+		else
+			return self.barrier_block
+		end
+	end
+    if params.damage >= self.barrier_block then
+		self:Destroy()
+        return self.barrier_block * (-1)
+	else
+		self.barrier_block = self.barrier_block - params.damage
+        self:SendBuffRefreshToClients()
+		return params.damage * (-1)
+	end
 end
 
 function modifier_mellstroy_business:GetModifierMoveSpeedBonus_Percentage()

@@ -104,8 +104,10 @@ function modifier_item_swag_active:IsPurgable() return true  end
 
 function modifier_item_swag_active:OnCreated()
     if not IsServer() then return end
-    self.max_shield = self:GetAbility():GetSpecialValueFor("barrier_block")
-    self:SetStackCount(self.max_shield)
+    self.barrier_max = self:GetAbility():GetSpecialValueFor("barrier_block")
+    self.barrier_block = self:GetAbility():GetSpecialValueFor("barrier_block")
+    self:SetHasCustomTransmitterData( true )
+    self:SendBuffRefreshToClients()
     self.sec_delay = self:GetAbility():GetSpecialValueFor("secondary_fade_delay")
     local parent = self:GetParent()
     parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_swag_invis", {duration = self:GetDuration()})
@@ -120,6 +122,22 @@ function modifier_item_swag_active:OnCreated()
     self:AddParticle(self.shield, false, false, -1, false, false)
 end
 
+function modifier_item_swag_active:AddCustomTransmitterData()
+    return {
+        barrier_max = self.barrier_max,
+        barrier_block = self.barrier_block,
+    }
+end
+
+function modifier_item_swag_active:HandleCustomTransmitterData( data )
+    self.barrier_max = data.barrier_max
+    self.barrier_block = data.barrier_block
+end
+
+function modifier_item_swag_active:GetAttributes()
+    return MODIFIER_ATTRIBUTE_MULTIPLE
+end
+
 function modifier_item_swag_active:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT,
@@ -131,24 +149,23 @@ function modifier_item_swag_active:DeclareFunctions()
     }
 end
 
-function modifier_item_swag_active:GetModifierIncomingDamageConstant( params )
-    if IsClient() then 
-        if params.report_max then 
-            return self.max_shield or self:GetStackCount()
-        else 
-            return self:GetStackCount()
-        end 
-    end
-    if params.damage>=self:GetStackCount() then
-        ParticleManager:DestroyParticle(self.shield, false)
-        ParticleManager:ReleaseParticleIndex(self.shield)
-        return -self:GetStackCount()
-    else
-        self:SetStackCount(self:GetStackCount()-params.damage)
-        return -params.damage
-    end
+function modifier_item_swag_active:GetModifierIncomingDamageConstant(params)
+    if IsClient() then
+		if params.report_max then
+			return self.barrier_max
+		else
+			return self.barrier_block
+		end
+	end
+    if params.damage >= self.barrier_block then
+		self:Destroy()
+        return self.barrier_block * (-1)
+	else
+		self.barrier_block = self.barrier_block - params.damage
+        self:SendBuffRefreshToClients()
+		return params.damage * (-1)
+	end
 end
-
 
 function modifier_item_swag_active:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("active_movement_speed")
