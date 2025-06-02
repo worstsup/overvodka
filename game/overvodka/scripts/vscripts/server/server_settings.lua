@@ -16,7 +16,7 @@ SERVER_ATTEMPT_INTERVAL = 1
 --Список для оффлайн игры (без сервера)
 SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     188428188,  -- nears
-    --409188637,  -- worstsup
+    409188637,  -- worstsup
     885116894, -- dolbayobi
     1010078422, -- mikeil
     349446348,  -- mefisto

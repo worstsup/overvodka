@@ -69,7 +69,7 @@ function modifier_serega_blink:OnIntervalThink()
 		)
 		self.t = 0
 		for _,enemy in pairs(enemies) do
-			if self.t == 1 then return end
+			if self.t >= 1 then return end
 			self.mana_damage = (enemy:GetMaxMana() - enemy:GetMana()) * self.mana_damage_pct
 			local damageTable = {
 				victim = enemy,
