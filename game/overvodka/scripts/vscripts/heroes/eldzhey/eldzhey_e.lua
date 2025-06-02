@@ -64,7 +64,7 @@ function modifier_eldzhey_e:OnAttackLanded(params)
     if params.target:IsBuilding() then return end
 	local target = params.target
 	if RollPercentage( self:GetAbility():GetSpecialValueFor("chance") ) then
-		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_eldzhey_e_root", {duration = self:GetAbility():GetSpecialValueFor("root_duration")})
+		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_eldzhey_e_root", {duration = self:GetAbility():GetSpecialValueFor("root_duration") * (1 - target:GetStatusResistance())})
 	end
 end
 

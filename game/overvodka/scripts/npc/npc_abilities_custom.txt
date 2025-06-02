@@ -6858,22 +6858,16 @@
 	//=================================================================================================================
 	"zolo_batya"
 	{
-		"BaseClass"						"ability_datadriven"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/zolo/zolo_batya"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"				"2"
 		"AbilityTextureName"			"zolo_batya"
-		"precache"
-		{
-			"particle"		"particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf"
-			"particle"		"particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot_gold.vpcf"
-		}
 		"AbilityCastRange"				"900"
-		"AOERadius"						"%radius"
 		"AbilityCastPoint"				"0.35 0.35 0.35"
 		"AbilityCooldown"				"70 65 60"
 		"AbilityManaCost"				"150 250 350"
@@ -6898,60 +6892,7 @@
 				"value"	"60 140 200"
 				"special_bonus_unique_zolo_8" "+100"
 			}
-			"talent"
-			{
-				"value"	"0"
-				"special_bonus_unique_zolo_8" "+1"
-			}
 			"slow"					"-20 -25 -30"
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/zolo/death_ward.lua"
-				"Function"		"CreateWard"
-			}
-			"FireSound"
-			{
-				"EffectName"	"sharik"
-				"Target"		"CASTER"
-			}
-			"ActOnTargets"
-			{
-				"Target"
-				{
-					"Center"	"POINT"
-					"Radius" 	"%radius"
-					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				}		
-				"Action"    
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/zolo/batya.lua"
-						"Function"		"Batya"
-				}
-					"FireEffect"
-					{
-						"EffectName"        "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
-						"EffectAttachType"  "follow_origin"
-						"Target"            "TARGET"
-					}
-					"Knockback"
-					{
-						"Target"            "TARGET"
-						"Center" 	        "CASTER"
-						"Distance"	        "350"
-						"Duration"	        "%stun_dur"
-						"Height"	        "350"
-						"IsFixedDistance"	"1"
-						"ShouldStun"        "1"	
-					}
-				}
-			}
 		}
 	}
 	//=================================================================================================================
@@ -6992,7 +6933,9 @@
 				"interval"				"0.5"
 		}
 	}
-
+	//=================================================================================================================
+	// ТАБЛЕТКИ ОТ УМА
+	//=================================================================================================================
     "zolo_tabletki"
     {
         "BaseClass"             "ability_lua"
@@ -8175,8 +8118,9 @@
 	}
 	"golovach_w"
 	{
-    	"BaseClass"             		"ability_datadriven"
-    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    	"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/golovach/golovach_w"
+    	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     	"AbilityType"                   "DOTA_ABILITY_TYPE_BASIC"
     	"SpellImmunityType"         	"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitTargetTeam"     	"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -8184,15 +8128,8 @@
 		"AbilityUnitDamageType"     	"DAMAGE_TYPE_MAGICAL"
     	"AbilityTextureName"            "golovach_w"
     	"HasShardUpgrade"				"1"
-    	"AbilityCastPoint"              "0"
     	"AbilityCooldown"               "30 28 26 24"
     	"AbilityManaCost"               "100 125 150 175"
-    	"precache"
-    	{
-			"particle"			"particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_projectile_blue.vpcf"
-			"particle"			"particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_owner_blue.vpcf"
-			"particle"			"particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
-    	}
     	"AbilityValues"
     	{
     		 "AbilityCastRange"
@@ -8221,109 +8158,12 @@
             	"value"	"0"
             	"special_bonus_unique_golovach_6" "+3"
             }
-            "blind_percentage"              "0"
             "radius"
             {
             	"value"	"0"
             	"special_bonus_shard"	"+3000"
             }
     	}
-    	"OnSpellStart"
-    	{
-    	   "ApplyModifier"
-			{
-				"ModifierName"  "modifier_dark_willow_debuff_fear"
-				"Duration"      "%fear_duration"
-				"Target"
-				{
-					"Center"    "CASTER"
-					"Radius"    "%fear_radius"
-					"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				}
-			}
-			"AttachEffect"
-            {
-				"EffectName"    "particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_owner_blue.vpcf"
-				"EffectAttachType"  "attach_origin"
-				"Target"        "CASTER"
-            }
-			"ActOnTargets"
-			{
-				"Target"
-				{
-					"Center"    "CASTER"
-					"Radius"    "%fear_radius"
-					"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-				}
-				"Action"
-				{
-					"TrackingProjectile"
-					{
-						"Target"           "TARGET"
-						"EffectName"       "particles/econ/items/queen_of_pain/qop_2022_immortal/queen_2022_scream_of_pain_projectile_blue.vpcf"
-						"Dodgeable"        "0"
-						"ProvidesVision"   "0"
-						"MoveSpeed"        "1000"
-						"SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_HITLOCATION"
-					}
-				}
-			}
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/golovach/golovach_w"
-				"Function"		"Damage"
-			}
-			"FireSound"
-			{
-				"EffectName"    "golovach_w"
-				"Target"        "CASTER"
-			}
-
-			"FireEffect"
-			{
-				"EffectName"    "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"        "CASTER"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName"  "modifier_golovach_w_aura"
-				"Target"        "CASTER"
-			}
-			"ApplyModifier"
-			{
-				"Target"		"CASTER"
-				"ModifierName"	"modifier_invisible"
-				"Duration" "%invis_duration"
-			} 
-    	}
-
-		"Modifiers"
-		{
-			"modifier_golovach_w_aura"
-			{
-				"Duration"  "%duration"
-
-				"Attributes" "MODIFIER_ATTRIBUTE_PERMANENT"
-
-				"Aura"          "modifier_golovach_w"
-				"Aura_Radius"   "%radius"
-				"Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types"    "DOTA_UNIT_TARGET_ALL"
-			}
-
-			"modifier_golovach_w"
-			{
-				"IsDebuff"  "1"
-				"States"
-				{
-					"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
 	}
 	"golovach_e"
 	{
@@ -8486,7 +8326,7 @@
 	}
 	"golovach_hidden"
 	{
-		"BaseClass"					"ability_lua"
+		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_hidden"
 		"AbilityTextureName"			"golovach_e"
 		"FightRecapLevel"				"1"
