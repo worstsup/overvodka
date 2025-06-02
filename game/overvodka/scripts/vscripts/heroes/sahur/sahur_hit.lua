@@ -1,5 +1,5 @@
 sahur_hit = class({})
-LinkLuaModifier("modifier_sahur_hit", "heroes/kirill/sahur_hit.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_sahur_hit", "heroes/sahur/sahur_hit.lua", LUA_MODIFIER_MOTION_NONE)
 
 function sahur_hit:GetIntrinsicModifierName()
     return "modifier_sahur_hit"

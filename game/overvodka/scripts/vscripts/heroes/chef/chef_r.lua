@@ -1,6 +1,6 @@
 chef_r = class({})
-LinkLuaModifier( "modifier_chef_r", "heroes/lev/chef_r", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_chef_r_slow", "heroes/lev/chef_r", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_chef_r", "heroes/chef/chef_r", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_chef_r_slow", "heroes/chef/chef_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE )
 
 function chef_r:Precache(context)

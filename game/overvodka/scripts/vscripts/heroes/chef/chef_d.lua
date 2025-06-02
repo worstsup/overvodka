@@ -1,6 +1,6 @@
-LinkLuaModifier("modifier_chef_d_debuff", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_chef_d_buff", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_chef_d_buff_facet", "heroes/lev/chef_d", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_d_debuff", "heroes/chef/chef_d", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_d_buff", "heroes/chef/chef_d", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_d_buff_facet", "heroes/chef/chef_d", LUA_MODIFIER_MOTION_NONE)
 
 chef_d = class({})
 

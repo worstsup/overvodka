@@ -1,14 +1,14 @@
-LinkLuaModifier("modifier_golmiy_golbet", "heroes/golmiy/golmiy_golbet", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_golmiy_golbet_reveal", "heroes/golmiy/golmiy_golbet", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_speed_bet", "heroes/speed/speed_bet", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_speed_bet_reveal", "heroes/speed/speed_bet", LUA_MODIFIER_MOTION_NONE)
 
-golmiy_golbet = class({})
+speed_bet = class({})
 
-function golmiy_golbet:OnSpellStart()
+function speed_bet:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
-    target:AddNewModifier(caster, self, "modifier_golmiy_golbet", { duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance()) })
-    target:AddNewModifier(caster, self, "modifier_golmiy_golbet_reveal", { duration = 0.5 })
+    target:AddNewModifier(caster, self, "modifier_speed_bet", { duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance()) })
+    target:AddNewModifier(caster, self, "modifier_speed_bet_reveal", { duration = 0.5 })
     target:EmitSound("stavka")
 
     local p = ParticleManager:CreateParticle("particles/speed_shard_start.vpcf", PATTACH_CUSTOMORIGIN, target)
@@ -18,13 +18,13 @@ function golmiy_golbet:OnSpellStart()
 end
 
 
-modifier_golmiy_golbet = class({})
+modifier_speed_bet = class({})
 
-function modifier_golmiy_golbet:IsDebuff() return true end
-function modifier_golmiy_golbet:IsHidden() return false end
-function modifier_golmiy_golbet:IsPurgable() return false end
+function modifier_speed_bet:IsDebuff() return true end
+function modifier_speed_bet:IsHidden() return false end
+function modifier_speed_bet:IsPurgable() return false end
 
-function modifier_golmiy_golbet:OnCreated()
+function modifier_speed_bet:OnCreated()
     if not IsServer() then return end
     self:StartIntervalThink(0.5)
     local p1 = ParticleManager:CreateParticle("particles/speed_shard_trail.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
@@ -33,13 +33,13 @@ function modifier_golmiy_golbet:OnCreated()
     self:AddParticle(p2, false, false, -1, false, false)
 end
 
-function modifier_golmiy_golbet:OnIntervalThink()
+function modifier_speed_bet:OnIntervalThink()
     local parent = self:GetParent()
-    parent:RemoveModifierByName("modifier_golmiy_golbet_reveal")
-    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_golmiy_golbet_reveal", { duration = 0.5 })
+    parent:RemoveModifierByName("modifier_speed_bet_reveal")
+    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_speed_bet_reveal", { duration = 0.5 })
 end
 
-function modifier_golmiy_golbet:OnDestroy()
+function modifier_speed_bet:OnDestroy()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetParent()
@@ -57,19 +57,19 @@ function modifier_golmiy_golbet:OnDestroy()
     end
 end
 
-function modifier_golmiy_golbet:CheckState()
+function modifier_speed_bet:CheckState()
     return {
         [MODIFIER_STATE_PROVIDES_VISION] = true,
     }
 end
 
-modifier_golmiy_golbet_reveal = class({})
+modifier_speed_bet_reveal = class({})
 
-function modifier_golmiy_golbet_reveal:IsHidden() return true end
-function modifier_golmiy_golbet_reveal:IsPurgable() return false end
-function modifier_golmiy_golbet_reveal:GetPriority() return MODIFIER_PRIORITY_HIGH end
+function modifier_speed_bet_reveal:IsHidden() return true end
+function modifier_speed_bet_reveal:IsPurgable() return false end
+function modifier_speed_bet_reveal:GetPriority() return MODIFIER_PRIORITY_HIGH end
 
-function modifier_golmiy_golbet_reveal:CheckState()
+function modifier_speed_bet_reveal:CheckState()
     return {
         [MODIFIER_STATE_INVISIBLE] = false,
     }

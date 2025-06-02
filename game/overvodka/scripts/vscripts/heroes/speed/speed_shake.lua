@@ -1,5 +1,5 @@
-LinkLuaModifier( "modifier_speed_shake", "heroes/golmiy/speed_shake", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_speed_shake_scepter", "heroes/golmiy/speed_shake", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_speed_shake", "heroes/speed/speed_shake", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_speed_shake_scepter", "heroes/speed/speed_shake", LUA_MODIFIER_MOTION_NONE )
 
 speed_shake = class({})
 

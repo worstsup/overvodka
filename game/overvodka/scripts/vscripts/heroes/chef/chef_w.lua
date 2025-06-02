@@ -1,6 +1,6 @@
-LinkLuaModifier("modifier_chef_w_active_regeneration", "heroes/lev/chef_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_chef_w", "heroes/lev/chef_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_chef_w_2", "heroes/lev/chef_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_w_active_regeneration", "heroes/chef/chef_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_w", "heroes/chef/chef_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_w_2", "heroes/chef/chef_w", LUA_MODIFIER_MOTION_NONE)
 
 chef_w = class ({})
 

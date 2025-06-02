@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_speed_innate", "heroes/golmiy/speed_innate", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_speed_innate", "heroes/speed/speed_innate", LUA_MODIFIER_MOTION_NONE)
 
 speed_innate = class({})
 
