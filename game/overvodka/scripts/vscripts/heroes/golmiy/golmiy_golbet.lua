@@ -6,14 +6,9 @@ golmiy_golbet = class({})
 function golmiy_golbet:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-
-    -- Spell Block (Linken's Sphere)
     if target:TriggerSpellAbsorb(self) then return end
-
-    -- Apply main modifier (handles vision and aura logic)
-    target:AddNewModifier(caster, self, "modifier_golmiy_golbet", { duration = self:GetSpecialValueFor("duration") })
-
-    -- Sound & Particle
+    target:AddNewModifier(caster, self, "modifier_golmiy_golbet", { duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance()) })
+    target:AddNewModifier(caster, self, "modifier_golmiy_golbet_reveal", { duration = 0.5 })
     target:EmitSound("stavka")
 
     local p = ParticleManager:CreateParticle("particles/speed_shard_start.vpcf", PATTACH_CUSTOMORIGIN, target)
@@ -31,13 +26,9 @@ function modifier_golmiy_golbet:IsPurgable() return false end
 
 function modifier_golmiy_golbet:OnCreated()
     if not IsServer() then return end
-
     self:StartIntervalThink(0.5)
-
-    -- Add trail and shield particles
     local p1 = ParticleManager:CreateParticle("particles/speed_shard_trail.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     self:AddParticle(p1, false, false, -1, false, false)
-
     local p2 = ParticleManager:CreateParticle("particles/speed_shard_shield.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
     self:AddParticle(p2, false, false, -1, false, false)
 end
@@ -50,7 +41,6 @@ end
 
 function modifier_golmiy_golbet:OnDestroy()
     if not IsServer() then return end
-
     local caster = self:GetCaster()
     local target = self:GetParent()
     local ability = self:GetAbility()
@@ -59,27 +49,9 @@ function modifier_golmiy_golbet:OnDestroy()
     local gold_self = ability:GetSpecialValueFor("bonus_gold_self")
     local gold_allies = ability:GetSpecialValueFor("bonus_gold")
     local player_id = caster:GetPlayerOwnerID()
-
     if not target:IsAlive() then
         caster:ModifyGold(gold_self, true, 0)
-
-        local allies = FindUnitsInRadius(
-            caster:GetTeam(),
-            targetLocation,
-            nil,
-            radius,
-            DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-            DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_NONE,
-            FIND_ANY_ORDER,
-            false
-        )
-
-        for _,ally in pairs(allies) do
-            if ally ~= caster then
-                ally:ModifyGold(gold_allies, true, 0)
-            end
-        end
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, gold_allies, nil)
     else
         PlayerResource:SpendGold(player_id, gold_allies, DOTA_ModifyGold_Unspecified)
     end
@@ -90,7 +62,6 @@ function modifier_golmiy_golbet:CheckState()
         [MODIFIER_STATE_PROVIDES_VISION] = true,
     }
 end
-
 
 modifier_golmiy_golbet_reveal = class({})
 

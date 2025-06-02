@@ -28,14 +28,8 @@ function eldzhey_w:OnSpellStart()
 		0,
 		false
 	)
-	if caster:HasModifier("modifier_windrun_caster_datadriven") then
-		caster:RemoveModifierByName("modifier_windrun_caster_datadriven")
-	end
-	if caster:HasModifier("modifier_roots") then
-		caster:RemoveModifierByName("modifier_roots")
-	end
-	if caster:HasModifier("modifier_windrun_debuff_aura_datadriven") then
-		caster:RemoveModifierByName("modifier_windrun_debuff_aura_datadriven")
+	if caster:HasModifier("modifier_eldzhey_e") then
+		caster:RemoveModifierByName("modifier_eldzhey_e")
 	end
 	caster:Purge( false, true, false, false, false )
 	for _,friend in pairs(friends) do
