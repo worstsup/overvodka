@@ -1,26 +1,26 @@
-chef_q = class({})
+chef_shout = class({})
 
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
-function chef_q:GetAOERadius()
+function chef_shout:GetAOERadius()
     return self:GetSpecialValueFor( "radius" )
 end
 
-function chef_q:OnAbilityPhaseStart()
+function chef_shout:OnAbilityPhaseStart()
     local sounds = {"chef_q_1", "chef_q_2", "chef_q_3"}
     self.playedSoundIndex = RandomInt(1, #sounds)
     EmitSoundOn(sounds[self.playedSoundIndex], self:GetCaster())
     return true
 end
 
-function chef_q:OnAbilityPhaseInterrupted()
+function chef_shout:OnAbilityPhaseInterrupted()
     local sounds = {"chef_q_1", "chef_q_2", "chef_q_3"}
     if self.playedSoundIndex then
         StopSoundOn(sounds[self.playedSoundIndex], self:GetCaster())
     end
 end
 
-function chef_q:OnSpellStart()
+function chef_shout:OnSpellStart()
     if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
@@ -68,7 +68,7 @@ function chef_q:OnSpellStart()
     end
 end
 
-function chef_q:PlayEffects( target )
+function chef_shout:PlayEffects( target )
 	local particle_cast = "particles/econ/items/beastmaster/bm_shoulder_ti7/bm_shoulder_ti7_roar.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_CUSTOMORIGIN, nil )
 	ParticleManager:SetParticleControlEnt(

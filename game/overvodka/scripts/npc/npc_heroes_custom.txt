@@ -336,7 +336,7 @@
 		"HeroSelectSoundEffect"		"lev_start"
 		"SimilarHeroes"  "17,42,74"
 		"GibType"		"default"
-		"Ability1"		"chef_q"
+		"Ability1"		"chef_shout"
 		"Ability2"		"chef_w"
 		"Ability3"		"chef_e"
 		"Ability4"		"chef_d"
