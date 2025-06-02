@@ -4,7 +4,8 @@ function zolo_batya:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/sharik.vsndevts", context )
 	PrecacheResource( "particle", "particles/alchemist_smooth_criminal_unstable_concoction_explosion_new.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot_gold.vpcf", context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_walruspunch_start.vpcf", context)
+    PrecacheResource( "particle", "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_walruskick_tgt.vpcf", context)
 end
 
 function zolo_batya:GetCooldown(level)
@@ -70,6 +71,18 @@ function zolo_batya:OnSpellStart()
         end
         unit:AddNewModifier(self:GetCaster(), self, "modifier_knockback", knockbackProperties)
 		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+        self:PlayEffects( unit )
+	    self:PlayEffects1( unit )
 	end
     EmitSoundOn("sharik", caster)
+end
+
+function zolo_batya:PlayEffects( target )
+	local particle_cast = "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_walruspunch_start.vpcf"
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
+end
+
+function zolo_batya:PlayEffects1( target )
+	local particle_cast = "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_walruskick_tgt.vpcf"
+	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 end
