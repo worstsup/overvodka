@@ -4240,9 +4240,9 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"ancient_rock_golem_weakening_aura"			// Ability 1
-		"Ability2"					"neutral_upgrade"			// Ability 2
-		"Ability3"					""			// Ability 3
+		"Ability1"					"broken_psyche"			// Ability 1
+		"Ability2"					"evil_monke"			// Ability 2
+		"Ability3"					"neutral_upgrade"			// Ability 3
 		"Ability4"					""			// Ability 4
 
 		// Armor
@@ -4314,10 +4314,10 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"granite_golem_hp_aura"			// Ability 1
-		"Ability2"					"neutral_upgrade"			// Ability 2
-		"Ability3"					""			// Ability 3
-		"Ability4"					""			// Ability 4
+		"Ability1"					"family_support"			// Ability 1
+		"Ability2"					"griffin_gas"			// Ability 2
+		"Ability3"					"surfin_bird"			// Ability 3
+		"Ability4"					"neutral_upgrade"			// Ability 4
 
 		// Armor
 		//----------------------------------------------------------------
@@ -4390,4 +4390,73 @@
         "VisionNighttimeRange" "0" 
         "AttackDesire" "1.5" 
     }
+
+	"npc_evil_monke"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/griffins/peter.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"Hero_PrimalBeast"
+		"Level"						"1"
+		"ModelScale" 				"1.8"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"monkey_menace"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+		"MagicalResistance"				"12"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"42"		// Damage range min.
+		"AttackDamageMax"			"42"		// Damage range max.	
+		"AttackRate"				"1"		// Speed of attack.
+		"BaseAttackSpeed"			"100"		// Speed of attack.
+		"AttackAnimationPoint"		"1"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"260"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"100"		// Experience earn.
+		"BountyGoldMin"				"42"		// Gold earned min.
+		"BountyGoldMax"				"52"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"420"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
+		"StatusMana"				"600"		// Base mana.
+		"StatusManaRegen"			"1.5"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
 }	

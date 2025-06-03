@@ -24,6 +24,7 @@ SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES = {
     1133110680, -- buyer
     466290701,  -- timoxa
     1362960359,  -- zombill
+    1160832543,  -- leny
     
     601410669, -- sasavot
     293769213, -- evelone

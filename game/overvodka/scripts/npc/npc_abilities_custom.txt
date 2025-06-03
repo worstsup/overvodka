@@ -12522,4 +12522,114 @@
 			}
 		}
 	}
+
+		"family_support"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/family_support"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"family_support"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"625 750 875 1000"
+		"AbilityValues"
+		{
+			"health_bonus_flat"		"160 200 240 280"
+			"attack_speed_bonus"		"10 15 20 25"
+		}
+	}
+
+		"griffin_gas"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/griffin_gas"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"griffin_gas"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"300"
+		"AbilityCooldown"				"18"
+		"AbilityValues"
+		{
+			"duration"		"3 3.5 4 4.5"
+			"radius"		"300"
+			"damage_per_second"		"30 35 40 45"
+			"damage_increase_pct"		"5"
+		}
+	}
+
+		"surfin_bird"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/surfin_bird"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"surfin_bird"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"400"
+		"AbilityCooldown"				"35"
+		"AbilityValues"
+		{
+			"enemy_movespeed_slow"		"-25"
+			"enemy_attackspeed_slow"		"10 14 18 22"
+			"enemy_miss_chance"		"30"
+			"self_incoming_damage"		"25"
+			"ally_hp_regen_pct"		"1.4"
+			"ally_damage_bonus_pct"		"15 20 25 30"
+		}
+	}
+
+		"broken_psyche"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/broken_psyche"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"broken_psyche"
+		"FightRecapLevel"				"1"
+		"AbilityValues"
+		{
+			"required_hits"		"10 9 8 7"
+			"movespeed_bonus_pct"		"15 20 25 30"
+			"attack_speed_bonus"		"10 12 14 16"
+			"buff_duration"		"-1"
+		}
+	}
+
+		"evil_monke"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/evil_monke"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"evil_monke"
+		"FightRecapLevel"				"1"
+	}
+
+		"monkey_menace"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/monkey_menace"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityTextureName"			"monkey_menace"
+		"FightRecapLevel"				"1"
+		"AbilityCooldown"				"5"
+		"AbilityValues"
+		{
+			"fear_duration"		"1.5"
+			"dot_duration"			"5"
+			"damage_per_second"		"25"
+		}
+	}
 }
