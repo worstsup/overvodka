@@ -56,7 +56,7 @@ end
 
 function modifier_sahur_q:CheckState()
 	local state = {
-		[MODIFIER_STATE_FLYING] = true,
+		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
 		[MODIFIER_STATE_UNSELECTABLE] = self.scepter,
 	}
 	return state

@@ -107,6 +107,7 @@ PrecacheUtils.particles = {
 		"particles/sans_arcana_hud.vpcf",
 		"particles/chapman.vpcf",
 		"particles/sans_base_attack_arcana.vpcf",
+		"particles/griffin_gas.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -360,6 +361,7 @@ PrecacheUtils.sounds = {
 		"soundevents/papich_q_clone_success.vsndevts",
 		"soundevents/golovach_start.vsndevts",
 		"soundevents/onehp.vsndevts",
+		"soundevents/griffins.vsndevts",
 		"soundevents/stint_start.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",

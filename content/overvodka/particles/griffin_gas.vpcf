@@ -1,0 +1,63 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf62:version{c135a90d-ef52-47fa-a9b8-83a382a77471} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 40
+	m_flCullRadius = 90.0
+	m_flMaxDrawDistance = 2000.0
+	m_flNoDrawTimeToGoToSleep = 2.0
+	m_nBehaviorVersion = 12
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/pudge_rot_radius_griffin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_pudge/pudge_rot_body_decay.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pudge_rot_body_decay_griffin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pudge_rot_body_griffin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pudge_rot_body_start_griffin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_pudge/pudge_rot_radius_b.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_pudge/pudge_rot_radius_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_pudge/pudge_rot_radius_c.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/pudge_rot_radius_d_griffin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green_smoke02.vpcf"
+		},
+	]
+}
