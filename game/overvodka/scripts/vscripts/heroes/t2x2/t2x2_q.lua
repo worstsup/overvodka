@@ -18,7 +18,7 @@ function t2x2_q:OnSpellStart()
     local radius = self:GetSpecialValueFor("radius")
     GridNav:DestroyTreesAroundPoint( target_point, radius, false )
     FindClearSpaceForUnit(caster, target_point, true)
-    local damage = self:GetSpecialValueFor("stomp_damage")
+    local damage = self:GetSpecialValueFor("stomp_damage") + self:GetSpecialValueFor("health_damage") * caster:GetMaxHealth() * 0.01
     local stun_duration = self:GetSpecialValueFor("stun_duration")
     local heroes = 0
     local enemies = FindUnitsInRadius(
@@ -55,6 +55,7 @@ function t2x2_q:OnSpellStart()
 end
 
 function t2x2_q:PlayEffects(location, radius)
+    EmitSoundOn("t2x2_q_"..RandomInt(1,4), self:GetCaster())
     local particle_cast = "particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_physical.vpcf"
     local sound_cast = "Hero_Centaur.HoofStomp"
     local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_WORLDORIGIN, nil)
@@ -62,7 +63,6 @@ function t2x2_q:PlayEffects(location, radius)
     ParticleManager:SetParticleControl(effect_cast, 1, Vector(radius, radius, radius))
     ParticleManager:ReleaseParticleIndex(effect_cast)
     EmitSoundOnLocationWithCaster(location, sound_cast, self:GetCaster())
-    EmitSoundOn("t2x2_q_"..RandomInt(1,4), self:GetCaster())
 end
 
 modifier_t2x2_q_shard = class({})

@@ -6,7 +6,9 @@ t2x2_w = class({})
 
 function t2x2_w:Precache( context )
     PrecacheResource( "soundfile", "soundevents/t2x2_sounds.vsndevts", context)
-    --PrecacheResource( "particle", "particles/t2x2_w_cast.vpcf", context )
+    PrecacheResource( "particle", "particles/units/heroes/hero_huskar/huskar_aoe_heal.vpcf", context )
+    PrecacheResource( "particle", "particles/units/heroes/hero_mars/mars_arena_of_blood_heal.vpcf", context )
+    PrecacheResource( "particle", "particles/t2x2_w_bad.vpcf", context )
 end
 
 function t2x2_w:GetIntrinsicModifierName()
@@ -20,10 +22,12 @@ function t2x2_w:OnSpellStart()
     local team = DOTA_UNIT_TARGET_TEAM_FRIENDLY
     local effect = "modifier_t2x2_w_buff"
     local sound = "t2x2_w_buff"
+    local particle = "particles/units/heroes/hero_huskar/huskar_aoe_heal.vpcf"
     if self:GetAltCastState() then
         team = DOTA_UNIT_TARGET_TEAM_ENEMY
         effect = "modifier_t2x2_w_debuff"
         sound = "t2x2_w_debuff"
+        particle = "particles/t2x2_w_bad.vpcf"
     end
     local radius = self:GetSpecialValueFor("radius")
     local duration = self:GetSpecialValueFor("duration")
@@ -31,8 +35,10 @@ function t2x2_w:OnSpellStart()
     for _,unit in ipairs(units) do
         unit:AddNewModifier(caster, self, effect, { duration = duration })
     end
-    --local p = ParticleManager:CreateParticle("particles/t2x2_w_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-    --ParticleManager:ReleaseParticleIndex(p)
+    local effect_cast = ParticleManager:CreateParticle( particle, PATTACH_WORLDORIGIN, nil )
+	ParticleManager:SetParticleControl( effect_cast, 0, point )
+	ParticleManager:SetParticleControl( effect_cast, 1, Vector( radius + 50, 0, 0 ) )
+	ParticleManager:ReleaseParticleIndex( effect_cast )
     EmitSoundOn(sound, caster)
 end
 
@@ -91,6 +97,14 @@ end
 
 function modifier_t2x2_w_buff:GetModifierConstantHealthRegen()
     return self:GetAbility():GetSpecialValueFor("hp_regen")
+end
+
+function modifier_t2x2_w_buff:GetEffectName()
+    return "particles/units/heroes/hero_mars/mars_arena_of_blood_heal.vpcf"
+end
+
+function modifier_t2x2_w_buff:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end
 
 modifier_t2x2_w_debuff = class({})

@@ -12927,7 +12927,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"				"25.0"
+		"AbilityCooldown"				"20 18 16 14"
 		"HasShardUpgrade"				"1"
 		"AbilityManaCost"				"110 130 150 170"
 		"AbilityValues"
@@ -12944,8 +12944,12 @@
 					"special_bonus_unique_sasavot_1" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
-				"stun_duration"					"1.75 2.0 2.25 2.5"
-				"stomp_damage"					"100 175 250 325"
+				"stun_duration"
+				{
+					"value"	"1.2 1.4 1.6 1.8"
+					"special_bonus_unique_t2x2_7"	"+0.8"
+				}
+				"stomp_damage"					"100 200 300 400"
 				"hasfacet"
 				{
 					"value"	"0"
@@ -12963,6 +12967,11 @@
 					"special_bonus_shard"  "+10"
 					"RequiresShard"			"1"
 				}
+				"health_damage"
+				{
+					"value"	"0"
+					"special_bonus_unique_t2x2_6" "+10"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -12976,27 +12985,31 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"30 27 24 21"
 		"AbilityManaCost"				"70 140 210 280"
 		"AbilityValues"
 		{
 			"radius"
 			{
-				"value"	"1500"
+				"value"	"800"
 				"affected_by_aoe_increase"	"1"
 			}
 			"AbilityCastRange"
 			{
-				"value"	"1500"
+				"value"	"800"
 				"affected_by_aoe_increase"	"1"
 			}
-			"duration"	"5 6 7 8"
+			"duration"	"8"
 			"attack_speed"
 			{
 				"value"			"20 30 40 50"
 			}
-			"armor"	"4 5 6 7"
-			"hp_regen"	"5 6 7 8"
+			"armor"
+			{
+				"value"	"4 5 6 7"
+				"special_bonus_unique_t2x2_3" "+3"
+			}
+			"hp_regen"	"5 10 15 20"
 			"movespeed"
 			{
 				"value"	"12 18 24 30"
@@ -13016,9 +13029,13 @@
 		"AbilityValues"
 		{
 				"damage_reduction"		"25 35 45 55"
-				"damage_reduction_hp"	"2"
+				"damage_reduction_hp"
+				{
+					"value"	"1.2 1.4 1.6 1.8"
+					"special_bonus_unique_t2x2_5" "+1"
+				}
 				"damage_cleanse"		"600 550 500 450"
-				"damage_reset_interval"	"6.0 6.0 6.0 6.0"
+				"damage_reset_interval"	"6.0"
 		}
 	}
 	//=================================================================================================================
@@ -13033,17 +13050,26 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityTextureName"            "tasty"
-		"AbilityCooldown"               "100 90 80"
 		"AbilityManaCost"               "150 200 250"
 		"AbilityCastPoint"				"0.5"
 		"AbilityValues"
 		{
-			"duration" 	"17"
-			"speed"		"25 30 35"
-			"crit_chance"               "25 30 35"
+			"AbilityCooldown"
+			{
+				"value"	"90 85 80"
+				"special_bonus_unique_t2x2_4" "-20"
+			}
+			"duration" 					"17"
+			"speed"						"25 30 35"
+			"crit_chance"
+			{
+				"value"	"25 30 35"
+				"special_bonus_unique_t2x2_2" "+5"
+			}
 			"crit_damage"
 			{
 				"value"	"160 180 200"
+				"special_bonus_unique_t2x2_8" "+60"
 			}
 			"bonus_hp"	"300 600 900"
 		}
