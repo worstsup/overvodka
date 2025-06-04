@@ -13046,13 +13046,11 @@
 				"AbilityCastRange"
 				{
 					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
 				"radius"
 				{
 					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
 				"stun_duration"
@@ -13061,11 +13059,6 @@
 					"special_bonus_unique_t2x2_7"	"+0.8"
 				}
 				"stomp_damage"					"100 200 300 400"
-				"hasfacet"
-				{
-					"value"	"0"
-					"special_bonus_facet_sasavot_e_facet" "=1"
-				}
 				"strength_per_hero"
 				{
 					"value"	"0"
