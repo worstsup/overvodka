@@ -32,6 +32,37 @@
             }
         }
     }
+    "models/items/lycan/ultimate/eternal_hunger_shapeshift_form/eternal_hunger_shapeshift_form.vmdl"
+	{
+		"PortraitLightPosition"		"187.33 84.33 170.74"
+		"PortraitLightAngles"		"46.58 220.52 0.00"
+		"PortraitLightFOV"		"33"
+		"PortraitLightDistance"		"230"
+		"PortraitLightColor"		"254 244 233"
+		"PortraitShadowColor"		"74 74 74"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"111 146 203"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_darkclouds.vmat"
+		"PortraitBackgroundColor1"		".6 .5 .55"
+		"PortraitBackgroundColor2"		".3 .3 .5"
+		"PortraitBackgroundColor3"		"0 .1 .1"
+		"PortraitBackgroundColor4"		"0 .61 .60"
+		"PortraitLightScale"		"1.100000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-102.280 92.600 199.470"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"308.08 -84.24 35.12"
+				"PortraitAngles"		"348.02 157.34 0.00"
+				"PortraitFOV"		"18"
+			}
+		}
+	}
     "models/heroes/terrorblade/terrorblade.vmdl"
 	{
 		"PortraitLightPosition"		"-13.29 -25.07 238.58"

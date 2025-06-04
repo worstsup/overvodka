@@ -12876,6 +12876,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCooldown"				"25.0"
+		"HasShardUpgrade"				"1"
 		"AbilityManaCost"				"110 130 150 170"
 		"AbilityValues"
 		{
@@ -12897,6 +12898,18 @@
 				{
 					"value"	"0"
 					"special_bonus_facet_sasavot_e_facet" "=1"
+				}
+				"strength_per_hero"
+				{
+					"value"	"0"
+					"special_bonus_shard"  "+5"
+					"RequiresShard"			"1"
+				}
+				"shard_duration"
+				{
+					"value"	"0"
+					"special_bonus_shard"  "+10"
+					"RequiresShard"			"1"
 				}
 		}
 	}
@@ -12961,25 +12974,17 @@
 		"AbilityTextureName"            "tasty"
 		"AbilityCooldown"               "100 90 80"
 		"AbilityManaCost"               "150 200 250"
-		"precache"
-		{
-			"soundfile" "soundevents/vkusno.vsndevts"
-			"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-		}
+		"AbilityCastPoint"				"0.5"
 		"AbilityValues"
 		{
 			"duration" 	"17"
 			"speed"		"25 30 35"
-			"bonus_night_vision"        "150 200 250 300"
 			"crit_chance"               "25 30 35"
 			"crit_damage"
 			{
 				"value"	"160 180 200"
 			}
 			"bonus_hp"	"300 600 900"
-			"transformation_time"       "0.5"
 		}
 	}
 }

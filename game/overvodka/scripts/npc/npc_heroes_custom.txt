@@ -2896,7 +2896,7 @@
 		"Ability3"				"t2x2_e"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		"Ability6"				"primal_beast_pulverize"
+		"Ability6"				"t2x2_r"
 		"Ability7"				"t2x2_innate"
 		"Ability10"				"special_bonus_attack_damage_20"
 		"Ability11"				"special_bonus_unique_primal_beast_trample_magic_resist"

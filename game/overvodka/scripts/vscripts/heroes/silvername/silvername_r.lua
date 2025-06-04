@@ -115,13 +115,13 @@ function modifier_silvername_r_thinker:OnIntervalThink()
 	)
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
-		ApplyDamage( self.damageTable )
 		enemy:AddNewModifier(
 			self.caster,
 			self.ability,
 			"modifier_generic_stunned_lua", 
 			{duration = self.stun_duration}
 		)
+		ApplyDamage( self.damageTable )
 		local particle = ParticleManager:CreateParticle("particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
 		ParticleManager:ReleaseParticleIndex( particle )
 	end

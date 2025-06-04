@@ -85,11 +85,11 @@ function ebanko_shard:OnSpellStart()
 		damage_type = self:GetAbilityDamageType(),
 		ability = self, 
 	}
-	ApplyDamage( damageTable )
 	if not target:IsDebuffImmune() and not target:IsMagicImmune() then
 		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration })
 		local knockback = target:AddNewModifier( self:GetCaster(), self, "modifier_generic_knockback_lua", { duration = flight_dur, distance = 1600, height = 150, direction_x = direction.x, direction_y = direction.y, isStun = true })
 	end
+	ApplyDamage( damageTable )
 	self:PlayEffects1( target )
 end
 

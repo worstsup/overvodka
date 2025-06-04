@@ -231,6 +231,9 @@
 		"npc_dota_hero_phantom_lancer_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ЗАВИСИТ ОТ ВАШЕЙ УДАЧИ"
 
+		"dota_tooltip_modifier_t2x2_q_shard" "Гнев"
+		"dota_tooltip_modifier_t2x2_q_shard_description" "Сила увеличена на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%"
+
 		"dota_tooltip_ability_special_bonus_unique_kolyan_1" "+{s:bonus_duration} сек. к длительности эффекта ЧЕРКАШИ"
 		"dota_tooltip_ability_special_bonus_unique_kolyan_2" "+{s:bonus_attack_damage}% к урону от атаки ПОРАБОТАТЬ ЛОКТЯМИ"
 		"dota_tooltip_ability_special_bonus_unique_kolyan_3" "ADIDAS даёт +{s:bonus_magic_resist}% к сопротивлению магии"

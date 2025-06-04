@@ -90,9 +90,9 @@ function speed_penalty:OnProjectileHit( target, location )
         caster:ModifyGold(gold, false, 0)
         SendOverheadEventMessage(caster, OVERHEAD_ALERT_GOLD, caster, gold, nil)
     end
-    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
     target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_time})
     target:AddNewModifier(caster, self, "modifier_speed_penalty", {duration = self:GetSpecialValueFor("fire_duration") * (1 - target:GetStatusResistance())})
+    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
     table.insert(tartar, target)
 end
 
