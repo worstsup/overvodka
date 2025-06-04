@@ -20,6 +20,11 @@
 
 "CustomEvents"
 {
+	"event_toggle_alt_cast"
+    {
+        "ent_index"     "short"
+        "is_alted"      "bool"
+    }
 	"custom_indicator"
 	{
 		"ability"	"int"

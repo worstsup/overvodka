@@ -1322,13 +1322,13 @@ function modifier_dvoreckov_qqe_leap:OnDestroy()
 
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
-		ApplyDamage( damageTable )
 		enemy:AddNewModifier(
 			self.parent,
 			self.ability,
 			"modifier_generic_stunned_lua",
 			{ duration = self.duration }
 		)
+		ApplyDamage( damageTable )
 	end
 	GridNav:DestroyTreesAroundPoint( self.point, self.radius/2, false )
 	self:PlayEffects2( self.point, self.radius )

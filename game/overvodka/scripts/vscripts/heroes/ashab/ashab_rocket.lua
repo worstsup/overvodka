@@ -27,9 +27,9 @@ function Ashab_rocket:OnProjectileHit(target, location)
     local stun_duration = self:GetSpecialValueFor("stun_duration")
     local gold = self:GetSpecialValueFor("gold")
     EmitSoundOn("rocket_hit", target)
+    target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_duration})
     local damageTable = {victim = target, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self}
     ApplyDamage(damageTable)
-    target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_duration})
     if not target:IsIllusion() and gold > 0 then
         caster:ModifyGold(gold, false, 0)
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, gold, nil)

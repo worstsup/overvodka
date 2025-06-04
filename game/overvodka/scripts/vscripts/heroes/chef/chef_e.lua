@@ -1,10 +1,10 @@
-LinkLuaModifier("modifier_lev_freak", "heroes/lev/lev_freak", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_e", "heroes/chef/chef_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_lev_freak_blood", "heroes/lev/lev_freak", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chef_e_blood", "heroes/chef/chef_e", LUA_MODIFIER_MOTION_NONE)
 
-lev_freak = class({})
+chef_e = class({})
 
-function lev_freak:Precache(context)
+function chef_e:Precache(context)
     PrecacheResource("soundfile", "soundevents/chef_e.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts", context)
     PrecacheResource("particle", "particles/chef_e.vpcf", context)
@@ -13,21 +13,21 @@ function lev_freak:Precache(context)
     PrecacheResource("model", "models/heroes/dragon_knight_persona/dk_persona_weapon_full.vmdl", context)
 end
 
-function lev_freak:OnSpellStart()
+function chef_e:OnSpellStart()
     local caster = self:GetCaster()
     caster.carapaced_units = {}
     local reflect_duration = self:GetSpecialValueFor("reflect_duration")
-    caster:AddNewModifier(caster, self, "modifier_lev_freak", { duration = reflect_duration })
+    caster:AddNewModifier(caster, self, "modifier_chef_e", { duration = reflect_duration })
     EmitSoundOn("chef_e", caster)
 end
 
-modifier_lev_freak = class({})
+modifier_chef_e = class({})
 
-function modifier_lev_freak:IsPurgable() return false end
-function modifier_lev_freak:IsHidden() return false end
-function modifier_lev_freak:IsDebuff() return false end
+function modifier_chef_e:IsPurgable() return false end
+function modifier_chef_e:IsHidden() return false end
+function modifier_chef_e:IsDebuff() return false end
 
-function modifier_lev_freak:OnCreated()
+function modifier_chef_e:OnCreated()
     if not IsServer() then return end
     self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
     self.stun_duration = self:GetAbility():GetSpecialValueFor("stun_duration")
@@ -40,7 +40,7 @@ function modifier_lev_freak:OnCreated()
 	self.knife:SetLocalAngles(0, 0, 0)
 end
 
-function modifier_lev_freak:OnDestroy()
+function modifier_chef_e:OnDestroy()
     if not IsServer() then return end
     self:GetParent():SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
     if self.knife and not self.knife:IsNull() then
@@ -49,7 +49,7 @@ function modifier_lev_freak:OnDestroy()
     end
 end
 
-function modifier_lev_freak:DeclareFunctions()
+function modifier_chef_e:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
@@ -58,34 +58,34 @@ function modifier_lev_freak:DeclareFunctions()
     }
 end
 
-function modifier_lev_freak:OnAttackLanded(event)
+function modifier_chef_e:OnAttackLanded(event)
     if not IsServer() then return end
     local parent = self:GetParent()
     local target = event.target
     local attacker = event.attacker
     if attacker ~= parent or target:IsBuilding() or target:IsWard() or target:IsDebuffImmune() then return end
     if target:GetTeamNumber() ~= parent:GetTeamNumber() then
-        target:AddNewModifier(parent, self:GetAbility(), "modifier_lev_freak_blood", { duration = self:GetAbility():GetSpecialValueFor("blood_duration") })
+        target:AddNewModifier(parent, self:GetAbility(), "modifier_chef_e_blood", { duration = self:GetAbility():GetSpecialValueFor("blood_duration") })
     end
 end
 
-function modifier_lev_freak:GetModifierMaxAttackRange()
+function modifier_chef_e:GetModifierMaxAttackRange()
     return self:GetAbility():GetSpecialValueFor("attack_range")
 end
 
-function modifier_lev_freak:GetAttackSound()
+function modifier_chef_e:GetAttackSound()
     return "Hero_BountyHunter.Attack"
 end
 
-function modifier_lev_freak:GetEffectName()
+function modifier_chef_e:GetEffectName()
     return "particles/chef_e.vpcf"
 end
 
-function modifier_lev_freak:GetEffectAttachType()
+function modifier_chef_e:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function modifier_lev_freak:OnTakeDamage(event)
+function modifier_chef_e:OnTakeDamage(event)
     if not IsServer() then return end
     local parent = self:GetParent()
     local attacker = event.attacker
@@ -93,7 +93,7 @@ function modifier_lev_freak:OnTakeDamage(event)
         return
     end
     if event.unit == parent and attacker:GetTeamNumber() ~= parent:GetTeamNumber() and not attacker:IsBuilding() then
-        if not parent.carapaced_units[ attacker:entindex() ] then
+        if not parent.carapaced_units[ attacker:entindex() ] and self.stun_duration > 0 then
             attacker:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.stun_duration })
             parent.carapaced_units[ attacker:entindex() ] = attacker
         end
@@ -105,18 +105,18 @@ function modifier_lev_freak:OnTakeDamage(event)
     end
 end
 
-modifier_lev_freak_blood = class({})
-function modifier_lev_freak_blood:IsPurgable() return true end
-function modifier_lev_freak_blood:IsHidden() return false end
-function modifier_lev_freak_blood:IsDebuff() return true end
-function modifier_lev_freak_blood:OnCreated()
+modifier_chef_e_blood = class({})
+function modifier_chef_e_blood:IsPurgable() return true end
+function modifier_chef_e_blood:IsHidden() return false end
+function modifier_chef_e_blood:IsDebuff() return true end
+function modifier_chef_e_blood:OnCreated()
     if not IsServer() then return end
     self.interval = 0.5
     self:StartIntervalThink(self.interval)
     self:OnIntervalThink()
 end
 
-function modifier_lev_freak_blood:OnIntervalThink()
+function modifier_chef_e_blood:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local damage = self:GetAbility():GetSpecialValueFor("blood_damage")
@@ -124,20 +124,20 @@ function modifier_lev_freak_blood:OnIntervalThink()
     ApplyDamage({victim = parent,attacker = self:GetCaster(),damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility(),})
 end
 
-function modifier_lev_freak_blood:DeclareFunctions()
+function modifier_chef_e_blood:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_TOOLTIP
     }
 end
 
-function modifier_lev_freak_blood:OnTooltip()
+function modifier_chef_e_blood:OnTooltip()
     return self:GetAbility():GetSpecialValueFor("blood_damage")
 end
 
-function modifier_lev_freak_blood:GetEffectName()
+function modifier_chef_e_blood:GetEffectName()
     return "particles/bloodseeker_rupture_new.vpcf"
 end
 
-function modifier_lev_freak_blood:GetEffectAttachType()
+function modifier_chef_e_blood:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
 end

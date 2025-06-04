@@ -1,6 +1,6 @@
 speed_cr7 = class({})
 
-LinkLuaModifier("modifier_speed_cr7_buff", "heroes/golmiy/speed_cr7", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_speed_cr7_buff", "heroes/speed/speed_cr7", LUA_MODIFIER_MOTION_NONE)
 
 function speed_cr7:Precache(context)
     PrecacheResource("particle", "particles/econ/items/omniknight/omni_ti8_head/omniknight_repel_buff_ti8.vpcf", context)

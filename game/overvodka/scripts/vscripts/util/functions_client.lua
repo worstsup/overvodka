@@ -29,3 +29,7 @@ function C_DOTA_BaseNPC:HasArcana()
     end
     return false
 end
+
+function C_DOTABaseAbility:GetAltCastState()
+    return self.alt_casted or false
+end

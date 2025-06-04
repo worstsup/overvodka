@@ -1,15 +1,15 @@
-kirill_w = class({})
-LinkLuaModifier("modifier_kirill_w", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_kirill_w_stun", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_kirill_w_silence", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_kirill_w_disarm", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_kirill_w_mute", "heroes/kirill/kirill_w", LUA_MODIFIER_MOTION_NONE)
+sahur_w = class({})
+LinkLuaModifier("modifier_sahur_w", "heroes/sahur/sahur_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_sahur_w_stun", "heroes/sahur/sahur_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_sahur_w_silence", "heroes/sahur/sahur_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_sahur_w_disarm", "heroes/sahur/sahur_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_sahur_w_mute", "heroes/sahur/sahur_w", LUA_MODIFIER_MOTION_NONE)
 
-function kirill_w:GetIntrinsicModifierName()
-    return "modifier_kirill_w"
+function sahur_w:GetIntrinsicModifierName()
+    return "modifier_sahur_w"
 end
 
-function kirill_w:Precache(context)
+function sahur_w:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", context)
     PrecacheResource("particle", "particles/kirill_stun.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/drow/drow_arcana/drow_arcana_silenced_v2.vpcf", context)
@@ -19,19 +19,19 @@ function kirill_w:Precache(context)
 	PrecacheResource("soundfile", "soundevents/chto.vsndevts", context )
 end
 
-modifier_kirill_w = class({})
+modifier_sahur_w = class({})
 
-function modifier_kirill_w:IsHidden() return true end
-function modifier_kirill_w:IsPurgable() return false end
-function modifier_kirill_w:IsDebuff() return false end
+function modifier_sahur_w:IsHidden() return true end
+function modifier_sahur_w:IsPurgable() return false end
+function modifier_sahur_w:IsDebuff() return false end
 
-function modifier_kirill_w:DeclareFunctions()
+function modifier_sahur_w:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
 
-function modifier_kirill_w:OnAttackLanded(params)
+function modifier_sahur_w:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker:IsIllusion() and not params.attacker:HasModifier("modifier_item_aghanims_shard") then return end
     local parent = self:GetParent()
@@ -71,30 +71,31 @@ function modifier_kirill_w:OnAttackLanded(params)
     end
     local effects = {}
 
-    if RandomInt(1, 4) == 1 then
+    local random_int = RandomInt(1, 4)
+    if random_int == 1 then
         table.insert(effects, {
-            modifier = "modifier_kirill_w_stun",
+            modifier = "modifier_sahur_w_stun",
             duration = ability:GetSpecialValueFor("stun_duration")
         })
     end
 
-    if RandomInt(1, 4) == 2 then
+    if random_int == 2 then
         table.insert(effects, {
-            modifier = "modifier_kirill_w_silence",
+            modifier = "modifier_sahur_w_silence",
             duration = ability:GetSpecialValueFor("silence_duration")
         })
     end
 
-    if RandomInt(1, 4) == 3 then
+    if random_int == 3 then
         table.insert(effects, {
-            modifier = "modifier_kirill_w_disarm",
+            modifier = "modifier_sahur_w_disarm",
             duration = ability:GetSpecialValueFor("disarm_duration")
         })
     end
 
-    if RandomInt(1, 4) == 4 then
+    if random_int == 4 then
         table.insert(effects, {
-            modifier = "modifier_kirill_w_mute",
+            modifier = "modifier_sahur_w_mute",
             duration = ability:GetSpecialValueFor("mute_duration")
         })
     end
@@ -113,62 +114,62 @@ function modifier_kirill_w:OnAttackLanded(params)
 end
 
 
-modifier_kirill_w_stun = class({})
-function modifier_kirill_w_stun:IsHidden() return false end
-function modifier_kirill_w_stun:IsPurgable() return true end
-function modifier_kirill_w_stun:IsDebuff() return true end
+modifier_sahur_w_stun = class({})
+function modifier_sahur_w_stun:IsHidden() return false end
+function modifier_sahur_w_stun:IsPurgable() return true end
+function modifier_sahur_w_stun:IsDebuff() return true end
 
-function modifier_kirill_w_stun:GetEffectName()
+function modifier_sahur_w_stun:GetEffectName()
     return "particles/generic_gameplay/generic_bashed.vpcf"
 end
-function modifier_kirill_w_stun:GetEffectAttachType()
+function modifier_sahur_w_stun:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end
 
-function modifier_kirill_w_stun:CheckState()
+function modifier_sahur_w_stun:CheckState()
     return {[MODIFIER_STATE_STUNNED] = true}
 end
 
-modifier_kirill_w_silence = class({})
-function modifier_kirill_w_silence:IsHidden() return false end
-function modifier_kirill_w_silence:IsPurgable() return true end
-function modifier_kirill_w_silence:IsDebuff() return true end
-function modifier_kirill_w_silence:CheckState()
+modifier_sahur_w_silence = class({})
+function modifier_sahur_w_silence:IsHidden() return false end
+function modifier_sahur_w_silence:IsPurgable() return true end
+function modifier_sahur_w_silence:IsDebuff() return true end
+function modifier_sahur_w_silence:CheckState()
     return {[MODIFIER_STATE_SILENCED] = true}
 end
 
-function modifier_kirill_w_silence:GetEffectName()
+function modifier_sahur_w_silence:GetEffectName()
     return "particles/econ/items/drow/drow_arcana/drow_arcana_silenced_v2.vpcf"
 end
-function modifier_kirill_w_silence:GetEffectAttachType()
+function modifier_sahur_w_silence:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end
 
-modifier_kirill_w_disarm = class({})
-function modifier_kirill_w_disarm:IsHidden() return false end
-function modifier_kirill_w_disarm:IsPurgable() return true end
-function modifier_kirill_w_disarm:IsDebuff() return true end
-function modifier_kirill_w_disarm:CheckState()
+modifier_sahur_w_disarm = class({})
+function modifier_sahur_w_disarm:IsHidden() return false end
+function modifier_sahur_w_disarm:IsPurgable() return true end
+function modifier_sahur_w_disarm:IsDebuff() return true end
+function modifier_sahur_w_disarm:CheckState()
     return {[MODIFIER_STATE_DISARMED] = true}
 end
 
-function modifier_kirill_w_disarm:GetEffectName()
+function modifier_sahur_w_disarm:GetEffectName()
     return "particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_disarm_ti6_debuff.vpcf"
 end
-function modifier_kirill_w_disarm:GetEffectAttachType()
+function modifier_sahur_w_disarm:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end
 
-modifier_kirill_w_mute = class({})
-function modifier_kirill_w_mute:IsHidden() return false end
-function modifier_kirill_w_mute:IsPurgable() return true end
-function modifier_kirill_w_mute:IsDebuff() return true end
-function modifier_kirill_w_mute:CheckState()
+modifier_sahur_w_mute = class({})
+function modifier_sahur_w_mute:IsHidden() return false end
+function modifier_sahur_w_mute:IsPurgable() return true end
+function modifier_sahur_w_mute:IsDebuff() return true end
+function modifier_sahur_w_mute:CheckState()
     return {[MODIFIER_STATE_MUTED] = true}
 end
-function modifier_kirill_w_mute:GetEffectName()
+function modifier_sahur_w_mute:GetEffectName()
     return "particles/items4_fx/nullifier_mute.vpcf"
 end
-function modifier_kirill_w_mute:GetEffectAttachType()
+function modifier_sahur_w_mute:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
 end

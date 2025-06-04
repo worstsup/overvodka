@@ -1,14 +1,51 @@
-kirill_e = class({})
+sahur_e = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_kirill_e_thinker", "heroes/kirill/kirill_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_kirill_e_jump", "heroes/kirill/kirill_e", LUA_MODIFIER_MOTION_BOTH )
+LinkLuaModifier( "modifier_sahur_e_thinker", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_sahur_e", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_sahur_e_jump", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_BOTH )
 
-function kirill_e:OnAbilityPhaseStart()
+function sahur_e:OnAbilityPhaseStart()
 	EmitSoundOn("sahur_e_start", self:GetCaster())
 	return true
 end
 
-function kirill_e:OnSpellStart()
+function sahur_e:GetBehavior()
+	local additive = self:GetSpecialValueFor("jump_end") == 1 and 1099511627776 or 0
+    local behavior = self.BaseClass.GetBehavior(self)
+    return tonumber(tostring(behavior)) + additive
+end
+
+function sahur_e:GetIntrinsicModifierName()
+	return "modifier_sahur_e"
+end
+
+modifier_sahur_e = class({})
+function modifier_sahur_e:IsHidden() return true end
+function modifier_sahur_e:IsPurgable() return false end
+function modifier_sahur_e:RemoveOnDeath() return false end
+function modifier_sahur_e:OnCreated()
+	if not IsServer() then return end
+end
+function modifier_sahur_e:DeclareFunctions()
+	local funcs = {
+		MODIFIER_EVENT_ON_ORDER,
+	}
+	return funcs
+end
+
+function modifier_sahur_e:OnOrder( params )
+	if params.unit~=self:GetParent() then return end
+	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
+    	FireGameEvent("event_toggle_alt_cast", 
+    	{
+            ent_index = self:GetAbility():GetEntityIndex(),
+            is_alted = not self:GetAbility().alt_casted
+        })
+        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
+	end
+end
+
+function sahur_e:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	local damage = self:GetSpecialValueFor("damage")
@@ -32,7 +69,7 @@ function kirill_e:OnSpellStart()
 		local blocker = CreateModifierThinker(
 			caster,
 			self,
-			"modifier_kirill_e_thinker",
+			"modifier_sahur_e_thinker",
 			{ duration = duration },
 			block_vec,
 			caster:GetTeamNumber(),
@@ -73,12 +110,12 @@ function kirill_e:OnSpellStart()
 			)
 		end
 	end
-	if self:GetSpecialValueFor("jump_end") == 1 then
+	if self:GetSpecialValueFor("jump_end") == 1 and self:GetAltCastState() then
 		local jump_duration = 0.5
 		local jump_height = 150
 		local jump_start = caster:GetOrigin()
 		local jump_end = end_pos
-		caster:AddNewModifier(caster, self, "modifier_kirill_e_jump", {
+		caster:AddNewModifier(caster, self, "modifier_sahur_e_jump", {
 			duration = jump_duration,
 			jump_duration = jump_duration,
 			jump_height = jump_height,
@@ -91,7 +128,7 @@ function kirill_e:OnSpellStart()
 	self:PlayEffects( start_pos, end_pos, duration )
 end
 
-function kirill_e:PlayEffects( start_pos, end_pos, duration )
+function sahur_e:PlayEffects( start_pos, end_pos, duration )
 	local particle_cast = "particles/econ/items/earthshaker/deep_magma/deep_magma_default/deep_magma_default_fissure.vpcf"
 	local sound_cast = "sahur_e"
 	local caster = self:GetCaster()
@@ -104,13 +141,13 @@ function kirill_e:PlayEffects( start_pos, end_pos, duration )
 	EmitSoundOnLocationWithCaster( end_pos, sound_cast, caster )
 end
 
-modifier_kirill_e_jump = class({})
+modifier_sahur_e_jump = class({})
 
-function modifier_kirill_e_jump:IsHidden() return true end
-function modifier_kirill_e_jump:IsPurgable() return false end
-function modifier_kirill_e_jump:GetMotionPriority() return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST end
+function modifier_sahur_e_jump:IsHidden() return true end
+function modifier_sahur_e_jump:IsPurgable() return false end
+function modifier_sahur_e_jump:GetMotionPriority() return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST end
 
-function modifier_kirill_e_jump:OnCreated(kv)
+function modifier_sahur_e_jump:OnCreated(kv)
 	if IsServer() then
 		self.jump_duration = kv.jump_duration or 0.5
 		self.jump_height = kv.jump_height or 150
@@ -126,7 +163,7 @@ function modifier_kirill_e_jump:OnCreated(kv)
 	end
 end
 
-function modifier_kirill_e_jump:UpdateHorizontalMotion(me, dt)
+function modifier_sahur_e_jump:UpdateHorizontalMotion(me, dt)
 	if IsServer() then
 		self.elapsed_time = self.elapsed_time + dt
 		local progress = math.min(self.elapsed_time / self.jump_duration, 1)
@@ -136,15 +173,15 @@ function modifier_kirill_e_jump:UpdateHorizontalMotion(me, dt)
 	end
 end
 
-function modifier_kirill_e_jump:DeclareFunctions()
+function modifier_sahur_e_jump:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION
 	}
 end
-function modifier_kirill_e_jump:GetOverrideAnimation()
+function modifier_sahur_e_jump:GetOverrideAnimation()
 	return ACT_DOTA_FLAIL
 end
-function modifier_kirill_e_jump:UpdateVerticalMotion(me, dt)
+function modifier_sahur_e_jump:UpdateVerticalMotion(me, dt)
 	if IsServer() then
 		local progress = math.min(self.elapsed_time / self.jump_duration, 1)
 		local zOffset = self.jump_height * math.sin(math.pi * progress)
@@ -157,19 +194,19 @@ function modifier_kirill_e_jump:UpdateVerticalMotion(me, dt)
 	end
 end
 
-function modifier_kirill_e_jump:OnHorizontalMotionInterrupted()
+function modifier_sahur_e_jump:OnHorizontalMotionInterrupted()
 	if IsServer() then
 		self:Destroy()
 	end
 end
 
-function modifier_kirill_e_jump:OnVerticalMotionInterrupted()
+function modifier_sahur_e_jump:OnVerticalMotionInterrupted()
 	if IsServer() then
 		self:Destroy()
 	end
 end
 
-function modifier_kirill_e_jump:OnDestroy()
+function modifier_sahur_e_jump:OnDestroy()
 	if IsServer() then
 		me = self:GetParent()
 		me:RemoveHorizontalMotionController(self)
@@ -177,22 +214,22 @@ function modifier_kirill_e_jump:OnDestroy()
 	end
 end
 
-modifier_kirill_e_thinker = class({})
+modifier_sahur_e_thinker = class({})
 
-function modifier_kirill_e_thinker:IsHidden()
+function modifier_sahur_e_thinker:IsHidden()
 	return true
 end
 
-function modifier_kirill_e_thinker:IsPurgable()
+function modifier_sahur_e_thinker:IsPurgable()
 	return false
 end
 
-function modifier_kirill_e_thinker:OnCreated( kv )
+function modifier_sahur_e_thinker:OnCreated( kv )
 end
-function modifier_kirill_e_thinker:OnRefresh( kv )
+function modifier_sahur_e_thinker:OnRefresh( kv )
 end
 
-function modifier_kirill_e_thinker:OnDestroy( kv )
+function modifier_sahur_e_thinker:OnDestroy( kv )
 	if IsServer() then
 		local sound_cast = "Hero_EarthShaker.FissureDestroy"
 		EmitSoundOnLocationWithCaster(self:GetParent():GetOrigin(), sound_cast, self:GetCaster() )

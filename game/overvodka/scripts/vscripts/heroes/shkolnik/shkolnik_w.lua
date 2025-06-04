@@ -23,7 +23,6 @@ function shkolnik_w:OnSpellStart()
 		damage_type = self:GetAbilityDamageType(),
 		ability = self,
 	}
-	ApplyDamage( damageTable )
 	target:AddNewModifier(
 		self:GetCaster(),
 		self, 
@@ -36,6 +35,7 @@ function shkolnik_w:OnSpellStart()
 		"modifier_shkolnik_armor", 
 		{duration = duration}
 	)
+	ApplyDamage( damageTable )
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
 

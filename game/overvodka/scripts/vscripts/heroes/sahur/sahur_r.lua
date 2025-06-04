@@ -1,17 +1,17 @@
-kirill_r = class({})
-LinkLuaModifier( "modifier_kirill_r", "heroes/kirill/kirill_r", LUA_MODIFIER_MOTION_NONE )
+sahur_r = class({})
+LinkLuaModifier( "modifier_sahur_r", "heroes/sahur/sahur_r", LUA_MODIFIER_MOTION_NONE )
 
-function kirill_r:GetAOERadius()
+function sahur_r:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
-function kirill_r:OnSpellStart()
+function sahur_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	CreateModifierThinker(
 		caster,
 		self,
-		"modifier_kirill_r",
+		"modifier_sahur_r",
 		{},
 		point,
 		caster:GetTeamNumber(),
@@ -22,25 +22,25 @@ function kirill_r:OnSpellStart()
 	EmitSoundOnLocationWithCaster(point, "sahur_r", caster)
 end
 
-modifier_kirill_r = class({})
+modifier_sahur_r = class({})
 
-function modifier_kirill_r:IsHidden()
+function modifier_sahur_r:IsHidden()
 	return false
 end
 
-function modifier_kirill_r:IsDebuff()
+function modifier_sahur_r:IsDebuff()
 	return true
 end
 
-function modifier_kirill_r:IsStunDebuff()
+function modifier_sahur_r:IsStunDebuff()
 	return false
 end
 
-function modifier_kirill_r:IsPurgable()
+function modifier_sahur_r:IsPurgable()
 	return true
 end
 
-function modifier_kirill_r:OnCreated( kv )
+function modifier_sahur_r:OnCreated( kv )
 	if not IsServer() then return end
 	self.owner = kv.isProvidedByAura~=1
 	if not self.owner then return end
@@ -61,13 +61,13 @@ function modifier_kirill_r:OnCreated( kv )
 	self:PlayEffects1( duration )
 end
 
-function modifier_kirill_r:OnRefresh( kv )
+function modifier_sahur_r:OnRefresh( kv )
 end
 
-function modifier_kirill_r:OnRemoved()
+function modifier_sahur_r:OnRemoved()
 end
 
-function modifier_kirill_r:OnDestroy()
+function modifier_sahur_r:OnDestroy()
 	if not IsServer() then return end
 	if self.owner then
 
@@ -75,7 +75,7 @@ function modifier_kirill_r:OnDestroy()
 	end
 end
 
-function modifier_kirill_r:DeclareFunctions()
+function modifier_sahur_r:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_BONUS_DAY_VISION,
 		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
@@ -85,25 +85,25 @@ function modifier_kirill_r:DeclareFunctions()
 	return funcs
 end
 
-function modifier_kirill_r:GetModifierMoveSpeedBonus_Percentage()
+function modifier_sahur_r:GetModifierMoveSpeedBonus_Percentage()
 	return self:GetAbility():GetSpecialValueFor("move_speed_tooltip")
 end
 
-function modifier_kirill_r:GetBonusDayVision()
+function modifier_sahur_r:GetBonusDayVision()
 	return -2000
 end
 
-function modifier_kirill_r:GetBonusNightVision()
+function modifier_sahur_r:GetBonusNightVision()
 	return -1000
 end
-function modifier_kirill_r:CheckState()
+function modifier_sahur_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_NOT_ON_MINIMAP] = true,
 	}
 	return state
 end
 
-function modifier_kirill_r:OnIntervalThink()
+function modifier_sahur_r:OnIntervalThink()
 	self.pulse = self.pulse + 1
 	local enemies = FindUnitsInRadius(
 		self:GetCaster():GetTeamNumber(),
@@ -130,31 +130,31 @@ function modifier_kirill_r:OnIntervalThink()
 	end
 end
 
-function modifier_kirill_r:IsAura()
+function modifier_sahur_r:IsAura()
 	return self.owner
 end
 
-function modifier_kirill_r:GetModifierAura()
-	return "modifier_kirill_r"
+function modifier_sahur_r:GetModifierAura()
+	return "modifier_sahur_r"
 end
 
-function modifier_kirill_r:GetAuraRadius()
+function modifier_sahur_r:GetAuraRadius()
 	return self.radius
 end
 
-function modifier_kirill_r:GetAuraDuration()
+function modifier_sahur_r:GetAuraDuration()
 	return 0.3
 end
 
-function modifier_kirill_r:GetAuraSearchTeam()
+function modifier_sahur_r:GetAuraSearchTeam()
 	return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 
-function modifier_kirill_r:GetAuraSearchType()
+function modifier_sahur_r:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
 end
 
-function modifier_kirill_r:PlayEffects1( duration )
+function modifier_sahur_r:PlayEffects1( duration )
 	local particle_cast = "particles/disruptor_2022_immortal_static_storm_custom.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self:GetParent():GetOrigin() )
@@ -163,7 +163,7 @@ function modifier_kirill_r:PlayEffects1( duration )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
-function modifier_kirill_r:PlayEffects2( target )
+function modifier_sahur_r:PlayEffects2( target )
 	local particle_cast = "particles/kirill_r_black.vpcf"
 	local effect_cast = ParticleManager:CreateParticleForPlayer(particle_cast, PATTACH_ABSORIGIN_FOLLOW, target, target:GetPlayerOwner())
 	ParticleManager:ReleaseParticleIndex( effect_cast )

@@ -1,25 +1,25 @@
-LinkLuaModifier("modifier_golmiy_penaltiy", "heroes/golmiy/golmiy_penaltiy", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_speed_penalty", "heroes/speed/speed_penalty", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
-golmiy_penaltiy = class({})
+speed_penalty = class({})
 
 tartar = {}
 
-function golmiy_penaltiy:GetCooldown(level)
+function speed_penalty:GetCooldown(level)
     return self.BaseClass.GetCooldown(self, level)
 end
 
-function golmiy_penaltiy:GetManaCost(level)
+function speed_penalty:GetManaCost(level)
     return self.BaseClass.GetManaCost(self, level)
 end
 
-function golmiy_penaltiy:Precache( context )
+function speed_penalty:Precache( context )
     PrecacheResource("particle", "particles/invoker_chaos_meteor_new.vpcf", context)
     PrecacheResource("soundfile", "soundevents/penal.vsndevts", context)
     PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_chaos_meteor_burn_debuff.vpcf", context)
 end
 
-function golmiy_penaltiy:OnSpellStart()
+function speed_penalty:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target_loc = self:GetCursorPosition()
@@ -51,7 +51,7 @@ function golmiy_penaltiy:OnSpellStart()
     }
     local angles = { 0 }
     EmitSoundOn("penal", caster)
-    local talent = caster:FindAbilityByName("special_bonus_unique_golmiy_7")
+    local talent = caster:FindAbilityByName("special_bonus_unique_speed_7")
     if talent and talent:GetLevel() > 0 then
         table.insert(angles,  30)
         table.insert(angles, -30)
@@ -75,7 +75,7 @@ function RotateVector2D(vec, degrees)
     )
 end
 
-function golmiy_penaltiy:OnProjectileHit( target, location )
+function speed_penalty:OnProjectileHit( target, location )
     if not IsServer() then return end
     if not target then return end
     local caster = self:GetCaster()
@@ -90,23 +90,23 @@ function golmiy_penaltiy:OnProjectileHit( target, location )
         caster:ModifyGold(gold, false, 0)
         SendOverheadEventMessage(caster, OVERHEAD_ALERT_GOLD, caster, gold, nil)
     end
-    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
     target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_time})
-    target:AddNewModifier(caster, self, "modifier_golmiy_penaltiy", {duration = self:GetSpecialValueFor("fire_duration") * (1 - target:GetStatusResistance())})
+    target:AddNewModifier(caster, self, "modifier_speed_penalty", {duration = self:GetSpecialValueFor("fire_duration") * (1 - target:GetStatusResistance())})
+    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
     table.insert(tartar, target)
 end
 
-modifier_golmiy_penaltiy = class({})
-function modifier_golmiy_penaltiy:IsHidden() return false end
-function modifier_golmiy_penaltiy:IsDebuff() return true end
-function modifier_golmiy_penaltiy:IsPurgable() return true end
-function modifier_golmiy_penaltiy:OnCreated()
+modifier_speed_penalty = class({})
+function modifier_speed_penalty:IsHidden() return false end
+function modifier_speed_penalty:IsDebuff() return true end
+function modifier_speed_penalty:IsPurgable() return true end
+function modifier_speed_penalty:OnCreated()
     if not IsServer() then return end
     self:StartIntervalThink(1)
     self:OnIntervalThink()
 end
 
-function modifier_golmiy_penaltiy:OnIntervalThink()
+function modifier_speed_penalty:OnIntervalThink()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetParent()
@@ -115,10 +115,10 @@ function modifier_golmiy_penaltiy:OnIntervalThink()
     ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = ability})
 end
 
-function modifier_golmiy_penaltiy:GetEffectName()
+function modifier_speed_penalty:GetEffectName()
     return "particles/units/heroes/hero_invoker/invoker_chaos_meteor_burn_debuff.vpcf"
 end
 
-function modifier_golmiy_penaltiy:GetEffectAttachType()
+function modifier_speed_penalty:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
 end

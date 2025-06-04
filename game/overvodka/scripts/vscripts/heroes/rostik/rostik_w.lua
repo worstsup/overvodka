@@ -71,11 +71,11 @@ function modifier_rostik_w_casting:OnIntervalThink()
 				
 	for _,unit in pairs(units) do
 		local damageTable = { victim = unit, attacker = self.caster, damage = self.damage + (self.caster:GetIntellect(false) / 100 * self.multi), damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()}
-		ApplyDamage(damageTable)
 		if RandomInt(0, 100) <= self:GetAbility():GetSpecialValueFor("chance") then
 			self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_ability_zuus_arc_lightning", {starting_unit_entindex  = unit:entindex()})
 			unit:AddNewModifier(self.caster, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self:GetAbility():GetSpecialValueFor("stun_duration")})
-		end
+        end
+        ApplyDamage(damageTable)
 	end
 
 	EmitSoundOnLocationWithCaster(point, "rostik_w_bolt", self.caster)	

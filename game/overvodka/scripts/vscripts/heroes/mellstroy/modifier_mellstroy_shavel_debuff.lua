@@ -137,13 +137,13 @@ function modifier_mellstroy_shavel_debuff:OnIntervalThink()
 
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
-		ApplyDamage(damageTable)
 		enemy:AddNewModifier(
 			self.caster,
 			self,
 			"modifier_generic_stunned_lua",
 			{ duration = self.ministun }
 		)
+		ApplyDamage(damageTable)
 		EmitSoundOn( "Hero_PrimalBeast.Pulverize.Stun", self.caster )
 	end
 	self:PlayEffects( origin, self.radius )

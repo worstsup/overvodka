@@ -1,4 +1,4 @@
-LinkLuaModifier( "modifier_speed_bark_effect", "heroes/golmiy/speed_bark", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_speed_bark_effect", "heroes/speed/speed_bark", LUA_MODIFIER_MOTION_NONE )
 
 speed_bark = class({})
 
