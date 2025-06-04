@@ -12851,6 +12851,55 @@
 				"duration"				"8"
 		}
 	}
+
+	//===================================================================================================================
+	//														T2X2
+	//===================================================================================================================
+	"special_bonus_unique_t2x2_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_t2x2_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// БОЛЬШОЕ СОЛНЦЕ (врожденная)
+	//=================================================================================================================
 	"t2x2_innate"
 	{
 		"BaseClass"						"ability_lua"
@@ -12866,6 +12915,9 @@
 			"lvl_slow"		"-0.5"
 		}
 	}
+	//=================================================================================================================
+	// ГНЕВ
+	//=================================================================================================================
 	"t2x2_q"
 	{
 		"BaseClass"						"ability_lua"
@@ -12900,6 +12952,9 @@
 				}
 		}
 	}
+	//=================================================================================================================
+	// СКЫРЛЫ / ПОЗИТИВ
+	//=================================================================================================================
 	"t2x2_w"
 	{
 		"BaseClass"						"ability_lua"
@@ -12935,6 +12990,9 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// КРЕПКОЕ ТЕЛО
+	//=================================================================================================================
 	"t2x2_e"
 	{
 		"BaseClass"						"ability_lua"
@@ -12950,6 +13008,9 @@
 				"damage_reset_interval"	"6.0 6.0 6.0 6.0"
 		}
 	}
+	//=================================================================================================================
+	// ГЛАВНЫЙ ФУРРИ-ФАНАТ
+	//=================================================================================================================
 	"t2x2_r"
 	{
 		"BaseClass"             		"ability_lua"
