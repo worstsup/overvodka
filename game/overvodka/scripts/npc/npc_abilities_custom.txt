@@ -7907,52 +7907,6 @@
 		}
 	}
 	//=================================================================================================================
-	// ДРИП (старая)
-	//=================================================================================================================
-	"sasavot_e"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/sasavot/sasavot_e"
-		"AbilityTextureName"			"sasavot_e"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts"
-			"particle"	"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_physical.vpcf"
-		}
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"25.0"
-		"AbilityManaCost"				"110 130 150 170"
-		"AbilityValues"
-		{
-				"AbilityCastRange"
-				{
-					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
-					"affected_by_aoe_increase"	"1"
-				}
-				"radius"
-				{
-					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
-					"affected_by_aoe_increase"	"1"
-				}
-				"stun_duration"					"1.75 2.0 2.25 2.5"
-				"stomp_damage"					"100 175 250 325"
-				"hasfacet"
-				{
-					"value"	"0"
-					"special_bonus_facet_sasavot_e_facet" "=1"
-				}
-		}
-	}
-	//=================================================================================================================
 	// ДРИП (новая)
 	//=================================================================================================================
 	"sasavot_e_new"
@@ -12895,6 +12849,137 @@
 					"special_bonus_unique_kolyan_3"	"+25"
 				}
 				"duration"				"8"
+		}
+	}
+	"t2x2_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/t2x2/t2x2_innate"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"			
+		"Innate"						"1"
+		"IsBreakable"					"0"
+		"AbilityValues"
+		{
+			"lvl_damage"	"2"
+			"lvl_status_resistance"	"0.6"
+			"lvl_slow"		"-0.5"
+		}
+	}
+	"t2x2_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/t2x2/t2x2_q"
+		"AbilityTextureName"			"sasavot_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"				"25.0"
+		"AbilityManaCost"				"110 130 150 170"
+		"AbilityValues"
+		{
+				"AbilityCastRange"
+				{
+					"value"	"450"
+					"special_bonus_unique_sasavot_1" "+50"
+					"affected_by_aoe_increase"	"1"
+				}
+				"radius"
+				{
+					"value"	"450"
+					"special_bonus_unique_sasavot_1" "+50"
+					"affected_by_aoe_increase"	"1"
+				}
+				"stun_duration"					"1.75 2.0 2.25 2.5"
+				"stomp_damage"					"100 175 250 325"
+				"hasfacet"
+				{
+					"value"	"0"
+					"special_bonus_facet_sasavot_e_facet" "=1"
+				}
+		}
+	}
+	"t2x2_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/t2x2/t2x2_w"
+		"AbilityTextureName"			"bleval"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"70 140 210 280"
+		"AbilityValues"
+		{
+			"radius"
+			{
+				"value"	"1500"
+				"affected_by_aoe_increase"	"1"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"1500"
+				"affected_by_aoe_increase"	"1"
+			}
+			"duration"	"5 6 7 8"
+			"attack_speed"
+			{
+				"value"			"20 30 40 50"
+			}
+			"armor"	"4 5 6 7"
+			"hp_regen"	"5 6 7 8"
+			"movespeed"
+			{
+				"value"	"12 18 24 30"
+			}
+		}
+	}
+	"t2x2_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/t2x2/t2x2_e"
+		"AbilityTextureName"			"tidehunter_kraken_shell"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"IsBreakable"			 		"1"
+		"AbilityValues"
+		{
+				"damage_reduction"		"25 35 45 55"
+				"damage_reduction_hp"	"2"
+				"damage_cleanse"		"600 550 500 450"
+				"damage_reset_interval"	"6.0 6.0 6.0 6.0"
+		}
+	}
+	"t2x2_r"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/t2x2/t2x2_r"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"            "tasty"
+		"AbilityCooldown"               "100 90 80"
+		"AbilityManaCost"               "150 200 250"
+		"precache"
+		{
+			"soundfile" "soundevents/vkusno.vsndevts"
+			"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
+			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
+			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
+		}
+		"AbilityValues"
+		{
+			"duration" 	"17"
+			"speed"		"25 30 35"
+			"bonus_night_vision"        "150 200 250 300"
+			"crit_chance"               "25 30 35"
+			"crit_damage"
+			{
+				"value"	"160 180 200"
+			}
+			"bonus_hp"	"300 600 900"
+			"transformation_time"       "0.5"
 		}
 	}
 }

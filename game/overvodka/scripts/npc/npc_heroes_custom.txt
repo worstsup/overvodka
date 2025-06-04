@@ -2880,4 +2880,74 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_tusk.vsndevts"
 		"VoiceFile"	""
 	}
+	"npc_dota_hero_primal_beast"
+	{
+		"Model"					"models/heroes/primal_beast/primal_beast_base.vmdl"
+		"SoundSet"				"Hero_PrimalBeast"
+		"Enabled"				"1"
+		"SimilarHeroes"			"7,29,2"
+		"ModelScale"			"0.9"
+        "HealthBarOffset"		"250"
+		"LoadoutScale"			"0.9"
+		"HeroSelectSoundEffect"	"Hero_PrimalBeast.Pick"	
+		"GibType"				"default"
+		"Ability1"				"t2x2_q"
+		"Ability2"				"t2x2_w"
+		"Ability3"				"t2x2_e"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"primal_beast_pulverize"
+		"Ability7"				"t2x2_innate"
+		"Ability10"				"special_bonus_attack_damage_20"
+		"Ability11"				"special_bonus_unique_primal_beast_trample_magic_resist"
+		"Ability12"				"special_bonus_unique_primal_beast_trample_cooldown"
+		"Ability13"				"special_bonus_unique_primal_beast_roar_dispells"
+		"Ability14"				"special_bonus_unique_primal_beast_trample_attack_damage"
+		"Ability15"				"special_bonus_unique_primal_beast_uproar_armor"
+		"Ability16"				"special_bonus_unique_primal_beast_trample_unslowable"
+		"Ability17"				"special_bonus_unique_primal_beast_pulverize_duration"
+		
+		"Facets"
+		{
+			"primal_beast_romp_n_stomp"		
+			{
+				"Deprecated"		"true"
+			}
+
+			"primal_beast_provoke_the_beast"
+			{
+				"Icon"				"broken_chain"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+
+			"primal_beast_ferocity"
+			{
+				"Icon"				"area_of_effect"
+				"Color"				"Yellow"
+				"GradientID"		"3"
+			}
+		}
+		"ArmorPhysical"				"2"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"36"
+		"AttackDamageMax"			"38"
+		"AttackRate"				"1.80000"
+		"AttackAnimationPoint"		"0.60"
+		"AttackAcquisitionRange"	"600"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"26"
+		"AttributeStrengthGain"		"4.300000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"1.000000"
+		"AttributeBaseIntelligence"	"16"
+		"AttributeIntelligenceGain"	"1.700000"
+		"MovementSpeed"				"305"
+		"MovementTurnRate"			"0.600000"
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"					""
+		"particle_folder"			"particles/units/heroes/hero_primal_beast"
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts"
+	}
 }
