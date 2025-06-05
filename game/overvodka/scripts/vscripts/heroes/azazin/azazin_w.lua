@@ -78,6 +78,7 @@ function modifier_azazin_w:OnCreated()
     if not IsServer() then return end
     self.time = 0
     self:StartIntervalThink(0.5)
+    self:OnIntervalThink()
 end
 function modifier_azazin_w:IsHidden()
     return true
@@ -135,6 +136,14 @@ function modifier_azazin_w:OnIntervalThink()
     local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
     for _,unit in pairs(targets) do
         unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_azazin_w_target", {duration = 1})
+        local damageTable = {
+            victim = unit,
+            attacker = self:GetCaster(),
+            damage = self:GetAbility():GetSpecialValueFor("damage"),
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self:GetAbility()
+        }
+        ApplyDamage(damageTable)
     end
 end
 
