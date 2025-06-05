@@ -108,6 +108,8 @@ PrecacheUtils.particles = {
 		"particles/chapman.vpcf",
 		"particles/sans_base_attack_arcana.vpcf",
 		"particles/griffin_gas.vpcf",
+		"particles/surfin_bird_erny.vpcf",
+		"models/heroes/dawnbreaker/debut/particles/battlemaiden_debut_intro_burst_smoke_vertical.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -223,6 +225,9 @@ PrecacheUtils.models = {
 		"models/invincible/invincible.vmdl",
 		"models/zhenya/zhenya.vmdl",
 		"sans/underfell_sans.vmdl",
+		"evil_monke/models/evil_monke_tpose.vmdl",
+		"models/worker/worker.vmdl",
+		"models/worker/factory.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -363,6 +368,7 @@ PrecacheUtils.sounds = {
 		"soundevents/onehp.vsndevts",
 		"soundevents/griffins.vsndevts",
 		"soundevents/stint_start.vsndevts",
+		"soundevents/mazellov_sounds.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_marci.vsndevts",

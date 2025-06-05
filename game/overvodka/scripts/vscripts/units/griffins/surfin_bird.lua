@@ -92,14 +92,10 @@ function modifier_surfin_bird_freeze:IsPurgable() return false end
 
 function modifier_surfin_bird_freeze:CheckState()
     return {
-        [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+        [MODIFIER_STATE_COMMAND_RESTRICTED] = true, -- запрещает перемещение/приказы
+        [MODIFIER_STATE_ROOTED] = true,             -- не может двигаться
+        [MODIFIER_STATE_DISARMED] = true,             -- не может двигаться
     }
-end
-
-function modifier_surfin_bird_freeze:OnCreated()
-    if IsServer() then
-        EmitSoundOn("peter_surfin_bird", self:GetParent()) 
-    end
 end
 
 function modifier_surfin_bird_freeze:DeclareFunctions()
@@ -107,6 +103,29 @@ function modifier_surfin_bird_freeze:DeclareFunctions()
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
     }
 end
+
+function modifier_surfin_bird_freeze:GetModifierIncomingDamage_Percentage()
+    return self:GetAbility():GetSpecialValueFor("self_incoming_damage")
+end
+
+function modifier_surfin_bird_freeze:OnCreated()
+    if not IsServer() then return end
+
+    local parent = self:GetParent()
+
+    -- Воспроизведение анимации
+    parent:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_2, 1.0)
+
+    -- Проигрывание звука
+    EmitSoundOn("peter_surfin_bird", parent)
+end
+
+function modifier_surfin_bird_freeze:OnDestroy()
+    if not IsServer() then return end
+    -- Остановка анимации при снятии модификатора
+    self:GetParent():FadeGesture(ACT_DOTA_CAST_ABILITY_2)
+end
+
 
 function modifier_surfin_bird_freeze:GetModifierIncomingDamage_Percentage()
     return self:GetAbility():GetSpecialValueFor("self_incoming_damage")
@@ -136,6 +155,21 @@ end
 function modifier_surfin_bird_debuff:GetModifierMiss_Percentage()
     return self:GetAbility():GetSpecialValueFor("enemy_miss_chance")
 end
+
+-- === Добавляем визуальный эффект ===
+function modifier_surfin_bird_debuff:OnCreated()
+    if not IsServer() then return end
+
+    self.pfx = ParticleManager:CreateParticle(
+        "particles/surfin_bird_erny.vpcf",
+        PATTACH_OVERHEAD_FOLLOW,
+        self:GetParent()
+    )
+
+    ParticleManager:SetParticleControlEnt(self.pfx, 0, self:GetParent(), PATTACH_OVERHEAD_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true)
+    self:AddParticle(self.pfx, false, false, -1, false, false)
+end
+
 
 
 modifier_surfin_bird_buff = class({})

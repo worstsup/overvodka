@@ -23,14 +23,13 @@ function modifier_monkey_menace:OnAttackLanded(keys)
     local parent = self:GetParent()
     local ability = self:GetAbility()
 
-    if keys.attacker == parent and keys.target ~= nil and not keys.target:IsInvulnerable() then
+    if keys.attacker == parent and keys.target ~= nil and not keys.target:IsMagicImmune() and not keys.target:IsInvulnerable() then
         if ability:IsCooldownReady() then
             local fear_duration = ability:GetSpecialValueFor("fear_duration")
             local dot_duration = ability:GetSpecialValueFor("dot_duration")
-            if not keys.target:IsDebuffImmune() then
-                keys.target:AddNewModifier(parent, ability, "modifier_monkey_menace_fear_debuff", {duration = fear_duration * (1 - keys.target:GetStatusResistance())})
-            end
-            keys.target:AddNewModifier(parent, ability, "modifier_monkey_menace_dot", {duration = dot_duration * (1 - keys.target:GetStatusResistance())})
+
+            keys.target:AddNewModifier(parent, ability, "modifier_monkey_menace_fear_debuff", {duration = fear_duration})
+            keys.target:AddNewModifier(parent, ability, "modifier_monkey_menace_dot", {duration = dot_duration})
 
             ability:StartCooldown(ability:GetCooldown(ability:GetLevel() - 1))
         end
@@ -56,7 +55,7 @@ function modifier_monkey_menace_fear_debuff:OnCreated(params)
     local caster = self:GetCaster()
     if caster and not caster:IsNull() and parent and not parent:IsNull() then
         local direction = (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Normalized()
-        local flee_distance = 1000
+        local flee_distance = 900
         local run_position = parent:GetAbsOrigin() + direction * flee_distance
 
         parent:MoveToPosition(run_position)

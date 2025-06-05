@@ -4395,11 +4395,11 @@
 	{										
 		// General
 		//----------------------------------------------------------------
-		"Model"						"models/griffins/peter.vmdl"	// Model.
+		"Model"						"evil_monke/models/evil_monke_tpose.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"SoundSet"					"Hero_PrimalBeast"
 		"Level"						"1"
-		"ModelScale" 				"1.8"
+		"ModelScale" 				"1.3"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -4418,9 +4418,7 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"42"		// Damage range min.
 		"AttackDamageMax"			"42"		// Damage range max.	
-		"AttackRate"				"1"		// Speed of attack.
 		"BaseAttackSpeed"			"100"		// Speed of attack.
-		"AttackAnimationPoint"		"1"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
 		"AttackRange"				"100"		// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
@@ -4429,13 +4427,13 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"RingRadius"				"60"
-		"HealthBarOffset"			"260"
+		"HealthBarOffset"			"200"
 
 		// Bounty
 		//----------------------------------------------------------------
 		"BountyXP"					"100"		// Experience earn.
-		"BountyGoldMin"				"42"		// Gold earned min.
-		"BountyGoldMax"				"52"		// Gold earned max.
+		"BountyGoldMin"				"20"		// Gold earned min.
+		"BountyGoldMax"				"26"		// Gold earned max.
 
 		// Movement
 		//----------------------------------------------------------------
@@ -4448,6 +4446,110 @@
 		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
 		"StatusMana"				"600"		// Base mana.
 		"StatusManaRegen"			"1.5"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
+
+	"npc_worker"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/worker/worker.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"Hero_PrimalBeast"
+		"Level"						"1"
+		"ModelScale" 				"0.35"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					""			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// Physical protection.
+		"MagicalResistance"				"0"		// Magical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackRange"				"0"		// Range within a target can be attacked.	   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"200"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"300"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"325"		// Base health.
+		"StatusHealthRegen"			"0"		// Health regeneration rate.
+		"StatusMana"				"600"		// Base mana.
+		"StatusManaRegen"			"0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
+
+	"npc_factory"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/worker/factory.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"Hero_PrimalBeast"
+		"Level"						"1"
+		"ModelScale" 				"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					""			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"	   
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"200"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"420"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"0"		// Health regeneration rate.
+		"StatusMana"				"600"		// Base mana.
+		"StatusManaRegen"			"0"		// Mana regeneration rate.		 
 		
 		// Vision
 		//----------------------------------------------------------------
