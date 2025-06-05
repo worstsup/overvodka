@@ -8,6 +8,7 @@ function t2x2_w:Precache( context )
     PrecacheResource( "soundfile", "soundevents/t2x2_sounds.vsndevts", context)
     PrecacheResource( "particle", "particles/units/heroes/hero_huskar/huskar_aoe_heal.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_mars/mars_arena_of_blood_heal.vpcf", context )
+    PrecacheResource( "particle", "particles/econ/items/wraith_king/wraith_king_arcana/wk_arc_slow_debuff.vpcf", context )
     PrecacheResource( "particle", "particles/t2x2_w_bad.vpcf", context )
 end
 
@@ -129,4 +130,12 @@ end
 
 function modifier_t2x2_w_debuff:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("movespeed")
+end
+
+function modifier_t2x2_w_debuff:GetEffectName()
+    return "particles/econ/items/wraith_king/wraith_king_arcana/wk_arc_slow_debuff.vpcf"
+end
+
+function modifier_t2x2_w_debuff:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end

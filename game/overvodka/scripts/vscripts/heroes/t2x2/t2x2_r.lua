@@ -3,13 +3,28 @@ LinkLuaModifier("modifier_t2x2_r_buff", "heroes/t2x2/t2x2_r", LUA_MODIFIER_MOTIO
 t2x2_r = class({})
 
 function t2x2_r:Precache(context)
+    PrecacheResource("particle", "particles/t2x2_r_cast.vpcf", context)
     PrecacheResource("model", "models/items/lycan/ultimate/eternal_hunger_shapeshift_form/eternal_hunger_shapeshift_form.vmdl", context)
+    PrecacheResource("soundfile", "soundevents/t2x2_sounds.vsndevts", context)
+end
+
+function t2x2_r:OnAbilityPhaseStart()
+    self.particle = ParticleManager:CreateParticle( "particles/t2x2_r_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
+    ParticleManager:SetParticleControl( self.particle, 0, self:GetCaster():GetAbsOrigin() )
+	ParticleManager:SetParticleControl( self.particle, 3, self:GetCaster():GetAbsOrigin() )
+    return true
+end
+
+function t2x2_r:OnAbilityPhaseInterrupted()
+	ParticleManager:DestroyParticle( self.particle, true )
+	ParticleManager:ReleaseParticleIndex( self.particle )
 end
 
 function t2x2_r:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     caster:AddNewModifier(caster, self, "modifier_t2x2_r_buff", { duration = self:GetSpecialValueFor("duration") })
+    EmitSoundOn("t2x2_r_"..RandomInt(1,2), caster)
 end
 
 

@@ -237,7 +237,7 @@
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ВЫСОКАЯ"
 
 		"dota_tooltip_ability_special_bonus_unique_t2x2_2" "+{s:bonus_crit_chance}% к шансу крит. урона ГЛАВНЫЙ ФУРРИ-ФАНАТ"
-		"dota_tooltip_ability_special_bonus_unique_t2x2_3" "+{s:bonus_special_bonus_unique_t2x2_3} к изменению брони от ПОЗИТИВ / СКЫРЛЫ"
+		"dota_tooltip_ability_special_bonus_unique_t2x2_3" "+{s:bonus_armor} к изменению брони от ПОЗИТИВ / СКЫРЛЫ"
 		"dota_tooltip_ability_special_bonus_unique_t2x2_4" "-{s:bonus_AbilityCooldown} сек. перезарядки ГЛАВНЫЙ ФУРРИ-ФАНАТ"
 		"dota_tooltip_ability_special_bonus_unique_t2x2_5" "+{s:bonus_damage_reduction_hp}% к блоку урона от макс. здоровья КРЕПКОЕ ТЕЛО"
 		"dota_tooltip_ability_special_bonus_unique_t2x2_6" "ГНЕВ наносит урон в размере {s:bonus_health_damage}% от макс. здоровья"

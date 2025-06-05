@@ -2898,7 +2898,7 @@
 		"Ability5"				"generic_hidden"
 		"Ability6"				"t2x2_r"
 		"Ability7"				"t2x2_innate"
-		"Ability10"				"special_bonus_attack_damage_20"
+		"Ability10"				"special_bonus_movement_speed_15"
 		"Ability11"				"special_bonus_unique_t2x2_2"
 		"Ability12"				"special_bonus_unique_t2x2_3"
 		"Ability13"				"special_bonus_unique_t2x2_4"

@@ -1,0 +1,78 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf62:version{c135a90d-ef52-47fa-a9b8-83a382a77471} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_nBehaviorVersion = 12
+	m_ConstantColor = [ 255, 0, 0, 255 ]
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 2
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 255.0, 255.0, 255.0 ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_cracks_lighten_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_cracks_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_ground_mark_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_dust.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_shock.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_debris_large.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_debris_small_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_shock_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_warp.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_ring_wave_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_energy_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_blast.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_shock_c.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/elder_titan_echo_stomp_ti7_end_new.vpcf"
+		},
+	]
+}
