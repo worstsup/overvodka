@@ -3,7 +3,7 @@ LinkLuaModifier( "modifier_t2x2_e", "heroes/t2x2/t2x2_e", LUA_MODIFIER_MOTION_NO
 
 function t2x2_e:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_tidehunter.vsndevts", context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_tidehunter/tidehunter_krakenshell_purge.vpcf", context )
+	PrecacheResource( "particle", "particles/t2x2_e_purge.vpcf", context )
 end
 
 function t2x2_e:Spawn()
@@ -76,9 +76,11 @@ function modifier_t2x2_e:OnIntervalThink()
 end
 
 function modifier_t2x2_e:PlayEffects()
-	local particle_cast = "particles/units/heroes/hero_tidehunter/tidehunter_krakenshell_purge.vpcf"
+	local particle_cast = "particles/t2x2_e_purge.vpcf"
 	local sound_cast = "Hero_Tidehunter.KrakenShell"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent )
+	ParticleManager:SetParticleControl(effect_cast, 3, self.parent:GetAbsOrigin())
+	ParticleManager:SetParticleControl(effect_cast, 4, self.parent:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( sound_cast, self.parent )
 end

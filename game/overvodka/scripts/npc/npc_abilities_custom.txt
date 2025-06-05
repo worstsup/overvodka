@@ -13116,7 +13116,7 @@
 			"hp_regen"	"5 10 15 20"
 			"movespeed"
 			{
-				"value"	"12 18 24 30"
+				"value"	"-12 -18 -24 -30"
 			}
 		}
 	}
@@ -13155,7 +13155,7 @@
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityTextureName"            "tasty"
 		"AbilityManaCost"               "150 200 250"
-		"AbilityCastPoint"				"0.5"
+		"AbilityCastPoint"				"1.0"
 		"AbilityValues"
 		{
 			"AbilityCooldown"

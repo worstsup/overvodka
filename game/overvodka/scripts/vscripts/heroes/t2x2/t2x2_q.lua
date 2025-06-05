@@ -8,7 +8,7 @@ end
 function t2x2_q:Precache(context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/t2x2_sounds.vsndevts", context)
-    PrecacheResource("particle", "particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_physical.vpcf", context)
+    PrecacheResource("particle", "particles/t2x2_q_aoe.vpcf", context)
 end
 
 function t2x2_q:OnSpellStart()
@@ -56,11 +56,10 @@ end
 
 function t2x2_q:PlayEffects(location, radius)
     EmitSoundOn("t2x2_q_"..RandomInt(1,4), self:GetCaster())
-    local particle_cast = "particles/econ/items/elder_titan/elder_titan_ti7/elder_titan_echo_stomp_ti7_physical.vpcf"
+    local particle_cast = "particles/t2x2_q_aoe.vpcf"
     local sound_cast = "Hero_Centaur.HoofStomp"
     local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(effect_cast, 0, location)
-    ParticleManager:SetParticleControl(effect_cast, 1, Vector(radius, radius, radius))
     ParticleManager:ReleaseParticleIndex(effect_cast)
     EmitSoundOnLocationWithCaster(location, sound_cast, self:GetCaster())
 end
