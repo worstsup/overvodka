@@ -55,7 +55,7 @@ function modifier_monkey_menace_fear_debuff:OnCreated(params)
     local caster = self:GetCaster()
     if caster and not caster:IsNull() and parent and not parent:IsNull() then
         local direction = (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Normalized()
-        local flee_distance = 500
+        local flee_distance = 900
         local run_position = parent:GetAbsOrigin() + direction * flee_distance
 
         parent:MoveToPosition(run_position)

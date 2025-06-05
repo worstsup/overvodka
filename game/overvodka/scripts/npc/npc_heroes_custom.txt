@@ -2950,4 +2950,124 @@
 		"particle_folder"			"particles/units/heroes/hero_primal_beast"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts"
 	}
+
+"npc_dota_hero_ringmaster"
+	{
+		"Model"		"models/heroes/ringmaster/ringmaster_base.vmdl"
+		"Enabled"		"1"
+		"ModelScale"			"0.92"
+		"LoadoutScale"			"0.96"
+		"HeroSelectSoundEffect"		"Hero_RingMaster.Pick"
+		"HealthBarOffset"		"240"
+		"GibType"		"default"
+		"Ability1"		"mazellov_q"
+		"Ability2" 		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability7"		""
+
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		"Ability18"		""
+		"Ability19"		""
+		"Ability20"		""
+		"Ability21"		""
+		"ArmorPhysical"		"1.2"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"30"
+		"AttackDamageMax"		"34"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.50000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"600"
+		"BaseAttackSpeed"		"115"
+		"AttackRate"				"2.20000"
+		"ProjectileModel"		"particles/units/heroes/hero_ringmaster/ringmaster_base_attack.vpcf"
+
+		"ProjectileSpeed"		"1200"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"2"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"1.6"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"3.4"
+		"MovementSpeed"				"310"
+		"StatusManaRegen"	"0.05"
+		"particle_folder"		"particles/units/heroes/hero_ringmaster"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_ringmaster.vsndevts"
+		"VoiceFile"		""
+		"Facets"
+		{
+			"ringmaster_default"	
+			{
+				"Icon"				"item"
+				"Color"				"Gray"
+				"GradientID"		"3"
+				"Deprecated"		"true"
+			}
+			"ringmaster_carny_classics"	
+			{
+				"Icon"				"whoopee_cushion"
+				"Color"				"Yellow"
+				"GradientID"		"1"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"		"ringmaster_funhouse_mirror"
+						"AbilityIndex"	"18"
+						"AutoLevelAbility" 	"false"
+					}
+					"Ability2"
+					{
+						"AbilityName"		"ringmaster_strongman_tonic"
+						"AbilityIndex"	"19"
+						"AutoLevelAbility" 	"false"
+					}
+					"Ability3"
+					{
+						"AbilityName"		"ringmaster_whoopee_cushion"
+						"AbilityIndex"	"20"
+						"AutoLevelAbility" 	"false"
+					}
+				}
+			}
+			"ringmaster_sideshow_secrets"	
+			{
+				"Icon"				"pie"
+				"Color"				"Red"
+				"GradientID"		"0"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"		"ringmaster_crystal_ball"
+						"AbilityIndex"	"18"
+						"AutoLevelAbility" 	"false"
+					}
+					"Ability2"
+					{
+						"AbilityName"		"ringmaster_summon_unicycle"
+						"AbilityIndex"	"19"
+						"AutoLevelAbility" 	"false"
+					}
+					"Ability3"
+					{
+						"AbilityName"		"ringmaster_weighted_pie"
+						"AbilityIndex"	"20"
+						"AutoLevelAbility" 	"false"
+					}
+				}
+			}
+		}
+	}
 }

@@ -13159,4 +13159,36 @@
 			"bonus_hp"	"300 600 900"
 		}
 	}
+
+	//=================================================================================================================
+	// ЗАВОД ЯЩИКОВ
+	//=================================================================================================================
+	"mazellov_q"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/mazellov/mazellov_q"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetTeam"	 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"            "tasty"
+		"AbilityCooldown"               "60 55 50 45"
+		"AbilityManaCost"               "150 175 200 225"
+		"AbilityCastRange"			"600 750 900 1050"
+		"AbilityCastPoint"				"1"
+		"AbilityValues"
+		{
+			"explode_damage"		"125 150 175 200"
+			"explode_radius"         "325 350 375 400"
+			"explode_delay"         "0.25"
+			"worker_hp"			"325 375 425 475"
+			"worker_armor"			"1 3 5 7"
+			"worker_magres"		"0 10 20 30"
+			"worker_movespeed"		"300 320 340 360"
+			"worker_spawn_interval"	"1.25"
+			"factory_hit_count" 	"5 6 7 8"
+			"factory_lifetime"		"15"
+		}
+	}
 }
