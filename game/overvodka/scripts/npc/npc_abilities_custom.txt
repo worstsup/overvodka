@@ -1000,7 +1000,7 @@
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"               "18.0"
+		"AbilityCooldown"               "24.0"
     	"AbilityManaCost"               "100 120 140 160"
 		"AbilityValues"
 		{
@@ -1035,7 +1035,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"            "qmar"
-		"AbilityCooldown"               "18.0"
+		"AbilityCooldown"               "24.0"
 		"AbilityDuration"               "10"
 		"AbilityHealthCost"             "100 180 260 340"
 		"AbilityValues"
@@ -1108,13 +1108,13 @@
 		    }
 		    "radius"
 		    {
-		        "value"	"600"
+		        "value"	"450 525 600"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
 		    "AbilityCastRange"
 		    {
-		        "value"	"600"
+		        "value"	"450 525 600"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
@@ -4376,7 +4376,7 @@
 				}
 				"damage"			
 				{
-					"value"		"50 100 150 200"
+					"value"		"30 60 90 120"
 					"special_bonus_unique_mellstroy_5" "+150"
 				}
 				"think_damage"
@@ -4386,7 +4386,7 @@
 				"fire_duration" "4"
 				"gold"
 				{
-					"value"	"30 60 90 120"
+					"value"	"25 50 75 100"
 					"special_bonus_unique_mellstroy_4" "+50"
 				}
 				"gold_cost"
@@ -12845,6 +12845,117 @@
 			}
 		}
 	}
+
+		"family_support"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/family_support"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"family_support"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"625 750 875 1000"
+		"AbilityValues"
+		{
+			"health_bonus_flat"		"160 200 240 280"
+			"attack_speed_bonus"		"10 15 20 25"
+		}
+	}
+
+		"griffin_gas"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/griffin_gas"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"griffin_gas"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"300"
+		"AbilityCooldown"				"18"
+		"AbilityValues"
+		{
+			"duration"		"3 3.5 4 4.5"
+			"radius"		"300"
+			"damage_per_second"		"30 35 40 45"
+			"damage_increase_pct"		"5"
+		}
+	}
+
+		"surfin_bird"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/surfin_bird"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"surfin_bird"
+		"FightRecapLevel"				"1"
+		"AbilityCastRange"				"400"
+		"AbilityCooldown"				"35"
+		"AbilityValues"
+		{
+			"enemy_movespeed_slow"		"-25"
+			"enemy_attackspeed_slow"		"10 14 18 22"
+			"enemy_miss_chance"		"30"
+			"self_incoming_damage"		"25"
+			"ally_hp_regen_pct"		"1.4"
+			"ally_damage_bonus_pct"		"15 20 25 30"
+		}
+	}
+
+		"broken_psyche"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/broken_psyche"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"broken_psyche"
+		"FightRecapLevel"				"1"
+		"AbilityValues"
+		{
+			"required_hits"		"10 9 8 7"
+			"movespeed_bonus_pct"		"15 20 25 30"
+			"attack_speed_bonus"		"10 12 14 16"
+			"buff_duration"		"-1"
+		}
+	}
+
+		"evil_monke"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/evil_monke"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"evil_monke"
+		"FightRecapLevel"				"1"
+	}
+
+		"monkey_menace"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/griffins/monkey_menace"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityTextureName"			"monkey_menace"
+		"FightRecapLevel"				"1"
+		"AbilityCooldown"				"5"
+		"AbilityValues"
+		{
+			"fear_duration"		"1.5"
+			"dot_duration"			"5"
+			"damage_per_second"		"25"
+		}
+	}
+
 	//=================================================================================================================
 	// ADIDAS (врожденная)
 	//=================================================================================================================
@@ -12946,28 +13057,43 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"				"25.0"
+		"AbilityCooldown"				"20 18 16 14"
+		"HasShardUpgrade"				"1"
 		"AbilityManaCost"				"110 130 150 170"
 		"AbilityValues"
 		{
 				"AbilityCastRange"
 				{
 					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
 				"radius"
 				{
 					"value"	"450"
-					"special_bonus_unique_sasavot_1" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
-				"stun_duration"					"1.75 2.0 2.25 2.5"
-				"stomp_damage"					"100 175 250 325"
-				"hasfacet"
+				"stun_duration"
+				{
+					"value"	"1.2 1.4 1.6 1.8"
+					"special_bonus_unique_t2x2_7"	"+0.8"
+				}
+				"stomp_damage"					"100 200 300 400"
+				"strength_per_hero"
 				{
 					"value"	"0"
-					"special_bonus_facet_sasavot_e_facet" "=1"
+					"special_bonus_shard"  "+5"
+					"RequiresShard"			"1"
+				}
+				"shard_duration"
+				{
+					"value"	"0"
+					"special_bonus_shard"  "+10"
+					"RequiresShard"			"1"
+				}
+				"health_damage"
+				{
+					"value"	"0"
+					"special_bonus_unique_t2x2_6" "+10"
 				}
 		}
 	}
@@ -12982,27 +13108,31 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"30 27 24 21"
 		"AbilityManaCost"				"70 140 210 280"
 		"AbilityValues"
 		{
 			"radius"
 			{
-				"value"	"1500"
+				"value"	"800"
 				"affected_by_aoe_increase"	"1"
 			}
 			"AbilityCastRange"
 			{
-				"value"	"1500"
+				"value"	"800"
 				"affected_by_aoe_increase"	"1"
 			}
-			"duration"	"5 6 7 8"
+			"duration"	"8"
 			"attack_speed"
 			{
 				"value"			"20 30 40 50"
 			}
-			"armor"	"4 5 6 7"
-			"hp_regen"	"5 6 7 8"
+			"armor"
+			{
+				"value"	"4 5 6 7"
+				"special_bonus_unique_t2x2_3" "+3"
+			}
+			"hp_regen"	"5 10 15 20"
 			"movespeed"
 			{
 				"value"	"12 18 24 30"
@@ -13022,9 +13152,13 @@
 		"AbilityValues"
 		{
 				"damage_reduction"		"25 35 45 55"
-				"damage_reduction_hp"	"2"
+				"damage_reduction_hp"
+				{
+					"value"	"1.2 1.4 1.6 1.8"
+					"special_bonus_unique_t2x2_5" "+1"
+				}
 				"damage_cleanse"		"600 550 500 450"
-				"damage_reset_interval"	"6.0 6.0 6.0 6.0"
+				"damage_reset_interval"	"6.0"
 		}
 	}
 	//=================================================================================================================
@@ -13039,27 +13173,60 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityTextureName"            "tasty"
-		"AbilityCooldown"               "100 90 80"
 		"AbilityManaCost"               "150 200 250"
-		"precache"
-		{
-			"soundfile" "soundevents/vkusno.vsndevts"
-			"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
-			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
-			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
-		}
+		"AbilityCastPoint"				"0.5"
 		"AbilityValues"
 		{
-			"duration" 	"17"
-			"speed"		"25 30 35"
-			"bonus_night_vision"        "150 200 250 300"
-			"crit_chance"               "25 30 35"
+			"AbilityCooldown"
+			{
+				"value"	"90 85 80"
+				"special_bonus_unique_t2x2_4" "-20"
+			}
+			"duration" 					"17"
+			"speed"						"25 30 35"
+			"crit_chance"
+			{
+				"value"	"25 30 35"
+				"special_bonus_unique_t2x2_2" "+5"
+			}
 			"crit_damage"
 			{
 				"value"	"160 180 200"
+				"special_bonus_unique_t2x2_8" "+60"
 			}
 			"bonus_hp"	"300 600 900"
-			"transformation_time"       "0.5"
+		}
+	}
+
+	//=================================================================================================================
+	// ЗАВОД ЯЩИКОВ
+	//=================================================================================================================
+	"mazellov_q"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/mazellov/mazellov_q"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetTeam"	 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"            "tasty"
+		"AbilityCooldown"               "60 55 50 45"
+		"AbilityManaCost"               "150 175 200 225"
+		"AbilityCastRange"			"600 750 900 1050"
+		"AbilityCastPoint"				"1"
+		"AbilityValues"
+		{
+			"explode_damage"		"125 150 175 200"
+			"explode_radius"         "325 350 375 400"
+			"explode_delay"         "0.25"
+			"worker_hp"			"325 375 425 475"
+			"worker_armor"			"1 3 5 7"
+			"worker_magres"		"0 10 20 30"
+			"worker_movespeed"		"300 320 340 360"
+			"worker_spawn_interval"	"1.25"
+			"factory_hit_count" 	"5 6 7 8"
+			"factory_lifetime"		"15"
 		}
 	}
 }

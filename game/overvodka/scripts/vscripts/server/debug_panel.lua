@@ -6,6 +6,7 @@ DebugPanel = DebugPanel or {
 		349446348, -- mefisto
 		466290701, -- timoxa
 		1362960359,  -- kirill
+		1160832543,  -- leny
 		1248303404
 	},
 	SelectedBot = {}

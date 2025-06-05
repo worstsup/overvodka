@@ -241,8 +241,8 @@ function papich_e_clone_slam:OnProjectileHit_ExtraData(target, location, data)
             end
             if not enemy:IsMagicImmune() then
                 damageTable.victim = enemy
-                ApplyDamage(damageTable)
                 enemy:AddNewModifier( self:GetCaster(), self.ice_blast_ability, "modifier_generic_stunned_lua", { duration = stun_duration * (1-enemy:GetStatusResistance()) } )
+                ApplyDamage(damageTable)
             end
         end
     end

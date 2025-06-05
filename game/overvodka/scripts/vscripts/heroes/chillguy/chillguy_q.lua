@@ -29,9 +29,9 @@ function chillguy_q:OnProjectileHit( hTarget, vLocation )
 			damage_type = DAMAGE_TYPE_MAGICAL,
 			ability = self
 		}
-		ApplyDamage( damage )
 		hTarget:AddNewModifier( self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun_duration } )
 		hTarget:AddNewModifier( self:GetCaster(), self, "modifier_chillguy_q_slow", { duration = dot_duration } )
+		ApplyDamage( damage )
 		self:PlayEffects2( hTarget )
 	end
 	return true

@@ -34,7 +34,6 @@ function ebanko_w:OnSpellStart()
 		damage_type = self:GetAbilityDamageType(),
 		ability = self, 
 	}
-	ApplyDamage( damageTable )
 	if not target:IsDebuffImmune() and not target:IsMagicImmune() then
 		local knockback = target:AddNewModifier(
 			self:GetCaster(),
@@ -53,6 +52,7 @@ function ebanko_w:OnSpellStart()
 		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration * (1 - target:GetStatusResistance()) })
 		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration * (1 - target:GetStatusResistance()) })
 	end
+	ApplyDamage( damageTable )
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
 
@@ -165,7 +165,6 @@ function modifier_ebanko_w:Bash(target)
 		damage_type = self:GetAbility():GetAbilityDamageType(),
 		ability = self:GetAbility(), 
 	}
-	ApplyDamage( damageTable )
 	if not target:IsDebuffImmune() and not target:IsMagicImmune() then
 		local knockback = target:AddNewModifier(
 			self:GetParent(),
@@ -184,6 +183,7 @@ function modifier_ebanko_w:Bash(target)
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_ebanko_w_slow", { duration = self.slow_duration * (1 - target:GetStatusResistance()) })
 	end
+	ApplyDamage( damageTable )
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
 end

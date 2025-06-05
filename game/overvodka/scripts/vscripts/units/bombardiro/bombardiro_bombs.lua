@@ -72,8 +72,8 @@ function modifier_bombardiro_bombs:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         damageTable.victim = enemy
         damageTable.damage = self.damage * enemy:GetMaxHealth() * 0.01
-        ApplyDamage( damageTable )
         enemy:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("duration") } )
+        ApplyDamage( damageTable )
     end
 
 end

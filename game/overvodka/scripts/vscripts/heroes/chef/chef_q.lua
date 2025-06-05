@@ -53,18 +53,18 @@ function chef_shout:OnSpellStart()
         if Talent:GetLevel() == 1 then
             for i,unit in ipairs(units) do
                 damage_table.victim = unit
-                ApplyDamage(damage_table)
                 unit:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+                ApplyDamage(damage_table)
             end
         else
             damage_table.victim = target
-            ApplyDamage(damage_table)
             target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+            ApplyDamage(damage_table)
         end
     else
         damage_table.victim = target
-        ApplyDamage(damage_table)
         target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+        ApplyDamage(damage_table)
     end
 end
 

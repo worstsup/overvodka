@@ -92,7 +92,6 @@ function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 				FindClearSpaceForUnit( unit, unit:GetOrigin(), true )
 				if unit:GetTeamNumber() ~= caster:GetTeamNumber() then
 					damageTable.victim = unit
-					ApplyDamage(damageTable)
 					unit:AddNewModifier(
 						caster, 
 						self,
@@ -113,6 +112,7 @@ function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 							knockback_height = 50
 						}
 					)
+					ApplyDamage(damageTable)
 					EmitSoundOn("sans_damage", unit)
 				end
 				damagedUnits[unit:entindex()] = true
