@@ -19,18 +19,27 @@
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
 			"item"		"item_chapman_green"
-
+		}
+		"#DOTA_Item_Build_Mid_Items"
+		{
+			"item"		"item_jordan"
+			"item"		"item_magic_aegis"
+			"item"		"item_ultimate_scepter"
+			"item"		"item_magic_daedalus"
+			"item"		"item_radiance"
+			"item"		"item_pasito"
+			"item"		"item_suchiy"
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{
 			"item"		"item_nikes"
 			"item"		"item_drobe"
 			"item"		"item_aegis_hero"
-			"item"		"item_ultimate_scepter"
 			"item"		"item_waka"
 			"item"		"item_pasito"
 			"item"		"item_armature_strike"
             "item"		"item_mask_of_quadrobe"
+			"item"		"item_ultimate_scepter"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
