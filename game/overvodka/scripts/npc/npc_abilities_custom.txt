@@ -1000,7 +1000,7 @@
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"               "18.0"
+		"AbilityCooldown"               "24.0"
     	"AbilityManaCost"               "100 120 140 160"
 		"AbilityValues"
 		{
@@ -1035,7 +1035,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"            "qmar"
-		"AbilityCooldown"               "18.0"
+		"AbilityCooldown"               "24.0"
 		"AbilityDuration"               "10"
 		"AbilityHealthCost"             "100 180 260 340"
 		"AbilityValues"
@@ -1108,13 +1108,13 @@
 		    }
 		    "radius"
 		    {
-		        "value"	"600"
+		        "value"	"450 525 600"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
 		    "AbilityCastRange"
 		    {
-		        "value"	"600"
+		        "value"	"450 525 600"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
@@ -4376,7 +4376,7 @@
 				}
 				"damage"			
 				{
-					"value"		"50 100 150 200"
+					"value"		"30 60 90 120"
 					"special_bonus_unique_mellstroy_5" "+150"
 				}
 				"think_damage"
@@ -4386,7 +4386,7 @@
 				"fire_duration" "4"
 				"gold"
 				{
-					"value"	"30 60 90 120"
+					"value"	"25 50 75 100"
 					"special_bonus_unique_mellstroy_4" "+50"
 				}
 				"gold_cost"
