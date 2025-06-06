@@ -135,6 +135,7 @@ function modifier_factory:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_AVOID_DAMAGE,
+        MODIFIER_PROPERTY_DISABLE_HEALING,
         MODIFIER_PROPERTY_HEALTHBAR_PIPS, -- добавляем поддержку пипсов
     }
 end
@@ -145,6 +146,10 @@ end
 
 function modifier_factory:GetModifierIncomingDamage_Percentage()
     return -100
+end
+
+function modifier_factory:GetDisableHealing()
+    return 1
 end
 
 function modifier_factory:GetModifierAvoidDamage(params)

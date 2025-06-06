@@ -2894,7 +2894,7 @@
 		"Ability1"				"t2x2_q"
 		"Ability2"				"t2x2_w"
 		"Ability3"				"t2x2_e"
-		"Ability4"				"generic_hidden"
+		"Ability4"				"t2x2_scepter"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"t2x2_r"
 		"Ability7"				"t2x2_innate"
@@ -2909,23 +2909,29 @@
 		
 		"Facets"
 		{
-			"primal_beast_romp_n_stomp"		
-			{
-				"Deprecated"		"true"
-			}
-
-			"primal_beast_provoke_the_beast"
+			"t2x2_purge"
 			{
 				"Icon"				"broken_chain"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
-
-			"primal_beast_ferocity"
+			"t2x2_double"
 			{
 				"Icon"				"area_of_effect"
 				"Color"				"Yellow"
 				"GradientID"		"3"
+			}
+			"primal_beast_romp_n_stomp"		
+			{
+				"Deprecated"		"true"
+			}
+			"primal_beast_provoke_the_beast"
+			{
+				"Deprecated"		"true"
+			}
+			"primal_beast_ferocity"
+			{
+				"Deprecated"		"true"
 			}
 		}
 		"ArmorPhysical"				"2"

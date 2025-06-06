@@ -402,6 +402,10 @@
 				m_vRandomMax = [ 0.0, 0.0, 0.0 ]
 			}
 			m_vecDistanceBiasAbs = [ 0.0, 0.0, 100.0 ]
+			m_TransformInput = 
+			{
+				m_nControlPoint = 3
+			}
 		},
 		{
 			_class = "C_INIT_InitFloat"
@@ -415,8 +419,8 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 70.0
-				m_flRandomMax = 90.0
+				m_flRandomMin = 30.0
+				m_flRandomMax = 50.0
 				m_bHasRandomSignFlip = false
 				m_nRandomSeed = -1
 				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"

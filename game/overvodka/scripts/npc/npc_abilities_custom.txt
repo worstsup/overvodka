@@ -13116,26 +13116,35 @@
 			{
 				"value"	"800"
 				"affected_by_aoe_increase"	"1"
+				"special_bonus_facet_t2x2_double" "x0.5"
 			}
 			"AbilityCastRange"
 			{
 				"value"	"800"
 				"affected_by_aoe_increase"	"1"
+				"special_bonus_facet_t2x2_double" "x0.5"
 			}
 			"duration"	"8"
 			"attack_speed"
 			{
 				"value"			"20 30 40 50"
+				"special_bonus_facet_t2x2_double" "x2"
 			}
 			"armor"
 			{
 				"value"	"4 5 6 7"
 				"special_bonus_unique_t2x2_3" "+3"
+				"special_bonus_facet_t2x2_double" "x2"
 			}
-			"hp_regen"	"5 10 15 20"
+			"hp_regen"
+			{
+				"value"	"5 10 15 20"
+				"special_bonus_facet_t2x2_double" "x2"
+			}
 			"movespeed"
 			{
 				"value"	"-12 -18 -24 -30"
+				"special_bonus_facet_t2x2_double" "x2"
 			}
 		}
 	}
@@ -13157,8 +13166,23 @@
 					"value"	"1.2 1.4 1.6 1.8"
 					"special_bonus_unique_t2x2_5" "+1"
 				}
-				"damage_cleanse"		"600 550 500 450"
-				"damage_reset_interval"	"6.0"
+				"damage_cleanse"
+				{
+					"value"	"0"
+					"special_bonus_facet_t2x2_purge"	"+600 +550 +500 +450"
+					"RequiresFacet"	"t2x2_purge"
+				}
+				"damage_reset_interval"
+				{
+					"value"	"0"
+					"special_bonus_facet_t2x2_purge"	"+6"
+					"RequiresFacet"	"t2x2_purge"
+				}
+				"has_facet"
+				{
+					"value"	"0"
+					"special_bonus_facet_t2x2_purge" "+1"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -13172,7 +13196,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityTextureName"            "tasty"
+		"AbilityTextureName"            "t2x2_r"
 		"AbilityManaCost"               "150 200 250"
 		"AbilityCastPoint"				"1.0"
 		"AbilityValues"
@@ -13197,7 +13221,35 @@
 			"bonus_hp"	"300 600 900"
 		}
 	}
-
+	"t2x2_scepter"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/t2x2/t2x2_scepter"
+		"AbilityTextureName"			"mirana_sacred_arrow"
+		"MaxLevel"						"1"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"3000"
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"30.0"
+		"AbilityManaCost"				"100"
+		"IsGrantedByScepter"			"1"
+		"AbilityValues"
+		{
+				"arrow_range"			"3000"
+				"arrow_max_stunrange"	"1800"
+				"arrow_speed"			"1200.0"
+				"arrow_width"			"115"
+				"arrow_min_stun"		"1.5"
+				"arrow_max_stun"		"5.0"
+				"damage"				"200"
+				"arrow_bonus_damage"	"300"
+				"arrow_vision"			"500"
+		}
+	}
 	//=================================================================================================================
 	// ЗАВОД ЯЩИКОВ
 	//=================================================================================================================

@@ -54,6 +54,7 @@ end
 
 function modifier_t2x2_e:OnTakeDamage( params )
 	if not IsServer() then return end
+	if self:GetAbility():GetSpecialValueFor("has_facet") == 0 then return end
 	if params.unit~=self.parent then return end
 	if self.parent:PassivesDisabled() then return end
 	if not params.attacker:GetPlayerOwner() then return end
