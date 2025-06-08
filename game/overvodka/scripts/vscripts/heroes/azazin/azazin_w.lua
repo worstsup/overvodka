@@ -139,7 +139,7 @@ function modifier_azazin_w:OnIntervalThink()
         local damageTable = {
             victim = unit,
             attacker = self:GetCaster(),
-            damage = self:GetAbility():GetSpecialValueFor("damage"),
+            damage = self:GetAbility():GetSpecialValueFor("damage") * 0.5,
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability = self:GetAbility()
         }

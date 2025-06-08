@@ -1441,9 +1441,9 @@
 		"ProjectileSpeed"			"600"		// Speed of projectile.		     
 		"RingRadius"				"50"
 		"HealthBarOffset"			"180"
-		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"50"		// Gold earned min.
-		"BountyGoldMax"				"50"		// Gold earned max.
+		"BountyXP"					"50"		// Experience earn.
+		"BountyGoldMin"				"30"		// Gold earned min.
+		"BountyGoldMax"				"30"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"280"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.
@@ -1486,9 +1486,9 @@
 		"ProjectileSpeed"			"600"		// Speed of projectile.		     
 		"RingRadius"				"50"
 		"HealthBarOffset"			"190"
-		"BountyXP"					"200"		// Experience earn.
-		"BountyGoldMin"				"60"		// Gold earned min.
-		"BountyGoldMax"				"60"		// Gold earned max.
+		"BountyXP"					"50"		// Experience earn.
+		"BountyGoldMin"				"40"		// Gold earned min.
+		"BountyGoldMax"				"40"		// Gold earned max.
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"310"		// Speed.			
 		"MovementTurnRate"			"0.9"		// Turning rate.

@@ -4533,7 +4533,7 @@
 		"AbilityType"				"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
 		"AbilityCooldown"			"90 85 80"
 		"AbilityGoldCost"			"700 1550 2400"
@@ -8987,11 +8987,8 @@
     	"AbilityModifierSupport"  "1"
     	"AbilityValues"
     	{
-    		"regen"
-    		{
-    			"value"	"0"
-    			"special_bonus_facet_papich_asket" "+40"
-    		}
+			"regen" 	"40"
+			"radius"	"600"
     	}
 	}
 	//=================================================================================================================
@@ -11174,7 +11171,7 @@
 				"value"	"0"
 				"special_bonus_shard" "+1"
 			}
-			"damage"				"20 30 40 50"
+			"damage"				"40 60 80 100"
 			"disarm"
 			{
 				"value"	"0"
@@ -11264,7 +11261,7 @@
 			}
 			"stun_duration"
 			{
-				"value"	"0.5"
+				"value"	"0.6"
 			}
 			"effect_duration"	"5"
 			"tick_damage"
@@ -11272,16 +11269,16 @@
 				"value"	"15 30 45 60"
 				"special_bonus_unique_azazin_1" "+20"
 			}
-			"armor_reduction"	"-1 -2 -3 -4"
-			"bonus_damage"
+			"magic_reduction"	"-5 -10 -15 -20"
+			"bonus_magic_damage"
 			{
 				"value"	"0 0 0 0"
-				"special_bonus_scepter" "+20 +40 +60 +80"
+				"special_bonus_scepter" "+20 +35 +50 +65"
 			}
-			"lifesteal"
+			"magic_lifesteal"
 			{
 				"value"			"0"
-				"special_bonus_scepter" "+50"
+				"special_bonus_scepter" "+20"
 			}
 			"break_duration"
 			{
@@ -11310,7 +11307,7 @@
 		"AbilityManaCost"				"20 40 60"
 		"AbilityValues"
 		{
-			"mana_cost_per_second"		"20 65 110"
+			"mana_cost_per_second"		"35 70 105"
 			"radius"
 			{
 				"value"						"450 500 550"
@@ -11320,7 +11317,7 @@
 			"damage"
 			{
 				"value"	"80 130 180"
-				"special_bonus_unique_azazin_8" "+40"
+				"special_bonus_unique_azazin_8" "+60"
 			}
 			"movespeed_slow"
 			{
@@ -13052,7 +13049,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/t2x2/t2x2_q"
-		"AbilityTextureName"			"sasavot_e"
+		"AbilityTextureName"			"t2x2_q"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
@@ -13104,7 +13101,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/t2x2/t2x2_w"
-		"AbilityTextureName"			"bleval"
+		"AbilityTextureName"			"t2x2_w"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ALT_CASTABLE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.3"
@@ -13155,7 +13152,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/t2x2/t2x2_e"
-		"AbilityTextureName"			"tidehunter_kraken_shell"
+		"AbilityTextureName"			"t2x2_e"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"IsBreakable"			 		"1"
 		"AbilityValues"
@@ -13225,7 +13222,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/t2x2/t2x2_scepter"
-		"AbilityTextureName"			"mirana_sacred_arrow"
+		"AbilityTextureName"			"t2x2_scepter"
 		"MaxLevel"						"1"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -13233,8 +13230,8 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"3000"
-		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"30.0"
+		"AbilityCastPoint"				"0.6"
+		"AbilityCooldown"				"20.0"
 		"AbilityManaCost"				"100"
 		"IsGrantedByScepter"			"1"
 		"AbilityValues"

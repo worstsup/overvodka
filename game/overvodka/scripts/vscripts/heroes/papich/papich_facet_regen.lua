@@ -1,32 +1,24 @@
 LinkLuaModifier("modifier_papich_facet_regen_no_enemies", "heroes/papich/papich_facet_regen", LUA_MODIFIER_MOTION_NONE)
 
-papich_facet_regen = papich_facet_regen or class({})
+papich_facet_regen = class({})
 
 function papich_facet_regen:GetIntrinsicModifierName()
     return "modifier_papich_facet_regen_no_enemies"
 end
 
-modifier_papich_facet_regen_no_enemies = modifier_papich_facet_regen_no_enemies or class({})
+modifier_papich_facet_regen_no_enemies = class({})
 
 function modifier_papich_facet_regen_no_enemies:IsHidden()
-    if self:GetStackCount() == 40 then
-        return false
-    end
-    return true
+    return (self:GetStackCount() == 0)
 end
 function modifier_papich_facet_regen_no_enemies:IsPurgable() return false end
 function modifier_papich_facet_regen_no_enemies:RemoveOnDeath() return false end
 
 function modifier_papich_facet_regen_no_enemies:OnCreated()
     if not IsServer() then return end
-    self.radius = 600
+    self.radius = self:GetAbility():GetSpecialValueFor("radius")
+    self.regen = self:GetAbility():GetSpecialValueFor("regen")
     self:StartIntervalThink(0.2)
-end
-
-function modifier_papich_facet_regen_no_enemies:OnRefresh()
-    if not IsServer() then return end
-
-    self.radius = 600
 end
 
 function modifier_papich_facet_regen_no_enemies:OnIntervalThink()
@@ -45,7 +37,7 @@ function modifier_papich_facet_regen_no_enemies:OnIntervalThink()
     )
 
     if #enemies == 0 then
-        self:SetStackCount(40)
+        self:SetStackCount(self.regen)
     else
         self:SetStackCount(0)
     end
@@ -58,9 +50,6 @@ function modifier_papich_facet_regen_no_enemies:DeclareFunctions()
 end
 
 function modifier_papich_facet_regen_no_enemies:GetModifierHPRegenAmplify_Percentage()
-    if self:GetStackCount() == 40 then
-        return 40
-    end
-    return 0
+    return self:GetStackCount()
 end
 

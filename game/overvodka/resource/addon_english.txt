@@ -188,6 +188,7 @@
 		"npc_dota_neutral_harpy_storm" "EVIL MINION"
 		"npc_gaster_blaster"						"Gaster Blaster"
 		"npc_kolyan_guard"				"Bodyguard"
+		"npc_evil_monke"				"Evil Monke"
 		"npc_dota_hero_undying_npedesc1"			"Difficulty: HIGH"
 		"npc_dota_hero_invoker_npedesc1"			"Difficulty: HIGH"
 		"npc_dota_hero_axe_npedesc1"				"Difficulty: LOW"

@@ -22,7 +22,7 @@ function t2x2_w:OnSpellStart()
     local point = caster:GetAbsOrigin()
     local team = DOTA_UNIT_TARGET_TEAM_FRIENDLY
     local effect = "modifier_t2x2_w_buff"
-    local sound = "t2x2_w_buff"
+    local sound = "t2x2_w_buff_"..RandomInt(1,2)
     local particle = "particles/units/heroes/hero_huskar/huskar_aoe_heal.vpcf"
     if self:GetAltCastState() then
         team = DOTA_UNIT_TARGET_TEAM_ENEMY

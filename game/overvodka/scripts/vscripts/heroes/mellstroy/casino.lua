@@ -17,6 +17,10 @@ function mellstroy_casino:OnSpellStart()
     local base_cost = self:GetSpecialValueFor( "base_cost" )
     local each_level = self:GetSpecialValueFor( "each_level" )
     local jackpot_chance = self:GetSpecialValueFor( "jackpot_chance" )
+    if GetMapName() == "overvodka_5x5" then
+        base_cost = 25
+        each_level = 25
+    end
     local ability_cost = base_cost + (each_level * hero_level)
     if gold < ability_cost then
         caster:EmitSound("nomoney")

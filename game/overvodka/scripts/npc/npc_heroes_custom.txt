@@ -1915,7 +1915,7 @@
 		"Ability8"		"papich_w_clone"
 		"Ability9"		"papich_e_clone"
 		"Ability18"		"papich_e_clone_slam"
-		"Ability19"		"papich_facet_regen"
+		"Ability19"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_papich_1"
 		"Ability11"		"special_bonus_unique_papich_2"
 		"Ability12"		"special_bonus_unique_papich_3"
@@ -1937,6 +1937,15 @@
 				"Icon"				"damage"
 				"Color"				"Red"
 				"GradientID"		"0"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"papich_facet_regen"
+						"AbilityIndex"	"5"
+						"AutoLevelAbility" "true"
+					}
+				}
 			}
 			"skeleton_king_facet_bone_guard" 
 			{
@@ -2498,9 +2507,9 @@
 		"AttributeBaseStrength"		"19"
 		"AttributeStrengthGain"		"2.0"
 		"AttributeBaseAgility"		"20"
-		"AttributeAgilityGain"		"3.3"
+		"AttributeAgilityGain"		"3.0"
 		"AttributeBaseIntelligence"		"20"
-		"AttributeIntelligenceGain"		"2.0"
+		"AttributeIntelligenceGain"		"2.5"
 		"StatusHealthRegen"		"1.25"
 		"StatusManaRegen"	"0.5"
 		"MovementSpeed"		"305"

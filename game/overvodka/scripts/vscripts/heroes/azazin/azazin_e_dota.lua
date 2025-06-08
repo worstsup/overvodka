@@ -161,12 +161,23 @@ end
 function modifier_azazin_e_dota_caster:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
 
-function modifier_azazin_e_dota_caster:GetModifierPreAttack_BonusDamage()
-    return self:GetAbility():GetSpecialValueFor("bonus_damage")
+function modifier_azazin_e_dota_caster:OnAttackLanded(params)
+    if not IsServer() then return end
+    if params.attacker ~= self:GetParent() then return end
+    if params.target:IsBuilding() or params.target:IsOther() or params.target:IsWard() then return end
+    local bonus_magic_damage = self:GetAbility():GetSpecialValueFor("bonus_magic_damage")
+    local damageTable = {
+        victim = params.target,
+        attacker = self:GetParent(),
+        damage = bonus_magic_damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self:GetAbility(),
+    }
+    ApplyDamage(damageTable)
 end
 
 function modifier_azazin_e_dota_caster:OnTakeDamage(params)
@@ -175,8 +186,8 @@ function modifier_azazin_e_dota_caster:OnTakeDamage(params)
     if self:GetParent() == params.unit then return end
     if params.unit:IsBuilding() then return end
     if params.unit:IsWard() then return end
-    if params.inflictor == nil and not self:GetParent():IsIllusion() then
-        local heal = self:GetAbility():GetSpecialValueFor("lifesteal") / 100 * params.damage
+    if params.inflictor ~= nil and not self:GetParent():IsIllusion() and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then
+        local heal = self:GetAbility():GetSpecialValueFor("magic_lifesteal") / 100 * params.damage
         self:GetParent():Heal(heal, self:GetAbility())
         local effect_cast = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.attacker)
         ParticleManager:ReleaseParticleIndex(effect_cast)
@@ -208,11 +219,11 @@ end
 
 function modifier_azazin_e_dota_debuff:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
     }
 end
-function modifier_azazin_e_dota_debuff:GetModifierPhysicalArmorBonus()
-    return self:GetAbility():GetSpecialValueFor("armor_reduction")
+function modifier_azazin_e_dota_debuff:GetModifierMagicalResistanceBonus()
+    return self:GetAbility():GetSpecialValueFor("magic_reduction")
 end
 function modifier_azazin_e_dota_debuff:GetEffectName()
     return "particles/azazin_e_debuff.vpcf"

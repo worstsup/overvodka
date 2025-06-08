@@ -73,7 +73,7 @@ function modifier_mellstroy_meteors:OnIntervalThink()
             Ability             = self:GetAbility(),
             EffectName          = eff,
             vSpawnOrigin        = caster:GetAbsOrigin(),
-            fDistance           = 900,
+            fDistance           = 800,
             fStartRadius        = 115,
             fEndRadius          = 120,
             Source              = caster,

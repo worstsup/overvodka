@@ -211,7 +211,7 @@ function modifier_papich_bkb:IsPurgable() return false end
 
 function modifier_papich_bkb:CheckState()
     local state = {
-        [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
     return state
 end

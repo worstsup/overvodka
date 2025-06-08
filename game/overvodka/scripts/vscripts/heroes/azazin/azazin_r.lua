@@ -133,8 +133,10 @@ function modifier_azazin_r:Burn()
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-        PlayerResource:SpendGold(enemy:GetPlayerID(), self.gold_per_second, 4)
-        self.parent:ModifyGold(self.gold_per_second, false, 0)
+		if enemy:IsRealHero() and not enemy:IsIllusion() then
+			PlayerResource:SpendGold(enemy:GetPlayerID(), self.gold_per_second, 4)
+			self.parent:ModifyGold(self.gold_per_second, false, 0)
+		end
 	end
 end
 

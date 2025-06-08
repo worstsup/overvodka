@@ -160,4 +160,3 @@ function modifier_papich_w_evasion:GetModifierEvasion_Constant(keys)
 		return self.evasion_chance
 	end
 end
-
