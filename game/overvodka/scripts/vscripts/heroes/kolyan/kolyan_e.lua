@@ -192,6 +192,16 @@ function modifier_kolyan_e_abilities:OnCreated( kv )
     end
 end
 
+function modifier_kolyan_e_abilities:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    }
+end
+
+function modifier_kolyan_e_abilities:GetModifierMoveSpeedBonus_Percentage()
+    return self:GetAbility():GetSpecialValueFor("slow")
+end
+
 function modifier_kolyan_e_abilities:OnDestroy()
     if IsServer() then
         local target = self:GetParent()

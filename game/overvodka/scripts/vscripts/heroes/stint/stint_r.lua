@@ -17,14 +17,16 @@ end
 function stint_r:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
+    local random_modifier = RandomInt(1, 3)
+    caster:AddNewModifier(caster, self, "modifier_stint_r_"..random_modifier, {duration = self:GetSpecialValueFor("duration")})
     if self:GetSpecialValueFor("all_effects") == 1 then
-        caster:AddNewModifier(caster, self, "modifier_stint_r_1", {duration = self:GetSpecialValueFor("duration")})
-        caster:AddNewModifier(caster, self, "modifier_stint_r_2", {duration = self:GetSpecialValueFor("duration")})
-        caster:AddNewModifier(caster, self, "modifier_stint_r_3", {duration = self:GetSpecialValueFor("duration")})
-        EmitSoundOn("stint_r_all", caster)
+        local random_modifier2 = random_modifier
+        while random_modifier2 == random_modifier do
+            random_modifier2 = RandomInt(1, 3)
+        end
+        caster:AddNewModifier(caster, self, "modifier_stint_r_"..random_modifier2, {duration = self:GetSpecialValueFor("duration")})
+        EmitSoundOn("stint_r_all_"..random_modifier, caster)
     else
-        local random_modifier = RandomInt(1, 3)
-        caster:AddNewModifier(caster, self, "modifier_stint_r_"..random_modifier, {duration = self:GetSpecialValueFor("duration")})
         EmitSoundOn("stint_r_"..random_modifier, caster)
     end
 end

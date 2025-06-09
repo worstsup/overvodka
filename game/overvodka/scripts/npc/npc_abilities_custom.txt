@@ -5886,7 +5886,7 @@
 				}
 				"ministun_duration"
 				{
-					"value"	"0.6"
+					"value"	"0.6 0.7 0.8 0.9"
 					"special_bonus_unique_arsen_4" "+0.4"
 				}
 		}
@@ -7830,7 +7830,7 @@
 		{
 				"damage"
 				{
-					"value"	"150 225 300 375"
+					"value"	"150 250 350 450"
 					"special_bonus_unique_sasavot_2" "+100"
 				}
 				"AbilityCharges"
@@ -7859,7 +7859,6 @@
 					"value"	"400"
 					"affected_by_aoe_increase"	"1"
 				}
-				"scepter_crit_bonus"			"280"
 				"health_damage"
 				{
 					"value"	"0"
@@ -8001,7 +8000,7 @@
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastRange"				"550"
+		"AbilityCastRange"				"800"
 		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"25.0"
 		"AbilityManaCost"				"150"
@@ -12688,12 +12687,12 @@
 			"duration"						"4"
 			"attack_damage"
 			{
-				"value"	"-50 -40 -30 -20"
+				"value"	"-40 -30 -20 -10"
 				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_damage_tooltip"
 			{
-				"value"	"50 60 70 80"
+				"value"	"60 70 80 90"
 				"special_bonus_unique_kolyan_2" "+8"
 			}
 			"attack_interval"				"0.5"
@@ -12787,6 +12786,7 @@
 				}
 				"swap_duration"			"10"
 				"swap_chance"			"15"
+				"slow"					"-20"
 		}
 	}
 	//=================================================================================================================

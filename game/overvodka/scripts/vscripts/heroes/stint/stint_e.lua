@@ -541,15 +541,6 @@ function modifier_inator_4_buff:OnIntervalThink()
             ab:StartCooldown(new_rem)
         end
     end
-    for slot = 0, 5 do
-        local it = parent:GetItemInSlot(slot)
-        if it and it:GetCooldownTimeRemaining() > 0 then
-            local rem = it:GetCooldownTimeRemaining()
-            local new_rem = math.max(0, rem - (self.interval * self.cdr_pct))
-            it:EndCooldown()
-            it:StartCooldown(new_rem)
-        end
-    end
 end
 
 modifier_inator_5 = class({})
