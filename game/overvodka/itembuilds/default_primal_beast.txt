@@ -1,7 +1,7 @@
 "itembuilds"
 {
 	"author"		"Overvodka"
-	"hero"			"npc_dota_hero_meepo"
+	"hero"			"npc_dota_hero_primal_beast"
 	"Title"			"Overvodka"
 	
 	"Items"
@@ -25,15 +25,15 @@
 		{
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
-			"item"		"item_manta_datadriven"
+			"item"		"item_pasito"
 			"item"		"item_mask_of_quadrobe"
+			"item"		"item_aghanims_shard"
 			"item"		"item_govno"
 			"item"		"item_waka"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_aghanims_shard"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_sange_and_yasha"
             "item"		"item_ultimate_scepter"
             "item"		"item_blink"
 		}

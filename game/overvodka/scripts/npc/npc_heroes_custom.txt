@@ -2459,7 +2459,7 @@
 		"Ability4"		"generic_hidden"
 		"Ability5"		"azazin_innate"
 		"Ability6"		"azazin_r"
-		"Ability7"		"azazin_e_dota"
+		"Ability7"		"generic_hidden"
 
 		"Ability10"		"special_bonus_unique_azazin_1"
 		"Ability11"		"special_bonus_unique_azazin_2"
