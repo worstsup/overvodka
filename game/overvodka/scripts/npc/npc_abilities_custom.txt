@@ -11203,59 +11203,15 @@
 			{
 				"value"			"4"
 			}
+			"required_hits_dota"		
+			{
+				"value"			"1"
+			}
 			"counter_duration"
 			{
 				"value"	"8"
 			}
-			"stun_duration"
-			{
-				"value"	"0.6"
-			}
-			"effect_duration"	"5"
-			"tick_damage"
-			{
-				"value"	"15 30 45 60"
-				"special_bonus_unique_azazin_1" "+20"
-			}
-			"magic_reduction"	"-5 -10 -15 -20"
-			"bonus_magic_damage"
-			{
-				"value"	"0 0 0 0"
-				"special_bonus_scepter" "+20 +35 +50 +65"
-			}
-			"magic_lifesteal"
-			{
-				"value"			"0"
-				"special_bonus_scepter" "+20"
-			}
-			"break_duration"
-			{
-				"value"	"0"
-				"special_bonus_facet_azazin_facet_e" "+3"
-				"RequiresFacet"	"azazin_facet_e"
-			}
-		}
-	}
-	//=================================================================================================================
-	// ПЫЛАЮЩИЕ ПЕРДАКИ (5х5)
-	//=================================================================================================================
-	"azazin_e_dota"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/azazin/azazin_e_dota"
-	  	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-	  	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-	  	"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"IsBreakable"					"1"
-		"HasScepterUpgrade"				"1"
-	   	"AbilityTextureName" 			"azazin_e"
-		"AbilityValues"
-		{
-			"required_hits"		
-			{
-				"value"			"5"
-			}
-			"counter_duration"
+			"counter_duration_dota"
 			{
 				"value"	"4"
 			}

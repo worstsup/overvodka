@@ -54,7 +54,13 @@ function modifier_azazin_e:OnAttackLanded(params)
     local target = params.target
     local ability = self:GetAbility()
     local required_hits = ability:GetSpecialValueFor("required_hits")
+    if GetMapName() == "overvodka_5x5" then
+		required_hits = required_hits + ability:GetSpecialValueFor("required_hits_dota")
+	end
     local counter_duration = ability:GetSpecialValueFor("counter_duration")
+    if GetMapName() == "overvodka_5x5" then
+		counter_duration = ability:GetSpecialValueFor("counter_duration_dota")
+	end
     local effect_duration = ability:GetSpecialValueFor("effect_duration")
     local stun_duration = ability:GetSpecialValueFor("stun_duration")
     if target:HasModifier("modifier_azazin_e_enemy") then
