@@ -3068,4 +3068,47 @@
 			"01"	"item_glimmer_cape;item_solar_crest"
 		}
 	}
+	"item_recipe_crumbl_cookie"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"500"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_crumbl_cookie"
+
+		"ItemRequirements"
+		{
+			"01"						"item_holy_locket;item_diadem;item_fluffy_hat"
+		}
+	}
+
+	"item_crumbl_cookie"
+	{
+		"BaseClass" 					"item_lua"
+		"ScriptFile" 					"items/crumbl_cookie"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityCastRange"				"600"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"			"crumbl_cookie"
+		"AbilityCooldown"				"10"
+		"AbilitySharedCooldown"			"magicwand"
+		"ItemCost"						"4000"
+		"AbilityValues"
+		{
+			"bonus_heal_pct"		"30"
+			"bonus_str"				"15"
+			"bonus_agi"				"15"
+			"bonus_int"				"15"
+			"charge_cooldown"		"5"
+			"regen_per_charge"		"40"
+			"max_charges"			"20"
+			"radius"				"1200"
+			"health"				"200"
+			"overheal_duration"		"10"
+		}
+	}
 }

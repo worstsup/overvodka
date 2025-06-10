@@ -86,8 +86,9 @@ function modifier_zhenya_q_debuff:OnIntervalThink()
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability     = self.abil,
         })
-        self.caster:Heal(dmg, self.abil)
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self.caster, dmg, nil)
+        local heal = dmg * self:GetAbility():GetSpecialValueFor("heal_pct") * 0.01
+        self.caster:Heal(heal, self.abil)
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self.caster, heal, nil)
     end
 end
 

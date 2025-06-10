@@ -534,7 +534,7 @@ function modifier_inator_4_buff:OnIntervalThink()
     local parent = self:GetParent()
     for i = 0, parent:GetAbilityCount() - 1 do
         local ab = parent:GetAbilityByIndex(i)
-        if ab and ab:GetCooldownTimeRemaining() > 0 and ab:GetAbilityType() ~= DOTA_ABILITY_TYPE_ULTIMATE then
+        if ab and ab:GetCooldownTimeRemaining() > 0 and ab:GetAbilityType() ~= ABILITY_TYPE_ULTIMATE then
             local rem = ab:GetCooldownTimeRemaining()
             local new_rem = math.max(0, rem - (self.interval * self.cdr_pct))
             ab:EndCooldown()

@@ -12421,6 +12421,7 @@
 				"special_bonus_unique_zhenya_4" "+200"
 			}
 			"damage"					"3 4 5 6"
+			"heal_pct"					"60"
 			"duration"		
 			{
 				"value"					"5"

@@ -110,6 +110,8 @@ PrecacheUtils.particles = {
 		"particles/griffin_gas.vpcf",
 		"particles/surfin_bird_erny.vpcf",
 		"models/heroes/dawnbreaker/debut/particles/battlemaiden_debut_intro_burst_smoke_vertical.vpcf",
+		"particles/crumble_cookie_effect.vpcf",
+		"particles/crumble_cookies.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -369,6 +371,7 @@ PrecacheUtils.sounds = {
 		"soundevents/griffins.vsndevts",
 		"soundevents/stint_start.vsndevts",
 		"soundevents/mazellov_sounds.vsndevts",
+		"soundevents/crumble_cookie.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_marci.vsndevts",
