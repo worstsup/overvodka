@@ -21,6 +21,43 @@
 		<CustomUIElement type="EndScreen" 			layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" />
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_brewmaster.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_ancient_apparition.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_antimage.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_earthshaker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_faceless_void.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_juggernaut.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_lion.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_mars.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_morphling.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_ogre_magi.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_omniknight.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_rattletrap.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_skeleton_king.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_slark.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_sniper.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_terrorblade.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_tidehunter.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_void_spirit.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_weaver.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_bounty_hunter.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_clinkz.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_invoker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_phoenix.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_tinker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_storm_spirit.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_necrolyte.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_pudge.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_riki.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_rubick.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_zuus.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_ringmaster.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_bloodseeker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_furion.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_kunkka.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_meepo.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_phantom_lancer.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_ursa.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/icons/npc_dota_hero_primal_beast.png" />
 	</Panel>
 </root>

@@ -53,7 +53,7 @@ end
 
 function peterka_r:PlayEffects()
 	local particle_cast = "particles/peterka_r_cast.vpcf"
-	local sound_cast = "5opka_r"
+	local sound_cast = "5opka_r_"..RandomInt(1,2)
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
