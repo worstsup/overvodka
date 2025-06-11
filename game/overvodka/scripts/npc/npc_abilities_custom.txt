@@ -673,7 +673,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"vovacho"
 		"AbilityCooldown"				"30 27 24 21"
-		"AbilityManaCost"				"75 105 135 165"
+		"AbilityManaCost"				"50 75 100 125"
 		"AbilityDuration"				"2.0 2.5 3.0 3.5"
 		"AbilityValues"
 		{
@@ -708,7 +708,7 @@
 				"ms_slow"
 				{
 					"value"	"0 0 0 0"
-					"special_bonus_facet_ebanko_q" "-20"
+					"special_bonus_facet_ebanko_q" "-30"
 					"RequiresFacet"	"ebanko_q"
 				}
 		}
@@ -737,7 +737,7 @@
 		{
 				"damage"
 				{
-					"value"		"150 275 400 525"
+					"value"		"125 225 325 425"
 					"special_bonus_unique_ebanko_4" "+150"
 				}
 				"knockback_height"	"300"
@@ -749,7 +749,7 @@
 				"stack"
 				{
 					"value"	"0"
-					"special_bonus_facet_ebanko_w"		"+40"
+					"special_bonus_facet_ebanko_w"		"+25"
 				}
 				"dur"
 				{
@@ -2173,7 +2173,7 @@
 			"movespeed"
 			{
 				"value"	"0"
-				"special_bonus_facet_speed_facet_w"	"+15"
+				"special_bonus_facet_speed_facet_w"	"+20"
 				"RequiresFacet"	"speed_facet_w"
 			}
 		}
@@ -2310,7 +2310,7 @@
 				"dmg_scepter"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+20"
+					"special_bonus_scepter"	"+25"
 				}
 				"lifesteal"
 				{
@@ -3111,7 +3111,7 @@
 				"bonus_agility"
 				{
 					"value"	"45 55 65 75"
-					"special_bonus_unique_sahur_7" "+15"
+					"special_bonus_unique_sahur_7" "+10"
 				}
 				"has_facet"
 				{
@@ -3145,7 +3145,7 @@
 		{
 				"chance"
 				{
-					"value"	"10 15 20 25"
+					"value"	"10 14 18 22"
 					"special_bonus_unique_sahur_5" "+5"
 				}
 				"stun_duration"		"1"
@@ -9831,8 +9831,8 @@
 				"stun_duration"	"1.6 1.8 2.0 2.2"
 				"damage"
 				{
-					"value"	"60 90 120 150"
-					"special_bonus_unique_peterka_3" "+50"
+					"value"	"80 110 140 170"
+					"special_bonus_unique_peterka_3" "+60"
 				}
 		}
 	}
@@ -9851,6 +9851,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"LinkedAbility"					"peterka_e_release"
+		"HasShardUpgrade"				"1"
 		"AbilityCastPoint"				"0.15"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastGestureSlot"		"DEFAULT"
@@ -9858,12 +9859,17 @@
 
 		"AbilityValues"
 		{
-			"charge_speed"					"750"
+			"charge_speed"
+			{
+				"value"	"750"
+				"special_bonus_shard" "+50"
+			}
 			"chargeup_time"					"1.42"
 			"knockback_radius"				"250"
 			"max_distance"
 			{
-				"value"									"1800 2000 2200 2400"
+				"value"	"1800 2000 2200 2400"
+				"special_bonus_shard" "+200"
 			}
 			"knockback_distance"			"250"
 			"AbilityCooldown"
@@ -10036,7 +10042,7 @@
 				"radius"				"700 800 900"
 				"collision_radius"		"50 50 50 50"
 				"splash_radius"			"150 150 150 150"
-				"duration"				"8.0"
+				"duration"				"8 9 10"
 				"speed"					"1000"
 				"machines_per_sec"		"32 34 36"
 				"distance"				"2000 2200 2400"
