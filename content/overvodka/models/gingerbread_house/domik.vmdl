@@ -1,0 +1,72 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc40:version{da0ab1f8-9722-4910-94b8-10b6a08c0934} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "unnamed_HitboxSet"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = ""
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -177.223907, -131.769653, -1.0 ]
+								hitbox_maxs = [ 117.197784, 143.536026, 239.120392 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "domik"
+						children = 
+						[
+							{
+								_class = "ReplaceMeshMaterials"
+								remaps = 
+								[
+									{
+										from = "material_0.vmat"
+										to = "models/gingerbread_house/domik1.vmat"
+									},
+									{
+										from = "material_1.vmat"
+										to = "models/gingerbread_house/domik2.vmat"
+									},
+								]
+								use_single_material = false
+								single_override_material = ""
+							},
+						]
+						filename = "models/gingerbread_house/domik.fbx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		document_sub_type = "ModelDocSubType_None"
+	}
+}
