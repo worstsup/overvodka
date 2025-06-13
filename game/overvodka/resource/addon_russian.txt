@@ -3152,5 +3152,14 @@
 		"DOTA_Tooltip_ability_mazellov_q_worker_movespeed"			"СКОРОСТЬ ПЕРЕДВИЖЕНИЯ РАБОТЯГИ:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_hit_count"			"АТАК ДЛЯ УНИЧТОЖЕНИЯ ЗАВОДА:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_lifetime"			"ДЛИТЕЛЬНОСТЬ ЗАВОДА:"
+
+		"DOTA_Tooltip_ability_mazellov_w"			"Чертово Колесо"
+		"DOTA_Tooltip_ability_mazellov_w_Description"			"Илюша выпускает колесо, которое катится по траектории, поражая всех противников на своем пути. К колесу можно переместиться в любой момент, применив способность Перемещение к Колесу. Каждые 0.2 сек дополнительно наносит 10% от своего урона."
+		"DOTA_Tooltip_ability_mazellov_w_projectile_speed"			"СКОРОСТЬ КОЛЕСА:"
+		"DOTA_Tooltip_ability_mazellov_w_projectile_width"			"РАДИУС:"
+		"DOTA_Tooltip_ability_mazellov_w_damage"			"УРОН:"
+
+		"DOTA_Tooltip_ability_mazellov_d"			"Перемещение к колесу"
+		"DOTA_Tooltip_ability_mazellov_d_Description"			"Перемещает Мазеллова к колесу от способности Чёртово Колесо."
 	}
 }

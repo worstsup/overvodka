@@ -870,3 +870,5 @@ if IsServer() then
         return VALVE_CScriptParticleManager_CreateParticle(self, sParticleName, iParticleAttachment, hOwner)
     end
 end
+
+
