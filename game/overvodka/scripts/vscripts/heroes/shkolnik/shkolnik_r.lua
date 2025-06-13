@@ -42,7 +42,7 @@ function modifier_shkolnik_r:OnCreated()
     self.current_dir = self.target_dir
     self.turn_speed = FrameTime()*self.turn_rate
     self.proj_time = 0
-    self.not_scepter = not self:GetCaster():HasScepter()
+    self.no_shard = not self:GetCaster():HasShard()
     self:StartIntervalThink(FrameTime())
     self:OnIntervalThink()
 end
@@ -131,7 +131,7 @@ function modifier_shkolnik_r:OnIntervalThink()
     local projectile_start_radius = self:GetAbility():GetSpecialValueFor("starting_aoe")
     local projectile_end_radius = self:GetAbility():GetSpecialValueFor("final_aoe")
     local projectile_direction = self:GetParent():GetForwardVector()
-    if self:GetCaster():HasScepter() then
+    if self:GetCaster():HasShard() then
         self:TurnLogic()
     end
 
@@ -165,8 +165,8 @@ end
 function modifier_shkolnik_r:CheckState()
     return{[MODIFIER_STATE_DISARMED] = true,
     [MODIFIER_STATE_ROOTED] = true,
-    [MODIFIER_STATE_SILENCED] = self.not_scepter,
-    [MODIFIER_STATE_MUTED] = self.not_scepter}
+    [MODIFIER_STATE_SILENCED] = self.no_shard,
+    [MODIFIER_STATE_MUTED] = self.no_shard}
 end
 
 function shkolnik_r:PlayProjectile( info )

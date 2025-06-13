@@ -1332,7 +1332,7 @@
 		}
 	}
 	//=================================================================================================================
-	// ДОМАШКА (шард)
+	// ДОМАШКА (удаленный шард)
 	//=================================================================================================================
 	"shkolnik_shard"
 	{
@@ -1352,6 +1352,32 @@
     	}
 	}
 	//=================================================================================================================
+	// HAPPY HIPPO (аганим)
+	//=================================================================================================================
+	"drake_scepter"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/shkolnik/drake_scepter"
+		"AbilityTextureName"			"drake_scepter"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"250"
+		"IsGrantedByScepter"			"1"
+		"MaxLevel"						"1"
+		"AbilityValues"
+		{
+			"duration"				"4.8"
+			"damage"				"100"
+			"radius"				"500"
+			"interval"				"0.4"
+			"stun_duration"			"0.2"
+			"bonus_radius"			"25"
+		}
+	}
+	//=================================================================================================================
 	// SOUNDPAD
 	//=================================================================================================================
 	"shkolnik_r"
@@ -1369,7 +1395,7 @@
 		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"250 400 550"
 		"AbilityCastRange"				"1100"
-		"HasScepterUpgrade"             "1"
+		"HasShardUpgrade"             	"1"
 		"AbilityValues"
 		{
 			"duration"

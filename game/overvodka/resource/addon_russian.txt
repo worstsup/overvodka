@@ -2175,7 +2175,7 @@
 		
 		"DOTA_Tooltip_ability_shkolnik_r"                "ОРАТЬ"
 		"DOTA_Tooltip_ability_shkolnik_r_Description"    "Школьник начинает громко орать на врагов. Способность можно отменить клавишей отмены действия. \nУлучшается с Aghanim's Scepter."
-		"DOTA_Tooltip_ability_shkolnik_r_scepter_Description" "Школьник может поворачиваться, а также использовать способности и предметы во время применения способности."
+		"DOTA_Tooltip_ability_shkolnik_r_shard_Description" "Школьник может поворачиваться, а также использовать способности и предметы во время применения способности."
 		"DOTA_Tooltip_ability_shkolnik_r_damage_tooltip"         "УРОН В СЕКУНДУ:"
 		"DOTA_Tooltip_ability_shkolnik_r_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_modifier_shkolnik_r"		   "Орать"
@@ -2223,6 +2223,8 @@
 		"DOTA_Tooltip_ability_shkolnik_e_Facet_shkolnik_e"					"После применения способности герой 2 секунды невосприимчив к магии."
 		"DOTA_Tooltip_ability_shkolnik_e_immun" "ДЛИТЕЛЬНОСТЬ НЕВОСПРИИМЧИВОСТИ К МАГИИ:"
 		"DOTA_Tooltip_ability_shkolnik_w_armor" "УМЕНЬШЕНИЕ БРОНИ:"
+		"DOTA_Tooltip_ability_drake_scepter" "HAPPY HIPPO"
+		"DOTA_Tooltip_ability_drake_scepter_description" "Денис Коломиец не находит своих бегемотиков и начинает бомбить, начинает стучать ножками по земле, сотрясая вокруг себя и оглушая врагов, с каждым ударом радиус увеличивается"
 		"DOTA_Tooltip_ability_special_bonus_unique_shkolnik_1" "+{s:bonus_fireblast_damage} к урону от ДВОЙКА"
 		"DOTA_Tooltip_ability_special_bonus_unique_shkolnik_2" "+{s:bonus_blink_range} к дальности ЗВОНОК НА УРОК"
 		"DOTA_Tooltip_ability_special_bonus_unique_shkolnik_3" "Школоёбы от ПЕРЕМЕНА проходят друг сквозь друга"

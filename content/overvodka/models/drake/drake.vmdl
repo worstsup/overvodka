@@ -691,7 +691,7 @@
 						_class = "AnimFile"
 						name = "Dancing"
 						is_default_idle_anim = false
-						activity_name = ""
+						activity_name = "ACT_DOTA_CAST_ABILITY_4"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -708,7 +708,7 @@
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = -1
-						framerate = -1.0
+						framerate = 55.0
 						reverse = false
 						additional_anim_files = [  ]
 					},

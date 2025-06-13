@@ -262,7 +262,7 @@
 		"Ability1"		"shkolnik_peremena"
 		"Ability2"		"drake_w"
 		"Ability3"		"shkolnik_e"
-		"Ability4"		"shkolnik_shard"
+		"Ability4"		"drake_scepter"
 		"Ability5"		"shkolnik_innate"
 		"Ability6"		"shkolnik_r"
 		"Ability10"		"special_bonus_unique_shkolnik_1"
