@@ -1149,7 +1149,7 @@
 	}
 
 	//===================================================================================================================
-	//													ТУПОЙ ШКОЛЬНИК
+	//													DRAKE (ТУПОЙ ШКОЛЬНИК)
 	//===================================================================================================================
 
 	"special_bonus_unique_shkolnik_1"
@@ -1201,7 +1201,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
-	// ПЕРЕМЕНА
+	// ЦЕЛЕВАЯ
 	//=================================================================================================================
 	"shkolnik_peremena"
 	{
@@ -1210,7 +1210,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"shkolota"
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"32 30 28 26"
 		"AbilityManaCost"				"75 120 165 210"
 		"AbilityCastPoint"				"0.35"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
@@ -1218,7 +1218,7 @@
 		{
 				"schoolboys_number"
 				{
-					"value"	"4 5 6 7"
+					"value"	"7 8 9 10"
 					"special_bonus_unique_shkolnik_5" "+3"
 				}
 				"schoolboys_duration"
@@ -1232,9 +1232,11 @@
 				}
 				"schoolboys_dmg"
 				{
-					"value"	"40 50 60 70"
+					"value"	"20 30 40 50"
 					"special_bonus_unique_shkolnik_7" "x2"
 				}
+				"armor"	"2 3 4 5"
+				"magic_resistance"	"25 35 45 55"
 				"pct_towers"	"50"
 		}
 	}
@@ -1279,8 +1281,30 @@
             }
 		}
 	}
+	"drake_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/shkolnik/drake_w"
+		"AbilityTextureName"			"drake_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCastRange"				"750 800 850 900"
+		"AbilityCooldown"				"26 24 22 20"
+		"AbilityManaCost"				"90 115 140 165"
+		"AbilityValues"
+		{
+				"radius"					"750 800 850 900"
+				"damage"					"100 175 250 325"
+				"stone_duration"			"1.2 1.5 1.8 2.1"
+				"stone_angle"				"60"
+				"bonus_physical_damage"		"50"
+		}
+	}
 	//=================================================================================================================
-	// ЗВОНОК НА УРОК
+	// УБЕЖАТЬ
 	//=================================================================================================================
 	"shkolnik_e"
 	{
@@ -1328,7 +1352,7 @@
     	}
 	}
 	//=================================================================================================================
-	// ОРАТЬ
+	// SOUNDPAD
 	//=================================================================================================================
 	"shkolnik_r"
 	{
@@ -6907,6 +6931,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityTextureName"			"zolo_batya"
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.35 0.35 0.35"

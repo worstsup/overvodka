@@ -905,15 +905,15 @@
 	"npc_schoolboy_1"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/ursa/ursa.vmdl"
-        "ModelScale"            "0.5"
-		"SoundSet"				"Hero_Ursa"
+        "Model"                 "models/drake/shkolnik/shkolnik.vmdl"
+        "ModelScale"            "0.35"
+		"SoundSet"				""
         "Level"                 "50"
         "HasInventory"          "0"
        
         // Armor
         //----------------------------------------------------------------
-        "ArmorPhysical"         "0"
+        "ArmorPhysical"         "2"
         "MagicalResistance"     "25"
        
         // Attack
@@ -975,13 +975,13 @@
         // General
         //----------------------------------------------------------------
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/ursa/ursa.vmdl"
-        "ModelScale"            "0.5"
-		"SoundSet"		"Hero_Ursa"
+        "Model"                 "models/drake/shkolnik/shkolnik.vmdl"
+        "ModelScale"            "0.35"
+		"SoundSet"				""
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "0"
+        "ArmorPhysical"         "3"
         "MagicalResistance"     "25"
        
         // Attack
@@ -1032,17 +1032,6 @@
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1" { "ItemDef" "4292" }
-				"Wearable2" { "ItemDef" "4293" }
-				"Wearable3" { "ItemDef" "4294" }
-				"Wearable4" { "ItemDef" "4295" }
-			}
-		}
 	}
 	
 	//=================================================================================
@@ -1054,14 +1043,14 @@
         // General
         //----------------------------------------------------------------
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/ursa/ursa.vmdl"
-        "ModelScale"            "0.5"
-		"SoundSet"		"Hero_Ursa"
+        "Model"                 "models/drake/shkolnik/shkolnik.vmdl"
+        "ModelScale"            "0.35"
+		"SoundSet"				""
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "0"
-        "MagicalResistance"     "25"
+        "ArmorPhysical"         "4"
+        "MagicalResistance"     "35"
        
         // Attack
         //----------------------------------------------------------------
@@ -1111,17 +1100,6 @@
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1" { "ItemDef" "7920" }
-				"Wearable2" { "ItemDef" "7921" }
-				"Wearable3" { "ItemDef" "7922" }
-				"Wearable4" { "ItemDef" "7923" }
-			}
-		}
 	}
 	
 	//=================================================================================
@@ -1131,14 +1109,14 @@
 	"npc_schoolboy_4"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/ursa/ursa.vmdl"
-        "ModelScale"            "0.5"
-		"SoundSet"		"Hero_Ursa"
+        "Model"                 "models/drake/shkolnik/shkolnik.vmdl"
+        "ModelScale"            "0.35"
+		"SoundSet"				""
         "Level"                 "50"
         "HasInventory"          "0"
        
-        "ArmorPhysical"         "0"
-        "MagicalResistance"     "25"
+        "ArmorPhysical"         "5"
+        "MagicalResistance"     "45"
        
         // Attack
         //----------------------------------------------------------------
@@ -1188,30 +1166,18 @@
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1" { "ItemDef" "6893" }
-				"Wearable2" { "ItemDef" "4212" }
-				"Wearable3" { "ItemDef" "4213" }
-				"Wearable4" { "ItemDef" "4214" }
-				"Wearable5" { "ItemDef" "4215" }
-			}
-		}
 	}
 	"npc_schoolboy_6"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/heroes/ursa/ursa.vmdl"
-        "ModelScale"            "0.5"
-		"SoundSet"				"Hero_Ursa"
+        "Model"                 "models/drake/shkolnik/shkolnik.vmdl"
+        "ModelScale"            "0.35"
+		"SoundSet"				""
         "Level"                 "50"
         "HasInventory"          "0"
        
-      	"ArmorPhysical"         "0"
-        "MagicalResistance"     "25"
+      	"ArmorPhysical"         "5"
+        "MagicalResistance"     "55"
        
         // Attack
         //----------------------------------------------------------------
@@ -1261,18 +1227,6 @@
         "UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "1"
         "IsSummoned"            "1"
-   
-		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1" { "ItemDef" "6893" }
-				"Wearable2" { "ItemDef" "4212" }
-				"Wearable3" { "ItemDef" "4213" }
-				"Wearable4" { "ItemDef" "4214" }
-				"Wearable5" { "ItemDef" "4215" }
-			}
-		}
 	}
 	"npc_sunflower"
 	{

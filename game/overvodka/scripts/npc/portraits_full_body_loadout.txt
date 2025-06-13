@@ -13296,9 +13296,9 @@
 		{
 			"default"
 			{
-				"PortraitPosition"		"547.972839 -258.260895 112.000000"
-				"PortraitAngles"		"5.691873 154.806702 0.000000"
-				"PortraitFOV"		"22.000000"
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"1.290534 155.100006 0.000000"
+				"PortraitFOV"		"21.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"econ_set_preview"

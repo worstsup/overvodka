@@ -112,6 +112,7 @@ PrecacheUtils.particles = {
 		"models/heroes/dawnbreaker/debut/particles/battlemaiden_debut_intro_burst_smoke_vertical.vpcf",
 		"particles/crumble_cookie_effect.vpcf",
 		"particles/crumble_cookies.vpcf",
+		"particles/drake_base_attack.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -230,6 +231,7 @@ PrecacheUtils.models = {
 		"evil_monke/models/evil_monke_tpose.vmdl",
 		"models/worker/worker.vmdl",
 		"models/worker/factory.vmdl",
+		"models/drake/drake.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -297,7 +299,8 @@ PrecacheUtils.sounds = {
 		"soundevents/arseni_start.vsndevts",
 		"soundevents/orlov_start.vsndevts", 
 		"soundevents/step_start.vsndevts", 
-		"soundevents/ivnv_start.vsndevts", 
+		"soundevents/ivnv_start.vsndevts",
+		"soundevents/mazellov_start.vsndevts", 
 		"soundevents/tamaev_start.vsndevts", 
 		"soundevents/kirill_start.vsndevts", 
 		"soundevents/lev_start.vsndevts",

@@ -3,7 +3,7 @@ LinkLuaModifier("modifier_shkolnik_r", "heroes/shkolnik/shkolnik_r", LUA_MODIFIE
 shkolnik_r = class({})
 
 function shkolnik_r:Precache( context )
-    PrecacheResource( "particle", "particles/units/heroes/hero_queenofpain/queen_sonic_wave.vpcf", context )
+    PrecacheResource( "particle", "particles/drake_r.vpcf", context )
     PrecacheResource( "soundfile", "soundevents/ivn.vsndevts", context )
 end
 
@@ -23,7 +23,8 @@ function shkolnik_r:OnSpellStart()
     if not IsServer() then return end
     self.point = self:GetCursorPosition()
     local caster = self:GetCaster()
-    EmitSoundOn("ivn", caster)
+    sound = "drake_r_"..RandomInt(1,5)
+    EmitSoundOn(sound, caster)
     self.modifier = self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_shkolnik_r", {duration = self:GetSpecialValueFor("duration")} )
 end
 
@@ -56,6 +57,7 @@ function modifier_shkolnik_r:DeclareFunctions()
         MODIFIER_EVENT_ON_ORDER,
         MODIFIER_PROPERTY_DISABLE_TURNING,
         MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+        MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
     }
     return funcs
 end
@@ -72,7 +74,7 @@ function modifier_shkolnik_r:OnOrder( params )
     if params.unit~=self:GetParent() then return end
 
     if params.order_type == DOTA_UNIT_ORDER_STOP or params.order_type == DOTA_UNIT_ORDER_HOLD_POSITION or params.order_type == DOTA_UNIT_ORDER_CONTINUE then
-        StopSoundOn("ivn", self:GetCaster())
+        StopSoundOn(sound, self:GetCaster())
         self:Destroy()
         self:GetParent():Stop()
         return
@@ -88,6 +90,10 @@ function modifier_shkolnik_r:OnOrder( params )
     then
         self:SetDirection( params.target:GetOrigin() )
     end
+end
+
+function modifier_shkolnik_r:GetOverrideAnimation()
+    return ACT_DOTA_CAST_ABILITY_6
 end
 
 function modifier_shkolnik_r:SetDirection( vec )
@@ -120,7 +126,6 @@ end
 
 function modifier_shkolnik_r:OnIntervalThink()
     if not IsServer() then return end
-    local projectile_name = "particles/units/heroes/hero_queenofpain/queen_sonic_wave.vpcf"
     local projectile_distance = self:GetAbility():GetSpecialValueFor("distance")
     local projectile_speed = self:GetAbility():GetSpecialValueFor("speed")
     local projectile_start_radius = self:GetAbility():GetSpecialValueFor("starting_aoe")
@@ -165,10 +170,12 @@ function modifier_shkolnik_r:CheckState()
 end
 
 function shkolnik_r:PlayProjectile( info )
-    local effect_cast = ParticleManager:CreateParticle("particles/units/heroes/hero_queenofpain/queen_sonic_wave.vpcf", PATTACH_ABSORIGIN, self:GetCaster())
+    local effect_cast = ParticleManager:CreateParticle("particles/drake_r.vpcf", PATTACH_CUSTOMORIGIN, nil)
     ParticleManager:SetParticleControl( effect_cast, 0, self:GetCaster():GetOrigin() )
     ParticleManager:SetParticleControlForward( effect_cast, 0, self:GetCaster():GetForwardVector() )
     ParticleManager:SetParticleControl( effect_cast, 1, info.vVelocity )
+    ParticleManager:SetParticleAlwaysSimulate( effect_cast )
+	ParticleManager:SetParticleShouldCheckFoW( effect_cast, false )
     ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 

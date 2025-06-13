@@ -12,7 +12,8 @@ end
 
 function shkolnik_peremena:Precache( context )
     PrecacheResource( "soundfile", "soundevents/peremena.vsndevts", context )
-    PrecacheResource( "model", "models/heroes/ursa/ursa.vmdl", context )
+    PrecacheResource( "model", "models/drake/shkolnik/shkolnik.vmdl", context )
+    PrecacheResource( "particle", "particles/drake_q_spawn.vpcf", context )
 end
 
 function shkolnik_peremena:OnSpellStart()
@@ -27,6 +28,9 @@ function shkolnik_peremena:OnSpellStart()
         self.schoolboy:SetOwner(caster)
         self.schoolboy:SetControllableByPlayer(caster:GetPlayerID(), true)
         FindClearSpaceForUnit(self.schoolboy, self.schoolboy:GetAbsOrigin(), true)
+        local p = ParticleManager:CreateParticle("particles/drake_q_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.schoolboy)
+        ParticleManager:SetParticleControl(p, 0, self.schoolboy:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
         self.schoolboy:AddNewModifier(self:GetCaster(), self, "modifier_kill", {duration = self:GetSpecialValueFor("schoolboys_duration")})
         self.schoolboy:AddNewModifier(self:GetCaster(), self, "modifier_overvodka_creep", {})
         if caster:HasTalent("special_bonus_unique_shkolnik_3") then
