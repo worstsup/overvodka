@@ -13289,7 +13289,7 @@
 			"projectile_speed"			"550"
 			"projectile_width"
 			{
-				"value"	"225 250 275 300"
+				"value"	"225 235 245 255"
 				"affected_by_aoe_increase"	"1"
 			}
 			"max_distance"				"1950"
@@ -13320,7 +13320,7 @@
 		"AbilityTextureName"            "mazellov_e"
 		"AbilityCooldown"               "8 7.5 7 6.5"
 		"AbilityManaCost"               "85 105 125 155"
-		"AbilityChannelTime"			"1 1.75 2.5 3.25"
+		"AbilityChannelTime"			"1.75 2.25 2.75 3.25"
 		"AbilityValues"
 		{
 			"wave_damage"		"20 35 50 65"

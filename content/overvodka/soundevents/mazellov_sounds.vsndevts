@@ -17,7 +17,7 @@
                "value0"    "sounds/abilities/mazellov_q_start.vsnd"
             }
           }
-          "volume"      {  "value"   "25.50000" }
+          "volume"      {  "value"   "8.0" }
           "pitch_rand_min"  {  "value"   "0.000" }
           "pitch_rand_max"  {  "value"   "0.000" }
           "pitch"       {  "value"   "1.000000" }
@@ -49,7 +49,7 @@
                "value0"    "sounds/abilities/mazellov_wheel.vsnd"
             }
           }
-          "volume"      {  "value"   "25.50000" }
+          "volume"      {  "value"   "6.0" }
           "pitch_rand_min"  {  "value"   "0.000" }
           "pitch_rand_max"  {  "value"   "0.000" }
           "pitch"       {  "value"   "1.000000" }
@@ -81,7 +81,7 @@
                "value0"    "sounds/abilities/mazellov_e.vsnd"
             }
           }
-          "volume"      {  "value"   "25.50000" }
+          "volume"      {  "value"   "5.5" }
           "pitch_rand_min"  {  "value"   "0.000" }
           "pitch_rand_max"  {  "value"   "0.000" }
           "pitch"       {  "value"   "1.000000" }
