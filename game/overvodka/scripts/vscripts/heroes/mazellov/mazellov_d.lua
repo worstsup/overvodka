@@ -2,6 +2,11 @@ LinkLuaModifier("modifier_mazellov_w", "heroes/mazellov/mazellov_d", LUA_MODIFIE
 
 mazellov_d = class({})
 
+function mazellov_d:Spawn()
+	if not IsServer() then return end
+	self:SetActivated( false )
+end
+
 function mazellov_d:OnSpellStart()
     local caster = self:GetCaster()
     local expire = caster.mazellov_orb_expire or 0
@@ -20,7 +25,7 @@ function mazellov_d:OnSpellStart()
         local current_pos = start_pos + dir * speed * time_passed
 
         FindClearSpaceForUnit(caster, current_pos, true)
-
+        ProjectileManager:ProjectileDodge( caster )
         -- Уничтожаем снаряд
         if caster.mazellov_orb_projectile then
             ProjectileManager:DestroyLinearProjectile(caster.mazellov_orb_projectile)
@@ -31,4 +36,5 @@ function mazellov_d:OnSpellStart()
     else
         caster:Interrupt()
     end
+    self:SetActivated( false )
 end

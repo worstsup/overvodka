@@ -95,8 +95,9 @@ function modifier_factory:OnCreated()
     self.hits_to_destroy = self:GetAbility():GetSpecialValueFor("factory_hit_count")
     self.interval = self:GetAbility():GetSpecialValueFor("worker_spawn_interval")
     self.radius = 1200
-
-    self:SetStackCount(self.hits_to_destroy)
+    self:GetParent():SetMaxHealth(self.hits_to_destroy)
+    self:GetParent():SetBaseMaxHealth(self.hits_to_destroy)
+    self:GetParent():SetHealth(self.hits_to_destroy)
     self:StartIntervalThink(self.interval)
 
     -- Звук появления завода
@@ -133,36 +134,58 @@ end
 
 function modifier_factory:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-        MODIFIER_PROPERTY_AVOID_DAMAGE,
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
         MODIFIER_PROPERTY_DISABLE_HEALING,
         MODIFIER_PROPERTY_HEALTHBAR_PIPS, -- добавляем поддержку пипсов
     }
 end
 
-function modifier_factory:GetModifierHealthBarPips(params)
-    return self:GetStackCount() -- количество пипсов = оставшиеся удары
+function modifier_factory:CheckState()
+	return {[MODIFIER_STATE_MAGIC_IMMUNE] = true}
 end
 
-function modifier_factory:GetModifierIncomingDamage_Percentage()
-    return -100
+function modifier_factory:OnAttackLanded(keys)
+    if not IsServer() then return end
+    if keys.target == self:GetParent() then
+        if keys.attacker:GetTeamNumber() == self:GetParent():GetTeamNumber() then
+            if self:GetParent():GetHealthPercent() > 50 then
+                self:GetParent():SetHealth(self:GetParent():GetHealth() - 10)
+            else 
+                self:GetParent():Kill(nil, keys.attacker)
+            end
+            return
+        end
+        local new_health = self:GetParent():GetHealth() - 1
+        new_health = math.floor(new_health)
+        if new_health <= 0 then
+            self:GetParent():Kill(nil, keys.attacker)
+        else
+            self:GetParent():SetHealth(new_health)
+        end
+    end
+end
+
+function modifier_factory:GetModifierHealthBarPips(params)
+    return self:GetParent():GetMaxHealth()
 end
 
 function modifier_factory:GetDisableHealing()
     return 1
 end
 
-function modifier_factory:GetModifierAvoidDamage(params)
-    if not IsServer() then return 0 end
+function modifier_factory:GetAbsoluteNoDamageMagical()
+    return 1
+end
 
-    local new_count = self:GetStackCount() - 1
-    self:SetStackCount(new_count)
+function modifier_factory:GetAbsoluteNoDamagePhysical()
+    return 1
+end
 
-    if new_count <= 0 then
-        self:GetParent():Kill(nil, params.attacker or self:GetCaster())
-    end
-
-    return 1 -- полностью избегаем урон, но считаем как удар
+function modifier_factory:GetAbsoluteNoDamagePure()
+    return 1
 end
 
 function modifier_factory:OnDestroy()

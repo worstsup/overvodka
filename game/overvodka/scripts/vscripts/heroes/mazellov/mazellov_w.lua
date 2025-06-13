@@ -2,17 +2,25 @@ LinkLuaModifier("modifier_mazellov_w_thinker", "heroes/mazellov/mazellov_w", LUA
 
 mazellov_w = class({})
 
+function mazellov_w:GetCastRange(location, target)
+    return self:GetSpecialValueFor("max_distance")
+end
+
 function mazellov_w:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local point = self:GetCursorPosition()
     local direction = (point - caster:GetAbsOrigin()):Normalized()
+    if point == caster:GetAbsOrigin() then
+        direction = caster:GetForwardVector()
+    end
+    direction.z = 0
     caster:EmitSound("mazellov_w_start")
-
-    local radius = self:GetSpecialValueFor("radius")
+    local radius = self:GetSpecialValueFor("projectile_width")
     local damage = self:GetSpecialValueFor("damage")
 
-    local speed = 550
-    local distance = 1950
+    local speed = self:GetSpecialValueFor("projectile_speed")
+    local distance = self:GetSpecialValueFor("max_distance")
     local travel_time = distance / speed
 
     local spawn_origin = caster:GetAbsOrigin()
@@ -89,7 +97,10 @@ modifier_mazellov_w_thinker = class({})
 
 function modifier_mazellov_w_thinker:OnCreated(kv)
     if not IsServer() then return end
-
+    local secondary = self:GetCaster():FindAbilityByName("mazellov_d")
+    if secondary and not secondary:IsNull() then
+        secondary:SetActivated(true)
+    end
     self.damage = kv.damage * 0.10
     self.radius = kv.radius
     self.speed = kv.speed
@@ -128,6 +139,13 @@ function modifier_mazellov_w_thinker:OnIntervalThink()
             damage = self.damage,
             damage_type = DAMAGE_TYPE_MAGICAL
         })
+    end
+end
+
+function modifier_mazellov_w_thinker:OnDestroy()
+    local secondary = self:GetCaster():FindAbilityByName("mazellov_d")
+    if secondary and not secondary:IsNull() and secondary:IsActivated() then
+        secondary:SetActivated(false)
     end
 end
 

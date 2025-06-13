@@ -1,7 +1,12 @@
 LinkLuaModifier("modifier_mazellov_e_channel", "heroes/mazellov/mazellov_e.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_mazellov_e_slow", "heroes/mazellov/mazellov_e.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE )
 
 mazellov_e = class({})
+
+function mazellov_e:Precache(context)
+    PrecacheResource("model", "models/gingerbread_house/domik.vmdl", context)
+end
 
 -- Добавляем эту функцию для определения времени каста
 function mazellov_e:GetChannelTime()
@@ -42,48 +47,44 @@ function modifier_mazellov_e_channel:OnCreated()
     self.original_model = parent:GetModelName()
     parent:SetModel("models/gingerbread_house/domik.vmdl")
     parent:SetOriginalModel("models/gingerbread_house/domik.vmdl")
-
-    self.damage = ability:GetSpecialValueFor("wave_damage")
     self.radius = ability:GetSpecialValueFor("wave_radius")
     self.interval = ability:GetSpecialValueFor("wave_interval")
-    self.slow_duration = ability:GetSpecialValueFor("wave_slow_duration")
-    self.slow_amount = ability:GetSpecialValueFor("wave_slow_amount")
     self:StartIntervalThink(self.interval)
+    self:OnIntervalThink()
 end
 
 function modifier_mazellov_e_channel:OnIntervalThink()
+    if not IsServer() then return end
     local caster = self:GetParent()
-    local ability = self:GetAbility()
-    local origin = caster:GetAbsOrigin()
-
-    local enemies = FindUnitsInRadius(
-        caster:GetTeamNumber(),
-        origin,
-        nil,
-        self.radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER,
-        false
-    )
-
+    self:GetAbility():FireRing()
     -- Волна визуала
     local particle = ParticleManager:CreateParticle("particles/mazellov_e.vpcf", PATTACH_ABSORIGIN, caster)
     ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(particle)
+end
 
-    for _,enemy in pairs(enemies) do
-        ApplyDamage({
-            victim = enemy,
-            attacker = caster,
-            ability = ability,
-            damage = self.damage,
-            damage_type = DAMAGE_TYPE_MAGICAL
-        })
+function mazellov_e:FireRing()
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    local pulse = caster:AddNewModifier(
+		caster,
+		self,
+		"modifier_generic_ring_lua",
+		{
+			end_radius = self:GetSpecialValueFor("wave_radius"),
+			speed = 450,
+			target_team = DOTA_UNIT_TARGET_TEAM_ENEMY,
+			target_type = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		}
+	)
+	pulse:SetCallback( function( enemy )
+		self:OnHit( enemy )
+	end)
+end
 
-        enemy:AddNewModifier(caster, ability, "modifier_mazellov_e_slow", { duration = self.slow_duration })
-    end
+function mazellov_e:OnHit( enemy )
+    enemy:AddNewModifier(self:GetCaster(), self, "modifier_mazellov_e_slow", { duration = self:GetSpecialValueFor("wave_slow_duration") })
+    ApplyDamage({victim = enemy, attacker = self:GetCaster(), ability = self, damage = self:GetSpecialValueFor("wave_damage"), damage_type = DAMAGE_TYPE_MAGICAL })
 end
 
 function modifier_mazellov_e_channel:OnDestroy()
@@ -100,9 +101,6 @@ function modifier_mazellov_e_channel:OnDestroy()
         ParticleManager:DestroyParticle(self.particle, false)
         ParticleManager:ReleaseParticleIndex(self.particle)
     end
-    
-    -- Останавливаем звуки
-    parent:StopSound("Hero_Disruptor.KineticField")
 end
 
 modifier_mazellov_e_slow = class({})
