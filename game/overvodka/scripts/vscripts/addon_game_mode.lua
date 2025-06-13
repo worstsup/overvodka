@@ -4,6 +4,7 @@ Overvodka Game Mode
 
 _G.nNEUTRAL_TEAM = 4
 _G.nCOUNTDOWNTIMER = 1501
+_G.overvodka_events = true
 local PrecacheUtils = require("util/precache")
 
 ---------------------------------------------------------------------------

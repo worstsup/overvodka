@@ -38,6 +38,7 @@ function DebugPanel:RegisterPanoramaListeners()
 	CustomGameEventManager:RegisterListener('debug_panel_give_item', Dynamic_Wrap(DebugPanel, 'OnItemRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_set_time_scale', Dynamic_Wrap(DebugPanel, 'OnSetHostTimescaleRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_wtf_toggle', Dynamic_Wrap(DebugPanel, 'OnWTFToggleRequest'))
+	CustomGameEventManager:RegisterListener('debug_panel_events_toggle', Dynamic_Wrap(DebugPanel, 'OnEventsToggleRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_refresh_abilities', Dynamic_Wrap(DebugPanel, 'OnRefreshAbilitiesRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_set_gold', Dynamic_Wrap(DebugPanel, 'OnSetGoldRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_change_gold', Dynamic_Wrap(DebugPanel, 'OnChangeGoldRequest'))
@@ -526,6 +527,14 @@ function DebugPanel:OnWTFToggleRequest(kv)
 	end
 	Convars:SetBool("dota_ability_debug", kv.isActive == 1)
 	DebugPanel:OnRefreshAbilitiesRequest(kv)
+end
+
+function DebugPanel:OnEventsToggleRequest(kv)
+	local playerID = kv.PlayerID
+	if(DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) == false) then
+		return
+	end
+	_G.overvodka_events = not _G.overvodka_events
 end
 
 function DebugPanel:RemoveAllCooldownForUnit(unit, useEffect)

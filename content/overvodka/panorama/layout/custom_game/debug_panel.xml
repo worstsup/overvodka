@@ -297,6 +297,11 @@
 								</Button>
 							</Panel>
 							<Panel class="Row">
+								<ToggleButton id="EventsButton" class="DemoToggleButton" acceptsjoyfocus="true" onactivate="OnEventsPressed()">
+									<Label text="Выключить ивенты" />
+								</ToggleButton>
+							</Panel>
+							<Panel class="Row">
 								<ToggleButton id="TitleStatusButton" class="DemoToggleButton" acceptsjoyfocus="true" onactivate="OnTitleStatusPressed()">
 									<Label text="Титул над головой" />
 								</ToggleButton>

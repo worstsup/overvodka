@@ -274,6 +274,14 @@ function OnWTFTogglePressed() {
 	Game.EmitSound( "UI.Button.Pressed" );
 }
 
+function OnEventsPressed() {
+	let check = $( '#EventsButton' ).checked
+	GameEvents.SendCustomGameEventToServer("debug_panel_events_toggle", {
+		isActive : check
+	});
+	Game.EmitSound( "UI.Button.Pressed" );
+}
+
 function OnTitleStatusPressed() {
 	let check = $( '#TitleStatusButton' ).checked
 	GameEvents.SendCustomGameEventToServer("debug_panel_switch_title_status", {
