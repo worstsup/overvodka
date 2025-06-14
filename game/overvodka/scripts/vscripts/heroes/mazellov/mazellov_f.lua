@@ -10,6 +10,11 @@ end
 
 mazellov_f = class({})
 
+function mazellov_f:Precache(context)
+    PrecacheResource( "particle", "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch.vpcf", context )
+    PrecacheResource( "particle", "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_projectile_hit.vpcf", context )
+end
+
 function mazellov_f:OnSpellStart()
     if not IsServer() then return end
 
@@ -128,12 +133,22 @@ for i = 1, 4 do
     _G["modifier_mazellov_f_orb_"..i] = class(modifier_mazellov_f_orb)
 end
 
-for i = 1, 4 do
-    modifier_mazellov_f_orb_hit = class({})
-    function modifier_mazellov_f_orb_hit:IsHidden() return true end
-    function modifier_mazellov_f_orb_hit:IsPurgable() return false end
-    function modifier_mazellov_f_orb_hit:IsDebuff() return false end
-end
+modifier_mazellov_f_orb_hit_1 = class({})
+function modifier_mazellov_f_orb_hit_1:IsHidden() return true end
+function modifier_mazellov_f_orb_hit_1:IsPurgable() return false end
+function modifier_mazellov_f_orb_hit_1:IsDebuff() return false end
+modifier_mazellov_f_orb_hit_2 = class({})
+function modifier_mazellov_f_orb_hit_2:IsHidden() return true end
+function modifier_mazellov_f_orb_hit_2:IsPurgable() return false end
+function modifier_mazellov_f_orb_hit_2:IsDebuff() return false end
+modifier_mazellov_f_orb_hit_3 = class({})
+function modifier_mazellov_f_orb_hit_3:IsHidden() return true end
+function modifier_mazellov_f_orb_hit_3:IsPurgable() return false end
+function modifier_mazellov_f_orb_hit_3:IsDebuff() return false end
+modifier_mazellov_f_orb_hit_4 = class({})
+function modifier_mazellov_f_orb_hit_4:IsHidden() return true end
+function modifier_mazellov_f_orb_hit_4:IsPurgable() return false end
+function modifier_mazellov_f_orb_hit_4:IsDebuff() return false end
 
 modifier_mazellov_f_dot = class({})
 
@@ -167,17 +182,22 @@ end
 modifier_mazellov_f_slow = class({})
 function modifier_mazellov_f_slow:IsDebuff() return true end
 function modifier_mazellov_f_slow:IsPurgable() return true end
+function modifier_mazellov_f_slow:OnCreated()
+    if not IsServer() then return end
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_projectile_hit.vpcf",PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
+    local p1 = ParticleManager:CreateParticle("particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    self:AddParticle(p1, false, false, -1, false, false)
+end
 function modifier_mazellov_f_slow:DeclareFunctions()
     return { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
 end
 function modifier_mazellov_f_slow:GetModifierMoveSpeedBonus_Percentage()
     return -self:GetAbility():GetSpecialValueFor("slow_pct")
-end
-function modifier_mazellov_f_slow:GetEffectName()
-    return "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_debuff.vpcf"
-end
-function modifier_mazellov_f_slow:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
 end
 
 modifier_mazellov_f_resist_reduction = class({})

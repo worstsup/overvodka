@@ -13432,7 +13432,34 @@
 		}
 	}
 
-
+	"mazellov_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/mazellov/mazellov_r"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"mazellov_r"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"130 125 120"
+		"AbilityManaCost"				"300"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+			"duration"					"8 9 10"
+			"bonus_as"					"40 80 120"
+			"bonus_ms"					"15 20 25"
+			"magic_resist"
+			{
+				"value"	"0"
+				"special_bonus_unique_mazellov_7" "+80"
+			}
+		}
+	}
 	//=================================================================================================================
 	// Lyrical Rap
 	//=================================================================================================================
