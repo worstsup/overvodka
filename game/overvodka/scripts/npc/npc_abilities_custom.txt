@@ -13274,10 +13274,9 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"            "mazellov_q"
-		"AbilityCooldown"               "60 55 50 45"
 		"AbilityManaCost"               "150 175 200 225"
 		"AbilityCastRange"			"600 750 900 1050"
-		"AbilityCastPoint"				"1"
+		"AbilityCastPoint"				"1" 
 		"AbilityValues"
 		{
 			"explode_damage"		"125 150 175 200"
@@ -13286,10 +13285,25 @@
 			"worker_hp"			"325 375 425 475"
 			"worker_armor"			"1 3 5 7"
 			"worker_magres"		"0 10 20 30"
-			"worker_movespeed"		"300 320 340 360"
-			"worker_spawn_interval"	"1.25"
+			"worker_movespeed"		"300 320 340 360" 
+			"worker_spawn_interval"
+			{
+				"value"		"1.25"
+				"special_bonus_unique_mazellov_8"		"-0.5"
+			}	
 			"factory_hit_count" 	"5 6 7 8"
 			"factory_lifetime"		"15"
+			"AbilityCooldown"
+			{
+				"value"		"60 55 50 45"
+				"special_bonus_unique_mazellov_3"	"-5"
+			}
+			"worker_respawn_enabled"
+			{
+				"value"		"0"
+				"special_bonus_facet_mazellov_q"	"+1"
+				"RequiresFacet"	"facet_mazellov_q" 
+			}
 		}
 	}
 
@@ -13307,10 +13321,9 @@
 		"AbilityTextureName"            "mazellov_w"
 		"AbilityCooldown"               "12 11 10 9"
 		"AbilityManaCost"               "100 110 120 130"
-		"AbilityCastRange"				"1950"
 		"AbilityCastPoint"				"0.2"
 		"LinkedAbility"					"mazellov_d"
-		"AbilityValues"
+		"AbilityValues" 
 		{
 			"projectile_speed"			"550"
 			"projectile_width"
@@ -13318,8 +13331,21 @@
 				"value"	"225 235 245 255"
 				"affected_by_aoe_increase"	"1"
 			}
-			"max_distance"				"1950"
-			"damage"					"150 200 250 300"
+			"max_distance"
+			{
+				"value"		"1950" 
+				"special_bonus_unique_mazellov_6"	"+200"
+			}
+			"AbilityCastRange"
+			{
+				"value"		"1950"
+				"special_bonus_unique_mazellov_6"	"+200"
+			}		
+			"damage"
+			{
+				"value"	"150 200 250 300" 
+				"special_bonus_unique_mazellov_1"		"+75"
+			}				
 		}
 	}
 
@@ -13343,21 +13369,152 @@
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"             		"heroes/mazellov/mazellov_e"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"            "mazellov_e"
 		"AbilityCooldown"               "8 7.5 7 6.5"
-		"AbilityManaCost"               "85 105 125 155"
 		"AbilityChannelTime"			"1.75 2.25 2.75 3.25"
 		"AbilityValues"
 		{
-			"wave_damage"		"20 35 50 65"
+			"wave_damage"		"20 35 50 65" 
 			"wave_radius"
 			{
 				"value"	"500"
 				"affected_by_aoe_increase"	"1"
 			}
 			"wave_interval"		"0.5"
-			"wave_slow_duration"	"3"
 			"wave_slow_amount"		"30"
+			"wave_slow_duration"	"3"
+			"AbilityManaCost"
+			{
+				"value"		"85 105 125 155"
+			} 
+			"wave_pull_speed"
+			{
+				"value"		"0"
+				"special_bonus_facet_mazellov_e"	"+200"
+				"RequiresFacet"	"facet_mazellov_e" 
+			}
+           
 		}
+	}
+
+	//=================================================================================================================
+	// МЕМЫ
+	//=================================================================================================================
+
+	"mazellov_f"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/mazellov/mazellov_f"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"            "mazellov_f"
+		"AbilityManaCost"               "100 110 120 130"
+		"AbilityValues"
+		{
+			"damage"		"50 100 150 200"
+			"dot_damage"		"20 40 60 70"
+			"slow_pct"		"15 20 25 30"
+			"magic_resist_reduction"			"10 15 20 25"
+			"miss_chance"				"15 20 25 30"
+			"duration"		"19"
+			"effect_duration"	"1.5 2 2.5 3"
+			"dot_interval"		"1"
+			"radius"		"650"
+			"rotation_speed"		"200"
+			"AbilityCooldown"
+			{
+				"value"		"8 7.5 7 6.5"
+				"special_bonus_unique_mazellov_4"		"-1"
+			}             
+		}
+	}
+
+
+	//=================================================================================================================
+	// Lyrical Rap
+	//=================================================================================================================
+
+	"mazellov_innate"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/mazellov/mazellov_innate"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_INNATE_UI"
+		"AbilityTextureName"            "mazellov_innate"
+		"innate"				"1"
+		"MaxLevel"		"1"
+		"AbilityValues"
+		{
+			"min_radius"
+			{
+				"value"		"200"
+				"affected_by_aoe_increase"	"1"
+			}		
+			"max_radius"
+			{
+				"value"		"700"
+				"affected_by_aoe_increase"	"1"
+			}		
+			"min_bonus"		"10"
+			"max_bonus"		"50"
+		}
+	}
+
+	"special_bonus_unique_mazellov_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+
+	"special_bonus_unique_mazellov_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 }

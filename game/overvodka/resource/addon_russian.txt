@@ -3154,6 +3154,7 @@
 		"DOTA_Tooltip_ability_mazellov_q_worker_movespeed"			"СКОРОСТЬ ПЕРЕДВИЖЕНИЯ РАБОТЯГИ:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_hit_count"			"АТАК ДЛЯ УНИЧТОЖЕНИЯ ЗАВОДА:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_lifetime"			"ДЛИТЕЛЬНОСТЬ ЗАВОДА:"
+		"DOTA_Tooltip_ability_mazellov_q_worker_spawn_interval"			"ИНТЕРВАЛ ПОЯВЛЕНИЯ РАБОТЯГ:"
 
 		"DOTA_Tooltip_ability_mazellov_w"			"Чертово Колесо"
 		"DOTA_Tooltip_ability_mazellov_w_Description"			"Илюша выпускает колесо, которое катится по траектории, поражая всех противников на своем пути. К колесу можно переместиться в любой момент, применив способность Перемещение к Колесу. Каждые 0.2 сек дополнительно наносит 10% от своего урона."
@@ -3163,5 +3164,38 @@
 
 		"DOTA_Tooltip_ability_mazellov_d"			"Перемещение к колесу"
 		"DOTA_Tooltip_ability_mazellov_d_Description"			"Перемещает Мазеллова к колесу от способности Чёртово Колесо."
+
+		"DOTA_Tooltip_ability_mazellov_e"			"Пряничный Домик"
+		"DOTA_Tooltip_ability_mazellov_e_Description"			"Мазяка ненадолго прячется в свой пряничный домик, защищаясь от любого вреда и выпуская волны вокруг себя, которые наносят урон и замедляют врагов."
+		"DOTA_Tooltip_ability_mazellov_e_wave_damage"			"УРОН ОТ ВОЛНЫ:"
+		"DOTA_Tooltip_ability_mazellov_e_wave_radius"			"РАДИУС ВОЛНЫ:"
+		"DOTA_Tooltip_ability_mazellov_e_wave_interval"			"ИНТЕРВАЛ ПОЯВЛЕНИЯ ВОЛН:"
+		"DOTA_Tooltip_ability_mazellov_e_wave_slow_duration"			"ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
+		"DOTA_Tooltip_ability_mazellov_e_wave_slow_amount"			"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+
+		"DOTA_Tooltip_ability_mazellov_innate"			"Lyrical Rap"
+		"DOTA_Tooltip_ability_mazellov_innate_Description"			"Чем ближе Мазеллов к противнику, тем красивее звучат его песни, и тем больше его способности наносят урон по врагам."
+		"DOTA_Tooltip_ability_mazellov_innate_min_radius"			"МИН. РАДИУС:"
+		"DOTA_Tooltip_ability_mazellov_innate_max_radius"			"МАКС. РАДИУС:"
+		"DOTA_Tooltip_ability_mazellov_innate_min_bonus"			"%МИН. БОНУС К УРОНУ ОТ ЗАКЛИНАНИЙ:"
+		"DOTA_Tooltip_ability_mazellov_innate_max_bonus"			"%МАКС. БОНУС К УРОНУ ОТ ЗАКЛИНАНИЙ:"
+
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_1"	"+{s:bonus_damage} к урону от Чертово Колесо"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_2"	"Пряничный Домик не требует маны"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_3"	"-{s:bonus_AbilityCooldown} сек. к перезарядки Завод Ящиков"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_4"	"-{s:bonus_AbilityCooldown} сек. к перезарядки Мемы"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5"				"Работяги наносят дополнительно 3% от макс. здоровья врага при взрыве"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5_description" "Базовый урон от взрыва + 3% от макс. здоровья цели (также учитывается сопротивление магии цели)"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_6"	"+{s:bonus_AbilityCastRange} к максимальной дистанции Чертово Колесо"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_7"	"Фанат получает невосприимчивость к эффектам и сопротивление к магии 80%"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_8"	"-{s:bonus_worker_spawn_interval} сек. к интервалу появления работяг от способности Завод Ящиков"
+
+		"dota_tooltip_facet_mazellov_e" "ПРИМАГНИТИЛО"
+		"dota_tooltip_facet_mazellov_e_description" "Способность ПРЯНИЧНЫЙ ДОМИК притягивает врагов к Мазеллову."
+		"dota_tooltip_ability_mazellov_e_facet_mazellov_e" "Каждая волна, задевшая врага, притягивает его к Мазеллову."
+
+		"dota_tooltip_facet_mazellov_q" "ПОДНИМАЛ ХУЙНЮ"
+		"dota_tooltip_facet_mazellov_q_description" "Если работяга, созданный способностью ЗАВОД ЯЩИКОВ, погибает от героя, он воскресает ослабленным на 50%."
+		"dota_tooltip_ability_mazellov_q_facet_mazellov_q" "Если работяга погиб от рук героя, то воскресает будучи ослабленным на <b>50%</b>."
 	}
 }

@@ -2981,22 +2981,18 @@
 		"Ability2" 		"mazellov_w"
 		"Ability3"		"mazellov_e"
 		"Ability4"		"mazellov_d"
-		"Ability5"		""
+		"Ability5"		"mazellov_f"
 		"Ability6"		""
-		"Ability7"		""
+		"Ability7"		"mazellov_innate"
 
-		"Ability10"		""
-		"Ability11"		""
-		"Ability12"		""
-		"Ability13"		""
-		"Ability14"		""
-		"Ability15"		""
-		"Ability16"		""
-		"Ability17"		""
-		"Ability18"		""
-		"Ability19"		""
-		"Ability20"		""
-		"Ability21"		""
+		"Ability10"		"special_bonus_unique_mazellov_1"
+		"Ability11"		"special_bonus_unique_mazellov_2"
+		"Ability12"		"special_bonus_unique_mazellov_3"
+		"Ability13"		"special_bonus_unique_mazellov_4"
+		"Ability14"		special_bonus_unique_mazellov_5
+		"Ability15"		"special_bonus_unique_mazellov_6"
+		"Ability16"		"special_bonus_unique_mazellov_7"
+		"Ability17"		special_bonus_unique_mazellov_8
 		"ArmorPhysical"		"1.2"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"30"
@@ -3024,66 +3020,25 @@
 		"VoiceFile"		""
 		"Facets"
 		{
-			"ringmaster_default"	
+			"mazellov_e" 
 			{
-				"Icon"				"item"
-				"Color"				"Gray"
-				"GradientID"		"3"
-				"Deprecated"		"true"
-			}
-			"ringmaster_carny_classics"	
-			{
-				"Icon"				"whoopee_cushion"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"		"ringmaster_funhouse_mirror"
-						"AbilityIndex"	"18"
-						"AutoLevelAbility" 	"false"
-					}
-					"Ability2"
-					{
-						"AbilityName"		"ringmaster_strongman_tonic"
-						"AbilityIndex"	"19"
-						"AutoLevelAbility" 	"false"
-					}
-					"Ability3"
-					{
-						"AbilityName"		"ringmaster_whoopee_cushion"
-						"AbilityIndex"	"20"
-						"AutoLevelAbility" 	"false"
-					}
-				}
-			}
-			"ringmaster_sideshow_secrets"	
-			{
-				"Icon"				"pie"
+				"Icon"				"vortex_in"
 				"Color"				"Red"
 				"GradientID"		"0"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"		"ringmaster_crystal_ball"
-						"AbilityIndex"	"18"
-						"AutoLevelAbility" 	"false"
-					}
-					"Ability2"
-					{
-						"AbilityName"		"ringmaster_summon_unicycle"
-						"AbilityIndex"	"19"
-						"AutoLevelAbility" 	"false"
-					}
-					"Ability3"
-					{
-						"AbilityName"		"ringmaster_weighted_pie"
-						"AbilityIndex"	"20"
-						"AutoLevelAbility" 	"false"
-					}
-				}
+			}
+			"mazellov_q" 
+			{
+				"Icon"				"summons"
+				"Color"				"Red"
+				"GradientID"		"2"
+			}
+			"ringmaster_carny_classics" 
+			{
+				"Deprecated"		"true"
+			}
+			"ringmaster_sideshow_secrets" 
+			{
+				"Deprecated"		"true"
 			}
 		}
 	}

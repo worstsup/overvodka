@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_mazellov_e_channel", "heroes/mazellov/mazellov_e.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_mazellov_e_slow", "heroes/mazellov/mazellov_e.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_mazellov_e_pull", "heroes/mazellov/mazellov_e.lua", LUA_MODIFIER_MOTION_HORIZONTAL)
+LinkLuaModifier("modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE)
 
 mazellov_e = class({})
 
@@ -8,16 +9,14 @@ function mazellov_e:Precache(context)
     PrecacheResource("model", "models/gingerbread_house/domik.vmdl", context)
 end
 
--- Добавляем эту функцию для определения времени каста
 function mazellov_e:GetChannelTime()
-    return self:GetSpecialValueFor("AbilityChannelTime") -- Убедитесь, что у вас есть это значение в ability specials
+    return self:GetSpecialValueFor("AbilityChannelTime")
 end
 
 function mazellov_e:OnSpellStart()
     local caster = self:GetCaster()
     caster:AddNewModifier(caster, self, "modifier_mazellov_e_channel", { duration = self:GetChannelTime() })
     
-    -- Добавляем звук или частицы при начале каста, если нужно
     caster:EmitSound("mazellov_e_start")
 end
 
@@ -25,6 +24,13 @@ function mazellov_e:OnChannelFinish(bInterrupted)
     local caster = self:GetCaster()
     caster:RemoveModifierByName("modifier_mazellov_e_channel")
 end 
+
+function mazellov_e:GetManaCost(level)
+    if self:GetCaster():HasTalent("special_bonus_unique_mazellov_2") then
+        return 0
+    end
+    return self.BaseClass.GetManaCost(self, level)
+end
 
 modifier_mazellov_e_channel = class({})
 
@@ -57,7 +63,6 @@ function modifier_mazellov_e_channel:OnIntervalThink()
     if not IsServer() then return end
     local caster = self:GetParent()
     self:GetAbility():FireRing()
-    -- Волна визуала
     local particle = ParticleManager:CreateParticle("particles/mazellov_e.vpcf", PATTACH_ABSORIGIN, caster)
     ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(particle)
@@ -67,24 +72,33 @@ function mazellov_e:FireRing()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local pulse = caster:AddNewModifier(
-		caster,
-		self,
-		"modifier_generic_ring_lua",
-		{
-			end_radius = self:GetSpecialValueFor("wave_radius"),
-			speed = 450,
-			target_team = DOTA_UNIT_TARGET_TEAM_ENEMY,
-			target_type = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		}
-	)
-	pulse:SetCallback( function( enemy )
-		self:OnHit( enemy )
-	end)
+        caster,
+        self,
+        "modifier_generic_ring_lua",
+        {
+            end_radius = self:GetSpecialValueFor("wave_radius"),
+            speed = 450,
+            target_team = DOTA_UNIT_TARGET_TEAM_ENEMY,
+            target_type = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        }
+    )
+    pulse:SetCallback( function( enemy )
+        self:OnHit( enemy )
+    end)
 end
 
 function mazellov_e:OnHit( enemy )
-    enemy:AddNewModifier(self:GetCaster(), self, "modifier_mazellov_e_slow", { duration = self:GetSpecialValueFor("wave_slow_duration") })
-    ApplyDamage({victim = enemy, attacker = self:GetCaster(), ability = self, damage = self:GetSpecialValueFor("wave_damage"), damage_type = DAMAGE_TYPE_MAGICAL })
+    local caster = self:GetCaster()
+    enemy:AddNewModifier(caster, self, "modifier_mazellov_e_slow", { duration = self:GetSpecialValueFor("wave_slow_duration") })
+    enemy:AddNewModifier(caster, self, "modifier_mazellov_e_pull", { duration = 0.4 })
+    
+    ApplyDamage({
+        victim = enemy,
+        attacker = caster,
+        ability = self,
+        damage = self:GetSpecialValueFor("wave_damage"),
+        damage_type = DAMAGE_TYPE_MAGICAL
+    })
 end
 
 function modifier_mazellov_e_channel:OnDestroy()
@@ -96,7 +110,6 @@ function modifier_mazellov_e_channel:OnDestroy()
         parent:SetOriginalModel(self.original_model)
     end
     
-    -- Удаляем частицы
     if self.particle then
         ParticleManager:DestroyParticle(self.particle, false)
         ParticleManager:ReleaseParticleIndex(self.particle)
@@ -118,4 +131,37 @@ end
 
 function modifier_mazellov_e_slow:GetModifierMoveSpeedBonus_Percentage()
     return -self.slow
+end
+
+modifier_mazellov_e_pull = class({})
+
+function modifier_mazellov_e_pull:IsHidden() return true end
+function modifier_mazellov_e_pull:IsDebuff() return true end
+function modifier_mazellov_e_pull:IsPurgable() return true end
+function modifier_mazellov_e_pull:GetModifierMoveSpeedBonus_Constant() return 0 end
+function modifier_mazellov_e_pull:GetAttributes() return MODIFIER_PROPERTY_MOVEMENT_TYPE end
+
+function modifier_mazellov_e_pull:OnCreated()
+    if not IsServer() then return end
+    self.pull_speed = self:GetAbility():GetSpecialValueFor("wave_pull_speed")
+    self:StartIntervalThink(FrameTime())
+end
+
+function modifier_mazellov_e_pull:OnIntervalThink()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+    local direction = (caster:GetAbsOrigin() - parent:GetAbsOrigin()):Normalized()
+    local distance = self.pull_speed * FrameTime()
+    local new_pos = parent:GetAbsOrigin() + direction * distance
+
+    if GridNav:CanFindPath(parent:GetAbsOrigin(), new_pos) then
+        parent:SetAbsOrigin(new_pos)
+    end
+end
+
+function modifier_mazellov_e_pull:CheckState()
+    return {
+        [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+    }
 end

@@ -26,13 +26,12 @@ function mazellov_d:OnSpellStart()
 
         FindClearSpaceForUnit(caster, current_pos, true)
         ProjectileManager:ProjectileDodge( caster )
-        -- Уничтожаем снаряд
         if caster.mazellov_orb_projectile then
             ProjectileManager:DestroyLinearProjectile(caster.mazellov_orb_projectile)
             caster.mazellov_orb_projectile = nil
         end
 
-        caster.mazellov_orb_teleported = true -- ← Прыжок совершен, блокируем повтор
+        caster.mazellov_orb_teleported = true
     else
         caster:Interrupt()
     end
