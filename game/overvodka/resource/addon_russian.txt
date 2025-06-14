@@ -3154,6 +3154,7 @@
 		"DOTA_Tooltip_ability_mazellov_q_worker_movespeed"			"СКОРОСТЬ ПЕРЕДВИЖЕНИЯ РАБОТЯГИ:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_hit_count"			"АТАК ДЛЯ УНИЧТОЖЕНИЯ ЗАВОДА:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_lifetime"			"ДЛИТЕЛЬНОСТЬ ЗАВОДА:"
+
 		"DOTA_Tooltip_ability_mazellov_q_worker_spawn_interval"			"ИНТЕРВАЛ ПОЯВЛЕНИЯ РАБОТЯГ:"
 
 		"DOTA_Tooltip_ability_mazellov_w"			"Чертово Колесо"
