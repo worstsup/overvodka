@@ -539,6 +539,12 @@ function COverthrowGameMode:OnItemPickUp( event )
 			UTIL_Remove(item)
 			local bonusItem = CreateItem("item_madstone_bundle", owner, owner)
 			owner:AddItem(bonusItem)
+			if GetMapName ~= "overvodka_5x5" then
+				Timers:CreateTimer(0.03, function()
+					local bonusItem2 = CreateItem("item_madstone_bundle", owner, owner)
+					owner:AddItem(bonusItem2)
+				end)
+			end
 		end)
 	end
 end
