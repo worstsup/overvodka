@@ -3186,6 +3186,7 @@
 		"DOTA_Tooltip_ability_mazellov_e_wave_interval"			"ИНТЕРВАЛ ПОЯВЛЕНИЯ ВОЛН:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_slow_duration"			"ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_slow_amount"			"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_mazellov_e_shard_description"	"Позволяет применять способности и предметы во время действия способности, также восполняет %hp_regen%%% от макс. здоровья и маны в секунду."
 
 		"DOTA_Tooltip_ability_mazellov_r"			  "Преданный фанат"
 		"DOTA_Tooltip_ability_mazellov_r_description" "Мазеллов делает выбранного вражеского героя своим преданным фанатом, получая над ним полный контроль. При этом цель теряет возможность управлять своим персонажем. Все убийства, совершённые фанатом во время действия способности, в том числе и смерть самого фаната, засчитываются Мазеллову. Подконтрольная цель может использовать все предметы и способности, кроме ультимейта, а также получает дополнительную скорость атаки и передвижения.\nRefresher Orb не сбрасывает перезарядку этой способности."
@@ -3194,6 +3195,7 @@
 		"DOTA_Tooltip_ability_mazellov_r_bonus_ms" 	"%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_modifier_mazellov_r"			"Преданный фанат"
 		"DOTA_Tooltip_modifier_mazellov_r_description" "Вы стали фанатом Мазеллова! Вы не можете управлять своим героем, а все совершенные убийства переходят владельцу способности"
+		"DOTA_Tooltip_ability_mazellov_r_scepter_description" "Позволяет использовать ультимативную способность фаната."
 
 		"DOTA_Tooltip_ability_mazellov_innate"			"Lyrical Rap"
 		"DOTA_Tooltip_ability_mazellov_innate_Description"			"Чем ближе Мазеллов к противнику, тем красивее звучат его песни, и тем больше его способности наносят урон по врагам."

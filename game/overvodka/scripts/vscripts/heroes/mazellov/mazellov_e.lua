@@ -16,7 +16,6 @@ end
 function mazellov_e:OnSpellStart()
     local caster = self:GetCaster()
     caster:AddNewModifier(caster, self, "modifier_mazellov_e_channel", { duration = self:GetChannelTime() })
-    
     caster:EmitSound("mazellov_e_start")
 end
 
@@ -46,10 +45,13 @@ end
 
 function modifier_mazellov_e_channel:OnCreated()
     if not IsServer() then return end
-
     local parent = self:GetParent()
     local ability = self:GetAbility()
-
+    local hp_regen = ability:GetSpecialValueFor("hp_regen")
+    local mana_regen = ability:GetSpecialValueFor("mana_regen")
+    if parent:HasShard() then
+        parent:AddNewModifier(parent, ability, "modifier_pugna_oblivion_savant", {duration = self:GetRemainingTime()})
+    end
     self.original_model = parent:GetModelName()
     parent:SetModel("models/gingerbread_house/domik.vmdl")
     parent:SetOriginalModel("models/gingerbread_house/domik.vmdl")
@@ -105,6 +107,9 @@ function modifier_mazellov_e_channel:OnDestroy()
     if not IsServer() then return end
 
     local parent = self:GetParent()
+    if parent:HasModifier("modifier_pugna_oblivion_savant") then
+        parent:RemoveModifierByName("modifier_pugna_oblivion_savant")
+    end
     if self.original_model then
         parent:SetModel(self.original_model)
         parent:SetOriginalModel(self.original_model)
