@@ -3003,7 +3003,7 @@
 		"AttackRange"		"600"
 		"BaseAttackSpeed"		"115"
 		"AttackRate"				"2.20000"
-		"ProjectileModel"		"particles/units/heroes/hero_ringmaster/ringmaster_base_attack.vpcf"
+		"ProjectileModel"		"particles/mazellov_base_attack.vpcf"
 
 		"ProjectileSpeed"		"1200"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"

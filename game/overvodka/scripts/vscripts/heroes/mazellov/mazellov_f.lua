@@ -160,7 +160,7 @@ function modifier_mazellov_f_dot:OnCreated()
     self.interval = self:GetAbility():GetSpecialValueFor("dot_interval")
     self:StartIntervalThink(self.interval)
     
-    self.particle = ParticleManager:CreateParticle("particles/units/heroes/hero_venomancer/venomancer_poison_debuff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self.particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_burn.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     self:AddParticle(self.particle, false, false, -1, false, false)
 end
 function modifier_mazellov_f_dot:OnIntervalThink()
@@ -173,7 +173,7 @@ function modifier_mazellov_f_dot:OnIntervalThink()
     })
 end
 function modifier_mazellov_f_dot:GetEffectName()
-    return "particles/units/heroes/hero_venomancer/venomancer_poison_debuff.vpcf"
+    return "particles/units/heroes/hero_phoenix/phoenix_fire_spirit_burn.vpcf"
 end
 function modifier_mazellov_f_dot:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
@@ -182,22 +182,17 @@ end
 modifier_mazellov_f_slow = class({})
 function modifier_mazellov_f_slow:IsDebuff() return true end
 function modifier_mazellov_f_slow:IsPurgable() return true end
-function modifier_mazellov_f_slow:OnCreated()
-    if not IsServer() then return end
-    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_projectile_hit.vpcf",PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
-    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(p)
-    local p1 = ParticleManager:CreateParticle("particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
-    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
-    self:AddParticle(p1, false, false, -1, false, false)
-end
 function modifier_mazellov_f_slow:DeclareFunctions()
     return { MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE }
 end
 function modifier_mazellov_f_slow:GetModifierMoveSpeedBonus_Percentage()
     return -self:GetAbility():GetSpecialValueFor("slow_pct")
+end
+function modifier_mazellov_f_slow:GetEffectName()
+    return "particles/units/heroes/hero_pugna/pugna_decrepify.vpcf"
+end
+function modifier_mazellov_f_slow:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end
 
 modifier_mazellov_f_resist_reduction = class({})
@@ -210,7 +205,7 @@ function modifier_mazellov_f_resist_reduction:GetModifierMagicalResistanceBonus(
     return -self:GetAbility():GetSpecialValueFor("magic_resist_reduction")
 end
 function modifier_mazellov_f_resist_reduction:GetEffectName()
-    return "particles/units/heroes/hero_pugna/pugna_decrepify.vpcf"
+    return "particles/units/heroes/hero_antimage/antimage_manabreak_enemy_debuff.vpcf"
 end
 function modifier_mazellov_f_resist_reduction:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
@@ -226,7 +221,7 @@ function modifier_mazellov_f_miss_chance:GetModifierMiss_Percentage()
     return self:GetAbility():GetSpecialValueFor("miss_chance")
 end
 function modifier_mazellov_f_miss_chance:GetEffectName()
-    return "particles/status_fx/status_effect_brewmaster_drunken_haze.vpcf"
+    return "particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_blinding_light_debuff.vpcf"
 end
 function modifier_mazellov_f_miss_chance:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
