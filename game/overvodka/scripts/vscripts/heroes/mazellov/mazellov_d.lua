@@ -3,8 +3,8 @@ LinkLuaModifier("modifier_mazellov_w", "heroes/mazellov/mazellov_d", LUA_MODIFIE
 mazellov_d = class({})
 
 function mazellov_d:Spawn()
-	if not IsServer() then return end
-	self:SetActivated( false )
+    if not IsServer() then return end
+    self:SetActivated( false )
 end
 
 function mazellov_d:OnSpellStart()
