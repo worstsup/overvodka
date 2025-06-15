@@ -127,9 +127,12 @@
 
 		"DOTA_Tooltip_modifier_invis_revealed"				"Невидимость раскрыта"
 		"dota_hud_error_stint_enemy_no_gold"				"У цели недостаточно золота"
-		"DOTA_Tooltip_ability_item_bag_of_gold"				"HAMSTER COIN"
-		"DOTA_Tooltip_ability_item_bag_of_gold_2"			"HAMSTER COIN"
-		"DOTA_Tooltip_ability_item_bag_of_gold_bablokrad"	"БАБЛО"
+		"DOTA_Tooltip_ability_item_bag_of_gold"				"<font color='#FFD700'> HAMSTER COIN</font>"
+		"DOTA_Tooltip_ability_item_bag_of_gold_description"	"<font color='#FFD700'>Даёт 300 золота</font>"
+		"DOTA_Tooltip_ability_item_bag_of_gold_2"			"<font color='#FFD700'> HAMSTER COIN</font>"
+		"DOTA_Tooltip_ability_item_bag_of_gold_2_description"	"<font color='#FFD700'>Даёт 300 золота</font>"
+		"DOTA_Tooltip_ability_item_bag_of_gold_bablokrad"	"<font color='#FFD700'>БАБЛО</font>"
+		"DOTA_Tooltip_ability_item_bag_of_gold_bablokrad_description" "<font color='#FFD700'>Даёт 100 золота</font>"
 		"DOTA_Tooltip_ability_item_treasure_chest"			"Сундук с приколами"
 
 		"npc_dota_hero_bounty_hunter"		"MELLSTROY"
