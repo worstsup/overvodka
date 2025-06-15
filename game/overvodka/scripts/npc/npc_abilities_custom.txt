@@ -8022,6 +8022,7 @@
 				"value"	"450 550 650 750"
 				"affected_by_aoe_increase"	"1"
 			}
+			"damage_threshold" "30 60 90 120"
 			"AbilityCastRange"
 			{
 				"value"	"450 550 650 750"
@@ -10485,7 +10486,7 @@
 				"interval"		"0.2"
 				"radius"		"200"
 				"damage_mini"	"60 100 140"
-				"ministun"		"0.5"
+				"ministun"		"0.25"
 				"dps_pct"		"5"	
 				"dps_pct_tooltip"	"10"
 				"radius_bones"	"325"
@@ -11213,7 +11214,7 @@
 		{
 			"duration"		
 			{
-				"value"	"4 5 6 7"
+				"value"	"4 4.6 5.2 5.8"
 				"special_bonus_unique_azazin_6" "+1"
 			}
 			"radius"
@@ -11322,13 +11323,13 @@
 			"mana_cost_per_second"		"35 70 105"
 			"radius"
 			{
-				"value"						"450 500 550"
+				"value"						"450"
 				"affected_by_aoe_increase"	"1"
 				"special_bonus_unique_azazin_5" "+100"
 			}
 			"damage"
 			{
-				"value"	"80 130 180"
+				"value"	"60 120 180"
 				"special_bonus_unique_azazin_8" "+60"
 			}
 			"movespeed_slow"
