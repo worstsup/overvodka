@@ -3,8 +3,8 @@ LinkLuaModifier("modifier_mazellov_w", "heroes/mazellov/mazellov_d", LUA_MODIFIE
 mazellov_d = class({})
 
 function mazellov_d:Spawn()
-	if not IsServer() then return end
-	self:SetActivated( false )
+    if not IsServer() then return end
+    self:SetActivated( false )
 end
 
 function mazellov_d:OnSpellStart()
@@ -26,13 +26,12 @@ function mazellov_d:OnSpellStart()
 
         FindClearSpaceForUnit(caster, current_pos, true)
         ProjectileManager:ProjectileDodge( caster )
-        -- Уничтожаем снаряд
         if caster.mazellov_orb_projectile then
             ProjectileManager:DestroyLinearProjectile(caster.mazellov_orb_projectile)
             caster.mazellov_orb_projectile = nil
         end
 
-        caster.mazellov_orb_teleported = true -- ← Прыжок совершен, блокируем повтор
+        caster.mazellov_orb_teleported = true
     else
         caster:Interrupt()
     end

@@ -9,7 +9,6 @@ function mazellov_q:OnAbilityPhaseStart()
     local point = self:GetCursorPosition()
     local caster = self:GetCaster()
 
-    -- Создаем партикл
     self.precast_particle = ParticleManager:CreateParticle(
         "particles/techies_minefield_hammer_new.vpcf",
         PATTACH_WORLDORIGIN,
@@ -19,13 +18,11 @@ function mazellov_q:OnAbilityPhaseStart()
     ParticleManager:SetParticleControl(self.precast_particle, 1, point)
     ParticleManager:SetParticleControl(self.precast_particle, 2, point)
 
-    self.precast_point = point -- сохраняем позицию, если пригодится
+    self.precast_point = point
 
     return true
 end
 
---------------------------------------------------------------------------------
--- Если каст был прерван
 function mazellov_q:OnAbilityPhaseInterrupted()
     if not IsServer() then return end
 
@@ -41,7 +38,6 @@ function mazellov_q:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("factory_lifetime")
 
-    -- Удаляем предварительный партикл, если он ещё остался
     if self.precast_particle then
         ParticleManager:DestroyParticle(self.precast_particle, false)
         ParticleManager:ReleaseParticleIndex(self.precast_particle)
@@ -52,28 +48,24 @@ function mazellov_q:OnSpellStart()
     factory:SetControllableByPlayer(caster:GetPlayerID(), true)
     factory:SetOwner(caster)
 
-    -- Добавляем партиклы на аттачменты
     self:AttachParticlesToFactory(factory)
 
     factory:AddNewModifier(caster, self, "modifier_factory", {})
     factory:AddNewModifier(caster, nil, "modifier_kill", {duration = duration})
 end
 
--- Новая функция для добавления партиклов
 function mazellov_q:AttachParticlesToFactory(factory)
     local particle_name = "models/heroes/dawnbreaker/debut/particles/battlemaiden_debut_intro_burst_smoke_vertical.vpcf"
     
-    -- Список аттачментов
     local attachments = {
         "particle1",
         "particle2",
         "particle3"
     }
     
-    -- Создаем партиклы на каждом аттачменте
     for _, attach_point in pairs(attachments) do
         local attach_id = factory:ScriptLookupAttachment(attach_point)
-        if attach_id ~= 0 then  -- Проверяем, что аттачмент существует
+        if attach_id ~= 0 then
             local particle = ParticleManager:CreateParticle(particle_name, PATTACH_POINT_FOLLOW, factory)
             ParticleManager:SetParticleControlEnt(particle, 0, factory, PATTACH_POINT_FOLLOW, attach_point, factory:GetAbsOrigin(), true)
             factory.particle_effects = factory.particle_effects or {}
@@ -82,7 +74,6 @@ function mazellov_q:AttachParticlesToFactory(factory)
     end
 end
 
----------------------------------------------------------------------------------------------------
 
 modifier_factory = class({})
 
@@ -100,7 +91,6 @@ function modifier_factory:OnCreated()
     self:GetParent():SetHealth(self.hits_to_destroy)
     self:StartIntervalThink(self.interval)
 
-    -- Звук появления завода
     EmitSoundOn("mazellov_q_start", self:GetParent())
 end
 
@@ -117,7 +107,6 @@ function modifier_factory:OnIntervalThink()
     worker:AddNewModifier(caster, ability, "modifier_worker_ai", {})
     worker:AddNewModifier(caster, ability, "modifier_worker_disarmed", {})
 
-    -- Параметры из KV
     local hp = ability:GetSpecialValueFor("worker_hp")
     local armor = ability:GetSpecialValueFor("worker_armor")
     local magres = ability:GetSpecialValueFor("worker_magres")
@@ -139,7 +128,7 @@ function modifier_factory:DeclareFunctions()
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
         MODIFIER_PROPERTY_DISABLE_HEALING,
-        MODIFIER_PROPERTY_HEALTHBAR_PIPS, -- добавляем поддержку пипсов
+        MODIFIER_PROPERTY_HEALTHBAR_PIPS, 
     }
 end
 
@@ -192,8 +181,7 @@ function modifier_factory:OnDestroy()
     if not IsServer() then return end
 
     StopSoundOn("mazellov_q_start", self:GetParent())
-    
-    -- Уничтожаем все партиклы при удалении завода
+
     local factory = self:GetParent()
     if factory.particle_effects then
         for _, particle in pairs(factory.particle_effects) do
@@ -203,21 +191,72 @@ function modifier_factory:OnDestroy()
     end
 end
 
----------------------------------------------------------------------------------------------------
-
 modifier_worker_ai = class({})
 
 function modifier_worker_ai:IsHidden() return true end
 function modifier_worker_ai:IsPurgable() return false end
 
-function modifier_worker_ai:OnCreated()
+function modifier_worker_ai:OnCreated(params)
     if not IsServer() then return end
 
     local ability = self:GetAbility()
-    self.explode_radius = ability:GetSpecialValueFor("explode_radius")
-    self.explode_damage = ability:GetSpecialValueFor("explode_damage")
+    
+    self.explode_radius = params.explode_radius or ability:GetSpecialValueFor("explode_radius")
+    self.explode_damage = params.explode_damage or ability:GetSpecialValueFor("explode_damage")
     self.explode_delay = ability:GetSpecialValueFor("explode_delay")
-    self:StartIntervalThink(0.2)
+    self.is_respawned = params.is_respawned or false
+    
+    self:StartIntervalThink(0.03)
+end
+
+function modifier_worker_ai:OnDestroy()
+    if not IsServer() then return end
+
+    local unit = self:GetParent()
+    if not unit:IsNull() and not unit:IsAlive() and not self.exploding then
+        self:Explode(nil)
+    end
+end
+
+function modifier_worker_ai:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_DEATH,
+        MODIFIER_EVENT_ON_TAKEDAMAGE,
+    }
+end
+
+function modifier_worker_ai:OnTakeDamage(params)
+    if not IsServer() then return end
+
+    local unit = self:GetParent()
+    if params.unit ~= unit then return end
+
+    if unit:GetHealth() <= 0 and not self.exploding then
+        self:Explode(params.attacker)
+    end
+end
+
+function modifier_worker_ai:OnDeath(params)
+    if not IsServer() then return end
+
+    local unit = self:GetParent()
+    if unit:IsNull() or params.unit ~= unit then return end
+
+    if self.explode_timer then
+        Timers:RemoveTimer(self.explode_timer)
+        self.explode_timer = nil
+    end
+
+    if self.exploding then return end
+
+    local respawn_enabled = self:GetAbility():GetSpecialValueFor("worker_respawn_enabled") == 1
+    local killer = params.attacker or unit:GetKiller()
+
+    if respawn_enabled and killer and killer ~= unit and not self.is_respawned then
+        self:RespawnWeakenedWorker(unit, killer)
+    else
+        self:Explode(nil)
+    end
 end
 
 function modifier_worker_ai:OnIntervalThink()
@@ -242,11 +281,9 @@ function modifier_worker_ai:OnIntervalThink()
 
         if (unit:GetAbsOrigin() - enemies[1]:GetAbsOrigin()):Length2D() <= self.explode_radius then
             self.exploding = true
-            self:StartIntervalThink(-1)  -- остановка периодического поиска
+            self:StartIntervalThink(-1)
 
-            -- не останавливаем юнита, он продолжает двигаться к цели
-
-            Timers:CreateTimer(self.explode_delay, function()
+            self.explode_timer = Timers:CreateTimer(self.explode_delay, function()
                 if not unit:IsNull() and unit:IsAlive() then
                     self:Explode(enemies[1])
                 end
@@ -255,11 +292,14 @@ function modifier_worker_ai:OnIntervalThink()
     end
 end
 
-
 function modifier_worker_ai:Explode(target)
     local unit = self:GetParent()
     local ability = self:GetAbility()
+    local caster = self:GetCaster()
     local damage = self.explode_damage
+
+    local has_talent = caster:HasTalent("special_bonus_unique_mazellov_5")
+    local health_pct_damage = has_talent and 0.03 or 0
 
     local enemies = FindUnitsInRadius(
         unit:GetTeamNumber(),
@@ -274,42 +314,51 @@ function modifier_worker_ai:Explode(target)
     )
 
     for _, enemy in pairs(enemies) do
+        local total_damage = damage
+        if has_talent then
+            total_damage = total_damage + (enemy:GetMaxHealth() * health_pct_damage)
+        end
+
         ApplyDamage({
             victim = enemy,
-            attacker = unit,
+            attacker = caster,
             ability = ability,
-            damage = damage,
+            damage = total_damage,
             damage_type = DAMAGE_TYPE_MAGICAL
         })
     end
 
-    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_techies/techies_suicide_base.vpcf", PATTACH_ABSORIGIN, unit)
-    ParticleManager:ReleaseParticleIndex(particle)
-
+    ParticleManager:CreateParticle("particles/units/heroes/hero_techies/techies_suicide_base.vpcf", PATTACH_ABSORIGIN, unit)
     EmitSoundOn("Hero_Techies.Suicide", unit)
 
     unit:AddNoDraw()
     unit:RemoveSelf()
 end
 
-
-function modifier_worker_ai:DeclareFunctions()
-    return {
-        MODIFIER_EVENT_ON_DEATH,
-    }
+function modifier_worker_ai:RespawnWeakenedWorker(unit, killer)
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local spawn_pos = unit:GetAbsOrigin()
+    
+    local weakened_worker = CreateUnitByName("npc_worker", spawn_pos, true, caster, nil, caster:GetTeamNumber())
+    
+    weakened_worker:SetMaxHealth(ability:GetSpecialValueFor("worker_hp") * 0.5)
+    weakened_worker:SetPhysicalArmorBaseValue(ability:GetSpecialValueFor("worker_armor") * 0.5)
+    weakened_worker:SetBaseMagicalResistanceValue(ability:GetSpecialValueFor("worker_magres") * 0.5)
+    weakened_worker:SetBaseMoveSpeed(ability:GetSpecialValueFor("worker_movespeed") * 0.5)
+    
+    weakened_worker:AddNewModifier(caster, ability, "modifier_worker_ai", {
+        explode_damage = ability:GetSpecialValueFor("explode_damage") * 0.5,
+        explode_radius = ability:GetSpecialValueFor("explode_radius") * 0.5,
+        is_respawned = true
+    })
+    weakened_worker:AddNewModifier(caster, ability, "modifier_worker_disarmed", {})
+    
+    ParticleManager:CreateParticle("particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", PATTACH_ABSORIGIN, weakened_worker)
+    
+    unit:AddNoDraw()
+    unit:RemoveSelf()
 end
-
-function modifier_worker_ai:OnDeath(params)
-    if not IsServer() then return end
-
-    local unit = self:GetParent()
-
-    if params.unit == unit and not self.exploding then
-        self.exploding = true  -- флаг, чтобы не взрывался дважды
-        self:Explode(nil)
-    end
-end
-
 
 modifier_worker_disarmed = class({})
 
@@ -321,6 +370,3 @@ function modifier_worker_disarmed:CheckState()
         [MODIFIER_STATE_DISARMED] = true,
     }
 end
-
-
-

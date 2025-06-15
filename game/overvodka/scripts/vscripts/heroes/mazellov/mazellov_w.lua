@@ -57,7 +57,6 @@ function mazellov_w:OnSpellStart()
 
     local projectile_id = ProjectileManager:CreateLinearProjectile(proj_info)
 
-    -- Создаём модификатор, который наносит доп. урон по пути
     local thinker = CreateModifierThinker(caster, self, "modifier_mazellov_w_thinker", {
         duration = travel_time,
         damage = damage,
@@ -71,7 +70,6 @@ function mazellov_w:OnSpellStart()
         z = spawn_origin.z
     }, spawn_origin, caster:GetTeamNumber(), false)
 
-    -- Для прыжка
     caster.mazellov_orb_direction = direction
     caster.mazellov_orb_start = spawn_origin
     caster.mazellov_orb_speed = speed
