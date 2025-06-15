@@ -50,7 +50,7 @@
             }
           }
           "volume"      {  "value"   "6.0" }
-          "volume"      {  "value"   "25.50000" }
+          "volume"      {  "value"   "5.50000" }
           "pitch_rand_min"  {  "value"   "0.000" }
           "pitch_rand_max"  {  "value"   "0.000" }
           "pitch"       {  "value"   "1.000000" }
