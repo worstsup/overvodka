@@ -25,7 +25,7 @@
 		{
 			"item"		"item_jordan"
 			"item"		"item_magic_aegis"
-			"item"		"item_ultimate_scepter"
+			"item"		"item_aghanims_shard"
 			"item"		"item_badun"
 			"item"		"item_suchiy"
 			"item"		"item_pasito"
@@ -38,7 +38,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_aghanims_shard"
+			"item"		"item_ultimate_scepter"
 			"item"		"item_magic_daedalus"
 			"item"		"item_invis_sword_datadriven"
 			"item"		"item_armlet_datadriven"
