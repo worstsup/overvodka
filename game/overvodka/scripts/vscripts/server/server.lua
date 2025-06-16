@@ -392,6 +392,9 @@ function Server:OnNPCSpawned(event)
             if unit:GetUnitName() == "npc_dota_hero_morphling" then
                 unit:AddNewModifier(unit, nil, "modifier_sans_arcana", {})
             end
+            if unit:GetUnitName() == "npc_dota_hero_void_spirit" then
+                unit:AddNewModifier(unit, nil, "modifier_invincible_arcana", {})
+            end
             if unit == RealHero and self.Players[PlayerID].last_time_double_show == 0 then
                 self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
 

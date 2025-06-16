@@ -26,7 +26,7 @@ function CDOTA_BaseNPC:HasShard()
 end
 
 function CDOTA_BaseNPC:HasArcana()
-    if self:HasModifier("modifier_sans_arcana") then
+    if self:HasModifier("modifier_sans_arcana") or self:HasModifier("modifier_invincible_arcana") then
         return true
     end
     return false

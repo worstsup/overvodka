@@ -2,7 +2,12 @@ LinkLuaModifier("modifier_invincible_innate_aura",    "heroes/invincible/invinci
 LinkLuaModifier("modifier_invincible_innate_debuff", "heroes/invincible/invincible_innate.lua", LUA_MODIFIER_MOTION_NONE)
 
 invincible_innate = class({})
-
+function invincible_innate:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "invincible_innate_arcana"
+    end
+    return "invincible_innate"
+end
 function invincible_innate:GetIntrinsicModifierName()
     return "modifier_invincible_innate_aura"
 end

@@ -14,6 +14,13 @@ function invincible_e:Precache(context)
 	PrecacheResource("particle", "particles/bloodseeker_rupture_new.vpcf", context)
 end
 
+function invincible_e:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "invincible_e_arcana"
+    end
+    return "invincible_e"
+end
+
 function invincible_e:OnSpellStart()
 end
 

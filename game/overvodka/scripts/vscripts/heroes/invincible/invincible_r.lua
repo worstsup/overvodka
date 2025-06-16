@@ -6,24 +6,46 @@ invincible_r = class({})
 function invincible_r:Precache(context)
     PrecacheResource("soundfile", "soundevents/invincible_r.vsndevts", context)
     PrecacheResource("particle", "particles/invincible_r_cast.vpcf", context)
+    PrecacheResource("particle", "particles/invincible_r_cast_arcana.vpcf", context)
     PrecacheResource("particle", "particles/invincible_r_cast_self.vpcf", context)
     PrecacheResource("particle", "particles/invincible_r_cast_chain.vpcf", context)
+    PrecacheResource("particle", "particles/invincible_r_cast_chain_arcana.vpcf", context)
     PrecacheResource("particle", "particles/invincible_r_marker.vpcf", context)
     PrecacheResource("particle", "particles/grimstroke_soulchain_rope_new.vpcf", context)
+    PrecacheResource("particle", "particles/grimstroke_soulchain_rope_new_arcana.vpcf", context)
     PrecacheResource("particle", "particles/invincible_r_debuff.vpcf", context)
+    PrecacheResource("particle", "particles/invincible_r_debuff_arcana.vpcf", context)
+    PrecacheResource("particle", "particles/whatsapp.vpcf", context)
+end
+
+function invincible_r:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "invincible_r_arcana"
+    end
+    return "invincible_r"
 end
 
 function invincible_r:OnSpellStart()
     local caster = self:GetCaster()
-    EmitSoundOn("invincible_r", caster)
-    local effect_cast = ParticleManager:CreateParticle( "particles/invincible_r_cast_self.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
+    local sound = "invincible_r"
+    local self_particle = "particles/invincible_r_cast_self.vpcf"
+    local cast_particle = "particles/invincible_r_cast.vpcf"
+    local cast_chain = "particles/invincible_r_cast_chain.vpcf"
+    if caster:HasArcana() then
+        sound = "invincible_r_arcana"
+        self_particle = "particles/whatsapp.vpcf"
+        cast_particle = "particles/invincible_r_cast_arcana.vpcf"
+        cast_chain = "particles/invincible_r_cast_chain_arcana.vpcf"
+    end
+    EmitSoundOn(sound, caster)
+    local effect_cast = ParticleManager:CreateParticle( self_particle, PATTACH_ABSORIGIN_FOLLOW, caster )
     ParticleManager:SetParticleControl( effect_cast, 0, caster:GetAbsOrigin() )
     ParticleManager:SetParticleControl( effect_cast, 1, caster:GetAbsOrigin() )
     ParticleManager:SetParticleControl( effect_cast, 2, caster:GetAbsOrigin() )
     ParticleManager:SetParticleControl( effect_cast, 5, caster:GetAbsOrigin() )
     ParticleManager:SetParticleControl( effect_cast, 12, caster:GetAbsOrigin() )
     ParticleManager:ReleaseParticleIndex( effect_cast )
-    local effect_cast_caster = ParticleManager:CreateParticle( "particles/invincible_r_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
+    local effect_cast_caster = ParticleManager:CreateParticle( cast_particle, PATTACH_ABSORIGIN_FOLLOW, caster )
 	ParticleManager:SetParticleControl( effect_cast_caster, 0, caster:GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( effect_cast_caster )
     caster:AddNewModifier(caster, self, "modifier_invincible_r_buff", {duration = self:GetSpecialValueFor("duration")})
@@ -48,7 +70,7 @@ function invincible_r:OnSpellStart()
         )
         if not found and enemy:IsHero() then
             enemy:AddNewModifier(caster, self, "modifier_invincible_r_debuff", { duration = self:GetSpecialValueFor("chain_dur") * ( 1 - enemy:GetStatusResistance() ) })
-            local effect_cast_target = ParticleManager:CreateParticle( "particles/invincible_r_cast_chain.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
+            local effect_cast_target = ParticleManager:CreateParticle( cast_chain, PATTACH_ABSORIGIN_FOLLOW, caster )
             ParticleManager:SetParticleControlEnt( effect_cast_target, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:SetParticleControlEnt( effect_cast_target, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:ReleaseParticleIndex( effect_cast_target )	
@@ -169,16 +191,26 @@ function modifier_invincible_r_debuff:GetModifierMoveSpeed_Limit()
 end
 
 function modifier_invincible_r_debuff:PlayEffects1()
-	local effect_cast1 = ParticleManager:CreateParticle( "particles/invincible_r_debuff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+    local debuff = "particles/invincible_r_debuff.vpcf"
+    if self:GetCaster():HasArcana() then
+        debuff = "particles/invincible_r_debuff_arcana.vpcf"
+    end
+	local effect_cast1 = ParticleManager:CreateParticle( debuff, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControlEnt( effect_cast1, 2, self:GetParent(), PATTACH_ABSORIGIN_FOLLOW, nil, self:GetParent():GetOrigin(), true )
 	self:AddParticle( effect_cast1, false, false, -1, false, false )
-	local effect_cast2 = ParticleManager:CreateParticle( "particles/invincible_r_marker.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent() )
-	self:AddParticle( effect_cast2, false, false, -1, false, true )
+    if not self:GetCaster():HasArcana() then
+        local effect_cast2 = ParticleManager:CreateParticle( "particles/invincible_r_marker.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent() )
+        self:AddParticle( effect_cast2, false, false, -1, false, true )
+    end
 end
 
 function modifier_invincible_r_debuff:PlayEffects2(connect)
+    local rope = "particles/grimstroke_soulchain_rope_new.vpcf"
+    if self:GetCaster():HasArcana() then
+        rope = "particles/grimstroke_soulchain_rope_new_arcana.vpcf"
+    end
 	if connect then
-		self.effect_cast = ParticleManager:CreateParticle( "particles/grimstroke_soulchain_rope_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+		self.effect_cast = ParticleManager:CreateParticle( rope, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 		ParticleManager:SetParticleControlEnt( self.effect_cast, 0, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 		ParticleManager:SetParticleControlEnt( self.effect_cast, 1, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	else

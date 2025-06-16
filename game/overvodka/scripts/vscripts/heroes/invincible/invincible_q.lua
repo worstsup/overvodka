@@ -6,10 +6,16 @@ function invincible_q:Precache(context)
     PrecacheResource("particle", "particles/status_fx/status_effect_dark_willow_wisp_fear.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_muerta/muerta_spell_fear_debuff.vpcf", context)
     PrecacheResource("particle", "particles/invincible_q.vpcf", context)
+	PrecacheResource("particle", "particles/invincible_q_arcana.vpcf", context)
     PrecacheResource("soundfile", "soundevents/invincible_q.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts", context)
 end
-
+function invincible_q:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "invincible_q_arcana"
+    end
+    return "invincible_q"
+end
 function invincible_q:GetCooldown(level)
     return self.BaseClass.GetCooldown( self, level )
 end
@@ -36,13 +42,18 @@ function invincible_q:OnSpellStart()
 
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-
+	local particle = "particles/invincible_q.vpcf"
+	local sound = "invincible_q"
+	if caster:HasArcana() then
+		particle = "particles/invincible_q_arcana.vpcf"
+		sound = "invincible_q_arcana"
+	end
 	local info = 
 	{
 		Target = target,
 		Source = caster,
 		Ability = self,	
-		EffectName = "particles/invincible_q.vpcf",
+		EffectName = particle,
 		iMoveSpeed = 1400,
 		bReplaceExisting = false,
 		bProvidesVision = true,
@@ -64,7 +75,7 @@ function invincible_q:OnSpellStart()
 			end
 		end
 	end
-    EmitSoundOn("invincible_q", caster)
+    EmitSoundOn(sound, caster)
 end
 
 function invincible_q:OnProjectileHit( hTarget, vLocation )

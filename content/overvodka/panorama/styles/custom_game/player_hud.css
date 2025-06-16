@@ -449,6 +449,15 @@
     margin-right: 600px;
 }
 
+#ModelPreview2{
+    width: 900px;
+    height: 900px;
+    horizontal-align: right;
+    vertical-align: center;
+    margin-top: 200px;
+    margin-right: -280px;
+}
+
 #ChatWheelPreview{
     width: 100px;
     height: 66.7px;

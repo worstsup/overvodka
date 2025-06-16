@@ -355,7 +355,14 @@ function GetOvervodkaHeroName(HeroName){
     }
     if (HeroName == "npc_dota_hero_void_spirit")
     {
-        OvervodkaName = "npc_dota_hero_invincible"
+        if (HasArcana(HeroName))
+        {
+            OvervodkaName = "npc_dota_hero_invincible_arcana"
+        }
+        else
+        {
+            OvervodkaName = "npc_dota_hero_invincible"
+        }
     }
     if (HeroName == "npc_dota_hero_mars")
     {
@@ -364,6 +371,14 @@ function GetOvervodkaHeroName(HeroName){
     if (HeroName == "npc_dota_hero_phantom_lancer")
     {
         OvervodkaName = "npc_dota_hero_kolyan"
+    }
+    if (HeroName == "npc_dota_hero_primal_beast")
+    {
+        OvervodkaName = "npc_dota_hero_t2x2"
+    }
+    if (HeroName == "npc_dota_hero_ringmaster")
+    {
+        OvervodkaName = "npc_dota_hero_mazellov"
     }
     return OvervodkaName	
 }
@@ -389,6 +404,13 @@ function HasArcana(HeroName){
     if (HeroName == "npc_dota_hero_morphling")
     {
         if (HasModifier(HeroName, "modifier_sans_arcana"))
+        {
+            return true
+        }
+    }
+    if (HeroName == "npc_dota_hero_void_spirit")
+    {
+        if (HasModifier(HeroName, "modifier_invincible_arcana"))
         {
             return true
         }
@@ -467,6 +489,10 @@ function GetUniqueSceneHeroName(hero_name)
     if (hero_name == "npc_dota_hero_morphling")
     {
         return "sans_arcana_loadout"
+    }
+    if (hero_name == "npc_dota_hero_void_spirit")
+    {
+        return "invincible_arcana_loadout"
     }
     return hero_name
 }

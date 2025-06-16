@@ -14,7 +14,7 @@
 						remaps = 
 						[
 							{
-								from = "sizecomparationdummy1mtl.vmat"
+								from = "n00b1mtl.vmat"
 								to = "models/drake/shkolnik/shkolnik.vmat"
 							},
 						]
@@ -30,7 +30,7 @@
 					{
 						_class = "Attachment"
 						name = "attach_hitloc"
-						parent_bone = "Torso"
+						parent_bone = "__________"
 						relative_origin = [ 0.0, 0.0, 0.0 ]
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
@@ -76,6 +76,38 @@
 						}
 					},
 				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "roblox_ataccka"
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_ATTACK"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/drake/shkolnik/roblox ataccka.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+				]
+				default_root_bone_name = ""
 			},
 		]
 		model_archetype = ""

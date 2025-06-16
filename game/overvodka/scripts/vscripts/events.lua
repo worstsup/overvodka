@@ -130,6 +130,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_morphling" then
 				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_sans_arcana", {})
 			end
+			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_void_spirit" then
+				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_invincible_arcana", {})
+			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
 				sahur:SetLevel(1)
