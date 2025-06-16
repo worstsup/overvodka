@@ -13393,7 +13393,7 @@
 			"wave_slow_duration"	"3"
 			"AbilityManaCost"
 			{
-				"value"		"85 105 125 155"
+				"value"		"85 105 125 145"
 			} 
 			"wave_pull_speed"
 			{
