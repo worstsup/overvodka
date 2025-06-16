@@ -1308,12 +1308,15 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.2"
-		"AbilityCastRange"				"750 800 850 900"
 		"AbilityCooldown"				"26 24 22 20"
 		"AbilityManaCost"				"90 115 140 165"
 		"AbilityValues"
 		{
-				"radius"					"750 800 850 900"
+				"radius"
+				{
+					"value"	"750 800 850 900"
+					"affected_by_aoe_increase"	"1"
+				}
 				"damage"
 				{
 					"value"	"100 175 250 325"
@@ -1326,6 +1329,11 @@
 				}
 				"stone_angle"				"60"
 				"bonus_physical_damage"		"50"
+				"AbilityCastRange"
+				{
+					"value"	"750 800 850 900"
+					"affected_by_aoe_increase"	"1"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -1566,10 +1574,6 @@
 				"pctmana"
 				{
 					"value" "15"
-				}
-				"facet_pct"
-				{
-					"value" "90"
 				}
 		}
 	}
