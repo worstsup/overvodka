@@ -6,6 +6,7 @@
 	m_nCullControlPoint = -1
 	m_flConstantRadius = 64.0
 	m_flConstantLifespan = 3.0
+	m_ConstantColor = [ 53, 167, 255, 255 ]
 	m_nBehaviorVersion = 5
 	m_nFirstMultipleOverride_BackwardCompat = 4
 	m_controlPointConfigurations = 
@@ -145,16 +146,16 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/wisp_guardian_c3.vpcf"
+			m_ChildRef = resource:"particles/wisp_guardian_.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/wisp_guardian_b3.vpcf"
+			m_ChildRef = resource:"particles/units/heroes/hero_wisp/wisp_guardian_b.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/wisp_guardian_d3.vpcf"
+			m_ChildRef = resource:"particles/units/heroes/hero_wisp/wisp_guardian_d.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/wisp_guardian_e3.vpcf"
+			m_ChildRef = resource:"particles/units/heroes/hero_wisp/wisp_guardian_e.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_wisp/wisp_guardian_tentacle.vpcf"

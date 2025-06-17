@@ -21,21 +21,25 @@ function mazellov_f:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
 
-    for i = 1, 4 do
-        caster:RemoveModifierByName("modifier_mazellov_f_orb_"..i)
+    caster.mazellov_f_orb_index = (caster.mazellov_f_orb_index or 0) + 1
+    local index = ((caster.mazellov_f_orb_index - 1) % 4) + 1
+
+    local existing_modifier = "modifier_mazellov_f_orb_" .. index
+    if caster:HasModifier(existing_modifier) then
+        caster:RemoveModifierByName(existing_modifier)
     end
 
-    for i = 1, 4 do
-        caster:AddNewModifier(caster, self, "modifier_mazellov_f_orb_"..i, {
-            duration = duration,
-            orb_index = i
-        })
-    end
+    caster:AddNewModifier(caster, self, existing_modifier, {
+        duration = duration,
+        orb_index = index
+    })
 end
+
+
 
 local modifier_mazellov_f_orb = class({})
 
-function modifier_mazellov_f_orb:IsHidden() return true end
+function modifier_mazellov_f_orb:IsHidden() return false end
 function modifier_mazellov_f_orb:IsPurgable() return false end
 
 function modifier_mazellov_f_orb:OnCreated(kv)
@@ -51,11 +55,10 @@ function modifier_mazellov_f_orb:OnCreated(kv)
     self.ability = self:GetAbility()
     self.angle = 90 * (self.orb_index - 1)
 
-    -- Разные партиклы для каждого орба
     local particle_names = {
         "particles/mazellov_f_1.vpcf",          -- 1-й орб (DOT)
         "particles/mazellov_f_3.vpcf",  -- 2-й орб (Slow)
-        "particles/units/heroes/hero_wisp/wisp_guardian.vpcf",                         -- 3-й орб (Resist Reduction)
+        "particles/mazellov_f.vpcf",                         -- 3-й орб (Resist Reduction)
         "particles/mazellov_f_2.vpcf"                  -- 4-й орб (Miss Chance)
     }
 
@@ -115,19 +118,38 @@ function modifier_mazellov_f_orb:OnIntervalThink()
             })
 
             enemy:AddNewModifier(self.parent, self.ability, "modifier_mazellov_f_orb_hit_"..self.orb_index, {duration = 1.0})
+
+            self.hit = true
             self:Destroy()
             return
         end
     end
 end
 
+
 function modifier_mazellov_f_orb:OnDestroy()
     if not IsServer() then return end
+
     if self.particle then
         ParticleManager:DestroyParticle(self.particle, false)
         ParticleManager:ReleaseParticleIndex(self.particle)
     end
+
+    local parent = self:GetParent()
+    local still_active = false
+    for i = 1, 4 do
+        if parent:HasModifier("modifier_mazellov_f_orb_" .. i) then
+            still_active = true
+            break
+        end
+    end
+
+    if not self.hit and not still_active then
+        parent.mazellov_f_orb_index = 1
+    end
 end
+
+
 
 for i = 1, 4 do
     _G["modifier_mazellov_f_orb_"..i] = class(modifier_mazellov_f_orb)
@@ -189,7 +211,7 @@ function modifier_mazellov_f_slow:GetModifierMoveSpeedBonus_Percentage()
     return -self:GetAbility():GetSpecialValueFor("slow_pct")
 end
 function modifier_mazellov_f_slow:GetEffectName()
-    return "particles/units/heroes/hero_pugna/pugna_decrepify.vpcf"
+    return "particles/pugna_decrepify_b.vpcf"
 end
 function modifier_mazellov_f_slow:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
