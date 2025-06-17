@@ -13097,7 +13097,7 @@
 				"strength_per_hero"
 				{
 					"value"	"0"
-					"special_bonus_shard"  "+5"
+					"special_bonus_shard"  "+8"
 					"RequiresShard"			"1"
 				}
 				"shard_duration"
@@ -13261,8 +13261,8 @@
 				"arrow_width"			"115"
 				"arrow_min_stun"		"1.5"
 				"arrow_max_stun"		"5.0"
-				"damage"				"200"
-				"arrow_bonus_damage"	"300"
+				"damage"				"300"
+				"arrow_bonus_damage"	"600"
 				"arrow_vision"			"500"
 		}
 	}
