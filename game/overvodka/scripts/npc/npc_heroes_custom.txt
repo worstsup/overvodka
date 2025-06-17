@@ -2968,10 +2968,11 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts"
 	}
 
-"npc_dota_hero_ringmaster"
+	"npc_dota_hero_ringmaster"
 	{
 		"Model"		"models/heroes/ringmaster/ringmaster_base.vmdl"
 		"Enabled"		"1"
+		"SimilarHeroes"			"35,17,86"
 		"ModelScale"			"0.92"
 		"LoadoutScale"			"0.96"
 		"HeroSelectSoundEffect"	"mazellov_start"
