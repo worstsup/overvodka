@@ -13410,7 +13410,7 @@
 	}
 
 	//=================================================================================================================
-	// МЕМЫ
+	// КИРИЕШКИ
 	//=================================================================================================================
 
 	"mazellov_f"
@@ -13421,7 +13421,7 @@
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"            "mazellov_f"
-		"AbilityManaCost"               "100 110 120 130"
+		"AbilityManaCost"               "90 100 110 120"
 		"AbilityValues"
 		{
 			"damage"		"50 100 150 200"
@@ -13436,7 +13436,7 @@
 			"rotation_speed"		"200"
 			"AbilityCooldown"
 			{
-				"value"		"8 7.5 7 6.5"
+				"value"		"10 9 8 7"
 				"special_bonus_unique_mazellov_4"		"-1"
 			}             
 		}
