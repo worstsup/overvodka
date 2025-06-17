@@ -10,6 +10,7 @@
 		{
 			"item"		"item_ward_observer"
 			"item"		"item_boots"
+			"item"		"item_magic_wand"
 			"item"		"item_chapman_red"
 		}
 		
@@ -18,10 +19,10 @@
 			"item"		"item_nikes"
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
+			"item"		"item_crumbl_cookie"
 			"item"		"item_mask_of_quadrobe"
 			"item"		"item_charik_new"
 			"item"		"item_chapman_blue"
-
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{
