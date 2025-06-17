@@ -49,13 +49,73 @@
 						[
 							{
 								_class = "Hitbox"
-								name = "Torso"
-								parent_bone = "Torso"
+								name = "__________"
+								parent_bone = "__________"
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -200.387604, -293.265411, -63.218231 ]
-								hitbox_maxs = [ 197.717682, 214.23349, 62.219181 ]
+								hitbox_mins = [ -0.5, -0.5, -0.5 ]
+								hitbox_maxs = [ 0.5, 0.5, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________003"
+								parent_bone = "___________003"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -55.069355, -93.052353, -25.746307 ]
+								hitbox_maxs = [ 44.930706, 100.37323, 179.369049 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________004"
+								parent_bone = "___________004"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -44.930756, -93.877289, -24.952652 ]
+								hitbox_maxs = [ 66.570694, 103.308594, 284.305664 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________005"
+								parent_bone = "___________005"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -55.069389, -32.215363, -49.801788 ]
+								hitbox_maxs = [ 44.930748, 168.325546, 51.36718 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________006"
+								parent_bone = "___________006"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -55.069363, -22.453949, -57.662384 ]
+								hitbox_maxs = [ 44.930782, 184.132828, 57.641701 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________007"
+								parent_bone = "___________007"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -55.069328, -23.386871, -43.682953 ]
+								hitbox_maxs = [ 44.930771, 177.249191, 57.692062 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "___________008"
+								parent_bone = "___________008"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -55.069359, -28.359268, -55.796097 ]
+								hitbox_maxs = [ 44.930779, 175.450714, 52.744812 ]
 							},
 						]
 					},
@@ -83,7 +143,62 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "roblox_ataccka"
+						name = "run"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_RUN"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/drake/shkolnik/run.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = 12.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "attack"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
 						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_ATTACK"
 						activity_weight = 1
@@ -98,7 +213,72 @@
 						disable_compression = false
 						animgraph_additive = false
 						delete_from_compiled_model = false
-						source_filename = "models/drake/shkolnik/roblox ataccka.fbx"
+						source_filename = "models/drake/shkolnik/attack.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "die"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_DIE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/drake/shkolnik/die.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "shkolnik"
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/drake/shkolnik/shkolnik.fbx"
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = -1

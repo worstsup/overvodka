@@ -9,6 +9,17 @@ end
 
 function mazellov_r:IsRefreshable() return false end
 
+function mazellov_r:OnAbilityUpgrade( hAbility )
+    if not IsServer() then return end
+    local result = self.BaseClass.OnAbilityUpgrade( self, hAbility )
+    
+    local ability = self:GetCaster():FindAbilityByName("mazellov_f")
+    if ability then
+        ability:SetLevel(ability:GetLevel() + 1)
+    end
+    return result
+end
+
 function mazellov_r:OnSpellStart()
     if not IsServer() then return end
 	local caster = self:GetCaster()

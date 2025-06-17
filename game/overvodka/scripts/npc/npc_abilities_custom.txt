@@ -3370,34 +3370,23 @@
 	//=================================================================================================================
 	// КОРОЛЬ МИДА (врожденная)
 	//=================================================================================================================
-	"slardar_seaborn_sentinel"
+	"sahur_innate"
 	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/sahur/sahur_innate"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"						"4"
 		"Innate"						"1"
 		"DependentOnAbility"			"sahur_r"
-		"HasScepterUpgrade"				"0"
 		"IsBreakable"					"1"
 		"AbilityValues"
-		{			
-			"river_speed"					"5"
-			"puddle_regen"				
-			{
-				"value"						"1 4 7 10"
-			}
-			"puddle_armor"				
-			{
-				"value"						"1 3 5 7"
-			}
-			"puddle_status_resistance"			
-			{
-				"value"						"0"
-			}
-            "river_speed_tooltip"			"5"
-			"river_damage"					"4 14 24 34"
+		{
+			"movespeed"		"5"
+			"regen"			"1 4 7 10"
+			"armor"			"1 3 5 7"
+			"damage"		"4 14 24 34"
 		}
 	}
-
 	//===================================================================================================================
 	//													WORSTSUP
 	//===================================================================================================================
@@ -13097,7 +13086,7 @@
 				"strength_per_hero"
 				{
 					"value"	"0"
-					"special_bonus_shard"  "+5"
+					"special_bonus_shard"  "+8"
 					"RequiresShard"			"1"
 				}
 				"shard_duration"
@@ -13261,8 +13250,8 @@
 				"arrow_width"			"115"
 				"arrow_min_stun"		"1.5"
 				"arrow_max_stun"		"5.0"
-				"damage"				"200"
-				"arrow_bonus_damage"	"300"
+				"damage"				"300"
+				"arrow_bonus_damage"	"600"
 				"arrow_vision"			"500"
 		}
 	}
@@ -13422,15 +13411,17 @@
 	{
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"             		"heroes/mazellov/mazellov_f"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"            "mazellov_f"
-		"AbilityManaCost"               "90 100 110 120"
+		"DependentOnAbility"			"mazellov_r"
+		"MaxLevel"						"4"
+		"AbilityManaCost"               "50 65 80 95"
 		"AbilityValues"
 		{
 			"damage"		"50 100 150 200"
-			"dot_damage"		"20 40 60 70"
+			"dot_damage"		"20 40 60 80"
 			"slow_pct"		"15 20 25 30"
 			"magic_resist_reduction"			"10 15 20 25"
 			"miss_chance"				"15 20 25 30"

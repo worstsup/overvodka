@@ -293,7 +293,7 @@ function COverthrowGameMode:InitGameMode()
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end
-	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 600.0 )
+	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 60.0 )
 
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )

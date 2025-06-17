@@ -28,7 +28,7 @@ function mazellov_f:OnSpellStart()
     if caster:HasModifier(existing_modifier) then
         caster:RemoveModifierByName(existing_modifier)
     end
-
+    EmitSoundOn("mazellov_f_"..RandomInt(1,3), caster)
     caster:AddNewModifier(caster, self, existing_modifier, {
         duration = duration,
         orb_index = index

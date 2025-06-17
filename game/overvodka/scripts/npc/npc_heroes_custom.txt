@@ -668,7 +668,7 @@
 		"Ability1"		"sahur_q"
 		"Ability2"		"sahur_w"
 		"Ability3"		"sahur_e"
-		"Ability4"		"slardar_seaborn_sentinel"
+		"Ability4"		"sahur_innate"
 		"Ability5"		"sahur_hit"
 		"Ability6"		"sahur_r"
 		"Ability7"		""
