@@ -3204,10 +3204,10 @@
 
 		"DOTA_Tooltip_ability_mazellov_f"			"Кириешки"
 		"DOTA_Tooltip_ability_mazellov_f_Description"			"Илья Мазеллов призывает одну из четырёх кириешек, которая начинает вращаться вокруг него. Каждая последующая активация добавляет новую кириешку (до 4), и каждая обладает уникальным эффектом при столкновении с врагом:
-		– Острая (красная): наносит периодический урон в секунду.
-		– Сырная (желтая): замедляет врага.
-		– Сметана и лук (синяя): снижает сопротивление магии.
-		– Холодец с хреном (серая): даёт шанс промаха."
+		– Острая (<font color='#FF0000'>красная</font>): наносит периодический урон в секунду.
+		– Сырная (<font color='#FFD700'>желтая</font>): замедляет врага.
+		– Сметана и лук (<font color='#0000FF'>синяя</font>): снижает сопротивление магии.
+		– Холодец с хреном (<font color='#A9A9A9'>серая</font>): даёт шанс промаха."
 
 		"DOTA_Tooltip_ability_mazellov_f_damage"			"УРОН ПРИ СТОЛКНОВЕНИИ:"
 		"DOTA_Tooltip_ability_mazellov_f_dot_damage"			"ПЕРИОДИЧЕСКИЙ УРОН:"
@@ -3216,6 +3216,27 @@
 		"DOTA_Tooltip_ability_mazellov_f_miss_chance"			"%ШАНС ПРОМАХА:"
 		"DOTA_Tooltip_ability_mazellov_f_duration"			"ДЛИТЕЛЬНОСТЬ КИРИЕШКИ:"
 		"DOTA_Tooltip_ability_mazellov_f_effect_duration"			"ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"
+
+		"DOTA_Tooltip_modifier_mazellov_f_orb_1"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_1_Description" "Острая кириешка при столкновении нанесет урон и наложит эффект периодического урона!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_2"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_2_Description"			"Сырная кириешка при столкновении нанесет урон и замедлит врага!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_3"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_3_Description"			"Кириешка со вкусом сметана и лук при столкновении нанесет урон и снизит сопротивление магии врагу!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_4"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_4_Description"			"Кириешка со вкусом холодец с хреном нанесет урон при столкновении и заставит врага промахиваться атаками!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_dot"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_dot_Description" "Вы были поражены острой кириешкой и получаете периодический урон каждую секунду!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_slow"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_slow_Description" "Вы были поражены сырной кириешкой и ваша скорость передвижения снижена!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_resist_reduction"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_resist_reduction_Description" "Вы были поражены кириешкой со вкусом сметана и лук и ваше сопротивление магии снижено!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_miss_chance"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_miss_chance_Description" "Вы были поражены кириешкой со вкусом холодец с хреном и следующие ваши атаки имеют шанс промахнуться!"
 
 		"DOTA_Tooltip_ability_mazellov_r"			  "Преданный фанат"
 		"DOTA_Tooltip_ability_mazellov_r_description" "Мазеллов делает выбранного вражеского героя своим преданным фанатом, получая над ним полный контроль. При этом цель теряет возможность управлять своим персонажем. Все убийства, совершённые фанатом во время действия способности, в том числе и смерть самого фаната, засчитываются Мазеллову. Подконтрольная цель может использовать все предметы и способности, кроме ультимейта, а также получает дополнительную скорость атаки и передвижения.\nRefresher Orb не сбрасывает перезарядку этой способности."

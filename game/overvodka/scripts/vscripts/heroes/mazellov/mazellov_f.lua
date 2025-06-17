@@ -211,7 +211,7 @@ function modifier_mazellov_f_slow:GetModifierMoveSpeedBonus_Percentage()
     return -self:GetAbility():GetSpecialValueFor("slow_pct")
 end
 function modifier_mazellov_f_slow:GetEffectName()
-    return "particles/units/heroes/hero_pugna/pugna_decrepify.vpcf"
+    return "particles/pugna_decrepify_b.vpcf"
 end
 function modifier_mazellov_f_slow:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
