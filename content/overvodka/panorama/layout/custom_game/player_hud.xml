@@ -52,6 +52,7 @@
             <Panel id="OvervodkaHamster" />
         </Panel>
         <Panel id="ModelPreview" />
+        <Panel id="ModelPreview2" />
         <!-- <Panel id="TestButton" onactivate="TipPlayer();"/> -->
 
         <Panel hittest="false" id="TipsContainer">

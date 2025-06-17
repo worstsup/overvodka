@@ -31,11 +31,6 @@ function chef_shout:OnSpellStart()
     local nowmana = caster:GetMana() + self:GetManaCost(self:GetLevel() - 1)
     local pctmana = self:GetSpecialValueFor( "pctmana" )
     local dmgfinal = damage + maxmana * pctmana / 100
-    if self:GetSpecialValueFor( "facet_dmg" ) > 0 then
-        if nowmana >= self:GetSpecialValueFor( "facet_pct" ) * maxmana / 100 then
-            dmgfinal = dmgfinal * (1 + self:GetSpecialValueFor( "facet_dmg" ) / 100)
-        end
-    end
     local damage_table = {}
     local target_location = target:GetAbsOrigin()
     local target_teams = self:GetAbilityTargetTeam()

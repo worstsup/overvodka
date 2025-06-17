@@ -219,13 +219,13 @@ function COverthrowGameMode:InitGameMode()
 	--GameRules:SetCustomGameEndDelay( 0 )
 	--GameRules:SetCustomVictoryMessageDuration( 10 )
 	if GetMapName() == "overvodka_duo" then
-		GameRules:SetCustomGameSetupTimeout( 0 ) -- was 3
+		GameRules:SetCustomGameSetupTimeout( 3 ) -- was 3
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
 	if GetMapName() == "overvodka_5x5" then
 		GameRules:SetPreGameTime( 90.0 )
-		GameRules:SetCustomGameSetupTimeout( 0 ) -- was 3
+		GameRules:SetCustomGameSetupTimeout( 3 ) -- was 3
 	else
 		GameRules:SetPreGameTime( 10.0 )
 	end
@@ -236,7 +236,6 @@ function COverthrowGameMode:InitGameMode()
 	GameRules:SetShowcaseTime( 0.0 )
 	GameRules:SetIgnoreLobbyTeamsInCustomGame( false )
 	GameRules:SetSafeToLeave(true)
-	--GameRules:SetHideKillMessageHeaders( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
 	GameRules:SetSuggestAbilitiesEnabled( true )
@@ -262,7 +261,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
 		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false )
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false )
@@ -294,7 +293,7 @@ function COverthrowGameMode:InitGameMode()
 	if self.m_bFastPlay then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 1.0 )
 	end
-	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 60.0 )
+	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 600.0 )
 
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )

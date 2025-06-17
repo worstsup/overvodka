@@ -130,6 +130,9 @@ function COverthrowGameMode:OnNPCSpawned( event )
 			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_morphling" then
 				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_sans_arcana", {})
 			end
+			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_void_spirit" then
+				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_invincible_arcana", {})
+			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
 				sahur:SetLevel(1)
@@ -539,6 +542,12 @@ function COverthrowGameMode:OnItemPickUp( event )
 			UTIL_Remove(item)
 			local bonusItem = CreateItem("item_madstone_bundle", owner, owner)
 			owner:AddItem(bonusItem)
+			if GetMapName ~= "overvodka_5x5" then
+				Timers:CreateTimer(0.03, function()
+					local bonusItem2 = CreateItem("item_madstone_bundle", owner, owner)
+					owner:AddItem(bonusItem2)
+				end)
+			end
 		end)
 	end
 end

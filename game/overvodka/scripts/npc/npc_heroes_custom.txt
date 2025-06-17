@@ -277,9 +277,9 @@
 		{
 			"shkolnik_w"
 			{
-				"Icon"				"vision"
+				"Icon"				"armor_broken"
 				"Color"				"Yellow"
-				"GradientID"		"0"
+				"GradientID"		"1"
 			}
 			"shkolnik_e"
 			{

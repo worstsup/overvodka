@@ -20,31 +20,39 @@ function shkolnik_e:OnSpellStart()
 	FindClearSpaceForUnit( caster, origin + direction, true )
 	local ab = caster:FindAbilityByName("shkolnik_peremena")
 	if ab and ab:GetLevel() > 0 then
-		local level = ab:GetLevel()
-		if self:GetCaster():HasTalent("special_bonus_unique_shkolnik_7") then level = 6 end
-		local schoolboy = CreateUnitByName("npc_schoolboy_"..level, origin, true, caster, nil, caster:GetTeamNumber())
-		local schoolboy2 = CreateUnitByName("npc_schoolboy_"..level, caster:GetAbsOrigin(), true, caster, nil, caster:GetTeamNumber())
-
-		schoolboy:SetOwner(caster)
-		schoolboy:SetControllableByPlayer(caster:GetPlayerID(), true)
-		FindClearSpaceForUnit(schoolboy, schoolboy:GetAbsOrigin(), true)
-		schoolboy:AddNewModifier(self:GetCaster(), ab, "modifier_kill", {duration = ab:GetSpecialValueFor("schoolboys_duration")})
-		schoolboy:AddNewModifier(self:GetCaster(), ab, "modifier_overvodka_creep", {})
-		if caster:HasTalent("special_bonus_unique_shkolnik_3") then
-			schoolboy:AddNewModifier(caster, ab, "modifier_phased", {})
-		end
-
-		schoolboy2:SetOwner(caster)
-		schoolboy2:SetControllableByPlayer(caster:GetPlayerID(), true)
-		FindClearSpaceForUnit(schoolboy2, schoolboy2:GetAbsOrigin(), true)
-		schoolboy2:AddNewModifier(self:GetCaster(), ab, "modifier_kill", {duration = ab:GetSpecialValueFor("schoolboys_duration")})
-		schoolboy2:AddNewModifier(self:GetCaster(), ab, "modifier_overvodka_creep", {})
-		if caster:HasTalent("special_bonus_unique_shkolnik_3") then
-			schoolboy2:AddNewModifier(caster, ab, "modifier_phased", {})
+		self:SpawnSchoolboys(caster, origin, ab)
+		local duration = self:GetSpecialValueFor("immun")
+		if duration > 0 then
+			caster:AddNewModifier( caster, self, "modifier_black_king_bar_immune", { duration = duration } )
+			self:SpawnSchoolboys(caster, origin, ab)
 		end
 	end
 	self:PlayEffects( origin, direction )
-	caster:AddNewModifier( caster, self, "modifier_black_king_bar_immune", { duration = self:GetSpecialValueFor("immun") } )
+end
+
+function shkolnik_e:SpawnSchoolboys(caster, origin, ab)
+	local level = ab:GetLevel()
+	if self:GetCaster():HasTalent("special_bonus_unique_shkolnik_7") then level = 6 end
+	local schoolboy = CreateUnitByName("npc_schoolboy_"..level, origin, true, caster, nil, caster:GetTeamNumber())
+	local schoolboy2 = CreateUnitByName("npc_schoolboy_"..level, caster:GetAbsOrigin(), true, caster, nil, caster:GetTeamNumber())
+
+	schoolboy:SetOwner(caster)
+	schoolboy:SetControllableByPlayer(caster:GetPlayerID(), true)
+	FindClearSpaceForUnit(schoolboy, schoolboy:GetAbsOrigin(), true)
+	schoolboy:AddNewModifier(self:GetCaster(), ab, "modifier_kill", {duration = ab:GetSpecialValueFor("schoolboys_duration")})
+	schoolboy:AddNewModifier(self:GetCaster(), ab, "modifier_overvodka_creep", {})
+	if caster:HasTalent("special_bonus_unique_shkolnik_3") then
+		schoolboy:AddNewModifier(caster, ab, "modifier_phased", {})
+	end
+
+	schoolboy2:SetOwner(caster)
+	schoolboy2:SetControllableByPlayer(caster:GetPlayerID(), true)
+	FindClearSpaceForUnit(schoolboy2, schoolboy2:GetAbsOrigin(), true)
+	schoolboy2:AddNewModifier(self:GetCaster(), ab, "modifier_kill", {duration = ab:GetSpecialValueFor("schoolboys_duration")})
+	schoolboy2:AddNewModifier(self:GetCaster(), ab, "modifier_overvodka_creep", {})
+	if caster:HasTalent("special_bonus_unique_shkolnik_3") then
+		schoolboy2:AddNewModifier(caster, ab, "modifier_phased", {})
+	end
 end
 
 function shkolnik_e:PlayEffects( origin, direction )

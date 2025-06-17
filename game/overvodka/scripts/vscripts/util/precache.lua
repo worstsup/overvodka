@@ -226,6 +226,7 @@ PrecacheUtils.models = {
 		"rostik/rostik.vmdl",
 		"models/stint/stint.vmdl",
 		"models/invincible/invincible.vmdl",
+		"models/invincible/arcana/whatsapp.vmdl",
 		"models/zhenya/zhenya.vmdl",
 		"sans/underfell_sans.vmdl",
 		"evil_monke/models/evil_monke_tpose.vmdl",

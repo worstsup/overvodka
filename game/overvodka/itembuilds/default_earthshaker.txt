@@ -10,6 +10,7 @@
 		{
 			"item"		"item_ward_observer"
 			"item"		"item_boots"
+			"item"		"item_magic_wand"
 			"item"		"item_chapman_red"
 		}
 		
@@ -19,7 +20,7 @@
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
             "item"		"item_blade_mail"
-
+			"item"		"item_crumbl_cookie"
 		}
 		"#DOTA_Item_Build_Late_Items"
 		{

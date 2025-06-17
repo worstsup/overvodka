@@ -84,8 +84,10 @@ function modifier_sasavot_debuff:OnCreated()
     end
     if not IsServer() then return end
     self.damage = self:GetAbility():GetSpecialValueFor("damage_aoe")
+    self.damage_threshold = self:GetAbility():GetSpecialValueFor("damage_threshold")
     self:StartIntervalThink(0.5)
 end
+
 function modifier_sasavot_debuff:OnIntervalThink()
     local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
         self:GetParent():GetAbsOrigin(),
@@ -101,10 +103,11 @@ function modifier_sasavot_debuff:OnIntervalThink()
         ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage * 0.5, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
     end
 end
+
 function modifier_sasavot_debuff:OnTakeDamage(keys)
     if not IsServer() then return end
     local caster = self:GetCaster()
-    if keys.unit == caster and keys.attacker:GetTeamNumber() ~= caster:GetTeamNumber() and keys.attacker:IsHero() and not keys.attacker:IsBuilding() then
+    if keys.unit == caster and keys.attacker:GetTeamNumber() ~= caster:GetTeamNumber() and keys.attacker:IsHero() and not keys.attacker:IsBuilding() and keys.damage > self.damage_threshold then
         caster:InterruptChannel()
         StopSoundOn("sasavot_dance_1", self:GetCaster())
         StopSoundOn("sasavot_dance_2", self:GetCaster())

@@ -17,7 +17,12 @@ function invincible_w:Precache(context)
     PrecacheResource( "particle", 'particles/sxssss/drow_banshee_wail_explosion.vpcf', context )
     PrecacheResource( "soundfile", "soundevents/invincible_w.vsndevts", context)
 end
-
+function invincible_w:GetAbilityTextureName()
+    if self:GetCaster():HasArcana() then
+        return "invincible_w_arcana"
+    end
+    return "invincible_w"
+end
 function invincible_w:OnSpellStart()
     if not IsServer() then return end
 

@@ -293,8 +293,15 @@ function PickIconsStyles()
             PickIconArray[key].style.border = "1px solid #FF4500"
             PickIconArray[key].style.boxShadow = "0 0 25px rgba(255, 69, 0, 0.8), inset 0 0 8px rgba(255, 0, 0, 0.5)"
             if (!PickIconArray[key].FindChild("Movie")) {
-                let sans = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/underfell_sans.webm", repeat: "true", autoplay: "onload" });
+            let sans = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/underfell_sans.webm", repeat: "true", autoplay: "onload" });
             }
+        }
+        else if (IsPlayerSubscribed(playerID) && PickIconArray[key].GetAttributeInt("heroid", -1) == 126) {
+            if (!PickIconArray[key].FindChild("Movie")) {
+            let invincible = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/invincible_arcana.webm", repeat: "true", autoplay: "onload" });
+            }
+            PickIconArray[key].style.border = "1px solid #00FF00"  // Green border
+            PickIconArray[key].style.boxShadow = "0 0 25px rgba(0, 255, 0, 0.8), inset 0 0 8px rgba(0, 255, 0, 0.5)" // Green glow
         }
         else {
             PickIconArray[key].style.border = "1px solid #FFD700" // Default gold border 

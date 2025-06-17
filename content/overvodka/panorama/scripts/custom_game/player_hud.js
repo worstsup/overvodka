@@ -2,6 +2,7 @@ const LocalPlayer = Players.GetLocalPlayer()
 const Container = $("#PlayersTitlesContainer")
 const SubscribePanel = $("#SubscribePanel")
 const ModelPreview = $("#ModelPreview")
+const ModelPreview2 = $("#ModelPreview2")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
@@ -179,11 +180,17 @@ function ToggleSubscribePanel(){
     }else{
         ModelPreview.style.visibility = "visible";
     }
+    if(ModelPreview2.style.visibility == "visible"){
+        ModelPreview2.style.visibility = "collapse";
+    }else{
+        ModelPreview2.style.visibility = "visible";
+    }
 }
 
 function CloseSubscribePanel(){
     SubscribePanel.RemoveClass("Show")
     ModelPreview.style.visibility = "collapse";
+    ModelPreview2.style.visibility = "collapse"; 
 }
 
 function TipPlayer(){
@@ -593,6 +600,18 @@ function UpdateTeamLeaved(){
         drawbackground: "false"
     });
     ModelPreview.style.visibility = "collapse";
+    let scene_panel_2 = $.CreatePanel("DOTAScenePanel", $("#ModelPreview2"), "", { 
+        class: "hero_model_strategy", 
+        style: "width:48%;height:80%;",
+        unit: "invincible_arcana_loadout", 
+        particleonly:"false", 
+        renderdeferred:"false", 
+        antialias:"true", 
+        renderwaterreflections:"true", 
+        allowrotation: "true",
+        drawbackground: "false"
+    });
+    ModelPreview2.style.visibility = "collapse";
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
     GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)

@@ -39,6 +39,12 @@ function UpdateCustomHeroModel(hero_name, playerId)
 		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
 		heroModelPanel.SetParent(panel);
 	}
+	if (!heroModelPanel && hero_name === "npc_dota_hero_void_spirit") 
+	{
+		let panel = FindDotaHudElement("StrategyScreen")
+		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
+		heroModelPanel.SetParent(panel);
+	}
 }
 
 function UpdatePlayer( teamPanel, playerId )
@@ -109,11 +115,17 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 			"npc_dota_hero_mars":	"file://{images}/heroes/npc_dota_hero_zhenya.png",
 			"npc_dota_hero_phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
+			"npc_dota_hero_primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
+			"npc_dota_hero_ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
 			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribed(playerId)) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
+			}
+			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && IsPlayerSubscribed(playerId)) {
+				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
 			else {
@@ -166,12 +178,18 @@ function UpdatePlayer( teamPanel, playerId )
 			"void_spirit": "file://{images}/heroes/npc_dota_hero_invincible.png",
 			"mars": "file://{images}/heroes/npc_dota_hero_zhenya.png",
 			"phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
+			"primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
+			"ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
 			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 
 			{
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+			}
+			else if (playerInfo.possible_hero_selection == "void_spirit" && IsPlayerSubscribed(playerId))
+			{
+				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png"); 
 			}
 			else
 			{

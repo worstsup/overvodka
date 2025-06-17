@@ -71,7 +71,7 @@ function modifier_drake_w_petrified:DeclareFunctions()
 end
 
 function modifier_drake_w_petrified:GetModifierIncomingDamage_Percentage( params )
-    if params.damage_type == DAMAGE_TYPE_PHYSICAL then
+    if params.damage_type == DAMAGE_TYPE_PHYSICAL and params.attacker:GetTeamNumber() == self:GetCaster():GetTeamNumber() and not params.attacker:IsRealHero() and params.attacker:GetOwner() == self:GetCaster() then
         return self.physical_bonus
     end
     return 0

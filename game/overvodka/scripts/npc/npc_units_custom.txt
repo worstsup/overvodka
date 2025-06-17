@@ -920,8 +920,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
+        "AttackDamageMin"       "20"
+        "AttackDamageMax"       "20"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -988,8 +988,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "50"
-        "AttackDamageMax"       "50"
+        "AttackDamageMin"       "30"
+        "AttackDamageMax"       "30"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1056,8 +1056,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "60"
-        "AttackDamageMax"       "60"
+        "AttackDamageMin"       "40"
+        "AttackDamageMax"       "40"
         "AttackRate"            "1.35"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1122,8 +1122,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "70"
-        "AttackDamageMax"       "70"
+        "AttackDamageMin"       "50"
+        "AttackDamageMax"       "50"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1183,8 +1183,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "140"
-        "AttackDamageMax"       "140"
+        "AttackDamageMin"       "100"
+        "AttackDamageMax"       "100"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -4344,7 +4344,26 @@
         "VisionNighttimeRange" "0" 
         "AttackDesire" "1.5" 
     }
-
+	"invincible_arcana_loadout"
+    {
+        "BaseClass" "npc_dota_base_additive"
+        "Model" "models/invincible/arcana/whatsapp.vmdl"
+        "AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+        "BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+        "MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed" "450"
+        "MovementTurnRate" "10"
+        "FollowRange" "250" 
+        "StatusHealth" "1" 
+		"ModelScale"	"1.4"
+        "TeamName" "DOTA_TEAM_GOODGUYS" 
+        "CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+        "VisionDaytimeRange" "0" 
+        "VisionNighttimeRange" "0" 
+        "AttackDesire" "1.2" 
+    }
 	"npc_evil_monke"
 	{										
 		// General

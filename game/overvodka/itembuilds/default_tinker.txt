@@ -10,6 +10,7 @@
 		{
 			"item"		"item_ward_observer"
 			"item"		"item_boots"
+			"item"		"item_magic_wand"
 			"item"		"item_chapman_green"
 		}
 		
@@ -18,6 +19,7 @@
 			"item"		"item_boots_of_bearing"
 			"item"		"item_bablokrad"
 			"item"		"item_hqd"
+			"item"		"item_crumbl_cookie"
 			"item"		"item_chapman_green"
 		}
 		"#DOTA_Item_Build_Core_Items"
