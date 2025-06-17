@@ -8,7 +8,6 @@
 	m_flConstantLifespan = 3.0
 	m_nBehaviorVersion = 5
 	m_nFirstMultipleOverride_BackwardCompat = 4
-	m_ConstantColor = [ 255, 255, 255, 155 ]
 	m_controlPointConfigurations = 
 	[
 		{
@@ -165,6 +164,9 @@
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_wisp/wisp_guardian_tentacle.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/wisp_guardian_c3333.vpcf"
 		},
 	]
 }

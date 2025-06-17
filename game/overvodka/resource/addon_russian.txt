@@ -3202,8 +3202,41 @@
 		"DOTA_Tooltip_modifier_mazellov_e_slow" "Пряничный Домик"
 		"DOTA_Tooltip_modifier_mazellov_e_slow_description" "Скорость передвижения снижена на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%"
 
-		"DOTA_Tooltip_ability_mazellov_f"			"Мемы"
-		"DOTA_Tooltip_ability_mazellov_f_Description"			"Илья Мазеллов внезапно вспоминает один из своих мемов, который материализуется и начинает вращаться вокруг него. При столкновении с врагом мем наносит урон и исчезает, оставляя после себя особый дебафф (каждый мем накладывает разный дебафф)."
+		"DOTA_Tooltip_ability_mazellov_f"			"Кириешки"
+		"DOTA_Tooltip_ability_mazellov_f_Description"			"Илья Мазеллов призывает одну из четырёх кириешек, которая начинает вращаться вокруг него. Каждая последующая активация добавляет новую кириешку (до 4), и каждая обладает уникальным эффектом при столкновении с врагом:
+		– Острая (<font color='#FF0000'>красная</font>): наносит периодический урон в секунду.
+		– Сырная (<font color='#FFD700'>желтая</font>): замедляет врага.
+		– Сметана и лук (<font color='#0000FF'>синяя</font>): снижает сопротивление магии.
+		– Холодец с хреном (<font color='#A9A9A9'>серая</font>): даёт шанс промаха."
+
+		"DOTA_Tooltip_ability_mazellov_f_damage"			"УРОН ПРИ СТОЛКНОВЕНИИ:"
+		"DOTA_Tooltip_ability_mazellov_f_dot_damage"			"ПЕРИОДИЧЕСКИЙ УРОН:"
+		"DOTA_Tooltip_ability_mazellov_f_slow_pct"			"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_mazellov_f_magic_resist_reduction"			"%СНИЖЕНИЕ СОПРОТИВЛЕНИЯ МАГИИ:"
+		"DOTA_Tooltip_ability_mazellov_f_miss_chance"			"%ШАНС ПРОМАХА:"
+		"DOTA_Tooltip_ability_mazellov_f_duration"			"ДЛИТЕЛЬНОСТЬ КИРИЕШКИ:"
+		"DOTA_Tooltip_ability_mazellov_f_effect_duration"			"ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"
+
+		"DOTA_Tooltip_modifier_mazellov_f_orb_1"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_1_Description" "Острая кириешка при столкновении нанесет урон и наложит эффект периодического урона!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_2"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_2_Description"			"Сырная кириешка при столкновении нанесет урон и замедлит врага!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_3"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_3_Description"			"Кириешка со вкусом сметана и лук при столкновении нанесет урон и снизит сопротивление магии врагу!"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_4"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_orb_4_Description"			"Кириешка со вкусом холодец с хреном нанесет урон при столкновении и заставит врага промахиваться атаками!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_dot"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_dot_Description" "Вы были поражены острой кириешкой и получаете периодический урон каждую секунду!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_slow"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_slow_Description" "Вы были поражены сырной кириешкой и ваша скорость передвижения снижена!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_resist_reduction"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_resist_reduction_Description" "Вы были поражены кириешкой со вкусом сметана и лук и ваше сопротивление магии снижено!"
+
+		"DOTA_Tooltip_modifier_mazellov_f_miss_chance"			"Кириешки"
+		"DOTA_Tooltip_modifier_mazellov_f_miss_chance_Description" "Вы были поражены кириешкой со вкусом холодец с хреном и следующие ваши атаки имеют шанс промахнуться!"
 
 		"DOTA_Tooltip_ability_mazellov_r"			  "Преданный фанат"
 		"DOTA_Tooltip_ability_mazellov_r_description" "Мазеллов делает выбранного вражеского героя своим преданным фанатом, получая над ним полный контроль. При этом цель теряет возможность управлять своим персонажем. Все убийства, совершённые фанатом во время действия способности, в том числе и смерть самого фаната, засчитываются Мазеллову. Подконтрольная цель может использовать все предметы и способности, кроме ультимейта, а также получает дополнительную скорость атаки и передвижения.\nRefresher Orb не сбрасывает перезарядку этой способности."
@@ -3224,7 +3257,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_1"	"+{s:bonus_damage} к урону от Чертово Колесо"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_2"	"Пряничный Домик не требует маны"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_3"	"-{s:bonus_AbilityCooldown} сек. к перезарядки Завод Ящиков"
-		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_4"	"-{s:bonus_AbilityCooldown} сек. к перезарядки Мемы"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_4"	"-{s:bonus_AbilityCooldown} сек. к перезарядки Кириешки"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5"				"Работяги наносят урон от макс. здоровья врага"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5_description" "Базовый урон от взрыва +3% от макс. здоровья цели (также учитывается сопротивление магии цели)"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_6"	"+{s:bonus_AbilityCastRange} к макс. дистанции Чертово Колесо"
