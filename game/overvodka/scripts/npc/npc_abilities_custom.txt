@@ -13430,7 +13430,7 @@
 		"AbilityValues"
 		{
 			"damage"		"50 100 150 200"
-			"dot_damage"		"20 40 60 70"
+			"dot_damage"		"20 40 60 80"
 			"slow_pct"		"15 20 25 30"
 			"magic_resist_reduction"			"10 15 20 25"
 			"miss_chance"				"15 20 25 30"
