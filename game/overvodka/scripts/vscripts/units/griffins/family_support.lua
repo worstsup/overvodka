@@ -14,6 +14,16 @@ function modifier_family_support:IsDebuff() return false end
 function modifier_family_support:IsPurgable() return false end
 function modifier_family_support:IsAura() return true end
 
+function modifier_family_support:OnCreated()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    if GetMapName() ~= "overvodka_5x5" then
+        parent:SetMinimumGoldBounty(250)
+        parent:SetMaximumGoldBounty(250)
+        parent:SetDeathXP(400)
+    end
+end
+
 function modifier_family_support:GetAuraRadius()
     return self:GetAbility():GetSpecialValueFor("AbilityCastRange")
 end

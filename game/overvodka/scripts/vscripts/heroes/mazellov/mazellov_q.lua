@@ -85,10 +85,15 @@ function modifier_factory:OnCreated()
 
     self.hits_to_destroy = self:GetAbility():GetSpecialValueFor("factory_hit_count")
     self.interval = self:GetAbility():GetSpecialValueFor("worker_spawn_interval")
+    local gold = self:GetAbility():GetSpecialValueFor("gold_bounty")
+    local xp = self:GetAbility():GetSpecialValueFor("xp_bounty")
     self.radius = 1200
     self:GetParent():SetMaxHealth(self.hits_to_destroy)
     self:GetParent():SetBaseMaxHealth(self.hits_to_destroy)
     self:GetParent():SetHealth(self.hits_to_destroy)
+    self:GetParent():SetMaximumGoldBounty(gold)
+    self:GetParent():SetMinimumGoldBounty(gold)
+    self:GetParent():SetDeathXP(xp)
     self:StartIntervalThink(self.interval)
 
     EmitSoundOn("mazellov_q_start", self:GetParent())
@@ -300,7 +305,7 @@ function modifier_worker_ai:Explode(target)
     local damage = self.explode_damage
 
     local has_talent = caster:HasTalent("special_bonus_unique_mazellov_5")
-    local health_pct_damage = has_talent and 0.03 or 0
+    local health_pct_damage = has_talent and 0.02 or 0
 
     local enemies = FindUnitsInRadius(
         unit:GetTeamNumber(),

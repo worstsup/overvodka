@@ -13,7 +13,7 @@ end
 
 function modifier_leaping_stride:OnIntervalThink()
     if not IsServer() then return end
-    if self:GetParent():HasModifier("modifier_custom_critical_strike") or self:GetParent():HasModifier("modifier_custom_vision_aura_lol") or self:GetParent():IsChanneling() or self:GetParent():HasModifier("modifier_teleporting") then return end
+    if self:GetParent():HasModifier("modifier_custom_critical_strike") or self:GetParent():HasModifier("modifier_custom_vision_aura_lol") or self:GetParent():IsChanneling() or self:GetParent():HasModifier("modifier_teleporting") or self:GetParent():HasModifier("modifier_invincible_r_debuff") then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
     local playerID = parent:GetPlayerOwnerID()

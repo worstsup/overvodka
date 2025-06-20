@@ -17,6 +17,12 @@ function modifier_broken_psyche:OnCreated()
     if not IsServer() then return end
     self.required_hits = self:GetAbility():GetSpecialValueFor("required_hits")
     self.activated = false
+    local parent = self:GetParent()
+    if GetMapName() ~= "overvodka_5x5" then
+        parent:SetMinimumGoldBounty(200)
+        parent:SetMaximumGoldBounty(200)
+        parent:SetDeathXP(300)
+    end
 end
 
 function modifier_broken_psyche:DeclareFunctions()

@@ -4,7 +4,7 @@ t2x2_r = class({})
 
 function t2x2_r:Precache(context)
     PrecacheResource("particle", "particles/t2x2_r_cast.vpcf", context)
-    PrecacheResource("model", "models/items/lycan/ultimate/eternal_hunger_shapeshift_form/eternal_hunger_shapeshift_form.vmdl", context)
+    PrecacheResource("model", "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl", context)
     PrecacheResource("soundfile", "soundevents/t2x2_sounds.vsndevts", context)
 end
 
@@ -12,12 +12,14 @@ function t2x2_r:OnAbilityPhaseStart()
     self.particle = ParticleManager:CreateParticle( "particles/t2x2_r_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
     ParticleManager:SetParticleControl( self.particle, 0, self:GetCaster():GetAbsOrigin() )
 	ParticleManager:SetParticleControl( self.particle, 3, self:GetCaster():GetAbsOrigin() )
+    EmitSoundOn("t2x2_r_cast", self:GetCaster())
     return true
 end
 
 function t2x2_r:OnAbilityPhaseInterrupted()
 	ParticleManager:DestroyParticle( self.particle, true )
 	ParticleManager:ReleaseParticleIndex( self.particle )
+    StopSoundOn("t2x2_r_cast", self:GetCaster())
 end
 
 function t2x2_r:OnSpellStart()
@@ -47,6 +49,7 @@ function modifier_t2x2_r_buff:DeclareFunctions()
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_HEALTH_BONUS,
         MODIFIER_PROPERTY_MODEL_CHANGE,
+        MODIFIER_PROPERTY_MODEL_SCALE,
     }
 end
 
@@ -65,5 +68,9 @@ function modifier_t2x2_r_buff:GetModifierHealthBonus()
 end
 
 function modifier_t2x2_r_buff:GetModifierModelChange()
-    return "models/items/lycan/ultimate/eternal_hunger_shapeshift_form/eternal_hunger_shapeshift_form.vmdl"
+    return "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"
+end
+
+function modifier_t2x2_r_buff:GetModifierModelScale()
+    return -20
 end

@@ -12,10 +12,11 @@ function mazellov_r:IsRefreshable() return false end
 function mazellov_r:OnAbilityUpgrade( hAbility )
     if not IsServer() then return end
     local result = self.BaseClass.OnAbilityUpgrade( self, hAbility )
-    
-    local ability = self:GetCaster():FindAbilityByName("mazellov_f")
-    if ability then
-        ability:SetLevel(ability:GetLevel() + 1)
+    if hAbility == self then
+        local ability = self:GetCaster():FindAbilityByName("mazellov_f")
+        if ability then
+            ability:SetLevel(ability:GetLevel() + 1)
+        end
     end
     return result
 end
@@ -23,8 +24,8 @@ end
 function mazellov_r:OnSpellStart()
     if not IsServer() then return end
 	local caster = self:GetCaster()
-	
 	local target = self:GetCursorTarget()
+    if target:TriggerSpellAbsorb( self ) then return end
 	local targetself = target:GetPlayerOwnerID()
 	local player = caster:GetPlayerOwnerID()
 	target:SetControllableByPlayer(targetself, false)
@@ -75,6 +76,8 @@ function modifier_mazellov_r:CheckState()
 	return {
 		[MODIFIER_STATE_PROVIDES_VISION] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = self.talent,
+        [MODIFIER_STATE_FAKE_ALLY] = true,
+        [MODIFIER_STATE_ATTACK_ALLIES] = true,
 	}
 end
 
@@ -95,6 +98,23 @@ function modifier_mazellov_r:OnCreated()
     if ultimate and not self.caster:HasScepter() then
         ultimate:SetActivated(false)
     end
+    for i = 0, DOTA_MAX_ABILITIES -1 do
+		local ability = self:GetParent():GetAbilityByIndex(i)
+		if(ability) then
+            if (ability:GetAbilityIndex() ~= 5 and not self.caster:HasScepter()) or (ability:GetAbilityIndex() == 5 and self.caster:HasScepter()) then
+                ability:EndCooldown()
+                ability:RefreshCharges()
+            end
+		end
+	end
+    local forbidden_items = {"item_aeon_disk","item_lesh","item_refresher", "item_onehp"}
+	for i = 0, DOTA_ITEM_MAX -1 do
+		local item = self:GetParent():GetItemInSlot(i)
+		if(item) and not table.contains(forbidden_items, item:GetName()) then
+			item:EndCooldown()
+			item:RefreshCharges()
+		end
+	end
     EmitSoundOn("mazellov_r_"..RandomInt(1,2), self:GetParent())
 end
 

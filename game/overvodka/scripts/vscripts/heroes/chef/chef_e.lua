@@ -121,7 +121,7 @@ function modifier_chef_e_blood:OnIntervalThink()
     local parent = self:GetParent()
     local damage = self:GetAbility():GetSpecialValueFor("blood_damage")
     local dmg = damage * parent:GetMaxHealth() / 100 * self.interval
-    ApplyDamage({victim = parent,attacker = self:GetCaster(),damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility(),})
+    ApplyDamage({victim = parent,attacker = self:GetCaster(),damage = dmg, damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility(),})
 end
 
 function modifier_chef_e_blood:DeclareFunctions()

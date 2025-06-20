@@ -39,7 +39,7 @@ function t2x2_scepter:OnSpellStart()
 	local info = {
 		Source = caster,
 		Ability = self,
-		vSpawnOrigin = caster:GetOrigin(),
+		vSpawnOrigin = caster:GetAttachmentOrigin(caster:ScriptLookupAttachment("attach_attack1")),
 		
 	    bDeleteOnHit = true,
 	    

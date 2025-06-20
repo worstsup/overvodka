@@ -309,7 +309,7 @@ function Server:GetPlayerRank(PlayerID)
         },
         {
             min = 8000,
-            max = 20000,
+            max = -1,
             type = SERVER_RANKS_DEFINITION.HAMSTERGOD
         },
     }

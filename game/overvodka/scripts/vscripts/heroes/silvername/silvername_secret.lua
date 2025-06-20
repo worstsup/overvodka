@@ -12,7 +12,8 @@ function BorrowedTimeActivate( event )
             {
                 "item_aeon_disk",
                 "item_lesh",
-                "item_refresher"
+                "item_refresher",
+				"item_onehp"
             }
 	if caster:GetHealth() < hp and ability:GetCooldownTimeRemaining() == 0 then
 		if strong == 1 then

@@ -67,7 +67,7 @@ end
 function modifier_papich_e_passive:OnIntervalThink()
     if not IsServer() then return end
     if self:GetParent():IsTempestDouble() then return end
-    if self:GetParent():PassivesDisabled() then
+    if self:GetParent():PassivesDisabled() or self:GetParent():HasModifier("modifier_mazellov_r") then
         if self:GetParent():HasModifier("modifier_custom_min_health") then
             self:GetParent():RemoveModifierByName("modifier_custom_min_health")
         end

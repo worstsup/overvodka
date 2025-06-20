@@ -616,6 +616,7 @@ end
 
 dvoreckov_qqq = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqq", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_dvoreckov_qqq_shard", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 
 function dvoreckov_qqq:Precache(context)
 	PrecacheResource("soundfile", "soundevents/hehe.vsndevts", context )
@@ -636,6 +637,9 @@ function dvoreckov_qqq:OnSpellStart()
 		"modifier_dvoreckov_qqq",
 		{ duration = duration }
 	)
+	if caster:HasShard() then
+		caster:AddNewModifier(caster, self, "modifier_dvoreckov_qqq_shard", { duration = duration })
+	end
 	self.modifiers[modifier] = true
 	self.sound_cast = "hehe"
 	EmitSoundOn(self.sound_cast, caster)
@@ -688,6 +692,39 @@ function dvoreckov_qqq:FindAdditionalTargets()
 	return targets
 end
 
+modifier_dvoreckov_qqq_shard = class({})
+
+function modifier_dvoreckov_qqq_shard:IsHidden()
+	return false
+end
+function modifier_dvoreckov_qqq_shard:IsPurgable()
+	return false
+end
+
+function modifier_dvoreckov_qqq_shard:CheckState()
+	return {
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
+	}
+end
+
+function modifier_dvoreckov_qqq_shard:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+	}
+end
+
+function modifier_dvoreckov_qqq_shard:GetModifierMagicalResistanceBonus()
+	return self:GetAbility():GetSpecialValueFor("shard_magic_resist")
+end
+
+function modifier_dvoreckov_qqq_shard:GetEffectName()
+	return "particles/items_fx/black_king_bar_avatar.vpcf"
+end
+
+function modifier_dvoreckov_qqq_shard:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
+
 modifier_dvoreckov_qqq = class({})
 
 function modifier_dvoreckov_qqq:IsHidden()
@@ -730,6 +767,9 @@ end
 
 function modifier_dvoreckov_qqq:OnDestroy()
 	if not IsServer() then return end
+	if self:GetCaster():HasModifier("modifier_dvoreckov_qqq_shard") then
+		self:GetCaster():RemoveModifierByName("modifier_dvoreckov_qqq_shard")
+	end
 	if not self.forceDestroy then
 		self:GetAbility():Unregister( self )
 	end

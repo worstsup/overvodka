@@ -485,7 +485,6 @@
 	"item_lesh"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ID"                            "1104"  //Valve's version of this item uses the ID "104".
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY" 
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -657,7 +656,6 @@
 	"item_invis_sword_datadriven"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ID"                            "1152" 
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -937,7 +935,6 @@
 	"item_manta_datadriven"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ID"                            "1147"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -1681,7 +1678,6 @@
 "item_kaska"
 {
     "BaseClass"                     "item_datadriven"
-    "ID"                            "1114"  //Valve's version of this item uses the ID "114".
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -1784,9 +1780,8 @@
 	"item_jordan"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ID"                            "1057"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"Model"                         "models/props_gameplay/red_box.vmdl" 
+		"Model"                         "models/props_gameplay/red_box.vmdl"
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"            "jordan"
 		"AbilitySharedCooldown"			"phase"
@@ -1892,7 +1887,6 @@
 	"item_nikes"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ID"                            "1050"  
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -2022,7 +2016,6 @@
 	"item_govno"
 	{
     "BaseClass"                     "item_datadriven"
-    "ID"                            "1032"
     "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "Model"                         "models/props_gameplay/red_box.vmdl" 
     "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -2144,7 +2137,6 @@
 	"item_recipe_mask_of_quadrobe"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"1171"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
 		"ItemCost"						"450"	
@@ -2159,7 +2151,6 @@
 	"item_mask_of_quadrobe"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"1172"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -2321,7 +2312,6 @@
 	"item_recipe_armlet_datadriven"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"1150"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
 		"ItemCost"						"200"	
@@ -2335,7 +2325,6 @@
 	}
 	"item_dummy_datadriven"  //A dummy item that is used to take up item slots in the swap_to_item() Lua function.
 	{
-		"ID"                            "2001"
 		"BaseClass"                     "item_datadriven"
 		"ItemBaseLevel"                 "1"
 		"ItemPurchasable"				"0"
@@ -2344,7 +2333,6 @@
 	"item_armlet_datadriven"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"1151"  //Valve's version of this item uses the ID "151".
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -2398,7 +2386,6 @@
 	"item_armlet_active_datadriven"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"2151"  //Valve's version of this item uses the ID "151".
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"

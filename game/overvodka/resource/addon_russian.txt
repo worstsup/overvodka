@@ -173,7 +173,7 @@
 		"npc_dota_hero_mars"				"ЖЕНЯ ПРО ДОТКУ"
 		"npc_dota_hero_phantom_lancer"		"КОЛЯН НАУМОВ"
 		"npc_dota_hero_primal_beast"		"T2X2"
-		"npc_dota_hero_ringmaster"		"МАЗЕЛЛОВ"
+		"npc_dota_hero_ringmaster"			"МАЗЕЛЛОВ"
 		"npc_dota_lone_druid_bear1"			"СЭМ"
 		"npc_dota_lone_druid_bear2"			"СЭМ"
 		"npc_dota_lone_druid_bear3"			"СЭМ"
@@ -238,6 +238,7 @@
 		"npc_dota_hero_mars_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_phantom_lancer_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_primal_beast_npedesc1"		"Сложность персонажа: НИЗКАЯ"
+		"npc_dota_hero_ringmaster_npedesc1"			"Сложность персонажа: ВЫСОКАЯ"
 		"npc_dota_hero_bounty_hunter_npedesc1" 		"Сложность персонажа: ВЫСОКАЯ"
 
 		"dota_tooltip_ability_special_bonus_unique_t2x2_2" "+{s:bonus_crit_chance}% к шансу крит. урона ГЛАВНЫЙ ФУРРИ-ФАНАТ"
@@ -1966,8 +1967,9 @@
 		"DOTA_Tooltip_ability_dvoreckov_qqq_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_dvoreckov_qqq_mana_per_second" "МАНА В СЕКУНДУ:"
 		"DOTA_Tooltip_ability_dvoreckov_qqq_movespeed" "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
-		"DOTA_Tooltip_ability_dvoreckov_qqq_shard_description" "Увеличивает число целей способности на 2. Также увеличивает расстояние разрыва и замедление передвижения."
+		"DOTA_Tooltip_ability_dvoreckov_qqq_shard_description" "Увеличивает число целей способности на 2, увеличивает расстояние разрыва и замедление передвижения. Также дает невосприимчивость к эффектам и +%shard_magic_resist%%% сопротивления магии."
 		"DOTA_Tooltip_modifier_dvoreckov_qqq" "Испить чай"
+		"DOTA_Tooltip_modifier_dvoreckov_qqq_shard" "Невосприимчивость к эффектам"
 		"DOTA_Tooltip_modifier_dvoreckov_qqq_Description" "Дворецков высасывает вашу ману"
 		"DOTA_Tooltip_ability_dvoreckov_eee" "ЗАКИНУТЬ СНЮС"
 		"DOTA_Tooltip_ability_dvoreckov_eee_Description" "Дворецков закидывает снюс и начинает стрелять по врагам. Выстрелы снижают сопротивление магии врагов.\n <font color='#FFFFFF'> Урон, бонус к дальности атаки и снижение сопротивления магии зависят от уровня способности НИКОТИН. </font>"
@@ -2176,7 +2178,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_chef_5" "+{s:bonus_radius} к радиусу БЛЮДО ОТ ШЕФА"
 		"DOTA_Tooltip_ability_special_bonus_unique_chef_6" "+{s:bonus_max_enemies} к числу целей от ГНЕВ ШЕФА"
 		"DOTA_Tooltip_ability_special_bonus_unique_chef_7" "ОСТРЫЙ НОЖ накладывает кровотечение"
-		"DOTA_Tooltip_ability_special_bonus_unique_chef_7_description" "Действует {s:bonus_blood_duration} сек. и наносит {s:bonus_blood_damage}% урона от макс. здоровья врага в секунду"
+		"DOTA_Tooltip_ability_special_bonus_unique_chef_7_description" "Действует {s:bonus_blood_duration} сек. и наносит {s:bonus_blood_damage}% чистого урона от макс. здоровья врага в секунду"
 		"DOTA_Tooltip_Ability_special_bonus_unique_chef_8" "НАОРАТЬ НА ОГУЗКА в радиусе {s:bonus_radius} вокруг цели"
 		
 		"DOTA_Tooltip_modifier_item_bablokrad_cooldown" "Баблокрад"
@@ -3158,7 +3160,7 @@
 		"DOTA_Tooltip_modifier_broken_psyche_buff_Description"			"О нет! Крис впал в безумие. Его скорость передвижения увеличена на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, а скорость атаки на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%%."
 
 		"DOTA_Tooltip_ability_evil_monke"			"Злая Обезьяна"
-		"DOTA_Tooltip_ability_evil_monke_Description"			"Всю жизнь Крис боялся Злую Обезьяну из шкафа. На месте гибели Криса появляется та самая Злая Обезьяна. Один из вражеских героев вблизи становится объектом её пристального запугивания"
+		"DOTA_Tooltip_ability_evil_monke_Description"			"Всю жизнь Крис боялся Злую Обезьяну из шкафа. На месте гибели Криса появляется та самая Злая Обезьяна. Один из вражеских героев вблизи становится объектом её пристального запугивания."
 
 		"DOTA_Tooltip_ability_monkey_menace"			"Обезьянья угроза"
 		"DOTA_Tooltip_ability_monkey_menace_Description"			"Каждый удар Злой Обезьяны — это не просто физическая боль, но и вспышка глубинного детского ужаса. При каждом успешном ударе по герою цель на мгновение впадает в страх, получая периодический урон."
@@ -3172,6 +3174,7 @@
 
 		"DOTA_Tooltip_ability_mazellov_q"			"Завод Ящиков"
 		"DOTA_Tooltip_ability_mazellov_q_Description"			"Илья строит завод ящиков, из которого выходят работяги с ящиками в руках. Они бегут к врагам и, достигнув цели, взрываются, нанося магический урон всем противникам в радиусе взрыва."
+		"DOTA_Tooltip_ability_mazellov_q_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Пухля</font>, <font color='#7DF9FF'>KFG870</font>, <font color='#AAFF00'>Happy</font>"
 		"DOTA_Tooltip_ability_mazellov_q_explode_damage"			"УРОН ОТ ВЗРЫВА:"
 		"DOTA_Tooltip_ability_mazellov_q_explode_radius"			"РАДИУС ВЗРЫВА:"
 		"DOTA_Tooltip_ability_mazellov_q_explode_delay"			"ЗАДЕРЖКА ПЕРЕД ВЗРЫВОМ:"
@@ -3186,6 +3189,7 @@
 
 		"DOTA_Tooltip_ability_mazellov_w"			"Чертово Колесо"
 		"DOTA_Tooltip_ability_mazellov_w_Description"			"Илюша выпускает колесо, которое катится по траектории, поражая всех противников на своем пути. К колесу можно переместиться в любой момент, применив способность Перемещение к Колесу. Каждые 0.2 сек дополнительно наносит 10% от своего урона."
+		"DOTA_Tooltip_ability_mazellov_w_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Пухля</font>, <font color='#7DF9FF'>KFG870</font>, <font color='#AAFF00'>Happy</font>"
 		"DOTA_Tooltip_ability_mazellov_w_projectile_speed"			"СКОРОСТЬ КОЛЕСА:"
 		"DOTA_Tooltip_ability_mazellov_w_projectile_width"			"РАДИУС:"
 		"DOTA_Tooltip_ability_mazellov_w_damage"			"УРОН:"
@@ -3195,12 +3199,14 @@
 
 		"DOTA_Tooltip_ability_mazellov_e"			"Пряничный Домик"
 		"DOTA_Tooltip_ability_mazellov_e_Description"			"Мазяка ненадолго прячется в свой пряничный домик, защищаясь от любого вреда и выпуская волны вокруг себя, которые наносят урон и замедляют врагов."
+		"DOTA_Tooltip_ability_mazellov_e_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Пухля</font>, <font color='#7DF9FF'>KFG870</font>, <font color='#AAFF00'>Happy</font>"
+		"DOTA_Tooltip_ability_mazellov_e_duration_tooltip"		"ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_damage"			"УРОН ОТ ВОЛНЫ:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_radius"			"РАДИУС ВОЛНЫ:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_interval"			"ИНТЕРВАЛ ПОЯВЛЕНИЯ ВОЛН:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_slow_duration"			"ДЛИТЕЛЬНОСТЬ ЗАМЕДЛЕНИЯ:"
 		"DOTA_Tooltip_ability_mazellov_e_wave_slow_amount"			"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
-		"DOTA_Tooltip_ability_mazellov_e_shard_description"	"Позволяет применять способности и предметы во время действия способности, также восполняет %hp_regen%%% от макс. здоровья и маны в секунду."
+		"DOTA_Tooltip_ability_mazellov_e_shard_description"	"Позволяет применять способности и предметы во время действия способности."
 		"DOTA_Tooltip_modifier_mazellov_e_slow" "Пряничный Домик"
 		"DOTA_Tooltip_modifier_mazellov_e_slow_description" "Скорость передвижения снижена на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%"
 
@@ -3210,7 +3216,7 @@
 		– Сырная (<font color='#FFD700'>желтая</font>): замедляет врага.
 		– Сметана и лук (<font color='#0000FF'>синяя</font>): снижает сопротивление магии.
 		– Холодец с хреном (<font color='#A9A9A9'>серая</font>): даёт шанс промаха."
-
+		"DOTA_Tooltip_ability_mazellov_f_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Пухля</font>, <font color='#7DF9FF'>KFG870</font>, <font color='#AAFF00'>Happy</font>"
 		"DOTA_Tooltip_ability_mazellov_f_damage"			"УРОН ПРИ СТОЛКНОВЕНИИ:"
 		"DOTA_Tooltip_ability_mazellov_f_dot_damage"			"ПЕРИОДИЧЕСКИЙ УРОН:"
 		"DOTA_Tooltip_ability_mazellov_f_slow_pct"			"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
@@ -3241,7 +3247,8 @@
 		"DOTA_Tooltip_modifier_mazellov_f_miss_chance_Description" "Вы были поражены кириешкой со вкусом холодец с хреном и следующие ваши атаки имеют шанс промахнуться!"
 
 		"DOTA_Tooltip_ability_mazellov_r"			  "Преданный фанат"
-		"DOTA_Tooltip_ability_mazellov_r_description" "Мазеллов делает выбранного вражеского героя своим преданным фанатом, получая над ним полный контроль. При этом цель теряет возможность управлять своим персонажем. Все убийства, совершённые фанатом во время действия способности, в том числе и смерть самого фаната, засчитываются Мазеллову. Подконтрольная цель может использовать все предметы и способности, кроме ультимейта, а также получает дополнительную скорость атаки и передвижения.\nRefresher Orb не сбрасывает перезарядку этой способности."
+		"DOTA_Tooltip_ability_mazellov_r_description" "Мазеллов делает выбранного вражеского героя своим преданным фанатом, получая над ним полный контроль. При этом цель теряет возможность управлять своим персонажем. Все убийства, совершённые фанатом во время действия способности, в том числе и смерть самого фаната, засчитываются Мазеллову. Подконтрольная цель сбрасывает перезарядки своих способностей и предметов и может использовать их все, кроме ультимейта, а также получает дополнительную скорость атаки и передвижения.\n<font color='#FFFFFF'>Захваченную цель нельзя увести на фонтан — его телепортирует обратно к подножию. Refresher Orb не сбрасывает перезарядку этой способности.</font>"
+		"DOTA_Tooltip_ability_mazellov_r_Lore"	"Герой создан благодаря <font color='#FFC0CB'>Пухля</font>, <font color='#7DF9FF'>KFG870</font>, <font color='#AAFF00'>Happy</font>"
 		"DOTA_Tooltip_ability_mazellov_r_duration" 	"ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_mazellov_r_bonus_as"	"ДОП. СКОРОСТЬ АТАКИ:"
 		"DOTA_Tooltip_ability_mazellov_r_bonus_ms" 	"%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
@@ -3258,11 +3265,11 @@
 
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_1"	"+{s:bonus_damage} к урону от Чертово Колесо"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_2"	"Пряничный Домик не требует маны"
-		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_3"	"-{s:bonus_AbilityCooldown} сек. перезарядки Завод Ящиков"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_3"	"+{s:bonus_wave_damage} к урону от волны Пряничный Домик"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_4"	"-{s:bonus_AbilityCooldown} сек. перезарядки Кириешки"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5"				"Работяги наносят урон от макс. здоровья врага"
-		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5_description" "Базовый урон от взрыва +3% от макс. здоровья цели (также учитывается сопротивление магии цели)"
-		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_6"	"+{s:bonus_AbilityCastRange} к макс. дистанции Чертово Колесо"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_5_description" "Базовый урон от взрыва +2% от макс. здоровья цели (также учитывается сопротивление магии цели)"
+		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_6"	"-{s:bonus_AbilityCooldown} сек. перезарядки Пряничный Домик"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_7"	"Фанат невосприимчив к эффектам"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_7_description" "Также получает +80% к сопротивлению магии"
 		"DOTA_Tooltip_ability_special_bonus_unique_mazellov_8"	"-{s:bonus_worker_spawn_interval} сек. интервала появления работяг от Завод Ящиков"

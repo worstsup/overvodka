@@ -27,3 +27,26 @@ end
 function modifier_fountain_aura_lua:GetAuraRadius()
 	return 1275
 end
+
+function modifier_fountain_aura_lua:OnCreated()
+	if IsServer() then
+		self:StartIntervalThink(0.05)
+	end
+end
+
+function modifier_fountain_aura_lua:OnIntervalThink()
+	if IsServer() then
+		local enemies = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, 1500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, 0, false)
+		if #enemies == 0 then
+			return
+		end
+		for _, enemy in pairs(enemies) do
+			if enemy:IsAlive() and enemy:HasModifier("modifier_mazellov_r") and not enemy:HasModifier("modifier_knockback") then
+				local direction = (enemy:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Normalized()
+				local distance = (self:GetParent():GetAbsOrigin() - enemy:GetAbsOrigin()):Length2D()
+				local new_pos = enemy:GetAbsOrigin() + direction * (1600 - distance)
+				FindClearSpaceForUnit(enemy, new_pos, true)
+			end
+		end
+	end
+end

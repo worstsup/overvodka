@@ -233,6 +233,8 @@ PrecacheUtils.models = {
 		"models/worker/worker.vmdl",
 		"models/worker/factory.vmdl",
 		"models/drake/drake.vmdl",
+		"models/mazellov/mazellov.vmdl",
+		"models/t2x2/t2x2.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -301,7 +303,8 @@ PrecacheUtils.sounds = {
 		"soundevents/orlov_start.vsndevts", 
 		"soundevents/step_start.vsndevts", 
 		"soundevents/ivnv_start.vsndevts",
-		"soundevents/mazellov_start.vsndevts", 
+		"soundevents/mazellov_start.vsndevts",
+		"soundevents/t2x2_start.vsndevts",
 		"soundevents/tamaev_start.vsndevts", 
 		"soundevents/kirill_start.vsndevts", 
 		"soundevents/lev_start.vsndevts",

@@ -92,7 +92,9 @@ end
 function mazellov_e:OnHit( enemy )
     local caster = self:GetCaster()
     enemy:AddNewModifier(caster, self, "modifier_mazellov_e_slow", { duration = self:GetSpecialValueFor("wave_slow_duration") })
-    enemy:AddNewModifier(caster, self, "modifier_mazellov_e_pull", { duration = 0.4 })
+    if not enemy:IsDebuffImmune() then
+        enemy:AddNewModifier(caster, self, "modifier_mazellov_e_pull", { duration = 0.4 })
+    end
     
     ApplyDamage({
         victim = enemy,
