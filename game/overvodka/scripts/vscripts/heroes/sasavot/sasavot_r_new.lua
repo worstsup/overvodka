@@ -43,7 +43,10 @@ end
 
 function modifier_sasavot_r_new:OnIntervalThink()
     if not IsServer() then return end
-
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     if self.target:IsAlive() and self.caster:IsAlive() then
         AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300, 0.5, false)
         if self.target:HasModifier("modifier_sasavot_shard") then

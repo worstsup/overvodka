@@ -39,7 +39,9 @@ function modifier_mazellov_innate:GetModifierSpellAmplify_Percentage()
     
     local parent = self:GetParent()
     local ability = self:GetAbility()
-    
+    if not ability or not parent:IsAlive() or parent:IsIllusion() or parent:PassivesDisabled() then
+        return 0
+    end
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
         parent:GetAbsOrigin(),

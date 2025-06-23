@@ -2,6 +2,7 @@ LinkLuaModifier("modifier_mazellov_f_dot", "heroes/mazellov/mazellov_f.lua", LUA
 LinkLuaModifier("modifier_mazellov_f_slow", "heroes/mazellov/mazellov_f.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_mazellov_f_resist_reduction", "heroes/mazellov/mazellov_f.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_mazellov_f_miss_chance", "heroes/mazellov/mazellov_f.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_mazellov_f_passive", "heroes/mazellov/mazellov_f.lua", LUA_MODIFIER_MOTION_NONE)
 
 for i = 1, 4 do
     LinkLuaModifier("modifier_mazellov_f_orb_"..i, "heroes/mazellov/mazellov_f.lua", LUA_MODIFIER_MOTION_NONE)
@@ -15,11 +16,30 @@ function mazellov_f:Precache(context)
     PrecacheResource( "particle", "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_projectile_hit.vpcf", context )
 end
 
-function mazellov_f:OnSpellStart()
-    if not IsServer() then return end
+function mazellov_f:GetIntrinsicModifierName()
+    return "modifier_mazellov_f_passive"
+end
 
-    local caster = self:GetCaster()
-    local duration = self:GetSpecialValueFor("duration")
+modifier_mazellov_f_passive = class({})
+
+function modifier_mazellov_f_passive:IsHidden() return true end
+function modifier_mazellov_f_passive:IsPurgable() return false end
+
+function modifier_mazellov_f_passive:OnCreated()
+    if not IsServer() then return end
+    self:StartIntervalThink(0.1)
+end
+
+function modifier_mazellov_f_passive:OnIntervalThink()
+    if not IsServer() then return end
+    if not self:GetAbility() then return end
+    if not self:GetAbility():IsCooldownReady() then return end
+    if self:GetParent():IsIllusion() then return end
+    if not self:GetParent():IsAlive() then return end
+    if self:GetParent():PassivesDisabled() then return end
+    self:GetAbility():UseResources(false, false, false, true)
+    local caster = self:GetParent()
+    local duration = self:GetAbility():GetSpecialValueFor("duration")
 
     caster.mazellov_f_orb_index = (caster.mazellov_f_orb_index or 0) + 1
     local index = ((caster.mazellov_f_orb_index - 1) % 4) + 1
@@ -28,14 +48,14 @@ function mazellov_f:OnSpellStart()
     if caster:HasModifier(existing_modifier) then
         caster:RemoveModifierByName(existing_modifier)
     end
-    EmitSoundOn("mazellov_f_"..RandomInt(1,3), caster)
-    caster:AddNewModifier(caster, self, existing_modifier, {
+    if RandomInt(1,2) == 1 then
+        EmitSoundOn("mazellov_f_"..RandomInt(1,3), caster)
+    end
+    caster:AddNewModifier(caster, self:GetAbility(), existing_modifier, {
         duration = duration,
         orb_index = index
     })
 end
-
-
 
 local modifier_mazellov_f_orb = class({})
 
@@ -63,7 +83,9 @@ function modifier_mazellov_f_orb:OnCreated(kv)
     }
 
     self.particle = ParticleManager:CreateParticle(particle_names[self.orb_index], PATTACH_CUSTOMORIGIN, nil)
-    ParticleManager:SetParticleControl(self.particle, 0, self.parent:GetAbsOrigin() + Vector(0, 0, 100))
+    local origin = self.parent:GetAbsOrigin()
+    local particle_pos = Vector(origin.x, origin.y, origin.z + 100)
+    ParticleManager:SetParticleControl(self.particle, 0, particle_pos)
     
     self:AddParticle(self.particle, false, false, -1, false, false)
 
@@ -71,12 +93,13 @@ function modifier_mazellov_f_orb:OnCreated(kv)
 end
 
 function modifier_mazellov_f_orb:OnIntervalThink()
-    if not IsServer() then return end
-
     self.angle = self.angle + self.speed * self.interval
     local radians = math.rad(self.angle)
     local offset = Vector(math.cos(radians), math.sin(radians), 0) * self.radius
-    local orb_position = self.parent:GetAbsOrigin() + offset + Vector(0, 0, 100)
+    local origin = self.parent:GetAbsOrigin()
+    local orb_position = Vector(origin.x + offset.x, origin.y + offset.y, origin.z + offset.z + 100)
+
+    ParticleManager:SetParticleControl(self.particle, 0, orb_position)
 
     ParticleManager:SetParticleControl(self.particle, 0, orb_position)
 

@@ -155,6 +155,10 @@ end
 
 function modifier_stint_q_trigger:OnIntervalThink()
     if not IsServer() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     local nelya  = self:GetParent()
     local caster = self:GetCaster()
     local now = GameRules:GetGameTime()

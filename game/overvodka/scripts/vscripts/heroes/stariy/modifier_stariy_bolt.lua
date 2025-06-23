@@ -67,6 +67,8 @@ function modifier_stariy_bolt:OnIntervalThink()
 				duration = self.duration,
 			}
 		)
+		self:PlayEffectsNew( self:GetParent() )
+		self:PlayEffects( enemy )
 		if self:GetParent():HasScepter() then
 			CreateModifierThinker( self:GetParent(), self:GetAbility(), "modifier_stariy_lasers_linger_thinker", { duration = self:GetAbility():GetSpecialValueFor( "linger_time" ) }, enemy:GetAbsOrigin(), self:GetParent():GetTeamNumber(), false )
 		end
@@ -85,15 +87,13 @@ function modifier_stariy_bolt:OnIntervalThink()
 			dmg = dmg * self:GetAbility():GetSpecialValueFor("creep_mult")
 		end
 		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-		self:PlayEffectsNew( self:GetParent() )
-		self:PlayEffects( enemy )
 		self:GetAbility():UseResources(false, false, false, true)
 	end
 end
 
 function modifier_stariy_bolt:PlayEffects( target )
 	local particle_cast = "particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start_bolt_parent.vpcf"
-
+	if not target then return end
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	EmitSoundOn( "Hero_Zuus.LightningBolt", target )	
 	ParticleManager:SetParticleControl( effect_cast, 1, target:GetOrigin() + Vector( 0, 0, 64 ) )

@@ -52,11 +52,11 @@ function stariy_lasers:OnAbilityPhaseStart()
 				false
 			)
 			local radius = self:GetSpecialValueFor( "pull_radius" )
-	
+
 			self.effect_radius = ParticleManager:CreateParticle( "particles/stariy_lasers_facet.vpcf", PATTACH_ABSORIGIN, caster )
 			ParticleManager:SetParticleControl( self.effect_radius, 0, caster:GetOrigin() )
 			ParticleManager:SetParticleControl( self.effect_radius, 1, Vector(radius,radius, 0) )
-		 end
+		end
 		StartSoundEventFromPositionReliable( "Aghanim.StaffBeams.WindUp", caster:GetAbsOrigin() )
 		self.nChannelFX = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_channel.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
 		self.vecTargets = FindUnitsInRadius( caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
@@ -67,6 +67,24 @@ function stariy_lasers:OnAbilityPhaseStart()
 				enemy.vSourceLoc = enemy:GetAbsOrigin()
 			end
 		end
+		if self.phaseUpdateTimer then
+			Timers:RemoveTimer(self.phaseUpdateTimer)
+		end
+		self.phaseUpdateTimer = Timers:CreateTimer(function()
+			if self.vecTargets then
+				for _, enemy in pairs(self.vecTargets) do
+					if enemy and not enemy:IsNull() then
+						enemy.vSourceLoc = enemy:GetAbsOrigin()
+						if enemy.nWarningFXIndex then
+							ParticleManager:SetParticleControl(enemy.nWarningFXIndex, 0, enemy:GetAbsOrigin())
+						end
+					end
+				end
+			end
+			if caster:IsChanneling() or caster:IsAlive() then
+				return 0.03
+			end
+		end)
 	end
 	return true
 end

@@ -153,6 +153,15 @@ function modifier_inator_stint:OnCreated()
     self:GetParent():SetBaseMaxHealth(self.hit_destroy)
     self:GetParent():SetMaxHealth(self.hit_destroy)
     self:GetParent():SetHealth(self.hit_destroy)
+    self:StartIntervalThink(0.1)
+end
+
+function modifier_inator_stint:OnIntervalThink()
+    if not IsServer() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
 end
 
 function modifier_inator_stint:OnDestroy()
@@ -231,6 +240,10 @@ end
 
 function modifier_inator_1:OnIntervalThink()
     if not IsServer() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     local effect_cast = ParticleManager:CreateParticle("particles/units/heroes/hero_ringmaster/ringmaster_wheel_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 1, Vector(self.radius, 0, 0))
@@ -282,7 +295,9 @@ function modifier_inator_2:GetModifierAura()
 end
 
 function modifier_inator_2:GetAuraDuration()
-    return self:GetAbility():GetSpecialValueFor("fire_duration")
+    if self:GetAbility() then
+        return self:GetAbility():GetSpecialValueFor("fire_duration")
+    end
 end
 
 function modifier_inator_2:GetAuraRadius()
@@ -304,6 +319,10 @@ end
 
 function modifier_inator_2_debuff:OnIntervalThink()
     if not IsServer() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     local damage = self:GetAbility():GetSpecialValueFor("damage_second") * self.interval * self:GetParent():GetMaxHealth() / 100
     ApplyDamage({
         victim = self:GetParent(),

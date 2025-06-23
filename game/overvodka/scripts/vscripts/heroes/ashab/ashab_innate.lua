@@ -126,11 +126,11 @@ function modifier_imba_batrider_sticky_napalm_new:OnCreated()
 	self.non_trigger_inflictors = {
 		["imba_batrider_sticky_napalm_new"] = true,
 		
-		["item_imba_cloak_of_flames"]	= true,
-		["item_imba_radiance"]			= true,
+		["item_cloak_of_flames"]	= true,
+		["item_radiance"]			= true,
 		
-		["item_imba_urn_of_shadows"]	= true,
-		["item_imba_spirit_vessel"]		= true,
+		["item_urn_of_shadows"]	= true,
+		["item_spirit_vessel"]		= true,
 	}
 	
 	self:SetStackCount(1)
@@ -145,7 +145,7 @@ function modifier_imba_batrider_sticky_napalm_new:OnRefresh()
 	self.movement_speed_pct	= -3
 	self.turn_rate_pct		= -40
 	self.damage				= 10 + self:GetCaster():GetLevel() * 2
-
+	
 	if not IsServer() then return end
 
 	if self:GetStackCount() < self.max_stacks then

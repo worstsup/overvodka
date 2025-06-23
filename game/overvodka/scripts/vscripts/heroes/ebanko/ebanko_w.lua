@@ -49,7 +49,7 @@ function ebanko_w:OnSpellStart()
 				knockback_height = 300
 			}
 		)
-		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration * (1 - target:GetStatusResistance()) })
+		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration })
 		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration * (1 - target:GetStatusResistance()) })
 	end
 	ApplyDamage( damageTable )

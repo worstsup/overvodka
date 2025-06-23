@@ -112,6 +112,10 @@ end
 
 function modifier_kolyan_r_trigger:OnIntervalThink()
     if not IsServer() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     local guard  = self:GetParent()
     local caster = self:GetCaster()
     if self:GetAbility():GetSpecialValueFor("has_facet") > 0 then

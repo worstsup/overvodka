@@ -116,7 +116,7 @@ end
 function modifier_invincible_q_debuff:OnCreated(kv)
     if not IsServer() then return end
     self.dir = Vector(kv.dir_x or 0, kv.dir_y or 0, 0):Normalized()
-    self:GetParent():MoveToPosition( self:GetParent():GetAbsOrigin() + self.dir * 2000 )
+    self:GetParent():MoveToPosition( self:GetParent():GetAbsOrigin() + self.dir * 1000 )
 end
 
 

@@ -14,7 +14,7 @@ end
 -----------------------------------------------------------------------------
 
 function modifier_stariy_lasers_thinker:OnIntervalThink()
-	if IsServer() then
+	if IsServer() and self:GetAbility() then
 		CreateModifierThinker( self:GetCaster(), self:GetAbility(), "modifier_stariy_lasers_linger_thinker", { duration = self.linger_time }, self:GetParent():GetAbsOrigin(), self:GetCaster():GetTeamNumber(), false )
 	end
 end

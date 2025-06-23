@@ -1037,7 +1037,7 @@
 		"AbilityTextureName"            "qmar"
 		"AbilityCooldown"               "24.0"
 		"AbilityDuration"               "10"
-		"AbilityHealthCost"             "100 180 260 340"
+		"AbilityHealthCost"             "70 140 210 280"
 		"AbilityValues"
 		{
 				"movespeed_bonus_pct"       "15 20 25 30"     
@@ -1327,7 +1327,7 @@
 					"value"	"1.2 1.5 1.8 2.1"
 					"special_bonus_unique_shkolnik_6" "+0.5"
 				}
-				"stone_angle"				"60"
+				"stone_angle"				"75"
 				"bonus_physical_damage"		"50"
 				"AbilityCastRange"
 				{
@@ -1396,7 +1396,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"AbilityCooldown"				"50"
+		"AbilityCooldown"				"40"
 		"AbilityManaCost"				"250"
 		"IsGrantedByScepter"			"1"
 		"MaxLevel"						"1"
@@ -4512,7 +4512,7 @@
 		"ScriptFile"					"heroes/mellstroy/mellstroy_business"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"			"biznes"
 		"HasScepterUpgrade"				"1"
 		"AbilityGoldCost"				"100 200 300 400"
@@ -7981,9 +7981,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sasavot/sasavot_e_new"
 		"AbilityTextureName"			"sasavot_e"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.0"
@@ -8055,7 +8052,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sasavot/sasavot_shard"
 		"AbilityTextureName"			"sasavot_shard"
-		"FightRecapLevel"				"2"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"				"1"
 		"precache"
@@ -8087,8 +8083,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sasavot/sasavot_r"
 		"AbilityTextureName"			"sasavot_r"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"3"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts"
@@ -8126,8 +8120,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sasavot/sasavot_r_new"
 		"AbilityTextureName"			"sasavot_r"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"3"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -8276,15 +8268,12 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_q"
 		"AbilityTextureName"			"golovach_e"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
 			"particle"	"particles/units/heroes/hero_bristleback/bristleback_side_dmg.vpcf"
 			"particle"	"particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
 		}
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityCastRange"				"350"
@@ -8327,7 +8316,6 @@
     	"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_w"
     	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-    	"AbilityType"                   "ABILITY_TYPE_BASIC"
     	"SpellImmunityType"         	"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitTargetTeam"     	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"     	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -8379,9 +8367,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_e"
 		"AbilityTextureName"            "golovach_q"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -8403,7 +8388,7 @@
 				"cr"			"800 850 900 950"
 				"freeze_duration"
 				{
-					"value"	"0.1 0.2 0.3 0.4"
+					"value"	"0.25"
 					"special_bonus_unique_golovach_5" "+0.2"
 				}
 				"freeze_cooldown"		"0.4"
@@ -8416,12 +8401,15 @@
 				}
            		"radius"                            "200"
             	"damage"                            "90 180 270 360"
-            	"lifesteal_pct"					"0"
+            	"lifesteal_pct"
+				{
+					"value"	"0"
+					"special_bonus_unique_golovach_7" "+40"
+				}
             	"hui_chance"					 "15"
 				"debuff_immune"
 				{
 					"value"	"0"
-					"special_bonus_unique_golovach_7" "+1"
 				}
 		}
 	}
@@ -8458,8 +8446,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/golovach/golovach_r"
 		"AbilityTextureName"			"golovach_r"
-		"FightRecapLevel"				"2"
-		"MaxLevel"						"3"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
@@ -8662,7 +8648,6 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"				"1"
 		"HasShardUpgrade"				"1"
 		"AbilityCastPoint"				"0.2 0.2 0.2 0.2"
 		"AbilityCooldown"				"20"
@@ -8755,7 +8740,6 @@
 		"AbilityTextureName"			"papich_w"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
-		"FightRecapLevel"				"1"
 		"HasScepterUpgrade"				"1"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"25"
@@ -8800,10 +8784,7 @@
    		"ScriptFile"                "heroes/papich/papich_e"
     	"AbilityTextureName"		"papich_e"
     	"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    	"AbilityType"				"ABILITY_TYPE_BASIC"
-    	"FightRecapLevel"			"1"
 		"IsBreakable"				"1"
-		"MaxLevel"					"4"
 		"AbilityValues"
 		{
 			"AbilityCooldown"
@@ -8948,7 +8929,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"3"
 		"AbilityTextureName"			"papich_w_clone"
 		"AbilitySound"					"Hero_TrollWarlord.WhirlingAxes.Melee"
@@ -9162,10 +9142,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/vihor/vihor_q"
 		"AbilityTextureName"			"vihor_q"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
 		"HasScepterUpgrade"				"1"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -9221,9 +9198,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/vihor/vihor_w"
 		"AbilityTextureName"			"vihor_w"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -9499,13 +9473,13 @@
 				}
 				"max_stun"
 				{
-					"value"	"1.8 2.0 2.2 2.4"
+					"value"	"1.4 1.6 1.8 2.0"
 					"special_bonus_unique_rostik_6" "+0.8"
 				}
-				"min_damage"				"50 100 150 200"
+				"min_damage"				"0 50 100 150"
 				"max_damage"
 				{
-					"value"	"150 250 350 450"
+					"value"	"100 200 300 400"
 				}
 				"radius"
 				{
@@ -11271,7 +11245,7 @@
 			"effect_duration"	"5"
 			"tick_damage"
 			{
-				"value"	"15 30 45 60"
+				"value"	"10 20 30 40"
 				"special_bonus_unique_azazin_1" "+20"
 			}
 			"magic_reduction"	"-5 -10 -15 -20"
@@ -11326,7 +11300,7 @@
 			}
 			"movespeed_slow"
 			{
-				"value"	"-15 -20 -25"
+				"value"	"-10 -15 -20"
 				"special_bonus_unique_azazin_4" "-15"
 			}
 			"attack_speed_slow"
@@ -13060,7 +13034,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"				"20 18 16 14"
+		"AbilityCooldown"				"21 20 19 18"
 		"HasShardUpgrade"				"1"
 		"AbilityManaCost"				"110 130 150 170"
 		"AbilityValues"
@@ -13077,7 +13051,7 @@
 				}
 				"stun_duration"
 				{
-					"value"	"1.2 1.4 1.6 1.8"
+					"value"	"1.1 1.2 1.3 1.4"
 					"special_bonus_unique_t2x2_7"	"+0.8"
 				}
 				"stomp_damage"					"100 200 300 400"
@@ -13206,10 +13180,10 @@
 			"AbilityCooldown"
 			{
 				"value"	"90 85 80"
-				"special_bonus_unique_t2x2_4" "-20"
+				"special_bonus_unique_t2x2_4" "-10"
 			}
-			"duration" 					"17"
-			"speed"						"25 30 35"
+			"duration" 					"15"
+			"speed"						"20 25 30"
 			"crit_chance"
 			{
 				"value"	"25 30 35"
@@ -13252,6 +13226,57 @@
 				"arrow_vision"			"500"
 		}
 	}
+	//===================================================================================================================
+	//													МАЗЕЛЛОВ
+	//===================================================================================================================
+	"special_bonus_unique_mazellov_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_mazellov_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	//=================================================================================================================
 	// ЗАВОД ЯЩИКОВ
 	//=================================================================================================================
@@ -13266,21 +13291,21 @@
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"            "mazellov_q"
 		"AbilityManaCost"               "150 175 200 225"
-		"AbilityCastRange"				"600 700 800 900"
-		"AbilityCastPoint"				"1" 
+		"AbilityCastRange"				"450 500 550 600"
+		"AbilityCastPoint"				"1"
 		"AbilityValues"
 		{
 			"explode_damage"		"75 100 125 150"
-			"explode_radius"        "325 350 375 400"
+			"explode_radius"        "250 275 300 325"
 			"explode_delay"         "0.25"
-			"worker_hp"				"200 250 300 350"
+			"worker_hp"				"125 175 225 275"
 			"worker_armor"			"1 3 5 7"
 			"worker_magres"			"0 10 20 30"
 			"worker_movespeed"		"300 320 340 360"
 			"worker_spawn_interval"
 			{
 				"value"		"1.25"
-				"special_bonus_unique_mazellov_8"		"-0.5"
+				"special_bonus_unique_mazellov_8"		"-0.3"
 			}	
 			"factory_hit_count" 	"4 4 5 6"
 			"factory_lifetime"		"15"
@@ -13298,11 +13323,9 @@
 			"xp_bounty"	  "75 125 175 225"
 		}
 	}
-
 	//=================================================================================================================
 	// ЧЁРТОВО КОЛЕСО
 	//=================================================================================================================
-
 	"mazellov_w"
 	{
 		"BaseClass"             		"ability_lua"
@@ -13311,7 +13334,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"            "mazellov_w"
-		"AbilityCooldown"               "13 12 11 10"
+		"AbilityCooldown"               "15 14 13 12"
 		"AbilityManaCost"               "100 110 120 130"
 		"AbilityCastPoint"				"0.2"
 		"LinkedAbility"					"mazellov_d"
@@ -13333,12 +13356,11 @@
 			}		
 			"damage"
 			{
-				"value"	"150 200 250 300" 
+				"value"	"75 125 175 225" 
 				"special_bonus_unique_mazellov_1"		"+75"
 			}				
 		}
 	}
-
 	"mazellov_d"
 	{
 		"BaseClass"             		"ability_lua"
@@ -13349,11 +13371,9 @@
 		"AbilityCastPoint"				"0"
 		"LinkedAbility"					"mazellov_w"
 	}
-
 	//=================================================================================================================
 	// ПРЯНИЧНЫЙ ДОМИК
 	//=================================================================================================================
-
 	"mazellov_e"
 	{
 		"BaseClass"             		"ability_lua"
@@ -13379,7 +13399,7 @@
 			}
 			"AbilityCooldown"
 			{
-				"value"	"12 11 10 9"
+				"value"	"14 13 12 11"
 				"special_bonus_unique_mazellov_6"	"-1"
 			}
 			"wave_interval"		"0.5"
@@ -13397,25 +13417,23 @@
 			}
 		}
 	}
-
 	//=================================================================================================================
 	// КИРИЕШКИ
 	//=================================================================================================================
-
 	"mazellov_f"
 	{
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"             		"heroes/mazellov/mazellov_f"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"            "mazellov_f"
 		"DependentOnAbility"			"mazellov_r"
 		"MaxLevel"						"4"
-		"AbilityManaCost"               "50 65 80 95"
+		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-			"damage"		"50 100 150 200"
+			"damage"		"30 60 90 120"
 			"dot_damage"		"20 40 60 80"
 			"slow_pct"		"15 20 25 30"
 			"magic_resist_reduction"			"10 15 20 25"
@@ -13423,11 +13441,11 @@
 			"duration"		"19"
 			"effect_duration"	"1.5 2 2.5 3"
 			"dot_interval"		"1"
-			"radius"		"650"
+			"radius"		"450"
 			"rotation_speed"		"200"
 			"AbilityCooldown"
 			{
-				"value"		"10 9 8 7"
+				"value"		"8 7 6 5"
 				"special_bonus_unique_mazellov_4"		"-1"
 			}             
 		}
@@ -13467,7 +13485,6 @@
 	//=================================================================================================================
 	// Lyrical Rap
 	//=================================================================================================================
-
 	"mazellov_innate"
 	{
 		"BaseClass"             		"ability_lua"
@@ -13476,6 +13493,7 @@
 		"AbilityTextureName"            "mazellov_innate"
 		"innate"				"1"
 		"MaxLevel"		"1"
+		"IsBreakable"	"1"
 		"AbilityValues"
 		{
 			"min_radius"
@@ -13489,63 +13507,7 @@
 				"affected_by_aoe_increase"	"1"
 			}		
 			"min_bonus"		"10"
-			"max_bonus"		"50"
+			"max_bonus"		"30"
 		}
-	}
-
-	"special_bonus_unique_mazellov_1"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_2"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_3"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_4"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_5"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_6"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_7"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"special_bonus_unique_mazellov_8"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 }

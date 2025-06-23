@@ -2485,7 +2485,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_golovach_5" "+0.2 sec to DAUBY stun duration"
 		"DOTA_Tooltip_ability_special_bonus_unique_golovach_6" "Invisibility from TILT"
 		"DOTA_Tooltip_ability_special_bonus_unique_golovach_6_Description" "Lasts 3 sec."
-		"DOTA_Tooltip_ability_special_bonus_unique_golovach_7" "Immune to DAUBY effects"
+		"DOTA_Tooltip_ability_special_bonus_unique_golovach_7" "+{s:bonus_lifesteal_pct}% lifesteal from DAUBY"
 		"DOTA_Tooltip_ability_special_bonus_unique_golovach_8" "+3 sec to DONATE duration"
 		
 

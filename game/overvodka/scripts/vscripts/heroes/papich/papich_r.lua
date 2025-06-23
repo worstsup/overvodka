@@ -123,7 +123,7 @@ function modifier_papich_r:OnIntervalThink()
     local current_health = self:GetParent():GetHealth()
     local max_health = self:GetParent():GetMaxHealth()
     local health_threshold = max_health * 0.01
-    if current_health <= health_threshold then
+    if current_health <= health_threshold or not self:GetCaster() then
         self:Destroy()
     end
 end
@@ -153,10 +153,12 @@ function modifier_papich_r:GetModifierAttackRangeBonus()
     return -350
 end
 function modifier_papich_r:GetModifierIncomingDamage_Percentage()
+    if not self:GetAbility() then return 0 end
     return self:GetAbility():GetSpecialValueFor("incoming_damage") - 100
 end
 
 function modifier_papich_r:GetModifierTotalDamageOutgoing_Percentage()
+    if not self:GetAbility() then return 0 end
     return self:GetAbility():GetSpecialValueFor("outgoing_damage") - 100
 end
 
@@ -178,7 +180,7 @@ function modifier_papich_r:OnDestroy()
     local units = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, -1, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false )
     for _, unit in pairs(units) do
         if unit ~= self:GetParent() then
-            if unit:IsRealHero() then
+            if unit:IsRealHero() and not unit:IsTempestDouble() then
                 for _, mod in pairs(unit:FindAllModifiers()) do
                     if mod and mod:GetCaster() == self:GetParent() then
                         mod:Destroy()
@@ -187,7 +189,9 @@ function modifier_papich_r:OnDestroy()
             end
         end
     end
-    self:GetAbility().knight = nil
+    if self:GetAbility() then
+        self:GetAbility().knight = nil
+    end
     UTIL_Remove(self:GetParent())
 end
 

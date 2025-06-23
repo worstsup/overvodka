@@ -23,7 +23,7 @@ end
 
 modifier_mellstroy_business = class({})
 
-function modifier_mellstroy_business:IsPurgable() return false end
+function modifier_mellstroy_business:IsPurgable() return true end
 
 function modifier_mellstroy_business:OnCreated()
     if IsServer() then

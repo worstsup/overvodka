@@ -19,6 +19,14 @@ function zhenya_q:OnSpellStart()
     caster:EmitSound("Hero_Pugna.NetherWard")
     EmitSoundOn("zhenya_q", caster)
     caster:AddNewModifier(caster, self, "modifier_zhenya_q_caster", { duration = duration })
+    if self:GetCaster():HasScepter() then
+        local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FIND_ANY_ORDER, false)
+        for _, enemy in pairs(enemies) do
+            if enemy and enemy:IsAlive() then
+                enemy:AddNewModifier(enemy, self, "modifier_zhenya_q_scepter", {duration = self:GetSpecialValueFor("root_duration") * (1 - enemy:GetStatusResistance())})
+            end
+        end
+    end
 end
 
 modifier_zhenya_q_caster = class({})
@@ -54,9 +62,6 @@ function modifier_zhenya_q_debuff:OnCreated()
     self.parent = self:GetParent()
     self.caster = self:GetCaster()
     self.abil = self:GetAbility()
-    if self.caster:HasScepter() then
-        self.parent:AddNewModifier(self.caster, self.abil, "modifier_zhenya_q_scepter", {duration = self.abil:GetSpecialValueFor("root_duration")})
-    end
     self.interval = 0.25
     self.damage_pct = self.abil:GetSpecialValueFor("damage")
     self:StartIntervalThink(self.interval)

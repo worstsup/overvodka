@@ -155,6 +155,11 @@ function modifier_invincible_r_debuff:OnDestroy( kv )
 end
 
 function modifier_invincible_r_debuff:OnIntervalThink()
+    if  not IsServer() then return end
+    if not self:GetAbility() or not self:GetParent() or not self:GetCaster() or not self:GetParent():IsAlive() or not self:GetCaster():IsAlive() then
+        self:Destroy()
+        return
+    end
 	local range = self:GetAbility():GetSpecialValueFor( "range" )
 	local vector_distance = self:GetCaster():GetAbsOrigin() - self:GetParent():GetAbsOrigin()
 	local distance = (vector_distance):Length2D()
