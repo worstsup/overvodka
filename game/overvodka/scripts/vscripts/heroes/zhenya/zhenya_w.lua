@@ -69,7 +69,7 @@ function modifier_zhenya_w:GetAuraDuration() return self:GetAbility():GetSpecial
 modifier_zhenya_w_buff = class({})
 
 function modifier_zhenya_w_buff:IsHidden() return false end
-function modifier_zhenya_w_buff:IsPurgable() return false end
+function modifier_zhenya_w_buff:IsPurgable() return true end
 function modifier_zhenya_w_buff:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_zhenya_w_buff:OnCreated()
@@ -113,7 +113,7 @@ modifier_zhenya_w_enemy_debuff = class({})
 
 function modifier_zhenya_w_enemy_debuff:IsHidden() return false end
 function modifier_zhenya_w_enemy_debuff:IsDebuff() return true end
-function modifier_zhenya_w_enemy_debuff:IsPurgable() return false end
+function modifier_zhenya_w_enemy_debuff:IsPurgable() return true end
 function modifier_zhenya_w_enemy_debuff:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_zhenya_w_enemy_debuff:OnCreated()

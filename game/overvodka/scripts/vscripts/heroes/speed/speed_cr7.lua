@@ -32,7 +32,7 @@ end
 modifier_speed_cr7_buff = class({})
 
 function modifier_speed_cr7_buff:IsPurgable()
-    return false
+    return true
 end
 
 function modifier_speed_cr7_buff:DeclareFunctions()

@@ -440,7 +440,7 @@
 		"ScriptFile"             		"heroes/kachok/kachok_big_tasty"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityType"                   "ABILITY_TYPE_BASIC"
 		"FightRecapLevel"               "2"
 		"AbilityTextureName"            "tasty"
@@ -1762,7 +1762,7 @@
 					"value"		"0.4"
 				}
 				"slow_duration"	"1.0"
-				"slow"			"-20 -25 -30"
+				"slow"			"-10 -15 -20"
 				"aoe_radius"	"250"
 				"max_enemies"
 				{
@@ -2267,6 +2267,7 @@
     	"AbilityType"                   "ABILITY_TYPE_BASIC"
     	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
     	"MaxLevel"						"4"
     	"AbilityTextureName"            "twenty"
     	"AbilityManaCost"               "50"
@@ -4927,8 +4928,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/litvin/litvin_zhishi"
 		"AbilityTextureName"			"zhishi"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"precache"
 		{
@@ -5005,8 +5004,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/litvin/litvin_zhishi_dota"
 		"AbilityTextureName"			"zhishi"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"precache"
 		{
@@ -5264,42 +5261,34 @@
 					"value"	"600"
 					"affected_by_aoe_increase"	"1"
 				}
+				"radius"
+				{
+					"value"	"600"
+					"affected_by_aoe_increase"	"1"
+				}
+				"creep_mult"		"2"
+				"damage" 			"50 100 150 200"
+				"int_damage"		"25"
+				"damage_percent"	"0"
+				"microstun"			"0"
+				"interval"			"0.1"
+				"beam_radius"       "200"
+                "beam_dps"          "100"
+                "linger_time"       "0.6"
+                "linger_create_interval"       "0.1"
+                "damage_interval"   "0.1"
 				"duration"
 				{
 					"value"	"0"
 					"special_bonus_facet_stariy_e_facet"	"+1.0"
 					"RequiresFacet"			"stariy_e_facet"
 				}
-				"radius"
-				{
-					"value"	"600"
-					"affected_by_aoe_increase"	"1"
-				}
-				"creep_mult"	"2"
 				"ms"
 				{
 					"value"	"0"
 					"special_bonus_facet_stariy_e_facet"	"-14 -21 -28 -35"
 					"RequiresFacet"			"stariy_e_facet"
 				}
-				"damage"
-				{
-					"value"	"50 100 150 200"
-				}
-				"damage_percent"
-				{
-					"value"	"0"
-				}
-				"microstun"
-				{
-					"value"	"0"
-				}
-				"interval"				"0.1"
-				"beam_radius"       "200"
-                "beam_dps"          "100"
-                "linger_time"       "0.6"
-                "linger_create_interval"       "0.1"
-                "damage_interval"   "0.1"
 		}
 	}
 	//=================================================================================================================
@@ -6171,13 +6160,13 @@
 				"bonus_as"
 				{
 					"value"	"0"
-					"special_bonus_facet_nix_pravin"	"=15 =30 =45 =60"
+					"special_bonus_facet_nix_pravin"	"=20 =30 =40 =50"
 					"RequiresFacet"	"nix_pravin"
 					"special_bonus_unique_nix_5" "+70"
 				}
 				"bonus_range"
 				{
-					"value"	"100 150 200 250"
+					"value"	"125 150 175 200"
 					"special_bonus_unique_nix_2" "+100"
 				}
 				"bonus_vision"
@@ -6268,7 +6257,7 @@
 				"chance_pct"			"100"
 				"damage"
 				{
-					"value"	"25 50 75 100"
+					"value"	"40 55 70 85"
 					"special_bonus_facet_nix_levin"				"x2"
 				}
 				"duration"
@@ -6330,7 +6319,7 @@
 				"as_loss"
 				{
 					"value" "0"
-					"special_bonus_facet_nix_pravin"	"-30 -65 -100"
+					"special_bonus_facet_nix_pravin"	"-40 -55 -70"
 					"RequiresFacet"	"nix_pravin"
 				}
 				"dps"
@@ -6914,6 +6903,7 @@
 		}
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastRange"				"700 800 900 1000"
 		"AbilityCastPoint"				"0.33"
 		"AbilityCooldown"				"28 26 24 22"
@@ -7982,7 +7972,7 @@
 		"ScriptFile"					"heroes/sasavot/sasavot_e_new"
 		"AbilityTextureName"			"sasavot_e"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastPoint"				"0.0"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityChannelTime"			"4.0"
@@ -8953,7 +8943,7 @@
 				}
 				"AbilityCastRange"
 				{
-					"value"	"450"
+					"value"	"500"
 					"affected_by_aoe_increase"	"1"
 				}
 				"axe_movement_speed"		"277"
@@ -9051,7 +9041,7 @@
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastPoint"				"0.2"
 		"MaxLevel"						"1"
 		"Innate"						"1"
@@ -9568,7 +9558,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCooldown"				"23"
 		"AbilityManaCost"				"90 120 150 180"
 		"AbilityValues"
@@ -9594,7 +9584,7 @@
 				"bonus_as"
 				{
 					"value"	"0"
-					"special_bonus_facet_rostik_e" "+20 +40 +60 +80"
+					"special_bonus_facet_rostik_e" "+15 +30 +45 +60"
 					"RequiresFacet"		"rostik_e"
 				}
 				"spirits_duration"
@@ -9784,7 +9774,7 @@
 		{
 			"spell_lifesteal"
 			{
-				"value"		"10 20 30 40"
+				"value"		"10 15 20 25"
 			}
 		}
 	}
@@ -10070,23 +10060,14 @@
 					"special_bonus_facet_peterka_r"	"+10"
 					"RequiresFacet" "peterka_r"
 				}
-				"stun_dur"
-				{
-					"value"	"0"
-					"special_bonus_scepter" "+0.6"
-					"RequiresScepter"		"1"
-				}
-				"slow"
-				{
-					"value"	"0"
-					"special_bonus_scepter" "+80"
-					"RequiresScepter"		"1"
-				}
 				"AbilityCooldown"
 				{
 					"value"	"68.0 60.0 52.0"
 					"special_bonus_unique_peterka_5" "-10"
 				}
+				"duration_scepter"	"0.8"
+				"radius_scepter"	"300"
+				"distance_scepter"	"1200"
 		}
 	}
 	//=================================================================================================================
@@ -10435,28 +10416,19 @@
 		"AbilityManaCost"				"150 200 250"
 		"AbilityValues"
 		{
-				"duration"
-				{
-					"value"	"15"
-				}
-				"bonus_ms"
-				{
-					"value" "10 15 20"
-				}
-				"cooldown_reduction"
-				{
-					"value"	"10 15 20"
-				}
-				"add_blasters"	"2"
-				"blasters_damage_pct" "50 60 70"
-				"interval"		"0.2"
-				"radius"		"200"
-				"damage_mini"	"60 100 140"
-				"ministun"		"0.25"
-				"dps_pct"		"5"	
-				"dps_pct_tooltip"	"10"
-				"radius_bones"	"325"
-				"bones_dur"		"3 4 5"
+				"duration"			 	"15"
+				"bonus_ms"			 	"10 15 20"
+				"cooldown_reduction" 	"10 15 20"
+				"add_blasters"		 	"2"
+				"blasters_damage_pct" 	"50 60 70"
+				"interval"				"0.2"
+				"radius"				"200"
+				"damage_mini"			"60 100 140"
+				"ministun"				"0.25"
+				"dps_pct"				"5"	
+				"dps_pct_tooltip"		"10"
+				"radius_bones"			"325"
+				"bones_dur"				"3 4 5"
 		}
 	}
 	//=================================================================================================================
@@ -11222,27 +11194,12 @@
 	   	"AbilityTextureName" 			"azazin_e"
 		"AbilityValues"
 		{
-			"required_hits"		
-			{
-				"value"			"4"
-			}
-			"required_hits_dota"		
-			{
-				"value"			"1"
-			}
-			"counter_duration"
-			{
-				"value"	"8"
-			}
-			"counter_duration_dota"
-			{
-				"value"	"4"
-			}
-			"stun_duration"
-			{
-				"value"	"0.6"
-			}
-			"effect_duration"	"5"
+			"required_hits"			"4"
+			"required_hits_dota" 	"1"
+			"counter_duration"		"8"
+			"counter_duration_dota" "4"
+			"stun_duration"			"0.6"
+			"effect_duration"		"5"
 			"tick_damage"
 			{
 				"value"	"10 20 30 40"
@@ -11423,7 +11380,6 @@
 		}
 	}
 
-
 	//===================================================================================================================
 	//													STRAY228
 	//===================================================================================================================
@@ -11501,13 +11457,10 @@
 			}
 			"duration"			"8"
 			"outgoing_damage"			"-60 -55 -50 -45"
-			"outgoing_damage_tooltip"		
-			{
-				"value"					"35 40 45 50"
-			}
+			"outgoing_damage_tooltip"	"40 45 50 55"
 			"incoming_damage"						"150"
 			"tooltip_incoming_damage_total_pct"		"250"
-			"illusion_count"				"3"
+			"illusion_count"			"3"
 			"evasion"					"20 30 40 50"
 			"bashchance"				"20"
 			"bashduration"				"0.6 0.8 1.0 1.2"
@@ -11644,27 +11597,12 @@
 		"AbilityManaCost"				"250"
 		"AbilityValues"
 		{
-				"duration"
-				{
-					"value"			"8.0"
-				}
-				"illusion_damage_outgoing"
-				{
-					"value"                    "-30"
-				}
-				"tooltip_outgoing"
-				{
-					"value"                    "70"
-				}
-				"illusion_damage_incoming"
-				{
-					"value"	"100"
-				}
-				"tooltip_illusion_total_damage_incoming"
-				{
-					"value"	"200"
-				}
-				"attack_delay"				"0.5"
+				"duration"									"8"
+				"illusion_damage_outgoing"					"-30"
+				"tooltip_outgoing"							"70"
+				"illusion_damage_incoming" 					"100"
+				"tooltip_illusion_total_damage_incoming" 	"200"
+				"attack_delay"								"0.5"
 		}
 	}
 	//=================================================================================================================
@@ -11907,10 +11845,7 @@
 				"value"	"700 775 850 925"
 				"affected_by_aoe_increase"	"1"
 			}
-			"cooldown_single"
-			{
-				"value"	"1"
-			}
+			"cooldown_single"	"1"
 			"dispel"
 			{
 				"value"	"0"
@@ -11949,14 +11884,8 @@
 			"chance_1_5"	 		"30"
 			"chance_2"		 		"20"
 			"chance_2_5"	 		"10"
-			"max_debt"
-			{
-				"value"	"1000"
-			}
-			"no_damage"
-			{
-				"value"	"0"
-			}
+			"max_debt" 				"1000"
+			"no_damage"				"0"
 			"heal"
 			{
 				"value"	"0"
@@ -12261,15 +12190,12 @@
 				"bonus_damage"
 				{
 					"value"	"35 70 105 140"
-					"special_bonus_unique_invincible_3"	"+75"
+					"special_bonus_unique_invincible_3"	"+100"
 				}
-				"lifesteal"
-				{
-					"value"	"100"
-				}
+				"lifesteal"	"100"
 				"AbilityCooldown"
 				{
-					"value"	"9 8 7 6"
+					"value"	"7.5 7.0 6.5 6.0"
 					"special_bonus_unique_invincible_6"	"-4"
 				}
 				"pct_damage"
@@ -12318,10 +12244,7 @@
         "AbilityUnitTargetFlags"        "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
         "AbilityValues"
         {
-            "duration"
-            {
-                "value"     "10"
-            }
+            "duration"		"10"
             "radius"		"800"
 			"chain_dur"
 			{
@@ -12476,7 +12399,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"			"zhenya_w"
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.2"
@@ -12784,26 +12707,14 @@
 		"AbilityTextureName"            "kolyan_r"
 		"AbilityCooldown"               "60"
 		"AbilityManaCost"               "150 200 250"
+		"AbilityCastRange" 				"800"
 		"AbilityCastPoint"				"1.4"
 		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
-			"duration"
-			{
-				"value"	"16"
-			}
-			"damage"
-			{
-				"value"	"30 60 90"
-			}
-			"radius"
-			{
-				"value"	"800"
-			}
-			"AbilityCastRange"
-			{
-				"value"	"800"
-			}
+			"duration" 	"16"
+			"damage"   	"30 60 90"
+			"radius"   	"800"
 			"num"
 			{
 				"value"	"2"
@@ -13299,7 +13210,7 @@
 			"explode_radius"        "250 275 300 325"
 			"explode_delay"         "0.25"
 			"worker_hp"				"125 175 225 275"
-			"worker_armor"			"1 3 5 7"
+			"worker_armor"			"1 2 3 4"
 			"worker_magres"			"0 10 20 30"
 			"worker_movespeed"		"300 320 340 360"
 			"worker_spawn_interval"

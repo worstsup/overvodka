@@ -79,7 +79,7 @@ end
 modifier_zolo_home = class({})
 
 function modifier_zolo_home:IsHidden() return false end
-function modifier_zolo_home:IsPurgable() return false end
+function modifier_zolo_home:IsPurgable() return true end
 
 function modifier_zolo_home:DeclareFunctions()
 	return {

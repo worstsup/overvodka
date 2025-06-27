@@ -869,8 +869,11 @@ end
 
 function dvoreckov_qqw:OnSpellStart()
 	local caster = self:GetCaster()
-	local duration =  ability_manager:GetValueQuas(self, self:GetCaster(), "duration")
-	
+	if caster:GetUnitName() == "npc_dota_hero_invoker" then
+		local duration =  ability_manager:GetValueQuas(self, self:GetCaster(), "duration")
+	else
+		duration = 12
+	end
 	caster:AddNewModifier(
 		caster,
 		self,

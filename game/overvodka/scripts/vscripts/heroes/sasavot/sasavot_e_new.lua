@@ -127,7 +127,7 @@ modifier_sasavot_bonus_buff = class({})
 
 function modifier_sasavot_bonus_buff:IsHidden() return false end
 function modifier_sasavot_bonus_buff:IsDebuff() return false end
-function modifier_sasavot_bonus_buff:IsPurgable() return false end
+function modifier_sasavot_bonus_buff:IsPurgable() return true end
 
 function modifier_sasavot_bonus_buff:OnCreated()
     self.movespeed = self:GetAbility():GetSpecialValueFor("movespeed")

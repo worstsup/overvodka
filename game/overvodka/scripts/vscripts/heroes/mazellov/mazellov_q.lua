@@ -111,7 +111,7 @@ function modifier_factory:OnIntervalThink()
     local worker = CreateUnitByName("npc_worker", spawn_pos, true, caster, nil, caster:GetTeamNumber())
     worker:AddNewModifier(caster, ability, "modifier_worker_ai", {})
     worker:AddNewModifier(caster, ability, "modifier_worker_disarmed", {})
-    worker:AddNewModifier(caster, ability, "modifier_kill", {duration = 20})
+    worker:AddNewModifier(caster, ability, "modifier_kill", {duration = 10})
 
     local hp = ability:GetSpecialValueFor("worker_hp")
     local armor = ability:GetSpecialValueFor("worker_armor")

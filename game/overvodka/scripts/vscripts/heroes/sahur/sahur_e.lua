@@ -56,6 +56,9 @@ function sahur_e:OnSpellStart()
 	local block_width = 24
 	local block_delta = 8.25
 	local direction = point-caster:GetOrigin()
+    if point == caster:GetAbsOrigin() then
+        direction = caster:GetForwardVector()
+    end
 	direction.z = 0
 	direction = direction:Normalized()
 	local wall_vector = direction * distance

@@ -4,6 +4,7 @@ function item_byebye:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     if caster:HasModifier("modifier_zhenya_r_caster") then return end
+    if caster:HasModifier("modifier_silence_item") then return end
     EmitSoundOn("byebye_start", caster)
     ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf", PATTACH_ABSORIGIN, caster)
 end
@@ -13,10 +14,11 @@ function item_byebye:OnChannelFinish(bInterrupted)
     local caster = self:GetCaster()
     StopSoundOn("byebye_start", caster)
     if not bInterrupted then
+        if caster:HasModifier("modifier_zhenya_r_caster") then return end
+        if caster:HasModifier("modifier_silence_item") then return end
         ProjectileManager:ProjectileDodge(caster)
         ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, caster)
         EmitSoundOn("byebye", caster)
-        
         local target_point = caster:GetAbsOrigin()
         local fountainEntities = Entities:FindAllByClassname("ent_dota_fountain")
         for _, fountainEnt in pairs(fountainEntities) do

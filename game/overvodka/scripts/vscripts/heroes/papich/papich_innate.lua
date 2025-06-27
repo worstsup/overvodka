@@ -17,7 +17,7 @@ end
 
 modifier_papich_innate = class({})
 function modifier_papich_innate:IsPurgable()
-	return false
+	return true
 end
 
 function modifier_papich_innate:OnCreated( kv )

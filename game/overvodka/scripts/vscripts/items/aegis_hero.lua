@@ -22,9 +22,7 @@ end
 function modifier_item_aegis_hero:CheckState()
 	local state = {}
 	if IsServer() then
-		state = {
-		[MODIFIER_STATE_CANNOT_MISS] = true,
-	}
+		state[MODIFIER_STATE_CANNOT_MISS] = self.critProc
 	end
 	return state
 end
@@ -48,12 +46,6 @@ function modifier_item_aegis_hero:OnAttackStart(params)
 	if not IsServer() then return end
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
-	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
-end
-
-function modifier_item_aegis_hero:OnAttackLanded(params)
-	if params.attacker ~= self:GetParent() then return end
-	if params.target:IsWard() then return end
 	if params.target:IsBuilding() then return end
 	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
 	if RollPercentage( self:GetAbility():GetSpecialValueFor("minibash_chance") ) then
@@ -61,35 +53,41 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
 	else
 		self.critProc = false
 	end
+end
+
+function modifier_item_aegis_hero:OnAttackLanded(params)
+	if not IsServer() then return end
+	if params.attacker ~= self:GetParent() then return end
+	if params.target:IsWard() then return end
+	if params.target:IsBuilding() then return end
+	if self:GetParent():FindAllModifiersByName("modifier_item_aegis_hero")[1] ~= self then return end
 	if not params.attacker:IsIllusion() and self.critProc then
 		local duration = self:GetAbility():GetSpecialValueFor("slow_duration")
-        local damage_pct = self:GetAbility():GetSpecialValueFor("bash_damage")
-        local cleave_damage = self:GetAbility():GetSpecialValueFor("cleave_percent")
-        local cleave_radius = self:GetAbility():GetSpecialValueFor("cleave_radius")
+		local damage_pct = self:GetAbility():GetSpecialValueFor("bash_damage")
+		local cleave_damage = self:GetAbility():GetSpecialValueFor("cleave_percent")
+		local cleave_radius = self:GetAbility():GetSpecialValueFor("cleave_radius")
 		local caster = self:GetCaster()
-	    if not self:GetCaster():IsHero() then
-	        caster = caster:GetOwner()
-	    end
+		if not self:GetCaster():IsHero() then
+			caster = caster:GetOwner()
+		end
 		local damage = self:GetParent():GetAverageTrueAttackDamage(nil) * damage_pct * 0.01
-        ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-        if not params.attacker:IsRangedAttacker() then
-        	local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
-			DoCleaveAttack( self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf" )
+		ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+		if not params.attacker:IsRangedAttacker() then
+			local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
+			if params.record and params.record ~= -1 then
+				DoCleaveAttack(self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf")
+			end
 			params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_item_aegis_hero_slow", {duration = duration})
 		end
-        params.target:EmitSound("DOTA_Item.MKB.melee")
-        params.target:EmitSound("DOTA_Item.MKB.Minibash")
-    end
+		params.target:EmitSound("DOTA_Item.MKB.melee")
+		params.target:EmitSound("DOTA_Item.MKB.Minibash")
+	end
 end
 
 modifier_item_aegis_hero_slow = class({})
 
 function modifier_item_aegis_hero_slow:IsHidden() return false end
 function modifier_item_aegis_hero_slow:IsPurgable() return false end
-
-function modifier_item_aegis_hero_slow:GetTexture()
-    return "items/aegis_hero"
-end
 
 function modifier_item_aegis_hero_slow:DeclareFunctions()
 	return {

@@ -300,6 +300,10 @@
 	}
 	"item_black_king_bar"					"REMOVE"
 	"item_octarine_core"					"REMOVE"
+	"item_recipe_basher"					"REMOVE"
+	"item_basher"							"REMOVE"
+	"item_recipe_abyssal_blade"				"REMOVE"
+	"item_abyssal_blade"					"REMOVE"
 	"item_tpscroll"
 	{
 		"AbilityCooldown"					"60"

@@ -29,7 +29,7 @@
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
 			"item"		"item_pasito"
-			"item"		"item_abyssal_blade"
+			"item"		"item_obossal_blade"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{

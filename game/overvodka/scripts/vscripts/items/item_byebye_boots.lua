@@ -7,6 +7,7 @@ function item_byebye_boots:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     if caster:HasModifier("modifier_zhenya_r_caster") then return end
+    if caster:HasModifier("modifier_silence_item") then return end
     self.point = self:GetCursorPosition()
     local origin = self:GetCaster():GetOrigin()
     EmitSoundOnLocationWithCaster( self.point, "byebye_start", caster )
@@ -22,6 +23,8 @@ function item_byebye_boots:OnChannelFinish(bInterrupted)
     if not IsServer() then return end
     local caster = self:GetCaster()
     if not bInterrupted then
+        if caster:HasModifier("modifier_zhenya_r_caster") then return end
+        if caster:HasModifier("modifier_silence_item") then return end
         ProjectileManager:ProjectileDodge(caster)
         ParticleManager:CreateParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", PATTACH_ABSORIGIN, caster)
         caster:SetAbsOrigin(self.point)

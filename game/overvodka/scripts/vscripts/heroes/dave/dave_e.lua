@@ -123,7 +123,7 @@ end
 
 modifier_dave_e_barrier = class({})
 
-function modifier_dave_e_barrier:IsPurgable() return false end
+function modifier_dave_e_barrier:IsPurgable() return true end
 function modifier_dave_e_barrier:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_dave_e_barrier:OnCreated( kv )

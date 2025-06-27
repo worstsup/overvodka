@@ -28,7 +28,6 @@
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
             "item"		"item_govno"
-			"item"		"item_abyssal_blade"
             "item"		"item_pasito"
             "item"		"item_ultimate_scepter"
             "item"		"item_waka"

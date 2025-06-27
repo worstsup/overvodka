@@ -29,9 +29,7 @@ function serega_song:OnSpellStart()
 end
 
 serega_song_end = class({})
-function serega_song_end:IsStealable()
-	return false
-end
+function serega_song_end:IsStealable() return false end
 function serega_song_end:OnSpellStart()
 	self.modifier:End()
 	self.modifier = nil

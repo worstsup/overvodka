@@ -15,6 +15,7 @@ end
 
 function mazellov_e:OnSpellStart()
     local caster = self:GetCaster()
+    ProjectileManager:ProjectileDodge(caster)
     caster:AddNewModifier(caster, self, "modifier_mazellov_e_channel", { duration = self:GetChannelTime() })
     caster:EmitSound("mazellov_e_start")
 end
@@ -40,6 +41,7 @@ function modifier_mazellov_e_channel:CheckState()
     return {
         [MODIFIER_STATE_INVULNERABLE] = true,
         [MODIFIER_STATE_NO_HEALTH_BAR] = true,
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
 end
 

@@ -28,6 +28,7 @@ function invincible_e:OnOrbImpact( params )
 	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = params.target
+	if target:IsBuilding() or target:IsWard() or target:GetUnitName() == "npc_factory" then return end
 	EmitSoundOn("invincible_e", target)
 	local damage = self:GetSpecialValueFor("bonus_damage")
 	ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self})

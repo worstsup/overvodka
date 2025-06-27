@@ -76,8 +76,7 @@ end
 modifier_item_onehp_active = class({})
 
 function modifier_item_onehp_active:IsHidden() return false end
-function modifier_item_onehp_active:IsPurgable() return false end
-function modifier_item_onehp_active:IsPurgeException() return false end
+function modifier_item_onehp_active:IsPurgable() return true end
 
 function modifier_item_onehp_active:DeclareFunctions()
     return  

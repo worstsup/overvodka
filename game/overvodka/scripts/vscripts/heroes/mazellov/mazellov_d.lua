@@ -7,6 +7,8 @@ function mazellov_d:Spawn()
     self:SetActivated( false )
 end
 
+function mazellov_d:IsStealable() return false end
+
 function mazellov_d:OnSpellStart()
     local caster = self:GetCaster()
     local expire = caster.mazellov_orb_expire or 0

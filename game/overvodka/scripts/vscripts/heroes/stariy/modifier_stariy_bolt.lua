@@ -20,6 +20,7 @@ function modifier_stariy_bolt:OnCreated( kv )
 	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
+	self.int_damage = self:GetAbility():GetSpecialValueFor( "int_damage" )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
 	self:StartIntervalThink( self.interval )
@@ -35,6 +36,7 @@ function modifier_stariy_bolt:OnRefresh( kv )
 	self.ms = self:GetAbility():GetSpecialValueFor( "ms" )
 	self.percent = self:GetAbility():GetSpecialValueFor( "damage_percent" )
 	self.microstun = self:GetAbility():GetSpecialValueFor( "microstun" )
+	self.int_damage = self:GetAbility():GetSpecialValueFor( "int_damage" )
 	self.cooldown = self:GetAbility():GetCooldown(1)
 end
 
@@ -43,6 +45,8 @@ function modifier_stariy_bolt:OnDestroy( kv )
 end
 
 function modifier_stariy_bolt:OnIntervalThink()
+	if not IsServer() then return end
+	if not self:GetAbility() or not self:GetParent() then return end
 	if self:GetParent():IsIllusion() then return end
 	if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 	if not self:GetParent():IsAlive() then return end
@@ -72,7 +76,7 @@ function modifier_stariy_bolt:OnIntervalThink()
 		if self:GetParent():HasScepter() then
 			CreateModifierThinker( self:GetParent(), self:GetAbility(), "modifier_stariy_lasers_linger_thinker", { duration = self:GetAbility():GetSpecialValueFor( "linger_time" ) }, enemy:GetAbsOrigin(), self:GetParent():GetTeamNumber(), false )
 		end
-		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01
+		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01 + self:GetParent():GetIntellect(false) * self.int_damage * 0.01
 		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
 			dmg = 0
 			if peterka == 0 then

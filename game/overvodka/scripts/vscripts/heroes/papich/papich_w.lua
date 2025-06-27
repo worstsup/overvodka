@@ -91,7 +91,7 @@ function modifier_papich_w_attack_speed:OnCreated()
 		self.attack_speed_bonus	= self:GetAuraOwner():FindModifierByName("modifier_papich_w_thinker_attack_speed").attack_speed_bonus
 		self.steal	= self:GetAuraOwner():FindModifierByName("modifier_papich_w_thinker_attack_speed").steal
 		self.stolen = self:GetParent():GetStrength() * self.steal * 0.01
-		if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
+		if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() and not self:GetParent():IsIllusion() then
 			k = k + 1
 			if self:GetCaster():HasScepter() then
 				k = k + 0.5
@@ -102,9 +102,11 @@ function modifier_papich_w_attack_speed:OnCreated()
 	end
 end
 function modifier_papich_w_attack_speed:OnDestroy()
-	k = k - 1
-	if self:GetCaster():HasScepter() then
-		k = k - 0.5
+	if self:GetParent():IsRealHero() and self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() and not self:GetParent():IsIllusion() then
+		k = k - 1
+		if self:GetCaster():HasScepter() then
+			k = k - 0.5
+		end
 	end
 end
 function modifier_papich_w_attack_speed:DeclareFunctions()

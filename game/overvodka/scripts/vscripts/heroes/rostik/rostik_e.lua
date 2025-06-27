@@ -38,7 +38,7 @@ function modifier_rostik_e:IsStunDebuff()
 	return false
 end
 function modifier_rostik_e:IsPurgable()
-	return false
+	return true
 end
 
 function modifier_rostik_e:OnCreated( kv )
@@ -163,7 +163,7 @@ function modifier_rostik_e_spirits:IsStunDebuff()
 	return false
 end
 function modifier_rostik_e_spirits:IsPurgable()
-	return false
+	return true
 end
 function modifier_rostik_e_spirits:OnCreated()
 end

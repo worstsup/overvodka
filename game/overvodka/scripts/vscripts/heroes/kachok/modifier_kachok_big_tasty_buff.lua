@@ -6,7 +6,7 @@ function modifier_kachok_big_tasty_buff:GetAttributes()
 end
 
 function modifier_kachok_big_tasty_buff:IsPurgable()
-    return false
+    return true
 end
 
 function modifier_kachok_big_tasty_buff:DeclareFunctions()
