@@ -85,6 +85,26 @@
 		"PLAYER_HUD_TeamLeavedDescription4"				"Общий бонус золота:"
 		"PLAYER_HUD_TeamLeavedDescription5"				"Общий бонус опыта:"
 
+		"Quest_Kills_Title" "Slay Enemies"
+        "Quest_Ults_Title" "Use Ultimates"
+        "Quest_MagicDamage_Title" "Deal Magic Damage"
+        "Quest_PhysDamage_Title" "Deal Physical Damage"
+        "Quest_Assists_Title" "Get Assists"
+        "Quest_Healing_Title" "Heal Allies"
+        "Quest_Stuns_Title" "Stun Enemies"
+        
+        // Quest Descriptions
+        "Quest_Kills_Desc" "Kill 5 enemy heroes"
+        "Quest_Ults_Desc" "Use your ultimate ability 3 times"
+        "Quest_MagicDamage_Desc" "Deal 15,000 magic damage"
+        "Quest_PhysDamage_Desc" "Deal 15,000 physical damage"
+        "Quest_Assists_Desc" "Get 10 assists"
+        "Quest_Healing_Desc" "Heal 10,000 health to allies"
+        "Quest_Stuns_Desc" "Stun enemies 15 times"
+        
+        // UI
+        "Quests_Header" "Daily Quests"
+
 		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"
 		"PLAYER_HUD_Subscribe_Buy"						"Купить"
 		"PLAYER_HUD_Subscribe_Subscribed_Buy"			"Продлить"

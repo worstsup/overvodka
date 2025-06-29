@@ -1,0 +1,67 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/overvodka_quests.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/overvodka_quests.js" />
+    </scripts>
+
+    <Panel class="QuestsContainter" hittest="false">
+        <Panel class="QuestsButton" hittest="true" onactivate="OpenQuests()"/>
+        <Panel id="QuestRoot">
+            <Panel id="QuestHeader">
+                <Panel id="QuestsCloseButton" hittest="true" onactivate="CloseQuests()"/>
+                <Label text="#Quests_Header" class="QuestHeaderTitle" />
+            </Panel>
+            <Panel id="QuestList">
+                <!-- Quest: Get 5 Kills -->
+                <Panel class="QuestRow" id="Quest_Kills">
+                    <Panel class="QuestInfo">
+                        <Label class="QuestTitle" text="#Quest_Kills_Title" />
+                        <Label class="QuestDescription" text="#Quest_Kills_Desc" />
+                    </Panel>
+                    <Panel class="QuestProgress">
+                        <ProgressBar id="KillsProgressBar" class="QuestProgressBar">
+                            <Label id="KillsProgressLabel" class="QuestProgressLabel" text="0 / 5" />
+                        </ProgressBar>
+                    </Panel>
+                </Panel>
+                
+                <!-- Quest: Use Ultimate 3 Times -->
+                <Panel class="QuestRow" id="Quest_Ults">
+                    <Panel class="QuestInfo">
+                        <Label class="QuestTitle" text="#Quest_Ults_Title" />
+                        <Label class="QuestDescription" text="#Quest_Ults_Desc" />
+                    </Panel>
+                    <Panel class="QuestProgress">
+                        <ProgressBar id="UltsProgressBar" class="QuestProgressBar">
+                            <Label id="UltsProgressLabel" class="QuestProgressLabel" text="0 / 3" />
+                        </ProgressBar>
+                    </Panel>
+                </Panel>
+                <Panel class="QuestRow" id="Quest_Damage">
+                    <Panel class="QuestInfo">
+                        <Label class="QuestTitle"       text="#Quest_Damage_Title" />
+                        <Label class="QuestDescription" text="#Quest_Damage_Desc" />
+                    </Panel>
+                    <Panel class="QuestProgress">
+                        <ProgressBar id="DamageProgressBar" class="QuestProgressBar">
+                            <Label id="DamageProgressLabel" class="QuestProgressLabel" text="0 / 15000" />
+                        </ProgressBar>
+                    </Panel>
+                </Panel>
+                <Panel class="QuestRow" id="Quest_PhysDamage">
+                    <Panel class="QuestInfo">
+                        <Label class="QuestTitle"       text="#Quest_PhysDamage_Title" />
+                        <Label class="QuestDescription" text="#Quest_PhysDamage_Desc" />
+                    </Panel>
+                    <Panel class="QuestProgress">
+                        <ProgressBar id="PhysDamageProgressBar" class="QuestProgressBar">
+                            <Label id="PhysDamageProgressLabel" class="QuestProgressLabel" text="0 / 15000" />
+                        </ProgressBar>
+                    </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

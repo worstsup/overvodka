@@ -7,13 +7,18 @@ function item_rocket_launcher:OnVectorCastStart(vStartLocation, vDirection)
 
     local caster = self:GetCaster()
     local point = vStartLocation
+    if (point - caster:GetAbsOrigin()):Length2D() < 1 then
+        local forward = caster:GetForwardVector()
+        point = point + forward * 100
+        vDirection = forward
+    end
     EmitSoundOnLocationWithCaster(point, "rocket_launcher", caster)
     self.effect = ParticleManager:CreateParticle("particles/rocket_launcher.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(self.effect, 0, point)
     ParticleManager:SetParticleControl(self.effect, 2, point)
 
-    local fly_distance = 3000
-    local spawnPos = vStartLocation - vDirection * fly_distance
+    local fly_distance = 2500
+    local spawnPos = point - vDirection * fly_distance
     spawnPos.z = GetGroundHeight(spawnPos, caster)
     local bombardiro = CreateUnitByName("npc_bombardiro", spawnPos, true, caster, caster, caster:GetTeamNumber())
     if not bombardiro then return end
@@ -23,8 +28,8 @@ function item_rocket_launcher:OnVectorCastStart(vStartLocation, vDirection)
     if bombs_ability then bombs_ability:SetLevel(1) end
 
     bombardiro:AddNewModifier(caster, self, "modifier_bombardiro_fly_rocket_launcher", {
-        point_x = vStartLocation.x,
-        point_y = vStartLocation.y,
+        point_x = point.x,
+        point_y = point.y,
         dir_x = vDirection.x,
         dir_y = vDirection.y,
         fly_distance = fly_distance

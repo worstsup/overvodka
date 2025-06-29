@@ -28,6 +28,7 @@ require('server/server')
 require('music_zone_trigger')
 require('util/vector_targeting')
 require('util/functions')
+require('quests')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -277,7 +278,7 @@ function COverthrowGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )

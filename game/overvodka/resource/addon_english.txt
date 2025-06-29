@@ -92,6 +92,24 @@
 		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Buying <span class='OvervodkaName'>Overvodka Prime</span> you'll get:"
 		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"<span class='OvervodkaName'>Overvodka Prime</span> is active! You get:"
 
+		"Quests_Header"             "DAILY QUESTS"
+
+        // Kills Quest
+        "Quest_Kills_Title"         "Slayer"
+        "Quest_Kills_Desc"          "Get 5 kills"
+
+        // Ultimates Quest
+        "Quest_Ults_Title"          "Master Caster"
+        "Quest_Ults_Desc"           "Use your ultimate 3 times"
+
+        // Magic Damage Quest
+        "Quest_Damage_Title"        "Sorcerer"
+        "Quest_Damage_Desc"         "Deal 15,000 magic damage"
+
+        // Physical Damage Quest
+        "Quest_Phys_Damage_Title"   "Bruiser"
+        "Quest_Phys_Damage_Desc"    "Deal 20,000 physical damage"
+
 		"COMEBACK_SYSTEM_DESC"							"This team gets x2 circle XP, x2 gold for coins, and x2 score points for kills."
 		"COMEBACK_SYSTEM_DESC2"							"This team gets x1.5 circle XP, x1.5 gold for coins, and x2 score points for kills."
 
