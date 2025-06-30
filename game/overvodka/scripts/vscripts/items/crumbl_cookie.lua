@@ -35,6 +35,12 @@ function item_crumbl_cookie:OnSpellStart()
     ParticleManager:SetParticleControl( particle2, 0, target:GetAbsOrigin() )
     ParticleManager:SetParticleControl( particle2, 1, target:GetAbsOrigin() )
     ParticleManager:ReleaseParticleIndex(particle2)
+    local playerID = self:GetCaster():GetPlayerOwnerID()
+    if playerID and PlayerResource:IsValidPlayerID(playerID) then
+        if Quests and Quests.IncrementQuest then
+            Quests:IncrementQuest(playerID, "cookieHeal", bonus_heal_mana)
+        end
+    end
 end
 
 function item_crumbl_cookie:CheckOverheal(target, bonus_heal_mana)

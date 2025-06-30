@@ -63,7 +63,12 @@ function item_bablokrad:OnSpellStart()
 	target:ModifyGold(-gold_enemy, false, 0)
 
 	self:GetCaster():ModifyGold(gold, false, 0)
-
+    local playerID = self:GetCaster():GetPlayerOwnerID()
+    if playerID and PlayerResource:IsValidPlayerID(playerID) then
+        if Quests and Quests.IncrementQuest then
+            Quests:IncrementQuest(playerID, "bablokradAmount", gold_enemy)
+        end
+    end
     target:AddNewModifier(self:GetCaster(), self, "modifier_item_bablokrad_cooldown", {duration = 30})
     self:SpendCharge(1)
 end

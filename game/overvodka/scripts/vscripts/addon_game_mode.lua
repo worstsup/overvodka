@@ -272,7 +272,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:GetGameModeEntity():SetGiveFreeTPOnDeath( false )
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
-		GameRules:SetStrategyTime( 10.0 )
+		GameRules:SetStrategyTime( 15.0 )
 		if GetMapName() == "overvodka_duo" then
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		else
@@ -393,22 +393,34 @@ end
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
-function COverthrowGameMode:EndGame( victoryTeam )
-	local overBoss = Entities:FindByName( nil, "@overboss" )
-	if overBoss then
-		local celebrate = overBoss:FindAbilityByName( 'dota_ability_celebrate' )
-		if celebrate then
-			overBoss:CastAbilityNoTarget( celebrate, -1 )
-		end
-	end
-	local tTeamScores = {}
-	for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
-		tTeamScores[team] = self:GetTeamHeroKills(team)
-	end
-	GameRules:SetPostGameTeamScores( tTeamScores )
-	local sortedTeams = self:GetSortedValidTeams()
-	Server:OnGameEnded(sortedTeams, victoryTeam)
-	GameRules:SetGameWinner( victoryTeam )
+function COverthrowGameMode:EndGame(victoryTeam)
+    if Quests and Quests.SaveAllProgress then
+        for playerID, _ in pairs(Quests.playerData) do
+            if Quests.modifierTimers[playerID] then
+                Quests.playerData[playerID].progress["midTime"] = Quests.modifierTimers[playerID].totalTime
+                Quests.playerData[playerID].dirty = true
+            end
+        end
+        Quests:SaveAllProgress()
+    end
+
+    local overBoss = Entities:FindByName(nil, "@overboss")
+    if overBoss then
+        local celebrate = overBoss:FindAbilityByName('dota_ability_celebrate')
+        if celebrate then
+            overBoss:CastAbilityNoTarget(celebrate, -1)
+        end
+    end
+    
+    local tTeamScores = {}
+    for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
+        tTeamScores[team] = self:GetTeamHeroKills(team)
+    end
+    GameRules:SetPostGameTeamScores(tTeamScores)
+    
+    local sortedTeams = self:GetSortedValidTeams()
+    Server:OnGameEnded(sortedTeams, victoryTeam)
+    GameRules:SetGameWinner(victoryTeam)
 end
 
 function COverthrowGameMode:GetSortedValidTeams()

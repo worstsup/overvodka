@@ -128,6 +128,14 @@ function item_armature_strike:OnSpellStart()
     for _, enemy in pairs(enemies) do
         enemy:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = stun_duration })
         caster:PerformAttack(enemy, true, true, true, true, true, false, true)
+        if enemy:IsRealHero() then
+            local playerID = caster:GetPlayerOwnerID()
+            if playerID and PlayerResource:IsValidPlayerID(playerID) then
+                if Quests and Quests.IncrementQuest then
+                    Quests:IncrementQuest(playerID, "armatureAmount")
+                end
+            end
+        end
     end
     buff:Destroy()
     caster:EmitSound("armature")

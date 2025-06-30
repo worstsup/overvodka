@@ -11,49 +11,56 @@ Quests.QuestTypes = {
         id = "kills",
         name = "#Quest_Kills_Title",
         description = "#Quest_Kills_Desc",
-        max = 25,
+        max = 50,
         event = "kills"
+    },
+    {
+        id = "creepKills",
+        name = "#Quest_CreepKills_Title",
+        description = "#Quest_CreepKills_Desc",
+        max = 30,
+        event = "creepKills"
     },
     {
         id = "magicDamage",
         name = "#Quest_MagicDamage_Title",
         description = "#Quest_MagicDamage_Desc",
-        max = 15000,
+        max = 25000,
         event = "magicDamage"
     },
     {
         id = "physDamage",
         name = "#Quest_PhysDamage_Title",
         description = "#Quest_PhysDamage_Desc",
-        max = 15000,
+        max = 25000,
         event = "physDamage"
     },
     {
         id = "goldAmount",
         name = "#Quest_GoldAmount_Title",
         description = "#Quest_GoldAmount_Desc",
-        max = 20,
+        max = 50,
         event = "goldAmount"
     },
     {
         id = "chestAmount",
         name = "#Quest_ChestAmount_Title",
         description = "#Quest_ChestAmount_Desc",
-        max = 3,
+        max = 5,
         event = "chestAmount"
     },
     {
         id = "chipsAmount",
         name = "#Quest_ChipsAmount_Title",
         description = "#Quest_ChipsAmount_Desc",
-        max = 3,
+        max = 5,
         event = "chipsAmount"
     },
     {
         id = "leshAmount",
         name = "#Quest_LeshAmount_Title",
         description = "#Quest_LeshAmount_Desc",
-        max = 2,
+        max = 3,
         event = "leshAmount"
     },
     {
@@ -67,8 +74,64 @@ Quests.QuestTypes = {
         id = "cubinAmount",
         name = "#Quest_CubinAmount_Title",
         description = "#Quest_CubinAmount_Desc",
-        max = 1,
+        max = 2,
         event = "cubinAmount"
+    },
+    {
+        id = "byebyeAmount",
+        name = "#Quest_ByeByeAmount_Title",
+        description = "#Quest_ByeByeAmount_Desc",
+        max = 3,
+        event = "byebyeAmount"
+    },
+    {
+        id = "hamsterGold",
+        name = "#Quest_HamsterGold_Title",
+        description = "#Quest_HamsterGold_Desc",
+        max = 5000,
+        event = "hamsterGold"
+    },
+    {
+        id = "midTime",
+        name = "#Quest_MidTime_Title",
+        description = "#Quest_MidTime_Desc",
+        max = 1200,
+        event = "midTime"
+    },
+    {
+        id = "kaskaAmount",
+        name = "#Quest_KaskaAmount_Title",
+        description = "#Quest_KaskaAmount_Desc",
+        max = 50,
+        event = "kaskaAmount"
+    },
+    {
+        id = "armatureAmount",
+        name = "#Quest_ArmatureAmount_Title",
+        description = "#Quest_ArmatureAmount_Desc",
+        max = 10,
+        event = "armatureAmount"
+    },
+    {
+        id = "bablokradAmount",
+        name = "#Quest_BablokradAmount_Title",
+        description = "#Quest_BablokradAmount_Desc",
+        max = 1500,
+        event = "bablokradAmount"
+    },
+    {
+        id = "goldenrainTime",
+        name = "#Quest_GoldenRainTime_Title",
+        description = "#Quest_GoldenRainTime_Desc",
+        max = 30,
+        event = "goldenrainTime"
+    },
+    {
+        id = "cookieHeal",
+        name = "#Quest_CookieHeal_Title",
+        description = "#Quest_CookieHeal_Desc",
+        max = 3000,
+        event = "cookieHeal"
     }
 }
 
@@ -92,6 +155,50 @@ function Quests:Init()
     ListenToGameEvent("dota_player_used_ability", Dynamic_Wrap(Quests, "OnAbilityUsed"), self)
     ListenToGameEvent("entity_hurt", Dynamic_Wrap(Quests, "OnEntityHurt"), self)
     ListenToGameEvent("dota_item_picked_up", Dynamic_Wrap( Quests, "OnItemPickUp"), self )
+    ListenToGameEvent("player_disconnect", Dynamic_Wrap(Quests, "OnPlayerDisconnect"), self)
+    self.modifierTimers = {}
+    self.thinkerTimer = Timers:CreateTimer(1, function()
+        self:TrackModifierTimes()
+        return 1
+    end)
+end
+
+function Quests:TrackModifierTimes()
+    for playerID, pd in pairs(self.playerData) do
+        if pd.activeQuests["midTime"] then
+            local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+            if hero and hero:IsAlive() then
+                if hero:HasModifier("modifier_get_xp") then
+                    if not self.modifierTimers[playerID] then
+                        self.modifierTimers[playerID] = {
+                            totalTime = pd.progress["midTime"] or 0,
+                            unsavedTime = 0
+                        }
+                    end
+                    self.modifierTimers[playerID].totalTime = self.modifierTimers[playerID].totalTime + 1
+                    self.modifierTimers[playerID].unsavedTime = self.modifierTimers[playerID].unsavedTime + 1
+                    pd.progress["midTime"] = self.modifierTimers[playerID].totalTime
+                    if self.modifierTimers[playerID].unsavedTime >= 5 or 
+                       self.modifierTimers[playerID].totalTime >= self:GetQuestMax("midTime") then
+                        self:UpdateNetTable(playerID)
+                        self.modifierTimers[playerID].unsavedTime = 0
+                        pd.dirty = true
+                    end
+                end
+            end
+        end
+    end
+end
+
+function Quests:OnPlayerDisconnect(event)
+    local playerID = event.PlayerID
+    if playerID and self.playerData[playerID] then
+        if self.modifierTimers[playerID] then
+            self.playerData[playerID].progress["midTime"] = self.modifierTimers[playerID].totalTime
+            self.playerData[playerID].dirty = true
+        end
+        self:SavePlayerProgress(playerID)
+    end
 end
 
 function Quests:GetQuestMax(questId)
@@ -118,46 +225,15 @@ function Quests:ShuffleTable(tbl)
     return tbl
 end
 
-function Quests:RecordQuestInit(playerID)
-
-    local steamID = PlayerResource:GetSteamAccountID(playerID)
-    if steamID == 0 then
-        print("[Quests] Invalid SteamID for player", playerID)
-        return
-    end
-
-    self:SendRequest(
-        SERVER_URL .. "quest_init",
-        {
-            SteamID = steamID,
-            SelectedQuests = pd.selectedQuests,
-        },
-        function(err, body)
-            if err then
-                print("[Quests] Quest init error:")
-                PrintTable(err)  -- Print the error table
-            else
-                print("[Quests] Quest init successful for player", playerID)
-            end
-        end,
-        true
-    )
-end
-
 function Quests:InitializeForPlayer(playerID)
     if self.playerData[playerID] then return end
-    local allIds = {}
-    for _, q in ipairs(self.QuestTypes) do allIds[#allIds+1] = q.id end
-    local shuffled = self:ShuffleTable(allIds)
-    local pd = { activeQuests = {}, progress = {}, selectedQuests = {} }
-    for i=1,math.min(3,#shuffled) do
-        local id = shuffled[i]
-        pd.activeQuests[id]   = true
-        pd.selectedQuests[i]   = id
-        pd.progress[id] = 0  -- Initialize progress to 0
-    end
+    local pd = {
+        activeQuests = {},
+        progress = {},
+        questDate = nil,
+        dirty = false
+    }
     self.playerData[playerID] = pd
-    self:UpdateNetTable(playerID)  -- Initial update with zeros
     self:FetchPlayerProgress(playerID)
 end
 
@@ -181,102 +257,110 @@ function Quests:FetchPlayerProgress(playerID)
         function(err, body)
             if err then
                 print("[Quests] Fetch progress error:")
-                PrintTable(err)  -- Print the error table
+                PrintTable(err)
                 return
             end
             
-            print("[Quests] Received quest data for player", playerID)
-            
             local pd = self.playerData[playerID]
-            local serverData = body.quests or {}
+            pd.questDate = body.quest_date
+            pd.progress = body.quests or {}
+            pd.activeQuests = {}
             
-            -- Initialize progress from server
-            for _, qid in ipairs(pd.selectedQuests) do
-                pd.progress[qid] = serverData[qid] or 0
-            end
-            
-            -- Check if we need to initialize
-            local isFresh = true
-            for _, qid in ipairs(pd.selectedQuests) do
-                if serverData[qid] ~= nil then
-                    isFresh = false
-                    break
-                end
-            end
-            
-            if isFresh then
-                print("[Quests] Initializing fresh quests for player", playerID)
-                self:RecordQuestInit(playerID)
+            for questId, _ in pairs(pd.progress) do
+                pd.activeQuests[questId] = true
             end
             
             self:UpdateNetTable(playerID)
         end,
-        true  -- debugEnabled
+        true
     )
 end
 
 function Quests:IncrementQuest(playerID, questId, amount)
     amount = amount or 1
     local pd = self.playerData[playerID]
-    if not pd then 
-        print("[Quests] No player data for", playerID)
-        return 
-    end
-    
+    if not pd then return end
     if not pd.activeQuests[questId] then
-        print("[Quests] Quest not active for player", playerID, questId)
         return
     end
-    
     local current = pd.progress[questId] or 0
     local maxVal  = self:GetQuestMax(questId)
-    if not maxVal then 
-        print("[Quests] Max value not found for", questId)
-        return 
-    end
-    
+    if not maxVal then return end
     if current >= maxVal then
         return
     end
-    
     local newVal = math.min(current + amount, maxVal)
-    pd.progress[questId] = newVal
-    
-    self:UpdateNetTable(playerID)
-    
-    local steamID = PlayerResource:GetSteamAccountID(playerID)
-    if steamID == 0 then
-        print("[Quests] Invalid SteamID for player", playerID)
-        return
+    if newVal > current then
+        pd.progress[questId] = newVal
+        pd.dirty = true
+        self:UpdateNetTable(playerID)
     end
-    
-    self:SendRequest(
-        SERVER_URL .. "quest_progress",
-        {
-            SteamID  = steamID,
-            QuestID  = questId,
-            Progress = newVal
-        },
-        function(err, body)
-            if err then
-                print("[Quests] Progress save error:")
-                PrintTable(err)
-            end
-        end,
-        true
-    )
 end
 
 function Quests:OnEntityKilled(event)
     local attackerIndex = event.entindex_attacker
     if not attackerIndex then return end
     local killer = EntIndexToHScript(attackerIndex)
-    if not killer or not killer:IsHero() then return end
-
+    if not killer or not killer.IsHero or not killer:IsHero() then return end
+    local killedIndex = event.entindex_killed
+    if not killedIndex then return end
+    local killed = EntIndexToHScript(killedIndex)
+    if not killed then return end
     local playerID = killer:GetPlayerOwnerID()
-    self:IncrementQuest(playerID, "kills")
+    if not playerID or not self.playerData[playerID] then return end
+    if killed:IsCreep() then
+        self:IncrementQuest(playerID, "creepKills")
+    end
+    if killed:IsRealHero() then
+        self:IncrementQuest(playerID, "kills")
+    end
 end
 
+function Quests:SaveAllProgress()
+    print("[Quests] Saving all progress at end of game")
+    
+    for playerID, pd in pairs(self.playerData) do
+        if pd.dirty and PlayerResource:IsValidPlayerID(playerID) then
+            self:SavePlayerProgress(playerID)
+        end
+    end
+end
+
+function Quests:SavePlayerProgress(playerID)
+    local pd = self.playerData[playerID]
+    if not pd or not pd.questDate then 
+        return 
+    end
+    
+    if self.modifierTimers[playerID] then
+        pd.progress["midTime"] = self.modifierTimers[playerID].totalTime
+        pd.dirty = true
+    end
+    
+    if not pd.dirty then return end
+    
+    local steamID = PlayerResource:GetSteamAccountID(playerID)
+    if steamID == 0 then return end
+    
+    self:SendRequest(
+        SERVER_URL .. "quest_progress_batch",
+        {
+            SteamID = steamID,
+            Progress = pd.progress,
+            QuestDate = pd.questDate
+        },
+        function(err, body)
+            if err then
+                print("[Quests] Save error for player", playerID)
+                PrintTable(err)
+            else
+                print("[Quests] Progress saved for player", playerID)
+                pd.dirty = false
+            end
+        end,
+        true
+    )
+end
 
 function Quests:OnAbilityUsed(event)
     local playerID    = event.PlayerID
@@ -298,6 +382,9 @@ function Quests:OnAbilityUsed(event)
     if abilityName == "item_cubin" then
         self:IncrementQuest(playerID, "cubinAmount")
     end
+    if abilityName == "item_byebye" then
+        self:IncrementQuest(playerID, "byebyeAmount")
+    end
 end
 
 function Quests:OnEntityHurt(event)
@@ -305,15 +392,17 @@ function Quests:OnEntityHurt(event)
     local victimIndex = event.entindex_killed
     local inflictorIndex = event.entindex_inflictor
     local damage = math.floor(event.damage or 0)
-    if not attackerIndex or not victimIndex or damage <= 0 then return end
+    if not attackerIndex or not victimIndex then return end
 
     local attacker = EntIndexToHScript(attackerIndex)
     local victim = EntIndexToHScript(victimIndex)
     if not attacker or not attacker:IsHero() then return end
-    if not victim or not victim:IsHero() then return end
-    if attacker:GetTeamNumber() == victim:GetTeamNumber() then return end
-
     local playerID = attacker:GetPlayerOwnerID()
+    if victim and victim:GetUnitName() == "npc_hamster" then
+        self:IncrementQuest(playerID, "hamsterGold", 200)
+    end
+    if damage <= 0 or not victim or not victim:IsHero() then return end
+    if attacker:GetTeamNumber() == victim:GetTeamNumber() then return end
     if not self.playerData[playerID] then return end
 
     local isMagic    = false

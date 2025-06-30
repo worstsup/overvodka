@@ -120,6 +120,7 @@ function modifier_golden_rain_thinker:OnCreated( kv )
     self.radius = self.ability:GetSpecialValueFor( "radius" )
     self.xp = self.ability:GetSpecialValueFor("xp")
     self.gold = self.ability:GetSpecialValueFor("gold")
+    self.k = 0
     if GetMapName() == "overvodka_5x5" then
         self.gold = self.gold * 0.5
         self.xp = self.xp * 0.5
@@ -146,6 +147,7 @@ function modifier_golden_rain_thinker:OnDestroy()
 end
 
 function modifier_golden_rain_thinker:OnIntervalThink()
+    self.k = self.k + 1
     local enemies = FindUnitsInRadius(
         DOTA_TEAM_NEUTRALS,
         self.parent:GetOrigin(),
@@ -160,6 +162,14 @@ function modifier_golden_rain_thinker:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         enemy:ModifyGold(self.gold, false, DOTA_ModifyGold_GameTick)
         enemy:AddExperience(self.xp, DOTA_ModifyXP_Unspecified, false, false)
+        if (self.k % 2 == 0) then
+            local playerID = enemy:GetPlayerOwnerID()
+            if playerID and PlayerResource:IsValidPlayerID(playerID) then
+                if Quests and Quests.IncrementQuest then
+                    Quests:IncrementQuest(playerID, "goldenrainTime")
+                end
+            end
+        end
     end
     self:PlayEffects()
 end

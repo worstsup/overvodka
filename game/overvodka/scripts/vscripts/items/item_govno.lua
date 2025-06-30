@@ -15,5 +15,11 @@ function BacktrackHeal( keys )
 		return
 	end
 	caster:SetHealth(ability.caster_hp_old)
-	ability:StartCooldown( ability:GetCooldown(ability:GetLevel()) )
+	ability:UseResources(false, false, false, true)
+	local playerID = caster:GetPlayerOwnerID()
+    if playerID and PlayerResource:IsValidPlayerID(playerID) then
+        if Quests and Quests.IncrementQuest then
+            Quests:IncrementQuest(playerID, "kaskaAmount")
+        end
+    end
 end
