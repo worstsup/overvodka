@@ -6,25 +6,28 @@
 .QuestsButton{
     width: 40px;
     height: 40px;
-    background-image: url("s2r://panorama/images/settings_chatwheel_png.vtex");
+    background-image: url("file://{images}/custom_game/overvodka_quests.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
 
     margin-top: 120px;
 	margin-left: 20px;
-
+    background-color: #000000a0;
+    border: 2px solid #ecbd64;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #7c6e1fe0;
     wash-color: #CDF;
-    img-shadow: 0px 0px 3px 2 black;
+    img-shadow: 0px 0px 3px 2 rgb(54, 52, 26);
 
     opacity: 1;
-
+    brightness: 1.5;
     transition-property: brightness;
     transition-duration: .1s;
 }
 
 .QuestsButton:hover{
-    brightness: 1.5;
+    brightness: 2.5;
 }
 
 #QuestRoot {

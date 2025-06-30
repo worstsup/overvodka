@@ -514,7 +514,7 @@ function Server:RecordChatWheelChanges(PlayerID, LineID, ItemID)
 end
 
 function Server:SendRequest(url, data, callback, debugEnabled, attempt)
-    if IsInToolsMode() or GameRules:IsCheatMode() then return end
+    --if IsInToolsMode() or GameRules:IsCheatMode() then return end
 
     local current_attempt = attempt and attempt or 1
 
