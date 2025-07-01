@@ -1,0 +1,137 @@
+/* overvodka_menu.css */
+
+.MenuRoot {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- The single 'Menu' button on the HUD --- */
+#MenuOpenButton {
+    horizontal-align: left;
+    vertical-align: top;
+    margin-top: 8px;
+    margin-left: 160px;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from(#3a3120), to(#1c1811) );
+    border: 2px solid #a4864f;
+    border-radius: 6px;
+    padding: 8px 16px;
+    box-shadow: 0px 0px 10px #000000;
+    transition-property: background-color, border, color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+#MenuOpenButton:hover {
+    brightness: 1.5;
+    transform: scaleX(1.05) scaleY(1.05);
+}
+
+#MenuOpenButton Label {
+    color: #f0e0b4;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- The Main Menu Panel --- */
+#MenuMainPanel {
+    width: 800px;
+    height: 600px;
+    horizontal-align: center;
+    vertical-align: center;
+    background-color: #1a1a1ae0;
+    border: 3px solid #a4864f;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px #000000;
+    margin-top: 100px;
+    /* Hide by default */
+    opacity: 0;
+    transform: translateY(20px);
+    transition-property: background-color, border, color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+    visibility: collapse;
+}
+
+#MenuMainPanel.Visible {
+    opacity: 1;
+    transform: translateY(0px);
+    visibility: visible;
+}
+
+/* --- Header and Tabs --- */
+#MenuHeader {
+    width: 100%;
+    height: 50px;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from(#3a3120), to(#1c1811) );
+    border-bottom: 2px solid #a4864f;
+    padding: 0 20px;
+}
+
+.TabButtonContainer {
+    horizontal-align: left;
+    vertical-align: center;
+    flow-children: right;
+}
+
+.MenuTabButton {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: 0;
+}
+
+.MenuTabButton Label {
+    color: #cccccc;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition-property: background-color, border, color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.MenuTabButton:hover Label {
+    color: #ffffff;
+    text-shadow: 0px 0px 5px #f0e0b4;
+}
+
+.MenuTabButton.Selected Label {
+    color: #f0e0b4;
+    font-weight: bold;
+}
+
+#MenuCloseButton {
+    width: 32px;
+    height: 32px;
+    background-image: url("s2r://panorama/images/control_icons/close_png.vtex");
+    background-size: contain;
+    background-repeat: no-repeat;
+    horizontal-align: right;
+    vertical-align: center;
+    wash-color: #a4864f;
+    transition-property: background-color, border, color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+#MenuCloseButton:hover {
+    brightness: 2.0;
+}
+
+/* --- Content Panels --- */
+#MenuContent {
+    width: 100%;
+    height: fill-parent-flow(1.0); /* Fills remaining space */
+}
+
+.MenuContentPanel {
+    width: 100%;
+    height: 100%;
+    visibility: collapse; /* Hide all content panels by default */
+}
+
+.MenuContentPanel.Visible {
+    visibility: visible; /* Show only the active one */
+}

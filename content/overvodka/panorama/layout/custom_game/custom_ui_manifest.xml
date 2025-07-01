@@ -12,7 +12,7 @@
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/dvoreckov_skill_panel.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/player_hud.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/debug_panel.xml" />
-		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/leaderboard_rating.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/chat_wheel.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
 		<CustomUIElement type="GameSetup"			layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
@@ -22,6 +22,7 @@
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
 		<CustomUIElement type="EndScreen" 			layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" />
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
+		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_brewmaster.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_ancient_apparition.png" />

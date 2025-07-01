@@ -9,35 +9,5 @@
     </scripts>
     <snippets />
     <Panel class="PlayerHUD" hittest="false">
-        <Panel hittest="false" id="PlayersTitlesContainer" />
-        <Panel id="SubscribeButton" onactivate="ToggleSubscribePanel();"/>
-        <Panel hittest="false" id="SubscribePanel">
-            <Panel id="SubscribePanelBody">
-                <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>
-
-                <Label class="SubscribeDescriptionHeader" id="SubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_DescriptionHeader"/>
-                <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
-                <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
-                <Panel id="HighFivePreview" />
-                <Panel id="SeasonalPreview" >
-                    <Panel class="SeasonalPreviewIcon Duel" />
-                    <Panel class="SeasonalPreviewIcon Balloon" />
-                </Panel>
-                <Panel id="EffectPreview" />
-                <Panel id="ChatWheelPreview" />
-                <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
-                    <Panel class="Wrapper">
-                        <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
-                        <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
-                        <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
-                    </Panel>
-                </Panel>
-                <Panel id="CloseButton" onactivate="CloseSubscribePanel();"/>
-                <Panel id="SubscribedEndDatePanel">
-                    <Label class="SubscribedEndDateText" text="#PLAYER_HUD_Subscribed_Works" />
-                    <Label class="SubscribedEndDateDate" text="{s:EndDate}" />
-                </Panel>
-            </Panel>
-        </Panel>
     </Panel>
 </root>

@@ -1,0 +1,221 @@
+<root>
+    <styles>
+        <!-- Load the new main CSS file first -->
+        <include src="file://{resources}/styles/custom_game/overvodka_menu.css" />
+        
+        <!-- Include the old CSS files to style the content inside the tabs -->
+        <include src="file://{resources}/styles/custom_game/leaderboard_rating.css" />
+        <include src="file://{resources}/styles/custom_game/player_hud.css" />
+        <include src="file://{resources}/styles/custom_game/chat_wheel.css" />
+        <include src="s2r://panorama/styles/dotastyles.css" />
+    </styles>
+    <scripts>
+        <!-- Load utility scripts first -->
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+
+        <!-- Load the new main JS file -->
+        <include src="file://{resources}/scripts/custom_game/overvodka_menu.js" />
+
+        <!-- Include the old JS files for the logic inside the tabs -->
+        <include src="file://{resources}/scripts/custom_game/leaderboard_rating.js" />
+        <include src="file://{resources}/scripts/custom_game/prime_panel.js" />
+    </scripts>
+
+    <snippets>
+        <!-- Snippet from leaderboard_rating.xml -->
+        <snippet name="Player">
+            <Panel hittest="true" class="PlayerLine">
+                <Panel hittest="true" class="Player">
+                    <Panel class="RankPanel"><Label class="RankLabel" text="{d:Rank}" /></Panel>
+                    <Panel class="PlayerImageNick" >
+                        <Panel class="PlayerImageNickAdjust" >
+                            <DOTAAvatarImage class="PlayerImage" steamid="local" />
+                            <DOTAUserName class="PlayerNickname" steamid="local" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="ValuePanel">
+                        <Panel class="Wrapper" hittest="false">
+                            <Label class="ValueLabel" text="{s:rating}" />
+                            <Panel class="ValueIcon" hittest="false" />
+                        </Panel>
+                    </Panel>
+                </Panel>
+            </Panel>
+        </snippet>
+        <!-- Snippet from chat_wheel.xml -->
+        <snippet name="Item">
+            <Panel hittest="true" class="Item">
+                <Panel hittest="true" class="ItemIconContainer">
+                    <Panel hittest="true" class="TextIcon" />
+                    <Panel hittest="true" id="SoundIcon" class="SoundIcon" />
+                </Panel>
+                <Label hittest="false" class="ItemText" text="{s:itemtext}"/>
+            </Panel>
+        </snippet>
+    </snippets>
+
+    <Panel class="MenuRoot" hittest="false">
+        <!-- The single button that will always be visible on the HUD -->
+        <Button id="MenuOpenButton" onactivate="Menu.Toggle()">
+            <Label text="MENU" />
+        </Button>
+
+        <!-- The main menu panel, hidden by default -->
+        <Panel id="ModelPreview" />
+        <Panel id="ModelPreview2" />
+        <Panel id="MenuMainPanel">
+            <!-- Header with navigation tabs -->
+            <Panel id="MenuHeader">
+                <Panel class="TabButtonContainer">
+                    <Button id="TabButton_Leaderboard" class="MenuTabButton" onactivate="Menu.SwitchTab('Leaderboard')">
+                        <Label text="#Menu_Tab_Leaderboard" />
+                    </Button>
+                    <Button id="TabButton_ChatWheel" class="MenuTabButton" onactivate="Menu.SwitchTab('ChatWheel')">
+                        <Label text="#Menu_Tab_ChatWheel" />
+                    </Button>
+                    <Button id="TabButton_Prime" class="MenuTabButton" onactivate="Menu.SwitchTab('Prime')">
+                        <Label text="#Menu_Tab_Prime" />
+                    </Button>
+                </Panel>
+                <Button id="MenuCloseButton" onactivate="Menu.Toggle()" />
+            </Panel>
+            <!-- Content area where the tabs will be shown -->
+            <Panel id="MenuContent">
+                <!-- LEADERBOARD CONTENT (from leaderboard_rating.xml) -->
+                <Panel id="Content_Leaderboard" class="MenuContentPanel">
+                    <Panel class="ButtonsRow" hittest="false">
+                        <Panel id="Buttons" class="Wrapper" hittest="false">
+                            <Panel id="Category3" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(3)"><Label class="CategoryButtonText" text="5x5"/></Panel>
+                            <Panel id="Category1" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(1)"><Label class="CategoryButtonText" text="Solo"/></Panel>
+                            <Panel id="Category2" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(2)"><Label class="CategoryButtonText" text="Duo"/></Panel>
+                        </Panel>
+                    </Panel>
+                    <Panel class="Body" hittest="false">
+                        <Panel class="RankContainer" hittest="false">
+                            <Panel class="RankContainerHeader">
+                                <Panel class="leaderboard_rank"><Label text="#rating_position" class="leaderboard_rankText"/></Panel>
+                                <Label text="#rating_player" class="leaderboard_player"/>
+                                <Label text="#rating_rating" class="leaderboard_rating"/>
+                            </Panel>
+                            <Panel class="PlayersTable" id="PlayerContainer"></Panel>
+                        </Panel>
+                        <Panel class="LinePlayerSelf" id="LineSelf"></Panel>
+                    </Panel>
+                </Panel>
+
+                <!-- CHAT WHEEL CONTENT (from chat_wheel.xml) -->
+                <Panel id="Content_ChatWheel" class="MenuContentPanel">
+                    <!-- The content here is a simplified version of your chat_wheel.xml, assuming the core logic is in the JS -->
+                    <Panel id="SettingsBody" hittest="false">
+                        <Panel class="SettingsChatWheel" hittest="true" onactivate="ChatWheel.StartSelectItem(0)">
+                            <Panel class="Top" hittest="false">
+                                <Panel class="Top" hittest="false">
+                                    <Panel id="LineButton1" class="LineButton" hittest="true" onactivate="StartSelectItem(1)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                </Panel>
+                            </Panel>
+                            <Panel class="Center" hittest="false">
+                                <Panel id="DecorLine1" class="DecorLine" hittest="false" />
+                                <Panel id="DecorLine2" class="DecorLine" hittest="false" />
+                                <Panel id="DecorLine3" class="DecorLine" hittest="false" />
+                                <Panel id="DecorLine4" class="DecorLine" hittest="false" />
+
+                                <Label id="CallKeyBind" text="бинд:{s:callkeybind}"/>
+
+                                <Panel class="CenterIcon" hittest="false" />
+
+                                <Panel class="LeftButtons" hittest="false">
+                                    <Panel id="LineButton8" class="LineButton" hittest="true" onactivate="StartSelectItem(8)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                    <Panel id="LineButton7" class="LineButton" hittest="true" onactivate="StartSelectItem(7)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                    <Panel id="LineButton6" class="LineButton" hittest="true" onactivate="StartSelectItem(6)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="RightButtons" hittest="false">
+                                    <Panel id="LineButton2" class="LineButton" hittest="true" onactivate="StartSelectItem(2)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                    <Panel id="LineButton3" class="LineButton" hittest="true" onactivate="StartSelectItem(3)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                    <Panel id="LineButton4" class="LineButton" hittest="true" onactivate="StartSelectItem(4)">
+                                        <Label class="LineText" text="{s:linetext}"/>
+                                    </Panel>
+                                </Panel>
+                            </Panel>
+                            <Panel class="Bottom" hittest="false">
+                                <Panel id="LineButton5" class="LineButton" hittest="true" onactivate="StartSelectItem(5)">
+                                    <Label class="LineText" text="{s:linetext}"/>
+                                </Panel>
+                            </Panel>
+                        </Panel>
+                        <Panel id="SettingsVariantsTable" hittest="false">
+                            <Panel class="HeaderLine" hittest="true">
+                                <Panel class="HeaderMenus" hittest="true">
+                                    <Panel id="TextMenuButton" class="ButtonHeader" hittest="true" onactivate="OpenMenuPage('text')">
+                                        <Label hittest="false" class="ButtonHeaderText" text="#CUSTOM_CHAT_WHEEL_Text"/>
+                                    </Panel>
+                                    <Panel class="ButtonHeaderDash" hittest="false">
+                                        <Label class="ButtonHeaderDashText" text="/"/>
+                                    </Panel>
+                                    <Panel id="SoundsMenuButton" class="ButtonHeader" hittest="true" onactivate="OpenMenuPage('sound')">
+                                        <Label hittest="false" class="ButtonHeaderText" text="#CUSTOM_CHAT_WHEEL_Sounds"/>
+                                    </Panel>
+                                </Panel>
+                                <Panel id="CloseButton" hittest="true" onactivate="CloseChatWheelSettings()"/>
+                            </Panel>
+                            <Panel class="ItemsBody" hittest="false">
+                                <Panel id="ItemsText" class="ItemsContainer" hittest="false">
+                                
+                                </Panel>
+                                <Panel id="ItemsSounds" class="ItemsContainer" hittest="false">
+                                
+                                </Panel>
+                            </Panel>
+                        </Panel>
+                    </Panel>
+                </Panel>
+
+                <!-- PRIME CONTENT (from player_hud.xml) -->
+                <Panel id="Content_Prime" class="MenuContentPanel">
+                    <!-- This is the SubscribePanel from player_hud.xml -->
+                    <Panel hittest="false" id="SubscribePanel">
+                    <Panel id="SubscribePanelBody">
+                        <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>
+
+                        <Label class="SubscribeDescriptionHeader" id="SubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_DescriptionHeader"/>
+                        <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
+                        <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
+                        <Panel id="HighFivePreview" />
+                        <Panel id="SeasonalPreview" >
+                            <Panel class="SeasonalPreviewIcon Duel" />
+                            <Panel class="SeasonalPreviewIcon Balloon" />
+                        </Panel>
+                        <Panel id="EffectPreview" />
+                        <Panel id="ChatWheelPreview" />
+                        <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
+                            <Panel class="Wrapper">
+                                <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                                <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
+                                <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                            </Panel>
+                        </Panel>
+                        <Panel id="SubscribedEndDatePanel">
+                            <Label class="SubscribedEndDateText" text="#PLAYER_HUD_Subscribed_Works" />
+                            <Label class="SubscribedEndDateDate" text="{s:EndDate}" />
+                        </Panel>
+                    </Panel>
+                </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+        <Panel id="OvervodkaHamster" />
+        <Panel id="TipPreview" />
+        <Panel id="DoubleRatingPreview" />
+    </Panel>
+</root>

@@ -41,8 +41,8 @@
     transition-property: opacity, transform, box-shadow;
     transition-duration: .15s;
     
-    width: 1300px;
-    height: 740px;
+    width: 1200px;
+    height: 700px;
 
     background-color: gradient(linear, 20% 70%, 0% 0%, from(#1d1c15ef), color-stop(0.5, #1b1910ef), to(#252110ef));
     border: 1px solid white;
@@ -62,7 +62,7 @@
 }
 
 .SettingsChatWheel{
-    width: 830px;
+    width: 730px;
     padding: 30px;
     flow-children: down;
     align: center center;

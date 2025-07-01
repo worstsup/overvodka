@@ -424,12 +424,3 @@ function RemoveWearablesFromDotaScenePanel()
     }
     */
 }
-const SubscribePanel = $("#SubscribePanel")
-function ToggleSubscribePanel(){
-    Game.EmitSound("UUI_SOUNDS.OvervodkaPrime");
-    SubscribePanel.SetHasClass("Show", !SubscribePanel.BHasClass("Show"))
-}
-
-function CloseSubscribePanel(){
-    SubscribePanel.RemoveClass("Show")
-}

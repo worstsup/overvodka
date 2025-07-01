@@ -123,6 +123,11 @@
 		"Quest_CookieHeal_Desc"			"Восстановите хп от Крамбл Куки"
 		"Quest_CreepKills_Desc"			"Убейте крипов"
         
+
+		"Menu_Tab_Leaderboard"			"Таблица Лидеров"
+		"Menu_Tab_ChatWheel"			"Колесо Чата"
+		"Menu_Tab_Prime"				"Overvodka Prime"
+		
         "Quests_Header" "Ежедневные задания"
 
 		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"

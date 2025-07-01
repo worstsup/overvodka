@@ -1,8 +1,5 @@
 const LocalPlayer = Players.GetLocalPlayer()
 const Container = $("#PlayersTitlesContainer")
-const SubscribePanel = $("#SubscribePanel")
-const ModelPreview = $("#ModelPreview")
-const ModelPreview2 = $("#ModelPreview2")
 const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
@@ -170,27 +167,6 @@ function SetUpKeyBind() {
             Game.AddCommand(cmd_name, () => KeysInfo.Func(), "", 0);
         }
     }
-}
-
-function ToggleSubscribePanel(){
-    Game.EmitSound("UUI_SOUNDS.OvervodkaPrime");
-    SubscribePanel.SetHasClass("Show", !SubscribePanel.BHasClass("Show"))
-    if(ModelPreview.style.visibility == "visible"){
-        ModelPreview.style.visibility = "collapse";
-    }else{
-        ModelPreview.style.visibility = "visible";
-    }
-    if(ModelPreview2.style.visibility == "visible"){
-        ModelPreview2.style.visibility = "collapse";
-    }else{
-        ModelPreview2.style.visibility = "visible";
-    }
-}
-
-function CloseSubscribePanel(){
-    SubscribePanel.RemoveClass("Show")
-    ModelPreview.style.visibility = "collapse";
-    ModelPreview2.style.visibility = "collapse"; 
 }
 
 function TipPlayer(){
@@ -486,13 +462,6 @@ function UpdatePlayerHUD(v){
 
     let bDoubleRatingShow = bTime && bSubscribed && bHasDoubleRating && !bPlayerDoubled
 
-    SubscribePanel.SetHasClass("PlayerSubscribed", bSubscribed)
-
-    if(bSubscribed){
-        let Text = v.permanent == 1 ? $.Localize("#PLAYER_HUD_Subscribe_Permanent") : GetDateString(v.end_date, true)
-        SubscribePanel.SetDialogVariable("EndDate", Text)
-    }
-
     DoubleRating.SetHasClass("Show", bDoubleRatingShow)
     if(bDoubleRatingShow){
         DoubleRating.SetDialogVariable("count", v.double_rating.count)
@@ -575,43 +544,6 @@ function UpdateTeamLeaved(){
     StartSecondaryAbilities();
 
     DeleteAllChildren(TipsContainer)
-
-    let fx_panel = $.CreatePanel("DOTAParticleScenePanel", $("#EffectPreview"), "", {
-        class: "PreviewPanelSize",
-        hittest: "false",
-        particleName: "particles/overvodka_prime_effect.vpcf",
-        startActive: "true",
-        particleonly: "false",
-        cameraOrigin: "0 -250 225",
-        lookAt: "0 0 15",
-        fov: "60",
-        squarePixels: "true",
-        drawbackground: "true"
-    });
-    let scene_panel = $.CreatePanel("DOTAScenePanel", $("#ModelPreview"), "", { 
-        class: "hero_model_strategy", 
-        style: "width:48%;height:80%;",
-        unit: "sans_arcana_loadout", 
-        particleonly:"false", 
-        renderdeferred:"false", 
-        antialias:"true", 
-        renderwaterreflections:"true", 
-        allowrotation: "true",
-        drawbackground: "false"
-    });
-    ModelPreview.style.visibility = "collapse";
-    let scene_panel_2 = $.CreatePanel("DOTAScenePanel", $("#ModelPreview2"), "", { 
-        class: "hero_model_strategy", 
-        style: "width:48%;height:80%;",
-        unit: "invincible_arcana_loadout", 
-        particleonly:"false", 
-        renderdeferred:"false", 
-        antialias:"true", 
-        renderwaterreflections:"true", 
-        allowrotation: "true",
-        drawbackground: "false"
-    });
-    ModelPreview2.style.visibility = "collapse";
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
     GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)

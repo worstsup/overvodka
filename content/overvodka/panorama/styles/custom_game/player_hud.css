@@ -154,7 +154,7 @@
 
 #SubscribePanel{
     width: 700px;
-    height: 815px;
+    height: 800px;
 
     align: center center;
 
@@ -163,11 +163,6 @@
     overflow: noclip;
 
     opacity: 0;
-
-    transform: translateX(-25px) translateY(-25px);
-
-    transition-property: opacity, transform, box-shadow;
-    transition-duration: .15s;
 }
 
 #SubscribePanel.Show{
@@ -181,8 +176,8 @@
 }
 
 #SubscribePanelBody{
-    width: 700px;
-    height: 565px;
+    width: 800px;
+    height: 545px;
     
     align: center bottom;
 
@@ -201,7 +196,7 @@
     align: center top;
     text-align: center;
     margin-top: 10px;
-    font-size: 50px;
+    font-size: 60px;
     text-transform: uppercase;
     letter-spacing: 1px;
 	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
@@ -486,9 +481,14 @@
     background-repeat: no-repeat;
     background-size: contain;
 
-    margin-left: -20px;
-
+    margin-left: -80px;
+    margin-top: 40px;
+    opacity: 0;
     align: center top;
+}
+
+#OvervodkaHamster.Visible{
+    opacity: 1;
 }
 
 #TipPreview{
@@ -502,17 +502,21 @@
 
     align: right top;
 
-    margin-right: 15px;
-    margin-top: 90px;
-
+    margin-right: 570px;
+    margin-top: 160px;
+    opacity: 0;
     transform: rotateZ(10deg);
 
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.5);
 }
 
+#TipPreview.Visible{
+    opacity: 1;
+}
+
 #DoubleRatingPreview{
-    width: 128px;
-    height: 128px;
+    width: 148px;
+    height: 148px;
 
     background-image: url("file://{images}/custom_game/rating_doubled.png");
     background-position: center;
@@ -521,10 +525,14 @@
 
     align: left top;
 
-    margin-left: 50px;
-    margin-top: 70px;
-
+    margin-left: 600px;
+    margin-top: 120px;
+    opacity: 0;
     transform: rotateZ(-10deg);
+}
+
+#DoubleRatingPreview.Visible{
+    opacity: 1;
 }
 
 .PreviewPanelSize{

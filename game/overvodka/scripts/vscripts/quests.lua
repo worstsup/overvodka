@@ -217,14 +217,6 @@ function Quests:OnPlayerConnectFull(event)
     end
 end
 
-function Quests:ShuffleTable(tbl)
-    for i = #tbl, 2, -1 do
-        local j = RandomInt(1, i)
-        tbl[i], tbl[j] = tbl[j], tbl[i]
-    end
-    return tbl
-end
-
 function Quests:InitializeForPlayer(playerID)
     if self.playerData[playerID] then return end
     local pd = {
