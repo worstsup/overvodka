@@ -36,14 +36,12 @@
 
     opacity: 0;
 
-    transform: translateX(-25px) translateY(-25px);
-
     transition-property: opacity, transform, box-shadow;
     transition-duration: .15s;
     
-    width: 1200px;
-    height: 700px;
-
+    width: 800px;
+    height: 550px;
+    margin-top: 50px;
     background-color: gradient(linear, 20% 70%, 0% 0%, from(#1d1c15ef), color-stop(0.5, #1b1910ef), to(#252110ef));
     border: 1px solid white;
     border-brush: gradient(linear, 20% 70%, 0% 0%, from(#7e765b), color-stop(0.5, #978d52ef), to(#bca93cef));
@@ -56,13 +54,11 @@
 #SettingsBody.Show{
     opacity: 1;
 
-    transform: translateX(0) translateY(0);
-
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.727);
 }
 
 .SettingsChatWheel{
-    width: 730px;
+    width: 500px;
     padding: 30px;
     flow-children: down;
     align: center center;
@@ -70,7 +66,7 @@
 
 .Top{
     width: 100%;
-    /* margin-bottom: 15px; */
+    margin-bottom: -42px;
 }
 
 .Center{
@@ -80,7 +76,7 @@
 }
 
 .Bottom{
-    /* margin-top: 30px; */
+    margin-top: -90px;
     width: 100%;
 }
 
@@ -90,20 +86,20 @@
 
 #LineButton2{
     align: right top;
-    margin-right: 50px;
+    margin-right: 32px;
 }
 
 #LineButton3{
     margin-right: 0px;
-    margin-top: 64px;
-    margin-bottom: 64px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 
     align: right top;
 }
 
 #LineButton4{
     align: right top;
-    margin-right: 50px;
+    margin-right: 32px;
 }
 
 #LineButton5{
@@ -112,30 +108,30 @@
 
 #LineButton6{
     align: left top;
-    margin-left: 50px;
+    margin-left: 32px;
 }
 
 #LineButton7{
     margin-left: 0px;
-    margin-top: 64px;
-    margin-bottom: 64px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 #LineButton8{
     align: left bottom;
-    margin-left: 50px;
+    margin-left: 32px;
 }
 
 .LineButton{
-    width: 210px;
-    height: 92px;
+    width: 150px;
+    height: 72px;
     border-radius: 32px;
     background-color: #302f2b;
     border: 2px solid white;
     border-brush: gradient( linear, 0% 0%, 100% 0%, from( #eed872 ), color-stop( .3, #bba850 ), color-stop( .35, #9f8f45), color-stop( .65, #9f8f45), color-stop( .7, #bba850 ), to( #eed872 ) );
     padding: 8px;
 
-    margin: 12px;
+    margin: 0px;
 }
 
 .LineButton.SelectingTime{
@@ -170,7 +166,7 @@
 }
 
 .DecorLine{
-    width: 400px;
+    width: 300px;
     height: 3px;
 
     align: center center;
@@ -187,7 +183,7 @@
 }
 
 #DecorLine4{
-    width: 460px;
+    width: 320px;
     transform: rotateZ(90deg);
 }
 
@@ -198,7 +194,7 @@
 }
 
 .RightButtons{
-    width: 500px;
+    width: 250px;
     flow-children: down;
     align: right center;
 }
@@ -209,8 +205,8 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: 112px;
-    height: 112px;
+    width: 92px;
+    height: 922px;
     wash-color: #eed872;
 }
 
@@ -246,8 +242,8 @@
 }
 
 #CloseButton{
-    width: 32px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
     background-image: url("s2r://panorama/images/control_icons/24px/x_close.vsvg");
     background-size: 80% 80%;
     background-position: center;
@@ -275,7 +271,7 @@
 
 .ButtonHeader{
     width: fit-children;
-    height: 30px;
+    height: 28px;
 
     z-index: 99999999;
 }
@@ -378,7 +374,7 @@
 
 .Item{
     width: 100%;
-    height: 50px;
+    height: 40px;
     flow-children: right;
 
     padding-top: 10px;
@@ -409,7 +405,7 @@
 }
 
 .ItemText{
-    font-size: 18px;
+    font-size: 14px;
     text-shadow: 1px 1.5px 0px 2 #000000;
     color: #fff;
 
@@ -459,7 +455,7 @@
 }
 
 .LineText{
-    font-size: 18px;
+    font-size: 14px;
     text-shadow: 1px 1.5px 0px 2 #000000;
     color: #fff;
     align: center center;
@@ -468,7 +464,7 @@
 
 #CallKeyBind{
     align: center center;
-    font-size: 15px;
+    font-size: 14px;
     color: white;
 
     text-shadow: 1px 1.5px 0px 2 #000000;

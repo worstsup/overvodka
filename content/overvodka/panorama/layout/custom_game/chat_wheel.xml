@@ -20,7 +20,6 @@
     </snippets>
 
   	<Panel class="CustomChatWheel" hittest="false">
-		<Panel class="SettingsOpenButton" hittest="true" onactivate="ToggleChatWheelSettings()"/>
 		<Panel id="SettingsBody" hittest="false">
 			<Panel class="SettingsChatWheel" hittest="true" onactivate="StartSelectItem(0)">
 				<Panel class="Top" hittest="false">

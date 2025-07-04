@@ -38,7 +38,7 @@
 		"CUSTOM_CHAT_WHEEL_Item_dj_stoika"				"Диджейская стойка"
 		"CUSTOM_CHAT_WHEEL_Item_hrap"					"Храп"
 		"CUSTOM_CHAT_WHEEL_Item_sori"					"Че то я засолил"
-		"CUSTOM_CHAT_WHEEL_Item_big_balls"				"Ты видишь какие у меня огромные яйца?"
+		"CUSTOM_CHAT_WHEEL_Item_big_balls"				"Огромные яйца"
 		"CUSTOM_CHAT_WHEEL_Item_hihihaha"				"Хихихиха"
 		"CUSTOM_CHAT_WHEEL_Item_na_koleni"				"На колени на колени"
 		"CUSTOM_CHAT_WHEEL_Item_come_here"				"А ну ка иди сюда"
@@ -103,6 +103,13 @@
 		"Quest_GoldenRainTime_Title"	"Фетишист"
 		"Quest_CookieHeal_Title"		"Луки-Луки-Луки"
 		"Quest_CreepKills_Title"		"Хозяин крипов"
+		"Quest_OboyudnoDamage_Title"	"Абаюдненька"
+		"Quest_CharonHeal_Title"		"Добрая раскурка"
+		"Quest_MinionAmount_Title"		"Papoy!"
+		"Quest_PlayArsen_Title"			"Тестостерон"
+		"Quest_PlayEbanko_Title"		"По-Китайски"
+		"Quest_PlayBratishkin_Title"	"Шефчик"
+		"Quest_PlayDrake_Title"			"Школота"
 
         "Quest_Kills_Desc" 				"Убейте врагов"
         "Quest_MagicDamage_Desc" 		"Нанесите маг. урон героям"
@@ -122,12 +129,33 @@
 		"Quest_GoldenRainTime_Desc"		"Находитесь под золотым дождём"
 		"Quest_CookieHeal_Desc"			"Восстановите хп от Крамбл Куки"
 		"Quest_CreepKills_Desc"			"Убейте крипов"
+		"Quest_OboyudnoDamage_Desc"		"Отразите урон с помощью Обоюдно"
+		"Quest_CharonHeal_Desc"			"Восстановите хп от Charon Baby"
+		"Quest_MinionAmount_Desc"		"Сгенерируйте миньонов"
+		"Quest_PlayArsen_Desc"			"Сыграйте за Арсена Маркаряна"
+		"Quest_PlayEbanko_Desc"			"Сыграйте за Ебанько"
+		"Quest_PlayBratishkin_Desc"		"Сыграйте за Братишкина"
+		"Quest_PlayDrake_Desc"			"Сыграйте за Drakeoffc"
         
-
+		"Menu_Name"						"Меню"
 		"Menu_Tab_Leaderboard"			"Таблица Лидеров"
 		"Menu_Tab_ChatWheel"			"Колесо Чата"
 		"Menu_Tab_Prime"				"Overvodka Prime"
+		"Menu_Tab_Store"				"Магазин"
 		
+		"Store_Category_Skins"				"Скины"
+		"Store_Category_Effects"			"Эффекты"
+		"Store_Category_Pets"				"Питомцы"
+		"Store_Buy_Item"					"Купить"
+		"Store_Equip_Item"					"Надеть"
+
+		"Store_Item_skin_1_name"		"Литвин с Lit Energy"
+		"Store_Item_skin_2_name"		"Злой Chill Guy"
+
+		"Store_Item_effect_1_name"		"Золотой эффект"
+
+		"Store_Item_pet_1_name"			"Мопс"
+
         "Quests_Header" "Ежедневные задания"
 
 		"PLAYER_HUD_Subscribe_Header"					"Overvodka Prime"
@@ -160,6 +188,7 @@
 		"rating_position"								"Позиция"
 		"rating_player"									"Игрок"
 		"rating_rating"									"Рейтинг"
+
 
 		"DOTA_Tooltip_modifier_get_xp"					"Аура супер-еврейства"
 		"DOTA_Tooltip_modifier_get_xp_Description"		"Это существо становится пиздец богатым"

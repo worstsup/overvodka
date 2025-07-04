@@ -421,7 +421,6 @@ function Server:OnPlayerConnected(event)
         }
 
         ChatWheel:LoadPlayer(event.PlayerID, {})
-
         if SteamID ~= 0 then
 
             if table.contains(SERVER_PLAYERS_WITH_PERMANENT_PRIVILEGES, SteamID) then

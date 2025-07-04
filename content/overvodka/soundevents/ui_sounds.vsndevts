@@ -142,7 +142,18 @@
         distance_max = "2500.0"
         event_type = "2.0"
     }
-
+    UUI_SOUNDS.NoMoney = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/abilities/nomoney.vsnd"
+        ]
+        volume = "2.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
     UUI_SOUNDS.Sosat = {
         type = "dota_src1_3d"
         vsnd_files =

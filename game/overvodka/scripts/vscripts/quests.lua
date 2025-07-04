@@ -7,132 +7,31 @@ Quests.SERVER_MAX_ATTEMPTS = 3
 Quests.SERVER_ATTEMPT_INTERVAL = 2
 
 Quests.QuestTypes = {
-    {
-        id = "kills",
-        name = "#Quest_Kills_Title",
-        description = "#Quest_Kills_Desc",
-        max = 50,
-        event = "kills"
-    },
-    {
-        id = "creepKills",
-        name = "#Quest_CreepKills_Title",
-        description = "#Quest_CreepKills_Desc",
-        max = 30,
-        event = "creepKills"
-    },
-    {
-        id = "magicDamage",
-        name = "#Quest_MagicDamage_Title",
-        description = "#Quest_MagicDamage_Desc",
-        max = 25000,
-        event = "magicDamage"
-    },
-    {
-        id = "physDamage",
-        name = "#Quest_PhysDamage_Title",
-        description = "#Quest_PhysDamage_Desc",
-        max = 25000,
-        event = "physDamage"
-    },
-    {
-        id = "goldAmount",
-        name = "#Quest_GoldAmount_Title",
-        description = "#Quest_GoldAmount_Desc",
-        max = 50,
-        event = "goldAmount"
-    },
-    {
-        id = "chestAmount",
-        name = "#Quest_ChestAmount_Title",
-        description = "#Quest_ChestAmount_Desc",
-        max = 5,
-        event = "chestAmount"
-    },
-    {
-        id = "chipsAmount",
-        name = "#Quest_ChipsAmount_Title",
-        description = "#Quest_ChipsAmount_Desc",
-        max = 5,
-        event = "chipsAmount"
-    },
-    {
-        id = "leshAmount",
-        name = "#Quest_LeshAmount_Title",
-        description = "#Quest_LeshAmount_Desc",
-        max = 3,
-        event = "leshAmount"
-    },
-    {
-        id = "chapmanAmount",
-        name = "#Quest_ChapmanAmount_Title",
-        description = "#Quest_ChapmanAmount_Desc",
-        max = 5,
-        event = "chapmanAmount"
-    },
-    {
-        id = "cubinAmount",
-        name = "#Quest_CubinAmount_Title",
-        description = "#Quest_CubinAmount_Desc",
-        max = 2,
-        event = "cubinAmount"
-    },
-    {
-        id = "byebyeAmount",
-        name = "#Quest_ByeByeAmount_Title",
-        description = "#Quest_ByeByeAmount_Desc",
-        max = 3,
-        event = "byebyeAmount"
-    },
-    {
-        id = "hamsterGold",
-        name = "#Quest_HamsterGold_Title",
-        description = "#Quest_HamsterGold_Desc",
-        max = 5000,
-        event = "hamsterGold"
-    },
-    {
-        id = "midTime",
-        name = "#Quest_MidTime_Title",
-        description = "#Quest_MidTime_Desc",
-        max = 1200,
-        event = "midTime"
-    },
-    {
-        id = "kaskaAmount",
-        name = "#Quest_KaskaAmount_Title",
-        description = "#Quest_KaskaAmount_Desc",
-        max = 50,
-        event = "kaskaAmount"
-    },
-    {
-        id = "armatureAmount",
-        name = "#Quest_ArmatureAmount_Title",
-        description = "#Quest_ArmatureAmount_Desc",
-        max = 10,
-        event = "armatureAmount"
-    },
-    {
-        id = "bablokradAmount",
-        name = "#Quest_BablokradAmount_Title",
-        description = "#Quest_BablokradAmount_Desc",
-        max = 1500,
-        event = "bablokradAmount"
-    },
-    {
-        id = "goldenrainTime",
-        name = "#Quest_GoldenRainTime_Title",
-        description = "#Quest_GoldenRainTime_Desc",
-        max = 30,
-        event = "goldenrainTime"
-    },
-    {
-        id = "cookieHeal",
-        name = "#Quest_CookieHeal_Title",
-        description = "#Quest_CookieHeal_Desc",
-        max = 3000,
-        event = "cookieHeal"
-    }
+    {id="kills",name="#Quest_Kills_Title",description="#Quest_Kills_Desc",max=50,event="kills"},
+    {id="creepKills",name="#Quest_CreepKills_Title",description="#Quest_CreepKills_Desc",max=30,event="creepKills"},
+    {id="magicDamage",name="#Quest_MagicDamage_Title",description="#Quest_MagicDamage_Desc",max=25000,event="magicDamage"},
+    {id="physDamage",name="#Quest_PhysDamage_Title",description="#Quest_PhysDamage_Desc",max=25000,event="physDamage"},
+    {id="goldAmount",name="#Quest_GoldAmount_Title",description="#Quest_GoldAmount_Desc",max=50,event="goldAmount"},
+    {id="chestAmount",name="#Quest_ChestAmount_Title",description="#Quest_ChestAmount_Desc",max=5,event="chestAmount"},
+    {id="chipsAmount",name="#Quest_ChipsAmount_Title",description="#Quest_ChipsAmount_Desc",max=5,event="chipsAmount"},
+    {id="leshAmount",name="#Quest_LeshAmount_Title",description="#Quest_LeshAmount_Desc",max=3,event="leshAmount"},
+    {id="chapmanAmount",name="#Quest_ChapmanAmount_Title",description="#Quest_ChapmanAmount_Desc",max=5,event="chapmanAmount"},
+    {id="cubinAmount",name="#Quest_CubinAmount_Title",description="#Quest_CubinAmount_Desc",max=2,event="cubinAmount"},
+    {id="byebyeAmount",name="#Quest_ByeByeAmount_Title",description="#Quest_ByeByeAmount_Desc",max=3,event="byebyeAmount"},
+    {id="hamsterGold",name="#Quest_HamsterGold_Title",description="#Quest_HamsterGold_Desc",max=5000,event="hamsterGold"},
+    {id="midTime",name="#Quest_MidTime_Title",description="#Quest_MidTime_Desc",max=1200,event="midTime"},
+    {id="kaskaAmount",name="#Quest_KaskaAmount_Title",description="#Quest_KaskaAmount_Desc",max=50,event="kaskaAmount"},
+    {id="armatureAmount",name="#Quest_ArmatureAmount_Title",description="#Quest_ArmatureAmount_Desc",max=10,event="armatureAmount"},
+    {id="bablokradAmount",name="#Quest_BablokradAmount_Title",description="#Quest_BablokradAmount_Desc",max=1500,event="bablokradAmount"},
+    {id="goldenrainTime",name="#Quest_GoldenRainTime_Title",description="#Quest_GoldenRainTime_Desc",max=30,event="goldenrainTime"},
+    {id="cookieHeal",name="#Quest_CookieHeal_Title",description="#Quest_CookieHeal_Desc",max=3000,event="cookieHeal"},
+    {id="oboyudnoDamage",name="#Quest_OboyudnoDamage_Title",description="#Quest_OboyudnoDamage_Desc",max=10000,event="oboyudnoDamage"},
+    {id="charonHeal",name="#Quest_CharonHeal_Title",description="#Quest_CharonHeal_Desc",max=2000,event="charonHeal"},
+    {id="minionAmount",name="#Quest_MinionAmount_Title",description="#Quest_MinionAmount_Desc",max=15,event="minionAmount"},
+    {id="playArsen",name="#Quest_PlayArsen_Title",description="#Quest_PlayArsen_Desc",max=1,event="playArsen"},
+    {id="playEbanko",name="#Quest_PlayEbanko_Title",description="#Quest_PlayEbanko_Desc",max=1,event="playEbanko"},
+    {id="playBratishkin",name="#Quest_PlayBratishkin_Title",description="#Quest_PlayBratishkin_Desc",max=1,event="playBratishkin"},
+    {id="playDrake",name="#Quest_PlayDrake_Title",description="#Quest_PlayDrake_Desc",max=1,event="playDrake"},
 }
 
 function Quests:Init()
@@ -155,6 +54,7 @@ function Quests:Init()
     ListenToGameEvent("dota_player_used_ability", Dynamic_Wrap(Quests, "OnAbilityUsed"), self)
     ListenToGameEvent("entity_hurt", Dynamic_Wrap(Quests, "OnEntityHurt"), self)
     ListenToGameEvent("dota_item_picked_up", Dynamic_Wrap( Quests, "OnItemPickUp"), self )
+    ListenToGameEvent('npc_spawned', Dynamic_Wrap(Quests, 'OnNPCSpawned'), self)
     ListenToGameEvent("player_disconnect", Dynamic_Wrap(Quests, "OnPlayerDisconnect"), self)
     self.modifierTimers = {}
     self.thinkerTimer = Timers:CreateTimer(1, function()
@@ -377,6 +277,9 @@ function Quests:OnAbilityUsed(event)
     if abilityName == "item_byebye" then
         self:IncrementQuest(playerID, "byebyeAmount")
     end
+    if abilityName == "item_minion_generator" then
+        self:IncrementQuest(playerID, "minionAmount")
+    end
 end
 
 function Quests:OnEntityHurt(event)
@@ -420,6 +323,34 @@ function Quests:OnEntityHurt(event)
 
     if isPhysical then
         self:IncrementQuest(playerID, "physDamage", damage)
+    end
+end
+
+function Quests:OnNPCSpawned(event)
+    if not event.entindex then return end
+
+    local unit = EntIndexToHScript(event.entindex)
+    if not unit or unit:IsNull() then return end
+
+    local bIsRespawn = event.is_respawn == 1
+
+    local RealHero = GetRealHero(unit)
+    if RealHero and RealHero:IsRealHero() and unit:IsHero() and not DebugPanel:IsDummy(unit) then
+        local PlayerID = unit:GetPlayerID()
+        if not bIsRespawn then
+            if unit:GetUnitName() == "npc_dota_hero_earthshaker" then
+                self:IncrementQuest(PlayerID, "playArsen")
+            end
+            if unit:GetUnitName() == "npc_dota_hero_kunkka" then
+                self:IncrementQuest(PlayerID, "playEbanko")
+            end
+            if unit:GetUnitName() == "npc_dota_hero_slark" then
+                self:IncrementQuest(PlayerID, "playBratishkin")
+            end
+            if unit:GetUnitName() == "npc_dota_hero_sniper" then
+                self:IncrementQuest(PlayerID, "playDrake")
+            end
+        end
     end
 end
 

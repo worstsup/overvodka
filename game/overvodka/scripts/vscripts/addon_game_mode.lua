@@ -29,6 +29,7 @@ require('music_zone_trigger')
 require('util/vector_targeting')
 require('util/functions')
 require('quests')
+require('store')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------

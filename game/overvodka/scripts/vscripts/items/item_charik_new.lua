@@ -122,7 +122,12 @@ function modifier_item_charik_new_regen:OnIntervalThink()
                 parent:Heal(healAmount, ability)
                 local manaRestore = parent:GetMaxMana() * percent_heal
                 parent:GiveMana(manaRestore)
-
+                local playerID = parent:GetPlayerOwnerID()
+                if playerID and PlayerResource:IsValidPlayerID(playerID) then
+                    if Quests and Quests.IncrementQuest then
+                        Quests:IncrementQuest(playerID, "charonHeal", healAmount)
+                    end
+                end
                 local particle = ParticleManager:CreateParticle("particles/econ/events/compendium_2024/compendium_2024_teleport_endcap_smoke.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
                 ParticleManager:ReleaseParticleIndex(particle)
                 ability:StartCooldown(ability:GetCooldown(ability:GetLevel()))

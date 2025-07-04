@@ -1,28 +1,21 @@
 <root>
     <styles>
-        <!-- Load the new main CSS file first -->
         <include src="file://{resources}/styles/custom_game/overvodka_menu.css" />
-        
-        <!-- Include the old CSS files to style the content inside the tabs -->
         <include src="file://{resources}/styles/custom_game/leaderboard_rating.css" />
         <include src="file://{resources}/styles/custom_game/player_hud.css" />
         <include src="file://{resources}/styles/custom_game/chat_wheel.css" />
         <include src="s2r://panorama/styles/dotastyles.css" />
     </styles>
     <scripts>
-        <!-- Load utility scripts first -->
         <include src="file://{resources}/scripts/custom_game/utils.js" />
-
-        <!-- Load the new main JS file -->
         <include src="file://{resources}/scripts/custom_game/overvodka_menu.js" />
-
-        <!-- Include the old JS files for the logic inside the tabs -->
         <include src="file://{resources}/scripts/custom_game/leaderboard_rating.js" />
         <include src="file://{resources}/scripts/custom_game/prime_panel.js" />
+        <include src="file://{resources}/scripts/custom_game/chat_wheel_panel.js" />
+        <include src="file://{resources}/scripts/custom_game/store_panel.js" />
     </scripts>
 
     <snippets>
-        <!-- Snippet from leaderboard_rating.xml -->
         <snippet name="Player">
             <Panel hittest="true" class="PlayerLine">
                 <Panel hittest="true" class="Player">
@@ -42,7 +35,6 @@
                 </Panel>
             </Panel>
         </snippet>
-        <!-- Snippet from chat_wheel.xml -->
         <snippet name="Item">
             <Panel hittest="true" class="Item">
                 <Panel hittest="true" class="ItemIconContainer">
@@ -52,19 +44,30 @@
                 <Label hittest="false" class="ItemText" text="{s:itemtext}"/>
             </Panel>
         </snippet>
+        <snippet name="StoreItem">
+            <Panel class="StoreItem">
+                <Image id="ItemImage" class="StoreItemImage" scaling="stretch-to-fit-y-preserve-aspect" />
+                <Panel class="StoreItemFooter">
+                    <Label id="ItemName" class="StoreItemName" text="Item Name" />
+                    <Panel class="StoreItemPrice">
+                        <Label id="ItemPrice" class="StoreItemPriceLabel" text="999" />
+                        <Panel class="StoreItemCoinIcon" />
+                    </Panel>
+                </Panel>
+                <Button id="ItemButton" class="StoreItemButton">
+                    <Label id="ItemButtonLabel" text="#Store_Buy_Item" />
+                </Button>
+            </Panel>
+        </snippet>
     </snippets>
 
     <Panel class="MenuRoot" hittest="false">
-        <!-- The single button that will always be visible on the HUD -->
         <Button id="MenuOpenButton" onactivate="Menu.Toggle()">
-            <Label text="MENU" />
+            <Label text="#Menu_Name" />
         </Button>
-
-        <!-- The main menu panel, hidden by default -->
         <Panel id="ModelPreview" />
         <Panel id="ModelPreview2" />
         <Panel id="MenuMainPanel">
-            <!-- Header with navigation tabs -->
             <Panel id="MenuHeader">
                 <Panel class="TabButtonContainer">
                     <Button id="TabButton_Leaderboard" class="MenuTabButton" onactivate="Menu.SwitchTab('Leaderboard')">
@@ -76,12 +79,11 @@
                     <Button id="TabButton_Prime" class="MenuTabButton" onactivate="Menu.SwitchTab('Prime')">
                         <Label text="#Menu_Tab_Prime" />
                     </Button>
+                    <Button id="TabButton_Store" class="MenuTabButton" onactivate="Menu.SwitchTab('Store')"><Label text="#Menu_Tab_Store" /></Button>
                 </Panel>
                 <Button id="MenuCloseButton" onactivate="Menu.Toggle()" />
             </Panel>
-            <!-- Content area where the tabs will be shown -->
             <Panel id="MenuContent">
-                <!-- LEADERBOARD CONTENT (from leaderboard_rating.xml) -->
                 <Panel id="Content_Leaderboard" class="MenuContentPanel">
                     <Panel class="ButtonsRow" hittest="false">
                         <Panel id="Buttons" class="Wrapper" hittest="false">
@@ -167,7 +169,6 @@
                                         <Label hittest="false" class="ButtonHeaderText" text="#CUSTOM_CHAT_WHEEL_Sounds"/>
                                     </Panel>
                                 </Panel>
-                                <Panel id="CloseButton" hittest="true" onactivate="CloseChatWheelSettings()"/>
                             </Panel>
                             <Panel class="ItemsBody" hittest="false">
                                 <Panel id="ItemsText" class="ItemsContainer" hittest="false">
@@ -180,37 +181,56 @@
                         </Panel>
                     </Panel>
                 </Panel>
-
+                <Panel id="Content_Store" class="MenuContentPanel">
+                    <Panel hittest="false" id="StoreBody">
+                        <Panel id="StoreHeader">
+                            <Panel id="StoreSubTabContainer">
+                                <Button id="StoreTab_Skins" class="StoreSubTabButton" onactivate="Store.SwitchCategory('skins')"><Label text="#Store_Category_Skins" /></Button>
+                                <Button id="StoreTab_Effects" class="StoreSubTabButton" onactivate="Store.SwitchCategory('effects')"><Label text="#Store_Category_Effects" /></Button>
+                                <Button id="StoreTab_Pets" class="StoreSubTabButton" onactivate="Store.SwitchCategory('pets')"><Label text="#Store_Category_Pets" /></Button>
+                            </Panel>
+                            <Panel id="CoinBalancePanel">
+                                <Label id="CoinBalanceLabel" text="0" />
+                                <Panel id="CoinBalanceIcon" />
+                            </Panel>
+                        </Panel>
+                        <Panel id="StoreContentArea">
+                            <Panel id="StoreItems_Skins" class="StoreItemGrid" />
+                            <Panel id="StoreItems_Effects" class="StoreItemGrid" />
+                            <Panel id="StoreItems_Pets" class="StoreItemGrid" />
+                        </Panel>
+                    </Panel>
+                </Panel>
                 <!-- PRIME CONTENT (from player_hud.xml) -->
                 <Panel id="Content_Prime" class="MenuContentPanel">
                     <!-- This is the SubscribePanel from player_hud.xml -->
                     <Panel hittest="false" id="SubscribePanel">
-                    <Panel id="SubscribePanelBody">
-                        <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>
+                        <Panel id="SubscribePanelBody">
+                            <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>
 
-                        <Label class="SubscribeDescriptionHeader" id="SubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_DescriptionHeader"/>
-                        <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
-                        <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
-                        <Panel id="HighFivePreview" />
-                        <Panel id="SeasonalPreview" >
-                            <Panel class="SeasonalPreviewIcon Duel" />
-                            <Panel class="SeasonalPreviewIcon Balloon" />
-                        </Panel>
-                        <Panel id="EffectPreview" />
-                        <Panel id="ChatWheelPreview" />
-                        <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
-                            <Panel class="Wrapper">
-                                <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
-                                <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
-                                <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                            <Label class="SubscribeDescriptionHeader" id="SubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_DescriptionHeader"/>
+                            <Label class="SubscribeDescriptionHeader" id="SubscribedSubscribeDescriptionHeader" html="true" text="#PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"/>
+                            <Label id="SubscribeDescription" html="true" text="#PLAYER_HUD_Subscribe_Description"/>
+                            <Panel id="HighFivePreview" />
+                            <Panel id="SeasonalPreview" >
+                                <Panel class="SeasonalPreviewIcon Duel" />
+                                <Panel class="SeasonalPreviewIcon Balloon" />
+                            </Panel>
+                            <Panel id="EffectPreview" />
+                            <Panel id="ChatWheelPreview" />
+                            <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
+                                <Panel class="Wrapper">
+                                    <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                                    <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
+                                    <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                                </Panel>
+                            </Panel>
+                            <Panel id="SubscribedEndDatePanel">
+                                <Label class="SubscribedEndDateText" text="#PLAYER_HUD_Subscribed_Works" />
+                                <Label class="SubscribedEndDateDate" text="{s:EndDate}" />
                             </Panel>
                         </Panel>
-                        <Panel id="SubscribedEndDatePanel">
-                            <Label class="SubscribedEndDateText" text="#PLAYER_HUD_Subscribed_Works" />
-                            <Label class="SubscribedEndDateDate" text="{s:EndDate}" />
-                        </Panel>
                     </Panel>
-                </Panel>
                 </Panel>
             </Panel>
         </Panel>

@@ -7,5 +7,7 @@
 		"players",
 		"globals",
 		"vector_targeting",
+		"store",
+		"player_data",
 	]
 }

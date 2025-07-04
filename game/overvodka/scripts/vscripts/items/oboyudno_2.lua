@@ -83,5 +83,12 @@ function modifier_item_oboyudno_2:OnAttackLanded(params)
 		end
 		local damage_return = self:GetAbility():GetSpecialValueFor("return_damage_passive_percentage") * params.original_damage / 100 + self:GetAbility():GetSpecialValueFor("return_damage_passive")
 		ApplyDamage({victim = params.attacker, attacker = self:GetParent(), damage = damage_return, damage_type = params.damage_type,  damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTA_DAMAGE_FLAG_REFLECTION, ability = self:GetAbility()})
+		local playerID = self:GetParent():GetPlayerOwnerID()
+		if playerID and PlayerResource:IsValidPlayerID(playerID) then
+			if Quests and Quests.IncrementQuest then
+				local dmg_quest = math.floor(damage_return)
+				Quests:IncrementQuest(playerID, "oboyudnoDamage", dmg_quest)
+			end
+		end
 	end
 end
