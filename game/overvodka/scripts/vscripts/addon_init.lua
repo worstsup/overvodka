@@ -7,6 +7,8 @@ end
 
 LinkLuaModifier("modifier_sans_arcana", "modifiers/modifier_sans_arcana", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_invincible_arcana", "modifiers/modifier_invincible_arcana", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_overvodka_pet", "modifiers/modifier_overvodka_pet", LUA_MODIFIER_MOTION_NONE )
+
 ListenToGameEvent("chat_wheel_console_command", function (data, event)
     if IsClient() then
         SendToConsole(data.command)

@@ -2,6 +2,8 @@ LinkLuaModifier("modifier_subscriber_effect", "modifiers/modifier_subscriber_eff
 LinkLuaModifier("modifier_win_condition", "modifiers/modifier_win_condition", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_arcana", "modifiers/modifier_sans_arcana", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_arcana", "modifiers/modifier_invincible_arcana", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_effect_1", "modifiers/store/modifier_overvodka_store_effect_1", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_effect_2", "modifiers/store/modifier_overvodka_store_effect_2", LUA_MODIFIER_MOTION_NONE)
 GAME_CATEGORY_DEFINITIONS = {
 	NONE = 0,
 	SOLO = 1,

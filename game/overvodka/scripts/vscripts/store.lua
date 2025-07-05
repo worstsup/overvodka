@@ -6,6 +6,7 @@ Store.Items = {
     skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 500, image = "file://{images}/custom_game/subscribe_button.png" },
     skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 750, image = "file://{images}/custom_game/tg_icon.png" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 300, image = "file://{images}/custom_game/subscribe_button.png" },
+    effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 400, image = "file://{images}/custom_game/tg_icon.png" },
     pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 1000, image = "file://{images}/custom_game/subscribe_button.png" },
 }
 
@@ -17,9 +18,24 @@ function Store:Init()
     CustomNetTables:SetTableValue("store", "items", self.Items)
 
     ListenToGameEvent("player_connect_full", Dynamic_Wrap(self, "OnPlayerConnectFull"), self)
+    ListenToGameEvent("npc_spawned", Dynamic_Wrap(self, "OnNPCSpawned"), self)
     CustomGameEventManager:RegisterListener("store_buy_item", function(_, event) self:OnBuyItem(event) end)
-    
+    CustomGameEventManager:RegisterListener("store_equip_item", function(_, event) self:OnEquipItem(event) end)
+    CustomGameEventManager:RegisterListener("store_unequip_item", function(_, event) self:OnUnequipItem(event) end)
     print("[Store] Initialized successfully.")
+end
+
+function Store:OnNPCSpawned(event)
+    if not event.entindex then return end
+    local npc = EntIndexToHScript(event.entindex)
+    if npc:IsRealHero() then
+        local playerID = npc:GetPlayerOwnerID()
+        if playerID >= 0 then
+            Timers:CreateTimer(0.1, function()
+                self:ApplyEquippedEffect(playerID)
+            end)
+        end
+    end
 end
 
 function Store:OnPlayerConnectFull(event)
@@ -37,21 +53,76 @@ function Store:FetchPlayerData(playerID)
         SERVER_URL .. "get_store_info",
         { SteamID = steamID },
         function(err, body)
-            if err or not body.success then
-                print("[Store] Failed to fetch data for player " .. playerID)
-                return
-            end
-            
-            print("[Store] Received data for player " .. playerID)
+            if err or not body.success then return end
             
             self.playerData[playerID] = {
                 coins = body.coins or 0,
-                inventory = self:ArrayToSet(body.inventory or {})
+                inventory = self:ArrayToSet(body.inventory or {}),
+                equipped_effect = body.equipped_effect
             }
 
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+            self:ApplyEquippedEffect(playerID)
         end
     )
+end
+
+function Store:OnEquipItem(event)
+    local playerID = event.PlayerID
+    local itemID = event.item_id
+    local item = self.Items[itemID]
+    local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
+    if not item or steamID == "0" then return end
+    self:SendRequest(
+        SERVER_URL .. "equip_item",
+        { SteamID = steamID, item_id = itemID, item_type = item.type },
+        function(err, body)
+            if err or not body.success then return end
+            self.playerData[playerID].equipped_effect = body.equipped_item
+            self:ApplyEquippedEffect(playerID)
+            CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+        end
+    )
+end
+
+function Store:OnUnequipItem(event)
+    local playerID = event.PlayerID
+    local itemType = event.item_type
+    local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
+
+    if not itemType or steamID == "0" then return end
+
+    self:SendRequest(
+        SERVER_URL .. "unequip_item",
+        { SteamID = steamID, item_type = itemType },
+        function(err, body)
+            if err or not body.success then return end
+
+            if body.unequipped_type == "effects" then
+                self.playerData[playerID].equipped_effect = nil
+            end
+            -- Add logic for other types here later
+            
+            self:ApplyEquippedEffect(playerID)
+            CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+        end
+    )
+end
+
+function Store:ApplyEquippedEffect(playerID)
+    local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+    if not hero or not self.playerData[playerID] then return end
+    local equippedID = self.playerData[playerID].equipped_effect
+    for id, itemData in pairs(self.Items) do
+        if itemData.type == "effects" and hero:HasModifier("modifier_overvodka_store_" .. id) then
+            hero:RemoveModifierByName("modifier_overvodka_store_" .. id)
+        end
+    end
+    if equippedID then
+        local modifierName = "modifier_overvodka_store_" .. equippedID
+        hero:AddNewModifier(hero, nil, modifierName, {})
+        print("[Store] Applied effect " .. modifierName .. " to player " .. playerID)
+    end
 end
 
 function Store:OnBuyItem(event)
@@ -92,8 +163,8 @@ end
 
 function Store:ArrayToSet(arr)
     local set = {}
-    for _, itemId in ipairs(arr) do
-        set[itemId] = true
+    for _, v in ipairs(arr) do
+        set[v] = true
     end
     return set
 end

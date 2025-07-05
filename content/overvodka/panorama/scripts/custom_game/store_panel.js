@@ -13,7 +13,8 @@ const StoreBody = $("#StoreBody");
     let isInitialized = false;
     let currentCategory = null;
     let allItems = {};
-    let playerInventory = [];
+    let playerInventory = {};
+    let playerEquipped = {};
     let playerCoins = 0;
     const localPlayerID64 = Players.GetLocalPlayer();
     const localSteamID = GetSteamID32(localPlayerID64).toString();
@@ -23,11 +24,9 @@ const StoreBody = $("#StoreBody");
         
         $.Msg("[Store] Initializing for SteamID:", localSteamID);
         
-        // Listen for NetTable changes
         CustomNetTables.SubscribeNetTableListener("store", OnStoreNetTableChange);
         CustomNetTables.SubscribeNetTableListener("player_data", OnPlayerDataChange);
 
-        // Get initial data
         const itemsData = CustomNetTables.GetTableValue("store", "items");
         if (itemsData) {
             $.Msg("[Store] Found store items in NetTable");
@@ -54,14 +53,13 @@ const StoreBody = $("#StoreBody");
 
     function OnPlayerDataChange(table_name, key, data) {
         if (key === localSteamID) {
-            $.Msg("[Store] Player data updated from NetTable: ", data);
-            
             if (data) {
-                if (typeof data.coins === "number") {
-                    playerCoins = data.coins;
-                    coinBalanceLabel.text = playerCoins;
-                }
+                playerCoins = data.coins || 0;
                 playerInventory = data.inventory || {};
+                // *** NEW: Update equipped data from NetTable ***
+                playerEquipped.effect = data.equipped_effect;
+                
+                coinBalanceLabel.text = playerCoins;
                 UpdateAllItemButtons();
             }
         }
@@ -128,8 +126,14 @@ const StoreBody = $("#StoreBody");
         button.enabled = true;
 
         if (playerInventory[itemData.id]) {
-            button.AddClass("Owned");
-            label.text = $.Localize("#Store_Equip_Item");
+            if (playerEquipped.effect === itemData.id) {
+                button.AddClass("Equipped");
+                label.text = $.Localize("#Store_Unequip_Item");
+                button.enabled = true;
+            } else {
+                button.AddClass("Owned");
+                label.text = $.Localize("#Store_Equip_Item");
+            }
         } else {
             if (playerCoins < itemData.price) {
                 button.AddClass("NotEnoughCoins");
@@ -140,9 +144,21 @@ const StoreBody = $("#StoreBody");
     }
 
     function OnItemButtonClick(itemId) {
+        const item = allItems[itemId];
+        if (!item) return;
         if (playerInventory[itemId]) {
-            $.Msg(`Equip item: ${itemId}`);
-            // TODO: Handle equipping logic
+            if (playerEquipped.effect === itemId) {
+                Game.EmitSound("UI.Unequip");
+                GameEvents.SendCustomGameEventToServer("store_unequip_item", {
+                    item_type: item.type
+                });
+            } else {
+                Game.EmitSound("UI.Equip");
+                GameEvents.SendCustomGameEventToServer("store_equip_item", { 
+                    item_id: itemId,
+                    item_type: item.type 
+                });
+            }
         } else {
             GameEvents.SendCustomGameEventToServer("store_buy_item", { item_id: itemId });
         }

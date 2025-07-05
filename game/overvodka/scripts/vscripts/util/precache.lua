@@ -70,6 +70,7 @@ PrecacheUtils.particles = {
 		"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_trail.vpcf",
 		"particles/econ/items/zeus/lightning_weapon_fx/zuus_base_attack_immortal_lightning.vpcf",
 		"particles/overvodka_prime_effect.vpcf",
+		"particles/econ/events/diretide_2020/emblem/fall20_emblem_v2_effect.vpcf",
 		"particles/rubick_faceless_void_chronosphere_new.vpcf",
 		"particles/marci_unleash_stack_number_two.vpcf",
 		"particles/marci_unleash_stack_number_one.vpcf",
