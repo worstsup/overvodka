@@ -310,13 +310,13 @@
 
 .LinePlayerSelf
 {
-	width: 550px;
+	width: 800px;
 	horizontal-align: center;
 	height: 50px;
 	background-color: #363121;
 	/* box-shadow: #7a7d82 0px 0px 5px -1px;  */
 	border: 1px solid #625f45;
-	margin-top:10px;
+	margin-top:-50px;
 	flow-children: right;
 }
 

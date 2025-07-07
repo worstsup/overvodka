@@ -8,13 +8,17 @@ const StoreBody = $("#StoreBody");
         skins: { button: $("#StoreTab_Skins"), panel: $("#StoreItems_Skins") },
         effects: { button: $("#StoreTab_Effects"), panel: $("#StoreItems_Effects") },
         pets: { button: $("#StoreTab_Pets"), panel: $("#StoreItems_Pets") },
+        prime: { button: $("#StoreTab_Prime"), panel: $("#StoreItems_Prime") },
     };
 
     let isInitialized = false;
     let currentCategory = null;
     let allItems = {};
     let playerInventory = {};
-    let playerEquipped = {};
+    let playerEquipped = {
+        effect: null,
+        skin: null
+    };
     let playerCoins = 0;
     const localPlayerID64 = Players.GetLocalPlayer();
     const localSteamID = GetSteamID32(localPlayerID64).toString();
@@ -56,9 +60,8 @@ const StoreBody = $("#StoreBody");
             if (data) {
                 playerCoins = data.coins || 0;
                 playerInventory = data.inventory || {};
-                // *** NEW: Update equipped data from NetTable ***
                 playerEquipped.effect = data.equipped_effect;
-                
+                playerEquipped.skin = data.equipped_skin;
                 coinBalanceLabel.text = playerCoins;
                 UpdateAllItemButtons();
             }
@@ -126,10 +129,16 @@ const StoreBody = $("#StoreBody");
         button.enabled = true;
 
         if (playerInventory[itemData.id]) {
-            if (playerEquipped.effect === itemData.id) {
+            let isEquipped = false;
+            if (itemData.type === 'effects') {
+                isEquipped = (playerEquipped.effect === itemData.id);
+            } else if (itemData.type === 'skins') {
+                isEquipped = (playerEquipped.skin === itemData.id);
+            }
+            
+            if (isEquipped) {
                 button.AddClass("Equipped");
                 label.text = $.Localize("#Store_Unequip_Item");
-                button.enabled = true;
             } else {
                 button.AddClass("Owned");
                 label.text = $.Localize("#Store_Equip_Item");
@@ -137,7 +146,6 @@ const StoreBody = $("#StoreBody");
         } else {
             if (playerCoins < itemData.price) {
                 button.AddClass("NotEnoughCoins");
-                button.enabled = true;
             }
             label.text = $.Localize("#Store_Buy_Item");
         }
@@ -146,8 +154,16 @@ const StoreBody = $("#StoreBody");
     function OnItemButtonClick(itemId) {
         const item = allItems[itemId];
         if (!item) return;
+
         if (playerInventory[itemId]) {
-            if (playerEquipped.effect === itemId) {
+            let isEquipped = false;
+            if (item.type === 'effects') {
+                isEquipped = (playerEquipped.effect === itemId);
+            } else if (item.type === 'skins') {
+                isEquipped = (playerEquipped.skin === itemId);
+            }
+
+            if (isEquipped) {
                 Game.EmitSound("UI.Unequip");
                 GameEvents.SendCustomGameEventToServer("store_unequip_item", {
                     item_type: item.type

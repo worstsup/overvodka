@@ -81,7 +81,7 @@ PrecacheUtils.particles = {
 		"particles/rostik_attack.vpcf",
 		"particles/rocket_launcher.vpcf",
 		"particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf",
-		"pparticles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf",
+		"particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf",
 		"particles/econ/items/lifestealer/lifestealer_immortal_backbone_gold/lifestealer_immortal_backbone_gold_rage.vpcf",
 		"particles/kotl_ti10_blinding_light_groundring_new.vpcf",
 		"particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf",
@@ -236,6 +236,7 @@ PrecacheUtils.models = {
 		"models/drake/drake.vmdl",
 		"models/mazellov/mazellov.vmdl",
 		"models/t2x2/t2x2.vmdl",
+		"litvin/litenergy/lit_energy.vmdl",
 }
 
 PrecacheUtils.sounds = {

@@ -1,0 +1,1690 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc40:version{da0ab1f8-9722-4910-94b8-10b6a08c0934} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "BoneMarkupList"
+				bone_cull_type = "None"
+				primary_root_bone = ""
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "kaneki"
+						filename = "models/update_heroes/kaneki/kaneki_kaneki.dmx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "attach_hitloc"
+						parent_bone = "bone_kaneki_51"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "attach_attack1"
+						parent_bone = "bone_kaneki_69"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "attach_attack2"
+						parent_bone = "bone_kaneki_79"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_01"
+								parent_bone = "bone_kaneki_01"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -160.367004, -123.831902, -315.116608 ]
+								hitbox_maxs = [ 135.073593, 246.904602, 228.078003 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_02"
+								parent_bone = "bone_kaneki_02"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.184292, -1.796438, -5.465881 ]
+								hitbox_maxs = [ 3.315699, 28.86977, 4.790222 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_03"
+								parent_bone = "bone_kaneki_03"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -8.871228, -2.166569, -8.257843 ]
+								hitbox_maxs = [ 5.020614, 25.91222, 5.742126 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_04"
+								parent_bone = "bone_kaneki_04"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -20.273569, -5.579712, -5.926819 ]
+								hitbox_maxs = [ 4.860809, 27.256611, 16.089479 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_05"
+								parent_bone = "bone_kaneki_05"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -18.680111, -3.838486, -10.02261 ]
+								hitbox_maxs = [ 5.822682, 17.86939, 10.39523 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_06"
+								parent_bone = "bone_kaneki_06"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -20.90642, -3.712219, -8.429443 ]
+								hitbox_maxs = [ 4.00481, 15.18004, 25.512051 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_07"
+								parent_bone = "bone_kaneki_07"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -28.60696, -6.900711, -5.963715 ]
+								hitbox_maxs = [ 4.666015, 22.358459, 40.588501 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_08"
+								parent_bone = "bone_kaneki_08"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -32.416302, -7.276489, -4.595825 ]
+								hitbox_maxs = [ 5.784368, 8.746841, 66.077057 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_09"
+								parent_bone = "bone_kaneki_09"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -19.55896, -18.39447, -6.762207 ]
+								hitbox_maxs = [ 9.726278, 10.94373, 57.60696 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_10"
+								parent_bone = "bone_kaneki_10"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.66102, -37.159409, -8.542969 ]
+								hitbox_maxs = [ 15.33457, 11.28983, 35.926762 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_11"
+								parent_bone = "bone_kaneki_11"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -38.214611, -7.607933, -36.783199 ]
+								hitbox_maxs = [ 15.77096, 65.372589, 11.20398 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_14"
+								parent_bone = "bone_kaneki_14"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.315712, -1.796423, -5.465881 ]
+								hitbox_maxs = [ 3.184278, 28.86977, 4.790222 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_15"
+								parent_bone = "bone_kaneki_15"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.020631, -2.166561, -8.257843 ]
+								hitbox_maxs = [ 8.871236, 25.91222, 5.742126 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_16"
+								parent_bone = "bone_kaneki_16"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.860838, -5.579697, -5.926819 ]
+								hitbox_maxs = [ 20.273581, 27.256611, 16.089479 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_17"
+								parent_bone = "bone_kaneki_17"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.822734, -3.83847, -10.02261 ]
+								hitbox_maxs = [ 18.68012, 17.86937, 10.39523 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_18"
+								parent_bone = "bone_kaneki_18"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.004898, -3.712189, -8.429443 ]
+								hitbox_maxs = [ 20.90641, 15.18008, 25.512051 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_19"
+								parent_bone = "bone_kaneki_19"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.666039, -6.900696, -5.963715 ]
+								hitbox_maxs = [ 28.606979, 22.358471, 40.588501 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_20"
+								parent_bone = "bone_kaneki_20"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.78445, -7.276474, -4.595825 ]
+								hitbox_maxs = [ 32.416279, 8.746872, 66.077057 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_21"
+								parent_bone = "bone_kaneki_21"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -9.726328, -18.39455, -6.762207 ]
+								hitbox_maxs = [ 19.55891, 10.94368, 57.60696 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_22"
+								parent_bone = "bone_kaneki_22"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -15.33456, -37.159451, -8.542969 ]
+								hitbox_maxs = [ 13.66103, 11.28981, 35.926762 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_23"
+								parent_bone = "bone_kaneki_23"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -15.77103, -7.607857, -16.78857 ]
+								hitbox_maxs = [ 10.22202, 5.388672, 11.20398 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_27"
+								parent_bone = "bone_kaneki_27"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.326294, -1.48484, -6.406891 ]
+								hitbox_maxs = [ 3.709018, 31.724409, 3.593079 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_28"
+								parent_bone = "bone_kaneki_28"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.972873, -1.459633, -7.996887 ]
+								hitbox_maxs = [ 9.414208, 29.52087, 6.003082 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_29"
+								parent_bone = "bone_kaneki_29"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.574823, -4.481499, -6.336914 ]
+								hitbox_maxs = [ 24.17495, 37.58329, 3.663055 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_30"
+								parent_bone = "bone_kaneki_30"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.875706, -4.067322, -8.364838 ]
+								hitbox_maxs = [ 21.23818, 23.94656, 7.63504 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_31"
+								parent_bone = "bone_kaneki_31"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.866182, -4.019028, -6.560852 ]
+								hitbox_maxs = [ 38.251652, 24.07695, 3.438995 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_32"
+								parent_bone = "bone_kaneki_32"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -2.874347, -5.106369, -15.0787 ]
+								hitbox_maxs = [ 61.417881, 18.092119, 7.541687 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_33"
+								parent_bone = "bone_kaneki_33"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -0.810468, -7.218414, -7.407471 ]
+								hitbox_maxs = [ 69.581093, 5.780945, 6.591827 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_34"
+								parent_bone = "bone_kaneki_34"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.435909, -11.17067, -13.36963 ]
+								hitbox_maxs = [ 51.596218, 10.82742, 27.158331 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_35"
+								parent_bone = "bone_kaneki_35"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.123, -18.48131, -14.62625 ]
+								hitbox_maxs = [ 17.33115, 13.03284, 45.2164 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_36"
+								parent_bone = "bone_kaneki_36"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -20.61705, -10.57199, -78.02533 ]
+								hitbox_maxs = [ 17.372789, 32.416519, 3.952759 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_39"
+								parent_bone = "bone_kaneki_39"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.70901, -1.484848, -6.406891 ]
+								hitbox_maxs = [ 3.326283, 31.7244, 3.593079 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_40"
+								parent_bone = "bone_kaneki_40"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -9.414198, -1.459641, -7.996887 ]
+								hitbox_maxs = [ 4.972867, 29.52087, 6.003082 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_41"
+								parent_bone = "bone_kaneki_41"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -24.17494, -4.481506, -6.336914 ]
+								hitbox_maxs = [ 4.574789, 37.583321, 3.663055 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_42"
+								parent_bone = "bone_kaneki_42"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -21.238171, -4.067352, -8.364838 ]
+								hitbox_maxs = [ 5.875637, 23.94655, 7.63504 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_43"
+								parent_bone = "bone_kaneki_43"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -38.251629, -4.019043, -6.560852 ]
+								hitbox_maxs = [ 5.866095, 24.0769, 3.438995 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_44"
+								parent_bone = "bone_kaneki_44"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -61.41795, -5.106369, -15.0787 ]
+								hitbox_maxs = [ 2.874302, 18.092131, 7.541687 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_45"
+								parent_bone = "bone_kaneki_45"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -69.581017, -7.218399, -7.407471 ]
+								hitbox_maxs = [ 0.810581, 5.780975, 6.591827 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_46"
+								parent_bone = "bone_kaneki_46"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -51.596191, -11.17068, -13.36963 ]
+								hitbox_maxs = [ 3.435917, 10.82742, 27.158331 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_47"
+								parent_bone = "bone_kaneki_47"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -17.33112, -18.481291, -14.62625 ]
+								hitbox_maxs = [ 13.12291, 13.03284, 45.2164 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_48"
+								parent_bone = "bone_kaneki_48"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.37403, -10.57205, -4.045135 ]
+								hitbox_maxs = [ 20.616871, 9.422607, 3.952759 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_52"
+								parent_bone = "bone_kaneki_52"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -38.414379, -30.217211, -116.153297 ]
+								hitbox_maxs = [ 19.00742, 30.657709, 6.760132 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_53"
+								parent_bone = "bone_kaneki_53"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -23.162411, -16.28532, -134.808197 ]
+								hitbox_maxs = [ 11.4625, 30.4333, 0.912735 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_54"
+								parent_bone = "bone_kaneki_54"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.05518, -15.1786, -28.34923 ]
+								hitbox_maxs = [ 11.1947, 17.164989, 1.72094 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_56"
+								parent_bone = "bone_kaneki_56"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -19.00742, -30.217199, -116.153397 ]
+								hitbox_maxs = [ 38.414379, 30.657721, 6.760132 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_57"
+								parent_bone = "bone_kaneki_57"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.4625, -16.285311, -134.808197 ]
+								hitbox_maxs = [ 23.162411, 30.43331, 0.912796 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_58"
+								parent_bone = "bone_kaneki_58"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.1947, -15.17859, -28.349171 ]
+								hitbox_maxs = [ 13.05518, 17.165001, 1.721001 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_61"
+								parent_bone = "bone_kaneki_61"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -33.24995, -22.444019, -2.737854 ]
+								hitbox_maxs = [ 33.24995, 27.18092, 16.939119 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_62"
+								parent_bone = "bone_kaneki_62"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -32.999908, -25.474871, -3.678772 ]
+								hitbox_maxs = [ 32.999908, 25.27499, 13.94055 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_63"
+								parent_bone = "bone_kaneki_63"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -40.749802, -27.49872, -3.622772 ]
+								hitbox_maxs = [ 40.749802, 38.750961, 66.81665 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_64"
+								parent_bone = "bone_kaneki_64"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.99988, -14.3869, -6.447083 ]
+								hitbox_maxs = [ 13.99987, 15.15678, 11.5528 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_66"
+								parent_bone = "bone_kaneki_66"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.51681, -9.623062, -19.724239 ]
+								hitbox_maxs = [ 0.5, 34.110931, 22.27536 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_67"
+								parent_bone = "bone_kaneki_67"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -31.58371, -20.173571, -70.03894 ]
+								hitbox_maxs = [ 1.16577, 19.232059, 12.53137 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_68"
+								parent_bone = "bone_kaneki_68"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -22.44714, -13.67373, -56.077728 ]
+								hitbox_maxs = [ 7.052042, 10.20061, 0.553436 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_69"
+								parent_bone = "bone_kaneki_69"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.4131, -13.62075, -27.81786 ]
+								hitbox_maxs = [ 6.086043, 11.56551, 0.60614 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_70"
+								parent_bone = "bone_kaneki_70"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -0.935616, -4.554627, -0.5 ]
+								hitbox_maxs = [ 3.563995, 3.132207, 0.89946 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_72"
+								parent_bone = "bone_kaneki_72"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -2.706765, -4.078039, -1.243271 ]
+								hitbox_maxs = [ 5.292541, 2.733869, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_74"
+								parent_bone = "bone_kaneki_74"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.639672, -6.709686, -1.616287 ]
+								hitbox_maxs = [ 6.359381, 11.16376, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_76"
+								parent_bone = "bone_kaneki_76"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -0.5, -9.623047, -19.724211 ]
+								hitbox_maxs = [ 11.51682, 34.110939, 22.275391 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_77"
+								parent_bone = "bone_kaneki_77"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -1.165777, -20.17354, -71.081879 ]
+								hitbox_maxs = [ 31.5837, 19.23209, 12.53143 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_78"
+								parent_bone = "bone_kaneki_78"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -6.931974, -15.03172, -53.920959 ]
+								hitbox_maxs = [ 22.5672, 8.842621, 1.596466 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_79"
+								parent_bone = "bone_kaneki_79"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -7.335588, -14.23539, -29.58556 ]
+								hitbox_maxs = [ 10.16355, 10.95086, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_80"
+								parent_bone = "bone_kaneki_80"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.564042, -4.554654, -2.100235 ]
+								hitbox_maxs = [ 3.935302, 3.13218, 0.899506 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_82"
+								parent_bone = "bone_kaneki_82"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.292588, -4.07806, -8.087021 ]
+								hitbox_maxs = [ 2.706717, 2.233893, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_84"
+								parent_bone = "bone_kaneki_84"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -7.257204, -7.283159, -0.962311 ]
+								hitbox_maxs = [ 3.741851, 11.09025, 1.037521 ]
+							},
+						]
+					},
+					{
+						_class = "HitboxSet"
+						name = "hands"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_108"
+								parent_bone = "bone_kaneki_66"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.51681, -9.623062, -19.724239 ]
+								hitbox_maxs = [ 0.5, 34.110931, 22.27536 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_109"
+								parent_bone = "bone_kaneki_67"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -31.58371, -20.173571, -70.03894 ]
+								hitbox_maxs = [ 1.16577, 19.232059, 12.53137 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_110"
+								parent_bone = "bone_kaneki_68"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -22.44714, -13.67373, -56.077728 ]
+								hitbox_maxs = [ 7.052042, 10.20061, 0.553436 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_111"
+								parent_bone = "bone_kaneki_69"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -11.4131, -13.62075, -27.81786 ]
+								hitbox_maxs = [ 6.086043, 11.56551, 0.60614 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_112"
+								parent_bone = "bone_kaneki_70"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -0.935616, -4.554627, -0.5 ]
+								hitbox_maxs = [ 3.563995, 3.132207, 0.89946 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_113"
+								parent_bone = "bone_kaneki_72"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -2.706765, -4.078039, -1.243271 ]
+								hitbox_maxs = [ 5.292541, 2.733869, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_114"
+								parent_bone = "bone_kaneki_74"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -4.639672, -6.709686, -1.616287 ]
+								hitbox_maxs = [ 6.359381, 11.16376, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_115"
+								parent_bone = "bone_kaneki_76"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -0.5, -9.623047, -19.724211 ]
+								hitbox_maxs = [ 11.51682, 34.110939, 22.275391 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_116"
+								parent_bone = "bone_kaneki_77"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -1.165777, -20.17354, -71.081879 ]
+								hitbox_maxs = [ 31.5837, 19.23209, 12.53143 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_117"
+								parent_bone = "bone_kaneki_78"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -6.931974, -15.03172, -53.920959 ]
+								hitbox_maxs = [ 22.5672, 8.842621, 1.596466 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_118"
+								parent_bone = "bone_kaneki_79"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -7.335588, -14.23539, -29.58556 ]
+								hitbox_maxs = [ 10.16355, 10.95086, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_119"
+								parent_bone = "bone_kaneki_80"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -3.564042, -4.554654, -2.100235 ]
+								hitbox_maxs = [ 3.935302, 3.13218, 0.899506 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_120"
+								parent_bone = "bone_kaneki_82"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -5.292588, -4.07806, -8.087021 ]
+								hitbox_maxs = [ 2.706717, 2.233893, 0.5 ]
+							},
+							{
+								_class = "Hitbox"
+								name = "bone_kaneki_121"
+								parent_bone = "bone_kaneki_84"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -7.257204, -7.283159, -0.962311 ]
+								hitbox_maxs = [ 3.741851, 11.09025, 1.037521 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "bone_kaneki_01"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_02"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_03"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_04"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_05"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_06"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_07"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_08"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_09"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_10"
+																								children = 
+																								[
+																									{
+																										_class = "Bone"
+																										name = "bone_kaneki_11"
+																										children = 
+																										[
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_12"
+																												origin = [ 20.4104, -30.136339, 2.403381 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																										]
+																										origin = [ 8.641998, -37.159409, 35.926762 ]
+																										angles = [ -0.0, 0.0, -0.0 ]
+																										do_not_discard = true
+																									},
+																								]
+																								origin = [ -19.55896, -18.394501, 57.60696 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ -32.416302, 8.746902, 66.077057 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ -28.60696, 22.358459, 40.588501 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ -20.90642, 15.18002, 25.512051 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ -18.680111, 17.86939, 10.39523 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ -20.273569, 27.256611, 16.089479 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ -8.871228, 25.91222, 5.665649 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ -2.361103, 28.86977, 4.790222 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ -0.718192, 29.53344, 4.165283 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -4.26291, -8.847475, 325.299408 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "bone_kaneki_13"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_14"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_15"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_16"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_17"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_18"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_19"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_20"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_21"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_22"
+																								children = 
+																								[
+																									{
+																										_class = "Bone"
+																										name = "bone_kaneki_23"
+																										children = 
+																										[
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_24"
+																												origin = [ -20.410391, -30.136351, 2.403381 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_25"
+																												origin = [ 21.880039, 26.754801, -6.506348 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																										]
+																										origin = [ -8.641922, -37.15942, 35.926762 ]
+																										angles = [ -0.0, 0.0, -0.0 ]
+																										do_not_discard = true
+																									},
+																								]
+																								origin = [ 19.55891, -18.39455, 57.60696 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ 32.416279, 8.746857, 66.077057 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ 28.606979, 22.358471, 40.588501 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ 20.90641, 15.18008, 25.512051 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ 18.68012, 17.86935, 10.39523 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ 20.273581, 27.25659, 16.089479 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ 8.871236, 25.91221, 5.665649 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ 2.361115, 28.86978, 4.790222 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ 0.718194, 29.53343, 4.165283 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -4.262902, 8.847484, 325.299408 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "bone_kaneki_26"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_27"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_28"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_29"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_30"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_31"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_32"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_33"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_34"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_35"
+																								children = 
+																								[
+																									{
+																										_class = "Bone"
+																										name = "bone_kaneki_36"
+																										children = 
+																										[
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_37"
+																												origin = [ -12.0834, -14.92184, 33.387081 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																										]
+																										origin = [ 17.33115, -18.481319, 45.2164 ]
+																										angles = [ -0.0, 0.0, -0.0 ]
+																										do_not_discard = true
+																									},
+																								]
+																								origin = [ 51.596218, -9.264725, 27.158331 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ 69.581093, 3.917511, -2.087433 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ 61.417881, 18.09207, -15.0787 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ 38.251652, 24.076981, -4.119965 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ 21.23818, 23.94655, -5.813721 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ 24.17495, 37.583271, 2.022339 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ 9.414208, 29.52088, 0.336914 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ 3.709018, 31.724409, 1.588318 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ 0.728776, 29.97184, 3.329285 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -4.2629, 8.847484, 311.076385 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "bone_kaneki_38"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_39"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_40"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_41"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_42"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_43"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_44"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_45"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_46"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_47"
+																								children = 
+																								[
+																									{
+																										_class = "Bone"
+																										name = "bone_kaneki_48"
+																										children = 
+																										[
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_49"
+																												origin = [ 12.0835, -14.92184, 33.387081 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																											{
+																												_class = "Bone"
+																												name = "bone_kaneki_50"
+																												origin = [ -10.80777, 13.13268, -30.679501 ]
+																												angles = [ -0.0, 0.0, -0.0 ]
+																												do_not_discard = true
+																											},
+																										]
+																										origin = [ -17.33112, -18.481291, 45.2164 ]
+																										angles = [ -0.0, 0.0, -0.0 ]
+																										do_not_discard = true
+																									},
+																								]
+																								origin = [ -51.596191, -9.264694, 27.158331 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ -69.581017, 3.91745, -2.087433 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ -61.41795, 18.092159, -15.0787 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ -38.251629, 24.0769, -4.119965 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ -21.238171, 23.94655, -5.813721 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ -24.17494, 37.583321, 2.022339 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ -9.414198, 29.52087, 0.336914 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ -3.70901, 31.7244, 1.588318 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ -0.728773, 29.97184, 3.329285 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -4.262908, -8.847474, 311.076385 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "bone_kaneki_51"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_52"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_53"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_54"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_55"
+														origin = [ -8.165035, -32.53548, -23.052999 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ -14.85672, 11.01808, -134.808197 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ -11.50178, 1.974329, -116.153297 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ -21.085489, 4.642379, -15.85263 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "bone_kaneki_56"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_57"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_58"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_59"
+														origin = [ 8.165005, -32.53548, -23.052999 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ 14.85672, 11.01809, -134.808197 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ 11.50178, 1.974327, -116.153397 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ 21.085489, 4.642369, -15.85263 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -1.949861, 0.000001, 297.091492 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "bone_kaneki_60"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "bone_kaneki_61"
+								children = 
+								[
+									{
+										_class = "Bone"
+										name = "bone_kaneki_62"
+										children = 
+										[
+											{
+												_class = "Bone"
+												name = "bone_kaneki_63"
+												children = 
+												[
+													{
+														_class = "Bone"
+														name = "bone_kaneki_64"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_65"
+																origin = [ 0.133524, -3.85331, 15.75208 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ 0.000002, 10.96892, 66.81665 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+													{
+														_class = "Bone"
+														name = "bone_kaneki_66"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_67"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_68"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_69"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_70"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_71"
+																								origin = [ 2.256149, -3.408739, -5.743088 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ 5.535561, -13.13007, -17.33618 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_72"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_73"
+																								origin = [ 1.349106, -0.29388, -10.34785 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ -7.690178, -9.295069, -27.191071 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_74"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_75"
+																								origin = [ -0.469566, 0.851742, -9.241287 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ -6.257446, 0.647104, -27.81786 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ -18.025221, -4.867388, -56.077728 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ -23.13236, 7.02977, -70.03894 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ -11.51681, 15.37805, 7.731506 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ -32.396751, 2.639798, 36.094639 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+													{
+														_class = "Bone"
+														name = "bone_kaneki_76"
+														children = 
+														[
+															{
+																_class = "Bone"
+																name = "bone_kaneki_77"
+																children = 
+																[
+																	{
+																		_class = "Bone"
+																		name = "bone_kaneki_78"
+																		children = 
+																		[
+																			{
+																				_class = "Bone"
+																				name = "bone_kaneki_79"
+																				children = 
+																				[
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_80"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_81"
+																								origin = [ -2.256203, -3.408756, -5.743134 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ -6.785049, -13.74469, -18.450029 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_82"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_83"
+																								origin = [ -1.349274, -0.293902, -17.191019 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ 6.440712, -9.909693, -21.46207 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																					{
+																						_class = "Bone"
+																						name = "bone_kaneki_84"
+																						children = 
+																						[
+																							{
+																								_class = "Bone"
+																								name = "bone_kaneki_85"
+																								origin = [ -0.428116, 0.778235, -8.587494 ]
+																								angles = [ 0.0, 0.0, 0.0 ]
+																								do_not_discard = true
+																							},
+																						]
+																						origin = [ 5.905594, 0.105969, -29.58556 ]
+																						angles = [ 0.0, 0.0, 0.0 ]
+																						do_not_discard = true
+																					},
+																				]
+																				origin = [ 19.39473, -5.610777, -53.920959 ]
+																				angles = [ -0.0, 0.0, 0.0 ]
+																				do_not_discard = true
+																			},
+																		]
+																		origin = [ 23.01227, 8.387735, -71.081879 ]
+																		angles = [ -0.0, -0.0, 0.0 ]
+																		do_not_discard = true
+																	},
+																]
+																origin = [ 11.51682, 15.37803, 7.731476 ]
+																angles = [ -0.0, 0.0, -0.0 ]
+																do_not_discard = true
+															},
+														]
+														origin = [ 32.396751, 2.639781, 36.094601 ]
+														angles = [ -0.0, 0.0, -0.0 ]
+														do_not_discard = true
+													},
+												]
+												origin = [ -0.0, 2.39887, 13.94055 ]
+												angles = [ 0.0, 0.0, 0.0 ]
+												do_not_discard = true
+											},
+										]
+										origin = [ 0.0, 3.155888, 16.939119 ]
+										angles = [ -0.0, 0.0, 0.0 ]
+										do_not_discard = true
+									},
+								]
+								origin = [ -0.000001, -2.91917, 10.59122 ]
+								angles = [ 0.0, -0.0, -0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ -0.863238, 0.000001, 310.145386 ]
+						angles = [ 0.0, 89.999992, -0.000005 ]
+						do_not_discard = true
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		document_sub_type = "ModelDocSubType_None"
+	}
+}

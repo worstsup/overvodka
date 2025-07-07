@@ -188,6 +188,7 @@
                                 <Button id="StoreTab_Skins" class="StoreSubTabButton" onactivate="Store.SwitchCategory('skins')"><Label text="#Store_Category_Skins" /></Button>
                                 <Button id="StoreTab_Effects" class="StoreSubTabButton" onactivate="Store.SwitchCategory('effects')"><Label text="#Store_Category_Effects" /></Button>
                                 <Button id="StoreTab_Pets" class="StoreSubTabButton" onactivate="Store.SwitchCategory('pets')"><Label text="#Store_Category_Pets" /></Button>
+                                <Button id="StoreTab_Prime" class="StoreSubTabButton" onactivate="Store.SwitchCategory('prime')"><Label text="#Store_Category_Prime" /></Button>
                             </Panel>
                             <Panel id="CoinBalancePanel">
                                 <Label id="CoinBalanceLabel" text="0" />
@@ -198,6 +199,7 @@
                             <Panel id="StoreItems_Skins" class="StoreItemGrid" />
                             <Panel id="StoreItems_Effects" class="StoreItemGrid" />
                             <Panel id="StoreItems_Pets" class="StoreItemGrid" />
+                            <Panel id="StoreItems_Prime" class="StoreItemGrid" />
                         </Panel>
                     </Panel>
                 </Panel>

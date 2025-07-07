@@ -3,11 +3,14 @@ if Store == nil then
 end
 
 Store.Items = {
-    skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 500, image = "file://{images}/custom_game/subscribe_button.png" },
-    skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 750, image = "file://{images}/custom_game/tg_icon.png" },
-    effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 300, image = "file://{images}/custom_game/subscribe_button.png" },
-    effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 400, image = "file://{images}/custom_game/tg_icon.png" },
+    skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 500, image = "file://{images}/custom_game/store/skins/skin_1.png", hero = "npc_dota_hero_ursa", modifier = "modifier_overvodka_store_skin_1" },
+    skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 750, image = "file://{images}/custom_game/store/skins/skin_2.png", hero = "npc_dota_hero_ancient_apparition", modifier = "modifier_overvodka_store_skin_2" },
+    skin_3 = { id = "skin_3", name = "#Store_Item_skin_3_name", type = "skins", price = 100, image = "file://{images}/custom_game/store/skins/skin_3.png", hero = "npc_dota_hero_axe", modifier = "modifier_overvodka_store_skin_3" },
+    effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 300, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
+    effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 400, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 1000, image = "file://{images}/custom_game/subscribe_button.png" },
+    prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 100, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
+    prime_week = { id = "prime_week", name = "#Store_Item_prime_week_name", type = "prime", price = 500, duration = "week", image = "file://{images}/custom_game/store/effects/effect_1.png" }
 }
 
 function Store:Init()
@@ -28,11 +31,12 @@ end
 function Store:OnNPCSpawned(event)
     if not event.entindex then return end
     local npc = EntIndexToHScript(event.entindex)
-    if npc:IsRealHero() then
+    if npc:IsHero() and not DebugPanel:IsDummy(npc) then
         local playerID = npc:GetPlayerOwnerID()
         if playerID >= 0 then
             Timers:CreateTimer(0.1, function()
-                self:ApplyEquippedEffect(playerID)
+                self:ApplyEquippedEffect(playerID, npc)
+                self:ApplyEquippedSkin(playerID, npc)
             end)
         end
     end
@@ -58,11 +62,16 @@ function Store:FetchPlayerData(playerID)
             self.playerData[playerID] = {
                 coins = body.coins or 0,
                 inventory = self:ArrayToSet(body.inventory or {}),
-                equipped_effect = body.equipped_effect
+                equipped_effect = body.equipped_effect,
+                equipped_skin = body.equipped_skin,
             }
 
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
-            self:ApplyEquippedEffect(playerID)
+            local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+            if hero then
+                self:ApplyEquippedEffect(playerID, hero)
+                self:ApplyEquippedSkin(playerID, hero)
+            end
         end
     )
 end
@@ -73,13 +82,27 @@ function Store:OnEquipItem(event)
     local item = self.Items[itemID]
     local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
     if not item or steamID == "0" then return end
+    
+    local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+    if item.type == "skins" and hero and hero:GetUnitName() ~= item.hero then
+        SendErrorToPlayer(playerID, "#Store_NotYourHero", "UUI_SOUNDS.NoGold")
+        return
+    end
+    
     self:SendRequest(
         SERVER_URL .. "equip_item",
         { SteamID = steamID, item_id = itemID, item_type = item.type },
         function(err, body)
             if err or not body.success then return end
-            self.playerData[playerID].equipped_effect = body.equipped_item
-            self:ApplyEquippedEffect(playerID)
+            
+            if item.type == "effects" then
+                self.playerData[playerID].equipped_effect = itemID
+                self:ApplyEquippedEffect(playerID)
+            elseif item.type == "skins" then
+                self.playerData[playerID].equipped_skin = itemID
+                self:ApplyEquippedSkin(playerID)
+            end
+            
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
         end
     )
@@ -100,28 +123,59 @@ function Store:OnUnequipItem(event)
 
             if body.unequipped_type == "effects" then
                 self.playerData[playerID].equipped_effect = nil
+                self:ApplyEquippedEffect(playerID)
+            elseif body.unequipped_type == "skins" then  -- NEW: Handle skin unequip
+                self.playerData[playerID].equipped_skin = nil
+                self:ApplyEquippedSkin(playerID)
             end
-            -- Add logic for other types here later
             
-            self:ApplyEquippedEffect(playerID)
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
         end
     )
 end
 
-function Store:ApplyEquippedEffect(playerID)
-    local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-    if not hero or not self.playerData[playerID] then return end
-    local equippedID = self.playerData[playerID].equipped_effect
+function Store:ApplyEquippedEffect(playerID, unit)
+    local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
+    if not hero or not hero:IsHero() then return end
+    
     for id, itemData in pairs(self.Items) do
-        if itemData.type == "effects" and hero:HasModifier("modifier_overvodka_store_" .. id) then
-            hero:RemoveModifierByName("modifier_overvodka_store_" .. id)
+        if itemData.type == "effects" then
+            local modifierName = itemData.modifier
+            if hero:HasModifier(modifierName) then
+                hero:RemoveModifierByName(modifierName)
+            end
         end
     end
-    if equippedID then
-        local modifierName = "modifier_overvodka_store_" .. equippedID
+    
+    local equippedID = self.playerData[playerID] and self.playerData[playerID].equipped_effect
+    if equippedID and self.Items[equippedID] and self.Items[equippedID].modifier then
+        local modifierName = self.Items[equippedID].modifier
         hero:AddNewModifier(hero, nil, modifierName, {})
-        print("[Store] Applied effect " .. modifierName .. " to player " .. playerID)
+        print("[Store] Applied effect to unit: " .. modifierName)
+    end
+end
+
+function Store:ApplyEquippedSkin(playerID, unit)
+    local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
+    if not hero or not hero:IsHero() then return end
+    
+    for id, itemData in pairs(self.Items) do
+        if itemData.type == "skins" then
+            local modifierName = itemData.modifier
+            if hero:HasModifier(modifierName) then
+                hero:RemoveModifierByName(modifierName)
+            end
+        end
+    end
+    
+    local equippedID = self.playerData[playerID] and self.playerData[playerID].equipped_skin
+    if equippedID and self.Items[equippedID] and self.Items[equippedID].modifier then
+        local skinItem = self.Items[equippedID]
+        if hero:GetUnitName() == skinItem.hero then
+            local modifierName = skinItem.modifier
+            hero:AddNewModifier(hero, nil, modifierName, {})
+            print("[Store] Applied skin to unit: " .. modifierName)
+        end
     end
 end
 
@@ -138,27 +192,32 @@ function Store:OnBuyItem(event)
         return
     end
 
-    self:SendRequest(
-        SERVER_URL .. "buy_item",
-        { SteamID = steamID, item_id = itemID },
-        function(err, body)
-            local player = PlayerResource:GetPlayer(playerID)
-            if not player then return end
+    local endpoint
+    local payload
+    
+    if item.type == "prime" then
+        endpoint = SERVER_URL .. "buy_prime"
+        payload = { SteamID = steamID, price = item.price, duration = item.duration }
+    else
+        endpoint = SERVER_URL .. "buy_item"
+        payload = { SteamID = steamID, item_id = itemID }
+    end
 
-            if err or not (body and body.success) then
-                local errorMsg = (body and body.error) or (err and err.error) or "Server error"
-                CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = false, error = errorMsg })
-                return
-            end
-            
-            self.playerData[playerID] = self.playerData[playerID] or {}
-            self.playerData[playerID].coins = body.new_balance
-            self.playerData[playerID].inventory = self:ArrayToSet(body.inventory or {})
-            
-            CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
-            CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", {success = true,new_balance = body.new_balance})
+    self:SendRequest(endpoint, payload, function(err, body)
+        local player = PlayerResource:GetPlayer(playerID)
+        if not player then return end
+
+        if err or not (body and body.success) then
+            local errorMsg = (body and body.error) or (err and err.error) or "Server error"
+            CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = false, error = errorMsg })
+            return
         end
-    )
+        if Server and Server.RefreshPlayerProfile then
+            Server:RefreshPlayerProfile(playerID)
+        end
+        self:FetchPlayerData(playerID)
+        CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = true, new_balance = body.new_balance })
+    end)
 end
 
 function Store:ArrayToSet(arr)

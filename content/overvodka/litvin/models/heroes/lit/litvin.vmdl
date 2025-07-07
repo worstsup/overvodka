@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc39:version{1ceecb0d-4093-4729-ab18-b76886c64cde} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc40:version{da0ab1f8-9722-4910-94b8-10b6a08c0934} -->
 {
 	rootNode = 
 	{
@@ -470,12 +470,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/lit_run.fbx"
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = -1
 						framerate = 25.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 					{
 						_class = "AnimFile"
@@ -493,12 +495,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/lit_idle.fbx"
 						import_bone_scales = false
 						start_frame = 0
 						end_frame = -1
 						framerate = -1.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 					{
 						_class = "AnimFile"
@@ -516,12 +520,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/lit_punch.fbx"
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = -1
-						framerate = 35.0
+						framerate = 45.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 					{
 						_class = "AnimFile"
@@ -554,12 +560,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/lit_die.fbx"
 						import_bone_scales = false
 						start_frame = 19
 						end_frame = -1
 						framerate = -1.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 					{
 						_class = "AnimFile"
@@ -577,12 +585,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/conditions.fbx"
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = 120
 						framerate = -1.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 					{
 						_class = "AnimFile"
@@ -600,12 +610,14 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						animgraph_additive = false
+						delete_from_compiled_model = false
 						source_filename = "litvin/models/heroes/lit/lit_idle.fbx"
 						import_bone_scales = false
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
 						reverse = false
+						additional_anim_files = [  ]
 					},
 				]
 				default_root_bone_name = ""
@@ -628,7 +640,7 @@
 						name = "attach_attack1"
 						parent_bone = "LeftHandMiddle2"
 						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 90.0, -180.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -637,7 +649,7 @@
 						name = "attach_attack2"
 						parent_bone = "RightHandMiddle2"
 						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 90.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},

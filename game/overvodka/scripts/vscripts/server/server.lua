@@ -382,7 +382,9 @@ function Server:OnNPCSpawned(event)
     local RealHero = GetRealHero(unit)
     if RealHero and RealHero:IsRealHero() and unit:IsHero() and not DebugPanel:IsDummy(unit) then
 		local PlayerID = unit:GetPlayerID()
-
+        if self:IsPlayerSubscribed(PlayerID) then
+            self:ApplyPrimeBenefits(PlayerID)
+        end
 		if not bIsRespawn and self:IsPlayerSubscribed(PlayerID) then
 			unit:AddAbility("plus_high_five"):SetLevel(1)
 			unit:AddAbility("seasonal_ti11_balloon"):SetLevel(1)
@@ -438,6 +440,53 @@ function Server:OnPlayerConnected(event)
                 self:CreatePlayerProfile(ResultData, event.PlayerID, SteamID)
             end, true)
         end
+    end
+end
+
+
+function Server:RefreshPlayerProfile(PlayerID)
+    if not PlayerResource:IsValidPlayerID(PlayerID) then return end
+    
+    local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
+    if SteamID == 0 then return end
+
+    cprint('[Server] Refreshing profile for PlayerID ' .. PlayerID)
+    
+    local CurrentCategory = GetCurrentCategory()
+    self:SendRequest(SERVER_URL.."get_player_profile_chatwheel", {SteamID=SteamID, Category=CurrentCategory}, function(ResultData)
+        self:CreatePlayerProfile(ResultData, PlayerID, SteamID)
+        self:ApplyPrimeBenefits(PlayerID)
+    end, true)
+end
+
+function Server:ApplyPrimeBenefits(PlayerID)
+    if not self:IsPlayerSubscribed(PlayerID) then return end
+
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    if not hero or hero:IsNull() then return end
+
+    if not hero:HasAbility("plus_high_five") then
+        hero:AddAbility("plus_high_five"):SetLevel(1)
+    end
+    if not hero:HasAbility("seasonal_ti11_balloon") then
+        hero:AddAbility("seasonal_ti11_balloon"):SetLevel(1)
+    end
+    if not hero:HasAbility("seasonal_ti11_duel") then
+        hero:AddAbility("seasonal_ti11_duel"):SetLevel(1)
+    end
+    if not hero:HasModifier("modifier_subscriber_effect") then
+        hero:AddNewModifier(hero, nil, "modifier_subscriber_effect", {})
+    end
+    if hero:GetUnitName() == "npc_dota_hero_morphling" and not hero:HasModifier("modifier_sans_arcana") then
+        hero:AddNewModifier(unit, nil, "modifier_sans_arcana", {})
+    end
+    if hero:GetUnitName() == "npc_dota_hero_void_spirit" and not hero:HasModifier("modifier_invincible_arcana") then
+        hero:AddNewModifier(unit, nil, "modifier_invincible_arcana", {})
+    end
+    
+    if self.Players[PlayerID] and self.Players[PlayerID].last_time_double_show == 0 then
+        self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
+        CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_double_rating_time", {time = self.Players[PlayerID].last_time_double_show})
     end
 end
 
