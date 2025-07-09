@@ -236,8 +236,8 @@
                 </Panel>
             </Panel>
         </Panel>
-        <Panel id="OvervodkaHamster" />
         <Panel id="TipPreview" />
         <Panel id="DoubleRatingPreview" />
+        <Panel id="OvervodkaHamster" />
     </Panel>
 </root>

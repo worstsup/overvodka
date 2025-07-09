@@ -7,31 +7,31 @@ Quests.SERVER_MAX_ATTEMPTS = 3
 Quests.SERVER_ATTEMPT_INTERVAL = 2
 
 Quests.QuestTypes = {
-    {id="kills",name="#Quest_Kills_Title",description="#Quest_Kills_Desc",max=50,event="kills"},
-    {id="creepKills",name="#Quest_CreepKills_Title",description="#Quest_CreepKills_Desc",max=30,event="creepKills"},
-    {id="magicDamage",name="#Quest_MagicDamage_Title",description="#Quest_MagicDamage_Desc",max=25000,event="magicDamage"},
-    {id="physDamage",name="#Quest_PhysDamage_Title",description="#Quest_PhysDamage_Desc",max=25000,event="physDamage"},
-    {id="goldAmount",name="#Quest_GoldAmount_Title",description="#Quest_GoldAmount_Desc",max=50,event="goldAmount"},
-    {id="chestAmount",name="#Quest_ChestAmount_Title",description="#Quest_ChestAmount_Desc",max=5,event="chestAmount"},
-    {id="chipsAmount",name="#Quest_ChipsAmount_Title",description="#Quest_ChipsAmount_Desc",max=5,event="chipsAmount"},
-    {id="leshAmount",name="#Quest_LeshAmount_Title",description="#Quest_LeshAmount_Desc",max=3,event="leshAmount"},
-    {id="chapmanAmount",name="#Quest_ChapmanAmount_Title",description="#Quest_ChapmanAmount_Desc",max=5,event="chapmanAmount"},
-    {id="cubinAmount",name="#Quest_CubinAmount_Title",description="#Quest_CubinAmount_Desc",max=2,event="cubinAmount"},
-    {id="byebyeAmount",name="#Quest_ByeByeAmount_Title",description="#Quest_ByeByeAmount_Desc",max=3,event="byebyeAmount"},
-    {id="hamsterGold",name="#Quest_HamsterGold_Title",description="#Quest_HamsterGold_Desc",max=5000,event="hamsterGold"},
-    {id="midTime",name="#Quest_MidTime_Title",description="#Quest_MidTime_Desc",max=1200,event="midTime"},
-    {id="kaskaAmount",name="#Quest_KaskaAmount_Title",description="#Quest_KaskaAmount_Desc",max=50,event="kaskaAmount"},
-    {id="armatureAmount",name="#Quest_ArmatureAmount_Title",description="#Quest_ArmatureAmount_Desc",max=10,event="armatureAmount"},
-    {id="bablokradAmount",name="#Quest_BablokradAmount_Title",description="#Quest_BablokradAmount_Desc",max=1500,event="bablokradAmount"},
-    {id="goldenrainTime",name="#Quest_GoldenRainTime_Title",description="#Quest_GoldenRainTime_Desc",max=30,event="goldenrainTime"},
-    {id="cookieHeal",name="#Quest_CookieHeal_Title",description="#Quest_CookieHeal_Desc",max=3000,event="cookieHeal"},
-    {id="oboyudnoDamage",name="#Quest_OboyudnoDamage_Title",description="#Quest_OboyudnoDamage_Desc",max=10000,event="oboyudnoDamage"},
-    {id="charonHeal",name="#Quest_CharonHeal_Title",description="#Quest_CharonHeal_Desc",max=2000,event="charonHeal"},
-    {id="minionAmount",name="#Quest_MinionAmount_Title",description="#Quest_MinionAmount_Desc",max=15,event="minionAmount"},
-    {id="playArsen",name="#Quest_PlayArsen_Title",description="#Quest_PlayArsen_Desc",max=1,event="playArsen"},
-    {id="playEbanko",name="#Quest_PlayEbanko_Title",description="#Quest_PlayEbanko_Desc",max=1,event="playEbanko"},
-    {id="playBratishkin",name="#Quest_PlayBratishkin_Title",description="#Quest_PlayBratishkin_Desc",max=1,event="playBratishkin"},
-    {id="playDrake",name="#Quest_PlayDrake_Title",description="#Quest_PlayDrake_Desc",max=1,event="playDrake"},
+    {id="kills",name="#Quest_Kills_Title",description="#Quest_Kills_Desc",max=50,reward=15,event="kills"},
+    {id="creepKills",name="#Quest_CreepKills_Title",description="#Quest_CreepKills_Desc",max=30,reward=15,event="creepKills"},
+    {id="magicDamage",name="#Quest_MagicDamage_Title",description="#Quest_MagicDamage_Desc",max=25000,reward=15,event="magicDamage"},
+    {id="physDamage",name="#Quest_PhysDamage_Title",description="#Quest_PhysDamage_Desc",max=25000,reward=15,event="physDamage"},
+    {id="goldAmount",name="#Quest_GoldAmount_Title",description="#Quest_GoldAmount_Desc",max=50,reward=15,event="goldAmount"},
+    {id="chestAmount",name="#Quest_ChestAmount_Title",description="#Quest_ChestAmount_Desc",max=5,reward=15,event="chestAmount"},
+    {id="chipsAmount",name="#Quest_ChipsAmount_Title",description="#Quest_ChipsAmount_Desc",max=5,reward=15,event="chipsAmount"},
+    {id="leshAmount",name="#Quest_LeshAmount_Title",description="#Quest_LeshAmount_Desc",max=3,reward=15,event="leshAmount"},
+    {id="chapmanAmount",name="#Quest_ChapmanAmount_Title",description="#Quest_ChapmanAmount_Desc",max=5,reward=15,event="chapmanAmount"},
+    {id="cubinAmount",name="#Quest_CubinAmount_Title",description="#Quest_CubinAmount_Desc",max=2,reward=15,event="cubinAmount"},
+    {id="byebyeAmount",name="#Quest_ByeByeAmount_Title",description="#Quest_ByeByeAmount_Desc",max=3,reward=15,event="byebyeAmount"},
+    {id="hamsterGold",name="#Quest_HamsterGold_Title",description="#Quest_HamsterGold_Desc",max=5000,reward=15,event="hamsterGold"},
+    {id="midTime",name="#Quest_MidTime_Title",description="#Quest_MidTime_Desc",max=1200,reward=15,event="midTime"},
+    {id="kaskaAmount",name="#Quest_KaskaAmount_Title",description="#Quest_KaskaAmount_Desc",max=50,reward=15,event="kaskaAmount"},
+    {id="armatureAmount",name="#Quest_ArmatureAmount_Title",description="#Quest_ArmatureAmount_Desc",max=10,reward=15,event="armatureAmount"},
+    {id="bablokradAmount",name="#Quest_BablokradAmount_Title",description="#Quest_BablokradAmount_Desc",max=1500,reward=15,event="bablokradAmount"},
+    {id="goldenrainTime",name="#Quest_GoldenRainTime_Title",description="#Quest_GoldenRainTime_Desc",max=30,reward=15,event="goldenrainTime"},
+    {id="cookieHeal",name="#Quest_CookieHeal_Title",description="#Quest_CookieHeal_Desc",max=3000,reward=15,event="cookieHeal"},
+    {id="oboyudnoDamage",name="#Quest_OboyudnoDamage_Title",description="#Quest_OboyudnoDamage_Desc",max=10000,reward=15,event="oboyudnoDamage"},
+    {id="charonHeal",name="#Quest_CharonHeal_Title",description="#Quest_CharonHeal_Desc",max=2000,reward=15,event="charonHeal"},
+    {id="minionAmount",name="#Quest_MinionAmount_Title",description="#Quest_MinionAmount_Desc",max=15,reward=15,event="minionAmount"},
+    {id="playArsen",name="#Quest_PlayArsen_Title",description="#Quest_PlayArsen_Desc",max=1,reward=15,event="playArsen"},
+    {id="playEbanko",name="#Quest_PlayEbanko_Title",description="#Quest_PlayEbanko_Desc",max=1,reward=15,event="playEbanko"},
+    {id="playBratishkin",name="#Quest_PlayBratishkin_Title",description="#Quest_PlayBratishkin_Desc",max=1,reward=15,event="playBratishkin"},
+    {id="playDrake",name="#Quest_PlayDrake_Title",description="#Quest_PlayDrake_Desc",max=1,reward=15,event="playDrake"},
 }
 
 function Quests:Init()
@@ -122,6 +122,7 @@ function Quests:InitializeForPlayer(playerID)
     local pd = {
         activeQuests = {},
         progress = {},
+        claimed = {},
         questDate = nil,
         dirty = false
     }
@@ -130,9 +131,11 @@ function Quests:InitializeForPlayer(playerID)
 end
 
 function Quests:UpdateNetTable(playerID)
+    if not self.playerData[playerID] then return end
     CustomNetTables:SetTableValue("quests", "player_" .. playerID, {
         activeQuests = self.playerData[playerID].activeQuests,
-        progress = self.playerData[playerID].progress
+        progress = self.playerData[playerID].progress,
+        claimed = self.playerData[playerID].claimed 
     })
 end
 
@@ -171,22 +174,53 @@ end
 function Quests:IncrementQuest(playerID, questId, amount)
     amount = amount or 1
     local pd = self.playerData[playerID]
-    if not pd then return end
-    if not pd.activeQuests[questId] then
-        return
-    end
+    if not pd or not pd.activeQuests[questId] then return end
+    
     local current = pd.progress[questId] or 0
     local maxVal  = self:GetQuestMax(questId)
     if not maxVal then return end
-    if current >= maxVal then
-        return
-    end
+
+    if current >= maxVal then return end
+    
     local newVal = math.min(current + amount, maxVal)
-    if newVal > current then
-        pd.progress[questId] = newVal
-        pd.dirty = true
-        self:UpdateNetTable(playerID)
+    pd.progress[questId] = newVal
+    pd.dirty = true
+    
+    if newVal >= maxVal and not pd.claimed[questId] then
+        pd.claimed[questId] = true
+        
+        local reward = self:GetQuestReward(questId)
+        if reward > 0 then
+            local steamID = PlayerResource:GetSteamAccountID(playerID)
+            if steamID ~= 0 then
+                self:SendRequest(
+                    SERVER_URL .. "update_balance",
+                    { SteamID = steamID, amount = reward },
+                    function(err, body)
+                        if err or not (body and body.success) then
+                            print("[Quests] Failed to grant reward to player " .. playerID)
+                            return
+                        end
+                        
+                        print("[Quests] Granted " .. reward .. " coins to player " .. playerID)
+                        if Store and Store.FetchPlayerData then
+                            Store:FetchPlayerData(playerID)
+                        end
+                    end
+                )
+            end
+        end
     end
+    self:UpdateNetTable(playerID)
+end
+
+function Quests:GetQuestReward(questId)
+    for _, q in ipairs(self.QuestTypes) do
+        if q.id == questId then
+            return q.reward or 0
+        end
+    end
+    return 0
 end
 
 function Quests:OnEntityKilled(event)

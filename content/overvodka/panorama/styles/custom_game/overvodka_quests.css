@@ -162,3 +162,37 @@
 .QuestRow.Completed .QuestTitle {
     color: #a0d878;
 }
+
+/* new */
+.QuestReward {
+    flow-children: right;
+    horizontal-align: right;
+    vertical-align: center;
+    visibility: collapse; /* Hide by default */
+}
+
+.QuestRewardLabel {
+    color: #ffd700; /* Gold color */
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #000;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+
+.QuestRewardIcon {
+    width: 32px;
+    height: 32px;
+    background-image: url("file://{images}/custom_game/subscribe_button.png"); /* Use your coin icon */
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: center;
+}
+
+.QuestRow.Claimed .QuestProgress {
+    visibility: collapse; /* Hide the progress bar when claimed */
+}
+
+.QuestRow.Claimed .QuestReward {
+    visibility: visible; /* Show the reward when claimed */
+}

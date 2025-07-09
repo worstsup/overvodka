@@ -125,7 +125,7 @@ function Store:OnUnequipItem(event)
             if body.unequipped_type == "effects" then
                 self.playerData[playerID].equipped_effect = nil
                 self:ApplyEquippedEffect(playerID)
-            elseif body.unequipped_type == "skins" then  -- NEW: Handle skin unequip
+            elseif body.unequipped_type == "skins" then
                 self.playerData[playerID].equipped_skin = nil
                 self:ApplyEquippedSkin(playerID)
             end

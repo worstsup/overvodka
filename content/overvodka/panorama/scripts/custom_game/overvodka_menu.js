@@ -24,9 +24,9 @@ var Menu = {};
     };
 
     $.CreatePanel("DOTAScenePanel", ModelPreview, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
-    ModelPreview.style.visibility = "collapse";
+    ModelPreview.SetHasClass("Visible", false);
     $.CreatePanel("DOTAScenePanel", ModelPreview2, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
-    ModelPreview2.style.visibility = "collapse";
+    ModelPreview2.SetHasClass("Visible", false);
     
     let isMenuOpen = false;
     let currentTab = null;
@@ -39,8 +39,8 @@ var Menu = {};
         if (!isMenuOpen) {
             TipPreview.SetHasClass("Visible", false);
             DoubleRatingPreview.SetHasClass("Visible", false);
-            ModelPreview.style.visibility = "collapse";
-            ModelPreview2.style.visibility = "collapse";
+            ModelPreview.SetHasClass("Visible", false);
+            ModelPreview2.SetHasClass("Visible", false);
         }
         Game.EmitSound("ui_general_button_click");
 
@@ -48,8 +48,8 @@ var Menu = {};
             Menu.SwitchTab('Leaderboard');
         }
         if (currentTab === 'Prime' && isMenuOpen) {
-            ModelPreview.style.visibility = "visible";
-            ModelPreview2.style.visibility = "visible";
+            ModelPreview.SetHasClass("Visible", true);
+            ModelPreview2.SetHasClass("Visible", true);
             TipPreview.SetHasClass("Visible", true);
             DoubleRatingPreview.SetHasClass("Visible", true);
         }
@@ -62,8 +62,8 @@ var Menu = {};
         currentTab = tabName;
         
         const isPrimeOpen = tabName === 'Prime';
-        ModelPreview.style.visibility = isPrimeOpen ? "visible" : "collapse";
-        ModelPreview2.style.visibility = isPrimeOpen ? "visible" : "collapse";
+        ModelPreview.SetHasClass("Visible", isPrimeOpen);
+        ModelPreview2.SetHasClass("Visible", isPrimeOpen);
         TipPreview.SetHasClass("Visible", isPrimeOpen);
         DoubleRatingPreview.SetHasClass("Visible", isPrimeOpen);
 

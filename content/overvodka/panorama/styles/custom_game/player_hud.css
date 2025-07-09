@@ -441,7 +441,17 @@
     height: 900px;
     align: center center;
     margin-top: 200px;
-    margin-right: 650px;
+    margin-right: 700px;
+    opacity: 0;
+    transform: translateX(200px) translateY(0px);
+    transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
+}
+
+#ModelPreview.Visible{
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
 }
 
 #ModelPreview2{
@@ -451,6 +461,16 @@
     vertical-align: center;
     margin-top: 200px;
     margin-right: -280px;
+    opacity: 0;
+    transform: translateX(-200px) translateY(0px);
+    transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
+}
+
+#ModelPreview2.Visible{
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
 }
 
 #ChatWheelPreview{
@@ -484,11 +504,18 @@
     margin-left: -50px;
     margin-top: 40px;
     opacity: 0;
+    transform: translateX(0px) translateY(20px);
+    transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
+    visibility: collapse;
     align: center top;
 }
 
 #OvervodkaHamster.Visible{
     opacity: 1;
+    transform: translateY(0px);
+    visibility: visible;
 }
 
 #TipPreview{
@@ -501,17 +528,21 @@
     background-size: contain;
 
     align: right top;
-
+    transform: translateX(-100px) translateY(100px) rotateZ(10deg);
+    transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
     margin-right: 570px;
     margin-top: 160px;
     opacity: 0;
-    transform: rotateZ(10deg);
 
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.5);
 }
 
 #TipPreview.Visible{
     opacity: 1;
+    transform: translateX(0px) translateY(0px) rotateZ(10deg);
+    visibility: visible;
 }
 
 #DoubleRatingPreview{
@@ -528,11 +559,16 @@
     margin-left: 600px;
     margin-top: 120px;
     opacity: 0;
-    transform: rotateZ(-10deg);
+    transform: translateX(100px) translateY(100px) rotateZ(-10deg);
+    transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
 }
 
 #DoubleRatingPreview.Visible{
     opacity: 1;
+    transform: translateX(0px) translateY(0px) rotateZ(-10deg);
+    visibility: visible;
 }
 
 .PreviewPanelSize{

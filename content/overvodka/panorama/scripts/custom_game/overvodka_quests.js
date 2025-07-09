@@ -19,17 +19,7 @@ function CloseQuests() {
 
 function InitializeQuests() {
     if (INITIALIZED) return;
-    
-    // Check for required data
-    if (QUEST_CONFIG.length === 0) {
-        $.Msg("[Quests] Not ready to initialize: missing quest config");
-        return;
-    }
-    
-    if (!PLAYER_DATA || !PLAYER_DATA.activeQuests || !PLAYER_DATA.progress) {
-        $.Msg("[Quests] Not ready to initialize: missing or incomplete player data");
-        return;
-    }
+    if (QUEST_CONFIG.length === 0 || !PLAYER_DATA || !PLAYER_DATA.activeQuests) return;
     
     const questList = $("#QuestList");
     if (!questList) return;
@@ -37,20 +27,18 @@ function InitializeQuests() {
     questList.RemoveAndDeleteChildren();
     QUESTS = {};
     
-    // Create UI for active quests
     const activeQuests = PLAYER_DATA.activeQuests;
     const progressData = PLAYER_DATA.progress;
-    
+    const claimedData = PLAYER_DATA.claimed || {}; // Get claimed data
+
     for (const questId in activeQuests) {
         if (!activeQuests[questId]) continue;
         
         const quest = QUEST_CONFIG.find(q => q.id === questId);
-        if (!quest) {
-            $.Msg(`[Quests] Quest config not found for: ${questId}`);
-            continue;
-        }
+        if (!quest) continue;
         
         const progress = progressData[questId] || 0;
+        const isClaimed = claimedData[questId] || false;
         
         // Create UI elements
         const panel = $.CreatePanel('Panel', questList, quest.id);
@@ -58,27 +46,29 @@ function InitializeQuests() {
         
         const questInfo = $.CreatePanel('Panel', panel, '');
         questInfo.AddClass("QuestInfo");
-        
         const title = $.CreatePanel('Label', questInfo, '');
         title.AddClass("QuestTitle");
         title.text = $.Localize(quest.name);
-        
         const desc = $.CreatePanel('Label', questInfo, '');
         desc.AddClass("QuestDescription");
         desc.text = $.Localize(quest.description);
         
+        // Progress Panel
         const questProgress = $.CreatePanel('Panel', panel, '');
         questProgress.AddClass("QuestProgress");
-        
         const progressBar = $.CreatePanel('ProgressBar', questProgress, '');
         progressBar.AddClass("QuestProgressBar");
-        progressBar.min = 0;
-        progressBar.max = quest.max;
-        progressBar.value = progress;
-        
         const progressLabel = $.CreatePanel('Label', progressBar, '');
         progressLabel.AddClass("QuestProgressLabel");
-        progressLabel.text = `${progress} / ${quest.max}`;
+        
+        // *** NEW: Create Reward Panel ***
+        const questReward = $.CreatePanel('Panel', panel, '');
+        questReward.AddClass("QuestReward");
+        const rewardLabel = $.CreatePanel('Label', questReward, '');
+        rewardLabel.AddClass("QuestRewardLabel");
+        rewardLabel.text = `+${quest.reward || 15}`;
+        const rewardIcon = $.CreatePanel('Panel', questReward, '');
+        rewardIcon.AddClass("QuestRewardIcon");
         
         QUESTS[quest.id] = {
             panel: panel,
@@ -87,26 +77,27 @@ function InitializeQuests() {
             maxValue: quest.max
         };
         
+        // Set initial state
+        progressBar.max = quest.max;
+        progressBar.value = progress;
+        progressLabel.text = `${progress} / ${quest.max}`;
+        
         if (progress >= quest.max) {
             panel.AddClass("Completed");
+        }
+        if (isClaimed) {
+            panel.AddClass("Claimed");
         }
     }
     
     INITIALIZED = true;
-    $.Msg("[Quests] UI fully initialized");
 }
 
-function UpdateQuestProgress(questId, value) {
-    if (!INITIALIZED) {
-        $.Msg("[Quests] Tried to update before initialization");
-        return;
-    }
+function UpdateQuestProgress(questId, value, isClaimed) {
+    if (!INITIALIZED) return;
     
     const quest = QUESTS[questId];
-    if (!quest) {
-        $.Msg(`[Quests] UpdateQuestProgress: Unknown quest ${questId}`);
-        return;
-    }
+    if (!quest) return;
     
     const cappedValue = Math.min(value, quest.maxValue);
     quest.progressBar.value = cappedValue;
@@ -117,6 +108,9 @@ function UpdateQuestProgress(questId, value) {
     } else {
         quest.panel.RemoveClass("Completed");
     }
+
+    // Update claimed status
+    quest.panel.SetHasClass("Claimed", isClaimed);
 }
 
 function HandleConfigUpdate(value) {
@@ -137,13 +131,15 @@ function HandlePlayerUpdate(playerID, value) {
     
     if (playerID === localPlayerID) {
         PLAYER_DATA = value;
-        $.Msg("[Quests] Updated player quest data");
         
-        InitializeQuests();
-        
-        if (INITIALIZED && value.progress) {
-            for (const questId in value.progress) {
-                UpdateQuestProgress(questId, value.progress[questId]);
+        if (!INITIALIZED) {
+            InitializeQuests();
+        } else {
+            if (value.progress) {
+                for (const questId in value.progress) {
+                    const isClaimed = (value.claimed && value.claimed[questId]) || false;
+                    UpdateQuestProgress(questId, value.progress[questId], isClaimed);
+                }
             }
         }
     }

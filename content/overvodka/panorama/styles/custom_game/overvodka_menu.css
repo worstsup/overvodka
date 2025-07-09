@@ -16,9 +16,8 @@
     border-radius: 6px;
     padding: 8px 16px;
     box-shadow: 0px 0px 10px #000000;
-    transition-property: background-color, border, color;
-	transition-duration: 0.2s;
-	transition-timing-function: ease-in-out;
+    transition-property: transform;
+    transition-duration: .15s;
 }
 
 #MenuOpenButton:hover {
@@ -32,6 +31,7 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-left: 6px;
 }
 
 /* --- The Main Menu Panel --- */
@@ -47,9 +47,9 @@
     margin-top: 100px;
     /* Hide by default */
     opacity: 0;
-    transform: translateY(20px);
-    transition-property: background-color, border, color;
-	transition-duration: 0.2s;
+    transform: translateX(0px) translateY(20px);
+    transition-property: transform;
+	transition-duration: 0.1s;
 	transition-timing-function: ease-in-out;
     visibility: collapse;
 }
