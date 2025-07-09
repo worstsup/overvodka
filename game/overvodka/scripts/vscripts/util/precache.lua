@@ -141,6 +141,7 @@ PrecacheUtils.particle_folders = {
 		"particles/units/heroes/hero_troll_warlord",
 		"particles/units/heroes/hero_keeper_of_the_light",
 		"particles/econ/events/ti11/balloon",
+		"particles/zolo_eye_skin.vpcf",
 }
 
 PrecacheUtils.units = {
@@ -237,6 +238,8 @@ PrecacheUtils.models = {
 		"models/mazellov/mazellov.vmdl",
 		"models/t2x2/t2x2.vmdl",
 		"litvin/litenergy/lit_energy.vmdl",
+		"models/items/pudge/arcana/pudge_arcana_back.vmdl",
+		"zolo/materials/models/heroes/zol/mask.vmdl",
 }
 
 PrecacheUtils.sounds = {

@@ -6,6 +6,7 @@ Store.Items = {
     skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 500, image = "file://{images}/custom_game/store/skins/skin_1.png", hero = "npc_dota_hero_ursa", modifier = "modifier_overvodka_store_skin_1" },
     skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 750, image = "file://{images}/custom_game/store/skins/skin_2.png", hero = "npc_dota_hero_ancient_apparition", modifier = "modifier_overvodka_store_skin_2" },
     skin_3 = { id = "skin_3", name = "#Store_Item_skin_3_name", type = "skins", price = 100, image = "file://{images}/custom_game/store/skins/skin_3.png", hero = "npc_dota_hero_axe", modifier = "modifier_overvodka_store_skin_3" },
+    skin_4 = { id = "skin_4", name = "#Store_Item_skin_4_name", type = "skins", price = 200, image = "file://{images}/custom_game/store/skins/skin_4.png", hero = "npc_dota_hero_ogre_magi", modifier = "modifier_overvodka_store_skin_4" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 300, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 400, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 1000, image = "file://{images}/custom_game/subscribe_button.png" },

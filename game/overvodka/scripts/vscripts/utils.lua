@@ -7,6 +7,7 @@ LinkLuaModifier("modifier_overvodka_store_effect_2", "modifiers/store/modifier_o
 LinkLuaModifier("modifier_overvodka_store_skin_1", "modifiers/store/modifier_overvodka_store_skin_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_2", "modifiers/store/modifier_overvodka_store_skin_2", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_3", "modifiers/store/modifier_overvodka_store_skin_3", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_4", "modifiers/store/modifier_overvodka_store_skin_4", LUA_MODIFIER_MOTION_NONE)
 
 GAME_CATEGORY_DEFINITIONS = {
 	NONE = 0,

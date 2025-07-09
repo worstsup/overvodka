@@ -154,6 +154,7 @@
 		"Store_Item_skin_1_name"		"Литвин с Lit Energy"
 		"Store_Item_skin_2_name"		"Злой Chill Guy"
 		"Store_Item_skin_3_name"		"Macan Хуесос"
+		"Store_Item_skin_4_name"		"Гуль Иван Золо"
 
 		"Store_Item_effect_1_name"		"Золотой эффект"
 		"Store_Item_effect_2_name"		"Diretide эффект"
