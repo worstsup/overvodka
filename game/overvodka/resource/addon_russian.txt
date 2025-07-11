@@ -20,7 +20,10 @@
 		"dvoreckov_panel_close"							"Закрыть"
 		"dvoreckov_panel_list"							"Список"
 		"custom_end_screen_legend_rating"				"Рейтинг"
+		"custom_end_screen_legend_coins"				"Hamster Coins"
 		"custom_end_screen_rating_no_data"				"Нет данных"
+		"ui_debug_tool_title"							"Debug Tool"
+
 
 		"PLAYER_HUD_DoubleRating"						"Удвоить ставку рейтинга в этой игре?"
 		"PLAYER_HUD_DoubleRatingCount"					"Осталось на сегодня:"
@@ -142,6 +145,23 @@
 		"Menu_Tab_ChatWheel"			"Колесо Чата"
 		"Menu_Tab_Prime"				"Overvodka Prime"
 		"Menu_Tab_Store"				"Магазин"
+		"Menu_Tab_Vote"					"Голосование"
+
+		"Vote_Title"					"Голосование за нового героя"
+		"Vote_Description"				"Выберите, какой герой выйдет следующим в кастомке OVERVODKA!"
+		"Vote_Results_Title"			"Текущие результаты"
+		"Vote_Loading"					"Загрузка..."
+		"Vote_EndDate"					"Выбирайте с умом, переголосовать будет нельзя! Итоги голосования будут подведены 21 июля."
+
+		"pirozhkov"						"Артур Пирожков"
+		"morgen"						"MORGENSHTERN"
+		"bikov"							"Доктор Быков"
+		"mrbeast"						"MrBeast"
+		"kuzya"							"Кузя"
+		"garik"							"Гарик Харламов"
+		"squid"							"456"
+		"texnik"						"Паша Техник"
+		"royale"						"Король Clash Royale"
 		
 		"Store_Category_Skins"				"Скины"
 		"Store_Category_Effects"			"Эффекты"
@@ -158,8 +178,16 @@
 
 		"Store_Item_effect_1_name"		"Золотой эффект"
 		"Store_Item_effect_2_name"		"Diretide эффект"
+		"Store_Item_effect_3_name"		"Lit Energy эффект"
 
-		"Store_Item_pet_1_name"			"Мопс"
+		"Store_Item_pet_1_name"			"Мопсярка"
+		"Store_Item_pet_2_name"			"Мини-Hamster"
+		"Store_Item_pet_3_name"			"Amogus"
+		"Store_Item_pet_4_name"			"McQueen"
+		"Store_Item_pet_5_name"			"Maxwell Cat"
+		"Store_Item_pet_6_name"			"Скебоб"
+		"Store_Item_pet_7_name"			"Спайк"
+		"Store_Item_pet_8_name"			"Шкипер"
 
 		"Store_Item_prime_day_name"		"Prime на сутки"
 		"Store_Item_prime_week_name"	"Prime на неделю"
@@ -173,13 +201,13 @@
 		"PLAYER_HUD_Subscribe_Subscribed_Buy"			"Продлить"
 		"PLAYER_HUD_Subscribed_Works"					"Действует до:"
 		"PLAYER_HUD_Subscribe_Permanent"				"Навсегда"
-		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span> вы получаете:"
+		"PLAYER_HUD_Subscribe_DescriptionHeader"		"Покупая <span class='OvervodkaName'>Overvodka Prime</span>, вы получаете:"
 		"PLAYER_HUD_Subscribe_Subscribed_DescriptionHeader"		"Подписка <span class='OvervodkaName'>Overvodka Prime</span> активна! Вы получаете:"
 
 		"COMEBACK_SYSTEM_DESC"							"Эта команда получает x2 опыта в кругу, x2 золота за монеты а также x2 очков счета за убийство"
 		"COMEBACK_SYSTEM_DESC2"							"Эта команда получает x1.5 опыта в кругу, x1.5 золота за монеты а также x2 очков счета за убийство"
 
-		"PLAYER_HUD_Subscribe_Description"				"- Новое колесо чата, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>- Возможность удваивать свою ставку рейтинга;<br>- Возможность давать пять, бить врагов по лицу и использовать надувные игрушки;<br>- Возможность прогревать других игроков за плохую игру;<br>- Визуальный эффект для героев;<br>- Специальную рамку героя на панели счета команд;<br>- Эксклюзивные Arcana-предметы для персонажей САНС и SINISTER MARK."
+		"PLAYER_HUD_Subscribe_Description"				"• Новое колесо чата, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность удваивать свою ставку рейтинга;<br>• Возможность давать пять, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность прогревать других игроков за плохую игру;<br>• Специальную рамку героя на панели счета команд;<br>• По 2 дополнительных ежедневных задания;<br>• Эксклюзивные Arcana-предметы для персонажей САНС и SINISTER MARK."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
@@ -1018,7 +1046,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_peterka_5" "-{s:bonus_AbilityCooldown} сек. перезарядки 42 АТАКА"
 		"DOTA_Tooltip_ability_special_bonus_unique_peterka_6" "Невоспр. к эффектам во время Я ЧЕ ЕМЕЛЯ?"
 		"DOTA_Tooltip_ability_special_bonus_unique_peterka_7" "+{s:bonus_damage} к урону от 42 АТАКА"
-		"DOTA_Tooltip_ability_special_bonus_unique_peterka_8" "Монеты дают герою вдвое больше золота"
+		"DOTA_Tooltip_ability_special_bonus_unique_peterka_8" "Монеты дают герою 150% золота"
 		"DOTA_Tooltip_ability_special_bonus_unique_peterka_8_Description" "Только при подборе монет способностью НЕ ТРОГАЮ МОНЕТЫ"
 
 		"DOTA_Tooltip_ability_rostik_q"	"ПЕТАРДА"

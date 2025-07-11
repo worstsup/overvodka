@@ -38,6 +38,16 @@
                     <Label id="PlayerRatingNoData" text="#custom_end_screen_rating_no_data" />
                 </Panel>
 			</Panel>
+
+			<Panel id="CoinsContainer" class="ScoreCol_Coins ScoreboardPanel">
+                <Panel id="RatingHasData">
+                    <Panel hittest="false" class="CoinsIcon" />
+                    <Label id="PlayerCoins" text="999" />
+                </Panel>
+                <Panel id="RatingNoData">
+                    <Label id="PlayerRatingNoData" text="#custom_end_screen_rating_no_data" />
+                </Panel>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

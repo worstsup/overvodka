@@ -412,7 +412,7 @@ function Quests:OnItemPickUp( event )
 end
 
 function Quests:SendRequest(url, data, callback, debugEnabled, attempt)
-    --if IsInToolsMode() or GameRules:IsCheatMode() then return end
+    if IsInToolsMode() or GameRules:IsCheatMode() then return end
     attempt = attempt or 1
     debugEnabled = debugEnabled or false
     

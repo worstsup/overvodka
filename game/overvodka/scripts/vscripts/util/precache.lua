@@ -114,6 +114,8 @@ PrecacheUtils.particles = {
 		"particles/crumble_cookie_effect.vpcf",
 		"particles/crumble_cookies.vpcf",
 		"particles/drake_base_attack.vpcf",
+		"particles/lit_energy_effect.vpcf",
+		"particles/zolo_eye_skin.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -141,7 +143,6 @@ PrecacheUtils.particle_folders = {
 		"particles/units/heroes/hero_troll_warlord",
 		"particles/units/heroes/hero_keeper_of_the_light",
 		"particles/econ/events/ti11/balloon",
-		"particles/zolo_eye_skin.vpcf",
 }
 
 PrecacheUtils.units = {
@@ -151,6 +152,7 @@ PrecacheUtils.units = {
 	"npc_nelya",
 	"npc_rivendare",
 	"npc_dota_courier",
+	"npc_overvodka_pet",
 }
 
 PrecacheUtils.models = {
@@ -206,6 +208,7 @@ PrecacheUtils.models = {
 		"models/minion/minion.vmdl",
 		"models/minion/minon_purple.vmdl",
 		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl",
+		"models/items/courier/hamster_courier/hamster_courier_lv1.vmdl",
 		"models/items/courier/hamster_courier/hamster_courier_lv7.vmdl",
 		"models/heroes/troll_warlord/troll_warlord.vmdl",
         "bmw/models/heroes/bm/tofab.vmdl",
@@ -240,6 +243,13 @@ PrecacheUtils.models = {
 		"litvin/litenergy/lit_energy.vmdl",
 		"models/items/pudge/arcana/pudge_arcana_back.vmdl",
 		"zolo/materials/models/heroes/zol/mask.vmdl",
+		"models/items/courier/butch_pudge_dog/butch_pudge_dog.vmdl",
+		"models/amogus/source/amongus.vmdl",
+		"models/amogus/source/mcqueen.vmdl",
+		"models/amogus/source/choucatm.vmdl",
+		"models/amogus/source/skebob.vmdl",
+		"models/amogus/source/spike.vmdl",
+		"models/amogus/source/skipper.vmdl",
 }
 
 PrecacheUtils.sounds = {

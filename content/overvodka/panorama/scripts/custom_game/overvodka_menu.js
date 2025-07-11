@@ -14,13 +14,15 @@ var Menu = {};
         Leaderboard: $("#Content_Leaderboard"),
         ChatWheel: $("#Content_ChatWheel"),
         Store: $("#Content_Store"),
-        Prime: $("#Content_Prime")
+        Prime: $("#Content_Prime"),
+        Vote: $("#Content_Vote")
     };
     const tabButtons = {
         Leaderboard: $("#TabButton_Leaderboard"),
         ChatWheel: $("#TabButton_ChatWheel"),
         Store: $("#TabButton_Store"),
-        Prime: $("#TabButton_Prime")
+        Prime: $("#TabButton_Prime"),
+        Vote: $("#TabButton_Vote")
     };
 
     $.CreatePanel("DOTAScenePanel", ModelPreview, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
@@ -80,6 +82,8 @@ var Menu = {};
             Store.Initialize();
         } else if (tabName === 'Prime' && Prime && Prime.Initialize) {
             Prime.Initialize();
+        } else if (tabName === 'Vote' && Vote && Vote.Initialize) {
+            Vote.Initialize();
         }
     };
 })();

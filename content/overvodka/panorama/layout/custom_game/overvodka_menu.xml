@@ -13,6 +13,7 @@
         <include src="file://{resources}/scripts/custom_game/prime_panel.js" />
         <include src="file://{resources}/scripts/custom_game/chat_wheel_panel.js" />
         <include src="file://{resources}/scripts/custom_game/store_panel.js" />
+        <include src="file://{resources}/scripts/custom_game/vote_panel.js" />
     </scripts>
 
     <snippets>
@@ -59,6 +60,19 @@
                 </Button>
             </Panel>
         </snippet>
+        <snippet name="HeroVoteCard">
+            <Button class="HeroVoteCard">
+                <Image id="HeroImage" class="HeroVoteImage" scaling="stretch-to-fit-y-preserve-aspect" />
+                <Label id="HeroName" class="HeroVoteName" text="Hero Name" />
+            </Button>
+        </snippet>
+        <snippet name="HistogramBar">
+            <Panel class="HistogramBar">
+                <Panel id="BarFill" class="BarFill" />
+                <Label id="BarHeroName" class="BarHeroName" text="Hero" />
+                <Label id="BarPercentage" class="BarPercentage" text="100%" />
+            </Panel>
+        </snippet>
     </snippets>
 
     <Panel class="MenuRoot" hittest="false">
@@ -70,16 +84,11 @@
         <Panel id="MenuMainPanel">
             <Panel id="MenuHeader">
                 <Panel class="TabButtonContainer">
-                    <Button id="TabButton_Leaderboard" class="MenuTabButton" onactivate="Menu.SwitchTab('Leaderboard')">
-                        <Label text="#Menu_Tab_Leaderboard" />
-                    </Button>
-                    <Button id="TabButton_ChatWheel" class="MenuTabButton" onactivate="Menu.SwitchTab('ChatWheel')">
-                        <Label text="#Menu_Tab_ChatWheel" />
-                    </Button>
-                    <Button id="TabButton_Prime" class="MenuTabButton" onactivate="Menu.SwitchTab('Prime')">
-                        <Label text="#Menu_Tab_Prime" />
-                    </Button>
+                    <Button id="TabButton_Leaderboard" class="MenuTabButton" onactivate="Menu.SwitchTab('Leaderboard')"><Label text="#Menu_Tab_Leaderboard" /></Button>
+                    <Button id="TabButton_ChatWheel" class="MenuTabButton" onactivate="Menu.SwitchTab('ChatWheel')"><Label text="#Menu_Tab_ChatWheel" /></Button>
+                    <Button id="TabButton_Prime" class="MenuTabButton" onactivate="Menu.SwitchTab('Prime')"><Label text="#Menu_Tab_Prime" /></Button>
                     <Button id="TabButton_Store" class="MenuTabButton" onactivate="Menu.SwitchTab('Store')"><Label text="#Menu_Tab_Store" /></Button>
+                    <Button id="TabButton_Vote" class="MenuTabButton" onactivate="Menu.SwitchTab('Vote')"><Label text="#Menu_Tab_Vote" /></Button>
                 </Panel>
                 <Button id="MenuCloseButton" onactivate="Menu.Toggle()" />
             </Panel>
@@ -105,9 +114,7 @@
                     </Panel>
                 </Panel>
 
-                <!-- CHAT WHEEL CONTENT (from chat_wheel.xml) -->
                 <Panel id="Content_ChatWheel" class="MenuContentPanel">
-                    <!-- The content here is a simplified version of your chat_wheel.xml, assuming the core logic is in the JS -->
                     <Panel id="SettingsBody" hittest="false">
                         <Panel class="SettingsChatWheel" hittest="true" onactivate="ChatWheel.StartSelectItem(0)">
                             <Panel class="Top" hittest="false">
@@ -203,9 +210,17 @@
                         </Panel>
                     </Panel>
                 </Panel>
-                <!-- PRIME CONTENT (from player_hud.xml) -->
+                <Panel id="Content_Vote" class="MenuContentPanel">
+                    <Label id="VoteTitle" class="VoteTitle" text="#Vote_Title" />
+                    <Label id="VoteDescription" class="VoteDescription" text="#Vote_Description" />
+                    <Panel id="VoteCandidatesContainer" class="VoteCandidatesContainer" />
+                    <Panel id="VoteResultsContainer" class="VoteResultsContainer">
+                        <Label class="VoteResultsTitle" text="#Vote_Results_Title" />
+                        <Panel id="HistogramContainer" class="HistogramContainer" />
+                    </Panel>
+                    <Label id="VoteEndDate" class="VoteEndDate" text="#Vote_EndDate" />
+                </Panel>
                 <Panel id="Content_Prime" class="MenuContentPanel">
-                    <!-- This is the SubscribePanel from player_hud.xml -->
                     <Panel hittest="false" id="SubscribePanel">
                         <Panel id="SubscribePanelBody">
                             <Label id="SubscribeHeader" text="#PLAYER_HUD_Subscribe_Header"/>

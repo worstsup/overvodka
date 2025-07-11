@@ -29,7 +29,7 @@ function InitializeQuests() {
     
     const activeQuests = PLAYER_DATA.activeQuests;
     const progressData = PLAYER_DATA.progress;
-    const claimedData = PLAYER_DATA.claimed || {}; // Get claimed data
+    const claimedData = PLAYER_DATA.claimed || {};
 
     for (const questId in activeQuests) {
         if (!activeQuests[questId]) continue;
@@ -40,7 +40,6 @@ function InitializeQuests() {
         const progress = progressData[questId] || 0;
         const isClaimed = claimedData[questId] || false;
         
-        // Create UI elements
         const panel = $.CreatePanel('Panel', questList, quest.id);
         panel.AddClass("QuestRow");
         
@@ -53,7 +52,6 @@ function InitializeQuests() {
         desc.AddClass("QuestDescription");
         desc.text = $.Localize(quest.description);
         
-        // Progress Panel
         const questProgress = $.CreatePanel('Panel', panel, '');
         questProgress.AddClass("QuestProgress");
         const progressBar = $.CreatePanel('ProgressBar', questProgress, '');
@@ -61,7 +59,6 @@ function InitializeQuests() {
         const progressLabel = $.CreatePanel('Label', progressBar, '');
         progressLabel.AddClass("QuestProgressLabel");
         
-        // *** NEW: Create Reward Panel ***
         const questReward = $.CreatePanel('Panel', panel, '');
         questReward.AddClass("QuestReward");
         const rewardLabel = $.CreatePanel('Label', questReward, '');
@@ -109,7 +106,6 @@ function UpdateQuestProgress(questId, value, isClaimed) {
         quest.panel.RemoveClass("Completed");
     }
 
-    // Update claimed status
     quest.panel.SetHasClass("Claimed", isClaimed);
 }
 

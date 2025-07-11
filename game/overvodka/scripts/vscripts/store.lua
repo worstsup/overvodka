@@ -3,15 +3,23 @@ if Store == nil then
 end
 
 Store.Items = {
-    skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 500, image = "file://{images}/custom_game/store/skins/skin_1.png", hero = "npc_dota_hero_ursa", modifier = "modifier_overvodka_store_skin_1" },
-    skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 750, image = "file://{images}/custom_game/store/skins/skin_2.png", hero = "npc_dota_hero_ancient_apparition", modifier = "modifier_overvodka_store_skin_2" },
+    skin_1 = { id = "skin_1", name = "#Store_Item_skin_1_name", type = "skins", price = 75, image = "file://{images}/custom_game/store/skins/skin_1.png", hero = "npc_dota_hero_ursa", modifier = "modifier_overvodka_store_skin_1" },
+    skin_2 = { id = "skin_2", name = "#Store_Item_skin_2_name", type = "skins", price = 50, image = "file://{images}/custom_game/store/skins/skin_2.png", hero = "npc_dota_hero_ancient_apparition", modifier = "modifier_overvodka_store_skin_2" },
     skin_3 = { id = "skin_3", name = "#Store_Item_skin_3_name", type = "skins", price = 100, image = "file://{images}/custom_game/store/skins/skin_3.png", hero = "npc_dota_hero_axe", modifier = "modifier_overvodka_store_skin_3" },
     skin_4 = { id = "skin_4", name = "#Store_Item_skin_4_name", type = "skins", price = 200, image = "file://{images}/custom_game/store/skins/skin_4.png", hero = "npc_dota_hero_ogre_magi", modifier = "modifier_overvodka_store_skin_4" },
-    effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 300, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
-    effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 400, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
-    pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 1000, image = "file://{images}/custom_game/subscribe_button.png" },
-    prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 100, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
-    prime_week = { id = "prime_week", name = "#Store_Item_prime_week_name", type = "prime", price = 500, duration = "week", image = "file://{images}/custom_game/store/effects/effect_1.png" }
+    effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
+    effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
+    effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
+    pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 100, image = "file://{images}/custom_game/store/pets/pet_1.png", modifier = "modifier_overvodka_store_pet_1" },
+    pet_2 = { id = "pet_2", name = "#Store_Item_pet_2_name", type = "pets", price = 100, image = "file://{images}/custom_game/store/pets/pet_2.png", modifier = "modifier_overvodka_store_pet_2" },
+    pet_3 = { id = "pet_3", name = "#Store_Item_pet_3_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_3.png", modifier = "modifier_overvodka_store_pet_3" },
+    pet_4 = { id = "pet_4", name = "#Store_Item_pet_4_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_4.png", modifier = "modifier_overvodka_store_pet_4" },
+    pet_5 = { id = "pet_5", name = "#Store_Item_pet_5_name", type = "pets", price = 125, image = "file://{images}/custom_game/store/pets/pet_5.png", modifier = "modifier_overvodka_store_pet_5" },
+    pet_6 = { id = "pet_6", name = "#Store_Item_pet_6_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_6.png", modifier = "modifier_overvodka_store_pet_6" },
+    pet_7 = { id = "pet_7", name = "#Store_Item_pet_7_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_7.png", modifier = "modifier_overvodka_store_pet_7" },
+    pet_8 = { id = "pet_8", name = "#Store_Item_pet_8_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_8.png", modifier = "modifier_overvodka_store_pet_8" },
+    prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 200, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
+    prime_week = { id = "prime_week", name = "#Store_Item_prime_week_name", type = "prime", price = 700, duration = "week", image = "file://{images}/custom_game/store/effects/effect_1.png" }
 }
 
 function Store:Init()
@@ -19,10 +27,11 @@ function Store:Init()
     self.isInitialized = true
     
     self.playerData = {}
+    self.playerPets = {}
     CustomNetTables:SetTableValue("store", "items", self.Items)
-
     ListenToGameEvent("player_connect_full", Dynamic_Wrap(self, "OnPlayerConnectFull"), self)
     ListenToGameEvent("npc_spawned", Dynamic_Wrap(self, "OnNPCSpawned"), self)
+    ListenToGameEvent("player_disconnect", Dynamic_Wrap(self, "OnPlayerDisconnect"), self)
     CustomGameEventManager:RegisterListener("store_buy_item", function(_, event) self:OnBuyItem(event) end)
     CustomGameEventManager:RegisterListener("store_equip_item", function(_, event) self:OnEquipItem(event) end)
     CustomGameEventManager:RegisterListener("store_unequip_item", function(_, event) self:OnUnequipItem(event) end)
@@ -38,6 +47,9 @@ function Store:OnNPCSpawned(event)
             Timers:CreateTimer(0.1, function()
                 self:ApplyEquippedEffect(playerID, npc)
                 self:ApplyEquippedSkin(playerID, npc)
+                if not npc:IsIllusion() then
+                    self:ApplyEquippedPet(playerID, npc)
+                end
             end)
         end
     end
@@ -65,6 +77,7 @@ function Store:FetchPlayerData(playerID)
                 inventory = self:ArrayToSet(body.inventory or {}),
                 equipped_effect = body.equipped_effect,
                 equipped_skin = body.equipped_skin,
+                equipped_pet = body.equipped_pet
             }
 
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
@@ -72,6 +85,7 @@ function Store:FetchPlayerData(playerID)
             if hero then
                 self:ApplyEquippedEffect(playerID, hero)
                 self:ApplyEquippedSkin(playerID, hero)
+                self:ApplyEquippedPet(playerID, hero)
             end
         end
     )
@@ -102,6 +116,9 @@ function Store:OnEquipItem(event)
             elseif item.type == "skins" then
                 self.playerData[playerID].equipped_skin = itemID
                 self:ApplyEquippedSkin(playerID)
+            elseif item.type == "pets" then
+                self.playerData[playerID].equipped_pet = itemID
+                self:ApplyEquippedPet(playerID)
             end
             
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
@@ -128,6 +145,9 @@ function Store:OnUnequipItem(event)
             elseif body.unequipped_type == "skins" then
                 self.playerData[playerID].equipped_skin = nil
                 self:ApplyEquippedSkin(playerID)
+            elseif body.unequipped_type == "pets" then
+                self.playerData[playerID].equipped_pet = nil
+                self:ApplyEquippedPet(playerID)
             end
             
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
@@ -152,7 +172,6 @@ function Store:ApplyEquippedEffect(playerID, unit)
     if equippedID and self.Items[equippedID] and self.Items[equippedID].modifier then
         local modifierName = self.Items[equippedID].modifier
         hero:AddNewModifier(hero, nil, modifierName, {})
-        print("[Store] Applied effect to unit: " .. modifierName)
     end
 end
 
@@ -175,8 +194,25 @@ function Store:ApplyEquippedSkin(playerID, unit)
         if hero:GetUnitName() == skinItem.hero then
             local modifierName = skinItem.modifier
             hero:AddNewModifier(hero, nil, modifierName, {})
-            print("[Store] Applied skin to unit: " .. modifierName)
         end
+    end
+end
+
+function Store:ApplyEquippedPet(playerID, unit)
+    local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
+    if not hero or not hero:IsHero() then return end
+    if self.playerPets[playerID] and IsValidEntity(self.playerPets[playerID]) then
+        self.playerPets[playerID]:RemoveSelf()
+        self.playerPets[playerID] = nil
+    end
+    local equippedID = self.playerData[playerID] and self.playerData[playerID].equipped_pet
+    if equippedID and self.Items[equippedID] and self.Items[equippedID].modifier then
+        local modifierName = self.Items[equippedID].modifier
+        local pet = CreateUnitByName("npc_overvodka_pet", hero:GetAbsOrigin() + RandomVector(RandomFloat(0,100)), true, hero, nil, hero:GetTeamNumber())
+        pet:SetOwner(hero)
+        pet:AddNewModifier(pet, nil, "modifier_overvodka_pet", {})
+        pet:AddNewModifier(pet, nil, modifierName, {})
+        self.playerPets[playerID] = pet
     end
 end
 
@@ -282,6 +318,14 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
             callback(nil, ResultData)
         end
     end)
+end
+
+function Store:OnPlayerDisconnect(event)
+    local playerID = event.PlayerID
+    if self.playerPets[playerID] and IsValidEntity(self.playerPets[playerID]) then
+        self.playerPets[playerID]:RemoveSelf()
+        self.playerPets[playerID] = nil
+    end
 end
 
 Store:Init()

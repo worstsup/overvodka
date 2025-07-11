@@ -17,7 +17,8 @@ const StoreBody = $("#StoreBody");
     let playerInventory = {};
     let playerEquipped = {
         effect: null,
-        skin: null
+        skin: null,
+        pet: null
     };
     let playerCoins = 0;
     const localPlayerID64 = Players.GetLocalPlayer();
@@ -62,6 +63,7 @@ const StoreBody = $("#StoreBody");
                 playerInventory = data.inventory || {};
                 playerEquipped.effect = data.equipped_effect;
                 playerEquipped.skin = data.equipped_skin;
+                playerEquipped.pet = data.equipped_pet;
                 coinBalanceLabel.text = playerCoins;
                 UpdateAllItemButtons();
             }
@@ -134,6 +136,8 @@ const StoreBody = $("#StoreBody");
                 isEquipped = (playerEquipped.effect === itemData.id);
             } else if (itemData.type === 'skins') {
                 isEquipped = (playerEquipped.skin === itemData.id);
+            } else if (itemData.type === 'pets') {
+                isEquipped = (playerEquipped.pet === itemData.id);
             }
             
             if (isEquipped) {
@@ -161,6 +165,8 @@ const StoreBody = $("#StoreBody");
                 isEquipped = (playerEquipped.effect === itemId);
             } else if (item.type === 'skins') {
                 isEquipped = (playerEquipped.skin === itemId);
+            } else if (item.type === 'pets') {
+                isEquipped = (playerEquipped.pet === itemId);
             }
 
             if (isEquipped) {

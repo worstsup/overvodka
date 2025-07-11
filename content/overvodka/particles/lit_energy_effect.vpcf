@@ -1,0 +1,105 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf62:version{c135a90d-ef52-47fa-a9b8-83a382a77471} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nMaxParticles = 0
+	m_nBehaviorVersion = 12
+	m_flCullRadius = -1.0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 6
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 7
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 5
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 8
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+			m_previewState = 
+			{
+				m_previewModel = "models/heroes/lion/lion.vmdl"
+				m_nModSpecificData = 365
+				m_groundType = "PET_GROUND_PLANE"
+				m_sequenceName = "idle"
+				m_hitboxSetName = "default"
+			}
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_RemapSpeedtoCP"
+			m_nOutControlPointNumber = 6
+			m_flInputMin = 280.0
+			m_flInputMax = 300.0
+			m_flOutputMin = 0.5
+		},
+		{
+			_class = "C_OP_RemapSpeedtoCP"
+			m_nOutControlPointNumber = 7
+			m_flInputMin = 280.0
+			m_flInputMax = 300.0
+			m_flOutputMin = 0.25
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/econ/events/summer_2021/summer_2021_emblem_effect_ground_dark.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/econ/events/summer_2021/summer_2021_emblem_effect_ring_darken.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/econ/events/summer_2021/summer_2021_emblem_effect_ground_rope.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/summer_2021_emblem_effect_ground_energy_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/summer_2021_emblem_effect_core_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/summer_2021_emblem_effect_ground_base_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/summer_2021_emblem_effect_gems_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/summer_2021_emblem_effect_ring_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/econ/events/summer_2021/summer_2021_emblem_effect_gem_trail.vpcf"
+		},
+	]
+}

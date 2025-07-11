@@ -47,6 +47,9 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		playerPanel.AddClass(RatingClass)
 	}
 
+	let PlayerCoins = CustomNetTables.GetTableValue("players", `player_${playerId}_end_game_coins`);
+	playerPanel.SetHasClass("ShowCoins", PlayerCoins !== undefined);
+
 	var playerInfo = Game.GetPlayerInfo( playerId );
 	
 	var ultStateOrTime = PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_HIDDEN; // values > 0 mean on cooldown for that many seconds
@@ -219,6 +222,12 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		playerPanel.SetHasClass("MinusRating", RatingPrefix == "-")
 		let RatingText = `${RatingPrefix}${Rating}`
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerRating", RatingText );
+	}
+
+	if(PlayerCoins != undefined){
+		let coins = PlayerCoins.coins || 0;
+        let coinsText = `+${coins}`;
+        _ScoreboardUpdater_SetTextSafe(playerPanel, "PlayerCoins", coinsText);
 	}
 
 	playerPanel.SetHasClass( "player_ultimate_ready", ( ultStateOrTime == PlayerUltimateStateOrTime_t.PLAYER_ULTIMATE_STATE_READY ) );

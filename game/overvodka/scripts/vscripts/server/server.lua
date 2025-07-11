@@ -90,23 +90,45 @@ function Server:OnGameEnded(Teams, VictoryTeam)
                 bWin = VictoryTeam == PlayerResource:GetTeam(PlayerID)
             end
             local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
-
             if PlayerInfo.doubled then
                 Rating = Rating * 2
             end
-
             if CountNotLeaved <= 4 then
                 Rating = Rating / 2
             end
 
+            local coins_to_grant = RandomInt(5, 10)
             if bLeaved then
+                coins_to_grant = 0
                 if Is5v5() then
                     Rating = SERVER_RATING_WHEN_ABANDONED_GAME_5V5
                 else
                     Rating = SERVER_RATING_WHEN_ABANDONED_GAME
                 end
             end
+            local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
+            print("[Server] Granting " .. coins_to_grant .. " coins to PlayerID " .. PlayerID)
 
+            if coins_to_grant > 0 then
+                if SteamID ~= 0 then
+                    self:SendRequest(
+                        SERVER_URL .. "update_balance",
+                        { SteamID = SteamID, amount = coins_to_grant },
+                        function(err, body)
+                            if err or not (body and body.success) then
+                                print("[Quests] Failed to grant reward to player " .. playerID)
+                                return
+                            end
+                            
+                            print("[Quests] Granted " .. coins_to_grant .. " coins to player " .. playerID)
+                            if Store and Store.FetchPlayerData then
+                                Store:FetchPlayerData(playerID)
+                            end
+                        end
+                    )
+                end
+            end
+            
             local PlayerData = {
                 rating = Rating,
                 heroname = HeroName,
@@ -116,11 +138,8 @@ function Server:OnGameEnded(Teams, VictoryTeam)
                 win = bWin,
                 leaved = bLeaved
             }
-
             CustomNetTables:SetTableValue('players', "player_"..PlayerID.."_end_game_rating", {rating = Rating})
-
-            local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
-
+            CustomNetTables:SetTableValue('players', "player_"..PlayerID.."_end_game_coins", {coins = coins_to_grant})
             self:SendRequest(SERVER_URL.."game_ended", {SteamID=SteamID, MatchID = MatchID, Category = CurrentCategory, PlayerData=PlayerData}, nil, true)
         end
     end
@@ -562,7 +581,7 @@ function Server:RecordChatWheelChanges(PlayerID, LineID, ItemID)
 end
 
 function Server:SendRequest(url, data, callback, debugEnabled, attempt)
-    --if IsInToolsMode() or GameRules:IsCheatMode() then return end
+    if IsInToolsMode() or GameRules:IsCheatMode() then return end
 
     local current_attempt = attempt and attempt or 1
 

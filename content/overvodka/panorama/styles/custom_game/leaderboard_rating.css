@@ -62,10 +62,10 @@
 	width: 100px;
 	height: 30px;
 
-	margin-right: 15px;
+	margin-right: 32px;
 
 	border: 1px solid #625c45;
-
+	border-radius: 16px;
 	transition-property: brightness, border;
 	transition-duration: .1s;
 }

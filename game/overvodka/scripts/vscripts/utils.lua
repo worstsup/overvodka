@@ -2,12 +2,22 @@ LinkLuaModifier("modifier_subscriber_effect", "modifiers/modifier_subscriber_eff
 LinkLuaModifier("modifier_win_condition", "modifiers/modifier_win_condition", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_arcana", "modifiers/modifier_sans_arcana", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_arcana", "modifiers/modifier_invincible_arcana", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_pet", "modifiers/modifier_overvodka_pet", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_overvodka_store_effect_1", "modifiers/store/modifier_overvodka_store_effect_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_effect_2", "modifiers/store/modifier_overvodka_store_effect_2", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_effect_3", "modifiers/store/modifier_overvodka_store_effect_3", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_1", "modifiers/store/modifier_overvodka_store_skin_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_2", "modifiers/store/modifier_overvodka_store_skin_2", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_3", "modifiers/store/modifier_overvodka_store_skin_3", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_4", "modifiers/store/modifier_overvodka_store_skin_4", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_1", "modifiers/store/modifier_overvodka_store_pet_1", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_2", "modifiers/store/modifier_overvodka_store_pet_2", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_3", "modifiers/store/modifier_overvodka_store_pet_3", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_4", "modifiers/store/modifier_overvodka_store_pet_4", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_5", "modifiers/store/modifier_overvodka_store_pet_5", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_6", "modifiers/store/modifier_overvodka_store_pet_6", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_7", "modifiers/store/modifier_overvodka_store_pet_7", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_8", "modifiers/store/modifier_overvodka_store_pet_8", LUA_MODIFIER_MOTION_NONE)
 
 GAME_CATEGORY_DEFINITIONS = {
 	NONE = 0,
@@ -15,6 +25,7 @@ GAME_CATEGORY_DEFINITIONS = {
 	DUO = 2,
 	DOTA = 3,
 }
+
 OVERVODKA_DISABLED_EBASHER = {
 	["npc_dota_hero_meepo"] = true,
 	["npc_dota_hero_furion"] = true,

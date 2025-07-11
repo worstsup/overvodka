@@ -119,7 +119,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-
+    
     transition-property: brightness;
     transition-duration: .2s;
 }
@@ -197,11 +197,12 @@
     text-align: center;
     margin-top: 10px;
     font-size: 60px;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
-
-    font-family: 'Roboto';
+    
+    font-family: Radiance;
 }
 
 .OvervodkaName{
@@ -210,27 +211,27 @@
 
 #SubscribeDescription{
     align: left top;
-    font-size: 22px;
-    padding-right: 200px;
-
+    font-size: 23px;
+    padding-right: 150px;
+    line-height: 1.4;
     text-align: left;
-    
+    font-family: Radiance;
     margin-top: 140px;
     margin-left: 25px;
-
+    
     color: #c7c4ac;
 }
 
 .SubscribeDescriptionHeader{
     align: center top;
-    font-size: 25px;
-
+    font-size: 30px;
+    font-weight: bold;
     margin-top: 90px;
     color: rgb(255, 247, 214);
     text-transform: uppercase;
     letter-spacing: 1px;
 
-    font-family: 'Roboto';
+    font-family: Radiance;
 }
 
 #SubscribedSubscribeDescriptionHeader{
@@ -259,8 +260,8 @@
 }
 
 #BuyButton{
-    width: 200px;
-    height: 55px;
+    width: 225px;
+    height: 65px;
 
     align: center bottom;
 
@@ -268,9 +269,9 @@
 
     background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
 
-    border: 1px solid white;
+    border: 3px solid white;
     border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
-
+    border-radius: 32px;
     transition-property: brightness, border-brush;
     transition-duration: .1s;
 }
@@ -403,8 +404,8 @@
 }
 
 #HighFivePreview{
-    width: 110px;
-    height: 119.1px;
+    width: 160px;
+    height: 180px;
 
     background-image: url("file://{images}/custom_game/high_five_preview.png");
     background-position: center;
@@ -413,27 +414,25 @@
 
     align: right top;
 
-    margin-right: 55px;
+    margin-right: 15px;
     margin-top: 125px;
 }
 
 #EffectPreview{
-    width: 110px;
-    height: 73.8px;
+    width: 180px;
+    height: 103.8px;
 
-    /* background-image: url("file://{images}/custom_game/effect_preview.png");
+    background-image: url("file://{images}/custom_game/overvodka_quests.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain; */
+    background-size: contain;
 
-    background-color: rgba(0, 0, 0, 0.5);
 
-    border: 1px solid black;
 
     align: right top;
 
-    margin-right: 55px;
-    margin-top: 280px;
+    margin-right: 15px;
+    margin-top: 330px;
 }
 
 #ModelPreview{
@@ -474,8 +473,8 @@
 }
 
 #ChatWheelPreview{
-    width: 100px;
-    height: 66.7px;
+    width: 150px;
+    height: 100px;
 
     background-image: url("file://{images}/custom_game/chat_wheel_preview.png");
     background-position: center;
@@ -488,8 +487,8 @@
 
     align: right top;
 
-    margin-right: 58px;
-    margin-top: 360px;
+    margin-right: 18px;
+    margin-top: 430px;
 }
 
 #OvervodkaHamster{
@@ -819,21 +818,21 @@
 }
 
 #SeasonalPreview{
-    width: 128px;
-    height: 64px;
+    width: 156px;
+    height: 86px;
 
     align: right top;
     
-    margin-top: 220px;
+    margin-top: 260px;
 
-    margin-right: 28px;
+    margin-right: 20px;
 
     flow-children: right;
 }
 
 .SeasonalPreviewIcon{
-    width: 48px;
-    height: 48px;
+    width: 86px;
+    height: 86px;
 
     background-image: url("file://{resources}/images/custom_game/high_five_icon.png");
     background-position: center;

@@ -30,6 +30,7 @@ require('util/vector_targeting')
 require('util/functions')
 require('quests')
 require('store')
+require('vote')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------

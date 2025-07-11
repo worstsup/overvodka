@@ -2,7 +2,7 @@
 SERVER_URL = 'http://overvodka.com/api/'
 
 -- Ключ кастомки
-SERVER_KEY = 'A82E19AD099EBD6B63FFE96B68F080AB56A82E79'
+SERVER_KEY = GetDedicatedServerKeyV3('overvodka')
 
 -- Сколько милисекунд ждать ответ от сервера за каждую попытку соединения
 SERVER_ONE_TRY_WAIT_TIME = 10000
