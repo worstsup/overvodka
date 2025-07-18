@@ -18441,7 +18441,7 @@
 		}
 		"PortraitHideParticles"		"1"
 		"PortraitHideDropShadow"		"0"
-		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateParticles"		"1"
 		"PortraitDesaturateHero"		"1"
 		"PortraitPlayIdleExpression"		"0"
 		"hero_presets"

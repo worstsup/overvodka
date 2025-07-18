@@ -8,8 +8,9 @@ function macan_e:GetIntrinsicModifierName()
 end
 
 modifier_macan_e = class({})
+
 function modifier_macan_e:IsHidden()
-	return false
+	return (self:GetStackCount() == 0)
 end
 function modifier_macan_e:IsDebuff()
 	return false
@@ -56,7 +57,7 @@ function modifier_macan_e:OnAbilityFullyCast( params )
 	if IsServer() then
 		local ability = params.ability
 		local caster = self:GetParent()
-		if ability:GetName() == "macan_w" and params.target:IsRealHero() and not params.target:IsIllusion() then
+		if ability:GetName() == "macan_w" and not caster:IsIllusion() and params.target:IsRealHero() and not params.target:IsIllusion() then
 			local target = params.target
 			if target:HasModifier("modifier_macan_e_debuff") then
 				local debuff = target:FindModifierByName("modifier_macan_e_debuff")
@@ -81,6 +82,7 @@ end
 
 
 function modifier_macan_e:OnIntervalThink()
+	if not IsServer() then return end
 	if not self:GetParent():IsAlive() then return end
 	if self:GetParent():IsIllusion() then return end
 	if self:GetParent():PassivesDisabled() then return end

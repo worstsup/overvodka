@@ -1850,12 +1850,12 @@
 				"base_damage"
 				{
 					"value"	"20 30 40 50"
-					"special_bonus_unique_dave_7" "+200%"
+					"special_bonus_unique_dave_7" "x3"
 				}
 				"base_hp"
 				{
 					"value"	"150 220 290 360"
-					"special_bonus_unique_dave_7" "+200%"
+					"special_bonus_unique_dave_7" "x3"
 				}
 				"duration"
 				{
@@ -13207,7 +13207,7 @@
 		"AbilityCastPoint"				"1"
 		"AbilityValues"
 		{
-			"explode_damage"		"65 130 195 260"
+			"explode_damage"		"70 90 110 130"
 			"explode_radius"        "250 275 300 325"
 			"explode_delay"         "0.25"
 			"worker_hp"				"125 175 225 275"
@@ -13420,6 +13420,179 @@
 			}		
 			"min_bonus"		"10"
 			"max_bonus"		"30"
+		}
+	}
+	//=================================================================================================================
+	// ZAP / SNOWBALL
+	//=================================================================================================================
+	"royale_q" 
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_q"
+		"AbilityBehavior"		   		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"		 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"		 	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"		  	"royale_q"
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"		   		"60 80 100 120"
+		"AbilityCooldown"		   		"14 12 10 8"
+		"AbilityValues"
+		{
+			"damage"					"75 150 225 300"
+			"radius"
+			{
+				"value"	"300"
+				"affected_by_aoe_increase"	"1"
+			}
+			"stun_duration"				"0.4 0.6 0.8 1.0"
+			"slow_duration"				"1.0 1.5 2.0 2.5"
+			"knockback_distance"		"250"
+			"slow"						"-50"
+			"slow_as"					"-60"
+		}
+	}
+	//=================================================================================================================
+	// GOBLIN GANG
+	//=================================================================================================================
+	"royale_w"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityTextureName"			"royale_w"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"100 125 150 175"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastRange"				"600"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"15"
+			}
+			"melee_hp"
+			{
+				"value"	"150 225 300 375"
+			}
+			"melee_dmg"
+			{
+				"value"	"25 50 75 100"
+			}
+			"ranged_hp"
+			{
+				"value"	"75 125 175 225"
+			}
+			"ranged_dmg"
+			{
+				"value"	"15 30 45 60"
+			}
+			"xp" "20 30 40 50"
+			"gold" "10 20 30 40"
+		}
+	}
+	//=================================================================================================================
+	// FREEZE / RAGE
+	//=================================================================================================================
+	"royale_e" 
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_e"
+		"AbilityBehavior"		   		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"		 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"		 	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"		  	"royale_e"
+		"AbilityCastRange"				"900"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"		   		"100 120 140 160"
+		"AbilityCooldown"		   		"30 28 26 24"
+		"AbilityValues"
+		{
+			"damage"			"50 100 150 200"
+			"radius"
+			{
+				"value"			"400"
+				"affected_by_aoe_increase"	"1"
+			}
+			"freeze_duration"	"1.2 1.6 2.0 2.4"
+			"rage_duration"		"5.0 5.5 6.0 6.5"
+			"bonus_ms"			"25"
+			"bonus_as"			"30 60 90 120"
+		}
+	}
+	//=================================================================================================================
+	// MEGA KNIGHT
+	//=================================================================================================================
+	"royale_r"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_r"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityTextureName"			"subo"
+		"AbilityCooldown"				"90 75 60"
+		"AbilityManaCost"				"150 200 250"
+		"AbilityCastPoint"				"0.5"
+		"AbilityCastRange"				"600"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"15"
+			}
+			"base_hp"
+			{
+				"value"	"1000 2000 3000"
+			}
+			"base_dmg"
+			{
+				"value"	"150 300 450"
+			}
+			"spawn_radius"	"300 325 350"
+			"spawn_dmg"		"200 400 600"
+			"jump_min_range"	"500"
+			"jump_max_range"	"800"
+			"jump_duration"		"0.9"
+			"jump_height"		"150"
+			"jump_prepare_time"	"0.8"
+			"attack_splash_radius"	"200"
+			"xp" "200 300 400"
+			"gold" "150 250 350"
+		}
+	}
+	//=================================================================================================================
+	// INFERNO TOWER
+	//=================================================================================================================
+	"royale_scepter"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_scepter"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"MaxLevel"						"1"
+		"AbilityTextureName"			"sans_scepter"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastRange"				"600"
+		"AbilityCooldown"				"60"
+		"AbilityManaCost"				"250"
+		"IsGrantedByScepter"			"1"
+		"AbilityValues"
+		{
+			"duration"			"20"
+			"base_hp"			"10"
+			"base_dmg"			"20"
+			"max_dmg"			"2000"
+			"ramp_time"			"4.0"
+			"attack_rate"		"0.4"
+			"attack_range"		"600"
+			"gold"				"150"
+			"xp"				"250"
 		}
 	}
 }

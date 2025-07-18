@@ -3043,4 +3043,80 @@
 			}
 		}
 	}
+	"npc_dota_hero_warlock"
+	{
+		"Model"		"models/heroes/warlock/warlock.vmdl"
+		"SoundSet"		"Hero_Warlock"
+		"Enabled"		"1"
+		"ModelScale"		"0.93"
+		"LoadoutScale"		"0.93"
+		"SimilarHeroes"		"50,33,57"
+		"HeroSelectSoundEffect"		"royale_start"
+		"GibType"		"default"
+		"Ability1"		"royale_q"
+		"Ability2"		"royale_w"
+		"Ability3"		"royale_e"
+		"Ability4"		"generic_hidden"
+		"Ability5"		"royale_scepter"
+		"Ability6"		"royale_r"
+
+		"Ability10"		"special_bonus_unique_warlock_5"
+		"Ability11"		"special_bonus_unique_warlock_upheaval_aoe"
+		"Ability12"		"special_bonus_unique_warlock_10"
+		"Ability13"		"special_bonus_unique_warlock_7"
+		"Ability14"		"special_bonus_unique_warlock_4"
+		"Ability15"		"special_bonus_unique_warlock_3"
+		"Ability16"		"special_bonus_unique_warlock_2"
+		"Ability17"		"special_bonus_unique_warlock_1"
+
+		"Facets"
+		{
+			"warlock_golem" 
+			{
+				"Icon"				"summons"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+
+			"warlock_grimoire"
+			{
+				"Icon"				"xp"
+				"Color"				"Gray"
+				"GradientID"		"3"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"warlock_black_grimoire"
+					}
+				}
+			}
+		}
+
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"27"
+		"AttackDamageMax"		"37"
+		"BaseAttackSpeed"		"90"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.300000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"600"
+		"ProjectileModel"		"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
+		"ProjectileSpeed"		"1200"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"2.4"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1.000000"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"3.100000"
+		"MovementSpeed"		"300"
+		"HasAggressiveStance"		"1"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"particle_folder"		"particles/units/heroes/hero_warlock"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts"
+		"VoiceFile"		""
+	}
 }

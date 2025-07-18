@@ -171,7 +171,7 @@ function GetRankClassName(Rating){
         },
         {
             min: 8000,
-            max: 20000,
+            max: 30000,
             class_name: "Hamstergod"
         },
     ]

@@ -1,0 +1,47 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf62:version{c135a90d-ef52-47fa-a9b8-83a382a77471} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 96
+	m_nBehaviorVersion = 12
+	m_nFirstMultipleOverride_BackwardCompat = 5
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 500.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/marci_bodyguard_radius_decal_azazin.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_marci/marci_bodyguard_radius_edge.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/marci_bodyguard_radius_smoke_royale.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/marci_bodyguard_radius_burst_azazin.vpcf"
+			m_flDelay = 0.4
+		},
+		{
+			m_ChildRef = resource:"particles/marci_bodyguard_radius_start_azazin.vpcf"
+		},
+	]
+}

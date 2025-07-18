@@ -1,0 +1,80 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf62:version{c135a90d-ef52-47fa-a9b8-83a382a77471} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_flConstantLifespan = 0.5
+	m_flNoDrawTimeToGoToSleep = 2.0
+	m_bShouldSort = false
+	m_nBehaviorVersion = 12
+	m_nFirstMultipleOverride_BackwardCompat = 4
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 425.0, 2.0, 1000.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_volumetric_ring.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_energy.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_sphere_shake.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_flash.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_fireworks.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_sphere.vpcf"
+			m_flDelay = 0.1
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_wind.vpcf"
+			m_flDelay = 0.1
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_shockwave.vpcf"
+			m_flDelay = 0.1
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_energy_sparks_core.vpcf"
+			m_flDelay = 0.2
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_shockwave_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_crystalmaiden_persona/cm_persona_nova_glass.vpcf"
+			m_flDelay = 0.4
+		},
+	]
+}

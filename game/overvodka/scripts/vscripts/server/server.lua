@@ -98,6 +98,21 @@ function Server:OnGameEnded(Teams, VictoryTeam)
             end
 
             local coins_to_grant = RandomInt(5, 10)
+            local CurrentCat = GetCurrentCategory()
+            if CurrentCat == GAME_CATEGORY_DEFINITIONS.NONE then return end
+            if CurrentCat == GAME_CATEGORY_DEFINITIONS.SOLO then
+                if #Teams < 3 then
+                    coins_to_grant = 0
+                end
+            elseif CurrentCat == GAME_CATEGORY_DEFINITIONS.DUO then
+                if #Teams < 2 then
+                    coins_to_grant = 0
+                end
+            elseif CurrentCat == GAME_CATEGORY_DEFINITIONS.DOTA then
+                if #Teams < 2 then
+                    coins_to_grant = 0
+                end
+            end
             if bLeaved then
                 coins_to_grant = 0
                 if Is5v5() then

@@ -14,6 +14,7 @@ end
 function macan_w:Spawn()
 	if not IsServer() then return end
 end
+
 function macan_w:GetAOERadius()
 	return 300
 end

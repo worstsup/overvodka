@@ -386,6 +386,29 @@ if IsServer() then
 	end
 end
 
+function SortUnits_HeroesFirst(units)
+    local heroes = {}
+    local others = {}
+
+    for idx, unit in ipairs(units) do
+        if unit:IsHero() then
+            heroes[#heroes + 1] = unit
+        else
+            others[#others + 1] = unit
+        end
+    end
+
+    local sorted = {}
+    for i = 1, #heroes do
+        sorted[#sorted + 1] = heroes[i]
+    end
+    for i = 1, #others do
+        sorted[#sorted + 1] = others[i]
+    end
+
+    return sorted
+end
+
 function GetRealHero(hAttacker)
     if not hAttacker then
         return hAttacker

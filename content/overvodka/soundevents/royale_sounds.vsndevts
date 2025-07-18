@@ -1,0 +1,513 @@
+"Royale.Cast"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_cast.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.0" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"MegaKnight.Deploy"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_r_deploy.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "3000.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"MegaKnight.Jump.Land"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_r_jump_land.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"MegaKnight.Jump.Cast"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_r_jump_cast.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"MegaKnight.Jump.Prepare"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_r_jump_prepare.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "-0.02" }
+          "pitch_rand_max"  {  "value"   "0.02" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"MegaKnight.Attack"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_r_attack.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"Royale.Zap"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_zap.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"Royale.Snowball.Throw"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_snowball_throw.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"Royale.Snowball.Impact"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_snowball_impact.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"Royale.Rage"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_rage.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"Royale.Freeze"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_freeze.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"InfernoTower.Spawn"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_inferno_spawn.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"InfernoTower.Loop"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_inferno_loop.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"GoblinGang.Deploy"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_goblin_deploy.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"GoblinGang.Melee.Attack"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_goblin_melee_attack.vsnd"
+            }
+          }
+          "volume"      {  "value"   "1.0" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"GoblinGang.Ranged.Attack"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/royale_goblin_ranged_attack.vsnd"
+               "value1"    "sounds/abilities/royale_goblin_ranged_attack_1.vsnd"
+               "value2"    "sounds/abilities/royale_goblin_ranged_attack_2.vsnd"
+            }
+          }
+          "volume"      {  "value"   "1.0" }
+          "pitch_rand_min"  {  "value"   "-0.05" }
+          "pitch_rand_max"  {  "value"   "0.05" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
