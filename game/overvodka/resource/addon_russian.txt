@@ -358,6 +358,8 @@
 		"npc_inferno"		"Адская башня"
 		"npc_goblin_melee"	"Гоблин"
 		"npc_goblin_ranged" "Гоблин-Копейщик"
+		"dota_tooltip_ability_royale_innate" "DOUBLE ELIXIR"
+		"dota_tooltip_modifier_royale_innate_buff" "Double Elixir!"
 		"dota_tooltip_ability_royale_q"	"ZAP / SNOWBALL"
 		"dota_tooltip_ability_royale_q_description" "Использует одно из двух чередующихся заклинаний:\n<h1>Zap</h1>Ненадолго оглушает всех врагов в выбранной области и наносит им урон.\n<h1>Snowball</h1>Кидает гигантский снежок, который при приземлении отбрасывает врагов, замедляет их и наносит урон."
 		"dota_tooltip_ability_royale_q_damage"	"УРОН:"
@@ -403,6 +405,8 @@
 		"dota_tooltip_ability_royale_scepter_attack_range" 	"ДАЛЬНОСТЬ АТАКИ:"
 		"dota_tooltip_ability_royale_scepter_gold"			"ЗОЛОТА ЗА УНИЧТОЖЕНИЕ:"
 		"dota_tooltip_ability_royale_scepter_xp"			"ОПЫТА ЗА УНИЧТОЖЕНИЕ:"
+		"dota_tooltip_ability_special_bonus_unique_royale_6" "Эволюция ZAP / SNOWBALL"
+		"dota_tooltip_ability_special_bonus_unique_royale_7" "Эволюция MEGA KNIGHT"
 
 		"dota_tooltip_ability_special_bonus_unique_t2x2_2" "+{s:bonus_crit_chance}% к шансу крит. урона ГЛАВНЫЙ ФУРРИ-ФАНАТ"
 		"dota_tooltip_ability_special_bonus_unique_t2x2_3" "+{s:bonus_armor} к изменению брони от ПОЗИТИВ / СКЫРЛЫ"

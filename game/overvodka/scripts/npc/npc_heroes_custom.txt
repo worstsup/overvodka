@@ -3059,14 +3059,15 @@
 		"Ability4"		"generic_hidden"
 		"Ability5"		"royale_scepter"
 		"Ability6"		"royale_r"
+		"Ability7"		"royale_innate"
 
 		"Ability10"		"special_bonus_unique_warlock_5"
 		"Ability11"		"special_bonus_unique_warlock_upheaval_aoe"
 		"Ability12"		"special_bonus_unique_warlock_10"
 		"Ability13"		"special_bonus_unique_warlock_7"
 		"Ability14"		"special_bonus_unique_warlock_4"
-		"Ability15"		"special_bonus_unique_warlock_3"
-		"Ability16"		"special_bonus_unique_warlock_2"
+		"Ability15"		"special_bonus_unique_royale_6"
+		"Ability16"		"special_bonus_unique_royale_7"
 		"Ability17"		"special_bonus_unique_warlock_1"
 
 		"Facets"

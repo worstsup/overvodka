@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_royale_q", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_q_stun", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_q_snowball_slow", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_royale_q_snowball_roll", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_HORIZONTAL)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
@@ -38,6 +39,12 @@ function royale_q:OnSpellStart()
     if not IsServer() then return end
 	local caster = self:GetCaster()
     local point = self:GetCursorPosition()
+    self._cast_dir = (point - caster:GetAbsOrigin()):Normalized()
+    if point == caster:GetAbsOrigin() then
+        self._cast_dir = caster:GetForwardVector()
+    end
+    self._cast_dir.z = 0
+    self._rolled = false
     local radius = self:GetSpecialValueFor("radius")
     if self:GetCaster():HasModifier("modifier_royale_q") then
         local travel_distance   = (point - caster:GetAbsOrigin()):Length2D()
@@ -59,39 +66,145 @@ function royale_q:OnSpellStart()
         EmitSoundOn("Royale.Snowball.Throw", caster)
         caster:RemoveModifierByName("modifier_royale_q")
     else
-        local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
-        for _,unit in pairs(units) do
-            local damageTable = { victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
-            unit:AddNewModifier(caster, self, "modifier_royale_q_stun", {duration = self:GetSpecialValueFor("stun_duration") * (1 - unit:GetStatusResistance())})
-            ApplyDamage(damageTable)
+        self:ZapEnemies(point, radius)
+        if caster:HasTalent("special_bonus_unique_royale_6") then
+            Timers:CreateTimer(1, function()
+                self:ZapEnemies(point, radius)
+            end)
         end
-        EmitSoundOnLocationWithCaster(point, "Royale.Zap", caster)	
-        local p = ParticleManager:CreateParticle("particles/royale_zap.vpcf", PATTACH_WORLDORIGIN, caster)
-        ParticleManager:SetParticleControl(p, 0, point)
-        ParticleManager:SetParticleControl(p, 1, Vector(radius, radius, radius))
         caster:AddNewModifier(caster, self, "modifier_royale_q", {})
     end
 end
 
-function royale_q:OnProjectileHit_ExtraData(target, location, extra)
-    if not location then return end
+function royale_q:ZapEnemies(point, radius)
     if not IsServer() then return end
     local caster = self:GetCaster()
-    local enemies = FindUnitsInRadius(caster:GetTeamNumber(),location,nil,self:GetSpecialValueFor("radius"),DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,0,0,false)
-
-    for _,unit in pairs(enemies) do
-        local unit_pos = unit:GetAbsOrigin()
-        local knockback_direction = (unit_pos - location):Normalized()
-        ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
-        unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_slow", {duration = self:GetSpecialValueFor("slow_duration") * (1 - unit:GetStatusResistance())})
-        unit:AddNewModifier( caster, self, "modifier_generic_knockback_lua", 
-            { duration = 0.4, distance = self:GetSpecialValueFor("knockback_distance"), height = 0, direction_x = knockback_direction.x, direction_y = knockback_direction.y })
+    local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    for _,unit in pairs(units) do
+        local damageTable = { victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
+        unit:AddNewModifier(caster, self, "modifier_royale_q_stun", {duration = self:GetSpecialValueFor("stun_duration") * (1 - unit:GetStatusResistance())})
+        ApplyDamage(damageTable)
     end
-    local p = ParticleManager:CreateParticle("particles/econ/events/snowball/snowball_projectile_ability_endcap.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(p, 0, location)
-    ParticleManager:SetParticleControl(p, 1, Vector(radius, 0, 0))
+    EmitSoundOnLocationWithCaster(point, "Royale.Zap", caster)	
+    local p = ParticleManager:CreateParticle("particles/royale_zap.vpcf", PATTACH_WORLDORIGIN, caster)
+    ParticleManager:SetParticleControl(p, 0, point)
+    ParticleManager:SetParticleControl(p, 1, Vector(radius, radius, radius))
     ParticleManager:ReleaseParticleIndex(p)
+end
+
+function royale_q:OnProjectileHit(target, location)
+    if not location then return end
+    local caster = self:GetCaster()
+    local radius = self:GetSpecialValueFor("radius")
+    local dmg    = self:GetSpecialValueFor("damage")
+    local knock  = self:GetSpecialValueFor("knockback_distance")
+    local slowD  = self:GetSpecialValueFor("slow_duration")
+
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), location, nil, radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+        0, FIND_ANY_ORDER, false)
+
+    if not caster:HasTalent("special_bonus_unique_royale_6") then
+        for _,unit in pairs(enemies) do
+            ApplyDamage({victim=unit, attacker=caster, damage=dmg,
+                damage_type=DAMAGE_TYPE_MAGICAL, ability=self})
+            unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_slow", {
+                duration = slowD * (1 - unit:GetStatusResistance())
+            })
+            local dir = (unit:GetAbsOrigin() - location):Normalized()
+            unit:AddNewModifier(caster, self, "modifier_generic_knockback_lua", {
+                duration = 0.4, distance=knock, height=0,
+                direction_x=dir.x, direction_y=dir.y
+            })
+        end
+    end
+    if caster:HasTalent("special_bonus_unique_royale_6") and not self._rolled and #enemies > 0 then
+        self._rolled = true
+        ProjectileManager:CreateLinearProjectile({
+            Ability       = self,
+            EffectName    = "particles/royale_snowball.vpcf",
+            vSpawnOrigin  = location,
+            fDistance     = self:GetSpecialValueFor("evo_roll_distance"),
+            fStartRadius  = radius,
+            fEndRadius    = radius,
+            Source        = caster,
+            vVelocity     = self._cast_dir * 600,
+            iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_ENEMY,
+            iUnitTargetType  = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+            bProvidesVision  = false,
+        })
+        for _,unit in pairs(enemies) do
+            unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_roll", {
+                dir_x = self._cast_dir.x,
+                dir_y = self._cast_dir.y,
+                dist  = self:GetSpecialValueFor("evo_roll_distance"),
+                dur   = self:GetSpecialValueFor("evo_roll_duration"),
+            })
+        end
+    end
+
+        local p = ParticleManager:CreateParticle(
+            "particles/econ/events/snowball/snowball_projectile_ability_endcap.vpcf",
+            PATTACH_WORLDORIGIN, nil
+        )
+        ParticleManager:SetParticleControl(p, 0, location)
+        ParticleManager:SetParticleControl(p, 1, Vector(self:GetSpecialValueFor("radius"),0,0))
+        ParticleManager:ReleaseParticleIndex(p)
+
     EmitSoundOnLocationWithCaster(location, "Royale.Snowball.Impact", caster)
+end
+
+modifier_royale_q_snowball_roll = class({})
+
+function modifier_royale_q_snowball_roll:IsHidden()    return true end
+function modifier_royale_q_snowball_roll:IsPurgable()  return false end
+
+function modifier_royale_q_snowball_roll:GetMotionControllerPriority()
+    return DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM
+end
+function modifier_royale_q_snowball_roll:CheckState()
+    return {
+        [MODIFIER_STATE_STUNNED] = true,
+        [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+    }
+end
+
+function modifier_royale_q_snowball_roll:OnCreated(kv)
+    if not IsServer() then return end
+    local parent  = self:GetParent()
+    parent:AddEffects( EF_NODRAW )
+    parent:AddNoDraw()
+    self.dir     = Vector(kv.dir_x, kv.dir_y, 0)
+    self.dist    = kv.dist
+    self.dur     = kv.dur
+    self.location = parent:GetAbsOrigin()
+    self.elapsed = 0
+    if not self:ApplyHorizontalMotionController() then
+        self:Destroy()
+    end
+end
+
+function modifier_royale_q_snowball_roll:UpdateHorizontalMotion(parent, dt)
+    self.elapsed = self.elapsed + dt
+    local prog = math.min(self.elapsed / self.dur, 1)
+    local move = self.dir * (self.dist * dt / self.dur)
+    parent:SetAbsOrigin(parent:GetAbsOrigin() + move)
+    if prog >= 1 then
+        parent:InterruptMotionControllers(true)
+        self:Destroy()
+    end
+end
+
+function modifier_royale_q_snowball_roll:OnDestroy()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    parent:RemoveEffects( EF_NODRAW )
+    parent:RemoveNoDraw()
+    ApplyDamage({victim=parent, attacker=self:GetCaster(), damage=self:GetAbility():GetSpecialValueFor("damage"), damage_type=DAMAGE_TYPE_MAGICAL, ability=self:GetAbility()})
+    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_royale_q_snowball_slow", {duration = self:GetAbility():GetSpecialValueFor("slow_duration") * (1 - parent:GetStatusResistance())})
+    local dir = (parent:GetAbsOrigin() - self.location):Normalized()
+    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_knockback_lua", {duration = 0.4, distance=175, height=0, direction_x=dir.x, direction_y=dir.y})
+    parent:RemoveHorizontalMotionController(self)
 end
 
 modifier_royale_q_stun = class({})

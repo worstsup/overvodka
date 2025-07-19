@@ -6,6 +6,9 @@ royale_w = class({})
 
 function royale_w:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
+    PrecacheResource("model", "models/royale/goblins/melee/g_sword.vmdl", context)
+    PrecacheResource("model", "models/royale/goblins/ranged/spear.vmdl", context)
+    PrecacheResource("model", "models/royale/goblins/ranged/bochka.vmdl", context)
     PrecacheUnitByNameSync("npc_goblin_melee", context)
     PrecacheUnitByNameSync("npc_goblin_ranged", context)
 end
@@ -59,6 +62,8 @@ function royale_w:OnSpellStart()
         melee:SetMinimumGoldBounty(gold)
         melee:SetMaximumGoldBounty(gold)
         melee:SetDeathXP(xp)
+        local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/melee/g_sword.vmdl"})
+        weapon:FollowEntityMerge(melee, "attach_attack1")
 
         local zOffsetR = isSide and sideOffset or 0
         local posB = spawnPoint - dir * forwardDist + perp * lateral + dir * zOffsetR
@@ -77,6 +82,10 @@ function royale_w:OnSpellStart()
         ranged:SetMinimumGoldBounty(gold)
         ranged:SetMaximumGoldBounty(gold)
         ranged:SetDeathXP(xp)
+        local bochka = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/bochka.vmdl"})
+        bochka:FollowEntityMerge(ranged, "attach_bochka")
+        local spear = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/spear.vmdl"})
+        spear:FollowEntityMerge(ranged, "attach_attack1")
     end
 
     EmitSoundOnLocationWithCaster(spawnPoint, "GoblinGang.Deploy", caster)

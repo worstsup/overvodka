@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_royale_megaknight", "heroes/royale/royale_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_megaknight_jump", "heroes/royale/royale_r", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
 royale_r = class({})
 
@@ -148,6 +149,15 @@ function modifier_royale_megaknight:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     local splashRadius = self:GetAbility():GetSpecialValueFor("attack_splash_radius")
     local splashDmg = self:GetParent():GetAverageTrueAttackDamage(nil)
+    if self:GetAbility():GetSpecialValueFor("evo_knockback_distance") > 0 then
+        local dir = (params.target:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Normalized()
+        params.target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_knockback_lua", {
+            duration = 0.4,
+            distance = self:GetAbility():GetSpecialValueFor("evo_knockback_distance"),
+            height = 250,
+            direction_x = dir.x, direction_y = dir.y,
+        })
+    end
     local targetPos = params.target:GetAbsOrigin()
     local p = ParticleManager:CreateParticle( "particles/megaknight_attack.vpcf", PATTACH_WORLDORIGIN, nil )
     ParticleManager:SetParticleControl(p, 0, targetPos)
