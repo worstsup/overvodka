@@ -3056,46 +3056,46 @@
 		"Ability1"		"royale_q"
 		"Ability2"		"royale_w"
 		"Ability3"		"royale_e"
-		"Ability4"		"generic_hidden"
+		"Ability4"		"royale_shard"
 		"Ability5"		"royale_scepter"
 		"Ability6"		"royale_r"
 		"Ability7"		"royale_innate"
 
-		"Ability10"		"special_bonus_unique_warlock_5"
-		"Ability11"		"special_bonus_unique_warlock_upheaval_aoe"
-		"Ability12"		"special_bonus_unique_warlock_10"
-		"Ability13"		"special_bonus_unique_warlock_7"
-		"Ability14"		"special_bonus_unique_warlock_4"
+		"Ability10"		"special_bonus_unique_royale_1"
+		"Ability11"		"special_bonus_unique_royale_2"
+		"Ability12"		"special_bonus_unique_royale_3"
+		"Ability13"		"special_bonus_unique_royale_4"
+		"Ability14"		"special_bonus_unique_royale_5"
 		"Ability15"		"special_bonus_unique_royale_6"
 		"Ability16"		"special_bonus_unique_royale_7"
-		"Ability17"		"special_bonus_unique_warlock_1"
+		"Ability17"		"special_bonus_unique_royale_8"
 
 		"Facets"
 		{
-			"warlock_golem" 
+			"royale_megaknight"
 			{
 				"Icon"				"summons"
 				"Color"				"Red"
 				"GradientID"		"0"
 			}
+			"royale_goblin"
+			{
+				"Icon"				"gold"
+				"Color"				"Green"
+				"GradientID"		"3"
+			}
+			"warlock_golem" 
+			{
+				"Deprecated" "true"
+			}
 
 			"warlock_grimoire"
 			{
-				"Icon"				"xp"
-				"Color"				"Gray"
-				"GradientID"		"3"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"warlock_black_grimoire"
-					}
-				}
+				"Deprecated" "true"
 			}
 		}
 
-		"ArmorPhysical"		"1"
+		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"27"
 		"AttackDamageMax"		"37"
@@ -3106,13 +3106,13 @@
 		"AttackRange"		"600"
 		"ProjectileModel"		"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
 		"ProjectileSpeed"		"1200"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
 		"AttributeBaseStrength"		"22"
 		"AttributeStrengthGain"		"2.4"
-		"AttributeBaseAgility"		"10"
-		"AttributeAgilityGain"		"1.000000"
-		"AttributeBaseIntelligence"		"25"
-		"AttributeIntelligenceGain"		"3.100000"
+		"AttributeBaseAgility"		"16"
+		"AttributeAgilityGain"		"1.8"
+		"AttributeBaseIntelligence"		"24"
+		"AttributeIntelligenceGain"		"2.8"
 		"MovementSpeed"		"300"
 		"HasAggressiveStance"		"1"
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"

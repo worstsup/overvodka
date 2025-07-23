@@ -2228,6 +2228,7 @@
 		
 		"DOTA_Tooltip_modifier_item_bablokrad_cooldown" "Bablokrad"
 		"DOTA_Tooltip_modifier_item_bablokrad_cooldown_Description" "You have recently been robbed, so your enemies cannot steal your money yet"
+		"bablokrad_recently_used" "This hero has recently been robbed"
 
 		"DOTA_Item_Build_Mid_Items"				"Magic Build"
 		"DOTA_Item_Build_Late_Items"			"Phys Build"

@@ -8,6 +8,8 @@ royale_r = class({})
 function royale_r:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
     PrecacheResource("particle", "particles/megaknight_attack.vpcf", context)
+    PrecacheResource("particle", "particles/royale_die.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", context)
     PrecacheUnitByNameSync("npc_megaknight", context)
 end
 
@@ -33,7 +35,10 @@ function royale_r:OnSpellStart()
     local base_hp = self:GetSpecialValueFor("base_hp")
     local gold = self:GetSpecialValueFor("gold")
     local xp = self:GetSpecialValueFor("xp")
-
+    local sound = "MegaKnight.Deploy"
+    if caster:HasTalent("special_bonus_unique_royale_7") then
+        sound = "MegaKnight.Deploy.Evo"
+    end
     local mega = CreateUnitByName("npc_megaknight", point, true, caster, nil, caster:GetTeamNumber())
     mega:SetOwner(caster)
     mega:AddNewModifier(caster, self, "modifier_kill", {duration = duration})
@@ -47,7 +52,7 @@ function royale_r:OnSpellStart()
     mega:SetDeathXP(xp)
     mega:AddNewModifier(caster, self, "modifier_royale_megaknight", {})
     mega:AddNewModifier(caster, self, "modifier_overvodka_creep", {})
-    EmitSoundOnLocationWithCaster(point, "MegaKnight.Deploy", caster)
+    EmitSoundOnLocationWithCaster(point, sound, caster)
 end
 
 
@@ -77,7 +82,13 @@ function modifier_royale_megaknight:OnCreated(kv)
             knockback_height = 200,
         })
     end
-    self:StartIntervalThink(0.25)
+    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 1, Vector(spawnRadius, spawnRadius, 1))
+    ParticleManager:ReleaseParticleIndex(particle)
+    Timers:CreateTimer(0.5, function()
+        self:StartIntervalThink(0.25)
+    end)
 end
 
 function modifier_royale_megaknight:OnIntervalThink()
@@ -98,11 +109,18 @@ function modifier_royale_megaknight:OnIntervalThink()
         for _,unit in pairs(sortedEnemies) do
             local dist = (unit:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D()
             if dist >= jumpMin then
-                EmitSoundOn("MegaKnight.Jump.Prepare", parent)
+                if not self:GetCaster():HasTalent("special_bonus_unique_royale_7") then
+                    EmitSoundOn("MegaKnight.Jump.Prepare", parent)
+                end
                 self.preparing = true
                 parent:Stop()
-                parent:StartGesture(ACT_DOTA_CAST_ABILITY_2)
                 parent:FaceTowards(unit:GetAbsOrigin())
+                Timers:CreateTimer(0.25, function()
+                    parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+                    if self:GetCaster():HasTalent("special_bonus_unique_royale_7") then
+                        EmitSoundOn("MegaKnight.Jump.Evo", parent)
+                    end
+                end)
                 Timers:CreateTimer(prepareTime, function()
                     local kv = {
                         target_x = unit:GetAbsOrigin().x,
@@ -141,8 +159,17 @@ function modifier_royale_megaknight:OnIntervalThink()
     end
 end
 
+function modifier_royale_megaknight:OnDestroy()
+    if not IsServer() then return end
+    EmitSoundOn("Royale.Death", self:GetParent())
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
+    UTIL_Remove(self:GetParent())
+end
+
 function modifier_royale_megaknight:DeclareFunctions()
-    return { MODIFIER_EVENT_ON_ATTACK_LANDED, MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND }
+    return { MODIFIER_EVENT_ON_ATTACK_LANDED, MODIFIER_EVENT_ON_DEATH, MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND }
 end
 
 function modifier_royale_megaknight:OnAttackLanded(params)
@@ -169,6 +196,23 @@ function modifier_royale_megaknight:OnAttackLanded(params)
                        DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)) do
         if unit ~= params.target then
             ApplyDamage({victim=unit, attacker=self:GetParent(), damage=splashDmg, damage_type=DAMAGE_TYPE_PHYSICAL, ability=self:GetAbility()})
+        end
+    end
+end
+
+function modifier_royale_megaknight:OnDeath(params)
+    if not IsServer() then return end
+    local victim = params.unit
+    local attacker = params.attacker
+    local cdr = self:GetAbility():GetSpecialValueFor("facet_cd_reduction")
+    if cdr <= 0 then return end
+    if attacker == self:GetParent() and victim:IsRealHero() and attacker:GetTeamNumber() ~= victim:GetTeamNumber() then
+        local ability = self:GetCaster():FindAbilityByName("royale_r")
+        if ability then
+            local cd = ability:GetCooldownTimeRemaining()
+            local new_cd = math.max(cd - cdr, 0)
+            ability:EndCooldown()
+            if new_cd > 0 then ability:StartCooldown(new_cd) end
         end
     end
 end
@@ -200,8 +244,10 @@ function modifier_royale_megaknight_jump:OnCreated(kv)
     self.g = (8 * self.height) / (self.duration ^ 2)
 
     self.elapsed = 0
-    parent:StartGesture(ACT_DOTA_CAST_ABILITY_2)
-    EmitSoundOn("MegaKnight.Jump.Cast", parent)
+    --parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+    if not self.caster:GetOwner():HasTalent("special_bonus_unique_royale_7") then
+        EmitSoundOn("MegaKnight.Jump.Cast", parent)
+    end
 
     if not self:ApplyHorizontalMotionController() or not self:ApplyVerticalMotionController() then
         self:Destroy()
@@ -259,4 +305,8 @@ function modifier_royale_megaknight_jump:FinishJump()
             knockback_height = 200,
         })
     end
+    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 1, Vector(jumpRadius, jumpRadius, 1))
+    ParticleManager:ReleaseParticleIndex(particle)
 end

@@ -23,7 +23,7 @@ end
 
 function item_bablokrad:GetCustomCastErrorTarget(target)
     if target:HasModifier("modifier_item_bablokrad_cooldown") then
-        return "У выбранного героя недавно уже пиздили бабло"
+        return "#bablokrad_recently_used"
     end
 end
 

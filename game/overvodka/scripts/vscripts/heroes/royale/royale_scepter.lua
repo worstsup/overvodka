@@ -6,6 +6,7 @@ royale_scepter = class({})
 
 function royale_scepter:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
+    PrecacheResource("particle", "particles/royale_die.vpcf", context)
     PrecacheUnitByNameSync("npc_inferno", context)
 end
 
@@ -125,6 +126,9 @@ function modifier_inferno_tower_beam:OnIntervalThink()
     end
 
     self.elapsed = math.min(self.elapsed + self.attack_rate, self.ramp_time)
+    if parent:HasModifier("modifier_royale_e_rage") then
+        self.elapsed = math.min(self.elapsed + self.attack_rate * 2, self.ramp_time)
+    end
     local pct = self.elapsed / self.ramp_time
     local damage = self.base_dmg + (self.max_dmg - self.base_dmg) * pct
 
@@ -157,6 +161,10 @@ end
 
 function modifier_royale_scepter:OnDestroy()
     if not IsServer() then return end
+    EmitSoundOn("Royale.Death", self:GetParent())
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
     UTIL_Remove(self:GetParent())
 end
 

@@ -13509,7 +13509,11 @@
 		"AbilityCooldown"		   		"14 12 10 8"
 		"AbilityValues"
 		{
-			"damage"					"75 150 225 300"
+			"damage"
+			{
+				"value"	"75 150 225 300"
+				"special_bonus_unique_royale_3" "+75"
+			}
 			"radius"
 			{
 				"value"	"300"
@@ -13533,7 +13537,6 @@
 		"ScriptFile"					"heroes/royale/royale_w"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityTextureName"			"royale_w"
-		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCastRange"				"600"
@@ -13546,21 +13549,35 @@
 			"melee_hp"
 			{
 				"value"	"150 225 300 375"
+				"special_bonus_unique_royale_8"	"x2"
 			}
 			"melee_dmg"
 			{
 				"value"	"25 50 75 100"
+				"special_bonus_unique_royale_8"	"x2"
 			}
 			"ranged_hp"
 			{
 				"value"	"75 125 175 225"
+				"special_bonus_unique_royale_8"	"x2"
 			}
 			"ranged_dmg"
 			{
 				"value"	"15 30 45 60"
+				"special_bonus_unique_royale_8"	"x2"
 			}
-			"xp" "20 30 40 50"
 			"gold" "10 20 30 40"
+			"xp" "20 30 40 50"
+			"AbilityCooldown"
+			{
+				"value"	"30"
+				"special_bonus_unique_royale_2" "-6"
+			}
+			"gold_steal"
+			{
+				"value"	"0"
+				"special_bonus_facet_royale_goblin" "+1 +2 +3 +4"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -13580,7 +13597,6 @@
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.4"
 		"AbilityManaCost"		   		"100 120 140 160"
-		"AbilityCooldown"		   		"30 28 26 24"
 		"AbilityValues"
 		{
 			"damage"			"50 100 150 200"
@@ -13593,6 +13609,20 @@
 			"rage_duration"		"5.0 5.5 6.0 6.5"
 			"bonus_ms"			"25"
 			"bonus_as"			"30 60 90 120"
+			"AbilityCooldown"
+			{
+				"value"	"30 28 26 24"
+				"special_bonus_unique_royale_5" "=0"
+			}
+			"AbilityCharges"
+			{
+				"value"										"0"
+				"special_bonus_unique_royale_5"			 "+2"
+			}
+			"AbilityChargeRestoreTime"
+			{
+				"value"	"30 28 26 24"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -13614,6 +13644,7 @@
 			"duration"
 			{
 				"value"	"15"
+				"special_bonus_unique_royale_4"	"+5"
 			}
 			"base_hp"
 			{
@@ -13622,6 +13653,7 @@
 			"base_dmg"
 			{
 				"value"	"150 300 450"
+				"special_bonus_unique_royale_1"	"+100"
 			}
 			"spawn_radius"	"300 325 350"
 			"spawn_dmg"		"200 400 600"
@@ -13638,6 +13670,41 @@
 				"value"	"0"
 				"special_bonus_unique_royale_7" "+400"
 			}
+			"facet_cd_reduction"
+			{
+				"value"	"0"
+				"special_bonus_facet_royale_megaknight" "+10"
+			}
+		}
+	}
+	//=================================================================================================================
+	// SPARKY
+	//=================================================================================================================
+	"royale_shard"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/royale/royale_shard"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"MaxLevel"						"1"
+		"AbilityTextureName"			"sans_shard"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastRange"				"600"
+		"AbilityCooldown"				"50"
+		"AbilityManaCost"				"200"
+		"IsGrantedByShard"				"1"
+		"AbilityValues"
+		{
+			"duration"			"20"
+			"base_hp"			"1000"
+			"base_dmg"			"500"
+			"pct_dmg"			"25"
+			"charge_time"		"3.0"
+			"attack_range"		"600"
+			"splash_radius"		"200"
+			"knockback"			"250"
+			"gold"				"150"
+			"xp"				"250"
 		}
 	}
 	//=================================================================================================================
@@ -13650,7 +13717,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"MaxLevel"						"1"
-		"AbilityTextureName"			"sans_scepter"
+		"AbilityTextureName"			"royale_scepter"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCastRange"				"600"
 		"AbilityCooldown"				"60"

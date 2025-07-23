@@ -1,11 +1,13 @@
 LinkLuaModifier("modifier_royale_w_melee", "heroes/royale/royale_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_w_ranged", "heroes/royale/royale_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_facet_royale_goblin", "heroes/royale/royale_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
 
 royale_w = class({})
 
 function royale_w:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
+    PrecacheResource("particle", "particles/royale_die.vpcf", context)
     PrecacheResource("model", "models/royale/goblins/melee/g_sword.vmdl", context)
     PrecacheResource("model", "models/royale/goblins/ranged/spear.vmdl", context)
     PrecacheResource("model", "models/royale/goblins/ranged/bochka.vmdl", context)
@@ -36,6 +38,7 @@ function royale_w:OnSpellStart()
     local xp         = self:GetSpecialValueFor("xp")
     local spacing    = 150
     local forwardDist = 150
+    local gold_steal = self:GetSpecialValueFor("gold_steal")
 
     local dir = (spawnPoint - caster:GetAbsOrigin()):Normalized()
     local perp = Vector(-dir.y, dir.x, 0)
@@ -64,6 +67,9 @@ function royale_w:OnSpellStart()
         melee:SetDeathXP(xp)
         local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/melee/g_sword.vmdl"})
         weapon:FollowEntityMerge(melee, "attach_attack1")
+        if gold_steal > 0 then
+            melee:AddNewModifier(caster, self, "modifier_facet_royale_goblin", {})
+        end
 
         local zOffsetR = isSide and sideOffset or 0
         local posB = spawnPoint - dir * forwardDist + perp * lateral + dir * zOffsetR
@@ -86,6 +92,9 @@ function royale_w:OnSpellStart()
         bochka:FollowEntityMerge(ranged, "attach_bochka")
         local spear = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/spear.vmdl"})
         spear:FollowEntityMerge(ranged, "attach_attack1")
+        if gold_steal > 0 then
+            ranged:AddNewModifier(caster, self, "modifier_facet_royale_goblin", {})
+        end
     end
 
     EmitSoundOnLocationWithCaster(spawnPoint, "GoblinGang.Deploy", caster)
@@ -105,6 +114,15 @@ function modifier_royale_w_melee:OnAttack(params)
     end
 end
 
+function modifier_royale_w_melee:OnDestroy()
+    if not IsServer() then return end
+    EmitSoundOn("Royale.Death", self:GetParent())
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
+    UTIL_Remove(self:GetParent())
+end
+
 modifier_royale_w_ranged = class({})
 function modifier_royale_w_ranged:IsHidden() return true end
 function modifier_royale_w_ranged:IsPurgable() return false end
@@ -116,5 +134,34 @@ end
 function modifier_royale_w_ranged:OnAttack(params)
     if params.attacker == self:GetParent() then
         EmitSoundOn("GoblinGang.Ranged.Attack", params.attacker)
+    end
+end
+
+function modifier_royale_w_ranged:OnDestroy()
+    if not IsServer() then return end
+    EmitSoundOn("Royale.Death", self:GetParent())
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
+    UTIL_Remove(self:GetParent())
+end
+
+modifier_facet_royale_goblin = class({})
+function modifier_facet_royale_goblin:IsHidden() return true end
+function modifier_facet_royale_goblin:IsPurgable() return false end
+
+function modifier_facet_royale_goblin:DeclareFunctions()
+    return { MODIFIER_EVENT_ON_ATTACK_LANDED }
+end
+
+function modifier_facet_royale_goblin:OnAttackLanded(params)
+    if not IsServer() then return end
+    if params.attacker ~= self:GetParent() or not params.target:IsRealHero() or params.attacker:GetTeamNumber() == params.target:GetTeamNumber() then return end
+
+    local gold_steal = self:GetAbility():GetSpecialValueFor("gold_steal")
+    local enemyID = params.target:GetPlayerID()
+    if enemyID then
+        PlayerResource:SpendGold(enemyID, gold_steal, 4)
+        self:GetCaster():ModifyGold(gold_steal, false, 0)
     end
 end

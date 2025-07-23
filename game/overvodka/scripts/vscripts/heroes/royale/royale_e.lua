@@ -15,6 +15,12 @@ function royale_e:Precache(context)
     PrecacheResource("particle", "particles/royale_freeze_effect.vpcf", context)
 end
 
+function royale_e:OnAbilityUpgrade( hAbility )
+	if not IsServer() then return end
+	self.BaseClass.OnAbilityUpgrade( self, hAbility )
+	self:EnableAbilityChargesOnTalentUpgrade( hAbility, "special_bonus_unique_royale_5" )
+end
+
 function royale_e:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
@@ -66,7 +72,7 @@ function modifier_royale_e_rage_aura:GetModifierAura() return "modifier_royale_e
 function modifier_royale_e_rage_aura:GetAuraDuration() return 0.1 end
 function modifier_royale_e_rage_aura:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") end
 function modifier_royale_e_rage_aura:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
-function modifier_royale_e_rage_aura:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_royale_e_rage_aura:GetAuraSearchType() return DOTA_UNIT_TARGET_ALL end
 function modifier_royale_e_rage_aura:GetAuraSearchFlags() return 0 end
 
 function modifier_royale_e_rage_aura:OnCreated()

@@ -2,6 +2,11 @@ LinkLuaModifier("modifier_royale_innate", "heroes/royale/royale_innate", LUA_MOD
 LinkLuaModifier("modifier_royale_innate_buff", "heroes/royale/royale_innate", LUA_MODIFIER_MOTION_NONE)
 
 royale_innate = class({})
+
+function royale_innate:Precache(context)
+    PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
+end
+
 function royale_innate:GetIntrinsicModifierName()
     return "modifier_royale_innate"
 end
@@ -19,9 +24,14 @@ end
 
 function modifier_royale_innate:OnIntervalThink()
     if not IsServer() then return end
-    if not self.evolved and GameRules:GetGameTime() >= 750 then
+    local time = 750
+    if GetMapName() == "overvodka_5x5" then
+        time = 1200
+    end
+    if not self.evolved and GameRules:GetGameTime() >= time then
         self.evolved = true
         self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_royale_innate_buff", {})
+        EmitSoundOn("Royale.DoubleElixir", self:GetParent())
     end
 end
 
@@ -35,7 +45,6 @@ function modifier_royale_innate_buff:OnCreated()
     self.mana_regen = self:GetParent():GetManaRegen()
     self:SetHasCustomTransmitterData(true)
     self:SendBuffRefreshToClients()
-    print("Royale's innate buff created with health regen: " .. self.health_regen .. " and mana regen: " .. self.mana_regen)
 end
 
 function modifier_royale_innate_buff:AddCustomTransmitterData()
