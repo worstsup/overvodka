@@ -11,19 +11,25 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "Материал.vmat"
-								to = "models/royale/megaknight/megaknight_1.vmat"
-							},
-							{
-								from = ""
-								to = "models/royale/megaknight/megaknight_2.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/royale/megaknight/megaknight.fbx"
+						import_scale = 1.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -67,8 +73,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -336.700867, -139.326111, -363.831146 ]
-								hitbox_maxs = [ 336.7005, 339.97406, 468.812225 ]
+								hitbox_mins = [ -50.505142, -9.706299, -53.583015 ]
+								hitbox_maxs = [ 50.505081, 49.412422, 71.56501 ]
 							},
 							{
 								_class = "Hitbox"
@@ -77,8 +83,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -323.027954, -263.064819, -363.831146 ]
-								hitbox_maxs = [ 350.818726, 204.247955, 468.812225 ]
+								hitbox_mins = [ -48.268143, -38.896835, -53.583015 ]
+								hitbox_maxs = [ 52.622803, 31.03421, 71.56501 ]
 							},
 							{
 								_class = "Hitbox"
@@ -87,8 +93,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -437.027649, -341.000305, -363.831146 ]
-								hitbox_maxs = [ 456.912781, 367.786743, 460.265839 ]
+								hitbox_mins = [ -65.554161, -57.453609, -53.863106 ]
+								hitbox_maxs = [ 67.352379, 53.568226, 71.565002 ]
 							},
 							{
 								_class = "Hitbox"
@@ -97,8 +103,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -370.039612, -67.677765, -359.214355 ]
-								hitbox_maxs = [ 370.039307, 646.126343, 370.53479 ]
+								hitbox_mins = [ -55.505943, -10.055912, -54.026726 ]
+								hitbox_maxs = [ 56.042381, 73.942139, 55.435646 ]
 							},
 							{
 								_class = "Hitbox"
@@ -107,8 +113,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -370.348511, -32.628113, -207.137573 ]
-								hitbox_maxs = [ 296.00293, 671.610657, 343.705139 ]
+								hitbox_mins = [ -55.870148, -20.046036, -31.935011 ]
+								hitbox_maxs = [ 44.724747, 90.8228, 52.127869 ]
 							},
 							{
 								_class = "Hitbox"
@@ -117,8 +123,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -343.444397, -249.182251, -209.051941 ]
-								hitbox_maxs = [ 261.832825, 753.66394, 344.604614 ]
+								hitbox_mins = [ -51.849213, -42.757153, -32.67511 ]
+								hitbox_maxs = [ 39.465271, 102.672073, 52.430748 ]
 							},
 							{
 								_class = "Hitbox"
@@ -127,8 +133,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -252.430588, -221.742188, -176.7883 ]
-								hitbox_maxs = [ 181.560013, 983.47168, 250.110687 ]
+								hitbox_mins = [ -26.733988, -39.041737, -55.682404 ]
+								hitbox_maxs = [ 114.525719, 62.390285, 72.554565 ]
 							},
 							{
 								_class = "Hitbox"
@@ -137,8 +143,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -296.485657, -31.964111, -182.426437 ]
-								hitbox_maxs = [ 369.948669, 672.702271, 338.577698 ]
+								hitbox_mins = [ -45.029984, -4.424507, -28.516565 ]
+								hitbox_maxs = [ 55.609673, 100.801094, 60.589577 ]
 							},
 							{
 								_class = "Hitbox"
@@ -147,8 +153,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -263.447998, -232.550476, -184.877045 ]
-								hitbox_maxs = [ 342.156372, 754.102234, 339.612457 ]
+								hitbox_mins = [ -40.621849, -33.476746, -29.470299 ]
+								hitbox_maxs = [ 51.142006, 102.756882, 60.975609 ]
 							},
 							{
 								_class = "Hitbox"
@@ -157,8 +163,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -181.421356, -250.916321, -244.196198 ]
-								hitbox_maxs = [ 252.297211, 884.332275, 181.33963 ]
+								hitbox_mins = [ -35.753403, -28.019058, -46.588776 ]
+								hitbox_maxs = [ 38.889977, 152.388214, 38.998108 ]
 							},
 							{
 								_class = "Hitbox"
@@ -167,8 +173,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -218.833008, -83.436951, -338.966553 ]
-								hitbox_maxs = [ 435.005066, 602.17157, 363.125671 ]
+								hitbox_mins = [ -38.893478, -14.617569, -50.953178 ]
+								hitbox_maxs = [ 65.049622, 94.160431, 58.526283 ]
 							},
 							{
 								_class = "Hitbox"
@@ -177,8 +183,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -221.266785, -244.725891, -256.554688 ]
-								hitbox_maxs = [ 232.171082, 455.511108, 267.660645 ]
+								hitbox_mins = [ -33.332191, -34.412491, -38.765812 ]
+								hitbox_maxs = [ 35.065353, 70.548965, 42.22102 ]
 							},
 							{
 								_class = "Hitbox"
@@ -187,8 +193,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -200.912781, -304.764771, -248.971924 ]
-								hitbox_maxs = [ 198.045197, 458.037476, 444.959351 ]
+								hitbox_mins = [ -30.080666, -45.711082, -37.308807 ]
+								hitbox_maxs = [ 29.756332, 68.692177, 66.777954 ]
 							},
 							{
 								_class = "Hitbox"
@@ -197,8 +203,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -532.53186, -84.151428, -334.581482 ]
-								hitbox_maxs = [ 218.832169, 596.86792, 376.442993 ]
+								hitbox_mins = [ -82.281235, -21.847038, -51.881916 ]
+								hitbox_maxs = [ 38.574341, 92.944336, 60.733105 ]
 							},
 							{
 								_class = "Hitbox"
@@ -207,8 +213,8 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -235.212463, -243.799805, -253.579468 ]
-								hitbox_maxs = [ 221.263489, 454.403931, 246.195648 ]
+								hitbox_mins = [ -38.439224, -34.172073, -39.948593 ]
+								hitbox_maxs = [ 33.332565, 70.814987, 41.012161 ]
 							},
 							{
 								_class = "Hitbox"
@@ -217,26 +223,10 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -198.1427, -286.219055, -245.53064 ]
-								hitbox_maxs = [ 200.815674, 463.329163, 382.561035 ]
+								hitbox_mins = [ -29.776592, -42.894188, -36.754501 ]
+								hitbox_maxs = [ 30.059917, 69.546181, 57.441422 ]
 							},
 						]
-					},
-				]
-			},
-			{
-				_class = "RenderMeshList"
-				children = 
-				[
-					{
-						_class = "RenderMeshFile"
-						filename = "models/royale/megaknight/megaknight.fbx"
-						import_scale = 1.0
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
 					},
 				]
 			},
@@ -289,88 +279,8 @@
 						source_filename = "models/royale/megaknight/Landing.fbx"
 						import_bone_scales = false
 						start_frame = -1
-						end_frame = 50
-						framerate = -1.0
-						reverse = false
-						additional_anim_files = [  ]
-					},
-					{
-						_class = "AnimFile"
-						name = "Slow_Run"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								extract_initial_offset = false
-								root_bone_name = ""
-								motion_type = "Uniform"
-							},
-						]
-						is_default_idle_anim = false
-						activity_name = "ACT_DOTA_RUN"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						animgraph_additive = false
-						delete_from_compiled_model = false
-						source_filename = "models/royale/megaknight/Slow Run.fbx"
-						import_bone_scales = false
-						start_frame = -1
 						end_frame = -1
-						framerate = 3.0
-						reverse = false
-						additional_anim_files = [  ]
-					},
-					{
-						_class = "AnimFile"
-						name = "Standing_Melee_Attack_Horizontal"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								extract_initial_offset = false
-								root_bone_name = ""
-								motion_type = "Uniform"
-							},
-						]
-						is_default_idle_anim = false
-						activity_name = "ACT_DOTA_ATTACK"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						animgraph_additive = false
-						delete_from_compiled_model = false
-						source_filename = "models/royale/megaknight/Standing Melee Attack Horizontal.fbx"
-						import_bone_scales = false
-						start_frame = -1
-						end_frame = -1
-						framerate = 55.0
+						framerate = 70.0
 						reverse = false
 						additional_anim_files = [  ]
 					},
@@ -411,6 +321,86 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "Standing_Melee_Attack_Horizontal"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_ATTACK"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/royale/megaknight/Standing Melee Attack Horizontal.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = 50.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "Slow_Run"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								extract_initial_offset = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+						]
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_RUN"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/royale/megaknight/Slow Run.fbx"
+						import_bone_scales = false
+						start_frame = -1
+						end_frame = -1
+						framerate = 3.0
 						reverse = false
 						additional_anim_files = [  ]
 					},

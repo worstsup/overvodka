@@ -13516,7 +13516,7 @@
 			}
 			"radius"
 			{
-				"value"	"300"
+				"value"	"275"
 				"affected_by_aoe_increase"	"1"
 			}
 			"stun_duration"				"0.5 0.6 0.7 0.8"
@@ -13540,6 +13540,7 @@
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCastRange"				"600"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"duration"
@@ -13597,6 +13598,7 @@
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.4"
 		"AbilityManaCost"		   		"100 120 140 160"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"damage"			"50 100 150 200"
@@ -13639,6 +13641,7 @@
 		"AbilityManaCost"				"150 200 250"
 		"AbilityCastPoint"				"0.5"
 		"AbilityCastRange"				"600"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"duration"
@@ -13693,6 +13696,7 @@
 		"AbilityCooldown"				"50"
 		"AbilityManaCost"				"200"
 		"IsGrantedByShard"				"1"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"duration"			"20"
@@ -13723,6 +13727,7 @@
 		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"250"
 		"IsGrantedByScepter"			"1"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"duration"			"20"

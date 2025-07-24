@@ -88,7 +88,7 @@ function royale_q:ZapEnemies(point, radius)
     EmitSoundOnLocationWithCaster(point, "Royale.Zap", caster)	
     local p = ParticleManager:CreateParticle("particles/royale_zap.vpcf", PATTACH_WORLDORIGIN, caster)
     ParticleManager:SetParticleControl(p, 0, point)
-    ParticleManager:SetParticleControl(p, 1, Vector(radius, radius, radius))
+    ParticleManager:SetParticleControl(p, 1, Vector(radius + 50, radius + 50, radius + 50))
     ParticleManager:ReleaseParticleIndex(p)
 end
 
@@ -148,7 +148,7 @@ function royale_q:OnProjectileHit(target, location)
             PATTACH_WORLDORIGIN, nil
         )
         ParticleManager:SetParticleControl(p, 0, location)
-        ParticleManager:SetParticleControl(p, 1, Vector(self:GetSpecialValueFor("radius"),0,0))
+        ParticleManager:SetParticleControl(p, 1, Vector(self:GetSpecialValueFor("radius")-25,0,0))
         ParticleManager:ReleaseParticleIndex(p)
 
     EmitSoundOnLocationWithCaster(location, "Royale.Snowball.Impact", caster)

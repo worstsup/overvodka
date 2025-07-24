@@ -15750,7 +15750,7 @@
 		"PortraitBackgroundColor3"		"0.550000 0.280000 0.210000"
 		"PortraitBackgroundColor4"		"0.550000 0.280000 0.210000"
 		"PortraitBackgroundTexture"		"materials/portraits_card/portrait_backgrounds/full_view_background.vmat"
-		"PortraitBackgroundModel"		"models/heroes/pedestal/pedestal_1_large.vmdl"
+		"PortraitBackgroundModel"		"models/items/pedestals/pedestal_2/pedestal_2.vmdl"
 		"PortraitAnimationActivity"		"ACT_DOTA_LOADOUT"
 		"PortraitAnimationCycle"		"0.000000"
 		"PortraitAnimationRate"		"1.000000"
@@ -15762,102 +15762,63 @@
 			"default"
 			{
 				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"357.377136 155.100006 0.000000"
-				"PortraitFOV"		"40.000000"
+				"PortraitAngles"		"1.290534 155.100006 0.000000"
+				"PortraitFOV"		"21.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"econ_set_preview"
 			{
-				"PortraitPosition"		"771.931335 -289.589996 248.960266"
-				"PortraitAngles"		"8.140859 159.128220 0.000000"
-				"PortraitFOV"		"32.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"summons"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"356.865723 155.100006 0.000000"
-				"PortraitFOV"		"30.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_weapon"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"0.960604 150.610474 0.000000"
-				"PortraitFOV"		"24.000000"
+				"PortraitPosition"		"691.278076 -319.666412 170.872559"
+				"PortraitAngles"		"9.515344 154.850647 0.000000"
+				"PortraitFOV"		"14.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_head"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"0.960154 150.562790 0.000000"
+				"PortraitPosition"		"770.615662 -369.589996 525.688171"
+				"PortraitAngles"		"29.491228 154.279053 0.000000"
 				"PortraitFOV"		"17.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_legs"
+			{
+				"PortraitPosition"		"670.542358 -369.589996 397.294556"
+				"PortraitAngles"		"24.954285 151.027725 0.000000"
+				"PortraitFOV"		"22.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_arms"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"0.962402 150.801437 0.000000"
+				"PortraitPosition"		"799.700012 -369.589996 450.985962"
+				"PortraitAngles"		"24.950283 155.100006 0.000000"
 				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_back"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 215.862976"
-				"PortraitAngles"		"8.694261 160.288971 0.000000"
-				"PortraitFOV"		"17.000000"
+				"PortraitPosition"		"703.144409 -369.589996 362.296753"
+				"PortraitAngles"		"21.297022 152.166733 0.000000"
+				"PortraitFOV"		"18.000000"
 				"PortraitFar"		"2000.000000"
 			}
-			"slot_ability_ultimate"
+			"slot_misc"
 			{
-				"PortraitPosition"		"684.992798 -369.589996 315.073669"
-				"PortraitAngles"		"14.867985 151.542938 0.000000"
-				"PortraitFOV"		"30.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_offhand_weapon"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"1.000000 155.100006 0.000000"
-				"PortraitFOV"		"17.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_shoulder"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"1.000000 155.100006 0.000000"
-				"PortraitFOV"		"17.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_belt"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"1.000000 155.100006 0.000000"
+				"PortraitPosition"		"799.700012 -369.589996 223.297180"
+				"PortraitAngles"		"10.582209 155.100006 0.000000"
 				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_taunt"
 			{
 				"PortraitPosition"		"799.700012 -369.589996 333.137512"
-				"PortraitAngles"		"13.346159 155.375107 0.000000"
-				"PortraitFOV"		"28.000000"
+				"PortraitAngles"		"14.299254 155.375107 0.000000"
+				"PortraitFOV"		"26.000000"
 				"PortraitFar"		"2000.000000"
 			}
 		}
-		"SummonPosition"		"-12.393982 79.326302 0.000000"
-		"SummonScale"		"0.966600"
-		"PortraitHideParticles"		"0"
-		"PortraitHideDropShadow"		"0"
-		"PortraitDesaturateParticles"		"0"
-		"PortraitDesaturateHero"		"1"
-		"SummonAngles"		"-0.000000 -22.934509 0.000000"
 		"hero_presets"
 		{
 			"Default"
-			{
-				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
-			}
-			"slot_weapon"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
@@ -15865,27 +15826,19 @@
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
+			"slot_legs"
+			{
+				"PortraitHeroRotation"		"-0.000000 25.072338 0.000000"
+			}
 			"slot_arms"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
 			"slot_back"
 			{
-				"PortraitHeroRotation"		"-0.000000 -177.556244 0.000000"
+				"PortraitHeroRotation"		"-0.000000 120.577911 0.000000"
 			}
-			"slot_ability_ultimate"
-			{
-				"PortraitHeroRotation"		"-0.000000 20.033535 0.000000"
-			}
-			"slot_offhand_weapon"
-			{
-				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
-			}
-			"slot_shoulder"
-			{
-				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
-			}
-			"slot_belt"
+			"slot_misc"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
@@ -15896,20 +15849,15 @@
 		}
 		"EffectDissolveColor"		"0.550000 0.280000 0.210000"
 		"PortraitPlayIdleExpression"		"0"
+		"PortraitHideParticles"		"0"
+		"PortraitHideDropShadow"		"0"
+		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateHero"		"1"
 		"PortraitVignetteItem"		"0"
 		"PortraitBackgroundMap"		"maps/ui/dota_hud_loadout_2022.vmap"
 		"PortraitAllowAnimatedPortrait"		"1"
 		"GodraysFXColor"		"0.600000 0.282338 0.200000"
 		"GroundfogFXColor"		"0.600000 0.282338 0.200000"
-		"summons"
-		{
-			"npc_dota_warlock_golem"
-			{
-				"Position"		"34.287338 -87.127213 0.000000"
-				"Angles"		"-0.000000 -67.172562 0.000000"
-				"Scale"		"0.999928"
-			}
-		}
 	}
 	"npc_dota_hero_weaver"
 	{

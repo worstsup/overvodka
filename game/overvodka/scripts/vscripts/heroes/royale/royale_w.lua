@@ -47,9 +47,9 @@ function royale_w:OnSpellStart()
     for i = 1, 3 do
         local lateral = (i - 2) * spacing
         local isSide = (i ~= 2)
-
         local zOffsetM = isSide and (-sideOffset) or 0
         local posF = spawnPoint + dir * forwardDist + perp * lateral + dir * zOffsetM
+        
         local melee = CreateUnitByName("npc_goblin_melee", posF, true, caster, caster, caster:GetTeamNumber())
         melee:SetOwner(caster)
         melee:SetControllableByPlayer(caster:GetPlayerID(), true)
@@ -67,9 +67,6 @@ function royale_w:OnSpellStart()
         melee:SetDeathXP(xp)
         local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/melee/g_sword.vmdl"})
         weapon:FollowEntityMerge(melee, "attach_attack1")
-        if gold_steal > 0 then
-            melee:AddNewModifier(caster, self, "modifier_facet_royale_goblin", {})
-        end
 
         local zOffsetR = isSide and sideOffset or 0
         local posB = spawnPoint - dir * forwardDist + perp * lateral + dir * zOffsetR
@@ -92,7 +89,9 @@ function royale_w:OnSpellStart()
         bochka:FollowEntityMerge(ranged, "attach_bochka")
         local spear = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/spear.vmdl"})
         spear:FollowEntityMerge(ranged, "attach_attack1")
+
         if gold_steal > 0 then
+            melee:AddNewModifier(caster, self, "modifier_facet_royale_goblin", {})
             ranged:AddNewModifier(caster, self, "modifier_facet_royale_goblin", {})
         end
     end

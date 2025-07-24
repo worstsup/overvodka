@@ -84,6 +84,10 @@ end
 
 function modifier_royale_shard_ai:OnIntervalThink()
     if not IsServer() or not self.parent:IsAlive() then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     if self.time_to_wait > 0 then
         self.time_to_wait = self.time_to_wait - 0.1
         if self.time_to_wait <= 0 then

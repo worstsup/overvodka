@@ -172,7 +172,7 @@ function modifier_mazellov_r:OnCreated()
     end
     for i = 0, DOTA_MAX_ABILITIES -1 do
 		local ability = self:GetParent():GetAbilityByIndex(i)
-		if(ability) then
+		if ability then
             if (ability:GetAbilityIndex() ~= 5 and not self.caster:HasScepter()) or (ability:GetAbilityIndex() == 5 and self.caster:HasScepter()) then
                 ability:EndCooldown()
                 ability:RefreshCharges()
@@ -195,6 +195,17 @@ function modifier_mazellov_r:OnCreated()
 	ParticleManager:SetParticleControlEnt(self.particle, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true)
 	ParticleManager:SetParticleControl(self.particle, 2, Vector(self:GetDuration(),0,0))
 	self:AddParticle(self.particle, false, false, 1, false, false)
+
+    -- тупейший костыль, но что поделать
+    Timers:CreateTimer(0.03, function()
+        for i = 0, 4 do
+            local ability = self:GetParent():GetAbilityByIndex(i)
+            if ability then
+                ability:RefreshCharges()
+            end
+        end
+    end)
+
     EmitSoundOn("mazellov_r_"..RandomInt(1,2), self:GetParent())
 end
 
@@ -258,7 +269,9 @@ function modifier_mazellov_r_hidden:OnIntervalThink()
         if clone == nil then
             self:GetParent():RemoveEffects( EF_NODRAW )
             self:GetParent():RemoveNoDraw()
-            self:GetParent():Kill( self:GetAbility(), self:GetCaster() )
+            if self:GetRemainingTime() > 0.05 then
+                self:GetParent():Kill( self:GetAbility(), self:GetCaster() )
+            end
             self:Destroy()
             return
         end

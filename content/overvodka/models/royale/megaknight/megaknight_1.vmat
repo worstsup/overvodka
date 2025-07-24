@@ -6,6 +6,7 @@ Layer0
 
 	//---- Masks ----
 	F_MASKS_1 1
+	F_MASKS_2 1
 
 	//---- Blend To Full ----
 	g_flEnvMapBlendToFull "0.000"
@@ -42,10 +43,16 @@ Layer0
 	g_vBloomColor "[1.000000 1.000000 1.000000 0.000000]"
 
 	//---- Mask 1 ----
-	TextureDetailMask "materials/default/default_detailmask.tga"
-	TextureDiffuseWarpMask "materials/default/default_diffusemask.tga"
+	TextureDetailMask "models/royale/megaknight/mat_metallic.png"
+	TextureDiffuseWarpMask "models/royale/megaknight/mat_metallic.png"
 	TextureMetalnessMask "models/royale/megaknight/mat_metallic.png"
-	TextureSelfIllumMask "materials/default/default_selfillummask.tga"
+	TextureSelfIllumMask "models/royale/megaknight/mat_metallic.png"
+
+	//---- Mask 2 ----
+	TextureRimMask "[1.000000 1.000000 1.000000 0.000000]"
+	TextureSpecularExponent "models/royale/megaknight/mat_roughness.png"
+	TextureSpecularMask "models/royale/megaknight/mat_metallic.png"
+	TextureTintByBaseMask "models/royale/megaknight/mat_metallic.png"
 
 	//---- Normal Map ----
 	TextureNormal "models/royale/megaknight/mat_normal_opengl.png"
@@ -58,4 +65,41 @@ Layer0
 	g_flSpecularExponent "32.000"
 	g_flSpecularScale "1.000"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Mask 1"
+		{
+		}
+		"Mask 2"
+		{
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
+	}
 }

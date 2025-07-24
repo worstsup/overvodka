@@ -94,6 +94,10 @@ end
 function modifier_royale_megaknight:OnIntervalThink()
     if not IsServer() then return end
     if self.preparing then return end
+    if not self:GetAbility() then
+        self:Destroy()
+        return
+    end
     local parent = self:GetParent()
     if not parent:IsAlive() or parent:IsStunned() or parent:IsHexed() or parent:IsSilenced() or parent:HasModifier("modifier_royale_megaknight_jump") then return end
     local ability = self:GetAbility()
@@ -244,7 +248,6 @@ function modifier_royale_megaknight_jump:OnCreated(kv)
     self.g = (8 * self.height) / (self.duration ^ 2)
 
     self.elapsed = 0
-    --parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
     if not self.caster:GetOwner():HasTalent("special_bonus_unique_royale_7") then
         EmitSoundOn("MegaKnight.Jump.Cast", parent)
     end

@@ -110,7 +110,7 @@ function modifier_inferno_tower_beam:OnCreated()
     self:StartIntervalThink(self.attack_rate)
 
     self.particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-    ParticleManager:SetParticleControlEnt(self.particle, 1, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(self.particle, 1, parent, PATTACH_POINT_FOLLOW, "attach_attack1", parent:GetAbsOrigin(), true)
 end
 
 function modifier_inferno_tower_beam:OnIntervalThink()
@@ -132,7 +132,7 @@ function modifier_inferno_tower_beam:OnIntervalThink()
     local pct = self.elapsed / self.ramp_time
     local damage = self.base_dmg + (self.max_dmg - self.base_dmg) * pct
 
-    ParticleManager:SetParticleControlEnt(self.particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(self.particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_attack1", parent:GetAbsOrigin(), true)
     ParticleManager:SetParticleControlEnt(self.particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 
     ApplyDamage({victim = target, attacker = parent, damage = damage * self.attack_rate, damage_type = DAMAGE_TYPE_MAGICAL, ability = ability})

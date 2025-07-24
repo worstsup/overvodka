@@ -143,6 +143,7 @@ PrecacheUtils.particle_folders = {
 		"particles/units/heroes/hero_troll_warlord",
 		"particles/units/heroes/hero_keeper_of_the_light",
 		"particles/econ/events/ti11/balloon",
+		"particles/base_attacks/ranged_tower_good.vpcf",
 }
 
 PrecacheUtils.units = {
@@ -250,6 +251,7 @@ PrecacheUtils.models = {
 		"models/amogus/source/skebob.vmdl",
 		"models/amogus/source/spike.vmdl",
 		"models/amogus/source/skipper.vmdl",
+		"models/royale/king/royal_clash_character_0723211955_texture.vmdl",
 }
 
 PrecacheUtils.sounds = {

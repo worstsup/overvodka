@@ -193,6 +193,70 @@
 			}
         }
     }
+    "models/royale/goblins/melee/goblin_melee.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/enchantress.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.1 0.8 0.1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.8 0.1" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.0 0.8 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.0 0.8 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "680 -50 1100" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "45" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "models/royale/goblins/ranged/goblin_ranged.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/enchantress.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "0.1 0.8 0.1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.8 0.1" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.0 0.8 0.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.0 0.8 0.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "680 -50 1100" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "45" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
     "models/drake/shkolnik/shkolnik.vmdl"
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
@@ -419,6 +483,38 @@
             }
         }
     }
+    "models/royale/megaknight/megaknight.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/full_view_background.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1 1 1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.1 0.1" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.1 0.1 0.1" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.1 0.1 0.1" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "280 -20 215" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "20" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
     "models/kolyan/kolyan.vmdl"
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
@@ -448,6 +544,38 @@
                 "PortraitPosition"      "280 -20 140" // Позиция камеры для съемки портрета
                 "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
                 "PortraitFOV"           "8" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
+    "models/royale/king/royal_clash_character_0723211955_texture.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/crystal_maiden.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  ".1 .1 1" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "0.1 0.3 0.9" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "0.3 0.6 0.8" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "0.3 0.8 0.8" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "280 -12 105" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "12" // Угол обзора камеры для съемки портрета
             }
         }
     }
