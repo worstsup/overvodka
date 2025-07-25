@@ -237,12 +237,14 @@ function modifier_macan_r:HitLogic()
 			local enemy = unit
 			self.damageTable.victim = enemy
 			ApplyDamage(self.damageTable)
-			enemy:AddNewModifier(
-				self.parent,
-				self.ability,
-				"modifier_generic_stunned_lua",
-				{ duration = self.stun }
-			)
+			if enemy and not enemy:IsNull() then
+				enemy:AddNewModifier(
+					self.parent,
+					self.ability,
+					"modifier_generic_stunned_lua",
+					{ duration = self.stun }
+				)
+			end
 		end
 		if is_enemy or not (unit:IsCurrentlyHorizontalMotionControlled() or unit:IsCurrentlyVerticalMotionControlled()) then
 			local direction = unit:GetOrigin()-self.parent:GetOrigin()

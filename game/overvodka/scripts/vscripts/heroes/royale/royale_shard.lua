@@ -106,7 +106,7 @@ function modifier_royale_shard_ai:OnIntervalThink()
     if self.elapsed == 0 then
         EmitSoundOn("Sparky.Charge", parent)
     end
-    if not self.currentTarget or not self.currentTarget:IsAlive() or (self.currentTarget:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > self.attack_range then
+    if not self.currentTarget or self.currentTarget:IsNull() or (self.currentTarget and not self.currentTarget:IsAlive()) or (self.currentTarget and (self.currentTarget:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > self.attack_range) then
         local enemies = FindUnitsInRadius(
             parent:GetTeamNumber(), parent:GetAbsOrigin(), nil,
             1200,
@@ -178,7 +178,7 @@ function modifier_royale_shard_ai:OnIntervalThink()
             Ability = self.ability,
             EffectName = "particles/sparky_proj.vpcf",
             iMoveSpeed = 1200,
-            bDodgeable = false,
+            bDodgeable = true,
             bProvidesVision = false,
         }
         local dir = (parent:GetAbsOrigin() - self.currentTarget:GetAbsOrigin()):Normalized()

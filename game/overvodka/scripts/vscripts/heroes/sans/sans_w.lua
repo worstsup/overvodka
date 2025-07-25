@@ -112,8 +112,8 @@ function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 							knockback_height = 50
 						}
 					)
-					ApplyDamage(damageTable)
 					EmitSoundOn("sans_damage", unit)
+					ApplyDamage(damageTable)
 				end
 				damagedUnits[unit:entindex()] = true
 			end
@@ -247,6 +247,7 @@ function modifier_sans_w_bone_thinker:OnIntervalThink()
         )
 
         for _, enemy in pairs(enemies) do
+			EmitSoundOn("sans_damage", enemy)
             ApplyDamage({
                 victim = enemy,
                 attacker = self:GetCaster(),
@@ -254,8 +255,9 @@ function modifier_sans_w_bone_thinker:OnIntervalThink()
                 damage_type = DAMAGE_TYPE_MAGICAL,
                 ability = self:GetAbility()
             })
-			enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
-			EmitSoundOn("sans_damage", enemy)
+			if enemy and not enemy:IsNull() then
+				enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
+			end
         end
 
         local particle_cast = "particles/sans_wall_w.vpcf"

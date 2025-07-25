@@ -71,7 +71,8 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
 			caster = caster:GetOwner()
 		end
 		local damage = self:GetParent():GetAverageTrueAttackDamage(nil) * damage_pct * 0.01
-		ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+		params.target:EmitSound("DOTA_Item.MKB.melee")
+		params.target:EmitSound("DOTA_Item.MKB.Minibash")
 		if not params.attacker:IsRangedAttacker() then
 			local cleaveDamage = ( cleave_damage * params.damage ) / 100.0
 			if params.record and params.record ~= -1 then
@@ -79,8 +80,7 @@ function modifier_item_aegis_hero:OnAttackLanded(params)
 			end
 			params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_item_aegis_hero_slow", {duration = duration})
 		end
-		params.target:EmitSound("DOTA_Item.MKB.melee")
-		params.target:EmitSound("DOTA_Item.MKB.Minibash")
+		ApplyDamage({victim = params.target, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
 	end
 end
 

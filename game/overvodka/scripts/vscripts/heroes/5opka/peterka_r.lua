@@ -185,7 +185,6 @@ function modifier_peterka_r_scepter_wave:OnCreated(kv)
     local ability = self:GetAbility()
     self.origin = caster:GetAbsOrigin()
     
-    -- Ability parameters
     self.speed           = ability:GetSpecialValueFor("speed")
     self.distance        = ability:GetSpecialValueFor("distance_scepter")
     self.collision_rad   = ability:GetSpecialValueFor("collision_radius")
@@ -193,7 +192,6 @@ function modifier_peterka_r_scepter_wave:OnCreated(kv)
     self.splash_damage   = ability:GetSpecialValueFor("damage")
     self.radius          = ability:GetSpecialValueFor("radius_scepter")
     
-    -- Projectile setup
     local machines_per_sec = 18
     self.interval = 1 / machines_per_sec
     local tx = kv.tx or caster:GetAbsOrigin().x
@@ -203,11 +201,9 @@ function modifier_peterka_r_scepter_wave:OnCreated(kv)
     dir.z = 0
     self.direction = dir:Normalized()
     
-    -- FIX: Calculate consistent perpendicular vector
     self.perp_vector = Vector(-self.direction.y, self.direction.x, 0)
     self.perp_vector = self.perp_vector:Normalized()
     
-    -- Projectile definition
     self.proj = {
         Ability           = ability,
         EffectName        = "particles/peterka_r.vpcf",
@@ -234,14 +230,10 @@ function modifier_peterka_r_scepter_wave:OnIntervalThink()
         return
     end
     
-    -- FIX: Use the pre-calculated perpendicular vector
     local offset = RandomFloat(-self.radius, self.radius)
     local spawnPos = self.origin + self.perp_vector * offset
-    
-    -- Ensure Z position is valid
     spawnPos.z = GetGroundHeight(spawnPos, caster) + 50
     
-    -- Create projectile
     self.proj.vSpawnOrigin = spawnPos
     ProjectileManager:CreateLinearProjectile(self.proj)
 end

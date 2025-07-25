@@ -111,12 +111,14 @@ function modifier_rostik_e:GetModifierProcAttack_Feedback( params )
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-		enemy:AddNewModifier(
-			self.parent, 
-			self.ability, 
-			"modifier_rostik_e_debuff", 
-			{ duration = self.duration } 
-		)
+		if enemy and not enemy:IsNull() then
+			enemy:AddNewModifier(
+				self.parent,
+				self.ability,
+				"modifier_rostik_e_debuff",
+				{ duration = self.duration }
+			)
+		end
 	end
 	if self:GetRemainingTime() > 0 then
 		self.parent:AddNewModifier(

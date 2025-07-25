@@ -181,14 +181,14 @@ function modifier_azazin_w_target:OnIntervalThink( kv )
             parent:SwapItems(i, j)
         end
     end
-    for i = 0, parent:GetAbilityCount() - 1 do
-        local ability = parent:GetAbilityByIndex(i)
-        if ability and not ability:IsCooldownReady() then
-            local current_cooldown = ability:GetCooldownTimeRemaining()
-            ability:EndCooldown()
-            ability:StartCooldown(current_cooldown + FrameTime())
-        end
-    end
+    --for i = 0, parent:GetAbilityCount() - 1 do
+    --    local ability = parent:GetAbilityByIndex(i)
+     --   if ability and not ability:IsCooldownReady() then
+     --       local current_cooldown = ability:GetCooldownTimeRemaining()
+     --       ability:EndCooldown()
+     --       ability:StartCooldown(current_cooldown + FrameTime())
+     --   end
+    --end
 end
 
 function modifier_azazin_w_target:DeclareFunctions()

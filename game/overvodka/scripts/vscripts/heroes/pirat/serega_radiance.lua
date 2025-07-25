@@ -84,14 +84,16 @@ function modifier_serega_radiance:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-		local debuff = enemy:AddNewModifier(
-			self:GetParent(),
-			self:GetAbility(),
-			"modifier_serega_radiance_debuff",
-			{
-				duration = self.duration,
-			}
-		)
+		if enemy and not enemy:IsNull() then
+			local debuff = enemy:AddNewModifier(
+				self:GetParent(),
+				self:GetAbility(),
+				"modifier_serega_radiance_debuff",
+				{
+					duration = self.duration,
+				}
+			)
+		end
 	end
 end
 function modifier_serega_radiance:GetModifierEvasion_Constant()

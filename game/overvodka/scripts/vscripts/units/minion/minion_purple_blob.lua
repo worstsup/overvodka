@@ -23,7 +23,9 @@ function minion_purple_blob:OnProjectileHit(target, location)
         damage_type = self:GetAbilityDamageType(),
         ability = self,
     })
-    target:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", { duration = duration })
+    if target and not target:IsNull() then
+        target:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", { duration = duration })
+    end
     caster:EmitSound("minion_purple_blob")
 end
 

@@ -65,9 +65,9 @@ function stray_w:OnSpellStart()
         target:EmitSound("Hero_Riki.Attack")
         self:GetCaster():SetForwardVector(vector)
         self:GetCaster():FaceTowards(target:GetAbsOrigin())
-        ApplyDamage({ victim = target, attacker = self:GetCaster(), ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL })
         FindClearSpaceForUnit(self:GetCaster(), self:GetCaster():GetAbsOrigin(), true)
         FindClearSpaceForUnit(target, target:GetAbsOrigin(), true)
+        ApplyDamage({ victim = target, attacker = self:GetCaster(), ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL })
     end
     knockback:SetEndCallback( callback )
 end

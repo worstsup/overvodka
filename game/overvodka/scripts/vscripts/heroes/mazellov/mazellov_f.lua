@@ -135,12 +135,12 @@ function modifier_mazellov_f_orb:OnIntervalThink()
             elseif self.orb_index == 4 then
                 modifier_name = "modifier_mazellov_f_miss_chance"
             end
-
-            enemy:AddNewModifier(self.parent, self.ability, modifier_name, {
-                duration = self:GetAbility():GetSpecialValueFor("effect_duration")
-            })
-
-            enemy:AddNewModifier(self.parent, self.ability, "modifier_mazellov_f_orb_hit_"..self.orb_index, {duration = 1.0})
+            if enemy and not enemy:IsNull() then
+                enemy:AddNewModifier(self.parent, self.ability, modifier_name, {
+                    duration = self:GetAbility():GetSpecialValueFor("effect_duration")
+                })
+                enemy:AddNewModifier(self.parent, self.ability, "modifier_mazellov_f_orb_hit_"..self.orb_index, {duration = 1.0})
+            end
 
             self.hit = true
             self:Destroy()

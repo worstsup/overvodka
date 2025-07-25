@@ -81,10 +81,12 @@ function papich_w_clone:DoAxeStuff(index,range,caster_loc)
 		else
 			table.insert(self[index],enemy)
 		end
-		ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = self:GetAbilityDamageType()})
-		caster:PerformAttack(enemy, true, true, true, true, false, true, true)
-		enemy:AddNewModifier(caster, self, "modifier_papich_w_clone", {duration = blind_duration * (1 - enemy:GetStatusResistance()), blind_stacks = blind_stacks})
 		enemy:EmitSound("Hero_TrollWarlord.WhirlingAxes.Target")
+		ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = self:GetAbilityDamageType()})
+		if enemy and not enemy:IsNull() then
+			caster:PerformAttack(enemy, true, true, true, true, false, true, true)
+			enemy:AddNewModifier(caster, self, "modifier_papich_w_clone", {duration = blind_duration * (1 - enemy:GetStatusResistance()), blind_stacks = blind_stacks})
+		end
 	end
 end
 

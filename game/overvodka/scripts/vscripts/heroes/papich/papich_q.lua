@@ -216,6 +216,7 @@ function modifier_papich_q:OnIntervalThink()
 				}
 				
 				ApplyDamage(damageTable)
+				if not target or target:IsNull() then return end
 				target:AddNewModifier(
 					caster,
 					self,

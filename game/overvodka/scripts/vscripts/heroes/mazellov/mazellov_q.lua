@@ -207,39 +207,21 @@ function modifier_worker_ai:OnCreated(params)
 
     local ability = self:GetAbility()
     
-    self.explode_radius = params.explode_radius or ability:GetSpecialValueFor("explode_radius")
-    self.explode_damage = params.explode_damage or ability:GetSpecialValueFor("explode_damage")
-    self.explode_delay = ability:GetSpecialValueFor("explode_delay")
-    self.is_respawned = params.is_respawned or false
+    self.explode_radius = ability:GetSpecialValueFor("explode_radius")
+    self.explode_damage = ability:GetSpecialValueFor("explode_damage")
+    self.is_respawned = (params.is_respawned == 1) or false
     
-    self:StartIntervalThink(0.03)
+    self:StartIntervalThink(0.1)
 end
 
 function modifier_worker_ai:OnDestroy()
     if not IsServer() then return end
-
-    local unit = self:GetParent()
-    if not unit:IsNull() and not unit:IsAlive() and not self.exploding then
-        self:Explode(nil)
-    end
 end
 
 function modifier_worker_ai:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_DEATH,
-        MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
-end
-
-function modifier_worker_ai:OnTakeDamage(params)
-    if not IsServer() then return end
-
-    local unit = self:GetParent()
-    if params.unit ~= unit then return end
-
-    if unit:GetHealth() <= 0 and not self.exploding then
-        self:Explode(params.attacker)
-    end
 end
 
 function modifier_worker_ai:OnDeath(params)
@@ -248,27 +230,19 @@ function modifier_worker_ai:OnDeath(params)
     local unit = self:GetParent()
     if unit:IsNull() or params.unit ~= unit then return end
 
-    if self.explode_timer then
-        Timers:RemoveTimer(self.explode_timer)
-        self.explode_timer = nil
-    end
-
-    if self.exploding then return end
-
     local respawn_enabled = self:GetAbility():GetSpecialValueFor("worker_respawn_enabled") == 1
-    local killer = params.attacker or unit:GetKiller()
+    local killer = params.attacker
 
     if respawn_enabled and killer and killer ~= unit and not self.is_respawned then
         self:RespawnWeakenedWorker(unit, killer)
     else
-        self:Explode(nil)
+        self:Explode()
     end
+    UTIL_Remove(unit)
 end
 
 function modifier_worker_ai:OnIntervalThink()
     local unit = self:GetParent()
-
-    if self.exploding then return end
 
     local enemies = FindUnitsInRadius(
         unit:GetTeamNumber(),
@@ -284,26 +258,23 @@ function modifier_worker_ai:OnIntervalThink()
 
     if enemies[1] then
         unit:MoveToTargetToAttack(enemies[1])
-
-        if (unit:GetAbsOrigin() - enemies[1]:GetAbsOrigin()):Length2D() <= self.explode_radius then
-            self.exploding = true
+        if (unit:GetAbsOrigin() - enemies[1]:GetAbsOrigin()):Length2D() <= 225 then
             self:StartIntervalThink(-1)
-
-            self.explode_timer = Timers:CreateTimer(self.explode_delay, function()
-                if not unit:IsNull() and unit:IsAlive() then
-                    self:Explode(enemies[1])
-                end
-            end)
+            if not unit:IsNull() and unit:IsAlive() then
+                unit:Kill(nil, unit)
+            end
         end
     end
 end
 
-function modifier_worker_ai:Explode(target)
+function modifier_worker_ai:Explode()
     local unit = self:GetParent()
     local ability = self:GetAbility()
     local caster = self:GetCaster()
     local damage = self.explode_damage
-
+    if self.is_respawned then
+        damage = damage * 0.5
+    end
     local has_talent = caster:HasTalent("special_bonus_unique_mazellov_5")
     local health_pct_damage = has_talent and 0.02 or 0
 
@@ -336,9 +307,6 @@ function modifier_worker_ai:Explode(target)
 
     ParticleManager:CreateParticle("particles/units/heroes/hero_techies/techies_suicide_base.vpcf", PATTACH_ABSORIGIN, unit)
     EmitSoundOn("Hero_Techies.Suicide", unit)
-
-    unit:AddNoDraw()
-    unit:RemoveSelf()
 end
 
 function modifier_worker_ai:RespawnWeakenedWorker(unit, killer)
@@ -348,22 +316,20 @@ function modifier_worker_ai:RespawnWeakenedWorker(unit, killer)
     
     local weakened_worker = CreateUnitByName("npc_worker", spawn_pos, true, caster, nil, caster:GetTeamNumber())
     
-    weakened_worker:SetMaxHealth(ability:GetSpecialValueFor("worker_hp") * 0.5)
+    local weakened_hp = ability:GetSpecialValueFor("worker_hp") * 0.5
+    weakened_worker:SetMaxHealth(weakened_hp)
+    weakened_worker:SetBaseMaxHealth(weakened_hp)
+    weakened_worker:SetHealth(weakened_hp)
     weakened_worker:SetPhysicalArmorBaseValue(ability:GetSpecialValueFor("worker_armor") * 0.5)
     weakened_worker:SetBaseMagicalResistanceValue(ability:GetSpecialValueFor("worker_magres") * 0.5)
     weakened_worker:SetBaseMoveSpeed(ability:GetSpecialValueFor("worker_movespeed") * 0.5)
     
     weakened_worker:AddNewModifier(caster, ability, "modifier_worker_ai", {
-        explode_damage = ability:GetSpecialValueFor("explode_damage") * 0.5,
-        explode_radius = ability:GetSpecialValueFor("explode_radius") * 0.5,
         is_respawned = true
     })
     weakened_worker:AddNewModifier(caster, ability, "modifier_worker_disarmed", {})
     
     ParticleManager:CreateParticle("particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", PATTACH_ABSORIGIN, weakened_worker)
-    
-    unit:AddNoDraw()
-    unit:RemoveSelf()
 end
 
 modifier_worker_disarmed = class({})

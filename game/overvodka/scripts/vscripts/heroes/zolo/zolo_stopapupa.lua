@@ -22,24 +22,26 @@ function zolo_stopapupa:OnOrbImpact( params )
 		SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, self:GetCaster(), 300, nil)
 	end
 	ApplyDamage({victim = params.target, attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_PURE, ability = self})
-	params.target:AddNewModifier(
-		self:GetCaster(), 
-		self, 
-		"modifier_zolo_stopapupa", 
-		{ duration = duration }
-	)
-	params.target:AddNewModifier(
-		self:GetCaster(), 
-		self, 
-		"modifier_dark_willow_debuff_fear", 
-		{ duration = bash }
-	)
-	params.target:AddNewModifier(
-		self:GetCaster(), 
-		self, 
-		"modifier_zolo_slow", 
-		{ duration = bash }
-	)
+	if params.target and not params.target:IsNull() then
+		params.target:AddNewModifier(
+			self:GetCaster(), 
+			self, 
+			"modifier_zolo_stopapupa", 
+			{ duration = duration }
+		)
+		params.target:AddNewModifier(
+			self:GetCaster(), 
+			self, 
+			"modifier_dark_willow_debuff_fear", 
+			{ duration = bash }
+		)
+		params.target:AddNewModifier(
+			self:GetCaster(), 
+			self, 
+			"modifier_zolo_slow", 
+			{ duration = bash }
+		)
+	end
 end
 
 modifier_zolo_slow = class({})

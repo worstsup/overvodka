@@ -58,7 +58,7 @@ function invincible_e:OnOrbImpact( params )
 			end
 		end
 	end
-	if caster:HasShard() then
+	if caster:HasShard() and target and not target:IsNull() and not target:IsDebuffImmune() then
 		target:AddNewModifier( caster, self, "modifier_invincible_e_debuff", { duration = self:GetSpecialValueFor("shard_duration") } )
 		caster:AddNewModifier( caster, self, "modifier_invincible_e_buff", { duration = self:GetSpecialValueFor("shard_duration") } )
 	end

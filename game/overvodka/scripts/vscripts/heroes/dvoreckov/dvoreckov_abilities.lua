@@ -2705,18 +2705,20 @@ function modifier_dvoreckov_qwe:OnIntervalThink()
 				}
 				
 				ApplyDamage( damageInfo )
-				local knockbackProperties =
-				{
-					center_x = 0,
-					center_y = 0,
-					center_z = 0,
-					duration = 0.2,
-					knockback_duration = 0.2,
-					knockback_distance = 200,
-					knockback_height = 200
-				}
-				if not enemy:HasModifier("modifier_knockback") and not enemy:IsDebuffImmune() and not enemy:IsMagicImmune() then
-					enemy:AddNewModifier( enemy, nil, "modifier_knockback", knockbackProperties )
+				if enemy and not enemy:IsNull() then
+					local knockbackProperties =
+					{
+						center_x = 0,
+						center_y = 0,
+						center_z = 0,
+						duration = 0.2,
+						knockback_duration = 0.2,
+						knockback_distance = 200,
+						knockback_height = 200
+					}
+					if not enemy:HasModifier("modifier_knockback") and not enemy:IsDebuffImmune() and not enemy:IsMagicImmune() then
+						enemy:AddNewModifier( enemy, nil, "modifier_knockback", knockbackProperties )
+					end
 				end
 			end
 		end

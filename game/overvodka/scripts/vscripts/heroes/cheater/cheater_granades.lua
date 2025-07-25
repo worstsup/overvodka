@@ -77,12 +77,14 @@ function cheater_granades:OnProjectileHit( target, location )
 		for _,unit in pairs(targets) do
 			local dmg_far = damage + self:GetSpecialValueFor( "damage_exp_percent_far" ) * unit:GetHealth() * 0.01
 			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_far, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
-			unit:AddNewModifier(
-				self:GetCaster(),
-				self,
-				"modifier_cheater_slow",
-				{ duration = slow_duration }
-			)
+			if unit and not unit:IsNull() then
+				unit:AddNewModifier(
+					self:GetCaster(),
+					self,
+					"modifier_cheater_slow",
+					{ duration = slow_duration }
+				)
+			end
 		end
 		local targets1 = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
 			location,

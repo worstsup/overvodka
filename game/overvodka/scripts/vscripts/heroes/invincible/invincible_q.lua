@@ -83,6 +83,8 @@ function invincible_q:OnProjectileHit( hTarget, vLocation )
 	if target==nil then return end
 	if target:TriggerSpellAbsorb( self ) then return end
 	if target:IsAttackImmune() then return end
+	target:EmitSound("Hero_PhantomAssassin.CoupDeGrace")
+	target:EmitSound("Hero_PhantomAssassin.Dagger.Target")
     local direction = (target:GetAbsOrigin() - self:GetCaster():GetAbsOrigin()):Normalized()
 	local fear_duration = self:GetSpecialValueFor("fear_duration")
 	local damage_base = self:GetSpecialValueFor("damage_base")
@@ -90,9 +92,9 @@ function invincible_q:OnProjectileHit( hTarget, vLocation )
 	local end_damage = damage + damage_base
 	self:GetCaster():PerformAttack( target, true, true, true, false, false, true, true )
 	ApplyDamage({ victim = target, attacker = self:GetCaster(), damage = end_damage, ability=nil, damage_type = DAMAGE_TYPE_PHYSICAL })
-	target:EmitSound("Hero_PhantomAssassin.CoupDeGrace")
-	target:AddNewModifier( self:GetCaster(), self, "modifier_invincible_q_debuff", {duration = fear_duration * (1-target:GetStatusResistance()), dir_x = direction.x, dir_y = direction.y})
-	target:EmitSound("Hero_PhantomAssassin.Dagger.Target")
+	if target and not target:IsNull() then
+		target:AddNewModifier( self:GetCaster(), self, "modifier_invincible_q_debuff", {duration = fear_duration * (1-target:GetStatusResistance()), dir_x = direction.x, dir_y = direction.y})
+	end
 end
 
 modifier_invincible_q_debuff = class({})

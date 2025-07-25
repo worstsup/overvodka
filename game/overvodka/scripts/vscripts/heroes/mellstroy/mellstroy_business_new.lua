@@ -28,10 +28,12 @@ function mellstroy_business_new:OnOrbImpact( params )
 		damage = damage * 1.5
 	end
 	ApplyDamage({attacker = self:GetCaster(), victim = params.target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_PURE})
-	params.target:AddNewModifier(
-		self:GetCaster(),
-		self,
-		"modifier_mellstroy_business_new",
-		{ duration = duration }
-	)
+	if params.target and not params.target:IsNull() then
+		params.target:AddNewModifier(
+			self:GetCaster(),
+			self,
+			"modifier_mellstroy_business_new",
+			{ duration = duration }
+		)
+	end
 end

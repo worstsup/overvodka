@@ -70,26 +70,27 @@ function modifier_eldzhey_r:Knock()
         local damage_pct = self:GetAbility():GetSpecialValueFor("damage_pct")
         local dmg = unit:GetHealth() * damage_pct * 0.01 + damage
         ApplyDamage({victim = unit, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+        if unit and not unit:IsNull() then
+            local distance = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
+            local direction = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Normalized()
+            local bump_point = self:GetParent():GetAbsOrigin() + direction * (distance + 150)
 
-        local distance = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
-        local direction = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Normalized()
-        local bump_point = self:GetParent():GetAbsOrigin() + direction * (distance + 150)
-
-        local knockbackProperties =
-        {
-             center_x = bump_point.x,
-             center_y = bump_point.y,
-             center_z = bump_point.z,
-             duration = 0.15,
-             knockback_duration = 0.15,
-             knockback_distance = 0,
-             knockback_height = 75,
-        }
-     
-        if unit:HasModifier("modifier_knockback") then
-            unit:RemoveModifierByName("modifier_knockback")
+            local knockbackProperties =
+            {
+                center_x = bump_point.x,
+                center_y = bump_point.y,
+                center_z = bump_point.z,
+                duration = 0.15,
+                knockback_duration = 0.15,
+                knockback_distance = 0,
+                knockback_height = 75,
+            }
+        
+            if unit:HasModifier("modifier_knockback") then
+                unit:RemoveModifierByName("modifier_knockback")
+            end
+            unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_knockback", knockbackProperties)
         end
-        unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_knockback", knockbackProperties)
     end
 end
 

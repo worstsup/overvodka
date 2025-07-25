@@ -34,8 +34,8 @@ function vovchik:OnSpellStart()
 		damage_type = DAMAGE_TYPE_PURE,
 		ability = self,
 	}
-	ApplyDamage(damageTable)
 	self:PlayEffects( target )
+	ApplyDamage(damageTable)
 end
 
 function vovchik:PlayEffects( target )

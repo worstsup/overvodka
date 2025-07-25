@@ -138,7 +138,9 @@ function rostik_q_throw:OnProjectileHit_ExtraData(target, location, ExtraData)
 	for _, enemy in pairs(enemies) do
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
-		enemy:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun })
+		if enemy and not enemy:IsNull() then
+			enemy:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun })
+		end
 	end
 	self:PlayEffects(location)
 end
@@ -224,12 +226,14 @@ function modifier_rostik_q:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
 		ApplyDamage( damageTable )
-		enemy:AddNewModifier(
-			self:GetCaster(),
-			self:GetAbility(),
-			"modifier_generic_stunned_lua",
-			{ duration = self.max_stun }
-		)
+		if enemy and not enemy:IsNull() then
+			enemy:AddNewModifier(
+				self:GetCaster(),
+				self:GetAbility(),
+				"modifier_generic_stunned_lua",
+				{ duration = self.max_stun }
+			)
+		end
 	end
 	if not self:GetParent():IsInvulnerable() then
 		self.fail_damage = self:GetAbility():GetSpecialValueFor( "fail_damage" )
@@ -237,12 +241,14 @@ function modifier_rostik_q:OnIntervalThink()
 		damageTable.victim = self:GetParent()
 		damageTable.damage_type = DAMAGE_TYPE_PURE
 		ApplyDamage( damageTable )
-		self:GetParent():AddNewModifier(
-			self:GetParent(),
-			self:GetAbility(),
-			"modifier_generic_stunned_lua",
-			{ duration = self.max_stun }
-		)
+		if self:GetParent() and not self:GetParent():IsNull() then
+			self:GetParent():AddNewModifier(
+				self:GetParent(),
+				self:GetAbility(),
+				"modifier_generic_stunned_lua",
+				{ duration = self.max_stun }
+			)
+		end
 	end
 	local ability = self:GetCaster():FindAbilityByName( "rostik_q_throw" )
 	self:GetCaster():SwapAbilities(

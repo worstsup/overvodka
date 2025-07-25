@@ -108,14 +108,16 @@ function royale_q:OnProjectileHit(target, location)
         for _,unit in pairs(enemies) do
             ApplyDamage({victim=unit, attacker=caster, damage=dmg,
                 damage_type=DAMAGE_TYPE_MAGICAL, ability=self})
-            unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_slow", {
-                duration = slowD * (1 - unit:GetStatusResistance())
-            })
-            local dir = (unit:GetAbsOrigin() - location):Normalized()
-            unit:AddNewModifier(caster, self, "modifier_generic_knockback_lua", {
-                duration = 0.4, distance=knock, height=0,
-                direction_x=dir.x, direction_y=dir.y
-            })
+            if unit and not unit:IsNull() then
+                unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_slow", {
+                    duration = slowD * (1 - unit:GetStatusResistance())
+                })
+                local dir = (unit:GetAbsOrigin() - location):Normalized()
+                unit:AddNewModifier(caster, self, "modifier_generic_knockback_lua", {
+                    duration = 0.4, distance=knock, height=0,
+                    direction_x=dir.x, direction_y=dir.y
+                })
+            end
         end
     end
     if caster:HasTalent("special_bonus_unique_royale_6") and not self._rolled and #enemies > 0 then
@@ -139,6 +141,7 @@ function royale_q:OnProjectileHit(target, location)
                 dir_y = self._cast_dir.y,
                 dist  = self:GetSpecialValueFor("evo_roll_distance"),
                 dur   = self:GetSpecialValueFor("evo_roll_duration"),
+                duration = self:GetSpecialValueFor("evo_roll_duration")
             })
         end
     end
@@ -201,10 +204,12 @@ function modifier_royale_q_snowball_roll:OnDestroy()
     parent:RemoveEffects( EF_NODRAW )
     parent:RemoveNoDraw()
     ApplyDamage({victim=parent, attacker=self:GetCaster(), damage=self:GetAbility():GetSpecialValueFor("damage"), damage_type=DAMAGE_TYPE_MAGICAL, ability=self:GetAbility()})
-    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_royale_q_snowball_slow", {duration = self:GetAbility():GetSpecialValueFor("slow_duration") * (1 - parent:GetStatusResistance())})
-    local dir = (parent:GetAbsOrigin() - self.location):Normalized()
-    parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_knockback_lua", {duration = 0.4, distance=175, height=0, direction_x=dir.x, direction_y=dir.y})
-    parent:RemoveHorizontalMotionController(self)
+    if parent and not parent:IsNull() then
+        parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_royale_q_snowball_slow", {duration = self:GetAbility():GetSpecialValueFor("slow_duration") * (1 - parent:GetStatusResistance())})
+        local dir = (parent:GetAbsOrigin() - self.location):Normalized()
+        parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_knockback_lua", {duration = 0.4, distance=175, height=0, direction_x=dir.x, direction_y=dir.y})
+        parent:RemoveHorizontalMotionController(self)
+    end
 end
 
 modifier_royale_q_stun = class({})

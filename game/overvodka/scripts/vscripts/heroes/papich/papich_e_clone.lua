@@ -293,11 +293,13 @@ function modifier_papich_e_clone_debuff:OnIntervalThink()
     if not IsServer() then return end
     self:GetParent():EmitSound("Hero_Ancient_Apparition.IceBlastRelease.Tick")
     ApplyDamage(self.damage_table)
-    SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, self:GetParent(), self.dot_damage, nil)
-    if self:GetParent():GetHealthPercent() <= self.kill_percent then
-        self:GetParent():Kill(self:GetAbility(), self:GetCaster())
-        EmitSoundOn("papich_e_clone_success", self:GetCaster())
-        self:Destroy()
+    if self:GetParent() and not self:GetParent():IsNull() then
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, self:GetParent(), self.dot_damage, nil)
+        if self:GetParent():GetHealthPercent() <= self.kill_percent then
+            self:GetParent():Kill(self:GetAbility(), self:GetCaster())
+            EmitSoundOn("papich_e_clone_success", self:GetCaster())
+            self:Destroy()
+        end
     end
 end
 

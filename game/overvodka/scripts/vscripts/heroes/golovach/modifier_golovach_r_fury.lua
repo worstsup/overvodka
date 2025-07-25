@@ -129,28 +129,30 @@ function modifier_golovach_r_fury:Pulse( center )
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
 		ApplyDamage(damageTable)
-		local direction = enemy:GetOrigin()-self:GetParent():GetOrigin()
-		direction.z = 0
-		direction = direction:Normalized()
-		enemy:AddNewModifier(
-			self.parent,
-			self.ability,
-			"modifier_golovach_r_debuff",
-			{ duration = self.duration * (1 - enemy:GetStatusResistance()) }
-		)
-		enemy:AddNewModifier(
+		if enemy and not enemy:IsNull() then
+			local direction = enemy:GetOrigin()-self:GetParent():GetOrigin()
+			direction.z = 0
+			direction = direction:Normalized()
+			enemy:AddNewModifier(
 				self.parent,
 				self.ability,
-				"modifier_generic_arc_lua",
-				{
-					dir_x = direction.x,
-					dir_y = direction.y,
-					duration = 0.3,
-					distance = 0,
-					height = 100,
-					activity = ACT_DOTA_FLAIL,
-				}
+				"modifier_golovach_r_debuff",
+				{ duration = self.duration * (1 - enemy:GetStatusResistance()) }
 			)
+			enemy:AddNewModifier(
+					self.parent,
+					self.ability,
+					"modifier_generic_arc_lua",
+					{
+						dir_x = direction.x,
+						dir_y = direction.y,
+						duration = 0.3,
+						distance = 0,
+						height = 100,
+						activity = ACT_DOTA_FLAIL,
+					}
+				)
+			end
 	end
 	self:PlayEffects4( center, self.radius )
 end

@@ -146,27 +146,29 @@ function modifier_stray_r_dota_shard:OnIntervalThink()
     local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
     for _, unit in pairs(units) do
         if not unit:IsDebuffImmune() and not unit:IsMagicImmune() then
-            ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
-            local direction = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin())
-            direction.z = 0
-            direction = direction:Normalized()
-            unit:AddNewModifier(
-                self:GetCaster(),
-                self,
-                "modifier_knockback",
-			    {
-			        center_x = self:GetParent():GetAbsOrigin().x,
-			        center_y = self:GetParent():GetAbsOrigin().y,
-			        center_z = self:GetParent():GetAbsOrigin().z,
-			        duration = 0.2,
-			        knockback_duration = 0.2,
-			        knockback_distance = 300,
-			        knockback_height = 50
-			    }
-            )
             local particle = ParticleManager:CreateParticle( "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", PATTACH_POINT_FOLLOW, unit )
             ParticleManager:SetParticleControlEnt( particle, 0, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:ReleaseParticleIndex( particle )
+            ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
+            if unit and not unit:IsNull() then
+                local direction = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin())
+                direction.z = 0
+                direction = direction:Normalized()
+                unit:AddNewModifier(
+                    self:GetCaster(),
+                    self,
+                    "modifier_knockback",
+                    {
+                        center_x = self:GetParent():GetAbsOrigin().x,
+                        center_y = self:GetParent():GetAbsOrigin().y,
+                        center_z = self:GetParent():GetAbsOrigin().z,
+                        duration = 0.2,
+                        knockback_duration = 0.2,
+                        knockback_distance = 300,
+                        knockback_height = 50
+                    }
+                )
+            end
         end
     end
 end

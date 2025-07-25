@@ -42,7 +42,9 @@ function modifier_custom_passive_disarm:OnIntervalThink()
                 damage_type = DAMAGE_TYPE_MAGICAL,
                 ability = self:GetAbility()
             })
-            enemy:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.disarm_duration})
+            if enemy and not enemy:IsNull() then
+                enemy:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.disarm_duration})
+            end
             self:GetAbility():StartCooldown(self.cooldown)
             break
         end

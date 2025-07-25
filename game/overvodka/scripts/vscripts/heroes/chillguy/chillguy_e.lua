@@ -21,16 +21,18 @@ function chillguy_e:OnSpellStart()
 		ability = self,
 	}
 	ApplyDamage( self.damageTable )
-	target:AddNewModifier(
-		caster,
-		self,
-		"modifier_chillguy_e",
-		{ duration = duration * (1 - target:GetStatusResistance()) }
-	)
-	target:AddNewModifier(
-		caster,
-		self,
-		"modifier_chillguy_blind",
-		{ duration = blindness_dur * (1 - target:GetStatusResistance()) }
-	)
+	if target and not target:IsNull() then
+		target:AddNewModifier(
+			caster,
+			self,
+			"modifier_chillguy_e",
+			{ duration = duration * (1 - target:GetStatusResistance()) }
+		)
+		target:AddNewModifier(
+			caster,
+			self,
+			"modifier_chillguy_blind",
+			{ duration = blindness_dur * (1 - target:GetStatusResistance()) }
+		)
+	end
 end

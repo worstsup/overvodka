@@ -64,7 +64,7 @@ function modifier_inferno_tower_ai:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     if not parent:IsAlive() then return end
-    if self.current_target then
+    if self.current_target and not self.current_target:IsNull() then
         if not self.current_target:IsAlive() or (self.current_target:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > (self.range + 25) then
             parent:RemoveModifierByName("modifier_inferno_tower_beam")
             self.current_target = nil
@@ -120,7 +120,7 @@ function modifier_inferno_tower_beam:OnIntervalThink()
     local mod = parent:FindModifierByName("modifier_inferno_tower_ai")
     local target = mod.current_target or nil
     
-    if not target or not target:IsAlive() then
+    if not target or target:IsNull() or not target:IsAlive() then
         self:Destroy()
         return
     end
@@ -140,6 +140,8 @@ end
 
 function modifier_inferno_tower_beam:OnDestroy()
     if not IsServer() then return end
+    local mod = self:GetParent():FindModifierByName("modifier_inferno_tower_ai")
+    mod.current_target = nil
     StopSoundOn("InfernoTower.Loop", self:GetParent())
     ParticleManager:DestroyParticle(self.particle, false)
     ParticleManager:ReleaseParticleIndex(self.particle)

@@ -264,7 +264,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
 		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false )
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false )

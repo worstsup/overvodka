@@ -66,19 +66,21 @@ function modifier_mell_amam:Knock()
 			self:GetParent():ModifyGold(bonus_gold, true, 0)
 		end
         ApplyDamage({victim = unit, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-        local knockbackProperties =
-        {
-             center_x = 0,
-             center_y = 0,
-             center_z = 0,
-             duration = self:GetAbility():GetSpecialValueFor("stun_dur"),
-             knockback_duration = self:GetAbility():GetSpecialValueFor("stun_dur"),
-             knockback_distance = 0,
-             knockback_height = 300,
-        }
-        if unit:HasModifier("modifier_knockback") then
-            unit:RemoveModifierByName("modifier_knockback")
+        if unit and not unit:IsNull() then
+            local knockbackProperties =
+            {
+                center_x = 0,
+                center_y = 0,
+                center_z = 0,
+                duration = self:GetAbility():GetSpecialValueFor("stun_dur"),
+                knockback_duration = self:GetAbility():GetSpecialValueFor("stun_dur"),
+                knockback_distance = 0,
+                knockback_height = 300,
+            }
+            if unit:HasModifier("modifier_knockback") then
+                unit:RemoveModifierByName("modifier_knockback")
+            end
+            unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_knockback", knockbackProperties)
         end
-        unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_knockback", knockbackProperties)
     end
 end

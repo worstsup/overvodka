@@ -6,6 +6,10 @@ end
 
 function modifier_litvin_bledina:OnCreated( kv )
 	self.bat = self:GetAbility():GetSpecialValueFor( "bat" )
+	self.max_attacks = self:GetAbility():GetSpecialValueFor("max_attacks")
+	if IsServer() then
+		self:SetStackCount(self.max_attacks)
+	end
 	self:PlayEffects1()
 end
 
@@ -32,6 +36,12 @@ end
 
 function modifier_litvin_bledina:GetModifierProcAttack_Feedback( params )
 	self:PlayEffects2( self:GetParent(), params.target )
+	if IsServer() then
+		self:DecrementStackCount()
+		if self:GetStackCount() < 1 then
+			self:Destroy()
+		end
+	end
 end
 
 function modifier_litvin_bledina:PlayEffects1()

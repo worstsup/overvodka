@@ -99,11 +99,13 @@ function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
         })
         local callback = function()
             local duration = self:GetSpecialValueFor("duration")
-            target:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_w_fear", {
-                duration = duration * (1 - target:GetStatusResistance()),
-                dir_x = direction.x,
-                dir_y = direction.y,
-            })
+            if target and not target:IsNull() then
+                target:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_w_fear", {
+                    duration = duration * (1 - target:GetStatusResistance()),
+                    dir_x = direction.x,
+                    dir_y = direction.y,
+                })
+            end
         end
         knockback:SetEndCallback(callback)
     else

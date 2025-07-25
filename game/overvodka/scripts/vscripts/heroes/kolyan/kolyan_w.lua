@@ -59,21 +59,23 @@ function kolyan_w:OnSpellStart()
             damageTable.victim = enemy
             damageTable.damage = math.min(base_damage + stack * stack_damage, max_damage)
             ApplyDamage(damageTable)
-            enemy:AddNewModifier(
-                caster,
-                self,
-                "modifier_kolyan_w",
-                { stack_duration = stack_duration }
-            )
-            self:PlayEffects2(enemy)
-			if self:GetSpecialValueFor("hasfacet") > 0 and enemy:IsRealHero() then
-				local abil = caster:FindAbilityByName("kolyan_e")
-				if abil and abil:GetLevel() > 0 then
-					enemy:AddNewModifier(caster, abil, "modifier_kolyan_e_debuff",{stack_duration = self:GetSpecialValueFor("duration")})
-					self:PlayEffects(enemy)
-					local mod = caster:FindModifierByName("modifier_kolyan_e")
-					if mod then
-						mod:AddStack( self:GetSpecialValueFor("duration") )
+			if enemy and not enemy:IsNull() then
+				enemy:AddNewModifier(
+					caster,
+					self,
+					"modifier_kolyan_w",
+					{ stack_duration = stack_duration }
+				)
+				self:PlayEffects2(enemy)
+				if self:GetSpecialValueFor("hasfacet") > 0 and enemy:IsRealHero() then
+					local abil = caster:FindAbilityByName("kolyan_e")
+					if abil and abil:GetLevel() > 0 then
+						enemy:AddNewModifier(caster, abil, "modifier_kolyan_e_debuff",{stack_duration = self:GetSpecialValueFor("duration")})
+						self:PlayEffects(enemy)
+						local mod = caster:FindModifierByName("modifier_kolyan_e")
+						if mod then
+							mod:AddStack( self:GetSpecialValueFor("duration") )
+						end
 					end
 				end
 			end

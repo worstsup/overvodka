@@ -105,12 +105,14 @@ function sahur_e:OnSpellStart()
 		if unit:GetTeamNumber()~=caster:GetTeamNumber() then
 			damageTable.victim = unit
 			ApplyDamage(damageTable)
-			unit:AddNewModifier(
-				caster,
-				self,
-				"modifier_generic_stunned_lua",
-				{ duration = stun_duration }
-			)
+			if unit and not unit:IsNull() then
+				unit:AddNewModifier(
+					caster,
+					self,
+					"modifier_generic_stunned_lua",
+					{ duration = stun_duration }
+				)
+			end
 		end
 	end
 	if self:GetSpecialValueFor("jump_end") == 1 and self:GetAltCastState() then

@@ -92,8 +92,8 @@ function speed_penalty:OnProjectileHit( target, location )
     end
     target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_time})
     target:AddNewModifier(caster, self, "modifier_speed_penalty", {duration = self:GetSpecialValueFor("fire_duration") * (1 - target:GetStatusResistance())})
-    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
     table.insert(tartar, target)
+    ApplyDamage({attacker = caster, victim = target, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
 end
 
 modifier_speed_penalty = class({})

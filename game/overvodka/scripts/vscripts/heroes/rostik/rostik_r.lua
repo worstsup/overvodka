@@ -56,8 +56,8 @@ function rostik_r:OnProjectileHitHandle(target, location, iHandle)
 		ability = self, 
 	}
 	ApplyDamage(damageTable)
+	if not target or target:IsNull() then return end
 	self.hit_targets[target:entindex()] = true
-
 	if target:IsHero() then
 		if self.modifier and (not self.modifier:IsNull()) then
 			self.modifier:End(self:GetCaster():GetOrigin())

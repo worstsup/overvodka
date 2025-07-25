@@ -221,13 +221,15 @@ function modifier_stint_r_3:OnIntervalThink()
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability = self.ability,
         })
-        local mod = enemy:FindModifierByName("modifier_stint_r_3_debuff")
-        if mod then
-            mod:IncrementStackCount()
-            mod:SetDuration(self.debuff_dur, true)
-        else
-            mod = enemy:AddNewModifier(self.parent, self.ability, "modifier_stint_r_3_debuff", { duration = self.debuff_dur })
-            if mod then mod:SetStackCount(1) end
+        if enemy and not enemy:IsNull() then
+            local mod = enemy:FindModifierByName("modifier_stint_r_3_debuff")
+            if mod then
+                mod:IncrementStackCount()
+                mod:SetDuration(self.debuff_dur, true)
+            else
+                mod = enemy:AddNewModifier(self.parent, self.ability, "modifier_stint_r_3_debuff", { duration = self.debuff_dur })
+                if mod then mod:SetStackCount(1) end
+            end
         end
     end
 end

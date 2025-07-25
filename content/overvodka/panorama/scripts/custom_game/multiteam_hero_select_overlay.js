@@ -117,6 +117,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
 			"npc_dota_hero_primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
 			"npc_dota_hero_ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
+			"npc_dota_hero_warlock": "file://{images}/heroes/npc_dota_hero_king.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -180,6 +181,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"phantom_lancer": "file://{images}/heroes/npc_dota_hero_kolyan.png",
 			"primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
 			"ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
+			"warlock": "file://{images}/heroes/npc_dota_hero_king.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

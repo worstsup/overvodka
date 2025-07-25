@@ -101,7 +101,9 @@ function chef_d:OnProjectileHit_ExtraData(htarget, vLocation, table)
                 ability = self,
                 damage_flags = DOTA_DAMAGE_FLAG_NONE
             })
-            enemy:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
+            if enemy and not enemy:IsNull() then
+                enemy:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
+            end
         end
     end
 end

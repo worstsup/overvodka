@@ -56,7 +56,9 @@ function royale_e:OnSpellStart()
         caster:RemoveModifierByName("modifier_royale_e")
     else
         for _,unit in pairs(units) do
-            unit:AddNewModifier(caster, self, "modifier_royale_e_freeze", {duration = self:GetSpecialValueFor("freeze_duration") * (1 - unit:GetStatusResistance())})
+            if unit and not unit:IsNull() then
+                unit:AddNewModifier(caster, self, "modifier_royale_e_freeze", {duration = self:GetSpecialValueFor("freeze_duration") * (1 - unit:GetStatusResistance())})
+            end
         end
         CreateModifierThinker(caster, self, "modifier_royale_e_freeze_aura", {duration = self:GetSpecialValueFor("freeze_duration")}, point, caster:GetTeamNumber(), false)
         EmitSoundOnLocationWithCaster(point, "Royale.Freeze", caster)

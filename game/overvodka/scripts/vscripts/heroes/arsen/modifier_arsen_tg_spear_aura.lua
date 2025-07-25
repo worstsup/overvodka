@@ -63,18 +63,20 @@ function modifier_arsen_tg_spear_aura:OnCreated( kv )
 		if self:GetParent():IsDebuffImmune() and self:GetAbility():GetSpecialValueFor("immunity") == 0 then return end
 		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua" ) then return end
 		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua_debuff" ) then return end
-		self:GetParent():AddNewModifier(
-			self:GetCaster(), -- player source
-			self:GetAbility(), -- ability source
-			"modifier_generic_knockback_lua", -- modifier name
-			{
-				duration = self.knockback_duration,
-				distance = self.width,
-				height = 30,
-				direction_x = direction.x,
-				direction_y = direction.y,
-			} -- kv
-		)
+		if self:GetParent() and not self:GetParent():IsNull() then
+			self:GetParent():AddNewModifier(
+				self:GetCaster(), -- player source
+				self:GetAbility(), -- ability source
+				"modifier_generic_knockback_lua", -- modifier name
+				{
+					duration = self.knockback_duration,
+					distance = self.width,
+					height = 30,
+					direction_x = direction.x,
+					direction_y = direction.y,
+				} -- kv
+			)
+		end
 	end
 end
 

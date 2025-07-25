@@ -59,22 +59,24 @@ function modifier_drake_scepter:Pulse()
 	local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false )
 	for _, target in pairs(enemies) do
 		ApplyDamage({victim = target, attacker = self:GetParent(), damage = self.damage, ability = self:GetAbility(), damage_type = DAMAGE_TYPE_MAGICAL})
-        local distance = (self:GetCaster():GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
-        local direction = (self:GetCaster():GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
-        local bump_point = target:GetAbsOrigin() + direction * (distance + 20)
-	
-        local knockbackProperties =
-        {
-        	should_stun = true,
-            center_x = bump_point.x,
-            center_y = bump_point.y,
-            center_z = bump_point.z,
-            duration = self.stun_duration,
-            knockback_duration = self.stun_duration,
-            knockback_distance = 40,
-            knockback_height = 40
-        }
-        target:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_knockback", knockbackProperties )
+        if target and not target:IsNull() then
+            local distance = (self:GetCaster():GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
+            local direction = (self:GetCaster():GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
+            local bump_point = target:GetAbsOrigin() + direction * (distance + 20)
+        
+            local knockbackProperties =
+            {
+                should_stun = true,
+                center_x = bump_point.x,
+                center_y = bump_point.y,
+                center_z = bump_point.z,
+                duration = self.stun_duration,
+                knockback_duration = self.stun_duration,
+                knockback_distance = 40,
+                knockback_height = 40
+            }
+            target:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_knockback", knockbackProperties )
+        end
 	end
 end
 

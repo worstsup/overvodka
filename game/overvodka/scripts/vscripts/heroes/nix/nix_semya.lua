@@ -75,28 +75,30 @@ function modifier_nix_semya_debuff:OnIntervalThink()
 	if damage > 0 then
 		ApplyDamage({ victim = self:GetParent(), attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
 	end
-    if not self:GetParent():IsDebuffImmune() then
-        if self:GetCaster():HasModifier("modifier_nix_semya_steal_buff") then
-            local mod = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_buff", { duration = duration } )
-            if mod then
-                mod:AddStack(1)
+    if self:GetParent() and not self:GetParent():IsNull() then
+        if not self:GetParent():IsDebuffImmune() then
+            if self:GetCaster():HasModifier("modifier_nix_semya_steal_buff") then
+                local mod = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_buff", { duration = duration } )
+                if mod then
+                    mod:AddStack(1)
+                end
+            else
+                local mod = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_buff", { duration = duration } )
+                if mod then
+                    mod:AddStack(1)
+                end
             end
-        else
-            local mod = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_buff", { duration = duration } )
-            if mod then
-                mod:AddStack(1)
-            end
-        end
-        
-        if self:GetParent():HasModifier("modifier_nix_semya_steal_debuff") then
-            local mod = self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_debuff", { duration = duration } )
-            if mod then
-                mod:AddStack(1)
-            end
-        else
-            local mod = self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_debuff", { duration = duration } )
-            if mod then
-                mod:AddStack(1)
+            
+            if self:GetParent():HasModifier("modifier_nix_semya_steal_debuff") then
+                local mod = self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_debuff", { duration = duration } )
+                if mod then
+                    mod:AddStack(1)
+                end
+            else
+                local mod = self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_nix_semya_steal_debuff", { duration = duration } )
+                if mod then
+                    mod:AddStack(1)
+                end
             end
         end
     end

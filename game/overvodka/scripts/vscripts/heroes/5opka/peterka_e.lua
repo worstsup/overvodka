@@ -460,7 +460,9 @@ function modifier_peterka_e_debuff:OnDestroy()
 	if self:GetParent():IsDebuffImmune() or self:GetParent():IsMagicImmune() then return end
 	local damage = self:GetAbility():GetSpecialValueFor("knockback_damage")
 	ApplyDamage({ attacker = self:GetCaster(), victim = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
-	self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("stun_duration") } )
+	if self:GetParent() and not self:GetParent():IsNull() then
+		self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("stun_duration") } )
+	end
 end
 
 function modifier_peterka_e_debuff:DeclareFunctions()

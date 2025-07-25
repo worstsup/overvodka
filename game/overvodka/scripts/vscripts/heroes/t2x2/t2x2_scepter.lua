@@ -96,7 +96,8 @@ function t2x2_scepter:OnProjectileHit_ExtraData( hTarget, vLocation, extraData )
 		ApplyDamage(damageTable)
 		return true
 	end
-
+	EmitSoundOn( "Hero_Muerta.DeadShot.Ricochet.Impact", hTarget )
+    EmitSoundOn( "Hero_Muerta.DeadShot.Fear", hTarget )
 	local damageTable = {
 		victim = hTarget,
 		attacker = self:GetCaster(),
@@ -105,15 +106,15 @@ function t2x2_scepter:OnProjectileHit_ExtraData( hTarget, vLocation, extraData )
 		ability = self,
 	}
 	ApplyDamage(damageTable)
-	hTarget:AddNewModifier(
-		self:GetCaster(),
-		self,
-		"modifier_t2x2_scepter",
-		{ duration = math.max(extraData.min_stun, extraData.max_stun*bonus_pct) * (1 - hTarget:GetStatusResistance()) }
-	)
+	if hTarget and not hTarget:IsNull() then
+		hTarget:AddNewModifier(
+			self:GetCaster(),
+			self,
+			"modifier_t2x2_scepter",
+			{ duration = math.max(extraData.min_stun, extraData.max_stun*bonus_pct) * (1 - hTarget:GetStatusResistance()) }
+		)
+	end
 	AddFOWViewer( self:GetCaster():GetTeamNumber(), vLocation, 500, 3, false )
-	EmitSoundOn( "Hero_Muerta.DeadShot.Ricochet.Impact", hTarget )
-    EmitSoundOn( "Hero_Muerta.DeadShot.Fear", hTarget )
 	return true
 end
 

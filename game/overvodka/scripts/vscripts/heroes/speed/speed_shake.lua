@@ -84,7 +84,6 @@ function modifier_speed_shake:OnIntervalThink()
     for _,enemy in pairs(enemies) do
         self.damageTable.victim = enemy
         self.damageTable.damage = self.damage + (self:GetCaster():GetIdealSpeed() * 0.01 * self:GetAbility():GetSpecialValueFor("dmg_scepter") * self.spinner_damage_tick)
-        ApplyDamage( self.damageTable )
         local heal = self:GetAbility():GetSpecialValueFor("lifesteal") * self.damage * 0.01
         self:GetCaster():Heal( heal, self:GetAbility() )
         SendOverheadEventMessage( self:GetCaster(), OVERHEAD_ALERT_HEAL, self:GetCaster(), heal, nil )
@@ -96,6 +95,7 @@ function modifier_speed_shake:OnIntervalThink()
         ParticleManager:SetParticleControl( particle, 4, enemy:GetAbsOrigin() )
         ParticleManager:SetParticleControl( particle, 5, enemy:GetAbsOrigin() )
         ParticleManager:ReleaseParticleIndex( particle )
+        ApplyDamage( self.damageTable )
     end
 end
 

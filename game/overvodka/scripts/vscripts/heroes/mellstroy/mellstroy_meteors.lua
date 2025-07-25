@@ -39,9 +39,11 @@ function mellstroy_meteors:OnProjectileHit( target, location )
     end
     local damageTable = {victim = target, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self}
     ApplyDamage(damageTable)
-    target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_slowed_debuff", {duration = stun_time * (1 - target:GetStatusResistance())})
-    target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_fired_debuff", {duration = fire_duration * (1 - target:GetStatusResistance())})
-    table.insert(tartar, target)
+    if target and not target:IsNull() then
+        target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_slowed_debuff", {duration = stun_time * (1 - target:GetStatusResistance())})
+        target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_fired_debuff", {duration = fire_duration * (1 - target:GetStatusResistance())})
+        table.insert(tartar, target)
+    end
 end
 
 modifier_mellstroy_meteors = class({})

@@ -130,8 +130,10 @@ function modifier_sahur_r:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
-		if enemy:IsRealHero() and not enemy:IsDebuffImmune() then
-			self:PlayEffects2(enemy)
+		if enemy and not enemy:IsNull() then
+			if enemy:IsRealHero() and not enemy:IsDebuffImmune() then
+				self:PlayEffects2(enemy)
+			end
 		end
 	end
 	if self.pulse >= self.pulses then

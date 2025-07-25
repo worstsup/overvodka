@@ -227,12 +227,12 @@ function modifier_sasavot_r_new_secondary:OnDestroy()
     StopSoundOn("sasavot_r_tick", self.target)
     local distance = (self.target:GetAbsOrigin() - self.caster:GetAbsOrigin()):Length2D()
     if self.durationPassed >= 14 and distance <= self.radius and not self.damageDealt then
-        self.damage_needed = self.target:GetMaxHealth() * self:GetAbility():GetSpecialValueFor("dmg_pct") * 0.01
-        ApplyDamage({victim = self.target, attacker = self.caster, damage = self.damage_needed, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS, ability = self:GetAbility()})
-        EmitGlobalSound("sasavot_r_success")
         local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/lifestealer/ls_ti10_immortal/ls_ti10_immortal_infest_radial_burst_blood.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.target )
         ParticleManager:SetParticleControl(effect_cast, 0, self.target:GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex( effect_cast )
+        self.damage_needed = self.target:GetMaxHealth() * self:GetAbility():GetSpecialValueFor("dmg_pct") * 0.01
+        ApplyDamage({victim = self.target, attacker = self.caster, damage = self.damage_needed, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS, ability = self:GetAbility()})
+        EmitGlobalSound("sasavot_r_success")
     end
 end
 function modifier_sasavot_r_new_secondary:GetEffectName()

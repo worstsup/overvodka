@@ -72,15 +72,17 @@ function modifier_royale_megaknight:OnCreated(kv)
     local units = FindUnitsInRadius(caster:GetTeamNumber(), parent:GetAbsOrigin(), nil, spawnRadius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
     for _,unit in pairs(units) do
         ApplyDamage({victim=unit, attacker=caster, damage=spawnDamage,damage_type=DAMAGE_TYPE_MAGICAL, ability=ability})
-        unit:AddNewModifier(caster, ability, "modifier_knockback", {
-            center_x = parent:GetAbsOrigin().x,
-            center_y = parent:GetAbsOrigin().y,
-            center_z = parent:GetAbsOrigin().z,
-            duration = 0.4,
-            knockback_duration = 0.4,
-            knockback_distance = spawnRadius,
-            knockback_height = 200,
-        })
+        if unit and not unit:IsNull() then
+            unit:AddNewModifier(caster, ability, "modifier_knockback", {
+                center_x = parent:GetAbsOrigin().x,
+                center_y = parent:GetAbsOrigin().y,
+                center_z = parent:GetAbsOrigin().z,
+                duration = 0.4,
+                knockback_duration = 0.4,
+                knockback_distance = spawnRadius,
+                knockback_height = 200,
+            })
+        end
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
     ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
@@ -279,6 +281,18 @@ function modifier_royale_megaknight_jump:UpdateVerticalMotion(parent, dt)
     parent:SetAbsOrigin(Vector(pos.x, pos.y, z))
 end
 
+function modifier_royale_megaknight_jump:OnHorizontalMotionInterrupted()
+	if IsServer() then
+		self:Destroy()
+	end
+end
+
+function modifier_royale_megaknight_jump:OnVerticalMotionInterrupted()
+	if IsServer() then
+		self:Destroy()
+	end
+end
+
 function modifier_royale_megaknight_jump:OnDestroy()
     if not IsServer() then return end
     local parent = self:GetParent()
@@ -298,15 +312,17 @@ function modifier_royale_megaknight_jump:FinishJump()
                        DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
     for _,unit in pairs(enemies) do
         ApplyDamage({victim=unit, attacker=self.caster, damage=jumpDmg, damage_type=DAMAGE_TYPE_MAGICAL, ability=self.ability})
-        unit:AddNewModifier(self.caster, self.ability, "modifier_knockback", {
-            center_x = parent:GetAbsOrigin().x,
-            center_y = parent:GetAbsOrigin().y,
-            center_z = parent:GetAbsOrigin().z,
-            duration = 0.4,
-            knockback_duration = 0.4,
-            knockback_distance = jumpRadius,
-            knockback_height = 200,
-        })
+        if unit and not unit:IsNull() then
+            unit:AddNewModifier(self.caster, self.ability, "modifier_knockback", {
+                center_x = parent:GetAbsOrigin().x,
+                center_y = parent:GetAbsOrigin().y,
+                center_z = parent:GetAbsOrigin().z,
+                duration = 0.4,
+                knockback_duration = 0.4,
+                knockback_distance = jumpRadius,
+                knockback_height = 200,
+            })
+        end
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
     ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())

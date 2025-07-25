@@ -521,6 +521,7 @@ function modifier_sans_e_thinker_orange:OnIntervalThink()
             if distance < 50 then
                 data.stationary_time = data.stationary_time + self.interval
                 if data.stationary_time >= 0.5 then
+					EmitSoundOn("sans_damage", enemy)
                     ApplyDamage({
                         victim = enemy,
                         attacker = caster,
@@ -528,7 +529,6 @@ function modifier_sans_e_thinker_orange:OnIntervalThink()
                         damage_type = ability:GetAbilityDamageType(),
                         ability = ability
                     })
-					EmitSoundOn("sans_damage", enemy)
                     data.stationary_time = data.stationary_time - 0.5
                 end
             else
@@ -577,6 +577,7 @@ function modifier_sans_e_thinker_blue:OnIntervalThink()
 
     for _, enemy in pairs(enemies) do
 		if enemy:IsMoving() then
+			EmitSoundOn("sans_damage", enemy)
         	ApplyDamage({
             	victim = enemy,
             	attacker = caster,
@@ -584,7 +585,6 @@ function modifier_sans_e_thinker_blue:OnIntervalThink()
             	damage_type = ability:GetAbilityDamageType(),
             	ability = ability
         	})
-			EmitSoundOn("sans_damage", enemy)
 		end
     end
 end

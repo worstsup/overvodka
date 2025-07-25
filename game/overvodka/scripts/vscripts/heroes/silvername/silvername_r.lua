@@ -121,9 +121,9 @@ function modifier_silvername_r_thinker:OnIntervalThink()
 			"modifier_generic_stunned_lua", 
 			{duration = self.stun_duration}
 		)
-		ApplyDamage( self.damageTable )
 		local particle = ParticleManager:CreateParticle("particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
 		ParticleManager:ReleaseParticleIndex( particle )
+		ApplyDamage( self.damageTable )
 	end
 	self:PlayEffects()
 	self.wave = self.wave + 1

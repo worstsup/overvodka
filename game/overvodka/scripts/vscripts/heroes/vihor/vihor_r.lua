@@ -74,7 +74,9 @@ function modifier_vihor_r:OnDestroy()
     for _, unit in pairs(units) do
         unit:RemoveModifierByName("modifier_vihor_r_debuff")
         ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
-        unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration * (1 - unit:GetStatusResistance())})
+        if unit and not unit:IsNull() then
+            unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration})
+        end
     end
     local particle_death = ParticleManager:CreateParticle("particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle_death, 0, self:GetParent():GetAbsOrigin())
@@ -115,7 +117,6 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     if GetMapName() == "overvodka_5x5" then
         self.dmg = self.dmg + self:GetAbility():GetSpecialValueFor("dota_damage") * self.interval
     end
-    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })
     if self:GetParent():GetHealthPercent() <= 3 then
         self.min_health = 0
         self:GetParent():Kill(self:GetAbility(), self:GetCaster())
@@ -161,6 +162,7 @@ function modifier_vihor_r_debuff:OnIntervalThink()
             end
         end
     end
+    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })
 end
 
 function modifier_vihor_r_debuff:DeclareFunctions()

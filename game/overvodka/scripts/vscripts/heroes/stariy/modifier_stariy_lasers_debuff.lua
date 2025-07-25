@@ -35,10 +35,9 @@ function modifier_stariy_lasers_debuff:OnIntervalThink()
 			damage_type = DAMAGE_TYPE_MAGICAL,
 			ability = self:GetAbility(),
 		}
-		ApplyDamage( damageInfo )
-
 		local nFXIndex = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_burn.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 		ParticleManager:SetParticleControlEnt( nFXIndex, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true )
 		ParticleManager:ReleaseParticleIndex( nFXIndex )
+		ApplyDamage( damageInfo )
 	end
 end

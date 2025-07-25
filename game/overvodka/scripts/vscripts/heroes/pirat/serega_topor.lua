@@ -64,6 +64,7 @@ function serega_topor:OnHit( enemy )
 	pct = math.min(pct,1)
 	local damage = damage_min + (damage_max-damage_min)*pct
 	local slow = slow_min + (slow_max-slow_min)*pct
+	EmitSoundOn( "Ability.PlasmaFieldImpact", enemy )
 	local damageTable = {
 		victim = enemy,
 		attacker = caster,
@@ -72,18 +73,18 @@ function serega_topor:OnHit( enemy )
 		ability = self,
 	}
 	ApplyDamage(damageTable)
-	enemy:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = duration})
-	enemy:AddNewModifier(
-		caster,
-		self,
-		"modifier_serega_topor",
-		{
-			duration = duration,
-			slow = slow,
-		}
-	)
-	local sound_cast = "Ability.PlasmaFieldImpact"
-	EmitSoundOn( sound_cast, enemy )
+	if enemy and not enemy:IsNull() then
+		enemy:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = duration})
+		enemy:AddNewModifier(
+			caster,
+			self,
+			"modifier_serega_topor",
+			{
+				duration = duration,
+				slow = slow,
+			}
+		)
+	end
 end
 
 function serega_topor:PlayEffects( radius, speed )

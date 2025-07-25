@@ -168,6 +168,7 @@ function modifier_ability_zuus_arc_lightning:CreateArcLightning(target)
         damage_type = self:GetAbility():GetAbilityDamageType(),
         ability = self:GetAbility()
     })
+    if not target or target:IsNull() then return end
     local fx = ParticleManager:CreateParticle("particles/rostik_q_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, OldTarget)
     ParticleManager:SetParticleControlEnt(fx, 0, OldTarget, PATTACH_POINT_FOLLOW, "attach_attack1", OldTarget:GetAbsOrigin(), true)
     ParticleManager:SetParticleControlEnt(fx, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)

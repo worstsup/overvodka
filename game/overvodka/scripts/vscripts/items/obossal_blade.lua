@@ -41,8 +41,10 @@ function item_obossal_blade:OnSpellStart()
 		ability = self
 	}
 	ApplyDamage(damageTable)
-	if target:IsAlive() then
-		target:AddNewModifier(caster, ability, modifier_bash, {duration = active_stun_duration * (1 - target:GetStatusResistance())})
+	if target and not target:IsNull() then
+		if target:IsAlive() then
+			target:AddNewModifier(caster, ability, modifier_bash, {duration = active_stun_duration * (1 - target:GetStatusResistance())})
+		end
 	end
 end
 

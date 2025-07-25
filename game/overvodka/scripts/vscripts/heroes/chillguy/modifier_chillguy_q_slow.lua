@@ -37,7 +37,6 @@ function modifier_chillguy_q_slow:GetModifierMoveSpeedBonus_Percentage( params )
 end
 function modifier_chillguy_q_slow:OnIntervalThink()
 	if IsServer() then
-		-- Apply DoT
 		local damage = {
 			victim = self:GetParent(),
 			attacker = self:GetCaster(),

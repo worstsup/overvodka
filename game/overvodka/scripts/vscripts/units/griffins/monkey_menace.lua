@@ -45,6 +45,7 @@ function modifier_monkey_menace_fear_debuff:CheckState()
     return {
         [MODIFIER_STATE_FEARED] = true,
         [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+        [MODIFIER_STATE_DISARMED] = true,
     }
 end
 

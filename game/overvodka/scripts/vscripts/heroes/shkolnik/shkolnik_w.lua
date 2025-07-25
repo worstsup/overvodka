@@ -35,10 +35,9 @@ function shkolnik_w:OnSpellStart()
 		"modifier_shkolnik_armor", 
 		{duration = duration}
 	)
-	ApplyDamage( damageTable )
 	self:PlayEffects( target )
 	self:PlayEffects1( target )
-
+	ApplyDamage( damageTable )
 end
 function shkolnik_w:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_ogre_magi/ogre_magi_fireblast.vpcf"

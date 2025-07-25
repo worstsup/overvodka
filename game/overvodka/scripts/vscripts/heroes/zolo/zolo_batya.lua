@@ -71,9 +71,9 @@ function zolo_batya:OnSpellStart()
             unit:RemoveModifierByName("modifier_knockback")
         end
         unit:AddNewModifier(self:GetCaster(), self, "modifier_knockback", knockbackProperties)
-		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
         self:PlayEffects( unit )
 	    self:PlayEffects1( unit )
+		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
 	end
     EmitSoundOn("sharik", caster)
 end
