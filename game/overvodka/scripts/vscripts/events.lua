@@ -2,7 +2,7 @@
 ---------------------------------------------------------------------------
 -- Event: Game state change handler
 ---------------------------------------------------------------------------
-function COverthrowGameMode:OnGameRulesStateChange()
+function OvervodkaGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
 	if nNewState == DOTA_GAMERULES_STATE_INIT then
         CustomGameEventManager:Send_ServerToAllClients("gamesetup", nil)
@@ -42,7 +42,16 @@ function COverthrowGameMode:OnGameRulesStateChange()
 		CustomNetTables:SetTableValue( "game_state", "victory_condition", { kills_to_win = self.TEAM_KILLS_TO_WIN } );
 
 		self._fPreGameStartTime = GameRules:GetGameTime()
-
+		if not IsInToolsMode() and GetMapName() ~= "overvodka_5x5" then
+			Convars:SetFloat("host_timescale", 0.25)
+			Timers:CreateTimer({
+				useGameTime = false,
+				endTime = 1.5,
+				callback = function()
+					Convars:SetFloat("host_timescale", 1)
+				end
+			})
+		end
 	elseif nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
 		-- random for all players that haven't chosen yet
 		for nPlayerID = 0, ( DOTA_MAX_TEAM_PLAYERS - 1 ) do
@@ -88,7 +97,7 @@ function COverthrowGameMode:OnGameRulesStateChange()
 	end
 end
 
-function COverthrowGameMode:ReplaceWinContidion()
+function OvervodkaGameMode:ReplaceWinContidion()
     local Structures = FindUnitsInRadius(
         DOTA_TEAM_GOODGUYS,
         Vector(0,0,0),
@@ -109,7 +118,7 @@ function COverthrowGameMode:ReplaceWinContidion()
     end
 end
 
-function COverthrowGameMode:OnHeroSelected(event)
+function OvervodkaGameMode:OnHeroSelected(event)
 	if event.hero_unit == "npc_dota_hero_morphling" then
 		if Server:IsPlayerSubscribed(event.player_id) then
 			EmitSoundOnClient("sans_arcana_start", PlayerResource:GetPlayer(event.player_id))
@@ -122,7 +131,7 @@ end
 -- Event: OnNPCSpawned
 --------------------------------------------------------------------------------
 golovach_spawned = 0
-function COverthrowGameMode:OnNPCSpawned( event )
+function OvervodkaGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
@@ -211,7 +220,7 @@ end
 -- * hero  		(string)
 ---------------------------------------------------------
 
-function COverthrowGameMode:OnHeroFinishSpawn( event )
+function OvervodkaGameMode:OnHeroFinishSpawn( event )
 	local hPlayerHero = EntIndexToHScript( event.heroindex )
 	if hPlayerHero ~= nil and hPlayerHero:IsRealHero() then
 		if GetMapName() ~= "overvodka_5x5" then
@@ -229,7 +238,7 @@ end
 --------------------------------------------------------------------------------
 -- Event: BountyRunePickupFilter
 --------------------------------------------------------------------------------
-function COverthrowGameMode:BountyRunePickupFilter( filterTable )
+function OvervodkaGameMode:BountyRunePickupFilter( filterTable )
       filterTable["xp_bounty"] = 2*filterTable["xp_bounty"]
       filterTable["gold_bounty"] = 2*filterTable["gold_bounty"]
       return true
@@ -238,7 +247,7 @@ end
 ---------------------------------------------------------------------------
 -- Event: OnTeamKillCredit, see if anyone won
 ---------------------------------------------------------------------------
-function COverthrowGameMode:OnTeamKillCredit( event )
+function OvervodkaGameMode:OnTeamKillCredit( event )
 --	print( "OnKillCredit" )
 --	DeepPrint( event )
 
@@ -290,7 +299,7 @@ end
 
 connectedPlayers = {}
 
-function COverthrowGameMode:OnGameInProgress()
+function OvervodkaGameMode:OnGameInProgress()
     for playerID = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
         if PlayerResource:IsValidPlayer(playerID) then
             connectedPlayers[playerID] = true
@@ -331,18 +340,18 @@ function CheckPlayerConnections()
         end
     end
     if teamsWithPlayers == 1 and lastTeamStanding ~= nil then
-        COverthrowGameMode:EndGame( lastTeamStanding )
+        OvervodkaGameMode:EndGame( lastTeamStanding )
     end
 end
 
-function COverthrowGameMode:OnPlayerDisconnect( event )
+function OvervodkaGameMode:OnPlayerDisconnect( event )
     local playerID = event.PlayerID
     if PlayerResource:IsValidPlayer(playerID) then
         connectedPlayers[playerID] = false
     end
 end
 
-function COverthrowGameMode:OnPlayerReconnect( event )
+function OvervodkaGameMode:OnPlayerReconnect( event )
     local playerID = event.PlayerID
     if PlayerResource:IsValidPlayer(playerID) then
         connectedPlayers[playerID] = true
@@ -351,7 +360,7 @@ end
 ---------------------------------------------------------------------------
 -- Event: OnEntityKilled
 ---------------------------------------------------------------------------
-function COverthrowGameMode:OnEntityKilled( event )
+function OvervodkaGameMode:OnEntityKilled( event )
 	local killedUnit = EntIndexToHScript( event.entindex_killed )
 	local killedTeam = killedUnit:GetTeam()
 	if killedUnit:IsTempestDouble() then return end
@@ -401,15 +410,15 @@ function COverthrowGameMode:OnEntityKilled( event )
 			if killedUnit:IsReincarnating() == true then
 				return nil
 			else
-				COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
+				OvervodkaGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 			end
 		else
-			COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
+			OvervodkaGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 		end
 	end
 end
 
-function COverthrowGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
+function OvervodkaGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 	--print("Setting time for respawn")
 	if killedTeam == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
 		if killedUnit:FindItemInInventory("item_aegis") then
@@ -450,7 +459,7 @@ end
 --------------------------------------------------------------------------------
 -- Event: OnItemPickUp
 --------------------------------------------------------------------------------
-function COverthrowGameMode:OnItemPickUp( event )
+function OvervodkaGameMode:OnItemPickUp( event )
 	VectorTarget:OnItemPickup(event)
 	local item = EntIndexToHScript( event.ItemEntityIndex )
 	local owner
@@ -540,7 +549,7 @@ function COverthrowGameMode:OnItemPickUp( event )
 				break
 			end
 		end
-		COverthrowGameMode:SpecialItemAdd(event)
+		OvervodkaGameMode:SpecialItemAdd(event)
 		Timers:CreateTimer(0.03, function()
 			RemoveItemByName(owner, treasureItemName)
 			UTIL_Remove(item)
@@ -560,9 +569,9 @@ end
 --------------------------------------------------------------------------------
 -- Event: OnNpcGoalReached
 --------------------------------------------------------------------------------
-function COverthrowGameMode:OnNpcGoalReached( event )
+function OvervodkaGameMode:OnNpcGoalReached( event )
 	local npc = EntIndexToHScript( event.npc_entindex )
 	if npc:GetUnitName() == "npc_dota_treasure_courier" then
-		COverthrowGameMode:TreasureDrop( npc )
+		OvervodkaGameMode:TreasureDrop( npc )
 	end
 end

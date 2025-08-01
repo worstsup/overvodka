@@ -1,14 +1,14 @@
 --[[ items.lua ]]
 
 --Spawns Bags of Gold in the middle
-function COverthrowGameMode:ThinkGoldDrop()
+function OvervodkaGameMode:ThinkGoldDrop()
 	local r = RandomInt( 1, 100 )
 	if r > ( 100 - self.m_GoldDropPercent ) then
 		self:SpawnGold()
 	end
 end
 
-function COverthrowGameMode:SpawnGold()
+function OvervodkaGameMode:SpawnGold()
 	local overBoss = Entities:FindByName( nil, "@overboss" )
 	local throwCoin = nil
 	local throwCoin2 = nil
@@ -26,7 +26,7 @@ function COverthrowGameMode:SpawnGold()
 	end
 end
 
-function COverthrowGameMode:SpawnGoldEntity( spawnPoint )
+function OvervodkaGameMode:SpawnGoldEntity( spawnPoint )
 	EmitGlobalSound("Item.PickUpGemWorld")
 	local newItem = CreateItem( "item_bag_of_gold", nil, nil )
 	local drop = CreateItemOnPositionForLaunch( spawnPoint, newItem )
@@ -37,7 +37,7 @@ end
 
 
 --Removes Bags of Gold after they expire
-function COverthrowGameMode:KillLoot( item, drop )
+function OvervodkaGameMode:KillLoot( item, drop )
 
 	if drop:IsNull() then
 		return
@@ -53,7 +53,7 @@ function COverthrowGameMode:KillLoot( item, drop )
 	UTIL_Remove( drop )
 end
 
-function COverthrowGameMode:SpecialItemAdd( event )
+function OvervodkaGameMode:SpecialItemAdd( event )
 	local item = EntIndexToHScript( event.ItemEntityIndex )
 	local owner
 	if event.HeroEntityIndex then
@@ -190,7 +190,7 @@ function COverthrowGameMode:SpecialItemAdd( event )
 	CustomGameEventManager:Send_ServerToAllClients( "overthrow_item_drop", overthrow_item_drop )
 end
 
-function COverthrowGameMode:ThinkSpecialItemDrop()
+function OvervodkaGameMode:ThinkSpecialItemDrop()
 	-- Stop spawning items after the maximum amount
 	if self.nNextSpawnItemNumber >= self.nMaxItemSpawns then
 		return
@@ -219,7 +219,7 @@ function COverthrowGameMode:ThinkSpecialItemDrop()
 	end
 end
 
-function COverthrowGameMode:PlanNextSpawn()
+function OvervodkaGameMode:PlanNextSpawn()
 	if self.itemSpawnLocations == nil then
 		self.itemSpawnLocations = {}
 		self.itemSpawnLocationsInUse = {}
@@ -265,7 +265,7 @@ function COverthrowGameMode:PlanNextSpawn()
 	return true
 end
 
-function COverthrowGameMode:WarnItem()
+function OvervodkaGameMode:WarnItem()
 	-- find the spawn point
 	if self:PlanNextSpawn() == false then
 		return false
@@ -288,7 +288,7 @@ function COverthrowGameMode:WarnItem()
 	return true
 end
 
-function COverthrowGameMode:SpawnItem()
+function OvervodkaGameMode:SpawnItem()
 	-- notify everyone
 	EmitGlobalSound( "Overthrow.Item.Spawn" )
 
@@ -304,13 +304,13 @@ function COverthrowGameMode:SpawnItem()
 	--treasureCourier:Attribute_SetIntValue( "particleID", particleTreasure )
 end
 
-function COverthrowGameMode:ForceSpawnItem()
+function OvervodkaGameMode:ForceSpawnItem()
 	if self:WarnItem() then
 		self:SpawnItem()
 	end
 end
 
-function COverthrowGameMode:KnockBackFromTreasure( center, radius, knockback_duration, knockback_distance, knockback_height )
+function OvervodkaGameMode:KnockBackFromTreasure( center, radius, knockback_duration, knockback_distance, knockback_height )
 	local targetType = bit.bor( DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_HERO )
 	local knockBackUnits = FindUnitsInRadius( DOTA_TEAM_NOTEAM, center, nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, targetType, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
  
@@ -332,7 +332,7 @@ function COverthrowGameMode:KnockBackFromTreasure( center, radius, knockback_dur
 end
 
 
-function COverthrowGameMode:TreasureDrop( treasureCourier )
+function OvervodkaGameMode:TreasureDrop( treasureCourier )
 
 	-- Destroy vision revealer
 	self.hItemDestinationRevealer:RemoveSelf()
@@ -378,7 +378,7 @@ function COverthrowGameMode:TreasureDrop( treasureCourier )
 	ParticleManager:SetParticleControlEnt( self.hCurrentItemSpawnLocation.nItemDestinationParticles, PATTACH_ABSORIGIN, self.hCurrentItemSpawnLocation.hItemDestinationRevealer, PATTACH_ABSORIGIN, "attach_origin", self.hCurrentItemSpawnLocation.hItemDestinationRevealer:GetAbsOrigin(), true )
 end
 
-function COverthrowGameMode:ForceSpawnGold()
+function OvervodkaGameMode:ForceSpawnGold()
 	self:SpawnGold()
 end
 

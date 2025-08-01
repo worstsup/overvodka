@@ -54,7 +54,7 @@ function modifier_vihor_r:OnIntervalThink()
     if not IsServer() then return end
     local units = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
     for _, unit in pairs(units) do
-        if not unit:HasModifier("modifier_vihor_r_debuff") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:HasModifier("modifier_macan_r") then
+        if not unit:HasModifier("modifier_vihor_r_debuff") and not unit:HasModifier("modifier_black_king_bar_immune") and not unit:HasModifier("modifier_macan_r") and not unit:IsDebuffImmune() then
             unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_vihor_r_debuff", {duration = self:GetRemainingTime()})
         end
     end
@@ -140,10 +140,10 @@ function modifier_vihor_r_debuff:OnIntervalThink()
         )
 
         for _, attacker in ipairs(enemies) do
-            if attacker:IsAlive() and attacker:HasModifier("modifier_vihor_r_debuff") and not attacker:IsMagicImmune() and not attacker:HasModifier("modifier_black_king_bar_immune") then
+            if attacker:IsAlive() and attacker:HasModifier("modifier_vihor_r_debuff") and not attacker:IsDebuffImmune() and not attacker:HasModifier("modifier_black_king_bar_immune") then
                 local target = nil
                 for _, potential_target in ipairs(enemies) do
-                    if potential_target:IsAlive() and potential_target:HasModifier("modifier_vihor_r_debuff") and potential_target ~= attacker then
+                    if potential_target:IsAlive() and potential_target:HasModifier("modifier_vihor_r_debuff") and not potential_target:IsDebuffImmune() and potential_target ~= attacker then
                         target = potential_target
                         break
                     else
@@ -151,7 +151,7 @@ function modifier_vihor_r_debuff:OnIntervalThink()
                     end
                 end
 
-                if target then
+                if target and not target:IsNull() then
                     attacker:MoveToTargetToAttack(target)
                     Timers:CreateTimer(0.9, function()
                         if not attacker:IsNull() then

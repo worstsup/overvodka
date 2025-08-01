@@ -16,7 +16,7 @@ bgid = 0
 function HeroSelection() {
 
     // if game state is not hero pick or stategy time   
-    if ((!Game.GameStateIs(0)) && (!Game.GameStateIs(4)) && (!Game.GameStateIs(5)))
+    if ((!Game.GameStateIs(0)) && (!Game.GameStateIs(1)) && (!Game.GameStateIs(4)) && (!Game.GameStateIs(5)))
     {
         return
     }

@@ -224,7 +224,8 @@ function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
         MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
-        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+        MODIFIER_PROPERTY_MOVESPEED_LIMIT
     }
     return funcs
 end
@@ -258,6 +259,10 @@ end
 
 function modifier_bratishkin_e_primary_scepter:GetAbsoluteNoDamagePure()
     return 1
+end
+
+function modifier_bratishkin_e_primary_scepter:GetModifierMoveSpeed_Limit()
+    return self:GetAbility():GetSpecialValueFor("max_speed")
 end
 
 function modifier_bratishkin_e_primary_scepter:GetModifierAttackRangeBonus()

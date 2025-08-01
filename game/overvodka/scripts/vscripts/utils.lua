@@ -176,8 +176,8 @@ function RollPseudoRandom(base_chance, entity)
 end
 
 function IsComebackTeam(TeamID)
-	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
-	local bIsFirstBlooded = COverthrowGameMode:IsFirstBlooded()
+	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
+	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
 
 	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
 		return false
@@ -201,8 +201,8 @@ function IsComebackTeam(TeamID)
 end
 
 function ChangeValueByTeamPlace(value, Team)
-	local CurrentTeams = COverthrowGameMode:GetSortedValidActiveTeams()
-	local bIsFirstBlooded = COverthrowGameMode:IsFirstBlooded()
+	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
+	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
 
 	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
 		return value

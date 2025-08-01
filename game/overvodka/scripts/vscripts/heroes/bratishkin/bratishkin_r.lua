@@ -60,7 +60,7 @@ function modifier_bratishkin_r_buff:GetModifierPreAttack_CriticalStrike( params 
         local modifier = params.target:FindModifierByNameAndCaster("modifier_bratishkin_r_debuff", self:GetParent())
         if modifier and modifier:GetStackCount() > 0 then
             self.record = params.record
-            local bonus_dmg_pct = self:GetAbility():GetSpecialValueFor("bonus_dmg_pct")
+            local bonus_dmg_pct = self:GetAbility():GetSpecialValueFor("bonus_dmg_pct") or 4
             return modifier:GetStackCount() * bonus_dmg_pct + 100
         end
 	end

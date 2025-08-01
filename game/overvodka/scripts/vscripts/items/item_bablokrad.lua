@@ -56,9 +56,9 @@ function item_bablokrad:OnSpellStart()
 	newItem:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius ) )
     newItem2:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius2 ) )
     newItem3:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius3 ) )
-	newItem:SetContextThink( "KillLoot", function() return COverthrowGameMode:KillLoot( newItem, drop ) end, 20 )
-    newItem2:SetContextThink( "KillLoot", function() return COverthrowGameMode:KillLoot( newItem2, drop2 ) end, 20 )
-    newItem3:SetContextThink( "KillLoot", function() return COverthrowGameMode:KillLoot( newItem3, drop3 ) end, 20 )
+	newItem:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem, drop ) end, 20 )
+    newItem2:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem2, drop2 ) end, 20 )
+    newItem3:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem3, drop3 ) end, 20 )
 
 	target:ModifyGold(-gold_enemy, false, 0)
 

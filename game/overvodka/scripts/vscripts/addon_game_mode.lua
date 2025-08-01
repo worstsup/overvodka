@@ -8,10 +8,10 @@ _G.overvodka_events = true
 local PrecacheUtils = require("util/precache")
 
 ---------------------------------------------------------------------------
--- COverthrowGameMode class
+-- OvervodkaGameMode class
 ---------------------------------------------------------------------------
-if COverthrowGameMode == nil then
-	_G.COverthrowGameMode = class({}) -- put COverthrowGameMode in the global scope
+if OvervodkaGameMode == nil then
+	_G.OvervodkaGameMode = class({})
 end
 
 ---------------------------------------------------------------------------
@@ -39,11 +39,11 @@ function Precache( context )
 end
 
 function Activate()
-	COverthrowGameMode:InitGameMode()
-	COverthrowGameMode:CustomSpawnCamps()
+	OvervodkaGameMode:InitGameMode()
+	OvervodkaGameMode:CustomSpawnCamps()
 end
 
-function COverthrowGameMode:CustomSpawnCamps()
+function OvervodkaGameMode:CustomSpawnCamps()
 	for name,_ in pairs(spawncamps) do
 	spawnunits(name)
 	end
@@ -53,7 +53,7 @@ end
 ---------------------------------------------------------------------------
 -- Initializer
 ---------------------------------------------------------------------------
-function COverthrowGameMode:InitGameMode()
+function OvervodkaGameMode:InitGameMode()
 	print( "Overthrow is loaded." )
 	XP_PER_LEVEL_TABLE = {
 	0, -- 1
@@ -176,9 +176,9 @@ function COverthrowGameMode:InitGameMode()
 	self.TEAMS_MISSING = 0
 	self.GoldBonusPerTeam = 2
 	self.XpBonusPerTeam = 4
-	self.MIN_COUNTDOWN_TIME = 900
-	self.SOLO_TIME_PER_TEAM = 120
-	self.DUO_TIME_PER_TEAM = 300
+	self.MIN_COUNTDOWN_TIME = 1200
+	self.SOLO_TIME_PER_TEAM = 60
+	self.DUO_TIME_PER_TEAM = 120
 
 	self.LeaveTeamEncounterDuration = 5
 
@@ -192,7 +192,7 @@ function COverthrowGameMode:InitGameMode()
 	
 	self:GatherAndRegisterValidTeams()
 
-	GameRules:GetGameModeEntity().COverthrowGameMode = self
+	GameRules:GetGameModeEntity().OvervodkaGameMode = self
 
 	-- Adding Many Players
 	if GetMapName() == "overvodka_5x5" then
@@ -264,7 +264,7 @@ function COverthrowGameMode:InitGameMode()
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
 		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false )
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false )
@@ -280,13 +280,13 @@ function COverthrowGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
-	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( COverthrowGameMode, "BountyRunePickupFilter" ), self )
-	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( COverthrowGameMode, "ExecuteOrderFilter" ), self )
+	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( OvervodkaGameMode, "BountyRunePickupFilter" ), self )
+	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( OvervodkaGameMode, "ExecuteOrderFilter" ), self )
 
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled( true )
 	GameRules:GetGameModeEntity():SetUseTurboCouriers( true )
@@ -298,15 +298,15 @@ function COverthrowGameMode:InitGameMode()
 	end
 	GameRules:GetGameModeEntity():SetDraftingHeroPickSelectTimeOverride( 60.0 )
 
-	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( COverthrowGameMode, 'OnGameRulesStateChange' ), self )
-	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( COverthrowGameMode, "OnNPCSpawned" ), self )
-	ListenToGameEvent( "dota_on_hero_finish_spawn", Dynamic_Wrap( COverthrowGameMode, "OnHeroFinishSpawn" ), self )
-	ListenToGameEvent( "dota_team_kill_credit", Dynamic_Wrap( COverthrowGameMode, 'OnTeamKillCredit' ), self )
-	ListenToGameEvent( "entity_killed", Dynamic_Wrap( COverthrowGameMode, 'OnEntityKilled' ), self )
-	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( COverthrowGameMode, "OnItemPickUp"), self )
-	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( COverthrowGameMode, "OnNpcGoalReached" ), self )
-	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( COverthrowGameMode, "OnPlayerDisconnected" ), self )
-	ListenToGameEvent( "hero_selected", Dynamic_Wrap( COverthrowGameMode, "OnHeroSelected" ), self )
+	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( OvervodkaGameMode, 'OnGameRulesStateChange' ), self )
+	ListenToGameEvent( "npc_spawned", Dynamic_Wrap( OvervodkaGameMode, "OnNPCSpawned" ), self )
+	ListenToGameEvent( "dota_on_hero_finish_spawn", Dynamic_Wrap( OvervodkaGameMode, "OnHeroFinishSpawn" ), self )
+	ListenToGameEvent( "dota_team_kill_credit", Dynamic_Wrap( OvervodkaGameMode, 'OnTeamKillCredit' ), self )
+	ListenToGameEvent( "entity_killed", Dynamic_Wrap( OvervodkaGameMode, 'OnEntityKilled' ), self )
+	ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap( OvervodkaGameMode, "OnItemPickUp"), self )
+	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( OvervodkaGameMode, "OnNpcGoalReached" ), self )
+	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( OvervodkaGameMode, "OnPlayerDisconnected" ), self )
+	ListenToGameEvent( "hero_selected", Dynamic_Wrap( OvervodkaGameMode, "OnHeroSelected" ), self )
 		Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 		Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
 		Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
@@ -327,7 +327,7 @@ function COverthrowGameMode:InitGameMode()
 			end, "Show team leave encounter", FCVAR_CHEAT )
 		Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
 
-	COverthrowGameMode:SetUpFountains()
+	OvervodkaGameMode:SetUpFountains()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
 
 	-- Spawning monsters
@@ -354,7 +354,7 @@ function COverthrowGameMode:InitGameMode()
 	} )
 end
 
-function COverthrowGameMode:IncrementTeamHeroKills(TeamID, value)
+function OvervodkaGameMode:IncrementTeamHeroKills(TeamID, value)
 	if self.TeamKills[TeamID] == nil then
 		self.TeamKills[TeamID] = 0
 	end
@@ -364,14 +364,14 @@ function COverthrowGameMode:IncrementTeamHeroKills(TeamID, value)
 	CustomNetTables:SetTableValue("globals", "team_".. TeamID .."_kills", {kills=self.TeamKills[TeamID]})
 end
 
-function COverthrowGameMode:GetTeamHeroKills(TeamID)
+function OvervodkaGameMode:GetTeamHeroKills(TeamID)
 	return self.TeamKills[TeamID] or 0
 end
 
 ---------------------------------------------------------------------------
 -- Set up fountain regen
 ---------------------------------------------------------------------------
-function COverthrowGameMode:SetUpFountains()
+function OvervodkaGameMode:SetUpFountains()
 
 	LinkLuaModifier( "modifier_fountain_aura_lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier( "modifier_fountain_aura_effect_lua", LUA_MODIFIER_MOTION_NONE )
@@ -385,7 +385,7 @@ end
 ---------------------------------------------------------------------------
 -- Get the color associated with a given teamID
 ---------------------------------------------------------------------------
-function COverthrowGameMode:ColorForTeam( teamID )
+function OvervodkaGameMode:ColorForTeam( teamID )
 	local color = self.m_TeamColors[ teamID ]
 	if color == nil then
 		color = { 255, 255, 255 } -- default to white
@@ -395,7 +395,7 @@ end
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
-function COverthrowGameMode:EndGame(victoryTeam)
+function OvervodkaGameMode:EndGame(victoryTeam)
     if Quests and Quests.SaveAllProgress then
         for playerID, _ in pairs(Quests.playerData) do
             if Quests.modifierTimers[playerID] then
@@ -425,7 +425,7 @@ function COverthrowGameMode:EndGame(victoryTeam)
     GameRules:SetGameWinner(victoryTeam)
 end
 
-function COverthrowGameMode:GetSortedValidTeams()
+function OvervodkaGameMode:GetSortedValidTeams()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
@@ -438,7 +438,7 @@ function COverthrowGameMode:GetSortedValidTeams()
 	return sortedTeams
 end
 
-function COverthrowGameMode:GetSortedValidActiveTeams()
+function OvervodkaGameMode:GetSortedValidActiveTeams()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
@@ -465,14 +465,14 @@ function COverthrowGameMode:GetSortedValidActiveTeams()
 	return sortedTeams
 end
 
-function COverthrowGameMode:GetCountMissingTeams()
+function OvervodkaGameMode:GetCountMissingTeams()
 	local MaxTeamsCount = #self.m_GatheredShuffledTeams
 	local CurrentActiveTeams = #self:GetSortedValidActiveTeams()
 	local Diff = MaxTeamsCount - CurrentActiveTeams
 	return Diff
 end
 
-function COverthrowGameMode:GetValidTeamPlayers()
+function OvervodkaGameMode:GetValidTeamPlayers()
 	local Teams = {}
 
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
@@ -490,11 +490,11 @@ function COverthrowGameMode:GetValidTeamPlayers()
 	return Teams
 end
 
-function COverthrowGameMode:IsFirstBlooded()
+function OvervodkaGameMode:IsFirstBlooded()
 	return self.bFirstBlooded
 end
 
-function COverthrowGameMode:OnPlayerDisconnected(event)
+function OvervodkaGameMode:OnPlayerDisconnected(event)
 	local PlayerID = event.PlayerID
 	local Team = PlayerResource:GetTeam(PlayerID)
 	local ActiveTeams = self:GetSortedValidActiveTeams()
@@ -521,7 +521,7 @@ function COverthrowGameMode:OnPlayerDisconnected(event)
 	} )
 end
 
-function COverthrowGameMode:ReduceCountdownTimer(nTimes)
+function OvervodkaGameMode:ReduceCountdownTimer(nTimes)
 	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
 	if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
 		_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-(MinusTime*nTimes))
@@ -531,7 +531,7 @@ end
 ---------------------------------------------------------------------------
 -- Put a label over a player's hero so people know who is on what team
 ---------------------------------------------------------------------------
-function COverthrowGameMode:UpdatePlayerColor( nPlayerID )
+function OvervodkaGameMode:UpdatePlayerColor( nPlayerID )
 	if not PlayerResource:HasSelectedHero( nPlayerID ) then
 		return
 	end
@@ -550,7 +550,7 @@ end
 ---------------------------------------------------------------------------
 -- Simple scoreboard using debug text
 ---------------------------------------------------------------------------
-function COverthrowGameMode:UpdateScoreboard()
+function OvervodkaGameMode:UpdateScoreboard()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
 		table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
@@ -612,7 +612,7 @@ end
 ---------------------------------------------------------------------------
 -- Update player labels and the scoreboard
 ---------------------------------------------------------------------------
-function COverthrowGameMode:OnThink()
+function OvervodkaGameMode:OnThink()
 	for nPlayerID = 0, (DOTA_MAX_TEAM_PLAYERS-1) do
 		self:UpdatePlayerColor( nPlayerID )
 	end
@@ -638,7 +638,7 @@ function COverthrowGameMode:OnThink()
 		if nCOUNTDOWNTIMER <= 0 then
 			if self.isGameTied == false then
 				GameRules:SetCustomVictoryMessage( self.m_VictoryMessages[self.leadingTeam] )
-				COverthrowGameMode:EndGame( self.leadingTeam )
+				OvervodkaGameMode:EndGame( self.leadingTeam )
 				self.countdownEnabled = false
 			else
 				self.TEAM_KILLS_TO_WIN = self.leadingTeamScore + 1
@@ -652,8 +652,8 @@ function COverthrowGameMode:OnThink()
 	end
 	
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		COverthrowGameMode:ThinkGoldDrop()
-		COverthrowGameMode:ThinkSpecialItemDrop()
+		OvervodkaGameMode:ThinkGoldDrop()
+		OvervodkaGameMode:ThinkSpecialItemDrop()
 	end
 
 	return 1
@@ -662,7 +662,7 @@ end
 ---------------------------------------------------------------------------
 -- Scan the map to see which teams have spawn points
 ---------------------------------------------------------------------------
-function COverthrowGameMode:GatherAndRegisterValidTeams()
+function OvervodkaGameMode:GatherAndRegisterValidTeams()
 	local foundTeams = {}
 	local foundTeamsList = {}
 	local numTeams
@@ -711,7 +711,7 @@ function COverthrowGameMode:GatherAndRegisterValidTeams()
 	end
 end
 
-function COverthrowGameMode:spawncamp(campname)
+function OvervodkaGameMode:spawncamp(campname)
 	spawnunits(campname)
 end
 
@@ -739,7 +739,7 @@ end
 --------------------------------------------------------------------------------
 -- Event: Filter for inventory full
 --------------------------------------------------------------------------------
-function COverthrowGameMode:ExecuteOrderFilter( filterTable )
+function OvervodkaGameMode:ExecuteOrderFilter( filterTable )
 	local orderType = filterTable["order_type"]
 	if ( orderType ~= DOTA_UNIT_ORDER_PICKUP_ITEM or filterTable["issuer_player_id_const"] == -1 ) then
 		return true
@@ -787,7 +787,7 @@ function COverthrowGameMode:ExecuteOrderFilter( filterTable )
 end
 
 --------------------------------------------------------------------------------
-function COverthrowGameMode:AssignTeams()
+function OvervodkaGameMode:AssignTeams()
 	local vecTeamValid = {}
 	local vecTeamNeededPlayers = {}
 	for nTeam = 0, (DOTA_TEAM_COUNT-1) do

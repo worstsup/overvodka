@@ -56,7 +56,7 @@ function Server:OnGameEnded(Teams, VictoryTeam)
         end
     end
 
-    local ValidPlayers = COverthrowGameMode:GetValidTeamPlayers()
+    local ValidPlayers = OvervodkaGameMode:GetValidTeamPlayers()
     local bCanBeRated = false
     local i = 0
     if Is5v5() then
@@ -549,10 +549,10 @@ end
 function Server:OnPlayerDisconnected(event)
     if self.bGameEnded == true then return end
 
-    local ConnectedTeams = COverthrowGameMode:GetSortedValidActiveTeams()
+    local ConnectedTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
 
     if #ConnectedTeams == 1 then
-        COverthrowGameMode:EndGame( ConnectedTeams[#ConnectedTeams].teamID )
+        OvervodkaGameMode:EndGame( ConnectedTeams[#ConnectedTeams].teamID )
     end
 end
 

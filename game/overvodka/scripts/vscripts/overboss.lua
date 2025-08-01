@@ -38,5 +38,5 @@ function ThrowCoin( args )
 		end
 	end
 	k = k + 1
-	GameRules:GetGameModeEntity().COverthrowGameMode:SpawnGoldEntity( coinSpawn )
+	GameRules:GetGameModeEntity().OvervodkaGameMode:SpawnGoldEntity( coinSpawn )
 end

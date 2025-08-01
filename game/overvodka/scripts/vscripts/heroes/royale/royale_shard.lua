@@ -10,6 +10,7 @@ function royale_shard:Precache(context)
     PrecacheResource("particle", "particles/sparky_charge_1.vpcf", context)
     PrecacheResource("particle", "particles/sparky_charge_2.vpcf", context)
     PrecacheResource("particle", "particles/sparky_charge_3.vpcf", context)
+    PrecacheResource("particle", "particles/econ/items/phantom_lancer/phantom_lancer_fall20_immortal/phantom_lancer_fall20_immortal_doppelganger_aoe_gold_bits.vpcf", context)
     PrecacheUnitByNameSync("npc_sparky", context)
 end
 
@@ -40,7 +41,9 @@ function royale_shard:OnSpellStart()
     sparky:SetMinimumGoldBounty(gold)
     sparky:SetMaximumGoldBounty(gold)
     sparky:SetDeathXP(xp)
-
+    local p = ParticleManager:CreateParticle( "particles/econ/items/phantom_lancer/phantom_lancer_fall20_immortal/phantom_lancer_fall20_immortal_doppelganger_aoe_gold_bits.vpcf", PATTACH_ABSORIGIN_FOLLOW, sparky )
+	ParticleManager:SetParticleControl( p, 0, sparky:GetOrigin() )
+	ParticleManager:ReleaseParticleIndex( p )
     EmitSoundOnLocationWithCaster(point, "Sparky.Deploy", caster)
     Timers:CreateTimer(0.4, function()
         sparky:AddNewModifier(caster, self, "modifier_royale_shard_ai", {duration = duration})
@@ -112,7 +115,7 @@ function modifier_royale_shard_ai:OnIntervalThink()
             1200,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
             FIND_CLOSEST,
             false)
         if #enemies > 0 then

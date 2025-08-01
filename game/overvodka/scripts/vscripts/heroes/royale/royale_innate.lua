@@ -28,7 +28,7 @@ function modifier_royale_innate:OnIntervalThink()
     if GetMapName() == "overvodka_5x5" then
         time = 1200
     end
-    if not self.evolved and GameRules:GetGameTime() >= time then
+    if not self.evolved and GameRules:GetGameTime() >= time and not self:GetParent():HasModifier("modifier_rune_regen") and not self:GetParent():HasModifier("modifier_fountain_aura_effect_lua") then
         self.evolved = true
         self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_royale_innate_buff", {})
         EmitSoundOn("Royale.DoubleElixir", self:GetParent())

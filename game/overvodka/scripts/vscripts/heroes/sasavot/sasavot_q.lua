@@ -100,6 +100,9 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 		FIND_ANY_ORDER,
 		false)
 	target:AddNewModifier( self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun_duration } )
+	target:Interrupt()
+	EmitSoundOn( "Hero_Sniper.AssassinateDamage", target )
+	EmitSoundOn( "sasavot_q", target )
 	if self:GetCaster():HasScepter() then
 		self:GetCaster():PerformAttack(target, true, true, true, true, true, false, true)
 	end
@@ -114,14 +117,10 @@ function sasavot_q:OnProjectileHit_ExtraData( target, location, extradata )
 		}
 		ApplyDamage(damageTable)
 	end
-	target:Interrupt()
 	local modifier = self:RetATValue( extradata.modifier )
 	if not modifier:IsNull() then
 		modifier:Destroy()
 	end
-	local sound_cast = "Hero_Sniper.AssassinateDamage"
-	EmitSoundOn( sound_cast, target )
-	EmitSoundOn( "sasavot_q", target )
 end
 
 function sasavot_q:GetAT()

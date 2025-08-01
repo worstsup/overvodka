@@ -96,7 +96,7 @@ end
 
 function modifier_dave_e:GetModifierIncomingDamage_Percentage( params )
     local parent = self:GetParent()
-    local dmg = params.damage
+    local dmg = params.original_damage
     local mana_shield = math.min( parent:GetMana(), dmg * self.absorb_pct / self.damage_per_mana )
     local absorbed = mana_shield * self.damage_per_mana
     local pct_return = -100 * (absorbed / dmg)

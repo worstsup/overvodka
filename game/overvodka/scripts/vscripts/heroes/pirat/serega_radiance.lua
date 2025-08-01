@@ -12,122 +12,72 @@ end
 
 modifier_serega_radiance = class({})
 
-function modifier_serega_radiance:IsHidden()
-	return true
-end
-
-function modifier_serega_radiance:IsDebuff()
-	return false
-end
-
-function modifier_serega_radiance:IsPurgable()
-	return false
-end
+function modifier_serega_radiance:IsHidden() return true end
+function modifier_serega_radiance:IsDebuff() return false end
+function modifier_serega_radiance:IsPurgable() return false end
 
 function modifier_serega_radiance:OnCreated( kv )
 	if not IsServer() then return end
-	self.base_damage = self:GetAbility():GetSpecialValueFor( "base_damage" )
-	self.base_miss = self:GetAbility():GetSpecialValueFor( "base_miss" )
-	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
-	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-	self.duration = 1
-	self:PlayEffects( self:GetParent() )
-	self:StartIntervalThink( self.interval )
-	self:OnIntervalThink()
-end
-
-function modifier_serega_radiance:OnRefresh( kv )
-	if not IsServer() then return end
-	self.base_damage = self:GetAbility():GetSpecialValueFor( "base_damage" )
-	self.base_miss = self:GetAbility():GetSpecialValueFor( "base_miss" )
-	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
-	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-	self.duration = 1
 	self:PlayEffects( self:GetParent() )
 end
 
-function modifier_serega_radiance:OnDestroy( kv )
-end
-
-function modifier_serega_radiance:DeclareFunctions()
-	local funcs = {
-		MODIFIER_PROPERTY_EVASION_CONSTANT,
-	}
-	return funcs
-end
-function modifier_serega_radiance:OnIntervalThink()
-	if not self:GetCaster():IsAlive() then return end
-	if self:GetParent():PassivesDisabled() then return end
-	self.dmg = self:GetCaster():GetLevel() * self.base_damage * self.interval
-	self.miss = self.base_miss + self:GetCaster():GetLevel()
-	if self:GetParent():IsIllusion() then
-		self.dmg = self.dmg / 2
-	end
-	if self:GetParent():PassivesDisabled() then return end
-	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),
-		self:GetParent():GetOrigin(),
-		nil,
-		self.radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0,
-		0,
-		false
-	)
-	self.damageTable = {
-		attacker = self:GetParent(),
-		damage = self.dmg,
-		damage_type = self:GetAbility():GetAbilityDamageType(),
-		ability = self:GetAbility(),
-	}
-	for _,enemy in pairs(enemies) do
-		self.damageTable.victim = enemy
-		ApplyDamage( self.damageTable )
-		if enemy and not enemy:IsNull() then
-			local debuff = enemy:AddNewModifier(
-				self:GetParent(),
-				self:GetAbility(),
-				"modifier_serega_radiance_debuff",
-				{
-					duration = self.duration,
-				}
-			)
-		end
-	end
-end
-function modifier_serega_radiance:GetModifierEvasion_Constant()
-	if self:GetParent():PassivesDisabled() then return 0 end
-	return self.miss
-end
 function modifier_serega_radiance:PlayEffects( target )
 	local particle_cast = "particles/radiance_owner_fall2022_new.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
+function modifier_serega_radiance:IsAura() return true end
+function modifier_serega_radiance:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") end
+function modifier_serega_radiance:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_serega_radiance:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_serega_radiance:GetModifierAura() return "modifier_serega_radiance_debuff" end
+function modifier_serega_radiance:GetAuraDuration() return 0.5 end
+
 modifier_serega_radiance_debuff = class({})
 
-function modifier_serega_radiance_debuff:IsHidden()
-	return true
-end
-function modifier_serega_radiance_debuff:IsDebuff()
-	return true
-end
-function modifier_serega_radiance_debuff:IsPurgable()
-	return false
-end
-function modifier_serega_radiance_debuff:OnCreated( kv )
-end
-function modifier_serega_radiance_debuff:OnRefresh( kv )
-end
-function modifier_serega_radiance_debuff:OnDestroy( kv )
+function modifier_serega_radiance_debuff:IsHidden() return false end
+function modifier_serega_radiance_debuff:IsDebuff() return true end
+function modifier_serega_radiance_debuff:IsPurgable() return false end
+
+function modifier_serega_radiance_debuff:OnCreated()
+	if not IsServer() then return end
+	self.particle = ParticleManager:CreateParticle("particles/econ/events/fall_2022/radiance_target_fall2022.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetCaster())
+	ParticleManager:SetParticleControl(self.particle, 0, self:GetParent():GetAbsOrigin())
+	ParticleManager:SetParticleControl(self.particle, 1, self:GetCaster():GetAbsOrigin())
+	self.interval = self:GetAbility():GetSpecialValueFor("interval")
+	self:StartIntervalThink(self.interval)
 end
 
-function modifier_serega_radiance_debuff:GetEffectName()
-	return "particles/econ/events/fall_2022/radiance_target_fall2022.vpcf"
+function modifier_serega_radiance_debuff:OnIntervalThink()
+	if not self:GetAbility() then return end
+	if not self:GetCaster():IsAlive() then return end
+	self.dmg = self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor("base_damage") * self.interval
+	if self:GetCaster():IsIllusion() then
+		self.dmg = self.dmg / 2
+	end
+	self.damageTable = {
+		victim = self:GetParent(),
+		attacker = self:GetCaster(),
+		damage = self.dmg,
+		damage_type = self:GetAbility():GetAbilityDamageType(),
+		ability = self:GetAbility(),
+	}
+	ApplyDamage( self.damageTable )
 end
 
-function modifier_serega_radiance_debuff:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
+function modifier_serega_radiance_debuff:OnDestroy()
+	if not IsServer() then return end
+	ParticleManager:DestroyParticle(self.particle, false)
+	ParticleManager:ReleaseParticleIndex(self.particle)
+end
+
+function modifier_serega_radiance_debuff:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MISS_PERCENTAGE,
+	}
+end
+
+function modifier_serega_radiance_debuff:GetModifierMiss_Percentage()
+	return self:GetAbility():GetSpecialValueFor( "base_miss" ) + self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor( "level_miss" )
 end

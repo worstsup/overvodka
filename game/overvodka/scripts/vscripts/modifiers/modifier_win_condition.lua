@@ -38,7 +38,7 @@ function modifier_win_condition:OnTakeDamage( event )
     if attacker and parent == target and parent:IsAlive() and parent:GetHealth() == 1 and self.Once == false then
         self.Once = true
 
-        COverthrowGameMode:EndGame(attacker:GetTeamNumber())
+        OvervodkaGameMode:EndGame(attacker:GetTeamNumber())
 
         parent:SetThink(function ()
             self.CanDeath = true

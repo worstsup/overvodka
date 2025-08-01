@@ -109,7 +109,7 @@ function modifier_royale_megaknight:OnIntervalThink()
     local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), parent:GetAbsOrigin(), nil,
                        jumpMax, DOTA_UNIT_TARGET_TEAM_ENEMY,
                        DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-                       DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FIND_CLOSEST, false)
+                       DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false)
     if #enemies > 0 then
         local sortedEnemies = SortUnits_HeroesFirst(enemies)
         for _,unit in pairs(sortedEnemies) do

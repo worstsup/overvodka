@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_peashooter_pure_attack", "heroes/dave/dave_peashooter", LUA_MODIFIER_MOTION_NONE)
+
 dave_peashooter_freeze = class({})
 
 function dave_peashooter_freeze:Precache(context)
@@ -25,5 +27,8 @@ function dave_peashooter_freeze:OnSpellStart()
     peashooter:SetMaximumGoldBounty(gold)
     peashooter:SetMinimumGoldBounty(gold)
     peashooter:SetDeathXP(xp)
+    if self:GetSpecialValueFor("pure_damage") > 0 then
+        peashooter:AddNewModifier(caster, self, "modifier_peashooter_pure_attack", {})
+    end
     EmitSoundOn("gribochki", peashooter)
 end

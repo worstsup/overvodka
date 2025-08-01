@@ -29,6 +29,7 @@ function modifier_serega_opa:DeclareFunctions()
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 		MODIFIER_PROPERTY_ABSORB_SPELL,
+		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 	}
 	return funcs
 end
@@ -40,13 +41,14 @@ function modifier_serega_opa:GetModifierPhysicalArmorBonus()
 	return self.armor
 end
 
+function modifier_serega_opa:GetModifierIncomingDamage_Percentage()
+	return self:GetAbility():GetSpecialValueFor("damage_absorb")
+end
+
 function modifier_serega_opa:GetAbsorbSpell( params )
 	if IsServer() then
 		if (not self:GetParent():IsIllusion()) and params.ability:GetCaster() ~= self:GetParent() and params.ability:GetAbilityName() ~= "rubick_spell_steal" then
 			params.ability:GetCaster():AddNewModifier( self:GetParent(), self, "modifier_generic_silenced_lua", { duration = self.duration } )
-			if self:GetParent():HasScepter() then
-				params.ability:GetCaster():AddNewModifier( self:GetParent(), self, "modifier_shadow_shaman_voodoo", { duration = self.hex_duration } )
-			end
 			self:PlayEffects(true)
 			return 1
 		end

@@ -20,7 +20,7 @@ function OnTriggerThink_Timer()
 	end
 	if vacated_time > 0 and Time() > vacated_time + 30 then
 		print("Time to respawn")
-		GameRules:GetGameModeEntity().COverthrowGameMode:spawncamp(thisEntity:GetName())
+		GameRules:GetGameModeEntity().OvervodkaGameMode:spawncamp(thisEntity:GetName())
 	end
 	return 3
 end

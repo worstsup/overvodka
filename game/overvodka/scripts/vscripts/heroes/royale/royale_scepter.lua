@@ -7,6 +7,7 @@ royale_scepter = class({})
 function royale_scepter:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
     PrecacheResource("particle", "particles/royale_die.vpcf", context)
+    PrecacheResource("particle", "particles/underlord_firestorm_pre_d_gold.vpcf", context)
     PrecacheUnitByNameSync("npc_inferno", context)
 end
 
@@ -55,7 +56,10 @@ function modifier_inferno_tower_ai:OnCreated()
     self.ramp_time    = ability:GetSpecialValueFor("ramp_time")
     self.attack_rate  = ability:GetSpecialValueFor("attack_rate")
     self.range        = ability:GetSpecialValueFor("attack_range")
-
+    local p = ParticleManager:CreateParticle( "particles/underlord_firestorm_pre_d_gold.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent )
+	ParticleManager:SetParticleControl( p, 0, parent:GetOrigin() )
+	ParticleManager:SetParticleControl( p, 3, parent:GetOrigin() )
+	ParticleManager:ReleaseParticleIndex( p )
     self.current_target = nil
     self:StartIntervalThink(0.1)
 end
@@ -82,10 +86,13 @@ function modifier_inferno_tower_ai:OnIntervalThink()
             FIND_CLOSEST,
             false
         )
-        if #enemies > 0 then
-            self.current_target = enemies[1]
-            if not parent:HasModifier("modifier_inferno_tower_beam") then
-                parent:AddNewModifier(parent, self:GetAbility(), "modifier_inferno_tower_beam", {})
+        for _, enemy in ipairs(enemies) do
+            if enemy:GetUnitName() ~= "npc_nelya" then
+                self.current_target = enemy
+                if not parent:HasModifier("modifier_inferno_tower_beam") then
+                    parent:AddNewModifier(parent, self:GetAbility(), "modifier_inferno_tower_beam", {})
+                end
+                break
             end
         end
     end

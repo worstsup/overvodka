@@ -946,7 +946,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "100"
+        "StatusHealth"          "150"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"
@@ -1009,7 +1009,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "375"
+        "MovementSpeed"         "250"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -1077,7 +1077,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "375"
+        "MovementSpeed"         "350"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -1143,7 +1143,7 @@
         // Movement
         //----------------------------------------------------------------
         "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"         "375"
+        "MovementSpeed"         "450"
         "MovementTurnRate"      "0.4"
        
         // Status
@@ -1183,8 +1183,8 @@
         //----------------------------------------------------------------
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "100"
-        "AttackDamageMax"       "100"
+        "AttackDamageMin"       "125"
+        "AttackDamageMax"       "125"
         "AttackRate"            "0.8"
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "500"
@@ -1209,7 +1209,7 @@
        
         // Status
         //----------------------------------------------------------------
-        "StatusHealth"          "650"
+        "StatusHealth"          "1125"
         "StatusHealthRegen"     "0"
         "StatusMana"            "0"
         "StatusManaRegen"       "0"

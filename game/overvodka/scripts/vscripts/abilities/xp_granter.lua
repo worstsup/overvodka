@@ -55,7 +55,7 @@ function modifier_dota_ability_xp_granter:OnCreated()
 end
 
 function modifier_dota_ability_xp_granter:OnIntervalThink()
-    local MissingTeamsCount = COverthrowGameMode:GetCountMissingTeams()
+    local MissingTeamsCount = OvervodkaGameMode:GetCountMissingTeams()
     local GoldBonus = self.GoldBonusPerTeam * MissingTeamsCount
     local XpBonus = self.XpBonusPerTeam * MissingTeamsCount
     

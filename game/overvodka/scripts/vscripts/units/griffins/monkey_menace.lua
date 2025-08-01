@@ -23,7 +23,7 @@ function modifier_monkey_menace:OnAttackLanded(keys)
     local parent = self:GetParent()
     local ability = self:GetAbility()
 
-    if keys.attacker == parent and keys.target ~= nil and not keys.target:IsMagicImmune() and not keys.target:IsInvulnerable() then
+    if keys.attacker == parent and keys.target ~= nil and not keys.target:IsDebuffImmune() and not keys.target:IsInvulnerable() then
         if ability:IsCooldownReady() then
             local fear_duration = ability:GetSpecialValueFor("fear_duration")
             local dot_duration = ability:GetSpecialValueFor("dot_duration")
