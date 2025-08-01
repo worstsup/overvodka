@@ -1966,7 +1966,7 @@
 		"DOTA_Tooltip_Facet_kachok_facet_test_Description" "BODYBUILDER ULT - PRESS TEST."
 
 		"DOTA_Tooltip_ability_macan_r" "ASPHALT 8"
-		"DOTA_Tooltip_ability_macan_r_Description" "Macan starts his M5, starting to dash around the map and crush all enemies. If Makan's cast is interrupted while the M5 is starting, the car will stall and will not go anywhere. While riding in the M5, the hero is immune to magic. \nUpgraded with Aghanim's Scepter."
+		"DOTA_Tooltip_ability_macan_r_Description" "Macan starts his M5, starting to dash around the map and crush all enemies. If Makan's cast is interrupted while the M5 is starting, the car will stall and will not go anywhere. While riding in the M5, the hero has debuff immunity. \nUpgraded with Aghanim's Scepter."
 		"DOTA_Tooltip_ability_macan_r_scepter_Description" "The car starts a second earlier, becomes easier to control, and its speed increases by 50."
 		"DOTA_Tooltip_ability_macan_r_chargeup_time" "ENGINE START UP TIME:"
 		"DOTA_Tooltip_ability_macan_r_charge_speed" "CAR SPEED:"
