@@ -280,7 +280,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -395,7 +395,31 @@ end
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
+function OvervodkaGameMode:FinalizeGameEnd(victoryTeam)
+    print("[GameMode] Все данные сохранены. Безопасное завершение игры.")
+    
+    local tTeamScores = {}
+    for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
+        tTeamScores[team] = self:GetTeamHeroKills(team)
+    end
+    GameRules:SetPostGameTeamScores(tTeamScores)
+    
+    GameRules:SetGameWinner(victoryTeam)
+end
+
 function OvervodkaGameMode:EndGame(victoryTeam)
+    if self.bGameHasEnded then return end
+    self.bGameHasEnded = true
+
+    print("[GameMode] EndGame вызван. Начинается процесс сохранения.")
+	
+    local overBoss = Entities:FindByName(nil, "@overboss")
+    if overBoss then
+        local celebrate = overBoss:FindAbilityByName('dota_ability_celebrate')
+        if celebrate then
+            overBoss:CastAbilityNoTarget(celebrate, -1)
+        end
+    end
     if Quests and Quests.SaveAllProgress then
         for playerID, _ in pairs(Quests.playerData) do
             if Quests.modifierTimers[playerID] then
@@ -404,26 +428,16 @@ function OvervodkaGameMode:EndGame(victoryTeam)
             end
         end
         Quests:SaveAllProgress()
-    end
-
-    local overBoss = Entities:FindByName(nil, "@overboss")
-    if overBoss then
-        local celebrate = overBoss:FindAbilityByName('dota_ability_celebrate')
-        if celebrate then
-            overBoss:CastAbilityNoTarget(celebrate, -1)
-        end
-    end
-    
-    local tTeamScores = {}
-    for team = DOTA_TEAM_FIRST, (DOTA_TEAM_COUNT-1) do
-        tTeamScores[team] = self:GetTeamHeroKills(team)
-    end
-    GameRules:SetPostGameTeamScores(tTeamScores)
-    
+	end
     local sortedTeams = self:GetSortedValidTeams()
-    Server:OnGameEnded(sortedTeams, victoryTeam)
-    GameRules:SetGameWinner(victoryTeam)
+
+    if Server and Server.OnGameEnded then
+        Server:OnGameEnded(sortedTeams, victoryTeam)
+    else
+        self:FinalizeGameEnd(victoryTeam)
+    end
 end
+
 
 function OvervodkaGameMode:GetSortedValidTeams()
 	local sortedTeams = {}

@@ -27,7 +27,7 @@ end
 
 function Server:OnGameEnded(Teams, VictoryTeam)
 
-    if IsInToolsMode() or GameRules:IsCheatMode() then return end
+    if IsInToolsMode() or GameRules:IsCheatMode() then OvervodkaGameMode:FinalizeGameEnd(VictoryTeam) return end
 
     if Teams == nil then return end
 
@@ -131,13 +131,13 @@ function Server:OnGameEnded(Teams, VictoryTeam)
                         { SteamID = SteamID, amount = coins_to_grant },
                         function(err, body)
                             if err or not (body and body.success) then
-                                print("[Quests] Failed to grant reward to player " .. playerID)
+                                print("[Quests] Failed to grant reward to player " .. PlayerID)
                                 return
                             end
                             
-                            print("[Quests] Granted " .. coins_to_grant .. " coins to player " .. playerID)
+                            print("[Quests] Granted " .. coins_to_grant .. " coins to player " .. PlayerID)
                             if Store and Store.FetchPlayerData then
-                                Store:FetchPlayerData(playerID)
+                                Store:FetchPlayerData(PlayerID)
                             end
                         end
                     )
@@ -158,6 +158,7 @@ function Server:OnGameEnded(Teams, VictoryTeam)
             self:SendRequest(SERVER_URL.."game_ended", {SteamID=SteamID, MatchID = MatchID, Category = CurrentCategory, PlayerData=PlayerData}, nil, true)
         end
     end
+    OvervodkaGameMode:FinalizeGameEnd(VictoryTeam)
 end
 
 function Server:CalculateRating(PlayerID, Teams, VictoryTeam)

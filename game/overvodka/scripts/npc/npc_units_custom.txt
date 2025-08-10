@@ -1456,7 +1456,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
 	"npc_dota_dark_willow_creature"
-	{										
+	{
 		// General
 		//----------------------------------------------------------------
 		"Model"						"bmw/models/heroes/bm/tofab.vmdl"	// Model.

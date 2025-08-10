@@ -37,7 +37,6 @@ function modifier_macan_e:OnRefresh( kv )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.stack_steal = self:GetParent():FindAbilityByName("macan_w"):GetSpecialValueFor( "stack_steal" )
 	self:StartIntervalThink( self.interval )
-	self:OnIntervalThink()
 end
 
 function modifier_macan_e:OnDestroy( kv )

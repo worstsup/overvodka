@@ -395,7 +395,6 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"FightRecapLevel"				"1"
 		"AbilityTextureName"			"adod"
 		"precache"
 		{
@@ -441,8 +440,6 @@
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilityType"                   "ABILITY_TYPE_BASIC"
-		"FightRecapLevel"               "2"
 		"AbilityTextureName"            "tasty"
 		"HasShardUpgrade"               "1"
 		"AbilityCooldown"               "34 30 26 22"
@@ -487,8 +484,6 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ScriptFile"             "heroes/kachok/kachok_abstention"
 		"AbilityTextureName"     "nosex"
-		"AbilityType"          	 "ABILITY_TYPE_BASIC"
-		"MaxLevel"             	 "4"
 		"HasScepterUpgrade"      "1"
 		"IsBreakable"			 "1"
 		"AbilityValues"
@@ -509,8 +504,6 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"ScriptFile"             "heroes/kachok/kachok_abstention_dota"
 		"AbilityTextureName"     "nosex"
-		"AbilityType"          	 "ABILITY_TYPE_BASIC"
-		"MaxLevel"             	 "4"
 		"HasScepterUpgrade"      "1"
 		"IsBreakable"			 "1"
 		"AbilityValues"
@@ -534,8 +527,6 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityTextureName"			"churban"
-		"MaxLevel"               		"3"
-		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"60"
 		"AbilityManaCost"				"80 125 170"
 		"AbilityValues"
@@ -953,9 +944,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/eldzhey/eldzhey_q.lua"
 		"AbilityTextureName"			"fei"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastPoint"				"0.15"
 		"AbilityCooldown"				"16"
@@ -974,8 +962,8 @@
 				}
 				"illusion_outgoing_tooltip"			
 				{
-            			"value"					"45.0 50.0 55.0 60.0"
-            			"special_bonus_unique_eldzhey_2" "+10"
+            		"value"					"45.0 50.0 55.0 60.0"
+            		"special_bonus_unique_eldzhey_2" "+10"
             	}
 				"illusion_incoming_damage"			"120.0"
 				"illusion_incoming_damage_total_tooltip"			"220.0"
@@ -995,9 +983,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/eldzhey/eldzhey_w"
 		"AbilityTextureName"			"novape"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
@@ -1540,7 +1525,6 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/chef/chef_q"
-		"AbilityType"                   "ABILITY_TYPE_BASIC"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -1822,11 +1806,9 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dave/dave_peashooter"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityType"                   "ABILITY_TYPE_BASIC"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"			"peashooter"
-		"FightRecapLevel"				"1"
 		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.1"
 		"AbilityManaCost"				"35 45 55 65"
@@ -1866,13 +1848,11 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dave/dave_sunflower"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityType"                   "ABILITY_TYPE_BASIC"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"			"sunflower"
-		"FightRecapLevel"				"1"
 		"AbilityCastRange"				"300"
 		"AbilityCastPoint"				"0.35 0.35 0.35 0.35"
 		"AbilityCooldown"				"32 28 24 20"
@@ -2062,7 +2042,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"80 75 70"
 		"AbilityManaCost"				"200 300 400"
 		"AbilityValues"
@@ -2194,7 +2173,6 @@
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"        	"futbik"
-        "MaxLevel"                  	"4"
 		"AbilityCooldown"				"28"
 		"AbilityManaCost"				"120 140 160 180"
 		"AbilityCastRange"				"1200"
@@ -2231,8 +2209,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/speed/speed_bark"
 		"AbilityTextureName"			"bleval"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastPoint"				"0.3"
@@ -2274,11 +2250,9 @@
 	{
     	"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/speed/speed_cr7"
-    	"AbilityType"                   "ABILITY_TYPE_BASIC"
     	"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-    	"MaxLevel"						"4"
     	"AbilityTextureName"            "twenty"
     	"AbilityManaCost"               "50"
     	"AbilityValues"
@@ -2372,10 +2346,8 @@
 	{
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/speed/speed_shake"
-		"AbilityType"            		"ABILITY_TYPE_ULTIMATE"	
-		"MaxLevel"               		"3"
+		"AbilityType"            		"ABILITY_TYPE_ULTIMATE"
 		"AbilityTextureName" 			"gena"
-		"RequiredLevel"          		"6"
 		"HasScepterUpgrade"         	"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -2470,7 +2442,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"materka"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE"
@@ -2491,7 +2462,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"alko"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE"
@@ -2524,7 +2494,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"wakas"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"7"
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE"
@@ -3176,7 +3145,6 @@
 		"BaseClass"						"ability_lua"
 		"AbilityTextureName"			"koleso"
 		"ScriptFile"					"heroes/sahur/sahur_q"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"	
@@ -3225,10 +3193,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sahur/sahur_w"
 		"AbilityTextureName"			"abuse"
-		"FightRecapLevel"				"1"
 		"HasShardUpgrade"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
@@ -3342,8 +3307,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sahur/sahur_r"
 		"AbilityTextureName"			"acer"
-		"FightRecapLevel"				"2"
-		"MaxLevel"						"3"
 		"precache"
 		{
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts"
@@ -3447,9 +3410,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/worstsup/worstsup_q"
 		"AbilityTextureName"			"stop"
-		"FightRecapLevel"				"2"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
@@ -3476,9 +3436,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/worstsup/worstsup_q_dota"
 		"AbilityTextureName"			"stop"
-		"FightRecapLevel"				"2"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
@@ -3702,9 +3659,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/macan/macan_q.lua"
 		"AbilityTextureName"			"pchela"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
@@ -3747,9 +3701,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/macan/macan_w"
 		"AbilityTextureName"			"razg"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -3796,14 +3747,11 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/macan/macan_e"
 		"AbilityTextureName"			"baidul"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
 		"IsBreakable"					"1"
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_slark/slark_essence_shift.vpcf"
 		}
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
@@ -3842,7 +3790,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/macan/macan_shard.lua"
 		"AbilityTextureName"			"sdvg"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"              "1"
 		"AbilityType"					"ABILITY_TYPE_BASIC"
@@ -3867,8 +3814,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/macan/macan_r.lua"
 		"AbilityTextureName"			"largus"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"3"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"HasScepterUpgrade"				"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -3949,49 +3894,6 @@
 				"crit_chance"				"100"
 				"crit_bonus"				"140"
 		}
-	}
-
-	"axe_one_man_army"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
-		"IsBreakable"					"1"
-		"AbilityValues"
-		{
-			"armor_pct_as_strength"			"0"
-			"radius"					"10000"
-			"bonus_linger_duration"		"0"
-		}
-	}
-	"riki_innate_backstab"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"MaxLevel"			"1"
-		"Innate"			"1"
-
-		"AbilityValues"
-		{
-			"damage_multiplier"				
-			{
-				"value"		"0.35"
-				"CalculateSpellDamageTooltip"	"0"
-				"DamageTypeTooltip"			"DAMAGE_TYPE_NONE"
-			}
-		
-			"backstab_angle"				"105 105 105 105"
-
-			"bonus_xp_kill"
-			{
-				"value"							"0"
-				"special_bonus_facet_riki_contract_killer"	"0"
-			}
-			"bonus_xp_assist"				
-			{
-				"value"							"0"
-				"special_bonus_facet_riki_contract_killer"	"0"
-			}
-		}			
 	}
 
 	//===================================================================================================================
@@ -4735,7 +4637,6 @@
 		"AbilityTextureName"			"bledina"
 		"ScriptFile"					"heroes/litvin/litvin_bledina"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.5"
@@ -4767,14 +4668,7 @@
 		"BaseClass"					"ability_lua"
 		"ScriptFile"					"heroes/litvin/litvin_conditions"
 		"AbilityTextureName"			"cond"
-		"FightRecapLevel"				"1"
-		"MaxLevel"					"4"
 		"HasScepterUpgrade"				"1"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_tiny.vsndevts"
-		}
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -4822,7 +4716,6 @@
 	{
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/litvin/litvin_subo"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityTextureName"			"subo"
 		"AbilityCooldown"				"28 27 26 25"
@@ -11822,7 +11715,6 @@
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"AbilityType"                   "ABILITY_TYPE_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"            "stint_q"
 		"AbilityCooldown"               "34 32 30 28"
@@ -13751,14 +13643,8 @@
 		}
 	}
 	//===================================================================================================================
-	//												FLASH
+	//												WALLY WEST
 	//===================================================================================================================
-	"special_bonus_unique_flash_1"
-	{
-        "BaseClass"						"special_bonus_base"														
-		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
 	"special_bonus_unique_flash_2"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -13813,7 +13699,214 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityValues"
 		{
-			"agi_to_ms"					"1"
+			"agi_to_ms"
+			{
+				"value"	"1"
+				"special_bonus_unique_flash_8"	"+0.4"
+			}
+		}
+	}
+	//=================================================================================================================
+	// The fastest man
+	//=================================================================================================================
+	"flash_q_facet_1"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_q_facet_1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"   			"invincible_q"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityManaCost"				"75"
+		"AbilityCastRange"				"600 700 800 900"
+		"AbilityValues"
+		{
+			"damage"				"75 125 175 225"
+			"damage_speed"
+			{
+				"value"	"30"
+				"special_bonus_unique_flash_7"	"+25"
+			}
+			"AbilityCooldown"
+			{
+				"value"	"18 15 12 9"
+				"special_bonus_unique_flash_5"	"-3"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Death run
+	//=================================================================================================================
+	"flash_q_facet_2"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_q_facet_2"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"   			"invincible_w"
+		"AbilityManaCost"				"75"
+		"AbilityValues"
+		{
+			"bonus_speed"				"14 18 22 26"
+			"damage_speed"
+			{
+				"value"	"30"
+				"special_bonus_unique_flash_7"	"+25"
+			}
+			"radius"					"200"
+			"duration"					"3"
+			"interval"					"0.8"
+			"AbilityCooldown"
+			{
+				"value"	"15 14 13 12"
+				"special_bonus_unique_flash_5"	"-3"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Lightning strike
+	//=================================================================================================================
+	"flash_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_w"
+		"AbilityTextureName"			"baza"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"175"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"9 8 7 6"
+		"AbilityManaCost"				"40"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+			"damage"
+			{
+				"value"	"35 55 75 95"
+				"special_bonus_unique_flash_2"	"+30"
+			}
+			"stun_duration"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+1.2"
+				"RequiresScepter"		"1"
+			}
+			"damage_pct"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+20"
+				"RequiresScepter"		"1"
+			}
+			"knockback_distance"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+300"
+				"RequiresScepter"		"1"
+			}
+			"time_damage"
+			{
+				"value"	"0.0"
+				"special_bonus_scepter"	"+3.0"
+				"RequiresScepter"		"1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Speed force aura
+	//=================================================================================================================
+	"flash_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_e"
+		"AbilityTextureName"			"baidul"
+		"IsBreakable"					"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"50"
+		"AbilityValues"
+		{
+				"interval"			"1.0"
+				"agi_gain"			"1"
+				"stat_loss"			"1"
+				"duration"
+				{
+					"value"	"12.5 15.0 17.5 20.0"
+				}
+				"radius"
+				{
+					"value"	"550 600 650 700"
+					"affected_by_aoe_increase"	"1"
+					"special_bonus_unique_flash_4"	"+200"
+				}
+				"AbilityCastRange"
+				{
+					"value"	"550 600 650 700"
+					"affected_by_aoe_increase"	"1"
+					"special_bonus_unique_flash_4"	"+200"
+				}
+				"agi_damage"		"10 15 20 25"
+				"agi_heal"			"6 9 12 15"
+		}
+	}
+	//=================================================================================================================
+	// Superhuman strength (шард)
+	//=================================================================================================================
+	"flash_shard"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_shard"
+		"AbilityTextureName"			"ebanko_r"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"				"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityValues"
+		{
+			"agi_gain"		"2"
+		}
+	}
+	//=================================================================================================================
+	// Everything at once
+	//=================================================================================================================
+	"flash_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/flash/flash_r"
+		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"			"stop"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastPoint"				"0.6"
+		"AbilityCooldown"				"120.0"
+		"AbilityManaCost"				"150 200 250"
+		"AbilityValues"
+		{
+				"duration"
+				{
+					"value"	"10"
+					"special_bonus_unique_flash_6"	"+4"
+				}
+				"speed_mult"	"1.5 1.75 2.0"
+				"max_speed"	"350 300 250"
+				"illusion_damage"
+				{
+					"value"	"30 40 50"
+					"special_bonus_unique_flash_3"	"+10"
+				}
 		}
 	}
 }
