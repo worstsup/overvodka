@@ -8,12 +8,14 @@ let INITIALIZED = false;
 function OpenQuests() {
     const questRoot = $("#QuestRoot");
     if (!questRoot) return;
+    Game.EmitSound("UUI_SOUNDS.QuestsOpen");
     questRoot.AddClass("Show");
 }
 
 function CloseQuests() {
     const questRoot = $("#QuestRoot");
     if (!questRoot) return;
+    Game.EmitSound("UUI_SOUNDS.QuestsClose");
     questRoot.RemoveClass("Show");
 }
 

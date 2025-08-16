@@ -36,6 +36,42 @@
         distance_max = "2500.0"
         event_type = "2.0"
     }
+    UUI_SOUNDS.OvervodkaMenu = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_hero_transition_02.vsnd"
+        ]
+        volume = "1.5"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.QuestsOpen = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_today_rollover_01.vsnd"
+        ]
+        volume = "0.8"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.QuestsClose = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/panorama/panorama_today_rolloff_01.vsnd"
+        ]
+        volume = "0.8"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
     UUI_SOUNDS.Leaderboard = {
         type = "dota_src1_3d"
         vsnd_files =
@@ -543,6 +579,54 @@
         vsnd_files =
         [
             "sounds/chat_wheel/linganguli.vsnd"
+        ]
+        volume = "3.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Gribochki = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/gribochki_wheel.vsnd"
+        ]
+        volume = "1.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Otec = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/otec_wheel.vsnd"
+        ]
+        volume = "2.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.ChtoYaSdelal = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/chtosdel.vsnd"
+        ]
+        volume = "3.0"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
+    UUI_SOUNDS.Lezhat = {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/chat_wheel/lezhat.vsnd"
         ]
         volume = "3.0"
         pitch = "1.00000"

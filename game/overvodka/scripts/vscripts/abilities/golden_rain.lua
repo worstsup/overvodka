@@ -40,6 +40,7 @@ function golden_rain:OnAbilityPhaseStart()
     StopGlobalSound( "5opka_r" )
     StopGlobalSound( "stray_scepter" )
     StopGlobalSound( "evelone_r_ambient" )
+    StopGlobalSound( "flash_r" )
     self.delay_duration = 1.5
     CreateModifierThinker(
         self:GetCaster(),

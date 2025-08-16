@@ -252,6 +252,7 @@ PrecacheUtils.models = {
 		"models/amogus/source/spike.vmdl",
 		"models/amogus/source/skipper.vmdl",
 		"models/royale/king/royal_clash_character_0723211955_texture.vmdl",
+		"models/flash/flash.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -267,6 +268,7 @@ PrecacheUtils.sounds = {
 		"soundevents/5opka_start.vsndevts",
 		"soundevents/zhenya_start.vsndevts",
 		"soundevents/kolyan_start.vsndevts",
+		"soundevents/flash_start.vsndevts",
 		"soundevents/invincible_start.vsndevts",
 		"soundevents/magic_crit.vsndevts",
 		"soundevents/elixir_collector.vsndevts",

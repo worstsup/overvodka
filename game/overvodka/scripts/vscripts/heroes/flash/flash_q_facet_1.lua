@@ -3,7 +3,6 @@ flash_q_facet_1 = class({})
 function flash_q_facet_1:Precache(context)
     PrecacheResource("particle", "particles/econ/items/zeus/lightning_weapon_fx/zuus_lightning_bolt_immortal_lightning.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/sven/sven_warcry_ti5/sven_warcry_cast_arc_lightning.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts", context)
 end
 
 function flash_q_facet_1:OnSpellStart()
@@ -20,5 +19,6 @@ function flash_q_facet_1:OnSpellStart()
     local particle2 = ParticleManager:CreateParticle("particles/econ/items/sven/sven_warcry_ti5/sven_warcry_cast_arc_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
     ParticleManager:SetParticleControl(particle2, 0, target:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle2)
-    target:EmitSound("Hero_Zuus.LightningBolt")
+    target:EmitSound("flash_q_facet1")
+    caster:EmitSound("flash_q_facet1_voice")
 end

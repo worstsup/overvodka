@@ -3,13 +3,27 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua",
 
 flash_w = class({})
 
+function flash_w:Precache(context)
+	PrecacheResource("soundfile", "soundevents/flash_sounds.vsndevts", context)
+	PrecacheResource("particle", "particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti7/maelstorm_ti7.vpcf", context)
+end
+
 function flash_w:GetIntrinsicModifierName()
     return "modifier_flash_w_orb_effect"
 end
 
 function flash_w:OnOrbImpact( params )
+	if not IsServer() then return end
+	if not params.target then return end
+	EmitSoundOn("flash_w_"..RandomInt(1,2), params.target)
+	local p = ParticleManager:CreateParticle("particles/econ/events/ti7/maelstorm_ti7.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	ParticleManager:SetParticleControlEnt( p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true )
+    ParticleManager:SetParticleControlEnt( p, 1, params.target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+	ParticleManager:ReleaseParticleIndex(p)
+	local p = ParticleManager:CreateParticle("particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.target)
+	ParticleManager:ReleaseParticleIndex(p)
     ApplyDamage({victim = params.target, attacker = self:GetCaster(), damage = self:GetSpecialValueFor("damage"), damage_type = self:GetAbilityDamageType(), ability = self})
-	
 	if self:GetCaster():HasScepter() and params.target and not params.target:IsNull() then
         local totalDist = 0
 		local mod = self:GetCaster():FindModifierByName("modifier_flash_w_orb_effect")
@@ -23,7 +37,7 @@ function flash_w:OnOrbImpact( params )
             knockback_duration = 0.4,
             duration       = 0.4,
             knockback_distance = self:GetSpecialValueFor("knockback_distance"),
-            knockback_height   = 200,
+            knockback_height   = 100,
             center_x       = self:GetCaster():GetAbsOrigin().x,
             center_y       = self:GetCaster():GetAbsOrigin().y,
             center_z       = self:GetCaster():GetAbsOrigin().z

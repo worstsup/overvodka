@@ -3124,12 +3124,14 @@
 	}
 	"npc_dota_hero_spirit_breaker"
 	{
-		"Model"		"models/heroes/spirit_breaker/spirit_breaker.vmdl"
-		"SoundSet"		"Hero_spirit_breaker"
+		"Model"		"models/flash/flash.vmdl"
+		"DisableWearables"	"1"
+		"SoundSet"		"Hero_NightStalker"
 		"Enabled"		"1"
-		"SimilarHeroes"		"106,126,107"
-		"ModelScale"		"0.740000"
-		"HeroSelectSoundEffect"		"Hero_SpiritBreaker.Pick"
+		"SimilarHeroes"		"126,78,8"
+		"ModelScale"		"1.2"
+		"LoadoutScale"		"1.05"
+		"HeroSelectSoundEffect"		"flash_start"
 		"GibType"		"ethereal"
 		"Ability1"		"generic_hidden"
 		"Ability2"		"flash_w"
@@ -3211,8 +3213,9 @@
 		"StatusHealthRegen"			"1.25"
 		"StatusManaRegen"			"0.5"
 		"MovementSpeed"				"305"
-		"particle_folder"			"particles/units/heroes/hero_spirit_breaker"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts"
+		"HealthBarOffset"			"240"
+		"particle_folder"			""
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
 		"VoiceFile"		""
 	}
 }

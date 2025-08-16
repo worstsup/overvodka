@@ -44,7 +44,7 @@ var Menu = {};
             ModelPreview.SetHasClass("Visible", false);
             ModelPreview2.SetHasClass("Visible", false);
         }
-        Game.EmitSound("ui_general_button_click");
+        Game.EmitSound("UUI_SOUNDS.OvervodkaMenu");
 
         if (isMenuOpen && currentTab === null) {
             Menu.SwitchTab('Leaderboard');

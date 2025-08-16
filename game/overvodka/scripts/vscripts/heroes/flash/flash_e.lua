@@ -10,14 +10,26 @@ function flash_e:Precache(context)
 end
 
 function flash_e:CastFilterResult()
-    if self:GetCaster():FindModifierByName("modifier_flash_e"):GetStackCount() == 0 then
+    local caster = self:GetCaster()
+    if not caster then
+        return UF_FAIL_CUSTOM
+    end
+    if not IsServer() then return end
+    local modifier = caster:FindModifierByName("modifier_flash_e") or nil
+    if not modifier or modifier:GetStackCount() == 0 then
         return UF_FAIL_CUSTOM
     end
     return UF_SUCCESS
 end
 
 function flash_e:GetCustomCastError()
-    if self:GetCaster():FindModifierByName("modifier_flash_e"):GetStackCount() == 0 then
+    local caster = self:GetCaster()
+    if not caster then
+        return "#flash_e_no_stacks"
+    end
+    if not IsServer() then return end
+    local modifier = caster:FindModifierByName("modifier_flash_e") or nil
+    if not modifier or modifier:GetStackCount() == 0 then
         return "#flash_e_no_stacks"
     end
 end
@@ -32,7 +44,7 @@ function flash_e:OnSpellStart()
     if total_stolen <= 0 then return end
     local dmg_mul = self:GetSpecialValueFor("agi_damage")
     local heal = self:GetSpecialValueFor("agi_heal") * total_stolen
-
+    EmitSoundOn("flash_e", caster)
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
         caster:GetAbsOrigin(),
@@ -60,6 +72,10 @@ function flash_e:OnSpellStart()
             })
             if enemy and not enemy:IsNull() then
                 enemy:RemoveModifierByName("modifier_flash_e_debuff")
+                local enemy_stacks = enemy:FindAllModifiersByName("modifier_flash_e_stack")
+                for _, stack in ipairs(enemy_stacks) do
+                    stack:Destroy()
+                end
             end
         end
     end
@@ -68,7 +84,10 @@ function flash_e:OnSpellStart()
     local p = ParticleManager:CreateParticle("particles/flash_e_caster.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:ReleaseParticleIndex(p)
-
+    local stacks = caster:FindAllModifiersByName("modifier_flash_e_stack")
+    for _,stack in ipairs(stacks) do
+        stack:Destroy()
+    end
     mod:SetStackCount(0)
 end
 
@@ -142,7 +161,7 @@ function modifier_flash_e:OnIntervalThink()
     local next_interval = self.base_interval
     if current_speed > 1 then
         next_interval = self.base_interval / (current_speed / 300)
-        next_interval = math.max(next_interval, 0.1)
+        next_interval = math.max(next_interval, 0.2)
     end
     self:StartIntervalThink(next_interval)
 end

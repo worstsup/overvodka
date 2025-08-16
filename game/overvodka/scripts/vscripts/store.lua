@@ -45,10 +45,12 @@ function Store:OnNPCSpawned(event)
         local playerID = npc:GetPlayerOwnerID()
         if playerID >= 0 then
             Timers:CreateTimer(0.1, function()
-                self:ApplyEquippedEffect(playerID, npc)
-                self:ApplyEquippedSkin(playerID, npc)
-                if not npc:IsIllusion() then
-                    self:ApplyEquippedPet(playerID, npc)
+                if npc and not npc:IsNull() then
+                    self:ApplyEquippedEffect(playerID, npc)
+                    self:ApplyEquippedSkin(playerID, npc)
+                    if not npc:IsIllusion() then
+                        self:ApplyEquippedPet(playerID, npc)
+                    end
                 end
             end)
         end
@@ -157,8 +159,8 @@ end
 
 function Store:ApplyEquippedEffect(playerID, unit)
     local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
-    if not hero or not hero:IsHero() then return end
-    
+    if not hero or hero:IsNull() then return end
+    if not hero:IsHero() then return end
     for id, itemData in pairs(self.Items) do
         if itemData.type == "effects" then
             local modifierName = itemData.modifier
@@ -177,8 +179,8 @@ end
 
 function Store:ApplyEquippedSkin(playerID, unit)
     local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
-    if not hero or not hero:IsHero() then return end
-    
+    if not hero or hero:IsNull() then return end
+    if not hero:IsHero() then return end
     for id, itemData in pairs(self.Items) do
         if itemData.type == "skins" then
             local modifierName = itemData.modifier
@@ -200,7 +202,8 @@ end
 
 function Store:ApplyEquippedPet(playerID, unit)
     local hero = unit or PlayerResource:GetSelectedHeroEntity(playerID)
-    if not hero or not hero:IsHero() then return end
+    if not hero or hero:IsNull() then return end
+    if not hero:IsHero() then return end
     if self.playerPets[playerID] and IsValidEntity(self.playerPets[playerID]) then
         self.playerPets[playerID]:RemoveSelf()
         self.playerPets[playerID] = nil

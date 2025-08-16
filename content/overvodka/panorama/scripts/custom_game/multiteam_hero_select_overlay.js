@@ -1,5 +1,5 @@
 "use strict";
-let heroModelPanel
+var heroModelPanel = heroModelPanel || null;
 function OnUpdateHeroSelection()
 {
 	for ( var teamId of Game.GetAllTeamIDs() )
@@ -22,10 +22,19 @@ function UpdateTeam( teamId )
 
 function UpdateCustomHeroModel(hero_name, playerId)
 {
-	// Only update for local player
 	if (playerId != Game.GetLocalPlayerID()) {
 		return;
 	}
+	let strategyScreen = FindDotaHudElement("StrategyScreen");
+    if (!strategyScreen) {
+        return;
+    }
+	let existing = strategyScreen.FindChildTraverse("custom_hero_model_panel");
+    if (existing) {
+        heroModelPanel = existing;
+        heroModelPanel.style.visibility = "visible";
+        return;
+    }
 
 	let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
 	HeroModelLoadout.style.visibility = "collapse";
@@ -36,15 +45,22 @@ function UpdateCustomHeroModel(hero_name, playerId)
 	if (!heroModelPanel && hero_name === "npc_dota_hero_morphling") 
 	{
 		let panel = FindDotaHudElement("StrategyScreen")
-		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
+		heroModelPanel = $.CreatePanel("DOTAScenePanel", strategyScreen, "custom_hero_model_panel", { class: "hero_model_strategy", style: "width:46.5%;height:90%;margin-top:-40px;", drawbackground: true, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true"});
 		heroModelPanel.SetParent(panel);
 	}
 	if (!heroModelPanel && hero_name === "npc_dota_hero_void_spirit") 
 	{
 		let panel = FindDotaHudElement("StrategyScreen")
-		heroModelPanel = $.CreatePanel("DOTAScenePanel", $.GetContextPanel(), "", { class: "hero_model_strategy", style: "width:48%;height:80%;", drawbackground: false, unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "false"});
+		heroModelPanel = $.CreatePanel("DOTAScenePanel", strategyScreen, "custom_hero_model_panel", { class: "hero_model_strategy", style: "width:46.5%;height:90%;margin-top:-40px;", drawbackground: true, unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true"});
 		heroModelPanel.SetParent(panel);
 	}
+	try {
+        let firstChild = strategyScreen.GetChild(0);
+        if (firstChild && strategyScreen.MoveChildBefore) {
+            strategyScreen.MoveChildBefore(heroModelPanel, firstChild);
+        }
+    } catch (e) {
+    }
 }
 
 function UpdatePlayer( teamPanel, playerId )
@@ -118,6 +134,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
 			"npc_dota_hero_ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 			"npc_dota_hero_warlock": "file://{images}/heroes/npc_dota_hero_king.png",
+			"npc_dota_hero_spirit_breaker": "file://{images}/heroes/npc_dota_hero_flash.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -182,6 +199,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"primal_beast": "file://{images}/heroes/npc_dota_hero_t2x2.png",
 			"ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 			"warlock": "file://{images}/heroes/npc_dota_hero_king.png",
+			"spirit_breaker": "file://{images}/heroes/npc_dota_hero_flash.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

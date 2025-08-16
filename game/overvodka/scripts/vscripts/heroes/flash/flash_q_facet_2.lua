@@ -7,7 +7,6 @@ function flash_q_facet_2:Precache(context)
     PrecacheResource("particle", "particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_portal.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_damage.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts", context)
 end
 
 function flash_q_facet_2:OnSpellStart()
@@ -19,7 +18,7 @@ function flash_q_facet_2:OnSpellStart()
     local particle = ParticleManager:CreateParticle("particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_portal.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControl(particle, 0, caster:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
-    caster:EmitSound("Hero_Weaver.Shukuchi")
+    caster:EmitSound("flash_q_facet2")
 end
 
 modifier_flash_q_facet_2 = class({})

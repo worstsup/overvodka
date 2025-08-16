@@ -93,15 +93,15 @@ end
 
 function modifier_item_charik_new_regen:OnIntervalThink()
     if not IsServer() then return end
-
+    if not self:GetAbility() then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
-
     if parent:IsIllusion() then return end
     if not parent:IsAlive() then 
         self.standing_time = 0 
         return 
     end
+    if not ability or ability:IsNull() then return end
     if ability:IsCooldownReady() then
         local percent_min = ability:GetSpecialValueFor("percent_min") / 100
         local percent_heal = ability:GetSpecialValueFor("percent_heal") / 100

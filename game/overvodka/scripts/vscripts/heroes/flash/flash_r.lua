@@ -2,12 +2,22 @@ LinkLuaModifier( "modifier_flash_r_buff", "heroes/flash/flash_r", LUA_MODIFIER_M
 LinkLuaModifier( "modifier_flash_r_thinker", "heroes/flash/flash_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_flash_r_debuff", "heroes/flash/flash_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_flash_r_after", "heroes/flash/flash_r", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_flash_r_after_cooldown", "heroes/flash/flash_r", LUA_MODIFIER_MOTION_NONE )
 
 flash_r = class({})
 
 function flash_r:Precache(context)
 	PrecacheResource( "soundfile", "soundevents/stopan.vsndevts", context )
-	PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_combined.vpcf", context )
+	PrecacheResource( "particle", "particles/units/heroes/hero_kez/kez_sai_afterimage_buff.vpcf", context )
+	PrecacheResource( "particle", "particles/flash_r_speed.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_start.vpcf", context)
+	PrecacheResource( "particle", "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active.vpcf", context)
+	PrecacheResource( "particle", "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start.vpcf", context)
+	PrecacheResource( "particle", "particles/econ/items/phantom_assassin/pa_crimson_witness_2021/pa_crimson_witness_blur_start.vpcf", context)
+	PrecacheResource( "particle", "particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", context)
+	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_shard_slow.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_lightning.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_start_lightning.vpcf", context)
 end
 
 function flash_r:GetCooldown( level )
@@ -15,10 +25,24 @@ function flash_r:GetCooldown( level )
 end
 
 function flash_r:OnAbilityPhaseStart()
-	EmitSoundOn( "stopan", self:GetCaster() )
+	EmitSoundOn( "flash_r_start", self:GetCaster() )
+	if self.p then
+		ParticleManager:DestroyParticle(self.p, true)
+		ParticleManager:ReleaseParticleIndex(self.p)
+		self.p = nil
+	end
+	self.p = ParticleManager:CreateParticle("particles/flash_r_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	ParticleManager:SetParticleControlEnt( self.p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+    ParticleManager:SetParticleControlEnt( self.p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 end
+
 function flash_r:OnAbilityPhaseInterrupted()
-	StopSoundOn( "stopan", self:GetCaster() )
+	StopSoundOn( "flash_r_start", self:GetCaster() )
+	if self.p then
+		ParticleManager:DestroyParticle(self.p, true)
+		ParticleManager:ReleaseParticleIndex(self.p)
+		self.p = nil
+	end
 end
 
 function flash_r:OnSpellStart()
@@ -34,6 +58,17 @@ function flash_r:OnSpellStart()
 		false
 	)
 	caster:AddNewModifier(caster, self, "modifier_flash_r_buff", {duration = self:GetSpecialValueFor("duration")})
+	EmitGlobalSound( "flash_r" )
+	StopGlobalSound( "5opka_r" )
+    StopGlobalSound( "stray_scepter" )
+    StopGlobalSound( "evelone_r_ambient" )
+	StopGlobalSound( "golden_rain" )
+	local p = ParticleManager:CreateParticle("particles/flash_r_start_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+    ParticleManager:SetParticleControlEnt( p, 4, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+	ParticleManager:ReleaseParticleIndex(p)
+	local p = ParticleManager:CreateParticle("particles/flash_r_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:ReleaseParticleIndex(p)
 end
 
 modifier_flash_r_buff = class({})
@@ -44,7 +79,38 @@ function modifier_flash_r_buff:IsPurgable() return false end
 
 function modifier_flash_r_buff:OnCreated()
 	if not IsServer() then return end
+	if self:GetAbility().p then
+		ParticleManager:DestroyParticle(self:GetAbility().p, true)
+		ParticleManager:ReleaseParticleIndex(self:GetAbility().p)
+		self:GetAbility().p = nil
+	end
+	self.p = ParticleManager:CreateParticle("particles/flash_r_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	ParticleManager:SetParticleControlEnt(self.p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+	ParticleManager:SetParticleControlEnt(self.p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+	self:AddParticle(self.p, false, false, -1, false, false)
+	self.saved_time = GameRules:GetTimeOfDay()
+	GameRules:SetTimeOfDay(0)
 	self:PlayEffects()
+end
+
+function modifier_flash_r_buff:OnRefresh()
+	if not IsServer() then return end
+	if self:GetAbility().p then
+		ParticleManager:DestroyParticle(self:GetAbility().p, true)
+		ParticleManager:ReleaseParticleIndex(self:GetAbility().p)
+		self:GetAbility().p = nil
+	end
+end
+
+function modifier_flash_r_buff:OnDestroy()
+	if not IsServer() then return end
+	local p = ParticleManager:CreateParticle("particles/flash_r_start_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	ParticleManager:SetParticleControlEnt( p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+    ParticleManager:SetParticleControlEnt( p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
+	ParticleManager:ReleaseParticleIndex(p)
+	if self.saved_time then
+		GameRules:SetTimeOfDay(self.saved_time)
+	end
 end
 
 function modifier_flash_r_buff:DeclareFunctions()
@@ -63,7 +129,9 @@ function modifier_flash_r_buff:OnAttackLanded(params)
 	if params.attacker ~= self:GetParent() then return end
     if not params.target or params.target:IsNull() then return end
 	if params.target:IsAttackImmune() then return end
+	if self:GetParent():HasModifier("modifier_flash_r_after_cooldown") then return end
 	self:SpawnAfterimage(params.target)
+	self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_flash_r_after_cooldown", {duration = self:GetAbility():GetSpecialValueFor("after_cooldown")})
 end
 
 function modifier_flash_r_buff:SpawnAfterimage(target)
@@ -77,24 +145,13 @@ function modifier_flash_r_buff:SpawnAfterimage(target)
 	after:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_flash_r_after", {duration = 1.5, target = target:entindex()})
 	after:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kill", {duration = 1.55})
     if after.SetRenderColor then
-        after:SetRenderColor(40, 60, 150)
-    end
-    if after.SetRenderAlpha then
-        after:SetRenderAlpha(160)
-    end
+		after:SetRenderColor(80, 255, 255)
+	end
     after:MoveToTargetToAttack(target)
-    local trail_pfx = ParticleManager:CreateParticle("particles/flash_afterimage_trail.vpcf", PATTACH_ABSORIGIN_FOLLOW, after)
-    ParticleManager:SetParticleControlEnt(trail_pfx, 0, after, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", after:GetAbsOrigin(), true)
-    ParticleManager:ReleaseParticleIndex(trail_pfx)
 end
 
 function modifier_flash_r_buff:PlayEffects()
-	local particle_cast = "particles/units/heroes/hero_faceless_void/faceless_void_chrono_speed.vpcf"
-	local particle_cast_2 = "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_combined.vpcf"
-	local effect_cast_2 = ParticleManager:CreateParticle( particle_cast_2, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
-	ParticleManager:SetParticleControl( effect_cast_2, 1, Vector( 1000, 1000, 1000 ) )
-	ParticleManager:ReleaseParticleIndex( effect_cast_2 )
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	local effect_cast = ParticleManager:CreateParticle( "particles/flash_r_speed.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
 		0,
@@ -104,8 +161,9 @@ function modifier_flash_r_buff:PlayEffects()
 		Vector(0,0,0),
 		true
 	)
-
 	self:AddParticle(effect_cast, false, false, -1, false, false)
+	local effect_cast_2 = ParticleManager:CreateParticle( "particles/units/heroes/hero_kez/kez_sai_afterimage_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	self:AddParticle(effect_cast_2, false, false, -1, false, false)
 end
 
 modifier_flash_r_after = class({})
@@ -115,12 +173,15 @@ function modifier_flash_r_after:IsPurgable() return false end
 
 function modifier_flash_r_after:OnCreated(kv)
 	if not IsServer() then return end
-	if not self:GetAbility() then
+	local ability = self:GetAbility()
+	local caster = self:GetCaster()
+	EmitSoundOn("flash_r_after", caster)
+	if not ability or ability:IsNull() or not caster or caster:IsNull() then
 		self:Destroy()
 		return
 	end
-	self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * self:GetAbility():GetSpecialValueFor("illusion_damage") * 0.01
-	self.speed = self:GetCaster():GetMoveSpeedModifier(self:GetCaster():GetBaseMoveSpeed(), true)
+	self.damage = caster:GetAverageTrueAttackDamage(nil) * ability:GetSpecialValueFor("illusion_damage") * 0.01
+	self.speed = caster:GetMoveSpeedModifier(caster:GetBaseMoveSpeed(), true)
 	if kv.target then
 		self.target = EntIndexToHScript(tonumber(kv.target))
 	end
@@ -135,9 +196,11 @@ function modifier_flash_r_after:OnIntervalThink()
 	end
 	if not self.target or self.target:IsNull() then
 		self:Destroy()
+		return
 	end
 	if self.target:IsAttackImmune() or not self.target:IsAlive() then
 		self:Destroy()
+		return
 	end
 end
 
@@ -162,7 +225,10 @@ end
 function modifier_flash_r_after:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker ~= self:GetParent() then return end
-	self:Destroy()
+	local mod = self
+	Timers:CreateTimer(0.3, function()
+		if mod and not mod:IsNull() then self:Destroy() end
+	end)
 end
 
 function modifier_flash_r_after:GetModifierPreAttack_BonusDamage()
@@ -173,18 +239,30 @@ function modifier_flash_r_after:GetModifierMoveSpeed_Absolute()
 	return self.speed
 end
 
+function modifier_flash_r_after:GetEffectName()
+	return "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active.vpcf"
+end
+
+function modifier_flash_r_after:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
+
 function modifier_flash_r_after:OnDestroy()
     if not IsServer() then return end
+	if not self:GetAbility() then return end
     self:StartIntervalThink(-1)
-    local effect_cast = ParticleManager:CreateParticle(
-        "particles/econ/items/drow/drow_arcana/drow_arcana_shard_hypothermia_death_v2.vpcf",
-        PATTACH_ABSORIGIN_FOLLOW,
-        self:GetParent()
-    )
-    ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
-    ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(effect_cast)
-    UTIL_Remove(self:GetParent())
+	local parent = self:GetParent()
+	if parent and not parent:IsNull() then
+		local effect_cast = ParticleManager:CreateParticle(
+			"particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start.vpcf",
+			PATTACH_ABSORIGIN_FOLLOW,
+			parent
+		)
+		ParticleManager:SetParticleControl(effect_cast, 0, parent:GetAbsOrigin())
+		ParticleManager:SetParticleControl(effect_cast, 3, parent:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(effect_cast)
+		UTIL_Remove(parent)
+	end
 end
 
 modifier_flash_r_debuff = class({})
@@ -192,6 +270,22 @@ modifier_flash_r_debuff = class({})
 function modifier_flash_r_debuff:IsHidden() return false end
 function modifier_flash_r_debuff:IsDebuff() return true end
 function modifier_flash_r_debuff:IsPurgable() return false end
+
+function modifier_flash_r_debuff:OnCreated()
+	if not IsServer() then return end
+	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
+	ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+	ParticleManager:ReleaseParticleIndex(p)
+end
+
+function modifier_flash_r_debuff:GetEffectName()
+	return "particles/units/heroes/hero_zuus/zuus_shard_slow.vpcf"
+end
+
+function modifier_flash_r_debuff:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
 
 function modifier_flash_r_debuff:DeclareFunctions()
 	return {
@@ -217,3 +311,8 @@ function modifier_flash_r_thinker:GetAuraRadius() return 99999 end
 function modifier_flash_r_thinker:GetAuraDuration() return 0.01 end
 function modifier_flash_r_thinker:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
 function modifier_flash_r_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+
+modifier_flash_r_after_cooldown = class({})
+
+function modifier_flash_r_after_cooldown:IsHidden() return true end
+function modifier_flash_r_after_cooldown:IsPurgable() return false end

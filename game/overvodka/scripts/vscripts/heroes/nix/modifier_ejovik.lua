@@ -19,7 +19,7 @@ end
 
 --------------------------------------------------------------------------------
 function modifier_ejovik:OnIntervalThink()
-	self.armor = self.armor + 4
+	self.armor = self.armor + 2
 end
 function modifier_ejovik:OnRemoved()
 end
