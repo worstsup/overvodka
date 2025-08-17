@@ -241,15 +241,22 @@ function modifier_mazellov_r:OnDestroy()
         if unit ~= self:GetParent() then
             if unit:IsRealHero() and not unit:IsTempestDouble() then
                 for _, mod in pairs(unit:FindAllModifiers()) do
-                    if mod and mod:GetCaster() == self:GetParent() then
-                        mod:Destroy()
+                    if mod and not mod:IsNull() and mod:GetCaster() and not mod:GetCaster():IsNull() then
+                        if mod:GetCaster() == self:GetParent() then
+                            mod:Destroy()
+                        end
                     end
                 end
             end
         end
     end
-    self:GetAbility().clone = nil
-    UTIL_Remove(self:GetParent())
+    if self:GetAbility() and not self:GetAbility():IsNull() then
+        self:GetAbility().clone = nil
+    end
+
+    if self:GetParent() and not self:GetParent():IsNull() then
+        UTIL_Remove(self:GetParent())
+    end
 end
 
 modifier_mazellov_r_hidden = class ({})

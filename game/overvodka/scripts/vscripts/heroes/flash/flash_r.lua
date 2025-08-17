@@ -140,14 +140,20 @@ function modifier_flash_r_buff:SpawnAfterimage(target)
 
     local spawn_pos = self:GetParent():GetAbsOrigin() + RandomVector(20)
     local after = CreateUnitByName(self:GetParent():GetUnitName(), spawn_pos, false, self:GetParent(), self:GetParent(), self:GetParent():GetTeamNumber())
-    after:SetControllableByPlayer(self:GetParent():GetPlayerID(), false)
+    after:SetControllableByPlayer(self:GetParent():GetPlayerOwnerID(), false)
     after:SetOwner(self:GetParent())
 	after:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_flash_r_after", {duration = 1.5, target = target:entindex()})
 	after:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kill", {duration = 1.55})
     if after.SetRenderColor then
 		after:SetRenderColor(80, 255, 255)
 	end
-    after:MoveToTargetToAttack(target)
+	
+    ExecuteOrderFromTable({
+        UnitIndex = after:entindex(),
+        OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,
+        TargetIndex = target:entindex(),
+        Queue = false
+    })
 end
 
 function modifier_flash_r_buff:PlayEffects()
@@ -174,6 +180,10 @@ function modifier_flash_r_after:IsPurgable() return false end
 function modifier_flash_r_after:OnCreated(kv)
 	if not IsServer() then return end
 	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then
+		self:Destroy()
+		return
+	end
 	local caster = self:GetCaster()
 	EmitSoundOn("flash_r_after", caster)
 	if not ability or ability:IsNull() or not caster or caster:IsNull() then
@@ -194,6 +204,11 @@ function modifier_flash_r_after:OnIntervalThink()
 		self:Destroy()
 		return
 	end
+	local caster = self:GetCaster()
+    if not caster or caster:IsNull() then
+        self:Destroy()
+        return
+    end
 	if not self.target or self.target:IsNull() then
 		self:Destroy()
 		return
@@ -249,7 +264,6 @@ end
 
 function modifier_flash_r_after:OnDestroy()
     if not IsServer() then return end
-	if not self:GetAbility() then return end
     self:StartIntervalThink(-1)
 	local parent = self:GetParent()
 	if parent and not parent:IsNull() then
@@ -273,6 +287,12 @@ function modifier_flash_r_debuff:IsPurgable() return false end
 
 function modifier_flash_r_debuff:OnCreated()
 	if not IsServer() then return end
+	local ability = self:GetAbility()
+    if ability and not ability:IsNull() then
+        self.max_speed = ability:GetSpecialValueFor("max_speed")
+    else
+        self.max_speed = 550
+    end
 	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 	ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
 	ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
@@ -294,10 +314,22 @@ function modifier_flash_r_debuff:DeclareFunctions()
 end
 
 function modifier_flash_r_debuff:GetModifierMoveSpeed_Limit()
-    return self:GetAbility():GetSpecialValueFor("max_speed")
+    return self.max_speed or 550
 end
 
 modifier_flash_r_thinker = class({})
+
+function modifier_flash_r_thinker:OnSpellStart()
+	if not IsServer() then return end
+	self:StartIntervalThink(0.1)
+end
+
+function modifier_flash_r_thinker:OnIntervalThink()
+	if not self:GetAbility() then
+		self:Destroy()
+		return
+	end
+end
 
 function modifier_flash_r_thinker:OnDestroy()
 	if IsServer() then
