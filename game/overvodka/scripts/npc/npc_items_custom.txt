@@ -3077,6 +3077,7 @@
 			"bonus_attack_speed_minion"			"90"
 			"bonus_movespeed_minion"			"30"
 			"bonus_damage_minion"				"50"
+			"hp_mult_minion"					"2"
 			"cdr_minion"						"50"
 			"minion_duration"					"60"
 			"radius"							"1200"

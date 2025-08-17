@@ -44,6 +44,7 @@ function modifier_item_minion_generator_minion_as:DeclareFunctions()
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE ,
 		MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
+		MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
     }
 end
 
@@ -71,6 +72,13 @@ end
 function modifier_item_minion_generator_minion_as:GetModifierPercentageCooldown()
 	if self:GetAbility() then
 		return self:GetAbility():GetSpecialValueFor("cdr_minion")
+	end
+	return 0
+end
+
+function modifier_item_minion_generator_minion_as:GetModifierExtraHealthPercentage()
+	if self:GetAbility() then
+		return (self:GetAbility():GetSpecialValueFor("hp_mult_minion") - 1) * 100
 	end
 	return 0
 end

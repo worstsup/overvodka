@@ -3497,7 +3497,7 @@
 				}
 				"att"
 				{
-					"value"	"5 10 15 20"
+					"value"	"4 8 12 16"
 					"special_bonus_unique_worstsup_4" "+5"
 				}
 				"vision" "50"
@@ -5165,12 +5165,12 @@
 				}
 				"AbilityCastRange"
 				{
-					"value"	"600"
+					"value"	"550"
 					"affected_by_aoe_increase"	"1"
 				}
 				"radius"
 				{
-					"value"	"600"
+					"value"	"550"
 					"affected_by_aoe_increase"	"1"
 				}
 				"creep_mult"		"2"
@@ -5254,7 +5254,7 @@
         		"AbilityCooldown"
         		{
         			"value"	"70 65 60"
-        			"special_bonus_unique_stariy_6" "-15"
+        			"special_bonus_unique_stariy_6" "-10"
         		}
         		"dur_tooltip"		"5.0"
                 "beam_speed"
@@ -5449,13 +5449,13 @@
 				}
 				"radius"
 				{
-					"value"	"375"
+					"value"	"350"
 					"special_bonus_unique_ashab_4" "+75"
 					"affected_by_aoe_increase"	"1"
 				}
 				"AbilityCastRange"
 				{
-					"value"	"375"
+					"value"	"350"
 					"special_bonus_unique_ashab_4" "+75"
 					"affected_by_aoe_increase"	"1"
 				}
@@ -5483,7 +5483,7 @@
 					"value"	"10"
 					"special_bonus_unique_ashab_2" "+5"
 				}
-				"base_hp"	"1 2 2 3"
+				"base_hp"	"1 1 2 2"
 				"radius"	"500"
 				"hpregen"	"2 3 4 5"
 				"bonus_ms" "10 14 18 22"
@@ -5592,7 +5592,7 @@
 				"AbilityCooldown"
 				{
 					"value"	"5.0"
-					"special_bonus_unique_ashab_8" "-3"
+					"special_bonus_unique_ashab_8" "-2"
 				}
 				"damage"				"10"
 				"radius"				"375"
@@ -5630,7 +5630,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"5.0"
-				"special_bonus_unique_ashab_8" "-3"
+				"special_bonus_unique_ashab_8" "-2"
 			}
 		}
 	}
@@ -13720,7 +13720,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"AbilityTextureName"   			"invincible_q"
+		"AbilityTextureName"   			"flash_q_facet_1"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
@@ -13779,7 +13779,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/flash/flash_w"
-		"AbilityTextureName"			"baza"
+		"AbilityTextureName"			"flash_w"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -13830,7 +13830,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/flash/flash_e"
-		"AbilityTextureName"			"baidul"
+		"AbilityTextureName"			"flash_e"
 		"IsBreakable"					"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -13872,7 +13872,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/flash/flash_shard"
-		"AbilityTextureName"			"ebanko_r"
+		"AbilityTextureName"			"flash_shard"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"				"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -13889,7 +13889,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/flash/flash_r"
 		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
-		"AbilityTextureName"			"stop"
+		"AbilityTextureName"			"flash_r"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"

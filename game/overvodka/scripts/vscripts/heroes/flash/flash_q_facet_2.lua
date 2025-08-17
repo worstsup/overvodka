@@ -28,7 +28,7 @@ function modifier_flash_q_facet_2:IsPurgable() return true end
 
 function modifier_flash_q_facet_2:OnCreated()
     if not IsServer() then return end
-    self:StartIntervalThink(FrameTime())
+    self:StartIntervalThink(0.1)
 end
 
 function modifier_flash_q_facet_2:OnIntervalThink()

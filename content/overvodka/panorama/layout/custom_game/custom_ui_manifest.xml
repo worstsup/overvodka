@@ -24,7 +24,6 @@
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_hero_flash.png" />
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/selection/npc_dota_hero_spirit_breaker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_spirit_breaker.png" />
 	</Panel>
 </root>
