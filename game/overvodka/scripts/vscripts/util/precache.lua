@@ -261,6 +261,7 @@ PrecacheUtils.models = {
 		"models/frisk/frisk.vmdl",
 		"models/chara/knife.vmdl",
 		"models/chara/chara.vmdl",
+		"models/bikov/bikov.vmdl",
 }
 
 PrecacheUtils.sounds = {

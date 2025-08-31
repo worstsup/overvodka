@@ -16057,6 +16057,7 @@
 		"PortraitBackgroundColor3"		"0.550000 0.280000 0.210000"
 		"PortraitBackgroundColor4"		"0.550000 0.280000 0.210000"
 		"PortraitBackgroundTexture"		"materials/portraits_card/portrait_backgrounds/full_view_background.vmat"
+		"PortraitBackgroundModel"		"models/items/pedestals/pedestal_2/pedestal_2.vmdl"
 		"PortraitAnimationActivity"		"ACT_DOTA_LOADOUT"
 		"PortraitAnimationCycle"		"0.000000"
 		"PortraitAnimationRate"		"1.000000"
@@ -16068,36 +16069,57 @@
 			"default"
 			{
 				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"2.851342 155.100006 0.000000"
+				"PortraitAngles"		"1.290534 155.100006 0.000000"
 				"PortraitFOV"		"21.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"econ_set_preview"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 92.000000"
-				"PortraitAngles"		"1.372822 155.100006 0.000000"
-				"PortraitFOV"		"16.000000"
+				"PortraitPosition"		"691.278076 -319.666412 170.872559"
+				"PortraitAngles"		"9.515344 154.850647 0.000000"
+				"PortraitFOV"		"14.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_head"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 112.000000"
-				"PortraitAngles"		"1.000000 155.100006 0.000000"
+				"PortraitPosition"		"770.615662 -369.589996 525.688171"
+				"PortraitAngles"		"29.491228 154.279053 0.000000"
+				"PortraitFOV"		"17.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_legs"
+			{
+				"PortraitPosition"		"670.542358 -369.589996 397.294556"
+				"PortraitAngles"		"24.954285 151.027725 0.000000"
+				"PortraitFOV"		"22.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_arms"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 450.985962"
+				"PortraitAngles"		"24.950283 155.100006 0.000000"
 				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_back"
 			{
-				"PortraitPosition"		"748.219727 -369.589996 361.610596"
-				"PortraitAngles"		"18.474260 154.538162 0.000000"
-				"PortraitFOV"		"26.000000"
+				"PortraitPosition"		"703.144409 -369.589996 362.296753"
+				"PortraitAngles"		"21.297022 152.166733 0.000000"
+				"PortraitFOV"		"18.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_misc"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 223.297180"
+				"PortraitAngles"		"10.582209 155.100006 0.000000"
+				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_taunt"
 			{
 				"PortraitPosition"		"799.700012 -369.589996 333.137512"
-				"PortraitAngles"		"13.346159 155.375107 0.000000"
-				"PortraitFOV"		"28.000000"
+				"PortraitAngles"		"14.299254 155.375107 0.000000"
+				"PortraitFOV"		"26.000000"
 				"PortraitFar"		"2000.000000"
 			}
 		}
@@ -16111,9 +16133,21 @@
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
+			"slot_legs"
+			{
+				"PortraitHeroRotation"		"-0.000000 25.072338 0.000000"
+			}
+			"slot_arms"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
 			"slot_back"
 			{
-				"PortraitHeroRotation"		"-0.000000 117.991470 0.000000"
+				"PortraitHeroRotation"		"-0.000000 120.577911 0.000000"
+			}
+			"slot_misc"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
 			"slot_taunt"
 			{
@@ -16127,7 +16161,7 @@
 		"PortraitDesaturateParticles"		"0"
 		"PortraitDesaturateHero"		"1"
 		"PortraitVignetteItem"		"0"
-		"SummonPosition"		"0.000000 0.000000 0.419922"
+		"PortraitBackgroundMap"		"maps/ui/dota_hud_loadout_2022.vmap"
 		"PortraitAllowAnimatedPortrait"		"1"
 		"GodraysFXColor"		"0.600000 0.282338 0.200000"
 		"GroundfogFXColor"		"0.600000 0.282338 0.200000"

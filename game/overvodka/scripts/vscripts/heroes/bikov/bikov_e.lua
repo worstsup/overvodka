@@ -49,12 +49,10 @@ function bikov_e:OnOrbImpact(params)
     local target = params.target
     if not caster or caster:IsNull() or not target or target:IsNull() then return end
 
-    -- дебафф на основную цель
     local duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance())
     local mod = (self.random == 1) and "modifier_bikov_e_evo" or "modifier_bikov_e_fu"
     target:AddNewModifier(caster, self, mod, { duration = duration })
 
-    -- визуал + УРОН СПОСОБНОСТИ
     local p = ParticleManager:CreateParticle(
         "particles/econ/items/void_spirit/void_spirit_immortal_2021/void_spirit_immortal_2021_astral_step_dmg_burst.vpcf",
         PATTACH_ABSORIGIN_FOLLOW, target
@@ -108,7 +106,7 @@ function bikov_e:OnOrbImpact(params)
 
     ProjectileManager:CreateTrackingProjectile({
         Target = second,
-        Source = target,                        -- летит из первичной цели
+        Source = target,
         Ability = self,
         EffectName = self:GetProjectileName(),
         iMoveSpeed = proj_speed,

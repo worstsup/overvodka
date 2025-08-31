@@ -3383,21 +3383,22 @@
 	}
 	"npc_dota_hero_winter_wyvern"
 	{
-		"Model"		"models/heroes/winterwyvern/winterwyvern.vmdl"
-		"ModelScale"		"1.000000"
-		"VersusScale"		"1.000000"
-		"LoadoutScale"		"1.000000"
-		"SoundSet"		"Hero_Winter_Wyvern"
+		"Model"				"models/bikov/bikov.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"230"
+		"ModelScale"		"1.0"
+		"LoadoutScale"		"0.95"
+		"SoundSet"			"Hero_QueenOfPain"
 		"SimilarHeroes"		"26,57,17"
 		"VoiceFile"		""
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_winter_wyvern.vsndevts"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
 		"HeroSelectSoundEffect"		"bikov_start"
 		"Ability1"		"bikov_q"
 		"Ability2"		"bikov_w"
 		"Ability3"		"bikov_e"
 		"Ability4"		"bikov_innate"
 		"Ability5"		"generic_hidden"
-		"Ability6"		"winter_wyvern_winters_curse"
+		"Ability6"		"bikov_ultimate"
 
 		"Ability10"		"special_bonus_unique_bikov_1"
 		"Ability11"		"special_bonus_unique_bikov_2"
@@ -3425,12 +3426,10 @@
 			{
 				"Deprecated"		"True"
 			}
-
 			"winter_wyvern_atk_range"
 			{
 				"Deprecated"		"True"
 			}
-
 			"winter_wyvern_winterproof"
 			{
 				"Deprecated"		"True"
