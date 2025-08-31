@@ -1,0 +1,14 @@
+"Layer0"
+{
+	"shader"	"global_lit_simple.vfx"
+	"F_FULLBRIGHT"	"1"
+	"g_vColorTint"	"[1.000000 1.000000 1.000000 0.000000]"
+	"g_vTexCoordOffset"	"[0.000000 0.000000 0.000000 0.000000]"
+	"g_vTexCoordScale"	"[1.000000 1.000000 0.000000 0.000000]"
+	"TextureColor"	"models/frisk/tex/apron.png"
+	"TextureTranslucency"	"models/frisk/tex/apron_2344824a_trans.png"
+	"Compiled Textures"
+	{
+		"g_tColor"	"models/frisk/tex/apron_png_2344824a.vtex"
+	}
+}

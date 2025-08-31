@@ -3,6 +3,7 @@ LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", 
 LinkLuaModifier("modifier_chillguy_q_slow", "heroes/chillguy/modifier_chillguy_q_slow", LUA_MODIFIER_MOTION_NONE )
 
 function chillguy_q:OnSpellStart()
+	if not IsServer() then return end
 	local target = self:GetCursorTarget()
 	local projectile_speed = self:GetSpecialValueFor("blast_speed")
 	local projectile_name = "particles/skeletonking_hellfireblast_new.vpcf"
@@ -18,6 +19,7 @@ function chillguy_q:OnSpellStart()
 	self:PlayEffects1()
 end
 function chillguy_q:OnProjectileHit( hTarget, vLocation )
+	if not IsServer() then return end
 	if hTarget ~= nil and ( not hTarget:IsInvulnerable() ) and ( not hTarget:IsMagicImmune() ) and ( not hTarget:TriggerSpellAbsorb( self ) ) then
 		local stun_duration = self:GetSpecialValueFor( "blast_stun_duration" )
 		local stun_damage = self:GetAbilityDamage()
@@ -30,9 +32,9 @@ function chillguy_q:OnProjectileHit( hTarget, vLocation )
 			ability = self
 		}
 		hTarget:AddNewModifier( self:GetCaster(), self, "modifier_generic_stunned_lua", { duration = stun_duration } )
-		hTarget:AddNewModifier( self:GetCaster(), self, "modifier_chillguy_q_slow", { duration = dot_duration } )
-		ApplyDamage( damage )
+		hTarget:AddNewModifier( self:GetCaster(), self, "modifier_chillguy_q_slow", { duration = dot_duration * (1 - hTarget:GetStatusResistance()) } )
 		self:PlayEffects2( hTarget )
+		ApplyDamage( damage )
 	end
 	return true
 end

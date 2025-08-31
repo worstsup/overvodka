@@ -1914,6 +1914,7 @@ function modifier_dvoreckov_eee:IsPurgable()
 end
 
 function modifier_dvoreckov_eee:OnCreated( kv )
+	if not IsServer() then return end
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		self.attacks = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "buffed_attacks")
 		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "damage")
@@ -1931,33 +1932,9 @@ function modifier_dvoreckov_eee:OnCreated( kv )
 	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )
 
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow_duration" )
-	if not IsServer() then return end
 	self:SetStackCount( self.attacks )
 	self.records = {}
 	self:PlayEffects()
-	local sound_cast = "dimon"
-	EmitSoundOn( sound_cast, self:GetParent() )
-end
-
-function modifier_dvoreckov_eee:OnRefresh( kv )
-	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.attacks = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "buffed_attacks")
-		self.damage = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "damage")
-		self.range_bonus = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "attack_range_bonus")
-	else
-		self.attacks = 6
-		self.damage = 105
-		self.range_bonus = 275
-	end
-	self.hastalent = self:GetAbility():GetSpecialValueFor("hastalent")
-	if self.hastalent == 1 then
-		self.damage = self:GetCaster():GetAverageTrueAttackDamage(nil) * self:GetAbility():GetSpecialValueFor("damage_percent") * 0.01 + self.damage
-	end
-	self.as_bonus = self:GetAbility():GetSpecialValueFor( "attack_speed_bonus" )
-	self.bat = self:GetAbility():GetSpecialValueFor( "base_attack_time" )
-	self.slow = self:GetAbility():GetSpecialValueFor( "slow_duration" )
-	if not IsServer() then return end
-	self:SetStackCount( self.attacks )
 	local sound_cast = "dimon"
 	EmitSoundOn( sound_cast, self:GetParent() )
 end
@@ -2006,9 +1983,9 @@ function modifier_dvoreckov_eee:OnAttackLanded( params )
 			"modifier_dvoreckov_eee_debuff",
 			{ duration = self.slow }
 		)
+		local sound_cast = "Hero_Snapfire.ExplosiveShellsBuff.Target"
+		EmitSoundOn( sound_cast, params.target )
 	end
-	local sound_cast = "Hero_Snapfire.ExplosiveShellsBuff.Target"
-	EmitSoundOn( sound_cast, params.target )
 end
 
 function modifier_dvoreckov_eee:OnAttackRecordDestroy( params )
@@ -2167,7 +2144,10 @@ end
 
 function dvoreckov_qee:OnSpellStart()
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition() + Vector(2, 2, 0)
+	local point = self:GetCursorPosition()
+	if point == caster:GetOrigin() then
+		point = point + caster:GetForwardVector()*10
+	end
 	local speed = self:GetSpecialValueFor( "wave_speed" )
 	local width = self:GetSpecialValueFor( "wave_width" )
 	local projectile_name = "particles/econ/items/drow/drow_arcana/drow_arcana_silence_wave.vpcf"
@@ -2178,193 +2158,53 @@ function dvoreckov_qee:OnSpellStart()
 	local xx = projectile_direction.x
 	local yy = projectile_direction.y
 	tartar = {}
-	local info = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = projectile_direction * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
+	local function MakeProjectile(dir)
+		return {
+			Source = caster,
+			Ability = self,
+			vSpawnOrigin = caster:GetAbsOrigin(),
+			bDeleteOnHit = false,
+			iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+			iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+			iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			EffectName = projectile_name,
+			fDistance = projectile_distance,
+			fStartRadius = width,
+			fEndRadius = width,
+			vVelocity = dir * speed,
+			ExtraData = {
+				x = caster:GetOrigin().x,
+				y = caster:GetOrigin().y,
+			}
 		}
-	}
-	local info2 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = -projectile_direction * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	local zam = projectile_direction.x
-	projectile_direction.x = -projectile_direction.y
-	projectile_direction.y = zam
-	local info3 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	projectile_direction.x = -projectile_direction.x
-	projectile_direction.y = -projectile_direction.y
-	local info4 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	projectile_direction.x = xx * (2 ^ 0.5) / 2 - yy * (2 ^ 0.5) / 2
-	projectile_direction.y = xx * (2 ^ 0.5) / 2 + yy * (2 ^ 0.5) / 2
+	end
 
-	local info5 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	local info6 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = -projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	local zamzam = projectile_direction.x
-	projectile_direction.x = -projectile_direction.y
-	projectile_direction.y = zamzam
-	local info7 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
-	local info8 = {
-		Source = caster,
-		Ability = self,
-		vSpawnOrigin = caster:GetAbsOrigin(),
-		
-	    bDeleteOnHit = false,
-	    
-	    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
-	    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
-	    iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-	    
-	    EffectName = projectile_name,
-	    fDistance = projectile_distance,
-	    fStartRadius = width,
-	    fEndRadius = width,
-		vVelocity = -projectile_direction  * speed,
-		
-		ExtraData = {
-			x = caster:GetOrigin().x,
-			y = caster:GetOrigin().y,
-		}
-	}
+	local dirs = {}
+	dirs[1] = projectile_direction
+	dirs[2] = -projectile_direction
+
+	dirs[3] = Vector(-projectile_direction.y, projectile_direction.x, 0)
+	dirs[4] = -dirs[3]
+
+	local sqrt2 = math.sqrt(2)
+	dirs[5] = Vector(
+		xx * sqrt2 / 2 - yy * sqrt2 / 2,
+		xx * sqrt2 / 2 + yy * sqrt2 / 2,
+		0
+	)
+	dirs[6] = -dirs[5]
+
+	dirs[7] = Vector(-dirs[5].y, dirs[5].x, 0)
+	dirs[8] = -dirs[7]
+
+	local info = MakeProjectile(dirs[1])
+	local info2 = MakeProjectile(dirs[2])
+	local info3 = MakeProjectile(dirs[3])
+	local info4 = MakeProjectile(dirs[4])
+	local info5 = MakeProjectile(dirs[5])
+	local info6 = MakeProjectile(dirs[6])
+	local info7 = MakeProjectile(dirs[7])
+	local info8 = MakeProjectile(dirs[8])
 	ProjectileManager:CreateLinearProjectile(info)
 	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 			local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_7")

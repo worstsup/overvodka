@@ -1,0 +1,43 @@
+"itembuilds"
+{
+	"author"		"Overvodka"
+	"hero"			"npc_dota_hero_templar_assassin"
+	"Title"			"Overvodka"
+	
+	"Items"
+	{		
+		"#DOTA_Item_Build_Starting_Items"
+		{
+			"item"		"item_ward_observer"
+			"item"		"item_boots"
+			"item"		"item_magic_wand"
+			"item"		"item_chapman_red"
+		}
+		
+		"#DOTA_Item_Build_Early_Game"
+		{
+			"item"		"item_balbe"
+			"item"		"item_bablokrad"
+			"item"		"item_hqd"
+			"item"		"item_crumbl_cookie"
+			"item"		"item_chapman_green"
+		}
+		"#DOTA_Item_Build_Mid_Items"
+		{
+			"item"		"item_jordan"
+			"item"		"item_holy_locket"
+			"item"		"item_swag"
+			"item"		"item_aghanims_shard"
+			"item"		"item_pasito"
+			"item"		"item_suchiy"
+			"item"		"item_magic_aegis"
+		}
+		"#DOTA_Item_Build_Luxury"
+		{
+			"item"		"item_ultimate_scepter"
+			"item"		"item_badun"
+			"item"		"item_magic_daedalus"
+			"item"		"item_govno"
+		}
+	}
+}

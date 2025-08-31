@@ -50,7 +50,6 @@ function modifier_custom_evasion:OnIntervalThink()
     else
         self.current_evasion = max_evasion
     end
-    print("Current Evasion:", self.current_evasion)
 end
 
 function modifier_custom_evasion:DeclareFunctions()

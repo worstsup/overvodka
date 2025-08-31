@@ -31,6 +31,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_disperser"
 			"item"		"item_swift_blink"
             "item"		"item_yasha_and_kaya"
             "item"		"item_govno"

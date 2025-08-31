@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/layout/custom_game/heroes/chara/chara_screamer.css" />
+	</styles>
+	<scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+	</scripts>
+	<Panel class="CharaScreamer" hittest="false">
+		<Panel id="CharaScreamerPanel" hittest="false" />
+	</Panel>
+</root>

@@ -19,7 +19,10 @@ function sasavot_e_new:OnSpellStart()
 end
 
 function sasavot_e_new:OnChannelThink(flInterval)
-    self.magresist_duration_min = self.magresist_duration_min + 0.03
+    if not IsServer() then return end
+    if self:GetSpecialValueFor("magresist_duration_min") > 0 then
+        self.magresist_duration_min = self.magresist_duration_min + 0.03
+    end
 end
 
 function sasavot_e_new:OnChannelFinish(interrupted)
@@ -56,7 +59,7 @@ end
 function sasavot_e_new:PlayEffects1()
     self.nChannelFX = ParticleManager:CreateParticle( "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 end
-random_chance = 0
+
 modifier_sasavot_debuff = class({})
 
 function modifier_sasavot_debuff:IsHidden() return true end
@@ -76,13 +79,9 @@ function modifier_sasavot_debuff:DeclareFunctions()
 end
 
 function modifier_sasavot_debuff:OnCreated()
-    random_chance = random_chance + 1
-    if (random_chance % 2) == 1 then
-        EmitSoundOn("sasavot_dance_1", self:GetCaster())
-    else
-        EmitSoundOn("sasavot_dance_2", self:GetCaster())
-    end
     if not IsServer() then return end
+    self.random = RandomInt(1, 2)
+    EmitSoundOn("sasavot_dance_"..self.random, self:GetCaster())
     self.damage = self:GetAbility():GetSpecialValueFor("damage_aoe")
     self.damage_threshold = self:GetAbility():GetSpecialValueFor("damage_threshold")
     self:StartIntervalThink(0.5)
@@ -109,8 +108,7 @@ function modifier_sasavot_debuff:OnTakeDamage(keys)
     local caster = self:GetCaster()
     if keys.unit == caster and keys.attacker:GetTeamNumber() ~= caster:GetTeamNumber() and keys.attacker:IsHero() and not keys.attacker:IsBuilding() and keys.damage > self.damage_threshold then
         caster:InterruptChannel()
-        StopSoundOn("sasavot_dance_1", self:GetCaster())
-        StopSoundOn("sasavot_dance_2", self:GetCaster())
+        StopSoundOn("sasavot_dance_"..self.random, self:GetCaster())
         EmitSoundOn("sasavot_dance_interrupt", self:GetCaster())
         caster:RemoveModifierByName("modifier_sasavot_debuff")
         caster:AddNewModifier(caster, self:GetAbility(), "modifier_sasavot_bonus_buff", { duration = 5 })
@@ -160,20 +158,12 @@ end
 
 modifier_magresist_sasavot = class({})
 
-function modifier_magresist_sasavot:IsPurgable()
-    return false
-end
-function modifier_magresist_sasavot:OnCreated( kv )
-end
-function modifier_magresist_sasavot:OnRemoved()
-end
+function modifier_magresist_sasavot:IsPurgable() return false end
 
 function modifier_magresist_sasavot:CheckState()
-    local state = {
+    return {
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
-
-    return state
 end
 function modifier_magresist_sasavot:GetEffectName()
     return "particles/black_king_bar_avatar_sasavot.vpcf"

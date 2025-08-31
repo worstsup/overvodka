@@ -320,7 +320,7 @@ function PickIconsStyles()
 
     let GridCategories = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("GridCategories")
     GridCategories.style.flowChildren = "down";
-    GridCategories.style.width = "1000px";
+    GridCategories.style.width = "1100px";
 
     let HeroCategories = GridCategories.FindChildrenWithClassTraverse("HeroCategory")
         

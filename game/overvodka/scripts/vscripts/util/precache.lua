@@ -116,6 +116,10 @@ PrecacheUtils.particles = {
 		"particles/drake_base_attack.vpcf",
 		"particles/lit_energy_effect.vpcf",
 		"particles/zolo_eye_skin.vpcf",
+		"particles/macan_innate.vpcf",
+		"particles/econ/events/seasonal_reward_line_fall_2025/lotus_orb_fallrewardline_2025_shield_fallrewardline_2025.vpcf",
+		"particles/chara_face2.vpcf",
+		"particles/bikov_attack.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -253,6 +257,10 @@ PrecacheUtils.models = {
 		"models/amogus/source/skipper.vmdl",
 		"models/royale/king/royal_clash_character_0723211955_texture.vmdl",
 		"models/flash/flash.vmdl",
+		"models/props_items/magicstick.vmdl",
+		"models/frisk/frisk.vmdl",
+		"models/chara/knife.vmdl",
+		"models/chara/chara.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -267,6 +275,7 @@ PrecacheUtils.sounds = {
     	"soundevents/armature_crit.vsndevts",
 		"soundevents/5opka_start.vsndevts",
 		"soundevents/zhenya_start.vsndevts",
+		"soundevents/chara_start.vsndevts",
 		"soundevents/kolyan_start.vsndevts",
 		"soundevents/flash_start.vsndevts",
 		"soundevents/invincible_start.vsndevts",
@@ -325,10 +334,12 @@ PrecacheUtils.sounds = {
 		"soundevents/mazellov_start.vsndevts",
 		"soundevents/t2x2_start.vsndevts",
 		"soundevents/tamaev_start.vsndevts", 
-		"soundevents/kirill_start.vsndevts", 
+		"soundevents/kirill_start.vsndevts",
+		"soundevents/bikov_start.vsndevts", 
 		"soundevents/lev_start.vsndevts",
 		"soundevents/stint_start.vsndevts",
 		"soundevents/royale_start.vsndevts",
+		"soundevents/frisk_start.vsndevts",
 		"soundevents/ailesh.vsndevts",
 		"soundevents/chapman.vsndevts",
 		"soundevents/stopan.vsndevts",
@@ -410,6 +421,7 @@ PrecacheUtils.sounds = {
 		"soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_keeper_of_the_light.vsndevts", 
 		"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts",
+		"soundevents/sans_damage.vsndevts",
 }
 
 PrecacheUtils.mapResources = {

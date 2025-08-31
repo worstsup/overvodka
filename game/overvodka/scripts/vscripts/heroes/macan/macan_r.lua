@@ -5,7 +5,7 @@ LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua.lua", LUA
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
 function macan_r:Precache( context )
-	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_charge_active.vpcf", context )
+	PrecacheResource( "particle", "particles/macan_r.vpcf", context )
 	PrecacheResource( "particle", "particles/macan_r_trail.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_chargeup.vpcf", context )
 	PrecacheResource( "particle", "particles/primal_beast_onslaught_range_finder_new.vpcf", context )
@@ -57,19 +57,12 @@ function macan_r:OnChargeFinish( interrupt )
 	)
 end
 
+
 modifier_macan_r = class({})
 
-function modifier_macan_r:IsHidden()
-	return false
-end
-
-function modifier_macan_r:IsDebuff()
-	return false
-end
-
-function modifier_macan_r:IsPurgable()
-	return false
-end
+function modifier_macan_r:IsHidden() return false end
+function modifier_macan_r:IsDebuff() return false end
+function modifier_macan_r:IsPurgable() return false end
 
 function modifier_macan_r:OnCreated( kv )
 	self.parent = self:GetParent()
@@ -111,12 +104,6 @@ function modifier_macan_r:OnCreated( kv )
 	}
 end
 
-function modifier_macan_r:OnRefresh( kv )
-end
-
-function modifier_macan_r:OnRemoved()
-end
-
 function modifier_macan_r:OnDestroy()
 	if not IsServer() then return end
 	self:StopEffects()
@@ -128,7 +115,7 @@ function modifier_macan_r:OnDestroy()
 end
 
 function modifier_macan_r:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_DISABLE_TURNING,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
@@ -136,8 +123,6 @@ function modifier_macan_r:DeclareFunctions()
 		MODIFIER_PROPERTY_MODEL_CHANGE,
 		MODIFIER_PROPERTY_MODEL_SCALE,
 	}
-
-	return funcs
 end
 
 function modifier_macan_r:OnOrder( params )
@@ -159,12 +144,14 @@ function modifier_macan_r:OnOrder( params )
 		self:SetDirection( params.target:GetOrigin() )
 	end	
 end
+
 function modifier_macan_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
 	}
 	return state
 end
+
 function modifier_macan_r:GetModifierDisableTurning()
 	return 1
 end
@@ -195,9 +182,6 @@ function modifier_macan_r:GetModifierModelScale()
 		end
 	end
 	return -50
-end
-
-function modifier_macan_r:OnIntervalThink()
 end
 
 function modifier_macan_r:TurnLogic( dt )
@@ -284,7 +268,7 @@ function modifier_macan_r:OnHorizontalMotionInterrupted()
 end
 
 function modifier_macan_r:GetEffectName()
-	return "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_charge_active.vpcf"
+	return "particles/macan_r.vpcf"
 end
 
 function modifier_macan_r:GetEffectAttachType()
@@ -305,23 +289,15 @@ function modifier_macan_r:StopEffects()
 	end
 end
 
+
 modifier_macan_r_charge = class({})
 
-function modifier_macan_r_charge:IsHidden()
-	return false
-end
-
-function modifier_macan_r_charge:IsDebuff()
-	return false
-end
-
-function modifier_macan_r_charge:IsPurgable()
-	return false
-end
+function modifier_macan_r_charge:IsHidden() return false end
+function modifier_macan_r_charge:IsDebuff() return false end
+function modifier_macan_r_charge:IsPurgable() return false end
 
 function modifier_macan_r_charge:OnCreated( kv )
 	self.parent = self:GetParent()
-	self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_5)
 	self.ability = self:GetAbility()
 	local sound_cast = "zavod"
 	EmitSoundOn( sound_cast, self.parent )
@@ -339,9 +315,6 @@ function modifier_macan_r_charge:OnCreated( kv )
 	self:PlayEffects2()
 end
 
-function modifier_macan_r_charge:OnRefresh( kv )
-end
-
 function modifier_macan_r_charge:OnRemoved()
 	if not IsServer() then return end
 	if not self.charge_finish then
@@ -350,16 +323,16 @@ function modifier_macan_r_charge:OnRemoved()
 	FilterManager:RemoveExecuteOrderFilter( self.filter )
 end
 
-function modifier_macan_r_charge:OnDestroy()
-end
-
 function modifier_macan_r_charge:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 	}
+end
 
-	return funcs
+function modifier_macan_r_charge:GetOverrideAnimation()
+	return ACT_DOTA_CAST_ABILITY_5
 end
 
 function modifier_macan_r_charge:OnOrder( params )
@@ -387,12 +360,11 @@ function modifier_macan_r_charge:GetModifierMoveSpeed_Limit()
 end
 
 function modifier_macan_r_charge:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_DISARMED] = true,
 	}
-
-	return state
 end
+
 function modifier_macan_r_charge:OrderFilter( data )
 	if data.order_type~=DOTA_UNIT_ORDER_MOVE_TO_POSITION and
 		data.order_type~=DOTA_UNIT_ORDER_MOVE_TO_TARGET and

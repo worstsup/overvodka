@@ -622,7 +622,7 @@
 						import_bone_scales = false
 						start_frame = 5
 						end_frame = -1
-						framerate = -1.0
+						framerate = 27.0
 						reverse = false
 						additional_anim_files = [  ]
 					},

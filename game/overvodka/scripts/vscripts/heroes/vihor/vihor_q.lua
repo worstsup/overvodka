@@ -110,39 +110,45 @@ function modifier_vihor_q_slow:GetEffectAttachType()
 end
 
 modifier_vihor_q_fly = class({})
-function modifier_vihor_q_fly:OnCreated( kv )
-	self.bonus_speed = self:GetAbility():GetSpecialValueFor("bonus_speed")
-	self:GetParent():StartGesture(ACT_DOTA_FLEE)
-end
-function modifier_vihor_q_fly:OnRefresh( kv )
+
+function modifier_vihor_q_fly:OnCreated(kv)
+    if not IsServer() then return end
+    self.bonus_speed = self:GetAbility() and self:GetAbility():GetSpecialValueFor("bonus_speed")
 end
 
 function modifier_vihor_q_fly:OnDestroy()
-	self:GetParent():RemoveGesture(ACT_DOTA_FLEE)
-	self:GetParent():StartGesture(ACT_DOTA_ECHO_SLAM)
+    if not IsServer() then return end
+    self:GetParent():StartGesture(ACT_DOTA_ECHO_SLAM)
 end
+
 function modifier_vihor_q_fly:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_FLYING] = true,
 		[MODIFIER_STATE_FORCED_FLYING_VISION] = true,
 	}
-	return state
 end
 
 function modifier_vihor_q_fly:DeclareFunctions()
     local funcs = 
     {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION
     }
     return funcs
 end
 
-function modifier_vihor_q_fly:GetModifierMoveSpeedBonus_Percentage( params )
+function modifier_vihor_q_fly:GetModifierMoveSpeedBonus_Percentage()
     return self.bonus_speed
 end
+
+function modifier_vihor_q_fly:GetOverrideAnimation()
+	return ACT_DOTA_FLEE
+end
+
 function modifier_vihor_q_fly:GetEffectName()
 	return "particles/econ/items/batrider/batrider_ti8_immortal_mount/batrider_ti8_immortal_firefly_mount_trail.vpcf"
 end
+
 function modifier_vihor_q_fly:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end

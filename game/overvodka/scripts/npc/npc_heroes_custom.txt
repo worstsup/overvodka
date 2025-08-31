@@ -844,17 +844,17 @@
 		"Ability17"		"special_bonus_unique_macan_8"
 		"Facets"
 		{
-			"macan_w"
-			{
-				"Icon"				"strength"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
 			"macan_r"
 			{
 				"Icon"				"armor"
 				"Color"				"Red"
 				"GradientID"		"2"
+			}
+			"macan_w"
+			{
+				"Icon"				"strength"
+				"Color"				"Red"
+				"GradientID"		"0"
 			}
 			"axe_one_man_army"
 			{
@@ -1986,9 +1986,8 @@
 		"DisableWearables"	"1"
 		"SoundSet"		"Hero_Rattletrap"
 		"Enabled"		"1"
-		"ModelScale"		"1.20000"
-		"VersusScale"		"0.8"
-		"LoadoutScale"		"0.75"
+		"ModelScale"		"1.2"
+		"LoadoutScale"		"1.2"
 		"HeroSelectSoundEffect"		"vihor_start"
 		"SimilarHeroes"  "42,7,36"
 		"GibType"		"motor"
@@ -3199,13 +3198,13 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"31"
 		"AttackDamageMax"			"41"
-		"AttackRate"				"1.5"
+		"AttackRate"				"1.6"
 		"AttackAnimationPoint"		"0.3"
 		"AttackAcquisitionRange"	"600"
 		"AttackRange"				"170"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"18"
-		"AttributeStrengthGain"		"1.8"
+		"AttributeStrengthGain"		"1.6"
 		"AttributeBaseAgility"		"28"
 		"AttributeAgilityGain"		"3.2"
 		"AttributeBaseIntelligence"	"14"
@@ -3217,5 +3216,255 @@
 		"particle_folder"			""
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
 		"VoiceFile"		""
+	}
+	"npc_dota_hero_templar_assassin"
+	{
+		"Model"		"models/frisk/frisk.vmdl"
+		"DisableWearables"	"1"
+		"SoundSet"		"Hero_NyxAssassin"
+		"Enabled"		"1"
+		"ModelScale"		"1.9"
+		"LoadoutScale"		"1.8"
+		"HealthBarOffset"	"230"
+		"SimilarHeroes"		"67,10,26"
+		"HeroSelectSoundEffect"		"frisk_start"
+		"GibType"		"default"
+
+		"Ability1"		"frisk_q"
+		"Ability2"		"frisk_w"
+		"Ability3"		"frisk_e"
+		"Ability4"		"frisk_d"
+		"Ability5"		"frisk_innate"
+		"Ability6"		"frisk_ultimate"
+
+		"Ability7"		"frisk_q_alt"
+		"Ability8"		"frisk_e_alt"
+		"Ability9"		"frisk_r_alt"
+
+		"Ability10"		"special_bonus_unique_frisk_1"
+		"Ability11"		"special_bonus_unique_frisk_2"
+		"Ability12"		"special_bonus_unique_frisk_3"
+		"Ability13"		"special_bonus_unique_frisk_4"
+		"Ability14"		"special_bonus_unique_frisk_5"
+		"Ability15"		"special_bonus_unique_frisk_6"
+		"Ability16"		"special_bonus_unique_frisk_7"
+		"Ability17"		"special_bonus_unique_frisk_8"
+
+		"Facets"
+		{
+			"dazzle_facet_nothl_boon"
+			{
+				"Icon"				"armor"
+				"Color"				"Green"
+				"GradientID"		"0"
+
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"dazzle_nothl_boon"
+					}
+				}
+			}
+			"frisk_post_genocide"
+			{
+				"Icon"				"teleport"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+			"templar_assassin_voidblades" 
+			{
+				"Deprecated"		"true"
+			}
+			"templar_assassin_refractor" 
+			{
+				"Deprecated"		"true"
+			}
+			"templar_assassin_hidden_reach" 
+			{
+				"Deprecated"		"true"
+			}
+		}
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"35"
+		"AttackDamageMax"		"37"
+		"AttackRate"		"1.700000"
+		"BaseAttackSpeed"		"110"
+		"StatusHealthRegen"		"1.0"
+		"AttackAnimationPoint"		"0.4"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"20" 
+		"AttributeStrengthGain"		"2.0000"
+		"AttributeBaseAgility"		"20"
+		"AttributeAgilityGain"		"2.0000"
+		"AttributeBaseIntelligence"		"20"
+		"AttributeIntelligenceGain"		"2.0000"
+		"MovementSpeed"		"310"
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_nyx_assassin.vsndevts"
+		"VoiceFile"		""
+	}
+	"npc_dota_hero_spectre"
+	{
+		"Model"		"models/chara/chara.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"230"
+		"SoundSet"		"Hero_PhantomAssassin"
+		"IdleSoundLoop"		""
+		"Enabled"		"1"
+		"ModelScale"		"1.9"
+		"LoadoutScale"		"1.8"
+		"SimilarHeroes"		"10,46,8"
+
+		"HeroSelectSoundEffect"		"chara_start"
+
+		"Ability1"		"chara_q"
+		"Ability2"		"chara_w"
+		"Ability3"		"chara_e"
+		"Ability4"		"chara_d"
+		"Ability5"		"chara_f"
+		"Ability6"		"chara_ultimate"
+		"Ability7"		"viper_predator"
+		"Ability10"		"special_bonus_unique_chara_1"
+		"Ability11"		"special_bonus_unique_chara_2"
+		"Ability12"		"special_bonus_unique_chara_3"
+		"Ability13"		"special_bonus_unique_chara_4"
+		"Ability14"		"special_bonus_unique_chara_5"
+		"Ability15"		"special_bonus_unique_chara_6"
+		"Ability16"		"special_bonus_unique_chara_7"
+		"Ability17"		"special_bonus_unique_chara_8"
+		"Facets"
+		{
+			"chara_q_armor"
+			{
+				"Icon"				"armor_broken"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+			"chara_more_waves"
+			{
+				"Icon"				"spectre"
+				"Color"				"Gray"
+				"GradientID"		"0"
+			}
+			"spectre_forsaken" 
+			{
+				"Deprecated" 	"true"
+			}
+			"spectre_twist_the_knife" 	
+			{
+				"Deprecated" 	"true"
+			}
+		}
+
+		"ArmorPhysical"		"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"BaseAttackSpeed"		"100"
+		"AttackDamageMin"		"21"
+		"AttackDamageMax"		"25"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.300000"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"19"
+		"AttributeStrengthGain"		"2.3"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"2.4"
+		"AttributeBaseIntelligence"		"20"
+		"AttributeIntelligenceGain"		"1.8"
+		"StatusHealthRegen"		"1.0"
+		"MovementSpeed"		"295"
+		"particle_folder"		"particles/units/heroes/hero_spectre"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+		"VoiceFile"		""
+	}
+	"npc_dota_hero_winter_wyvern"
+	{
+		"Model"		"models/heroes/winterwyvern/winterwyvern.vmdl"
+		"ModelScale"		"1.000000"
+		"VersusScale"		"1.000000"
+		"LoadoutScale"		"1.000000"
+		"SoundSet"		"Hero_Winter_Wyvern"
+		"SimilarHeroes"		"26,57,17"
+		"VoiceFile"		""
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_winter_wyvern.vsndevts"
+		"HeroSelectSoundEffect"		"bikov_start"
+		"Ability1"		"bikov_q"
+		"Ability2"		"bikov_w"
+		"Ability3"		"bikov_e"
+		"Ability4"		"bikov_innate"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"winter_wyvern_winters_curse"
+
+		"Ability10"		"special_bonus_unique_bikov_1"
+		"Ability11"		"special_bonus_unique_bikov_2"
+		"Ability12"		"special_bonus_unique_bikov_3"
+		"Ability13"		"special_bonus_unique_bikov_4"
+		"Ability14"		"special_bonus_unique_bikov_5"
+		"Ability15"		"special_bonus_unique_bikov_6"
+		"Ability16"		"special_bonus_unique_bikov_7"
+		"Ability17"		"special_bonus_unique_bikov_8"
+		"Facets"
+		{
+			"bikov_igor"
+			{
+				"Icon"				"tower"
+				"Color"				"Green"
+				"GradientID"		"2"
+			}
+			"bikov_e_bounce"
+			{
+				"Icon"				"ricochet"
+				"Color"				"Blue"
+				"GradientID"		"0"
+			}
+			"winter_wyvern_heal_mana"
+			{
+				"Deprecated"		"True"
+			}
+
+			"winter_wyvern_atk_range"
+			{
+				"Deprecated"		"True"
+			}
+
+			"winter_wyvern_winterproof"
+			{
+				"Deprecated"		"True"
+			}
+			"winter_wyvern_recursive"
+			{
+				"Deprecated"		"True"
+			}
+		}
+		"ArmorPhysical"		"1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"		"25"
+		"AttackDamageMax"		"32"
+		"AttackDamageType"		"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"		"1.700000"
+		"AttackAnimationPoint"		"0.250000"
+		"AttackAcquisitionRange"		"800"
+		"AttackRange"		"425"
+		"ProjectileModel"		"particles/bikov_attack.vpcf"
+		"ProjectileSpeed"		"700"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"2.5"
+		"AttributeBaseAgility"		"16"
+		"AttributeAgilityGain"		"1.7"
+		"AttributeBaseIntelligence"	"26"
+		"AttributeIntelligenceGain"	"3.6"
+		"VisionNighttimeRange"		"1200"
+		"BaseAttackSpeed"		"100"
+		"StatusManaRegen"	"0.5"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"particle_folder"		"particles/units/heroes/hero_winter_wyvern"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"		"295"
+		"HasAggressiveStance"		"0"
 	}
 }

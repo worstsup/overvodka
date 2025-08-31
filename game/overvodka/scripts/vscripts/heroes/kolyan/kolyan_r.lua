@@ -134,7 +134,7 @@ function modifier_kolyan_r_trigger:OnIntervalThink()
     if not self.busy and (guard:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D() >= 300 then
         guard:MoveToPosition(caster:GetAbsOrigin() + RandomVector(200))
     end
-    if self.busy and self.currentTarget then
+    if self.busy and self.currentTarget and not self.currentTarget:IsNull() then
          if (not self.currentTarget:IsAlive())
          or not caster:CanEntityBeSeenByMyTeam( self.currentTarget ) or self.currentTarget:IsAttackImmune()
          or not self.currentTarget:IsPositionInRange(caster:GetAbsOrigin(), self.radius + 500) then

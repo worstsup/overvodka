@@ -1,0 +1,14 @@
+"Layer0"
+{
+	"shader"	"global_lit_simple.vfx"
+	"F_FULLBRIGHT"	"1"
+	"g_vColorTint"	"[1.000000 1.000000 1.000000 0.000000]"
+	"g_vTexCoordOffset"	"[0.000000 0.000000 0.000000 0.000000]"
+	"g_vTexCoordScale"	"[1.000000 1.000000 0.000000 0.000000]"
+	"TextureColor"	"models/frisk/tex/glove.png"
+	"TextureTranslucency"	"models/frisk/tex/glove_4e92cc55_trans.png"
+	"Compiled Textures"
+	{
+		"g_tColor"	"models/frisk/tex/glove_png_4e92cc55.vtex"
+	}
+}

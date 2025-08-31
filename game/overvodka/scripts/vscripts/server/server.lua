@@ -26,140 +26,129 @@ function Server:Init()
 end
 
 function Server:OnGameEnded(Teams, VictoryTeam)
-
-    if IsInToolsMode() or GameRules:IsCheatMode() then OvervodkaGameMode:FinalizeGameEnd(VictoryTeam) return end
-
-    if Teams == nil then return end
-
-    if self.bGameEnded == true then return end
-
-    self.bGameEnded = true
-
-    local CurrentCategory = GetCurrentCategory()
-
-    if CurrentCategory == GAME_CATEGORY_DEFINITIONS.NONE then return end
-
-    if CurrentCategory == GAME_CATEGORY_DEFINITIONS.SOLO then
-        if #Teams < 3 then return end
-    elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DUO then
-        if #Teams < 2 then return end
-    elseif CurrentCategory == GAME_CATEGORY_DEFINITIONS.DOTA then
-        if #Teams < 2 then return end
-    end
-
-    local MatchID = tostring(GameRules:Script_GetMatchID())
-    
-    local CountNotLeaved = 0
-    for PlayerID, PlayerInfo in pairs(self.Players) do
-        if PlayerResource:GetConnectionState(PlayerID) ~= DOTA_CONNECTION_STATE_ABANDONED then
-            CountNotLeaved = CountNotLeaved + 1
-        end
-    end
-
-    local ValidPlayers = OvervodkaGameMode:GetValidTeamPlayers()
-    local bCanBeRated = false
-    local i = 0
-    if Is5v5() then
-        for TeamID, PlayerList in pairs(ValidPlayers) do
-            if #PlayerList >= 3 then
-                i = i + 1
-
-                if i == 2 then
-                    bCanBeRated = true
-                end
-            end
-        end
-
-        if bCanBeRated == false then
-            return
-        end
-    end
-
-    print("[Server] Saving data to server!")
-
-    for PlayerID, PlayerInfo in pairs(self.Players) do
-        local Hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
-        if Hero then
-            local HeroName = Hero:GetUnitName()
-            local Kills = PlayerResource:GetKills(PlayerID)
-            local Deaths = PlayerResource:GetDeaths(PlayerID)
-            local Assists = PlayerResource:GetAssists(PlayerID)
-            local Rating = self:CalculateRating(PlayerID, Teams, VictoryTeam)
-            local bWin = Rating >= 45
-            if Is5v5() then
-                bWin = VictoryTeam == PlayerResource:GetTeam(PlayerID)
-            end
-            local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
-            if PlayerInfo.doubled then
-                Rating = Rating * 2
-            end
-            if CountNotLeaved <= 4 then
-                Rating = Rating / 2
-            end
-
-            local coins_to_grant = RandomInt(5, 10)
-            local CurrentCat = GetCurrentCategory()
-            if CurrentCat == GAME_CATEGORY_DEFINITIONS.NONE then return end
-            if CurrentCat == GAME_CATEGORY_DEFINITIONS.SOLO then
-                if #Teams < 3 then
-                    coins_to_grant = 0
-                end
-            elseif CurrentCat == GAME_CATEGORY_DEFINITIONS.DUO then
-                if #Teams < 2 then
-                    coins_to_grant = 0
-                end
-            elseif CurrentCat == GAME_CATEGORY_DEFINITIONS.DOTA then
-                if #Teams < 2 then
-                    coins_to_grant = 0
-                end
-            end
-            if bLeaved then
-                coins_to_grant = 0
-                if Is5v5() then
-                    Rating = SERVER_RATING_WHEN_ABANDONED_GAME_5V5
-                else
-                    Rating = SERVER_RATING_WHEN_ABANDONED_GAME
-                end
-            end
-            local SteamID = PlayerResource:GetSteamAccountID(PlayerID)
-            print("[Server] Granting " .. coins_to_grant .. " coins to PlayerID " .. PlayerID)
-
-            if coins_to_grant > 0 then
-                if SteamID ~= 0 then
-                    self:SendRequest(
-                        SERVER_URL .. "update_balance",
-                        { SteamID = SteamID, amount = coins_to_grant },
-                        function(err, body)
-                            if err or not (body and body.success) then
-                                print("[Quests] Failed to grant reward to player " .. PlayerID)
-                                return
-                            end
-                            
-                            print("[Quests] Granted " .. coins_to_grant .. " coins to player " .. PlayerID)
-                            if Store and Store.FetchPlayerData then
-                                Store:FetchPlayerData(PlayerID)
-                            end
-                        end
-                    )
-                end
-            end
-            
-            local PlayerData = {
-                rating = Rating,
-                heroname = HeroName,
-                kills = Kills,
-                deaths = Deaths,
-                assists = Assists,
-                win = bWin,
-                leaved = bLeaved
-            }
-            CustomNetTables:SetTableValue('players', "player_"..PlayerID.."_end_game_rating", {rating = Rating})
-            CustomNetTables:SetTableValue('players', "player_"..PlayerID.."_end_game_coins", {coins = coins_to_grant})
-            self:SendRequest(SERVER_URL.."game_ended", {SteamID=SteamID, MatchID = MatchID, Category = CurrentCategory, PlayerData=PlayerData}, nil, true)
-        end
-    end
+  if IsInToolsMode() or GameRules:IsCheatMode() then
     OvervodkaGameMode:FinalizeGameEnd(VictoryTeam)
+    return
+  end
+
+  if self.bGameEnded then return end
+  self.bGameEnded = true
+
+  local shouldSave = (Teams ~= nil)
+  local category = GetCurrentCategory()
+
+  if category == GAME_CATEGORY_DEFINITIONS.NONE then
+    shouldSave = false
+  elseif category == GAME_CATEGORY_DEFINITIONS.SOLO then
+    if not Teams or #Teams < 3 then shouldSave = false end
+  elseif category == GAME_CATEGORY_DEFINITIONS.DUO or category == GAME_CATEGORY_DEFINITIONS.DOTA then
+    if not Teams or #Teams < 2 then shouldSave = false end
+  end
+
+  if Is5v5() then
+    local ValidPlayers = OvervodkaGameMode:GetValidTeamPlayers() or {}
+    local fullTeams = 0
+    for _, list in pairs(ValidPlayers) do
+      if type(list) == "table" and #list >= 3 then
+        fullTeams = fullTeams + 1
+      end
+    end
+    if fullTeams < 2 then
+      shouldSave = false
+    end
+  end
+
+  if shouldSave then
+    print("[Server] Saving data to server!")
+    local MatchID = tostring(GameRules:Script_GetMatchID())
+
+    local CountNotLeaved = 0
+    for PlayerID, _ in pairs(self.Players or {}) do
+      if PlayerResource:IsValidPlayerID(PlayerID) and
+         PlayerResource:GetConnectionState(PlayerID) ~= DOTA_CONNECTION_STATE_ABANDONED then
+        CountNotLeaved = CountNotLeaved + 1
+      end
+    end
+
+    for PlayerID, PlayerInfo in pairs(self.Players or {}) do
+      if PlayerResource:IsValidPlayerID(PlayerID) then
+        local Hero    = PlayerResource:GetSelectedHeroEntity(PlayerID)
+        local HeroName= (Hero and not Hero:IsNull()) and Hero:GetUnitName() or ""
+        local Kills   = PlayerResource:GetKills(PlayerID) or 0
+        local Deaths  = PlayerResource:GetDeaths(PlayerID) or 0
+        local Assists = PlayerResource:GetAssists(PlayerID) or 0
+        local SteamID = PlayerResource:GetSteamAccountID(PlayerID) or 0
+
+        local Rating  = self:CalculateRating(PlayerID, Teams, VictoryTeam) or 0
+        local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
+
+        if PlayerInfo and PlayerInfo.doubled then
+          Rating = Rating * 2
+        end
+        if CountNotLeaved <= 4 then
+          Rating = Rating / 2
+        end
+        if bLeaved then
+          if Is5v5() then
+            Rating = SERVER_RATING_WHEN_ABANDONED_GAME_5V5
+          else
+            Rating = SERVER_RATING_WHEN_ABANDONED_GAME
+          end
+        end
+
+        local bWin = (Is5v5() and (VictoryTeam == PlayerResource:GetTeam(PlayerID))) or (Rating >= 45)
+
+        local coins_to_grant = 0
+        if not bLeaved then
+          local enoughTeams =
+            (category == GAME_CATEGORY_DEFINITIONS.SOLO and #Teams >= 3) or
+            ((category == GAME_CATEGORY_DEFINITIONS.DUO or category == GAME_CATEGORY_DEFINITIONS.DOTA) and #Teams >= 2)
+          if enoughTeams then
+            coins_to_grant = RandomInt(5, 10)
+          end
+        end
+
+        CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_end_game_rating", { rating = Rating })
+        CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_end_game_coins",  { coins  = coins_to_grant })
+
+        if coins_to_grant > 0 and SteamID ~= 0 then
+          self:SendRequest(
+            SERVER_URL .. "update_balance",
+            { SteamID = SteamID, amount = coins_to_grant },
+            function(err, body)
+              if not err and body and body.success and Store and Store.FetchPlayerData then
+                Store:FetchPlayerData(PlayerID)
+              end
+            end
+          )
+        end
+
+        if SteamID ~= 0 then
+          local PlayerData = {
+            rating  = Rating,
+            heroname= HeroName,
+            kills   = Kills,
+            deaths  = Deaths,
+            assists = Assists,
+            win     = bWin,
+            leaved  = bLeaved
+          }
+          self:SendRequest(
+            SERVER_URL.."game_ended",
+            { SteamID = SteamID, MatchID = MatchID, Category = category, PlayerData = PlayerData },
+            nil, true
+          )
+        end
+      end
+    end
+  end
+
+  Timers:CreateTimer(0.03, function()
+    OvervodkaGameMode:FinalizeGameEnd(VictoryTeam)
+  end)
 end
+
+
 
 function Server:CalculateRating(PlayerID, Teams, VictoryTeam)
     local PlayerTeam = PlayerResource:GetTeam(PlayerID)

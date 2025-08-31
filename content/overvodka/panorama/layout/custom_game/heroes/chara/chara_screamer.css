@@ -1,0 +1,12 @@
+.CharaScreamer
+{
+	width: 100%;
+	height: 100%;
+	overflow: clip;
+}
+
+#CharaScreamerPanel
+{
+	width: 100%;
+	height: 100%;
+}

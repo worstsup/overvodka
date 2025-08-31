@@ -2,7 +2,6 @@ LinkLuaModifier( "modifier_ebanko_q", "heroes/ebanko/ebanko_q.lua", LUA_MODIFIER
 LinkLuaModifier( "modifier_ebanko_q_slow", "heroes/ebanko/ebanko_q.lua", LUA_MODIFIER_MOTION_NONE )
 
 ebanko_q = class({})
-k = 0
 
 function ebanko_q:Precache(context)
 	PrecacheResource( "particle", "particles/econ/items/crystal_maiden/ti7_immortal_shoulder/cm_ti7_immortal_frostbite.vpcf", context )
@@ -26,13 +25,13 @@ function ebanko_q:OnSpellStart()
 		FIND_ANY_ORDER,
 		false
 	)
+	local k = caster._ebanko_q_sound_index or 0
 	if (k % 2 == 0) then
 		EmitSoundOn("zima_holoda", caster)
-	end
-	if (k % 2 == 1) then
+	else
 		EmitSoundOn("ebanul_moroz", caster)
 	end
-	k = k + 1
+	caster._ebanko_q_sound_index = k + 1
 	for _,unit in pairs(targets) do
 		unit:AddNewModifier(caster, self, "modifier_ebanko_q", {duration = duration})
 	end

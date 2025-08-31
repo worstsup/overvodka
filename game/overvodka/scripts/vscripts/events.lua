@@ -162,6 +162,10 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if dave then
 				dave:SetLevel(1)
 			end
+			local chara = spawnedUnit:FindAbilityByName("chara_f")
+			if chara then
+				chara:SetLevel(1)
+			end
 			if GetMapName() == "overvodka_5x5" then
 				if spawnedUnit:GetUnitName() == "npc_dota_hero_pudge" then
 					spawnedUnit:SwapAbilities("kachok_abstention","kachok_abstention_dota", false, true)
@@ -194,6 +198,22 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 				cigarette:SetLocalOrigin(Vector(1, -1, 0))
 				cigarette:SetLocalAngles(0, 0, 0)
 		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_templar_assassin" then
+			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_items/magicstick.vmdl"})
+			sword:FollowEntity(spawnedUnit, true)
+			sword:SetParent(spawnedUnit, "attach_sword")
+			sword:SetLocalOrigin(Vector(0, 0, 0))
+			sword:SetLocalAngles(0, 0, 0)
+			sword:SetModelScale(0.5)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_spectre" then
+			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/chara/knife.vmdl"})
+			sword:FollowEntity(spawnedUnit, true)
+			sword:SetParent(spawnedUnit, "attach_sword")
+			sword:SetLocalOrigin(Vector(0, 0, 0))
+			sword:SetLocalAngles(0, 0, 0)
+			sword:SetModelScale(1.0)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_juggernaut" and golovach_spawned == 0 then
 			spawnedUnit:FindAbilityByName("golovach_innate"):StartCooldown(spawnedUnit:FindAbilityByName("golovach_innate"):GetCooldown(1))
 			golovach_spawned = golovach_spawned + 1
@@ -211,8 +231,24 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 				ParticleManager:SetParticleControlEnt( particleSpawn, PATTACH_ABSORIGIN, spawnedUnit, PATTACH_ABSORIGIN, "attach_origin", spawnedUnit:GetAbsOrigin(), true )
 			end
 		end
+	else
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_templar_assassin" then
+			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_items/magicstick.vmdl"})
+			sword:FollowEntity(spawnedUnit, true)
+			sword:SetParent(spawnedUnit, "attach_sword")
+			sword:SetLocalOrigin(Vector(0, 0, 0))
+			sword:SetLocalAngles(0, 0, 0)
+			sword:SetModelScale(0.5)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_spectre" then
+			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/chara/knife.vmdl"})
+			sword:FollowEntity(spawnedUnit, true)
+			sword:SetParent(spawnedUnit, "attach_sword")
+			sword:SetLocalOrigin(Vector(0, 0, 0))
+			sword:SetLocalAngles(0, 0, 0)
+			sword:SetModelScale(1.0)
+		end
 	end
-	
 end
 ---------------------------------------------------------
 -- dota_on_hero_finish_spawn

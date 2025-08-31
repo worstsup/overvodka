@@ -5,44 +5,42 @@ function macan_innate:GetIntrinsicModifierName()
 	return "modifier_macan_innate"
 end
 
+macan_innate.music_heroes = {
+	npc_dota_hero_invoker = true,
+	npc_dota_hero_ogre_magi = true,
+	npc_dota_hero_terrorblade = true,
+	npc_dota_hero_ursa = true,
+	npc_dota_hero_rattletrap = true,
+	npc_dota_hero_kunkka = true,
+	npc_dota_hero_necrolyte = true,
+	npc_dota_hero_antimage = true,
+	npc_dota_hero_weaver = true,
+	npc_dota_hero_omniknight = true,
+	npc_dota_hero_ringmaster = true,
+}
+
+
 modifier_macan_innate = class({})
 
-function modifier_macan_innate:IsHidden()
-	return true
-end
-function modifier_macan_innate:IsPurgable()
-	return false
-end
+function modifier_macan_innate:IsHidden() return true end
+function modifier_macan_innate:IsPurgable() return false end
 
 function modifier_macan_innate:OnCreated( kv )
-	self.crit_chance = self:GetAbility():GetSpecialValueFor( "crit_chance" )
 	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "crit_bonus" )
-end
-
-function modifier_macan_innate:OnRefresh( kv )
-	self.crit_chance = self:GetAbility():GetSpecialValueFor( "crit_chance" )
-	self.crit_bonus = self:GetAbility():GetSpecialValueFor( "crit_bonus" )
-end
-
-function modifier_macan_innate:OnDestroy( kv )
 end
 
 function modifier_macan_innate:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 	}
-
-	return funcs
 end
 
 function modifier_macan_innate:GetModifierPreAttack_CriticalStrike( params )
 	if IsServer() and (not self:GetParent():PassivesDisabled()) then
-		if self:RollChance( self.crit_chance ) then
-			if params.target:GetUnitName() == "npc_dota_hero_invoker" or params.target:GetUnitName() == "npc_dota_hero_ogre_magi" or params.target:GetUnitName() == "npc_dota_hero_terrorblade" or params.target:GetUnitName() == "npc_dota_hero_ursa" or params.target:GetUnitName() == "npc_dota_hero_rattletrap" or params.target:GetUnitName() == "npc_dota_hero_kunkka" or params.target:GetUnitName() == "npc_dota_hero_necrolyte" or params.target:GetUnitName() == "npc_dota_hero_antimage" then
-				self.record = params.record
-				return self.crit_bonus
-			end
+		if macan_innate.music_heroes[params.target:GetUnitName()] then
+			self.record = params.record
+			return self.crit_bonus
 		end
 	end
 end
@@ -56,16 +54,8 @@ function modifier_macan_innate:GetModifierProcAttack_Feedback( params )
 	end
 end
 
-function modifier_macan_innate:RollChance( chance )
-	local rand = math.random()
-	if rand<chance/100 then
-		return true
-	end
-	return false
-end
-
 function modifier_macan_innate:PlayEffects( target )
-	local particle_cast = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+	local particle_cast = "particles/macan_innate.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
@@ -73,9 +63,9 @@ function modifier_macan_innate:PlayEffects( target )
 		target,
 		PATTACH_POINT_FOLLOW,
 		"attach_hitloc",
-		target:GetOrigin(),
+		target:GetAbsOrigin(),
 		true
 	)
-	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetOrigin()-target:GetOrigin()):Normalized() )
+	ParticleManager:SetParticleControlForward( effect_cast, 1, (self:GetParent():GetAbsOrigin()-target:GetAbsOrigin()):Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

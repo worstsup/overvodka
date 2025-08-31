@@ -584,7 +584,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"DependentOnAbility"			"kachok_big_tasty"
-		"MaxLevel"						"4"			
+		"MaxLevel"						"4"
 		"Innate"						"1"
 		"IsBreakable"					"0"
 
@@ -869,21 +869,7 @@
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_silencer.vsndevts"
-			"particle"	"particles/units/heroes/hero_silencer/silencer_glaives_of_wisdom.vpcf"
-		}
-		"AbilityType"					"ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityDuration"				"0.0"
-		"AbilityCastRange"				"0"
-		"AbilityManaCost"				"0"
-		"AbilityDamage"					"0"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityValues"
 		{
 				"steal_range"		"0"
@@ -1054,7 +1040,6 @@
 	{
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/eldzhey/eldzhey_shard"
-   		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     	"AbilityTextureName"            "galim"
     	"MaxLevel"						"1"
@@ -1193,7 +1178,6 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/shkolnik/shkolnik_peremena"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"shkolota"
 		"AbilityCooldown"				"32 30 28 26"
@@ -1252,9 +1236,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/shkolnik/shkolnik_w"
 		"AbilityTextureName"            "dvaa"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -1639,7 +1620,6 @@
         "BaseClass"                                     "ability_lua"
         "ScriptFile"                                    "heroes/chef/chef_d"
         "AbilityTextureName"							"chef_d"
-		"AbilityType"									"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				                "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"			                "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				                "SPELL_IMMUNITY_ENEMIES_NO"
@@ -3689,7 +3669,7 @@
 				"bol"
 				{
 					"value"	"0"
-					"special_bonus_facet_axe_call_out"			"+1"
+					"special_bonus_facet_macan_r"	"+1"
 				}
 		}
 	}
@@ -3881,17 +3861,11 @@
 		"MaxLevel"						"1"
 		"RequiredLevel"					"-1"
 		"Innate"						"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
-			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_mechanical.vpcf"
-		}
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityValues"
 		{
-				"crit_chance"				"100"
 				"crit_bonus"				"140"
 		}
 	}
@@ -7318,10 +7292,8 @@
 		"FightRecapLevel"				"2"
 		"MaxLevel"						"3"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"80 70 60"
@@ -7329,20 +7301,15 @@
 		"AbilityValues"
 		{
 				"bonus_attack_speed"			"550"
-				"focusfire_damage_reduction"
+				"damage_reduction"
 				{
 					"value"	"-30 -20 -10"
 					"special_bonus_unique_cheater_5" "+10"
 				}
-				"AbilityDuration"
-				{
-					"value"	"5.0 5.5 6.0"
-				}
-				"focusfire_duration_tooltip"
+				"duration"
 				{
 					"value"	"5 5.5 6.0"
 				}
-				"focusfire_fire_on_the_move"	"1"
 		}
 	}
 	//=================================================================================================================
@@ -8638,12 +8605,6 @@
 		"AbilityManaCost"				"75 115 165 205"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastRange"				"900"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_arc_warden/arc_warden_magnetic_cast.vpcf"
-			"particle"	"particles/papich_w.vpcf"
-			"soundfile"	"soundevents/papich_w.vsndevts"
-		}
 		"AbilityValues"
 		{
 				"radius"
@@ -13704,7 +13665,7 @@
 		{
 			"agi_to_ms"
 			{
-				"value"	"0.8"
+				"value"	"0.6"
 				"special_bonus_unique_flash_8"	"+0.4"
 			}
 		}
@@ -13911,6 +13872,936 @@
 					"special_bonus_unique_flash_3"	"+10"
 				}
 				"after_cooldown"	"0.8"
+		}
+	}
+	//===================================================================================================================
+	//													FRISK
+	//===================================================================================================================
+	"special_bonus_unique_frisk_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_frisk_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Казуал (врожденная)
+	//=================================================================================================================
+	"frisk_innate"
+	{
+		
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/frisk/frisk_innate"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"DependentOnAbility"			"frisk_ultimate"
+		"MaxLevel"						"4"
+		"Innate"						"1"
+		"IsBreakable"					"1"
+		"AbilityTextureName"			"frisk_innate"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCooldown"				"7"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"0.25 0.35 0.45 0.55"
+				"special_bonus_unique_frisk_5"	"+0.15"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Предмет
+	//=================================================================================================================
+	"frisk_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/frisk/frisk_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityTextureName"			"sasavot_q"
+		"AbilityCastPoint"				"0.25"
+		"AbilityManaCost"				"60 80 100 120"
+		"AbilityCastRange"				"200 300 400 500"
+		"AbilityCooldown"				"25 24 23 22"
+		"HasScepterUpgrade"				"1"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"4.25 4.5 4.75 5.0"
+				"special_bonus_unique_frisk_1"	"+1.0"
+			}
+
+			"tea_regen"			"150"
+			"tea_ms"			"16 20 24 28"
+
+			"legendary_regen"	"120 170 220 270"
+			"legendary_damage"	"45"
+
+			"noodles_heal_min"	"50"
+			"noodles_heal_max"	"300 350 400 450"
+
+			"cowboy_armor"		"6 9 12 15"
+			"cowboy_as"			"25 45 65 85"
+
+			"pan_heal_amp"		"20 30 40 50"
+
+			"temmie_chance"		"2 4 6 8"
+			"temmie_armor"		"20"
+			"temmie_hp"			"200 400 600 800"
+
+			"medallion_chance"	"1 2 3 4"
+			"medallion_resist"	"50"
+
+			"knife_chance"		"1 2 3 4"
+			"knife_damage"		"99"
+
+			"pie_chance"		"3 6 9 12"
+			"pie_heal_pct"		"15"
+
+			"special_scepter"	"2"
+		}
+	}
+	//=================================================================================================================
+	// Действие
+	//=================================================================================================================
+	"frisk_w"
+	{
+		"BaseClass"						        "ability_lua"
+		"ScriptFile"					        "heroes/frisk/frisk_w"
+		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			        "vihor_q"
+		"HasScepterUpgrade"						"1"
+		"AbilityValues"
+		{
+			"AbilityCooldown"
+			{
+				"value"	"10 9 8 7"
+				"special_bonus_scepter"	"-4"
+			}
+			"scepter_upg"	"4"
+		}
+	}
+	//=================================================================================================================
+	// Решимость
+	//=================================================================================================================
+	"frisk_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/frisk/frisk_e"
+		"AbilityTextureName"			"frisk_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"28 27 26 24"
+		"AbilityManaCost"				"120 130 140 150"
+		"AbilityCastRange"				"800"
+		"AbilityValues"
+		{
+			"radius"
+			{
+				"value"	"450 500 550 600"
+				"affected_by_aoe_increase"	"1"
+			}
+			"duration"	"2.8 3.2 3.6 4.0"
+			"status_resist"	"20 25 30 35"
+			"heal"
+			{
+				"value"	"120 180 240 300"
+				"special_bonus_unique_frisk_2"	"+100"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Надежды и мечты
+	//=================================================================================================================
+	"frisk_d"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/frisk/frisk_d"
+		"AbilityTextureName"			"frisk_d"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"				"0.25"
+		"AbilityManaCost"				"150 225 300"
+		"AbilityCastRange"				"800"
+		"AbilityCooldown"				"90 85 80"
+		"DependentOnAbility"			"frisk_ultimate"
+		"AbilityValues"
+		{
+			"hp_loss_pct"		"50"
+			"heal_from_hp_loss"	"50 60 70"
+			"duration"			"20"
+			"barrier_duration"	"10"
+			"barrier_hp"
+			{
+				"value"	"150 300 450"
+				"special_bonus_unique_frisk_8"	"+450"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Сохранение
+	//=================================================================================================================
+	"frisk_ultimate"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/frisk/frisk_ultimate"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityType"				"ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"        "frisk_r"
+
+		"AbilityManaCost"           "150 75 0"
+		"AbilityCooldown"           "60 45 30"
+
+		"AbilityValues"
+		{
+			"evasion_per_stack"	"2"
+			"evasion_max"		"60"
+			"buff_duration"
+			{
+				"value"	"0"
+				"special_bonus_unique_frisk_7" 	"+3"
+			}
+			"pulse_radius"
+			{
+				"value"	"0"
+				"special_bonus_facet_frisk_post_genocide"	"+350"
+				"RequiresFacet"	"frisk_post_genocide"
+			}
+			"pulse_base_damage"
+			{
+				"value"	"0 0 0"
+				"special_bonus_facet_frisk_post_genocide"	"+150 +250 +350"
+				"RequiresFacet"	"frisk_post_genocide"
+			}
+			"pulse_int_mult"
+			{
+				"value"	"0"
+				"special_bonus_facet_frisk_post_genocide" "+150"
+				"RequiresFacet"	"frisk_post_genocide"
+			}
+			"pulse_slow_pct"
+			{
+				"value"	"0"
+				"special_bonus_facet_frisk_post_genocide" "-25 -30 -35"
+				"RequiresFacet"	"frisk_post_genocide"
+			}
+			"pulse_slow_duration"
+			{
+				"value"	"0.0"
+				"special_bonus_facet_frisk_post_genocide" "+2.0"
+				"RequiresFacet"	"frisk_post_genocide"
+			}
+		}
+	}
+	"frisk_save_destroy"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/frisk/frisk_ultimate"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"        "frisk_r"
+		"MaxLevel"                  "1"
+		"AbilityCooldown"           "1"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"0.5"
+		"AbilityManaCost"           "0"
+	}
+	//=================================================================================================================
+	// Флирт
+	//=================================================================================================================
+	"frisk_q_alt"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/frisk/frisk_q_alt"
+		"AbilityTextureName"        "invincible_q"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"      "SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+		"AbilityCastRange"          "400 500 550 600"
+		"AbilityCooldown"           "26 25 24 22"
+		"AbilityManaCost"           "60 80 100 120"
+		"HasShardUpgrade"			"1"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityValues"
+		{
+			"damage"
+			{
+				"value"	"100 120 140 160"
+				"special_bonus_unique_frisk_3"	"+75"
+			}
+			"int_damage"			"75"
+			"interval"              "0.5"
+			"duration"              "1.4 1.7 2.0 2.3"
+			"movespeed_bonus_pct"   "30"
+			"shard_radius"			"300"
+		}
+	}
+	//=================================================================================================================
+	// Надоедливый пёс
+	//=================================================================================================================
+	"frisk_e_alt"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/frisk/frisk_e_alt"
+		"AbilityTextureName"			"frisk_e_alt"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.35"
+		"AbilityCooldown"				"24 23 22 21"
+		"AbilityManaCost"				"70 90 110 130"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityValues"
+		{
+				"blast_speed"			"1000"
+				"blast_slow"			"-18 -22 -26 -30"
+				"blast_dot_duration"	"5.5 6.0 6.5 7.0"
+				"damage"
+				{
+					"value"	"25 40 55 70"
+				}
+				"bonus_attack_speed"
+				{
+					"value"	"20 40 60 80"
+					"special_bonus_unique_frisk_6"	"+50"
+				}
+				"interval"	"0.4"
+				"as_duration"	"1.0"
+		}
+	}
+	//=================================================================================================================
+	// Воодушевить
+	//=================================================================================================================
+	"frisk_r_alt"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/frisk/frisk_r_alt"
+		"AbilityTextureName"        "invincible_e"
+
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"SpellDispellableType"      "SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastRange"          "700"
+		"AbilityCooldown"           "55 50 45 40"
+		"AbilityManaCost"           "110 130 150 170"
+		"AbilityCastPoint"			"0.25"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"5"
+				"special_bonus_unique_frisk_4"	"+1"
+			}
+			"magic_resist_pct"      "60"
+
+			"bonus_str"             "7 14 21 28"
+			"bonus_hpregen"         "8 12 16 20"
+			"bonus_per_effect"      "3 4 5 6"
+		}
+	}
+	"dazzle_nothl_boon"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"1"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"12"							
+			}
+		}
+	}
+	//===================================================================================================================
+	//													CHARA
+	//===================================================================================================================
+	"special_bonus_unique_chara_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_chara_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Но никто не пришёл (врожденная)
+	//=================================================================================================================
+	"viper_predator"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_INNATE_UI"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"MaxLevel"						"1"
+		"Innate"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"damage_base"				
+			{
+				"value"					"0.15"
+			}
+			"damage_per_level"			"0.05"
+			"total_damage_per_missing_health"
+			{
+				"dynamic_value"			"true"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Глубокий разрез
+	//=================================================================================================================
+	"chara_q"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/chara/chara_q"
+		"AbilityTextureName"        "bloodseeker_bloodrage"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"      "SPELL_DISPELLABLE_YES"
+		"AbilityCastRange"          "299"
+		"AbilityCooldown"           "23 22 21 20"
+		"AbilityManaCost"           "60 80 100 120"
+		"AbilityCastPoint"			"0.3"
+		"HasScepterUpgrade"			"1"
+		"AbilityValues"
+		{
+			"attack_damage_pct"      	"59"
+			"damage"                 	"60 120 180 240"
+			"bleed_dps"
+			{
+				"value"					"30 60 90 120"
+				"special_bonus_unique_chara_6"	"+80"
+			}
+			"bleed_duration"         	"2.4 3.0 3.6 4.2"
+			"bleed_interval"         	"0.5"
+			"bleed_chance_attack"    	"4 9 14 19"
+			"bleed_chance_active"    	"14 19 24 29"
+			"scepter_repeat_threshold1" "90"
+			"scepter_repeat_threshold2" "80"
+			"scepter_repeat_attack_pct" "29"
+			"scepter_repeat_flat_pct"   "59"
+			"scepter_repeat_delay" 		"0.3"
+			"hp_loss_armor"
+			{
+				"value"	"0"
+				"special_bonus_facet_chara_q_armor"	"+9"
+				"RequiresFacet"		"chara_q_armor"
+			}
+			"armor_decrease"
+			{
+				"value"	"0"
+				"special_bonus_facet_chara_q_armor"	"+1"
+				"RequiresFacet"		"chara_q_armor"
+			}
+			"armor_decrease_tooltip"
+			{
+				"value"	"0"
+				"special_bonus_facet_chara_q_armor"	"+0.99"
+				"RequiresFacet"		"chara_q_armor"
+			}
+			"armor_duration"
+			{
+				"value"	"0"
+				"special_bonus_facet_chara_q_armor"	"+6.99"
+				"RequiresFacet"		"chara_q_armor"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Ударная волна
+	//=================================================================================================================
+	"chara_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/chara/chara_w"
+		"AbilityTextureName"			"evelone_w"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityManaCost"				"80 100 120 140"
+		"AbilityCastRange"				"699 799 899 999"
+		"AbilityCastPoint"				"0.3"
+		"AbilityValues"
+		{
+			"AbilityCooldown"
+			{
+				"value"	"25 23 21 19"
+				"special_bonus_unique_chara_4" "-4"
+			}
+			"range"		"699 799 899 999"
+			"damage"	"100 200 300 400"
+			"radius"	"300"
+			"miss_chance"
+			{
+				"value"	"15 20 25 30"
+				"special_bonus_unique_chara_1" "+10"
+			}
+			"duration"	"2.5 3.0 3.5 4.0"
+			"more_waves"
+			{
+				"value"	"0"
+				"special_bonus_facet_chara_more_waves"	"+1"
+			}
+			"angle"	"45"
+		}
+	}
+	//=================================================================================================================
+	// Страшная гримаса
+	//=================================================================================================================
+	"chara_e"
+	{
+		"BaseClass"						        "ability_lua"
+		"ScriptFile"					        "heroes/chara/chara_e"
+		"AbilityUnitTargetTeam"		            "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"		            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"			            "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_YES"
+        "AbilityUnitDamageType"			        "DAMAGE_TYPE_PURE"
+		"AbilityTextureName"			        "dogon"
+		"AbilityCooldown"						"27 26 25 24"
+		"AbilityManaCost"						"70 90 110 130"
+        "AbilityValues"
+        {
+			"AbilityCastRange"
+			{
+				"value"				"399 499 599 699"
+				"special_bonus_unique_chara_2"	"+100"
+			}
+            "ms_bonus"              "50"
+            "duration"              "3"
+			"after_duration"
+			{
+				"value"				"0.5"
+				"special_bonus_unique_chara_3" "+0.5"
+			}
+            "damage"                "60 90 120 150"
+			"interval"				"0.25"
+			"fear_slow_pct"			"-50"
+        }
+	}
+	//=================================================================================================================
+	// Любитель ножей
+	//=================================================================================================================
+	"chara_d"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/chara/chara_d"
+		"AbilityTextureName"        "phantom_assassin_coup_de_grace"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"      "SPELL_DISPELLABLE_NO"
+		"AbilityType"				"ABILITY_TYPE_ULTIMATE"
+		"AbilityCooldown"           "49 39 29"
+		"AbilityManaCost"           "100 130 160"
+		"AbilityCastRange"			"799 899 999"
+		"HasShardUpgrade"			"1"
+		"AbilityCastPoint"			"0.5"
+		"DependentOnAbility"		"chara_ultimate"
+		"AbilityValues"
+		{
+			"damage_base"			 "69"
+			"damage"         		 "6.99"
+			"exhaust_duration"       "1.9"
+			"knife_distance"         "799 899 999"
+			"knife_count"            "19 29 39"
+			"knife_width"            "72"
+			"knife_speed"            "1000"
+			"shard_chance"			 "19"
+			"shard_bonus_damage"	 "100"
+			"double"
+			{
+				"value"	"0"
+				"special_bonus_unique_chara_7"	"+1"
+			}
+			"double_delay"
+			{
+				"value"	"0.0"
+				"special_bonus_unique_chara_7"	"+0.25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Путь Геноцида
+	//=================================================================================================================
+	"chara_f"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/chara/chara_f"
+		"MaxLevel"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"IsBreakable"					"0"
+		"AbilityTextureName"			"sans_innate"
+		"AbilityValues"
+		{
+			"movespeed_gain"	"1"
+			"agi_gain"			"1"
+			"as_gain"			"1"
+			"max_gain"			"50"
+			"mult"
+			{
+				"value"	"1.5"
+				"special_bonus_unique_chara_5" "+0.5"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Безумие
+	//=================================================================================================================
+	"chara_ultimate"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/chara/chara_ultimate"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"            "tasty"
+		"AbilityCooldown"               "120 110 100"
+		"AbilityManaCost"               "100 150 200"
+		"AbilityCastPoint"				"1.0"
+		"AbilityValues"
+		{
+			"duration"
+			{
+				"value"	"15"
+				"special_bonus_unique_chara_8"	"+5"
+			}
+			"lifesteal_pct"	"20 30 40"
+			"bat"			"1.2 1.1 1.0"
+			"mult"
+			{
+				"value"	"1.5"
+				"special_bonus_unique_chara_5" "+0.5"
+			}
+		}
+	}
+	//===================================================================================================================
+	//											ДОКТОР БЫКОВ
+	//===================================================================================================================
+	"special_bonus_unique_bikov_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_bikov_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Игорь
+	//=================================================================================================================
+	"bikov_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/bikov/bikov_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"bikov_q"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"28 27 26 25"
+		"AbilityManaCost"				"100 115 130 145"
+		"AbilityValues"
+		{
+			"duration"		
+			{
+				"value"					"6"
+				"special_bonus_unique_bikov_4"	"+2"
+			}
+			"radius"
+			{
+				"value"	"425 450 475 500"
+				"affected_by_aoe_increase"	"1"
+			}
+			"push_distance"   	"200 225 250 275"
+			"interval"
+			{
+				"value"	"1.4"
+				"special_bonus_unique_bikov_7"	"-0.5"
+			}
+			"damage"			"50 100 150 200"
+			"hp_regen"			"30 60 90 120"
+			"mana_regen"		"10 20 30 40"
+			"hit_destroy"		"3 3 4 4"
+			"bonus_attack_speed"
+			{
+				"value"	"0"
+				"special_bonus_facet_bikov_igor"	"+15 +30 +45 +60"
+			}
+			"gold"				"50"
+			"xp"				"100"
+		}
+	}
+	//=================================================================================================================
+	// Ночное Дежурство
+	//=================================================================================================================
+	"bikov_w"
+	{
+		"BaseClass"               "ability_lua"
+		"ScriptFile"              "heroes/bikov/bikov_w"
+		"AbilityTextureName"      "bikov_w"
+		"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+		"AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"    "SPELL_DISPELLABLE_NO"
+		"SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"        "450 500 550 600"
+		"AbilityCastPoint"        "0.25"
+		"AbilityCooldown"         "22 20 18 16"
+		"AbilityManaCost"         "140 160 180 200"
+
+		"AbilityValues"
+		{
+			"prison_duration"           "2.0 2.5 3.0 3.5"
+			"damage"
+			{
+				"value"	"100 175 250 325"
+				"special_bonus_unique_bikov_1"	"+75"
+			}
+			"radius"
+			{
+				"value"	"0"
+				"special_bonus_unique_bikov_8" "+400" 
+			}
+
+			"fatigue_duration"          "4.0 5.0 6.0 7.0"
+			"fatigue_moveslow_pct"      "20 22 24 26"
+			"fatigue_attackspeed"       "15 30 45 60"
+
+			"both_teams"
+			{
+				"value" "0"
+				"special_bonus_unique_bikov_5" "+1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Эво Как / Фуфуфу
+	//=================================================================================================================
+	"bikov_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/bikov/bikov_e"
+		"AbilityTextureName"			"bikov_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityManaCost"				"30 40 50 60"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+				"AbilityCooldown"
+				{
+					"value"	"8.5 8.0 7.5 7.0"
+					"special_bonus_scepter"	"-5"
+				}
+				"damage"		"30 50 70 90"
+				"duration"		"2.4 2.6 2.8 3.0"
+				"magic_resist"	"-15 -20 -25 -30"
+				"status_resist"	"-15 -20 -25 -30"
+				"bonus_range"
+				{
+					"value"	"100 150 200 250"
+					"special_bonus_unique_bikov_6"	"+100"
+				}
+				"scepter_cd"	"5"
+				"int_damage"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+50"
+				}
+				"bounce_enabled"
+				{
+					"value" "0"
+					"special_bonus_facet_bikov_e_bounce" "+1"
+					"RequiresFacet" "bikov_e_bounce"
+				}
+				"bounce_pct"
+				{
+					"value" "0"
+					"special_bonus_facet_bikov_e_bounce" "+30"
+					"RequiresFacet" "bikov_e_bounce"
+				}
+				"search_radius"
+				{
+					"value" "0"
+					"special_bonus_facet_bikov_e_bounce" "+400"
+					"RequiresFacet" "bikov_e_bounce"
+				}
+		}
+	}
+	//=================================================================================================================
+	// Зав. терапевтическим отделением
+	//=================================================================================================================
+	"bikov_innate"
+	{
+		"BaseClass"          "ability_lua"
+		"ScriptFile"         "heroes/bikov/bikov_innate"
+		"AbilityBehavior"    "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"           "1"
+		"Innate"			 "1"
+		"AbilityCastRange"	 "900"
+		"AbilityValues"
+		{
+			"bonus_hp_regen"    "5"
+			"bonus_as"          "15"
+			"bonus_status_res"  "10"
 		}
 	}
 }

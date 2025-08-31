@@ -25,6 +25,7 @@ function macan_q:OnSpellStart()
 	)
 
 end
+
 function macan_q:OnProjectileHit_ExtraData( target, location, ExtraData )
 	local effect_cast = ExtraData.effect
 	ParticleManager:DestroyParticle( effect_cast, false )
@@ -40,19 +41,12 @@ function macan_q:OnProjectileHit_ExtraData( target, location, ExtraData )
 	ApplyDamage(damageTable)
 end
 
+
 modifier_macan_q = class({})
 
-function modifier_macan_q:IsHidden()
-	return false
-end
-
-function modifier_macan_q:IsDebuff()
-	return false
-end
-
-function modifier_macan_q:IsPurgable()
-	return false
-end
+function modifier_macan_q:IsHidden() return false end
+function modifier_macan_q:IsDebuff() return false end
+function modifier_macan_q:IsPurgable() return false end
 
 function modifier_macan_q:OnCreated( kv )
 	self.parent = self:GetParent()
@@ -89,11 +83,11 @@ function modifier_macan_q:OnCreated( kv )
 		"modifier_macan_q_attack",
 		{ duration = kv.duration }
 	)
-	if self:GetCaster():HasModifier("modifier_macan_r") and self.bol == 1 then 
+	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) and self.bol == 1 then 
 		self.base_facing_new = Vector(0,1,0)
-		self.rotate_radius_new = self:GetAbility():GetSpecialValueFor( "roaming_radius" ) + 500
+		self.rotate_radius_new = self:GetAbility():GetSpecialValueFor( "roaming_radius" )
 		self.rotate_delta_new = 360/self.revolution * self.interval
-		self.relative_pos_new = Vector( -self.rotate_radius_new, 0, 100 )
+		self.relative_pos_new = Vector( self.rotate_radius_new, 0, 100 )
 		self.position_new = self.parent:GetOrigin() + self.relative_pos_new
 		self.rotation_new = 0
 		self.facing_new = self.base_facing_new
@@ -136,7 +130,7 @@ function modifier_macan_q:OnRefresh( kv )
 		"modifier_macan_q_attack",
 		{ duration = kv.duration }
 	)
-	if self:GetCaster():HasModifier("modifier_macan_r") and self.bol == 1 then 
+	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) and self.bol == 1 then 
 		self.rotate_delta_new = 360/self.revolution * self.interval
 		self.rotate_radius_new = self:GetAbility():GetSpecialValueFor( "roaming_radius" ) + 500
 		self.relative_pos_new = Vector( -self.rotate_radius_new, 0, 100 )
@@ -147,9 +141,6 @@ function modifier_macan_q:OnRefresh( kv )
 			{ duration = kv.duration }
 		)
 	end
-end
-
-function modifier_macan_q:OnRemoved()
 end
 
 function modifier_macan_q:OnDestroy()
@@ -165,7 +156,7 @@ function modifier_macan_q:OnIntervalThink()
 	self.facing = RotatePosition( self.zero, QAngle( 0, -self.rotation, 0 ), self.base_facing )
 	self.wisp:SetOrigin( self.position )
 	self.wisp:SetForwardVector( self.facing )
-	if self:GetCaster():HasModifier("modifier_macan_r") then 
+	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) then 
 		self.rotation_new = self.rotation_new + self.rotate_delta_new
 		self.position_new = RotatePosition( origin, QAngle( 0, -self.rotation_new, 0 ), origin + self.relative_pos_new )
 		self.facing_new = RotatePosition( self.zero, QAngle( 0, -self.rotation_new, 0 ), self.base_facing_new )
@@ -198,29 +189,19 @@ function modifier_macan_q:PlayEffects()
 		true
 	)
 	ParticleManager:SetParticleControl( effect_cast, 3, Vector( self.rotate_radius, self.rotate_radius, self.rotate_radius ) )
-	if self:GetCaster():HasModifier("modifier_macan_r") then 
+	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) then 
 		ParticleManager:SetParticleControl( effect_cast, 3, Vector( self.rotate_radius_new, self.rotate_radius_new, self.rotate_radius_new ) )
 	end
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
+
 modifier_macan_q_attack = class({})
 
-function modifier_macan_q_attack:IsHidden()
-	return false
-end
-
-function modifier_macan_q_attack:IsDebuff()
-	return false
-end
-
-function modifier_macan_q_attack:IsStunDebuff()
-	return false
-end
-
-function modifier_macan_q_attack:IsPurgable()
-	return false
-end
+function modifier_macan_q_attack:IsHidden() return false end
+function modifier_macan_q_attack:IsDebuff() return false end
+function modifier_macan_q_attack:IsStunDebuff() return false end
+function modifier_macan_q_attack:IsPurgable() return false end
 
 function modifier_macan_q_attack:OnCreated( kv )
 	local damage = self:GetAbility():GetSpecialValueFor( "attack_damage" )
@@ -255,9 +236,6 @@ end
 
 function modifier_macan_q_attack:OnRemoved()
 	StopSoundOn( music, self:GetParent() )
-end
-
-function modifier_macan_q_attack:OnDestroy()
 end
 
 function modifier_macan_q_attack:OnIntervalThink()
@@ -307,7 +285,9 @@ function modifier_macan_q_attack:PlayEffects()
 		false,
 		false
 	)
-	EmitSoundOn( music, self:GetParent() )
+	if not self:GetCaster():HasModifier("modifier_macan_r") and not self:GetCaster():HasModifier("modifier_macan_r_charge") then
+		EmitSoundOn( music, self:GetParent() )
+	end
 end
 
 function modifier_macan_q_attack:PlayEffects1( target, speed )
@@ -337,15 +317,11 @@ function modifier_macan_q_attack:PlayEffects1( target, speed )
 	return effect_cast
 end
 
+
 modifier_wisp_ambient = class({})
 
-function modifier_wisp_ambient:IsHidden()
-	return false
-end
-
-function modifier_wisp_ambient:IsPurgable()
-	return false
-end
+function modifier_wisp_ambient:IsHidden() return false end
+function modifier_wisp_ambient:IsPurgable() return false end
 
 function modifier_wisp_ambient:OnCreated( kv )
 	if not IsServer() then return end
@@ -359,22 +335,10 @@ function modifier_wisp_ambient:OnCreated( kv )
 
 end
 
-function modifier_wisp_ambient:OnRefresh( kv )
-	
-end
-
-function modifier_wisp_ambient:OnRemoved()
-end
-
-function modifier_wisp_ambient:OnDestroy()
-end
-
 function modifier_wisp_ambient:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
 	}
-
-	return funcs
 end
 
 function modifier_wisp_ambient:GetModifierBaseAttack_BonusDamage()
@@ -385,15 +349,13 @@ function modifier_wisp_ambient:GetModifierBaseAttack_BonusDamage()
 end
 
 function modifier_wisp_ambient:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_INVULNERABLE] = true,
 		[MODIFIER_STATE_UNSELECTABLE] = true,
 		[MODIFIER_STATE_UNTARGETABLE] = true,
 		[MODIFIER_STATE_OUT_OF_GAME] = true,
 		[MODIFIER_STATE_NO_HEALTH_BAR] = true,
 	}
-
-	return state
 end
 
 function modifier_wisp_ambient:PlayEffects()

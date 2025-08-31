@@ -96,7 +96,7 @@
 	"npc_dota_hero_tiny"				"0"
 	"npc_dota_hero_treant"				"0"	
 	"npc_dota_hero_venomancer"			"0"
-	"npc_dota_hero_winter_wyvern"		"0"
+	"npc_dota_hero_winter_wyvern"		"1"
 	
 	"npc_dota_hero_bristleback"			"0"
 	"npc_dota_hero_storm_spirit"		"1"
@@ -111,7 +111,7 @@
 	"npc_dota_hero_riki"				"1"
 	"npc_dota_hero_rubick"				"1"
 	"npc_dota_hero_techies"				"0"
-	"npc_dota_hero_templar_assassin"	"0"
+	"npc_dota_hero_templar_assassin"	"1"
 	"npc_dota_hero_zuus"				"1"
 	"npc_dota_hero_ringmaster"			"1"
 
@@ -127,7 +127,7 @@
 	"npc_dota_hero_meepo"				"1"
 	"npc_dota_hero_monkey_king"			"0"
 	"npc_dota_hero_phantom_lancer"		"1"
-	"npc_dota_hero_spectre"				"0"
+	"npc_dota_hero_spectre"				"1"
 	"npc_dota_hero_undying"				"0"
 	"npc_dota_hero_ursa"				"1"	
 	"npc_dota_hero_hoodwink"			"0"

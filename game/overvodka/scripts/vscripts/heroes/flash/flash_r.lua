@@ -288,11 +288,10 @@ function modifier_flash_r_debuff:IsPurgable() return false end
 function modifier_flash_r_debuff:OnCreated()
 	if not IsServer() then return end
 	local ability = self:GetAbility()
-    if ability and not ability:IsNull() then
-        self.max_speed = ability:GetSpecialValueFor("max_speed")
-    else
-        self.max_speed = 550
-    end
+    if not ability or ability:IsNull() then
+		self:Destroy()
+		return
+	end
 	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 	ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
 	ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
@@ -314,7 +313,11 @@ function modifier_flash_r_debuff:DeclareFunctions()
 end
 
 function modifier_flash_r_debuff:GetModifierMoveSpeed_Limit()
-    return self.max_speed or 550
+	if not self:GetAbility() or self:GetAbility():IsNull() then
+		self:Destroy()
+		return 550
+	end
+    return self:GetAbility():GetSpecialValueFor("max_speed")
 end
 
 modifier_flash_r_thinker = class({})

@@ -135,6 +135,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 			"npc_dota_hero_warlock": "file://{images}/heroes/npc_dota_hero_king.png",
 			"npc_dota_hero_spirit_breaker": "file://{images}/heroes/npc_dota_hero_flash.png",
+			"npc_dota_hero_winter_wyvern": "file://{images}/heroes/npc_dota_hero_bikov.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -200,6 +201,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"ringmaster": "file://{images}/heroes/npc_dota_hero_mazellov.png",
 			"warlock": "file://{images}/heroes/npc_dota_hero_king.png",
 			"spirit_breaker": "file://{images}/heroes/npc_dota_hero_flash.png",
+			"winter_wyvern": "file://{images}/heroes/npc_dota_hero_bikov.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

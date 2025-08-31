@@ -38,6 +38,8 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_primal_beast",
     "npc_dota_hero_warlock",
     "npc_dota_hero_spirit_breaker",
+    "npc_dota_hero_templar_assassin",
+    "npc_dota_hero_spectre",
 ]
 
 function FixModelScene(){

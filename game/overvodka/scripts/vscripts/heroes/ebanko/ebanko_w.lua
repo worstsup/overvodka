@@ -52,9 +52,8 @@ function ebanko_w:OnSpellStart()
 		target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = duration })
 		target:AddNewModifier(caster, self, "modifier_ebanko_w_slow", { duration = slow_duration * (1 - target:GetStatusResistance()) })
 	end
-	ApplyDamage( damageTable )
 	self:PlayEffects( target )
-	self:PlayEffects1( target )
+	ApplyDamage( damageTable )
 
 end
 
@@ -63,11 +62,6 @@ function ebanko_w:PlayEffects( target )
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	EmitSoundOn( "fof", target )
 	EmitSoundOn( "ya_tebya", target )
-end
-
-function ebanko_w:PlayEffects1( target )
-	local particle_cast = "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 end
 
 modifier_ebanko_w_slow = class({})
@@ -92,6 +86,14 @@ function modifier_ebanko_w_slow:DeclareFunctions()
 end
 function modifier_ebanko_w_slow:GetModifierMoveSpeedBonus_Percentage()
 	return -self.slow
+end
+
+function modifier_ebanko_w_slow:GetEffectName()
+	return "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
+end
+
+function modifier_ebanko_w_slow:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end
 
 modifier_ebanko_w = class({})
@@ -183,9 +185,8 @@ function modifier_ebanko_w:Bash(target)
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
 		target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_ebanko_w_slow", { duration = self.slow_duration * (1 - target:GetStatusResistance()) })
 	end
-	ApplyDamage( damageTable )
 	self:PlayEffects( target )
-	self:PlayEffects1( target )
+	ApplyDamage( damageTable )
 end
 
 function modifier_ebanko_w:PlayEffects( target )
@@ -193,9 +194,4 @@ function modifier_ebanko_w:PlayEffects( target )
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	EmitSoundOn( "fof", target )
 	EmitSoundOn( "ya_tebya", target )
-end
-
-function modifier_ebanko_w:PlayEffects1( target )
-	local particle_cast = "particles/units/heroes/hero_tusk/tusk_walruspunch_tgt.vpcf"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 end

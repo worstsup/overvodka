@@ -50,7 +50,9 @@ function modifier_leaping_stride:PerformJump(direction, speed)
     local jump_duration = 0.65
     local start_pos = parent:GetAbsOrigin()
     local end_pos = start_pos + direction * jump_distance
-    parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+    if not parent:HasModifier("modifier_cheater_rage") then
+        parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+    end
     parent:AddNewModifier(
         parent,
         self:GetAbility(),

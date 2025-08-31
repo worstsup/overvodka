@@ -1,5 +1,7 @@
-const CustomSkillPanelButton = $("#CustomSkillPanelButton")
-const CustomSkillPanel = $("#CustomSkillPanel")
+"use strict";
+
+const CustomSkillPanelButton = $("#CustomSkillPanelButton");
+const CustomSkillPanel = $("#CustomSkillPanel");
 const COMBOS = [
     "dvoreckov_www","dvoreckov_qqq","dvoreckov_eee",
     "dvoreckov_qww","dvoreckov_qqw","dvoreckov_wee",
@@ -15,37 +17,67 @@ function GetDotaHud() {
 }
 function SafeDeleteAsync(p){
     if(p && p.IsValid()){
-        p.DeleteAsync(0)
+        p.DeleteAsync(0);
     }
 }
 function Start(){
-    let LocalPlayer = Players.GetLocalPlayer()
-    let HeroName = Players.GetPlayerSelectedHero( LocalPlayer )
+    let LocalPlayer = Players.GetLocalPlayer();
+    let HeroName = Players.GetPlayerSelectedHero( LocalPlayer );
     if (HeroName == "npc_dota_hero_invoker"){
-        let DotaHud = GetDotaHud()
-        let Abilities = DotaHud.FindChildTraverse("abilities")
-        CreatePanel(Abilities)
+        let DotaHud = GetDotaHud();
+        let Abilities = DotaHud.FindChildTraverse("abilities");
+        CreatePanel(Abilities);
     }
 }
+function AttachButtonToHud() {
+    const DotaHud = GetDotaHud();
+    const Abilities = DotaHud.FindChildTraverse("abilities");
+    if (!Abilities) {
+        $.Schedule(0.1, AttachButtonToHud);
+        return;
+    }
+
+    const ultimatePanel = Abilities.FindChildTraverse("Ability5");
+    if (!ultimatePanel) {
+        $.Schedule(0.1, AttachButtonToHud);
+        return;
+    }
+
+    CustomSkillPanelButton.SetParent(ultimatePanel);
+}
+
+function UpdateButtonState() {
+    const queryUnit = Players.GetLocalPlayerPortraitUnit();
+    const unitName = Entities.GetUnitName(queryUnit);
+
+    if (unitName === "npc_dota_hero_invoker") {
+        AttachButtonToHud();
+        CustomSkillPanelButton.RemoveClass("Hidden");
+    } else {
+        CustomSkillPanelButton.AddClass("Hidden");
+        CustomSkillPanel.RemoveClass("Show"); 
+    }
+}
+
 function CreatePanel(Abilities){
-    let ability6 = Abilities.FindChildTraverse("Ability5")
+    let ability6 = Abilities.FindChildTraverse("Ability5");
     if (ability6 == undefined){
         $.Schedule(0.1, function(){
-            CreatePanel(Abilities)
+            CreatePanel(Abilities);
         })
     }
     else{
         let findPanel = ability6.FindChildTraverse("CustomSkillPanelButton");
         if (findPanel) {
-            SafeDeleteAsync(findPanel)
+            SafeDeleteAsync(findPanel);
         }
-        CustomSkillPanelButton.RemoveClass("Hidden")
+        CustomSkillPanelButton.RemoveClass("Hidden");
         CustomSkillPanelButton.SetParent(ability6);
     }
 }
 function TogglePanel(){
     Game.EmitSound("UUI_SOUNDS.ButtonPress");
-    CustomSkillPanel.SetHasClass("Show", !CustomSkillPanel.BHasClass("Show"))
+    CustomSkillPanel.SetHasClass("Show", !CustomSkillPanel.BHasClass("Show"));
     const isHidden = CustomSkillPanel.BHasClass("Hidden");
     if (isHidden) {
         for (let i=0; i<10; i++) {
@@ -86,17 +118,13 @@ function TogglePanel(){
         }
       }
 }
-function UpdatePanel(){
-    let queryUnit = Players.GetLocalPlayerPortraitUnit();
-    let UnitName = Entities.GetUnitName(queryUnit);
-    if (UnitName == "npc_dota_hero_invoker"){
-        CustomSkillPanelButton.RemoveClass("Hidden")
-    }
-    else{
-         CustomSkillPanelButton.AddClass("Hidden")
-    }
-}
-Start();
-GameEvents.Subscribe('dota_player_update_query_unit', UpdatePanel);
-GameEvents.Subscribe('dota_player_update_hero_selection', UpdatePanel);
-GameEvents.Subscribe('dota_player_update_selected_unit', UpdatePanel);
+
+
+(function() {
+    CustomSkillPanelButton.AddClass("Hidden");
+    CustomSkillPanel.RemoveClass("Show");
+    GameEvents.Subscribe('dota_player_update_query_unit', UpdateButtonState);
+    GameEvents.Subscribe('dota_player_update_hero_selection', UpdateButtonState);
+    GameEvents.Subscribe('dota_player_update_selected_unit', UpdateButtonState);
+    UpdateButtonState();
+})();

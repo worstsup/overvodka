@@ -388,6 +388,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_flash"
     }
+    if (HeroName == "npc_dota_hero_winter_wyvern")
+    {
+        OvervodkaName = "npc_dota_hero_bikov"
+    }
     return OvervodkaName	
 }
 
@@ -504,3 +508,45 @@ function GetUniqueSceneHeroName(hero_name)
     }
     return hero_name
 }
+
+function getScreamerRoot() {
+    // пытаемся найти локально
+    var p = $("#CharaScreamerPanel");
+    if (p) return p;
+
+    // если скрипт исполняется не в том layout’е — найдём через HUD
+    var hud = $.GetContextPanel();
+    while (hud && hud.id !== "Hud") hud = hud.GetParent();
+    return hud ? hud.FindChildTraverse("CharaScreamerPanel") : null;
+}
+
+function CharaScreamerTrue() {
+    var root = getScreamerRoot();
+    if (!root) { $.Msg("CharaScreamer panel not found"); return; }
+    root.RemoveAndDeleteChildren();
+
+    $.CreatePanel(
+        "MoviePanel",
+        root,
+        "screamer_chara",
+        {
+            style: "width:100%;height:100%;align:center center;opacity:0.50;",
+            class: "chara_screamer_webm",
+            src: "file://{resources}/videos/chara_screamer.webm",
+            repeat: "true",
+            hittest: "false",
+            autoplay: "onload"
+        }
+    );
+}
+
+function CharaScreamerFalse() {
+    var root = getScreamerRoot();
+    if (!root) return; // панель ещё не создана — просто выходим
+    root.RemoveAndDeleteChildren();
+}
+
+(function () {
+    GameEvents.Subscribe( "CharaScreamerTrue", CharaScreamerTrue );
+    GameEvents.Subscribe( "CharaScreamerFalse", CharaScreamerFalse );
+})();

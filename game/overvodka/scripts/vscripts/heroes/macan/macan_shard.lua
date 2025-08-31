@@ -1,5 +1,4 @@
 macan_shard = class({})
-LinkLuaModifier( "modifier_macan_shard", "heroes/macan/macan_shard", LUA_MODIFIER_MOTION_NONE )
 
 function macan_shard:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts", context )
@@ -13,63 +12,34 @@ function macan_shard:OnSpellStart()
 	local outgoing = self:GetSpecialValueFor( "illusion_outgoing_damage" )
 	local incoming = self:GetSpecialValueFor( "illusion_incoming_damage" )
 	local distance = 300
-	local illusions = CreateIllusions(
-		caster,
-		caster,
-		{
-			outgoing_damage = outgoing,
-			incoming_damage = incoming,
-			duration = duration,
-		},
-		8,
-		distance,
-		false,
-		true
-	)
-	EmitSoundOn( "sdvg", self:GetCaster() )
-	local illusion = illusions[1]
-	self:SetContextThink( DoUniqueString( "macan_shard" ),function()
-		illusion:AddNewModifier(
+	local illusions = {}
+	local num_illusions = 8
+	local angle_step = 360 / num_illusions
+	local radius = distance
+
+	for i = 1, num_illusions do
+		local angle = math.rad(angle_step * (i - 1))
+		local spawn_pos = caster:GetAbsOrigin() + Vector(math.cos(angle), math.sin(angle), 0) * radius
+
+		local illusion = CreateIllusions(
 			caster,
-			self,
-			"modifier_macan_shard",
-			{ duration = duration }
-		)
-		local sound_cast = "Hero_Terrorblade.ConjureImage"
-		EmitSoundOn( sound_cast, illusion )
-	end, FrameTime()*2)
-end
+			caster,
+			{
+				outgoing_damage = outgoing,
+				incoming_damage = incoming,
+				duration = duration,
+			},
+			1,
+			0,
+			false,
+			true
+		)[1]
 
-local MODIFIER_PRIORITY_MONKAGIGA_EXTEME_HYPER_ULTRA_REINFORCED_V9 = 10001
-
-modifier_macan_shard = class({})
-
-function modifier_macan_shard:IsHidden()
-	return true
-end
-function modifier_macan_shard:IsDebuff()
-	return false
-end
-function modifier_macan_shard:IsStunDebuff()
-	return false
-end
-function modifier_macan_shard:IsPurgable()
-	return false
-end
-function modifier_macan_shard:OnCreated( kv )
-	if not IsServer() then return end
-end
-function modifier_macan_shard:OnRefresh( kv )
-end
-function modifier_macan_shard:OnRemoved()
-end
-function modifier_macan_shard:OnDestroy()
-end
-
-function modifier_macan_shard:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
-end
-
-function modifier_macan_shard:StatusEffectPriority()
-	return MODIFIER_PRIORITY_MONKAGIGA_EXTEME_HYPER_ULTRA_REINFORCED_V9
+		if illusion then
+			FindClearSpaceForUnit(illusion, spawn_pos, false)
+			table.insert(illusions, illusion)
+		end
+	end
+	EmitSoundOn( "sdvg", self:GetCaster() )
+	EmitSoundOn( "Hero_Terrorblade.ConjureImage", self:GetCaster() )
 end

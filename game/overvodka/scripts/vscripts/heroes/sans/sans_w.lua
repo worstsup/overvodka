@@ -115,7 +115,9 @@ function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 					EmitSoundOn("sans_damage", unit)
 					ApplyDamage(damageTable)
 				end
-				damagedUnits[unit:entindex()] = true
+				if unit and not unit:IsNull() then
+					damagedUnits[unit:entindex()] = true
+				end
 			end
 		end
 		self:PlayEffects( start_pos, end_pos, duration )
