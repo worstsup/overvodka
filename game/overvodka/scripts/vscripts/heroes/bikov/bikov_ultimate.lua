@@ -163,6 +163,7 @@ function modifier_bikov_r_hold:CheckState()
     return {
         [MODIFIER_STATE_STUNNED]           = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_PROVIDES_VISION] = true,
     }
 end
 

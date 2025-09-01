@@ -6227,7 +6227,7 @@
 		"Innate"						"1"
 		"AbilityValues"
 		{
-			"bat_tooltip"				"1.5"
+			"bat_tooltip"				"1.6"
 		}
 	}
 
@@ -13874,6 +13874,7 @@
 				"after_cooldown"	"0.8"
 		}
 	}
+	
 	//===================================================================================================================
 	//													FRISK
 	//===================================================================================================================
@@ -13926,7 +13927,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
-	// Казуал (врожденная)
+	// Неуязвимость (врожденная)
 	//=================================================================================================================
 	"frisk_innate"
 	{
@@ -13961,7 +13962,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilityTextureName"			"sasavot_q"
+		"AbilityTextureName"			"frisk_q"
 		"AbilityCastPoint"				"0.25"
 		"AbilityManaCost"				"60 80 100 120"
 		"AbilityCastRange"				"200 300 400 500"
@@ -14015,7 +14016,7 @@
 		"ScriptFile"					        "heroes/frisk/frisk_w"
 		"AbilityBehavior"				        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_NO"
-		"AbilityTextureName"			        "vihor_q"
+		"AbilityTextureName"			        "frisk_w"
 		"HasScepterUpgrade"						"1"
 		"AbilityValues"
 		{
@@ -14164,7 +14165,7 @@
 	{
 		"BaseClass"                 "ability_lua"
 		"ScriptFile"                "heroes/frisk/frisk_q_alt"
-		"AbilityTextureName"        "invincible_q"
+		"AbilityTextureName"        "frisk_q_alt"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -14236,7 +14237,7 @@
 	{
 		"BaseClass"                 "ability_lua"
 		"ScriptFile"                "heroes/frisk/frisk_r_alt"
-		"AbilityTextureName"        "invincible_e"
+		"AbilityTextureName"        "frisk_r_alt"
 
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -14275,6 +14276,7 @@
 			}
 		}
 	}
+
 	//===================================================================================================================
 	//													CHARA
 	//===================================================================================================================
@@ -14358,7 +14360,7 @@
 	{
 		"BaseClass"                 "ability_lua"
 		"ScriptFile"                "heroes/chara/chara_q"
-		"AbilityTextureName"        "bloodseeker_bloodrage"
+		"AbilityTextureName"        "chara_q"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -14421,7 +14423,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/chara/chara_w"
-		"AbilityTextureName"			"evelone_w"
+		"AbilityTextureName"			"chara_w"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
@@ -14466,7 +14468,7 @@
 		"SpellImmunityType"			            "SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"	  	            "SPELL_DISPELLABLE_YES"
         "AbilityUnitDamageType"			        "DAMAGE_TYPE_PURE"
-		"AbilityTextureName"			        "dogon"
+		"AbilityTextureName"			        "chara_e"
 		"AbilityCooldown"						"27 26 25 24"
 		"AbilityManaCost"						"70 90 110 130"
         "AbilityValues"
@@ -14495,7 +14497,7 @@
 	{
 		"BaseClass"                 "ability_lua"
 		"ScriptFile"                "heroes/chara/chara_d"
-		"AbilityTextureName"        "phantom_assassin_coup_de_grace"
+		"AbilityTextureName"        "chara_d"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
@@ -14541,7 +14543,7 @@
 		"MaxLevel"						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"IsBreakable"					"0"
-		"AbilityTextureName"			"sans_innate"
+		"AbilityTextureName"			"chara_f"
 		"AbilityValues"
 		{
 			"movespeed_gain"	"1"
@@ -14566,7 +14568,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
-		"AbilityTextureName"            "tasty"
+		"AbilityTextureName"            "chara_ultimate"
 		"AbilityCooldown"               "120 110 100"
 		"AbilityManaCost"               "100 150 200"
 		"AbilityCastPoint"				"1.0"
@@ -14586,6 +14588,7 @@
 			}
 		}
 	}
+	
 	//===================================================================================================================
 	//											ДОКТОР БЫКОВ
 	//===================================================================================================================

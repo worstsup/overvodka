@@ -148,6 +148,7 @@ end
 function modifier_macan_r:CheckState()
 	local state = {
 		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
+		[MODIFIER_STATE_MAGIC_IMMUNE] = true,
 	}
 	return state
 end

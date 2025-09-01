@@ -18,9 +18,9 @@ end
 function frisk_w:GetAbilityTextureName()
     local caster = self:GetCaster()
     if caster and caster:HasModifier("modifier_frisk_w") then
-        return "vihor_w"
+        return "frisk_w_alt"
     end
-    return "vihor_q"
+    return "frisk_w"
 end
 
 function frisk_w:SyncAltLevels()
