@@ -78,11 +78,11 @@ function chara_w:OnProjectileHit_ExtraData(target, pos, data)
     local duration = self:GetSpecialValueFor("duration")
     target:AddNewModifier(self:GetCaster(), self, "modifier_chara_w",
         { duration = duration * (1 - target:GetStatusResistance()) })
-
+    local damage = self:GetSpecialValueFor("damage") + self:GetSpecialValueFor("damage_pct") * target:GetMaxHealth() * 0.01
     ApplyDamage({
         victim = target,
         attacker = self:GetCaster(),
-        damage = self:GetSpecialValueFor("damage"),
+        damage = damage,
         damage_type = self:GetAbilityDamageType(),
         ability = self,
     })

@@ -313,6 +313,20 @@ function dvoreckov_r:ProcsMagicStick()
 	return false
 end
 
+function dvoreckov_r:GetCooldown(level)
+    local caster = self:GetCaster()
+    local base = self.BaseClass.GetCooldown(self, level)
+    if caster and caster:HasScepter() then
+        local scepter_cd = self:GetSpecialValueFor("cooldown_scepter") or base
+        base = scepter_cd
+    end
+    local per_lvl = self:GetSpecialValueFor("cd_reduction_per_level") or 0
+    local hero_lvl = caster and caster:GetLevel() or 1
+    local cd = base - per_lvl * math.max(0, hero_lvl - 1)
+    return math.max(0.2, cd)
+end
+
+
 orb_manager = {}
 ability_manager = {}
 

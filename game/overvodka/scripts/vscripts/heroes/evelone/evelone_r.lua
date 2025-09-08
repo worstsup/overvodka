@@ -60,6 +60,7 @@ function modifier_evelone_r:RemoveOnDeath() return false end
 
 function modifier_evelone_r:OnCreated()
     if IsServer() then
+        self.saved_time = GameRules:GetTimeOfDay()
         GameRules:SetTimeOfDay(0)
         self:StartIntervalThink(0.5)
         self.particle = ParticleManager:CreateParticle("particles/evelone_r_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
@@ -91,7 +92,9 @@ end
 
 function modifier_evelone_r:OnDestroy()
     if IsServer() then
-        GameRules:SetTimeOfDay(0.5)
+        if self.saved_time then
+            GameRules:SetTimeOfDay(self.saved_time)
+        end
         ParticleManager:DestroyParticle(self.particle, false)
         ParticleManager:ReleaseParticleIndex(self.particle)
         ParticleManager:DestroyParticle(self.particle_2, false)

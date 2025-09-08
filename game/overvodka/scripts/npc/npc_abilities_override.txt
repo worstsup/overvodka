@@ -300,6 +300,8 @@
 	}
 	"item_black_king_bar"					"REMOVE"
 	"item_octarine_core"					"REMOVE"
+	"item_heart"							"REMOVE"
+	"item_recipe_heart"						"REMOVE"
 	"item_recipe_basher"					"REMOVE"
 	"item_basher"							"REMOVE"
 	"item_recipe_abyssal_blade"				"REMOVE"

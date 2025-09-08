@@ -73,18 +73,30 @@ function sans_e:OnSpellStart( params )
 	else
 		self.target = self:GetCursorTarget()
 		self.target_origin = self.target:GetAbsOrigin()
-
 		local duration
 		local is_ally = true
 		if self.target:GetTeam() ~= caster:GetTeam() then
 			if self.target:TriggerSpellAbsorb(self) then
 				return nil
 			end
-
+			if caster:HasArcana() then
+				EmitSoundOn("sans_e_up_arcana", caster)
+			else
+				EmitSoundOn("sans_e_up", caster)
+			end
+			local effect_immune = (self.target.IsDebuffImmune and self.target:IsDebuffImmune()) or self.target:IsMagicImmune()
+			if effect_immune then
+				return nil
+			end
 			duration = self:GetSpecialValueFor("enemy_lift_duration") * (1 - self.target:GetStatusResistance())
 			self.target:AddNewModifier(caster, self, "modifier_sans_e_stun", { duration = duration })
 			is_ally = false
 		else
+			if caster:HasArcana() then
+				EmitSoundOn("sans_e_up_arcana", caster)
+			else
+				EmitSoundOn("sans_e_up", caster)
+			end
 			duration = self:GetSpecialValueFor("ally_lift_duration")
 			self.target:AddNewModifier(caster, self, "modifier_sans_e_root", { duration = duration})
 		end
@@ -105,11 +117,6 @@ function sans_e:OnSpellStart( params )
 		ParticleManager:SetParticleControlEnt(self.target_modifier.tele_pfx, 1, self.target, PATTACH_POINT_FOLLOW, "attach_hitloc", self.target:GetAbsOrigin(), true)
 		ParticleManager:SetParticleControl(self.target_modifier.tele_pfx, 2, Vector(duration,0,0))
 		self.target_modifier:AddParticle(self.target_modifier.tele_pfx, false, false, 1, false, false)
-		if caster:HasArcana() then
-			EmitSoundOn("sans_e_up_arcana", caster)
-		else
-			EmitSoundOn("sans_e_up", caster)
-		end
 		self.target_modifier.final_loc = self.target_origin
 		self.target_modifier.changed_target = false
 		caster:AddNewModifier(caster, self, "modifier_sans_e_caster", { duration = duration + FrameTime()})
@@ -188,7 +195,11 @@ function modifier_sans_e:OnCreated( params )
 		local ability = self:GetAbility()
 		self.parent = self:GetParent()
 		if self.parent ~= caster then
-			if self.parent:IsDebuffImmune() or self.parent:IsMagicImmune() then return end
+			local effect_immune = (self.parent.IsDebuffImmune and self.parent:IsDebuffImmune()) or self.parent:IsMagicImmune()
+			if effect_immune then
+				self:Destroy()
+				return
+			end
 		end
 		self.z_height = 0
 		self.duration = params.duration

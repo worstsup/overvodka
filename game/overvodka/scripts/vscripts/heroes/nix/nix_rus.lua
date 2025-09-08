@@ -34,9 +34,6 @@ function modifier_nix_rus:OnCreated()
     self:AddParticle(particle, false, false, -1, false, false)
 end
 
-function modifier_nix_rus:OnRemoved()
-end
-
 function modifier_nix_rus:OnIntervalThink()
 	if IsServer() then
 		if not self:GetParent():IsAlive() then
@@ -62,13 +59,10 @@ function modifier_nix_rus:OnIntervalThink()
 end
 
 function modifier_nix_rus:DeclareFunctions()
-	local funcs = 
-	{
+	return {
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 	}
-
-	return funcs
 end
 
 function modifier_nix_rus:GetModifierModelScale()
@@ -133,12 +127,6 @@ end
 
 function modifier_nix_rus_debuff:OnRefresh( kv )
 	self.lose_strength = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("str_loss") * 0.01
-end
-
-function modifier_nix_rus_debuff:OnRemoved()
-end
-
-function modifier_nix_rus_debuff:OnDestroy()
 end
 
 function modifier_nix_rus_debuff:DeclareFunctions()

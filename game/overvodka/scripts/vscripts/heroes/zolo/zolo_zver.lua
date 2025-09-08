@@ -2,6 +2,15 @@ zolo_zver = class({})
 LinkLuaModifier( "modifier_zolo_zver", "heroes/zolo/zolo_zver", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_disarm", "heroes/zolo/zolo_zver", LUA_MODIFIER_MOTION_NONE )
 
+function zolo_zver:Precache(context)
+	PrecacheResource("particle", "particles/huskar_inner_fire_new.vpcf", context)
+	PrecacheResource("particle", "particles/mars_shield_bash_crit_new.vpcf", context)
+	PrecacheResource("particle", "particles/primal_beast_2022_prestige_onslaught_chargeup_new.vpcf", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_deafening_blast_disarm_debuff.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/zolo_zver.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/zolo_zver_start.vsndevts", context)
+end
+
 function zolo_zver:OnAbilityPhaseStart()
 	self:PlayEffects3()
 end

@@ -653,6 +653,39 @@
 			"01" "item_tiara_of_selemene;item_soul_booster"
 		}
   	}
+	
+	"item_heart_vodka"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/heart_vodka"
+  		"AbilityTextureName"			"heart_vodka"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"ItemCost"						"5200"
+		"ItemShopTags"					"str;regen_health;health_pool;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		"AbilityValues"
+		{
+			"bonus_strength"		"40"
+			"health_regen_pct"		"1.4"
+		}
+	}
+	"item_recipe_heart_vodka"
+	{
+		"BaseClass"				 		"item_datadriven"
+  		"AbilityTextureName"			"recipe"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"ItemCost"						"600"	
+		"ItemShopTags"					""
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_heart_vodka"
+		"ItemRequirements"
+		{
+			"01"						"item_ring_of_tarrasque;item_reaver"
+		}
+	}
+
 	"item_recipe_ebasher"
 	{
 		"BaseClass"						"item_datadriven"
@@ -3121,7 +3154,7 @@
 			"initial_fade_delay"		"0.3"
 			"secondary_fade_delay"		"0.5"
 			"active_movement_speed"		"20"
-			"duration"					"10"
+			"duration"					"9"
 			"bonus_magical_armor"		"25"
 			"barrier_block"				"400"
 			"bonus_armor"			"4"

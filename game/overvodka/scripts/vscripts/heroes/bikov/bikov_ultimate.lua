@@ -31,8 +31,8 @@ function bikov_ultimate:OnSpellStart()
     self._grabbed = target
     self._hold = target:AddNewModifier(caster, self, "modifier_bikov_r_hold", { duration = hold })
     caster:AddNewModifier(caster, self, "modifier_bikov_r_caster", { duration = hold })
-    local windup   = math.max(0.0, self:GetSpecialValueFor("throw_windup") or 0.45)
-    local animRate = self:GetSpecialValueFor("throw_anim_rate") or 1.0
+    local windup   = math.max(0.0, self:GetSpecialValueFor("throw_windup"))
+    local animRate = self:GetSpecialValueFor("throw_anim_rate")
 
     self._windup_timer = Timers:CreateTimer(math.max(0.03, hold - windup), function()
         if not caster:IsChanneling() then return end
@@ -66,7 +66,7 @@ function bikov_ultimate:OnChannelFinish(bInterrupted)
 
     if bInterrupted then
         StopSoundOn("bikov_r", caster)
-        FindClearSpaceForUnit(target, caster:GetAbsOrigin() + caster:GetForwardVector()*80, true)
+        FindClearSpaceForUnit(target, caster:GetAbsOrigin() + caster:GetForwardVector() * 100, true)
         return
     end
     self:ThrowTarget(caster, target)
@@ -89,7 +89,6 @@ function bikov_ultimate:ThrowTarget(caster, target)
         knockback_duration = dur,
         knockback_distance = distance,
         knockback_height   = height,
-        should_stun = 0,
     })
 
     target:AddNewModifier(caster, self, "modifier_bikov_r_throw_timer", {
@@ -122,6 +121,14 @@ function modifier_bikov_r_caster:CheckState()
     return {
         [MODIFIER_STATE_DEBUFF_IMMUNE] = self:GetParent():HasShard(),
     }
+end
+
+function modifier_bikov_r_caster:GetEffectName()
+    if self:GetParent():HasShard() then
+        return "particles/items_fx/black_king_bar_avatar.vpcf"
+    else
+        return ""
+    end
 end
 
 function modifier_bikov_r_caster:GetModifierDisableTurning() return 1 end

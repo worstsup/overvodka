@@ -80,8 +80,8 @@ function Server:OnGameEnded(Teams, VictoryTeam)
         local SteamID = PlayerResource:GetSteamAccountID(PlayerID) or 0
 
         local Rating  = self:CalculateRating(PlayerID, Teams, VictoryTeam) or 0
+        local bWin = (Is5v5() and (VictoryTeam == PlayerResource:GetTeam(PlayerID))) or (Rating >= 45)
         local bLeaved = PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_ABANDONED
-
         if PlayerInfo and PlayerInfo.doubled then
           Rating = Rating * 2
         end
@@ -95,8 +95,6 @@ function Server:OnGameEnded(Teams, VictoryTeam)
             Rating = SERVER_RATING_WHEN_ABANDONED_GAME
           end
         end
-
-        local bWin = (Is5v5() and (VictoryTeam == PlayerResource:GetTeam(PlayerID))) or (Rating >= 45)
 
         local coins_to_grant = 0
         if not bLeaved then

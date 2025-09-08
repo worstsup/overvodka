@@ -69,6 +69,7 @@ function modifier_bikov_q:OnIntervalThink()
     if not ability or ability:IsNull() then self:Destroy() return end
 
     local igor   = self:GetParent()
+    if not igor:IsAlive() then return end
     local caster = self:GetCaster()
     local origin = igor:GetAbsOrigin()
 
@@ -86,15 +87,19 @@ function modifier_bikov_q:OnIntervalThink()
     )
     for _,e in ipairs(enemies) do
         if e and not e:IsNull() and e:IsAlive() then
-            local kb = {
-                knockback_duration = 0.3,
-                duration = 0.3,
-                knockback_distance = self.push_distance,
-                knockback_height = 50,
-                center_x = origin.x, center_y = origin.y, center_z = origin.z,
-            }
-            e:RemoveModifierByName("modifier_knockback")
-            e:AddNewModifier(caster, ability, "modifier_knockback", kb)
+            local held_by_ult = e:HasModifier("modifier_bikov_r_hold") or e:HasModifier("modifier_bikov_r_throw_timer")
+
+            if not held_by_ult then
+                local kb = {
+                    knockback_duration = 0.3,
+                    duration = 0.3,
+                    knockback_distance = self.push_distance,
+                    knockback_height = 50,
+                    center_x = origin.x, center_y = origin.y, center_z = origin.z,
+                }
+                e:RemoveModifierByName("modifier_knockback")
+                e:AddNewModifier(caster, ability, "modifier_knockback", kb)
+            end
             ApplyDamage({
                 victim      = e,
                 attacker    = caster,

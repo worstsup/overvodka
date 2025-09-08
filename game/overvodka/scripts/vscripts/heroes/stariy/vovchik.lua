@@ -21,8 +21,8 @@ function vovchik:OnSpellStart()
 	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
-	local damage = target:GetHealth() * 0.25
-	local heal = target:GetHealth() * 0.25
+	local damage = target:GetHealth() * self:GetSpecialValueFor("dmg") * 0.01
+	local heal = target:GetHealth() * self:GetSpecialValueFor("dmg") * 0.01
 	if target:TriggerSpellAbsorb( self ) then
 		return
 	end

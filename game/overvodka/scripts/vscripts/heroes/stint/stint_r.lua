@@ -144,6 +144,7 @@ function modifier_stint_r_2:IsDebuff()   return false end
 
 function modifier_stint_r_2:OnCreated()
     if not IsServer() then return end
+    self.saved_time = GameRules:GetTimeOfDay()
     GameRules:SetTimeOfDay(0)
     self.interval = self:GetAbility():GetSpecialValueFor("armageddon_interval")
     self.radius = self:GetAbility():GetSpecialValueFor("armageddon_radius")
@@ -168,7 +169,9 @@ end
 
 function modifier_stint_r_2:OnDestroy()
     if not IsServer() then return end
-    GameRules:SetTimeOfDay(0.5)
+    if self.saved_time then
+		GameRules:SetTimeOfDay(self.saved_time)
+	end
 end
 
 modifier_stint_r_3 = class({})

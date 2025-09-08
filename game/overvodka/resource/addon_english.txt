@@ -494,7 +494,7 @@
 		"dota_tooltip_ability_special_bonus_unique_chara_1" "+{s:bonus_miss_chance}% Shockwave miss chance"
 		"dota_tooltip_ability_special_bonus_unique_chara_2" "+{s:bonus_AbilityCastRange} Terrifying Grimace cast range"
 		"dota_tooltip_ability_special_bonus_unique_chara_3" "+{s:bonus_after_duration} Terrifying Grimace fear linger duration"
-		"dota_tooltip_ability_special_bonus_unique_chara_4" "-{s:bonus_AbilityCooldown}s Shockwave cooldown"
+		"dota_tooltip_ability_special_bonus_unique_chara_4" "+{s:bonus_damage_pct}% enemy max health damage from Shockwave"
 		"dota_tooltip_ability_special_bonus_unique_chara_5" "+{s:bonus_mult} Genocide Route bonuses during Madness"
 		"dota_tooltip_ability_special_bonus_unique_chara_6" "+{s:bonus_bleed_dps} Deep Cut Bleed DPS"
 		"dota_tooltip_ability_special_bonus_unique_chara_7" "Knife Lover casts twice"
@@ -1615,11 +1615,11 @@
 		"DOTA_Tooltip_ability_papich_maniac_chance" "%BLEEDING DAMAGE:"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_1" "-{s:bonus_AbilityCooldown} sec. cooldown of DUBAICH"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_2" "+{s:bonus_range} to the range of casting TUPORYLYCH"
-		"DOTA_Tooltip_ability_special_bonus_unique_papich_3" "-{s:bonus_AbilityCooldown} sec. cooldown of NA VKUSNICHAH"
+		"DOTA_Tooltip_ability_special_bonus_unique_papich_3" "ON YUMMY heals {s:bonus_heal_pct}% max health"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_4" "+{s:bonus_duration} sec. to the duration of ADEKVATYCH"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_5" "+{s:bonus_intellect_steal_pct}% to the steal of intelligence from ADEKVATYCH"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_6" "+{s:bonus_outgoing_damage}% to the outgoing damage of MANYAKICH"
-		"DOTA_Tooltip_ability_special_bonus_unique_papich_7" "MANYAKICH can be used on VKUSNICHI"
+		"DOTA_Tooltip_ability_special_bonus_unique_papich_7" "MANYAKICH can be used on ON YUMMY"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_8" "Immunity to effects after arrival with DUBAICH"
 		"DOTA_Tooltip_ability_special_bonus_unique_papich_8_Description" "Lasts {s:bonus_bkb_duration} sec."
 		"DOTA_Tooltip_modifier_papich_bkb" "Immune to status effects"
@@ -2096,9 +2096,10 @@
 		"DOTA_Tooltip_Facet_stariy_e_facet_Description" "The ability YOU slows enemies."
 		"DOTA_Tooltip_Facet_stariy_w_facet" "NONSENSE"
 		"DOTA_Tooltip_Facet_stariy_w_facet_Description" "The ability DELIRIUM restores health."
-		"DOTA_Tooltip_ability_stariy_bred_Facet_stariy_w_facet" "The ability restores %regen%%% of maximum health per second." "DOTA_Tooltip_ability_vovchik" "VOVCHIK"
-		"DOTA_Tooltip_ability_vovchik_Description" "Vovchik steals %dmg_tooltip%%% of the enemy's current health."
-		"DOTA_Tooltip_ability_vovchik_dmg_tooltip" "%DAMAGE FROM CURRENT HEALTH:"
+		"DOTA_Tooltip_ability_stariy_bred_Facet_stariy_w_facet" "The ability restores %regen%%% of maximum health per second."
+		"DOTA_Tooltip_ability_vovchik" "VOVCHIK"
+		"DOTA_Tooltip_ability_vovchik_Description" "Vovchik steals %dmg%%% of the enemy's current health."
+		"DOTA_Tooltip_ability_vovchik_dmg" "%DAMAGE FROM CURRENT HEALTH:"
 		"DOTA_Tooltip_ability_pugna_oblivion_savant" "HUGE EGGS"
 
 		"DOTA_Tooltip_ability_hamster" "HAMSTER TAPPING"
@@ -2430,7 +2431,7 @@
 		"DOTA_Tooltip_ability_dvoreckov_wwe_maxhealth_dmg" "%DAMAGE PER SECOND FROM MAX HEALTH:"
 		"DOTA_Tooltip_ability_dvoreckov_wwe_tooltip_key" "%MANA PER SECOND:"
 		"DOTA_Tooltip_ability_dvoreckov_r" "MIX"
-		"DOTA_Tooltip_ability_dvoreckov_r_Description" "Dvoreckov mixes the selected ingredients to obtain a new ability."
+		"DOTA_Tooltip_ability_dvoreckov_r_Description" "Dvoreckov mixes selected ingredients and gains a new ability.\nCooldown is reduced by %cd_reduction_per_level% sec per hero level."
 		"DOTA_Tooltip_ability_dvoreckov_r_scepter_Description" "Removes the cooldown of the ability."
 		"DOTA_Tooltip_ability_dvoreckov_qqq" "DRINK TEA"
 		"DOTA_Tooltip_ability_dvoreckov_qqq_Description" "Dvoreckov drains the enemy's tea supply. \n <font color='#FFFFFF'> The mana drained per second and the slow are dependent on the level of the REP ability </font>"
@@ -2654,7 +2655,10 @@
 		"DOTA_Item_Build_Mid_Items"				"Magic Build"
 		"DOTA_Item_Build_Late_Items"			"Phys Build"
 		"DOTA_Item_Build_Core_Items"			"Summoner Build"
-		
+
+		"DOTA_Tooltip_ability_item_rocket_launcher" "Flare Rocket"
+		"DOTA_Tooltip_ability_item_rocket_launcher_description" "<h1>Active: Summon Bombardiro</h1>Fires a flare at a location, summoning a Bombardiro Crocodilo that will fly through that location in the target direction."
+
 		"DOTA_Tooltip_ability_shkolnik_r" "SOUNDPAD"
 		"DOTA_Tooltip_ability_shkolnik_r_Description" "Drake picks up the Column, playing one of his random favorite tracks. The ability can be canceled with the cancel key.\nUpgrades with Aghanim's Shard."
 		"DOTA_Tooltip_ability_shkolnik_r_shard_Description" "Denis can turn, and use abilities and items while casting the ability."
@@ -3725,6 +3729,12 @@
 		"dota_tooltip_facet_mazellov_q_description" "If a worker created by the BOX FACTORY ability dies from a hero, he resurrects weakened by 50%."
 
 		"dota_tooltip_ability_mazellov_q_facet_mazellov_q" "If a worker dies from a hero, he resurrects weakened by <b>50%</b>."
+
+		"DOTA_Tooltip_Ability_item_heart_vodka"				"Heart of Tarrasque"
+		"DOTA_Tooltip_Ability_item_recipe_heart_vodka" "Recipe: Heart of Tarrasque"
+		"DOTA_Tooltip_ability_item_heart_vodka_Lore" "The preserved heart of an extinct monster that strengthens the wielder's stamina."
+		"DOTA_Tooltip_ability_item_heart_vodka_bonus_strength" "+$str"
+		"DOTA_Tooltip_ability_item_heart_vodka_health_regen_pct" "%+max health per second"
 	}
 }
 

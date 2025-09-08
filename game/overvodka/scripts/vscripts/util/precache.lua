@@ -262,6 +262,8 @@ PrecacheUtils.models = {
 		"models/chara/knife.vmdl",
 		"models/chara/chara.vmdl",
 		"models/bikov/bikov.vmdl",
+		"models/heroes/terrorblade/terrorblade.vmdl",
+		"models/heroes/rubick/rubick.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -356,14 +358,10 @@ PrecacheUtils.sounds = {
 		"soundevents/sigmastaff.vsndevts",
 		"soundevents/byebye_start.vsndevts",
 		"soundevents/byebye.vsndevts",
-		"soundevents/gunnar.vsndevts",
 		"soundevents/hamster_announce.vsndevts",
 		"soundevents/jump.vsndevts",
 		"soundevents/jump_2.vsndevts",
 		"soundevents/jump_3.vsndevts",
-		"soundevents/zolo_zver.vsndevts",
-		"soundevents/zolo_home.vsndevts",
-		"soundevents/zolo_zver_start.vsndevts",
 		"soundevents/raif.vsndevts",
 		"soundevents/snadom.vsndevts",
 		"soundevents/nizkaya.vsndevts",

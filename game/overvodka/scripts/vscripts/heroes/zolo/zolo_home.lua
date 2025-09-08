@@ -1,5 +1,13 @@
 LinkLuaModifier("modifier_zolo_home", "heroes/zolo/zolo_home", LUA_MODIFIER_MOTION_NONE)
+
 zolo_home = class({})
+
+function zolo_home:Precache(context)
+	PrecacheResource("particle", "particles/econ/events/spring_2021/blink_dagger_spring_2021_start_lvl2.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/spring_2021/blink_dagger_spring_2021_end_lvl2.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/zolo_home.vsndevts", context)
+end
 
 function zolo_home:OnSpellStart()
 	local caster = self:GetCaster()
