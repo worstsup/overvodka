@@ -219,14 +219,8 @@ function modifier_topor:OnIntervalThink()
 	ProjectileManager:CreateLinearProjectile(arrow_projectile_7)
 end
 
-function modifier_topor:OnRemoved()
-	
-end
 function modifier_topor:OnRefresh( kv )
 	self:OnCreated( kv )
-end
-
-function modifier_topor:OnRemoved()
 end
 
 function modifier_topor:OnDestroy()

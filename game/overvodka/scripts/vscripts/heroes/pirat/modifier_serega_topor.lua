@@ -23,10 +23,6 @@ function modifier_serega_topor:OnRefresh( kv )
 	self:SetStackCount( self.slow )
 end
 
-function modifier_serega_topor:OnRemoved()
-end
-function modifier_serega_topor:OnDestroy()
-end
 
 function modifier_serega_topor:AddCustomTransmitterData()
 	local data = {

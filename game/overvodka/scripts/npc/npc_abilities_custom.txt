@@ -6187,14 +6187,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/pirat/serega_sven"
 		"AbilityTextureName"			"serega_sven"
-		"precache"
-		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
-			"soundfile"	"soundevents/serega_sven.vsndevts"
-			"particle"	"particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_ti6.vpcf"
-			"particle"	"particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_hit_ti6.vpcf"
-			"model"		"litvin/models/heroes/lit/sven_new.vmdl"
-		}
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -6242,19 +6234,15 @@
 					"value"	"700 775 850 925"
 					"special_bonus_unique_serega_5" "+200"
 				}
-				"min_blink_range"			"200"
 				"illusion_duration"
 				{
 					"value"	"4.0"
 					"special_bonus_unique_serega_1" "+2"
 				}
             	"illusion_outgoing_damage"          "-80 -75 -70 -65"  
-            	"illusion_outgoing_tooltip"         
-            	{
-            		"value"					"20 25 30 35"
-            	}
+            	"illusion_outgoing_tooltip"         "20 25 30 35"
             	"illusion_incoming_damage"  "250.0"
-            	"illusion_incoming_damage_total_tooltip"            "350.0"
+            	"illusion_incoming_damage_total_tooltip"   "350.0"
             	"radius"
             	{
             		"value"	"500"
@@ -6324,7 +6312,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/pirat/serega_radiance"
 		"AbilityTextureName"			"serega_radik"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
 		"Innate"						"1"
 		"IsBreakable"					"1"
