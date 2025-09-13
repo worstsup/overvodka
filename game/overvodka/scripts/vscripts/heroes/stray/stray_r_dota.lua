@@ -27,7 +27,7 @@ function stray_r_dota:OnSpellStart()
     StopGlobalSound("stray_scepter")
     local duration = self:GetSpecialValueFor('duration')
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_stray_r_dota", {duration = duration})
-    if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
+    if self:GetCaster():HasShard() then
         self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_stray_r_dota_shard", {duration = duration})
     end
 end

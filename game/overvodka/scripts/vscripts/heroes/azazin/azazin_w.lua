@@ -74,17 +74,15 @@ end
 
 modifier_azazin_w = class({})
 
+function modifier_azazin_w:IsHidden() return true end
+function modifier_azazin_w:IsPurgable() return false end
+
 function modifier_azazin_w:OnCreated()
     if not IsServer() then return end
     self.time = 0
     self:StartIntervalThink(0.5)
     self:OnIntervalThink()
 end
-function modifier_azazin_w:IsHidden()
-    return true
-end
-
-function modifier_azazin_w:IsPurgable() return false end
 
 function modifier_azazin_w:CheckState()
     return 
@@ -166,6 +164,9 @@ end
 
 modifier_azazin_w_target = class({})
 
+function modifier_azazin_w_target:IsHidden() return true end
+function modifier_azazin_w_target:IsPurgable() return false end
+
 function modifier_azazin_w_target:OnCreated()
     if not IsServer() then return end
     self.talent = self:GetAbility():GetSpecialValueFor("disarm") == 1
@@ -192,42 +193,29 @@ function modifier_azazin_w_target:OnIntervalThink( kv )
 end
 
 function modifier_azazin_w_target:DeclareFunctions()
-    local decFuncs = 
-    {
+    return {
         MODIFIER_PROPERTY_DISABLE_HEALING
     }
-    return decFuncs
 end
 function modifier_azazin_w_target:CheckState()
-    local state = {
+    return {
         [MODIFIER_STATE_SILENCED] = self.talent
     }
-    return state
 end
 function modifier_azazin_w_target:GetDisableHealing()
     return self:GetAbility():GetSpecialValueFor("disable_healing")
 end
 
-function modifier_azazin_w_target:IsHidden()
-    return true
-end
-
-function modifier_azazin_w_target:IsPurgable()
-    return false
-end
-
-function modifier_azazin_w_target:OnDestroy()
-    if not IsServer() then return end
-end
 
 modifier_azazin_w_root = class({})
+
 function modifier_azazin_w_root:IsHidden() return false end
 function modifier_azazin_w_root:IsPurgable() return true end
+
 function modifier_azazin_w_root:CheckState()
-    local state = {
+    return {
         [MODIFIER_STATE_ROOTED] = true
     }
-    return state
 end
 
 function modifier_azazin_w_root:GetEffectName()

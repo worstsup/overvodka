@@ -59,7 +59,7 @@ function litvin_zhishi_dota:OnSpellStart()
 		"modifier_litvin_enrage",
 		{ duration = buff_dur }
 	)
-	if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
+	if self:GetCaster():HasShard() then
 		self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_litvin_litenergy", { duration = buff_dur } )
 	end
 	self:PlayEffects( origin, direction, point, radius )

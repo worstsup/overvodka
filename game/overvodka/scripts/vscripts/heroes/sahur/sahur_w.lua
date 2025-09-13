@@ -33,7 +33,7 @@ end
 
 function modifier_sahur_w:OnAttackLanded(params)
     if not IsServer() then return end
-    if params.attacker:IsIllusion() and not params.attacker:HasModifier("modifier_item_aghanims_shard") then return end
+    if params.attacker:IsIllusion() and not params.attacker:HasShard() then return end
     local parent = self:GetParent()
     local target = params.target
     local ability = self:GetAbility()
@@ -44,7 +44,7 @@ function modifier_sahur_w:OnAttackLanded(params)
     if target:IsBuilding() then return end
 
     if RandomInt(0, 100) > ability:GetSpecialValueFor("chance") then return end
-    if params.attacker:HasModifier("modifier_item_aghanims_shard") and not params.attacker:IsIllusion() then
+    if params.attacker:HasShard() and not params.attacker:IsIllusion() then
         local illusions = CreateIllusions(
             parent,
             parent,

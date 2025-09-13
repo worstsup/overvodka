@@ -1,16 +1,9 @@
 modifier_generic_lifesteal_lua = class({})
 
-function modifier_generic_lifesteal_lua:IsHidden()
-	return false
-end
-
-function modifier_generic_lifesteal_lua:IsDebuff()
-	return false
-end
-
-function modifier_generic_lifesteal_lua:IsPurgable()
-	return true
-end
+function modifier_generic_lifesteal_lua:IsHidden() return false end
+function modifier_generic_lifesteal_lua:IsDebuff() return false end
+function modifier_generic_lifesteal_lua:IsPurgable() return true end
+ function modifier_generic_lifesteal_lua:ShouldUseOverheadOffset() return true end
  
 function modifier_generic_lifesteal_lua:OnCreated( kv )
 	self.caster = self:GetCaster()
@@ -26,11 +19,10 @@ function modifier_generic_lifesteal_lua:OnRefresh( kv )
 end
 
 function modifier_generic_lifesteal_lua:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
 	}
-	return funcs
 end
 
 function modifier_generic_lifesteal_lua:GetModifierProcAttack_Feedback( params )
@@ -46,10 +38,6 @@ function modifier_generic_lifesteal_lua:OnTakeDamage( params )
 	local heal = params.damage * self.lifesteal
 	self.parent:Heal( heal, self.ability )
 	self:PlayEffects2()
-end
-
-function modifier_generic_lifesteal_lua:ShouldUseOverheadOffset()
-	return true
 end
 
 function modifier_generic_lifesteal_lua:GetStatusEffectName()

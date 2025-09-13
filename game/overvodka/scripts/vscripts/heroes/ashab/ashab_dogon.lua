@@ -67,13 +67,6 @@ function modifier_ashab_dogon:OnCreated( kv )
 	EmitSoundOn( sound_cast, self:GetCaster() )
 end
 
-function modifier_ashab_dogon:OnRefresh( kv )
-	
-end
-
-function modifier_ashab_dogon:OnRemoved()
-end
-
 function modifier_ashab_dogon:OnDestroy()
 	if not IsServer() then return end
 	GridNav:DestroyTreesAroundPoint( self:GetParent():GetOrigin(), self.tree_radius, true )
@@ -251,15 +244,6 @@ function modifier_ashab_dogon_debuff:OnCreated( kv )
 	self:PlayEffects()
 end
 
-function modifier_ashab_dogon_debuff:OnRefresh( kv )
-end
-
-function modifier_ashab_dogon_debuff:OnRemoved()
-end
-
-function modifier_ashab_dogon_debuff:OnDestroy()
-end
-
 function modifier_ashab_dogon_debuff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
@@ -288,12 +272,6 @@ modifier_magresist_ashab = class({})
 
 function modifier_magresist_ashab:IsPurgable()
 	return false
-end
-
-function modifier_magresist_ashab:OnCreated( kv )
-end
-
-function modifier_magresist_ashab:OnRemoved()
 end
 
 function modifier_magresist_ashab:CheckState()

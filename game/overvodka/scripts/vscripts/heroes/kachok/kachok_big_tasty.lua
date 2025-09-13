@@ -11,7 +11,7 @@ function kachok_big_tasty:OnSpellStart()
 
     caster:AddNewModifier(caster, self, "modifier_kachok_big_tasty_transformation", { duration = self:GetSpecialValueFor("transformation_time") })
 
-    if not caster:HasModifier("modifier_item_aghanims_shard") then return end
+    if not caster:HasShard() then return end
 
     local casterMaxHealth = caster:GetMaxHealth()
     local healing = casterMaxHealth * self:GetSpecialValueFor("shard_healing_percent") / 100

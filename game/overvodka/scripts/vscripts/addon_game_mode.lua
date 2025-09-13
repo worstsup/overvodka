@@ -54,7 +54,6 @@ end
 -- Initializer
 ---------------------------------------------------------------------------
 function OvervodkaGameMode:InitGameMode()
-	print( "Overthrow is loaded." )
 	XP_PER_LEVEL_TABLE = {
 	0, -- 1
 	200, -- 2
@@ -307,30 +306,30 @@ function OvervodkaGameMode:InitGameMode()
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( OvervodkaGameMode, "OnNpcGoalReached" ), self )
 	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( OvervodkaGameMode, "OnPlayerDisconnected" ), self )
 	ListenToGameEvent( "hero_selected", Dynamic_Wrap( OvervodkaGameMode, "OnHeroSelected" ), self )
-		Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
-		Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
-		Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
-		Convars:RegisterCommand( "overthrow_force_end_game", function(...) return self:EndGame( DOTA_TEAM_GOODGUYS ) end, "Force the game to end.", FCVAR_CHEAT )
-		Convars:RegisterCommand( "overthrow_team_leaved", function(...) 
-				local Data = {
-					team = 2,
-					last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
-					bonus_gold = self.GoldBonusPerTeam,
-					bonus_xp = self.XpBonusPerTeam,
-					time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
-					missing_teams = self.TEAMS_MISSING
-				}
-				return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
-			end, "Show team leave encounter", FCVAR_CHEAT )
-		Convars:RegisterCommand( "overthrow_chat_wheel_say", function(...) 
-				return CustomGameEventManager:Send_ServerToAllClients("chat_wheel_say_line", {caller_player = 1, item_id = 1})
-			end, "Show team leave encounter", FCVAR_CHEAT )
-		Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
+
+	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_set_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_force_end_game", function(...) return self:EndGame( DOTA_TEAM_GOODGUYS ) end, "Force the game to end.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_team_leaved", function(...) 
+		local Data = {
+			team = 2,
+			last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+			bonus_gold = self.GoldBonusPerTeam,
+			bonus_xp = self.XpBonusPerTeam,
+			time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
+			missing_teams = self.TEAMS_MISSING
+			}
+		return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
+		end, "Show team leave encounter", FCVAR_CHEAT )
+	Convars:RegisterCommand( "overthrow_chat_wheel_say", function(...) 
+		return CustomGameEventManager:Send_ServerToAllClients("chat_wheel_say_line", {caller_player = 1, item_id = 1})
+		end, "Show team leave encounter", FCVAR_CHEAT )
+	Convars:SetInt( "dota_server_side_animation_heroesonly", 0 )
 
 	OvervodkaGameMode:SetUpFountains()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
 
-	-- Spawning monsters
 	spawncamps = {}
 	for i = 1, self.numSpawnCamps do
 		local campname = "camp"..i.."_path_customspawn"
@@ -731,7 +730,7 @@ end
 
 function spawnunits(campname)
 	local spawndata = spawncamps[campname]
-	local NumberToSpawn = spawndata.NumberToSpawn --How many to spawn
+	local NumberToSpawn = spawndata.NumberToSpawn
     local SpawnLocation = Entities:FindByName( nil, campname )
     local waypointlocation = Entities:FindByName ( nil, spawndata.WaypointName )
 	if SpawnLocation == nil then
@@ -894,7 +893,6 @@ if IsServer() then
             ProjectileManager:DestroyLinearProjectile(iProjectile)
         end
         
-        --print("Server: Overriding Gaben Particle Function...")
 
         return VALVE_CScriptParticleManager_CreateParticle(self, sParticleName, iParticleAttachment, hOwner)
     end

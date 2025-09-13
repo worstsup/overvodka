@@ -77,13 +77,6 @@ function modifier_worstsup_q_dota_effect:OnCreated( kv )
 	end
 end
 
-function modifier_worstsup_q_dota_effect:OnRefresh( kv )
-end
-function modifier_worstsup_q_dota_effect:OnRemoved()
-end
-function modifier_worstsup_q_dota_effect:OnDestroy()
-end
-
 function modifier_worstsup_q_dota_effect:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MIN,

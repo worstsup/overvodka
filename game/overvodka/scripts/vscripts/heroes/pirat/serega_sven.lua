@@ -17,52 +17,55 @@ function serega_sven:Precache(ctx)
 end
 
 function serega_sven:OnSpellStart()
-	if not IsServer() then return end
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target and not target:IsNull() and target:TriggerSpellAbsorb(self) then
         return
     end
+
     self._hitUnits = {}
+
     local origin = caster:GetAbsOrigin()
-    local aimPos = target:GetAbsOrigin()
-    local dir = aimPos - origin
-    dir.z = 0
-    if dir:Length2D() < 1 then
-        dir = caster:GetForwardVector()
-        dir.z = 0
-    end
+    local aimPos = target and not target:IsNull() and target:GetAbsOrigin() or (origin + caster:GetForwardVector() * 100)
+    local dir = aimPos - origin; dir.z = 0
+    if dir:Length2D() < 1 then dir = caster:GetForwardVector(); dir.z = 0 end
     dir = dir:Normalized()
 
-    local distance = (aimPos - origin):Length2D()
-    local radius   = self:GetSpecialValueFor("width")
-    local speed    = self:GetSpecialValueFor("speed")
-    local stun     = self:GetSpecialValueFor("duration")
+    local maxDistance = self:GetCastRange(caster:GetAbsOrigin(), target)
+    if not maxDistance or maxDistance <= 0 then
+        maxDistance = 750
+    end
+
+    local toTarget  = (aimPos - origin):Length2D()
+    local radius    = self:GetSpecialValueFor("width")
+    local speed     = self:GetSpecialValueFor("speed")
+    local stun      = self:GetSpecialValueFor("duration")
+
     if target and not target:IsNull() and target:IsRealHero() then
-        local travel = distance / math.max(speed, 1)
+        local travel = toTarget / math.max(speed, 1)
         target:AddNewModifier(caster, self, "modifier_serega_sven", { duration = travel + stun })
     end
 
     local projectile_name = "particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_ti6.vpcf"
 
     local function Fire(dir2d)
-        local info = {
+        ProjectileManager:CreateLinearProjectile({
             Source = caster,
             Ability = self,
             vSpawnOrigin = origin,
-            bDeleteOnHit = false,
 
+            bDeleteOnHit = false,
             iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_ENEMY,
             iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
             iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
 
-            EffectName  = projectile_name,
-            fDistance   = distance,
-            fStartRadius= radius,
-            fEndRadius  = radius,
-            vVelocity   = dir2d * speed,
-        }
-        ProjectileManager:CreateLinearProjectile(info)
+            EffectName   = projectile_name,
+            fDistance    = maxDistance,
+            fStartRadius = radius,
+            fEndRadius   = radius,
+            vVelocity    = dir2d * speed,
+        })
     end
 
     Fire(dir)

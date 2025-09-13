@@ -658,7 +658,7 @@ function dvoreckov_qqq:OnSpellStart()
 	self.sound_cast = "hehe"
 	EmitSoundOn(self.sound_cast, caster)
 
-	if self:GetCaster():HasModifier("modifier_item_aghanims_shard") then
+	if self:GetCaster():HasShard() then
 		local additional_targets = self:FindAdditionalTargets()
 		local count = 0
 		for _, additional_target in pairs(additional_targets) do

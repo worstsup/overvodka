@@ -85,7 +85,7 @@ function modifier_bombardiro_fly:OnIntervalThink()
             700,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_NONE,
+            DOTA_UNIT_TARGET_FLAG_NO_INVIS,
             FIND_ANY_ORDER,
             false
         )

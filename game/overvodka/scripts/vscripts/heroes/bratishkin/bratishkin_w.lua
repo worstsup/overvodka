@@ -119,21 +119,10 @@ end
 
 modifier_bratishkin_w_fear = class({})
 
-function modifier_bratishkin_w_fear:IsHidden() 
-    return false 
-end
-
-function modifier_bratishkin_w_fear:IsDebuff() 
-    return true 
-end
-
-function modifier_bratishkin_w_fear:IsPurgable() 
-    return true 
-end
-
-function modifier_bratishkin_w_fear:RemoveOnDeath() 
-    return true 
-end
+function modifier_bratishkin_w_fear:IsHidden() return false end
+function modifier_bratishkin_w_fear:IsDebuff() return true end
+function modifier_bratishkin_w_fear:IsPurgable() return true end
+function modifier_bratishkin_w_fear:RemoveOnDeath() return true end
 
 function modifier_bratishkin_w_fear:OnCreated(kv)
     if not IsServer() then return end
@@ -149,11 +138,9 @@ function modifier_bratishkin_w_fear:OnDestroy()
 end
 
 function modifier_bratishkin_w_fear:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
 	}
-
-	return funcs
 end
 
 function modifier_bratishkin_w_fear:GetModifierProvidesFOWVision()

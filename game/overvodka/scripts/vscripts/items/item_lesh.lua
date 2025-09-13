@@ -2,7 +2,7 @@ function lesh_start(keys)
     local target = keys.target
     if target:TriggerSpellAbsorb(keys.ability) then return end
     local target_maxHealth = target:GetMaxHealth()
-    local dagon_particle = ParticleManager:CreateParticle("particles/items_fx/dagon.vpcf",  PATTACH_ABSORIGIN_FOLLOW, keys.caster)
+    local dagon_particle = ParticleManager:CreateParticle("particles/items_fx/dagon.vpcf", PATTACH_ABSORIGIN_FOLLOW, keys.caster)
     ParticleManager:SetParticleControlEnt(dagon_particle, 1, keys.target, PATTACH_POINT_FOLLOW, "attach_hitloc", keys.target:GetAbsOrigin(), false)
     local particle_effect_intensity = 800
     ParticleManager:SetParticleControl(dagon_particle, 2, Vector(particle_effect_intensity))

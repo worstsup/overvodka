@@ -92,9 +92,9 @@ function modifier_surfin_bird_freeze:IsPurgable() return false end
 
 function modifier_surfin_bird_freeze:CheckState()
     return {
-        [MODIFIER_STATE_COMMAND_RESTRICTED] = true, -- запрещает перемещение/приказы
-        [MODIFIER_STATE_ROOTED] = true,             -- не может двигаться
-        [MODIFIER_STATE_DISARMED] = true,             -- не может двигаться
+        [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
+        [MODIFIER_STATE_ROOTED] = true,
+        [MODIFIER_STATE_DISARMED] = true,
     }
 end
 
@@ -113,16 +113,13 @@ function modifier_surfin_bird_freeze:OnCreated()
 
     local parent = self:GetParent()
 
-    -- Воспроизведение анимации
     parent:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_2, 1.0)
 
-    -- Проигрывание звука
     EmitSoundOn("peter_surfin_bird", parent)
 end
 
 function modifier_surfin_bird_freeze:OnDestroy()
     if not IsServer() then return end
-    -- Остановка анимации при снятии модификатора
     self:GetParent():FadeGesture(ACT_DOTA_CAST_ABILITY_2)
 end
 
@@ -156,7 +153,6 @@ function modifier_surfin_bird_debuff:GetModifierMiss_Percentage()
     return self:GetAbility():GetSpecialValueFor("enemy_miss_chance")
 end
 
--- === Добавляем визуальный эффект ===
 function modifier_surfin_bird_debuff:OnCreated()
     if not IsServer() then return end
 

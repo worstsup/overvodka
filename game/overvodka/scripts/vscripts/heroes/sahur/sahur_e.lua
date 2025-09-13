@@ -1,8 +1,9 @@
-sahur_e = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e_thinker", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e_jump", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_BOTH )
+
+sahur_e = class({})
 
 function sahur_e:OnAbilityPhaseStart()
 	EmitSoundOn("sahur_e_start", self:GetCaster())
@@ -19,19 +20,23 @@ function sahur_e:GetIntrinsicModifierName()
 	return "modifier_sahur_e"
 end
 
+
 modifier_sahur_e = class({})
+
 function modifier_sahur_e:IsHidden() return true end
 function modifier_sahur_e:IsPurgable() return false end
 function modifier_sahur_e:RemoveOnDeath() return false end
+
 function modifier_sahur_e:OnCreated()
 	if not IsServer() then return end
 end
+
 function modifier_sahur_e:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ORDER,
 	}
-	return funcs
 end
+
 
 function modifier_sahur_e:OnOrder( params )
 	if params.unit~=self:GetParent() then return end
@@ -146,6 +151,7 @@ function sahur_e:PlayEffects( start_pos, end_pos, duration )
 	EmitSoundOnLocationWithCaster( end_pos, sound_cast, caster )
 end
 
+
 modifier_sahur_e_jump = class({})
 
 function modifier_sahur_e_jump:IsHidden() return true end
@@ -221,23 +227,12 @@ end
 
 modifier_sahur_e_thinker = class({})
 
-function modifier_sahur_e_thinker:IsHidden()
-	return true
-end
-
-function modifier_sahur_e_thinker:IsPurgable()
-	return false
-end
-
-function modifier_sahur_e_thinker:OnCreated( kv )
-end
-function modifier_sahur_e_thinker:OnRefresh( kv )
-end
+function modifier_sahur_e_thinker:IsHidden() return true end
+function modifier_sahur_e_thinker:IsPurgable() return false end
 
 function modifier_sahur_e_thinker:OnDestroy( kv )
 	if IsServer() then
-		local sound_cast = "Hero_EarthShaker.FissureDestroy"
-		EmitSoundOnLocationWithCaster(self:GetParent():GetOrigin(), sound_cast, self:GetCaster() )
+		EmitSoundOnLocationWithCaster(self:GetParent():GetOrigin(), "Hero_EarthShaker.FissureDestroy", self:GetCaster() )
 		UTIL_Remove(self:GetParent())
 	end
 end

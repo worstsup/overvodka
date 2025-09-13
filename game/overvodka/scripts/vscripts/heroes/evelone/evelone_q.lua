@@ -76,7 +76,7 @@ function modifier_evelone_q_shard:OnHeroKilled( params )
     local target = params.target
     if parent == params.attacker and target:GetTeamNumber() ~= parent:GetTeamNumber() then
         if self:GetParent():IsIllusion() then return end
-        if not self:GetParent():HasModifier("modifier_item_aghanims_shard") then return end
+        if not self:GetParent():HasShard() then return end
         if self:GetAbility():GetMaxAbilityCharges(self:GetAbility():GetLevel()) > self:GetAbility():GetCurrentAbilityCharges() then
             self:GetAbility():SetCurrentAbilityCharges(self:GetAbility():GetCurrentAbilityCharges()+1)
         end

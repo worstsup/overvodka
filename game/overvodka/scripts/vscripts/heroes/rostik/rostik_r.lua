@@ -151,7 +151,7 @@ function modifier_rostik_r:OnDestroy( kv )
 	if IsServer() then
 		self:GetParent():InterruptMotionControllers( true )
 	end
-	if self:GetParent():HasModifier("modifier_item_aghanims_shard") then
+	if self:GetParent():HasShard() then
 		local dir = self.start_point - self:GetParent():GetOrigin()
 		dir.z = 0
 		dir = dir:Normalized()

@@ -72,9 +72,7 @@ end
 
 modifier_peterka_e_cast = class({})
 
-function modifier_peterka_e_cast:IsPurgable()
-	return false
-end
+function modifier_peterka_e_cast:IsPurgable() return false end
 
 function modifier_peterka_e_cast:OnCreated( kv )
 	self.speed = self:GetAbility():GetSpecialValueFor( "charge_speed" )
@@ -111,13 +109,11 @@ function modifier_peterka_e_cast:OnRemoved()
 end
 
 function modifier_peterka_e_cast:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
 	}
-
-	return funcs
 end
 
 function modifier_peterka_e_cast:GetModifierModelChange()
@@ -154,11 +150,10 @@ function modifier_peterka_e_cast:GetModifierMoveSpeed_Limit()
 end
 
 function modifier_peterka_e_cast:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_DISARMED] = true,
 		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
 	}
-	return state
 end
 
 function modifier_peterka_e_cast:OnIntervalThink()
@@ -234,17 +229,13 @@ end
 
 modifier_peterka_e_charge = class({})
 
-function modifier_peterka_e_charge:IsPurgable()
-	return false
-end
+function modifier_peterka_e_charge:IsPurgable() return false end
 
 function modifier_peterka_e_charge:CheckState()
-	local state = 
-	{
+	return {
 		[MODIFIER_STATE_DISARMED] = true,
 		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.debuff_immune
 	}
-	return state
 end
 
 function modifier_peterka_e_charge:OnCreated( kv )
@@ -291,14 +282,13 @@ function modifier_peterka_e_charge:OnCreated( kv )
 end
 
 function modifier_peterka_e_charge:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_DISABLE_TURNING,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
 	}
-	return funcs
 end
 
 function modifier_peterka_e_charge:GetModifierModelChange()
@@ -403,48 +393,22 @@ end
 
 function modifier_peterka_e_charge:OnDestroy()
 	if not IsServer() then return end
-
 	self:GetParent():RemoveHorizontalMotionController(self)
 	FindClearSpaceForUnit( self:GetParent(), self:GetParent():GetOrigin(), false )
 end
 
-function modifier_peterka_e_charge:IsAura()
-	return true
-end
-
-function modifier_peterka_e_charge:GetModifierAura()
-	return "modifier_peterka_e_debuff"
-end
-
-function modifier_peterka_e_charge:GetAuraRadius()
-	return self:GetAbility():GetSpecialValueFor("knockback_radius")
-end
-
-function modifier_peterka_e_charge:GetAuraDuration()
-	return 0.1
-end
-
-function modifier_peterka_e_charge:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_ENEMY
-end
-
-function modifier_peterka_e_charge:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
-
-function modifier_peterka_e_charge:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES 
-end
-
-function modifier_peterka_e_charge:GetAuraEntityReject(target)
-	return false
-end
+function modifier_peterka_e_charge:IsAura() return true end
+function modifier_peterka_e_charge:GetModifierAura() return "modifier_peterka_e_debuff" end
+function modifier_peterka_e_charge:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("knockback_radius") end
+function modifier_peterka_e_charge:GetAuraDuration() return 0.1 end
+function modifier_peterka_e_charge:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_peterka_e_charge:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_peterka_e_charge:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES  end
+function modifier_peterka_e_charge:GetAuraEntityReject(target) return false end
 
 modifier_peterka_e_debuff = class({})
 
-function modifier_peterka_e_debuff:IsPurgable()
-	return false
-end
+function modifier_peterka_e_debuff:IsPurgable() return false end
 
 function modifier_peterka_e_debuff:OnCreated( kv )
 	if not IsServer() then return end
@@ -466,11 +430,9 @@ function modifier_peterka_e_debuff:OnDestroy()
 end
 
 function modifier_peterka_e_debuff:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 	}
-
-	return funcs
 end
 
 function modifier_peterka_e_debuff:GetOverrideAnimation()
@@ -478,11 +440,9 @@ function modifier_peterka_e_debuff:GetOverrideAnimation()
 end
 
 function modifier_peterka_e_debuff:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_STUNNED] = true,
 	}
-
-	return state
 end
 
 function modifier_peterka_e_debuff:UpdateHorizontalMotion( me, dt )

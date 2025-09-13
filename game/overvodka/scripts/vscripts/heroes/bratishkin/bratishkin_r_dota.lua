@@ -146,7 +146,7 @@ function modifier_bratishkin_r_dota_shard:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     if params.attacker:IsIllusion() then return end
     if not params.target or not params.target:IsHero() or params.target:GetTeamNumber() == self:GetParent():GetTeamNumber() then return end
-    if not self:GetParent():HasModifier("modifier_item_aghanims_shard") then return end
+    if not self:GetParent():HasShard() then return end
     self.attack_count = (self.attack_count or 0) + 1
     if self.attack_count >= self:GetAbility():GetSpecialValueFor("attacks_needed") then
         self.attack_count = self.attack_count - self:GetAbility():GetSpecialValueFor("attacks_needed")

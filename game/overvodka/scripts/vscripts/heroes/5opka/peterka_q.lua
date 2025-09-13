@@ -2,6 +2,7 @@ LinkLuaModifier("modifier_peterka_q", "heroes/5opka/peterka_q", LUA_MODIFIER_MOT
 LinkLuaModifier("modifier_telka", "heroes/5opka/peterka_q", LUA_MODIFIER_MOTION_NONE)
 
 peterka_q = class({})
+
 function peterka_q:Precache(context)
 	PrecacheResource("particle", "particles/peterka_q.vpcf", context)
 	PrecacheResource("particle", "particles/econ/events/ti10/fountain_regen_ti10_golden_sparkles.vpcf", context)
@@ -9,6 +10,7 @@ function peterka_q:Precache(context)
     PrecacheResource("particle", "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_golden_walruspunch_start.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/peterka_q.vsndevts", context)
 end
+
 function peterka_q:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
@@ -26,6 +28,7 @@ function peterka_q:OnSpellStart()
 	AddFOWViewer(caster:GetTeamNumber(), target:GetAbsOrigin(), 100, 0.5, false)
     telka:SetForceAttackTarget(target)
 end
+
 
 modifier_peterka_q = class({})
 
@@ -60,26 +63,31 @@ function modifier_peterka_q:OnIntervalThink()
         ability = ability
     })
 end
+
 function modifier_peterka_q:OnDestroy()
     if not IsServer() then return end
 	self:PlayEffects()
 end
+
 function modifier_peterka_q:PlayEffects()
-	local particle_cast = "particles/peterka_q.vpcf"
-	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	local effect_cast = ParticleManager:CreateParticle("particles/peterka_q.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 end
+
 function modifier_peterka_q:GetEffectName()
     return "particles/econ/items/antimage/antimage_ti7_golden/antimage_blink_start_ti7_golden.vpcf"
 end
+
 function modifier_peterka_q:GetEffectAttachType()
     return PATTACH_ABSORIGIN_FOLLOW
 end
+
 
 modifier_telka = class({})
 
 function modifier_telka:IsHidden() return true end
 function modifier_telka:IsDebuff() return true end
 function modifier_telka:IsPurgable() return false end
+
 function modifier_telka:CheckState()
 	return {
 		[MODIFIER_STATE_INVULNERABLE] = true,
@@ -94,25 +102,27 @@ function modifier_telka:DeclareFunctions()
         MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
+
 function modifier_telka:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker ~= self:GetParent() then return end
     if params.target == nil then return end
     self:PlayEffects(params.target)
 end
-function modifier_telka:OnCreated(kv)
-	if not IsServer() then return end
-end
+
 function modifier_telka:OnDestroy()
 	if not IsServer() then return end
 	UTIL_Remove(self:GetParent())
 end
+
 function modifier_telka:GetEffectName()
 	return "particles/econ/events/ti10/fountain_regen_ti10_golden_sparkles.vpcf"
 end
+
 function modifier_telka:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
+
 function modifier_telka:PlayEffects(target)
     local particle_cast = "particles/econ/items/tuskarr/tusk_ti9_immortal/tusk_ti9_golden_walruspunch_start.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )

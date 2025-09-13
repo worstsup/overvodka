@@ -1,4 +1,3 @@
-
 modifier_kachok_big_tasty_buff = class({})
 
 function modifier_kachok_big_tasty_buff:GetAttributes()

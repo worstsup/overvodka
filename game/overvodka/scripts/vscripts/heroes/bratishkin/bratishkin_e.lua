@@ -100,12 +100,11 @@ end
 function modifier_bratishkin_e_primary:IsPurgable() return false end
 
 function modifier_bratishkin_e_primary:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
     }
-    return funcs
 end
 
 function modifier_bratishkin_e_primary:GetModifierBonusStats_Strength()
@@ -133,8 +132,7 @@ function modifier_bratishkin_e_primary:GetModifierAttackRangeBonus()
 end
 
 function modifier_bratishkin_e_primary:CheckState()
-    local state = 
-    {   
+    return {   
         [MODIFIER_STATE_INVULNERABLE]   = true,
         [MODIFIER_STATE_UNSELECTABLE]   = true,
         [MODIFIER_STATE_OUT_OF_GAME]    = true,
@@ -143,7 +141,6 @@ function modifier_bratishkin_e_primary:CheckState()
         [MODIFIER_STATE_MAGIC_IMMUNE] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
-    return state
 end
 
 function modifier_bratishkin_e_primary:OnIntervalThink()
@@ -216,7 +213,7 @@ end
 function modifier_bratishkin_e_primary_scepter:IsPurgable() return false end
 
 function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
@@ -227,7 +224,6 @@ function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
         MODIFIER_PROPERTY_MOVESPEED_LIMIT
     }
-    return funcs
 end
 
 function modifier_bratishkin_e_primary_scepter:GetModifierBonusStats_Strength()

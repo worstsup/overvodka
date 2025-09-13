@@ -68,7 +68,7 @@ function mazellov_r:OnSpellStart()
         if target:HasModifier("modifier_item_ultimate_scepter_consumed") then
             clone:AddNewModifier(caster, self, "modifier_item_ultimate_scepter_consumed", {duration = -1})
         end
-        if target:HasModifier("modifier_item_aghanims_shard") then
+        if target:HasShard() then
             clone:AddNewModifier(caster, self, "modifier_item_aghanims_shard", {duration = -1})
         end
         Timers:CreateTimer(FrameTime(), function()

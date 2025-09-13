@@ -7301,7 +7301,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCooldown"				"1.0 1.0 1.0 1.0"
+		"AbilityCooldown"				"1.0"
 		"AbilityManaCost"				"25 30 35 40"
 		"AbilityValues"
 		{
@@ -7376,7 +7376,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityCastRange"				"550 550 550"
+		"AbilityCastRange"				"550"
 		"AbilityCastPoint"				"0.25"
 		"AbilityManaCost"				"65 100 135 170"
 		"AbilityValues"
@@ -7420,7 +7420,7 @@
 		"IsGrantedByShard"				"1"
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"100.0"
+		"AbilityCooldown"				"100"
 		"AbilityManaCost"				"400"
 		"AbilityValues"
 		{
@@ -8294,30 +8294,25 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/papich/papich_q"
 		"AbilityTextureName"			"papich_q"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"HasShardUpgrade"				"1"
-		"AbilityCastPoint"				"0.2 0.2 0.2 0.2"
+		"AbilityCastPoint"				"0.2"
 		"AbilityCooldown"				"20"
-		"AbilityChannelTime"			"0.01"
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
-				"damage_per_second"		"10000.0 10000.0 10000.0 10000.0"
-				"max_channel_time"		"0.01"
 				"range"
 				{
 					"value"	"1000"
 					"special_bonus_unique_papich_2" "+200"
 				}
-				"speed"					"1050.0 1050.0 1050.0 1050.0"
-				"vision_radius"			"800 1000 1200 1400"
-				"vision_duration"		"3.34 3.34 3.34 3.34"
-				"channel_vision_radius"	"375 450 525 600"
+				"speed"						"1050.0"
+				"vision_duration"			"3"
+				"channel_vision_radius"		"375"
 				"channel_vision_interval"	"0.5"
-				"channel_vision_duration"	"10.34"
-				"channel_vision_step"		"150 225 300 375"
+				"channel_vision_step"		"225"
 				"total_damage"				"100 200 300 400"
 				"damage_mana"
 				{
@@ -8334,7 +8329,6 @@
 					"value"	"1200"
 					"special_bonus_unique_papich_2" "+200"
 				}
-				"transient_form_ms_reduction"				"70"
 				"silence_duration"
 				{
 					"value"	"0"
@@ -8343,15 +8337,6 @@
 				}
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
-	}
-	"papich_q_end"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/papich/papich_q"
-		"AbilityTextureName"			"papich_q"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
- 		"AbilityCastAnimation"			"ACT_INVALID"
 	}
 
 	"dummy_unit_state"
@@ -8435,45 +8420,11 @@
 				"value"	"130 120 110 100"
 				"special_bonus_unique_papich_1" "-10"
 			}
-			"hp_percent"
-			{
-				"value"	"5"
-			}
-			"charge_speed"
-			{
-				"value"	"2000"
-			}
-			"chargeup_time"
-			{
-				"value"	"1.6"
-			}
-			"slow_pct"					"35"
-			"knockback_radius"
-			{
-				"value"	"250"
-			}
+			"hp_percent" 				"5"
+			"charge_speed" 				"2000"
+			"chargeup_time" 			"1.6"
 			"max_distance"				"25000"
-			"knockback_distance"
-			{
-				"value"	"300"
-			}
-			"knockback_damage"			"30"
-			"slow_duration"				"1.5"
-			"knockback_duration"		"0.2"
-			"max_charge_time"
-			{
-				"value"	"1.6"
-			}
-			"turn_rate"
-			{
-				"value"	"180"
-			}
-			"base_power"				"0"
-			"movement_turn_rate"
-			{
-				"value"	"160"
-			}
-			"stun_duration"				"0.8"
+			"turn_rate" 				"180"
 			"gold"
 			{
 				"value"	"0"
@@ -9710,11 +9661,11 @@
 	"peterka_innate"
 	{
 		"BaseClass"                 "ability_datadriven"
-		"MaxLevel"						"1"
-		"RequiredLevel"					"-1"
-		"Innate"						"1"
+		"MaxLevel"					"1"
+		"RequiredLevel"				"-1"
+		"Innate"					"1"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityType"				"ABILITY_TYPE_BASIC"
 		"AbilityValues"
 		{
 			"dmg"	"20"
@@ -10065,8 +10016,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"Innate"				"1"
-		"MaxLevel"				"1"
+		"Innate"						"1"
+		"MaxLevel"						"1"
 		"AbilityCooldown"				"1"
 		"IsBreakable"					"1"
 		"AbilityValues"

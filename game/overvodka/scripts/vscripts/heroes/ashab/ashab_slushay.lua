@@ -13,7 +13,7 @@ function ashab_slushay:OnSpellStart()
 	local reduction_radius = self:GetSpecialValueFor("radius")
 	local reduction_duration = self:GetSpecialValueFor("reduction_duration")
 	local bonus_damage = self:GetSpecialValueFor("attack_damage")
-	 if caster:HasModifier("modifier_item_aghanims_shard") then
+	 if caster:HasShard() then
 		caster:Purge( false, true, false, true, false)
 	end
 	local enemies = FindUnitsInRadius(

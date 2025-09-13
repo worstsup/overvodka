@@ -67,7 +67,7 @@ function modifier_bombardiro_bombs:OnIntervalThink()
     if not IsServer() then return end
     self:GetParent():EmitSound("Hero_Gyrocopter.CallDown.Damage")
     local damageTable = { attacker = self:GetCaster(), damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility() }
-    local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NO_INVIS, 0, false )
+    local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false )
     for _,enemy in pairs(enemies) do
         damageTable.victim = enemy
         damageTable.damage = self.damage * enemy:GetMaxHealth() * 0.01

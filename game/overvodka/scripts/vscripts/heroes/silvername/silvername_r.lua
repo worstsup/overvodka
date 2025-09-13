@@ -85,11 +85,6 @@ function modifier_silvername_r_thinker:OnCreated( kv )
 	self:StartIntervalThink( delay )
 end
 
-function modifier_silvername_r_thinker:OnRefresh( kv )
-end
-function modifier_silvername_r_thinker:OnRemoved()
-end
-
 function modifier_silvername_r_thinker:OnDestroy()
 	if not IsServer() then return end
 	UTIL_Remove( self:GetParent() )

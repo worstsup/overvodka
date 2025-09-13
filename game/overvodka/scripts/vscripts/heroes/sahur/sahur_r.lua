@@ -4,6 +4,7 @@ LinkLuaModifier( "modifier_sahur_r", "heroes/sahur/sahur_r", LUA_MODIFIER_MOTION
 function sahur_r:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
+
 function sahur_r:OnAbilityUpgrade( hAbility )
     if not IsServer() then return end
     local result = self.BaseClass.OnAbilityUpgrade( self, hAbility )
@@ -14,6 +15,7 @@ function sahur_r:OnAbilityUpgrade( hAbility )
     end
     return result
 end
+
 function sahur_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
@@ -26,28 +28,16 @@ function sahur_r:OnSpellStart()
 		caster:GetTeamNumber(),
 		false
 	)
-	local sound_cast_2 = "komp"
-	EmitSoundOn( sound_cast_2, caster )
+	EmitSoundOn( "komp", caster )
 	EmitSoundOnLocationWithCaster(point, "sahur_r", caster)
 end
 
 modifier_sahur_r = class({})
 
-function modifier_sahur_r:IsHidden()
-	return false
-end
-
-function modifier_sahur_r:IsDebuff()
-	return true
-end
-
-function modifier_sahur_r:IsStunDebuff()
-	return false
-end
-
-function modifier_sahur_r:IsPurgable()
-	return true
-end
+function modifier_sahur_r:IsHidden() return false end
+function modifier_sahur_r:IsDebuff() return true end
+function modifier_sahur_r:IsStunDebuff() return false end
+function modifier_sahur_r:IsPurgable() return true end
 
 function modifier_sahur_r:OnCreated( kv )
 	if not IsServer() then return end
@@ -70,28 +60,19 @@ function modifier_sahur_r:OnCreated( kv )
 	self:PlayEffects1( duration )
 end
 
-function modifier_sahur_r:OnRefresh( kv )
-end
-
-function modifier_sahur_r:OnRemoved()
-end
-
 function modifier_sahur_r:OnDestroy()
 	if not IsServer() then return end
 	if self.owner then
-
 		UTIL_Remove( self:GetParent() )
 	end
 end
 
 function modifier_sahur_r:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_BONUS_DAY_VISION,
 		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 	}
-
-	return funcs
 end
 
 function modifier_sahur_r:GetModifierMoveSpeedBonus_Percentage()
@@ -105,11 +86,11 @@ end
 function modifier_sahur_r:GetBonusNightVision()
 	return -1000
 end
+
 function modifier_sahur_r:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_NOT_ON_MINIMAP] = true,
 	}
-	return state
 end
 
 function modifier_sahur_r:OnIntervalThink()

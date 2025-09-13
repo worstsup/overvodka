@@ -18,8 +18,9 @@ function worstsup_q:OnAbilityPhaseInterrupted()
 end
 
 function worstsup_q:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition()
+	local point = caster:GetAbsOrigin()
 	local duration = self:GetSpecialValueFor("duration")
 	local vision = self:GetSpecialValueFor("vision_radius")
 	self.thinker = CreateModifierThinker(
@@ -72,13 +73,6 @@ function modifier_worstsup_q_effect:OnCreated( kv )
 			self:PlayEffects()
 		end
 	end
-end
-
-function modifier_worstsup_q_effect:OnRefresh( kv )
-end
-function modifier_worstsup_q_effect:OnRemoved()
-end
-function modifier_worstsup_q_effect:OnDestroy()
 end
 
 function modifier_worstsup_q_effect:DeclareFunctions()

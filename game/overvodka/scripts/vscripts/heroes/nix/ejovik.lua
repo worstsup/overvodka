@@ -26,7 +26,7 @@ function modifier_ejovik:OnCreated( kv )
 	self.mag = self:GetAbility():GetSpecialValueFor( "bonus_mag" )
 	self.range = self:GetAbility():GetSpecialValueFor( "bonus_range" )
 	self.vision = self:GetAbility():GetSpecialValueFor( "bonus_vision" )
-	self.shard = self:GetParent():HasModifier("modifier_item_aghanims_shard")
+	self.shard = self:GetParent():HasShard()
 	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
 	self:StartIntervalThink(1)
 end

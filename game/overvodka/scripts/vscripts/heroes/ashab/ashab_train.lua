@@ -14,9 +14,7 @@ end
 
 modifier_train = class({})
 
-function modifier_train:IsPurgable()
-	return false
-end
+function modifier_train:IsPurgable() return false end
 
 function modifier_train:OnCreated( kv )
 	local particle = ParticleManager:CreateParticle("particles/tamaev_train.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
@@ -30,24 +28,19 @@ function modifier_train:OnCreated( kv )
 	self.bonus_strength   = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("bonus_strength") * 0.01
 end
 
-function modifier_train:OnRemoved()
-end
-
 function modifier_train:DeclareFunctions()
-	local funcs = 
-	{
+	return {
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_PROPERTY_STATUS_RESISTANCE,
 	}
-	return funcs
 end
 
-function modifier_train:GetModifierModelScale( params )
+function modifier_train:GetModifierModelScale()
 	return self.model_scale
 end
 
-function modifier_train:GetModifierBonusStats_Strength( params )
+function modifier_train:GetModifierBonusStats_Strength()
 	return self.bonus_strength
 end
 

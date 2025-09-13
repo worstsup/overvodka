@@ -52,11 +52,9 @@ function modifier_chef_w_active_regeneration:IsPurgable() return false end
 function modifier_chef_w_active_regeneration:IsHidden() return true end
 
 function modifier_chef_w_active_regeneration:DeclareFunctions()
-	local funcs = 
-	{
+	return {
 		MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE
 	}
-	return funcs
 end
 
 function modifier_chef_w_active_regeneration:GetModifierTotalPercentageManaRegen()
@@ -104,12 +102,10 @@ function modifier_chef_w_2:IsHidden() return false end
 function modifier_chef_w_2:IsPurgable() return false end
 
 function modifier_chef_w_2:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE
     }
-    return funcs
 end
 
 function modifier_chef_w_2:GetModifierConstantManaRegen()

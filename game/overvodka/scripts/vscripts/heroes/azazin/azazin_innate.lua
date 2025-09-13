@@ -11,12 +11,8 @@ end
 
 modifier_azazin_innate = class({})
 
-function modifier_azazin_innate:IsHidden()
-	return true
-end
-function modifier_azazin_innate:IsPurgable()
-	return false
-end
+function modifier_azazin_innate:IsHidden() return true end
+function modifier_azazin_innate:IsPurgable() return false end
 
 function modifier_azazin_innate:OnCreated( kv )
 	self.mana_break = self:GetAbility():GetSpecialValueFor( "mana_per_hit" )
@@ -28,14 +24,10 @@ function modifier_azazin_innate:OnRefresh( kv )
 	self.mana_damage_pct = self:GetAbility():GetSpecialValueFor( "damage_per_burn" )
 end
 
-function modifier_azazin_innate:OnDestroy( kv )
-end
-
 function modifier_azazin_innate:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
 	}
-	return funcs
 end
 
 function modifier_azazin_innate:GetModifierProcAttack_BonusDamage_Physical( params )

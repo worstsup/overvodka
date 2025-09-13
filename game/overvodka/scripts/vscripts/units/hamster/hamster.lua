@@ -7,18 +7,10 @@ end
 
 modifier_hamster = class({})
 
-function modifier_hamster:IsHidden()
-	return true
-end
-function modifier_hamster:IsDebuff()
-	return false
-end
-function modifier_hamster:IsStunDebuff()
-	return false
-end
-function modifier_hamster:IsPurgable()
-	return false
-end
+function modifier_hamster:IsHidden() return true end
+function modifier_hamster:IsDebuff() return false end
+function modifier_hamster:IsStunDebuff() return false end
+function modifier_hamster:IsPurgable() return false end
 
 function modifier_hamster:OnCreated()
 	if not IsServer() then return end
@@ -28,13 +20,7 @@ function modifier_hamster:OnCreated()
 	self.flee_radius = 700
 	self.gold_cooldowns = {}
 	self:StartIntervalThink(0.2)
-	k = 0
-end
-
-function modifier_hamster:OnRemoved()
-end
-
-function modifier_hamster:OnDestroy()
+	self.k = 0
 end
 
 function modifier_hamster:OnIntervalThink()
@@ -70,7 +56,7 @@ function modifier_hamster:OnIntervalThink()
 			parent:Stop()
 		end
     end
-	k = k + 1
+	self.k = self.k + 1
 	local current_time = GameRules:GetGameTime()
 	for entindex, last_time in pairs(self.gold_cooldowns) do
 		if current_time - last_time > 1 then
@@ -91,7 +77,7 @@ function modifier_hamster:OnIntervalThink()
 	}
 	local caster = self:GetParent()
     local caster_position = caster:GetAbsOrigin()
-    if (k % 15 == 0) then
+    if (self.k % 15 == 0) then
     	for _, team in ipairs(ALL_TEAMS) do
         	MinimapEvent(
             	team,
@@ -135,12 +121,12 @@ function modifier_hamster:OnTakeDamage( params )
                 attacker:ModifyGold(self.gold, true, 0)
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, attacker, self.gold, nil)
                 self.gold_cooldowns[entindex] = current_time
-                local slark_gold = math.floor(self.gold * 0.5)
+                local bratishkin_gold = math.floor(self.gold * 0.5)
                 local all_heroes = HeroList:GetAllHeroes()
                 for _, hero in ipairs(all_heroes) do
                     if hero:IsRealHero() and not hero:IsIllusion() and hero:GetUnitName() == "npc_dota_hero_slark" then
-                        hero:ModifyGold(slark_gold, true, 0)
-                        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, hero, slark_gold, nil)
+                        hero:ModifyGold(bratishkin_gold, true, 0)
+                        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, hero, bratishkin_gold, nil)
                     end
                 end
             end

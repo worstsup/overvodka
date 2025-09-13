@@ -25,11 +25,6 @@ function modifier_mellstroy_business_new:OnRefresh( kv )
 	self.as = self:GetAbility():GetSpecialValueFor( "bonus_attackspeed" )
 end
 
-function modifier_mellstroy_business_new:OnRemoved()
-end
-function modifier_mellstroy_business_new:OnDestroy()
-end
-
 function modifier_mellstroy_business_new:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
