@@ -1,7 +1,7 @@
-LinkLuaModifier( "modifier_mell_success_counter", "heroes/mellstroy/mellstroy_casino_allin", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_mell_two",   "heroes/mellstroy/mellstroy_casino_allin", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_mell_one",   "heroes/mellstroy/mellstroy_casino_allin", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_mell_three", "heroes/mellstroy/mellstroy_casino_allin", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_success_counter", "heroes/mellstroy/casino_allin", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_two",   "heroes/mellstroy/casino_allin", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_one",   "heroes/mellstroy/casino_allin", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_mell_three", "heroes/mellstroy/casino_allin", LUA_MODIFIER_MOTION_NONE )
 
 mellstroy_casino_allin = class({})
 
@@ -60,7 +60,7 @@ function mellstroy_casino_allin:OnSpellStart()
             self:SetActivated(false)
         end
     else
-        caster:EmitSound("lose")
+        caster:EmitSound("lose_"..RandomInt(1,2))
     end
 end
 

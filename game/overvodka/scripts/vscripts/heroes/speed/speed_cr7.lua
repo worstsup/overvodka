@@ -5,17 +5,29 @@ LinkLuaModifier("modifier_speed_cr7_buff", "heroes/speed/speed_cr7", LUA_MODIFIE
 function speed_cr7:Precache(context)
     PrecacheResource("particle", "particles/econ/items/omniknight/omni_ti8_head/omniknight_repel_buff_ti8.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/jakiro/jakiro_ti10_immortal/jakiro_ti10_macropyre_projectile_flame_child_blue.vpcf", context)
+    PrecacheResource( "particle", "particles/golmy_2.vpcf", context )
     PrecacheResource( "soundfile", "soundevents/speed_cr7.vsndevts", context )
+    PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_brewmaster.vsndevts", context )
+end
+
+function speed_cr7:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "twenty_skin"
+    end
+    return "twenty"
 end
 
 function speed_cr7:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
-    EmitSoundOn("speed_cr7", caster)
-    local particle_cast = "particles/econ/items/jakiro/jakiro_ti10_immortal/jakiro_ti10_macropyre_projectile_flame_child_blue.vpcf"
-    local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, caster )
-    ParticleManager:SetParticleControl(effect_cast, 0, self:GetCaster():GetAbsOrigin())
-    ParticleManager:SetParticleControl(effect_cast, 3, self:GetCaster():GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex( effect_cast )
+    if not caster:HasModifier("modifier_overvodka_store_skin_5") then
+        EmitSoundOn("speed_cr7", caster)
+        local particle_cast = "particles/econ/items/jakiro/jakiro_ti10_immortal/jakiro_ti10_macropyre_projectile_flame_child_blue.vpcf"
+        local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, caster )
+        ParticleManager:SetParticleControl(effect_cast, 0, self:GetCaster():GetAbsOrigin())
+        ParticleManager:SetParticleControl(effect_cast, 3, self:GetCaster():GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex( effect_cast )
+    end
     local cooldown_reduction = self:GetSpecialValueFor("cooldown_reduction")
     for i = 0, caster:GetAbilityCount() - 1 do
         local ability = caster:GetAbilityByIndex(i)
@@ -33,6 +45,14 @@ modifier_speed_cr7_buff = class({})
 
 function modifier_speed_cr7_buff:IsPurgable()
     return true
+end
+
+function modifier_speed_cr7_buff:OnCreated()
+    if not IsServer() then return end
+    if self:GetParent():HasModifier("modifier_overvodka_store_skin_5") then
+        local p = ParticleManager:CreateParticle("particles/golmy_2.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
+        self:AddParticle(p, false, false, -1, false, false)
+    end
 end
 
 function modifier_speed_cr7_buff:DeclareFunctions()

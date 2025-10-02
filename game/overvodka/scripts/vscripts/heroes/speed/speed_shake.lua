@@ -10,6 +10,13 @@ function speed_shake:Precache(context)
     PrecacheResource("soundfile", "soundevents/gennadiy.vsndevts", context)
 end
 
+function speed_shake:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "gena_skin"
+    end
+    return "gena"
+end
+
 function speed_shake:GetCooldown(level)
     return self.BaseClass.GetCooldown( self, level )
 end
@@ -23,7 +30,12 @@ function speed_shake:GetCastRange(location, target)
 end
 
 function speed_shake:OnAbilityPhaseStart()
-    EmitSoundOn("gennadiy_start", self:GetCaster())
+    if not IsServer() then return end
+    local sound = "gennadiy_start"
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        sound = "gennadiy_start_skin"
+    end
+    EmitSoundOn(sound, self:GetCaster())
     return true
 end
 
@@ -32,9 +44,14 @@ function speed_shake:OnAbilityPhaseInterrupted()
 end
 
 function speed_shake:OnSpellStart()
+    if not IsServer() then return end
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
-    caster:EmitSound("gennadiy")
+    local sound = "gennadiy"
+    if caster:HasModifier("modifier_overvodka_store_skin_5") then
+        sound = "gennadiy_skin"
+    end
+    caster:EmitSound(sound)
     caster:AddNewModifier( caster, self, "modifier_speed_shake", { duration = duration } )
     if caster:HasScepter() then
         caster:AddNewModifier( caster, self, "modifier_speed_shake_scepter", { duration = duration } )
@@ -43,15 +60,10 @@ end
 
 modifier_speed_shake = class({})
 
-function modifier_speed_shake:IsHidden()
-    return false
-end
+function modifier_speed_shake:IsHidden() return false end
+function modifier_speed_shake:IsPurgable() return false end
 
-function modifier_speed_shake:IsPurgable()
-    return false
-end
-
-function modifier_speed_shake:OnCreated( kv )
+function modifier_speed_shake:OnCreated()
     if not IsServer() then return end
     self.damage = self:GetAbility():GetSpecialValueFor("damage")
     local radius = self:GetAbility():GetSpecialValueFor("radius")
@@ -72,9 +84,13 @@ function modifier_speed_shake:OnCreated( kv )
     self:StartIntervalThink(self.spinner_damage_tick)
 end
 
-function modifier_speed_shake:OnDestroy( kv )
+function modifier_speed_shake:OnDestroy()
     if not IsServer() then return end
-    self:GetParent():StopSound("gennadiy")
+    local sound = "gennadiy"
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        sound = "gennadiy_skin"
+    end
+    self:GetParent():StopSound(sound)
 end
 
 function modifier_speed_shake:OnIntervalThink()
@@ -100,11 +116,9 @@ function modifier_speed_shake:OnIntervalThink()
 end
 
 function modifier_speed_shake:CheckState()
-    local state = 
-    {
+    return {
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
     }
-    return state
 end
 
 function modifier_speed_shake:DeclareFunctions()

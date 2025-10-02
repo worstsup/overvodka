@@ -264,6 +264,14 @@ PrecacheUtils.models = {
 		"models/bikov/bikov.vmdl",
 		"models/heroes/terrorblade/terrorblade.vmdl",
 		"models/heroes/rubick/rubick.vmdl",
+		"models/items/lion/hell_weapon/hell_weapon.vmdl",
+		"models/items/lion/lion_ti9_immortal_head/lion_ti9_immortal_head.vmdl",
+		"models/items/lion/hellclaw_of_maelrawn/hellclaw_of_maelrawn.vmdl",
+		"models/heroes/brewmaster/back.vmdl",
+		"models/heroes/brewmaster/brewmaster.vmdl",
+		"models/heroes/brewmaster/barrel.vmdl",
+		"models/heroes/brewmaster/bracer.vmdl",
+		"models/heroes/brewmaster/weapon.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -340,6 +348,7 @@ PrecacheUtils.sounds = {
 		"soundevents/kirill_start.vsndevts",
 		"soundevents/bikov_start.vsndevts", 
 		"soundevents/lev_start.vsndevts",
+		"soundevents/chef_start.vsndevts",
 		"soundevents/stint_start.vsndevts",
 		"soundevents/royale_start.vsndevts",
 		"soundevents/frisk_start.vsndevts",

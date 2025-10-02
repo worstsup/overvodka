@@ -62,6 +62,86 @@ function UpdateCustomHeroModel(hero_name, playerId)
     } catch (e) {
     }
 }
+function ToggleLockInNotice(heroPickPanel, showNotice) {
+    if (!heroPickPanel) return;
+
+    const controls = heroPickPanel.FindChildTraverse("HeroPickControls") || heroPickPanel.FindChildTraverse("HeroControls");
+    if (!controls) return;
+
+    let lockBtn = controls.FindChildTraverse("LockInButton");
+    if (!lockBtn) {
+        const btns = (typeof controls.Children === "function") ? controls.Children() : null;
+        if (btns) {
+            for (let i = 0; i < btns.length; i++) {
+                if (btns[i] && btns[i].BHasClass && btns[i].BHasClass("lock-in-button")) { lockBtn = btns[i]; break; }
+            }
+        }
+    }
+
+    const noticeId = "OvervodkaPrimeNotice";
+
+    if (showNotice) {
+        if (lockBtn) lockBtn.style.visibility = "collapse";
+
+        let notice = controls.FindChildTraverse(noticeId);
+        if (!notice) {
+			notice = $.CreatePanel("Panel", controls, noticeId);
+			notice.AddClass("OvervodkaPrimeNotice");
+			notice.style.width = "100%";
+			notice.style.height = "100%";
+			notice.style.backgroundColor = "rgba(0,0,0,0.8)";
+			notice.style.layoutAlign = "stretch center";
+
+			const textId = noticeId + "_text";
+			const text = $.CreatePanel("Label", notice, textId);
+			text.text = $.Localize("#DOTA_Tooltip_overvodka_prime_notice") || "Доступно с Overvodka Prime";
+
+			text.style.width = "100%";
+			text.style.height = "100%";
+			text.style.margin = "20px 0px 0px 0px";
+			text.style.textAlign = "center";
+			text.style.fontSize = "24px";
+			text.style.fontWeight = "bold";
+			text.style.color = "white";
+
+		} else {
+			let text = notice.FindChildTraverse(noticeId + "_text");
+			if (!text) {
+				text = $.CreatePanel("Label", notice, noticeId + "_text");
+			}
+			text.text = $.Localize("#DOTA_Tooltip_overvodka_prime_notice") || "Доступно с Overvodka Prime";
+			text.style.width = "100%";
+			text.style.height = "100%";
+			text.style.textAlign = "center";
+			text.style.margin = "20px 0px 0px 0px"; 
+			text.style.fontSize = "24px";
+			text.style.fontWeight = "bold";
+			text.style.color = "white";
+		}
+
+        try {
+            const firstChild = (typeof controls.GetChild === "function") ? controls.GetChild(0) : null;
+            if (firstChild && typeof controls.MoveChildBefore === "function") {
+                controls.MoveChildBefore(notice, firstChild);
+            } else {
+                if (firstChild && typeof firstChild.MoveChildAfter === "function") {
+                    firstChild.MoveChildAfter(firstChild, notice);
+                } else {
+                    $.Msg("ToggleLockInNotice: MoveChildBefore / MoveChildAfter not available; notice kept at end.");
+                }
+            }
+        } catch (err) {
+            $.Msg("ToggleLockInNotice: error while moving notice to start:", err);
+        }
+
+    } else {
+        if (lockBtn) lockBtn.style.visibility = "visible";
+
+        const old = controls.FindChildTraverse(noticeId);
+        if (old) old.DeleteAsync(0);
+    }
+}
+
 
 function UpdatePlayer( teamPanel, playerId )
 {
@@ -101,7 +181,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_rubick": "file://{images}/heroes/npc_dota_hero_mrus.png",
 			"npc_dota_hero_terrorblade": "file://{images}/heroes/npc_dota_hero_senya.png",
 			"npc_dota_hero_riki": "file://{images}/heroes/npc_dota_hero_stray.png",
-			"npc_dota_hero_lion": "file://{images}/heroes/npc_dota_hero_lev.png",
+			"npc_dota_hero_lion": "file://{images}/heroes/npc_dota_hero_chef.png",
+			"npc_dota_hero_puck": "file://{images}/heroes/npc_dota_hero_lev.png",
 			"npc_dota_hero_kunkka": "file://{images}/heroes/npc_dota_hero_vova.png",
 			"npc_dota_hero_pudge": "file://{images}/heroes/npc_dota_hero_step.png",
 			"npc_dota_hero_sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
@@ -169,7 +250,8 @@ function UpdatePlayer( teamPanel, playerId )
 			"rubick": "file://{images}/heroes/npc_dota_hero_mrus.png",
 			"terrorblade": "file://{images}/heroes/npc_dota_hero_senya.png",
 			"riki": "file://{images}/heroes/npc_dota_hero_stray.png",
-			"lion": "file://{images}/heroes/npc_dota_hero_lev.png",
+			"lion": "file://{images}/heroes/npc_dota_hero_chef.png",
+			"puck": "file://{images}/heroes/npc_dota_hero_lev.png",
 			"kunkka": "file://{images}/heroes/npc_dota_hero_vova.png",
 			"pudge": "file://{images}/heroes/npc_dota_hero_step.png",
 			"sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
@@ -209,16 +291,26 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
+			let HeroPick = FindDotaHudElement("HeroPickRightColumn");
+			HeroPick.style.visibility = "visible";
 			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 
 			{
+				ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+				
 			}
 			else if (playerInfo.possible_hero_selection == "void_spirit" && IsPlayerSubscribed(playerId))
 			{
-				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png"); 
+				ToggleLockInNotice(HeroPick, false);
+				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
+			}
+			else if (playerInfo.possible_hero_selection == "puck" && !IsPlayerSubscribed(playerId))
+			{
+				ToggleLockInNotice(HeroPick, true);
 			}
 			else
 			{
+				ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage(possibleHeroImages[playerInfo.possible_hero_selection]);
 			}
 		}

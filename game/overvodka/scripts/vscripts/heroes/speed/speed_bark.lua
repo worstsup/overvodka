@@ -4,9 +4,17 @@ speed_bark = class({})
 
 function speed_bark:Precache( context )
     PrecacheResource( "soundfile", "soundevents/speed_bark.vsndevts", context)
+    PrecacheResource( "soundfile", "soundevents/blue.vsndevts", context)
     PrecacheResource( "particle", "particles/speed_bark_cast.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_blue.vpcf", context )
+end
+
+function speed_bark:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "bleval_skin"
+    end
+    return "bleval"
 end
 
 function speed_bark:OnSpellStart()
@@ -35,7 +43,11 @@ function speed_bark:OnSpellStart()
         caster
     )
     ParticleManager:ReleaseParticleIndex(p)
-    EmitSoundOn("speed_bark", caster)
+    local sound = "speed_bark"
+    if caster:HasModifier("modifier_overvodka_store_skin_5") then
+        sound = "blue"
+    end
+    EmitSoundOn(sound, caster)
 end
 
 modifier_speed_bark_effect = class({})

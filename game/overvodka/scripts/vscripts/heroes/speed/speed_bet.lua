@@ -3,13 +3,24 @@ LinkLuaModifier("modifier_speed_bet_reveal", "heroes/speed/speed_bet", LUA_MODIF
 
 speed_bet = class({})
 
+function speed_bet:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "golbet_skin"
+    end
+    return "golbet"
+end
+
 function speed_bet:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
     target:AddNewModifier(caster, self, "modifier_speed_bet", { duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance()) })
     target:AddNewModifier(caster, self, "modifier_speed_bet_reveal", { duration = 0.5 })
-    target:EmitSound("stavka")
+    local sound = "stavka"
+    if caster:HasModifier("modifier_overvodka_store_skin_5") then
+        sound = "stavka_skin"
+    end
+    target:EmitSound(sound)
 
     local p = ParticleManager:CreateParticle("particles/speed_shard_start.vpcf", PATTACH_CUSTOMORIGIN, target)
     ParticleManager:SetParticleControlEnt(p, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetAbsOrigin(), true)

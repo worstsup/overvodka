@@ -10,7 +10,7 @@ end
 function mellstroy_amam:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    self:GetCaster():EmitSound("amamam")
+    EmitSoundOn("amamam", self:GetCaster())
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_mell_amam", {duration = duration}) 
 end
 
@@ -20,6 +20,7 @@ function modifier_mell_amam:IsPurgable() return false end
 
 function modifier_mell_amam:OnDestroy()
     if not IsServer() then return end
+    StopSoundOn("amamam", self:GetCaster())
 end
 
 function modifier_mell_amam:OnCreated()

@@ -99,8 +99,8 @@ function HeroSelection() {
     SimilarHero1.style.visibility = "visible"
     SimilarHero2.style.visibility = "visible"
     SimilarHero3.style.visibility = "visible"
-    // select hero buttons (ban, pick, random)
     
+    // select hero buttons (ban, pick, random)
     HeroBlock.style.visibility = "visible"
     HeroBlock.style.margin = "-10px 22px 0px 0px";
     HeroBlock.style.boxShadow = "0px 0px 15px 0px yellow"

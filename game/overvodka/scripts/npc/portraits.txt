@@ -32,6 +32,68 @@
             }
         }
     }
+    "models/heroes/brewmaster/brewmaster.vmdl"
+	{
+		"PortraitLightPosition"		"51.95 -5.86 225.45"
+		"PortraitLightAngles"		"49.50 171.45 0.00"
+		"PortraitLightFOV"		"81"
+		"PortraitLightDistance"		"142"
+		"PortraitLightColor"		"254 254 207"
+		"PortraitShadowColor"		"97 108 131"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"69 108 141"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"254 254 254"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_whiteExterior.vmat"
+		"PortraitBackgroundColor1"		"0.64 0.80 1"
+		"PortraitBackgroundColor2"		"0.64 0.80 1"
+		"PortraitBackgroundColor3"		"1 1 1"
+		"PortraitBackgroundColor4"		"0.64 0.80 1"
+		"PortraitLightScale"		"1.600000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"30.780 32.650 15.890"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"330.43 65.56 179.76"
+				"PortraitAngles"		"3.53 190.36 0.00"
+				"PortraitFOV"		"11"
+			}
+		}
+	}
+    "models/heroes/lion/lion.vmdl"
+	{
+		"PortraitLightPosition"		"-8.02 -98.37 189.21"
+		"PortraitLightAngles"		"9.64 75.20 0.00"
+		"PortraitLightFOV"		"64"
+		"PortraitLightDistance"		"120"
+		"PortraitLightColor"		"254 168 0"
+		"PortraitShadowColor"		"63 48 48"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"129 136 151"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_gradient_top.vmat"
+		"PortraitBackgroundColor1"		"1 .5 0"
+		"PortraitBackgroundColor2"		"1 .5 .0"
+		"PortraitBackgroundColor3"		"1 .3 .0"
+		"PortraitBackgroundColor4"		"1 .5 .0"
+		"PortraitLightScale"		"2.150000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-12.930 26.190 -2.240"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"397.99 89.38 252.53"
+				"PortraitAngles"		"12.34 193.86 0.00"
+				"PortraitFOV"		"8"
+			}
+		}
+	}
     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"
 	{
 		"PortraitLightPosition"		"187.33 84.33 170.74"

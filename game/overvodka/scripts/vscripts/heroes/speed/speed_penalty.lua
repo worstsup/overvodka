@@ -5,6 +5,13 @@ speed_penalty = class({})
 
 tartar = {}
 
+function speed_penalty:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "futbik_skin"
+    end
+    return "futbik"
+end
+
 function speed_penalty:GetCooldown(level)
     return self.BaseClass.GetCooldown(self, level)
 end

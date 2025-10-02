@@ -2,6 +2,13 @@ LinkLuaModifier("modifier_speed_innate", "heroes/speed/speed_innate", LUA_MODIFI
 
 speed_innate = class({})
 
+function speed_innate:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
+        return "speed_innate_skin"
+    end
+    return "speed_innate"
+end
+
 function speed_innate:GetIntrinsicModifierName()
     return "modifier_speed_innate"
 end

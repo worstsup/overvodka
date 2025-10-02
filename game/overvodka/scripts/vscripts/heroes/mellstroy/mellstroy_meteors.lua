@@ -17,6 +17,7 @@ end
 function mellstroy_meteors:OnSpellStart()
     if not IsServer() then return end
 	local caster = self:GetCaster()
+    self.tartar = {}
 	EmitSoundOn("fruits", caster)
 	caster:AddNewModifier(caster, self, "modifier_mellstroy_meteors", {duration = 7})
 end
@@ -29,7 +30,7 @@ function mellstroy_meteors:OnProjectileHit( target, location )
     local damage = self:GetSpecialValueFor("damage")
     local gold = self:GetSpecialValueFor("gold")
 	local fire_duration = self:GetSpecialValueFor("fire_duration")
-    for _,v in ipairs(tartar) do  
+    for _,v in ipairs(self.tartar) do
         if v == target then return end
     end
     target:EmitSound("Hero_WarlockGolem.Attack")
@@ -42,7 +43,7 @@ function mellstroy_meteors:OnProjectileHit( target, location )
     if target and not target:IsNull() then
         target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_slowed_debuff", {duration = stun_time * (1 - target:GetStatusResistance())})
         target:AddNewModifier(caster, self, "modifier_mellstroy_meteor_fired_debuff", {duration = fire_duration * (1 - target:GetStatusResistance())})
-        table.insert(tartar, target)
+        table.insert(self.tartar, target)
     end
 end
 
@@ -63,7 +64,7 @@ function modifier_mellstroy_meteors:OnIntervalThink()
     local forward_dir = caster:GetForwardVector()
     forward_dir.z = 0
     local angle_step = math.rad(45)
-	tartar = {}
+	self:GetAbility().tartar = {}
     for i = 0, 7 do
         local angle = angle_step * i
         local cosA  = math.cos(angle)

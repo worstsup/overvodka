@@ -216,6 +216,10 @@ function GetOvervodkaHeroName(HeroName){
     }
     if (HeroName == "npc_dota_hero_lion")
     {
+        OvervodkaName = "npc_dota_hero_chef"
+    }
+    if (HeroName == "npc_dota_hero_puck")
+    {
         OvervodkaName = "npc_dota_hero_lev"
     }
     if (HeroName == "npc_dota_hero_ursa")

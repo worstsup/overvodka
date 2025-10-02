@@ -187,6 +187,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 				end
 			end
 	  	end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_puck" then
+			spawnedUnit.a = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/lion/lion_ti9_immortal_head/lion_ti9_immortal_head.vmdl"})
+			spawnedUnit.a:FollowEntity(spawnedUnit, true)
+			spawnedUnit.b = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/lion/hell_weapon/hell_weapon.vmdl"})
+			spawnedUnit.b:FollowEntity(spawnedUnit, true)
+			spawnedUnit.c = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/lion/hellclaw_of_maelrawn/hellclaw_of_maelrawn.vmdl"})
+			spawnedUnit.c:FollowEntity(spawnedUnit, true)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)

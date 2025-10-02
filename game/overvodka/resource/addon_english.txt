@@ -162,17 +162,17 @@
 		"Vote_Description" "Choose which hero will be the next to appear in the OVERVODKA custom!"
 		"Vote_Results_Title" "Current results"
 		"Vote_Loading" "Loading..."
-		"Vote_EndDate" "Choose wisely, you won't be able to re-vote! The voting results will be announced on August 10."
+		"Vote_EndDate" "Choose wisely, you won't be able to re-vote! The voting results will be announced on October 15."
 
 		"pirozhkov" "Artur Pirozhkov"
 		"morgen" "MORGENSHTERN"
-		"bikov" "Dr. Bykov"
+		"kobyakov" "Kobyakov"
 		"mrbeast" "MrBeast"
-		"kuzya" "Kuzya"
+		"rostikfacekid" "rostikfacekid"
 		"garik" "Garik Kharlamov"
-		"squid" "456"
-		"texnik" "Pasha Technik"
-		"nagiev" "Dmitriy Nagiev"
+		"darkprince" "dark prince))"
+		"helin" "heliN139"
+		"nagiev" "Dmitry Nagiev"
 
 		"Store_Category_Skins" "Skins"
 		"Store_Category_Effects" "Effects"
@@ -186,6 +186,7 @@
 		"Store_Item_skin_2_name" "Evil Chill Guy"
 		"Store_Item_skin_3_name" "Macan Cocksucker"
 		"Store_Item_skin_4_name" "Ghoul Ivan Zolo"
+		"Store_Item_skin_5_name" "Golmiy - IShowSpeed"
 
 		"Store_Item_effect_1_name" "Golden Effect"
 		"Store_Item_effect_2_name" "Diretide effect"
@@ -202,7 +203,7 @@
 
 		"Store_Item_prime_day_name" "Prime for a day"
 		"Store_Item_prime_week_name" "Prime for a week"
-
+		"DOTA_Tooltip_overvodka_prime_notice"	"Only with Overvodka Prime"
 		"Store_NotYourHero" "Not your fuckin hero"
 
 		"COMEBACK_SYSTEM_DESC"							"This team gets x2 circle XP, x2 gold for coins, and x2 score points for kills."
@@ -2218,6 +2219,11 @@
 		"DOTA_Tooltip_ability_mellstroy_casino_allin_Description" "Mellstroy bets half of his current savings and has a <font color='#FFFFFF'>50%</font> chance of either doubling them or losing everything. \n<font color='#FFFFFF'> After three wins, the ability becomes inactive.</font>"
 		"DOTA_Tooltip_ability_alchemist_goblins_greed" "INCREASED DEPOSIT"
 		"DOTA_Tooltip_ability_alchemist_goblins_greed_Description" "The hero starts the game with an additional 600 gold."
+		"DOTA_Tooltip_ability_mellstroy_scepter" "BEM BEM BEM"
+		"DOTA_Tooltip_ability_mellstroy_scepter_description" "Mellstroy begins singing bem bem bem, and for %damage_cleanse% of the damage taken, release the effects of the current level of Sweet Bonanza (no more than once every %damage_reset_interval% seconds)."
+		"DOTA_Tooltip_ability_mellstroy_scepter_duration" "DURATION:"
+		"DOTA_Tooltip_modifier_mellstroy_scepter" "Bem bem bem"
+		"DOTA_Tooltip_modifier_mellstroy_scepter_description" "Spins the slots when taking damage"
 		"DOTA_Tooltip_Facet_mellstroy_e" "JUICY DEP"
 		"DOTA_Tooltip_Facet_mellstroy_e_Description" "A percentage of the character's current gold is added to the health of the barrier from the WHAT THE BUSINESS?"
 		"DOTA_Tooltip_ability_mellstroy_business_Facet_mellstroy_e" "%shield_from_gold%%% of the hero's current gold is added to the health of the barrier."
