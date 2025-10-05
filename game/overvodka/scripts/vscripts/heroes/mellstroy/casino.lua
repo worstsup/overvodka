@@ -49,22 +49,12 @@ function mellstroy_casino:OnSpellStart()
                 ability:StartCooldown(new_cooldown)
             end
         end
-        if caster:HasScepter() then
-            caster:ModifyStrength(1)
-            caster:ModifyAgility(1)
-            caster:ModifyIntellect(1)
-        end
     elseif random_chance <= 55 or loses >= 2 then
         local reward = ability_cost * 2 
         local notion = reward - ability_cost
         caster:ModifyGold(reward, false, 0)
         caster:EmitSound("normalwin")
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
-        if caster:HasScepter() then
-            caster:ModifyStrength(1)
-            caster:ModifyAgility(1)
-            caster:ModifyIntellect(1)
-        end
         loses = 0
     else
         caster:EmitSound("lose_"..RandomInt(1,2))

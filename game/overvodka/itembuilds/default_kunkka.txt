@@ -29,12 +29,13 @@
 			"item"		"item_govno"
 			"item"		"item_aegis_hero"
 			"item"		"item_waka"
-			"item"		"item_armature_strike"
+			"item"		"item_shemelis"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_pasito"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_armature_strike"
 			"item"		"item_aghanims_shard"
 			"item"		"item_invis_sword_datadriven"
 		}

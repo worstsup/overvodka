@@ -3097,17 +3097,15 @@
 					"value"	"5 6 7 8"
 					"special_bonus_unique_sahur_4" "+2"
 				}
-				"bonus_strength"				"0"
 				"move_speed"
 				{
 					"value"	"10"
 					"special_bonus_unique_sahur_1" "+10"
 				}
 				"model_scale"					"-70"
-				"bonus_intellect"				"0"
 				"bonus_agility"
 				{
-					"value"	"45 55 65 75"
+					"value"	"55 60 65 70"
 					"special_bonus_unique_sahur_7" "+10"
 				}
 				"has_facet"
@@ -14675,7 +14673,7 @@
 	//=================================================================================================================
 	// ШОКОЛАДИ
 	//=================================================================================================================
-	"Megumin_mana_aura"
+	"lev_w"
 	{
 		"BaseClass"                     "ability_datadriven"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
@@ -14705,18 +14703,18 @@
 		
 		"Modifiers"
 		{
-			"modifier_Megumin_mana_aura"
+			"modifier_lev_w"
 			{
 				"Passive"               "1"
 				"Aura_ApplyToCaster"            "1"
 				"IsHidden"              "1"
-				"Aura"                  "modifier_Megumin_mana_auravision"
+				"Aura"                  "modifier_lev_wvision"
 				"Aura_Radius"           "%global_radius"
 				"Aura_Teams"            "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 				"Aura_Types"            "DOTA_UNIT_TARGET_HERO"
 			}
 
-			"modifier_Megumin_mana_auravision"
+			"modifier_lev_wvision"
 			{
 				"IsBuff"	"1"
 				
@@ -14727,7 +14725,7 @@
 				}
 			}
 			
-			"modifier_Megumin_mana_active"
+			"modifier_lev_w_active"
 			{
 				"Passive"           "0"
 				"IsHidden"          "1"
@@ -14746,7 +14744,7 @@
 		{
 			"ApplyModifier"
 			{
-				"ModifierName"  "modifier_Megumin_mana_active"
+				"ModifierName"  "modifier_lev_w_active"
 				"Target"
 				{
 					"Center"    "CASTER"

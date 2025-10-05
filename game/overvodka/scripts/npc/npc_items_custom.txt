@@ -3222,4 +3222,50 @@
 			"overheal_duration"		"10"
 		}
 	}
+	"item_recipe_shemelis"
+  	{
+  		"BaseClass"				 "item_datadriven"
+  		"AbilityTextureName"		"recipe"
+  		"Model"						"models/props_gameplay/recipe.vmdl"
+  		"ItemCost"					"650"
+		"ItemRecipe"				"1"
+		"ItemResult"				"item_shemelis"
+		"ItemRequirements"
+		{
+			"01" 					"item_butterfly;item_diffusal_blade"
+		}
+  	}
+	"item_shemelis"
+  	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items/shemelis"
+  		"AbilityTextureName"		"shemelis"
+		"Model"						"models/props_gameplay/red_box.vmdl" 
+ 		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+  		"ItemCost"					"8600"
+		"AbilityCooldown"			"15"
+		"AbilityManaCost"			"100"
+		"AbilityCastRange"			"600"
+		"ItemDroppable" 			"1"
+
+		"AbilityValues"
+		{
+			"agi"			 		"50"
+			"int"					"10"
+			"dmg"		  			"25"
+			"ev"					"35"
+			"attack"				"20"
+			"mana_per_hit"			"40"
+			"mana_per_hit_illusion"	"10"
+			"damage_per_burn"		"1"
+			"slow_movespeed"		"-80"
+			"duration"				"4"
+			"range"					"600"
+			"speed"					"2500"
+			"barrier_pct"			"50"
+			"barrier_duration"		"5"
+		}
+  	}
 }

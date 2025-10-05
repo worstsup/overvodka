@@ -97,13 +97,8 @@ function modifier_sahur_facet_bonus:IsHidden()
 	end
 end
 
-function modifier_sahur_facet_bonus:IsPurgable()
-    return false
-end
-
-function modifier_sahur_facet_bonus:RemoveOnDeath()
-    return false
-end
+function modifier_sahur_facet_bonus:IsPurgable() return false end
+function modifier_sahur_facet_bonus:RemoveOnDeath() return false end
 
 function modifier_sahur_facet_bonus:DeclareFunctions()
     return {

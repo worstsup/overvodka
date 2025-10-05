@@ -47,6 +47,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_shemelis"
 			"item"		"item_kaska"
 			"item"		"item_govno"
 			"item"		"item_invis_sword_datadriven"

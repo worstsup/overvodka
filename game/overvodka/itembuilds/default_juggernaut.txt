@@ -30,11 +30,12 @@
             "item"		"item_govno"
             "item"		"item_pasito"
             "item"		"item_ultimate_scepter"
-            "item"		"item_waka"
+            "item"		"item_shemelis"
 		}
 
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_waka"
 			"item"		"item_kaska"
             "item"		"item_aghanims_shard"
             "item"		"item_armature_strike"

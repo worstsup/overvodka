@@ -26,14 +26,15 @@
 		{
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
-            "item"		"item_govno"
+			"item"		"item_aghanims_shard"
 			"item"		"item_armature_strike"
-			"item"		"item_kaska"
-            "item"		"item_aghanims_shard"
+			"item"		"item_shemelis"
+			"item"		"item_govno"
             "item"		"item_pasito"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
+			"item"		"item_kaska"
 			"item"		"item_oboyudno_2"
 			"item"		"item_blink"
 			"item"		"item_magic_aegis"

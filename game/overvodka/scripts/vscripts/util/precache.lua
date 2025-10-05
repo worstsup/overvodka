@@ -120,6 +120,8 @@ PrecacheUtils.particles = {
 		"particles/econ/events/seasonal_reward_line_fall_2025/lotus_orb_fallrewardline_2025_shield_fallrewardline_2025.vpcf",
 		"particles/chara_face2.vpcf",
 		"particles/bikov_attack.vpcf",
+		"particles/shemelis_trail.vpcf",
+		"particles/shemelis_slash.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -430,6 +432,7 @@ PrecacheUtils.sounds = {
 		"soundevents/game_sounds_heroes/game_sounds_keeper_of_the_light.vsndevts", 
 		"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts",
 		"soundevents/sans_damage.vsndevts",
+		"soundevents/shemelis.vsndevts",
 }
 
 PrecacheUtils.mapResources = {

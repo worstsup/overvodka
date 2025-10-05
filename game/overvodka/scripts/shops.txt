@@ -99,6 +99,7 @@
 	{
 		"item"		"item_hqd"
 		"item"		"item_waka"
+		"item"		"item_shemelis"
 		"item"		"item_onehp"
 		"item"		"item_kaska"
 		"item"		"item_govno"
@@ -109,8 +110,7 @@
 		"item"		"item_oboyudno_2"
 		"item"		"item_elixir_collector"
 		"item"		"item_minion_generator"
-		"item"		"item_swag"
-		"item"		"item_claymore"				
+		"item"		"item_swag"		
 		"item"		"item_mithril_hammer"	
 	}
 			
