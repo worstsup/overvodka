@@ -254,10 +254,6 @@ function modifier_macan_r:HitLogic()
 end
 
 function modifier_macan_r:UpdateHorizontalMotion( me, dt )
-	if self.parent:IsRooted() then
-		self:Destroy()
-		return
-	end
 	self:HitLogic()
 	self:TurnLogic( dt )
 	local nextpos = me:GetOrigin() + me:GetForwardVector() * self.speed * dt
@@ -267,6 +263,8 @@ end
 function modifier_macan_r:OnHorizontalMotionInterrupted()
 	self:Destroy()
 end
+
+function modifier_macan_r:GetMotionPriority() return DOTA_MOTION_CONTROLLER_PRIORITY_ULTRA end
 
 function modifier_macan_r:GetEffectName()
 	return "particles/macan_r.vpcf"

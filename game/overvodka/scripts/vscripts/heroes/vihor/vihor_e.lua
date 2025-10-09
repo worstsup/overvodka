@@ -28,7 +28,6 @@ function modifier_vihor_e:OnCreated( kv )
 	self.blocked = self:GetAbility():GetSpecialValueFor("blocked")
 	self.chance = self:GetAbility():GetSpecialValueFor("chance")
 	self.damage = self:GetAbility():GetSpecialValueFor("damage")
-	self.tick_duration = self:GetAbility():GetSpecialValueFor("tick_duration")
 end
 
 function modifier_vihor_e:OnRefresh( kv )
@@ -36,17 +35,12 @@ function modifier_vihor_e:OnRefresh( kv )
 	self.blocked = self:GetAbility():GetSpecialValueFor("blocked")
 	self.chance = self:GetAbility():GetSpecialValueFor("chance")
 	self.damage = self:GetAbility():GetSpecialValueFor("damage")
-	self.tick_duration = self:GetAbility():GetSpecialValueFor("tick_duration")
-end
-
-function modifier_vihor_e:OnDestroy( kv )
 end
 
 function modifier_vihor_e:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 	}
-	return funcs
 end
 
 function modifier_vihor_e:OnAttackLanded( params )
@@ -57,8 +51,8 @@ function modifier_vihor_e:OnAttackLanded( params )
 		if not params.attacker:IsRealHero() then return end
 		local random_chance = RandomInt(1, 100)
 		if random_chance <= self.chance then
-			params.attacker:AddNewModifier( params.attacker, self:GetAbility(), "modifier_shadow_shaman_voodoo", { duration = self.duration } )
-			params.attacker:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_vihor_e_debuff", { duration = self.tick_duration } )
+			params.attacker:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_shadow_shaman_voodoo", { duration = self.duration } )
+			params.attacker:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_vihor_e_debuff", { duration = self:GetAbility():GetSpecialValueFor("tick_duration") } )
 			ApplyDamage({victim = params.attacker, attacker = self:GetParent(), damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self:GetAbility()})
 			EmitSoundOn("vihor_e", self:GetParent())
 			self:GetAbility():UseResources( false, false, false, true )
@@ -71,9 +65,6 @@ end
 
 modifier_vihor_e_debuff = class({})
 
-function modifier_vihor_e_debuff:IsDebuff()
-	return true
-end
 function modifier_vihor_e_debuff:IsPurgable()
 	return false
 end
@@ -81,16 +72,9 @@ function modifier_vihor_e_debuff:IsHidden()
 	return false
 end
 
-function modifier_vihor_e_debuff:OnCreated( kv )
-	self.damage = self:GetAbility():GetSpecialValueFor("damage")
-	self:StartIntervalThink( 1 )
-end
-function modifier_vihor_e_debuff:OnRefresh( kv )
-	self.damage = self:GetAbility():GetSpecialValueFor("damage")
-	self:StartIntervalThink( 1 )
-end
-
-function modifier_vihor_e_debuff:OnDestroy()
+function modifier_vihor_e_debuff:OnCreated()
+	if not IsServer() then return end
+	self:StartIntervalThink(1)
 end
 
 function modifier_vihor_e_debuff:OnIntervalThink()
@@ -98,7 +82,7 @@ function modifier_vihor_e_debuff:OnIntervalThink()
 		local damage = {
 			victim = self:GetParent(),
 			attacker = self:GetCaster(),
-			damage = self.damage,
+			damage = self:GetAbility():GetSpecialValueFor("damage"),
 			damage_type = DAMAGE_TYPE_PURE,
 			ability = self:GetAbility()
 		}

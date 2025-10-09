@@ -81,7 +81,6 @@ function stint_w:OnSpellStart()
     else
         mT = roll(ch_bad, ch_15, ch_2, ch_25)
     end
-    print(string.format("[Stint W] %s rolled %.1fx, %s rolled %.1fx", caster:GetName(), mC, target:GetName(), mT))
     local part1_caster = math.floor(mC) + 10
     local part2_caster
     if mC == 1.5 or mC == 2.5 then
@@ -206,7 +205,6 @@ function modifier_stint_w_debt:OnIntervalThink()
         ParticleManager:ReleaseParticleIndex(effect_cast_debtor)
         local effect_cast_caster = ParticleManager:CreateParticle("particles/stint_debt.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
         ParticleManager:ReleaseParticleIndex(effect_cast_caster)
-        print(string.format("[Stint W Debt] %s paid %d to %s, remaining %d", self.debtor:GetName(), actual, self.caster:GetName(), debt))
     end
     if debt <= 0 then self:Destroy() end
 end

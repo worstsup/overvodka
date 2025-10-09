@@ -158,11 +158,6 @@ end
 function modifier_mellstroy_shavel_debuff:OnHorizontalMotionInterrupted()
 	self:Destroy()
 end
-function modifier_mellstroy_shavel_debuff:UpdateVerticalMotion( me, dt )
-end
-function modifier_mellstroy_shavel_debuff:OnHorizontalMotionInterrupted()
-	self:Destroy()
-end
 function modifier_mellstroy_shavel_debuff:GetPriority()
 	return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
 end

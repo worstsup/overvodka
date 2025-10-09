@@ -105,78 +105,104 @@ function modifier_vihor_r_debuff:OnCreated(kv)
     self.target = self:GetCaster():GetAbsOrigin() + RandomVector(100)
     self.tick_damage = self:GetAbility():GetSpecialValueFor("tick_damage")
     self.interval = 0.2
+    self.next_order_time = 0.0
+    self.radius = self:GetAbility():GetSpecialValueFor("radius")
     self:GetParent():Stop()
+    self:GetParent():Interrupt()
+    self:GetParent():SetIdleAcquire(false)
+    self:GetParent():SetAcquisitionRange(0)
+    self:GetParent():SetForceAttackTarget(target)
+    self:IssueAttackOrder()
     self:StartIntervalThink(self.interval)
+end
+
+local function IsValidDebuffedEnemy(u)
+    return u and not u:IsNull() and u:IsAlive()
+        and u:HasModifier("modifier_vihor_r_debuff")
+        and not u:IsDebuffImmune()
+        and not u:HasModifier("modifier_black_king_bar_immune")
+end
+
+function modifier_vihor_r_debuff:IssueAttackOrder()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+
+    local pool = FindUnitsInRadius(
+        caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self.radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false
+    )
+
+    local target, bestDist = nil, 1e18
+    local myPos = parent:GetAbsOrigin()
+    for _,u in ipairs(pool) do
+        if u ~= parent and IsValidDebuffedEnemy(u) then
+            local d = (u:GetAbsOrigin() - myPos):Length2D()
+            if d < bestDist then
+                bestDist = d
+                target = u
+            end
+        end
+    end
+
+    if target then
+        parent:SetForceAttackTarget(target)
+        parent:MoveToTargetToAttack(target)
+    else
+        parent:SetForceAttackTarget(nil)
+        parent:MoveToPosition(caster:GetAbsOrigin())
+    end
+
+    self.next_order_time = GameRules:GetGameTime() + 1.25
 end
 
 function modifier_vihor_r_debuff:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local caster = self:GetCaster()
-    self.dmg = self.tick_damage * self:GetParent():GetMaxHealth() * 0.01 * self.interval
+
+    local dps = self.tick_damage * parent:GetMaxHealth() * 0.01
+    local dmg = dps * self.interval
     if GetMapName() == "overvodka_5x5" then
-        self.dmg = self.dmg + self:GetAbility():GetSpecialValueFor("dota_damage") * self.interval
+        dmg = dmg + self:GetAbility():GetSpecialValueFor("dota_damage") * self.interval
     end
-    if self:GetParent():GetHealthPercent() <= 3 then
+    if parent:GetHealthPercent() <= 3 then
         self.min_health = 0
-        self:GetParent():Kill(self:GetAbility(), self:GetCaster())
+        parent:Kill(self:GetAbility(), caster)
+        return
     end
-    AddFOWViewer(parent:GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetAbility():GetSpecialValueFor("radius"), self.interval, false)
+    ApplyDamage({
+        victim = parent, attacker = caster, damage = dmg,
+        damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE,
+        ability = self:GetAbility()
+    })
+
+    AddFOWViewer(parent:GetTeamNumber(), caster:GetAbsOrigin(), self.radius, self.interval, false)
     if not parent:IsMoving() then
-        parent:MoveToPosition(self.target)
+        parent:MoveToPosition(caster:GetAbsOrigin())
     end
-    if GameRules:GetGameTime() % 1.2 < self.interval then
-        local debuff_radius = self:GetAbility():GetSpecialValueFor("radius")
-        local enemies = FindUnitsInRadius(
-            caster:GetTeamNumber(),
-            caster:GetAbsOrigin(),
-            nil,
-            debuff_radius,
-            DOTA_UNIT_TARGET_TEAM_ENEMY,
-            DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-            FIND_ANY_ORDER,
-            false
-        )
 
-        for _, attacker in ipairs(enemies) do
-            if attacker:IsAlive() and attacker:HasModifier("modifier_vihor_r_debuff") and not attacker:IsDebuffImmune() and not attacker:HasModifier("modifier_black_king_bar_immune") then
-                local target = nil
-                for _, potential_target in ipairs(enemies) do
-                    if potential_target:IsAlive() and potential_target:HasModifier("modifier_vihor_r_debuff") and not potential_target:IsDebuffImmune() and potential_target ~= attacker then
-                        target = potential_target
-                        break
-                    else
-                        attacker:Stop()
-                    end
-                end
-
-                if target and not target:IsNull() then
-                    attacker:MoveToTargetToAttack(target)
-                    Timers:CreateTimer(0.9, function()
-                        if not attacker:IsNull() then
-                            attacker:Stop()
-                        end
-                    end)
-                end
-            end
-        end
+    local now = GameRules:GetGameTime()
+    if now >= (self.next_order_time or 0) then
+        self:IssueAttackOrder()
     end
-    ApplyDamage({ victim = parent, attacker = caster, damage = self.dmg, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, ability = self:GetAbility() })
 end
 
 function modifier_vihor_r_debuff:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
         MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
         MODIFIER_PROPERTY_MIN_HEALTH,
+        MODIFIER_EVENT_ON_ATTACK_START,
     }
-    return funcs
 end
+
 function modifier_vihor_r_debuff:GetMinHealth()
     return self.min_health
 end
+
 function modifier_vihor_r_debuff:GetModifierMoveSpeedBonus_Percentage()
     return self.slow
 end
@@ -188,10 +214,23 @@ end
 function modifier_vihor_r_debuff:GetModifierFixedAttackRate()
     return 0.3
 end
+
+function modifier_vihor_r_debuff:OnAttackStart(params)
+    if not IsServer() then return end
+    if params.attacker ~= self.parent then return end
+    local tgt = params.target
+    if not IsValidDebuffedEnemy(tgt) then
+        self.parent:Interrupt()
+        self.parent:Stop()
+        self:IssueAttackOrder()
+    end
+end
+
 function modifier_vihor_r_debuff:OnDestroy()
     if not IsServer() then return end
     local parent = self:GetParent()
     if not parent:IsNull() then
+        parent:SetForceAttackTarget(nil)
         parent:Stop()
     end
     self:GetCaster():RemoveGesture(ACT_DOTA_CAST_ABILITY_5)

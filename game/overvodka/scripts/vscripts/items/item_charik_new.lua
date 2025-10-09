@@ -93,7 +93,6 @@ end
 
 function modifier_item_charik_new_regen:OnIntervalThink()
     if not IsServer() then return end
-    if not self:GetAbility() then return end
     local parent = self:GetParent()
     local ability = self:GetAbility()
     if parent:IsIllusion() then return end
@@ -101,7 +100,10 @@ function modifier_item_charik_new_regen:OnIntervalThink()
         self.standing_time = 0 
         return 
     end
-    if not ability or ability:IsNull() then return end
+    if not ability or ability:IsNull() then
+        self.standing_time = 0
+        return
+    end
     if ability:IsCooldownReady() then
         local percent_min = ability:GetSpecialValueFor("percent_min") / 100
         local percent_heal = ability:GetSpecialValueFor("percent_heal") / 100
@@ -110,7 +112,7 @@ function modifier_item_charik_new_regen:OnIntervalThink()
             return
         end
 
-        if not parent:IsMoving() then
+        if not parent:IsMoving() and not parent:IsOutOfGame() then
             self.standing_time = self.standing_time + 0.1
             if self.standing_time >= 1.0 and not self.k then
                 EmitSoundOn("smok2", parent)
@@ -120,7 +122,9 @@ function modifier_item_charik_new_regen:OnIntervalThink()
             if self.standing_time >= 3.0 then
                 local healAmount = parent:GetMaxHealth() * percent_heal
                 parent:Heal(healAmount, ability)
+                SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self:GetParent(), healAmount, self:GetParent():GetPlayerOwner())
                 local manaRestore = parent:GetMaxMana() * percent_heal
+                SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_ADD, self:GetParent(), manaRestore, self:GetParent():GetPlayerOwner()) 
                 parent:GiveMana(manaRestore)
                 local playerID = parent:GetPlayerOwnerID()
                 if playerID and PlayerResource:IsValidPlayerID(playerID) then

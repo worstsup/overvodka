@@ -1,5 +1,6 @@
 LinkLuaModifier("modifier_stray_r", "heroes/stray/stray_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_stray_r_shard", "heroes/stray/stray_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_stray_r_shard_cooldown", "heroes/stray/stray_r", LUA_MODIFIER_MOTION_NONE)
 
 stray_r = class({})
 
@@ -133,7 +134,7 @@ function modifier_stray_r_shard:OnCreated(params)
     if not IsServer() then return end
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
     self.damage = self:GetAbility():GetSpecialValueFor("taran_damage")
-    self:StartIntervalThink(0.15)
+    self:StartIntervalThink(0.05)
 end
 
 function modifier_stray_r_shard:OnDestroy()
@@ -145,7 +146,7 @@ function modifier_stray_r_shard:OnIntervalThink()
     GridNav:DestroyTreesAroundPoint(self:GetCaster():GetAbsOrigin(), self.radius, true)
     local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
     for _, unit in pairs(units) do
-        if not unit:IsDebuffImmune() and not unit:IsMagicImmune() then
+        if not unit:IsDebuffImmune() and not unit:IsMagicImmune() and not unit:HasModifier("modifier_stray_r_shard_cooldown") then
             local particle = ParticleManager:CreateParticle( "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", PATTACH_POINT_FOLLOW, unit )
             ParticleManager:SetParticleControlEnt( particle, 0, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:ReleaseParticleIndex( particle )
@@ -168,7 +169,12 @@ function modifier_stray_r_shard:OnIntervalThink()
                         knockback_height = 50
                     }
                 )
+                unit:AddNewModifier(self:GetCaster(), self, "modifier_stray_r_shard_cooldown", {duration = 0.5})
             end
         end
     end
 end
+
+modifier_stray_r_shard_cooldown = class({})
+function modifier_stray_r_shard_cooldown:IsPurgable() return false end
+function modifier_stray_r_shard_cooldown:IsHidden() return true end

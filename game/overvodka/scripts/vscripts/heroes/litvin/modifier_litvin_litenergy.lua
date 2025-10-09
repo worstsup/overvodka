@@ -18,11 +18,6 @@ function modifier_litvin_litenergy:OnCreated( kv )
 	self.base_miss = self.base_miss + self.level_miss * self.level
 end
 
---------------------------------------------------------------------------------
-
-function modifier_litvin_litenergy:OnRemoved()
-end
-
 function modifier_litvin_litenergy:GetTexture()
 	return "litenergy"
 end
