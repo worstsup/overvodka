@@ -17,6 +17,107 @@ GameUI.CustomUIConfig().team_select =
     "bShowSpectatorTeam" : false
 }
 
+function UpdateHeroSelection() {
+    if (Game.GameStateIs(DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME)) {
+        UnmuteAll()
+    }
+}
+
+(function () {
+    GameEvents.Subscribe('game_rules_state_change', UpdateHeroSelection);
+})();
+
+function RemoveMute() 
+{
+    let scoreboard = FindDotaHudElement("scoreboard")
+    if (scoreboard) {
+        scoreboard.FindChildrenWithClassTraverse("ReportColumn")?.forEach(element => {
+            element.style.visibility = "collapse"
+        })
+    }
+    $.Schedule(0, RemoveMute)
+}
+
+$.Schedule(0, RemoveMute)
+
+let updateMuteSchedule = null;
+let updateMuteInterval = 0.1;
+
+function UnmuteAll()
+{
+    for (let nPlayerID = 0; nPlayerID < Players.GetMaxPlayers(); nPlayerID++) {
+        if (nPlayerID != Players.GetLocalPlayer()) {
+            Game.SetPlayerMuted( nPlayerID, false )
+            Game.SetPlayerMuted( nPlayerID, false )
+            Game.SetPlayerMuted( nPlayerID, false )
+        }
+    }
+}
+
+function GetLocalHeroName() {
+    let localPlayer = Players.GetLocalPlayer();
+    let heroIndex = Players.GetPlayerHeroEntityIndex(localPlayer);
+    if (heroIndex != -1) {
+        return Entities.GetUnitName(heroIndex);
+    }
+    if (Players.IsSpectator( localPlayer )) {
+        return "spectator";
+    }
+    return null;
+}
+
+function ApplyMuteFromNetTable() {
+    let localHeroName = GetLocalHeroName();
+    let muteData = null;
+    
+    if (localHeroName) {
+        muteData = CustomNetTables.GetTableValue("mute_data", localHeroName);
+    }
+    if (!muteData && localHeroName == "spectator") {
+        muteData = CustomNetTables.GetTableValue("mute_data", "npc_dota_hero_abaddon");
+    }
+    if (!muteData) {
+        muteData = CustomNetTables.GetTableValue("mute_data", "all");
+    }
+    if (muteData) {
+        for (let nPlayerID = 0; nPlayerID < Players.GetMaxPlayers(); nPlayerID++) {
+            if (nPlayerID != Players.GetLocalPlayer()) {
+                let hero = Players.GetPlayerHeroEntityIndex(nPlayerID);
+                if (hero != -1) {
+                    let heroName = Entities.GetUnitName(hero);
+                    if (muteData.hasOwnProperty(heroName)) {
+                        Game.SetPlayerMutedVoice(nPlayerID, muteData[heroName] == 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function StartMuteLoop() {
+    ApplyMuteFromNetTable();
+    updateMuteSchedule = $.Schedule(updateMuteInterval, StartMuteLoop);
+}
+
+StartMuteLoop();
+
+
+GameEvents.Subscribe("PrintMuted", PrintMuted);
+
+function PrintMuted()
+{
+    for (let nPlayerID = 0; nPlayerID < Players.GetMaxPlayers(); nPlayerID++) {
+        if (Players.GetPlayerHeroEntityIndex( nPlayerID ) != -1) {
+            print(Entities.GetUnitName(Players.GetPlayerHeroEntityIndex( nPlayerID )))
+            print(
+                "all " + Game.IsPlayerMuted( nPlayerID ) + " " +
+                "voice " + Game.IsPlayerMutedVoice( nPlayerID ) + " " +
+                "text " + Game.IsPlayerMutedText( nPlayerID )
+            )
+        }
+    }
+}
+
 GameUI.CustomUIConfig().team_logo_xml = "file://{resources}/layout/custom_game/overthrow_team_icon.xml";
 GameUI.CustomUIConfig().team_logo_large_xml = "file://{resources}/layout/custom_game/overthrow_team_icon_large.xml";
 

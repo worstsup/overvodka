@@ -15,7 +15,7 @@ function eldzhey_e:OnSpellStart()
 	local caster = self:GetCaster()
 	EmitSoundOn("parit", caster)
 	local cooldown = caster:FindAbilityByName("eldzhey_w"):GetCooldownTimeRemaining()
-	caster:FindAbilityByName("eldzhey_w"):StartCooldown(cooldown + 6)
+	caster:FindAbilityByName("eldzhey_w"):StartCooldown(cooldown + self:GetSpecialValueFor("heal_bonus_cooldown"))
 	caster:AddNewModifier(caster, self, "modifier_eldzhey_e", {duration = self:GetSpecialValueFor("duration")})
 end
 

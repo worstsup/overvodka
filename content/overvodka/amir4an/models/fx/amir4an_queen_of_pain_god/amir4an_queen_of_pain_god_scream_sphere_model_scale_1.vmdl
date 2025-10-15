@@ -1,0 +1,56 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc28:version{fb63b6ca-f435-4aa0-a2c7-c66ddc651dca} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+				]
+				bone_cull_type = "None"
+			},
+			
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					
+					{
+						_class = "RenderMeshFile"
+						name = "unnamed_1"
+						filename = "amir4an/models/fx/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_scream_sphere_model_scale_1_unnamed_1.dmx"
+					},
+				]
+			},
+			
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					
+					{
+						_class = "Bone"
+						name = "Bone"
+						origin = 
+						[
+							0.000000,
+							-0.000000,
+							0.000000,
+						]
+						angles = 
+						[
+							0.000000,
+							0.000000,
+							89.999990,
+						]
+						do_not_discard = true
+					},
+				]
+			},
+		]
+	}
+}

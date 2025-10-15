@@ -49,7 +49,8 @@ function OvervodkaGameMode:CustomSpawnCamps()
 	end
 end
 
-
+CustomNetTables:SetTableValue("voice_data", "ambient_noice_correction", {ambient_noice_correction = -30})
+_G.ambient_noice_correction = -30
 ---------------------------------------------------------------------------
 -- Initializer
 ---------------------------------------------------------------------------
@@ -98,7 +99,7 @@ function OvervodkaGameMode:InitGameMode()
   		MusicZoneTrigger:Init()
 	end
 	DebugPanel:Init()
-
+	CustomGameEventManager:RegisterListener( "event_update_loud_server", Dynamic_Wrap(self, "event_update_loud_server"))
 	GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	GameRules:GetGameModeEntity():SetCustomHeroMaxLevel( 35 )
 	GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(XP_PER_LEVEL_TABLE)
@@ -279,7 +280,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -351,6 +352,56 @@ function OvervodkaGameMode:InitGameMode()
 		DOTA_POST_GAME_COLUMN_DAMAGE,
 		DOTA_POST_GAME_COLUMN_HEALING,
 	} )
+end
+
+function OvervodkaGameMode:event_update_loud_server(data)
+    local hHero = PlayerResource:GetSelectedHeroEntity(data.PlayerID)
+    if not hHero or not hHero:GetUnitName() == "npc_dota_hero_abaddon" then
+        return
+    end
+    hHero.voice_level = max(0.01, 1 - math.abs(((data.voice_level + _G.ambient_noice_correction) / 60)))
+end
+
+function OvervodkaGameMode:UpdateMute(hero_name_to_mute, hero_owner, player, reverce, abi_name)
+    local t = {}
+    for iPlayerID = 0,20 do
+        if PlayerResource:IsValidPlayer(iPlayerID) then
+            local hero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+            if hero then
+                if hero_name_to_mute then
+                    if hero:GetUnitName() == hero_name_to_mute then
+                        t[hero:GetUnitName()] = reverce ~= nil and reverce
+                    else
+                        t[hero:GetUnitName()] = true
+                    end
+                else
+                    t[hero:GetUnitName()] = true
+                end
+            end
+        end
+    end
+    if not hero_owner then
+        hero_owner = "all"
+    end
+    if abi_name == "prince_r" then
+        local pain_mute = {}
+        for iPlayerID = 0,20 do
+            if PlayerResource:IsValidPlayer(iPlayerID) then
+                local hero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+                if hero then
+                    pain_mute[hero:GetUnitName()] = true
+                end
+            end
+        end
+        pain_mute["npc_dota_hero_abaddon"] = reverce
+        CustomNetTables:SetTableValue("mute_data", "npc_dota_hero_abaddon", pain_mute)
+    end
+    CustomNetTables:SetTableValue("mute_data", hero_owner, t)
+    if player then
+        CustomGameEventManager:Send_ServerToPlayer(player, "UpdateMute", {} )
+    else
+        CustomGameEventManager:Send_ServerToAllClients("UpdateMute", {} )
+    end
 end
 
 function OvervodkaGameMode:IncrementTeamHeroKills(TeamID, value)

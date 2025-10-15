@@ -1,0 +1,43 @@
+/* Prettified by Source 2 Viewer 15.0.0.0 - https://valveresourceformat.github.io */
+
+.ChannelbarPosition
+{
+	vertical-align: center;
+	horizontal-align: center;
+	margin-top: 20%;
+}
+
+#ChannelBarProgress_custom
+{
+	width: 100%;
+	border-radius: 4px;
+	background-color: gradient(linear, 0px 0px, 300px 0px, from(#3C1768), color-stop(0.25, #932F73), color-stop(0.45, #E44757), color-stop(0.7, #FF8B5A), color-stop(0.9, #FFD196), to(#FFF2DE) );
+	height: 30px;
+	vertical-align: middle;
+	horizontal-align: left;
+	box-shadow: fill #000a 0px 0px 6px 0px ;
+}
+
+#ChannelBarProgress_custom_container
+{
+	width: 100%;
+	height: 100%;
+}
+
+.AbilityImageChannelbar
+{
+	border: 4px solid rgb(51, 13, 13);
+}
+
+#ChannelBarChannel.ChannelBarChannel_custom
+{
+	border-radius: 20px;
+}
+
+#LineFillEffect
+{
+	width: 300px;
+	height: 30px;
+	color: gradient(linear, 0px 0px, 300px 0px, from(#3C1768), color-stop(0.25, #932F73), color-stop(0.45, #E44757), color-stop(0.7, #FF8B5A), color-stop(0.9, #FFD196), to(#FFF2DE) );
+}
+

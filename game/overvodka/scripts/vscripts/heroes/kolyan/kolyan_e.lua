@@ -3,6 +3,7 @@ LinkLuaModifier( "modifier_kolyan_e", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOT
 LinkLuaModifier( "modifier_kolyan_e_debuff", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_kolyan_e_stack", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_kolyan_e_abilities", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_kolyan_e_root", "heroes/kolyan/kolyan_e", LUA_MODIFIER_MOTION_NONE )
 
 function kolyan_e:GetIntrinsicModifierName()
 	return "modifier_kolyan_e"
@@ -10,6 +11,7 @@ end
 
 function kolyan_e:Precache(context)
 	PrecacheResource("particle", "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift_gold.vpcf", context)
+	PrecacheResource("particle", "particles/kolyan_root.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/kolyan_e.vsndevts", context)
 end
 
@@ -51,7 +53,8 @@ function modifier_kolyan_e:GetModifierProcAttack_Feedback( params )
 		local debuff = params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kolyan_e_debuff",{stack_duration = self.duration})
         local random_chance = RandomInt(1, 100)
         if random_chance <= self:GetAbility():GetSpecialValueFor("swap_chance") and not target:HasModifier("modifier_kolyan_e_abilities") then
-            params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kolyan_e_abilities", {duration = self:GetAbility():GetSpecialValueFor("swap_duration")})
+            params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kolyan_e_abilities", {duration = self:GetAbility():GetSpecialValueFor("swap_duration") * (1 - target:GetStatusResistance())})
+			params.target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_kolyan_e_root", {duration = self:GetAbility():GetSpecialValueFor("root_duration") * (1 - target:GetStatusResistance())})
 			EmitSoundOn("kolyan_e_"..RandomInt(1,2), self:GetParent())
         end
 		self:AddStack( duration )
@@ -213,4 +216,24 @@ function modifier_kolyan_e_abilities:OnDestroy()
             true, true
         )
     end
+end
+
+modifier_kolyan_e_root = class({})
+
+function modifier_kolyan_e_root:IsHidden() return false end
+function modifier_kolyan_e_root:IsDebuff() return true end
+function modifier_kolyan_e_root:IsPurgable() return true end
+
+function modifier_kolyan_e_root:CheckState()
+	return {
+		[MODIFIER_STATE_ROOTED] = true,
+	}
+end
+
+function modifier_kolyan_e_root:GetEffectName()
+	return "particles/kolyan_root.vpcf"
+end
+
+function modifier_kolyan_e_root:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end

@@ -5,6 +5,7 @@ litvin_bledina = class({})
 function litvin_bledina:Precache(context)
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_buff.vpcf", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_attack.vpcf", context )
+	PrecacheResource( "soundfile", "soundevents/bledina.vsndevts", context )
 end
 
 function litvin_bledina:OnSpellStart()

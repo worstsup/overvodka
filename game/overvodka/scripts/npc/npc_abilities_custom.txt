@@ -972,19 +972,13 @@
     	"AbilityManaCost"               "100 120 140 160"
 		"AbilityValues"
 		{
-			"heal"                  
+			"heal"
             {
             	"value"	"150 250 350 450"
             	"special_bonus_unique_eldzhey_5" "+400"
             }
-            "AbilityCastRange"
-            {
-            	"value" "400"
-            }	
-            "radius"
-            {
-            	"value" "400"
-            }
+            "AbilityCastRange" "300"
+            "radius"		   "300"
             "damagebyfacet"
             {
             	"value"	"0"
@@ -1008,24 +1002,20 @@
 		"AbilityHealthCost"             "70 140 210 280"
 		"AbilityValues"
 		{
-				"movespeed_bonus_pct"       "15 20 25 30"     
-				"bonus_as"       
-				{
-					"value"				"35 45 55 65"
-				}
+				"movespeed_bonus_pct"   "15 20 25 30"     
+				"bonus_as"      		"35 45 55 65"
 				"bonus_damage"
 				{
 					"value"	"20 40 60 80"
 					"special_bonus_unique_eldzhey_6" "+60"
 				}
-				"enemy_movespeed_bonus_pct" "0"
-				"radius"                    "0"
-				"duration"                  "10"
+				"duration"              "10"
 				"chance"
 				{
 					"value"	"0"
 					"special_bonus_facet_eldzhey_e" "+30"
 				}
+				"heal_bonus_cooldown"		"6"
 				"root_duration" "1"
 		}
 	}
@@ -1090,7 +1080,7 @@
 				"value"	"0"
 				"special_bonus_scepter"	"+1.5"
 			}
-		    "duration"          "5 6 7"
+		    "duration"          "5.0 5.5 6.0"
 		}
 	}
 	//=================================================================================================================
@@ -1291,7 +1281,7 @@
 					"special_bonus_unique_shkolnik_6" "+0.5"
 				}
 				"stone_angle"				"75"
-				"bonus_physical_damage"		"50"
+				"bonus_physical_damage"		"25 30 35 40"
 				"AbilityCastRange"
 				{
 					"value"	"750 800 850 900"
@@ -2493,7 +2483,6 @@
 		"ScriptFile"					"heroes/dvoreckov/dvoreckov_abilities"
 		"AbilityTextureName"			"borya"
 		"MaxLevel"						"1"
-		"HasScepterUpgrade"				"1"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityCooldown"				"5"
@@ -2501,9 +2490,8 @@
 		"AbilityValues"
 		{
 				"max_invoked_spells"		"2"
-				"cooldown_scepter"			"0"
 				"mana_cost_scepter"			"0"
-				"cd_reduction_per_level"	"0.1"
+				"cd_reduction_per_level"	"0.15"
 		}
 	}
 	//=================================================================================================================
@@ -3105,7 +3093,7 @@
 				"model_scale"					"-70"
 				"bonus_agility"
 				{
-					"value"	"55 60 65 70"
+					"value"	"45 50 55 60"
 					"special_bonus_unique_sahur_7" "+10"
 				}
 				"has_facet"
@@ -3148,7 +3136,7 @@
 				{
 					"value"	"0"
 					"RequiresShard"	"1"
-					"special_bonus_shard" "+2"
+					"special_bonus_shard" "+1.25"
 				}
 				"illusion_damage_outgoing"
 				{
@@ -3266,7 +3254,7 @@
 					"special_bonus_unique_sahur_6" "+1"
 				}
 				"damage_tooltip"			"50 75 100"
-				"move_speed_tooltip"			"-30"
+				"move_speed_tooltip"			"-30 -35 -40"
 		}
 	}
 	//=================================================================================================================
@@ -5767,7 +5755,7 @@
 					"value"	"50"
 					"CalculateSpellDamageTooltip"	"1"
 				}
-				"return_damage_str"			"25"
+				"return_damage_str"			"40"
 				"aura_radius"				
 				{
 					"value"		"1200"
@@ -8051,11 +8039,7 @@
 		{
 				"duration"				"4.0"
 				"cr"			"800 850 900 950"
-				"freeze_duration"
-				{
-					"value"	"0.25"
-					"special_bonus_unique_golovach_5" "+0.2"
-				}
+				"freeze_duration" "0.25"
 				"freeze_cooldown"		"0.4"
 				"freeze_damage"			"0"
 				"damage_trigger"		"10.0"
@@ -8064,8 +8048,16 @@
 					"value"	"700"
 					"special_bonus_unique_golovach_1" "+150"
 				}
-           		"radius"                            "200"
-            	"damage"                            "90 180 270 360"
+           		"radius"
+				{
+					"value"	"0"
+					"special_bonus_unique_golovach_5" "+200"
+				}
+            	"damage"
+				{
+					"value"	"0"
+					"special_bonus_unique_golovach_5" "+400"
+				}
             	"lifesteal_pct"
 				{
 					"value"	"0"
@@ -8466,7 +8458,7 @@
 		{	
 			"duration"
 			{
-				"value"	"20"
+				"value"	"16 18 20"
 			}
 			"outgoing_damage"
 			{
@@ -9498,8 +9490,8 @@
 			"movement_turn_rate"			"85"
 			"stun_duration"
 			{
-				"value"									"0.8"
-				"special_bonus_unique_peterka_2" "+0.4"
+				"value"									"0.8 0.9 1.0 1.1"
+				"special_bonus_unique_peterka_2" "+0.42"
 			}
 			"debuff_immune"
 			{
@@ -10708,6 +10700,11 @@
 					"value"	"0"
 					"special_bonus_facet_azazin_facet_q" "+1"
 				}
+				"tether"
+				{
+					"value"	"0"
+					"special_bonus_unique_azazin_7"	"+1"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -10750,7 +10747,6 @@
 			"disarm"
 			{
 				"value"	"0"
-				"special_bonus_unique_azazin_7" "+1"
 			}
 			"root_duration"
 			{
@@ -11411,7 +11407,7 @@
 				"value"	"2"
 				"special_bonus_unique_stint_5" "+1"
 			}
-			"shield" 			"25 30 35 40"
+			"shield" 			"25"
 			"radius"
 			{
 				"value"	"700 775 850 925"
@@ -11470,8 +11466,7 @@
 			}
 			"AbilityCooldown"
 			{
-				"value"	"40 35 30 25"
-				"special_bonus_unique_stint_4"	"-7"
+				"value"	"35 30 25 20"
 			}
 		}
 	}
@@ -11496,14 +11491,18 @@
 			"duration"		
 			{
 				"value"					"6"
-				"special_bonus_unique_stint_1" "+1.5"
+				"special_bonus_unique_stint_1" "+1"
 			}
 			"radius"
 			{
 				"value"	"450"
 				"affected_by_aoe_increase"	"1"
 			}
-			"hit_destroy"				"3 3 4 4"
+			"hit_destroy"
+			{
+				"value"	"3 3 4 4"
+				"special_bonus_unique_stint_4"	"+2"
+			}
 			"pct_damage"				"1"
 			"slow"
 			{
@@ -12264,6 +12263,7 @@
 					"value"	"10 15 20 25"
 					"special_bonus_unique_kolyan_1" "+10"
 				}
+				"root_duration"			"0.8"
 				"swap_duration"			"10"
 				"swap_chance"			"15"
 				"slow"					"-20"
@@ -12290,7 +12290,7 @@
 		"AbilityValues"
 		{
 			"duration" 	"16"
-			"damage"   	"30 60 90"
+			"damage"   	"25 50 75"
 			"radius"   	"800"
 			"num"
 			{
@@ -12685,6 +12685,9 @@
 			"bonus_hp"	"300 600 900"
 		}
 	}
+	//=================================================================================================================
+	// БОСС МАФИИ
+	//=================================================================================================================
 	"t2x2_scepter"
 	{
 		"BaseClass"						"ability_lua"
@@ -12693,7 +12696,7 @@
 		"MaxLevel"						"1"
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"3000"
@@ -12705,12 +12708,12 @@
 		{
 				"arrow_range"			"3000"
 				"arrow_max_stunrange"	"1800"
-				"arrow_speed"			"1400.0"
+				"arrow_speed"			"1600"
 				"arrow_width"			"115"
 				"arrow_min_stun"		"1.5"
 				"arrow_max_stun"		"8.0"
 				"damage"				"300"
-				"arrow_bonus_damage"	"900"
+				"arrow_bonus_damage"	"600"
 				"arrow_vision"			"500"
 		}
 	}
@@ -15024,6 +15027,264 @@
 					"value"	"0 0 0"
 					"special_bonus_unique_lev_6"	"+150"
 				}
+		}
+	}
+	//===================================================================================================================
+	//												ТЁМНЫЙ ПРИНЦ
+	//===================================================================================================================
+
+	"special_bonus_unique_prince_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_prince_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// SoundCloud
+	//=================================================================================================================
+	"prince_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/prince/prince_innate"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"prince_innate"
+		"IsBreakable"					"1"
+		"AbilityCastRange"				"350"
+		"AbilityValues"
+		{
+				"attackers_need"    "3"
+				"window"            "1.0"
+				"radius"            "350"
+				"push_range"        "350"
+				"push_duration"     "0.25"
+				"damage"
+				{
+					"value"	"0"
+					"special_bonus_unique_prince_1"	"+150"
+				}
+				"AbilityCooldown"
+				{
+					"value"	"25"
+					"special_bonus_unique_prince_4" "-7"
+				}
+				"active"
+				{
+					"value"	"0"
+					"special_bonus_facet_prince_innate_active" "+1"
+					"RequiresFacet"	"prince_innate_active"
+				}
+				"disarm_duration"
+				{
+					"value"	"0"
+					"special_bonus_facet_prince_innate_active" "+1.8"
+					"RequiresFacet"	"prince_innate_active"
+				}
+		}
+	}
+	//=================================================================================================================
+	// Ы А Ы А
+	//=================================================================================================================
+	"prince_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/prince/prince_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"prince_q"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityManaCost"				"90 120 150 180"
+		"HasScepterUpgrade"				"1"
+		"AbilityValues"
+		{
+			"damage"
+			{
+				"value"					"40 55 70 85"
+			}
+			"attacks" "5"
+			"attack_interval"	"0.16"
+			"AbilityCooldown"
+			{
+				"value"					"30 28 26 24"
+			}
+			"magic_lifesteal"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+100"
+				"RequiresScepter"		"1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Гной
+	//=================================================================================================================
+	"prince_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/prince/prince_w"
+	  	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	  	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"IsBreakable"					"1"
+	   	"AbilityTextureName" 			"prince_w"
+		"AbilityValues"
+		{
+			"stacks_need"		"5"
+			"duration"			"8"
+			"effect_duration"	"5"
+			"magic_resist"		"2 3 4 5"
+			"debuff_damage"
+			{
+				"value"	"30 40 50 60"
+				"special_bonus_unique_prince_3" "+30"
+			}
+			"int_damage"
+			{
+				"value"	"0"
+				"special_bonus_facet_prince_w_int" "+40"
+				"RequiresFacet"		"prince_w_int"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Отвратительный король
+	//=================================================================================================================
+	"prince_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/prince/prince_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityTextureName"			"prince_e"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.25"
+		"AbilityCooldown"				"55 50 45 40"
+		"HasShardUpgrade"				"1"
+		"AbilityManaCost"				"100 120 140 160"
+		"AbilityValues"
+		{
+			"tombstone_health"		"7"
+			"duration"				"15"
+			"radius"				"1200"
+			"damage"
+			{
+				"value"	"24 28 32 36"
+				"special_bonus_unique_prince_6" "+30"
+			}
+			"zombie_interval"		"2.5 2.0 1.5 1.0"
+			"spawn_delay"			"3.5"
+			"shard_range"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+300"
+				"RequiresShard"		"1"
+			}
+			"min_inside_time"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+2"
+				"RequiresShard"		"1"
+			}
+			"shard_bonus_hp"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+3"
+				"RequiresShard"		"1"
+			}
+		}
+	}
+	"prince_r"
+	{
+        "BaseClass"                     "ability_lua"
+		"ScriptFile"				    "heroes/prince/prince_r"	
+		"AbilityTextureName"            "prince_r"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"				   
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastPoint"				"1.25"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_EMP"
+		"AbilityManaCost"				"200 350 500"
+		"AbilityValues"
+		{
+			"damage"			"50 100 150"
+			"AbilityCooldown"
+			{
+				"value"	"80"
+				"special_bonus_unique_prince_2" "-10"
+			}
+            "duration"
+			{
+				"value"	"5"
+				"special_bonus_unique_prince_5" "+1"
+			}
+            "turn_rate" "70"
+			"knockback_speed" "240"
+			"wave_knockback_duration" "0.03"
+			"speed"				"1200"
+			"incoming_damage_reduction" "0"
+			"damage_instant" "30 60 90"
+			"damage_multiplier" "2"
+			"starting_aoe"	"100"
+			"final_aoe"			
+			{
+				"value"	"250"
+				"affected_by_aoe_increase"		"1"
+			}
+			"distance"		"1500"
+			"interval" "0.2"
 		}
 	}
 }

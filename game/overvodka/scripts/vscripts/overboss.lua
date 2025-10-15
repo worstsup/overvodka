@@ -7,7 +7,7 @@ function ThrowCoin( args )
 		coinSpawn = args.caster:GetAttachmentOrigin( coinAttach )
 	end
 	if _G.overvodka_events then
-		if k == 8 or k == 16 or k == 32 or k == 44 or k == 64 or k == 76 or k == 88 or k == 96 or k == 102 or k == 108 or (k >= 112 and k % 6 == 0) then
+		if k == 10 or k == 18 or k == 36 or k == 48 or k == 64 or k == 76 or k == 88 or k == 96 or k == 104 or k == 112 or (k >= 118 and k % 8 == 0) then
 			SpawnBombardiro()
 		end
 		if k == 23 then

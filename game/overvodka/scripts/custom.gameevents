@@ -59,5 +59,11 @@
 		"player_ID"		"short"
 		"_error"		"string"
 	}
+	"event_update_loud" 
+    {
+        "ent_index" "short"
+        "voice_level" "float"
+        "is_transmitting" "bool"
+    }
 }
 

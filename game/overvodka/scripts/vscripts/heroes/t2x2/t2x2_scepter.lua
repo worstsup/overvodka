@@ -102,7 +102,7 @@ function t2x2_scepter:OnProjectileHit_ExtraData( hTarget, vLocation, extraData )
 		victim = hTarget,
 		attacker = self:GetCaster(),
 		damage = extraData.min_damage + extraData.bonus_damage*bonus_pct,
-		damage_type = DAMAGE_TYPE_MAGICAL,
+		damage_type = DAMAGE_TYPE_PURE,
 		ability = self,
 	}
 	ApplyDamage(damageTable)

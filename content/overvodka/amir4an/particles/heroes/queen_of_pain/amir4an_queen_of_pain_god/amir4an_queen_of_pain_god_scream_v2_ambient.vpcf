@@ -1,0 +1,53 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nBehaviorVersion = 12
+	m_nMaxParticles = 4096
+	m_bEnableNamedValues = true
+	m_nSnapshotControlPoint = 29
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 25
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 26
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 150.0, 0.0, 8.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 27
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 255.0, 59.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"amir4an/particles/heroes/queen_of_pain/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_scream_v2_circle_trail.vpcf"
+		},
+		{
+			m_ChildRef = resource:"amir4an/particles/heroes/queen_of_pain/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_scream_v2_model.vpcf"
+		},
+		{
+			m_ChildRef = resource:"amir4an/particles/heroes/queen_of_pain/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_scream_v2_wave.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/prince_r.vpcf"
+		},
+	]
+}

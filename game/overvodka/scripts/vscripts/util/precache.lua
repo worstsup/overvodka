@@ -122,6 +122,7 @@ PrecacheUtils.particles = {
 		"particles/bikov_attack.vpcf",
 		"particles/shemelis_trail.vpcf",
 		"particles/shemelis_slash.vpcf",
+		"particles/prince_innate.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -274,6 +275,8 @@ PrecacheUtils.models = {
 		"models/heroes/brewmaster/barrel.vmdl",
 		"models/heroes/brewmaster/bracer.vmdl",
 		"models/heroes/brewmaster/weapon.vmdl",
+		"models/prince/prince.vmdl",
+		"models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -337,6 +340,7 @@ PrecacheUtils.sounds = {
 		"soundevents/vova_start.vsndevts", 
 		"soundevents/ilin_start.vsndevts",
 		"soundevents/dima_start.vsndevts",
+		"soundevents/prince_start.vsndevts",
 		"soundevents/lit_start.vsndevts", 
 		"soundevents/artem_start.vsndevts", 
 		"soundevents/dave_start.vsndevts", 
@@ -361,7 +365,6 @@ PrecacheUtils.sounds = {
 		"soundevents/secret.vsndevts",
 		"soundevents/mell_start.vsndevts", 
 		"soundevents/cond.vsndevts",
-		"soundevents/bledina.vsndevts",
 		"soundevents/zhishi.vsndevts",
 		"soundevents/zhishi_start.vsndevts",
 		"soundevents/litenergy.vsndevts",

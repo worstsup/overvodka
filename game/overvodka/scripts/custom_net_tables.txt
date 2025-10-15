@@ -9,5 +9,8 @@
 		"vector_targeting",
 		"store",
 		"player_data",
+		"voice_data",
+		"mute_data",
+		"ov_flags",
 	]
 }

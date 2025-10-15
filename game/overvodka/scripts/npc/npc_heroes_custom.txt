@@ -3541,4 +3541,83 @@
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
 		"VoiceFile"	""
 	}
+	"npc_dota_hero_abaddon"
+	{
+		"Model"		"models/prince/prince.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"220"
+		"SoundSet"		"Hero_Abaddon"
+		"ModelScale"		"0.8"
+		"VersusScale"		"0.8"
+		"LoadoutScale"		"0.8"
+		"SimilarHeroes"		"57,63,78"
+		"HeroSelectSoundEffect"		"prince_start"
+		"GibType"		"ethereal"
+		"GibTintColor"	"76 147 148 255"
+		"Ability1"		"prince_q"
+		"Ability2"		"prince_w"
+		"Ability3"		"prince_e"
+		"Ability4"		"prince_innate"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"prince_r"
+
+		"Ability10"		"special_bonus_unique_prince_1"
+		"Ability11"		"special_bonus_unique_prince_2"
+		"Ability12"		"special_bonus_unique_prince_3"
+		"Ability13"		"special_bonus_unique_prince_4"
+		"Ability14"		"special_bonus_unique_prince_5"
+		"Ability15"		"special_bonus_unique_prince_6"
+		"Ability16"		"special_bonus_unique_prince_7"
+		"Ability17"		"special_bonus_unique_prince_8"
+		"Facets"
+		{
+			"prince_w_int"
+			{
+				"Icon"				"intelligence"
+				"Color"				"Gray"
+				"GradientID"		"0"
+			}
+			"prince_innate_active"
+			{
+				"Icon"				"barrier"
+				"Color"				"Gray"
+				"GradientID"		"2"
+			}
+			"abaddon_death_dude"
+			{
+				"Deprecated"		"true"
+			}
+			"abaddon_mephitic_shroud" 
+			{
+				"Deprecated"		"true"
+			}
+			"abaddon_mists_of_fate"
+			{
+				"Deprecated"		"true"
+			}
+		}
+		"ArmorPhysical"			"-1"
+		"AttackCapabilities"	"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"22"
+		"AttackDamageMax"		"32"
+		"BaseAttackSpeed"		"95"
+		"AttackRate"			"1.500000"
+		"AttackAnimationPoint"	"0.560000"
+		"AttackAcquisitionRange" "600"
+		"AttackRange"			"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"	"22"
+		"AttributeStrengthGain"	"2.4"
+		"AttributeBaseAgility"	"23"
+		"AttributeAgilityGain"	"1.8"
+		"AttributeBaseIntelligence"	"18"
+		"AttributeIntelligenceGain"	"2.0"
+		"StatusManaRegen"	"0"
+		"StatusHealthRegen"	"1"
+		"MovementSpeed"		"305"
+		"MovementTurnRate"		"0.600000"
+		"particle_folder"		"particles/units/heroes/hero_abaddon"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+		"VoiceFile"		""
+	}
 }

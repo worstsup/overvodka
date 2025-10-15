@@ -13,6 +13,7 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 			self:ReplaceWinContidion()
 		end
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+		OvervodkaGameMode:UpdateMute(_, _, _)
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
 			nCOUNTDOWNTIMER = 1501
@@ -142,6 +143,9 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_void_spirit" then
 				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_invincible_arcana", {})
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
+				spawnedUnit.voice_level = 0
+			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
 				sahur:SetLevel(1)
@@ -194,6 +198,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			spawnedUnit.b:FollowEntity(spawnedUnit, true)
 			spawnedUnit.c = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/lion/hellclaw_of_maelrawn/hellclaw_of_maelrawn.vmdl"})
 			spawnedUnit.c:FollowEntity(spawnedUnit, true)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
+			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl"})
+			sword:FollowEntity(spawnedUnit, true)
+			sword:SetParent(spawnedUnit, "attach_sword")
+			sword:SetLocalOrigin(Vector(0, 0, 0))
+			sword:SetLocalAngles(0, 0, 0)
+			sword:SetModelScale(1)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})

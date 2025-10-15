@@ -1,6 +1,8 @@
 LinkLuaModifier("modifier_azazin_q_pull", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL)
 LinkLuaModifier("modifier_azazin_q_tree_walk_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_azazin_q_tree_walk", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_azazin_tether_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_azazin_tether", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
 azazin_q = class({})
 k = 0
 function azazin_q:Precache(context)
@@ -167,6 +169,9 @@ function modifier_azazin_q_pull:OnDestroy()
         if self:GetAbility():GetSpecialValueFor("wark_through_trees") == 1 then
             CreateModifierThinker(self:GetCaster(), self:GetAbility(), "modifier_azazin_q_tree_walk_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self:GetCaster():GetTeamNumber(), false)
         end
+        if self:GetAbility():GetSpecialValueFor("tether") == 1 then
+            CreateModifierThinker(self:GetCaster(), self:GetAbility(), "modifier_azazin_tether_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self:GetCaster():GetTeamNumber(), false)
+        end
     end
 end
 
@@ -209,5 +214,25 @@ function modifier_azazin_q_tree_walk:IsPurgable() return false end
 function modifier_azazin_q_tree_walk:CheckState()
     return {
         [MODIFIER_STATE_ALLOW_PATHING_THROUGH_TREES] = self:GetCaster() == self:GetParent(),
+    }
+end
+
+modifier_azazin_tether_aura = class({})
+function modifier_azazin_tether_aura:IsHidden() return true end
+function modifier_azazin_tether_aura:IsPurgable() return false end
+function modifier_azazin_tether_aura:IsAura() return true end
+function modifier_azazin_tether_aura:GetModifierAura() return "modifier_azazin_tether" end
+function modifier_azazin_tether_aura:GetAuraDuration() return 0.1 end
+function modifier_azazin_tether_aura:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") + 25 end
+function modifier_azazin_tether_aura:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_azazin_tether_aura:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_azazin_tether_aura:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
+
+modifier_azazin_tether = class({})
+function modifier_azazin_tether:IsHidden() return false end
+function modifier_azazin_tether:IsPurgable() return false end
+function modifier_azazin_tether:CheckState()
+    return {
+        [MODIFIER_STATE_TETHERED] = true,
     }
 end

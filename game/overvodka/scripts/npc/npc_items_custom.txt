@@ -1380,7 +1380,7 @@
 				"corruption_duration"	"7.0"
 				"bonus_damage_per_kill"	"3"
 				"bonus_damage_per_assist"	"2"
-				"max_damage"			"50"
+				"max_damage"			"30"
 		}
 	}
 	"item_recipe_waka"
@@ -1773,12 +1773,12 @@
 		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"		"SPELL_DISPELLABLE_YES_STRONG"
 		"AbilityCooldown"			"90"
-		"ItemCost"					"4600"
+		"ItemCost"					"4100"
 		"AbilityValues"
 		{
-			"bonus_health"		"400"
+			"bonus_health"		"250"
 			"bonus_mana"		"300"
-			"bonus_damage"		"25"
+			"bonus_damage"		"15"
 			"duration"			"3"
 			"percent_tooltip"	"15"
 		}
@@ -1788,13 +1788,12 @@
 		"BaseClass"						"item_datadriven"
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"AbilityTextureName"			"item_recipe"
-		"ItemCost"						"250"	
+		"ItemCost"						"100"
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_onehp"
-
 		"ItemRequirements"
 		{
-			"01"						"item_aeon_disk;item_claymore"
+			"01"						"item_aeon_disk;item_broadsword"
 		}
 	}
 "item_kaska"
@@ -1807,17 +1806,17 @@
     "AbilityTextureName"            "kaska"
 	"AbilityCastPoint"              "0.0"
     "AbilityCooldown"               "80.0"
-    "AbilityManaCost"               "100.0"
-    "ItemCost"                      "9000"
+    "AbilityManaCost"               "0.0"
+    "ItemCost"                      "9400"
     "ItemShopTags"                  "str;regen_health;health_pool"
     "ItemQuality"                   "epic"
     "AbilityValues"
     {
+			"bonus_damage"              		"35"
             "bonus_strength"                    "45"
-            "bonus_health"                      "0"
+            "bonus_health"                      "250"
+			"bonus_mana"						"300"
             "health_regen_percent_per_second"   "1.8"
-            "bonus_damage"              "35"
-            "lifesteal_percent"         "25"
             "duration"					"4"
     }
     "OnSpellStart"
@@ -1850,22 +1849,9 @@
             {
                 "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"
                 "MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-				"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
+				"MODIFIER_PROPERTY_MANA_BONUS"               	"%bonus_mana"
+				"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"      "%bonus_damage"
 				"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"     "%health_regen_percent_per_second"
-            }
-        }
-        "modifier_item_satanic_datadriven_lifesteal"
-        {
-            "Passive"           "1"
-            "IsHidden"          "1"
-            
-            "OnAttackLanded"
-            {
-                "Lifesteal"
-                {
-                    "Target"            "ATTACKER"
-                    "LifestealPercent"  "%lifesteal_percent"
-                }
             }
         }
         "modifier_undead"
@@ -1891,13 +1877,13 @@
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_recipe"
 		"Model"							"models/props_gameplay/recipe.vmdl"
-		"ItemCost"						"700"	
+		"ItemCost"						"100"	
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
 		"ItemResult"					"item_kaska"
 		"ItemRequirements"
 		{
-			"01"						"item_onehp;item_reaver;item_lifesteal"
+			"01"						"item_onehp;item_heart_vodka"
 		}
 	}
 	"item_jordan"
