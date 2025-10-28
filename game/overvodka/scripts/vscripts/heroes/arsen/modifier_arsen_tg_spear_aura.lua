@@ -45,37 +45,39 @@ function modifier_arsen_tg_spear_aura:OnCreated( kv )
 			ability = self:GetAbility(), --Optional.
 		}
 		ApplyDamage(damageTable)
-
-		-- animate soldiers
-		local arena_walls = Entities:FindAllByClassnameWithin( "npc_dota_phantomassassin_gravestone", self.parent:GetOrigin(), 160 )
-		for _,arena_wall in pairs(arena_walls) do
-			if arena_wall:HasModifier( "modifier_arsen_tg_blocker" ) and arena_wall.model then
-				arena_wall:FadeGesture( ACT_DOTA_ATTACK )
-				arena_wall:StartGesture( ACT_DOTA_ATTACK )
-				break
+		
+		
+		if self.parent and not self.parent:IsNull() then
+			local arena_walls = Entities:FindAllByClassnameWithin( "npc_dota_phantomassassin_gravestone", self.parent:GetAbsOrigin(), 160 )
+			for _,arena_wall in pairs(arena_walls) do
+				if arena_wall:HasModifier( "modifier_arsen_tg_blocker" ) and arena_wall.model then
+					arena_wall:FadeGesture( ACT_DOTA_ATTACK )
+					arena_wall:StartGesture( ACT_DOTA_ATTACK )
+					break
+				end
 			end
-		end
 
-		-- play effects
-		self:PlayEffects( direction:Normalized() )
+			-- play effects
+			self:PlayEffects( direction:Normalized() )
 
-		-- knockback if not having spear buff
-		if self:GetParent():IsDebuffImmune() and self:GetAbility():GetSpecialValueFor("immunity") == 0 then return end
-		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua" ) then return end
-		if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua_debuff" ) then return end
-		if self:GetParent() and not self:GetParent():IsNull() then
-			self:GetParent():AddNewModifier(
-				self:GetCaster(), -- player source
-				self:GetAbility(), -- ability source
-				"modifier_generic_knockback_lua", -- modifier name
-				{
-					duration = self.knockback_duration,
-					distance = self.width,
-					height = 30,
-					direction_x = direction.x,
-					direction_y = direction.y,
-				} -- kv
-			)
+			-- knockback if not having spear buff
+			if self:GetParent():IsDebuffImmune() and self:GetAbility():GetSpecialValueFor("immunity") == 0 then return end
+			if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua" ) then return end
+			if self:GetParent():HasModifier( "modifier_mars_spear_of_mars_lua_debuff" ) then return end
+			if self:GetParent() and not self:GetParent():IsNull() then
+				self:GetParent():AddNewModifier(
+					self:GetCaster(), -- player source
+					self:GetAbility(), -- ability source
+					"modifier_generic_knockback_lua", -- modifier name
+					{
+						duration = self.knockback_duration,
+						distance = self.width,
+						height = 30,
+						direction_x = direction.x,
+						direction_y = direction.y,
+					} -- kv
+				)
+			end
 		end
 	end
 end

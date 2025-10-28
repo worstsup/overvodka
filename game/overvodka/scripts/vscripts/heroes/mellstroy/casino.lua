@@ -77,7 +77,7 @@ function modifier_mellstroy_casino_sounds:OnIntervalThink()
     local parent = self:GetParent()
     local player_id = parent:GetPlayerID()
 	local gold = PlayerResource:GetGold(player_id)
-    if gold < 50 then
+    if gold < 50 and parent:IsAlive() then
         if not parent:HasModifier("modifier_mellstroy_casino_sounds_cd") then
             parent:EmitSound("mellstroy_nishiy")
             parent:AddNewModifier(parent, self:GetAbility(), "modifier_mellstroy_casino_sounds_cd", {duration = 30})

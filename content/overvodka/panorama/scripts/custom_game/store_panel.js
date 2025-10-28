@@ -21,6 +21,8 @@ const StoreBody = $("#StoreBody");
         pet: null
     };
     let playerCoins = 0;
+    const claimedPrime = Object.create(null);
+    let lastClickedItemId = null;
     const localPlayerID64 = Players.GetLocalPlayer();
     const localSteamID = GetSteamID32(localPlayerID64).toString();
     Store.Initialize = function() {
@@ -64,6 +66,10 @@ const StoreBody = $("#StoreBody");
                 playerEquipped.effect = data.equipped_effect;
                 playerEquipped.skin = data.equipped_skin;
                 playerEquipped.pet = data.equipped_pet;
+                const primeClaims = data.prime_claims ? (Array.isArray(data.prime_claims) ? data.prime_claims : Object.values(data.prime_claims)) : [];
+                for (const code of primeClaims) {
+                    claimedPrime[code] = true;
+                }
                 coinBalanceLabel.text = playerCoins;
                 UpdateAllItemButtons();
             }
@@ -101,7 +107,11 @@ const StoreBody = $("#StoreBody");
 
         itemPanel.FindChildTraverse("ItemImage").SetImage(itemData.image);
         itemPanel.FindChildTraverse("ItemName").text = $.Localize(itemData.name);
-        itemPanel.FindChildTraverse("ItemPrice").text = itemData.price;
+        if (Number(itemData.price) === 0) {
+            itemPanel.FindChildTraverse("ItemPrice").text = $.Localize("#Store_Free");
+        } else {
+            itemPanel.FindChildTraverse("ItemPrice").text = itemData.price;
+        }
 
         const button = itemPanel.FindChildTraverse("ItemButton");
         const buttonLabel = itemPanel.FindChildTraverse("ItemButtonLabel");
@@ -109,6 +119,7 @@ const StoreBody = $("#StoreBody");
         UpdateItemButtonState(button, buttonLabel, itemData);
 
         button.SetPanelEvent("onactivate", () => {
+            lastClickedItemId = itemData.id;
             OnItemButtonClick(itemData.id);
         });
     }
@@ -130,6 +141,28 @@ const StoreBody = $("#StoreBody");
         button.RemoveClass("NotEnoughCoins");
         button.enabled = true;
 
+        if (itemData.type === "prime") {
+            const isFree = Number(itemData.price) === 0;
+            const alreadyClaimed = !!claimedPrime[itemData.id] || !!playerInventory[itemData.id];
+
+            if (alreadyClaimed) {
+                button.enabled = false;
+                label.text = $.Localize("#Store_Claimed");
+                return;
+            }
+
+            if (isFree) {
+                label.text = $.Localize("#Store_Claim");
+            }
+            else {
+                if (playerCoins < Number(itemData.price)) {
+                    button.AddClass("NotEnoughCoins");
+                }
+                label.text = $.Localize("#Store_Buy_Item");
+            }
+            return;
+        }
+
         if (playerInventory[itemData.id]) {
             let isEquipped = false;
             if (itemData.type === 'effects') {
@@ -147,17 +180,28 @@ const StoreBody = $("#StoreBody");
                 button.AddClass("Owned");
                 label.text = $.Localize("#Store_Equip_Item");
             }
-        } else {
-            if (playerCoins < itemData.price) {
-                button.AddClass("NotEnoughCoins");
+        }
+        else {
+            if (Number(itemData.price) === 0) {
+                label.text = $.Localize("#Store_Claim");
+            } 
+            else {
+                if (playerCoins < Number(itemData.price)) {
+                    button.AddClass("NotEnoughCoins");
+                }
+                label.text = $.Localize("#Store_Buy_Item");
             }
-            label.text = $.Localize("#Store_Buy_Item");
         }
     }
 
     function OnItemButtonClick(itemId) {
         const item = allItems[itemId];
         if (!item) return;
+
+        if (item.type === 'prime') {
+            GameEvents.SendCustomGameEventToServer("store_buy_item", {item_id: item.id});
+            return;
+        }
 
         if (playerInventory[itemId]) {
             let isEquipped = false;
@@ -187,13 +231,21 @@ const StoreBody = $("#StoreBody");
     }
 
     GameEvents.Subscribe("store_buy_response", (data) => {
+        const itemId = data.item_id || lastClickedItemId;
+        const item =
+        itemId && allItems[itemId] ? allItems[itemId] : null;
+
         if (data.success) {
             Game.EmitSound("General.Buy");
-            if (data.new_balance !== undefined) {
+            if (typeof data.new_balance !== "undefined") {
                 playerCoins = data.new_balance;
                 coinBalanceLabel.text = playerCoins;
-                UpdateAllItemButtons();
             }
+            if (item && item.type === "prime") {
+                claimedPrime[itemId] = true;
+            }
+
+            UpdateAllItemButtons();
         }
         else {
             Game.EmitSound("UUI_SOUNDS.NoMoney");

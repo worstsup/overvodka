@@ -7,10 +7,20 @@ function mellstroy_amam:Precache(context)
     PrecacheResource( "soundfile", "soundevents/amamam.vsndevts", context )
 end
 
+function mellstroy_amam:OnAbilityPhaseStart()
+    if not IsServer() then return end
+    EmitSoundOn("amamam", self:GetCaster())
+    return true
+end
+
+function mellstroy_amam:OnAbilityPhaseInterrupted()
+    if not IsServer() then return end
+    StopSoundOn("amamam", self:GetCaster())
+end
+
 function mellstroy_amam:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    EmitSoundOn("amamam", self:GetCaster())
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_mell_amam", {duration = duration}) 
 end
 
@@ -20,7 +30,11 @@ function modifier_mell_amam:IsPurgable() return false end
 
 function modifier_mell_amam:OnDestroy()
     if not IsServer() then return end
-    StopSoundOn("amamam", self:GetCaster())
+    if self:GetParent() and not self:GetParent():IsNull() then
+        if not self:GetParent():IsAlive() then
+            StopSoundOn("amamam", self:GetParent())
+        end
+    end
 end
 
 function modifier_mell_amam:OnCreated()

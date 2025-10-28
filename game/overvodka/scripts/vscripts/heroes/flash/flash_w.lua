@@ -3,10 +3,19 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua",
 
 flash_w = class({})
 
+function flash_w:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+        return "flash_w_immortal"
+    end
+    return "flash_w"
+end
+
 function flash_w:Precache(context)
 	PrecacheResource("soundfile", "soundevents/flash_sounds.vsndevts", context)
 	PrecacheResource("particle", "particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf", context)
 	PrecacheResource("particle", "particles/econ/events/ti7/maelstorm_ti7.vpcf", context)
+	PrecacheResource("particle", "particles/maelstorm_ti7_immortal.vpcf", context)
+	PrecacheResource("particle", "particles/gold_storm_spirit_ti8_overload_active_h_immortal.vpcf", context)
 end
 
 function flash_w:GetIntrinsicModifierName()
@@ -17,11 +26,19 @@ function flash_w:OnOrbImpact( params )
 	if not IsServer() then return end
 	if not params.target then return end
 	EmitSoundOn("flash_w_"..RandomInt(1,2), params.target)
-	local p = ParticleManager:CreateParticle("particles/econ/events/ti7/maelstorm_ti7.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	local name = "particles/econ/events/ti7/maelstorm_ti7.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/maelstorm_ti7_immortal.vpcf"
+	end
+	local p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
 	ParticleManager:SetParticleControlEnt( p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( p, 1, params.target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	ParticleManager:ReleaseParticleIndex(p)
-	local p = ParticleManager:CreateParticle("particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.target)
+	local name2 = "particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name2 = "particles/gold_storm_spirit_ti8_overload_active_h_immortal.vpcf"
+	end
+	local p = ParticleManager:CreateParticle(name2, PATTACH_ABSORIGIN_FOLLOW, params.target)
 	ParticleManager:ReleaseParticleIndex(p)
     ApplyDamage({victim = params.target, attacker = self:GetCaster(), damage = self:GetSpecialValueFor("damage"), damage_type = self:GetAbilityDamageType(), ability = self})
 	if self:GetCaster():HasScepter() and params.target and not params.target:IsNull() then

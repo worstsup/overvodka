@@ -1058,7 +1058,7 @@
 		"HasScepterUpgrade"				"1"
 		"AbilityValues"
 		{
-			"damage"          
+			"damage"
 		    {
 		        "value"	"30 40 50"
 		        "special_bonus_unique_eldzhey_7" "+40"
@@ -4411,7 +4411,7 @@
 		}
 	}
 	//=================================================================================================================
-	// АМ АМ АМ
+	// ДА ДА НЕТ НЕТ
 	//=================================================================================================================
     "mellstroy_amam"
 	{
@@ -4426,12 +4426,13 @@
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
 		"AbilityCooldown"			"90 85 80"
 		"AbilityGoldCost"			"700 1550 2400"
+		"AbilityCastPoint"			"0.45"
 		"AbilityValues"
 		{
-		        "damage"     "80 160 240"
+		        "damage"     "75 150 225"
 		        "stun_dur"
 		        {
-		        	"value"	"0.6"
+		        	"value"	"0.45"
 		        	"special_bonus_unique_mellstroy_1" "+0.2"
 		        }
 		        "radius"
@@ -4444,10 +4445,10 @@
 		        	"value"	"800"
 		        	"affected_by_aoe_increase"	"1"
 		        }
-		        "interv"	"1.5"
-		        "duration"          "9 12 15"
+		        "interv"	 "1.0"
+		        "duration"   "10"
 		        "bonus_gold" "90 180 270"
-		        "gold_cost"	"700 1550 2400"
+		        "gold_cost"	 "700 1550 2400"
 		}
 	}
 	//=================================================================================================================
@@ -4569,7 +4570,7 @@
 	//=================================================================================================================
 	"litvin_conditions"
 	{
-		"BaseClass"					"ability_lua"
+		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/litvin/litvin_conditions"
 		"AbilityTextureName"			"cond"
 		"HasScepterUpgrade"				"1"
@@ -11203,7 +11204,7 @@
 			"magic_resist"			"50 60 70"
 			"dmg"
 			{
-				"value"	"175 350 525"
+				"value"	"150 300 450"
 				"special_bonus_unique_stray_6" "+100"
 			}
 			"bat"					"1.4"
@@ -15097,7 +15098,7 @@
 		"AbilityCastRange"				"350"
 		"AbilityValues"
 		{
-				"attackers_need"    "3"
+				"attackers_need"    "2"
 				"window"            "1.0"
 				"radius"            "350"
 				"push_range"        "350"
@@ -15109,8 +15110,7 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"	"25"
-					"special_bonus_unique_prince_4" "-7"
+					"value"	"16"
 				}
 				"active"
 				{
@@ -15150,18 +15150,26 @@
 			"damage"
 			{
 				"value"					"40 55 70 85"
+				"special_bonus_unique_prince_4" "+45"
 			}
 			"attacks" "5"
 			"attack_interval"	"0.16"
 			"AbilityCooldown"
 			{
 				"value"					"30 28 26 24"
+				"special_bonus_scepter" "-4"
 			}
+			"scepter_cd"	"4"
 			"magic_lifesteal"
 			{
 				"value"	"0"
 				"special_bonus_scepter"	"+100"
 				"RequiresScepter"		"1"
+			}
+			"damage_pct"
+			{
+				"value"	"0"
+				"special_bonus_unique_prince_8" "+75"
 			}
 		}
 	}
@@ -15220,8 +15228,8 @@
 			"radius"				"1200"
 			"damage"
 			{
-				"value"	"24 28 32 36"
-				"special_bonus_unique_prince_6" "+30"
+				"value"	"30 35 40 45"
+				"special_bonus_unique_prince_6" "+40"
 			}
 			"zombie_interval"		"2.5 2.0 1.5 1.0"
 			"spawn_delay"			"3.5"
@@ -15245,15 +15253,18 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// Овердоз
+	//=================================================================================================================
 	"prince_r"
 	{
         "BaseClass"                     "ability_lua"
-		"ScriptFile"				    "heroes/prince/prince_r"	
+		"ScriptFile"				    "heroes/prince/prince_r"
 		"AbilityTextureName"            "prince_r"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"				   
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityCastPoint"				"1.25"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_EMP"
 		"AbilityManaCost"				"200 350 500"
@@ -15275,7 +15286,7 @@
 			"wave_knockback_duration" "0.03"
 			"speed"				"1200"
 			"incoming_damage_reduction" "0"
-			"damage_instant" "30 60 90"
+			"damage_instant" "35 70 105"
 			"damage_multiplier" "2"
 			"starting_aoe"	"100"
 			"final_aoe"			
@@ -15287,4 +15298,289 @@
 			"interval" "0.2"
 		}
 	}
+
+	//===================================================================================================================
+	//												SereGGa
+	//===================================================================================================================
+
+	"special_bonus_unique_seregga_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_seregga_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Пенный заряд (innate)
+	//=================================================================================================================
+	"seregga_innate"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/seregga/seregga_innate"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityTextureName"    "seregga_innate"
+		"Innate"       			"1"
+		"IsBreakable"           "1"
+		"AbilityCooldown"		"20 18 16 14"
+		"MaxLevel"				"4"
+		"DependentOnAbility"	"seregga_r"
+		"AbilityValues"
+		{
+			"stack_duration"
+			{
+				"value"	"10"
+				"special_bonus_unique_seregga_2"	"+5"
+			}
+			"stacks_needed"         "3"
+			"bonus_duration"        "4 5 6 7"
+			"bonus_ms_pct"
+			{
+				"value"	"15"
+				"special_bonus_unique_seregga_4"	"+10"
+			}
+			"bonus_hp_regen_pct"    "5"
+			"bonus_mana_regen_pct"  "4"
+		}
+	}
+	//=================================================================================================================
+	// Бицуха / Эгида
+	//=================================================================================================================
+	"seregga_q"
+	{
+		"BaseClass"          "ability_lua"
+		"ScriptFile"         "heroes/seregga/seregga_q"
+		"AbilityTextureName" "seregga_q_biceps"
+		"AbilityBehavior"    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"HasShardUpgrade"	 "1"
+		"AbilityValues"
+		{
+			"biceps_crit_chance"    "20 25 30 35"
+			"biceps_crit_mult"      "175"
+			"biceps_attack_range"   "50 75 100 125"
+
+			"aegis_armor"           "5 8 11 14"
+			"aegis_reflect_pct"     "20 25 30 35"
+			"aegis_status_resist"   "15 20 25 30"
+
+			"shard_duration"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+3"
+				"RequiresShard"		"1"
+			}
+
+			"AbilityCooldown"
+			{
+				"value"	"8.5 8.0 7.5 7.0"
+				"special_bonus_unique_seregga_5"	"-2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Диплом о высшем образовании
+	//=================================================================================================================
+	"seregga_w"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/seregga/seregga_w"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityTextureName"            "seregga_w"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"          "SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastRange"              "700"
+		"AbilityCastPoint"              "0.3"
+		"AbilityCooldown"               "18 16 14 12"
+		"AbilityManaCost"               "90 100 110 120"
+		"AbilityValues"
+		{
+			"duration"          "5 5.5 6 6.5"
+			"slow_pct"          "15 20 25 30"
+			"int_pct_reduce"    "20 25 30 35"
+			"dmg_amp_pct"
+			{
+				"value"	"12 16 20 24"
+				"special_bonus_unique_seregga_7"	"+20"
+			}
+			"damage"
+			{
+				"value"	"0"
+				"special_bonus_unique_seregga_1"	"+150"
+			}
+			"bounces_dur_reduct"
+			{
+				"value"	"0"
+				"special_bonus_facet_seregga_w_bounce" "+1.5"
+				"RequiresFacet"	"seregga_w_bounce"
+			}
+			"bounce_range"
+			{
+				"value"	"0"
+				"special_bonus_facet_seregga_w_bounce" "+500"
+				"RequiresFacet"	"seregga_w_bounce"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Суперхлоп
+	//=================================================================================================================
+	"seregga_e"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/seregga/seregga_e"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"            "seregga_e"
+		"AbilityCastPoint"              "0.5"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+		"AbilityCooldown"               "13 12 11 10"
+		"AbilityManaCost"               "70 80 90 100"
+		"AbilityValues"
+		{
+			"radius"
+			{
+				"value"	"325 350 375 400"
+				"affected_by_aoe_increase"	"1"
+				"special_bonus_unique_seregga_6" "+100"
+			}
+			"damage"
+			{
+				"value"	"110 220 330 440"
+				"special_bonus_unique_seregga_3"  "+120"
+			}
+			"push_distance"
+			{
+				"value"	"300"
+				"special_bonus_unique_seregga_6" "+100"
+			}
+			"push_duration"     "0.4"
+			"has_facet"
+			{
+				"value"	"0"
+				"special_bonus_facet_seregga_e_move"	"+1"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"325 350 375 400"
+				"special_bonus_unique_seregga_6" "+100"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Драка на поляне
+	//=================================================================================================================
+	"seregga_r"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/seregga/seregga_r"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"            "seregga_r"
+		"AbilityCastPoint"              "0.3"
+		"AbilityCooldown"               "70 65 60"
+		"AbilityManaCost"               "150 200 250"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"              "600"
+		"AbilityValues"
+		{
+			"duration"          "5.5 6.5 7.5"
+			"radius"            "450 500 550"
+			"slow_pct"          "20 25 30"
+			"wall_width"        "120"
+			"min_edge_speed"    "0.01"
+			"max_edge_bonus"    "260"
+			"bonus_ms_pct"          "20"
+			"bonus_hp_regen_pct"    "5"
+			"bonus_mana_regen_pct"  "4"
+		}
+	}
+
+	//=================================================================================================================
+	// На фениксе
+	//=================================================================================================================
+	"seregga_scepter"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/seregga/seregga_scepter"
+		"AbilityTextureName"            "seregga_scepter"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastPoint"              "0.3"
+		"AbilityCooldown"               "24"
+		"AbilityManaCost"               "150"
+		"MaxLevel"						"1"
+		"IsGrantedByScepter"			"1"
+		"AbilityValues"
+		{
+			"duration"                  "2.0"
+			"path_length"     			"1400"
+        	"path_width"      			"500"
+			"radius"                    "275"
+			"think_interval"            "0.06"
+			"impact_damage"             "500"
+			"slow_pct"                  "35"
+			"slow_duration"             "2.0"
+			"burn_maxhp_pct"            "5"
+			"burn_duration"             "4.0"
+		}
+	}
+	"seregga_scepter_stop"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/seregga/seregga_scepter"
+		"AbilityTextureName"            "seregga_scepter_stop"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"MaxLevel"                      "1"
+		"AbilityCooldown"               "1"
+		"AbilityManaCost"               "0"
+	}
+
 }

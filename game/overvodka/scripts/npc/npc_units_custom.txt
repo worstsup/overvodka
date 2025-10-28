@@ -4810,7 +4810,7 @@
 	}
 	"npc_dota_prince_throne"
 	{
-		"BaseClass"					"npc_dota_unit_undying_tombstone"
+		"BaseClass"					"npc_dota_base_additive"
 		"Model"						"models/prince/throne/tron.vmdl"
 		"SoundSet"					"Undying_Tombstone"
 		"ModelScale"				"0.9"
@@ -4838,7 +4838,7 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
-		"VisionDaytimeRange"		"1800"
+		"VisionDaytimeRange"		"800"
 		"VisionNighttimeRange"		"1800"
 	}
 
@@ -4851,9 +4851,9 @@
 		"Level"						"1"
 		"CanBeDominated"			"0"
 		"Ability1"					"undying_tombstone_zombie_deathstrike"
-		"Ability2"					"neutral_spell_immunity"	
+		"Ability2"					"neutral_spell_immunity"
 		"ArmorPhysical"				"0"			
-		"MagicalResistance"			"33"	
+		"MagicalResistance"			"100"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"33"		
 		"AttackDamageMax"			"39"		
@@ -4873,8 +4873,8 @@
 		"MovementSpeed"				"375"
 		"MovementTurnRate"			"0.5"
 		"StatusHealth"				"2"
-		"StatusHealthRegen"			"0"	
-		"StatusMana"				"0"	
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
 		"StatusManaRegen"			"0"	
 		"TeamName"					"DOTA_TEAM_BADGUYS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"

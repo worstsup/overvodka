@@ -3,10 +3,20 @@ LinkLuaModifier( "modifier_flash_e", "heroes/flash/flash_e", LUA_MODIFIER_MOTION
 LinkLuaModifier( "modifier_flash_e_debuff", "heroes/flash/flash_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_flash_e_stack", "heroes/flash/flash_e", LUA_MODIFIER_MOTION_NONE )
 
+function flash_e:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+        return "flash_e_immortal"
+    end
+    return "flash_e"
+end
+
 function flash_e:Precache(context)
     PrecacheResource("particle", "particles/flash_e_gain.vpcf", context)
+    PrecacheResource("particle", "particles/flash_e_gain_immortal.vpcf", context)
     PrecacheResource("particle", "particles/flash_e_caster.vpcf", context)
+    PrecacheResource("particle", "particles/flash_e_caster_immortal.vpcf", context)
     PrecacheResource("particle", "particles/flash_e_target.vpcf", context)
+    PrecacheResource("particle", "particles/flash_e_target_immortal.vpcf", context)
 end
 
 function flash_e:CastFilterResult()
@@ -45,6 +55,9 @@ function flash_e:OnSpellStart()
     local dmg_mul = self:GetSpecialValueFor("agi_damage")
     local heal = self:GetSpecialValueFor("agi_heal") * total_stolen
     EmitSoundOn("flash_e", caster)
+    if caster:HasModifier("modifier_overvodka_store_skin_6") then
+        EmitSoundOn("flash_e_immortal", caster)
+    end
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
         caster:GetAbsOrigin(),
@@ -56,10 +69,14 @@ function flash_e:OnSpellStart()
         0,
         false
     )
+    local name = "particles/flash_e_target.vpcf"
+    if caster:HasModifier("modifier_overvodka_store_skin_6") then
+        name = "particles/flash_e_target_immortal.vpcf"
+    end
     for _, enemy in pairs(enemies) do
         if not enemy:IsIllusion() and enemy:HasModifier("modifier_flash_e_debuff") then
             local debuff = enemy:FindModifierByName("modifier_flash_e_debuff")
-            local p = ParticleManager:CreateParticle("particles/flash_e_target.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
+            local p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, enemy)
             ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:SetParticleControlEnt( p, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	        ParticleManager:ReleaseParticleIndex(p)
@@ -81,7 +98,11 @@ function flash_e:OnSpellStart()
     end
     caster:HealWithParams(heal, self, false, true, caster, false)
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, caster, heal, caster:GetPlayerOwner())
-    local p = ParticleManager:CreateParticle("particles/flash_e_caster.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    local name1 = "particles/flash_e_caster.vpcf"
+    if caster:HasModifier("modifier_overvodka_store_skin_6") then
+        name1 = "particles/flash_e_caster_immortal.vpcf"
+    end
+    local p = ParticleManager:CreateParticle(name1, PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:ReleaseParticleIndex(p)
     local stacks = caster:FindAllModifiersByName("modifier_flash_e_stack")
@@ -190,7 +211,11 @@ function modifier_flash_e:RemoveStack()
 end
 
 function modifier_flash_e:PlayEffects( target )
-	local effect_cast = ParticleManager:CreateParticle( "particles/flash_e_gain.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
+    local name = "particles/flash_e_gain.vpcf"
+    if self:GetParent():HasModifier("modifier_overvodka_store_skin_6") then
+        name = "particles/flash_e_gain_immortal.vpcf"
+    end
+	local effect_cast = ParticleManager:CreateParticle( name, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControl( effect_cast, 1, self:GetParent():GetAbsOrigin() + Vector( 0, 0, 64 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

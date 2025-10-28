@@ -40,11 +40,9 @@ function modifier_golovach_e:OnDestroy( kv )
 end
 
 function modifier_golovach_e:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
 	}
-
-	return funcs
 end
 
 function modifier_golovach_e:OnTakeDamage( params )

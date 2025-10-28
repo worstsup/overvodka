@@ -123,6 +123,9 @@ PrecacheUtils.particles = {
 		"particles/shemelis_trail.vpcf",
 		"particles/shemelis_slash.vpcf",
 		"particles/prince_innate.vpcf",
+		"particles/econ/events/ti9/ti9_emblem_effect.vpcf",
+		"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_debuff.vpcf",
+		"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_splash.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -277,6 +280,8 @@ PrecacheUtils.models = {
 		"models/heroes/brewmaster/weapon.vmdl",
 		"models/prince/prince.vmdl",
 		"models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl",
+		"models/seregga/seregga.vmdl",
+		"models/blackflash/blackflash.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -358,6 +363,7 @@ PrecacheUtils.sounds = {
 		"soundevents/stint_start.vsndevts",
 		"soundevents/royale_start.vsndevts",
 		"soundevents/frisk_start.vsndevts",
+		"soundevents/seregga_start.vsndevts",
 		"soundevents/ailesh.vsndevts",
 		"soundevents/chapman.vsndevts",
 		"soundevents/stopan.vsndevts",
@@ -436,6 +442,7 @@ PrecacheUtils.sounds = {
 		"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts",
 		"soundevents/sans_damage.vsndevts",
 		"soundevents/shemelis.vsndevts",
+		"soundevents/seregga_innate.vsndevts",
 }
 
 PrecacheUtils.mapResources = {

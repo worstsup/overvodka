@@ -3,6 +3,13 @@ LinkLuaModifier("modifier_flash_q_facet_2_cooldown", "heroes/flash/flash_q_facet
 
 flash_q_facet_2 = class({})
 
+function flash_q_facet_2:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+        return "flash_q_facet_2_immortal"
+    end
+    return "flash_q_facet_2"
+end
+
 function flash_q_facet_2:Precache(context)
     PrecacheResource("particle", "particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_portal.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_damage.vpcf", context)

@@ -8,9 +8,11 @@ Store.Items = {
     skin_3 = { id = "skin_3", name = "#Store_Item_skin_3_name", type = "skins", price = 100, image = "file://{images}/custom_game/store/skins/skin_3.png", hero = "npc_dota_hero_axe", modifier = "modifier_overvodka_store_skin_3" },
     skin_4 = { id = "skin_4", name = "#Store_Item_skin_4_name", type = "skins", price = 200, image = "file://{images}/custom_game/store/skins/skin_4.png", hero = "npc_dota_hero_ogre_magi", modifier = "modifier_overvodka_store_skin_4" },
     skin_5 = { id = "skin_5", name = "#Store_Item_skin_5_name", type = "skins", price = 230, image = "file://{images}/custom_game/store/skins/skin_5.png", hero = "npc_dota_hero_brewmaster", modifier = "modifier_overvodka_store_skin_5" },
+    skin_6 = { id = "skin_6", name = "#Store_Item_skin_6_name", type = "skins", price = 420, image = "file://{images}/custom_game/store/skins/skin_6.png", hero = "npc_dota_hero_spirit_breaker", modifier = "modifier_overvodka_store_skin_6" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
+    effect_4 = { id = "effect_4", name = "#Store_Item_effect_4_name", type = "effects", price = 0, image = "file://{images}/custom_game/store/effects/effect_4.png", modifier = "modifier_overvodka_store_effect_4" },
     pet_1 = { id = "pet_1", name = "#Store_Item_pet_1_name", type = "pets", price = 100, image = "file://{images}/custom_game/store/pets/pet_1.png", modifier = "modifier_overvodka_store_pet_1" },
     pet_2 = { id = "pet_2", name = "#Store_Item_pet_2_name", type = "pets", price = 100, image = "file://{images}/custom_game/store/pets/pet_2.png", modifier = "modifier_overvodka_store_pet_2" },
     pet_3 = { id = "pet_3", name = "#Store_Item_pet_3_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_3.png", modifier = "modifier_overvodka_store_pet_3" },
@@ -80,7 +82,8 @@ function Store:FetchPlayerData(playerID)
                 inventory = self:ArrayToSet(body.inventory or {}),
                 equipped_effect = body.equipped_effect,
                 equipped_skin = body.equipped_skin,
-                equipped_pet = body.equipped_pet
+                equipped_pet = body.equipped_pet,
+                prime_claims = body.prime_claims or {}
             }
 
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
@@ -229,7 +232,7 @@ function Store:OnBuyItem(event)
     if not item or steamID == "0" then return end
 
     if self.playerData[playerID] and self.playerData[playerID].coins < item.price then
-        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "store_buy_response", { success = false, error = "Not enough coins" })
+        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "store_buy_response", { success = false, error = "Not enough coins", item_id = itemID })
         return
     end
 
@@ -250,14 +253,14 @@ function Store:OnBuyItem(event)
 
         if err or not (body and body.success) then
             local errorMsg = (body and body.error) or (err and err.error) or "Server error"
-            CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = false, error = errorMsg })
+            CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = false, error = errorMsg, item_id = itemID })
             return
         end
         if Server and Server.RefreshPlayerProfile then
             Server:RefreshPlayerProfile(playerID)
         end
         self:FetchPlayerData(playerID)
-        CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = true, new_balance = body.new_balance })
+        CustomGameEventManager:Send_ServerToPlayer(player, "store_buy_response", { success = true, new_balance = body.new_balance, item_id = itemID })
     end)
 end
 

@@ -264,10 +264,9 @@ function modifier_sans_field:OnDestroy()
 end
 
 function modifier_sans_field:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 	}
-	return funcs
 end
 
 function modifier_sans_field:GetModifierMoveSpeed_Limit( params )

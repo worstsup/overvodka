@@ -28,11 +28,9 @@ function modifier_golovach_q:OnDestroy( kv )
 end
 
 function modifier_golovach_q:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 	}
-
-	return funcs
 end
 
 function modifier_golovach_q:OnAttackLanded( params )

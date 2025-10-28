@@ -124,12 +124,19 @@ function modifier_prince_e_inside:OnCreated(kv)
     if self.throne and not self.throne:IsNull() and self.throne:IsAlive() and self.ability and not self.ability:IsNull() then
         self.bonus_hp = tonumber(self.ability:GetSpecialValueFor("shard_bonus_hp")) or 0
         if self.bonus_hp > 0 then
-            self.throne:SetBaseMaxHealth(self.throne:GetBaseMaxHealth() + self.bonus_hp)
-            self.throne:SetMaxHealth(self.throne:GetMaxHealth() + self.bonus_hp)
-            self.throne:SetHealth(self.throne:GetHealth() + self.bonus_hp)
-            self.throne:SetModel("models/prince/tron_shard.vmdl")
             local mod = self.throne:FindModifierByName("modifier_prince_e")
-            if mod then mod:_UpdatePips() end
+            local per_pip = (mod and mod.hits_per_pip) or 2
+
+            self.throne:SetBaseMaxHealth(self.throne:GetBaseMaxHealth() + self.bonus_hp * per_pip)
+            self.throne:SetMaxHealth(self.throne:GetMaxHealth() + self.bonus_hp * per_pip)
+            self.throne:SetHealth(self.throne:GetHealth() + self.bonus_hp * per_pip)
+
+            if mod then
+                mod.pips_display = (mod.pips_display or 0) + self.bonus_hp
+                mod:_UpdatePips()
+            end
+
+            self.throne:SetModel("models/prince/tron_shard.vmdl")
         end
     end
 
@@ -156,27 +163,37 @@ function modifier_prince_e_inside:OnDestroy()
     if self.throne and not self.throne:IsNull() and self.throne._inside == self.parent then
         self.throne._inside = nil
     end
+
     if self.throne and not self.throne:IsNull() and self.throne:IsAlive() and self.bonus_hp and self.bonus_hp > 0 then
-        local new_base = math.max(1, self.throne:GetBaseMaxHealth() - self.bonus_hp)
-        local new_max  = math.max(1, self.throne:GetMaxHealth()  - self.bonus_hp)
+        local mod = self.throne:FindModifierByName("modifier_prince_e")
+        local per_pip = (mod and mod.hits_per_pip) or 2
+
+        local new_base = math.max(1, self.throne:GetBaseMaxHealth() - self.bonus_hp * per_pip)
+        local new_max  = math.max(1, self.throne:GetMaxHealth()  - self.bonus_hp * per_pip)
         self.throne:SetBaseMaxHealth(new_base)
         self.throne:SetMaxHealth(new_max)
         self.throne:SetHealth(math.min(self.throne:GetHealth(), new_max))
+
         self.throne:SetModel("models/prince/throne/tron.vmdl")
         self.throne:StartGesture(ACT_DOTA_IDLE)
-        local mod = self.throne:FindModifierByName("modifier_prince_e")
-        if mod then mod:_UpdatePips() end
+
+        if mod then
+            mod.pips_display = math.max(1, (mod.pips_display or 1) - self.bonus_hp)
+            mod:_UpdatePips()
+        end
     end
+
     if self.ability and not self.ability:IsNull() then
         local reenter_cd = tonumber(self.ability:GetSpecialValueFor("min_inside_time")) or 0
         if reenter_cd > 0 then
             self.parent._prince_e_enter_cd_until = GameRules:GetGameTime() + reenter_cd
         end
     end
+
     self:GetParent():RemoveNoDraw()
     FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin() + RandomVector(120), true)
-    --self:GetParent():StopSound("prince_e_inside")
 end
+
 
 function modifier_prince_e_inside:DeclareFunctions()
     return { MODIFIER_EVENT_ON_ORDER }
@@ -248,7 +265,7 @@ function modifier_prince_e:GetAbsoluteNoDamagePure()
 end
 
 function modifier_prince_e:GetModifierHealthBarPips()
-    return self._pips or math.max(1, self:GetParent():GetMaxHealth())
+    return self._pips or self.pips_display or 1
 end
 
 function modifier_prince_e:OnAttackLanded(keys)
@@ -256,12 +273,17 @@ function modifier_prince_e:OnAttackLanded(keys)
     local parent = self:GetParent()
     if keys.target ~= parent then return end
 
+    local attacker = keys.attacker
+    if not attacker or attacker:IsNull() then return end
+
+    local hp_loss = (attacker:IsHero() and not attacker:IsIllusion()) and 2 or 1
+
     local cur = math.max(0, parent:GetHealth())
-    local new = math.max(0, cur - 1)
+    local new = math.max(0, cur - hp_loss)
 
     if new <= 0 then
-        if keys.attacker and keys.attacker:IsHero() then
-            parent:Kill(nil, keys.attacker)
+        if attacker:IsHero() then
+            parent:Kill(nil, attacker)
         else
             parent:ForceKill(false)
         end
@@ -270,16 +292,20 @@ function modifier_prince_e:OnAttackLanded(keys)
     end
 end
 
+
 function modifier_prince_e:OnCreated()
     if not IsServer() then return end
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
     self.zombie_interval = self:GetAbility():GetSpecialValueFor("zombie_interval")
 
-    local pips = self:GetAbility():GetSpecialValueFor("tombstone_health")
+    self.pips_display = self:GetAbility():GetSpecialValueFor("tombstone_health")
+    self.hits_per_pip = 2
+    local max_hp_internal = self.pips_display * self.hits_per_pip
+
     local parent = self:GetParent()
-    parent:SetBaseMaxHealth(pips)
-    parent:SetMaxHealth(pips)
-    parent:SetHealth(pips)
+    parent:SetBaseMaxHealth(max_hp_internal)
+    parent:SetMaxHealth(max_hp_internal)
+    parent:SetHealth(max_hp_internal)
 
     self:SetHasCustomTransmitterData(true)
     self:_UpdatePips()
@@ -288,7 +314,7 @@ end
 
 function modifier_prince_e:_UpdatePips()
     if not IsServer() then return end
-    self._pips = math.max(1, self:GetParent():GetMaxHealth())
+    self._pips = self.pips_display or 1
     self:SendBuffRefreshToClients()
 end
 
@@ -381,4 +407,23 @@ function modifier_prince_e_zombie:OnIntervalThink()
             })
         end
     end
+end
+
+function modifier_prince_e_zombie:CheckState()
+	return {[MODIFIER_STATE_MAGIC_IMMUNE] = true}
+end
+
+function modifier_prince_e_zombie:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
+        MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+    }
+end
+
+function modifier_prince_e_zombie:GetAbsoluteNoDamageMagical()
+    return 1
+end
+
+function modifier_prince_e_zombie:GetAbsoluteNoDamagePure()
+    return 1
 end

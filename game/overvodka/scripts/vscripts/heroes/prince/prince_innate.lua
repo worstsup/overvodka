@@ -108,7 +108,6 @@ function modifier_prince_innate:OnAttackLanded(params)
     local attacker = params.attacker
     if not attacker or attacker:IsNull() then return end
     if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
-    if not attacker:IsHero() then return end
 
     local window          = ability:GetSpecialValueFor("window")
     local attackers_need  = ability:GetSpecialValueFor("attackers_need")
@@ -158,7 +157,7 @@ function modifier_prince_innate:OnAttackLanded(params)
                     knockback_height = 0,
                 }
                 enemy:AddNewModifier(parent, ability, "modifier_knockback", kb)
-                enemy:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", { duration = self:GetSpecialValueFor("disarm_duration") })
+                enemy:AddNewModifier(parent, ability, "modifier_generic_disarmed_lua", { duration = ability:GetSpecialValueFor("disarm_duration") })
                 if damage > 0 then
                     ApplyDamage({
                         victim = enemy,

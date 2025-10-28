@@ -390,7 +390,12 @@ function GetOvervodkaHeroName(HeroName){
     }
     if (HeroName == "npc_dota_hero_spirit_breaker")
     {
-        OvervodkaName = "npc_dota_hero_flash"
+        if (HasModifier(HeroName, "modifier_overvodka_store_skin_6")) {
+            OvervodkaName = "npc_dota_hero_flash_immortal"
+        }
+        else {
+            OvervodkaName = "npc_dota_hero_flash"
+        }
     }
     if (HeroName == "npc_dota_hero_winter_wyvern")
     {
@@ -407,6 +412,10 @@ function GetOvervodkaHeroName(HeroName){
     if (HeroName == "npc_dota_hero_abaddon")
     {
         OvervodkaName = "npc_dota_hero_prince"
+    }
+    if (HeroName == "npc_dota_hero_tusk")
+    {
+        OvervodkaName = "npc_dota_hero_seregga"
     }
     return OvervodkaName	
 }

@@ -6,18 +6,32 @@ LinkLuaModifier( "modifier_flash_r_after_cooldown", "heroes/flash/flash_r", LUA_
 
 flash_r = class({})
 
+function flash_r:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+        return "flash_r_immortal"
+    end
+    return "flash_r"
+end
+
 function flash_r:Precache(context)
-	PrecacheResource( "soundfile", "soundevents/stopan.vsndevts", context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_kez/kez_sai_afterimage_buff.vpcf", context )
 	PrecacheResource( "particle", "particles/flash_r_speed.vpcf", context)
 	PrecacheResource( "particle", "particles/flash_r_start.vpcf", context)
 	PrecacheResource( "particle", "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active.vpcf", context)
+	PrecacheResource( "particle", "particles/pa_persona_phantom_blur_active_new.vpcf", context)
 	PrecacheResource( "particle", "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start.vpcf", context)
-	PrecacheResource( "particle", "particles/econ/items/phantom_assassin/pa_crimson_witness_2021/pa_crimson_witness_blur_start.vpcf", context)
+	PrecacheResource( "particle", "particles/pa_persona_phantom_blur_active_start_new.vpcf", context)
 	PrecacheResource( "particle", "particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", context)
+	PrecacheResource( "particle", "particles/antimage_manabreak_slow_new.vpcf", context)
 	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_shard_slow.vpcf", context)
+	PrecacheResource( "particle", "particles/zuus_shard_slow_immortal.vpcf", context)
 	PrecacheResource( "particle", "particles/flash_r_lightning.vpcf", context)
 	PrecacheResource( "particle", "particles/flash_r_start_lightning.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_lightning_immortal.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_start_lightning_immortal.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_speed_immortal.vpcf", context)
+	PrecacheResource( "particle", "particles/flash_r_start_immortal.vpcf", context)
+	PrecacheResource( "particle", "particles/kez_sai_afterimage_buff_immortal.vpcf", context)
 end
 
 function flash_r:GetCooldown( level )
@@ -31,7 +45,11 @@ function flash_r:OnAbilityPhaseStart()
 		ParticleManager:ReleaseParticleIndex(self.p)
 		self.p = nil
 	end
-	self.p = ParticleManager:CreateParticle("particles/flash_r_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	local name = "particles/flash_r_lightning.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/flash_r_lightning_immortal.vpcf"
+	end
+	self.p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
 	ParticleManager:SetParticleControlEnt( self.p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( self.p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 end
@@ -58,16 +76,26 @@ function flash_r:OnSpellStart()
 		false
 	)
 	caster:AddNewModifier(caster, self, "modifier_flash_r_buff", {duration = self:GetSpecialValueFor("duration")})
-	EmitGlobalSound( "flash_r" )
+	local sound = "flash_r"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		sound = "flash_r_immortal"
+	end
+	EmitGlobalSound( sound )
 	StopGlobalSound( "5opka_r" )
     StopGlobalSound( "stray_scepter" )
     StopGlobalSound( "evelone_r_ambient" )
 	StopGlobalSound( "golden_rain" )
-	local p = ParticleManager:CreateParticle("particles/flash_r_start_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	local name_start = "particles/flash_r_start.vpcf"
+	local name_light = "particles/flash_r_start_lightning.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name_start = "particles/flash_r_start_immortal.vpcf"
+		name_light = "particles/flash_r_start_lightning_immortal.vpcf"
+	end
+	local p = ParticleManager:CreateParticle(name_light, PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( p, 4, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	ParticleManager:ReleaseParticleIndex(p)
-	local p = ParticleManager:CreateParticle("particles/flash_r_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	local p = ParticleManager:CreateParticle(name_start, PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:ReleaseParticleIndex(p)
 end
 
@@ -84,7 +112,11 @@ function modifier_flash_r_buff:OnCreated()
 		ParticleManager:ReleaseParticleIndex(self:GetAbility().p)
 		self:GetAbility().p = nil
 	end
-	self.p = ParticleManager:CreateParticle("particles/flash_r_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	local name = "particles/flash_r_lightning.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/flash_r_lightning_immortal.vpcf"
+	end
+	self.p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
 	ParticleManager:SetParticleControlEnt(self.p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:SetParticleControlEnt(self.p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	self:AddParticle(self.p, false, false, -1, false, false)
@@ -104,7 +136,11 @@ end
 
 function modifier_flash_r_buff:OnDestroy()
 	if not IsServer() then return end
-	local p = ParticleManager:CreateParticle("particles/flash_r_start_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+	local name = "particles/flash_r_start_lightning.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/flash_r_start_lightning_immortal.vpcf"
+	end
+	local p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
 	ParticleManager:SetParticleControlEnt( p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	ParticleManager:ReleaseParticleIndex(p)
@@ -157,7 +193,11 @@ function modifier_flash_r_buff:SpawnAfterimage(target)
 end
 
 function modifier_flash_r_buff:PlayEffects()
-	local effect_cast = ParticleManager:CreateParticle( "particles/flash_r_speed.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	local name = "particles/flash_r_speed.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/flash_r_speed_immortal.vpcf"
+	end
+	local effect_cast = ParticleManager:CreateParticle( name, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControlEnt(
 		effect_cast,
 		0,
@@ -168,7 +208,11 @@ function modifier_flash_r_buff:PlayEffects()
 		true
 	)
 	self:AddParticle(effect_cast, false, false, -1, false, false)
-	local effect_cast_2 = ParticleManager:CreateParticle( "particles/units/heroes/hero_kez/kez_sai_afterimage_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	local name_2 = "particles/units/heroes/hero_kez/kez_sai_afterimage_buff.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name_2 = "particles/kez_sai_afterimage_buff_immortal.vpcf"
+	end
+	local effect_cast_2 = ParticleManager:CreateParticle( name_2, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	self:AddParticle(effect_cast_2, false, false, -1, false, false)
 end
 
@@ -255,6 +299,9 @@ function modifier_flash_r_after:GetModifierMoveSpeed_Absolute()
 end
 
 function modifier_flash_r_after:GetEffectName()
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		return "particles/pa_persona_phantom_blur_active_new.vpcf"
+	end
 	return "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active.vpcf"
 end
 
@@ -267,11 +314,11 @@ function modifier_flash_r_after:OnDestroy()
     self:StartIntervalThink(-1)
 	local parent = self:GetParent()
 	if parent and not parent:IsNull() then
-		local effect_cast = ParticleManager:CreateParticle(
-			"particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start.vpcf",
-			PATTACH_ABSORIGIN_FOLLOW,
-			parent
-		)
+		local name = "particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start.vpcf"
+		if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+			name = "particles/pa_persona_phantom_blur_active_start_new.vpcf"
+		end
+		local effect_cast = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, parent)
 		ParticleManager:SetParticleControl(effect_cast, 0, parent:GetAbsOrigin())
 		ParticleManager:SetParticleControl(effect_cast, 3, parent:GetAbsOrigin())
 		ParticleManager:ReleaseParticleIndex(effect_cast)
@@ -292,13 +339,20 @@ function modifier_flash_r_debuff:OnCreated()
 		self:Destroy()
 		return
 	end
-	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	local name = "particles/units/heroes/hero_antimage/antimage_manabreak_slow.vpcf"
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		name = "particles/antimage_manabreak_slow_new.vpcf"
+	end
+	local p = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 	ParticleManager:SetParticleControl(p, 0, self:GetParent():GetAbsOrigin())
 	ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(p)
 end
 
 function modifier_flash_r_debuff:GetEffectName()
+	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+		return "particles/zuus_shard_slow_immortal.vpcf"
+	end
 	return "particles/units/heroes/hero_zuus/zuus_shard_slow.vpcf"
 end
 

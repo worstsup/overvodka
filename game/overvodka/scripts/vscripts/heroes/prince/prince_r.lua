@@ -4,6 +4,10 @@ LinkLuaModifier( "modifier_prince_r_slow", "heroes/prince/prince_r", LUA_MODIFIE
 
 prince_r = class({})
 
+function prince_r:IsStealable()
+    return false
+end
+
 function prince_r:Precache( context )
 	PrecacheResource( "particle", "amir4an/particles/heroes/queen_of_pain/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_ultimate_precast_ambient.vpcf", context )
 	PrecacheResource( "particle", "amir4an/particles/heroes/queen_of_pain/amir4an_queen_of_pain_god/amir4an_queen_of_pain_god_scream_v2_ambient.vpcf", context )
@@ -363,9 +367,8 @@ function modifier_prince_r_slow:OnCreated(data)
         victim = self:GetParent(),
         attacker = self:GetCaster(),
         damage = self.damage_instant * self.damage_multiplier * self:GetCaster().voice_level,
-        damage_type = DAMAGE_TYPE_MAGICAL,
-        damage_flags = DOTA_DAMAGE_FLAG_NONE,
-        ability = self
+        damage_type = DAMAGE_TYPE_PURE,
+        ability = self:GetAbility()
     })
     self:StartIntervalThink(FrameTime())
 end
@@ -380,8 +383,7 @@ function modifier_prince_r_slow:OnIntervalThink()
         victim = self:GetParent(),
         attacker = self:GetCaster(),
         damage = self.damage,
-        damage_type = DAMAGE_TYPE_MAGICAL,
-        damage_flags = DOTA_DAMAGE_FLAG_NONE,
-        ability = self
+        damage_type = DAMAGE_TYPE_PURE,
+        ability = self:GetAbility()
     })
 end

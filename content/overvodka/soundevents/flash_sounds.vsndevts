@@ -124,6 +124,37 @@
     }
   }
 }
+"flash_r_immortal"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/flash_r_immortal.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "-0.03" }
+          "pitch_rand_max"  {  "value"   "0.0" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
 
 
 "flash_r_after"
@@ -274,6 +305,70 @@
             }
           }
           "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "-0.03" }
+          "pitch_rand_max"  {  "value"   "0.03" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"flash_e_immortal"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/flash_e_immortal.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.0" }
+          "pitch_rand_min"  {  "value"   "-0.03" }
+          "pitch_rand_max"  {  "value"   "0.03" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"flash_q_facet_1_immortal"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/flash_q_facet_1_immortal.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.0" }
           "pitch_rand_min"  {  "value"   "-0.03" }
           "pitch_rand_max"  {  "value"   "0.03" }
           "pitch"       {  "value"   "1.000000" }

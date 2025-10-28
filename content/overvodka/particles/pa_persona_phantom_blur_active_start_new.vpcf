@@ -1,0 +1,38 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nBehaviorVersion = 12
+	m_nMaxParticles = 0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+			m_previewState = 
+			{
+				m_previewModel = "models/heroes/phantom_assassin_persona/phantom_assassin_persona.vmdl"
+				m_nModSpecificData = 783
+				m_sequenceName = "c3_blur_alt"
+				m_hitboxSetName = "default"
+			}
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_phantom_assassin_persona/pa_persona_phantom_blur_active_start_ground.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_blur_active_start_ground_b_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/pa_persona_phantom_blur_active_start_smoke_new.vpcf"
+		},
+	]
+}

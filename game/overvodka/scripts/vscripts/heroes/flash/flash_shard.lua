@@ -1,6 +1,13 @@
 flash_shard = class({})
 LinkLuaModifier( "modifier_flash_shard", "heroes/flash/flash_shard", LUA_MODIFIER_MOTION_NONE )
 
+function flash_shard:GetAbilityTextureName()
+    if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
+        return "flash_shard_immortal"
+    end
+    return "flash_shard"
+end
+
 function flash_shard:GetIntrinsicModifierName()
 	return "modifier_flash_shard"
 end

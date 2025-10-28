@@ -166,7 +166,7 @@ function modifier_prince_q_caster:PerformSlash()
 
     local dmg = self.damage
     if caster:HasTalent("special_bonus_unique_prince_8") then
-        dmg = dmg + caster:GetAverageTrueAttackDamage(nil)
+        dmg = dmg + caster:GetAverageTrueAttackDamage(nil) * self:GetAbility():GetSpecialValueFor("damage_pct") * 0.01
     end
     caster:PerformAttack(target, true, true, true, false, false, true, true)
     ApplyDamage({
