@@ -21,7 +21,8 @@ function invincible_e:GetAbilityTextureName()
     return "invincible_e"
 end
 
-function invincible_e:OnSpellStart()
+function invincible_e:GetCastRange(vLocation, hTarget)
+    return self:GetCaster():Script_GetAttackRange()
 end
 
 function invincible_e:OnOrbImpact( params )

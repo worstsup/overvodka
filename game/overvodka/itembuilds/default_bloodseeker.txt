@@ -33,7 +33,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_shemelis"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_govno"

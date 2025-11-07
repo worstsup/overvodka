@@ -36,7 +36,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_devastator"
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_swag"
 			"item"		"item_govno"
 		}

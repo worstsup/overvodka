@@ -7,7 +7,8 @@ function arsen_baza:GetIntrinsicModifierName()
 	return "modifier_generic_orb_effect_lua"
 end
 
-function arsen_baza:OnSpellStart()
+function arsen_baza:GetCastRange(vLocation, hTarget)
+    return self:GetCaster():Script_GetAttackRange()
 end
 
 function arsen_baza:OnOrbImpact( params )

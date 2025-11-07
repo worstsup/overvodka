@@ -10,6 +10,10 @@ function flash_w:GetAbilityTextureName()
     return "flash_w"
 end
 
+function flash_w:GetCastRange(vLocation, hTarget)
+    return self:GetCaster():Script_GetAttackRange()
+end
+
 function flash_w:Precache(context)
 	PrecacheResource("soundfile", "soundevents/flash_sounds.vsndevts", context)
 	PrecacheResource("particle", "particles/econ/items/storm_spirit/strom_spirit_ti8/gold_storm_spirit_ti8_overload_active_h.vpcf", context)

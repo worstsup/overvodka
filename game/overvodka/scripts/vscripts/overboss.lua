@@ -6,7 +6,7 @@ function ThrowCoin( args )
 	if coinAttach ~= -1 then
 		coinSpawn = args.caster:GetAttachmentOrigin( coinAttach )
 	end
-	if _G.overvodka_events then
+	if _G.overvodka_events and not IsInToolsMode() then
 		if k == 10 or k == 18 or k == 36 or k == 48 or k == 64 or k == 76 or k == 88 or k == 96 or k == 104 or k == 112 or (k >= 118 and k % 8 == 0) then
 			SpawnBombardiro()
 		end

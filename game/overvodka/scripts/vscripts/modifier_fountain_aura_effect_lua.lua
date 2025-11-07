@@ -10,19 +10,35 @@ function modifier_fountain_aura_effect_lua:DeclareFunctions()
 	return funcs
 end
 
+local function _HasApocalypseOn(unit)
+    return unit and not unit:IsNull() and (unit:HasModifier("modifier_visitor_r") or unit:HasModifier("modifier_visitor_r_cooldown"))
+end
+
 function modifier_fountain_aura_effect_lua:GetTexture()
 	return "rune_regen"
 end
 
 function modifier_fountain_aura_effect_lua:GetModifierHealthRegenPercentage()
+	local parent = self:GetParent()
+	if _HasApocalypseOn(parent) then
+		return 0
+	end
 	return 15
 end
 
 function modifier_fountain_aura_effect_lua:GetModifierTotalPercentageManaRegen()
+	local parent = self:GetParent()
+	if _HasApocalypseOn(parent) then
+		return 0
+	end
 	return 15
 end
 
 function modifier_fountain_aura_effect_lua:GetModifierConstantManaRegen()
+	local parent = self:GetParent()
+	if _HasApocalypseOn(parent) then
+		return 0
+	end
 	return 20
 end
 

@@ -138,8 +138,8 @@ function stariy_lasers:OnSpellStart()
 
 				local nBeamFXIndex = ParticleManager:CreateParticle( "particles/creatures/aghanim/staff_beam.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster() )
 				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_eyes", self:GetCaster():GetAbsOrigin(), true )
-				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 1, projectile.hThinker, PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
-				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 2, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 1, projectile.hThinker, PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetAbsOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 2, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetAbsOrigin(), true )
 				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 9, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetCaster():GetAbsOrigin(), true )
 				projectile.nFXIndex = nBeamFXIndex
 
@@ -231,8 +231,8 @@ function stariy_lasers:OnChannelThink( flInterval )
 
 				local nBeamFXIndex = ParticleManager:CreateParticle( "particles/creatures/aghanim/staff_beam.vpcf", PATTACH_CUSTOMORIGIN, self:GetCaster() )
 				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_eyes", self:GetCaster():GetAbsOrigin(), true )
-				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 1, projectile.hThinker, PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
-				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 2, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 1, projectile.hThinker, PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetAbsOrigin(), true )
+				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 2, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, projectile.hThinker:GetAbsOrigin(), true )
 				ParticleManager:SetParticleControlEnt( nBeamFXIndex, 9, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetCaster():GetAbsOrigin(), true )
 				projectile.nFXIndex = nBeamFXIndex
 				table.insert(self.vecTargets, enemy)

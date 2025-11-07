@@ -253,11 +253,7 @@ function GetOvervodkaHeroName(HeroName){
     if (HeroName == "npc_dota_hero_axe")
     {
         OvervodkaName = "npc_dota_hero_dima"
-    }	
-    if (HeroName == "npc_dota_hero_undying")
-    {
-        OvervodkaName = "npc_dota_hero_dmb"
-    }	
+    }
     if (HeroName == "npc_dota_hero_invoker")
     {
         OvervodkaName = "npc_dota_hero_zombill"
@@ -417,6 +413,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_seregga"
     }
+    if (HeroName == "npc_dota_hero_undying")
+    {
+        OvervodkaName = "npc_dota_hero_visitor"
+    }
     return OvervodkaName	
 }
 
@@ -535,11 +535,9 @@ function GetUniqueSceneHeroName(hero_name)
 }
 
 function getScreamerRoot() {
-    // пытаемся найти локально
     var p = $("#CharaScreamerPanel");
     if (p) return p;
 
-    // если скрипт исполняется не в том layout’е — найдём через HUD
     var hud = $.GetContextPanel();
     while (hud && hud.id !== "Hud") hud = hud.GetParent();
     return hud ? hud.FindChildTraverse("CharaScreamerPanel") : null;
@@ -567,11 +565,51 @@ function CharaScreamerTrue() {
 
 function CharaScreamerFalse() {
     var root = getScreamerRoot();
-    if (!root) return; // панель ещё не создана — просто выходим
+    if (!root) return;
+    root.RemoveAndDeleteChildren();
+}
+
+function getScreamerRoot_Visitor() {
+    var p = $("#VisitorScreamerPanel");
+    if (p) return p;
+
+    var hud = $.GetContextPanel();
+    while (hud && hud.id !== "Hud") hud = hud.GetParent();
+    return hud ? hud.FindChildTraverse("VisitorScreamerPanel") : null;
+}
+
+function VisitorScreamerTrue() {
+    var root = getScreamerRoot_Visitor();
+    if (!root) { $.Msg("VisitorScreamer panel not found"); return; }
+    root.RemoveAndDeleteChildren();
+    var rnd = Math.random() < 0.5 ? 1 : 2;
+    var videoSrc = "file://{resources}/videos/visitor_screamer_" + rnd + ".webm";
+    var sound = "visitor_screamer_" + rnd;
+    Game.EmitSound(sound)
+    $.CreatePanel(
+        "MoviePanel",
+        root,
+        "screamer_visitor",
+        {
+            style: "width:100%;height:100%;align:center center;opacity:0.80;",
+            class: "visitor_screamer_webm",
+            src: videoSrc,
+            repeat: "true",
+            hittest: "false",
+            autoplay: "onload"
+        }
+    );
+}
+
+function VisitorScreamerFalse() {
+    var root = getScreamerRoot_Visitor();
+    if (!root) return;
     root.RemoveAndDeleteChildren();
 }
 
 (function () {
     GameEvents.Subscribe( "CharaScreamerTrue", CharaScreamerTrue );
     GameEvents.Subscribe( "CharaScreamerFalse", CharaScreamerFalse );
+    GameEvents.Subscribe( "VisitorScreamerTrue", VisitorScreamerTrue );
+    GameEvents.Subscribe( "VisitorScreamerFalse", VisitorScreamerFalse );
 })();

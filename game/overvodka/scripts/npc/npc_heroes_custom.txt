@@ -1217,9 +1217,9 @@
 		"Ability2"		"ashab_slushay"
 		"Ability3"		"ashab_car"
 		"Ability4"		"ashab_train"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"imba_batrider_sticky_napalm"
 		"Ability6"		"Ashab_rocket"
-		"Ability7"		"generic_hidden"
+		"Ability7"		"imba_batrider_sticky_napalm_new"
 
 		"Ability10"		"special_bonus_unique_ashab_1"
 		"Ability11"		"special_bonus_unique_ashab_2"
@@ -3693,5 +3693,90 @@
 		"particle_folder"		"particles/units/heroes/hero_tusk"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_tusk.vsndevts"
 		"VoiceFile"		""
+	}
+	"npc_dota_hero_undying"
+	{
+		"Model"				"models/visitor/visitor.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"230"
+		"SoundSet"			"Hero_Undying"
+		"IdleSoundLoop"		""
+		"ModelScale"		"1"
+		"VersusScale"		"0.93"
+		"LoadoutScale"		"0.93"
+		"SimilarHeroes"		"102,14,67"
+		"HeroSelectSoundEffect"		"visitor_night"
+		"GibType"		"goo"
+		"GibTintColor"	"73 82 68 255"
+		"Ability1"		"visitor_q"
+		"Ability2"		"visitor_w"
+		"Ability3"		"visitor_e"
+		"Ability4"		"visitor_d"
+		"Ability5"		"visitor_innate"
+		"Ability6"		"visitor_r"
+
+		"Ability10"		"special_bonus_all_stats_4"
+		"Ability11"		"special_bonus_day_vision_400"
+		"Ability12"		"special_bonus_unique_visitor_6"
+		"Ability13"		"special_bonus_unique_visitor_4"
+		"Ability14"		"special_bonus_unique_visitor_5"
+		"Ability15"		"special_bonus_unique_visitor_3"
+		"Ability16"		"special_bonus_unique_visitor_7"
+		"Ability17"		"special_bonus_unique_visitor_8"
+		"Facets"
+		{
+			"visitor_facet_1"
+			{
+				"Icon"				"summons"
+				"Color"				"Green"
+				"GradientID"		"4"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"visitor_ability_facet_1"
+						"AutoLevelAbility"	"false"
+					}
+				}
+			}
+			"undying_rotting_mitts" 
+			{
+				"Deprecated"	"true"
+			}
+			"visitor_facet_2"
+			{
+				"Icon"				"strength"
+				"Color"				"Red"
+				"GradientID"		"1"
+			}	
+			"undying_ripped" 
+			{
+				"Deprecated"		"true"
+			}
+
+		}
+		"ArmorPhysical"					"0"
+		"AttackCapabilities"			"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"				"27"
+		"AttackDamageMax"				"35"
+		"AttackRate"					"2.0"
+		"AttackAnimationPoint"			"0.3"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"					"200"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"			"23"
+		"AttributeStrengthGain"			"2.5"
+		"AttributeBaseAgility"			"23"
+		"AttributeAgilityGain"			"2.5"
+		"AttributeBaseIntelligence"		"23"
+		"AttributeIntelligenceGain"		"2.5"
+		"VisionDaytimeRange"		"400"
+		"VisionNighttimeRange"		"2500"
+		"StatusHealthRegen"		"-0.25"
+		"StatusManaRegen"		"0.25"
+		"MovementSpeed"			"285"
+		"particle_folder"		"particles/units/heroes/hero_undying"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
+		"VoiceFile"				""
 	}
 }

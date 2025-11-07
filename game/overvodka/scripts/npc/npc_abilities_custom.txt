@@ -11826,7 +11826,7 @@
 			"chain_dur"
 			{
 				"value"	"5"
-				"special_bonus_unique_invincible_7" "+5"
+				"special_bonus_unique_invincible_7" "+3"
 			}
 			"slow"			"-100"
 			"slow_dur"		"2.0"
@@ -13461,7 +13461,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"175"
-		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"9 8 7 6"
 		"AbilityManaCost"				"40"
 		"HasScepterUpgrade"				"1"
@@ -15110,7 +15109,7 @@
 				}
 				"AbilityCooldown"
 				{
-					"value"	"16"
+					"value"	"12"
 				}
 				"active"
 				{
@@ -15198,7 +15197,7 @@
 			"int_damage"
 			{
 				"value"	"0"
-				"special_bonus_facet_prince_w_int" "+40"
+				"special_bonus_facet_prince_w_int" "+60"
 				"RequiresFacet"		"prince_w_int"
 			}
 		}
@@ -15393,14 +15392,15 @@
 		"AbilityTextureName" "seregga_q_biceps"
 		"AbilityBehavior"    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"HasShardUpgrade"	 "1"
+		"AbilityManaCost"	 "45 50 55 60"
 		"AbilityValues"
 		{
-			"biceps_crit_chance"    "20 25 30 35"
+			"biceps_crit_chance"    "15 20 25 30"
 			"biceps_crit_mult"      "175"
 			"biceps_attack_range"   "50 75 100 125"
 
-			"aegis_armor"           "5 8 11 14"
-			"aegis_reflect_pct"     "20 25 30 35"
+			"aegis_armor"           "3 5 7 9"
+			"aegis_reflect_pct"     "18 22 26 30"
 			"aegis_status_resist"   "15 20 25 30"
 
 			"shard_duration"
@@ -15581,6 +15581,255 @@
 		"MaxLevel"                      "1"
 		"AbilityCooldown"               "1"
 		"AbilityManaCost"               "0"
+	}
+
+	//===================================================================================================================
+	//												PALE VISITOR
+	//===================================================================================================================
+	"special_bonus_unique_visitor_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_visitor_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_visitor_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_visitor_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_visitor_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_visitor_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Необъяснимое сверхмогущество (innate)
+	//=================================================================================================================
+	"visitor_innate"
+	{
+		"BaseClass"           "ability_lua"
+		"ScriptFile"          "heroes/pale_visitor/visitor_innate"
+		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"Innate"              "1"
+		"IsBreakable"         "1"
+		"AbilityValues"
+		{
+			"dmg_per_attr"
+			{
+				"value"	"0.4"
+				"special_bonus_unique_visitor_8"	"+0.25"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Схватить за шею
+	//=================================================================================================================
+	"visitor_q"
+	{
+		"BaseClass"				"ability_lua"
+		"ScriptFile"			"heroes/pale_visitor/visitor_q"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"	"visitor_q"
+		"AbilityCastRange"		"350"
+		"AbilityCooldown"		"22 18 14 10"
+		"AbilityManaCost"		"100 125 150 175"
+		"HasShardUpgrade"		"1"
+		"AbilityCastPoint"		"0.1"
+		"AbilityValues"
+		{
+			"grab_duration"		"1"
+			"silence_duration"	"0.5 1 1.5 2"
+			"slow_duration"		"1 1.5 2 2.5"
+			"damage"			"90 180 270 360"
+			"kill_threshold"	"9 10 11 12"
+			"slow_pct"			"25"
+			"manacost_stack"	"1.5"
+			"bonus_respawn_time"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+25"
+				"RequiresShard"			"1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Ты дома один?
+	//=================================================================================================================
+	"visitor_w"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/pale_visitor/visitor_w"
+		"AbilityTextureName"            "visitor_w"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"          "SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint"              "0.2"
+		"AbilityCooldown"               "20 18 16 14"
+		"AbilityManaCost"               "200 235 270 305"
+		"HasScepterUpgrade"				"1"
+		"AbilityCastRange"				"700"
+		"AbilityValues"
+		{
+			"guest_duration"            "4 5 6 7"
+			"enemy_duration"            "2"
+			"enemy_stun_dur"			"0.7 0.8 0.9 1.0"
+			"guest_bonus_as"            "40 70 100 130"
+			"guest_bonus_ms_pct"        "10 12 14 16"
+			"enemy_slow_pct"            "-15 -25 -35 -45"
+			"check_radius"              "1000 850 700 550"
+
+			"scepter_count"				"2"
+			"scepter_check_radius"		"700"
+			"scepter_stun_dur"			"0.8"
+			"scepter_buff_dur"			"2.0"
+			"scepter_mag_resist"		"70"
+
+			"find_range"				"700"
+		}
+	}
+	//=================================================================================================================
+	// Нечеловеческая сила
+	//=================================================================================================================
+	"visitor_e"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/pale_visitor/visitor_e"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"            "visitor_e"
+		"AbilityManaCost"               "70"
+		"AbilityValues"
+		{
+			"bonus_damage"      "10 20 30 40"
+			"crit_mult"         "155 170 185 200"
+			"amp_per_stack"     "2 3 4 5"
+			"max_stacks"        "6"
+			"amp_duration"      "7.5"
+			"AbilityCooldown"
+			{
+				"value"	"9 7 5 3"
+				"special_bonus_unique_visitor_6"	"-0.75"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Наблюдение
+	//=================================================================================================================
+	"visitor_d"
+	{
+		"BaseClass"           "ability_lua"
+		"ScriptFile"          "heroes/pale_visitor/visitor_d"
+		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityTextureName"  "visitor_d"
+		"MaxLevel"			  "4"
+		"IsBreakable"		  "1"
+		"DependentOnAbility"  "visitor_r"
+		"AbilityValues"
+		{
+			"gain_time_per_enemy"
+			{
+				"value"	"2.0 1.5 1.0 0.5"
+				"special_bonus_unique_visitor_7"	"-0.25"
+			}
+			"loss_time_base"        "3.0 6.0 9.0 12.0"
+			"loss_speed_extra"      "70 60 50 40"
+			"heal_amp_pct"          "15 20 25 30"
+			"vision_radius"
+			{
+				"value" "750 1100 1450 1800"
+				"special_bonus_unique_visitor_4"	"+400"
+			}
+			"max_stacks_per_enemy" "5 10 15 20"
+			"AbilityCastRange"
+			{
+				"value" "750 1100 1450 1800"
+				"special_bonus_unique_visitor_4"	"+400"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Вестник апокалипсиса
+	//=================================================================================================================
+	"visitor_r"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/pale_visitor/visitor_r"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
+		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCooldown"               "10"
+		"AbilityTextureName"			"visitor_r"
+		"AbilityValues"
+		{
+			"mana_perc_per_sec"		"5"
+			"hp_damage_pct"
+			{
+				"value"	"1.5 2.0 2.5"
+				"special_bonus_unique_visitor_5"	"+1.0"
+			}
+			"vision_bonus"			"200 400 600"
+			"hp_regen_bonus"		"10 20 30"
+			"ms_bonus"				"10 14 18"
+
+			"kill_bonuses_enable"
+			{
+				"value"	"0"
+				"special_bonus_facet_visitor_facet_2"	"+1"
+			}
+			"bonus_hp_regen_enemy"       "5"
+			"bonus_mana_regen_enemy"     "2.5"
+			"penalty_hp_regen_ally"      "3"
+			"penalty_mana_regen_ally"    "1.25"
+		}
+	}
+
+	//=================================================================================================================
+	// Facet 1
+	//=================================================================================================================
+	"visitor_ability_facet_1"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/pale_visitor/visitor_ability_facet_1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"4"
+		"DependentOnAbility"			"visitor_d"
+
+		"AbilityValues"
+		{
+			"gold"				"7 10 13 16"
+			"exp"				"5 10 15 20"
+		}
 	}
 
 }

@@ -35,7 +35,7 @@
 		{
             "item"      "item_aghanims_shard"
 			"item"		"item_ultimate_scepter"
-		    "item"		"item_kaska"
+		    "item"		"item_derzko"
 		    "item"		"item_govno"
             "item"		"item_invis_sword_datadriven"
 		}

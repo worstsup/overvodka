@@ -54,6 +54,17 @@ function OvervodkaGameMode:KillLoot( item, drop )
 end
 
 function OvervodkaGameMode:SpecialItemAdd( event )
+
+	local function IsInventoryAndBackpackFull(hero)
+		if not hero or hero:IsNull() then return false end
+		for slot = 0, 8 do
+			if hero:GetItemInSlot(slot) == nil then
+				return false
+			end
+		end
+		return true
+	end
+
 	local item = EntIndexToHScript( event.ItemEntityIndex )
 	local owner
 	if event.HeroEntityIndex then
@@ -180,7 +191,15 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 			spawnedItem = t5
 		end
 	end
-	owner:AddItemByName( spawnedItem )
+	if IsInventoryAndBackpackFull(owner) then
+		SendErrorToPlayer(owner:GetPlayerID(), "#chest_inventory_full")
+		local itemEntity = CreateItem(spawnedItem, owner, owner)
+		local dropPos = owner:GetAbsOrigin() + owner:GetForwardVector() * 150
+		local drop = CreateItemOnPositionSync(dropPos, itemEntity)
+	else
+		owner:AddItemByName(spawnedItem)
+	end
+
 	EmitGlobalSound("Overthrow.Item.Claimed")
 	local overthrow_item_drop =
 	{

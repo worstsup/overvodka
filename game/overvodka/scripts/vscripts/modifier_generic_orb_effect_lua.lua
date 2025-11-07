@@ -179,5 +179,3 @@ function modifier_generic_orb_effect_lua:FlagExist(a,b)--Bitwise Exist
 	end
 	return c==d
 end
---------------------------------------------------------------------------------
--- Graphics & Animations

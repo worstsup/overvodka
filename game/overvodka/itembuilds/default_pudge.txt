@@ -34,7 +34,7 @@
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_oboyudno_2"
 			"item"		"item_blink"
 			"item"		"item_magic_aegis"

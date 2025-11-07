@@ -6,7 +6,8 @@ function mellstroy_business_new:GetIntrinsicModifierName()
 	return "modifier_generic_orb_effect_lua"
 end
 
-function mellstroy_business_new:OnSpellStart()
+function mellstroy_business_new:GetCastRange(vLocation, hTarget)
+    return self:GetCaster():Script_GetAttackRange()
 end
 
 function mellstroy_business_new:OnOrbImpact( params )

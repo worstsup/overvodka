@@ -96,10 +96,25 @@ function modifier_seregga_q_biceps:OnCreated()
     local p2 = ParticleManager:CreateParticle("particles/econ/items/centaur/centaur_2022_immortal/centaur_2022_immortal_stampede_cast_crimson.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
     ParticleManager:SetParticleControl(p2, 0, self.parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p2)
+    self:StartIntervalThink(0.2)
 end
 
 function modifier_seregga_q_biceps:OnRefresh()
     self:OnCreated()
+end
+
+function modifier_seregga_q_biceps:OnIntervalThink()
+    if not IsServer() then return end
+
+    if not self.ability or self.ability:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    if not self.parent:HasAbility("seregga_q") then
+        self:Destroy()
+        return
+    end
 end
 
 function modifier_seregga_q_biceps:DeclareFunctions()
@@ -166,10 +181,25 @@ function modifier_seregga_q_aegis:OnCreated()
     ParticleManager:SetParticleControl(p, 0, self.parent:GetAbsOrigin())
     ParticleManager:SetParticleControl(p, 1, self.parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
+    self:StartIntervalThink(0.2)
 end
 
 function modifier_seregga_q_aegis:OnRefresh()
     self:OnCreated()
+end
+
+function modifier_seregga_q_aegis:OnIntervalThink()
+    if not IsServer() then return end
+
+    if not self.ability or self.ability:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    if not self.parent:HasAbility("seregga_q") then
+        self:Destroy()
+        return
+    end
 end
 
 function modifier_seregga_q_aegis:OnDestroy()
@@ -238,3 +268,22 @@ function modifier_seregga_q_shard_window:IsPurgable() return false end
 function modifier_seregga_q_shard_window:RemoveOnDeath() return true end
 function modifier_seregga_q_shard_window:GetEffectName() return "particles/seregga_q_shard.vpcf" end
 function modifier_seregga_q_shard_window:GetEffectAttachType() return PATTACH_ABSORIGIN_FOLLOW end
+
+function modifier_seregga_q_shard_window:OnCreated()
+    if not IsServer() then return end
+    self:StartIntervalThink(0.2)
+end
+
+function modifier_seregga_q_shard_window:OnIntervalThink()
+    if not IsServer() then return end
+
+    if not self.ability or self.ability:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    if not self.parent:HasAbility("seregga_q") then
+        self:Destroy()
+        return
+    end
+end

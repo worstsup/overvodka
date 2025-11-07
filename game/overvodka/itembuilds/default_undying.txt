@@ -17,7 +17,7 @@
 		"#DOTA_Item_Build_Early_Game"
 		{
 			"item"		"item_balbe"
-			"item"		"item_bablokrad"
+			"item"		"item_invis_sword"
 			"item"		"item_hqd"
 			"item"		"item_crumbl_cookie"
 			"item"		"item_chapman_green"
@@ -25,16 +25,17 @@
 		"#DOTA_Item_Build_Late_Items"
 		{
 			"item"		"item_nikes"
-			"item"		"item_mask_of_quadrobe"
 			"item"		"item_aegis_hero"
 			"item"		"item_waka"
 			"item"		"item_manta_datadriven"
+			"item"		"item_aghanims_shard"
 			"item"		"item_pasito"
 			"item"		"item_ultimate_scepter"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
-			"item"		"item_kaska"
+			"item"		"item_swag"
+			"item"		"item_derzko"
 			"item"		"item_govno"
 		}
 	}

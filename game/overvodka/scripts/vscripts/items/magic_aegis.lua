@@ -13,8 +13,7 @@ function modifier_item_magic_aegis:IsPurgable() return false end
 function modifier_item_magic_aegis:IsPurgeException() return false end
 
 function modifier_item_magic_aegis:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,

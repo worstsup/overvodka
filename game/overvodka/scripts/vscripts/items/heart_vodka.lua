@@ -25,7 +25,7 @@ function modifier_item_heart_vodka:OnCreated()
     if not IsServer() then return end
     self.str = self:GetAbility():GetSpecialValueFor('bonus_strength')
     self.health_regen_pct = self:GetAbility():GetSpecialValueFor('health_regen_pct')
-    if self:GetParent():FindAllModifiersByName("modifier_item_heart_vodka")[1] ~= self or self:GetParent():HasItemInInventory("item_kaska") then
+    if self:GetParent():FindAllModifiersByName("modifier_item_heart_vodka")[1] ~= self or self:GetParent():HasItemInInventory("item_derzko") then
         self.health_regen_pct = 0
     end
     self:SetHasCustomTransmitterData(true)
@@ -35,7 +35,7 @@ end
 function modifier_item_heart_vodka:OnIntervalThink()
     if not IsServer() then return end
     self.str = self:GetAbility():GetSpecialValueFor('bonus_strength')
-    if self:GetParent():FindAllModifiersByName("modifier_item_heart_vodka")[1] ~= self or self:GetParent():HasItemInInventory("item_kaska") then
+    if self:GetParent():FindAllModifiersByName("modifier_item_heart_vodka")[1] ~= self or self:GetParent():HasItemInInventory("item_derzko") then
         self.health_regen_pct = 0
     else
         self.health_regen_pct = self:GetAbility():GetSpecialValueFor('health_regen_pct')

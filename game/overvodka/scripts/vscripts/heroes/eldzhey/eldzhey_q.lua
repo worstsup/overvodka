@@ -61,38 +61,10 @@ function eldzhey_q:OnSpellStart()
 	end
 end
 
-local MODIFIER_PRIORITY_MONKAGIGA_EXTEME_HYPER_ULTRA_REINFORCED_V9 = 10001
-
 modifier_eldzhey_q = class({})
 
-function modifier_eldzhey_q:IsHidden()
-	return true
-end
-
-function modifier_eldzhey_q:IsDebuff()
-	return false
-end
-
-function modifier_eldzhey_q:IsStunDebuff()
-	return false
-end
-
-function modifier_eldzhey_q:IsPurgable()
-	return false
-end
-
-function modifier_eldzhey_q:OnCreated( kv )
-	if not IsServer() then return end
-end
-
-function modifier_eldzhey_q:OnRefresh( kv )
-end
-
-function modifier_eldzhey_q:OnRemoved()
-end
-
-function modifier_eldzhey_q:OnDestroy()
-end
+function modifier_eldzhey_q:IsHidden() return true end
+function modifier_eldzhey_q:IsPurgable() return false end
 
 function modifier_eldzhey_q:GetEffectName()
 	return "particles/units/heroes/hero_terrorblade/terrorblade_mirror_image.vpcf"
@@ -107,5 +79,5 @@ function modifier_eldzhey_q:GetStatusEffectName()
 end
 
 function modifier_eldzhey_q:StatusEffectPriority()
-	return MODIFIER_PRIORITY_MONKAGIGA_EXTEME_HYPER_ULTRA_REINFORCED_V9
+	return MODIFIER_PRIORITY_SUPER_ULTRA
 end

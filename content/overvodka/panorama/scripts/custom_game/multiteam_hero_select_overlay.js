@@ -187,7 +187,6 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_pudge": "file://{images}/heroes/npc_dota_hero_step.png",
 			"npc_dota_hero_sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
 			"npc_dota_hero_meepo": "file://{images}/heroes/npc_dota_hero_kirill.png",
-			"npc_dota_hero_undying": "file://{images}/heroes/npc_dota_hero_dmb.png",
 			"npc_dota_hero_axe": "file://{images}/heroes/npc_dota_hero_dima.png",
 			"npc_dota_hero_phoenix": "file://{images}/heroes/npc_dota_hero_orlov.png",
 			"npc_dota_hero_zuus": "file://{images}/heroes/npc_dota_hero_stariy.png",
@@ -221,6 +220,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_templar_assassin": "file://{images}/heroes/npc_dota_hero_frisk.png",
 			"npc_dota_hero_abaddon": "file://{images}/heroes/npc_dota_hero_prince.png",
 			"npc_dota_hero_tusk": "file://{images}/heroes/npc_dota_hero_seregga.png",
+			"npc_dota_hero_undying": "file://{images}/heroes/npc_dota_hero_visitor.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -258,7 +258,6 @@ function UpdatePlayer( teamPanel, playerId )
 			"pudge": "file://{images}/heroes/npc_dota_hero_step.png",
 			"sniper": "file://{images}/heroes/npc_dota_hero_ivanov.png",
 			"meepo": "file://{images}/heroes/npc_dota_hero_kirill.png",
-			"undying": "file://{images}/heroes/npc_dota_hero_dmb.png",
 			"axe": "file://{images}/heroes/npc_dota_hero_dima.png",
 			"phoenix": "file://{images}/heroes/npc_dota_hero_orlov.png",
 			"zuus": "file://{images}/heroes/npc_dota_hero_stariy.png",
@@ -292,6 +291,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"templar_assassin": "file://{images}/heroes/npc_dota_hero_frisk.png",
 			"abaddon": "file://{images}/heroes/npc_dota_hero_prince.png",
 			"tusk": "file://{images}/heroes/npc_dota_hero_seregga.png",
+			"undying": "file://{images}/heroes/npc_dota_hero_visitor.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

@@ -36,7 +36,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_govno"
-			"item"		"item_kaska"
+			"item"		"item_derzko"
             "item"		"item_aghanims_shard"
             "item"		"item_armature_strike"
             "item"		"item_swift_blink"

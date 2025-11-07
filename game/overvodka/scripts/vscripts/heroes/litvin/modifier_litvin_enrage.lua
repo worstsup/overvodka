@@ -18,17 +18,11 @@ function modifier_litvin_enrage:OnRefresh( kv )
 	self.damage_reduction = self:GetAbility():GetSpecialValueFor("damage_reduction")
 end
 
-function modifier_litvin_enrage:OnDestroy( kv )
-	self.damage_reduction = self:GetAbility():GetSpecialValueFor("damage_reduction")
-end
-
 function modifier_litvin_enrage:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 		MODIFIER_PROPERTY_MODEL_SCALE,
 	}
-
-	return funcs
 end
 
 function modifier_litvin_enrage:GetModifierIncomingDamage_Percentage( params )

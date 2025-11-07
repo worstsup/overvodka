@@ -150,6 +150,10 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if sahur then
 				sahur:SetLevel(1)
 			end
+			local visitor_d = spawnedUnit:FindAbilityByName("visitor_d")
+			if visitor_d then
+				visitor_d:SetLevel(1)
+			end
 			local mazellov_f = spawnedUnit:FindAbilityByName("mazellov_f")
 			if mazellov_f then
 				mazellov_f:SetLevel(1)
@@ -426,14 +430,22 @@ function OvervodkaGameMode:OnEntityKilled( event )
 
 	if killedUnit:IsRealHero() then
 		self.allSpawned = true
-		if hero:IsRealHero() == true then
+
+		if hero and hero:IsRealHero() and hero:GetUnitName() == "npc_dota_hero_undying" then
 			if event.entindex_inflictor ~= nil then
-				local inflictor_index = event.entindex_inflictor
-				if inflictor_index ~= nil then
-					local ability = EntIndexToHScript( event.entindex_inflictor )
+				local ability = EntIndexToHScript(event.entindex_inflictor)
+				if ability 
+					and ability:GetAbilityName() == "visitor_q" 
+					and hero:HasShard() then
+
+					local bonus_pct = ability:GetSpecialValueFor("bonus_respawn_time") or 0
+					if bonus_pct > 0 then
+						killedUnit._visitorBonusRespawnPct = bonus_pct
+					end
 				end
 			end
 		end
+
 		if hero:IsRealHero() and heroTeam ~= killedTeam then
 			--print("Granting killer xp")
 			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
@@ -475,40 +487,54 @@ function OvervodkaGameMode:OnEntityKilled( event )
 end
 
 function OvervodkaGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
-	--print("Setting time for respawn")
-	if killedTeam == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
-		if killedUnit:FindItemInInventory("item_aegis") then
-			extraTime = -15
-		end
-		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
-			if killedUnit:IsReincarnating() then
-				extraTime = -16
-			end
-		end
-		killedUnit:SetTimeUntilRespawn( 20 + extraTime )
-	else
-		if killedUnit:FindItemInInventory("item_aegis") then
-			extraTime = -5
-		end
-		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
-			if killedUnit:IsReincarnating() then
-				extraTime = -6
-			end
-		end
-		killedUnit:SetTimeUntilRespawn( 10 + extraTime )
-	end
+	extraTime = extraTime or 0
+
+	local baseTime = 0
+
 	if GetMapName() == "overvodka_5x5" then
-		extraTime = killedUnit:GetLevel() * 2
+		baseTime = 10 + killedUnit:GetLevel() * 2
+
 		if killedUnit:FindItemInInventory("item_aegis") then
-			extraTime = -5
+			extraTime = extraTime - 5
 		end
 		if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
 			if killedUnit:IsReincarnating() then
-				extraTime = -6
+				extraTime = extraTime - 6
 			end
 		end
-		killedUnit:SetTimeUntilRespawn( 10 + extraTime )
+	else
+		if killedTeam == self.leadingTeam and self.isGameTied == false then
+			baseTime = 20
+			if killedUnit:FindItemInInventory("item_aegis") then
+				extraTime = extraTime - 15
+			end
+			if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
+				if killedUnit:IsReincarnating() then
+					extraTime = extraTime - 16
+				end
+			end
+		else
+			baseTime = 10
+			if killedUnit:FindItemInInventory("item_aegis") then
+				extraTime = extraTime - 5
+			end
+			if killedUnit:GetUnitName() == "npc_dota_hero_juggernaut" then
+				if killedUnit:IsReincarnating() then
+					extraTime = extraTime - 6
+				end
+			end
+		end
 	end
+
+	local respawnTime = baseTime + extraTime
+
+	local bonus_pct = killedUnit._visitorBonusRespawnPct or 0
+	if bonus_pct > 0 then
+		respawnTime = respawnTime * (1 + bonus_pct * 0.01)
+		killedUnit._visitorBonusRespawnPct = nil
+	end
+
+	killedUnit:SetTimeUntilRespawn( respawnTime )
 end
 
 

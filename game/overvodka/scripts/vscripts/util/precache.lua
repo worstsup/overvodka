@@ -126,6 +126,8 @@ PrecacheUtils.particles = {
 		"particles/econ/events/ti9/ti9_emblem_effect.vpcf",
 		"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_debuff.vpcf",
 		"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_splash.vpcf",
+		"particles/item_nikes.vpcf",
+		"particles/econ/events/ti9/phase_boots_ti9.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -364,6 +366,7 @@ PrecacheUtils.sounds = {
 		"soundevents/royale_start.vsndevts",
 		"soundevents/frisk_start.vsndevts",
 		"soundevents/seregga_start.vsndevts",
+		"soundevents/visitor_night.vsndevts",
 		"soundevents/ailesh.vsndevts",
 		"soundevents/chapman.vsndevts",
 		"soundevents/stopan.vsndevts",

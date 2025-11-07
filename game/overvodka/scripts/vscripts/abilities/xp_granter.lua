@@ -61,18 +61,19 @@ function modifier_dota_ability_xp_granter:OnIntervalThink()
     
     local Units = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0,0,0), nil, self.Radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_ANY_ORDER, false)
     for _, Unit in ipairs(Units) do
-        local Xp = self.Xp
-        local Gold = self.Gold
+        if not Unit:HasModifier("modifier_visitor_ability_facet_1") then
+            local Xp = self.Xp
+            local Gold = self.Gold
 
-        local Team = Unit:GetTeamNumber()
+            local Team = Unit:GetTeamNumber()
+            Xp = Xp + XpBonus
+            Gold = Gold + GoldBonus
 
-        Xp = Xp + XpBonus
-        Gold = Gold + GoldBonus
+            local newXp = ChangeValueByTeamPlace(Xp, Team)
 
-        local newXp = ChangeValueByTeamPlace(Xp, Team)
-
-        Unit:ModifyGold(Gold, false, DOTA_ModifyGold_GameTick)
-        Unit:AddExperience(newXp, DOTA_ModifyXP_Unspecified, false, false)
+            Unit:ModifyGold(Gold, false, DOTA_ModifyGold_GameTick)
+            Unit:AddExperience(newXp, DOTA_ModifyXP_Unspecified, false, false)
+        end
     end
 end
 

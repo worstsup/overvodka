@@ -26,7 +26,7 @@
 		{
 			"item"		"item_nikes"
 			"item"		"item_waka"
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_govno"
 			"item"		"item_armature_strike"
 			"item"		"item_ultimate_scepter"

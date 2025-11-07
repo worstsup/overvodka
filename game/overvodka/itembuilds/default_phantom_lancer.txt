@@ -36,7 +36,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_shemelis"
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_aegis_hero"
             "item"		"item_armature_strike"
             "item"		"item_bloodthorn"

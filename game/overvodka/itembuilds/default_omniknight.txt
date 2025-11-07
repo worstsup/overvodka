@@ -28,7 +28,7 @@
 			"item"		"item_ultimate_scepter"
 			"item"		"item_magic_aegis"
 			"item"		"item_oboyudno"
-			"item"		"item_kaska"
+			"item"		"item_derzko"
 			"item"		"item_suchiy"
 			"item"		"item_armlet_datadriven"
 		}

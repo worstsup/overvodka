@@ -72,6 +72,16 @@ end
 function seregga_w:OnProjectileHit_ExtraData(target, location, extra)
     if not IsServer() then return end
     local caster = self:GetCaster()
+    local damage = self:GetSpecialValueFor("damage")
+    if damage > 0 then
+        ApplyDamage({
+            victim = target,
+            attacker = caster,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self
+        })
+    end
     if not extra then return end
 
     local cast_id = tonumber(extra.cast_id or 0) or 0
@@ -122,17 +132,6 @@ function seregga_w:OnProjectileHit_ExtraData(target, location, extra)
         self:_FireBounce(target, next_target, cast_id, new_dur)
     else
         self:_EndCastChain(cast_id)
-    end
-
-    local damage = self:GetSpecialValueFor("damage")
-    if damage > 0 then
-        ApplyDamage({
-            victim = target,
-            attacker = caster,
-            damage = damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self
-        })
     end
 
     return true

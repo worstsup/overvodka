@@ -1,9 +1,7 @@
-LinkLuaModifier("modifier_evelone_r", "heroes/evelone/evelone_r.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_evelone_r_debuff", "heroes/evelone/evelone_r.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_evelone_r_aura", "heroes/evelone/evelone_r.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua.lua", LUA_MODIFIER_MOTION_NONE)
-
-num = 0
+LinkLuaModifier("modifier_evelone_r", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_evelone_r_debuff", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_evelone_r_aura", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
 
 evelone_r = class({})
 
@@ -32,16 +30,7 @@ function evelone_r:OnSpellStart()
     caster:AddNewModifier(caster, self, "modifier_evelone_r", {duration = duration})
     EmitGlobalSound("evelone_night")
     EmitGlobalSound("evelone_r_ambient")
-    if num % 3 == 0 then
-        EmitGlobalSound("evelone_r_1")
-    end
-    if num % 3 == 1 then
-        EmitGlobalSound("evelone_r_2")
-    end
-    if num % 3 == 2 then
-        EmitGlobalSound("evelone_r_3")
-    end
-    num = num + 1
+    EmitGlobalSound("evelone_r_"..RandomInt(1,3))
 end
 
 function evelone_r:GetCooldown(level)

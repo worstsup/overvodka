@@ -29,7 +29,7 @@ function modifier_item_balbe:IsPurgeException() return false end
 function modifier_item_balbe:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_balbe:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE,
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
@@ -38,7 +38,6 @@ function modifier_item_balbe:DeclareFunctions()
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
     }
-    return funcs
 end
 function modifier_item_balbe:GetModifierAttackSpeedBonus_Constant()
     if self:GetAbility() then
@@ -96,11 +95,9 @@ function modifier_item_balbe_active:OnCreated()
 end
 
 function modifier_item_balbe_active:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
     }
-
-    return funcs
 end
 
 function modifier_item_balbe_active:GetModifierMoveSpeedBonus_Percentage()
@@ -108,10 +105,7 @@ function modifier_item_balbe_active:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function modifier_item_balbe_active:CheckState()
-    local state = 
-    {
+    return {
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
     }
-
-    return state
 end

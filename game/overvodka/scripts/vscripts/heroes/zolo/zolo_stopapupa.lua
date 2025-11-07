@@ -7,7 +7,8 @@ function zolo_stopapupa:GetIntrinsicModifierName()
 	return "modifier_generic_orb_effect_lua"
 end
 
-function zolo_stopapupa:OnSpellStart()
+function zolo_stopapupa:GetCastRange(vLocation, hTarget)
+    return self:GetCaster():Script_GetAttackRange()
 end
 
 function zolo_stopapupa:OnOrbImpact( params )

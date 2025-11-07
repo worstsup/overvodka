@@ -101,7 +101,7 @@
 		"item"		"item_waka"
 		"item"		"item_shemelis"
 		"item"		"item_onehp"
-		"item"		"item_kaska"
+		"item"		"item_derzko"
 		"item"		"item_govno"
 		"item"		"item_balbe"
 		"item"		"item_hqd_maxx"

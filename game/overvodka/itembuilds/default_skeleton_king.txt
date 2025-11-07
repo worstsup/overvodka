@@ -38,7 +38,7 @@
 			"item"		"item_swag"
 			"item"		"item_aghanims_shard"
             "item"		"item_waka"
-            "item"		"item_kaska"
+            "item"		"item_derzko"
             "item"		"item_armature_strike"
 		}
 	}
