@@ -58,11 +58,45 @@ function modifier_visitor_q_counter:IsPurgable() return false end
 function modifier_visitor_q_counter:RemoveOnDeath() return false end
 
 function modifier_visitor_q_counter:DeclareFunctions()
-    return {MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING}
+    return {MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING, MODIFIER_EVENT_ON_DEATH}
 end
 
 function modifier_visitor_q_counter:GetModifierPercentageManacostStacking()
 	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("manacost_stack")
+end
+
+function modifier_visitor_q_counter:OnDeath(params)
+
+    local parent  = self:GetParent()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+    if not parent or parent:IsNull() then return end
+    if params.attacker ~= parent then return end
+
+    local victim = params.unit
+    if not victim or victim:IsNull() then return end
+    if not victim:IsRealHero() or victim:IsIllusion() then return end
+
+    local inflictor = params.inflictor
+
+    local valid = false
+    if inflictor == ability then
+        valid = true
+    else
+        if victim:HasModifier("modifier_visitor_q_grabbed") then
+            valid = true
+        end
+    end
+
+    if not valid then return end
+
+    self:IncrementStackCount()
+
+    if parent:HasShard() then
+        parent:AddNewModifier(parent, ability, "modifier_visitor_q_shard", {
+            target = victim:entindex()
+        })
+    end
 end
 
 modifier_visitor_q_grabbed = class({})
@@ -104,9 +138,6 @@ function modifier_visitor_q_grabbed:OnIntervalThink()
     end
     local hp_pct = (self.parent:GetHealth() / self.parent:GetMaxHealth()) * 100
     if hp_pct <= self.kill_thr then
-        if self.parent:IsRealHero() and (not self.parent:IsIllusion()) and self.caster:HasShard() then
-            self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_visitor_q_shard", {target = self.parent:entindex()})
-        end
         self.parent:Kill(self:GetAbility(), self.caster)
     end
     if not self.parent or self.parent:IsNull() or not self.parent:IsAlive() then
@@ -128,24 +159,26 @@ end
 
 function modifier_visitor_q_grabbed:OnDestroy()
     if not IsServer() then return end
+
     if self.attach_fx then
         ParticleManager:DestroyParticle(self.attach_fx, false)
         ParticleManager:ReleaseParticleIndex(self.attach_fx)
     end
+
     if not self.parent or self.parent:IsNull() then return end
+
     local p = ParticleManager:CreateParticle("particles/visitor_q_base.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
     ParticleManager:SetParticleControl(p, 0, self.parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
+
     if not self.parent:IsAlive() then return end
-    local hp_pct = (self.parent:GetHealth() / self.parent:GetMaxHealth()) * 100
-    if hp_pct <= self.kill_thr then
-        self.parent:Kill(self:GetAbility(), self.caster)
-    end
-    if not self.parent or self.parent:IsNull() then return end
-    if self.caster:HasTalent("special_bonus_unique_visitor_3") then
+
+    if self.caster and not self.caster:IsNull() and self.caster:HasTalent("special_bonus_unique_visitor_3") then
         self.caster:PerformAttack(self.parent, true, true, true, true, false, false, true)
     end
     if not self.parent or self.parent:IsNull() then return end
+    if not self.parent:IsAlive() then return end
+
     ApplyDamage({
         victim = self.parent,
         attacker = self.caster,
@@ -153,22 +186,15 @@ function modifier_visitor_q_grabbed:OnDestroy()
         damage_type = DAMAGE_TYPE_PHYSICAL,
         ability = self:GetAbility()
     })
+
     if not self.parent or self.parent:IsNull() then return end
-    if not self.parent:IsAlive() and self.parent:IsRealHero() and not self.parent:IsIllusion() then
-        local mod = self.caster:FindModifierByName("modifier_visitor_q_counter")
-        if mod and not mod:IsNull() then
-            mod:IncrementStackCount()
-        end
-        if self.caster:HasShard() then
-            self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_visitor_q_shard", {target = self.parent:entindex()})
-        end
-        return
-    end
+    if not self.parent:IsAlive() then return end
 
     self.parent:AddNewModifier(self.caster, self:GetAbility(), "modifier_visitor_q_debuff", {
         duration = self.slow_dur * (1 - self.parent:GetStatusResistance()),
     })
 end
+
 
 function modifier_visitor_q_grabbed:CheckState()
     return {

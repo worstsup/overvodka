@@ -55,11 +55,13 @@
 	width: 100%;
 	height: 50px;
 	margin-top: 8%;
-	margin-left: 7.5px;
+	z-index: 100;
+	border: 1px solid #625c45;
+	
 }
 
 .CategoryButton{
-	width: 100px;
+	width: 120px;
 	height: 30px;
 
 	margin-right: 32px;
@@ -224,7 +226,6 @@
 {
 	width: 100%;
 	height: 587px;
-	margin-top: 16%;
 	flow-children: down;
 	border: 1px solid #625f45;
 	horizontal-align: center;
@@ -498,4 +499,225 @@
 .MenuTabButton.Selected Label {
     color: #f0e0b4;
     font-weight: bold;
+}
+
+/* === PROFILE PANEL === */
+.ProfilePanel { width: 100%; flow-children: down; padding: 0px 24px; visibility: collapse; overflow: squish scroll;}
+.ProfilePanel.Visible { visibility: visible; }
+.ProfilePanel #VerticalScrollBar{
+    width: 4px;
+    height: 100%;
+    visibility: visible;
+    horizontal-align: right;
+    layout-position: fixed;
+    background-color: black;
+}
+.ProfileHeader { flow-children: right; margin:10px 0 12px 0; }
+.ProfileRankIcon {
+  width: 56px;
+  height: 56px;
+  margin-left: 30px;
+  align: center center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.95;
+}
+.ProfileRankText {
+  vertical-align: center;
+  margin-left: 8px;
+  font-size: 24px;
+  color: #d2c79f;
+  text-shadow: 0 1px 3px #000a;
+  opacity: .95;
+}
+.ProfileAvatar { width: 64px; height: 64px; border: 1px solid #a4883a; box-shadow: 0 0 12px 0 #a4883a33; }
+.ProfileNickname { vertical-align: center; margin-left: 14px; font-size: 36px; color: #f4e6c0; text-shadow: 0 0 6px 2.0 #000; }
+.ProfileSince {
+  vertical-align: center;
+  margin-left: 45px;
+  font-size: 24px;
+  color: #d2c79f;
+  opacity: 0.9;
+  text-shadow: 0 1px 3px #0009;
+}
+
+.ProfileStatsRow { flow-children: right; margin: 4px 0 10px 0; }
+.StatCard {
+  width: 240px; height: 70px; margin-right: 14px; flow-children: down;
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#2a2415ee), to(#1c1a12ee));
+  border: 1px solid #7e6a30; border-brush: gradient(linear, 0% 0%, 0% 100%, from(#d4cc96), to(#7e6a30));
+  box-shadow: inset 0 0 10px 0 #00000066; border-radius: 8px; padding: 8px;
+}
+.StatValue { color: #ffe9a6; font-size: 28px; font-weight: bold; text-shadow: 0 0 5px 2.0 #000; align: center center; }
+.StatLabel { color: #d5c89b; font-size: 16px; opacity: .85; margin-top: -3px; align: center center;}
+
+.TopHeroesRow { flow-children: right; align: center bottom; padding: 10px 0px; }
+.HeroCard {
+  width: 220px; height: 250px; margin: 0 10px; flow-children: down;
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#332a18ee), to(#1a1710ee));
+  border: 1px solid #957b2f; border-radius: 10px; box-shadow: 0 0 14px 0 #000a;
+  transition-property: brightness, transform; transition-duration: .12s;
+}
+.HeroCardImage.warmup {
+  opacity: 0.99;            /* едва заметно – только чтобы триггернуть repaint */
+  transform: translateZ(0);  /* выносим в GPU-слой */
+}
+.HeroCard:hover { brightness: 1.4; transform: translateY(-4px); }
+.HeroCard--big { width: 250px; height: 310px; }
+.HeroCardImage {
+  width: 100%;
+  height: fill-parent-flow(1);
+
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  background-size: cover;
+
+  z-index: 1;
+}
+.HeroCardFooter {
+  width: 100%;
+  flow-children: down;
+  padding: 8px 10px 10px 10px;
+
+  /* “накладываемся” на низ картинки */
+  margin-top: -68px;                 /* подбери число под нужную высоту подложки */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  /* реальная полупрозрачность поверх портрета */
+  background-color: rgba(21, 19, 12, 0.75); /* 0.45–0.75 – твик по вкусу */
+  /* или мягкий градиент поверх картинки: */
+  /* background-color: gradient(linear, 0% 0%, 0% 100%, from(#00000000), to(#15130cbb)); */
+
+  z-index: 2; /* выше картинки */
+}
+.HeroName { color: #f6e7b8; font-size: 18px; font-weight: bold; text-overflow: shrink; }
+.HeroStats { color: #d9cfa7; font-size: 14px; opacity: .95; }
+.MatchHistory {
+  width: 100%;
+  margin-top: 16px;
+  flow-children: down;
+  padding-top: 8px;
+  border-top: 1px solid #3a2f14;
+}
+
+.MatchHistoryTitle {
+  font-size: 18px;
+  color: #f4e6c0;
+  margin-bottom: 8px;
+  text-shadow: 0 1px 2px #0008;
+}
+
+.MatchList {
+  width: 100%;
+  flow-children: down;
+  max-height: 3600px;
+}
+
+.MatchRow {
+  height: 48px;
+  width: 100%;
+  margin: 6px 0;
+  padding: 6px 10px;
+  flow-children: right;
+  align: center center;
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#241f13ee), to(#191611ee));
+  border: 1px solid #5b4a1a;
+  border-radius: 6px;
+}
+.MatchRow:hover { brightness: 1.2; }
+
+.MatchHeroIcon {
+  width: 64px;
+  height: 36px;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.MatchHeroName {
+  width: 40%;
+  font-size: 18px;
+  color: #f6e7b8;
+  margin-left: 6px;
+  align: center center;
+}
+
+.MatchKDA {
+  width: 24%;
+  font-size: 15px;
+  color: #d9cfa7;
+  text-align: right;
+  margin-right: 8px;
+  align: center center;
+}
+
+.MatchDate {
+  width: 24%;
+  font-size: 15px;
+  color: #c8b98f;
+  text-align: right;
+  align: center center;
+}
+
+.MatchPrivateNotice {
+  width: 100%;
+  height: 35px;
+  text-align: center center;
+  color: #d2c79f;
+  font-size: 25px;
+  opacity: .9;
+  margin-top: 10px;
+}
+
+#BuyButtonStats{
+    width: 225px;
+    height: 65px;
+
+    align: center bottom;
+
+    margin-bottom: 20px;
+
+    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
+
+    border: 3px solid white;
+    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
+    border-radius: 32px;
+    transition-property: brightness, border-brush;
+    transition-duration: .1s;
+}
+
+.PlayerSubscribed #BuyButtonStats{
+    width: 250px;
+}
+
+#BuyButtonStats:hover{
+    brightness: 1.5;
+    border-brush: #87782cef;
+}
+
+
+
+.MatchRow.Win {
+  /* Зеленоватый фон для победы */
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#2a2f1aee), to(#1f2316ee));
+  /* Зеленая рамка */
+  border: 1px solid #5f7c2a;
+}
+.MatchRow.Win:hover {
+    border: 1px solid #7cb52d;
+    brightness: 1.3;
+}
+
+.MatchRow.Loss {
+  /* Красноватый фон для поражения */
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#2f1a1aee), to(#231616ee));
+  /* Красная рамка */
+  border: 1px solid #7c2a2a;
+}
+.MatchRow.Loss:hover {
+    border: 1px solid #b52d2d;
+    brightness: 1.3;
 }

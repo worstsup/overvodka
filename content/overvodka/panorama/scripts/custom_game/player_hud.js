@@ -6,6 +6,13 @@ const DoubleRating = $("#DoubleRating");
 const TeamLeavedEncounter = $("#TeamLeavedEncounter");
 const DotaHUDPanel = GetDotaHud();
 
+let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
+let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
+if (dota_glyph && roshan && Game.GetMapInfo().map_display_name != "overvodka_5x5") {
+    dota_glyph.style.visibility = "collapse";
+    roshan.style.visibility = "collapse";
+}
+
 let SlotsKeys = [
     {
         Default: "N",

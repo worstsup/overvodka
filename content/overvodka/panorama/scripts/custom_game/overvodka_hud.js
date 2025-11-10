@@ -55,7 +55,7 @@ function HeroSelection() {
     Minimap.style.marginBottom = "15px"
     let removeMinimap = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroPickMinimap")
     removeMinimap.style.visibility = "visible"
-    removeMinimap.style.marginRight = "-5%"
+    removeMinimap.style.marginRight = "-15%"
     removeMinimap.style.border = "2px solid #FFD700" // Gold border
     removeMinimap.style.boxShadow = "0 0 15px rgba(255, 215, 0, 0.1)" // Gold glow effect
     removeMinimap.style.transform = "rotateX(0deg)"

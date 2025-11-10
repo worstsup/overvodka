@@ -7,7 +7,7 @@ LinkLuaModifier( "modifier_rostik_r_fire", "heroes/rostik/rostik_r", LUA_MODIFIE
 function rostik_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
-	local direction = point - caster:GetOrigin() +Vector(3,3,0)
+	local direction = point - caster:GetAbsOrigin() +Vector(3,3,0)
 	direction.z = 0
 	direction = direction:Normalized()
 	self.direction = direction
@@ -60,10 +60,10 @@ function rostik_r:OnProjectileHitHandle(target, location, iHandle)
 	self.hit_targets[target:entindex()] = true
 	if target:IsHero() then
 		if self.modifier and (not self.modifier:IsNull()) then
-			self.modifier:End(self:GetCaster():GetOrigin())
+			self.modifier:End(self:GetCaster():GetAbsOrigin())
 			self.modifier = nil
-			self:GetCaster():SetOrigin(target:GetOrigin() + self.direction * 80)
-			FindClearSpaceForUnit(self:GetCaster(), target:GetOrigin() + self.direction * 80, false)
+			self:GetCaster():SetOrigin(target:GetAbsOrigin() + self.direction * 80)
+			FindClearSpaceForUnit(self:GetCaster(), target:GetAbsOrigin() + self.direction * 80, false)
 			target:AddNewModifier(
 				self:GetCaster(),
 				self,
@@ -137,22 +137,18 @@ function modifier_rostik_r:OnCreated( kv )
 	end
 	if IsServer() then
 		self.direction = Vector( kv.x, kv.y, 0 )
-		self.start_point = self:GetParent():GetOrigin()
-		self.origin = self:GetParent():GetOrigin()
+		self.start_point = self:GetParent():GetAbsOrigin()
+		self.origin = self:GetParent():GetAbsOrigin()
 		self:StartIntervalThink( self.delay )
 		self:PlayEffects()
 	end
 end
 
-function modifier_rostik_r:OnRefresh( kv )	
-end
-
 function modifier_rostik_r:OnDestroy( kv )
-	if IsServer() then
-		self:GetParent():InterruptMotionControllers( true )
-	end
+	if not IsServer() then return end
+	self:GetParent():InterruptMotionControllers( true )
 	if self:GetParent():HasShard() then
-		local dir = self.start_point - self:GetParent():GetOrigin()
+		local dir = self.start_point - self:GetParent():GetAbsOrigin()
 		dir.z = 0
 		dir = dir:Normalized()
 		local duration = self:GetAbility():GetSpecialValueFor( "fire_duration" )
@@ -164,9 +160,9 @@ function modifier_rostik_r:OnDestroy( kv )
 				duration = duration,
 				x = dir.x,
 				y = dir.y,
-				range = (self.start_point - self:GetParent():GetOrigin()):Length2D(),
+				range = (self.start_point - self:GetParent():GetAbsOrigin()):Length2D(),
 			},
-			self:GetParent():GetOrigin(),
+			self:GetParent():GetAbsOrigin(),
 			self:GetParent():GetTeamNumber(),
 			false
 		)
@@ -178,7 +174,7 @@ function modifier_rostik_r:OnRemoved( kv )
 		if self.pre_collide then
 			ParticleManager:SetParticleControl( self.effect_cast, 3, self.pre_collide )
 		else
-			ParticleManager:SetParticleControl( self.effect_cast, 3, self:GetParent():GetOrigin() )
+			ParticleManager:SetParticleControl( self.effect_cast, 3, self:GetParent():GetAbsOrigin() )
 		end
 		local sound_loop = "Hero_EarthSpirit.RollingBoulder.Loop"
 		StopSoundOn( sound_loop, self:GetParent() )
@@ -234,7 +230,7 @@ function modifier_rostik_r:OnIntervalThink()
 end
 
 function modifier_rostik_r:UpdateHorizontalMotion( me, dt )
-	local pos = self:GetParent():GetOrigin()
+	local pos = self:GetParent():GetAbsOrigin()
 	if (pos-self.origin):Length2D()>=self.distance then
 		self:Destroy()
 		return
@@ -300,7 +296,7 @@ function modifier_rostik_r_thinker:OnCreated( kv )
 	self.abilityTargetFlags = self:GetAbility():GetAbilityTargetFlags()
 	local start_range = -50
 	self.direction = Vector( kv.x, kv.y, 0 )
-	self.startpoint = self.parent:GetOrigin() + self.direction * start_range
+	self.startpoint = self.parent:GetAbsOrigin() + self.direction * start_range
 	self.endpoint = self.startpoint + self.direction * self.range
 	local step = 0
 	while step < self.range do
@@ -315,9 +311,6 @@ end
 
 function modifier_rostik_r_thinker:OnRefresh( kv )
 	self:OnCreated( kv )
-end
-
-function modifier_rostik_r_thinker:OnRemoved()
 end
 
 function modifier_rostik_r_thinker:OnDestroy()
@@ -415,17 +408,9 @@ function modifier_rostik_r_fire:OnRefresh( kv )
 	self.damageTable.damage_type = damage_type
 end
 
-function modifier_rostik_r_fire:OnRemoved()
-end
-
-function modifier_rostik_r_fire:OnDestroy()
-end
-
-
 function modifier_rostik_r_fire:OnIntervalThink()
 	ApplyDamage( self.damageTable )
 end
-
 
 function modifier_rostik_r_fire:GetEffectName()
 	return "particles/rostik_r_fire_debuff.vpcf"

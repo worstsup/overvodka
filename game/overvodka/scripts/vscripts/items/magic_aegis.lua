@@ -21,7 +21,6 @@ function modifier_item_magic_aegis:DeclareFunctions()
         MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
     }
-    return funcs
 end
 
 function modifier_item_magic_aegis:GetModifierPercentageCooldown()

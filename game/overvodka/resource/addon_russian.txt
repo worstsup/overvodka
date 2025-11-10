@@ -147,11 +147,23 @@
 		"Quest_PlayDrake_Desc"			"Сыграйте за Drakeoffc"
         
 		"Menu_Name"						"Меню"
-		"Menu_Tab_Leaderboard"			"Таблица Лидеров"
+		"Menu_Tab_Leaderboard"			"Статистика"
 		"Menu_Tab_ChatWheel"			"Колесо Чата"
 		"Menu_Tab_Prime"				"Overvodka Prime"
 		"Menu_Tab_Store"				"Магазин"
 		"Menu_Tab_Vote"					"Голосование"
+		"Menu_Profile_Button"			"Профиль"
+		"Menu_Games_Played"				"сыграно игр"
+		"Menu_Winrate"					"процент побед"
+		"Menu_KDA"						"средний KDA"
+		"ov_in_game_since_prefix" "В игре с:"
+		"ov_game_one"    "игра"
+		"ov_game_few"    "игры"
+		"ov_game_many"   "игр"
+		"ov_match_history_title"    	"Последние матчи"
+		"ov_prime_required"         	"Просмотр чужих матчей доступен с Overvodka Prime"
+
+
 
 		"Vote_Title"					"Голосование за нового героя"
 		"Vote_Description"				"Выберите, какой герой выйдет следующим в кастомке OVERVODKA!"

@@ -227,7 +227,6 @@ PrecacheUtils.models = {
         "bmw/models/heroes/bm/tofab.vmdl",
 		"models/items/hex/sheep_hex/sheep_hex.vmdl",
 		"models/items/lycan/wolves/watchdog_lycan_summons/watchdog_lycan_summons.vmdl",
-		"models/items/beastmaster/hawk/fotw_eagle/fotw_eagle.vmdl",
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"nix/model.vmdl",
 		"sans/sans_rig.vmdl",
@@ -284,6 +283,7 @@ PrecacheUtils.models = {
 		"models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl",
 		"models/seregga/seregga.vmdl",
 		"models/blackflash/blackflash.vmdl",
+		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
 }
 
 PrecacheUtils.sounds = {

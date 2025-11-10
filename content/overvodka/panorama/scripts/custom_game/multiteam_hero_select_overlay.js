@@ -90,7 +90,6 @@ function ToggleLockInNotice(heroPickPanel, showNotice) {
 			notice.style.width = "100%";
 			notice.style.height = "100%";
 			notice.style.backgroundColor = "rgba(0,0,0,0.8)";
-			notice.style.layoutAlign = "stretch center";
 
 			const textId = noticeId + "_text";
 			const text = $.CreatePanel("Label", notice, textId);
@@ -357,7 +356,7 @@ function UpdateTimer()
 	var timerValue = Math.max( 0, Math.floor( transitionTime - gameTime ) );	
 	$("#TimerPanel").SetDialogVariableInt( "timer_seconds", timerValue );
 
-	$.Schedule( 0.1, UpdateTimer );
+	$.Schedule( 0.05, UpdateTimer );
 }
 
 (function()

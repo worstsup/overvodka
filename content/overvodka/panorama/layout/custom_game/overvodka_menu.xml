@@ -36,6 +36,14 @@
                 </Panel>
             </Panel>
         </snippet>
+        <snippet name="MatchRow">
+            <Panel class="MatchRow" hittest="true">
+                <Image class="MatchHeroIcon" scaling="stretch-to-fit-y-preserve-aspect" />
+                <Label class="MatchHeroName" text="—" />
+                <Label class="MatchKDA" text="0 / 0 / 0" />
+                <Label class="MatchDate" text="—" />
+            </Panel>
+        </snippet>
         <snippet name="Item">
             <Panel hittest="true" class="Item">
                 <Panel hittest="true" class="ItemIconContainer">
@@ -94,14 +102,61 @@
             </Panel>
             <Panel id="MenuContent">
                 <Panel id="Content_Leaderboard" class="MenuContentPanel">
-                    <Panel class="ButtonsRow" hittest="false">
-                        <Panel id="Buttons" class="Wrapper" hittest="false">
-                            <Panel id="Category3" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(3)"><Label class="CategoryButtonText" text="5x5"/></Panel>
-                            <Panel id="Category1" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(1)"><Label class="CategoryButtonText" text="Solo"/></Panel>
-                            <Panel id="Category2" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(2)"><Label class="CategoryButtonText" text="Duo"/></Panel>
-                        </Panel>
-                    </Panel>
                     <Panel class="Body" hittest="false">
+                        <Panel class="ButtonsRow" hittest="false">
+                            <Panel id="Buttons" class="Wrapper" hittest="false">
+                                <Panel id="Category4" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(4)"><Label class="CategoryButtonText" text="#Menu_Profile_Button"/></Panel>
+                                <Panel id="Category3" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(3)"><Label class="CategoryButtonText" text="5x5"/></Panel>
+                                <Panel id="Category1" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(1)"><Label class="CategoryButtonText" text="Solo"/></Panel>
+                                <Panel id="Category2" class="CategoryButton" hittest="true" onactivate="Leaderboard.SelectCategory(2)"><Label class="CategoryButtonText" text="Duo"/></Panel>
+                            </Panel>
+                        </Panel>
+                        <Panel id="ProfilePanel" class="ProfilePanel">
+
+                            <Panel class="ProfileHeader">
+                                <DOTAAvatarImage id="ProfileAvatar" class="ProfileAvatar" steamid="local" />
+                                <DOTAUserName id="ProfileNickname" class="ProfileNickname" steamid="local" />
+                                <Panel id="ProfileRankIcon" class="ProfileRankIcon" />
+                                <Label id="ProfileRankText" class="ProfileRankText" text="" />
+                                <Label id="ProfileSince" class="ProfileSince" text="" />
+                            </Panel>
+
+                            <Panel class="ProfileStatsRow">
+                                <Panel class="StatCard"><Label class="StatValue" id="StatGames" text="0"/><Label class="StatLabel" text="#Menu_Games_Played"/></Panel>
+                                <Panel class="StatCard"><Label class="StatValue" id="StatWinPct" text="0%"/><Label class="StatLabel" text="#Menu_Winrate"/></Panel>
+                                <Panel class="StatCard"><Label class="StatValue" id="StatKDA" text="0.00"/><Label class="StatLabel" text="#Menu_KDA"/></Panel>
+                            </Panel>
+
+                            <Panel class="TopHeroesRow" id="TopHeroesRow">
+                                <Panel class="HeroCard HeroCard--small" id="TopHero2">
+                                <Panel id="TopHero2_Image" class="HeroCardImage" />
+                                <Panel class="HeroCardFooter"><Label id="TopHero2_Name" class="HeroName" text="—"/><Label id="TopHero2_Stats" class="HeroStats" text="—"/></Panel>
+                                </Panel>
+                                <Panel class="HeroCard HeroCard--big" id="TopHero1">
+                                <Panel id="TopHero1_Image" class="HeroCardImage" />
+                                <Panel class="HeroCardFooter"><Label id="TopHero1_Name" class="HeroName" text="—"/><Label id="TopHero1_Stats" class="HeroStats" text="—"/></Panel>
+                                </Panel>
+                                <Panel class="HeroCard HeroCard--small" id="TopHero3">
+                                <Panel id="TopHero3_Image" class="HeroCardImage" />
+                                <Panel class="HeroCardFooter"><Label id="TopHero3_Name" class="HeroName" text="—"/><Label id="TopHero3_Stats" class="HeroStats" text="—"/></Panel>
+                                </Panel>
+                            </Panel>
+
+                            <Panel id="MatchHistory" class="MatchHistory" visible="false">
+                                <Label class="MatchHistoryTitle" text="#ov_match_history_title" />
+                                <Panel id="MatchList" class="MatchList">
+                                </Panel>
+                                <Label id="MatchPrivateNotice" class="MatchPrivateNotice" text="#ov_prime_required" visible="false" />
+                                <Panel id="BuyButtonStats" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');" visible="false">
+                                <Panel class="Wrapper">
+                                    <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                                    <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
+                                    <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                                </Panel>
+                            </Panel>
+                            </Panel>
+
+                        </Panel>
                         <Panel class="RankContainer" hittest="false">
                             <Panel class="RankContainerHeader">
                                 <Panel class="leaderboard_rank"><Label text="#rating_position" class="leaderboard_rankText"/></Panel>

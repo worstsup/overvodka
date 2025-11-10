@@ -37,6 +37,10 @@
         <Panel id="LeaderboardMain">
             <Panel class="ButtonsRow" hittest="false">
                 <Panel id="Buttons" class="Wrapper" hittest="false">
+                    <Panel id="Category4" class="CategoryButton" hittest="true" onactivate="SelectCategory(4)">
+                        <Panel class="CategoryButtonBack" hittest="false" />
+                        <Label class="CategoryButtonText" text="#Menu_Profile_Button"/>
+                    </Panel>
                     <Panel id="Category3" class="CategoryButton" hittest="true" onactivate="SelectCategory(3)">
                         <Panel class="CategoryButtonBack" hittest="false" />
                         <Label class="CategoryButtonText" text="5x5"/>
@@ -52,7 +56,8 @@
                 </Panel>
             </Panel>
             <Panel class="Body" hittest="false">
-                <Panel class="RankContainer" hittest="false">
+
+                <Panel id="RankContainer" class="RankContainer" hittest="false">
                     <Panel class="RankContainerHeader">
                         <Panel class="leaderboard_rank">
                             <Label text="#rating_position" class="leaderboard_rankText"/>

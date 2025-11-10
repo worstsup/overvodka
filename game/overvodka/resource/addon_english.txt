@@ -155,10 +155,21 @@
 		"Quest_PlayDrake_Desc" "Play as Drakeoffc"
 
 		"Menu_Name" "Menu"
-		"Menu_Tab_Leaderboard" "Leaderboard"
+		"Menu_Tab_Leaderboard" "Statistics"
 		"Menu_Tab_ChatWheel" "Chat Wheel"
 		"Menu_Tab_Prime" "Overvodka Prime"
 		"Menu_Tab_Store" "Store"
+		"Menu_Profile_Button" "Profile"
+		"Menu_Games_Played" "Games Played"
+		"Menu_Winrate" "Win Rate"
+		"Menu_KDA" "Average KDA"
+		"ov_in_game_since_prefix" "In game since:"
+		"ov_game_one"    "game"
+		"ov_game_few"    "games"
+		"ov_game_many"   "games"
+		"ov_match_history_title" "Recent Matches"
+		"ov_prime_required" "Available with Overvodka Prime"
+
 
 		"Vote_Title" "Vote for a new hero"
 		"Vote_Description" "Choose which hero will be the next to appear in the OVERVODKA custom!"

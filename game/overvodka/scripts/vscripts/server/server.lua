@@ -22,6 +22,9 @@ function Server:Init()
 
     CustomGameEventManager:RegisterListener("player_want_toggle_mute", function(source, event) self:OnPlayerWantToggleMute(event) end)
 
+    CustomGameEventManager:RegisterListener("server_get_profile_stats", function(source, event) self:OnAttemptGetProfileStats(event) end)
+
+
     self.ThinkerEnt = SpawnEntityFromTableSynchronous("info_target", {targetname="server_thinker"})
 end
 
@@ -577,6 +580,34 @@ function Server:OnAttemptGetLeaderboardInfo(event)
         CustomGameEventManager:Send_ServerToAllClients("server_leaderboard_update", {category = event.category})
     end, true)
 end
+
+function Server:OnAttemptGetProfileStats(event)
+    local steamid = event and event.steamid
+    if not steamid then
+        local pid = event and event.PlayerID or 0
+        steamid = PlayerResource:GetSteamAccountID(pid)
+    end
+    if not steamid then return end
+
+    self:SendRequest(
+        SERVER_URL.."get_player_profile_stats",
+        { SteamID = steamid },
+        function(ResultData)
+            CustomNetTables:SetTableValue("globals", "profile_"..tostring(steamid), ResultData or {})
+            if event and event.PlayerID ~= nil then
+                CustomGameEventManager:Send_ServerToPlayer(
+                    PlayerResource:GetPlayer(event.PlayerID),
+                    "server_profile_update",
+                    { steamid = steamid }
+                )
+            else
+                CustomGameEventManager:Send_ServerToAllClients("server_profile_update", { steamid = steamid })
+            end
+        end,
+        true
+    )
+end
+
 
 function Server:RecordChatWheelChanges(PlayerID, LineID, ItemID)
     local SteamID = PlayerResource:GetSteamAccountID(PlayerID)

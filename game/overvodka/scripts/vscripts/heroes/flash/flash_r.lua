@@ -396,10 +396,10 @@ end
 
 function modifier_flash_r_thinker:IsAura() return true end
 function modifier_flash_r_thinker:GetModifierAura() return "modifier_flash_r_debuff" end
-function modifier_flash_r_thinker:GetAuraRadius() return 99999 end
+function modifier_flash_r_thinker:GetAuraRadius() return 30000 end
 function modifier_flash_r_thinker:GetAuraDuration() return 0.01 end
 function modifier_flash_r_thinker:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
-function modifier_flash_r_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_flash_r_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO end
 
 modifier_flash_r_after_cooldown = class({})
 
