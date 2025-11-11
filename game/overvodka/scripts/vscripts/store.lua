@@ -9,6 +9,27 @@ Store.Items = {
     skin_4 = { id = "skin_4", name = "#Store_Item_skin_4_name", type = "skins", price = 200, image = "file://{images}/custom_game/store/skins/skin_4.png", hero = "npc_dota_hero_ogre_magi", modifier = "modifier_overvodka_store_skin_4" },
     skin_5 = { id = "skin_5", name = "#Store_Item_skin_5_name", type = "skins", price = 230, image = "file://{images}/custom_game/store/skins/skin_5.png", hero = "npc_dota_hero_brewmaster", modifier = "modifier_overvodka_store_skin_5" },
     skin_6 = { id = "skin_6", name = "#Store_Item_skin_6_name", type = "skins", price = 420, image = "file://{images}/custom_game/store/skins/skin_6.png", hero = "npc_dota_hero_spirit_breaker", modifier = "modifier_overvodka_store_skin_6" },
+    sans_arcana = {
+        id = "sans_arcana",
+        name = "#Store_Item_sans_arcana",
+        type = "skins",
+        price = 0,
+        prime_only = true,
+        image = "file://{images}/custom_game/store/skins/sans_arcana.png",
+        hero = "npc_dota_hero_morphling",
+        modifier = "modifier_sans_arcana"
+    },
+
+    invincible_arcana = {
+        id = "invincible_arcana",
+        name = "#Store_Item_invincible_arcana",
+        type = "skins",
+        price = 0,
+        prime_only = true,
+        image = "file://{images}/custom_game/store/skins/invincible_arcana.png",
+        hero = "npc_dota_hero_void_spirit",
+        modifier = "modifier_invincible_arcana"
+    },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
@@ -109,7 +130,31 @@ function Store:OnEquipItem(event)
         SendErrorToPlayer(playerID, "#Store_NotYourHero", "UUI_SOUNDS.NoGold")
         return
     end
-    
+
+    if item.prime_only then
+        self.playerData[playerID] = self.playerData[playerID] or {
+            coins = 0,
+            inventory = {},
+            equipped_effect = nil,
+            equipped_skin = nil,
+            equipped_pet = nil,
+            prime_claims = {}
+        }
+
+        if item.type == "effects" then
+            self.playerData[playerID].equipped_effect = itemID
+            self:ApplyEquippedEffect(playerID)
+        elseif item.type == "skins" then
+            self.playerData[playerID].equipped_skin = itemID
+            self:ApplyEquippedSkin(playerID)
+        elseif item.type == "pets" then
+            self.playerData[playerID].equipped_pet = itemID
+            self:ApplyEquippedPet(playerID)
+        end
+
+        CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+        return
+    end
     self:SendRequest(
         SERVER_URL .. "equip_item",
         { SteamID = steamID, item_id = itemID, item_type = item.type },
@@ -131,6 +176,7 @@ function Store:OnEquipItem(event)
         end
     )
 end
+
 
 function Store:OnUnequipItem(event)
     local playerID = event.PlayerID
@@ -230,6 +276,10 @@ function Store:OnBuyItem(event)
     local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
 
     if not item or steamID == "0" then return end
+
+    if item.prime_only then
+        return
+    end
 
     if self.playerData[playerID] and self.playerData[playerID].coins < item.price then
         CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "store_buy_response", { success = false, error = "Not enough coins", item_id = itemID })

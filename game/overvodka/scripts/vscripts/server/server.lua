@@ -416,12 +416,6 @@ function Server:OnNPCSpawned(event)
             unit:AddAbility("seasonal_ti11_duel"):SetLevel(1)
 
             unit:AddNewModifier(unit, nil, "modifier_subscriber_effect", {})
-            if unit:GetUnitName() == "npc_dota_hero_morphling" then
-                unit:AddNewModifier(unit, nil, "modifier_sans_arcana", {})
-            end
-            if unit:GetUnitName() == "npc_dota_hero_void_spirit" then
-                unit:AddNewModifier(unit, nil, "modifier_invincible_arcana", {})
-            end
             if unit == RealHero and self.Players[PlayerID].last_time_double_show == 0 then
                 self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
 
@@ -502,13 +496,6 @@ function Server:ApplyPrimeBenefits(PlayerID)
     if not hero:HasModifier("modifier_subscriber_effect") then
         hero:AddNewModifier(hero, nil, "modifier_subscriber_effect", {})
     end
-    if hero:GetUnitName() == "npc_dota_hero_morphling" and not hero:HasModifier("modifier_sans_arcana") then
-        hero:AddNewModifier(unit, nil, "modifier_sans_arcana", {})
-    end
-    if hero:GetUnitName() == "npc_dota_hero_void_spirit" and not hero:HasModifier("modifier_invincible_arcana") then
-        hero:AddNewModifier(unit, nil, "modifier_invincible_arcana", {})
-    end
-    
     if self.Players[PlayerID] and self.Players[PlayerID].last_time_double_show == 0 then
         self.Players[PlayerID].last_time_double_show = GameRules:GetGameTime() + SERVER_DOUBLE_RATING_TIME
         CustomNetTables:SetTableValue("players", "player_"..PlayerID.."_double_rating_time", {time = self.Players[PlayerID].last_time_double_show})

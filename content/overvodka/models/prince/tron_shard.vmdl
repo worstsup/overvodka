@@ -37,6 +37,10 @@
 								from = "materials/dev/primary_white.vmat"
 								to = "materials/effects/radiant_backlighting.vmat"
 							},
+							{
+								from = "materials/dev/primary_black.vmat"
+								to = "materials/dev/hero_black.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""

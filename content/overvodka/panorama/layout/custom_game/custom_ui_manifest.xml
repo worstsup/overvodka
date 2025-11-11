@@ -27,6 +27,7 @@
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
-		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/icons/npc_dota_hero_undying.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/custom_game/store/skins/sans_arcana.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/custom_game/store/skins/invincible_arcana.png" />
 	</Panel>
 </root>

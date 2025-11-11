@@ -137,12 +137,6 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
-			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_morphling" then
-				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_sans_arcana", {})
-			end
-			if Server:IsPlayerSubscribed(spawnedUnit:GetPlayerID()) and spawnedUnit:GetUnitName() == "npc_dota_hero_void_spirit" then
-				spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_invincible_arcana", {})
-			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 				spawnedUnit.voice_level = 0
 			end

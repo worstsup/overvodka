@@ -195,12 +195,12 @@ function modifier_prince_q_caster:OnDestroy()
     if not IsServer() then return end
     if self.caster and not self.caster:IsNull() then
         self.caster:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-        self.caster:MoveToPositionAggressive(self.caster:GetAbsOrigin())
         self.ability:SetActivated(true)
         local prince_r = self.caster:FindAbilityByName("prince_r")
         if prince_r then
             prince_r:SetActivated(true)
         end
+        self.caster:MoveToPositionAggressive(self.caster:GetAbsOrigin())
     end
 end
 

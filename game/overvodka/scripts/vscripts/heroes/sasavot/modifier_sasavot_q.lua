@@ -19,11 +19,6 @@ function modifier_sasavot_q:OnCreated( kv )
 	end
 end
 
-function modifier_sasavot_q:OnRefresh( kv )
-end
-function modifier_sasavot_q:OnDestroy( kv )
-end
-
 function modifier_sasavot_q:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
@@ -36,11 +31,10 @@ function modifier_sasavot_q:GetModifierProvidesFOWVision()
 end
 
 function modifier_sasavot_q:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_INVISIBLE] = false,
 		[MODIFIER_STATE_PROVIDES_VISION] = true,
 	}
-	return state
 end
 
 function modifier_sasavot_q:PlayEffects()

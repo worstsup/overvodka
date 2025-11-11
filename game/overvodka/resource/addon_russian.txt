@@ -187,6 +187,8 @@
 		"Store_Category_Prime"			"Prime"
 		"Store_Buy_Item"				"Купить"
 		"Store_Equip_Item"				"Надеть"
+		"Store_Need_Prime"				"С Prime"
+		"Store_Need_Prime_Button"		"Подписаться"
 		"Store_Unequip_Item"			"Снять"
 		"Store_Free"					"Бесплатно"
 		"Store_Claim"					"Забрать"
@@ -198,6 +200,8 @@
 		"Store_Item_skin_4_name"		"Гуль Иван Золо"
 		"Store_Item_skin_5_name"		"Гольмий IShowSpeed"
 		"Store_Item_skin_6_name"		"Чёрный Флэш"
+		"Store_Item_sans_arcana"		"Underfell Sans"
+		"Store_Item_invincible_arcana"	"WhatsApp Mark"
 
 		"Store_Item_effect_1_name"		"Золотой эффект"
 		"Store_Item_effect_2_name"		"Diretide эффект"

@@ -25,6 +25,13 @@ const StoreBody = $("#StoreBody");
     let lastClickedItemId = null;
     const localPlayerID64 = Players.GetLocalPlayer();
     const localSteamID = GetSteamID32(localPlayerID64).toString();
+
+    const PRIME_AUTO_SKINS = {
+        "npc_dota_hero_morphling": "sans_arcana",
+        "npc_dota_hero_void_spirit": "invincible_arcana",
+    };
+    let primeAutoApplied = false;
+
     Store.Initialize = function() {
         if (isInitialized) return;
         StoreBody.SetHasClass("Visible", true);
@@ -50,6 +57,53 @@ const StoreBody = $("#StoreBody");
         
         isInitialized = true;
     };
+
+    function hasPrime() {
+        try {
+            if (typeof IsPlayerSubscribed === "function") {
+                return !!IsPlayerSubscribed(Players.GetLocalPlayer());
+            }
+        } catch (e) {
+            $.Msg("IsPlayerSubscribed error:", e);
+        }
+        return false;
+    }
+
+    function TryAutoEquipPrimeSkin() {
+        if (primeAutoApplied) return;
+
+        if (!hasPrime()) {
+            return;
+        }
+
+        const playerID = Players.GetLocalPlayer();
+        const heroEnt = Players.GetPlayerHeroEntityIndex(playerID);
+
+        if (heroEnt === -1) {
+            $.Schedule(1.0, TryAutoEquipPrimeSkin);
+            return;
+        }
+
+        const heroName = Entities.GetUnitName(heroEnt);
+        const itemId = PRIME_AUTO_SKINS[heroName];
+
+        if (!itemId) {
+            return;
+        }
+
+        if (playerEquipped.skin && playerEquipped.skin !== itemId) {
+            return;
+        }
+
+        primeAutoApplied = true;
+
+        GameEvents.SendCustomGameEventToServer("store_equip_item", {
+            item_id: itemId,
+            item_type: "skins"
+        });
+    }
+
+    $.Schedule(1.0, TryAutoEquipPrimeSkin);
 
     function OnStoreNetTableChange(table_name, key, data) {
         if (key === "items") {
@@ -107,10 +161,15 @@ const StoreBody = $("#StoreBody");
 
         itemPanel.FindChildTraverse("ItemImage").SetImage(itemData.image);
         itemPanel.FindChildTraverse("ItemName").text = $.Localize(itemData.name);
-        if (Number(itemData.price) === 0) {
-            itemPanel.FindChildTraverse("ItemPrice").text = $.Localize("#Store_Free");
+
+        const priceLabel = itemPanel.FindChildTraverse("ItemPrice");
+
+        if (itemData.prime_only) {
+            priceLabel.text = $.Localize("#Store_Need_Prime");
+        } else if (Number(itemData.price) === 0) {
+            priceLabel.text = $.Localize("#Store_Free");
         } else {
-            itemPanel.FindChildTraverse("ItemPrice").text = itemData.price;
+            priceLabel.text = itemData.price;
         }
 
         const button = itemPanel.FindChildTraverse("ItemButton");
@@ -140,6 +199,34 @@ const StoreBody = $("#StoreBody");
         button.RemoveClass("Equipped");
         button.RemoveClass("NotEnoughCoins");
         button.enabled = true;
+
+        if (itemData.prime_only) {
+            const hasPrimeSub = hasPrime();
+
+            if (!hasPrimeSub) {
+                button.enabled = true;
+                label.text = $.Localize("#Store_Need_Prime_Button");
+                return;
+            }
+
+            let isEquipped = false;
+            if (itemData.type === "effects") {
+                isEquipped = (playerEquipped.effect === itemData.id);
+            } else if (itemData.type === "skins") {
+                isEquipped = (playerEquipped.skin === itemData.id);
+            } else if (itemData.type === "pets") {
+                isEquipped = (playerEquipped.pet === itemData.id);
+            }
+
+            if (isEquipped) {
+                button.AddClass("Equipped");
+                label.text = $.Localize("#Store_Unequip_Item");
+            } else {
+                button.AddClass("Owned");
+                label.text = $.Localize("#Store_Equip_Item");
+            }
+            return;
+        }
 
         if (itemData.type === "prime") {
             const isFree = Number(itemData.price) === 0;
@@ -197,6 +284,38 @@ const StoreBody = $("#StoreBody");
     function OnItemButtonClick(itemId) {
         const item = allItems[itemId];
         if (!item) return;
+
+        if (item.prime_only) {
+            const hasPrimeSub = hasPrime();
+
+            if (!hasPrimeSub) {
+                Menu.SwitchTab('Prime');
+                return;
+            }
+
+            let isEquipped = false;
+            if (item.type === 'effects') {
+                isEquipped = (playerEquipped.effect === itemId);
+            } else if (item.type === 'skins') {
+                isEquipped = (playerEquipped.skin === itemId);
+            } else if (item.type === 'pets') {
+                isEquipped = (playerEquipped.pet === itemId);
+            }
+
+            if (isEquipped) {
+                Game.EmitSound("UI.Unequip");
+                GameEvents.SendCustomGameEventToServer("store_unequip_item", {
+                    item_type: item.type
+                });
+            } else {
+                Game.EmitSound("UI.Equip");
+                GameEvents.SendCustomGameEventToServer("store_equip_item", { 
+                    item_id: itemId,
+                    item_type: item.type 
+                });
+            }
+            return;
+        }
 
         if (item.type === 'prime') {
             GameEvents.SendCustomGameEventToServer("store_buy_item", {item_id: item.id});

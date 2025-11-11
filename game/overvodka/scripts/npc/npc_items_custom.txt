@@ -2373,187 +2373,41 @@
 			"01"						"item_mystic_staff;item_armlet"
 		}
 	}
-	"item_dummy_datadriven"  //A dummy item that is used to take up item slots in the swap_to_item() Lua function.
+	"item_dummy_datadriven"
 	{
 		"BaseClass"                     "item_datadriven"
-		"ItemBaseLevel"                 "1"
 		"ItemPurchasable"				"0"
 	}
 	
 	"item_armlet_datadriven"
 	{
-		"BaseClass"						"item_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"armlet_datadriven"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"0"
-		"AbilityManaCost"				"0"
-		"ItemCost"						"5500"
-		
-		"AbilityValues"
-		{
-				"int"	"30"
-				"armor" "8"
-				"mp"	"10"
-				"dmg"	"30"
-		}
-		
-		"OnSpellStart"  //Switch to the active version of Armlet.
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"items/item_armlet.lua"
-				"Function"				"item_armlet_datadriven_on_spell_start"
-			}
-			
-			"FireSound"
-			{
-				"EffectName"				"DOTA_Item.Armlet.Activate"
-				"Target"					"CASTER"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_armletbonus"
-		    {
-		        "Passive"           "1"
-		        "IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+		"BaseClass"                     "item_lua"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityTextureName"            "armlet_datadriven"
+		"ScriptFile"                    "items/item_armlet"
 
-		        "Properties"
-		        {
-		            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mp"
-		            "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor"
-		            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int"
-		            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"%dmg"
-		        }
-		    }
-		}
-	}
-	"item_armlet_active_datadriven"
-	{
-		"BaseClass"						"item_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"armlet_active_datadriven"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"0"
-		"AbilityManaCost"				"0"
-		"ItemCost"						"5500"
-		
-		"ItemPurchasable"				"0"
-			
+		"ItemCost"                      "5500"
+		"ItemQuality"                   "epic"
+
+		"AbilityCooldown"               "0"
+		"AbilityManaCost"               "0"
+
 		"AbilityValues"
 		{
-				"int"	"30"
-				"armor" "8"
-				"bonus_armor"	"10"
-				"mp"	"10"
-				"dmg"	"30"
-				"bonus_damage"						"9"
-				"bonus_attack_speed"				"0"
-				"bonus_armor"						"5"
-				"bonus_health_regen"				"0"
-				"unholy_bonus_damage"				"20"
-				"unholy_bonus_attack_speed"			"10"
-				"unholy_bonus_strength"				"25"  //The ratio of %unholy_bonus_strength to %unholy_ticks_to_full_effect is currently hardcoded in 
-				"unholy_health_drain_per_second"	"3"
-				"unholy_health_drain_interval"		".1"
-				"unholy_ticks_to_full_effect"		"7"  //The ratio of %unholy_bonus_strength to %unholy_ticks_to_full_effect is currently hardcoded in 
-				"unholy_tick_interval"				".1"  //This is the interval at which the caster will gain Strength immediately after Armlet is toggled
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"items/item_armlet.lua"
-				"Function"				"item_armlet_active_datadriven_on_spell_start"
-			}
-			
-			"FireSound"
-			{
-				"EffectName"			"DOTA_Item.Armlet.DeActivate"
-				"Target"				"CASTER"
-			}
-		}
-		
-		"OnUnequip"
-		{		
-			"RunScript"
-			{
-				"ScriptFile"					"items/item_armlet.lua"
-				"Function"						"item_armlet_active_datadriven_on_unequip"
-				"UnholyTicksToFullEffect"		"%unholy_ticks_to_full_effect"
-				"UnholyBonusStrength"			"%unholy_bonus_strength"
-			}
-		}
-	
-		"Modifiers"
-		{
-			"modifier_item_armlet_active_datadriven"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"EffectName"			"particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_v2_debuff.vpcf"
-				"EffectAttachType"		"follow_origin"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mp"
-		            "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%bonus_armor"
-		            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%int"
-		            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"%dmg"
-					"MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" 	"%unholy_bonus_damage"
-				}
-				
-				"ThinkInterval" 		"%unholy_health_drain_interval"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"					"items/item_armlet.lua"
-						"Function"						"modifier_item_armlet_active_datadriven_on_interval_think_damage"
-						"UnholyHealthDrainPerSecond"	"%unholy_health_drain_per_second"
-						"UnholyHealthDrainInterval"		"%unholy_health_drain_interval"
-					}
-				}
-			}
-			"modifier_item_armlet_active_datadriven_apply_tick_strength"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"ThinkInterval" 		"%unholy_tick_interval"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"					"items/item_armlet.lua"
-						"Function"						"modifier_item_armlet_active_datadriven_apply_tick_strength_on_interval_think"
-						"UnholyTicksToFullEffect"		"%unholy_ticks_to_full_effect"
-						"UnholyBonusStrength"			"%unholy_bonus_strength"
-					}
-				}
-			}
-			"modifier_item_armlet_active_datadriven_tick"
-			{
-				"Passive"			"0"
-				"IsHidden"			"1"
-				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"3.57"
-				}
-			}
+			// Пассивка
+			"int"                          "30"
+			"armor"                        "8"
+			"mp"                           "10"
+			"dmg"                          "30"
+
+			"bonus_armor"                  "5"
+			"unholy_bonus_damage"          "20"
+			"unholy_bonus_strength"        "25"
+			"unholy_ticks_to_full_effect"  "7"
+			"unholy_tick_interval"         "0.1"
+
+			"unholy_health_drain_per_second" "3"
+			"unholy_health_drain_interval"   "0.1"
 		}
 	}
 	"item_recipe_bablokrad"
