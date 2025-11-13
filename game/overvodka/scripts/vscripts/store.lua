@@ -59,6 +59,8 @@ function Store:Init()
     CustomGameEventManager:RegisterListener("store_buy_item", function(_, event) self:OnBuyItem(event) end)
     CustomGameEventManager:RegisterListener("store_equip_item", function(_, event) self:OnEquipItem(event) end)
     CustomGameEventManager:RegisterListener("store_unequip_item", function(_, event) self:OnUnequipItem(event) end)
+    CustomGameEventManager:RegisterListener("cases_request_info", function(_, event) self:OnCasesRequestInfo(event) end)
+    CustomGameEventManager:RegisterListener("cases_open_case", function(_, event) self:OnCasesOpenCase(event) end)
     print("[Store] Initialized successfully.")
 end
 
@@ -343,19 +345,47 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
     Request:SetHTTPRequestGetOrPostParameter('data', EncodedData)
     
     Request:Send(function(Result)
-        if Result.StatusCode ~= 200 then
-            ifprint("HTTP error: "..tostring(Result.StatusCode))
+        local status = tonumber(Result.StatusCode) or 0
+
+        -- Любой HTTP != 200
+        if status ~= 200 then
+            ifprint("HTTP error: "..tostring(status).." body: "..tostring(Result.Body))
+
+            -- Пытаемся распарсить JSON даже в ошибках,
+            -- чтобы достать .error с бэкенда ("Not enough coins" и т.п.)
+            local parsedBody = nil
+            local ok, decoded = pcall(json.decode, Result.Body or "")
+            if ok and decoded then
+                parsedBody = decoded
+            end
+
+            local errTable = {
+                status = status,
+                body   = Result.Body,
+                error  = parsedBody and parsedBody.error or nil,
+            }
+
+            -- 4xx — логическая ошибка, РЕТРАИТЬ НЕ НАДО
+            if status >= 400 and status < 500 then
+                if callback then
+                    callback(errTable, parsedBody)
+                end
+                return
+            end
+
+            -- 5xx/прочие сетевые косяки — как раньше, с ретраями
             local nextAttempt = attempt + 1
             if nextAttempt <= SERVER_MAX_ATTEMPTS then
                 Timers:CreateTimer(SERVER_ATTEMPT_INTERVAL, function()
                     self:SendRequest(url, data, callback, debugEnabled, nextAttempt)
                 end)
             elseif callback then
-                callback({status = Result.StatusCode, body = Result.Body}, nil)
+                callback(errTable, parsedBody)
             end
             return
         end
-        
+
+        -- 200 OK: как раньше
         local success, ResultData = pcall(json.decode, Result.Body)
         if not success or not ResultData then
             ifprint("JSON decode error")
@@ -369,12 +399,13 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
             end
             return
         end
-        
+
         ifprint("Request successful")
         if callback then
             callback(nil, ResultData)
         end
     end)
+
 end
 
 function Store:OnPlayerDisconnect(event)
@@ -383,6 +414,92 @@ function Store:OnPlayerDisconnect(event)
         self.playerPets[playerID]:RemoveSelf()
         self.playerPets[playerID] = nil
     end
+end
+
+function Store:OnCasesRequestInfo(event)
+    local playerID = event.PlayerID
+    if not playerID or playerID < 0 then return end
+
+    local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
+    if steamID == "0" then return end
+
+    self:SendRequest(
+        SERVER_URL .. "get_cases_info",
+        { SteamID = steamID },
+        function(err, body)
+            if err or not body or not body.success then
+                print("[Store] get_cases_info error:", err and err.error or "unknown")
+                return
+            end
+
+            local player = PlayerResource:GetPlayer(playerID)
+            if not player then return end
+
+            -- cases: [
+            --   { case_id, name, icon, cost, items = [ { item_id, item_name, item_icon, rare }, ... ] }
+            -- ]
+            CustomGameEventManager:Send_ServerToPlayer(player, "cases_info", {
+                cases = body.cases or {}
+            })
+        end
+    )
+end
+
+function Store:OnCasesOpenCase(event)
+    local playerID = event.PlayerID
+    if not playerID or playerID < 0 then return end
+
+    local case_id = event.case_id
+    if not case_id then return end
+
+    local steamID = tostring(PlayerResource:GetSteamAccountID(playerID))
+    if steamID == "0" then return end
+
+    self:SendRequest(
+        SERVER_URL .. "open_case",
+        { SteamID = steamID, case_id = case_id },
+        function(err, body)
+            local player = PlayerResource:GetPlayer(playerID)
+            if not player then return end
+
+            if err or not body or not body.success then
+                local errorMsg = (body and body.error) or (err and err.error) or "Server error"
+                CustomGameEventManager:Send_ServerToPlayer(player, "cases_open_result", {
+                    success = false,
+                    error   = errorMsg
+                })
+                return
+            end
+
+            if self.playerData[playerID] then
+                if body.new_balance ~= nil then
+                    self.playerData[playerID].coins = body.new_balance
+                end
+                if body.inventory then
+                    self.playerData[playerID].inventory = self:ArrayToSet(body.inventory)
+                end
+                CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+            end
+            if Server and Server.RefreshPlayerProfile then
+                Server:RefreshPlayerProfile(playerID)
+            end
+            CustomGameEventManager:Send_ServerToPlayer(player, "cases_open_result", {
+                success     = true,
+                new_balance = body.new_balance,
+                case_id     = case_id,
+                drop_id     = body.drop_id,
+                items       = body.items,
+                inventory   = body.inventory,
+            })
+            CustomGameEventManager:Send_ServerToAllClients("case_opened_announce", {
+                player_id      = playerID,
+                case_id        = case_id,
+                case_name      = body.case_name,
+                drop_id        = body.drop_id,
+                drop_item_name = body.drop_item_name
+            })
+        end
+    )
 end
 
 Store:Init()

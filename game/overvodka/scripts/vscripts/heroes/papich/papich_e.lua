@@ -255,7 +255,6 @@ function modifier_papich_e_charge:OnCreated( kv )
     end
     caster:FaceTowards(self.point)
 	self:StartIntervalThink( FrameTime() )
-	self.filter = FilterManager:AddExecuteOrderFilter( self.OrderFilter, self )
 	self:SetDirection( self.point )
 	self:PlayEffects1()
 	self:PlayEffects2()
@@ -266,12 +265,10 @@ function modifier_papich_e_charge:OnRemoved()
 	if not self.charge_finish then
 		self.ability:OnChargeFinish( false )
 	end
-	FilterManager:RemoveExecuteOrderFilter( self.filter )
 end
 
 function modifier_papich_e_charge:DeclareFunctions()
 	local funcs = {
-		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 		MODIFIER_PROPERTY_MIN_HEALTH,
 	}
@@ -283,9 +280,6 @@ function modifier_papich_e_charge:GetMinHealth()
     return 1
 end
 
-function modifier_papich_e_charge:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-end
 
 function modifier_papich_e_charge:SetDirection( location )
 	local dir = ((location-self.parent:GetOrigin())*Vector(1,1,0)):Normalized()
@@ -304,31 +298,6 @@ function modifier_papich_e_charge:CheckState()
 		[MODIFIER_STATE_OUT_OF_GAME] = true,
 		[MODIFIER_STATE_UNTARGETABLE] = true,
 	}
-end
-
-function modifier_papich_e_charge:OrderFilter( data )
-	if data.order_type~=DOTA_UNIT_ORDER_MOVE_TO_POSITION and
-		data.order_type~=DOTA_UNIT_ORDER_MOVE_TO_TARGET and
-		data.order_type~=DOTA_UNIT_ORDER_ATTACK_TARGET
-	then
-		return true
-	end
-	local found = false
-	for _,entindex in pairs(data.units) do
-		local entunit = EntIndexToHScript( entindex )
-		if entunit==self.parent then
-			found = true
-		end
-	end
-	if not found then return true end
-	data.order_type = DOTA_UNIT_ORDER_MOVE_TO_DIRECTION
-	if data.entindex_target~=0 then
-		local pos = EntIndexToHScript( data.entindex_target ):GetOrigin()
-		data.position_x = pos.x
-		data.position_y = pos.y
-		data.position_z = pos.z
-	end
-	return true
 end
 
 function modifier_papich_e_charge:OnIntervalThink()
@@ -444,7 +413,6 @@ end
 
 function modifier_papich_e:DeclareFunctions()
 	return {
-		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_DISABLE_TURNING,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
@@ -456,26 +424,6 @@ end
 
 function modifier_papich_e:GetMinHealth()
     return 1
-end
-
-function modifier_papich_e:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if 	params.order_type==DOTA_UNIT_ORDER_MOVE_TO_POSITION then
-		ExecuteOrderFromTable({
-			UnitIndex = self.parent:entindex(),
-			OrderType = DOTA_UNIT_ORDER_MOVE_TO_DIRECTION,
-			Position = params.new_pos,
-		})
-	elseif
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_DIRECTION
-	then
-		self:SetDirection( params.new_pos )
-	elseif 
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET
-	then
-		self:SetDirection( params.target:GetOrigin() )
-	end	
 end
 
 function modifier_papich_e:CheckState()

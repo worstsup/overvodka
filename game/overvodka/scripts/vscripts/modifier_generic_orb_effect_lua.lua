@@ -27,13 +27,6 @@ function modifier_generic_orb_effect_lua:OnCreated( kv )
 	self.records = {}
 end
 
-function modifier_generic_orb_effect_lua:OnRefresh( kv )
-end
-
-function modifier_generic_orb_effect_lua:OnDestroy( kv )
-
-end
-
 --------------------------------------------------------------------------------
 -- Modifier Effects
 function modifier_generic_orb_effect_lua:DeclareFunctions()

@@ -423,6 +423,49 @@ function angle(cx, cy, ex, ey) {
     return theta;
 }
 
+function OnCaseOpened(event) {
+    if (IsPlayerMuted && IsPlayerMuted(event.player_id)) {
+        return;
+    }
+
+    var playerId = event.player_id;
+    var Info = Game.GetPlayerInfo(playerId);
+    if (!Info) return;
+
+    var HeroName = Info.player_selected_hero;
+    var playerColor = GetHEXPlayerColor(playerId);
+    var OvervodkaName = GetOvervodkaHeroName(HeroName);
+
+    var caseName = $.Localize(event.case_name || "") || (event.case_name || "");
+    var dropName = $.Localize(event.drop_item_name || "") || (event.drop_item_name || "");
+
+    var Text = "<font color='" + playerColor + "'>" + Info.player_name + "</font> " +
+               $.Localize("#Store_Chat_CaseOpened_Opened") + " " +
+               caseName + " " +
+               $.Localize("#Store_Chat_CaseOpened_AndGot") + " " +
+               dropName +"!";
+
+    $.Schedule(3.0, function () {
+        var ChatLines = DotaHUD.FindChildTraverse("ChatLinesPanel");
+        if (!ChatLines) return;
+
+        var msgPanel = $.CreatePanel("Panel", ChatLines, "", { class: "ChatLine" });
+        msgPanel.BLoadLayout("file://{resources}/layout/custom_game/custom_chat_line.xml", false, false);
+        msgPanel.hittest = false;
+
+        var HeroImage = msgPanel.FindChildTraverse("HeroImage");
+        if (HeroImage) {
+            HeroImage.SetImage("file://{images}/heroes/" + OvervodkaName + ".png");
+        }
+
+        msgPanel.SetDialogVariable("text", Text);
+
+        $.Schedule(10, function () {
+            msgPanel.AddClass("ExpireThis");
+        });
+    });
+}
+
 (function(){
     DeleteAllChildren(ItemsText)
     DeleteAllChildren(ItemsSounds)
@@ -457,5 +500,6 @@ function angle(cx, cy, ex, ey) {
     CreateKeyBind()
 
     GameEvents.Subscribe("chat_wheel_say_line", OnSayLine)
+    GameEvents.Subscribe("case_opened_announce", OnCaseOpened)
     MAIN_PANEL.SetHasClass("IsSubscribed", true)
 })();

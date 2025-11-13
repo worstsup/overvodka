@@ -110,7 +110,6 @@ end
 
 function modifier_peterka_e_cast:DeclareFunctions()
 	return {
-		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 		MODIFIER_PROPERTY_MODEL_CHANGE,
 	}
@@ -120,27 +119,27 @@ function modifier_peterka_e_cast:GetModifierModelChange()
 	return "peterka/emelya.vmdl"
 end
 
-function modifier_peterka_e_cast:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if 	params.order_type==DOTA_UNIT_ORDER_MOVE_TO_POSITION or
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_DIRECTION
-	then
-		self:SetDirection( params.new_pos )
-	elseif 
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET
-	then
-		self:SetDirection( params.target:GetOrigin() )
-	elseif
-		params.order_type==DOTA_UNIT_ORDER_STOP or 
-		params.order_type==DOTA_UNIT_ORDER_HOLD_POSITION
-	then
-		self:GetAbility():OnChargeFinish( false, self.target )
-	end	
+function modifier_peterka_e_cast:OnOrder(params)
+    if params.unit ~= self:GetParent() then return end
+    local order = params.order_type
+
+    if order == DOTA_UNIT_ORDER_MOVE_TO_POSITION or order == DOTA_UNIT_ORDER_MOVE_TO_DIRECTION then
+        if params.new_pos then
+            self:SetDirection(params.new_pos)
+        end
+    elseif order == DOTA_UNIT_ORDER_MOVE_TO_TARGET or order == DOTA_UNIT_ORDER_ATTACK_TARGET then
+        if params.target and not params.target:IsNull() then
+            self:SetDirection(params.target:GetAbsOrigin())
+        end
+    elseif order == DOTA_UNIT_ORDER_STOP or order == DOTA_UNIT_ORDER_HOLD_POSITION then
+        self:GetAbility():OnChargeFinish(false, self.target)
+    end
 end
 
 function modifier_peterka_e_cast:SetDirection( location )
-	local dir = ((location-self:GetParent():GetOrigin())*Vector(1,1,0)):Normalized()
+	local dir = location-self:GetParent():GetAbsOrigin()
+	dir.z = 0
+	dir = dir:Normalized()
 	self.target_angle = VectorToAngles( dir ).y
 	self.face_target = false
 end
@@ -241,15 +240,10 @@ end
 function modifier_peterka_e_charge:OnCreated( kv )
 
 	self.speed = self:GetAbility():GetSpecialValueFor( "charge_speed" )
-
 	self.turn_speed = self:GetAbility():GetSpecialValueFor( "turn_rate" )
-
 	self.radius = self:GetAbility():GetSpecialValueFor( "knockback_radius" )
-
 	self.distance = self:GetAbility():GetSpecialValueFor( "knockback_distance" )
-
 	self.duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
-
 	self.stun = self:GetAbility():GetSpecialValueFor( "stun_duration" )
 	self.debuff_immune = false
 	if self:GetAbility():GetSpecialValueFor("debuff_immune") == 1 then
@@ -283,7 +277,6 @@ end
 
 function modifier_peterka_e_charge:DeclareFunctions()
 	return {
-		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_PROPERTY_DISABLE_TURNING,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
@@ -295,28 +288,24 @@ function modifier_peterka_e_charge:GetModifierModelChange()
 	return "peterka/emelya.vmdl"
 end
 
-function modifier_peterka_e_charge:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
+function modifier_peterka_e_charge:OnOrder(params)
+    if params.unit ~= self:GetParent() then return end
+	print(params.new_pos)
+    local order = params.order_type
 
-	if params.order_type==DOTA_UNIT_ORDER_MOVE_TO_POSITION then
-		self:SetDirection( params.new_pos )
-	elseif
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_DIRECTION
-	then
-		self:SetDirection( params.new_pos )
-	elseif 
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET
-	then
-		self:SetDirection( params.target:GetOrigin() )
-	elseif
-		params.order_type==DOTA_UNIT_ORDER_STOP or 
-		params.order_type==DOTA_UNIT_ORDER_CAST_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_CAST_POSITION or
-		params.order_type==DOTA_UNIT_ORDER_HOLD_POSITION
-	then
-		self:Destroy()
-	end	
+    if order == DOTA_UNIT_ORDER_MOVE_TO_POSITION or order == DOTA_UNIT_ORDER_MOVE_TO_DIRECTION then
+        if params.new_pos then self:SetDirection(params.new_pos) end
+    elseif order == DOTA_UNIT_ORDER_MOVE_TO_TARGET or order == DOTA_UNIT_ORDER_ATTACK_TARGET then
+        if params.target and not params.target:IsNull() then
+            self:SetDirection(params.target:GetAbsOrigin())
+        end
+    elseif order == DOTA_UNIT_ORDER_STOP
+        or order == DOTA_UNIT_ORDER_CAST_TARGET
+        or order == DOTA_UNIT_ORDER_CAST_POSITION
+        or order == DOTA_UNIT_ORDER_HOLD_POSITION
+    then
+        self:Destroy()
+    end
 end
 
 function modifier_peterka_e_charge:GetModifierDisableTurning()
@@ -324,7 +313,9 @@ function modifier_peterka_e_charge:GetModifierDisableTurning()
 end
 
 function modifier_peterka_e_charge:SetDirection( location )
-	local dir = ((location-self:GetParent():GetOrigin())*Vector(1,1,0)):Normalized()
+	local dir = location-self:GetParent():GetAbsOrigin()
+	dir.z = 0
+	dir = dir:Normalized()
 	self.target_angle = VectorToAngles( dir ).y
 	self.face_target = false
 end

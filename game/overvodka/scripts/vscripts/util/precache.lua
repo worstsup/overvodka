@@ -128,6 +128,7 @@ PrecacheUtils.particles = {
 		"particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_splash.vpcf",
 		"particles/item_nikes.vpcf",
 		"particles/econ/events/ti9/phase_boots_ti9.vpcf",
+		"particles/ui/ui_generic_treasure_impact.vpcf",
 }
 
 PrecacheUtils.particle_folders = {

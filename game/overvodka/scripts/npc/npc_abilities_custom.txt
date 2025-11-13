@@ -4128,7 +4128,6 @@
 		"Innate"						"1"
 		"MaxLevel"						"4"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
-		"AbilityCastGestureSlot"		"DEFAULT"
 		"AbilityValues"
 		{
 			"radius"				
@@ -5745,7 +5744,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"			"kach"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
-		"AbilityCastGestureSlot"		"DEFAULT"
 		"IsBreakable"					"1"
 		"IsGrantedByShard"				"1"
 		"MaxLevel"						"1"
@@ -9458,7 +9456,6 @@
 		"HasShardUpgrade"				"1"
 		"AbilityCastPoint"				"0.15"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
-		"AbilityCastGestureSlot"		"DEFAULT"
 		"AbilityManaCost"				"120 140 160 180"
 
 		"AbilityValues"
@@ -9635,8 +9632,8 @@
 					"special_bonus_unique_peterka_7" "+42"
 				}
 				"radius"				"700 800 900"
-				"collision_radius"		"50 50 50 50"
-				"splash_radius"			"150 150 150 150"
+				"collision_radius"		"50"
+				"splash_radius"			"150"
 				"duration"				"8 9 10"
 				"speed"					"1000"
 				"machines_per_sec"		"32 34 36"

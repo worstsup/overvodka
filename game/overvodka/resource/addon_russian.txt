@@ -163,8 +163,6 @@
 		"ov_match_history_title"    	"Последние матчи"
 		"ov_prime_required"         	"Просмотр чужих матчей доступен с Overvodka Prime"
 
-
-
 		"Vote_Title"					"Голосование за нового героя"
 		"Vote_Description"				"Выберите, какой герой выйдет следующим в кастомке OVERVODKA!"
 		"Vote_Results_Title"			"Текущие результаты"
@@ -185,6 +183,7 @@
 		"Store_Category_Effects"		"Эффекты"
 		"Store_Category_Pets"			"Питомцы"
 		"Store_Category_Prime"			"Prime"
+		"Store_Category_Cases"			"Кейсы"
 		"Store_Buy_Item"				"Купить"
 		"Store_Equip_Item"				"Надеть"
 		"Store_Need_Prime"				"С Prime"
@@ -216,6 +215,24 @@
 		"Store_Item_pet_6_name"			"Скебоб"
 		"Store_Item_pet_7_name"			"Спайк"
 		"Store_Item_pet_8_name"			"Шкипер"
+
+		"Store_Case_View"				"Посмотреть"
+		"Store_Case_Open"				"Открыть"
+		"Case_Overvodka_Basic"			"Кейс со скинами"
+		"Case_Overvodka_Pets"			"Кейс с питомцами"
+		"Store_Case_Drop_Header"		"Вы получили"
+		"Store_Case_Drop_Claim"			"Забрать"
+		"Store_Case_DefaultName"		"Кейс"
+		"Store_Case_Contains"			"Содержит"
+		"Store_Chat_CaseOpened_Opened"	"открыл"
+		"Store_Chat_CaseOpened_AndGot"  "и выбил"
+
+		"Case_Overvodka_Prime"			"Кейс Overvodka Prime"
+		"Case_Prime_1d"					"Prime на сутки"
+		"Case_Prime_3d"					"Prime на 3 дня"
+		"Case_Prime_7d"					"Prime на 7 дней"
+		"Case_Prime_14d"				"Prime на 14 дней"
+		"Case_Prime_30d"				"Prime на 30 дней"
 
 		"Store_Item_prime_day_name"		"Prime на сутки"
 		"Store_Item_prime_3d_free_name"	"Prime на 3 дня"

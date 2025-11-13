@@ -34,7 +34,19 @@ function modifier_litvin_bledina:DeclareFunctions()
 		MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
+		MODIFIER_EVENT_ON_ATTACK,
 	}
+end
+
+function modifier_litvin_bledina:OnAttack( params )
+	if params.attacker~=self:GetParent() then return end
+	if self:GetStackCount() <= 0 then return end
+	if IsServer() then
+		self:DecrementStackCount()
+		if self:GetStackCount() <= 0 then
+			self:Destroy()
+		end
+	end
 end
 
 function modifier_litvin_bledina:GetModifierBaseAttackTimeConstant()
@@ -47,12 +59,6 @@ end
 
 function modifier_litvin_bledina:GetModifierProcAttack_Feedback( params )
 	self:PlayEffects2( self:GetParent(), params.target )
-	if IsServer() then
-		self:DecrementStackCount()
-		if self:GetStackCount() < 1 then
-			self:Destroy()
-		end
-	end
 end
 
 function modifier_litvin_bledina:PlayEffects1()

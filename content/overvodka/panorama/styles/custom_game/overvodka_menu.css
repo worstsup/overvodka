@@ -475,3 +475,410 @@
     color: white;
     font-weight: bold;
 }
+
+.ChestHudMainPanel {
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    margin-top: 45px;
+    ignore-parent-flow: true;
+
+    z-index: 50;
+
+    opacity: 0;
+    visibility: collapse;
+
+    transition-property: opacity;
+    transition-duration: 0.25s;
+
+    background-color: #191919;
+}
+
+.ChestHudMainPanel.ChestHudAnimOpen {
+    visibility: visible;
+    opacity: 1;
+}
+
+.ChestHudMainPanel.ChestHudAnimClose {
+    visibility: collapse;
+    opacity: 0;
+}
+
+.ChestName {
+    horizontal-align: center;
+    margin-top: 10px;
+    color: #f0e0b4;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+    font-size: 22px;
+    text-shadow: 0px 2px 8px #000000dd;
+}
+
+.RollLine {
+    width: 100%;
+    height: 128px;
+    horizontal-align: center;
+    margin-top: 55px;
+}
+
+.RollLineBorderTop,
+.RollLineBorderBottom {
+    width: 100%;
+    height: 3px;
+    background-color: #a4864f66;
+}
+
+.RollLineBorderTop {
+    vertical-align: top;
+}
+
+.RollLineBorderBottom {
+    vertical-align: bottom;
+}
+
+.RollLineBg {
+    width: 100%;
+    height: 100%;
+    background-color: gradient( linear, 0% 0%, 100% 0%, from( #000000dd ), color-stop( .5, #111111ff ), to( #000000dd ) );
+}
+
+.RollItemsList {
+    width: 100%;
+    height: 160px;
+    overflow: clip;
+    horizontal-align: center;
+}
+
+.RollItemsListMain {
+    width: 9999px;
+    height: 100%;
+    flow-children: right;
+}
+
+
+.pointer_top {
+    width: 40px;
+    height: 40px;
+    background-image: url("s2r://panorama/images/hero_badges/hero_badge_rank_0_png.vtex");
+    background-size: 100%;
+    z-index: 5;
+    horizontal-align: center;
+    margin-top: -10px;
+    wash-color: #f0e0b4;
+    saturation: 0.2;
+}
+.CloseChestHudIcon {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    margin-top: 12px;
+    horizontal-align: right;
+    background-image: url("s2r://panorama/images/control_icons/x_close_grey_psd.vtex");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    brightness: 2;
+    transition-property: brightness, pre-transform-scale2d;
+    transition-duration: 0.15s;
+}
+
+.CloseChestHudIcon:hover {
+    brightness: 5;
+    pre-transform-scale2d: 1.05;
+}
+
+.CloseChestHudIcon:active {
+    pre-transform-scale2d: 0.9;
+}
+.pointer_bottom {
+    width: 40px;
+    height: 40px;
+    background-image: url("s2r://panorama/images/hero_badges/hero_badge_rank_0_png.vtex");
+    background-size: 100%;
+    z-index: 5;
+    horizontal-align: center;
+    vertical-align: bottom;
+    transform: rotateZ(180deg) translateY(10px);
+    wash-color: #f0e0b4;
+    saturation: 0.2;
+}
+.ChestOpenButton {
+    margin-top: 190px;
+}
+
+.item_panel,
+.item_panel_roll {
+    width: 128px;
+    height: 128px;
+    margin: 2px;
+    opacity: 0;
+    transition-property: opacity, brightness;
+    transition-duration: 0.2s;
+}
+.item_panel_content {
+    width: 128px;
+    height: 98px;
+    margin: 2px;
+    opacity: 0;
+    transition-property: opacity, brightness;
+    transition-duration: 0.2s;
+}
+.item_panel_name {
+    width: 100%;
+    height: 20px;
+    vertical-align: bottom;
+    z-index: 5;
+}
+
+.item_icon {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item_name {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: semi-bold;
+    align: center center;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 3px 2.0 #000000b0;
+    margin: 3px;
+    text-align: center;
+    text-overflow: shrink;
+}
+
+.item_panel_border {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f0e0b422;
+}
+
+.item_panel:hover .item_icon {
+    brightness: 1.2;
+}
+
+
+.MainCost {
+    flow-children: right;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.chest_cost_no_money {
+    color: gradient( linear, 0% 100%, 0% 0%, from( #ff5e5e ), to( #d30000 ) );
+    font-weight: bold;
+    text-shadow: 0px 0px 3px 1.5 black;
+}
+
+.OpenChestButton {
+    horizontal-align: center;
+    margin-top: 200px;
+    width: 220px;
+    height: 40px;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from(#a98336), to(#cda758) );
+    border: 1px solid #f0e0b4;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px #000000aa;
+    transition-property: brightness, pre-transform-scale2d;
+    transition-duration: 0.2s;
+    brightness: 1;
+    pre-transform-scale2d: 1;
+}
+
+.OpenChestButton:hover {
+    brightness: 1.5;
+}
+
+.OpenChestButton:active {
+    pre-transform-scale2d: 0.97;
+}
+
+.OpenChestButtonLabel {
+    font-weight: semi-bold;
+    color: #2b1c05;
+    text-transform: uppercase;
+    align: center center;
+    font-size: 18px;
+    text-shadow: 0px 1px 2px #f8e7b0;
+}
+
+
+.ItemsInChestName {
+    horizontal-align: center;
+    margin-top: 255px;
+    color: #f0e0b4;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-shadow: 0px 2px 6px #000000dd;
+}
+.ChestOpenButton.Disabled {
+    wash-color: #777;
+    saturation: 0.2;
+    brightness: 0.5;
+}
+.BorderItemsChestBlock {
+    border-bottom: 1px solid #f0e0b444;
+    border-brush: gradient(radial, 50% 50%, 0% 0%, 50% 55%, from(#f0e0b4), to(#fff0));
+    width: 100%;
+    horizontal-align: center;
+    height: 10px;
+    margin-top: 240px;
+}
+
+.BorderItemsChestBlock.HasItems {
+    border-bottom: 1px solid #f0e0b4aa;
+    border-brush: gradient(
+        radial, 50% 50%, 0% 0%, 50% 55%,
+        from(#f0e0b4),
+        to(#fff0)
+    );
+    brightness: 1.2;
+}
+
+.ItemsInChestBlock {
+    width: 700px;
+    height:100%;
+    horizontal-align: center;
+    margin-top: 280px;
+    flow-children: right-wrap;
+}
+
+.DropItemPanel {
+    width: 50%;
+    height: 60%;
+    align: center center;
+    margin-top:30px;
+    z-index: 20;
+    flow-children: none;
+    opacity: 0;
+    pre-transform-scale2d: 0.9;
+    transition-property: pre-transform-scale2d, opacity;
+    transition-duration: 0.15s;
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #24201a ), to( #0f0b07 ) );
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.8);
+    border: 1px solid #a4864f;
+}
+
+.DropItemPanelVisible {
+    pre-transform-scale2d: 1;
+    opacity: 1;
+}
+
+.DropItemContent {
+    width: 100%;
+    height: 100%;
+    align: center center;
+    flow-children: down;
+}
+
+.DropEffect {
+    width: 400px;
+    height: 170px;
+    align: center center;
+    overflow: clip;
+}
+
+.DropEffect_top,
+.DropEffect_bottom {
+    width: 400px;
+    height: 200px;
+    align: center center;
+    overflow: clip;
+}
+
+.DropEffect_top {
+    transform: translateY(20px);
+}
+
+.DropEffect_bottom {
+    transform: translateY(-20px);
+}
+
+.DropEffectIcon {
+    width: 220px;
+    height: 130px;
+    align: center center;
+    transform: translateY(-1px);
+    overflow: clip;
+    z-index: 20;
+}
+
+.ItemDropHeader {
+    font-size: 18px;
+    color: gradient( linear, 0% 100%, 0% 0%, from( #f9e0bb ), to( #fff442 ) );
+    font-weight: semi-bold;
+    align: center center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    text-shadow: 0px 0px 3px 2.0 #000000b0;
+}
+
+.ItemDropName {
+    margin-top: 10px;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    font-weight: semi-bold;
+    align: center center;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 3px 2.0 #000000b0;
+}
+
+.ItemDropIcon {
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    box-shadow: black 0px 0px 6px 0px;
+}
+
+.ItemDropClaimButton {
+    width: 160px;
+    height: 35px;
+    margin-top: 10px;
+    horizontal-align: center;
+    background-color: gradient(linear, 10% 100%, 0% 0%,
+        from(rgba(191, 147, 63, 0.9)),
+        color-stop(0.5, rgba(230, 193, 104, 0.9)),
+        to(rgba(191, 147, 63, 0.9)));
+    box-shadow: 0px 0px 10px 1 rgba(255, 228, 144, 0.35);
+    border: 1px solid #f0e0b4;
+    transition-property: brightness;
+    transition-duration: 0.2s;
+}
+
+.ItemDropClaimButtonLabel {
+    font-size: 18px;
+    color: #2b1c05;
+    font-weight: semi-bold;
+    align: center center;
+    text-transform: uppercase;
+}
+
+.ItemDropClaimButton:hover {
+    brightness: 1.2;
+}
+
+.ItemDropClaimButton:active {
+    brightness: 0.8;
+}
+
+/* Доп. состояния */
+
+.no_money {
+    wash-color: #777;
+    saturation: 0.1;
+}
+
+.has_all_items {
+    wash-color: #777;
+    saturation: 0.1;
+}
+
+.has_dropped_item {
+    wash-color: #777;
+    saturation: 0;
+}

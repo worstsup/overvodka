@@ -52,14 +52,12 @@ function modifier_shkolnik_r:OnDestroy()
 end
 
 function modifier_shkolnik_r:DeclareFunctions()
-    local funcs = 
+    return
     {
-        MODIFIER_EVENT_ON_ORDER,
         MODIFIER_PROPERTY_DISABLE_TURNING,
         MODIFIER_PROPERTY_MOVESPEED_LIMIT,
         MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
     }
-    return funcs
 end
 
 function modifier_shkolnik_r:GetModifierMoveSpeed_Limit()

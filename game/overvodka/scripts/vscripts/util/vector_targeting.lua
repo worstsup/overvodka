@@ -2,6 +2,42 @@ if not VectorTarget then
 	VectorTarget = class({})
 end
 
+local ORDER_DEBUG = false
+local function dprint(...) if ORDER_DEBUG then print("[ORDER]", ...) end end
+
+local MOVEMENT_FIX = {
+    modifier_peterka_e_cast   = true,
+    modifier_peterka_e_charge = true,
+	modifier_invincible_w = true,
+	modifier_macan_r = true,
+	modifier_macan_r_charge = true,
+	modifier_shkolnik_r = true,
+	modifier_prince_r = true,
+}
+
+function VectorTarget:RouteOrderToModifiers(unit, order, target, new_pos)
+    if not unit or unit:IsNull() then return end
+    local mods = unit.FindAllModifiers and unit:FindAllModifiers() or {}
+    dprint("route->", unit:GetUnitName(), "order=", order, "pos=", new_pos)
+
+    for _, mod in ipairs(mods) do
+        local name = mod:GetName()
+        if MOVEMENT_FIX[name] and mod.OnOrder then
+            local ok, err = pcall(function()
+                mod:OnOrder({
+                    unit       = unit,
+                    order_type = order,
+                    target     = target,
+                    new_pos    = new_pos,
+                })
+            end)
+            if not ok then
+                print("[ORDER][ERROR] OnOrder failed in "..tostring(name)..": "..tostring(err))
+            end
+        end
+    end
+end
+
 ListenToGameEvent("game_rules_state_change", function()
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		VectorTarget:Init()
@@ -20,41 +56,64 @@ function VectorTarget:Init()
 end
 
 function VectorTarget:OrderFilter(event)
-	if not event.units["0"] then return true end
-	local unit = EntIndexToHScript(event.units["0"])
-	local ability = EntIndexToHScript(event.entindex_ability)
+    if not event.units or not event.units["0"] then return true end
 
-	if not ability or not ability.GetBehaviorInt then return true end
-	local behavior = ability:GetBehaviorInt()
+    local unit = EntIndexToHScript(event.units["0"])
+    local ability = (event.entindex_ability and event.entindex_ability ~= 0) and EntIndexToHScript(event.entindex_ability) or nil
 
-	-- check if the ability exists and if it is Vector targeting
-	if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING) ~= 0 then
+    if ability and ability.GetBehaviorInt then
+        local behavior = ability:GetBehaviorInt()
 
-		if event.order_type == DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION then
-			ability.vectorTargetPosition2 = Vector(event.position_x, event.position_y, 0)
-		end
+        if bit.band(behavior, DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING) ~= 0 then
+            if event.order_type == DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION then
+                ability.vectorTargetPosition2 = Vector(event.position_x, event.position_y, 0)
+            end
 
-		if event.order_type == DOTA_UNIT_ORDER_CAST_POSITION then
-			ability.vectorTargetPosition = Vector(event.position_x, event.position_y, 0)
-			local position = ability.vectorTargetPosition
-			local position2 = ability.vectorTargetPosition2
-			local direction = (position2 - position):Normalized()
+            if event.order_type == DOTA_UNIT_ORDER_CAST_POSITION then
+                ability.vectorTargetPosition = Vector(event.position_x, event.position_y, 0)
+                local position  = ability.vectorTargetPosition
+                local position2 = ability.vectorTargetPosition2
+                local direction = (position2 - position):Normalized()
 
-			--Change direction if just clicked on the same position
-			if position == position2 then
-				direction = (position - unit:GetAbsOrigin()):Normalized()
-			end
-			direction = Vector(direction.x, direction.y, 0)
-			ability.vectorTargetDirection = direction
+                if position == position2 then
+                    direction = (position - unit:GetAbsOrigin()):Normalized()
+                end
+                direction = Vector(direction.x, direction.y, 0)
+                ability.vectorTargetDirection = direction
 
-			local function OverrideSpellStart(self, position, direction)
-				self:OnVectorCastStart(position, direction)
-			end
-			ability.OnSpellStart = function(self) return OverrideSpellStart(self, position, direction) end
-		end
-	end
-	return true
+                local function OverrideSpellStart(self, pos, dir)
+                    self:OnVectorCastStart(pos, dir)
+                end
+                ability.OnSpellStart = function(self) return OverrideSpellStart(self, position, direction) end
+            end
+        end
+    end
+
+    local order = event.order_type
+
+    local target = nil
+    if event.entindex_target and event.entindex_target ~= 0 then
+        local h = EntIndexToHScript(event.entindex_target)
+        if h and not h:IsNull() then target = h end
+    end
+
+    local new_pos = nil
+    if event.position_x ~= nil then
+        new_pos = Vector(event.position_x, event.position_y or 0, event.position_z or 0)
+    end
+
+    if event.units then
+        for _, entindex in pairs(event.units) do
+            local u = EntIndexToHScript(entindex or -1)
+            if u and not u:IsNull() then
+                self:RouteOrderToModifiers(u, order, target, new_pos)
+            end
+        end
+    end
+
+    return true
 end
+
 
 function VectorTarget:UpdateNettable(ability)
 	local vectorData = {

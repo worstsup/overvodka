@@ -8,6 +8,7 @@ const StoreBody = $("#StoreBody");
         skins: { button: $("#StoreTab_Skins"), panel: $("#StoreItems_Skins") },
         effects: { button: $("#StoreTab_Effects"), panel: $("#StoreItems_Effects") },
         pets: { button: $("#StoreTab_Pets"), panel: $("#StoreItems_Pets") },
+        cases:  { button: $("#StoreTab_Cases"),  panel: $("#StoreItems_Cases") },
         prime: { button: $("#StoreTab_Prime"), panel: $("#StoreItems_Prime") },
     };
 
@@ -129,10 +130,6 @@ const StoreBody = $("#StoreBody");
             }
         }
     }
-    function UpdateCoinBalance() {
-        coinBalanceLabel.text = playerCoins;
-        UpdateAllItemButtons();
-    }
     function BuildStoreUI() {
         for (const cat of Object.values(categories)) {
             cat.panel.RemoveAndDeleteChildren();
@@ -150,10 +147,6 @@ const StoreBody = $("#StoreBody");
         } else {
             Store.SwitchCategory('skins');
         }
-    }
-    function UpdateCoinBalance() {
-        coinBalanceLabel.text = playerCoins;
-        UpdateAllItemButtons();
     }
     function CreateItemPanel(itemData, parent) {
         const itemPanel = $.CreatePanel("Panel", parent, `StoreItem_${itemData.id}`);
@@ -379,6 +372,641 @@ const StoreBody = $("#StoreBody");
             cat.button.SetHasClass("Selected", isSelected);
             cat.panel.SetHasClass("Visible", isSelected);
         }
+
+        if (categoryName === "cases" && Store.Cases) {
+            Store.Cases.EnsureLoaded();
+        }
+    };
+    Store.Cases = (function () {
+        const casesPanel = $("#StoreItems_Cases");
+
+        let casesList = [];
+        let isLoaded = false;
+        let isOpening = false;
+
+        let previewCase = null;
+
+        GameEvents.Subscribe("cases_info", function (data) {
+            const raw = data && data.cases ? data.cases : [];
+
+            if (Array.isArray(raw)) {
+                casesList = raw;
+            } else {
+                casesList = Object.values(raw);
+            }
+
+            $.Msg("[Cases] received cases:", casesList.length);
+            BuildCasesUI();
+            isLoaded = true;
+        });
+
+        GameEvents.Subscribe("cases_open_result", function (data) {
+            isOpening = false;
+
+            if (!data || !data.success) {
+                Game.EmitSound("UUI_SOUNDS.NoMoney");
+                $.Msg("[Cases] failed to open case:", data && data.error);
+                return;
+            }
+
+            if (typeof data.new_balance !== "undefined") {
+                playerCoins = data.new_balance;
+                coinBalanceLabel.text = playerCoins;
+            }
+
+            if (data.inventory) {
+                playerInventory = {};
+                const invArray = Array.isArray(data.inventory) ? data.inventory : Object.values(data.inventory);
+                for (const id of invArray) {
+                    playerInventory[id] = true;
+                }
+                UpdateAllItemButtons();
+            }
+
+            if (data.items && data.drop_id) {
+                CasesChestAnimation.StartRoll(data.items, data.drop_id);
+            }
+        });
+
+        function RequestCasesInfo() {
+            if (isLoaded) return;
+            GameEvents.SendCustomGameEventToServer("cases_request_info", {});
+        }
+
+        function BuildCasesUI() {
+            if (!casesPanel) return;
+            casesPanel.RemoveAndDeleteChildren();
+
+            const list = Array.isArray(casesList) ? casesList : Object.values(casesList || {});
+            if (!list.length) {
+                const label = $.CreatePanel("Label", casesPanel, "");
+                label.text = $.Localize("#Store_Cases_Empty") || "Нет доступных кейсов";
+                label.style.color = "#f0e0b4";
+                label.style.fontSize = "20px";
+                label.style.horizontalAlign = "center";
+                label.style.verticalAlign = "center";
+                return;
+            }
+
+            for (const caseInfo of list) {
+                CreateCaseCard(caseInfo);
+            }
+        }
+
+        function ShowPreview(caseInfo) {
+            previewCase = caseInfo || null;
+            if (!previewCase) return;
+
+            CasesChestAnimation.OpenChestHudForPreview(previewCase.name, previewCase.items);
+        }
+
+        function OpenCurrentCase() {
+            if (!previewCase) return;
+            if (isOpening) return;
+
+            isOpening = true;
+
+            GameEvents.SendCustomGameEventToServer("cases_open_case", {
+                case_id: previewCase.case_id,
+            });
+        }
+
+        function CreateCaseCard(caseInfo) {
+            const card = $.CreatePanel("Panel", casesPanel, `Case_${caseInfo.case_id}`);
+            card.BLoadLayoutSnippet("StoreItem");
+
+            const imgPanel = card.FindChildTraverse("ItemImage");
+            const nameLabel = card.FindChildTraverse("ItemName");
+            const priceLabel = card.FindChildTraverse("ItemPrice");
+            const button = card.FindChildTraverse("ItemButton");
+            const buttonLabel = card.FindChildTraverse("ItemButtonLabel");
+
+            if (imgPanel && caseInfo.icon) {
+                imgPanel.SetImage(caseInfo.icon);
+            }
+            if (nameLabel) {
+                nameLabel.text = $.Localize(caseInfo.name || "") || caseInfo.name || "Case";
+            }
+            if (priceLabel) {
+                priceLabel.text = caseInfo.cost || 0;
+            }
+            if (buttonLabel) {
+                buttonLabel.text = $.Localize("#Store_Case_View") || "ПОСМОТРЕТЬ";
+            }
+
+            button.SetPanelEvent("onactivate", function () {
+                ShowPreview(caseInfo);
+            });
+        }
+
+        return {
+            EnsureLoaded: function () {
+                RequestCasesInfo();
+            },
+            ShowPreview: ShowPreview,
+            OpenCurrentCase: OpenCurrentCase,
+        };
+    })();
+
+
+})();
+
+var CasesChestAnimation = (function () {
+    let CURRENT_DROP_ID = null;
+
+    const DELAY_SPAWN_ITEMS_ANIM = 0.07;
+    const STARTING_SPEED = 6000;
+    
+    const DROP_SLOT_INDEX = 70;
+    const ITEM_WIDTH = 132.5;
+    let VIEWPORT_CENTER_X = 0;
+    
+    const rarity_color = {
+        common:    "#b0c3d9",
+        uncommon:  "#5e98d9",
+        rare:      "#4b69ff",
+        mythical:  "#8847ff",
+        legendary: "#d32ce6",
+        immortal:  "#e4ae39",
     };
 
+    let isRolling = false;
+    let sound_tick_width = ITEM_WIDTH; 
+    let animProgress = 0;
+    let lastSoundStep = -1; 
+
+
+    function FillChestContents(items) {
+        const container = $("#ItemsInChestBlock");
+        const border = $("#BorderItemsChestBlock");
+
+        if (!container) return;
+
+        container.RemoveAndDeleteChildren();
+
+        const hasItems = !!items && Object.keys(items).length > 0;
+        if (border) {
+            border.SetHasClass("HasItems", hasItems);
+        }
+        if (!hasItems) return;
+
+        const list = Array.isArray(items) ? items : Object.values(items || {});
+
+        const rarityOrder = {
+            common: 1,
+            uncommon: 2,
+            rare: 3,
+            mythical: 4,
+            legendary: 5,
+            immortal: 6
+        };
+
+        list.sort((a, b) => {
+            const ra = rarityOrder[a.rare] || 999;
+            const rb = rarityOrder[b.rare] || 999;
+            if (ra !== rb) return ra - rb;
+
+            const na = (a.item_name || "").toLowerCase();
+            const nb = (b.item_name || "").toLowerCase();
+            if (na < nb) return -1;
+            if (na > nb) return 1;
+            return 0;
+        });
+
+        for (const info of list) {
+            const item_panel = $.CreatePanel("Panel", container, "");
+            item_panel.AddClass("item_panel_content");
+            item_panel.style.opacity = "1";
+
+            const rareColor = rarity_color[info.rare] || "#ffffff";
+
+            const item_icon = $.CreatePanel("Panel", item_panel, "");
+            item_icon.AddClass("item_icon");
+            if (info.item_icon) {
+                item_icon.style.backgroundImage = 'url("' + info.item_icon + '")';
+                item_icon.style.backgroundSize = "100%";
+            }
+
+            const item_panel_name = $.CreatePanel("Panel", item_panel, "");
+            item_panel_name.AddClass("item_panel_name");
+            item_panel_name.style.backgroundColor = rareColor;
+
+            const item_name = $.CreatePanel("Label", item_panel_name, "");
+            item_name.AddClass("item_name");
+            item_name.text = $.Localize(info.item_name || "") || (info.item_name || "");
+
+            const item_panel_border = $.CreatePanel("Panel", item_panel, "");
+            item_panel_border.AddClass("item_panel_border");
+            item_panel_border.style.borderBrush =
+                'gradient( linear, 0% 100%, 0% 20%, from(' + rareColor + '), to( rgba(0,0,0,0.1) ) )';
+        }
+    }
+
+
+    function StartRoll(items, dropItemId) {
+        animProgress = 0;
+        lastSoundStep = -1;
+        const hud = $("#ChestHudMainPanel");
+        const rollList = $("#RollItemsListMain");
+        const rollContainer = $("#RollItemsList");
+
+        if (!hud || !rollList || !rollContainer) {
+            $.Msg("[CasesChestAnimation] Required panels not found, skipping animation");
+            return;
+        }
+
+        if (!items) {
+            $.Msg("[CasesChestAnimation] StartRoll called with no items");
+            return;
+        }
+
+        if (isRolling) {
+            $.Msg("[CasesChestAnimation] already rolling, skipping new roll");
+            return;
+        }
+
+        CURRENT_DROP_ID = GetItemPositionInDropList(dropItemId, items);
+        if (CURRENT_DROP_ID === null) {
+            $.Msg("[CasesChestAnimation] drop item not found in items list, abort");
+            return;
+        }
+
+        isRolling = true;
+
+        hud.style.opacity = "1";
+        hud.hittest = true;
+        hud.style.visibility = "visible";
+        hud.SetHasClass("ChestHudAnimClose", false);
+        hud.SetHasClass("ChestHudAnimOpen", true);
+
+        const dropPanel = $("#DropItemPanel");
+        if (dropPanel) {
+            dropPanel.SetHasClass("DropItemPanelVisible", false);
+        }
+
+
+        ClearOldChest();
+        ChestInitItemsInRoll(items);
+        FillChestContents(items);
+
+        const openBtn = $("#ChestOpenButton");
+        if (openBtn) {
+            openBtn.enabled = false;
+            openBtn.AddClass("Disabled");
+        }
+
+        VIEWPORT_CENTER_X = (rollContainer.actuallayoutwidth / rollContainer.actualuiscale_x) / 2;
+        
+        $.Schedule(0.25, function () {
+            OpenChest(items);
+        });
+    }
+
+    function ClearOldChest() {
+        const rollList = $("#RollItemsListMain");
+        if (rollList) {
+            rollList.RemoveAndDeleteChildren();
+            rollList.style.position = "0px 0px 0px";
+        }
+    }
+
+    function ChestInitItemsInRoll(items) {
+        const rollList = $("#RollItemsListMain");
+        if (!rollList) return;
+
+        rollList.RemoveAndDeleteChildren();
+
+        const keys = Object.keys(items);
+        const len = keys.length;
+        if (!len) return;
+
+        const drop_info = items[CURRENT_DROP_ID];
+
+        for (let i = 0; i <= 160; i++) { 
+            let item_data;
+            let panel_id = "";
+            let is_drop_slot = false;
+
+            if (i === DROP_SLOT_INDEX) {
+                item_data = drop_info;
+                panel_id = "dropped_item";
+                is_drop_slot = true;
+            } else {
+                const randomKey = keys[Math.floor(Math.random() * len)];
+                item_data = items[randomKey];
+            }
+
+            CreateItemInfo(rollList, item_data, 0, true, is_drop_slot, panel_id);
+        }
+
+        rollList.style.position = "0px 0px 0px";
+    }
+
+    function CreateItemInfo(main_panel, item_info, delay_count, roll, drop_slot, panel_id) {
+        if (!main_panel || !item_info) return;
+
+        const item_panel = $.CreatePanel("Panel", main_panel, panel_id || "");
+
+        if (roll) {
+            item_panel.AddClass("item_panel_roll");
+        } else {
+            item_panel.AddClass("item_panel");
+        }
+
+        const item_icon = $.CreatePanel("Panel", item_panel, "item_icon");
+        item_icon.AddClass("item_icon");
+        if (item_info.item_icon) {
+            item_icon.style.backgroundImage = 'url("' + item_info.item_icon + '")';
+            item_icon.style.backgroundSize = "100%";
+        }
+
+        const item_panel_name = $.CreatePanel("Panel", item_panel, "item_panel_name");
+        item_panel_name.AddClass("item_panel_name");
+        const rareColor = rarity_color[item_info.rare] || "#ffffff";
+        item_panel_name.style.backgroundColor = rareColor;
+
+        const item_name = $.CreatePanel("Label", item_panel_name, "item_name");
+        item_name.AddClass("item_name");
+        item_name.text = $.Localize(item_info.item_name || "") || (item_info.item_name || "");
+
+        const item_panel_border = $.CreatePanel("Panel", item_panel, "item_panel_border");
+        item_panel_border.AddClass("item_panel_border");
+        item_panel_border.style.borderBrush =
+            'gradient( linear, 0% 100%, 0% 20%, from(' + rareColor + '), to( rgba(0,0,0,0.1) ) )';
+            
+
+        $.Schedule(DELAY_SPAWN_ITEMS_ANIM * delay_count, function() {
+            if (item_panel && item_panel.IsValid()) {
+                item_panel.style.opacity = "1";
+            }
+        });
+    }
+
+
+    function OpenChest(items) {
+        const keys = Object.keys(items);
+        if (!keys.length || CURRENT_DROP_ID === null) {
+            isRolling = false;
+            return;
+        }
+
+        Game.EmitSound("ui.treasure_count");
+
+        let current = 0;
+
+        const drop_info = items[CURRENT_DROP_ID];
+        
+        const slot_drop = $("#RollItemsListMain") && $("#RollItemsListMain").FindChildTraverse("dropped_item");
+        if (slot_drop && drop_info) {
+             const item_icon = slot_drop.FindChildTraverse("item_icon");
+             if (item_icon && drop_info.item_icon) {
+                 item_icon.style.backgroundImage = 'url("' + drop_info.item_icon + '")';
+             }
+
+             const item_panel_name = slot_drop.FindChildTraverse("item_panel_name");
+             if (item_panel_name) {
+                 item_panel_name.style.backgroundColor = rarity_color[drop_info.rare] || "#ffffff";
+             }
+
+             const item_name = slot_drop.FindChildTraverse("item_name");
+             if (item_name) {
+                 item_name.text = $.Localize(drop_info.item_name || "") || (drop_info.item_name || "");
+             }
+
+             const item_panel_border = slot_drop.FindChildTraverse("item_panel_border");
+             if (item_panel_border) {
+                 const rareColor = rarity_color[drop_info.rare] || "#ffffff";
+                 item_panel_border.style.borderBrush =
+                     'gradient( linear, 0% 100%, 0% 20%, from(' + rareColor + '), to( rgba(0,0,0,0.1) ) )';
+             }
+        }
+
+        const targetCenterPos = (DROP_SLOT_INDEX * ITEM_WIDTH) + (ITEM_WIDTH / 2);
+        const desiredStopPos = -(targetCenterPos) + VIEWPORT_CENTER_X;
+
+        const stopRange = ITEM_WIDTH / 4; 
+        const minPos = desiredStopPos - stopRange;
+        const maxPos = desiredStopPos + stopRange;
+
+        const drop_distance = Math.floor(Math.random() * (maxPos - minPos + 1) + minPos);
+
+        ChestAnimate(current, drop_distance, STARTING_SPEED, ITEM_WIDTH, drop_info);
+    }
+
+    (function () {
+        const closeIcon = $("#CloseChestHudIcon");
+            if (closeIcon) {
+                closeIcon.SetPanelEvent("onactivate", function () {
+                CloseDropPanel();
+            });
+        }
+    })();
+
+    (function () {
+        const hud = $("#ChestHudMainPanel");
+        if (hud) {
+            hud.style.opacity = "0";
+            hud.style.visibility = "collapse";
+        }
+        const openBtn = $("#ChestOpenButton");
+        if (openBtn) {
+            openBtn.SetPanelEvent("onactivate", function () {
+                if (Store && Store.Cases && Store.Cases.OpenCurrentCase) {
+                    Game.EmitSound("ui_generic_button_click");
+                    Store.Cases.OpenCurrentCase();
+                }
+            });
+        }
+    })();
+
+    function OpenChestHudForPreview(caseName, items) {
+        const hud = $("#ChestHudMainPanel");
+        if (!hud) return;
+
+        const dropPanel = $("#DropItemPanel");
+        if (dropPanel) {
+            dropPanel.SetHasClass("DropItemPanelVisible", false);
+        }
+
+        const rollList = $("#RollItemsListMain");
+        if (rollList) {
+            rollList.RemoveAndDeleteChildren();
+            rollList.style.position = "0px 0px 0px";
+        }
+
+        const chestNameLabel = $("#ChestName");
+        if (chestNameLabel) {
+            chestNameLabel.text = $.Localize(caseName || "") || (caseName || "");
+        }
+
+        FillChestContents(items);
+
+        hud.style.opacity = "1";
+        hud.hittest = true;
+        hud.style.visibility = "visible";
+        hud.SetHasClass("ChestHudAnimClose", false);
+        hud.SetHasClass("ChestHudAnimOpen", true);
+
+        isRolling = false;
+        CURRENT_DROP_ID = null;
+    }
+
+
+    function ChestAnimate(current, drop_distance, speed_unused, sound_tick_unused, item_drop_info) {
+        const hud = $("#ChestHudMainPanel");
+        if (!hud) {
+            isRolling = false;
+            CURRENT_DROP_ID = null;
+            CloseDropPanel();
+            return;
+        }
+
+        if (hud.BHasClass("ChestHudAnimClose")) {
+            isRolling = false;
+            CURRENT_DROP_ID = null;
+            CloseDropPanel();
+            return;
+        }
+
+        const rollList = $("#RollItemsListMain");
+        if (!rollList) {
+            isRolling = false;
+            CURRENT_DROP_ID = null;
+            CloseDropPanel();
+            return;
+        }
+
+        const dt = Game.GetGameFrameTime();
+        const ANIM_DURATION = 3.0;
+
+        animProgress += dt / ANIM_DURATION;
+        if (animProgress > 1) animProgress = 1;
+
+        const t = animProgress;
+        const eased = 1 - Math.pow(1 - t, 3);
+
+        const pos = 0 + (drop_distance - 0) * eased;
+        rollList.style.position = pos + "px 0px 0px";
+
+        const step = Math.floor(Math.abs(pos) / ITEM_WIDTH);
+        if (step !== lastSoundStep) {
+            lastSoundStep = step;
+            Game.EmitSound("UUI_SOUNDS.CaseRoll");
+        }
+
+        if (animProgress >= 1) {
+            rollList.style.position = drop_distance + "px 0px 0px";
+            $.Schedule(0.1, function () {
+                GiveItemDrop(item_drop_info);
+            });
+            return;
+        }
+        $.Schedule(dt, function () {
+            ChestAnimate(pos, drop_distance, 0, 0, item_drop_info);
+        });
+    }
+
+    function GiveItemDrop(item_drop_info) {
+        isRolling = false;
+
+        const dropPanel = $("#DropItemPanel");
+        if (!dropPanel) return;
+
+        dropPanel.SetHasClass("DropItemPanelVisible", true);
+
+        const nameLabel = $("#ItemDropName");
+        if (nameLabel) {
+            nameLabel.text = $.Localize(item_drop_info.item_name || "") || (item_drop_info.item_name || "");
+        }
+
+        const iconPanel = $("#ItemDropIcon");
+        if (iconPanel) {
+            if (item_drop_info.item_icon) {
+                iconPanel.style.backgroundImage = 'url("' + item_drop_info.item_icon + '")';
+                iconPanel.style.backgroundSize = "100%";
+            }
+        }
+
+        const rareColor = rarity_color[item_drop_info.rare] || "#ffffff";
+
+        const hud = $("#ChestHudMainPanel");
+        if (hud) {
+            const item_drop_effect = $.CreatePanel("DOTAParticleScenePanel", hud, "", {
+                particleName: "particles/ui/ui_generic_treasure_impact.vpcf",
+                renderdeferred: "true",
+                particleonly: "false",
+                startActive: "true",
+                cameraOrigin: "0 0 300",
+                lookAt: "0 0 0",
+                fov: "60"
+            });
+            item_drop_effect.AddClass("item_drop_effect");
+            item_drop_effect.hittest = false;
+            item_drop_effect.DeleteAsync(3);
+        }
+
+        Game.EmitSound("ui.treasure_01");
+
+        const claimBtn = $("#ItemDropClaimButton");
+        if (claimBtn) {
+            claimBtn.SetPanelEvent("onactivate", function () {
+                CloseDropPanel();
+            });
+        }
+
+        const openBtn = $("#ChestOpenButton");
+        if (openBtn) {
+            openBtn.enabled = true;
+            openBtn.RemoveClass("Disabled");
+        }
+
+        CURRENT_DROP_ID = null;
+    }
+
+    function CloseDropPanel() {
+        const rollList = $("#RollItemsListMain");
+        if (rollList) {
+            rollList.style.position = "0px 0px 0px";
+        }
+
+        const dropPanel = $("#DropItemPanel");
+        if (dropPanel) {
+            dropPanel.SetHasClass("DropItemPanelVisible", false);
+        }
+
+        const hud = $("#ChestHudMainPanel");
+        if (hud) {
+            hud.SetHasClass("ChestHudAnimOpen", false);
+            hud.SetHasClass("ChestHudAnimClose", true);
+            hud.hittest = false;
+            $.Schedule(0.05, function () {
+                if (hud && hud.IsValid() && hud.BHasClass("ChestHudAnimClose")) {
+                    hud.style.opacity = "0";
+                    hud.style.visibility = "collapse";
+                }
+            });
+        }
+        const openBtn = $("#ChestOpenButton");
+        if (openBtn) {
+            openBtn.enabled = true;
+            openBtn.RemoveClass("Disabled");
+        }
+    }
+
+    function GetItemPositionInDropList(id, items) {
+        const keys = Object.keys(items);
+        for (let i = 0; i < keys.length; i++) {
+            const k = keys[i];
+            const info = items[k];
+            if (info && info.item_id == id) {
+                return k;
+            }
+        }
+        return null;
+    }
+
+    return {
+        StartRoll: StartRoll,
+        OpenChestHudForPreview: OpenChestHudForPreview,
+    };
 })();

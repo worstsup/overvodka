@@ -122,7 +122,6 @@ function modifier_invincible_w:DeclareFunctions()
     return
     {
         MODIFIER_PROPERTY_DISABLE_TURNING,
-        MODIFIER_EVENT_ON_ORDER,
     }
 end
 

@@ -250,6 +250,7 @@
                                 <Button id="StoreTab_Skins" class="StoreSubTabButton" onactivate="Store.SwitchCategory('skins')"><Label text="#Store_Category_Skins" /></Button>
                                 <Button id="StoreTab_Effects" class="StoreSubTabButton" onactivate="Store.SwitchCategory('effects')"><Label text="#Store_Category_Effects" /></Button>
                                 <Button id="StoreTab_Pets" class="StoreSubTabButton" onactivate="Store.SwitchCategory('pets')"><Label text="#Store_Category_Pets" /></Button>
+                                <Button id="StoreTab_Cases" class="StoreSubTabButton" onactivate="Store.SwitchCategory('cases')"><Label text="#Store_Category_Cases" /></Button>
                                 <Button id="StoreTab_Prime" class="StoreSubTabButton" onactivate="Store.SwitchCategory('prime')"><Label text="#Store_Category_Prime" /></Button>
                             </Panel>
                             <Panel id="CoinBalancePanel">
@@ -261,7 +262,53 @@
                             <Panel id="StoreItems_Skins" class="StoreItemGrid" />
                             <Panel id="StoreItems_Effects" class="StoreItemGrid" />
                             <Panel id="StoreItems_Pets" class="StoreItemGrid" />
+                            <Panel id="StoreItems_Cases" class="StoreItemGrid" />
                             <Panel id="StoreItems_Prime" class="StoreItemGrid" />
+                        </Panel>
+                        <Panel id="ChestHudMainPanel" class="ChestHudMainPanel ChestHudAnimClose" hittest="false">
+                            <Panel id="CloseChestHudIcon" class="CloseChestHudIcon" />
+                            <Label id="ChestName" class="ChestName" text="#Store_Case_DefaultName" />
+
+                            <Panel class="RollLine">
+                                <Panel class="RollLineBorderTop" />
+                                <Panel class="RollLineBg">
+                                    <Panel id="RollItemsList" class="RollItemsList">
+                                        <Panel id="RollItemsListMain" class="RollItemsListMain" />
+                                    </Panel>
+                                </Panel>
+                                <Panel class="RollLineBorderBottom" />
+
+                                <Panel class="pointer_top" />
+                                <Panel class="pointer_bottom" />
+                            </Panel>
+
+                            <Button id="ChestOpenButton" class="OpenChestButton ChestOpenButton">
+                                <Label class="OpenChestButtonLabel" text="#Store_Case_Open" />
+                            </Button>
+
+                            <Label class="ItemsInChestName" text="#Store_Case_Contains" />
+                            <Panel id="BorderItemsChestBlock" class="BorderItemsChestBlock" />
+
+                            <Panel id="ItemsInChestBlock" class="ItemsInChestBlock" />
+
+                            <Panel id="DropItemPanel" class="DropItemPanel">
+                                <Panel class="DropItemContent">
+                                    <Label class="ItemDropHeader" text="#Store_Case_Drop_Header" />
+                                    <Label id="ItemDropName" class="ItemDropName" text="" />
+
+                                    <Panel id="DropEffect" class="DropEffect">
+                                        <Panel id="DropEffect_top" class="DropEffect_top" />
+                                        <Panel id="DropEffect_bottom" class="DropEffect_bottom" />
+                                        <Panel class="DropEffectIcon">
+                                            <Panel id="ItemDropIcon" class="ItemDropIcon" />
+                                        </Panel>
+                                    </Panel>
+
+                                    <Button id="ItemDropClaimButton" class="ItemDropClaimButton">
+                                        <Label class="ItemDropClaimButtonLabel" text="#Store_Case_Drop_Claim" />
+                                    </Button>
+                                </Panel>
+                            </Panel>
                         </Panel>
                     </Panel>
                 </Panel>

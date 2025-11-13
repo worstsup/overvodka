@@ -501,7 +501,6 @@
     font-weight: bold;
 }
 
-/* === PROFILE PANEL === */
 .ProfilePanel { width: 100%; flow-children: down; padding: 0px 24px; visibility: collapse; overflow: squish scroll;}
 .ProfilePanel.Visible { visibility: visible; }
 .ProfilePanel #VerticalScrollBar{
@@ -560,8 +559,8 @@
   transition-property: brightness, transform; transition-duration: .12s;
 }
 .HeroCardImage.warmup {
-  opacity: 0.99;            /* едва заметно – только чтобы триггернуть repaint */
-  transform: translateZ(0);  /* выносим в GPU-слой */
+  opacity: 0.99;
+  transform: translateZ(0); 
 }
 .HeroCard:hover { brightness: 1.4; transform: translateY(-4px); }
 .HeroCard--big { width: 250px; height: 310px; }
@@ -580,19 +579,14 @@
   flow-children: down;
   padding: 8px 10px 10px 10px;
 
-  /* “накладываемся” на низ картинки */
-  margin-top: -68px;                 /* подбери число под нужную высоту подложки */
+  margin-top: -68px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 
-  /* реальная полупрозрачность поверх портрета */
-  background-color: rgba(21, 19, 12, 0.75); /* 0.45–0.75 – твик по вкусу */
-  /* или мягкий градиент поверх картинки: */
-  /* background-color: gradient(linear, 0% 0%, 0% 100%, from(#00000000), to(#15130cbb)); */
-
-  z-index: 2; /* выше картинки */
+  background-color: rgba(21, 19, 12, 0.75);
+  z-index: 2;
 }
-.HeroName { color: #f6e7b8; font-size: 18px; font-weight: bold; text-overflow: shrink; }
+.HeroName { color: #f6e7b8; font-size: 18px; font-weight: bold; text-overflow: shrink;}
 .HeroStats { color: #d9cfa7; font-size: 14px; opacity: .95; }
 .MatchHistory {
   width: 100%;
