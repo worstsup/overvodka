@@ -421,6 +421,26 @@
 		"npc_dota_hero_abaddon_npedesc1"			"Сложность персонажа: НУЖЕН МИКРОФОН"
 		"npc_dota_hero_puck_npedesc1"				"Сложность персонажа: ЛЕВ"
 
+		"DOTA_Tooltip_ability_silvername_innate_facet_1"              		 "Влад и Стэс"
+		"DOTA_Tooltip_ability_silvername_innate_facet_1_Description"  		 "В зависимости от аспекта, дает различные бонусы:\nВлад: получает более дорогие предметы с сундуков.\n\nИзлишний опыт (после 35 уровня) всегда трансформируется в золото в соотношении 1 к 3."
+		
+
+		"DOTA_Tooltip_ability_silvername_q_facet_1"              		 "Посмотрим на практике"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_Description"  		 "Кидает во врага снаряд и смотрит, как он сработает на практике. Попадание во врага случайно уменьшает перезарядку способности."
+		"DOTA_Tooltip_ability_silvername_q_facet_1_damage_min"			 "МИН. УРОН:"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_damage_max"			 "МАКС. УРОН:"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_stun_min"			 "МИН. ОГЛУШЕНИЕ:"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_stun_max"			 "МАКС. ОГЛУШЕНИЕ:"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_cd_min"				 "МИН. УМЕНЬШЕНИЕ:"
+		"DOTA_Tooltip_ability_silvername_q_facet_1_cd_max"				 "МАКС. УМЕНЬШЕНИЕ:"
+
+		"DOTA_Tooltip_ability_silvername_w_facet_1"              		 "Тоби пизда"
+		"DOTA_Tooltip_ability_silvername_w_facet_1_Description"  		 "Герой устремляется к цели и своей атакой ворует у нее золото."
+		"DOTA_Tooltip_ability_silvername_w_facet_1_max_distance"		 "ДАЛЬНОСТЬ РЫВКА:"
+		"DOTA_Tooltip_ability_silvername_w_facet_1_gold_steal"			 "ВОРОВСТВО ЗОЛОТА:"
+		"DOTA_Tooltip_ability_silvername_w_facet_1_gold_steal_pct"		 "%ВОРОВСТВО ТЕКУЩЕГО ЗОЛОТА:"
+		"DOTA_Tooltip_modifier_silvername_w_facet_1_boost"				 "Тоби пизда"
+
 		"DOTA_Tooltip_ability_silvername_e_facet_1"              		 "Нуу, где враги"
 		"DOTA_Tooltip_ability_silvername_e_facet_1_Description"  		 "<h1>Пассивно</h1> Показывает расположение вражеских героев в радиусе.\n<h1>Активация</h1>SilverName начинает воровать у всех вражеских героев в половине от радиуса их атрибуты, скорость атаки и скорость передвижения."
 		"DOTA_Tooltip_ability_silvername_e_facet_1_vision_radius"        "РАДИУС:"
@@ -433,6 +453,12 @@
 		"DOTA_Tooltip_modifier_silvername_e_facet_1_debuff"              "Нуу, где враги"
 		"DOTA_Tooltip_modifier_silvername_e_facet_1_debuff_Description"  "Атрибуты снижены на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%, скорость атаки уменьшена на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, скорость передвижения — на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
 
+		"DOTA_Tooltip_ability_silvername_r_facet_1"              		 "Взять топ 1"
+		"DOTA_Tooltip_ability_silvername_r_facet_1_Description"  		 "SilverName берёт топ-1, призывая вокруг себя два кольца духов-воинов. Они копируют его урон и предметы, а также атакуют вражеских героев с фиксированным интервалом и следуют за хозяином во время действия способности."
+		"DOTA_Tooltip_ability_silvername_r_facet_1_duration"		 	 "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_ability_silvername_r_facet_1_attack_interval"		 "ИНТЕРВАЛ АТАКИ:"
+		"DOTA_Tooltip_ability_silvername_r_facet_1_outer_radius"		 "РАДИУС:"
+		"npc_dota_silvername_clone"										 "Silvername"
 
 		"dota_tooltip_ability_visitor_innate"              		 "Необъяснимое сверхмогущество"
 		"dota_tooltip_ability_visitor_innate_description"  		 "Бледный Гость получает на %dmg_per_attr% больше урона за каждый атрибут. А день и ночь сменяются вдвое быстрее."
