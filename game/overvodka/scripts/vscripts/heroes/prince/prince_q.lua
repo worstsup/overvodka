@@ -200,7 +200,12 @@ function modifier_prince_q_caster:OnDestroy()
         if prince_r then
             prince_r:SetActivated(true)
         end
-        self.caster:MoveToPositionAggressive(self.caster:GetAbsOrigin())
+        ExecuteOrderFromTable({
+            UnitIndex = self.caster:entindex(),
+            OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+            Position = self.caster:GetAbsOrigin(),
+            Queue = true,
+        })
     end
 end
 

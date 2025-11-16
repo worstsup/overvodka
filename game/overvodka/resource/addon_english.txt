@@ -243,6 +243,14 @@
 		"Case_Prime_14d" "Prime for 14 days"
 		"Case_Prime_30d" "Prime for 30 days"
 
+		"overvodka_tooltip_golden_rain" "Golden Rain starts in"
+		"overvodka_tooltip_golden_rain_active" "Golden Rain is already underway"
+		"overvodka_tooltip_golden_rain_done" "Golden Rain has already happened"
+
+		"overvodka_tooltip_hamster" "Hamster Kombat starts in"
+		"overvodka_tooltip_hamster_active" "Hamster Kombat is already underway"
+		"overvodka_tooltip_hamster_done" "Hamster Kombat has already happened"
+
 		"Store_Item_prime_day_name" "Prime for a day"
 		"Store_Item_prime_week_name" "Prime for a week"
 		"DOTA_Tooltip_overvodka_prime_notice"	"Only with Overvodka Prime"

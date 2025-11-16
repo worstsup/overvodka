@@ -64,7 +64,12 @@ end
 function modifier_item_shemelis_movement:OnDestroy()
     if not IsServer() then return end
     FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin(), true)
-    self:GetCaster():MoveToPositionAggressive(self:GetCaster():GetAbsOrigin())
+    ExecuteOrderFromTable({
+        UnitIndex = self:GetCaster():entindex(),
+        OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
+        Position = self:GetCaster():GetAbsOrigin(),
+        Queue = true,
+    })
 end
 
 modifier_item_shemelis_movement_damage = class({})

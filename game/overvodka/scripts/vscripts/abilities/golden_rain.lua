@@ -161,13 +161,15 @@ function modifier_golden_rain_thinker:OnIntervalThink()
         false
     )
     for _,enemy in pairs(enemies) do
-        enemy:ModifyGold(self.gold, false, DOTA_ModifyGold_GameTick)
-        enemy:AddExperience(self.xp, DOTA_ModifyXP_Unspecified, false, false)
-        if (self.k % 2 == 0) then
-            local playerID = enemy:GetPlayerOwnerID()
-            if playerID and PlayerResource:IsValidPlayerID(playerID) then
-                if Quests and Quests.IncrementQuest then
-                    Quests:IncrementQuest(playerID, "goldenrainTime")
+        if not enemy:HasModifier("modifier_papich_r") then
+            enemy:ModifyGold(self.gold, false, DOTA_ModifyGold_GameTick)
+            enemy:AddExperience(self.xp, DOTA_ModifyXP_Unspecified, false, false)
+            if (self.k % 2 == 0) then
+                local playerID = enemy:GetPlayerOwnerID()
+                if playerID and PlayerResource:IsValidPlayerID(playerID) then
+                    if Quests and Quests.IncrementQuest then
+                        Quests:IncrementQuest(playerID, "goldenrainTime")
+                    end
                 end
             end
         end

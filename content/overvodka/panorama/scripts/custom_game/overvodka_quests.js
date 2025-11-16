@@ -76,7 +76,6 @@ function InitializeQuests() {
             maxValue: quest.max
         };
         
-        // Set initial state
         progressBar.max = quest.max;
         progressBar.value = progress;
         progressLabel.text = `${progress} / ${quest.max}`;

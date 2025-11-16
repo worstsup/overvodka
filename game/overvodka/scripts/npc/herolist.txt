@@ -88,7 +88,7 @@
 	"npc_dota_hero_jakiro"				"0"	
 	"npc_dota_hero_keeper_of_the_light"	"0"
 	"npc_dota_hero_phantom_assassin"	"0"
-	"npc_dota_hero_phoenix"				"0"
+	"npc_dota_hero_phoenix"				"1"
 	"npc_dota_hero_sand_king"			"0"
 	"npc_dota_hero_shredder"			"0"
 	"npc_dota_hero_silencer"			"0"

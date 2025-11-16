@@ -1,0 +1,137 @@
+.OvervodkaEventsTimers
+{
+    vertical-align: bottom;
+    margin-left: 240px;
+    margin-bottom: 0px;
+    flow-children: none;
+    z-index: -100;
+}
+
+.OvervodkaTimersChildrens
+{
+    flow-children: down;
+    margin-top: 45px;
+    ui-scale: 92%;
+    horizontal-align: center;
+}
+
+.BGFlare
+{
+    width: 85px;
+    height: 140px;
+    vertical-align: bottom;
+    background-image: url("s2r://panorama/images/hud/reborn/right_flare_bg_psd.vtex");
+    background-size: 100%;
+}
+
+.NewTimerPanel
+{
+    margin: 5px;
+    margin-right: 45px;
+    margin-top: 2px;
+    flow-children: down;
+}
+
+.NewTimerCircle
+{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    horizontal-align: center;
+}
+
+.NewTimerBG
+{
+    width: 100%;
+    height: 100%;
+    align: center center;
+    border-radius: 50%;
+    background-color: gradient( linear, 0% 25%, 0% 100%, from( #181f27e7 ), to( #477077e7 ) );
+    box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.NewTimerRadial
+{
+    border: 2px solid rgb(204, 220, 232);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-brush: gradient( linear, 0% 0%, 100% 0%, from( #F8E8B9 ), color-stop( 0.5, #eba800), to( #C79123 ) );
+    transition-property: clip;
+    transition-duration: 0.1s;
+}
+
+.NewTimerImage
+{
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    align: center center;
+}
+
+.NewTimerLabel
+{
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    horizontal-align: center;
+    margin-top: 3px;
+    text-shadow: 0px 0px 3px 2 rgba(0, 0, 0, 0.5);
+}
+
+.GoldenRainImage
+{
+    background-image: url("file://{images}/custom_game/subscribe_button.png");
+    width: 100%;
+    height: 100%;
+}
+
+.HamsterImage
+{
+    background-image: url("file://{images}/custom_game/hamster_icon.png");
+    width: 100%;
+    height: 100%;
+}
+
+.GoldenRainBG
+{
+    background-color: gradient( linear, 0% 25%, 0% 100%, from( #272218e7 ), to( #7d6243e7 ) );
+}
+
+.HamsterBG
+{
+    background-color: gradient( linear, 0% 25%, 0% 100%, from( #192718e7 ), to( #437d46e7 ) );
+}
+
+.MinimapExtraLarge .OvervodkaEventsTimers
+{
+    vertical-align: bottom;
+    margin-left: 280px;
+}
+
+.MinimapExtraLarge .OvervodkaTimersChildrens
+{
+    ui-scale: 100%;
+}
+
+.MinimapExtraLarge .BGFlare
+{
+    width: 85px;
+    height: 155px;
+    vertical-align: bottom;
+    background-image: url("s2r://panorama/images/hud/reborn/right_flare_bg_psd.vtex");
+    background-size: 100%;
+}
+
+.HUDFlipped .OvervodkaEventsTimers
+{
+    horizontal-align: right;
+    margin-left: 0px;
+    margin-right: 1555px;
+}
+
+.HUDFlipped Label
+{
+    transform: scaleX(-1);
+}

@@ -25,6 +25,7 @@
 		"Ability15"		"special_bonus_unique_kachok_6"
 		"Ability16"		"special_bonus_unique_kachok_7"
 		"Ability17"		"special_bonus_unique_kachok_8"
+		"BotImplemented"	""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"ModelScale"		"0.9"
@@ -122,6 +123,7 @@
 		"Ability15"		"special_bonus_unique_ebanko_6"
 		"Ability16"		"special_bonus_unique_ebanko_7"
 		"Ability17"		"special_bonus_unique_ebanko_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"ebanko_q"
@@ -199,6 +201,7 @@
 		"Ability15"		"special_bonus_unique_eldzhey_6"
 		"Ability16"		"special_bonus_unique_eldzhey_7"
 		"Ability17"		"special_bonus_unique_eldzhey_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"eldzhey_w"
@@ -273,6 +276,7 @@
 		"Ability15"		"special_bonus_unique_shkolnik_6"
 		"Ability16"		"special_bonus_unique_shkolnik_7"
 		"Ability17"		"special_bonus_unique_shkolnik_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"shkolnik_w"
@@ -352,6 +356,7 @@
 		"Ability15"		"special_bonus_unique_chef_4"
 		"Ability16"		"special_bonus_unique_chef_6"
 		"Ability17"		"special_bonus_unique_chef_8"
+		"BotImplemented"	""
 		"StatusHealthRegen"		"0.5"
 		"ArmorPhysical"		"0"
 		"HealthBarOffset"	"250"
@@ -424,6 +429,7 @@
 		"Ability15"		"special_bonus_unique_dave_5"
 		"Ability16"		"special_bonus_unique_dave_7"
 		"Ability17"		"special_bonus_unique_dave_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"dave_old_scepter"
@@ -516,6 +522,7 @@
 		"Ability15"		"special_bonus_unique_speed_6"
 		"Ability16"		"special_bonus_unique_speed_8"
 		"Ability17"		"special_bonus_unique_speed_7"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"speed_facet_q"
@@ -594,6 +601,7 @@
 		"Ability23"		"special_bonus_unique_dvoreckov_7"
 		"Ability24"		"special_bonus_unique_dvoreckov_8"
 		"Ability25"		"dvoreckov_innate"
+		"BotImplemented"	""
 
 		"Facets"
 		{
@@ -681,6 +689,7 @@
 		"Ability15"		"special_bonus_unique_sahur_6"
 		"Ability16"		"special_bonus_unique_sahur_7"
 		"Ability17"		"special_bonus_unique_sahur_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"sahur_facet_q" 
@@ -762,6 +771,7 @@
 		"Ability19"		"special_bonus_unique_rubick_5"
 		"Ability20"		"bratishkin_q_base"
 		"Ability21"		"worstsup_q_dota"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"rubick_frugal_filch" 
@@ -842,6 +852,7 @@
 		"Ability15"		"special_bonus_unique_macan_6"
 		"Ability16"		"special_bonus_unique_macan_7"
 		"Ability17"		"special_bonus_unique_macan_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"macan_r"
@@ -895,6 +906,7 @@
 		"Ability3"					"dark_willow_cursed_crown_lua"
 		"Ability4"					"macan_q"
 		"Ability6"					"dark_willow_terrorize_lua"
+		"BotImplemented"	""
 	}
 	"npc_dota_hero_phoenix"
 	{
@@ -904,16 +916,16 @@
 		"IdleSoundLoop"			""
 		"HeroSelectSoundEffect"	"orlov_start"
 		"Enabled"				"1"
-		"ModelScale"			"1.5"
+		"ModelScale"			"1.2"
 		"VersusScale"			"0.95"
 		"SimilarHeroes"  "35,34,68"
 		"GibType"		"fire"
-		"Ability1"		"silvername_murloc"
-		"Ability2"		"silvername_rivendare"
-		"Ability3"		"silvername_secret"
+		"Ability1"		"silvername_q_facet_1"
+		"Ability2"		"silvername_w_facet_1"
+		"Ability3"		"silvername_e_facet_1"
 		"Ability4"		"silvername_shard"
 		"Ability5"		"beastmaster_inner_beast"
-		"Ability6"		"silvername_r"
+		"Ability6"		"silvername_r_facet_1"
 		"Ability7"		"generic_hidden"
 		"Ability8"		"generic_hidden"
 		"Ability9"		"generic_hidden"
@@ -925,6 +937,7 @@
 		"Ability15"		"special_bonus_unique_silvername_6"
 		"Ability16"		"special_bonus_unique_silvername_7"
 		"Ability17"		"special_bonus_unique_silvername_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"silvername_e"
@@ -998,6 +1011,7 @@
 		"Ability15"		"special_bonus_unique_mellstroy_1"
 		"Ability16"		"special_bonus_unique_mellstroy_7"
 		"Ability17"		"special_bonus_unique_mellstroy_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"mellstroy_e"
@@ -1079,6 +1093,7 @@
 		"Ability15"		"special_bonus_unique_litvin_6"
 		"Ability16"		"special_bonus_unique_litvin_7"
 		"Ability17"		"special_bonus_unique_litvin_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"litvin_d" 
@@ -1150,6 +1165,7 @@
 		"Ability15"		"special_bonus_unique_stariy_5"
 		"Ability16"		"special_bonus_unique_stariy_6"
 		"Ability17"		"special_bonus_unique_stariy_7"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"stariy_r_facet"
@@ -1228,6 +1244,7 @@
 		"Ability15"		"special_bonus_unique_ashab_6"
 		"Ability16"		"special_bonus_unique_ashab_7"
 		"Ability17"		"special_bonus_unique_ashab_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"ashab_q_facet"
@@ -1296,6 +1313,7 @@
 		"Ability15"		"special_bonus_unique_arsen_6"
 		"Ability16"		"special_bonus_unique_arsen_7"
 		"Ability17"		"special_bonus_unique_arsen_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"arsen_facet_testosteron"
@@ -1381,6 +1399,7 @@
 		"Ability15"		"special_bonus_unique_nix_6"
 		"Ability16"		"special_bonus_unique_nix_7"
 		"Ability17"		"special_bonus_unique_nix_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"nix_levin"
@@ -1453,6 +1472,7 @@
 		"Ability15"		"special_bonus_unique_serega_6"
 		"Ability16"		"special_bonus_unique_serega_7"
 		"Ability17"		"special_bonus_unique_serega_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"serega_magic_facet" 
@@ -1530,6 +1550,7 @@
 		"Ability15"		"special_bonus_unique_cheater_6"
 		"Ability16"		"special_bonus_unique_cheater_7"
 		"Ability17"		"special_bonus_unique_cheater_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"cheater_wallhack_facet" 
@@ -1624,6 +1645,7 @@
 		"Ability15"		"special_bonus_unique_zolo_6"
 		"Ability16"		"special_bonus_unique_zolo_7"
 		"Ability17"		"special_bonus_unique_zolo_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"zolo_q_facet" 
@@ -1697,6 +1719,7 @@
 		"Ability15"		"special_bonus_unique_chillguy_6"
 		"Ability16"		"special_bonus_unique_chillguy_7"
 		"Ability17"		"special_bonus_unique_chillguy_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"chillguy_e_facet" 
@@ -1767,6 +1790,7 @@
 		"Ability15"				"special_bonus_unique_sasavot_6"
 		"Ability16"				"special_bonus_unique_sasavot_7"
 		"Ability17"				"special_bonus_unique_sasavot_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"sasavot_e_facet" 
@@ -1842,6 +1866,7 @@
 		"Ability15"		"special_bonus_unique_golovach_6"
 		"Ability16"		"special_bonus_unique_golovach_7"
 		"Ability17"		"special_bonus_unique_golovach_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"golovach_facet_innate"
@@ -1926,6 +1951,7 @@
 		"Ability15"		"special_bonus_unique_papich_6"
 		"Ability16"		"special_bonus_unique_papich_7"
 		"Ability17"		"special_bonus_unique_papich_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"papich_e_gold"
@@ -2006,6 +2032,7 @@
 		"Ability15"		"special_bonus_unique_vihor_6"
 		"Ability16"		"special_bonus_unique_vihor_7"
 		"Ability17"		"special_bonus_unique_vihor_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"vihor_heal"
@@ -2082,6 +2109,7 @@
 		"Ability15"		"special_bonus_unique_rostik_6"
 		"Ability16"		"special_bonus_unique_rostik_7"
 		"Ability17"		"special_bonus_unique_rostik_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"rostik_e"
@@ -2161,6 +2189,7 @@
 		"Ability15"		"special_bonus_unique_peterka_6"
 		"Ability16"		"special_bonus_unique_peterka_7"
 		"Ability17"		"special_bonus_unique_peterka_8"
+		"BotImplemented"	""
 		
 		"Facets"
 		{
@@ -2236,6 +2265,7 @@
 		"Ability20"		"special_bonus_unique_sans_6"
 		"Ability21"		"special_bonus_unique_sans_7"
 		"Ability22"		"special_bonus_unique_sans_8"
+		"BotImplemented"	""
 		
 		"Facets"
 		{
@@ -2315,6 +2345,7 @@
 		"Ability15"		"special_bonus_unique_evelone_6"
 		"Ability16"		"special_bonus_unique_evelone_7"
 		"Ability17"		"special_bonus_unique_evelone_8"
+		"BotImplemented"	""
 
 		"Facets"
 		{
@@ -2395,6 +2426,7 @@
 		"Ability15"		"special_bonus_unique_bratishkin_6"
 		"Ability16"		"special_bonus_unique_bratishkin_7"
 		"Ability17"		"special_bonus_unique_bratishkin_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"bratishkin_facet_knight"
@@ -2470,6 +2502,7 @@
 		"Ability15"		"special_bonus_unique_azazin_6"
 		"Ability16"		"special_bonus_unique_azazin_7"
 		"Ability17"		"special_bonus_unique_azazin_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"azazin_facet_q"
@@ -2544,6 +2577,7 @@
 		"Ability15"		"special_bonus_unique_stray_6"
 		"Ability16"		"special_bonus_unique_stray_7"
 		"Ability17"		"special_bonus_unique_stray_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"stray_facet_q"
@@ -2623,6 +2657,7 @@
 		"Ability15"		"special_bonus_unique_stint_4"
 		"Ability16"		"special_bonus_unique_stint_7"
 		"Ability17"		"special_bonus_unique_stint_8"
+		"BotImplemented"	""
 		
 		"Facets"
 		{
@@ -2692,6 +2727,7 @@
 		"Ability15"					"special_bonus_unique_invincible_8"
 		"Ability16"					"special_bonus_unique_invincible_7"
 		"Ability17"					"special_bonus_unique_invincible_6"
+		"BotImplemented"	""
 		
 		"Facets"
 		{
@@ -2768,6 +2804,7 @@
 		"Ability15"					"special_bonus_unique_zhenya_8"
 		"Ability16"					"special_bonus_unique_zhenya_7"
 		"Ability17"					"special_bonus_unique_zhenya_6"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"zhenya_facet_q"
@@ -2839,6 +2876,7 @@
 		"Ability15"					"special_bonus_unique_kolyan_6"
 		"Ability16"					"special_bonus_unique_kolyan_7"
 		"Ability17"					"special_bonus_unique_kolyan_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"kolyan_stacks"
@@ -2917,6 +2955,7 @@
 		"Ability15"				"special_bonus_unique_t2x2_6"
 		"Ability16"				"special_bonus_unique_t2x2_7"
 		"Ability17"				"special_bonus_unique_t2x2_8"
+		"BotImplemented"	""
 		
 		"Facets"
 		{
@@ -2994,6 +3033,7 @@
 		"Ability15"				"special_bonus_unique_mazellov_3"
 		"Ability16"				"special_bonus_unique_mazellov_7"
 		"Ability17"				"special_bonus_unique_mazellov_8"
+		"BotImplemented"	""
 		"ArmorPhysical"			"0"
 		"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"30"
@@ -3070,6 +3110,7 @@
 		"Ability15"		"special_bonus_unique_royale_6"
 		"Ability16"		"special_bonus_unique_royale_7"
 		"Ability17"		"special_bonus_unique_royale_8"
+		"BotImplemented"	""
 
 		"Facets"
 		{
@@ -3147,6 +3188,7 @@
 		"Ability15"		"special_bonus_unique_flash_6"
 		"Ability16"		"special_bonus_unique_flash_7"
 		"Ability17"		"special_bonus_unique_flash_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"flash_facet_bolt"
@@ -3249,6 +3291,7 @@
 		"Ability15"		"special_bonus_unique_frisk_6"
 		"Ability16"		"special_bonus_unique_frisk_7"
 		"Ability17"		"special_bonus_unique_frisk_8"
+		"BotImplemented"	""
 
 		"Facets"
 		{
@@ -3335,6 +3378,7 @@
 		"Ability15"		"special_bonus_unique_chara_6"
 		"Ability16"		"special_bonus_unique_chara_7"
 		"Ability17"		"special_bonus_unique_chara_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"chara_q_armor"
@@ -3408,6 +3452,7 @@
 		"Ability15"		"special_bonus_unique_bikov_6"
 		"Ability16"		"special_bonus_unique_bikov_7"
 		"Ability17"		"special_bonus_unique_bikov_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"bikov_igor"
@@ -3492,6 +3537,7 @@
 		"Ability15"		"special_bonus_unique_lev_6"
 		"Ability16"		"special_bonus_unique_lev_7"
 		"Ability17"		"special_bonus_unique_lev_8"
+		"BotImplemented"	""
 		"StatusHealthRegen"		"0.5"
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -3568,6 +3614,7 @@
 		"Ability15"		"special_bonus_unique_prince_6"
 		"Ability16"		"special_bonus_unique_prince_7"
 		"Ability17"		"special_bonus_unique_prince_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"prince_w_int"
@@ -3645,6 +3692,7 @@
 		"Ability15"		"special_bonus_unique_seregga_6"
 		"Ability16"		"special_bonus_unique_seregga_7"
 		"Ability17"		"special_bonus_unique_seregga_8"
+		"BotImplemented"	""
 
 		"Facets"
 		{
@@ -3722,6 +3770,7 @@
 		"Ability15"		"special_bonus_unique_visitor_3"
 		"Ability16"		"special_bonus_unique_visitor_7"
 		"Ability17"		"special_bonus_unique_visitor_8"
+		"BotImplemented"	""
 		"Facets"
 		{
 			"visitor_facet_1"

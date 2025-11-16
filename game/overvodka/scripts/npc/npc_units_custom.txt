@@ -4883,4 +4883,70 @@
 		"VisionDaytimeRange"		"1400"
 		"VisionNighttimeRange"		"1400"
 	}
+	"npc_dota_silvername_clone"
+	{
+		"BaseClass"                                           "npc_dota_creature"
+		"Model"                                               "models/events/crownfall/survivors/ogre_med/ogre.vmdl"
+		"ModelScale"                                          "1.25"
+		"SoundSet"                                            "Hero_MonkeyKing"
+		"GameSoundsFile"                                      "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts"
+		"Level"                                               "1"
+
+		"CanBeDominated"                                      "0"
+		"ConsideredHero"                                      "0"
+		"IgnoreAddSummonedToSelection"                        "1"
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"                                       "0"
+		"MagicalResistance"                                   "0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"                                     "29"
+		"AttackDamageMax"                                     "35"
+		"AttackRate"                                          "1.7"
+		"AttackAnimationPoint"                                "0.45"
+		"AttackAcquisitionRange"                              "800"
+		"AttackRange"                                         "250"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"                                            "0"
+		"BountyGoldMin"                                       "0"
+		"BountyGoldMax"                                       "0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"                                      "DOTA_HULL_SIZE_SMALL"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"                                       "0"
+		"MovementTurnRate"                                    "0.6"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"                                        "150"
+		"StatusHealthRegen"                                   "0"
+		"StatusMana"                                          "0"
+		"StatusManaRegen"                                     "0"
+
+		// Combat
+		//----------------------------------------------------------------
+		"TeamName"                                            "DOTA_TEAM_GOODGUYS"
+		"UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_HERO"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"                                  "600"
+		"VisionNighttimeRange"                                "600"
+
+		"HasInventory"                                        "1"
+
+		"ImmuneToOmnislash"                                   "1"
+		"UntargetableByExorcismSpirits"                       "1"
+	}
 }	

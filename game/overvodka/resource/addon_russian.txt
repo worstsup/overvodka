@@ -238,6 +238,14 @@
 		"Store_Item_prime_3d_free_name"	"Prime на 3 дня"
 		"Store_Item_prime_week_name"	"Prime на неделю"
 
+		"overvodka_tooltip_golden_rain"        "Золотой Дождь начнется через"
+		"overvodka_tooltip_golden_rain_active" "Золотой Дождь уже идет"
+		"overvodka_tooltip_golden_rain_done"   "Золотой Дождь уже был"
+
+		"overvodka_tooltip_hamster"            "Hamster Kombat начнется через"
+		"overvodka_tooltip_hamster_active"     "Hamster Kombat уже идет"
+		"overvodka_tooltip_hamster_done"       "Hamster Kombat уже был"
+
 		"Store_NotYourHero"				"Не твой герой бля"
 		"DOTA_Tooltip_overvodka_prime_notice"	"Доступно с Overvodka Prime"
         "Quests_Header" "Ежедневные задания"
@@ -412,6 +420,19 @@
 		"npc_dota_hero_tusk_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_abaddon_npedesc1"			"Сложность персонажа: НУЖЕН МИКРОФОН"
 		"npc_dota_hero_puck_npedesc1"				"Сложность персонажа: ЛЕВ"
+
+		"DOTA_Tooltip_ability_silvername_e_facet_1"              		 "Нуу, где враги"
+		"DOTA_Tooltip_ability_silvername_e_facet_1_Description"  		 "<h1>Пассивно</h1> Показывает расположение вражеских героев в радиусе.\n<h1>Активация</h1>SilverName начинает воровать у всех вражеских героев в половине от радиуса их атрибуты, скорость атаки и скорость передвижения."
+		"DOTA_Tooltip_ability_silvername_e_facet_1_vision_radius"        "РАДИУС:"
+		"DOTA_Tooltip_ability_silvername_e_facet_1_attribute_steal_pct"  "%КРАЖА АТРИБУТОВ:"
+		"DOTA_Tooltip_ability_silvername_e_facet_1_attack_speed_steal"   "КРАЖА СКОРОСТИ АТАКИ:"
+		"DOTA_Tooltip_ability_silvername_e_facet_1_movespeed_steal_pct"  "%КРАЖА СКОРОСТИ ПЕРЕДВИЖЕНИЯ:"
+		"DOTA_Tooltip_ability_silvername_e_facet_1_duration"             "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_modifier_silvername_e_facet_1_buff"             	 "Нуу, где враги"
+		"DOTA_Tooltip_modifier_silvername_e_facet_1_buff_Description" 	 "Атрибуты увеличены на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%, скорость атаки увеличена на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, скорость передвижения — на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
+		"DOTA_Tooltip_modifier_silvername_e_facet_1_debuff"              "Нуу, где враги"
+		"DOTA_Tooltip_modifier_silvername_e_facet_1_debuff_Description"  "Атрибуты снижены на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%, скорость атаки уменьшена на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, скорость передвижения — на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
+
 
 		"dota_tooltip_ability_visitor_innate"              		 "Необъяснимое сверхмогущество"
 		"dota_tooltip_ability_visitor_innate_description"  		 "Бледный Гость получает на %dmg_per_attr% больше урона за каждый атрибут. А день и ночь сменяются вдвое быстрее."

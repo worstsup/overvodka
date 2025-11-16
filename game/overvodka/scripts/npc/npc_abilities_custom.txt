@@ -3847,6 +3847,113 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
+	// Посмотрим на практике
+	//=================================================================================================================
+	"silvername_q_facet_1"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_q_facet_1"
+		"AbilityTextureName"			"chaos_knight_chaos_bolt"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.4"
+		"AbilityCooldown"				"10.0"
+		"AbilityManaCost"				"140"
+		"AbilityValues"
+		{
+				"chaos_bolt_speed"		"700"
+				"stun_min"				"0.1 0.2 0.3 0.4"
+				"stun_max"				"1.75 2.0 2.25 2.5"
+				"damage_min"			"30 40 50 60"
+				"damage_max"			"200 275 350 425"
+		}
+	}
+	//=================================================================================================================
+	// Тоби пизда
+	//=================================================================================================================
+	"silvername_w_facet_1"
+	{
+		"BaseClass"           "ability_lua"
+		"ScriptFile"          "heroes/silvername/silvername_w_facet_1"
+		"AbilityTextureName"  "phantom_lancer_phantom_edge"
+		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityCooldown"     "30 26 22 18"
+		"AbilityValues"
+		{
+			"min_distance"      "200"
+			"max_distance"
+			{
+				"value"  "600 700 800 900"
+			}
+			"bonus_speed"       "800"
+			"max_duration"      "5"
+			"gold_steal"
+			{
+				"value"  "20 40 60 80"
+			}
+			"gold_steal_pct"
+			{
+				"value"  "2 3 4 5"
+			}
+			"AbilityCastRange"
+			{
+				"value"  "600 700 800 900"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Нуу, где враги
+	//=================================================================================================================
+	"silvername_e_facet_1"
+	{
+		"BaseClass"         	"ability_lua"
+		"ScriptFile"        	"heroes/silvername/silvername_e_facet_1"
+		"AbilityTextureName"    "bounty_hunter_track"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"       "30"
+		"AbilityManaCost"       "100 110 120 130"
+		"AbilityCastRange"		"1200 1350 1500 1650"
+		"IsBreakable"			"1"
+		"AbilityValues"
+		{
+				"vision_radius" 		"1200 1350 1500 1650"
+				"attribute_steal_pct"   "4 6 8 10"
+				"attack_speed_steal"    "15 20 25 30"
+				"movespeed_steal_pct"   "5 6 7 8"
+				"duration"      		"8.0"
+		}
+	}
+	//=================================================================================================================
+	// Взять топ 1
+	//=================================================================================================================
+	"silvername_r_facet_1"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/silvername/silvername_r_facet_1"
+		"AbilityTextureName"    "monkey_king_wukongs_command"
+		"AbilityType"			"ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCooldown"       "90 80 70"
+		"AbilityManaCost"       "100 125 150"
+		"AbilityCastPoint"		"0.5"
+		"AbilityValues"
+		{
+				"duration"          "7.0"
+				"inner_radius"      "300"
+				"outer_radius"      "750"
+				"inner_count"       "6"
+				"outer_count"       "12"
+				"attack_interval"   "1.0"
+		}
+	}
+
+	//=================================================================================================================
 	// МУРЛОК-ПОЛКОВОДЕЦ
 	//=================================================================================================================
 	"silvername_murloc"
