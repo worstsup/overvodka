@@ -8,7 +8,7 @@ function silvername_r_facet_1:IsStealable() return true end
 function silvername_r_facet_1:Precache(ctx)
     PrecacheUnitByNameSync("npc_dota_silvername_clone", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_monkey_king/monkey_king_furarmy_ring.vpcf", ctx)
+    PrecacheResource("particle", "particles/silvername_ring.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", ctx)
     PrecacheResource("particle", "particles/status_fx/status_effect_monkey_king_fur_army.vpcf", ctx)
 end
@@ -78,7 +78,7 @@ function modifier_silvername_r_facet_1:OnCreated(kv)
     self:CreateRing(self.inner_radius, self.inner_count)
     self:CreateRing(self.outer_radius, self.outer_count)
 
-    self.particleHandler = ParticleManager:CreateParticle("particles/units/heroes/hero_monkey_king/monkey_king_furarmy_ring.vpcf", PATTACH_WORLDORIGIN, nil)
+    self.particleHandler = ParticleManager:CreateParticle("particles/silvername_ring.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:SetParticleControl(self.particleHandler, 0, self.caster:GetAbsOrigin())
     ParticleManager:SetParticleControl(self.particleHandler, 1, Vector(self.outer_radius, 0, 0))
 
@@ -90,7 +90,6 @@ function modifier_silvername_r_facet_1:OnIntervalThink()
     if not self.caster or self.caster:IsNull() then return end
     if not self.particleHandler then return end
 
-    ParticleManager:SetParticleControl(self.particleHandler, 0, self.caster:GetAbsOrigin())
 end
 
 function modifier_silvername_r_facet_1:OnDestroy()
