@@ -1,0 +1,113 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nMaxParticles = 0
+	m_nBehaviorVersion = 12
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 60
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 50.0, 255.0, 50.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 61
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 9
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 62
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_HSVShiftToCP"
+			m_DefaultHSVColor = [ 222, 64, 6, 255 ]
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_bOrient = true
+			m_nCP1 = 3
+			m_nCP2 = 9
+			m_nCP3 = 9
+			m_nCP4 = 9
+			m_vecCP1Pos = [ -0.0, 0.0, 0.0 ]
+			m_vecCP2Pos = [ 0.0, 0.0, 0.0 ]
+			m_vecCP3Pos = [ -0.0, 0.0, 0.0 ]
+			m_vecCP4Pos = [ 0.0, -0.0, 0.0 ]
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_PositionLock"
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/monkey_king_fur_army_cast_ground_dark_new.vpcf"
+			m_flDelay = 0.35
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_base.vpcf"
+			m_flDelay = 0.35
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_streaks.vpcf"
+			m_flDelay = 0.2
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_core.vpcf"
+			m_flDelay = 0.4
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_rope.vpcf"
+			m_flDelay = 0.8
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_spikes.vpcf"
+			m_flDelay = 0.4
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_glow.vpcf"
+			m_flDelay = 0.4
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_hair.vpcf"
+			m_flDelay = 0.85
+		},
+		{
+			m_ChildRef = resource:"particles/monkey_king_fur_army_cast_ground_glyph_new.vpcf"
+			m_flDelay = 0.3
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_monkey_king/monkey_king_fur_army_cast_ring_burst.vpcf"
+			m_flDelay = 0.4
+		},
+	]
+}

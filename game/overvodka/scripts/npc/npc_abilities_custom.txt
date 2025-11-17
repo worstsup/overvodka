@@ -3847,6 +3847,22 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
+	// Влад
+	//=================================================================================================================
+	"silvername_innate_facet_1"
+	{
+		"BaseClass"                 	"ability_datadriven"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityBehavior"           	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityValues"
+		{
+			"gold_pct"	"33"
+		}
+	}
+	//=================================================================================================================
 	// Посмотрим на практике
 	//=================================================================================================================
 	"silvername_q_facet_1"
@@ -3862,17 +3878,24 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.4"
-		"AbilityCooldown"				"10.0"
+		"AbilityCooldown"				"15.0"
 		"AbilityManaCost"				"140"
+		"HasShardUpgrade"				"1"
 		"AbilityValues"
 		{
 				"chaos_bolt_speed"		"700"
 				"stun_min"				"0.1 0.2 0.3 0.4"
 				"stun_max"				"1.75 2.0 2.25 2.5"
-				"damage_min"			"30 40 50 60"
+				"damage_min"			"30 60 90 120"
 				"damage_max"			"200 275 350 425"
-				"cd_min"				"0"
+				"cd_min"				"0 0 1 1"
 				"cd_max"				"1 2 3 4"
+				"targets"
+				{
+					"value"	"1"
+					"special_bonus_unique_silvername_5" "+1"
+				}
+				"shard_duration"		"3"
 		}
 	}
 	//=================================================================================================================
@@ -3883,8 +3906,8 @@
 		"BaseClass"           "ability_lua"
 		"ScriptFile"          "heroes/silvername/silvername_w_facet_1"
 		"AbilityTextureName"  "phantom_lancer_phantom_edge"
-		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityCooldown"     "30 26 22 18"
+		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"IsBreakable"		  "1"
 		"AbilityValues"
 		{
 			"min_distance"      "200"
@@ -3906,6 +3929,11 @@
 			{
 				"value"  "600 700 800 900"
 			}
+			"AbilityCooldown"
+			{
+				"value"	"18 16 14 12"
+				"special_bonus_unique_silvername_7"	"-10"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -3916,10 +3944,11 @@
 		"BaseClass"         	"ability_lua"
 		"ScriptFile"        	"heroes/silvername/silvername_e_facet_1"
 		"AbilityTextureName"    "bounty_hunter_track"
-		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"       "30"
-		"AbilityManaCost"       "100 110 120 130"
+		"AbilityManaCost"       "50 70 90 110"
 		"AbilityCastRange"		"1200 1350 1500 1650"
 		"IsBreakable"			"1"
 		"AbilityValues"
@@ -3941,18 +3970,58 @@
 		"AbilityTextureName"    "monkey_king_wukongs_command"
 		"AbilityType"			"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"       "90 80 70"
-		"AbilityManaCost"       "100 125 150"
+		"AbilityManaCost"       "200"
 		"AbilityCastPoint"		"0.5"
-		"AbilityCastRange"		"750"
+		"HasScepterUpgrade"		"1"
 		"AbilityValues"
 		{
-				"duration"          "7.0"
+				"duration"          "6.0 6.5 7.0"
 				"inner_radius"      "300"
 				"outer_radius"      "750"
-				"inner_count"       "6"
-				"outer_count"       "12"
+				"radius_tooltip"
+				{
+					"value"	"750"
+					"special_bonus_unique_silvername_8"	"+350"
+				}
+				"inner_count"       "5"
+				"outer_count"       "9"
 				"attack_interval"   "1.0"
+				"scepter_radius"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+300"
+					"RequiresScepter"	"1"
+				}
+				"scepter_interval"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+4"
+					"RequiresScepter"	"1"
+				}
+				"scepter_duration"
+				{
+					"value"	"0"
+					"special_bonus_scepter"	"+10"
+					"RequiresScepter"	"1"
+				}
+				"bonus_radius"
+				{
+					"value"	"0"
+					"special_bonus_unique_silvername_8"	"+1100"
+				}
+				"bonus_count"
+				{
+					"value"	"0"
+					"special_bonus_unique_silvername_8" "+7"
+				}
+				"AbilityCastRange"
+				{
+					"value"	"750"
+					"special_bonus_unique_silvername_8"	"+350"
+				}
 		}
 	}
 

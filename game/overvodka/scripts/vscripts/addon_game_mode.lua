@@ -287,9 +287,11 @@ function OvervodkaGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetModifyExperienceFilter( Dynamic_Wrap(OvervodkaGameMode, "XPToGoldFilter"), self )
+	GameRules:GetGameModeEntity():SetModifyGoldFilter( Dynamic_Wrap(OvervodkaGameMode, "GoldTrackFilter"), self )
 	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( OvervodkaGameMode, "BountyRunePickupFilter" ), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( OvervodkaGameMode, "ExecuteOrderFilter" ), self )
 
+	GameRules:SetFilterMoreGold( true )
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled( true )
 	GameRules:GetGameModeEntity():SetUseTurboCouriers( true )
 	GameRules:GetGameModeEntity():SetCanSellAnywhere( true )
@@ -802,6 +804,26 @@ function spawnunits(campname)
     end
 end
 
+function OvervodkaGameMode:GoldTrackFilter(event)
+    local gold      = event.gold or 0
+    local playerID  = event.player_id_const
+
+    if gold <= 0 then
+        return true
+    end
+    if playerID ~= nil and playerID ~= -1 then
+        local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+        if hero and not hero:IsNull() then
+            if hero:HasTalent("special_bonus_unique_silvername_2") then
+                local new_gold = math.floor(gold * 1.2 + 0.5)
+                event.gold = new_gold
+            end
+        end
+    end
+
+    return true
+end
+
 function OvervodkaGameMode:XPToGoldFilter(event)
     local xp         = event.experience or 0
     local playerID   = event.player_id_const
@@ -830,7 +852,6 @@ function OvervodkaGameMode:XPToGoldFilter(event)
     if hero:GetLevel() < 35 then
         return true
     end
-
     local gold_float = xp * 3 / 10
     local gold = math.floor(gold_float + 0.5)
     if gold > 0 and playerID ~= nil and playerID ~= -1 then

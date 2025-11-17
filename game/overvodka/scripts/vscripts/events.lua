@@ -444,7 +444,7 @@ function OvervodkaGameMode:OnEntityKilled( event )
 			--print("Granting killer xp")
 			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
 				local memberID = hero:GetPlayerID()
-				PlayerResource:ModifyGold( memberID, 500, false, 0 )
+				PlayerResource:ModifyGoldFiltered( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )
 				local name = hero:GetClassname()
 				local victim = killedUnit:GetClassname()
@@ -585,7 +585,7 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			end
 			local Team = PlayerResource:GetTeam(playerID)
 			local newR = ChangeValueByTeamPlace(r, Team)
-			PlayerResource:ModifyGold( playerID, newR, false, 0 )
+			owner:ModifyGoldFiltered(newR, false, 0)
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
 		UTIL_Remove( item )
@@ -607,7 +607,7 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			rewerd = 200
 		end
 		local playerID = owner:GetPlayerID()
-		PlayerResource:ModifyGold( playerID, rewerd, false, 0 )
+		PlayerResource:ModifyGoldFiltered( playerID, rewerd, false, 0 )
 		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
 		UTIL_Remove( item )
 	elseif event.itemname == "item_treasure_chest" then

@@ -162,7 +162,7 @@ function modifier_golden_rain_thinker:OnIntervalThink()
     )
     for _,enemy in pairs(enemies) do
         if not enemy:HasModifier("modifier_papich_r") then
-            enemy:ModifyGold(self.gold, false, DOTA_ModifyGold_GameTick)
+            enemy:ModifyGoldFiltered(self.gold, false, DOTA_ModifyGold_GameTick)
             enemy:AddExperience(self.xp, DOTA_ModifyXP_Unspecified, false, false)
             if (self.k % 2 == 0) then
                 local playerID = enemy:GetPlayerOwnerID()

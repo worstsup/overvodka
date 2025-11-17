@@ -121,8 +121,7 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 		"item_chapman_red",
 		"item_chapman_green",
 		"item_chapman_indigo",
-		"item_chapman_pink",
-		"item_rocket_launcher"
+		"item_chapman_pink"
 	}
 
 	local tier4 =
@@ -131,8 +130,7 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 		"item_cubin",
 		"item_burger_sobolev",
 		"item_burger_oblomoff",
-		"item_burger_larin",
-		"item_rocket_launcher"
+		"item_burger_larin"
 	}
 
 	local tier5 =
@@ -141,8 +139,7 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 		"item_cubin",
 		"item_burger_sobolev",
 		"item_burger_oblomoff",
-		"item_burger_larin",
-		"item_rocket_launcher"
+		"item_burger_larin"
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )
@@ -189,6 +186,13 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 			spawnedItem = t5
 		else
 			spawnedItem = t5
+		end
+	end
+	if hero == "npc_dota_hero_phoenix" then
+		if nLeaderKills > 20 or owner:HasTalent("special_bonus_unique_silvername_3") then
+			spawnedItem = t5
+		else
+			spawnedItem = t3
 		end
 	end
 	if IsInventoryAndBackpackFull(owner) then

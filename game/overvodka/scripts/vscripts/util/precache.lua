@@ -432,6 +432,7 @@ PrecacheUtils.sounds = {
 		"soundevents/onehp.vsndevts",
 		"soundevents/griffins.vsndevts",
 		"soundevents/mazellov_sounds.vsndevts",
+		"soundevents/silvername_sounds.vsndevts",
 		"soundevents/crumble_cookie.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",

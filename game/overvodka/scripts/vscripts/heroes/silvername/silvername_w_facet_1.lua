@@ -5,6 +5,7 @@ silvername_w_facet_1 = class({})
 
 function silvername_w_facet_1:Precache(ctx)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_phantom_lancer.vsndevts", ctx)
+	PrecacheResource("soundfile", "soundevents/silvername_sounds.vsndevts", ctx)
 end
 
 function silvername_w_facet_1:IsStealable() return false end
@@ -17,6 +18,14 @@ function silvername_w_facet_1:OnOwnerSpawned()
 	if self.toggle_state then
 		self:ToggleAbility()
 	end
+end
+
+function silvername_w_facet_1:OnToggle()
+	local caster = self:GetCaster()
+	local toggle = self:GetToggleState()
+
+	if not IsServer() then return end
+	self:EndCooldown()
 end
 
 function silvername_w_facet_1:OnOwnerDied()
@@ -110,6 +119,7 @@ function modifier_silvername_w_facet_1:StartRush(target)
 	if not target or target:IsNull() then return end
 	if not self.ability or self.ability:IsNull() then return end
 
+	self.parent:EmitSound("silvername_w_facet_1")
 	self.parent:EmitSound("Hero_PhantomLancer.PhantomEdge")
 
 	local max_duration = self.ability:GetSpecialValueFor("max_duration")
@@ -266,7 +276,7 @@ function modifier_silvername_w_facet_1_boost:OnAttackLanded(keys)
 	end
 
     PlayerResource:SpendGold(victimPlayerID, steal, 4)
-    self.parent:ModifyGold(steal, false, 0)
+    self.parent:ModifyGoldFiltered(steal, false, 0)
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, self.parent, steal, nil)
 
 	self.gold_stolen = true
