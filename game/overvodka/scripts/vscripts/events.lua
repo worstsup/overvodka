@@ -140,6 +140,10 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 				spawnedUnit.voice_level = 0
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_phoenix" and spawnedUnit:HasAbility("silvername_q_facet_2") then
+				chair = spawnedUnit:AddItemByName("item_silvername_chair")
+				chair:SetSellable(false)
+			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
 				sahur:SetLevel(1)

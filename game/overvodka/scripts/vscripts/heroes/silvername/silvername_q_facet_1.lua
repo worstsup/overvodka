@@ -2,14 +2,6 @@ silvername_q_facet_1 = class({})
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_silvername_r_facet_1_soldier", "heroes/silvername/silvername_r_facet_1", LUA_MODIFIER_MOTION_NONE)
 
-function silvername_q_facet_1:Precache(ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_chaos_knight/chaos_knight_bolt_msg.vpcf", ctx)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_chaos_knight.vsndevts", ctx)
-	PrecacheResource("soundfile", "soundevents/silvername_sounds.vsndevts", ctx)
-	PrecacheUnitByNameSync("npc_dota_silvername_clone", ctx)
-end
-
 function silvername_q_facet_1:FindAdditionalTargets(primaryTarget, maxTargets)
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return {} end
@@ -188,9 +180,10 @@ function silvername_q_facet_1:SpawnShardSoldier(target)
     soldier.IsTempestDouble = function() return true end
     soldier:SetRenderColor(255, 255, 0)
 
-    local avg = caster:GetAverageTrueAttackDamage(nil)
-    soldier:SetBaseDamageMin(avg)
-    soldier:SetBaseDamageMax(avg)
+    local damage_min = caster:GetBaseDamageMin() * (r_ability:GetSpecialValueFor("damage") / 100)
+    local damage_max = caster:GetBaseDamageMax() * (r_ability:GetSpecialValueFor("damage") / 100) 
+    soldier:SetBaseDamageMin(damage_min)
+    soldier:SetBaseDamageMax(damage_max)
 
     self:CopyAttackItemsForShard(caster, soldier)
 

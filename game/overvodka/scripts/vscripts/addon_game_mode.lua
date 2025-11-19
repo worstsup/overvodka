@@ -849,6 +849,13 @@ function OvervodkaGameMode:XPToGoldFilter(event)
         return true
     end
 
+	if playerID ~= nil and playerID ~= -1 then
+        if hero:HasTalent("special_bonus_unique_silvername_1") then
+            local new_xp = math.floor(xp * 1.3 + 0.5)
+            event.experience = new_xp
+        end
+    end
+
     if hero:GetLevel() < 35 then
         return true
     end

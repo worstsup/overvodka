@@ -10,15 +10,6 @@ function silvername_r_facet_1:GetIntrinsicModifierName()
     return "modifier_silvername_r_facet_1_scepter"
 end
 
-function silvername_r_facet_1:Precache(ctx)
-    PrecacheUnitByNameSync("npc_dota_silvername_clone", ctx)
-    PrecacheResource("particle", "particles/silvername_r_facet_1_cast.vpcf", ctx)
-    PrecacheResource("particle", "particles/silvername_ring.vpcf", ctx)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts", ctx)
-    PrecacheResource("particle", "particles/status_fx/status_effect_monkey_king_fur_army.vpcf", ctx)
-    PrecacheResource("soundfile", "soundevents/silvername_sounds.vsndevts", ctx)
-end
-
 modifier_silvername_r_facet_1_scepter = class({})
 
 function modifier_silvername_r_facet_1_scepter:IsHidden()   return true  end
@@ -52,6 +43,7 @@ function modifier_silvername_r_facet_1_scepter:OnIntervalThink()
 
     if not parent:IsAlive() then return end
     if not parent:HasScepter() then return end
+    if parent:IsIllusion() then return end
     if parent:IsInvisible() then return end
 
     local scepter_radius   = ability:GetSpecialValueFor("scepter_radius")   or 0
@@ -112,9 +104,10 @@ function silvername_r_facet_1:SpawnScepterSoldier(caster)
     soldier.IsTempestDouble = function() return true end
     soldier:SetRenderColor(255, 255, 0)
 
-    local avg = caster:GetAverageTrueAttackDamage(nil)
-    soldier:SetBaseDamageMin(avg)
-    soldier:SetBaseDamageMax(avg)
+    local damage_min = caster:GetBaseDamageMin() * (self:GetSpecialValueFor("damage") / 100)
+    local damage_max = caster:GetBaseDamageMax() * (self:GetSpecialValueFor("damage") / 100) 
+    soldier:SetBaseDamageMin(damage_min)
+    soldier:SetBaseDamageMax(damage_max)
 
     for itemSlot = 0, 16 do
         local item = caster:GetItemInSlot(itemSlot)
@@ -244,15 +237,6 @@ function modifier_silvername_r_facet_1:OnCreated(kv)
     self.particleHandler = ParticleManager:CreateParticle("particles/silvername_ring.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:SetParticleControl(self.particleHandler, 0, self.caster:GetAbsOrigin())
     ParticleManager:SetParticleControl(self.particleHandler, 1, Vector(self.max_ring_radius, 0, 0))
-
-    self:StartIntervalThink(FrameTime())
-end
-
-function modifier_silvername_r_facet_1:OnIntervalThink()
-    if not IsServer() then return end
-    if not self.caster or self.caster:IsNull() then return end
-    if not self.particleHandler then return end
-
 end
 
 function modifier_silvername_r_facet_1:OnDestroy()
@@ -313,9 +297,10 @@ function modifier_silvername_r_facet_1:CreateRing(radius, count)
             soldier.IsTempestDouble = function() return true end
             soldier:SetRenderColor(255, 255, 0)
 
-            local avg = self.caster:GetAverageTrueAttackDamage(nil)
-            soldier:SetBaseDamageMin(avg)
-            soldier:SetBaseDamageMax(avg)
+            local damage_min = self.caster:GetBaseDamageMin() * (self.ability:GetSpecialValueFor("damage") / 100)
+            local damage_max = self.caster:GetBaseDamageMax() * (self.ability:GetSpecialValueFor("damage") / 100) 
+            soldier:SetBaseDamageMin(damage_min)
+            soldier:SetBaseDamageMax(damage_max)
 
             self:CopyAttackItems(self.caster, soldier)
 
@@ -404,6 +389,24 @@ function modifier_silvername_r_facet_1_soldier:OnCreated(kv)
     self.fixed_attack_rate = self.attack_interval
 
     if not IsServer() then return end
+
+    self.w_ability          = nil
+    self.gold_steal_amount  = 0
+    self.gold_steal_pct     = 0
+    self.gold_steal_cd      = 0
+    self.next_gold_steal    = 0
+
+    if self.caster and not self.caster:IsNull() then
+        if self.caster.HasTalent and self.caster:HasTalent("special_bonus_unique_silvername_5") then
+            local w = self.caster:FindAbilityByName("silvername_w_facet_1")
+            if w and not w:IsNull() and w:GetLevel() > 0 then
+                self.w_ability         = w
+                self.gold_steal_amount = w:GetSpecialValueFor("gold_steal") or 0
+                self.gold_steal_pct    = w:GetSpecialValueFor("gold_steal_pct") or 0
+                self.gold_steal_cd     = w:GetCooldown( w:GetLevel() )
+            end
+        end
+    end
 
     if self.caster and not self.caster:IsNull() then
         local center = self.caster:GetAbsOrigin()
@@ -583,9 +586,56 @@ end
 function modifier_silvername_r_facet_1_soldier:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_FIXED_ATTACK_RATE,
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
 
 function modifier_silvername_r_facet_1_soldier:GetModifierFixedAttackRate()
     return self.fixed_attack_rate or 1.0
+end
+
+function modifier_silvername_r_facet_1_soldier:OnAttackLanded(keys)
+    if not IsServer() then return end
+
+    if keys.attacker ~= self.parent then return end
+    if not self.w_ability then return end
+
+    local target = keys.target
+    if not target or target:IsNull() then return end
+    if target:GetTeamNumber() == self.parent:GetTeamNumber() then return end
+    if not target:IsRealHero() or target:IsIllusion() then return end
+
+    local attackerPlayerID = self.parent:GetPlayerOwnerID()
+    local victimPlayerID   = target:GetPlayerOwnerID()
+
+    if attackerPlayerID == nil or attackerPlayerID == -1 or victimPlayerID == nil or victimPlayerID == -1 then
+        return
+    end
+
+    local now = GameRules:GetGameTime()
+    if self.gold_steal_cd > 0 and now < (self.next_gold_steal or 0) then
+        return
+    end
+
+    local victimGold = PlayerResource:GetGold(victimPlayerID) or 0
+
+    local fixed = self.gold_steal_amount or 0
+    local pct   = self.gold_steal_pct or 0
+
+    local steal = fixed + math.floor(victimGold * pct * 0.01 + 0.5)
+    if steal <= 0 then return end
+
+    if steal > victimGold then
+        steal = victimGold
+    end
+
+    if steal <= 0 then return end
+
+    PlayerResource:SpendGold(victimPlayerID, steal, 4)
+    self.caster:ModifyGoldFiltered(steal, false, 0)
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, self.caster, steal, nil)
+
+    if self.gold_steal_cd > 0 then
+        self.next_gold_steal = now + self.gold_steal_cd
+    end
 end

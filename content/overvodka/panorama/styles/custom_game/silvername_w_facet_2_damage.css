@@ -1,0 +1,24 @@
+.SilvernameDamageTitle
+{
+    width: 200px;
+    height: 60px;
+
+    overflow: noclip;
+}
+
+.SilvernameDamageTitle.TitleHidden
+{
+    opacity: 0;
+}
+
+.SilvernameDamageText
+{
+    color: white;
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    align: center center;
+
+    text-shadow: 0px 0px 10px #ff2b2b;
+    font-weight: bold;
+}

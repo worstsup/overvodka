@@ -5,6 +5,8 @@ const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
 const TeamLeavedEncounter = $("#TeamLeavedEncounter");
 const DotaHUDPanel = GetDotaHud();
+let SilvernameFacet2Target = -1;
+let DamagePanel = null;
 
 let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
 let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
@@ -264,6 +266,8 @@ function SendCustomMessageToChat(event){
 let Offset = 125
 let UISCALE_X = 1;
 let UISCALE_Y = 1;
+let DamageOffset = 170; 
+let DamageHalfWidth = 100;
 
 let AdminPlayers = []
 
@@ -296,71 +300,48 @@ function UpdateTitles() {
         panel.checked = true
     }
 
-    for (let i = Container.GetChildCount(); i > -1; i--) {
-        const panel = Container.GetChild(i)
-        if(panel){
-            let Unit = panel.title_unit
-            
-            let bIsDead = !Entities.IsAlive( Unit)
+    for (let i = Container.GetChildCount() - 1; i >= 0; i--) {
+        const panel = Container.GetChild(i);
+        if (!panel) continue;
 
-            let bIsActivePlayerHero = false
-            let PlayerID = Entities.GetPlayerOwnerID( Unit )
-            const Hero = Players.GetPlayerHeroEntityIndex( PlayerID )
+        const Unit = panel.title_unit;
 
-            if(Hero != -1 && Hero == Unit){
-                bIsActivePlayerHero = true
-            }
-            if(!panel.checked && !bIsActivePlayerHero){
-                DeletePlayerTitle(Unit)
-                continue
-            }
+        if (Unit === undefined || Unit === null || !Entities.IsValidEntity(Unit)) {
+            continue;
+        }
 
-            panel.SetHasClass("TitleHiddenByHero", bIsDead || !panel.checked)
+        let bIsDead = !Entities.IsAlive(Unit);
 
-            panel.checked = false
+        let bIsActivePlayerHero = false;
+        let PlayerID = Entities.GetPlayerOwnerID(Unit);
+        const Hero = Players.GetPlayerHeroEntityIndex(PlayerID);
 
-            if(!bIsDead){
-                let HeroOrigin = Entities.GetAbsOrigin(Unit);
-                let ScreenX = Game.WorldToScreenX(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
-                let ScreenY = Game.WorldToScreenY(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
-                let bIsOutScreen = GameUI.GetScreenWorldPosition(ScreenX, ScreenY) == null
-                panel.SetHasClass("TitleHidden", bIsOutScreen)
-                if(!bIsOutScreen){
-                    let x = (ScreenX - (100 * UISCALE_Y)) / UISCALE_X;
-                    let y = (ScreenY - (Offset * UISCALE_Y)) / UISCALE_Y;
-                    panel.style.position = (Math.floor(x)) + "px " + (Math.floor(y)) + "px" + ' 0';
-                }
+        if (Hero != -1 && Hero == Unit) {
+            bIsActivePlayerHero = true;
+        }
+        if (!panel.checked && !bIsActivePlayerHero) {
+            DeletePlayerTitle(Unit);
+            continue;
+        }
+
+        panel.SetHasClass("TitleHiddenByHero", bIsDead || !panel.checked);
+
+        panel.checked = false;
+
+        if (!bIsDead) {
+            let HeroOrigin = Entities.GetAbsOrigin(Unit);
+            let ScreenX = Game.WorldToScreenX(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250);
+            let ScreenY = Game.WorldToScreenY(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250);
+            let bIsOutScreen = GameUI.GetScreenWorldPosition(ScreenX, ScreenY) == null;
+            panel.SetHasClass("TitleHidden", bIsOutScreen);
+            if (!bIsOutScreen) {
+                let x = (ScreenX - (100 * UISCALE_Y)) / UISCALE_X;
+                let y = (ScreenY - (Offset * UISCALE_Y)) / UISCALE_Y;
+                panel.style.position = Math.floor(x) + "px " + Math.floor(y) + "px 0";
             }
         }
     }
-    
-    // for (const PlayerID of Game.GetAllPlayerIDs()) {
-    //     // $.Msg("==========================================")
-    //     const panel = GetOrCreatePlayerTitlePanel(PlayerID)
 
-    //     const Hero = Players.GetPlayerHeroEntityIndex( PlayerID )
-
-    //     panel.SetHasClass("TitleHiddenByHero", Hero == -1)
-
-    //     if(Hero != -1){
-    //         let bIsDead = !Entities.IsAlive( Hero )
-    //         let bSeenByMyTeam = IsSeenByMyTeam(Hero)
-    //         panel.SetHasClass("TitleHiddenByHero", bIsDead || !bSeenByMyTeam)
-    //         if(!bIsDead){
-    //             let HeroOrigin = Entities.GetAbsOrigin(Hero);
-    //             let ScreenX = Game.WorldToScreenX(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
-    //             let ScreenY = Game.WorldToScreenY(HeroOrigin[0], HeroOrigin[1], HeroOrigin[2] + 250 )
-    //             let bIsOutScreen = GameUI.GetScreenWorldPosition(ScreenX, ScreenY) == null
-    //             panel.SetHasClass("TitleHidden", bIsOutScreen)
-    //             if(!bIsOutScreen){
-    //                 let x = (ScreenX - (100 * UISCALE_Y)) / UISCALE_X;
-    //                 let y = (ScreenY - (Offset * UISCALE_Y)) / UISCALE_Y;
-    //                 panel.style.position = (Math.floor(x)) + "px " + (Math.floor(y)) + "px" + ' 0';
-    //             }
-    //         }
-    //     }
-    //     // $.Msg("==========================================")
-    // }
 }
 
 function GetOrCreatePlayerTitlePanel(EntIndex) {
@@ -547,6 +528,80 @@ function UpdateTeamLeaved(){
     }
 }
 
+function OnSilvernameFacet2TargetStart(event) {
+    SilvernameFacet2Target = event.entindex;
+}
+
+function OnSilvernameFacet2TargetEnd(event) {
+    if (SilvernameFacet2Target === event.entindex) {
+        SilvernameFacet2Target = -1;
+    }
+    DeleteDamageTitlePanel(event.entindex);
+}
+
+function UpdateSilvernameFacet2Damage() {
+    if (SilvernameFacet2Target !== -1 && Entities.IsValidEntity(SilvernameFacet2Target)) {
+        const ent = SilvernameFacet2Target;
+
+        const buff = HasModifierOnUnit(ent, "modifier_silvername_w_facet_2_target");
+        if (!buff) {
+            DeleteDamageTitlePanel(ent);
+        } else {
+            const panel = GetOrCreateDamageTitlePanel(ent);
+            const label = panel.FindChildTraverse("DamageText");
+
+            const dmg = Buffs.GetStackCount(ent, buff) | 0;
+            if (label) {
+                label.text = dmg > 0 ? (dmg) : "0";
+            }
+
+            panel.SetHasClass("TitleHidden", dmg <= 0);
+
+            const origin = Entities.GetAbsOrigin(ent);
+            const worldX = origin[0];
+            const worldY = origin[1];
+            const worldZ = origin[2] + 100; // высота над моделью
+
+            const screenX = Game.WorldToScreenX(worldX, worldY, worldZ);
+            const screenY = Game.WorldToScreenY(worldX, worldY, worldZ);
+
+            if (screenX === -1 || screenY === -1) {
+                panel.visible = false;
+            } else {
+                panel.visible = true;
+
+                const x = (screenX - (DamageHalfWidth * UISCALE_Y)) / UISCALE_X;
+                const y = (screenY - (DamageOffset   * UISCALE_Y)) / UISCALE_Y;
+
+                panel.style.position = Math.floor(x) + "px " + Math.floor(y) + "px 0px";
+            }
+        }
+    } else {
+    }
+
+    $.Schedule(0.03, UpdateSilvernameFacet2Damage);
+}
+
+
+function GetOrCreateDamageTitlePanel(entIndex) {
+    const id = `silvername_w_facet_2_${entIndex}`;
+    let panel = Container.FindChildTraverse(id);
+    if (panel) return panel;
+
+    panel = $.CreatePanel("Panel", Container, id);
+    panel.unit_index = entIndex;
+    panel.BLoadLayout("file://{resources}/layout/custom_game/silvername_w_facet_2_damage.xml", false, false);
+    return panel;
+}
+
+function DeleteDamageTitlePanel(entIndex) {
+    const id = `silvername_w_facet_2_${entIndex}`;
+    const panel = Container.FindChildTraverse(id);
+    if (panel) {
+        panel.DeleteAsync(0);
+    }
+}
+
 (function(){
     StartSecondaryAbilities();
 
@@ -554,6 +609,11 @@ function UpdateTeamLeaved(){
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
     GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
+
+    GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
+    GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);
+
+    UpdateSilvernameFacet2Damage();
 
     SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}_double_rating_time`, function(v){
         DoubleRatingLastTime = v.time

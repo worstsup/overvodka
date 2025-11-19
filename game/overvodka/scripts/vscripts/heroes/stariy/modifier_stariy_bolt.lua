@@ -78,7 +78,6 @@ function modifier_stariy_bolt:OnIntervalThink()
 		end
 		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01 + self:GetParent():GetIntellect(false) * self.int_damage * 0.01
 		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
-			dmg = 0
 			if peterka == 0 then
 				EmitSoundOn( "stariy_peterka", self:GetParent() )
 			end

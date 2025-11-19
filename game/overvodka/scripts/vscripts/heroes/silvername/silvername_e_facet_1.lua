@@ -12,12 +12,6 @@ function silvername_e_facet_1:GetIntrinsicModifierName()
 	return "modifier_silvername_e_facet_1"
 end
 
-function silvername_e_facet_1:Precache(ctx)
-	PrecacheResource("soundfile", "soundevents/silvername_sounds.vsndevts", ctx)
-	PrecacheResource("particle", "particles/econ/items/bounty_hunter/bounty_hunter_hunters_hoard/bounty_hunter_hoard_track_trail.vpcf", ctx)
-	PrecacheResource("particle", "particles/silvername_e_facet_1_cast.vpcf", ctx)
-end
-
 function silvername_e_facet_1:OnSpellStart()
 	local caster = self:GetCaster()
 	if not caster or caster:IsNull() then return end

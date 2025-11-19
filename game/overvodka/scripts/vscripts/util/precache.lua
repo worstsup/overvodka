@@ -129,6 +129,19 @@ PrecacheUtils.particles = {
 		"particles/item_nikes.vpcf",
 		"particles/econ/events/ti9/phase_boots_ti9.vpcf",
 		"particles/ui/ui_generic_treasure_impact.vpcf",
+
+		--silvername
+		"particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf",
+		"particles/units/heroes/hero_chaos_knight/chaos_knight_bolt_msg.vpcf",
+		"particles/econ/items/bounty_hunter/bounty_hunter_hunters_hoard/bounty_hunter_hoard_track_trail.vpcf",
+		"particles/silvername_e_facet_1_cast.vpcf",
+		"particles/silvername_r_facet_1_cast.vpcf",
+		"particles/silvername_ring.vpcf",
+		"particles/status_fx/status_effect_monkey_king_fur_army.vpcf",
+		"particles/silvername_w_facet_2_exp.vpcf",
+		"particles/units/heroes/hero_phantom_assassin/phantom_assassin_mark_overhead.vpcf",
+		"particles/silvername_w_facet_2_call.vpcf",
+		"particles/nightstalker_ti10_crimson_aura_smoke_new.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -167,6 +180,9 @@ PrecacheUtils.units = {
 	"npc_rivendare",
 	"npc_dota_courier",
 	"npc_overvodka_pet",
+	"npc_dota_silvername_clone",
+	"npc_murloc",
+	"npc_silvername_chair",
 }
 
 PrecacheUtils.models = {
@@ -284,7 +300,10 @@ PrecacheUtils.models = {
 		"models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl",
 		"models/seregga/seregga.vmdl",
 		"models/blackflash/blackflash.vmdl",
+
+		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
+		"models/creeps/mega_greevil/mega_greevil.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -432,7 +451,6 @@ PrecacheUtils.sounds = {
 		"soundevents/onehp.vsndevts",
 		"soundevents/griffins.vsndevts",
 		"soundevents/mazellov_sounds.vsndevts",
-		"soundevents/silvername_sounds.vsndevts",
 		"soundevents/crumble_cookie.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_warlock.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_troll_warlord.vsndevts",
@@ -448,6 +466,10 @@ PrecacheUtils.sounds = {
 		"soundevents/sans_damage.vsndevts",
 		"soundevents/shemelis.vsndevts",
 		"soundevents/seregga_innate.vsndevts",
+
+		"soundevents/silvername_sounds.vsndevts",
+		"soundevents/game_sounds_heroes/game_sounds_chaos_knight.vsndevts",
+		"soundevents/game_sounds_heroes/game_sounds_phantom_lancer.vsndevts",
 }
 
 PrecacheUtils.mapResources = {

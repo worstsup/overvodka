@@ -4,8 +4,21 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.l
 LinkLuaModifier( "modifier_sans_w_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_bone_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier( "modifier_sans_w_walk", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
+
 function sans_w:IsDualVectorDirection()
+	local facet_square = self:GetSpecialValueFor("facet_square") or 0
+	if facet_square > 0 then
+		return false
+	end
 	return true
+end
+
+function sans_w:GetBehavior()
+    if self:GetSpecialValueFor("facet_square") > 0 then
+        return DOTA_ABILITY_BEHAVIOR_POINT
+    end
+
+    return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING
 end
 
 function sans_w:GetAbilityTextureName()
@@ -24,10 +37,205 @@ function sans_w:OnAbilityPhaseStart()
 	return true
 end
 
+function sans_w:CreateWallLine( start_pos, end_pos, damage, duration, radius, stun_duration, damagedUnits )
+    if not IsServer() then return end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    local team = caster:GetTeamNumber()
+
+    local block_width   = 24
+    local block_delta   = 8.25
+    local block_spacing = (block_delta + 2*block_width)
+    local startingOffset = (block_delta + block_width) * 0.5
+
+    local wall_vector = end_pos - start_pos
+    wall_vector.z = 0
+    local total_distance = wall_vector:Length2D()
+    if total_distance <= 0 then return end
+
+    local dir = wall_vector:Normalized()
+
+    local blocks = math.floor( total_distance / block_spacing )
+    local block_pos = startingOffset
+
+    for i = 1, blocks do
+        local block_vec = start_pos + dir * block_pos
+
+        local blocker = CreateModifierThinker(
+            caster,
+            self,
+            "modifier_sans_w_thinker",
+            { duration = duration },
+            block_vec,
+            team,
+            true
+        )
+        if blocker and not blocker:IsNull() then
+            blocker:SetHullRadius( block_width )
+        end
+
+        block_pos = block_pos + block_spacing
+    end
+
+    local units = FindUnitsInLine(
+        team,
+        start_pos,
+        end_pos,
+        nil,
+        radius,
+        DOTA_UNIT_TARGET_TEAM_BOTH,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        0
+    )
+
+    local damageTable = {
+        attacker    = caster,
+        damage      = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability     = self,
+    }
+
+    for _, unit in pairs(units) do
+        if unit and not unit:IsNull() then
+            local entid = unit:entindex()
+            if not damagedUnits[entid] then
+                FindClearSpaceForUnit( unit, unit:GetAbsOrigin(), true )
+
+                if unit:GetTeamNumber() ~= team then
+                    damageTable.victim = unit
+
+                    unit:AddNewModifier(
+                        caster,
+                        self,
+                        "modifier_generic_stunned_lua",
+                        { duration = stun_duration }
+                    )
+
+                    unit:AddNewModifier(
+                        caster,
+                        self,
+                        "modifier_knockback",
+                        {
+                            center_x = caster:GetAbsOrigin().x,
+                            center_y = caster:GetAbsOrigin().y,
+                            center_z = caster:GetAbsOrigin().z,
+                            duration = 0.3,
+                            knockback_duration = 0.3,
+                            knockback_distance = 50,
+                            knockback_height = 50
+                        }
+                    )
+
+                    EmitSoundOn("sans_damage", unit)
+                    ApplyDamage(damageTable)
+                end
+
+                damagedUnits[entid] = true
+            end
+        end
+    end
+
+    self:PlayEffects( start_pos, end_pos, duration )
+
+    if caster:HasModifier("modifier_sans_r") then
+        CreateModifierThinker(
+            caster,
+            self,
+            "modifier_sans_w_bone_thinker",
+            {
+                duration    = duration,
+                start_pos_x = start_pos.x,
+                start_pos_y = start_pos.y,
+                start_pos_z = start_pos.z,
+                end_pos_x   = end_pos.x,
+                end_pos_y   = end_pos.y,
+                end_pos_z   = end_pos.z,
+                direction_x = dir.x,
+                direction_y = dir.y,
+            },
+            start_pos,
+            team,
+            false
+        )
+    end
+end
+
+function sans_w:CastFacetSquare( caster, center )
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+
+    local damage        = self:GetSpecialValueFor("damage")
+    local duration      = self:GetSpecialValueFor("fissure_duration")
+    local radius        = self:GetSpecialValueFor("fissure_radius")
+    local stun_duration = self:GetSpecialValueFor("stun_duration")
+    local square_size   = self:GetSpecialValueFor("square_size_facet")
+
+    local damagedUnits = {}
+
+    local caster_origin = caster:GetAbsOrigin()
+    local main_dir = caster_origin - center
+    main_dir.z = 0
+
+    if main_dir:Length2D() < 1 then
+        main_dir = caster:GetForwardVector()
+        main_dir.z = 0
+    end
+
+    main_dir = main_dir:Normalized()
+    local perp_dir = Vector(-main_dir.y, main_dir.x, 0):Normalized()
+
+    local half_side = square_size * 0.5
+
+    local extra_len = 64
+    local half_len  = half_side + extra_len
+
+    local side1_center = center + perp_dir * half_side
+    local side2_center = center - perp_dir * half_side
+    local side3_center = center + main_dir * half_side
+    local side4_center = center - main_dir * half_side
+
+    local s1_start = side1_center - main_dir * half_len
+    local s1_end   = side1_center + main_dir * half_len
+    self:CreateWallLine(s1_start, s1_end, damage, duration, radius, stun_duration, damagedUnits)
+
+    local s2_start = side2_center - main_dir * half_len
+    local s2_end   = side2_center + main_dir * half_len
+    self:CreateWallLine(s2_start, s2_end, damage, duration, radius, stun_duration, damagedUnits)
+
+    local s3_start = side3_center - perp_dir * half_len
+    local s3_end   = side3_center + perp_dir * half_len
+    self:CreateWallLine(s3_start, s3_end, damage, duration, radius, stun_duration, damagedUnits)
+
+    local s4_start = side4_center - perp_dir * half_len
+    local s4_end   = side4_center + perp_dir * half_len
+    self:CreateWallLine(s4_start, s4_end, damage, duration, radius, stun_duration, damagedUnits)
+end
+
+
+function sans_w:OnSpellStart()
+	if not IsServer() then return end
+
+	local caster = self:GetCaster()
+	if not caster or caster:IsNull() then return end
+
+	local facet_square = self:GetSpecialValueFor("facet_square") or 0
+	if facet_square <= 0 then
+		return
+	end
+
+	local center = self:GetCursorPosition()
+	self:CastFacetSquare(caster, center)
+	FindClearSpaceForUnit( caster, caster:GetAbsOrigin(), true )
+end
+
 function sans_w:OnVectorCastStart(vStartLocation, direction_new)
 	local caster = self:GetCaster()
 	local center = self:GetVectorPosition()
-	
+	if self:GetSpecialValueFor("facet_square") > 0 then
+		return
+	end
 	local target_point = center + direction_new
 	local direction = (target_point - center)
 	direction.z = 0
@@ -218,7 +426,11 @@ function modifier_sans_w_bone_thinker:OnCreated(params)
 		self.damage_mini = self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("damage_mini")
 		self.duration = self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("ministun")
         self.radius = 200
-        self:StartIntervalThink(0.2)
+		self.interval = 0.2
+		if self:GetAbility():GetSpecialValueFor("facet_square") > 0 then
+			self.interval = self.interval * 2
+		end
+        self:StartIntervalThink(self.interval)
     end
 end
 

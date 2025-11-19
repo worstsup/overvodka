@@ -3,11 +3,6 @@ LinkLuaModifier("modifier_silvername_w_facet_1_boost", "heroes/silvername/silver
 
 silvername_w_facet_1 = class({})
 
-function silvername_w_facet_1:Precache(ctx)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_phantom_lancer.vsndevts", ctx)
-	PrecacheResource("soundfile", "soundevents/silvername_sounds.vsndevts", ctx)
-end
-
 function silvername_w_facet_1:IsStealable() return false end
 
 function silvername_w_facet_1:GetIntrinsicModifierName()
@@ -239,7 +234,7 @@ function modifier_silvername_w_facet_1_boost:OnAttackLanded(keys)
 	if not IsServer() then return end
 	if self.gold_stolen then return end
 	if keys.attacker ~= self.parent then return end
-
+	
 	local target = keys.target
 	if not target or target:IsNull() then return end
 	if target ~= self.target then
@@ -247,11 +242,14 @@ function modifier_silvername_w_facet_1_boost:OnAttackLanded(keys)
 		return
 	end
 
-	if not target:IsRealHero() then
+	if not target:IsRealHero() or target:IsIllusion() then
 		self:Destroy()
 		return
 	end
-
+	if self.parent:IsIllusion() then
+		self:Destroy()
+		return
+	end
 	local attackerPlayerID = self.parent:GetPlayerOwnerID()
 	local victimPlayerID   = target:GetPlayerOwnerID()
 

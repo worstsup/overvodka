@@ -1620,7 +1620,7 @@
         "AttackAnimationPoint"  "0.3"
         "AttackAcquisitionRange" "600"
         "AttackRange"           "175"
-        "Ability1"					"hill_troll_rally"				// Ability 1
+        "Ability1"				"generic_hidden"
        
         // Bounty
         //----------------------------------------------------------------
@@ -4948,5 +4948,38 @@
 
 		"ImmuneToOmnislash"                                   "1"
 		"UntargetableByExorcismSpirits"                       "1"
+	}
+
+	"npc_silvername_chair"
+	{
+		"BaseClass"					"npc_dota_base_additive"
+		"Model"						"models/props_structures/kings_chair.vmdl"
+		"SoundSet"					""
+		"ModelScale"				"0.5"
+		"Level"						"4"
+		"IsSummoned"				"1"
+		"IsAncient"					"1"
+		"IsOther"					"1"
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"33"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"BountyXP"					"0"	
+		"BountyGoldMin"				"0"	
+		"BountyGoldMax"				"0"	
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"HealthBarOffset"			"250"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"330"
+		"MovementTurnRate"			"0.9"	
+		"StatusHealth"				"800"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"		
+		"StatusManaRegen"			"0"
+		"TeamName"					"DOTA_TEAM_BADGUYS"	
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"800"
+		"VisionNighttimeRange"		"800"
 	}
 }	

@@ -3804,6 +3804,12 @@
 	//													SILVERNAME
 	//===================================================================================================================
 
+	"special_bonus_unique_silvername_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
 	"special_bonus_unique_silvername_2"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -3893,7 +3899,6 @@
 				"targets"
 				{
 					"value"	"1"
-					"special_bonus_unique_silvername_5" "+1"
 				}
 				"shard_duration"		"3"
 		}
@@ -3979,6 +3984,7 @@
 		"AbilityValues"
 		{
 				"duration"          "6.0 6.5 7.0"
+				"damage"			"60 70 80"
 				"inner_radius"      "300"
 				"outer_radius"      "750"
 				"radius_tooltip"
@@ -4024,49 +4030,89 @@
 				}
 		}
 	}
-
 	//=================================================================================================================
-	// МУРЛОК-ПОЛКОВОДЕЦ
+	// ПРИЗВАТЬ МЭРЛОКОВ
 	//=================================================================================================================
-	"silvername_murloc"
+	"silvername_q_facet_2"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/silvername/silvername_murloc"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"ScriptFile"					"heroes/silvername/silvername_q_facet_2"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"			"murloc"
-		"AbilityManaCost"				"35 40 45 50"
+		"AbilityManaCost"				"70 100 130 160"
 		"AbilityCastPoint"				"0.4"
+		"AbilityCooldown"				"25"
+		"AbilityCastRange"				"200"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityValues"
 		{
+				"count"
+				{
+					"value"	"2 4 6 8"
+					"special_bonus_unique_silvername_1"	"+2"
+				}
+				"duration"			"15"
+				"base_hp" 			"225 275 325 375"
+				"base_dmg"			"23 29 35 41"
+				"bat"				"1.2 1.1 1.0 0.9"
+				"as_reduction"		"-6"
+				"dmg_reduction"		"-3"
+				"armor_reduction" 	"-1"
+				"debuff_duration"	"3"
+				"max_stacks"		"4 6 8 10"
+				"pct_towers"		"50"
+				"gold"				"30"
+				"xp"				"40"
+		}
+	}
+	//=================================================================================================================
+	// УЕБАТЬ СТУЛ
+	//=================================================================================================================
+	"silvername_w_facet_2"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_w_facet_2"
+		"AbilityTextureName"			"testosteron"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"				"100 120 140 160"
+		"AbilityValues"
+		{
+				"aggro_radius"
+				{
+					"value"	"315 340 375 400"
+					"special_bonus_unique_silvername_3"	"+100"
+					"affected_by_aoe_increase"	"1"
+				}
+				"reflect_radius"
+				{
+					"value"	"400 475 550 625"
+					"special_bonus_unique_silvername_4" "+200"
+					"affected_by_aoe_increase"	"1"
+				}
+				"reflect_pct"
+				{
+					"value"	"55 65 75 85"
+					"special_bonus_unique_silvername_7"	"+50"
+				}
+				"duration"          	"1.75 2.25 2.75 3.25"
+				"chair_search_radius"	"1000"
+				"AbilityCastRange"
+				{
+					"value"	"315 340 375 400"
+					"special_bonus_unique_silvername_3"	"+100"
+					"affected_by_aoe_increase"	"1"
+				}
 				"AbilityCooldown"
 				{
-					"value"	"10 8 6 4"
-					"special_bonus_unique_silvername_5" "-2"
+					"value"	"36 34 32 30"
+					"special_bonus_unique_silvername_2" "-6"
 				}
-				"duration"
-				{
-					"value"	"20"
-					"special_bonus_unique_silvername_3" "+10"
-				}
-				"base_hp"
-				{
-					"value"	"100 200 300 400"
-					"special_bonus_unique_silvername_2" "+150"
-				}
-				"base_dmg"
-				{
-					"value"	"10 20 30 40"
-				}
-				"phase"
-				{
-					"value"   "0"
-					"special_bonus_facet_silvername_q"	"+35"
-				}
-				"pct_towers"	"50"
-				"gold"	"25"
-				"xp"	"40"
 		}
 	}
 	//=================================================================================================================
@@ -9689,6 +9735,36 @@
 		"AbilityCooldown"				"0.3"
 	}
 	//=================================================================================================================
+	// XXL
+	//=================================================================================================================
+	"peterka_xxl"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"heroes/5opka/peterka_xxl"
+		"AbilityTextureName"		"peterka_xxl"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"	    "SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"			"22 20 18 16"
+		"AbilityManaCost"			"80 100 120 140"
+		"AbilityValues"
+		{
+			"fly_time"				"0.6"
+			"stun_duration"			"0.5 0.6 0.7 0.8"
+			"damage"				"100 140 180 220"
+			"damage_per_hero"		"20 42 60 80"
+			"damage_per_unit"		"5 10 15 20"
+			"cast_range"			"650 700 750 800"
+			"radius"
+			{
+				"value"	"350"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+	//=================================================================================================================
 	// НЕ ТРОГАЮ МОНЕТЫ
 	//=================================================================================================================
 	"peterka_w"
@@ -9697,8 +9773,11 @@
 		"ScriptFile"					"heroes/5opka/peterka_w"
 		"AbilityTextureName"			"peterka_w"
 		"IsBreakable"					"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"MaxLevel"						"4"
+		"Innate"						"1"
+		"DependentOnAbility"			"peterka_r"
 		"AbilityValues"
 		{
 				"radius"			"375 450 525 600"
@@ -9721,6 +9800,7 @@
 					"value"	"1.0"
 					"special_bonus_unique_peterka_8" "+0.5"
 				}
+				"dmg"	"20"
 		}
 	}
 	//=================================================================================================================
@@ -9732,7 +9812,10 @@
 		"ScriptFile"					"heroes/5opka/peterka_w_dota"
 		"AbilityTextureName"			"peterka_w"
 		"IsBreakable"					"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"MaxLevel"						"4"
+		"Innate"						"1"
+		"DependentOnAbility"			"peterka_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityValues"
 		{
@@ -9756,6 +9839,7 @@
 					"value"	"1"
 					"special_bonus_unique_peterka_8" "+1"
 				}
+				"dmg"	"20"
 		}
 	}
 	//=================================================================================================================
@@ -10003,6 +10087,7 @@
 				"fissure_duration"
 				{
 					"value"	"5.0 6.0 7.0 8.0"
+					"special_bonus_facet_sans_e" "-50%"
 				}
 				"fissure_radius"				"250"
 				"stun_duration"
@@ -10014,6 +10099,17 @@
 				{
 					"value"	"0"
 					"special_bonus_facet_sans_w" "+1"
+				}
+				"facet_square"
+				{
+					"value"	"0"
+					"special_bonus_facet_sans_e" "+1"
+				}
+				"square_size_facet"
+				{
+					"value"	"0"
+					"special_bonus_facet_sans_e" "+500"
+					"RequiresFacet"	"facet_sans_e"
 				}
 		}
 	}
@@ -10080,7 +10176,6 @@
 				"facet_blue"
 				{
 					"value"	"0"
-					"special_bonus_facet_sans_e" "+1"
 				}
 		}
 	}

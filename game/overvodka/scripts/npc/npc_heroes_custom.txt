@@ -920,16 +920,16 @@
 		"VersusScale"			"0.95"
 		"SimilarHeroes"  "35,34,68"
 		"GibType"		"fire"
-		"Ability1"		"silvername_q_facet_1"
-		"Ability2"		"silvername_w_facet_1"
-		"Ability3"		"silvername_e_facet_1"
+		"Ability1"		"generic_hidden"
+		"Ability2"		"generic_hidden"
+		"Ability3"		"generic_hidden"
 		"Ability4"		"generic_hidden"
-		"Ability5"		"silvername_innate_facet_1"
-		"Ability6"		"silvername_r_facet_1"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"generic_hidden"
 		"Ability7"		"generic_hidden"
 		"Ability8"		"generic_hidden"
 		"Ability9"		"generic_hidden"
-		"Ability10"		"special_bonus_exp_boost_30"
+		"Ability10"		"special_bonus_unique_silvername_1"
 		"Ability11"		"special_bonus_unique_silvername_2"
 		"Ability12"		"special_bonus_unique_silvername_3"
 		"Ability13"		"special_bonus_unique_silvername_4"
@@ -940,18 +940,66 @@
 		"BotImplemented"	""
 		"Facets"
 		{
-			"silvername_e"
+			"silvername_facet_1"
 			{
 				"Icon"				"barrier"
 				"Color"				"Red"
 				"GradientID"		"2"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"silvername_q_facet_1"
+						"AbilityIndex"	"0"
+						"AutoLevelAbility" "false"
+					}
+					"Ability2"
+					{
+						"AbilityName"	"silvername_w_facet_1"
+						"AbilityIndex"	"1"
+						"AutoLevelAbility" "false"
+					}
+					"Ability3"
+					{
+						"AbilityName"	"silvername_e_facet_1"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+					"Ability4"
+					{
+						"AbilityName"	"silvername_innate_facet_1"
+						"AbilityIndex"	"4"
+						"AutoLevelAbility" "true"
+					}
+					"Ability5"
+					{
+						"AbilityName"	"silvername_r_facet_1"
+						"AbilityIndex"	"5"
+						"AutoLevelAbility" "false"
+					}
+				}
 			}
 
-			"silvername_q" 
+			"silvername_facet_2"
 			{
 				"Icon"				"nuke"
 				"Color"				"Red"
 				"GradientID"		"1"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName" "silvername_q_facet_2"
+						"AbilityIndex"	"0"
+						"AutoLevelAbility" "false"
+					}
+					"Ability2"
+					{
+						"AbilityName" "silvername_w_facet_2"
+						"AbilityIndex"	"1"
+						"AutoLevelAbility" "false"
+					}
+				}
 			}
 			"phoenix_facet_immolate"
 			{
@@ -2175,12 +2223,12 @@
 		"GibType"		"ethereal"
 		"Ability1"		"peterka_q"
 		"Ability2"		"peterka_e"
-		"Ability3"		"peterka_w"
+		"Ability3"		"peterka_xxl"
 		"Ability4"		"peterka_shard"
-		"Ability5"		"peterka_innate"
+		"Ability5"		"peterka_w"
 		"Ability6"		"peterka_r"
 		"Ability7"		"peterka_e_release"
-		"Ability8"		"peterka_w_dota"
+		"Ability8"		"generic_hidden"
 		"Ability10"		"special_bonus_mp_regen_250"
 		"Ability11"		"special_bonus_unique_peterka_2"
 		"Ability12"		"special_bonus_unique_peterka_3"
@@ -2271,7 +2319,7 @@
 		{
 			"sans_e"
 			{
-				"Icon"				"area_of_effect"
+				"Icon"				"chrono_cube"
 				"Color"				"Blue"
 				"GradientID"		"1"
 			}
