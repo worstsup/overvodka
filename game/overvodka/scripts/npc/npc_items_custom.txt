@@ -2065,17 +2065,17 @@
 	}
 	"item_govno"
 	{
-    "BaseClass"                     "item_datadriven"
-    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "Model"                         "models/props_gameplay/red_box.vmdl" 
-    "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"            "govno"
-	"AbilityCooldown"				"0.6"
-    "ItemCost"                      "7550"
+		"BaseClass"                     "item_datadriven"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model"                         "models/props_gameplay/red_box.vmdl" 
+		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"            "govno"
+		"AbilityCooldown"				"0.6"
+		"ItemCost"                      "7550"
 		"AbilityValues"
 		{
 				"dodge_chance_pct"			"20"
-				"bonus_movement_speed"		"10"
+		    	"bonus_movement_speed"		"10"
 				"bonus_strength"			"10"
 				"bonus_agility"				"28"
 				"bonus_health"				"250"
@@ -2083,33 +2083,33 @@
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
 		}
-	
+
 		"Modifiers"
 		{
 			"modifier_govno"
 			{
-            "Passive"           "1"
-            "IsHidden"          "1"
-            "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-            
-            "Properties"
+				"Passive"           "1"
+				"IsHidden"          "1"
+				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+				
+				"Properties"
 				{
-                "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%bonus_movement_speed"
-				"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"
-                "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_agility"
-				"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-				"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_hpregen"
-				"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%bonus_magic_resist"
-				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%bonus_movement_speed"
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_agility"
+					"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_hpregen"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%bonus_magic_resist"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
 				}
 			}
 			"modifier_backtrack_datadriven"
 			{
 				"Passive"	"1"
 				"IsHidden"	"1"
-	
+		
 				"ThinkInterval"		"0.03"
-	
+		
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -2118,13 +2118,13 @@
 						"Function"		"BacktrackHealth"
 					}
 				}
-	
+		
 				"OnTakeDamage"
 				{
 					"Random"
 					{
 						"Chance"	"%dodge_chance_pct"
-	
+
 						"OnSuccess"
 						{
 							"FireEffect"
@@ -2133,7 +2133,7 @@
 								"EffectAttachType"	"follow_origin"
 								"Target"		"CASTER"
 							}
-	
+		
 							"RunScript"
 							{
 								"ScriptFile"	"items/item_govno.lua"

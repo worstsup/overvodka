@@ -999,6 +999,12 @@
 						"AbilityIndex"	"1"
 						"AutoLevelAbility" "false"
 					}
+					"Ability3"
+					{
+						"AbilityName" "silvername_e_facet_2"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
 				}
 			}
 			"phoenix_facet_immolate"

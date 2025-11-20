@@ -4116,6 +4116,33 @@
 		}
 	}
 	//=================================================================================================================
+	// ВЕТРА
+	//=================================================================================================================
+	"silvername_e_facet_2"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/silvername/silvername_e_facet_2"
+		"AbilityTextureName"    "sans_e"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"	"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"       "17"
+		"AbilityManaCost"       "75"
+		"AbilityCastPoint"		"0.2"
+		"AbilityValues"
+		{
+			"duration"		"7"
+			"chance"        "17"
+			"bonus_damage"  "10 20 30 40"
+			"slow"          "100"
+			"slow_duration" "0.4"
+			"aura_radius"   "10000"
+		}
+	}
+
+	//=================================================================================================================
 	// ПОЛКОВОДЕЦ (ПАССИВКА МУРЛОКА)
 	//=================================================================================================================
 	"hill_troll_rally"
@@ -9419,7 +9446,7 @@
 				"spirits_slow"
 				{
 					"value"	"0"
-					"special_bonus_scepter"	"+30"
+					"special_bonus_scepter"	"+100"
 					"RequiresScepter"	"1"
 				}
 				"spirits_slow_duration"
@@ -9458,11 +9485,11 @@
 			{
 				"value"				"125 150 175 200"
 			}
-			"revolution_time"			"5.0 5.0 5.0 5.0"
-			"min_range"					"600"
+			"revolution_time"			"2.0"
+			"min_range"					"500"
 			"max_range"					
 			{
-					"value"		"600"
+					"value"		"500"
 			}
 			"hero_hit_radius"			"110"
 			"explode_radius"
@@ -9478,15 +9505,15 @@
 			"spirit_amount"			"5"
 			"scepter_slow_pct"
 			{
-				"value"			"15"
+				"value"			"100"
 			}
 			"scepter_slow_duration"
 			{
-				"value"			"0.3"
+				"value"			"0.5"
 			}
 			"AbilityManaCost"				
 			{
-				"value"							"0"
+				"value"			"0"
 			}
 			"AbilityCooldown"				
 			{
@@ -14351,8 +14378,8 @@
 		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"      "SPELL_DISPELLABLE_YES"
 		"AbilityCastRange"          "399"
-		"AbilityCooldown"           "15 14 13 12"
-		"AbilityManaCost"           "60 80 100 120"
+		"AbilityCooldown"           "11 10 9 8"
+		"AbilityManaCost"           "60 70 80 90"
 		"AbilityCastPoint"			"0.3"
 		"HasScepterUpgrade"			"1"
 		"AbilityValues"

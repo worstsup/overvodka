@@ -37,7 +37,7 @@ function modifier_generic_lifesteal_lua:OnTakeDamage( params )
 	if self.attack_record ~= params.record then return end
 	local heal = params.damage * self.lifesteal
 	if params.unit:IsCreep() then
-		heal = heal * 0.5
+		heal = heal * 0.6
 	end
 	self.parent:HealWithParams(heal, self.ability, true, true, self.parent, false)
 	self:PlayEffects2()
