@@ -3016,10 +3016,6 @@
 		"DOTA_Tooltip_Facet_phoenix_facet_immolate_Description" "Срабатывание способности СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА применяет на владельца сильное развеивание."
 		"DOTA_Tooltip_ability_phoenix_dying_light"						"ОРЛИНОЕ ЧУТЬЁ"
 		"DOTA_Tooltip_ability_phoenix_dying_light_Description"			"Срабатывание способности СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА применяет на владельца сильное развеивание."
-		"DOTA_Tooltip_ability_rubick_spell_steal_Facet_rubick_mana"  "Украденные способности расходуют меньше маны."
-		"DOTA_Tooltip_Facet_rubick_mana"							"ЛЬГОТА"	
-		"DOTA_Tooltip_Facet_rubick_mana_Description"						"Украденные способности расходуют меньше маны."
-		"DOTA_Tooltip_Facet_rubick_radius"						"НУЖНЫЙ РАЗМЕР"	
 		
 		"DOTA_Tooltip_ability_chef_shout"  "НАОРАТЬ НА ОГУЗКА"
 		"DOTA_Tooltip_ability_chef_shout_Description"  "Шеф орёт на выбранного огузка, нанося ему урон и накладывая оглушение. Также наносится дополнительный урон, равный %pctmana%%% от макс. маны Шефа."
@@ -3353,6 +3349,12 @@
 
 		"DOTA_Tooltip_ability_rubick_spell_steal" "СМЕНА КОДА"
 		"DOTA_Tooltip_ability_rubick_spell_steal_Description" "Мрус переписывает код своего персонажа, приобретая последнюю способность, использованную выбранным противником."
+		"DOTA_Tooltip_modifier_rubick_spell_steal" "Смена кода"
+		"DOTA_Tooltip_ability_rubick_spell_steal_Facet_rubick_frugal_filch"  "Украденные способности расходуют меньше маны."
+		"DOTA_Tooltip_Facet_rubick_frugal_filch"							"ЛЬГОТА"	
+		"DOTA_Tooltip_Facet_rubick_frugal_filch_Description"						"Украденные способности расходуют меньше маны."
+		"DOTA_Tooltip_Facet_rubick_arcane_accumulation"						"НУЖНЫЙ РАЗМЕР"
+		"DOTA_Tooltip_Facet_rubick_arcane_accumulation_Description"						"Применив способность, герой на время получит бонус к области действия заклинаний."
 		"DOTA_Tooltip_ability_worstsup_q" "СТОПАНТРЭ"
 		"DOTA_Tooltip_ability_worstsup_q_Description" "Мрус открывает консоль и прописывает команду <font color='#FFFFFF'>host_timescale 0</font>, из-за которой время для противников полностью останавливается и ускоряется для мруса."
 		"DOTA_Tooltip_modifier_worstsup_q_effect" "Время остановлено"
