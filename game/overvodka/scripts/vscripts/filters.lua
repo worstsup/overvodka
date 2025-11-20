@@ -13,8 +13,8 @@ FilterManager.filternames = {
 	'Healing',
 	'ItemAddedToInventory',
 	'ModifierGained',
-	'ModifyExperience',
-	'ModifyGold',
+	'ModifyExperience', -- deleted
+	'ModifyGold', -- deleted
 	'RuneSpawn',
 	'TrackingProjectile',	
 }
@@ -36,8 +36,6 @@ function FilterManager:Init()
 	entity:SetHealingFilter( self.MainHealingFilter, self )
 	entity:SetItemAddedToInventoryFilter( self.MainItemAddedToInventoryFilter, self )
 	entity:SetModifierGainedFilter( self.MainModifierGainedFilter, self )
-	entity:SetModifyExperienceFilter( self.MainModifyExperienceFilter, self )
-	entity:SetModifyGoldFilter( self.MainModifyGoldFilter, self )
 	entity:SetRuneSpawnFilter( self.MainRuneSpawnFilter, self )
 	entity:SetTrackingProjectileFilter( self.MainTrackingProjectileFilter, self )
 end
@@ -78,16 +76,6 @@ function FilterManager:AddModifierGainedFilter( func, context )
 	self.filters[7][key] = {func = func, context = context}
 	return key
 end
-function FilterManager:AddModifyExperienceFilter( func, context )
-	local key = DoUniqueString( 'filtermanager' )
-	self.filters[8][key] = {func = func, context = context}
-	return key
-end
-function FilterManager:AddModifyGoldFilter( func, context )
-	local key = DoUniqueString( 'filtermanager' )
-	self.filters[9][key] = {func = func, context = context}
-	return key
-end
 function FilterManager:AddRuneSpawnFilter( func, context )
 	local key = DoUniqueString( 'filtermanager' )
 	self.filters[10][key] = {func = func, context = context}
@@ -120,12 +108,6 @@ function FilterManager:RemoveItemAddedToInventoryFilter( key )
 end
 function FilterManager:RemoveModifierGainedFilter( key )
 	self.filters[7][key] = nil
-end
-function FilterManager:RemoveModifyExperienceFilter( key )
-	self.filters[8][key] = nil
-end
-function FilterManager:RemoveModifyGoldFilter( key )
-	self.filters[9][key] = nil
 end
 function FilterManager:RemoveRuneSpawnFilter( key )
 	self.filters[10][key] = nil
@@ -223,34 +205,6 @@ function FilterManager:MainModifierGainedFilter( handle )
 	local result = true
 	-- iterate over filters
 	for _,data in pairs(self.filters[7]) do
-		-- hand over filters
-		local res = data.func( data.context, handle )
-
-		-- if there is a filter that return false, the main filter will return false
-		result = result and res
-	end
-
-	return result
-end
-
-function FilterManager:MainModifyExperienceFilter( handle )
-	local result = true
-	-- iterate over filters
-	for _,data in pairs(self.filters[8]) do
-		-- hand over filters
-		local res = data.func( data.context, handle )
-
-		-- if there is a filter that return false, the main filter will return false
-		result = result and res
-	end
-
-	return result
-end
-
-function FilterManager:MainModifyGoldFilter( handle )
-	local result = true
-	-- iterate over filters
-	for _,data in pairs(self.filters[9]) do
 		-- hand over filters
 		local res = data.func( data.context, handle )
 

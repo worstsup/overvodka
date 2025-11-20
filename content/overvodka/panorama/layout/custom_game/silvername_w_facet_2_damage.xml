@@ -1,0 +1,9 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/silvername_w_facet_2_damage.css" />
+    </styles>
+
+    <Panel class="SilvernameDamageTitle" hittest="false">
+        <Label id="DamageText" class="SilvernameDamageText" text="0" />
+    </Panel>
+</root>

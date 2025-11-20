@@ -9,27 +9,8 @@ Store.Items = {
     skin_4 = { id = "skin_4", name = "#Store_Item_skin_4_name", type = "skins", price = 200, image = "file://{images}/custom_game/store/skins/skin_4.png", hero = "npc_dota_hero_ogre_magi", modifier = "modifier_overvodka_store_skin_4" },
     skin_5 = { id = "skin_5", name = "#Store_Item_skin_5_name", type = "skins", price = 230, image = "file://{images}/custom_game/store/skins/skin_5.png", hero = "npc_dota_hero_brewmaster", modifier = "modifier_overvodka_store_skin_5" },
     skin_6 = { id = "skin_6", name = "#Store_Item_skin_6_name", type = "skins", price = 420, image = "file://{images}/custom_game/store/skins/skin_6.png", hero = "npc_dota_hero_spirit_breaker", modifier = "modifier_overvodka_store_skin_6" },
-    sans_arcana = {
-        id = "sans_arcana",
-        name = "#Store_Item_sans_arcana",
-        type = "skins",
-        price = 0,
-        prime_only = true,
-        image = "file://{images}/custom_game/store/skins/sans_arcana.png",
-        hero = "npc_dota_hero_morphling",
-        modifier = "modifier_sans_arcana"
-    },
-
-    invincible_arcana = {
-        id = "invincible_arcana",
-        name = "#Store_Item_invincible_arcana",
-        type = "skins",
-        price = 0,
-        prime_only = true,
-        image = "file://{images}/custom_game/store/skins/invincible_arcana.png",
-        hero = "npc_dota_hero_void_spirit",
-        modifier = "modifier_invincible_arcana"
-    },
+    sans_arcana = { id = "sans_arcana", name = "#Store_Item_sans_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/sans_arcana.png", hero = "npc_dota_hero_morphling", modifier = "modifier_sans_arcana" },
+    invincible_arcana = { id = "invincible_arcana", name = "#Store_Item_invincible_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/invincible_arcana.png", hero = "npc_dota_hero_void_spirit", modifier = "modifier_invincible_arcana" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
@@ -347,12 +328,9 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
     Request:Send(function(Result)
         local status = tonumber(Result.StatusCode) or 0
 
-        -- Любой HTTP != 200
         if status ~= 200 then
             ifprint("HTTP error: "..tostring(status).." body: "..tostring(Result.Body))
 
-            -- Пытаемся распарсить JSON даже в ошибках,
-            -- чтобы достать .error с бэкенда ("Not enough coins" и т.п.)
             local parsedBody = nil
             local ok, decoded = pcall(json.decode, Result.Body or "")
             if ok and decoded then
@@ -365,7 +343,6 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
                 error  = parsedBody and parsedBody.error or nil,
             }
 
-            -- 4xx — логическая ошибка, РЕТРАИТЬ НЕ НАДО
             if status >= 400 and status < 500 then
                 if callback then
                     callback(errTable, parsedBody)
@@ -373,7 +350,6 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
                 return
             end
 
-            -- 5xx/прочие сетевые косяки — как раньше, с ретраями
             local nextAttempt = attempt + 1
             if nextAttempt <= SERVER_MAX_ATTEMPTS then
                 Timers:CreateTimer(SERVER_ATTEMPT_INTERVAL, function()
@@ -385,7 +361,6 @@ function Store:SendRequest(url, data, callback, debugEnabled, attempt)
             return
         end
 
-        -- 200 OK: как раньше
         local success, ResultData = pcall(json.decode, Result.Body)
         if not success or not ResultData then
             ifprint("JSON decode error")

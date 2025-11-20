@@ -71,8 +71,8 @@ function modifier_dota_ability_xp_granter:OnIntervalThink()
 
             local newXp = ChangeValueByTeamPlace(Xp, Team)
 
-            Unit:ModifyGold(Gold, false, DOTA_ModifyGold_GameTick)
-            Unit:AddExperience(newXp, DOTA_ModifyXP_Unspecified, false, false)
+            Unit:ModifyGoldFiltered(Gold, false, DOTA_ModifyGold_GameTick)
+            Unit:AddExperience(newXp, DOTA_ModifyXP_Unspecified, false, true)
         end
     end
 end

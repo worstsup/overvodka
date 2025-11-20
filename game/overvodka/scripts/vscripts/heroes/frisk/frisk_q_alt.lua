@@ -117,7 +117,9 @@ function modifier_frisk_q_alt_charm:OnIntervalThink()
         self:Destroy()
         return
     end
-    parent:MoveToNPC(caster)
+    if not parent:IsDebuffImmune() then
+        parent:MoveToNPC(caster)
+    end
     self._acc = self._acc + self.move_tick
     if self._acc + 1e-6 >= self.interval then
         self._acc = self._acc - self.interval

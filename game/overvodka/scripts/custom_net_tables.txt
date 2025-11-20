@@ -12,5 +12,6 @@
 		"voice_data",
 		"mute_data",
 		"ov_flags",
+		"overvodka_events",
 	]
 }

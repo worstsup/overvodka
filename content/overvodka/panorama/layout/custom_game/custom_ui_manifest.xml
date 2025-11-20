@@ -18,6 +18,7 @@
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/visitor/visitor_screamer.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/voice_loud_line/voice_loud_line.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/overvodka_events_timers/overvodka_events_timers.xml" />
 		<CustomUIElement type="GameSetup"			layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
 		<CustomUIElement type="FlyoutScoreboard"	layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml" />
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
@@ -27,6 +28,6 @@
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
-		<Image id="gamemode" class="SeqImg" src="file://{images}/custom_game/store/cases/case_pets.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/images/items/silvername_chair.png" />
 	</Panel>
 </root>

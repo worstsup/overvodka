@@ -7,39 +7,24 @@ end
 
 modifier_ebanko_innate = class({})
 
-function modifier_ebanko_innate:IsHidden()
-	return false
-end
-function modifier_ebanko_innate:IsDebuff()
-	return false
-end
-function modifier_ebanko_innate:IsPurgable()
-	return false
-end
+function modifier_ebanko_innate:IsHidden() return false end
+function modifier_ebanko_innate:IsDebuff() return false end
+function modifier_ebanko_innate:IsPurgable() return false end
 
-function modifier_ebanko_innate:OnCreated( kv )
+function modifier_ebanko_innate:OnCreated()
 	self.radius = self:GetAbility():GetSpecialValueFor( "steal_range" )
 	self.steal = 1
-	if not IsServer() then return end
 end
 
-function modifier_ebanko_innate:OnRefresh( kv )
+function modifier_ebanko_innate:OnRefresh()
 	self.radius = self:GetAbility():GetSpecialValueFor( "steal_range" )
 	self.steal = 1
-	if not IsServer() then return end
-end
-
-function modifier_ebanko_innate:OnRemoved()
-end
-
-function modifier_ebanko_innate:OnDestroy()
 end
 
 function modifier_ebanko_innate:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_EVENT_ON_HERO_KILLED,
 	}
-	return funcs
 end
 
 function modifier_ebanko_innate:OnHeroKilled( params )

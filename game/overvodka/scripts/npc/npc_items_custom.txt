@@ -3048,4 +3048,54 @@
 			"barrier_duration"		"5"
 		}
   	}
+	"item_recipe_silvername_chair"
+	{
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName" 			"recipe"
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"ItemCost"						"400"
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_silvername_chair"
+		"ItemRequirements"
+		{
+			"01"						"item_vanguard;item_vladmir;item_void_stone"
+		}
+	}
+	"item_silvername_chair"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/silvername_chair"
+		"ItemCost"						"5000"
+		"ItemKillable" 					"1"
+		"ItemDroppable" 				"1"
+		"ItemSellable"				  	"0"
+		"ItemPurchasable"		 		"0"
+		"AbilityTextureName"			"silvername_chair"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCastRange"				"500"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"100"
+		
+		"AbilityValues"
+		{
+			"bonus_health"				"250"
+			"bonus_health_regen"		"4.5"
+			"chance"					"60"
+			"block_melee"				"50"
+			"block_range"				"25"
+
+			"bonus_armor"				"2"
+			"bonus_mana_regen"			"2.5"
+			"aura_radius"				"1200"
+			"aura_armor"				"2"
+			"aura_mana_regen"			"1"
+			"aura_damage_pct"			"18"
+			"aura_lifesteal_heroes"		"20"
+			"aura_lifesteal_creeps"		"12"
+
+			"chair_hp_pct"				"60"
+			"chair_duration"			"12"
+		}
+	}
 }

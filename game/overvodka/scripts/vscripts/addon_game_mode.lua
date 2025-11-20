@@ -31,6 +31,7 @@ require('util/functions')
 require('quests')
 require('store')
 require('vote')
+require('overvodka_events')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -280,14 +281,17 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainConstantManaRegen( 0 )
+	GameRules:GetGameModeEntity():SetModifyExperienceFilter( Dynamic_Wrap(OvervodkaGameMode, "XPToGoldFilter"), self )
+	GameRules:GetGameModeEntity():SetModifyGoldFilter( Dynamic_Wrap(OvervodkaGameMode, "GoldTrackFilter"), self )
 	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap( OvervodkaGameMode, "BountyRunePickupFilter" ), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap( OvervodkaGameMode, "ExecuteOrderFilter" ), self )
 
+	GameRules:SetFilterMoreGold( true )
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled( true )
 	GameRules:GetGameModeEntity():SetUseTurboCouriers( true )
 	GameRules:GetGameModeEntity():SetCanSellAnywhere( true )
@@ -800,9 +804,71 @@ function spawnunits(campname)
     end
 end
 
---------------------------------------------------------------------------------
--- Event: Filter for inventory full
---------------------------------------------------------------------------------
+function OvervodkaGameMode:GoldTrackFilter(event)
+    local gold      = event.gold or 0
+    local playerID  = event.player_id_const
+
+    if gold <= 0 then
+        return true
+    end
+    if playerID ~= nil and playerID ~= -1 then
+        local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+        if hero and not hero:IsNull() then
+            if hero:HasTalent("special_bonus_unique_silvername_2") then
+                local new_gold = math.floor(gold * 1.2 + 0.5)
+                event.gold = new_gold
+            end
+        end
+    end
+
+    return true
+end
+
+function OvervodkaGameMode:XPToGoldFilter(event)
+    local xp         = event.experience or 0
+    local playerID   = event.player_id_const
+    local heroIndex  = event.hero_entindex_const
+    if xp <= 0 then
+        return true
+    end
+
+    if not heroIndex or heroIndex == 0 then
+        return true
+    end
+
+    local hero = EntIndexToHScript(heroIndex)
+    if not hero or hero:IsNull() then
+        return true
+    end
+
+	if hero:GetUnitName() ~= "npc_dota_hero_phoenix" then
+		return true
+	end
+
+    if not hero:IsRealHero() or hero:IsTempestDouble() or hero:IsClone() then
+        return true
+    end
+
+	if playerID ~= nil and playerID ~= -1 then
+        if hero:HasTalent("special_bonus_unique_silvername_1") then
+            local new_xp = math.floor(xp * 1.3 + 0.5)
+            event.experience = new_xp
+        end
+    end
+
+    if hero:GetLevel() < 35 then
+        return true
+    end
+    local gold_float = xp * 3 / 10
+    local gold = math.floor(gold_float + 0.5)
+    if gold > 0 and playerID ~= nil and playerID ~= -1 then
+		hero:ModifyGold(gold, false, 0)
+    end
+
+    return true
+end
+
+
 function OvervodkaGameMode:ExecuteOrderFilter( filterTable )
 	local orderType = filterTable["order_type"]
 	if ( orderType ~= DOTA_UNIT_ORDER_PICKUP_ITEM or filterTable["issuer_player_id_const"] == -1 ) then

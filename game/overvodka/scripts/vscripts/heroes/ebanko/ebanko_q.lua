@@ -60,12 +60,11 @@ function modifier_ebanko_q:OnIntervalThink()
 end
 
 function modifier_ebanko_q:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_ROOTED] = true,
 		[MODIFIER_STATE_DISARMED] = true,
 		[MODIFIER_STATE_INVISIBLE] = false,
 	}
-	return state
 end
 
 function modifier_ebanko_q:GetEffectName()
@@ -86,11 +85,10 @@ function modifier_ebanko_q_slow:IsHidden() return false end
 function modifier_ebanko_q_slow:IsDebuff() return true end
 function modifier_ebanko_q_slow:IsPurgable() return true end
 function modifier_ebanko_q_slow:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 	}
-	return funcs
 end
 
 function modifier_ebanko_q_slow:GetModifierMoveSpeedBonus_Percentage()

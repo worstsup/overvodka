@@ -454,6 +454,23 @@ function HasArcana(HeroName){
     }
 }
 
+function HasModifierOnUnit(entIndex, modifier)
+{
+    if (!Entities.IsValidEntity(entIndex))
+        return false;
+
+    const numBuffs = Entities.GetNumBuffs(entIndex);
+    for (let i = 0; i < numBuffs; i++)
+    {
+        const buff = Entities.GetBuff(entIndex, i);
+        if (Buffs.GetName(entIndex, buff) === modifier)
+        {
+            return buff;
+        }
+    }
+    return false;
+}
+
 function HasModifier(heroName, modifier)
  {
     const heroes = Entities.GetAllHeroEntities();
