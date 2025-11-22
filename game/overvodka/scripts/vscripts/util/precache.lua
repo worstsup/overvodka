@@ -142,6 +142,11 @@ PrecacheUtils.particles = {
 		"particles/units/heroes/hero_phantom_assassin/phantom_assassin_mark_overhead.vpcf",
 		"particles/silvername_w_facet_2_call.vpcf",
 		"particles/nightstalker_ti10_crimson_aura_smoke_new.vpcf",
+		"particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_mjollnir_shield.vpcf",
+		"particles/silvername_e_facet_2_cast.vpcf",
+		"particles/econ/items/faceless_void/faceless_void_bracers_of_aeons/fv_bracers_of_aeons_red_backtrack.vpcf",
+		"particles/silvername_r_facet_2_cast.vpcf",
+		"particles/silvername_r_facet_2_cast2.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -183,6 +188,7 @@ PrecacheUtils.units = {
 	"npc_dota_silvername_clone",
 	"npc_murloc",
 	"npc_silvername_chair",
+	"npc_silvername_garr",
 }
 
 PrecacheUtils.models = {

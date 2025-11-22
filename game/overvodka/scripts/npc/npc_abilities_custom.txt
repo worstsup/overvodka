@@ -3217,7 +3217,7 @@
 	//=================================================================================================================
 	// РАЗБИТЬ МОНИТОР
 	//=================================================================================================================
-	"sahur_r"
+	"sahur_ultimate"
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/sahur/sahur_r"
@@ -3267,7 +3267,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"						"4"
 		"Innate"						"1"
-		"DependentOnAbility"			"sahur_r"
+		"DependentOnAbility"			"sahur_ultimate"
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
@@ -3972,7 +3972,7 @@
 	{
 		"BaseClass"             "ability_lua"
 		"ScriptFile"            "heroes/silvername/silvername_r_facet_1"
-		"AbilityTextureName"    "monkey_king_wukongs_command"
+		"AbilityTextureName"    "silvername_r_facet_1"
 		"AbilityType"			"ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
@@ -4041,7 +4041,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilityTextureName"			"murloc"
+		"AbilityTextureName"			"silvername_q_facet_2"
 		"AbilityManaCost"				"70 100 130 160"
 		"AbilityCastPoint"				"0.4"
 		"AbilityCooldown"				"25"
@@ -4075,7 +4075,7 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/silvername/silvername_w_facet_2"
-		"AbilityTextureName"			"testosteron"
+		"AbilityTextureName"			"silvername_w_facet_2"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
@@ -4122,8 +4122,9 @@
 	{
 		"BaseClass"             "ability_lua"
 		"ScriptFile"            "heroes/silvername/silvername_e_facet_2"
-		"AbilityTextureName"    "sans_e"
+		"AbilityTextureName"    "silvername_e_facet_2"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"SpellDispellableType"	"SPELL_DISPELLABLE_YES"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
@@ -4131,6 +4132,7 @@
 		"AbilityCooldown"       "17"
 		"AbilityManaCost"       "75"
 		"AbilityCastPoint"		"0.2"
+		"HasShardUpgrade"		"1"
 		"AbilityValues"
 		{
 			"duration"		"7"
@@ -4139,6 +4141,80 @@
 			"slow"          "100"
 			"slow_duration" "0.4"
 			"aura_radius"   "10000"
+			"backtrack_pct"
+			{
+				"value"		"0"
+				"special_bonus_shard"	"+17"
+				"RequiresShard"	"1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// КУДА ЯРОСТЬ ДЕТЬ
+	//=================================================================================================================
+	"silvername_r_facet_2"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"             		"heroes/silvername/silvername_r_facet_2"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"            "tasty"
+		"HasShardUpgrade"               "1"
+		"AbilityCooldown"               "85 75 65"
+		"AbilityManaCost"             	"150 200 250"
+		"precache"
+		{
+			"soundfile" "soundevents/vkusno.vsndevts"
+			"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
+			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
+			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
+		}
+		"AbilityValues"
+		{
+			"duration" "20"
+			"speed"
+			{
+				"value"				"550 650 750"
+			}
+			"crit_chance"               "40"
+			"crit_damage"
+			{
+				"value"	"160 200 240"
+				"special_bonus_unique_kachok_6" "+40"
+			}
+			"transformation_time"       "3.0"
+		}
+	}
+	//=================================================================================================================
+	// ЗОЛОТОЙ ГЭР
+	//=================================================================================================================
+	"silvername_scepter"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/silvername/silvername_scepter"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityTextureName"        "sans_scepter"
+		"MaxLevel"                  "4"
+		"AbilityCooldown"           "30"
+		"AbilityManaCost"           "0"
+		"AbilityCastPoint"          "0.3"
+		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
+		"IsGrantedByScepter"		"1"
+		"AbilityValues"
+		{
+			"aura_radius" 	"800"
+			"hp_per_summon"	"50 55 60 65"
+			"health"		"1100 1400 1700 2000"
+			"pull_distance" "50"
+			"movespeed"		"400"
+			"range"			"300"
+			"bat"			"1.1"
+			"gold"			"200"
+			"xp"			"200"
 		}
 	}
 

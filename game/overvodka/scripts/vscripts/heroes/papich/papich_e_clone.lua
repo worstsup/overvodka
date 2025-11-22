@@ -109,7 +109,7 @@ function modifier_papich_e_clone_thinker:IsPurgable()    return false end
 
 function modifier_papich_e_clone_thinker:OnCreated(params)
     if not IsServer() then return end
-    local ice_blast_particle = ParticleManager:CreateParticleForTeam("particles/ancient_apparition_ice_blast_initial_ti5_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetCaster():GetTeamNumber())
+    local ice_blast_particle = ParticleManager:CreateParticle("particles/ancient_apparition_ice_blast_initial_ti5_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(ice_blast_particle, 1, Vector(params.x, params.y, 0))
     self:AddParticle(ice_blast_particle, false, false, -1, false, false)
 end
@@ -263,9 +263,9 @@ function modifier_papich_e_clone_debuff:GetStatusEffectName()
 end
 
 function modifier_papich_e_clone_debuff:OnCreated(params)
-    if not IsServer() then return end
     self.dot_damage = self:GetAbility():GetSpecialValueFor("dot_damage")
     self.kill_percent = self:GetAbility():GetSpecialValueFor("kill_percent")
+    if not IsServer() then return end
     if params.caster_entindex then
         self.caster = EntIndexToHScript(params.caster_entindex)
     else
@@ -306,9 +306,14 @@ end
 function modifier_papich_e_clone_debuff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_DISABLE_HEALING,
+        MODIFIER_PROPERTY_TOOLTIP,
     }
 end
 
 function modifier_papich_e_clone_debuff:GetDisableHealing()
     return 1
+end
+
+function modifier_papich_e_clone_debuff:OnTooltip()
+    return self.kill_percent
 end
