@@ -70,6 +70,7 @@ function peterka_xxl:OnSpellStart()
             if interrupted then return end
 
             local landing_pos = GetGroundPosition(point, caster)
+            GridNav:DestroyTreesAroundPoint(landing_pos, 250, false)
             FindClearSpaceForUnit(caster, landing_pos, true)
 
             caster:EmitSound("Hero_EarthShaker.EchoSlam")

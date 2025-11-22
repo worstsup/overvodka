@@ -1,0 +1,47 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 4
+	m_hFallback = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red_mid.vpcf"
+	m_nFallbackMaxCount = 2
+	m_ConstantColor = [ 255, 255, 255, 175 ]
+	m_nBehaviorVersion = 12
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red_groundglow.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red_dust.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/dragon_knight_transform_red_spotlight_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/dragon_knight_transform_red_coreglow_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/dragon_knight_transform_red_flames01_new.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red_flames02.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red_flash.vpcf"
+		},
+	]
+}

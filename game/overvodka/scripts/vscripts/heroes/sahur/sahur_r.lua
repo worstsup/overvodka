@@ -1,22 +1,11 @@
-sahur_r = class({})
+sahur_ultimate = class({})
 LinkLuaModifier( "modifier_sahur_r", "heroes/sahur/sahur_r", LUA_MODIFIER_MOTION_NONE )
 
-function sahur_r:GetAOERadius()
+function sahur_ultimate:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
 end
 
-function sahur_r:OnAbilityUpgrade( hAbility )
-    if not IsServer() then return end
-    local result = self.BaseClass.OnAbilityUpgrade( self, hAbility )
-    
-    local ability = self:GetCaster():FindAbilityByName("sahur_innate")
-    if ability then
-        ability:SetLevel(ability:GetLevel() + 1)
-    end
-    return result
-end
-
-function sahur_r:OnSpellStart()
+function sahur_ultimate:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
 	CreateModifierThinker(

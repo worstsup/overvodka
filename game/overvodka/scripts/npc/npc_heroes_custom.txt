@@ -678,7 +678,7 @@
 		"Ability3"		"sahur_e"
 		"Ability4"		"sahur_innate"
 		"Ability5"		"sahur_hit"
-		"Ability6"		"sahur_r"
+		"Ability6"		"sahur_ultimate"
 		"Ability7"		""
 		"Ability8"		""
 		"Ability10"		"special_bonus_unique_sahur_1"
@@ -1003,6 +1003,12 @@
 					{
 						"AbilityName" "silvername_e_facet_2"
 						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+					"Ability4"
+					{
+						"AbilityName" "silvername_r_facet_2"
+						"AbilityIndex"	"5"
 						"AutoLevelAbility" "false"
 					}
 				}

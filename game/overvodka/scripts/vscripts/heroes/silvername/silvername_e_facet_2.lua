@@ -14,7 +14,10 @@ function silvername_e_facet_2:OnSpellStart()
 
     caster:AddNewModifier(caster, self, "modifier_silvername_e_facet_2", { duration = self:GetSpecialValueFor("duration") })
 
-    caster:EmitSound("Hero_Windrunner.Windrun")
+    caster:EmitSound("silvername_e_facet_2")
+
+    local p = ParticleManager:CreateParticle("particles/silvername_e_facet_2_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    ParticleManager:ReleaseParticleIndex(p)
 end
 
 
@@ -74,6 +77,14 @@ modifier_silvername_e_facet_2_aura = class({})
 function modifier_silvername_e_facet_2_aura:IsHidden()   return true end
 function modifier_silvername_e_facet_2_aura:IsPurgable() return false end
 
+function modifier_silvername_e_facet_2_aura:GetEffectName()
+    return "particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_mjollnir_shield.vpcf"
+end
+
+function modifier_silvername_e_facet_2_aura:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
+end
+
 function modifier_silvername_e_facet_2_aura:OnCreated()
     if not IsServer() then return end
 
@@ -106,10 +117,72 @@ function modifier_silvername_e_facet_2_buff:IsPurgable() return false end
 function modifier_silvername_e_facet_2_buff:IsDebuff()   return false end
 function modifier_silvername_e_facet_2_buff:IsBuff()     return true end
 
+function modifier_silvername_e_facet_2_buff:OnCreated()
+    self.parent  = self:GetParent()
+    self.caster  = self:GetCaster()
+    self.ability = self:GetAbility()
+    self.isCaster = (self.parent == self.caster)
+
+    if not IsServer() then return end
+    if not self.parent or self.parent:IsNull() then return end
+
+    self.old_hp     = self.parent:GetHealth()
+    self.current_hp = self.old_hp
+
+    if self.isCaster then
+        self:StartIntervalThink(0.03)
+    end
+end
+
+function modifier_silvername_e_facet_2_buff:OnIntervalThink()
+    if not IsServer() then return end
+    if not self.caster or self.caster:IsNull() then return end
+    if not self.parent or self.parent:IsNull() then return end
+    if not self.caster:HasShard() then return end
+
+    self.old_hp     = self.current_hp or self.parent:GetHealth()
+    self.current_hp = self.parent:GetHealth()
+end
+
+function modifier_silvername_e_facet_2_buff:OnDestroy()
+    if not IsServer() then return end
+    self:StartIntervalThink(-1)
+end
+
 function modifier_silvername_e_facet_2_buff:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_ATTACK_LANDED,
+        MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
+end
+
+function modifier_silvername_e_facet_2_buff:OnTakeDamage(params)
+    if not IsServer() then return end
+
+    local parent  = self:GetParent()
+    local caster  = self:GetCaster()
+    local ability = self:GetAbility()
+
+    if not parent or parent:IsNull() then return end
+    if not caster or caster:IsNull() then return end
+    if not ability or ability:IsNull() then return end
+
+    if params.unit ~= parent then return end
+    if parent ~= caster then return end
+    if not caster:HasShard() then return end
+
+    local chance = ability:GetSpecialValueFor("backtrack_pct") or 0
+    if chance <= 0 then return end
+    if not RollPercentage(chance) then return end
+
+    local p = ParticleManager:CreateParticle("particles/econ/items/faceless_void/faceless_void_bracers_of_aeons/fv_bracers_of_aeons_red_backtrack.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    ParticleManager:ReleaseParticleIndex(p)
+
+    local old_hp = self.old_hp or parent:GetHealth()
+    local max_hp = parent:GetMaxHealth()
+    old_hp = math.min(old_hp, max_hp)
+    old_hp = math.max(old_hp, 1)
+    parent:SetHealth(old_hp)
 end
 
 function modifier_silvername_e_facet_2_buff:OnAttackLanded(params)
