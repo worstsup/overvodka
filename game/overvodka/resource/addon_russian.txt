@@ -2121,7 +2121,7 @@
 		"dota_tooltip_modifier_papich_w_enemy"                        "Адекватыч"
 		"dota_tooltip_modifier_papich_w_enemy_description"            "Вы внутри купола, ваш интеллект уменьшен. Скорость атаки: −%dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, Скорость передвижения: −%dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%"
 
-		"DOTA_Tooltip_ability_papich_w_slow"	"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ"
+		"DOTA_Tooltip_ability_papich_w_slow"	"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ:"
 		"DOTA_Tooltip_ability_papich_q_clone" "ДОГОНЯЛЫЧ"
 		"DOTA_Tooltip_ability_papich_q_clone_Description" "Маньякич прыгает вперед, привязывая к месту первую попавшуюся жертву, а при попадании во врага выпускает вокруг себя кинжалы, наносящие урон всем врагам в радиусе %end_damage_radius% и накладывающие на них кровотечение на %blood_duration% сек., наносящее %blood_damage%%% чистого урона от текущего здоровья в секунду."
 		"DOTA_Tooltip_ability_papich_q_clone_pounce_distance" "ДАЛЬНОСТЬ:"
