@@ -983,7 +983,7 @@
 			"silvername_facet_2"
 			{
 				"Icon"				"nuke"
-				"Color"				"Red"
+				"Color"				"Yellow"
 				"GradientID"		"1"
 				"Abilities"
 				{
@@ -1012,6 +1012,12 @@
 						"AutoLevelAbility" "false"
 					}
 					"Ability5"
+					{
+						"AbilityName" "silvername_innate_facet_2"
+						"AbilityIndex"	"4"
+						"AutoLevelAbility" "true"
+					}
+					"Ability6"
 					{
 						"AbilityName" "silvername_r_facet_2"
 						"AbilityIndex"	"5"

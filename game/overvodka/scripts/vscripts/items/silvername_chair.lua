@@ -73,7 +73,7 @@ function item_silvername_chair:OnSpellStart()
     chair:AddNewModifier(caster, self, "modifier_phased", {})
     chair:AddNewModifier(caster, self, "modifier_kill", { duration = duration })
     chair:AddNewModifier(caster, self, "modifier_item_silvername_chair_unit", {})
-
+    chair:EmitSound("silvername_chair")
     caster.silvername_chair_unit = chair
 end
 

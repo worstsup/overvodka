@@ -18,7 +18,7 @@ function silvername_r_facet_2:OnSpellStart()
     ParticleManager:ReleaseParticleIndex(particle)
 
     caster:StartGesture(ACT_DOTA_CAST_ABILITY_2)
-    EmitSoundOn("vkusno", caster)
+    caster:EmitSound("silvername_r_facet_2")
 
     local transform_time = self:GetSpecialValueFor("transformation_time")
     caster:AddNewModifier(caster, self, "modifier_silvername_r_facet_2_transformation", { duration = transform_time })
@@ -178,4 +178,12 @@ function modifier_silvername_r_facet_2_aura:GetModifierMoveSpeedOverride()
     local ability = self.ability
     if not ability or ability:IsNull() then return 0 end
     return ability:GetSpecialValueFor("speed")
+end
+
+function modifier_silvername_r_facet_2_aura:GetEffectName()
+    return "particles/silvername_r_facet_2.vpcf"
+end
+
+function modifier_silvername_r_facet_2_aura:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
 end

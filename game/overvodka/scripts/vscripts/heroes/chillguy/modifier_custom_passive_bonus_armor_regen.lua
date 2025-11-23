@@ -21,6 +21,10 @@ function modifier_custom_passive_bonus_armor_regen:OnIntervalThink()
     if not IsServer() then return end
 
     local parent = self:GetParent()
+    if parent:PassivesDisabled() then
+        self:SetStackCount(0)
+        return
+    end
     local isMoving = parent:IsMoving()
     if not isMoving or (parent:HasScepter() and parent:HasModifier("modifier_chillguy_r")) then
         self:SetStackCount(1)

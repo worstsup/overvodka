@@ -147,6 +147,7 @@ PrecacheUtils.particles = {
 		"particles/econ/items/faceless_void/faceless_void_bracers_of_aeons/fv_bracers_of_aeons_red_backtrack.vpcf",
 		"particles/silvername_r_facet_2_cast.vpcf",
 		"particles/silvername_r_facet_2_cast2.vpcf",
+		"particles/silvername_r_facet_2.vpcf",
 }
 
 PrecacheUtils.particle_folders = {

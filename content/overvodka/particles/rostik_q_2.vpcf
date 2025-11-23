@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf61:version{39d3ce1d-9442-4407-9b78-8317145b1732} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -230,7 +230,7 @@
 		},
 		{
 			m_bEndCap = true
-			m_ChildRef = resource:"particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile_explosion.vpcf"
+			m_ChildRef = resource:"particles/dark_willow_bramble_projectile_explosion_new2.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_dark_willow/dark_willow_bramble_projectile_launch.vpcf"

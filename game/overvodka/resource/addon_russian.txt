@@ -496,6 +496,8 @@
 		"DOTA_Tooltip_modifier_silvername_q_facet_2_buff_Description" 			"Скорость атаки увеличена на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, урон — на %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE%, броня — на %fMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%."
 		"npc_silvername_chair"													"Стул"
 		"npc_dota_silvername_clone"										 		"Silvername"
+		"DOTA_Tooltip_ability_silvername_innate_facet_2"								"СТЭС"
+		"DOTA_Tooltip_ability_silvername_innate_facet_2_description"					"Стэс имеет уникальный предмет в инвентаре — Стул. Он даёт бонусы к вампиризму и блокирует часть входящего урона, а также его можно поставить, чтобы он перенаправлял весь входящий урон в себя."
 		"DOTA_Tooltip_Ability_item_silvername_chair"                   			"СТУЛ"
 		"DOTA_Tooltip_Ability_item_silvername_chair_Description"        		"<h1>Активное: Поставить</h1>Ставит в выбранную точку стул с запасом здоровья, равным %chair_hp_pct%%% от суммарного текущего здоровью героя и всех его призванных существ. Пока стул жив, весь урон, получаемый героем и его юнитами в радиусе %aura_radius%, переносится стулу. Стул существует %chair_duration% сек.\n\n<h1>Пассивное: Damage Block</h1>С вероятностью в %chance%%% блокирует %block_melee% урона от атак, если владелец — герой ближнего боя, или %block_range% урона, если герой дальнего боя.\n\n<h1>Пассивное: Vladmir's Aura</h1>Увеличивает вампиризм союзников на %aura_lifesteal_heroes%%%, их урон на %aura_damage_pct%%%, броню на %aura_armor% и восстановление маны на %aura_mana_regen%.<br><br>Радиус: %aura_radius%"
 		"DOTA_Tooltip_Ability_item_silvername_chair_bonus_health"         		"+$health"

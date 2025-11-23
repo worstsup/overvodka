@@ -4031,6 +4031,22 @@
 		}
 	}
 	//=================================================================================================================
+	// Влад
+	//=================================================================================================================
+	"silvername_innate_facet_2"
+	{
+		"BaseClass"                 	"ability_datadriven"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityBehavior"           	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityValues"
+		{
+			"chair_hp_pct"	"50"
+		}
+	}
+	//=================================================================================================================
 	// ПРИЗВАТЬ МЭРЛОКОВ
 	//=================================================================================================================
 	"silvername_q_facet_2"
@@ -4167,7 +4183,6 @@
 		"AbilityManaCost"             	"150 200 250"
 		"precache"
 		{
-			"soundfile" "soundevents/vkusno.vsndevts"
 			"particle"	"particles/units/heroes/hero_lycan/lycan_shapeshift_buff.vpcf"
 			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_revert.vpcf"
 			"particle"  "particles/units/heroes/hero_lycan/lycan_shapeshift_cast.vpcf"
@@ -7797,6 +7812,7 @@
 		"DependentOnAbility"	"chillguy_r"
     	"MaxLevel"				"4"
 		"Innate"				"1"
+		"IsBreakable"			"1"
     	"AbilityValues"
 		{
 				"armor"	"0.5 0.6 0.7 0.8"

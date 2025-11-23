@@ -81,7 +81,7 @@ function silvername_scepter:OnSpellStart()
         self.summoned_garr = nil
     end
 
-    local spawn_distance = 100
+    local spawn_distance = 250
     local spawn_pos = caster:GetAbsOrigin() + caster:GetForwardVector() * spawn_distance
 
     local team = caster:GetTeamNumber()
@@ -103,6 +103,7 @@ function silvername_scepter:OnSpellStart()
 
     garr:AddNewModifier(caster, self, "modifier_silvername_garr", {})
     garr:AddNewModifier(caster, self, "modifier_kill", {duration = self:GetSpecialValueFor("duration")})
+    caster:EmitSound("silvername_scepter")
 end
 
 function silvername_scepter:SetupGarrStats(garr, caster)
