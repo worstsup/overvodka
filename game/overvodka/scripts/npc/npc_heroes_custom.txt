@@ -1007,6 +1007,12 @@
 					}
 					"Ability4"
 					{
+						"AbilityName" "silvername_scepter"
+						"AbilityIndex"	"3"
+						"AutoLevelAbility" "false"
+					}
+					"Ability5"
+					{
 						"AbilityName" "silvername_r_facet_2"
 						"AbilityIndex"	"5"
 						"AutoLevelAbility" "false"

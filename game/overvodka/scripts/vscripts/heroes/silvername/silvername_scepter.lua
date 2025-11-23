@@ -99,9 +99,10 @@ function silvername_scepter:OnSpellStart()
 
     self.summoned_garr = garr
 
-    garr:AddNewModifier(caster, self, "modifier_silvername_garr", {})
-
     self:SetupGarrStats(garr, caster)
+
+    garr:AddNewModifier(caster, self, "modifier_silvername_garr", {})
+    garr:AddNewModifier(caster, self, "modifier_kill", {duration = self:GetSpecialValueFor("duration")})
 end
 
 function silvername_scepter:SetupGarrStats(garr, caster)
@@ -129,7 +130,6 @@ function silvername_scepter:SetupGarrStats(garr, caster)
     garr:SetBaseAttackTime(bat)
 
     garr:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
-    garr:SetAttackRange(range)
 
     garr:SetMaximumGoldBounty(gold)
     garr:SetMinimumGoldBounty(gold)
@@ -143,6 +143,7 @@ function modifier_silvername_garr:IsHidden()      return true end
 function modifier_silvername_garr:IsPurgable()    return false end
 function modifier_silvername_garr:IsDebuff()      return false end
 function modifier_silvername_garr:IsBuff()        return true end
+function modifier_silvername_garr:RemoveOnDeath() return true end
 
 function modifier_silvername_garr:CheckState()
     return {
@@ -258,15 +259,20 @@ function modifier_silvername_garr_aura_buff:OnCreated()
     self.caster  = self:GetCaster()
     self.ability = self:GetAbility()
 
-    if not IsServer() then return end
-
-    self:StartIntervalThink(0.3)
+    if IsServer() then
+        if self.parent and not self.parent:IsNull() and not self.parent:IsHero() then
+            self.base_max_health = self.parent:GetMaxHealth()
+        end
+        self:StartIntervalThink(0.3)
+    end
 end
 
 function modifier_silvername_garr_aura_buff:OnIntervalThink()
     if not IsServer() then return end
-
     if not self.ability or self.ability:IsNull() then return end
+
+    local parent = self.parent
+    if not parent or parent:IsNull() then return end
 
     local garr = self.ability.summoned_garr
     if not garr or garr:IsNull() then
@@ -300,15 +306,86 @@ function modifier_silvername_garr_aura_buff:OnIntervalThink()
         if unit
             and not unit:IsNull()
             and not unit:IsIllusion()
-            and unit:IsSummoned()
+            and not unit:IsBuilding()
+            and not unit:IsOther()
+            and unit ~= garr
         then
             summoned_count = summoned_count + 1
         end
     end
 
     self:SetStackCount(summoned_count)
+
+    if parent:IsHero() then
+        parent:CalculateStatBonus(true)
+        return
+    end
+
+    local hp_per_summon = self.ability:GetSpecialValueFor("hp_per_summon") or 0
+    local bonus_hp      = hp_per_summon * self:GetStackCount()
+
+    local old_max = parent:GetMaxHealth()
+    local old_hp  = parent:GetHealth()
+    local hp_pct  = 0
+
+    if old_max > 0 then
+        hp_pct = old_hp / old_max
+    end
+
+    local base_max = self.base_max_health or old_max
+    if base_max <= 0 then base_max = old_max end
+    if base_max <= 0 then return end
+
+    local new_max = base_max + bonus_hp
+    if new_max < 1 then new_max = 1 end
+
+    parent:SetMaxHealth(new_max)
+
+    if hp_pct > 0 then
+        local new_hp = math.floor(new_max * hp_pct)
+        if new_hp < 1 then new_hp = 1 end
+        parent:SetHealth(new_hp)
+    else
+        if parent:GetHealth() <= 0 then
+            parent:SetHealth(1)
+        end
+    end
 end
 
+function modifier_silvername_garr_aura_buff:OnDestroy()
+    if not IsServer() then return end
+
+    local parent = self.parent
+    if not parent or parent:IsNull() then return end
+
+    if parent:IsHero() then
+        parent:CalculateStatBonus(true)
+        return
+    end
+
+    if self.base_max_health and self.base_max_health > 0 then
+        local old_max = parent:GetMaxHealth()
+        local old_hp  = parent:GetHealth()
+        local hp_pct  = 0
+
+        if old_max > 0 then
+            hp_pct = old_hp / old_max
+        end
+
+        local new_max = self.base_max_health
+        parent:SetMaxHealth(new_max)
+
+        if hp_pct > 0 then
+            local new_hp = math.floor(new_max * hp_pct)
+            if new_hp < 1 then new_hp = 1 end
+            parent:SetHealth(new_hp)
+        else
+            if parent:GetHealth() <= 0 then
+                parent:SetHealth(1)
+            end
+        end
+    end
+end
 
 function modifier_silvername_garr_aura_buff:DeclareFunctions()
     return {
@@ -318,9 +395,5 @@ end
 
 function modifier_silvername_garr_aura_buff:GetModifierHealthBonus()
     if not self.ability or self.ability:IsNull() then return 0 end
-
-    local hp_per_summon = self.ability:GetSpecialValueFor("hp_per_summon") or 0
-    local count = self:GetStackCount() or 0
-
-    return hp_per_summon * count
+    return self.ability:GetSpecialValueFor("hp_per_summon") * self:GetStackCount()
 end
