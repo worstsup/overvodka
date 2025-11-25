@@ -5,6 +5,8 @@ Overvodka Game Mode
 _G.nNEUTRAL_TEAM = 4
 _G.nCOUNTDOWNTIMER = 1501
 _G.overvodka_events = true
+_G.winter_mode = true
+
 local PrecacheUtils = require("util/precache")
 
 ---------------------------------------------------------------------------
@@ -807,14 +809,15 @@ end
 function OvervodkaGameMode:GoldTrackFilter(event)
     local gold      = event.gold or 0
     local playerID  = event.player_id_const
-
+	local reason = event.reason_const
+	if reason == 6 then return true end -- DOTA_ModifyGold_SellItem
     if gold <= 0 then
         return true
     end
     if playerID ~= nil and playerID ~= -1 then
         local hero = PlayerResource:GetSelectedHeroEntity(playerID)
         if hero and not hero:IsNull() then
-            if hero:HasTalent("special_bonus_unique_silvername_2") then
+            if hero:HasTalent("special_bonus_unique_silvername_2") and hero:HasAbility("silvername_q_facet_1") then
                 local new_gold = math.floor(gold * 1.2 + 0.5)
                 event.gold = new_gold
             end
@@ -850,7 +853,7 @@ function OvervodkaGameMode:XPToGoldFilter(event)
     end
 
 	if playerID ~= nil and playerID ~= -1 then
-        if hero:HasTalent("special_bonus_unique_silvername_1") then
+        if hero:HasTalent("special_bonus_unique_silvername_1") and hero:HasAbility("silvername_q_facet_1") then
             local new_xp = math.floor(xp * 1.3 + 0.5)
             event.experience = new_xp
         end

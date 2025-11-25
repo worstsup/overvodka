@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_silvername_garr", "heroes/silvername/silvername_scepter", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_silvername_garr_aura_buff", "heroes/silvername/silvername_scepter", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_silvername_scepter_autolevel", "heroes/silvername/silvername_scepter", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
 
 silvername_scepter = class({})
 
@@ -103,6 +104,7 @@ function silvername_scepter:OnSpellStart()
 
     garr:AddNewModifier(caster, self, "modifier_silvername_garr", {})
     garr:AddNewModifier(caster, self, "modifier_kill", {duration = self:GetSpecialValueFor("duration")})
+    garr:AddNewModifier(caster, self, "modifier_overvodka_creep", {})
     caster:EmitSound("silvername_scepter")
 end
 

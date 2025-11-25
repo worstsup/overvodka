@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_overvodka_creep",              "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_creep",              "modifiers/modifier_overvodka_creep",     LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_silvername_q_facet_2_murloc",  "heroes/silvername/silvername_q_facet_2", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_silvername_q_facet_2_debuff",  "heroes/silvername/silvername_q_facet_2", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_silvername_q_facet_2_buff",    "heroes/silvername/silvername_q_facet_2", LUA_MODIFIER_MOTION_NONE)
@@ -296,7 +296,6 @@ function modifier_silvername_q_facet_2_debuff:OnDestroy()
     end
 end
 
-
 function modifier_silvername_q_facet_2_debuff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
@@ -322,43 +321,105 @@ function modifier_silvername_q_facet_2_debuff:GetMaxStacks()
     return self.ability:GetSpecialValueFor("max_stacks") or 0
 end
 
+
 modifier_silvername_q_facet_2_buff = class({})
 
-function modifier_silvername_q_facet_2_buff:IsPurgable()   return true end
-function modifier_silvername_q_facet_2_buff:IsDebuff()     return false end
-function modifier_silvername_q_facet_2_buff:IsBuff()       return true end
-function modifier_silvername_q_facet_2_buff:IsHidden()     return false end
+function modifier_silvername_q_facet_2_buff:IsPurgable()     return true  end
+function modifier_silvername_q_facet_2_buff:IsDebuff()       return false end
+function modifier_silvername_q_facet_2_buff:IsBuff()         return true  end
+function modifier_silvername_q_facet_2_buff:IsHidden()       return false end
+function modifier_silvername_q_facet_2_buff:RemoveOnDeath()  return true  end
 
 function modifier_silvername_q_facet_2_buff:OnCreated(kv)
-    self.as_bonus    = 0
-    self.dmg_bonus   = 0
-    self.armor_bonus = 0
-    self.stack_internal = 0
+    self.as_bonus       = self.as_bonus       or 0
+    self.dmg_bonus      = self.dmg_bonus      or 0
+    self.armor_bonus    = self.armor_bonus    or 0
+    self.stack_internal = self.stack_internal or 0
 
-    if not IsServer() then return end
+    self.is_owner = (self:GetParent() == self:GetCaster())
 
-    self:SetHasCustomTransmitterData(true)
-    self:SendBuffRefreshToClients()
+    if IsServer() then
+        self:SetHasCustomTransmitterData(true)
+
+        if not self.is_owner then
+            self:StartIntervalThink(0.2)
+        end
+
+        self:SendBuffRefreshToClients()
+    end
 end
 
 function modifier_silvername_q_facet_2_buff:OnRefresh(kv)
-    if not IsServer() then return end
-    self:SendBuffRefreshToClients()
+    if IsServer() then
+        self:SendBuffRefreshToClients()
+    end
 end
 
+function modifier_silvername_q_facet_2_buff:IsAura()
+    return self.is_owner
+end
+
+function modifier_silvername_q_facet_2_buff:GetAuraRadius()      return 900 end
+function modifier_silvername_q_facet_2_buff:GetAuraSearchTeam()  return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
+function modifier_silvername_q_facet_2_buff:GetAuraSearchType()  return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function modifier_silvername_q_facet_2_buff:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_NONE end
+function modifier_silvername_q_facet_2_buff:GetModifierAura()    return "modifier_silvername_q_facet_2_buff" end
+function modifier_silvername_q_facet_2_buff:GetAuraDuration()    return 0.1 end
+
+function modifier_silvername_q_facet_2_buff:GetAuraEntityReject(hEntity)
+    if IsServer() then
+        if hEntity == self:GetCaster() then
+            return true
+        end
+    end
+    return false
+end
+
+function modifier_silvername_q_facet_2_buff:OnIntervalThink()
+    if not IsServer() then return end
+    if self.is_owner then return end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then
+        self.as_bonus       = 0
+        self.dmg_bonus      = 0
+        self.armor_bonus    = 0
+        self.stack_internal = 0
+        self:SetStackCount(0)
+        self:SendBuffRefreshToClients()
+        self:StartIntervalThink(-1)
+        return
+    end
+
+    local ownerBuff = caster:FindModifierByName("modifier_silvername_q_facet_2_buff")
+    if ownerBuff and not ownerBuff:IsNull() and ownerBuff ~= self then
+        self.as_bonus       = ownerBuff.as_bonus       or 0
+        self.dmg_bonus      = ownerBuff.dmg_bonus      or 0
+        self.armor_bonus    = ownerBuff.armor_bonus    or 0
+        self.stack_internal = ownerBuff.stack_internal or ownerBuff:GetStackCount() or 0
+    else
+        self.as_bonus       = 0
+        self.dmg_bonus      = 0
+        self.armor_bonus    = 0
+        self.stack_internal = 0
+    end
+
+    self:SetStackCount(self.stack_internal or 0)
+    self:SendBuffRefreshToClients()
+end
 function modifier_silvername_q_facet_2_buff:AddCustomTransmitterData()
     return {
-        as_bonus    = self.as_bonus    or 0,
-        dmg_bonus   = self.dmg_bonus   or 0,
-        armor_bonus = self.armor_bonus or 0,
+        as_bonus       = self.as_bonus       or 0,
+        dmg_bonus      = self.dmg_bonus      or 0,
+        armor_bonus    = self.armor_bonus    or 0,
         stack_internal = self.stack_internal or self:GetStackCount() or 0,
     }
 end
 
 function modifier_silvername_q_facet_2_buff:HandleCustomTransmitterData(data)
-    self.as_bonus    = data.as_bonus    or 0
-    self.dmg_bonus   = data.dmg_bonus   or 0
-    self.armor_bonus = data.armor_bonus or 0
+    self.as_bonus       = data.as_bonus       or 0
+    self.dmg_bonus      = data.dmg_bonus      or 0
+    self.armor_bonus    = data.armor_bonus    or 0
     self.stack_internal = data.stack_internal or 0
 
     self:SetStackCount(self.stack_internal or 0)
@@ -385,25 +446,29 @@ function modifier_silvername_q_facet_2_buff:GetModifierPhysicalArmorBonus()
 end
 
 function modifier_silvername_q_facet_2_buff:AddBonus(as_delta, dmg_delta, armor_delta, stack_delta)
-    self.as_bonus    = (self.as_bonus or 0)    + (as_delta    or 0)
-    self.dmg_bonus   = (self.dmg_bonus or 0)   + (dmg_delta   or 0)
-    self.armor_bonus = (self.armor_bonus or 0) + (armor_delta or 0)
+    if not self.is_owner then
+        return
+    end
 
+    self.as_bonus       = (self.as_bonus or 0)       + (as_delta    or 0)
+    self.dmg_bonus      = (self.dmg_bonus or 0)      + (dmg_delta   or 0)
+    self.armor_bonus    = (self.armor_bonus or 0)    + (armor_delta or 0)
     self.stack_internal = (self.stack_internal or 0) + (stack_delta or 0)
+
     if self.stack_internal < 0 then
         self.stack_internal = 0
     end
 
     self:SetStackCount(self.stack_internal or 0)
 
-    if not IsServer() then return end
+    if IsServer() then
+        self:SendBuffRefreshToClients()
 
-    self:SendBuffRefreshToClients()
-
-    if (self.as_bonus == 0 or self.as_bonus == nil)
-    and (self.dmg_bonus == 0 or self.dmg_bonus == nil)
-    and (self.armor_bonus == 0 or self.armor_bonus == nil)
-    and (self.stack_internal == 0 or self.stack_internal == nil) then
-        self:Destroy()
+        if (not self.as_bonus or self.as_bonus == 0)
+        and (not self.dmg_bonus or self.dmg_bonus == 0)
+        and (not self.armor_bonus or self.armor_bonus == 0)
+        and (not self.stack_internal or self.stack_internal == 0) then
+            self:Destroy()
+        end
     end
 end

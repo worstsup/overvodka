@@ -137,7 +137,7 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
-			if not spawnedUnit:IsIllusion() then
+			if not spawnedUnit:IsIllusion() and winter_mode then
 				ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, PlayerResource:GetPlayer(spawnedUnit:GetPlayerID()))
 			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then

@@ -305,7 +305,7 @@
                "value0"    "sounds/abilities/silvername_w_facet_2_1.vsnd"
             }
           }
-          "volume"      {  "value"   "3.0" }
+          "volume"      {  "value"   "3.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }
@@ -337,7 +337,7 @@
                "value0"    "sounds/abilities/silvername_w_facet_2_2.vsnd"
             }
           }
-          "volume"      {  "value"   "3.0" }
+          "volume"      {  "value"   "3.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }
@@ -369,7 +369,7 @@
                "value0"    "sounds/abilities/silvername_w_facet_2_3.vsnd"
             }
           }
-          "volume"      {  "value"   "3.0" }
+          "volume"      {  "value"   "3.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }

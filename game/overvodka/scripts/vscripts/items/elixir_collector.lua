@@ -233,6 +233,21 @@ function modifier_elixir_collector_debuff:OnIntervalThink()
 		return
 	end
 
+    if self:GetParent():IsNull() then
+        self:Destroy()
+        return
+    end
+
+    if not self:GetParent():IsAlive() then
+        self:Destroy()
+        return
+    end
+
+    if self:GetParent():IsInvulnerable() then
+        self:Destroy()
+        return
+    end
+
 	if not self:GetCaster():IsAlive() then
 		self:Destroy()
 		return

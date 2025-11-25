@@ -32,7 +32,7 @@ function modifier_item_aegis_hero:DeclareFunctions()
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
-        MODIFIER_EVENT_ON_ATTACK_START
+        MODIFIER_EVENT_ON_ATTACK
 	}
 end
 
@@ -42,7 +42,7 @@ function modifier_item_aegis_hero:GetModifierAttackSpeedBonus_Constant()
 	end
 end
 
-function modifier_item_aegis_hero:OnAttackStart(params)
+function modifier_item_aegis_hero:OnAttack(params)
 	if not IsServer() then return end
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
