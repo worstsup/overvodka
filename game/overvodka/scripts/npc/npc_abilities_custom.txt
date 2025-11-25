@@ -8851,7 +8851,7 @@
 				"pounce_radius"			"115"
 				"leash_duration"		"1.5 2.0 2.5"
 				"leash_radius"			"250"
-				"end_damage"			"150 300 450"
+				"end_damage"			"100 200 300"
 				"end_radius"			"550"
 				"blood_duration"		"5"
 				"blood_damage"			"3 4 5"
@@ -8951,7 +8951,7 @@
 			"dot_damage"			"50 70 90"
 			"think_interval"		"1.0"
 			"duration"				"0.75 1.25 1.75"
-			"damage"				"150 300 450"
+			"damage"				"150 250 350"
 			"kill_percent"			"10.0 12.5 15.0"
 		}
 	}
