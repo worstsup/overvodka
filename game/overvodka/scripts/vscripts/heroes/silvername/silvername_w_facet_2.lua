@@ -157,9 +157,11 @@ function silvername_w_facet_2:OnSpellStart()
         end
     end
 
-    local effect_cast = ParticleManager:CreateParticle( "particles/silvername_w_facet_2_call.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
+    local effect_cast = ParticleManager:CreateParticle( "particles/silvername_w_facet_2_call.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( aggro_radius, aggro_radius, aggro_radius ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
+
+    caster:EmitSound("silvername_w_facet_2_"..RandomInt(1,4))
 end
 
 modifier_silvername_w_facet_2_target = class({})

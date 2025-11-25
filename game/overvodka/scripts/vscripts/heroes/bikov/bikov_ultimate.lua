@@ -33,7 +33,11 @@ function bikov_ultimate:OnSpellStart()
     caster:AddNewModifier(caster, self, "modifier_bikov_r_caster", { duration = hold })
     local windup   = math.max(0.0, self:GetSpecialValueFor("throw_windup"))
     local animRate = self:GetSpecialValueFor("throw_anim_rate")
-
+    local throw_dur = self:GetSpecialValueFor("throw_duration")
+    local total_stun = hold + throw_dur + 0.1
+    if target and not target:IsNull() then
+        self._grab_stun = target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = total_stun })
+    end
     self._windup_timer = Timers:CreateTimer(math.max(0.03, hold - windup), function()
         if not caster:IsChanneling() then return end
         caster:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
@@ -55,22 +59,38 @@ function bikov_ultimate:OnChannelFinish(bInterrupted)
     end
     local cm = caster and caster:FindModifierByName("modifier_bikov_r_caster")
     if cm then cm:Destroy() end
+
     local target = self._grabbed
     self._grabbed = nil
-    if self._hold and not self._hold:IsNull() then
-        self._hold:Destroy()
-    end
-    self._hold = nil
 
-    if not target or target:IsNull() then return end
+    local hold_mod = self._hold
+    self._hold = nil
+    if hold_mod and not hold_mod:IsNull() then
+        hold_mod:Destroy()
+    end
+
+    local stun = self._grab_stun
+    self._grab_stun = nil
+
+    if not target or target:IsNull() then
+        if stun and not stun:IsNull() then
+            stun:Destroy()
+        end
+        return
+    end
 
     if bInterrupted then
         StopSoundOn("bikov_r", caster)
+        if stun and not stun:IsNull() then
+            stun:Destroy()
+        end
         FindClearSpaceForUnit(target, caster:GetAbsOrigin() + caster:GetForwardVector() * 100, true)
         return
     end
+
     self:ThrowTarget(caster, target)
 end
+
 
 function bikov_ultimate:ThrowTarget(caster, target)
     if not IsServer() then return end

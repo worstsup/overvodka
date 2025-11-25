@@ -186,8 +186,7 @@ function modifier_elixir_collector_buff:OnIntervalThink()
 		self:GetCaster():RemoveModifierByName("modifier_elixir_collector_buff_hero")
 		return
 	end
-	local flag = 0
-	local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, flag, 0, false)
+	local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 
 	if #targets <= 0 then
 		self:GetCaster():RemoveModifierByName("modifier_elixir_collector_buff_hero")
@@ -233,6 +232,21 @@ function modifier_elixir_collector_debuff:OnIntervalThink()
 		self:Destroy()
 		return
 	end
+
+    if self:GetParent():IsNull() then
+        self:Destroy()
+        return
+    end
+
+    if not self:GetParent():IsAlive() then
+        self:Destroy()
+        return
+    end
+
+    if self:GetParent():IsInvulnerable() then
+        self:Destroy()
+        return
+    end
 
 	if not self:GetCaster():IsAlive() then
 		self:Destroy()

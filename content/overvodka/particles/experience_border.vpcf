@@ -1,21 +1,44 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf63:version{a6e6a69e-52d3-4527-8b9c-ff3bb91aca3e} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 0
-	m_Operators =
+	m_nBehaviorVersion = 12
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 6
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_PreEmissionOperators = 
 	[
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_bSetOnce = true
-			m_bUseWorldLocation = true
-			m_vecCP1Pos =
-			[
-				0.000000,
-				0.000000,
-				-1.000000,
-			]
+			m_vecCP1Pos = [ 0.0, 0.0, -1.0 ]
 			m_nCP1 = 4
+			m_transformInput = 
+			{
+				m_nType = "PT_TYPE_INVALID"
+			}
 		},
 		{
 			_class = "C_OP_SetControlPointOrientation"
@@ -26,32 +49,28 @@
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_nCP1 = 2
-			m_vecCP1Pos =
-			[
-				0.000000,
-				0.000000,
-				30.000000,
-			]
+			m_vecCP1Pos = [ 0.0, 0.0, 30.0 ]
 		},
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_nCP1 = 10
-			m_vecCP1Pos =
-			[
-				900.000000,
-				1.000000,
-				1.000000,
-			]
+			m_vecCP1Pos = [ 900.0, 1.0, 1.0 ]
 			m_bSetOnce = true
 		},
 	]
-	m_Children =
+	m_Children = 
 	[
 		{
 			m_ChildRef = resource:"particles/experience_border_a.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/experience_border_d.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/ui_sweeping_ring_newyear.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/maiden_freezing_field_snow_arcana1_new.vpcf"
 		},
 	]
 }

@@ -115,16 +115,36 @@ function modifier_visitor_q_grabbed:OnCreated()
     self.caster = self:GetCaster()
     self.parent = self:GetParent()
 
-    self.silence_dur = self:GetAbility():GetSpecialValueFor("silence_duration")
-    self.slow_dur    = self:GetAbility():GetSpecialValueFor("slow_duration")
-    self.damage      = self:GetAbility():GetSpecialValueFor("damage")
-    self.kill_thr    = self:GetAbility():GetSpecialValueFor("kill_threshold")
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+
+    self.silence_dur = ability:GetSpecialValueFor("silence_duration")
+    self.slow_dur    = ability:GetSpecialValueFor("slow_duration")
+    self.damage      = ability:GetSpecialValueFor("damage")
+    self.kill_thr    = ability:GetSpecialValueFor("kill_threshold")
+
+    self.damage_interval = ability:GetSpecialValueFor("damage_interval")
+    if self.damage_interval <= 0 then
+        self.damage_interval = 0.25
+    end
+
+    self.grab_duration = ability:GetSpecialValueFor("grab_duration")
+    if self.grab_duration <= 0 then
+        self.grab_duration = self:GetDuration() or 1.0
+    end
+
+    self.damage_per_second = self.damage / math.max(self.grab_duration, 0.01)
+    self.damage_timer = 0
 
     if not IsServer() then return end
 
-    self.attach_fx = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf", PATTACH_POINT_FOLLOW, self.caster)
+    self.attach_fx = ParticleManager:CreateParticle(
+        "particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf",
+        PATTACH_POINT_FOLLOW,
+        self.caster
+    )
     ParticleManager:SetParticleControlEnt(self.attach_fx, 0, self.caster, PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true)
-    ParticleManager:SetParticleControlEnt(self.attach_fx, 1, self.parent, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:SetParticleControlEnt(self.attach_fx, 1, self.parent, PATTACH_POINT_FOLLOW, "attach_hitloc",  Vector(0,0,0), true)
 
     self:StartIntervalThink(FrameTime())
 end
@@ -132,15 +152,43 @@ end
 
 function modifier_visitor_q_grabbed:OnIntervalThink()
     if not IsServer() then return end
+
     if not self.caster or self.caster:IsNull() or not self.caster:IsAlive() then
         self:Destroy()
         return
     end
-    local hp_pct = (self.parent:GetHealth() / self.parent:GetMaxHealth()) * 100
-    if hp_pct <= self.kill_thr then
-        self.parent:Kill(self:GetAbility(), self.caster)
-    end
+
     if not self.parent or self.parent:IsNull() or not self.parent:IsAlive() then
+        self:Destroy()
+        return
+    end
+
+    local dt = FrameTime()
+    self.damage_timer = (self.damage_timer or 0) + dt
+
+    while self.damage_timer >= self.damage_interval do
+        self.damage_timer = self.damage_timer - self.damage_interval
+
+        if self.parent and not self.parent:IsNull() and self.parent:IsAlive() then
+            ApplyDamage({
+                victim      = self.parent,
+                attacker    = self.caster,
+                damage      = self.damage_per_second * self.damage_interval,
+                damage_type = DAMAGE_TYPE_PHYSICAL,
+                ability     = self:GetAbility()
+            })
+        else
+            break
+        end
+    end
+
+    if self.parent and not self.parent:IsNull() and self.parent:IsAlive() then
+        local hp_pct = (self.parent:GetHealth() / self.parent:GetMaxHealth()) * 100
+        if hp_pct <= self.kill_thr then
+            self.parent:Kill(self:GetAbility(), self.caster)
+            return
+        end
+    else
         self:Destroy()
         return
     end
@@ -156,6 +204,7 @@ function modifier_visitor_q_grabbed:OnIntervalThink()
     local cur = self.parent:GetAbsOrigin()
     self.parent:SetAbsOrigin(Vector(pos.x, pos.y, cur.z))
 end
+
 
 function modifier_visitor_q_grabbed:OnDestroy()
     if not IsServer() then return end
@@ -174,18 +223,8 @@ function modifier_visitor_q_grabbed:OnDestroy()
     if not self.parent:IsAlive() then return end
 
     if self.caster and not self.caster:IsNull() and self.caster:HasTalent("special_bonus_unique_visitor_3") then
-        self.caster:PerformAttack(self.parent, true, true, true, true, false, false, true)
+        self.caster:PerformAttack(self.parent, true, true, false, true, false, false, true)
     end
-    if not self.parent or self.parent:IsNull() then return end
-    if not self.parent:IsAlive() then return end
-
-    ApplyDamage({
-        victim = self.parent,
-        attacker = self.caster,
-        damage = self.damage,
-        damage_type = DAMAGE_TYPE_PHYSICAL,
-        ability = self:GetAbility()
-    })
 
     if not self.parent or self.parent:IsNull() then return end
     if not self.parent:IsAlive() then return end
