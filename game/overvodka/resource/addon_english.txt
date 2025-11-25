@@ -1917,7 +1917,7 @@
 		"DOTA_Tooltip_Facet_papich_asket" "ASCETIC"
 		"DOTA_Tooltip_Facet_papich_asket_Description" "When there are no enemy heroes within 600 range of Papich, his health regeneration is increased by 40%."
 		"DOTA_Tooltip_modifier_papich_e_clone_debuff" "Meat Chopper"
-		"DOTA_Tooltip_modifier_papich_e_clone_debuff_Description" "You cannot regenerate health, and you also take damage over time. If your health drops below 20%%, you die."
+		"DOTA_Tooltip_modifier_papich_e_clone_debuff_Description" "You cannot regenerate health, and you also take damage over time. If your health drops below %fMODIFIER_PROPERTY_TOOLTIP%%%, you die."
 		"DOTA_Tooltip_ability_papich_maniac" "BLEEDING"
 		"DOTA_Tooltip_ability_papich_maniac_Description" "Each of Maniac's abilities causes enemies to bleed, dealing damage over time."
 		"DOTA_Tooltip_ability_papich_maniac_chance" "%BLEEDING DAMAGE:"
