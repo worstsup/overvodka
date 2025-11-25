@@ -349,6 +349,7 @@
 		"npc_dota_hero_abaddon"				"ТЁМНЫЙ ПРИНЦ"
 		"npc_dota_hero_tusk"				"SEREGGA"
 		"npc_dota_hero_undying"				"PALE VISITOR"
+		"npc_dota_hero_ember_spirit"		"PEACEMAKER"
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
 		"npc_worker"						"РАБОТЯГА"
@@ -420,6 +421,15 @@
 		"npc_dota_hero_tusk_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_abaddon_npedesc1"			"Сложность персонажа: НУЖЕН МИКРОФОН"
 		"npc_dota_hero_puck_npedesc1"				"Сложность персонажа: ЛЕВ"
+
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_1"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_2"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_3"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_4"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_5"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_6"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_7"		 ""
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_8"		 ""
 
 		"DOTA_Tooltip_ability_silvername_innate_facet_1"              	 "Влад"
 		"DOTA_Tooltip_ability_silvername_innate_facet_1_Description"  	 "За каждые полученные %networth_step% золота Влад навсегда получает +%bonus_as% к скорости атаки, +%bonus_hp% к здоровью и +%bonus_ms% к скорости передвижения.\nВлад всегда получает более дорогие предметы с сундуков.\nИзлишний опыт (после 35 уровня) всегда трансформируется в %gold_pct%%% золота."
