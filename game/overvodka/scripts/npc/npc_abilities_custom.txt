@@ -16302,4 +16302,20 @@
 			"distance"			"1075"
 		}
 	}
+	//=================================================================================================================
+	// Peace out motherfucker (шард)
+	//=================================================================================================================
+	"peacemaker_shard"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/peacemaker/peacemaker_shard"
+		"AbilityTextureName"			"peacemaker_shard"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"				"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityValues"
+		{
+			"dmg_reduction"		"1"
+		}
+	}
 }
