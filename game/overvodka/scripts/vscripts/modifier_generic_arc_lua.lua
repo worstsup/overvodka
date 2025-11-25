@@ -1,4 +1,3 @@
--- Created by Elfansoer
 --[[
 	Generic Jump Arc
 
@@ -107,13 +106,22 @@ end
 --------------------------------------------------------------------------------
 -- Status Effects
 function modifier_generic_arc_lua:CheckState()
-	local state = {
-		[MODIFIER_STATE_STUNNED] = self.isStun or false,
-		[MODIFIER_STATE_COMMAND_RESTRICTED] = self.isRestricted or false,
-		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-	}
+    local state = {
+        [MODIFIER_STATE_STUNNED]            = self.isStun or false,
+        [MODIFIER_STATE_COMMAND_RESTRICTED] = self.isRestricted or false,
+        [MODIFIER_STATE_NO_UNIT_COLLISION]  = true,
+    }
 
-	return state
+    if self.isInvulnerable then
+        state[MODIFIER_STATE_INVULNERABLE] = true
+        state[MODIFIER_STATE_NO_HEALTH_BAR] = true
+    end
+
+    if self.isOutOfGame then
+        state[MODIFIER_STATE_OUT_OF_GAME] = true
+    end
+
+    return state
 end
 
 --------------------------------------------------------------------------------
@@ -184,6 +192,8 @@ function modifier_generic_arc_lua:SetJumpParameters( kv )
 	self.isRestricted = kv.isRestricted==1
 	self.isForward = kv.isForward==1
 	self.activity = kv.activity or 0
+	self.isInvulnerable = kv.isInvulnerable==1
+    self.isOutOfGame    = kv.isOutOfGame==1
 	self:SetStackCount( self.activity )
 
 	-- load direction

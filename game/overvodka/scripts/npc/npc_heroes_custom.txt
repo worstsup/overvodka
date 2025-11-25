@@ -3913,7 +3913,7 @@
 		"HeroSelectSoundEffect"		"Hero_EmberSpirit.Pick"
 		"GibType"		"fire"
 		"Ability1"		"peacemaker_q"
-		"Ability2"		"ember_spirit_sleight_of_fist"
+		"Ability2"		"peacemaker_w"
 		"Ability3"		"ember_spirit_flame_guard"
 		"Ability4"		"ember_spirit_activate_fire_remnant"
 		"Ability5"		"generic_hidden"
