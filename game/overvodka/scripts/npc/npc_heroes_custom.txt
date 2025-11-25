@@ -3916,7 +3916,7 @@
 		"Ability2"		"peacemaker_w"
 		"Ability3"		"ember_spirit_flame_guard"
 		"Ability4"		"ember_spirit_activate_fire_remnant"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"peacemaker_shard"
 		"Ability6"		"ember_spirit_fire_remnant"
 		"Ability10"		"special_bonus_unique_peacemaker_1"
 		"Ability11"		"special_bonus_unique_peacemaker_2"

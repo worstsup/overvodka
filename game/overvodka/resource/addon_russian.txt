@@ -421,6 +421,19 @@
 		"npc_dota_hero_tusk_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_abaddon_npedesc1"			"Сложность персонажа: НУЖЕН МИКРОФОН"
 		"npc_dota_hero_puck_npedesc1"				"Сложность персонажа: ЛЕВ"
+		"npc_dota_hero_ember_spirit_npedesc1"		"Сложность персонажа: ---"
+
+		"dota_tooltip_ability_peacemaker_q"						"Eagly"
+		"dota_tooltip_ability_peacemaker_q_description"			"Миротворец выпускает своего любимого питомца Орлушу, который летит по прямой и оглушает всех противников по пути."
+		"dota_tooltip_ability_peacemaker_q_lore"				"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
+		"dota_tooltip_ability_peacemaker_q_damage"				"УРОН:"
+		"dota_tooltip_ability_peacemaker_q_speed"				"СКОРОСТЬ ПОЛЕТА:"
+
+		"dota_tooltip_ability_peacemaker_shard" 				"Peace out motherfucker"
+		"dota_tooltip_ability_peacemaker_shard_description" 	"За каждое убийство Миротворец снижает получаемый урон на %dmg_reduction%%%."
+		"dota_tooltip_ability_peacemaker_shard_lore"			"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
+		"dota_tooltip_modifier_peacemaker_shard"				"Peace out motherfucker"
+		"dota_tooltip_modifier_peacemaker_shard_description" 	"Получаемый урон снижен на %dMODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE%%%."
 
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_1"		 ""
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_2"		 ""
