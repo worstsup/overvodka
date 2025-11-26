@@ -418,7 +418,7 @@
 		"npc_dota_hero_ember_spirit_npedesc1"		"Difficulty: ---"
 
 		"dota_tooltip_ability_peacemaker_q"						"Eagly"
-		"dota_tooltip_ability_peacemaker_q_description"			"Миротворец выпускает своего любимого питомца Орлушу, который летит по прямой."
+		"dota_tooltip_ability_peacemaker_q_description"			"Миротворец выпускает своего любимого питомца Орлушу, который летит по прямой и наносит урон всем противникам на пути."
 		"dota_tooltip_ability_peacemaker_q_lore"				"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
 		"dota_tooltip_ability_peacemaker_q_damage"				"УРОН:"
 		"dota_tooltip_ability_peacemaker_q_speed"				"СКОРОСТЬ ПОЛЕТА:"

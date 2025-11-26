@@ -16277,6 +16277,22 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
+	// Desert Eagle
+	//=================================================================================================================
+	"peacemaker_deagle"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/peacemaker/peacemaker_deagle"
+		"AbilityTextureName"			"sans_innate"
+		"MaxLevel"						"1"
+		"Innate"						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityValues"
+		{
+			"attack_range"				"550"
+		}
+	}
+	//=================================================================================================================
 	// Eagly
 	//=================================================================================================================
 	"peacemaker_q"
@@ -16353,6 +16369,29 @@
 				"value"	"325 350 375 400"
 				"affected_by_aoe_increase"	"1"
 			}
+		}
+	}
+	//=================================================================================================================
+	// Explosive Bullet
+	//=================================================================================================================
+	"peacemaker_e_facet_deagle"
+	{
+		"BaseClass"         		"ability_lua"
+		"ScriptFile"        		"heroes/peacemaker/peacemaker_e_facet_deagle"
+		"AbilityBehavior"   		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"         "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+		"IsBreakable"				"1"
+		"AbilityTextureName" 		"flash_e"
+		"AbilityValues"
+		{
+				"chance"    		"20 25 35 40"
+				"crit"      		"110 120 130 140"
+				"bleed_duration" 	"1 2 3 4"
+				"bleed_interval" 	"0.5"
+				"bleed_damage" 		"30 60 90 120"
 		}
 	}
 	//=================================================================================================================

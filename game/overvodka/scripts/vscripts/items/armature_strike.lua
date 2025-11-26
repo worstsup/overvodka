@@ -3,6 +3,7 @@ LinkLuaModifier("modifier_armature_strike_crit", "items/armature_strike", LUA_MO
 LinkLuaModifier("modifier_armature_strike", "items/armature_strike", LUA_MODIFIER_MOTION_NONE)
 
 item_armature_strike = class({})
+
 function item_armature_strike:GetIntrinsicModifierName() 
     return "modifier_armature_strike"
 end
@@ -17,6 +18,7 @@ function modifier_armature_strike:GetAttributes()  return MODIFIER_ATTRIBUTE_MUL
 function modifier_armature_strike:OnCreated()
     if not IsServer() then return end
     self.critProc = false
+    self.chance = self:GetAbility():GetSpecialValueFor("chance")
 end
 
 function modifier_armature_strike:DeclareFunctions()
@@ -40,6 +42,7 @@ function modifier_armature_strike:GetModifierAttackSpeedBonus_Constant()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 end
+
 function modifier_armature_strike:GetModifierBonusStats_Intellect()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor("bonus_int")
@@ -52,8 +55,7 @@ end
 
 function modifier_armature_strike:GetModifierPreAttack_CriticalStrike(params)
     if self:GetParent():FindAllModifiersByName("modifier_armature_strike")[1] ~= self then return end
-    local chance = self:GetAbility():GetSpecialValueFor("chance")
-    if RollPercentage(chance) then
+    if RollPercentage(self.chance) then
         self.critProc = true
         return self:GetAbility():GetSpecialValueFor("crit")
     end
@@ -101,12 +103,8 @@ function item_armature_strike:OnSpellStart()
     local caster_position = caster:GetAbsOrigin()
     local direction = (point - caster_position):Normalized()
     local end_position = caster_position + direction * range
-    local buff = caster:AddNewModifier(
-        caster,
-        self,
-        "modifier_armature_strike_crit",
-        {  }
-    )
+    local buff = caster:AddNewModifier(caster, self, "modifier_armature_strike_crit", {})
+    
     local particle = ParticleManager:CreateParticle("particles/armature_strike.vpcf", PATTACH_ABSORIGIN, caster)
     ParticleManager:SetParticleControl(particle, 0, caster_position)
     ParticleManager:SetParticleControl(particle, 1, end_position)
@@ -144,36 +142,18 @@ end
 
 modifier_armature_strike_crit = class({})
 
-function modifier_armature_strike_crit:IsHidden()
-    return true
-end
-
-function modifier_armature_strike_crit:IsDebuff()
-    return false
-end
-
-function modifier_armature_strike_crit:IsPurgable()
-    return false
-end
+function modifier_armature_strike_crit:IsHidden() return true end
+function modifier_armature_strike_crit:IsDebuff() return false end
+function modifier_armature_strike_crit:IsPurgable() return false end
 
 function modifier_armature_strike_crit:OnCreated( kv )
     self.bonus_crit = self:GetAbility():GetSpecialValueFor( "crit_multiplier" )
 end
 
-function modifier_armature_strike_crit:OnRefresh( kv )
-end
-
-function modifier_armature_strike_crit:OnRemoved()
-end
-
-function modifier_armature_strike_crit:OnDestroy()
-end
-
 function modifier_armature_strike_crit:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
     }
-    return funcs
 end
 
 function modifier_armature_strike_crit:GetModifierPreAttack_CriticalStrike( params )

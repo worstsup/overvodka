@@ -307,6 +307,8 @@ PrecacheUtils.models = {
 		"models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl",
 		"models/seregga/seregga.vmdl",
 		"models/blackflash/blackflash.vmdl",
+		"models/peacemaker/peacemaker.vmdl",
+		"models/peacemaker/deagle_peacemaker.vmdl",
 
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
