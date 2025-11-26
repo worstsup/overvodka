@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_peacemaker_deagle", "heroes/peacemaker/modifier_peacemaker_deagle", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_peacemaker_deagle", "heroes/peacemaker/peacemaker_deagle", LUA_MODIFIER_MOTION_NONE)
 
 peacemaker_deagle = class({})
 
@@ -14,8 +14,9 @@ function modifier_peacemaker_deagle:RemoveOnDeath() return false end
 
 function modifier_peacemaker_deagle:OnCreated()
     local parent = self:GetParent()
-    parent:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
     self.attack_range_bonus = self:GetAbility():GetSpecialValueFor("attack_range") - parent:Script_GetAttackRange()
+    if not IsServer() then return end
+    parent:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
 end
 
 function modifier_peacemaker_deagle:OnRefresh()
@@ -27,6 +28,7 @@ function modifier_peacemaker_deagle:DeclareFunctions()
         MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND,
+        MODIFIER_PROPERTY_PROJECTILE_NAME,
     }
 end
 
@@ -40,4 +42,8 @@ end
 
 function modifier_peacemaker_deagle:GetAttackSound()
     return "Peacemaker.Deagle.Attack"
+end
+
+function modifier_peacemaker_deagle:GetModifierProjectileName()
+    return "particles/peacemaker_deagle_proj.vpcf"
 end

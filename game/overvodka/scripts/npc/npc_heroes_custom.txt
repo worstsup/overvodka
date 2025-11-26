@@ -3935,17 +3935,20 @@
 				"Icon"				"fist"
 				"Color"				"Red"
 				"GradientID"		"0"
-				"Ability1"
+				"Abilities"
 				{
-					"AbilityName"	"peacemaker_e_facet_deagle"
-					"AbilityIndex"	"2"
-					"AutoLevelAbility" "false"
-				}
-				"Ability2"
-				{
-					"AbilityName"	"peacemaker_deagle"
-					"AbilityIndex"	"6"
-					"AutoLevelAbility" "false"
+					"Ability1"
+					{
+						"AbilityName"	"peacemaker_e_facet_deagle"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+					"Ability2"
+					{
+						"AbilityName"	"peacemaker_deagle"
+						"AbilityIndex"	"6"
+						"AutoLevelAbility" "false"
+					}
 				}
 			}
 			"ember_spirit_double_impact"		
