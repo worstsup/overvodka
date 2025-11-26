@@ -51,11 +51,13 @@ function modifier_item_drobe:GetModifierBonusStats_Agility()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_agi')
 end
+
 function modifier_item_drobe:GetModifierAttackRangeBonus()
     if not self:GetAbility() then return end
     if not self:GetParent():IsRangedAttacker() then return end
     return self:GetAbility():GetSpecialValueFor('bonus_range')
 end
+
 function modifier_item_drobe:OnCreated()
     self.true_attack = true
 end

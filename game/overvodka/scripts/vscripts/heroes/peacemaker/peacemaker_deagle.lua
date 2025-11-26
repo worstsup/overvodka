@@ -14,7 +14,7 @@ function modifier_peacemaker_deagle:RemoveOnDeath() return false end
 
 function modifier_peacemaker_deagle:OnCreated()
     local parent = self:GetParent()
-    self.attack_range_bonus = self:GetAbility():GetSpecialValueFor("attack_range") - parent:Script_GetAttackRange()
+    self.attack_range_bonus = self:GetAbility():GetSpecialValueFor("attack_range")
     if not IsServer() then return end
     parent:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
 end
@@ -25,14 +25,14 @@ end
 
 function modifier_peacemaker_deagle:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
+        MODIFIER_PROPERTY_ATTACK_RANGE_BASE_OVERRIDE,
         MODIFIER_PROPERTY_MODEL_CHANGE,
         MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND,
         MODIFIER_PROPERTY_PROJECTILE_NAME,
     }
 end
 
-function modifier_peacemaker_deagle:GetModifierAttackRangeBonus()
+function modifier_peacemaker_deagle:GetModifierAttackRangeOverride()
     return self.attack_range_bonus
 end
 
