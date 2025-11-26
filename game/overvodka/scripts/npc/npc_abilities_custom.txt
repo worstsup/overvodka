@@ -16318,7 +16318,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"11 10 9 8"
-				"special_bonus_unique_peacemaker_5"	"-3"
+				"special_bonus_unique_peacemaker_8"	"-3"
 			}
 		}
 	}
@@ -16353,8 +16353,16 @@
 			{
 				"value"	"300"
 			}
-			"armor_per_hero"	"1 2 3 4"
-			"buff_duration"		"10"
+			"armor_per_hero"	
+			{
+				"value"	"1 2 3 4"
+				"special_bonus_unique_peacemaker_4"	"+2"
+			}
+			"buff_duration"
+			{
+				"value" "10"
+				"special_bonus_unique_peacemaker_2"	"+3" 
+			}
 			"push_duration"     "0.4"
 			"AbilityCastRange"
 			{
