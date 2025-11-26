@@ -16,7 +16,6 @@
 		
 		"#DOTA_Item_Build_Early_Game"
 		{
-			"item"		"item_ancient_janggo"
 			"item"		"item_hqd"
 			"item"		"item_crumbl_cookie"
 			"item"		"item_chapman_green"
@@ -26,15 +25,28 @@
 			"item"		"item_boots_of_bearing"
 			"item"		"item_bloodthorn"
 			"item"		"item_minion_generator"
-			"item"		"item_magic_aegis"
 			"item"		"item_ultimate_scepter"
 			"item"		"item_pasito"
+			"item"		"item_aghanims_shard"
+			"item"		"item_sheepstick"
+			"item"		"item_shemelis"
+		}
+		"#DOTA_Item_Build_Late_Items"
+		{
+			"item"		"item_nikes"
+			"item"		"item_pasito"
+			"item"		"item_aghanims_shard"
+			"item"		"item_ultimate_scepter"
+			"item"		"item_shemelis"
+			"item"		"item_waka"
+			"item"		"item_govno"
+			"item"		"item_armature_strike"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_swag"
 			"item"		"item_bablokrad"
-			"item"		"item_aghanims_shard"
+			"item"		"item_aegis_hero"
 			"item"		"item_invis_sword_datadriven"
 		}
 	}
