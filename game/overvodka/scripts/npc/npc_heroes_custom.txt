@@ -3914,10 +3914,11 @@
 		"GibType"		"fire"
 		"Ability1"		"peacemaker_q"
 		"Ability2"		"peacemaker_w"
-		"Ability3"		"ember_spirit_flame_guard"
-		"Ability4"		"ember_spirit_activate_fire_remnant"
+		"Ability3"		"generic_hidden"
+		"Ability4"		"generic_hidden"
 		"Ability5"		"peacemaker_shard"
 		"Ability6"		"ember_spirit_fire_remnant"
+		"Ability7"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_peacemaker_1"
 		"Ability11"		"special_bonus_unique_peacemaker_2"
 		"Ability12"		"special_bonus_unique_peacemaker_3"
@@ -3929,11 +3930,27 @@
 		"BotImplemented" ""
 		"Facets"
 		{
-			"ember_spirit_double_impact"		
+			"peacemaker_facet_deagle"
 			{
 				"Icon"				"fist"
 				"Color"				"Red"
 				"GradientID"		"0"
+				"Ability1"
+				{
+					"AbilityName"	"peacemaker_e_facet_deagle"
+					"AbilityIndex"	"2"
+					"AutoLevelAbility" "false"
+				}
+				"Ability2"
+				{
+					"AbilityName"	"peacemaker_deagle"
+					"AbilityIndex"	"6"
+					"AutoLevelAbility" "false"
+				}
+			}
+			"ember_spirit_double_impact"		
+			{
+				"Deprecated"	"true"
 			}
 			"ember_spirit_chain_gang"		
 			{

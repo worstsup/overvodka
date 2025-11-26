@@ -424,11 +424,10 @@
 		"npc_dota_hero_ember_spirit_npedesc1"		"Сложность персонажа: ---"
 
 		"dota_tooltip_ability_peacemaker_q"						"Eagly"
-		"dota_tooltip_ability_peacemaker_q_description"			"Миротворец выпускает своего любимого питомца Орлушу, который летит по прямой."
+		"dota_tooltip_ability_peacemaker_q_description"			"Миротворец выпускает своего любимого питомца Орлушу, который летит по прямой и наносит урон всем противникам на пути."
 		"dota_tooltip_ability_peacemaker_q_lore"				"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
 		"dota_tooltip_ability_peacemaker_q_damage"				"УРОН:"
 		"dota_tooltip_ability_peacemaker_q_speed"				"СКОРОСТЬ ПОЛЕТА:"
-
 		"dota_tooltip_ability_peacemaker_w"						"Sonic Boom Helmet"
 		"dota_tooltip_ability_peacemaker_w_description"			"Миротворец надевает шлем, который дал ему отец, и наносит всем героям в области урон, отталкивая их и получая броню за каждого врага, задетого способностью."
 		"dota_tooltip_ability_peacemaker_w_lore"				"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
@@ -439,13 +438,11 @@
 		"dota_tooltip_ability_peacemaker_w_buff_duration"		"ДЛИТЕЛЬНОСТЬ БОНУСА:"
 		"dota_tooltip_modifier_peacemaker_w_armor"				"Sonic Boom Helmet"
 		"dota_tooltip_modifier_peacemaker_w_armor_description"	"+%dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS% к броне"
-
 		"dota_tooltip_ability_peacemaker_shard" 				"Peace out motherfucker"
 		"dota_tooltip_ability_peacemaker_shard_description" 	"За каждое убийство Миротворец снижает получаемый урон на %dmg_reduction%%%."
 		"dota_tooltip_ability_peacemaker_shard_lore"			"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
 		"dota_tooltip_modifier_peacemaker_shard"				"Peace out motherfucker"
 		"dota_tooltip_modifier_peacemaker_shard_description" 	"Получаемый урон снижен на %dMODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE%%%"
-
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_1"		 ""
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_2"		 ""
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_3"		 ""
@@ -455,6 +452,7 @@
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_7"		 ""
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_8"		 "Альтернативное применение Eagly"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_8_description" "При применении герой мчится вместе с орлом до конца его пути, становясь неуязвимым на время полёта."
+		"dota_tooltip_facet_peacemaker_facet_deagle"			"DESERT EAGLE"
 
 		"DOTA_Tooltip_ability_silvername_innate_facet_1"              	 "Влад"
 		"DOTA_Tooltip_ability_silvername_innate_facet_1_Description"  	 "За каждые полученные %networth_step% золота Влад навсегда получает +%bonus_as% к скорости атаки, +%bonus_hp% к здоровью и +%bonus_ms% к скорости передвижения.\nВлад всегда получает более дорогие предметы с сундуков.\nИзлишний опыт (после 35 уровня) всегда трансформируется в %gold_pct%%% золота."
