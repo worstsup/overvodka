@@ -113,7 +113,7 @@
                "value0"    "sounds/abilities/peacemaker_deagle_attack.vsnd"
             }
           }
-          "volume"      {  "value"   "2.00000" }
+          "volume"      {  "value"   "1.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }
@@ -145,7 +145,7 @@
                "value0"    "sounds/abilities/peacemaker_e_facet1.vsnd"
             }
           }
-          "volume"      {  "value"   "2.00000" }
+          "volume"      {  "value"   "1.5" }
           "pitch_rand_min"  {  "value"   "-0.05000" }
           "pitch_rand_max"  {  "value"   "0.050000" }
           "pitch"       {  "value"   "1.000000" }

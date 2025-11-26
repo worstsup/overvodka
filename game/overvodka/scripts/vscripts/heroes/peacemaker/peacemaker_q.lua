@@ -1,5 +1,6 @@
 LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peacemaker_q", "heroes/peacemaker/peacemaker_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 peacemaker_q = class({})
 
@@ -19,7 +20,7 @@ function peacemaker_q:OnAbilityPhaseInterrupted()
 end
 
 function peacemaker_q:GetBehavior()
-	local additive = self:GetCaster():HasTalent("special_bonus_unique_peacemaker_8") and 1099511627776 or 0
+	local additive = self:GetCaster():HasTalent("special_bonus_unique_peacemaker_5") and 1099511627776 or 0
     local behavior = self.BaseClass.GetBehavior(self)
     return tonumber(tostring(behavior)) + additive
 end
@@ -95,7 +96,7 @@ function peacemaker_q:OnSpellStart()
 	}
 	ProjectileManager:CreateLinearProjectile(info)
 
-	if caster:HasTalent("special_bonus_unique_peacemaker_8") and self:GetAltCastState() then
+	if caster:HasTalent("special_bonus_unique_peacemaker_5") and self:GetAltCastState() then
         local duration = distance / math.max(speed, 1)
 
         caster:AddNewModifier(
@@ -133,14 +134,9 @@ end
 function peacemaker_q:OnProjectileHitHandle( target, location, projectile )
 	if not target then return end
 
-	local damageTable = {
-		victim = target,
-		attacker = self:GetCaster(),
-		damage = self:GetSpecialValueFor( "damage" ),
-		damage_type = self:GetAbilityDamageType(),
-		ability = self,
-	}
-	ApplyDamage( damageTable )
+	if self:GetCaster():HasTalent("special_bonus_unique_peacemaker_3") then
+		target:AddNewModifier(self:GetCaster(), self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor("stun_duration")})
+	end
 
 	local direction = ProjectileManager:GetLinearProjectileVelocity( projectile )
 	direction.z = 0
@@ -149,4 +145,13 @@ function peacemaker_q:OnProjectileHitHandle( target, location, projectile )
 	local p = ParticleManager:CreateParticle( "particles/units/heroes/hero_brewmaster/brewmaster_windwalk.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControl( p, 0, target:GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( p )
+
+	local damageTable = {
+		victim = target,
+		attacker = self:GetCaster(),
+		damage = self:GetSpecialValueFor( "damage" ),
+		damage_type = self:GetAbilityDamageType(),
+		ability = self,
+	}
+	ApplyDamage( damageTable )
 end
