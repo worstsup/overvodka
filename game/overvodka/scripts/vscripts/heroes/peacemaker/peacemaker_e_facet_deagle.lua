@@ -96,7 +96,7 @@ function modifier_peacemaker_e_facet_deagle:OnAttackLanded(params)
 
         local duration = base_duration * (1 - target:GetStatusResistance())
         if duration <= 0 then return end
-
+        target:EmitSound("Peacemaker.Deagle.Crit")
         target:AddNewModifier(parent, ability, "modifier_peacemaker_e_facet_deagle_bleed", {duration = duration,})
     end
 end

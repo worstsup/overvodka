@@ -453,6 +453,7 @@
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_8"		 "Альтернативное применение Eagly"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_8_description" "При применении герой мчится вместе с орлом до конца его пути, становясь неуязвимым на время полёта."
 		"dota_tooltip_facet_peacemaker_facet_deagle"			"DESERT EAGLE"
+		"dota_tooltip_ability_peacemaker_deagle"				"DESERT EAGLE"
 
 		"DOTA_Tooltip_ability_silvername_innate_facet_1"              	 "Влад"
 		"DOTA_Tooltip_ability_silvername_innate_facet_1_Description"  	 "За каждые полученные %networth_step% золота Влад навсегда получает +%bonus_as% к скорости атаки, +%bonus_hp% к здоровью и +%bonus_ms% к скорости передвижения.\nВлад всегда получает более дорогие предметы с сундуков.\nИзлишний опыт (после 35 уровня) всегда трансформируется в %gold_pct%%% золота."

@@ -11,7 +11,21 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = [  ]
+						remaps = 
+						[
+							{
+								from = "magazine.vmat"
+								to = "models/peacemaker/deagle/deagle1.vmat"
+							},
+							{
+								from = "mainbody.vmat"
+								to = "models/peacemaker/deagle/deagle2.vmat"
+							},
+							{
+								from = "slide.vmat"
+								to = "models/peacemaker/deagle/deagle3.vmat"
+							},
+						]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -50,8 +64,8 @@
 						_class = "Attachment"
 						name = "attach_attack1"
 						parent_bone = "R_Finger2"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ 29.123421, 8.383377, -3.149752 ]
+						relative_angles = [ 0.0, 0.0, -0.000062 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -517,31 +531,6 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "Cross_Punch"
-						is_default_idle_anim = false
-						activity_name = "ACT_DOTA_ATTACK"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						animgraph_additive = false
-						delete_from_compiled_model = false
-						source_filename = "models/peacemaker/Cross Punch.fbx"
-						import_bone_scales = false
-						start_frame = 8
-						end_frame = 50
-						framerate = 50.0
-						reverse = false
-						additional_anim_files = [  ]
-					},
-					{
-						_class = "AnimFile"
 						name = "Running"
 						children = 
 						[
@@ -622,31 +611,6 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "Punching"
-						is_default_idle_anim = false
-						activity_name = "ACT_DOTA_ATTACK2"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						animgraph_additive = false
-						delete_from_compiled_model = false
-						source_filename = "models/peacemaker/Punching.fbx"
-						import_bone_scales = false
-						start_frame = 2
-						end_frame = 43
-						framerate = 50.0
-						reverse = false
-						additional_anim_files = [  ]
-					},
-					{
-						_class = "AnimFile"
 						name = "Landing"
 						is_default_idle_anim = false
 						activity_name = "ACT_DOTA_SPAWN"
@@ -715,7 +679,7 @@
 						source_filename = "models/peacemaker/Bash.fbx"
 						import_bone_scales = false
 						start_frame = 30
-						end_frame = 80
+						end_frame = 53
 						framerate = 45.0
 						reverse = false
 						additional_anim_files = [  ]
@@ -765,6 +729,31 @@
 						source_filename = "models/peacemaker/Grab And Put Back Rifle.fbx"
 						import_bone_scales = false
 						start_frame = 11
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+						additional_anim_files = [  ]
+					},
+					{
+						_class = "AnimFile"
+						name = "Shooting"
+						is_default_idle_anim = false
+						activity_name = "ACT_DOTA_ATTACK"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						animgraph_additive = false
+						delete_from_compiled_model = false
+						source_filename = "models/peacemaker/Shooting.fbx"
+						import_bone_scales = false
+						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
 						reverse = false
