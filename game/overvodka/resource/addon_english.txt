@@ -425,6 +425,7 @@
 
 		"dota_tooltip_ability_peacemaker_w"						"Sonic Boom Helmet"
 		"dota_tooltip_ability_peacemaker_w_description"			"Миротворец надевает шлем, который дал ему отец, и наносит всем героям в области урон, отталкивая их и получая броню за каждого врага, задетого способностью."
+		"dota_tooltip_ability_peacemaker_w_lore"				"Герой создан благодаря <font color='#DE3163'>vosxod</font>"
 		"dota_tooltip_ability_peacemaker_w_radius"				"РАДИУС:"
 		"dota_tooltip_ability_peacemaker_w_damage"				"УРОН:"
 		"dota_tooltip_ability_peacemaker_w_push_distance"		"ДАЛЬНОСТЬ ОТТАЛКИВАНИЯ:"
