@@ -3,6 +3,12 @@ LinkLuaModifier("modifier_peacemaker_e_facet_deagle_bleed",  "heroes/peacemaker/
 
 peacemaker_e_facet_deagle = class({})
 
+function peacemaker_e_facet_deagle:Precache(ctx)
+    PrecacheResource( "particle", "particles/peacemaker_e_facet1.vpcf", ctx )
+    PrecacheResource( "particle", "particles/bloodseeker_rupture_new.vpcf", ctx )
+    PrecacheResource( "soundfile", "soundevents/peacemaker_sounds.vsndevts", ctx )
+end
+
 function peacemaker_e_facet_deagle:GetIntrinsicModifierName()
     return "modifier_peacemaker_e_facet_deagle"
 end
@@ -97,7 +103,10 @@ function modifier_peacemaker_e_facet_deagle:OnAttackLanded(params)
         local duration = base_duration * (1 - target:GetStatusResistance())
         if duration <= 0 then return end
         target:EmitSound("Peacemaker.Deagle.Crit")
-        target:AddNewModifier(parent, ability, "modifier_peacemaker_e_facet_deagle_bleed", {duration = duration,})
+        target:AddNewModifier(parent, ability, "modifier_peacemaker_e_facet_deagle_bleed", {duration = duration})
+        local p = ParticleManager:CreateParticle("particles/peacemaker_e_facet1.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+        ParticleManager:SetParticleControl(p, 0, target:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(p)
     end
 end
 
@@ -109,8 +118,7 @@ function modifier_peacemaker_e_facet_deagle_bleed:IsDebuff()   return true end
 function modifier_peacemaker_e_facet_deagle_bleed:IsBuff()     return false end
 
 function modifier_peacemaker_e_facet_deagle_bleed:GetEffectName()
-    -- сюда можно потом подвесить кастомный эффект крови
-    return nil
+    return "particles/bloodseeker_rupture_new.vpcf"
 end
 
 function modifier_peacemaker_e_facet_deagle_bleed:GetEffectAttachType()
