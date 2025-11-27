@@ -10530,7 +10530,7 @@
 			}
 			"AbilityCooldown"
 			{
-				"value"										"12"
+				"value"										"14"
 				"special_bonus_unique_evelone_8"			  "=0"
 			}
 			"AbilityChargeRestoreTime"		"12"
@@ -10571,12 +10571,12 @@
 			}
 			"crit_bonus"
 			{
-				"value"	"125 150 175 200"
+				"value"	"120 135 150 165"
 				"special_bonus_unique_evelone_5" "+30"
 			}
 			"miss_chance"
 			{
-				"value"	"20 30 40 50"
+				"value"	"25 30 35 40"
 				"special_bonus_unique_evelone_7" "+50"
 			}
 		}
