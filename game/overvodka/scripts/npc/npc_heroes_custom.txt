@@ -3904,7 +3904,7 @@
 		"Model"		"models/peacemaker/peacemaker.vmdl"
 		"DisableWearables"	"1"
 		"HealthBarOffset"	"230"
-		"SoundSet"		"Hero_EmberSpirit"
+		"SoundSet"		"Hero_NightStalker"
 		"IdleSoundLoop"		""
 		"ModelScale"		"1.15"
 		"VersusScale"		"1.15"
@@ -3951,15 +3951,28 @@
 					}
 				}
 			}
+			"peacemaker_facet_magic"		
+			{
+				"Icon"				"debuff"
+				"Color"				"Yellow"
+				"GradientID"		"1"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"peacemaker_e_facet_magic"
+						"AbilityIndex"	"2"
+						"AutoLevelAbility" "false"
+					}
+				}
+			}
 			"ember_spirit_double_impact"		
 			{
 				"Deprecated"	"true"
 			}
 			"ember_spirit_chain_gang"		
 			{
-				"Icon"				"debuff"
-				"Color"				"Yellow"
-				"GradientID"		"1"
+				"Deprecated"	"true"
 			}
 		}
 		"ArmorPhysical"		"0"
@@ -3969,6 +3982,7 @@
 		"AttackRate"		"1.700000"
 		"AttackAnimationPoint"		"0.400000"
 		"AttackAcquisitionRange"		"600"
+		"ProjectileSpeed"	"1500"
 		"AttackRange"		"150"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"22"
@@ -3981,7 +3995,7 @@
 		"MovementSpeed"		"300"
 		"HasAggressiveStance"		"1"
 		"particle_folder"		"particles/units/heroes/hero_ember_spirit"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
 		"VoiceFile"		""
 	}
 }

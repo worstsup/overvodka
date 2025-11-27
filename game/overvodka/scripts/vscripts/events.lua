@@ -451,7 +451,7 @@ function OvervodkaGameMode:OnEntityKilled( event )
 			--print("Granting killer xp")
 			if killedUnit:GetTeam() == self.leadingTeam and self.isGameTied == false and GetMapName() ~= "overvodka_5x5" then
 				local memberID = hero:GetPlayerID()
-				PlayerResource:ModifyGoldFiltered( memberID, 500, false, 0 )
+				PlayerResource:ModifyGold( memberID, 500, false, 0 )
 				hero:AddExperience( 100, 0, false, false )
 				local name = hero:GetClassname()
 				local victim = killedUnit:GetClassname()

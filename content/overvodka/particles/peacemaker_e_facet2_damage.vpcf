@@ -16,16 +16,6 @@
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_entityName = "self"
 				},
-				{
-					m_iControlPoint = 1
-					m_iAttachType = "PATTACH_WORLDORIGIN"
-					m_entityName = "self"
-				},
-				{
-					m_iControlPoint = 3
-					m_iAttachType = "PATTACH_WORLDORIGIN"
-					m_entityName = "self"
-				},
 			]
 		},
 	]
@@ -95,8 +85,8 @@
 		},
 		{
 			_class = "C_INIT_RandomColor"
-			m_ColorMin = [ 30, 144, 255 ]
-			m_ColorMax = [ 65, 105, 225 ]
+			m_ColorMin = [ 255, 165, 0 ]
+			m_ColorMax = [ 255, 165, 0 ]
 		},
 	]
 	m_Operators = 
@@ -166,18 +156,22 @@
 	[
 		{
 			m_ChildRef = resource:"particles/mechamancer_gale_debuff_glow_sans.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/mechamancer_gale_debuff_flek_sans.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/mechamancer_gale_debuff_gloop_sans.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/mechamancer_gale_debuff_gloop_b_sans.vpcf"
+			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/sans_innate_model.vpcf"
+			m_ChildRef = resource:"particles/peacemaker_e_facet2_model.vpcf"
 		},
 	]
 }

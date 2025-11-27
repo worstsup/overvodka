@@ -130,6 +130,7 @@ PrecacheUtils.particles = {
 		"particles/econ/events/ti9/phase_boots_ti9.vpcf",
 		"particles/ui/ui_generic_treasure_impact.vpcf",
 		"particles/peacemaker_deagle_proj.vpcf",
+		"particles/peacemaker_e_facet2.vpcf",
 
 		--silvername
 		"particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf",

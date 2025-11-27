@@ -22,17 +22,22 @@ function modifier_peacemaker_e_facet_deagle:IsBuff()     return true end
 
 function modifier_peacemaker_e_facet_deagle:OnCreated()
     if not IsServer() then return end
-    self.critProc = false
+    self.critProc            = false
+    self.in_extra_attack     = false
+    self.pending_bleed_targets = {}
 end
 
 function modifier_peacemaker_e_facet_deagle:OnRefresh()
     if not IsServer() then return end
-    self.critProc = false
+    self.critProc            = false
+    self.in_extra_attack     = false
+    self.pending_bleed_targets = self.pending_bleed_targets or {}
 end
 
 function modifier_peacemaker_e_facet_deagle:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+        MODIFIER_EVENT_ON_ATTACK,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
@@ -40,11 +45,12 @@ end
 function modifier_peacemaker_e_facet_deagle:GetModifierPreAttack_CriticalStrike(params)
     if not IsServer() then return end
 
-    local parent  = self:GetParent()
+    local parent = self:GetParent()
     if parent:PassivesDisabled() then
         self.critProc = false
         return
     end
+
     local ability = self:GetAbility()
     if not ability or ability:IsNull() then return end
     if params.attacker ~= parent then return end
@@ -54,9 +60,12 @@ function modifier_peacemaker_e_facet_deagle:GetModifierPreAttack_CriticalStrike(
         self.critProc = false
         return
     end
-
     if target:IsBuilding() or target:IsOther() or target:IsWard() then
         self.critProc = false
+        return
+    end
+
+    if self.in_extra_attack then
         return
     end
 
@@ -75,6 +84,67 @@ function modifier_peacemaker_e_facet_deagle:GetModifierPreAttack_CriticalStrike(
     self.critProc = false
 end
 
+function modifier_peacemaker_e_facet_deagle:OnAttack(params)
+    if not IsServer() then return end
+
+    local parent  = self:GetParent()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+    if params.attacker ~= parent then return end
+
+    if params.no_attack_cooldown then return end
+    if not params.process_procs then return end
+    if parent:PassivesDisabled() then return end
+    if self.in_extra_attack then return end
+
+    if not self.critProc then return end
+
+    if not parent:HasTalent("special_bonus_unique_peacemaker_7") then return end
+
+    local main_target = params.target
+    if not main_target or main_target:IsNull() then return end
+
+    local team   = parent:GetTeamNumber()
+    local origin = parent:GetAbsOrigin()
+    local range  = parent:Script_GetAttackRange()
+
+    local enemies = FindUnitsInRadius(
+        team,
+        origin,
+        nil,
+        range,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS,
+        FIND_CLOSEST,
+        false
+    )
+
+    local extra_target = nil
+    for _,enemy in ipairs(enemies) do
+        if enemy ~= main_target
+            and not enemy:IsNull()
+            and enemy:IsAlive()
+            and not enemy:IsOther()
+            and not enemy:IsBuilding()
+            and not enemy:IsWard()
+        then
+            extra_target = enemy
+            break
+        end
+    end
+
+    if not extra_target then return end
+
+    self.pending_bleed_targets = self.pending_bleed_targets or {}
+    local idx = extra_target:entindex()
+    self.pending_bleed_targets[idx] = (self.pending_bleed_targets[idx] or 0) + 1
+
+    self.in_extra_attack = true
+    parent:PerformAttack(extra_target, false, true, true, false, true, false, false)
+    self.in_extra_attack = false
+end
+
 function modifier_peacemaker_e_facet_deagle:OnAttackLanded(params)
     if not IsServer() then return end
 
@@ -88,13 +158,27 @@ function modifier_peacemaker_e_facet_deagle:OnAttackLanded(params)
         self.critProc = false
         return
     end
-
     if target:IsBuilding() or target:IsOther() or target:IsWard() then
         self.critProc = false
         return
     end
 
-    if self.critProc then
+    local should_bleed_from_extra = false
+    if self.pending_bleed_targets then
+        local idx = target:entindex()
+        local c = self.pending_bleed_targets[idx]
+        if c and c > 0 then
+            should_bleed_from_extra = true
+            c = c - 1
+            if c <= 0 then
+                self.pending_bleed_targets[idx] = nil
+            else
+                self.pending_bleed_targets[idx] = c
+            end
+        end
+    end
+
+    if self.critProc or should_bleed_from_extra then
         self.critProc = false
 
         local base_duration = ability:GetSpecialValueFor("bleed_duration") or 0
@@ -102,8 +186,10 @@ function modifier_peacemaker_e_facet_deagle:OnAttackLanded(params)
 
         local duration = base_duration * (1 - target:GetStatusResistance())
         if duration <= 0 then return end
+
         target:EmitSound("Peacemaker.Deagle.Crit")
         target:AddNewModifier(parent, ability, "modifier_peacemaker_e_facet_deagle_bleed", {duration = duration})
+
         local p = ParticleManager:CreateParticle("particles/peacemaker_e_facet1.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
         ParticleManager:SetParticleControl(p, 0, target:GetAbsOrigin())
         ParticleManager:ReleaseParticleIndex(p)
@@ -170,7 +256,7 @@ function modifier_peacemaker_e_facet_deagle_bleed:OnIntervalThink()
         return
     end
 
-    local dmg = self.damage_per_tick or 0
+    local dmg = self.damage_per_tick * self.interval
     if dmg <= 0 then return end
 
     ApplyDamage({
