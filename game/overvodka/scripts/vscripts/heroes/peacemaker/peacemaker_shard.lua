@@ -30,6 +30,7 @@ end
 function modifier_peacemaker_shard:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+        MODIFIER_EVENT_ON_DEATH,
     }
 end
 
@@ -42,4 +43,13 @@ function modifier_peacemaker_shard:UpdateDamageStacks()
     local kills = self:GetParent():GetKills()
     local bonus = kills * self.dmg_per_kill
     self:SetStackCount(math.floor(bonus))
+end
+
+function modifier_peacemaker_shard:OnDeath(params)
+    if not IsServer() then return end
+    if params.attacker:GetTeamNumber() ~= self:GetParent():GetTeamNumber() then return end
+    if params.unit:GetTeamNumber() == self:GetParent():GetTeamNumber() then return end
+    if params.unit:IsRealHero() and not params.unit:IsIllusion() and RandomInt(1, 2) == 1 then
+        self:GetParent():EmitSound("Peacemaker.Shard.Death")
+    end
 end

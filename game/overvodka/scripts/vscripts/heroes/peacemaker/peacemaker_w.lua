@@ -10,6 +10,13 @@ function peacemaker_w:Precache(ctx)
     PrecacheResource("soundfile", "soundevents/peacemaker_sounds.vsndevts", ctx)
 end
 
+function peacemaker_w:GetAbilityDamageType()
+    if self:GetCaster():HasAbility("peacemaker_deagle") then
+        return DAMAGE_TYPE_PHYSICAL
+	end
+    return DAMAGE_TYPE_MAGICAL
+end
+
 function peacemaker_w:OnAbilityPhaseStart()
     self:GetCaster():EmitSound("peacemaker_w_cast")
     return true
@@ -69,7 +76,7 @@ function peacemaker_w:OnSpellStart()
     local damageTable = {
         attacker = caster,
         damage = damage,
-        damage_type = DAMAGE_TYPE_PHYSICAL,
+        damage_type = self:GetAbilityDamageType(),
         ability = self,
     }
 

@@ -10,6 +10,13 @@ function peacemaker_q:Precache(ctx)
 	PrecacheResource( "soundfile", "soundevents/peacemaker_sounds.vsndevts", ctx )
 end
 
+function peacemaker_q:GetAbilityDamageType()
+    if self:GetCaster():HasAbility("peacemaker_deagle") then
+        return DAMAGE_TYPE_PHYSICAL
+	end
+    return DAMAGE_TYPE_MAGICAL
+end
+
 function peacemaker_q:OnAbilityPhaseStart()
 	self:GetCaster():EmitSound("peacemaker_q_cast")
 	return true

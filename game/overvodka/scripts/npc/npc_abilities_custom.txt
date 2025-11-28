@@ -16292,7 +16292,33 @@
 		"AbilityValues"
 		{
 			"attack_range"		"550"
-			"duration"			"3"
+			"duration"
+			{
+				"value"	"3"
+				"special_bonus_unique_peacemaker_1"	"+1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Mortal Combat (Combo)
+	//=================================================================================================================
+	"peacemaker_combo"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/peacemaker/peacemaker_combo"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityTextureName"    "seregga_innate"
+		"Innate"       			"1"
+		"IsBreakable"           "1"
+		"MaxLevel"				"1"
+		"AbilityValues"
+		{
+			"each_stack_duration"	"12"
+			"bonus_magic_damage"
+			{
+				"value"	"4"
+				"special_bonus_unique_peacemaker_1"	"+2"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -16429,13 +16455,13 @@
 			"sleep_duration"    "3 3.5 4.0 4.5"
 			"wake_damage"
 			{
-				"value"	"200 300 400 500"
+				"value"	"150 200 250 300"
 				"special_bonus_unique_peacemaker_7"	"+350"
 			}
 		}
 	}
 	//=================================================================================================================
-	// Peace out motherfucker (шард)
+	// Peace Out, Motherfucker (Shard)
 	//=================================================================================================================
 	"peacemaker_shard"
 	{
@@ -16448,6 +16474,32 @@
 		"AbilityValues"
 		{
 			"dmg_reduction"		"1"
+		}
+	}
+	//=================================================================================================================
+	// Vigilante Edit (Scepter)
+	//=================================================================================================================
+	"peacemaker_scepter"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/peacemaker/peacemaker_scepter"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"royale_r"
+		"IsGrantedByScepter"			"1"
+		"MaxLevel"						"1"
+		"AbilityCooldown"				"40"
+		"AbilityManaCost"				"250"
+		"AbilityValues"
+		{
+			"duration" "20"
+			"dash_min_distance"	"150"
+			"dash_max_distance"	"800"
+			"dash_radius"		"150"
+			"idle_duration"		"0.5"
+			"attack_interval"	"0.5"
+			"dash_interval"		"0.2"
+			"dash_overshoot" "120"
+			"max_follow_range"	"500"
 		}
 	}
 }

@@ -1473,7 +1473,7 @@
             }
         }
     }
-    "models/peacemaker/peacemaker_deagle.vmdl"
+    "models/peacemaker/deagle_peacemaker.vmdl"
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
         "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
