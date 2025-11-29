@@ -1,0 +1,94 @@
+.PeacemakerIntroRoot
+{
+    width: 100%;
+    height: 100%;
+    overflow: clip;
+}
+
+#PeacemakerIntroPanel
+{
+    width: 100%;
+    height: 100%;
+}
+
+/* Контейнер видео: затемнённый фон, золотая рамка, анимация появления */
+#PeacemakerIntroContainer
+{
+    width: 80%;
+    height: 70%;
+    horizontal-align: center;
+    vertical-align: center;
+    flow-children: none;
+
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #111111ee ), to( #181818ee ) );
+    border-radius: 10px;
+    border: 3px solid #FFD966ff;                /* золотая рамка */
+    box-shadow: 0px 0px 18px 0px #000000dd;
+
+    animation-duration: 0.18s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+
+/* Само видео внутри рамки */
+#PeacemakerIntroVideo
+{
+    width: 100%;
+    height: 100%;
+    opacity: 0.95;
+
+    border-radius: 0px;
+    overflow: clip;
+
+    z-index: 1;
+}
+
+/* Большая золотая круглая кнопка, немного вылезает за край */
+#PeacemakerIntroClose
+{
+    width: 120px;
+    height: 48px;
+
+    horizontal-align: right;
+    vertical-align: top;
+
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #FFE599ff ), to( #CFA000ff ) );
+    border: 2px solid #FFF2B8ff;
+
+    box-shadow: 0px 0px 12px 0px #000000dd;
+
+    opacity: 1.0;
+    z-index: 2;
+
+    transition-property: pre-transform-scale2d, box-shadow, brightness;
+    transition-duration: 0.08s;
+}
+
+/* крестик внутри кнопки */
+#PeacemakerIntroClose Label
+{
+    
+    horizontal-align: center;
+    vertical-align: center;
+    color: #2b1b00ff;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0px 0px 4px #FFFCE3aa;
+}
+
+/* ховер-эффект */
+#PeacemakerIntroClose:hover
+{
+    pre-transform-scale2d: 1.08;
+    box-shadow: 0px 0px 18px 0px #000000ff;
+    brightness: 1.2;
+}
+
+/* нажатие */
+#PeacemakerIntroClose:active
+{
+    pre-transform-scale2d: 0.95;
+    brightness: 0.9;
+}

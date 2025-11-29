@@ -3917,7 +3917,7 @@
 		"Ability3"		"generic_hidden"
 		"Ability4"		"peacemaker_scepter"
 		"Ability5"		"peacemaker_shard"
-		"Ability6"		"ember_spirit_fire_remnant"
+		"Ability6"		"peacemaker_r"
 		"Ability7"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_peacemaker_1"
 		"Ability11"		"special_bonus_unique_peacemaker_2"

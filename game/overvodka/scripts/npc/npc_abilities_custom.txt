@@ -16461,6 +16461,33 @@
 		}
 	}
 	//=================================================================================================================
+	// Season 1 Intro
+	//=================================================================================================================
+	"peacemaker_r"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/peacemaker/peacemaker_r"
+		"AbilityTextureName"			"sans_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam" 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCooldown"				"100 90 80"
+		"AbilityManaCost"				"200 250 300"
+		"AbilityCastRange"				"900"
+		"AbilityValues"
+		{
+			"radius"					"900"
+			"duration"					"5 6 7"
+			"damage"					"125 175 225"
+			"bonus_attack_damage_pct"	"25 50 75"
+			"cooldown_reduction_pct"	"20 30 40"
+		}
+	}
+	//=================================================================================================================
 	// Peace Out, Motherfucker (Shard)
 	//=================================================================================================================
 	"peacemaker_shard"

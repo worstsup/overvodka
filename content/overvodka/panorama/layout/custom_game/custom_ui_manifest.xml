@@ -14,8 +14,11 @@
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/debug_panel.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/chat_wheel.xml" />
+
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/chara/chara_screamer.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/visitor/visitor_screamer.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/peacemaker/peacemaker_r_intro.xml" />
+		
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/voice_loud_line/voice_loud_line.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/overvodka_events_timers/overvodka_events_timers.xml" />

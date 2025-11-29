@@ -11,7 +11,7 @@ end
 function Ashab_rocket:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
-    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
     EmitSoundOn("rocket", caster)
     local info = {Source = caster, Ability = self, EffectName = "particles/clockwerk_para_rocket_flare_mew.vpcf", iMoveSpeed = 600, bDodgeable = true, bProvidesVision = false}
     for _, enemy in pairs(enemies) do

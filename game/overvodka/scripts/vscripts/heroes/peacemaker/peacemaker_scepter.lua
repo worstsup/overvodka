@@ -28,19 +28,15 @@ function peacemaker_scepter:OnSpellStart()
         end
         self.vigilante = nil
     end
+    
+    local spawn_pos = caster:GetAbsOrigin() + RandomVector(175)
 
-    local spawn_distance = 175
-    local spawn_pos = caster:GetAbsOrigin() + RandomVector(spawn_distance)
-
-    local team     = caster:GetTeamNumber()
-    local owner    = caster
-
-    local vigilante = CreateUnitByName("npc_peacemaker_vigilante", spawn_pos, true, owner, nil, team)
+    local vigilante = CreateUnitByName("npc_peacemaker_vigilante", spawn_pos, true, caster, nil, caster:GetTeamNumber())
     if not vigilante or vigilante:IsNull() then
         return
     end
 
-    vigilante:SetOwner(owner)
+    vigilante:SetOwner(caster)
     self.vigilante = vigilante
     self:SetupVigilanteStats(vigilante, caster)
     vigilante:AddNewModifier(caster, self, "modifier_peacemaker_scepter_vigilante", {duration = self:GetSpecialValueFor("duration")})
@@ -182,24 +178,18 @@ function modifier_peacemaker_scepter_vigilante:OnCreated()
     self.parent  = self:GetParent()
     self.caster  = self:GetCaster()
     self.ability = self:GetAbility()
-
     if not self.ability or self.ability:IsNull() then return end
-
     self.spawn_time    = GameRules:GetGameTime()
     self.idle_duration = self.ability:GetSpecialValueFor("idle_duration") or 0.5
-
     self.current_target        = nil
     self.dashed_on_this_target = false
     self.has_cut_target        = false
-
     self.dash_interval   = self.ability:GetSpecialValueFor("dash_interval") or 0.2
     self.next_dash_time  = self.spawn_time + self.idle_duration
-
     self.max_follow_range = self.ability:GetSpecialValueFor("max_follow_range") or 500
     self.dash_max_distance  = self.ability:GetSpecialValueFor("dash_max_distance")  or 1200
 
     if not IsServer() then return end
-
     self:StartIntervalThink(0.05)
 end
 
@@ -220,7 +210,6 @@ function modifier_peacemaker_scepter_vigilante:OnIntervalThink()
     end
 
     local now = GameRules:GetGameTime()
-
     if now < self.spawn_time + self.idle_duration then
         return
     end
@@ -314,30 +303,26 @@ function modifier_peacemaker_scepter_vigilante:DoAstralDash(target)
 
     local desired = distance + overshoot
     local dist = math.max(math.min(max_dist, desired), min_dist)
-
     local dash_end = GetGroundPosition(origin + direction * dist, parent)
 
     local cut_target = false
 
     local enemies = FindUnitsInLine(
         parent:GetTeamNumber(),
-        origin,
-        dash_end,
-        nil,
-        radius,
+        origin, dash_end, nil, radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+        DOTA_UNIT_TARGET_FLAG_INVULNERABLE
     )
 
     for _,enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
-            parent:PerformAttack(enemy, true, true, true, false, true, false, true)
             if enemy == target then
                 cut_target = true
             end
             local impact = ParticleManager:CreateParticle("particles/econ/items/void_spirit/void_spirit_immortal_2021/void_spirit_immortal_2021_astral_step_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
             ParticleManager:ReleaseParticleIndex(impact)
+            parent:PerformAttack(enemy, true, true, true, false, true, false, true)
         end
     end
 

@@ -27,7 +27,7 @@ function item_silvername_chair:OnSpellStart()
             mod:Destroy()
         end
         caster.silvername_chair_unit:ForceKill(false)
-        UTIL_Remove(caster.silvername_chair_unit)
+        caster.silvername_chair_unit:AddNoDraw()
         caster.silvername_chair_unit = nil
     end
 

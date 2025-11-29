@@ -624,9 +624,55 @@ function VisitorScreamerFalse() {
     root.RemoveAndDeleteChildren();
 }
 
+function getPeacemakerIntroRoot() {
+    var p = $("#PeacemakerIntroPanel");
+    if (p) return p;
+
+    var hud = $.GetContextPanel();
+    while (hud && hud.id !== "Hud") {
+        hud = hud.GetParent();
+    }
+    return hud ? hud.FindChildTraverse("PeacemakerIntroPanel") : null;
+}
+
+function PeacemakerRIntroShow() {
+    var root = getPeacemakerIntroRoot();
+    if (!root) { $.Msg("PeacemakerIntro panel not found"); return; }
+    root.RemoveAndDeleteChildren();
+
+    var container = $.CreatePanel("Panel", root, "PeacemakerIntroContainer");
+    container.hittest = false;
+
+    var movie = $.CreatePanel("MoviePanel", container, "PeacemakerIntroVideo", {
+        src: "file://{resources}/videos/peacemaker_r_intro.webm",
+        repeat: "true",
+        hittest: "false",
+        autoplay: "onload"
+    });
+
+    var closeBtn = $.CreatePanel("Button", container, "PeacemakerIntroClose");
+    closeBtn.SetPanelEvent("onactivate", PeacemakerRIntroCloseClicked);
+
+    var lbl = $.CreatePanel("Label", closeBtn, "");
+    lbl.text = "ЗАКРЫТЬ";
+}
+
+function PeacemakerRIntroHide() {
+    var root = getPeacemakerIntroRoot();
+    if (!root) return;
+    root.RemoveAndDeleteChildren();
+}
+
+function PeacemakerRIntroCloseClicked() {
+    PeacemakerRIntroHide();
+    GameEvents.SendCustomGameEventToServer("peacemaker_r_close_clicked", {});
+}
+
 (function () {
     GameEvents.Subscribe( "CharaScreamerTrue", CharaScreamerTrue );
     GameEvents.Subscribe( "CharaScreamerFalse", CharaScreamerFalse );
     GameEvents.Subscribe( "VisitorScreamerTrue", VisitorScreamerTrue );
     GameEvents.Subscribe( "VisitorScreamerFalse", VisitorScreamerFalse );
+    GameEvents.Subscribe("PeacemakerRIntroShow", PeacemakerRIntroShow);
+    GameEvents.Subscribe("PeacemakerRIntroHide", PeacemakerRIntroHide);
 })();

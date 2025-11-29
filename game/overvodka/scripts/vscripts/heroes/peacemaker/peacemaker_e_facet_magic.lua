@@ -225,19 +225,9 @@ end
 function modifier_peacemaker_e_facet_magic_sleep:OnTakeDamage(params)
     if not IsServer() then return end
 
-    if params.unit ~= self:GetParent() then
-        return
-    end
-
-    if params.damage <= 0 then
-        return
-    end
-
-    local inflictor = params.inflictor
-
-    if inflictor == self:GetAbility() then
-        return
-    end
+    if params.unit ~= self:GetParent() then return end
+    if params.damage <= 0 then return end
+    if params.inflictor == self:GetAbility() then return end
 
     self.damageTaken = (self.damageTaken or 0) + params.damage
 
