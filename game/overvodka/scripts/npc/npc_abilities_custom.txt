@@ -16475,16 +16475,28 @@
 		"AbilityUnitTargetTeam" 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
-		"AbilityCooldown"				"100 90 80"
 		"AbilityManaCost"				"200 250 300"
-		"AbilityCastRange"				"900"
 		"AbilityValues"
 		{
-			"radius"					"900"
+			"radius"
+			{
+				"value"	"900"
+				"affected_by_aoe_increase"	"1"
+			}
 			"duration"					"5 6 7"
-			"damage"					"125 175 225"
+			"damage"					"100 150 200"
 			"bonus_attack_damage_pct"	"25 50 75"
 			"cooldown_reduction_pct"	"20 30 40"
+			"AbilityCastRange"
+			{
+				"value"	"900"
+				"affected_by_aoe_increase"	"1"
+			}
+			"AbilityCooldown"
+			{
+				"value"	"100 95 90"
+				"special_bonus_unique_peacemaker_6"	"-10"
+			}
 		}
 	}
 	//=================================================================================================================

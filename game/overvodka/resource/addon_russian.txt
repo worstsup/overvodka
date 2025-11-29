@@ -421,7 +421,7 @@
 		"npc_dota_hero_tusk_npedesc1"				"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_abaddon_npedesc1"			"Сложность персонажа: НУЖЕН МИКРОФОН"
 		"npc_dota_hero_puck_npedesc1"				"Сложность персонажа: ЛЕВ"
-		"npc_dota_hero_ember_spirit_npedesc1"		"Сложность персонажа: ---"
+		"npc_dota_hero_ember_spirit_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 
 		"dota_tooltip_Facet_peacemaker_facet_deagle"						"Desert Eagle"
 		"dota_tooltip_Facet_peacemaker_facet_deagle_description"			"Миротворец становится стрелком и получает способности X-Ray Vision и Explosive Bullet."
@@ -498,7 +498,7 @@
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_4"		 	"+{s:bonus_armor_per_hero} брони за героя от Sonic Boom Helmet"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_5"		 	"Альтернативное применение Eagly"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_5_description" "При применении герой мчится вместе с орлом до конца его пути, становясь неуязвимым на время полёта."
-		"dota_tooltip_ability_special_bonus_unique_peacemaker_6"		 	"чето на ульт"
+		"dota_tooltip_ability_special_bonus_unique_peacemaker_6"		 	"-{s:bonus_AbilityCooldown} сек. перезарядки Season 1 Intro"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_7"		 	"Доп. цель Explosive Bullet / +{s:bonus_wake_damage} к урону для пробуждения от Dart"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_7_facet_peacemaker_facet_deagle"	"Доп. цель Explosive Bullet"
 		"dota_tooltip_ability_special_bonus_unique_peacemaker_7_facet_peacemaker_facet_magic"	"+{s:bonus_wake_damage} к урону для пробуждения от Dart"

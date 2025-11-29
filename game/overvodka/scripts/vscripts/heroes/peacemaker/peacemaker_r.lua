@@ -30,7 +30,7 @@ peacemaker_r = class({})
 
 function peacemaker_r:Precache(ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_disruptor/disruptor_kineticfield.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/huskar/huskar_2021_immortal/huskar_2021_immortal_burning_spear_debuff_gold.vpcf", ctx)
     PrecacheResource("particle", "particles/peacemaker_r.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_shredder/shredder_whirling_death_spin.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/peacemaker_sounds.vsndevts", ctx)
@@ -82,7 +82,7 @@ function modifier_peacemaker_r_caster:IsDebuff()      return false end
 function modifier_peacemaker_r_caster:IsBuff()        return true end
 
 function modifier_peacemaker_r_caster:GetEffectName()
-    return "particles/units/heroes/hero_disruptor/disruptor_kineticfield.vpcf"
+    return "particles/econ/items/huskar/huskar_2021_immortal/huskar_2021_immortal_burning_spear_debuff_gold.vpcf"
 end
 
 function modifier_peacemaker_r_caster:GetEffectAttachType()
@@ -102,12 +102,12 @@ end
 
 function modifier_peacemaker_r_caster:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE,
+        MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
         MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
     }
 end
 
-function modifier_peacemaker_r_caster:GetModifierBaseDamageOutgoing_Percentage()
+function modifier_peacemaker_r_caster:GetModifierDamageOutgoing_Percentage()
     return self.bonus_damage_pct or 0
 end
 
