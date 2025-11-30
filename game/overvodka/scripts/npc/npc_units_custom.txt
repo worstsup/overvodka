@@ -1696,22 +1696,16 @@
 	"npc_subo"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
-        "ModelScale"            "2"
+        "Model"                 "models/subo/subobratik.vmdl"
+        "ModelScale"            "2.0"
 		"SoundSet"				"Hero_PrimalBeast"
         "Level"                 "50"
         "HasInventory"          "0"
         "ArmorPhysical"         "5"
         "MagicalResistance"     "50"
-        "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-        "AttackDamageMin"       "40"
-        "AttackDamageMax"       "40"
-        "AttackRate"            "1.4"
-        "AttackAnimationPoint"  "0.5"
-        "AttackAcquisitionRange" "500"
-        "AttackRange"           "250"
-        "Ability1"				"ogre_bruiser_ogre_smash"
+        "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+		"Ability1"				"ogre_bruiser_ogre_smash"
+        "Ability2"				"subo_dance"
         "BountyGoldMin"         "50"
         "BountyGoldMax"         "50"
 		"BountyXP"				"50"
@@ -1728,10 +1722,9 @@
         "VisionDaytimeRange"    "600"
         "VisionNighttimeRange"  "300"
         "TeamName"              "DOTA_TEAM_NEUTRALS"
-        "CombatClassAttack"		"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"		"DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        "AutoAttacksByDefault"  "1"
+        "AutoAttacksByDefault"  "0"
         "IsSummoned"            "1"
 	}
 	"npc_ashab_car"
@@ -4970,18 +4963,11 @@
 		"SoundSet"                                            "Hero_MonkeyKing"
 		"GameSoundsFile"                                      "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts"
 		"Level"                                               "1"
-
 		"CanBeDominated"                                      "0"
 		"ConsideredHero"                                      "0"
 		"IgnoreAddSummonedToSelection"                        "1"
-
-		// Armor
-		//----------------------------------------------------------------
 		"ArmorPhysical"                                       "0"
 		"MagicalResistance"                                   "0"
-
-		// Attack
-		//----------------------------------------------------------------
 		"AttackCapabilities"                                  "DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"                                     "29"
 		"AttackDamageMax"                                     "35"
@@ -4989,37 +4975,19 @@
 		"AttackAnimationPoint"                                "0.45"
 		"AttackAcquisitionRange"                              "800"
 		"AttackRange"                                         "250"
-
-		// Bounty
-		//----------------------------------------------------------------
 		"BountyXP"                                            "0"
 		"BountyGoldMin"                                       "0"
 		"BountyGoldMax"                                       "0"
-
-		// Bounds
-		//----------------------------------------------------------------
 		"BoundsHullName"                                      "DOTA_HULL_SIZE_SMALL"
-
-		// Movement
-		//----------------------------------------------------------------
 		"MovementCapabilities"                                "DOTA_UNIT_CAP_MOVE_NONE"
 		"MovementSpeed"                                       "0"
 		"MovementTurnRate"                                    "0.6"
-
-		// Status
-		//----------------------------------------------------------------
 		"StatusHealth"                                        "150"
 		"StatusHealthRegen"                                   "0"
 		"StatusMana"                                          "0"
 		"StatusManaRegen"                                     "0"
-
-		// Combat
-		//----------------------------------------------------------------
 		"TeamName"                                            "DOTA_TEAM_GOODGUYS"
 		"UnitRelationshipClass"                               "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_HERO"
-
-		// Vision
-		//----------------------------------------------------------------
 		"VisionDaytimeRange"                                  "600"
 		"VisionNighttimeRange"                                "600"
 

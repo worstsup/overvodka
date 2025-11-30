@@ -4989,13 +4989,33 @@
 					"value"	"300 500 700 900"
 					"special_bonus_unique_litvin_5" "+1500"
 				}
-				"base_dmg"
-				{
-					"value"	"40 80 120 160"
-					"special_bonus_unique_litvin_5" "+100"
-				}
 				"xp" "40 60 80 100"
 				"gold" "50 100 150 200"
+				"radius"   "350"
+				"slow_as"	"-20 -40 -60 -80"
+				"slow_ms"	"-15 -20 -25 -30"
+		}
+	}
+	//=================================================================================================================
+	// ТАНЕЦ СУБО
+	//=================================================================================================================
+	"subo_dance"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"subo_dance"
+		"ScriptFile"					"heroes/litvin/litvin_subo"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCooldown"				"15"
+		"MaxLevel"						"4"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"350"
+		"AbilityValues"
+		{
+				"duration" "10"
+				"radius"   "350"
+				"slow_as"	"-20 -40 -60 -80"
+				"slow_ms"	"-15 -20 -25 -30"
 		}
 	}
 	//=================================================================================================================
@@ -5014,7 +5034,7 @@
 		"AbilityManaCost"				"0"
 		"AbilityValues"
 		{
-				"radius"						
+				"radius"
 				{
 					"value"			"350"
 				}
@@ -8744,6 +8764,7 @@
 				{
 					"value"	"5"
 					"special_bonus_unique_papich_4" "+1"
+					"special_bonus_scepter"	"+1.5"
 				}
 				"attack_speed_bonus"		"20 30 40 50"
 				"evasion_chance"			"100"
@@ -8753,6 +8774,8 @@
 					"special_bonus_unique_papich_5" "+10"
 				}
 				"slow"	"10 15 20 25"
+				"pull_radius"	"800"
+				"pull_speed"	"150"
 		}
 	}
 	//=================================================================================================================
@@ -16285,7 +16308,6 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/peacemaker/peacemaker_deagle"
-		"AbilityTextureName"			"sans_innate"
 		"MaxLevel"						"1"
 		"Innate"						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -16307,7 +16329,6 @@
 		"BaseClass"             "ability_lua"
 		"ScriptFile"            "heroes/peacemaker/peacemaker_combo"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilityTextureName"    "seregga_innate"
 		"Innate"       			"1"
 		"IsBreakable"           "1"
 		"MaxLevel"				"1"
@@ -16364,7 +16385,7 @@
 		"BaseClass"                     "ability_lua"
 		"ScriptFile"                    "heroes/peacemaker/peacemaker_w"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"            "seregga_e"
+		"AbilityTextureName"            "peacemaker_w"
 		"AbilityCastPoint"              "0.25"
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -16442,7 +16463,7 @@
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"	"SPELL_DISPELLABLE_YES"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
-		"AbilityTextureName"    "sans_e"
+		"AbilityTextureName"    "peacemaker_e_facet_magic"
 		"AbilityCooldown"   	"13 12 11 10"
 		"AbilityManaCost"   	"110 130 150 170"
 		"AbilityCastPoint"		"0.25"
@@ -16467,8 +16488,8 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/peacemaker/peacemaker_r"
-		"AbilityTextureName"			"sans_r"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"			"peacemaker_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
@@ -16476,6 +16497,7 @@
 		"AbilityUnitTargetType" 		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityManaCost"				"200 250 300"
+		"AbilityCastPoint"				"0.25"
 		"AbilityValues"
 		{
 			"radius"
@@ -16484,7 +16506,7 @@
 				"affected_by_aoe_increase"	"1"
 			}
 			"duration"					"5 6 7"
-			"damage"					"100 150 200"
+			"damage"					"100 140 180"
 			"bonus_attack_damage_pct"	"25 50 75"
 			"cooldown_reduction_pct"	"20 30 40"
 			"AbilityCastRange"
@@ -16497,6 +16519,7 @@
 				"value"	"100 95 90"
 				"special_bonus_unique_peacemaker_6"	"-10"
 			}
+			"dota_bonus_cooldown"	"40"
 		}
 	}
 	//=================================================================================================================
@@ -16523,7 +16546,7 @@
 		"BaseClass"             		"ability_lua"
 		"ScriptFile"					"heroes/peacemaker/peacemaker_scepter"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"royale_r"
+		"AbilityTextureName"			"peacemaker_scepter"
 		"IsGrantedByScepter"			"1"
 		"MaxLevel"						"1"
 		"AbilityCooldown"				"40"

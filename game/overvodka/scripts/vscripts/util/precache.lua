@@ -397,6 +397,7 @@ PrecacheUtils.sounds = {
 		"soundevents/royale_start.vsndevts",
 		"soundevents/frisk_start.vsndevts",
 		"soundevents/seregga_start.vsndevts",
+		"soundevents/peacemaker_start.vsndevts",
 		"soundevents/visitor_night.vsndevts",
 		"soundevents/ailesh.vsndevts",
 		"soundevents/chapman.vsndevts",

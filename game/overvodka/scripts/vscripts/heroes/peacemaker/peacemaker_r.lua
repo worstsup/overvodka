@@ -36,12 +36,25 @@ function peacemaker_r:Precache(ctx)
     PrecacheResource("soundfile", "soundevents/peacemaker_sounds.vsndevts", ctx)
 end
 
-function peacemaker_r:GetCooldown(level)
-    return self.BaseClass.GetCooldown(self, level)
+function peacemaker_r:GetCooldown( level )
+    local base_cd = self.BaseClass.GetCooldown( self, level )
+    if GetMapName() == "overvodka_5x5" then
+        return base_cd + self:GetSpecialValueFor("dota_bonus_cooldown")
+    end
+    return base_cd
 end
 
 function peacemaker_r:GetManaCost(level)
     return self.BaseClass.GetManaCost(self, level)
+end
+
+function peacemaker_r:OnAbilityPhaseStart()
+	self:GetCaster():EmitSound("Peacemaker.Intro")
+	return true
+end
+
+function peacemaker_r:OnAbilityPhaseInterrupted()
+    self:GetCaster():StopSound("Peacemaker.Intro")
 end
 
 function peacemaker_r:OnSpellStart()
@@ -59,7 +72,6 @@ function peacemaker_r:OnSpellStart()
     ParticleManager:SetParticleControl(p, 0, caster:GetAbsOrigin())
     ParticleManager:SetParticleControl(p, 1, Vector(radius, radius, radius))
     ParticleManager:ReleaseParticleIndex(p)
-    caster:EmitSound("Peacemaker.Intro")
 
     local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, false)
 

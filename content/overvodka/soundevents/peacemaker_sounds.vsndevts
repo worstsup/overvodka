@@ -209,7 +209,7 @@
                "value0"    "sounds/abilities/peacemaker_r.vsnd"
             }
           }
-          "volume"      {  "value"   "10.0" }
+          "volume"      {  "value"   "12.0" }
           "pitch_rand_min"  {  "value"   "-0.03000" }
           "pitch_rand_max"  {  "value"   "0.030000" }
           "pitch"       {  "value"   "1.000000" }

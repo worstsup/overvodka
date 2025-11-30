@@ -34,6 +34,7 @@ function papich_w_clone:OnSpellStart()
 		local counter = 0
 		caster:StartGesture(ACT_DOTA_CAST_ABILITY_2)
 		Timers:CreateTimer(FrameTime(), function()
+			if not caster or caster:IsNull() then return end
 			counter = counter + FrameTime()
 			caster_loc = caster:GetAbsOrigin()
 			if counter <= (whirl_duration / 2) then
@@ -99,11 +100,9 @@ function modifier_papich_w_clone:IsStunDebuff() return false end
 function modifier_papich_w_clone:RemoveOnDeath() return true end
 
 function modifier_papich_w_clone:DeclareFunctions()
-	local decFuns =
-		{
-			MODIFIER_PROPERTY_MISS_PERCENTAGE
-		}
-	return decFuns
+	return {
+		MODIFIER_PROPERTY_MISS_PERCENTAGE
+	}
 end
 
 function modifier_papich_w_clone:OnCreated(params)

@@ -8,7 +8,7 @@ function papich_r:Precache(context)
     PrecacheResource( "soundfile", "soundevents/papich_r_appear.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/fof.vsndevts", context )
     PrecacheResource( "particle", "particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_nether_swap_v3_explosion.vpcf", context )
-    PrecacheResource( "particle", "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", context)
+    PrecacheResource( "particle", "particles/econ/items/pudge/hungry_clown/hungry_clown_rot_dark.vpcf", context)
 end
 
 function papich_r:OnAbilityPhaseStart()
@@ -109,8 +109,7 @@ function modifier_papich_r:IsPurgeException() return false end
 function modifier_papich_r:OnCreated()
     if not IsServer() then return end
     self:GetParent():EmitSound("papich_r_spawn")
-    local particle_ambient = ParticleManager:CreateParticle( "particles/econ/courier/courier_greevil_black/courier_greevil_black_ambient_3.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
-    ParticleManager:SetParticleControlEnt(particle_ambient, 0, self:GetParent(), PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", self:GetParent():GetAbsOrigin(), true)
+    local particle_ambient = ParticleManager:CreateParticle( "particles/econ/items/pudge/hungry_clown/hungry_clown_rot_dark.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
     self:AddParticle(particle_ambient, false, false, -1, false, false)
     self.check_interval = 0.1
 

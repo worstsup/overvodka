@@ -1,6 +1,8 @@
 LinkLuaModifier("modifier_papich_w_thinker", "heroes/papich/papich_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_papich_w_enemy",   "heroes/papich/papich_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_papich_w_caster",  "heroes/papich/papich_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_w_pull",    "heroes/papich/papich_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_papich_w_ally",    "heroes/papich/papich_w", LUA_MODIFIER_MOTION_NONE)
 
 papich_w = class({})
 
@@ -11,30 +13,79 @@ end
 function papich_w:Precache(ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_magnetic_cast.vpcf", ctx)
     PrecacheResource("particle", "particles/papich_w.vpcf", ctx)
+    PrecacheResource("particle", "particles/papich_w_pull.vpcf", ctx)
     PrecacheResource("soundfile","soundevents/papich_w.vsndevts", ctx)
+end
+
+function papich_w:GetBehavior()
+    local behavior = self.BaseClass.GetBehavior(self)
+    local caster   = self:GetCaster()
+
+    if caster and caster:HasScepter() then
+        local nBehavior = tonumber(tostring(behavior))
+        return nBehavior + DOTA_ABILITY_BEHAVIOR_UNIT_TARGET
+    end
+
+    return behavior
+end
+
+function papich_w:CastFilterResultTarget(target)
+	if self:GetCaster():HasScepter() then
+		return UnitFilter(target, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, self:GetCaster():GetTeamNumber())
+	end
+    return UF_SUCCESS
 end
 
 function papich_w:OnSpellStart()
     local caster = self:GetCaster()
-    local pos    = self:GetCursorPosition()
     local dur    = self:GetSpecialValueFor("duration")
     local rad    = self:GetSpecialValueFor("radius")
+
+    if not caster or caster:IsNull() then return end
+
+    local pos    = self:GetCursorPosition()
+    local target = nil
+
+    if caster:HasScepter() then
+        local t = self:GetCursorTarget()
+        if t and not t:IsNull()
+            and t:GetTeamNumber() == caster:GetTeamNumber()
+        then
+            target = t
+            pos    = t:GetAbsOrigin()
+        end
+    end
 
     caster:EmitSound("papich_w")
     local p = ParticleManager:CreateParticle("particles/units/heroes/hero_arc_warden/arc_warden_magnetic_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControlEnt(p, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetAbsOrigin(), true)
     ParticleManager:ReleaseParticleIndex(p)
 
+    local follow_ent = target and target:entindex() or nil
+
     caster:AddNewModifier(caster, self, "modifier_papich_w_caster", {
-        duration = dur,
-        center_x = pos.x, center_y = pos.y, center_z = pos.z,
-        radius   = rad
+        duration  = dur,
+        center_x  = pos.x, center_y = pos.y, center_z = pos.z,
+        radius    = rad,
+        follow_ent = follow_ent,
     })
 
-    CreateModifierThinker(caster, self, "modifier_papich_w_thinker",
-        { duration = dur, radius = rad }, pos, caster:GetTeamNumber(), false)
-end
+    if target and target ~= caster then
+        target:AddNewModifier(caster, self, "modifier_papich_w_ally", {duration = dur})
+    end
 
+    CreateModifierThinker(
+        caster, self, "modifier_papich_w_thinker",
+        {
+            duration   = dur,
+            radius     = rad,
+            follow_ent = follow_ent,
+        },
+        pos,
+        caster:GetTeamNumber(),
+        false
+    )
+end
 
 modifier_papich_w_thinker = class({})
 
@@ -43,13 +94,51 @@ function modifier_papich_w_thinker:IsPurgable() return false end
 
 function modifier_papich_w_thinker:OnCreated(kv)
     self.radius = tonumber(kv.radius or 0)
-    if not IsServer() then return end
 
-    self.center  = self:GetParent():GetAbsOrigin()
+    if not IsServer() then
+        self.center = self:GetParent():GetAbsOrigin()
+        return
+    end
+
+    self.center = self:GetParent():GetAbsOrigin()
+
+    self.follow_target = nil
+    if kv.follow_ent ~= nil then
+        local idx = tonumber(kv.follow_ent)
+        if idx then
+            local ent = EntIndexToHScript(idx)
+            if ent and not ent:IsNull() then
+                self.follow_target = ent
+            end
+        end
+    end
 
     local fx = ParticleManager:CreateParticle("particles/papich_w.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(fx, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(fx, 1, Vector(self.radius, 1, 1))
     self:AddParticle(fx, false, false, -1, false, false)
+    if self:GetCaster():HasScepter() then
+        local pull = ParticleManager:CreateParticle("particles/papich_w_pull.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+        ParticleManager:SetParticleControl(fx, 0, self:GetParent():GetAbsOrigin())
+        self:AddParticle(fx, false, false, -1, false, false)
+    end
+    if self.follow_target then
+        self:StartIntervalThink(0.03)
+    end
+end
+
+function modifier_papich_w_thinker:OnIntervalThink()
+    if not IsServer() then return end
+
+    if not self.follow_target or self.follow_target:IsNull() or not self.follow_target:IsAlive() then
+        self:StartIntervalThink(-1)
+        return
+    end
+
+    self.center = self.follow_target:GetAbsOrigin()
+    if self:GetParent() and not self:GetParent():IsNull() then
+        self:GetParent():SetAbsOrigin(self.center)
+    end
 end
 
 function modifier_papich_w_thinker:IsAura() return true end
@@ -81,42 +170,48 @@ function modifier_papich_w_enemy:IsDebuff() return true end
 function modifier_papich_w_enemy:IsPurgable() return true end
 
 function modifier_papich_w_enemy:OnCreated()
-    self.as_slow, self.ms_slow = 0, 0
-    self.stolen_int, self.stolen_str = 0, 0
+    self.as_slow     = 0
+    self.ms_slow     = 0
+    self.stolen_int  = 0
+
     local ability = self:GetAbility()
-    if not ability or ability:IsNull() then if IsServer() then self:Destroy() end return end
+    if not ability or ability:IsNull() then
+        if IsServer() then self:Destroy() end
+        return
+    end
 
     self.as_slow = ability:GetSpecialValueFor("attack_speed_bonus")
     self.ms_slow = ability:GetSpecialValueFor("slow")
 
     if not IsServer() then return end
+
     local parent = self:GetParent()
     local caster = ability:GetCaster()
-    if not parent or parent:IsNull() or not caster or caster:IsNull() then self:Destroy() return end
-	
-    local pct = ability:GetSpecialValueFor("intellect_steal_pct")
-	if not parent:IsHero() or parent:IsIllusion() then
-		self.stolen_int, self.stolen_str = 0, 0
-		return
-	end
-    if parent:IsHero() and not parent:IsIllusion() then
-        local base_str = parent:GetStrength()
-        self.stolen_int = math.floor(base_str * pct * 0.01 + 0.5)
-        if caster:HasScepter() then
-            self.stolen_str = math.floor(base_str * pct * 0.01 + 0.5)
-        end
+    if not parent or parent:IsNull() or not caster or caster:IsNull() then
+        self:Destroy()
+        return
     end
-	print(self.stolen_int)
+
+    local pct = ability:GetSpecialValueFor("intellect_steal_pct") or 0
+
+    if not parent:IsHero() or parent:IsIllusion() then
+        self.stolen_int = 0
+        return
+    end
+
+    local base_str = parent:GetStrength()
+    self.stolen_int = math.floor(base_str * pct * 0.01 + 0.5)
+
     self._caster_buff = caster:FindModifierByName("modifier_papich_w_caster")
     if self._caster_buff and not self._caster_buff:IsNull() then
-        self._caster_buff:AddContribution(self.stolen_int, self.stolen_str)
+        self._caster_buff:AddContribution(self.stolen_int, 0)
     end
 end
 
 function modifier_papich_w_enemy:OnDestroy()
     if not IsServer() then return end
     if self._caster_buff and not self._caster_buff:IsNull() then
-        self._caster_buff:RemoveContribution(self.stolen_int, self.stolen_str)
+        self._caster_buff:RemoveContribution(self.stolen_int, 0)
     end
 end
 
@@ -125,14 +220,20 @@ function modifier_papich_w_enemy:DeclareFunctions()
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
-        MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
     }
 end
 
-function modifier_papich_w_enemy:GetModifierAttackSpeedBonus_Constant() return -(self.as_slow or 0) end
-function modifier_papich_w_enemy:GetModifierMoveSpeedBonus_Percentage()  return -(self.ms_slow or 0) end
-function modifier_papich_w_enemy:GetModifierBonusStats_Intellect()       return -(self.stolen_int or 0) end
-function modifier_papich_w_enemy:GetModifierBonusStats_Strength()        return -(self.stolen_str or 0) end
+function modifier_papich_w_enemy:GetModifierAttackSpeedBonus_Constant()
+    return -(self.as_slow or 0)
+end
+
+function modifier_papich_w_enemy:GetModifierMoveSpeedBonus_Percentage()
+    return -(self.ms_slow or 0)
+end
+
+function modifier_papich_w_enemy:GetModifierBonusStats_Intellect()
+    return -(self.stolen_int or 0)
+end
 
 
 modifier_papich_w_caster = class({})
@@ -141,13 +242,35 @@ function modifier_papich_w_caster:OnCreated(kv)
     local ability = self:GetAbility()
     self.as = ability and ability:GetSpecialValueFor("attack_speed_bonus") or 0
     self.ms = ability and ability:GetSpecialValueFor("slow") or 0
-    self.center = Vector(tonumber(kv.center_x or 0), tonumber(kv.center_y or 0), tonumber(kv.center_z or 0))
-    self.radius = tonumber(kv.radius or 0)
-    self.total_int, self.total_str = 0, 0
-    self.has_scepter = (ability and ability:GetCaster() and ability:GetCaster():HasScepter()) or false
 
-    self._inside = false
-    self._victims = 0
+    self.center = Vector(
+        tonumber(kv.center_x or 0),
+        tonumber(kv.center_y or 0),
+        tonumber(kv.center_z or 0)
+    )
+    self.radius = tonumber(kv.radius or 0)
+
+    self.total_int = 0
+    self.total_str = 0
+
+    self.follow_target = nil
+    if kv.follow_ent ~= nil then
+        local idx = tonumber(kv.follow_ent)
+        if idx then
+            local ent = EntIndexToHScript(idx)
+            if ent and not ent:IsNull() then
+                self.follow_target = ent
+            end
+        end
+    end
+
+    self.has_scepter = ability
+        and ability:GetCaster()
+        and ability:GetCaster():HasScepter()
+        or false
+
+    self._inside    = false
+    self._victims   = 0
     self._has_bonus = false
 
     if IsServer() then
@@ -156,6 +279,7 @@ function modifier_papich_w_caster:OnCreated(kv)
         self:SendBuffRefreshToClients()
     end
 end
+
 
 function modifier_papich_w_caster:IsInside()
     local parent = self:GetParent()
@@ -196,9 +320,49 @@ function modifier_papich_w_caster:CountVictims()
 end
 
 function modifier_papich_w_caster:OnIntervalThink()
+    if self.follow_target and not self.follow_target:IsNull() and self.follow_target:IsAlive() then
+        self.center = self.follow_target:GetAbsOrigin()
+    end
+
     local inside   = self:IsInside()
     local victims  = inside and self:CountVictims() or 0
     local has_bonus= inside and (victims > 0)
+
+    if self.has_scepter then
+        local ability = self:GetAbility()
+        local parent  = self:GetParent()
+        if ability and not ability:IsNull() and parent and not parent:IsNull() then
+            local pull_radius = ability:GetSpecialValueFor("pull_radius") or self.radius or 0
+
+            local enemies = FindUnitsInRadius(
+                parent:GetTeamNumber(),
+                self.center,
+                nil,
+                pull_radius,
+                DOTA_UNIT_TARGET_TEAM_ENEMY,
+                DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+                DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+                FIND_ANY_ORDER,
+                false
+            )
+
+            for _,enemy in ipairs(enemies) do
+                if enemy and not enemy:IsNull() and enemy:IsAlive() and not enemy:IsDebuffImmune() then
+                    enemy:AddNewModifier(
+                        parent,
+                        ability,
+                        "modifier_papich_w_pull",
+                        {
+                            duration = 0.25,
+                            center_x = self.center.x,
+                            center_y = self.center.y,
+                            center_z = self.center.z,
+                        }
+                    )
+                end
+            end
+        end
+    end
 
     if inside ~= self._inside or victims ~= self._victims or has_bonus ~= self._has_bonus then
         self._inside   = inside
@@ -231,7 +395,6 @@ function modifier_papich_w_caster:RemoveContribution(int_gain, str_gain)
         self:SendBuffRefreshToClients()
     end
 end
-
 
 function modifier_papich_w_caster:AddCustomTransmitterData()
     return {
@@ -277,9 +440,9 @@ end
 
 function modifier_papich_w_caster:GetModifierBonusStats_Intellect()
     if not self._inside then return 0 end
-    local from_str = (self.has_scepter and math.floor((self.total_str or 0) * 0.5 + 0.5) or 0)
-    return (self.total_int or 0) + from_str
+    return self.total_int or 0
 end
+
 
 function modifier_papich_w_caster:GetModifierEvasion_Constant(params)
     if not params or not params.attacker then return 0 end
@@ -290,4 +453,158 @@ function modifier_papich_w_caster:GetModifierEvasion_Constant(params)
         return ability and ability:GetSpecialValueFor("evasion_chance") or 0
     end
     return 0
+end
+
+modifier_papich_w_pull = class({})
+
+function modifier_papich_w_pull:IsHidden()      return true end
+function modifier_papich_w_pull:IsDebuff()      return true  end
+function modifier_papich_w_pull:IsStunDebuff()  return true  end
+function modifier_papich_w_pull:IsPurgable()    return false  end
+
+function modifier_papich_w_pull:OnCreated(kv)
+    if not IsServer() then return end
+
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    self.pull_speed = ability:GetSpecialValueFor("pull_speed") or 0
+
+    self.center = Vector(
+        tonumber(kv.center_x or 0),
+        tonumber(kv.center_y or 0),
+        tonumber(kv.center_z or 0)
+    )
+
+    self:StartIntervalThink(FrameTime())
+end
+
+function modifier_papich_w_pull:OnRefresh(kv)
+    if not IsServer() then return end
+
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    self.center = Vector(
+        tonumber(kv.center_x or 0),
+        tonumber(kv.center_y or 0),
+        tonumber(kv.center_z or 0)
+    )
+end
+
+function modifier_papich_w_pull:OnIntervalThink()
+    if not IsServer() then return end
+
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    local direction = self.center - parent:GetAbsOrigin()
+    direction.z = 0
+    if direction:Length2D() < 200 then return end
+
+    direction = direction:Normalized()
+    local point = parent:GetAbsOrigin() + direction * self.pull_speed * FrameTime()
+
+    parent:SetAbsOrigin(point)
+end
+
+function modifier_papich_w_pull:OnDestroy()
+    if not IsServer() then return end
+    local parent = self:GetParent()
+    if parent and not parent:IsNull() then
+        FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+    end
+end
+
+modifier_papich_w_ally = class({})
+
+function modifier_papich_w_ally:IsHidden()      return false end
+function modifier_papich_w_ally:IsDebuff()      return false end
+function modifier_papich_w_ally:IsPurgable()    return true  end
+
+function modifier_papich_w_ally:OnCreated(kv)
+    self.caster     = self:GetCaster()
+    self.ability    = self:GetAbility()
+
+    self:SetHasCustomTransmitterData(true)
+    if IsServer() then
+        self:StartIntervalThink(0.2)
+        self:SendBuffRefreshToClients()
+    end
+end
+
+function modifier_papich_w_ally:OnRefresh(kv)
+    self.caster  = self:GetCaster()
+    self.ability = self:GetAbility()
+end
+
+function modifier_papich_w_ally:OnIntervalThink()
+    if not IsServer() then return end
+
+    if not self.caster or self.caster:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    local buff = self.caster:FindModifierByName("modifier_papich_w_caster")
+    if not buff or buff:IsNull() then
+        self.as        = 0
+        self.ms        = 0
+        self.total_int = 0
+    else
+        self.as        = buff.as or 0
+        self.ms        = buff.ms or 0
+        self.total_int = buff.total_int or 0
+    end
+
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_papich_w_ally:AddCustomTransmitterData()
+    return {
+        as = self.as or 0,
+        ms = self.ms or 0,
+        ti = self.total_int or 0,
+    }
+end
+
+function modifier_papich_w_ally:HandleCustomTransmitterData(data)
+    self.as        = data.as or 0
+    self.ms        = data.ms or 0
+    self.total_int = data.ti or 0
+end
+
+function modifier_papich_w_ally:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
+    }
+end
+
+function modifier_papich_w_ally:GetModifierAttackSpeedBonus_Constant()
+    if (self.total_int or 0) <= 0 then
+        return 0
+    end
+    return self.as or 0
+end
+
+function modifier_papich_w_ally:GetModifierMoveSpeedBonus_Percentage()
+    if (self.total_int or 0) <= 0 then
+        return 0
+    end
+    return self.ms or 0
+end
+
+function modifier_papich_w_ally:GetModifierBonusStats_Intellect()
+    return self.total_int or 0
 end
