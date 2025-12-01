@@ -1063,17 +1063,17 @@
 			"damage"
 		    {
 		        "value"	"30 40 50"
-		        "special_bonus_unique_eldzhey_7" "+40"
+		        "special_bonus_unique_eldzhey_7" "+30"
 		    }
 		    "radius"
 		    {
-		        "value"	"450 525 600"
+		        "value"	"450 500 550"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
 		    "AbilityCastRange"
 		    {
-		        "value"	"450 525 600"
+		        "value"	"450 500 550"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }

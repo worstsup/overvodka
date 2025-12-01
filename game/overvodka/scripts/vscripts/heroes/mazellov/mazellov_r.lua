@@ -42,6 +42,9 @@ end
 
 function mazellov_r:OnSpellStart()
     if not IsServer() then return end
+    local silvename_abilities_facet_1 = {"silvername_q_facet_1", "silvername_w_facet_1", "silvername_e_facet_1", "silvername_r_facet_1"}
+    local silvename_abilities_facet_2 = {"silvername_q_facet_2", "silvername_w_facet_2", "silvername_e_facet_2", "silvername_r_facet_2"}
+
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
     if target:HasModifier("modifier_item_lotus_orb_active") then
@@ -51,6 +54,27 @@ function mazellov_r:OnSpellStart()
 	local clone = CreateUnitByName( target:GetUnitName(), target:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
     if clone then
         self.clone = clone
+
+        if target:GetUnitName() == "npc_dota_hero_phoenix" then
+            local list = nil
+            if target:HasAbility("silvername_q_facet_1") then
+                list = silvename_abilities_facet_1
+            else
+                list = silvename_abilities_facet_2
+            end
+            for _, ability_name in ipairs(list) do
+                if ability_name and ability_name ~= "" then
+                    local src_ability = target:FindAbilityByName(ability_name)
+                    if src_ability then
+                        local clone_ability = clone:AddAbility(ability_name)
+                        if clone_ability then
+                            clone_ability:SetLevel(src_ability:GetLevel())
+                        end
+                    end
+                end
+            end
+        end
+
         clone:AddNewModifier(self:GetCaster(), self, "modifier_mazellov_r", {duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance())})
         clone:SetUnitCanRespawn(true)
         clone:SetRespawnsDisabled(true)
@@ -136,6 +160,7 @@ function modifier_mazellov_r:DeclareFunctions()
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+        MODIFIER_PROPERTY_HEROFACET_OVERRIDE
     }
 end
 
@@ -149,6 +174,10 @@ end
 
 function modifier_mazellov_r:GetModifierMagicalResistanceBonus()
     return self:GetAbility():GetSpecialValueFor("magic_resist")
+end
+
+function modifier_mazellov_r:GetModifierHeroFacetOverride()
+    return 1
 end
 
 function modifier_mazellov_r:CheckState()
