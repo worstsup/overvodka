@@ -192,6 +192,7 @@ PrecacheUtils.units = {
 	"npc_murloc",
 	"npc_silvername_chair",
 	"npc_silvername_garr",
+	"npc_zhenya_boss",
 }
 
 PrecacheUtils.models = {

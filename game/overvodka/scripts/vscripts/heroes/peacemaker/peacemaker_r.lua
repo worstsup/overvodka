@@ -167,7 +167,9 @@ function modifier_peacemaker_r_debuff:OnCreated(kv)
         and self.parent and not self.parent:IsNull() then
             if not self.parent:IsDebuffImmune() then
                 self.parent:FaceTowards(self.caster:GetAbsOrigin())
-                self:ShowIntroVideo()
+                if self.parent:IsRealHero() and not self.parent:IsIllusion() then
+                    self:ShowIntroVideo()
+                end
             else
                 self.waiting_for_no_debuff_immune = true
             end

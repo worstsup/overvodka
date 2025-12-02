@@ -127,8 +127,7 @@
 .HUDFlipped .OvervodkaEventsTimers
 {
     horizontal-align: right;
-    margin-left: 0px;
-    margin-right: 1555px;
+    align:left bottom;
 }
 
 .HUDFlipped Label

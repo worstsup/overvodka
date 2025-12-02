@@ -862,7 +862,7 @@ function OvervodkaGameMode:XPToGoldFilter(event)
     if hero:GetLevel() < 35 then
         return true
     end
-    local gold_float = xp * 3 / 10
+    local gold_float = xp * 2 / 10
     local gold = math.floor(gold_float + 0.5)
     if gold > 0 and playerID ~= nil and playerID ~= -1 then
 		hero:ModifyGold(gold, false, 0)

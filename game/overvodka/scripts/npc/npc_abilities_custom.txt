@@ -3869,7 +3869,7 @@
 		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityValues"
 		{
-			"gold_pct"	"33"
+			"gold_pct"	"20"
 			"networth_step"  "2500"
 			"bonus_as"       "5"
 			"bonus_hp"       "50"
@@ -3945,7 +3945,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"18 16 14 12"
-				"special_bonus_unique_silvername_7"	"-10"
+				"special_bonus_unique_silvername_7"	"-8"
 			}
 		}
 	}
@@ -3962,15 +3962,20 @@
 		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"       "30"
 		"AbilityManaCost"       "50 70 90 110"
-		"AbilityCastRange"		"1200 1350 1500 1650"
+		"AbilityCastRange"		"1000 1100 1200 1300"
 		"IsBreakable"			"1"
 		"AbilityValues"
 		{
-				"vision_radius" 		"1200 1350 1500 1650"
+				"vision_radius" 		"1000 1100 1200 1300"
 				"attribute_steal_pct"   "4 6 8 10"
 				"attack_speed_steal"    "15 20 25 30"
 				"movespeed_steal_pct"   "5 6 7 8"
 				"duration"      		"8.0"
+				"steal_pct"
+				{
+					"value"	"0"
+					"special_bonus_unique_silvername_6"	"+50"
+				}
 		}
 	}
 	//=================================================================================================================
@@ -4075,7 +4080,7 @@
 		{
 				"count"
 				{
-					"value"	"2 4 6 8"
+					"value"	"2 3 4 5"
 					"special_bonus_unique_silvername_1"	"+2"
 				}
 				"duration"			"15"
@@ -4122,7 +4127,7 @@
 				"reflect_pct"
 				{
 					"value"	"55 65 75 85"
-					"special_bonus_unique_silvername_7"	"+50"
+					"special_bonus_unique_silvername_7"	"+35"
 				}
 				"duration"          	"1.75 2.25 2.75 3.25"
 				"chair_search_radius"	"1000"
@@ -4187,7 +4192,7 @@
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"            "silvername_r_facet_2"
-		"AbilityCooldown"               "85 75 65"
+		"AbilityCooldown"               "85 80 75"
 		"AbilityManaCost"             	"150 200 250"
 		"precache"
 		{
@@ -4200,7 +4205,7 @@
 			"duration" "20"
 			"speed"
 			{
-				"value"				"550 650 750"
+				"value"				"550 600 650"
 			}
 			"crit_chance"               "40"
 			"crit_damage"

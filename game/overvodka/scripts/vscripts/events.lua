@@ -644,6 +644,9 @@ function OvervodkaGameMode:OnItemPickUp( event )
 					owner:AddItem(bonusItem2)
 				end)
 			end
+			if owner:GetUnitName() == "npc_dota_hero_phoenix" and owner:HasTalent("special_bonus_unique_silvername_3") and owner:HasAbility("silvername_q_facet_1") then
+				OvervodkaGameMode:SpecialItemAdd(event)
+			end
 		end)
 	end
 end

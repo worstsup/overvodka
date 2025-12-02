@@ -250,6 +250,12 @@ function OvervodkaEvents:TriggerBombardiro()
     if not IsServer() then return end
 
     local now = GameRules:GetGameTime()
+
+    local minAllowedTime = (self.initGameTime or 0) + BOMBARDIRO_FIRST_MINUTE * 60.0
+    if now < minAllowedTime then
+        return
+    end
+
     if self:IsGameTimeBlockedForBombardiro(now) then
         return
     end

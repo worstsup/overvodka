@@ -188,13 +188,6 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 			spawnedItem = t5
 		end
 	end
-	if hero == "npc_dota_hero_phoenix" then
-		if nLeaderKills > 20 or owner:HasTalent("special_bonus_unique_silvername_3") then
-			spawnedItem = t5
-		else
-			spawnedItem = t3
-		end
-	end
 	if IsInventoryAndBackpackFull(owner) then
 		SendErrorToPlayer(owner:GetPlayerID(), "#chest_inventory_full")
 		local itemEntity = CreateItem(spawnedItem, owner, owner)

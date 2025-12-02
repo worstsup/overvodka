@@ -21,6 +21,9 @@ function litvin_subo:OnSpellStart()
     subo:SetControllableByPlayer(caster:GetPlayerID(), false)
     subo:SetOwner(caster)
     subo:AddNewModifier(caster, self, "modifier_kill", {duration = duration})
+    if caster:HasTalent("special_bonus_unique_litvin_5") then
+        subo:AddNewModifier(caster, self, "modifier_magic_immune", {})
+    end
     subo:SetBaseMaxHealth(base_hp)
     subo:SetMaxHealth(base_hp)
     subo:SetHealth(base_hp)

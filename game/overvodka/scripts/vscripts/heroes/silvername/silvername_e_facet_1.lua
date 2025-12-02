@@ -411,8 +411,15 @@ function modifier_silvername_e_facet_1_debuff:OnDeath(event)
     if not perma_buff then
         perma_buff = caster:AddNewModifier(caster, ability, "modifier_silvername_e_facet_1_perma_buff", {})
     end
+
+	local steal_pct = (ability:GetSpecialValueFor("steal_pct") or 50) * 0.01
+
+	local perma_steal_str = math.floor(self.steal_str * steal_pct)
+	local perma_steal_agi = math.floor(self.steal_agi * steal_pct)
+	local perma_steal_int = math.floor(self.steal_int * steal_pct)
+
     if perma_buff and perma_buff.AddPermanentSteal then
-        perma_buff:AddPermanentSteal(self.steal_str, self.steal_agi, self.steal_int)
+        perma_buff:AddPermanentSteal(perma_steal_str, perma_steal_agi, perma_steal_int)
     end
 
     local perma_debuff = self._perma_debuff
@@ -421,7 +428,7 @@ function modifier_silvername_e_facet_1_debuff:OnDeath(event)
     end
 
     if perma_debuff and perma_debuff.AddPermanentLoss then
-        perma_debuff:AddPermanentLoss(self.steal_str, self.steal_agi, self.steal_int)
+        perma_debuff:AddPermanentLoss(perma_steal_str, perma_steal_agi, perma_steal_int)
     end
 end
 
