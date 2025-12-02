@@ -71,7 +71,8 @@ function SpawnHamster()
 		undefined,
 		DOTA_TEAM_NEUTRALS
 	)
-	hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 30})
+	hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 60})
+    return hamster
 end
 
 function PickRandomShuffle( reference_list, bucket )

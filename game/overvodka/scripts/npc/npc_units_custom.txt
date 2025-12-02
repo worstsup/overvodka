@@ -785,7 +785,7 @@
 	"npc_hamster"
 	{
 		"BaseClass" "npc_dota_creature"
-		"Model" "models/items/courier/hamster_courier/hamster_courier_lv7.vmdl"
+		"Model" "models/items/courier/hamster_courier/hamster_courier_lv4.vmdl"
 		"ModelScale" "3"
 		"Level"	"1"
 		"IsAncient"					"1"
@@ -5033,12 +5033,17 @@
 	{
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/zhenya/zhenya.vmdl"
-        "ModelScale"            "2.5"
+        "ModelScale"            "3.0"
 		"SoundSet"				"Hero_PrimalBeast"
         "Level"                 "50"
         "HasInventory"          "0"
         "ArmorPhysical"         "50"
         "MagicalResistance"     "75"
+		"CanBeDominated"		"0"
+		"IsAncient"				"1"
+		"Ability1"				"zhenya_q_boss"
+		"Ability2"				"zhenya_w_boss"
+		"Ability3"				"zhenya_innate_boss"
         "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
         "AttackDamageMin"       "600"
@@ -5067,6 +5072,5 @@
         "UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         "AutoAttacksByDefault"  "0"
         "IsSummoned"            "1"
-		"vscripts"              "units/zhenya_boss.lua"
 	}
-}	
+}

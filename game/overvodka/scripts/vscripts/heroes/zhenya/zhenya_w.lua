@@ -39,6 +39,7 @@ function modifier_zhenya_w:OnCreated()
     if not IsServer() then return end
     EmitSoundOn("zhenya_w_loop", self:GetParent())
     local fx = ParticleManager:CreateParticle("particles/zhenya_w.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(fx, 1, Vector(self:GetAbility():GetSpecialValueFor("radius"), 0, 0))
     self:AddParticle(fx, false, false, -1, false, false)
 end
 

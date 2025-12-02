@@ -150,6 +150,8 @@ PrecacheUtils.particles = {
 		"particles/silvername_r_facet_2_cast.vpcf",
 		"particles/silvername_r_facet_2_cast2.vpcf",
 		"particles/silvername_r_facet_2.vpcf",
+
+		"particles/econ/items/spirit_breaker/spirit_breaker_weapon_ti8/spirit_breaker_bash_ti8.vpcf",
 }
 
 PrecacheUtils.particle_folders = {
@@ -249,7 +251,7 @@ PrecacheUtils.models = {
 		"models/minion/minon_purple.vmdl",
 		"models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl",
 		"models/items/courier/hamster_courier/hamster_courier_lv1.vmdl",
-		"models/items/courier/hamster_courier/hamster_courier_lv7.vmdl",
+		"models/items/courier/hamster_courier/hamster_courier_lv4.vmdl",
 		"models/heroes/troll_warlord/troll_warlord.vmdl",
         "bmw/models/heroes/bm/tofab.vmdl",
 		"models/items/hex/sheep_hex/sheep_hex.vmdl",

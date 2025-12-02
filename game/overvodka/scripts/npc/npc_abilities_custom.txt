@@ -16569,4 +16569,81 @@
 			"max_follow_range"	"500"
 		}
 	}
+
+	//=================================================================================================================
+	// ЖЕНЯ ПРО ОТСОС
+	//=================================================================================================================
+	"zhenya_q_boss"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/boss_zhenya/zhenya_q_boss"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"zhenya_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation"			"ACT_DOTA_UNDYING_TOMBSTONE"
+		"AbilityCastPoint"				"0.3"
+		"AbilityManaCost"				"500"
+		"MaxLevel"						"2"
+		"AbilityCooldown"				"15"
+		"AbilityCastRange"				"600"
+		"AbilityValues"
+		{
+			"radius" 		"800 1200"
+			"damage"		"10"
+			"heal_pct"		"50"
+			"duration"		"5"
+			"root_duration"	"2"
+			"slow"			"-30"
+		}
+	}
+	//=================================================================================================================
+	// МУКБАНГ
+	//=================================================================================================================
+	"zhenya_w_boss"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/boss_zhenya/zhenya_w_boss"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"zhenya_w"
+		"AbilityCastRange"				"400"
+		"AbilityCastPoint"				"0.2"
+		"MaxLevel"						"2"
+		"AbilityCooldown"				"20"
+		"AbilityManaCost"				"750"
+		"AbilityValues"
+		{
+			"duration"		"10"
+			"radius" 		"550"
+			"heal_pct"		"3 5"
+			"base_hp"		"10"
+			"aura_duration"	"2"
+			"strength_loss" "-5 -7"
+		}
+	}
+	//=================================================================================================================
+	// 200 КГ (врожденная)
+	//=================================================================================================================
+	"zhenya_innate_boss"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"units/boss_zhenya/zhenya_innate_boss"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"			 	"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"zhenya_e"
+		"MaxLevel"						"2"
+		"AbilityValues"
+		{
+			"damage"					"250 350"
+			"radius"
+			{
+				"value"					"325 400"
+			}
+		}
+	}
 }

@@ -371,6 +371,8 @@
 		"npc_kolyan_guard"					"Охранник"
 		"npc_evil_monke"					"Злая Обезьяна"
 
+		"npc_zhenya_boss"					"Женя Мороз"
+
 		"npc_dota_hero_undying_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_invoker_npedesc1"			"Сложность персонажа: ВЫСОКАЯ"
 		"npc_dota_hero_axe_npedesc1"				"Сложность персонажа: НИЗКАЯ"
@@ -2219,7 +2221,7 @@
 		"DOTA_Tooltip_ability_papich_q_silence_duration" "ДЛИТЕЛЬНОСТЬ БЕЗМОЛВИЯ:"
 		"DOTA_Tooltip_ability_papich_w" "АДЕКВАТЫЧ"
 		"DOTA_Tooltip_ability_papich_w_Description" "Папизи создаёт большой купол, в котором ворует у каждого врага интеллект, зависящий от их силы, а также уменьшает их скорость атаки и передвижения, при этом увеличивая свою на столько же. Враги вне купола не могут попасть по Папичу."
-		
+		"DOTA_Tooltip_ability_papich_w_scepter_Description" "Увеличивает радиус и длительность. Способность можно применить на союзника, и купол будет следовать за ним, даруя ему все бонусы. Также купол притягивает к себе всех врагов в радиусе %pull_radius% со скоростью %pull_speed%."
 		
 		"DOTA_Tooltip_ability_papich_w_radius" "РАДИУС:"
 		"DOTA_Tooltip_ability_papich_w_duration" "ДЛИТЕЛЬНОСТЬ:"

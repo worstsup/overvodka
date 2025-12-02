@@ -3,6 +3,14 @@ LinkLuaModifier("modifier_win_condition", 				"modifiers/modifier_win_condition"
 LinkLuaModifier("modifier_sans_arcana", 				"modifiers/modifier_sans_arcana", 					 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_arcana", 			"modifiers/modifier_invincible_arcana", 			 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_pet", 				"modifiers/modifier_overvodka_pet", 				 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_arc_lua",				"modifier_generic_arc_lua", 						 LUA_MODIFIER_MOTION_BOTH)
+
+LinkLuaModifier("modifier_zhenya_boss", 				"units/zhenya_boss", 				 				 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_zhenya_boss_running", 		"units/zhenya_boss", 				 		 		 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_zhenya_hamster_carried", 		"units/zhenya_boss", 						 		 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_zhenya_boss_phase1", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_zhenya_boss_phase2", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
+
 LinkLuaModifier("modifier_overvodka_store_effect_1", 	"modifiers/store/modifier_overvodka_store_effect_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_effect_2", 	"modifiers/store/modifier_overvodka_store_effect_2", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_effect_3", 	"modifiers/store/modifier_overvodka_store_effect_3", LUA_MODIFIER_MOTION_NONE)

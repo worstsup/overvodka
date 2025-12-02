@@ -15,7 +15,7 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 9, 12 },
+        { 0.5, 0.6 }, -- 9 12
         { 20, 23 },
     },
     overvodka_5x5 = {
@@ -68,7 +68,7 @@ end
 function OvervodkaEvents:Init()
     if not IsServer() then return end
     if self.initialized then return end
-    if IsInToolsMode() then return end
+    --if IsInToolsMode() then return end
 
     if _G.overvodka_events ~= nil and not _G.overvodka_events then
         return
@@ -84,6 +84,11 @@ function OvervodkaEvents:Init()
 
     self.goldenRainTimes = {}
     self.hamsterTimes    = {}
+
+    self.zhenyaBossActive = false
+    self.zhenyaBoss       = nil
+    self.zhenyaHamster    = nil
+    self.zhenyaEndTime    = nil
 
     CustomNetTables:SetTableValue("overvodka_events", "golden_rain", { t1 = -1, t2 = -1 })
     CustomNetTables:SetTableValue("overvodka_events", "hamster",     { t1 = -1, t2 = -1 })
@@ -201,17 +206,96 @@ end
 function OvervodkaEvents:TriggerHamster()
     if not IsServer() then return end
 
-    CustomGameEventManager:Send_ServerToAllClients( "item_has_spawned", {} )
-    EmitGlobalSound( "hamster_announce" )
+    CustomGameEventManager:Send_ServerToAllClients("item_has_spawned", {})
+    EmitGlobalSound("hamster_announce")
 
     Timers:CreateTimer(15.0, function()
         if SpawnHamster then
-            SpawnHamster()
+            local hamster = SpawnHamster()
+
+            if hamster and not hamster:IsNull() then
+                if OvervodkaEvents and OvervodkaEvents.StartZhenyaBoss then
+                    OvervodkaEvents:StartZhenyaBoss(hamster)
+                end
+            else
+                print("[OvervodkaEvents] SpawnHamster() returned nil")
+            end
         else
             print("[OvervodkaEvents] SpawnHamster() is nil")
         end
     end)
 end
+
+function OvervodkaEvents:StartZhenyaBoss(hamster)
+    if not IsServer() then return end
+    if not hamster or hamster:IsNull() then
+        print("[OvervodkaEvents] StartZhenyaBoss: hamster is nil")
+        return
+    end
+
+    if self.zhenyaBossActive then
+        return
+    end
+
+    self.zhenyaHamster    = hamster
+    self.zhenyaBossActive = true
+
+    self.zhenyaEndTime = GameRules:GetGameTime() + 60.0
+
+    -- пока без задержек / бега – просто спавним рядом с хомяком
+    self:SpawnZhenyaBoss()
+end
+
+function OvervodkaEvents:SpawnZhenyaBoss()
+    if not IsServer() then return end
+
+    if not self.zhenyaHamster or self.zhenyaHamster:IsNull() then
+        print("[OvervodkaEvents] SpawnZhenyaBoss: hamster is nil, abort")
+        self.zhenyaBossActive = false
+        return
+    end
+
+    if self.zhenyaBoss and not self.zhenyaBoss:IsNull() and self.zhenyaBoss:IsAlive() then
+        return
+    end
+
+    local basePos = self.zhenyaHamster:GetAbsOrigin()
+    local distance = 5000
+    local angle = RandomFloat(0, 2*math.pi)
+    local spawnPos = basePos + Vector(math.cos(angle), math.sin(angle), 0) * distance
+    spawnPos = GetGroundPosition(spawnPos, nil)
+
+    local boss = CreateUnitByName(
+        "npc_zhenya_boss",
+        spawnPos,
+        true,
+        nil,
+        nil,
+        DOTA_TEAM_NEUTRALS
+    )
+
+    if not boss or boss:IsNull() then
+        print("[OvervodkaEvents] Failed to spawn npc_zhenya_boss")
+        self.zhenyaBossActive = false
+        return
+    end
+
+    self.zhenyaBoss = boss
+
+    boss:AddNewModifier(boss, nil, "modifier_zhenya_boss", {duration = 60})
+
+    boss.zhenyaHamster = self.zhenyaHamster
+
+    _G.ZhenyaBoss = boss
+
+    -- позже тут будем отправлять событие на клиент для полоски HP
+    CustomGameEventManager:Send_ServerToAllClients("zhenya_boss_spawned", {
+        entindex = boss:entindex(),
+        end_time = self.zhenyaEndTime or 0,
+    })
+end
+
+
 
 --------------------------------------------------------------------
 -- Bombardiro
