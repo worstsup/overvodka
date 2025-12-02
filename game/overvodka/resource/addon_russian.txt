@@ -549,7 +549,7 @@
 		"DOTA_Tooltip_modifier_silvername_e_facet_1_perma_buff"          "Украдено атрибутов"
 		"DOTA_Tooltip_modifier_silvername_e_facet_1_perma_debuff"        "Украдено атрибутов"
 		"DOTA_Tooltip_ability_silvername_r_facet_1"              		 "Взять топ 1"
-		"DOTA_Tooltip_ability_silvername_r_facet_1_Description"  		 "SilverName берёт топ-1, призывая вокруг себя два кольца духов-воинов. Они копируют его урон и предметы, а также атакуют вражеских героев с фиксированным интервалом и следуют за хозяином во время действия способности."
+		"DOTA_Tooltip_ability_silvername_r_facet_1_Description"  		 "SilverName берёт топ-1 и призывает вокруг себя два кольца духов-воинов. Они копируют его урон и предметы, а также атакуют вражеских героев с фиксированным интервалом и следуют за хозяином во время действия способности."
 		"DOTA_Tooltip_ability_silvername_r_facet_1_scepter_description"	 "Раз в несколько секунд создаёт неподалёку от героя одного духа.<br>Не работает, если герой невидим."
 		"DOTA_Tooltip_ability_silvername_r_facet_1_duration"		 	 "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_silvername_r_facet_1_damage"			 	 "%УРОН КЛОНОВ:"
@@ -2219,7 +2219,8 @@
 		"DOTA_Tooltip_ability_papich_q_silence_duration" "ДЛИТЕЛЬНОСТЬ БЕЗМОЛВИЯ:"
 		"DOTA_Tooltip_ability_papich_w" "АДЕКВАТЫЧ"
 		"DOTA_Tooltip_ability_papich_w_Description" "Папизи создаёт большой купол, в котором ворует у каждого врага интеллект, зависящий от их силы, а также уменьшает их скорость атаки и передвижения, при этом увеличивая свою на столько же. Враги вне купола не могут попасть по Папичу."
-		"DOTA_Tooltip_ability_papich_w_scepter_Description" "Увеличивает радиус и длительность. Способность можно применить на союзника, и купол будет следовать за ним, даруя ему все бонусы. Также купол притягивает к себе всех врагов в радиусе %pull_radius% со скоростью %pull_speed%."
+		
+		
 		"DOTA_Tooltip_ability_papich_w_radius" "РАДИУС:"
 		"DOTA_Tooltip_ability_papich_w_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_papich_w_attack_speed_bonus" "УМЕНЬШЕНИЕ СКОРОСТИ АТАКИ:"
@@ -2227,7 +2228,7 @@
 		"dota_tooltip_modifier_papich_w_caster"                       "Адекватыч"
 		"dota_tooltip_modifier_papich_w_caster_description"           "Вы внутри купола. Скорость атаки: +%dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, Скорость передвижения: +%dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, Интеллект: +%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
 		"dota_tooltip_modifier_papich_w_ally"                         "Адекватыч"
-		"dota_tooltip_modifier_papich_w_ally_description"           "Вы внутри купола. Скорость атаки: +%dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, Скорость передвижения: +%dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, Интеллект: +%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
+		"dota_tooltip_modifier_papich_w_ally_description"			  "Вы внутри купола. Скорость атаки: +%dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, Скорость передвижения: +%dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, Интеллект: +%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
 		"dota_tooltip_modifier_papich_w_enemy"                        "Адекватыч"
 		"dota_tooltip_modifier_papich_w_enemy_description"            "Вы внутри купола, ваш интеллект уменьшен. Скорость атаки: −%dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, Скорость передвижения: −%dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%"
 
