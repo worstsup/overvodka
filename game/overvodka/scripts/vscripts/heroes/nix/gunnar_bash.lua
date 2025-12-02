@@ -115,15 +115,7 @@ end
 
 function modifier_gunnar_bash:PlayEffects( target, isCreep )
 	local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/spirit_breaker/spirit_breaker_weapon_ti8/spirit_breaker_bash_ti8.vpcf", PATTACH_POINT_FOLLOW, target )
-	ParticleManager:SetParticleControlEnt(
-		effect_cast,
-		0,
-		target,
-		PATTACH_POINT_FOLLOW,
-		"attach_hitloc",
-		Vector(0,0,0),
-		true
-	)
+	ParticleManager:SetParticleControlEnt(effect_cast, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( "gunnar", target )
 end
