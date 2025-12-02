@@ -3909,7 +3909,7 @@
 		"ModelScale"		"1.15"
 		"VersusScale"		"1.15"
 		"LoadoutScale"		"0.95"
-		"SimilarHeroes"		"126,107,17"
+		"SimilarHeroes"		"53,51,100"
 		"HeroSelectSoundEffect"		"peacemaker_start"
 		"GibType"		"fire"
 		"Ability1"		"peacemaker_q"
