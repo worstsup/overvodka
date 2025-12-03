@@ -11,6 +11,8 @@ function kachok_trenbolone:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
-    EmitSoundOn("trenbolone", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("trenbolone", caster)
+    end
     caster:AddNewModifier(caster, self, "modifier_kachok_trenbolone", { duration = duration })
 end

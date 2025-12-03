@@ -24,7 +24,9 @@ end
 
 function stray_r:OnSpellStart()
     if not IsServer() then return end
-    self:GetCaster():EmitSound("stray_r")
+    if not global_sounds_muted then
+        self:GetCaster():EmitSound("stray_r")
+    end
     StopGlobalSound("stray_scepter")
     local duration = self:GetSpecialValueFor('duration')
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_stray_r", {duration = duration})

@@ -51,7 +51,9 @@ function speed_shake:OnSpellStart()
     if caster:HasModifier("modifier_overvodka_store_skin_5") then
         sound = "gennadiy_skin"
     end
-    caster:EmitSound(sound)
+    if not global_sounds_muted then
+        caster:EmitSound(sound)
+    end
     caster:AddNewModifier( caster, self, "modifier_speed_shake", { duration = duration } )
     if caster:HasScepter() then
         caster:AddNewModifier( caster, self, "modifier_speed_shake_scepter", { duration = duration } )

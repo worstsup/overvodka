@@ -399,7 +399,9 @@ function modifier_papich_e:OnCreated()
 		return
 	end
 	EmitSoundOn( "papich_e_plane", self:GetCaster() )
-	EmitSoundOn( "papich_e_fly", self:GetCaster() )
+	if not global_sounds_muted then
+		EmitSoundOn( "papich_e_fly", self:GetCaster() )
+	end
 end
 
 function modifier_papich_e:OnDestroy()

@@ -8,7 +8,9 @@ end
 
 function ashab_train:OnSpellStart()
 	if not IsServer() then return end
-	EmitSoundOn( "ashab_train", self:GetCaster() )
+	if not global_sounds_muted then
+		EmitSoundOn( "ashab_train", self:GetCaster() )
+	end
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_train", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 

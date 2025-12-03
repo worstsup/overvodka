@@ -46,7 +46,9 @@ subo_dance = class({})
 function subo_dance:OnSpellStart()
     if not IsServer() then return end
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_subo_dance", {duration = self:GetSpecialValueFor("duration")})
-    self:GetCaster():EmitSound("subo_dance_"..RandomInt(1,2))
+    if not global_sounds_muted then
+        self:GetCaster():EmitSound("subo_dance_"..RandomInt(1,2))
+    end
     self:GetCaster():GetOwner():StopSound("subo")
     local p = ParticleManager:CreateParticle("particles/subo_dance_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:ReleaseParticleIndex(p)

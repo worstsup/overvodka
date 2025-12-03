@@ -26,7 +26,9 @@ function kolyan_r:OnSpellStart()
     local forward = caster:GetForwardVector()
     local right = Vector(-forward.y, forward.x, 0):Normalized()
     local fv = right * 225
-    EmitSoundOn("kolyan_r", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("kolyan_r", caster)
+    end
     local guard = CreateUnitByName(
         "npc_kolyan_guard",
         caster:GetAbsOrigin() + fv,

@@ -95,8 +95,9 @@ function modifier_factory:OnCreated()
     self:GetParent():SetMinimumGoldBounty(gold)
     self:GetParent():SetDeathXP(xp)
     self:StartIntervalThink(self.interval)
-
-    EmitSoundOn("mazellov_q_start", self:GetParent())
+    if not global_sounds_muted then
+        EmitSoundOn("mazellov_q_start", self:GetParent())
+    end
 end
 
 

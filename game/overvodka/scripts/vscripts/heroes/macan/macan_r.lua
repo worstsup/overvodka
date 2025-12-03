@@ -95,7 +95,9 @@ function modifier_macan_r:OnCreated( kv )
 		return
 	end
 	EmitSoundOn( "ezda", self:GetCaster() )
-	EmitSoundOn( "macan_r_gay", self:GetCaster() )
+	if not global_sounds_muted then
+		EmitSoundOn( "macan_r_gay", self:GetCaster() )
+	end
 	self.damageTable = {
 		attacker = self.parent,
 		damage = damage,

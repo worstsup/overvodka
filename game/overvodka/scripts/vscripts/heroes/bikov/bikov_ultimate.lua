@@ -44,7 +44,9 @@ function bikov_ultimate:OnSpellStart()
         caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_5, animRate)
     end)
 
-    EmitSoundOn("bikov_r", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("bikov_r", caster)
+    end
 end
 
 function bikov_ultimate:OnChannelFinish(bInterrupted)

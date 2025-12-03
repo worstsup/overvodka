@@ -23,7 +23,9 @@ end
 
 function chara_ultimate:OnSpellStart()
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_chara_ultimate", {duration = self:GetSpecialValueFor("duration")})
-    EmitSoundOn("chara_r_"..self.random, self:GetCaster())
+    if not global_sounds_muted then
+        EmitSoundOn("chara_r_"..self.random, self:GetCaster())
+    end
     local p = ParticleManager:CreateParticle("particles/chara_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     ParticleManager:SetParticleControl(p, 0, self:GetCaster():GetAbsOrigin())
     ParticleManager:SetParticleControl(p, 1, self:GetCaster():GetAbsOrigin())

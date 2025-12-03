@@ -26,7 +26,9 @@ function ebanko_r:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
     caster:AddNewModifier(caster, self, "modifier_ebanko_r", { duration = duration })
-    caster:EmitSound("ebi_menya")
+    if not global_sounds_muted then
+        caster:EmitSound("ebi_menya")
+    end
 end
 
 modifier_ebanko_r = class({})

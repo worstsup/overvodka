@@ -28,7 +28,9 @@ end
 
 function chef_r:OnSpellStart()
     if not IsServer() then return end
-    EmitSoundOn( "chef_r", self:GetCaster() )
+    if not global_sounds_muted then
+        EmitSoundOn( "chef_r", self:GetCaster() )
+    end
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_chef_r", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 

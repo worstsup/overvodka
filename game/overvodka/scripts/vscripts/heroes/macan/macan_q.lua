@@ -286,7 +286,9 @@ function modifier_macan_q_attack:PlayEffects()
 		false
 	)
 	if not self:GetCaster():HasModifier("modifier_macan_r") and not self:GetCaster():HasModifier("modifier_macan_r_charge") then
-		EmitSoundOn( music, self:GetParent() )
+		if not global_sounds_muted then
+			EmitSoundOn( music, self:GetParent() )
+		end
 	end
 end
 

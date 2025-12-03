@@ -24,7 +24,9 @@ function shkolnik_r:OnSpellStart()
     self.point = self:GetCursorPosition()
     local caster = self:GetCaster()
     sound = "drake_r_"..RandomInt(1,5)
-    EmitSoundOn(sound, caster)
+    if not global_sounds_muted then
+        EmitSoundOn(sound, caster)
+    end
     self.modifier = self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_shkolnik_r", {duration = self:GetSpecialValueFor("duration")} )
 end
 

@@ -80,7 +80,9 @@ function flash_r:OnSpellStart()
 	if self:GetCaster():HasModifier("modifier_overvodka_store_skin_6") then
 		sound = "flash_r_immortal"
 	end
-	EmitGlobalSound( sound )
+	if not global_sounds_muted then
+		EmitGlobalSound( sound )
+	end
 	StopGlobalSound( "5opka_r" )
     StopGlobalSound( "stray_scepter" )
     StopGlobalSound( "evelone_r_ambient" )

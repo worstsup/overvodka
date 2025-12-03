@@ -49,7 +49,9 @@ function peacemaker_r:GetManaCost(level)
 end
 
 function peacemaker_r:OnAbilityPhaseStart()
-	self:GetCaster():EmitSound("Peacemaker.Intro")
+    if not global_sounds_muted then
+	    self:GetCaster():EmitSound("Peacemaker.Intro")
+    end
 	return true
 end
 

@@ -42,22 +42,24 @@ end
 
 function sans_r:OnSpellStart()
     if not IsServer() then return end
-    if self:GetCaster():HasArcana() then
-        if k % 2 == 0 then
-            EmitSoundOn( "sans_r_2_arcana", self:GetCaster() )
+    if not global_sounds_muted then
+        if self:GetCaster():HasArcana() then
+            if k % 2 == 0 then  
+                EmitSoundOn( "sans_r_2_arcana", self:GetCaster() )
+            else
+                EmitSoundOn( "sans_r_1_arcana", self:GetCaster() )
+            end
         else
-            EmitSoundOn( "sans_r_1_arcana", self:GetCaster() )
+            if k % 3 == 0 then
+                EmitSoundOn( "sans_r_1", self:GetCaster() )
+            elseif k % 3 == 1 then
+                EmitSoundOn( "sans_r_2", self:GetCaster() )
+            elseif k % 3 == 2 then
+                EmitSoundOn( "sans_r_3", self:GetCaster() )
+            end
         end
-    else
-        if k % 3 == 0 then
-            EmitSoundOn( "sans_r_1", self:GetCaster() )
-        elseif k % 3 == 1 then
-            EmitSoundOn( "sans_r_2", self:GetCaster() )
-        elseif k % 3 == 2 then
-            EmitSoundOn( "sans_r_3", self:GetCaster() )
-        end
+        k = k + 1
     end
-    k = k + 1
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_sans_r", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 

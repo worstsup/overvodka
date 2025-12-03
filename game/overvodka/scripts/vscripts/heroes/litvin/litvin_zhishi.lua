@@ -83,5 +83,7 @@ function litvin_zhishi:PlayEffects( origin, direction, point, radius )
 	ParticleManager:SetParticleControl( effect_cast, 0, point )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( radius, radius, radius ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOnLocationWithCaster( point, sound_cast, self:GetCaster() )
+	if not global_sounds_muted then
+		EmitSoundOnLocationWithCaster( point, sound_cast, self:GetCaster() )
+	end
 end

@@ -17,7 +17,9 @@ end
 hit = false
 function dave_loonboon:OnSpellStart()
     if not IsServer() then return end
-    EmitSoundOn( "dave_loonboon", self:GetCaster() )
+    if not global_sounds_muted then
+        EmitSoundOn( "dave_loonboon", self:GetCaster() )
+    end
     self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_dave_loonboon", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 

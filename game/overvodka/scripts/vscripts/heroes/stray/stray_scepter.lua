@@ -29,7 +29,9 @@ function stray_scepter:OnSpellStart()
 		0,
 		false
 	)
-	EmitGlobalSound("stray_scepter")
+	if not global_sounds_muted then
+		EmitGlobalSound("stray_scepter")
+	end
     if caster:HasModifier("modifier_stray_r") then
         caster:StopSound("stray_r")
     end

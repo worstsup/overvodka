@@ -9,7 +9,9 @@ end
 
 function mellstroy_amam:OnAbilityPhaseStart()
     if not IsServer() then return end
-    EmitSoundOn("amamam", self:GetCaster())
+    if not global_sounds_muted then
+        EmitSoundOn("amamam", self:GetCaster())
+    end
     return true
 end
 

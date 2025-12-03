@@ -10,7 +10,9 @@ end
 function eldzhey_shard:OnSpellStart()
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("duration")
-    EmitSoundOn("vivo", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("vivo", caster)
+    end
     caster:AddNewModifier(caster, self, "modifier_eldzhey_shard", {duration = duration})
     
     local allies = FindUnitsInRadius(

@@ -18,7 +18,9 @@ function sahur_ultimate:OnSpellStart()
 		false
 	)
 	EmitSoundOn( "komp", caster )
-	EmitSoundOnLocationWithCaster(point, "sahur_r", caster)
+	if not global_sounds_muted then
+		EmitSoundOnLocationWithCaster(point, "sahur_r", caster)
+	end
 end
 
 modifier_sahur_r = class({})
