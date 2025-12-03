@@ -72,9 +72,9 @@ function modifier_seregga_r_field:OnCreated()
     self.pfx = ParticleManager:CreateParticle("particles/seregga_r.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(self.pfx, 0, self.origin)
     ParticleManager:SetParticleControl(self.pfx, 1, Vector(self.radius, 0, 0))
-
-    EmitSoundOnLocationWithCaster(self.origin, "seregga_r", self.caster)
-
+    if not global_sounds_muted then
+        EmitSoundOnLocationWithCaster(self.origin, "seregga_r", self.caster)
+    end
     if self.caster:HasTalent("special_bonus_unique_seregga_8") then
         self.parent:AddNewModifier(
             self.caster,

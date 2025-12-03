@@ -28,7 +28,9 @@ end
 function rostik_w:OnSpellStart()
 	if not IsServer() then return end
 	self.modifier = self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_rostik_w_casting", {duration = self:GetSpecialValueFor("duration")})
-	EmitSoundOn("rostik_w", self:GetCaster())
+	if not global_sounds_muted then
+        EmitSoundOn("rostik_w", self:GetCaster())
+    end
 end
 
 modifier_rostik_w_casting = class ({})

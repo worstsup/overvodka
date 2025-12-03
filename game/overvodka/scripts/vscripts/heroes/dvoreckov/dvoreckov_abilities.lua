@@ -1893,7 +1893,9 @@ function dvoreckov_wee:Precache(context)
 end
 
 function dvoreckov_wee:OnSpellStart()
-	self:GetCaster():EmitSound("pubg")
+	if not global_sounds_muted then
+		self:GetCaster():EmitSound("pubg")
+	end
 	self:GetCaster():StartGesture(ACT_DOTA_SPAWN)
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_dvoreckov_wee", {duration = self:GetSpecialValueFor("duration")})
 end

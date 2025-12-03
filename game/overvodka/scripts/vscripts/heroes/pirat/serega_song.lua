@@ -142,7 +142,9 @@ function modifier_serega_song:PlayEffects()
 		false,
 		false
 	)
-	EmitSoundOn( sound_cast, caster )
+	if not global_sounds_muted then
+		EmitSoundOn( sound_cast, caster )
+	end
 end
 
 

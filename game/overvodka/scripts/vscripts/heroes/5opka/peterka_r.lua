@@ -67,7 +67,9 @@ function peterka_r:PlayEffects()
 		true
 	)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitGlobalSound( sound_cast )
+	if not global_sounds_muted then
+		EmitGlobalSound( sound_cast )
+	end
 end
 
 modifier_peterka_r_thinker = class({})

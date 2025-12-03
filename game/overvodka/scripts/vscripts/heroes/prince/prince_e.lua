@@ -36,7 +36,9 @@ end
 function prince_e:OnSpellStart()
     if not IsServer() then return end
     local cursor_point = self:GetCursorPosition()
-    EmitSoundOnLocationWithCaster(cursor_point, "prince_e", self:GetCaster())
+    if not global_sounds_muted then
+        EmitSoundOnLocationWithCaster(cursor_point, "prince_e", self:GetCaster())
+    end
     local effect_cast = ParticleManager:CreateParticle("particles/prince_e_ping.vpcf", PATTACH_WORLDORIGIN, self:GetCaster())
     ParticleManager:SetParticleControl(effect_cast, 0, cursor_point)
     ParticleManager:SetParticleControl(effect_cast, 7, Vector(255, 0, 0))

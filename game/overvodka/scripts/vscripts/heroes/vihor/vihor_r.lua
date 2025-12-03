@@ -30,7 +30,9 @@ function vihor_r:OnSpellStart()
     if not IsServer() then return end
     local duration_to_explosion = self:GetSpecialValueFor("duration_to_explosion")
     AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetSpecialValueFor("radius"), duration_to_explosion, false)
-    EmitSoundOnLocationWithCaster(self:GetCaster():GetAbsOrigin(), "vihor_r", self:GetCaster())
+    if not global_sounds_muted then
+        EmitSoundOnLocationWithCaster(self:GetCaster():GetAbsOrigin(), "vihor_r", self:GetCaster())
+    end
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_vihor_r", {duration = duration_to_explosion})
     self:GetCaster():StartGesture(ACT_DOTA_CAST_ABILITY_5)
 end

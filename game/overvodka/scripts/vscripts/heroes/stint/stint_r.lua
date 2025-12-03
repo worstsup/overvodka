@@ -25,9 +25,13 @@ function stint_r:OnSpellStart()
             random_modifier2 = RandomInt(1, 3)
         end
         caster:AddNewModifier(caster, self, "modifier_stint_r_"..random_modifier2, {duration = self:GetSpecialValueFor("duration")})
-        EmitSoundOn("stint_r_all_"..random_modifier, caster)
+        if not global_sounds_muted then
+            EmitSoundOn("stint_r_all_"..random_modifier, caster)
+        end
     else
-        EmitSoundOn("stint_r_"..random_modifier, caster)
+        if not global_sounds_muted then
+            EmitSoundOn("stint_r_"..random_modifier, caster)
+        end
     end
 end
 

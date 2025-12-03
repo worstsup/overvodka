@@ -38,7 +38,9 @@ function peterka_xxl:OnSpellStart()
     point = origin + direction
     local k = caster.peterka_xxl_sound_index or 0
     caster.peterka_xxl_sound_index = (k + 1) % 2
-    caster:EmitSound("peterka_xxl_"..k)
+    if not global_sounds_muted then
+		caster:EmitSound("peterka_xxl_"..k)
+	end
     StopSoundOn("5opka_e", caster)
     StopSoundOn("5opka_e_cast", caster)
 

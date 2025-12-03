@@ -32,7 +32,9 @@ function worstsup_w:OnProjectileHit(target, location)
     if not target or target:IsInvulnerable() then return end
     if target:TriggerSpellAbsorb(self) then return end
     local caster = self:GetCaster()
-    EmitSoundOn("cheza", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("cheza", caster)
+    end
     
     target:AddNewModifier(caster, self, "modifier_worstsup_w_debuff", {
         duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance())

@@ -75,7 +75,9 @@ function zolo_batya:OnSpellStart()
 	    self:PlayEffects1( unit )
 		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
 	end
-    EmitSoundOn("sharik", caster)
+    if not global_sounds_muted then
+        EmitSoundOn("sharik", caster)
+    end
 end
 
 function zolo_batya:PlayEffects( target )

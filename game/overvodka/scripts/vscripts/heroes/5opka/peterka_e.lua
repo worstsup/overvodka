@@ -54,6 +54,10 @@ function peterka_e:OnChargeFinish( interrupt, target )
 		return
 	end
 
+	if not global_sounds_muted then
+		EmitSoundOn("5opka_e_cast", self:GetCaster())
+	end
+
 	caster:AddNewModifier( caster, self, "modifier_peterka_e_charge", { duration = duration } )
 end
 
@@ -250,7 +254,6 @@ function modifier_peterka_e_charge:OnCreated( kv )
 		self.debuff_immune = true
 	end
 	local damage = self:GetAbility():GetSpecialValueFor( "knockback_damage" )
-	EmitSoundOn("5opka_e_cast", self:GetParent())
 	self.tree_radius = 100
 	self.height = 50
 	self.duration = 0.3

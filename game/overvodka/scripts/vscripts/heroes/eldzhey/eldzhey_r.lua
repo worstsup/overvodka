@@ -23,7 +23,9 @@ end
 function eldzhey_r:OnSpellStart()
     if not IsServer() then return end
     local duration = self:GetSpecialValueFor("duration")
-    self:GetCaster():EmitSound("jinsi")
+    if not global_sounds_muted then
+        self:GetCaster():EmitSound("jinsi")
+    end
     self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_eldzhey_r", {duration = duration}) 
 end
 

@@ -50,8 +50,9 @@ function frisk_d:OnSpellStart()
         self:EndCooldown()
         self:SetActivated(false)
     end
-
-    EmitSoundOn("frisk_d_cast_1", target)
+    if not global_sounds_muted then
+        EmitSoundOn("frisk_d_cast_1", target)
+    end
 end
 
 
@@ -106,7 +107,10 @@ function modifier_frisk_d:OnDestroy()
             local p = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
             ParticleManager:SetParticleControl(p, 0, parent:GetAbsOrigin())
             ParticleManager:ReleaseParticleIndex(p)
-            EmitSoundOn("frisk_d_activate_1", parent)
+            
+            if not global_sounds_muted then
+                EmitSoundOn("frisk_d_activate_1", parent)
+            end
 
             parent:AddNewModifier(caster, ability, "modifier_frisk_d_barrier", { duration = barrier_dur })
         else
@@ -133,7 +137,10 @@ function modifier_frisk_d:OnDestroy()
             local p = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
             ParticleManager:SetParticleControl(p, 0, parent:GetAbsOrigin())
             ParticleManager:ReleaseParticleIndex(p)
-            EmitSoundOn("frisk_d_activate_1", parent)
+
+            if not global_sounds_muted then
+                EmitSoundOn("frisk_d_activate_1", parent)
+            end
 
             parent:AddNewModifier(caster, ability, "modifier_frisk_d_barrier", { duration = barrier_dur })
         end

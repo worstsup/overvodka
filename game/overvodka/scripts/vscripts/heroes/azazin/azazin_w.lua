@@ -47,15 +47,17 @@ function azazin_w:OnSpellStart()
     local particle = ParticleManager:CreateParticle("particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, taunt)
     ParticleManager:SetParticleControl(particle, 0, taunt:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
-    if k == 0 then
-        taunt:EmitSound("azazin_w_1")
-        k = 1
-    elseif k == 1 then
-        taunt:EmitSound("azazin_w_2")
-        k = 2
-    elseif k == 2 then
-        taunt:EmitSound("azazin_w_3")
-        k = 0
+    if not global_sounds_muted then
+        if k == 0 then
+            taunt:EmitSound("azazin_w_1")
+            k = 1
+        elseif k == 1 then
+            taunt:EmitSound("azazin_w_2")
+            k = 2
+        elseif k == 2 then
+            taunt:EmitSound("azazin_w_3")
+            k = 0
+        end
     end
     local targets = FindUnitsInRadius(caster:GetTeamNumber(),
         point,

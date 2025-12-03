@@ -10,7 +10,9 @@ end
 
 function nix_rus:OnSpellStart()
 	if not IsServer() then return end
-	EmitSoundOn( "nix_rus", self:GetCaster() )
+	if not global_sounds_muted then
+		EmitSoundOn( "nix_rus", self:GetCaster() )
+	end
 	self:GetCaster():AddNewModifier( self:GetCaster(), self, "modifier_nix_rus", { duration = self:GetSpecialValueFor( "duration" ) } )
 end
 

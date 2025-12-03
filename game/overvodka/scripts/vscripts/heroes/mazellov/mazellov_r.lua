@@ -234,8 +234,9 @@ function modifier_mazellov_r:OnCreated()
             end
         end
     end)
-
-    EmitSoundOn("mazellov_r_"..RandomInt(1,2), self:GetParent())
+    if not global_sounds_muted then
+        EmitSoundOn("mazellov_r_"..RandomInt(1,2), self:GetParent())
+    end
 end
 
 function modifier_mazellov_r:GetUnitLifetimeFraction( params )

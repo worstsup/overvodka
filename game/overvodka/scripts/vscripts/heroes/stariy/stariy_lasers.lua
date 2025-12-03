@@ -108,7 +108,9 @@ function stariy_lasers:OnSpellStart()
 		if self.thinker then self.thinker:Destroy() end
 		self.thinker = nil
 		EmitSoundOn( "Hero_Phoenix.SunRay.Cast", self:GetCaster() )
-		EmitSoundOn( "stariy_ult", self:GetCaster() )
+		if not global_sounds_muted then
+			EmitSoundOn( "stariy_ult", self:GetCaster() )
+		end
 		EmitSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
 		self.Projectiles = {}
 

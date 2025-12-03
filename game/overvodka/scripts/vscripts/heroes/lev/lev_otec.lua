@@ -81,7 +81,9 @@ function modifier_otec_start:OnAbilityFullyCast( params )
 		if params.unit~=self:GetParent() then return end
 		if params.ability~=self:GetParent():GetAbilityByIndex(0) then return end
 		self:GetParent():AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_otec", { duration = self:GetAbility():GetSpecialValueFor("duration") } )
-		EmitSoundOn( "lev_r", self:GetParent() )
+		if not global_sounds_muted then
+			EmitSoundOn( "lev_r", self:GetParent() )
+		end
 		self:Destroy()
 	end
 end
