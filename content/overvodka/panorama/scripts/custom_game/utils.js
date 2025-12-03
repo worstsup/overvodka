@@ -417,6 +417,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_visitor"
     }
+    if (HeroName == "npc_dota_hero_ember_spirit")
+    {
+        OvervodkaName = "npc_dota_hero_peacemaker"
+    }
     return OvervodkaName	
 }
 

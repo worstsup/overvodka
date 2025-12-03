@@ -3918,7 +3918,7 @@
 	{
 		"BaseClass"           "ability_lua"
 		"ScriptFile"          "heroes/silvername/silvername_w_facet_1"
-		"AbilityTextureName"  "phantom_lancer_phantom_edge"
+		"AbilityTextureName"  "silvername_w_facet_1"
 		"AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
 		"IsBreakable"		  "1"
 		"AbilityValues"
@@ -3956,7 +3956,7 @@
 	{
 		"BaseClass"         	"ability_lua"
 		"ScriptFile"        	"heroes/silvername/silvername_e_facet_1"
-		"AbilityTextureName"    "bounty_hunter_track"
+		"AbilityTextureName"    "silvername_e_facet_1"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
@@ -16642,8 +16642,34 @@
 			"damage"					"250 350"
 			"radius"
 			{
-				"value"					"325 400"
+				"value"					"275 350"
 			}
 		}
 	}
+	//=================================================================================================================
+	// ПРЫЖОК ЖОПОЙ
+	//=================================================================================================================
+	"zhenya_e_boss"
+	{
+		"BaseClass"        				"ability_lua"
+		"ScriptFile"        			"units/boss_zhenya/zhenya_e_boss"
+		"AbilityBehavior"   			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"			 	"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName" 			"zhenya_r"
+		"AbilityCooldown"   			"18"
+		"AbilityManaCost"   			"300"
+		"AbilityCastPoint"  			"0.8"
+		"AbilityValues"
+		{
+				"radius"    "600"
+				"damage_pct" "25"
+				"leap_duration" "0.6"
+				"leap_height"   "400"
+				"knockback_distance"    "550"
+				"knockback_duration"    "0.5"
+				"knockback_height"      "300"
+		}
+	}
+
 }

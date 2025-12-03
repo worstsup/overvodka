@@ -242,8 +242,11 @@ function OvervodkaEvents:StartZhenyaBoss(hamster)
 
     self.zhenyaEndTime = GameRules:GetGameTime() + 60.0
 
-    -- пока без задержек / бега – просто спавним рядом с хомяком
+    _G.global_sounds_muted = true
     self:SpawnZhenyaBoss()
+    Timers:CreateTimer(60.0, function()
+        _G.global_sounds_muted = false
+    end)
 end
 
 function OvervodkaEvents:SpawnZhenyaBoss()

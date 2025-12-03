@@ -19,8 +19,9 @@ function modifier_zhenya_boss:OnCreated()
 
     self.abilityQ = nil
     self.abilityW = nil
+    self.abilityE = nil
     self.nextAbilityTime = nil
-    self.lastAbilityWasQ = false
+    self.lastAbilityName = nil
     self.castLockUntil = 0
 
     if OvervodkaEvents then
@@ -111,7 +112,7 @@ function modifier_zhenya_boss:ThinkRunToHamster()
             end
 
             self.nextAbilityTime = GameRules:GetGameTime() + 6.0
-            self.lastAbilityWasQ = false
+            self.lastAbilityName = nil
 
             self.state = "PHASE1"
         end)
@@ -232,15 +233,17 @@ function modifier_zhenya_boss:ThinkAbilities()
     end
 
     local now = GameRules:GetGameTime()
-    if not self.nextAbilityTime or now < self.nextAbilityTime then
-        return
-    end
+    if self.castLockUntil and now < self.castLockUntil then return end
+    if not self.nextAbilityTime or now < self.nextAbilityTime then return end
 
     if not self.abilityQ or self.abilityQ:IsNull() then
         self.abilityQ = self.parent:FindAbilityByName("zhenya_q_boss")
     end
     if not self.abilityW or self.abilityW:IsNull() then
         self.abilityW = self.parent:FindAbilityByName("zhenya_w_boss")
+    end
+    if not self.abilityE or self.abilityE:IsNull() then
+        self.abilityE = self.parent:FindAbilityByName("zhenya_e_boss")
     end
 
     local team   = self.parent:GetTeamNumber()
@@ -266,13 +269,30 @@ function modifier_zhenya_boss:ThinkAbilities()
         return
     end
 
+    local order
+    if self.state == "PHASE2" then
+        order = { "Q", "W", "E" }
+    else
+        order = { "Q", "W" }
+    end
+
+    local startIndex = 1
+    if self.lastAbilityName then
+        for i, name in ipairs(order) do
+            if name == self.lastAbilityName then
+                startIndex = (i % #order) + 1
+                break
+            end
+        end
+    end
+
     local casted = false
-    local primaryIsQ = not self.lastAbilityWasQ
 
-    for i = 1, 2 do
-        local useQ = (i == 1 and primaryIsQ) or (i == 2 and not primaryIsQ)
+    for step = 1, #order do
+        local idx = ((startIndex - 1 + step - 1) % #order) + 1
+        local name = order[idx]
 
-        if useQ then
+        if name == "Q" then
             if CanCastAbility(self.abilityQ) then
                 local qRadius = 800
                 local qEnemies = FindUnitsInRadius(
@@ -280,24 +300,44 @@ function modifier_zhenya_boss:ThinkAbilities()
                     DOTA_UNIT_TARGET_TEAM_ENEMY,
                     DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
                     DOTA_UNIT_TARGET_FLAG_NONE,
-                    FIND_ANY_ORDER, false
+                    FIND_ANY_ORDER,
+                    false
                 )
                 if qEnemies and #qEnemies > 0 then
                     self.parent:CastAbilityNoTarget(self.abilityQ, -1)
-                    self.lastAbilityWasQ = true
+                    self.lastAbilityName = "Q"
+                    self.castLockUntil   = now + 0.4
                     casted = true
-                    self.castLockUntil = now + 0.4
                     break
                 end
             end
-        else
+
+        elseif name == "W" then
             if CanCastAbility(self.abilityW) then
                 local wPos = origin + RandomVector(200)
-                if wPos then
-                    self.parent:CastAbilityOnPosition(wPos, self.abilityW, -1)
-                    self.lastAbilityWasQ = false
+                self.parent:CastAbilityOnPosition(wPos, self.abilityW, -1)
+                self.lastAbilityName = "W"
+                self.castLockUntil   = now + 0.4
+                casted = true
+                break
+            end
+
+        elseif name == "E" then
+            if self.state == "PHASE2" and CanCastAbility(self.abilityE) then
+                local eRadius = 600
+                local eEnemies = FindUnitsInRadius(
+                    team, origin, nil, eRadius,
+                    DOTA_UNIT_TARGET_TEAM_ENEMY,
+                    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+                    DOTA_UNIT_TARGET_FLAG_NONE,
+                    FIND_ANY_ORDER,
+                    false
+                )
+                if eEnemies and #eEnemies > 0 then
+                    self.parent:CastAbilityNoTarget(self.abilityE, -1)
+                    self.lastAbilityName = "E"
+                    self.castLockUntil   = now + 1.1
                     casted = true
-                    self.castLockUntil = now + 0.4
                     break
                 end
             end
@@ -390,6 +430,47 @@ function modifier_zhenya_boss:CheckState()
         [MODIFIER_STATE_DEBUFF_IMMUNE]                  = true,
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
     }
+end
+
+function modifier_zhenya_boss:OnDestroy()
+    if not IsServer() then return end
+
+    local boss = self.parent or self:GetParent()
+    if not boss or boss:IsNull() then return end
+
+    if not boss:IsAlive() then return end
+
+
+    if OvervodkaEvents then
+        OvervodkaEvents.zhenyaBossActive = false
+        OvervodkaEvents.zhenyaBoss = nil
+    end
+
+    boss:Stop()
+
+    local origin = boss:GetAbsOrigin()
+    local center = Vector(0, 0, 0)
+    local dir = origin - center
+    dir.z = 0
+    if dir:Length2D() < 0.01 then
+        dir = RandomVector(1)
+    end
+    dir = dir:Normalized()
+
+    local runDistance = 9000
+    local runPos = origin + dir * runDistance
+
+    boss:MoveToPosition(runPos)
+
+    boss:AddNewModifier(boss, nil, "modifier_zhenya_boss_escape", {})
+
+    Timers:CreateTimer(15.0, function()
+        if not boss or boss:IsNull() then return end
+        if boss:IsAlive() then
+            boss:ForceKill(false)
+            boss:AddNoDraw()
+        end
+    end)
 end
 
 
@@ -577,11 +658,14 @@ function modifier_zhenya_boss_phase2:OnCreated()
     local q = parent:FindAbilityByName("zhenya_q_boss")
     local w = parent:FindAbilityByName("zhenya_w_boss")
     local e = parent:FindAbilityByName("zhenya_innate_boss")
+    local leap = parent:FindAbilityByName("zhenya_e_boss")
 
     if q and not q:IsNull() then q:SetLevel(2) end
     if w and not w:IsNull() then w:SetLevel(2) end
     if e and not e:IsNull() then e:SetLevel(2) end
-    -- сюда потом можно подвесить бонус урон / ms / as и т.д.
+    if leap and not leap:IsNull() and leap:GetLevel() < 1 then
+        leap:SetLevel(1)
+    end
 end
 
 function modifier_zhenya_boss_phase2:DeclareFunctions()
@@ -590,4 +674,41 @@ function modifier_zhenya_boss_phase2:DeclareFunctions()
         -- MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         -- MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     }
+end
+
+
+modifier_zhenya_boss_escape = class({})
+
+function modifier_zhenya_boss_escape:IsHidden() return true end
+function modifier_zhenya_boss_escape:IsPurgable() return false end
+function modifier_zhenya_boss_escape:IsPurgeException() return false end
+function modifier_zhenya_boss_escape:RemoveOnDeath() return false end
+
+function modifier_zhenya_boss_escape:CheckState()
+    return {
+        [MODIFIER_STATE_INVULNERABLE]                  = true,
+        [MODIFIER_STATE_NO_UNIT_COLLISION]             = true,
+        [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+        [MODIFIER_STATE_COMMAND_RESTRICTED]            = false,
+    }
+end
+
+function modifier_zhenya_boss_escape:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE,
+        MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
+    }
+end
+
+function modifier_zhenya_boss_escape:GetModifierMoveSpeed_Limit()
+    return 600
+end
+
+function modifier_zhenya_boss_escape:GetModifierMoveSpeed_Absolute()
+    return 600
+end
+
+function modifier_zhenya_boss_escape:GetModifierMoveSpeedBase_Override()
+    return 600
 end
