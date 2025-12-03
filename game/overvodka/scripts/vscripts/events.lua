@@ -216,6 +216,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
 		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_bloodseeker" then
+			local crown = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_gameplay/crown001.vmdl"})
+				crown:FollowEntity(spawnedUnit, true)
+				crown:SetParent(spawnedUnit, "attach_head")
+				crown:SetLocalOrigin(Vector(0, 0, 0))
+				crown:SetLocalAngles(0, 0, 0)
+				crown:SetModelScale(0.255)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_invoker" then
 			local cigarette = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/dvoreckov/cigarette.vmdl"})
 				cigarette:FollowEntity(spawnedUnit, true)

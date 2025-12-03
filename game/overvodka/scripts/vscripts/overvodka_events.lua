@@ -26,7 +26,7 @@ local HAMSTER_WINDOWS = {
 
 local BOMBARDIRO_FIRST_MINUTE = 1.5
 local BOMBARDIRO_LAST_MINUTE = 60
-local BOMBARDIRO_BLOCK_DURATION = 45.0
+local BOMBARDIRO_BLOCK_DURATION = 60.0
 
 local GOLDEN_RAIN_ABILITY_NAME = "golden_rain"
 
@@ -133,7 +133,7 @@ function OvervodkaEvents:ScheduleGoldenRainEvents()
 
         local level = i
 
-        self:AddBombardiroBlock(absoluteStart - 15.0, absoluteStart + 30.0)
+        self:AddBombardiroBlock(absoluteStart - 15.0, absoluteStart + 45.0)
 
         self.goldenRainTimes[i] = absoluteStart
         self:UpdateNetTableForEvent("golden_rain", self.goldenRainTimes)

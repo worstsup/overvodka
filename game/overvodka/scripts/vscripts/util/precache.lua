@@ -318,6 +318,7 @@ PrecacheUtils.models = {
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
+		"models/elka/elka2.vmdl",
 }
 
 PrecacheUtils.sounds = {
