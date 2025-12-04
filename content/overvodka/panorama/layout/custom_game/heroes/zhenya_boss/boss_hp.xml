@@ -1,0 +1,53 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="file://{resources}/layout/custom_game/heroes/zhenya_boss/boss_hp.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/layout/custom_game/heroes/zhenya_boss/boss_hp.js" />
+    </scripts>
+
+    <Panel class="BossHPRoot" hittest="false">
+        <Panel id="BossHPPanel" class="BossHPPanel" hittest="false">
+            
+            <Panel class="BossHPPortraitWrapper">
+                <Panel class="BossAvatarCircle">
+                    <Image id="BossAvatarImage"
+                        class="BossAvatarImage"
+                        scaling="stretch-to-fit-preserve-aspect" />
+                </Panel>
+            </Panel>
+
+            <Panel class="BossHPContent" hittest="false">
+                <Panel class="BossHPHeader" hittest="false">
+                    <Label id="BossNameLabel"
+                           class="BossNameLabel"
+                           text="#npc_zhenya_boss"
+                           hittest="false" />
+
+                    <Label id="BossTimerLabel"
+                           class="BossTimerLabel"
+                           text=""
+                           hittest="false" />
+                </Panel>
+
+                <Panel class="BossHPBarWrapper" hittest="false">
+                    <ProgressBar id="BossHPProgress"
+                                 class="BossHPProgress"
+                                 value="1.0"
+                                 hittest="false" />
+                    <Panel class="HPBurnerContainer" id="hp_burner_container">
+                        <DOTAScenePanel id="hp_burner" map="scenes/hud/healthbarburner" camera="camera_1"/>
+                    </Panel>
+
+                    <Panel id="BossHPPhaseDivider"
+                           class="BossHPPhaseDivider"
+                           hittest="false" />
+                </Panel>
+            </Panel>
+        </Panel>
+    </Panel>
+
+
+</root>

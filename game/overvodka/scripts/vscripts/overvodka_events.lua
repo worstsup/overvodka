@@ -240,11 +240,11 @@ function OvervodkaEvents:StartZhenyaBoss(hamster)
     self.zhenyaHamster    = hamster
     self.zhenyaBossActive = true
 
-    self.zhenyaEndTime = GameRules:GetGameTime() + 60.0
+    self.zhenyaEndTime = GameRules:GetGameTime() + 70.0
 
     _G.global_sounds_muted = true
     self:SpawnZhenyaBoss()
-    Timers:CreateTimer(60.0, function()
+    Timers:CreateTimer(70.0, function()
         _G.global_sounds_muted = false
     end)
 end
@@ -285,13 +285,12 @@ function OvervodkaEvents:SpawnZhenyaBoss()
 
     self.zhenyaBoss = boss
 
-    boss:AddNewModifier(boss, nil, "modifier_zhenya_boss", {duration = 60})
+    boss:AddNewModifier(boss, nil, "modifier_zhenya_boss", {duration = 70})
 
     boss.zhenyaHamster = self.zhenyaHamster
 
     _G.ZhenyaBoss = boss
 
-    -- позже тут будем отправлять событие на клиент для полоски HP
     CustomGameEventManager:Send_ServerToAllClients("zhenya_boss_spawned", {
         entindex = boss:entindex(),
         end_time = self.zhenyaEndTime or 0,

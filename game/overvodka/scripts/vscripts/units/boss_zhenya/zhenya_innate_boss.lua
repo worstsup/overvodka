@@ -4,6 +4,8 @@ zhenya_innate_boss = class({})
 
 function zhenya_innate_boss:Precache(context)
     PrecacheResource("particle", "particles/econ/items/centaur/centaur_ti6_gold/centaur_ti6_warstomp_gold.vpcf", context)
+	PrecacheResource("particle", "particles/econ/items/centaur/centaur_ti6_gold/centaur_ti6_warstomp.vpcf", context)
+	PrecacheResource("particle", "particles/zhenya_e_boss.vpcf", context)
     PrecacheResource("soundfile", "soundevents/zhenya_w.vsndevts", context)
 end
 

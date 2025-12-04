@@ -29,12 +29,12 @@ function OnItemHasSpawned( msg )
 }
 
 function OnHamsterSpawn( msg ) {
-	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
-	$.GetContextPanel().SetHasClass( "item_has_spawned", true );
-	$( "#AlertMessage_Chest" ).html = true;
-	$( "#AlertMessage_Delivery" ).html = true;
-	$( "#AlertMessage_Chest" ).text = $.Localize( "#HamsterSpawnAnnounce" );
-	$( "#AlertMessage_Delivery" ).text = $.Localize( "#HamsterSpawn" );
+	//$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	//$.GetContextPanel().SetHasClass( "item_has_spawned", true );
+	//$( "#AlertMessage_Chest" ).html = true;
+	//$( "#AlertMessage_Delivery" ).html = true;
+	//$( "#AlertMessage_Chest" ).text = $.Localize( "#HamsterSpawnAnnounce" );
+	//$( "#AlertMessage_Delivery" ).text = $.Localize( "#HamsterSpawn" );
 
 	$.Schedule( 10, ClearItemSpawnMessage );
 }

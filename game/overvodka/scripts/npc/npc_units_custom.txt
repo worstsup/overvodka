@@ -5032,7 +5032,7 @@
 	"npc_zhenya_boss"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/zhenya/zhenya.vmdl"
+        "Model"                 "models/zhenya_moroz/zhenyamoroz2.vmdl"
         "ModelScale"            "3.0"
 		"SoundSet"				"Hero_PrimalBeast"
         "Level"                 "50"

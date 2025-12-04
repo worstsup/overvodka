@@ -68,6 +68,9 @@ function modifier_zhenya_boss:OnIntervalThink()
     elseif self.state == "PHASE2" then
         self:ThinkPhase2()
     end
+    if self.state == "PHASE1" or self.state == "TRANSFORMING" or self.state == "PHASE2" then
+        self:ClampToMid()
+    end
 end
 
 function modifier_zhenya_boss:ThinkRunToHamster()
@@ -221,6 +224,27 @@ local function CanCastAbility(ability)
     if not ability:IsFullyCastable() then return false end
     return true
 end
+
+function modifier_zhenya_boss:ClampToMid()
+    if not IsServer() then return end
+    if not self.parent or self.parent:IsNull() then return end
+
+    local pos = self.parent:GetAbsOrigin()
+    local v   = pos - Vector(0, 0, 0)
+    v.z       = 0
+
+    local dist = v:Length2D()
+    if dist <= 3200 then
+        return
+    end
+
+    local newPos = Vector(0, 0, 0) + v:Normalized() * 3200
+    newPos = GetGroundPosition(newPos, self.parent)
+
+    self.parent:SetAbsOrigin(newPos)
+    ResolveNPCPositions(newPos, 128)
+end
+
 
 function modifier_zhenya_boss:ThinkAbilities()
     if not IsServer() then return end
@@ -416,7 +440,7 @@ function modifier_zhenya_boss:AttachHamster()
     if not self.hamster or self.hamster:IsNull() then return end
     if not self.parent or self.parent:IsNull() then return end
 
-    self.hamster:SetParent(self.parent, "attach_attack1")
+    self.hamster:SetParent(self.parent, "attach_hamster")
     self.hamster:SetAbsOrigin(self.parent:GetAbsOrigin())
 
     self.hamster:AddNewModifier(self.parent, nil, "modifier_zhenya_hamster_carried", {boss_entindex = self.parent:entindex()})
@@ -434,12 +458,15 @@ end
 
 function modifier_zhenya_boss:OnDestroy()
     if not IsServer() then return end
-
+    _G.global_sounds_muted = false
     local boss = self.parent or self:GetParent()
     if not boss or boss:IsNull() then return end
 
     if not boss:IsAlive() then return end
 
+    if self.hamster and not self.hamster:IsNull() then
+        self.hamster:RemoveModifierByName("modifier_zhenya_hamster_carried")
+    end
 
     if OvervodkaEvents then
         OvervodkaEvents.zhenyaBossActive = false
@@ -670,7 +697,6 @@ end
 
 function modifier_zhenya_boss_phase2:DeclareFunctions()
     return {
-        -- тут позже можно добавить свойства
         -- MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         -- MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     }

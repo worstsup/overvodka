@@ -71,7 +71,7 @@ function SpawnHamster()
 		undefined,
 		DOTA_TEAM_NEUTRALS
 	)
-	hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 60})
+	hamster:AddNewModifier(hamster, nil, "modifier_kill", {duration = 70})
     return hamster
 end
 

@@ -2,6 +2,28 @@ LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODI
 
 zhenya_e_boss = class({})
 
+function zhenya_e_boss:OnAbilityPhaseStart()
+    if not IsServer() then return true end
+
+    self.precast_particle = ParticleManager:CreateParticle(
+        "particles/zhenya_e_boss.vpcf",
+        PATTACH_ABSORIGIN_FOLLOW,
+        self:GetCaster()
+    )
+
+    return true
+end
+
+function zhenya_e_boss:OnAbilityPhaseInterrupted()
+    if not IsServer() then return end
+
+    if self.precast_particle then
+        ParticleManager:DestroyParticle(self.precast_particle, false)
+        ParticleManager:ReleaseParticleIndex(self.precast_particle)
+        self.precast_particle = nil
+    end
+end
+
 function zhenya_e_boss:OnSpellStart()
     if not IsServer() then return end
 
@@ -52,7 +74,7 @@ function zhenya_e_boss:OnLeapLanded()
     local knock_dur   = self:GetSpecialValueFor("knockback_duration")
     local knock_height= self:GetSpecialValueFor("knockback_height")
 
-    local pfx = ParticleManager:CreateParticle("particles/econ/items/centaur/centaur_ti6_gold/centaur_ti6_warstomp_gold.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    local pfx = ParticleManager:CreateParticle("particles/econ/items/centaur/centaur_ti6/centaur_ti6_warstomp.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControl(pfx, 0, origin)
     ParticleManager:SetParticleControl(pfx, 1, Vector(radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(pfx)

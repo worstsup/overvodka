@@ -274,6 +274,7 @@ PrecacheUtils.models = {
 		"models/invincible/invincible.vmdl",
 		"models/invincible/arcana/whatsapp.vmdl",
 		"models/zhenya/zhenya.vmdl",
+		"models/zhenya_moroz/zhenyamoroz2.vmdl",
 		"sans/underfell_sans.vmdl",
 		"evil_monke/models/evil_monke_tpose.vmdl",
 		"models/worker/worker.vmdl",

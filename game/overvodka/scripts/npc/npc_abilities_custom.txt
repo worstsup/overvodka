@@ -16639,7 +16639,7 @@
 		"MaxLevel"						"2"
 		"AbilityValues"
 		{
-			"damage"					"250 350"
+			"damage"					"200 300"
 			"radius"
 			{
 				"value"					"275 350"
@@ -16660,12 +16660,13 @@
 		"AbilityCooldown"   			"18"
 		"AbilityManaCost"   			"300"
 		"AbilityCastPoint"  			"0.8"
+		"AbilityCastAnimation"			"ACT_DOTA_OVERRIDE_ABILITY_3"
 		"AbilityValues"
 		{
 				"radius"    "600"
 				"damage_pct" "25"
 				"leap_duration" "0.6"
-				"leap_height"   "400"
+				"leap_height"   "300"
 				"knockback_distance"    "550"
 				"knockback_duration"    "0.5"
 				"knockback_height"      "300"
