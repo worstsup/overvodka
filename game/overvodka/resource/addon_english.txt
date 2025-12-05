@@ -455,6 +455,22 @@
 		"npc_dota_hero_abaddon_npedesc1"			"Difficulty: LOW"
 		"npc_dota_hero_ember_spirit_npedesc1"		"Difficulty: LOW"
 
+		"zhenya_notif_you_got"        "You received"
+		"zhenya_notif_reward_generic" "You received a reward!"
+
+		"zhenya_notif_coins_1" "Hamster Coin"
+		"zhenya_notif_coins_2" "Hamster Coins"
+		"zhenya_notif_coins_5" "Hamster Coins"
+
+		"zhenya_notif_gold_1"  "gold"
+		"zhenya_notif_gold_2"  "gold"
+		"zhenya_notif_gold_5"  "gold"
+
+		"zhenya_notif_prime_1" "hour of Overvodka Prime"
+		"zhenya_notif_prime_2" "hours of Overvodka Prime"
+		"zhenya_notif_prime_5" "hours of Overvodka Prime"
+
+
 		"dota_tooltip_Facet_peacemaker_facet_deagle"						"Desert Eagle"
 		"dota_tooltip_Facet_peacemaker_facet_deagle_description"			"Peacemaker becomes a ranged hero and gains X-Ray Vision and Explosive Bullet abilities."
 		"dota_tooltip_Facet_peacemaker_facet_magic"							"Mortal Kombat"

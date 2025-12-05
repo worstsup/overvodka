@@ -55,7 +55,11 @@ function SpawnBombardiro()
 end
 
 function SpawnHamster()
-    EmitGlobalSound( "kirill_start" )
+    if not winter_mode then
+        EmitGlobalSound( "kirill_start" )
+    else
+        EmitGlobalSound( "zhenya_boss_song" )
+    end
 	CustomGameEventManager:Send_ServerToAllClients( "hamster_spawn", {} )
 	local hamsterSpawn
     if GetMapName() == "overvodka_5x5" then

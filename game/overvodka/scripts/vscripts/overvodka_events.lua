@@ -5,7 +5,7 @@ end
 local GOLDEN_RAIN_WINDOWS = {
     default = {
         { 4, 7 },
-        { 14, 17 },
+        { 14.5, 17 },
     },
     overvodka_5x5 = {
         { 8, 12 },
@@ -15,12 +15,10 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 0.5, 0.6 }, -- 9 12
-        { 20, 23 },
+        { 0.4, 0.5 }, -- 11 12.5
     },
     overvodka_5x5 = {
         { 16, 18 },
-        { 26, 30 },
     },
 }
 
@@ -207,7 +205,11 @@ function OvervodkaEvents:TriggerHamster()
     if not IsServer() then return end
 
     CustomGameEventManager:Send_ServerToAllClients("item_has_spawned", {})
-    EmitGlobalSound("hamster_announce")
+    if not winter_mode then
+        EmitGlobalSound("hamster_announce")
+    else
+        EmitGlobalSound("zhenya_announce")
+    end
 
     Timers:CreateTimer(15.0, function()
         if SpawnHamster then

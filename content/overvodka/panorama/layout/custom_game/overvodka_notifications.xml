@@ -1,0 +1,28 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/overvodka_notifications.js" />
+    </scripts>
+
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.css" />
+    	<include src="file://{resources}/styles/custom_game/overvodka_notifications.css" />
+  	</styles>
+
+    <snippets>
+        <snippet name="ZhenyaNotification">
+            <Panel class="ZhenyaNotification" hittest="false">
+                <Panel class="ZN_LeftIconWrapper" hittest="false">
+                    <Image id="ZN_Icon" class="ZN_Icon" hittest="false" />
+                </Panel>
+                <Panel class="ZN_RightTextWrapper" hittest="false">
+                    <Label id="ZN_Text" class="ZN_Text" text="Вы получили награду!" hittest="false" />
+                </Panel>
+            </Panel>
+        </snippet>
+    </snippets>
+
+    <Panel class="ZhenyaNotificationsRoot" hittest="false">
+        <Panel id="ZhenyaNotificationsContainer" class="ZhenyaNotificationsContainer" hittest="false" />
+    </Panel>
+</root>

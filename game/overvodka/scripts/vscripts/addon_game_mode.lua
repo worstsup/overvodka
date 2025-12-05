@@ -359,6 +359,8 @@ function OvervodkaGameMode:InitGameMode()
 		DOTA_POST_GAME_COLUMN_DAMAGE,
 		DOTA_POST_GAME_COLUMN_HEALING,
 	} )
+
+	OvervodkaGameMode.zhenyaNotifSeq = OvervodkaGameMode.zhenyaNotifSeq or {}
 end
 
 function OvervodkaGameMode:event_update_loud_server(data)
