@@ -81,7 +81,8 @@ PrecacheUtils.particles = {
 		"particles/rostik_attack.vpcf",
 		"particles/rocket_launcher.vpcf",
 		"particles/units/heroes/hero_tusk/tusk_frozen_sigil.vpcf",
-		"particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf",
+		"particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf", -- old hamster
+		"particles/winter_hamster.vpcf", -- winter hamster
 		"particles/econ/items/lifestealer/lifestealer_immortal_backbone_gold/lifestealer_immortal_backbone_gold_rage.vpcf",
 		"particles/kotl_ti10_blinding_light_groundring_new.vpcf",
 		"particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf",
@@ -320,6 +321,7 @@ PrecacheUtils.models = {
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"models/elka/elka2.vmdl",
+		"models/props_winter/present.vmdl",
 }
 
 PrecacheUtils.sounds = {

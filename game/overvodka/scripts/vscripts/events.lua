@@ -604,6 +604,10 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
 		UTIL_Remove( item )
+	elseif event.itemname == "item_zhenya_present" then
+        if not owner or owner:IsNull() then return end
+        UTIL_Remove(item)
+        self:GiveZhenyaPresentReward(owner)
 	elseif event.itemname == "item_bag_of_gold_2" then
 		if owner:GetUnitName() ~= "npc_dota_hero_necrolyte" then
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.3, damage_type = DAMAGE_TYPE_PURE } )
@@ -668,4 +672,151 @@ function OvervodkaGameMode:OnNpcGoalReached( event )
 	if npc:GetUnitName() == "npc_dota_treasure_courier" then
 		OvervodkaGameMode:TreasureDrop( npc )
 	end
+end
+
+
+function OvervodkaGameMode:GiveZhenyaPresentReward(hero)
+    if not IsServer() then return end
+    if not hero or hero:IsNull() then return end
+
+    local playerID = hero:GetPlayerID()
+    if playerID == nil or playerID == -1 then return end
+    local roll = RandomInt(1, 100)
+	--if IsInToolsMode() or GameRules:IsCheatMode() then roll = 1 end
+    if roll <= 33 then
+        self:GiveZhenyaGold(hero, 500)
+    elseif roll <= 66 then
+        local coins = RandomInt(5, 10)
+        self:GiveZhenyaHamsterCoins(playerID, coins)
+    else
+        local hours = self:RollZhenyaPrimeHours()
+        self:GiveZhenyaPrime(playerID, hours)
+    end
+end
+
+function OvervodkaGameMode:GiveZhenyaGold(hero, amount)
+    if not IsServer() then return end
+    if not hero or hero:IsNull() then return end
+
+    amount = amount or 500
+
+    hero:ModifyGoldFiltered(amount, false, 0)
+    SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, amount, nil)
+end
+
+function OvervodkaGameMode:GiveZhenyaHamsterCoins(playerID, amount)
+    if not IsServer() then return end
+    if not amount or amount <= 0 then return end
+
+    local steamID = PlayerResource:GetSteamAccountID(playerID)
+    if not steamID or steamID == 0 then return end
+
+    local data = {
+        SteamID = steamID,
+        amount  = amount,
+    }
+
+    if Server and Server.SendRequest then
+        Server:SendRequest(
+            SERVER_URL .. "/update_balance",
+            data,
+             function(response)
+                if response and response.success then
+                    if Server and Server.RefreshPlayerProfile then
+                        Server:RefreshPlayerProfile(playerID)
+                    end
+                    if Store and Store.FetchPlayerData then
+                        Store:FetchPlayerData(playerID)
+                    end
+					self:PushZhenyaNotification(playerID, {
+                        kind   = "coins",
+                        amount = amount,
+                    })
+                else
+                    print("[ZhenyaPresent] update_balance failed:", response and response.error)
+                end
+            end,
+            false
+        )
+    end
+end
+
+function OvervodkaGameMode:RollZhenyaPrimeHours()
+    local roll24 = RandomInt(1, 100)
+    if roll24 == 1 then
+        return 24
+    end
+
+    local totalWeight = 0
+    local weights = {}
+    for h = 1, 23 do
+        local w = (24 - h)
+        weights[h] = w
+        totalWeight = totalWeight + w
+    end
+
+    local roll = RandomInt(1, totalWeight)
+    local accum = 0
+    for h = 1, 23 do
+        accum = accum + weights[h]
+        if roll <= accum then
+            return h
+        end
+    end
+
+    return 1
+end
+
+function OvervodkaGameMode:GiveZhenyaPrime(playerID, hours)
+    if not IsServer() then return end
+    if not hours or hours <= 0 then return end
+
+    local steamID = PlayerResource:GetSteamAccountID(playerID)
+    if not steamID or steamID == 0 then return end
+
+    local durationKey = "gift_" .. tostring(hours) .. "h"
+
+    local data = {
+        SteamID = steamID,
+        duration = durationKey,
+    }
+
+    if Server and Server.SendRequest then
+        Server:SendRequest(
+            SERVER_URL .. "buy_prime",
+            data,
+            function(response)
+                if response and response.success then
+                    if Server and Server.RefreshPlayerProfile then
+                        Server:RefreshPlayerProfile(playerID)
+                    end
+                    if Store and Store.FetchPlayerData then
+                        Store:FetchPlayerData(playerID)
+                    end
+					self:PushZhenyaNotification(playerID, {
+                        kind  = "prime",
+                        hours = hours,
+                    })
+                else
+                    print("[ZhenyaPresent] buy_prime failed:", response and response.error)
+                end
+            end,
+            false
+        )
+    end
+end
+
+function OvervodkaGameMode:PushZhenyaNotification(playerID, payload)
+    if not IsServer() then return end
+    if not payload then return end
+
+    self.zhenyaNotifSeq[playerID] = (self.zhenyaNotifSeq[playerID] or 0) + 1
+    payload.seq = self.zhenyaNotifSeq[playerID]
+    payload.time = GameRules:GetGameTime()
+
+    CustomNetTables:SetTableValue(
+        "overvodka_notifications",
+        tostring(playerID),
+        payload
+    )
 end

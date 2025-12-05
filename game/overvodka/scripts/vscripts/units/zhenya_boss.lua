@@ -122,6 +122,67 @@ function modifier_zhenya_boss:ThinkRunToHamster()
     end
 end
 
+function modifier_zhenya_boss:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_DEATH,
+    }
+end
+
+function modifier_zhenya_boss:OnDeath(event)
+    if not IsServer() then return end
+
+    local unit = event.unit
+    if not unit or unit:IsNull() then return end
+    if unit ~= self.parent then
+        return
+    end
+    EmitGlobalSound("zhenya_boss_death")
+    if OvervodkaEvents then
+        OvervodkaEvents.zhenyaBossActive = false
+        OvervodkaEvents.zhenyaBoss       = nil
+    end
+
+    local origin = unit:GetAbsOrigin()
+
+    EmitGlobalSound("Item.PickUpGemWorld")
+
+    local count = 20
+
+    local spiralArms     = 4
+    local angleStep      = math.rad(18)
+    local radiusStart    = 150
+    local radiusStep     = 90
+    local spawnInterval  = 0.08
+
+    for i = 0, count - 1 do
+        local idx = i
+
+        Timers:CreateTimer(idx * spawnInterval, function()
+            local item = CreateItem("item_zhenya_present", nil, nil)
+            if not item then return end
+
+            local spawnPoint = origin
+
+            local arm = idx % spiralArms
+            local t   = math.floor(idx / spiralArms)
+
+            local baseAngle = t * angleStep
+            local armOffset = (2 * math.pi / spiralArms) * arm
+            local angle     = baseAngle + armOffset
+
+            local radius = radiusStart + radiusStep * t
+            radius = radius + RandomFloat(-15, 15)
+
+            local dir = Vector(math.cos(angle), math.sin(angle), 0)
+            local targetPos = spawnPoint + dir * radius
+
+            local drop = CreateItemOnPositionForLaunch(spawnPoint, item)
+            item:LaunchLootInitialHeight(false, 0, 500, 0.75, targetPos)
+        end)
+    end
+end
+
+
 function modifier_zhenya_boss:ThinkPhase1()
     if not IsServer() then return end
     if not self.parent or self.parent:IsNull() then return end

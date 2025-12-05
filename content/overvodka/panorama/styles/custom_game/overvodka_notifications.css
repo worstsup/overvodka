@@ -1,0 +1,135 @@
+@keyframes 'ZN_SlideIn' {
+    0% {
+        opacity: 0;
+        transform: translateX(40px) translateY(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px) translateY(0px);
+    }
+}
+
+@keyframes 'ZN_SlideOut' {
+    0% {
+        opacity: 1;
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(40px) translateY(0px);
+    }
+}
+
+.ZhenyaNotificationsRoot {
+    width: 400px;
+    height: 400px;
+
+    horizontal-align: right;
+    vertical-align: top;
+
+    margin-top: 460px;
+    margin-right: -70px;
+
+    flow-children: down;
+    overflow: noclip;
+    z-index: 100;
+}
+
+.ZhenyaNotificationsContainer {
+    width: 100%;
+    flow-children: down;
+    vertical-align: top;
+    horizontal-align: right;
+}
+
+.ZhenyaNotification {
+    width: 320px;
+    height: 64px;
+
+    margin-bottom: 6px;
+
+    flow-children: right;
+    background-color: gradient(
+        linear, 0% 0%, 100% 0%,
+        from(#141414ee),
+        color-stop(0.7, #2b1c10ee),
+        to(#3a2410ee)
+    );
+
+    border-radius: 8px;
+    border: 1px solid #ffffff22;
+
+    box-shadow: 0px 0px 16px 1px #000000aa;
+
+    opacity: 0;
+    transform: translateX(40px);
+
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.ZN_Show {
+    animation-name: ZN_SlideIn;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.ZN_Hide {
+    animation-name: ZN_SlideOut;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+
+    opacity: 0;
+    transform: translateX(40px);
+}
+
+.ZN_LeftIconWrapper {
+    width: 56px;
+    height: 100%;
+
+    vertical-align: center;
+    horizontal-align: left;
+
+}
+
+.ZN_Icon {
+    width: 44px;
+    height: 44px;
+
+    horizontal-align: center;
+    vertical-align: center;
+
+    background-color: transparent;  
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.ZN_RightTextWrapper {
+    width: fill-parent-flow(1.0);
+    height: 100%;
+
+}
+
+.ZN_Text {
+    font-family: defaultFont;
+    font-weight: bold;
+    font-size: 18px;
+
+    color: #fdf5deff;
+    text-shadow: 1px 1px 2px 3 #000000ff;
+
+    horizontal-align: left;
+    vertical-align: center;
+
+    margin-right: 8px;
+    margin-left: 4px;
+}

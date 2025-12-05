@@ -11,6 +11,7 @@
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overthrow_item_notification.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/dvoreckov_skill_panel.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/player_hud.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overvodka_notifications.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/debug_panel.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/chat_wheel.xml" />
@@ -32,6 +33,6 @@
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/overvodka_hud.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
-		<Image id="gamemode" class="SeqImg" src="file://{images}/custom_game/zhenya_boss_avatar_angry.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/custom_game/zhenya_present.png" />
 	</Panel>
 </root>
