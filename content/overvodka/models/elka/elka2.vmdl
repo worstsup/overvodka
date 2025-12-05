@@ -15,7 +15,7 @@
 						[
 							{
 								from = ""
-								to = "models/elka/elka.vmat"
+								to = "models/elka/elka2.vmat"
 							},
 							{
 								from = "blackline.vmat"

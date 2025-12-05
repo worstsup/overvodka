@@ -144,8 +144,12 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 				spawnedUnit.voice_level = 0
 			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_phoenix" and spawnedUnit:HasAbility("silvername_q_facet_2") then
-				chair = spawnedUnit:AddItemByName("item_silvername_chair")
-				chair:SetSellable(false)
+				Timers:CreateTimer(0.2, function()
+					if spawnedUnit then
+						chair = spawnedUnit:AddItemByName("item_silvername_chair")
+						chair:SetSellable(false)
+					end
+				end)
 			end
 			local sahur = spawnedUnit:FindAbilityByName("sahur_hit")
 			if sahur then
@@ -682,7 +686,7 @@ function OvervodkaGameMode:GiveZhenyaPresentReward(hero)
     local playerID = hero:GetPlayerID()
     if playerID == nil or playerID == -1 then return end
     local roll = RandomInt(1, 100)
-	--if IsInToolsMode() or GameRules:IsCheatMode() then roll = 1 end
+	if IsInToolsMode() or GameRules:IsCheatMode() then roll = 1 end
     if roll <= 33 then
         self:GiveZhenyaGold(hero, 500)
     elseif roll <= 66 then

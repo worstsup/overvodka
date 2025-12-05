@@ -38,7 +38,7 @@ function modifier_sasavot_r_new:OnCreated()
     self.caster = self:GetCaster()
     self.target = self:GetParent()
     self:PlayEffects()
-    self:StartIntervalThink(0.5)
+    self:StartIntervalThink(0.2)
 end
 
 function modifier_sasavot_r_new:OnIntervalThink()
@@ -48,7 +48,7 @@ function modifier_sasavot_r_new:OnIntervalThink()
         return
     end
     if self.target:IsAlive() and self.caster:IsAlive() then
-        AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300, 0.5, false)
+        AddFOWViewer(self.caster:GetTeamNumber(), self.target:GetAbsOrigin(), 300, 0.25, false)
         if self.target:HasModifier("modifier_sasavot_shard") then
             self.target:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary", {duration = 15})
             self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_sasavot_r_new_secondary_self", {duration = 15})
@@ -95,18 +95,11 @@ function modifier_sasavot_r_new_secondary_self:IsPurgable()
 	return false
 end
 
-function modifier_sasavot_r_new_secondary_self:OnCreated( kv )
-end
-
-function modifier_sasavot_r_new_secondary_self:OnDestroy( kv )
-end
-
 function modifier_sasavot_r_new_secondary_self:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 	}
-	return funcs
 end
 
 function modifier_sasavot_r_new_secondary_self:GetModifierPreAttack_CriticalStrike( params )
@@ -165,17 +158,17 @@ function modifier_sasavot_r_new_secondary:OnCreated()
     self.damageDealt = false
     EmitSoundOn("sasavot_r_tick", self.target)
 end
+
 function modifier_sasavot_r_new_secondary:OnRefresh()
     self.radius = self:GetAbility():GetSpecialValueFor("radius")
 end
+
 function modifier_sasavot_r_new_secondary:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_PROPERTY_BONUS_VISION_PERCENTAGE,
         MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
     }
-    return funcs
 end
 
 function modifier_sasavot_r_new_secondary:GetModifierDamageOutgoing_Percentage()

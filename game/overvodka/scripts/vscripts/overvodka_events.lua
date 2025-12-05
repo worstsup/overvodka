@@ -15,10 +15,10 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 0.4, 0.5 }, -- 11 12.5
+        { 11, 12.5 }, -- 11 12.5
     },
     overvodka_5x5 = {
-        { 16, 18 },
+        { 18, 20 },
     },
 }
 
@@ -66,7 +66,7 @@ end
 function OvervodkaEvents:Init()
     if not IsServer() then return end
     if self.initialized then return end
-    --if IsInToolsMode() then return end
+    if IsInToolsMode() then return end
 
     if _G.overvodka_events ~= nil and not _G.overvodka_events then
         return

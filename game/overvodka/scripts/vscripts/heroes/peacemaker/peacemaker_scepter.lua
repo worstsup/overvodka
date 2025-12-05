@@ -40,6 +40,9 @@ function peacemaker_scepter:OnSpellStart()
     self.vigilante = vigilante
     self:SetupVigilanteStats(vigilante, caster)
     vigilante:AddNewModifier(caster, self, "modifier_peacemaker_scepter_vigilante", {duration = self:GetSpecialValueFor("duration")})
+    if not global_sounds_muted then
+        vigilante:EmitSound("Peacemaker.Vigilante")
+    end
     local p = ParticleManager:CreateParticle("particles/econ/items/spectre/spectre_arcana/spectre_arcana_loadout_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, vigilante)
     ParticleManager:ReleaseParticleIndex(p)
 end
@@ -207,6 +210,10 @@ function modifier_peacemaker_scepter_vigilante:OnIntervalThink()
     if not self.caster:IsAlive() then
         self:Destroy()
         return
+    end
+
+    if global_sounds_muted then
+        self.parent:StopSound("Peacemaker.Vigilante")
     end
 
     local now = GameRules:GetGameTime()

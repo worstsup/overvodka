@@ -290,8 +290,10 @@ function OvervodkaGameMode:WarnItem()
 	local spawnLocation = self.hCurrentItemSpawnLocation.hSpawnLocation:GetAbsOrigin();
 
 	-- notify everyone
-	CustomGameEventManager:Send_ServerToAllClients( "item_will_spawn", { spawn_location = spawnLocation } )
-	EmitGlobalSound( "Overthrow.Item.Warning" )
+	if not global_sounds_muted then
+		CustomGameEventManager:Send_ServerToAllClients( "item_will_spawn", { spawn_location = spawnLocation } )
+		EmitGlobalSound( "Overthrow.Item.Warning" )
+	end
 	
 	-- fire the destination particles
 	DoEntFire( self.hCurrentItemSpawnLocation.world_effects_name, "Start", "0", 0, self, self )
