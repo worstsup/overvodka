@@ -319,6 +319,8 @@ PrecacheUtils.models = {
 
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
+		"models/heroes/ogre_magi/ogre_magi_weapon.vmdl",
+		"models/silvername/silvername2.vmdl",
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"models/elka/elka2.vmdl",
 		"models/props_winter/present.vmdl",

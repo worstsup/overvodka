@@ -17,7 +17,7 @@ function silvername_r_facet_2:OnSpellStart()
     )
     ParticleManager:ReleaseParticleIndex(particle)
 
-    caster:StartGesture(ACT_DOTA_CAST_ABILITY_2)
+    caster:StartGesture(ACT_DOTA_CAST_ABILITY_6)
     caster:EmitSound("silvername_r_facet_2")
 
     local transform_time = self:GetSpecialValueFor("transformation_time")

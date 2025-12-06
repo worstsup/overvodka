@@ -208,6 +208,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			spawnedUnit.c = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/lion/hellclaw_of_maelrawn/hellclaw_of_maelrawn.vmdl"})
 			spawnedUnit.c:FollowEntity(spawnedUnit, true)
 		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_phoenix" then
+			local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/ogre_magi/ogre_magi_weapon.vmdl"})
+			weapon:FollowEntity(spawnedUnit, true)
+			weapon:SetParent(spawnedUnit, "attach_sword")
+			weapon:SetLocalOrigin(Vector(0, 0, 0))
+			weapon:SetLocalAngles(0, 0, 0)
+			weapon:SetModelScale(0.5)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl"})
 			sword:FollowEntity(spawnedUnit, true)
@@ -276,6 +284,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			sword:SetLocalOrigin(Vector(0, 0, 0))
 			sword:SetLocalAngles(0, 0, 0)
 			sword:SetModelScale(0.5)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_silvername_clone" then
+			local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/ogre_magi/ogre_magi_weapon.vmdl"})
+			weapon:FollowEntity(spawnedUnit, true)
+			weapon:SetParent(spawnedUnit, "attach_sword")
+			weapon:SetLocalOrigin(Vector(0, 0, 0))
+			weapon:SetLocalAngles(0, 0, 0)
+			weapon:SetModelScale(0.5)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_spectre" then
 			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/chara/knife.vmdl"})
@@ -690,7 +706,7 @@ function OvervodkaGameMode:GiveZhenyaPresentReward(hero)
     if roll <= 33 then
         self:GiveZhenyaGold(hero, 500)
     elseif roll <= 66 then
-        local coins = RandomInt(5, 10)
+        local coins = RandomInt(5, 15)
         self:GiveZhenyaHamsterCoins(playerID, coins)
     else
         local hours = self:RollZhenyaPrimeHours()

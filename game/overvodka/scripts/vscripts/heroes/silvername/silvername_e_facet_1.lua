@@ -412,7 +412,7 @@ function modifier_silvername_e_facet_1_debuff:OnDeath(event)
         perma_buff = caster:AddNewModifier(caster, ability, "modifier_silvername_e_facet_1_perma_buff", {})
     end
 
-	local steal_pct = (ability:GetSpecialValueFor("steal_pct") or 50) * 0.01
+	local steal_pct = (ability:GetSpecialValueFor("steal_pct") or 30) * 0.01
 
 	local perma_steal_str = math.floor(self.steal_str * steal_pct)
 	local perma_steal_agi = math.floor(self.steal_agi * steal_pct)
