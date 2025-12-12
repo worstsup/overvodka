@@ -43,6 +43,7 @@ function modifier_silvername_r_facet_1_scepter:OnIntervalThink()
 
     if not parent:IsAlive() then return end
     if not parent:HasScepter() then return end
+    if parent:PassivesDisabled() then return end
     if parent:IsIllusion() then return end
     if parent:IsInvisible() then return end
 
@@ -211,7 +212,7 @@ function modifier_silvername_r_facet_1:OnCreated(kv)
     self.bonus_count  = 0
 
     if self.ability and not self.ability:IsNull() then
-        if self.caster and self.caster:HasTalent("special_bonus_unique_silvername_8") then
+        if self.caster then
             self.bonus_radius = self.ability:GetSpecialValueFor("bonus_radius") or 0
             self.bonus_count  = self.ability:GetSpecialValueFor("bonus_count")  or 0
         end

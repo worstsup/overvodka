@@ -10,32 +10,21 @@ end
 function peterka_r:OnSpellStart()
 	if not IsServer() then return end
 	local caster = self:GetCaster()
-	local point = self:GetCursorPosition() + Vector(10, 0, 0)
-	CreateModifierThinker(
-		caster,
-		self,
-		"modifier_peterka_r_thinker",
-		{},
-		point,
-		caster:GetTeamNumber(),
-		false
-	)
+	local point = self:GetCursorPosition()
+    if point == caster:GetAbsOrigin() then
+        point = point + caster:GetForwardVector()
+    end
+	CreateModifierThinker(caster, self, "modifier_peterka_r_thinker", {}, point, caster:GetTeamNumber(), false)
 	self:PlayEffects()
 end
 
 function peterka_r:OnProjectileHit_ExtraData( target, location, extraData )
 	if not target then return true end
 	local enemies = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),
-			location,
-			nil,
-			extraData.radius,
-			DOTA_UNIT_TARGET_TEAM_ENEMY,
-			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-			0,
-			0,
-			false
-		)
+		self:GetCaster():GetTeamNumber(), location, nil,
+		extraData.radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false
+	)
 	local damageTable = {
 		attacker = self:GetCaster(),
 		damage = extraData.damage,
@@ -51,7 +40,6 @@ function peterka_r:OnProjectileHit_ExtraData( target, location, extraData )
 	end
 	return true
 end
-
 
 function peterka_r:PlayEffects()
 	local particle_cast = "particles/peterka_r_cast.vpcf"
@@ -74,15 +62,9 @@ end
 
 modifier_peterka_r_thinker = class({})
 
-function modifier_peterka_r_thinker:IsHidden()
-	return true
-end
-function modifier_peterka_r_thinker:IsDebuff()
-	return false
-end
-function modifier_peterka_r_thinker:IsPurgable()
-	return false
-end
+function modifier_peterka_r_thinker:IsHidden() return true end
+function modifier_peterka_r_thinker:IsDebuff() return false end
+function modifier_peterka_r_thinker:IsPurgable() return false end
 
 function modifier_peterka_r_thinker:OnCreated( kv )
 	if IsServer() then
@@ -171,8 +153,7 @@ function modifier_peterka_r_scepter:OnAbilityExecuted(params)
     local pt = params.target:GetAbsOrigin()
     caster:AddNewModifier(caster, self:GetAbility(), "modifier_peterka_r_scepter_wave", {
         duration = self:GetAbility():GetSpecialValueFor("duration_scepter"),
-        tx = pt.x,
-        ty = pt.y,
+        tx = pt.x, ty = pt.y,
     })
 end
 

@@ -66,24 +66,20 @@ function litvin_zhishi:OnSpellStart()
 end
 
 function litvin_zhishi:PlayEffects( origin, direction, point, radius )
-	local particle_cast_a = "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
-	local particle_cast_b = "particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
-	local effect_cast_a = ParticleManager:CreateParticle( particle_cast_a, PATTACH_ABSORIGIN, self:GetCaster() )
+	local effect_cast_a = ParticleManager:CreateParticle( "particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf", PATTACH_ABSORIGIN, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast_a, 0, origin )
 	ParticleManager:SetParticleControlForward( effect_cast_a, 0, direction:Normalized() )
 	ParticleManager:SetParticleControl( effect_cast_a, 1, origin + direction )
 	ParticleManager:ReleaseParticleIndex( effect_cast_a )
-	local effect_cast_b = ParticleManager:CreateParticle( particle_cast_b, PATTACH_ABSORIGIN, self:GetCaster() )
+	local effect_cast_b = ParticleManager:CreateParticle( "particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf", PATTACH_ABSORIGIN, self:GetCaster() )
 	ParticleManager:SetParticleControl( effect_cast_b, 0, self:GetCaster():GetOrigin() )
 	ParticleManager:SetParticleControlForward( effect_cast_b, 0, direction:Normalized() )
 	ParticleManager:ReleaseParticleIndex( effect_cast_b )
-	local particle_cast = "particles/dark_seer_vacuum_new.vpcf"
-	local sound_cast = "zhishi"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
+	local effect_cast = ParticleManager:CreateParticle( "particles/dark_seer_vacuum_new.vpcf", PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, point )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( radius, radius, radius ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	if not global_sounds_muted then
-		EmitSoundOnLocationWithCaster( point, sound_cast, self:GetCaster() )
+		EmitSoundOnLocationWithCaster( point, "zhishi", self:GetCaster() )
 	end
 end

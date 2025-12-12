@@ -222,7 +222,8 @@ function modifier_bratishkin_e_primary_scepter:DeclareFunctions()
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
-        MODIFIER_PROPERTY_MOVESPEED_LIMIT
+        MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE
     }
 end
 
@@ -261,6 +262,10 @@ function modifier_bratishkin_e_primary_scepter:GetModifierMoveSpeed_Limit()
     return self:GetAbility():GetSpecialValueFor("max_speed")
 end
 
+function modifier_bratishkin_e_primary_scepter:GetModifierMoveSpeed_Absolute()
+    return self:GetAbility():GetSpecialValueFor("max_speed")
+end
+
 function modifier_bratishkin_e_primary_scepter:GetModifierAttackRangeBonus()
     return self:GetAbility():GetSpecialValueFor("radius")
 end
@@ -275,7 +280,9 @@ function modifier_bratishkin_e_primary_scepter:CheckState()
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_DISARMED] = true,
         [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
-        [MODIFIER_STATE_ATTACK_IMMUNE] = true
+        [MODIFIER_STATE_ATTACK_IMMUNE] = true,
+        [MODIFIER_STATE_MUTED] = true,
+        [MODIFIER_STATE_SILENCED] = true,
     }
 end
 

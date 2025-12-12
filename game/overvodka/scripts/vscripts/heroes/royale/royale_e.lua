@@ -26,12 +26,12 @@ function royale_e:GetAOERadius()
 end
 
 function royale_e:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_e:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_e:GetAbilityTextureName()

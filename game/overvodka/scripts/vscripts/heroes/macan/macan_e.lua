@@ -9,18 +9,11 @@ end
 
 modifier_macan_e = class({})
 
-function modifier_macan_e:IsHidden()
-	return (self:GetStackCount() == 0)
-end
-function modifier_macan_e:IsDebuff()
-	return false
-end
+function modifier_macan_e:IsHidden() return (self:GetStackCount() == 0) end
+function modifier_macan_e:IsDebuff() return false end
+function modifier_macan_e:IsPurgable() return false end
 
-function modifier_macan_e:IsPurgable()
-	return false
-end
-
-function modifier_macan_e:OnCreated( kv )
+function modifier_macan_e:OnCreated()
 	self.agi_gain = self:GetAbility():GetSpecialValueFor( "agi_gain" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
@@ -30,7 +23,7 @@ function modifier_macan_e:OnCreated( kv )
 	self:OnIntervalThink()
 end
 
-function modifier_macan_e:OnRefresh( kv )
+function modifier_macan_e:OnRefresh()
 	self.agi_gain = self:GetAbility():GetSpecialValueFor( "agi_gain" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
@@ -39,17 +32,12 @@ function modifier_macan_e:OnRefresh( kv )
 	self:StartIntervalThink( self.interval )
 end
 
-function modifier_macan_e:OnDestroy( kv )
-
-end
-
 function modifier_macan_e:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_EVENT_ON_ABILITY_FULLY_CAST
 	}
-	return funcs
 end
 
 function modifier_macan_e:OnAbilityFullyCast( params )
@@ -59,7 +47,6 @@ function modifier_macan_e:OnAbilityFullyCast( params )
 		if ability:GetName() == "macan_w" and not caster:IsIllusion() and params.target:IsRealHero() and not params.target:IsIllusion() then
 			local target = params.target
 			if target:HasModifier("modifier_macan_e_debuff") then
-				local debuff = target:FindModifierByName("modifier_macan_e_debuff")
 				local stacks_to_steal = self.stack_steal
 				if stacks_to_steal > 0 then
 					for i = 1, stacks_to_steal do
@@ -134,6 +121,7 @@ end
 function modifier_macan_e:RemoveStack()
 	self:DecrementStackCount()
 end
+
 function modifier_macan_e:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_slark/slark_essence_shift.vpcf"
 
@@ -144,15 +132,9 @@ end
 
 modifier_macan_e_debuff = class({})
 
-function modifier_macan_e_debuff:IsHidden()
-	return false
-end
-function modifier_macan_e_debuff:IsDebuff()
-	return true
-end
-function modifier_macan_e_debuff:IsPurgable()
-	return false
-end
+function modifier_macan_e_debuff:IsHidden() return false end
+function modifier_macan_e_debuff:IsDebuff() return true end
+function modifier_macan_e_debuff:IsPurgable() return false end
 
 function modifier_macan_e_debuff:OnCreated( kv )
 	self.stat_loss = self:GetAbility():GetSpecialValueFor( "stat_loss" )
@@ -171,20 +153,15 @@ function modifier_macan_e_debuff:OnRefresh( kv )
 	end
 end
 
-function modifier_macan_e_debuff:OnDestroy( kv )
-end
-
 function modifier_macan_e_debuff:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 	}
-	return funcs
 end
 
 function modifier_macan_e_debuff:GetModifierBonusStats_Strength()
 	return self:GetStackCount() * -self.stat_loss
 end
-
 
 function modifier_macan_e_debuff:AddStack( duration )
 	local mod = self:GetParent():AddNewModifier(
@@ -209,16 +186,11 @@ end
 
 modifier_macan_e_stack = class({})
 
-function modifier_macan_e_stack:IsHidden()
-	return true
-end
-function modifier_macan_e_stack:IsPurgable()
-	return false
-end
+function modifier_macan_e_stack:IsHidden() return true end
+function modifier_macan_e_stack:IsPurgable() return false end
+
 function modifier_macan_e_stack:GetAttributes()
 	return MODIFIER_ATTRIBUTE_MULTIPLE
-end
-function modifier_macan_e_stack:OnCreated( kv )
 end
 
 function modifier_macan_e_stack:OnRemoved()

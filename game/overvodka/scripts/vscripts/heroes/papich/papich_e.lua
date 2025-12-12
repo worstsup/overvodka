@@ -90,13 +90,6 @@ function modifier_papich_e_passive:OnIntervalThink()
             self.parent:AddNewModifier(self.parent, self.ability, "modifier_custom_min_health", {})
         end
     else
-        if self.parent:HasModifier("modifier_brb_test") then
-            self.parent:RemoveModifierByName("modifier_brb_test")
-            self.parent:RemoveModifierByName("modifier_brb_test_attack_target")
-        end
-        if self.parent:HasModifier("modifier_axe_berserkers_call_lua_debuff") then
-            self.parent:RemoveModifierByName("modifier_axe_berserkers_call_lua_debuff")
-        end
         if self.parent:HasModifier("modifier_generic_stunned_lua") then
             self.parent:RemoveModifierByName("modifier_generic_stunned_lua")
         end
@@ -268,12 +261,10 @@ function modifier_papich_e_charge:OnRemoved()
 end
 
 function modifier_papich_e_charge:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
 		MODIFIER_PROPERTY_MIN_HEALTH,
 	}
-
-	return funcs
 end
 
 function modifier_papich_e_charge:GetMinHealth()
@@ -328,14 +319,7 @@ function modifier_papich_e_charge:PlayEffects1()
 	local particle_cast = "particles/primal_beast_onslaught_range_finder_new.vpcf"
 	local effect_cast = ParticleManager:CreateParticleForPlayer( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent, self.parent:GetPlayerOwner() )
 	ParticleManager:SetParticleControl( effect_cast, 0, self.parent:GetOrigin() )
-	self:AddParticle(
-		effect_cast,
-		false,
-		false,
-		-1,
-		false,
-		false
-	)
+	self:AddParticle(effect_cast, false, false, -1, false, false)
 	self.effect_cast = effect_cast
 	self:SetEffects()
 end
@@ -349,15 +333,7 @@ function modifier_papich_e_charge:PlayEffects2()
 	local particle_cast = "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_chargeup.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_POINT_FOLLOW, self.parent )
 	ParticleManager:SetParticleControl( effect_cast, 0, self.parent:GetOrigin() )
-	ParticleManager:SetParticleControlEnt(
-		effect_cast,
-		1,
-		self:GetCaster(),
-		PATTACH_POINT_FOLLOW,
-		"attach_hitloc",
-		Vector(0,0,0),
-		true
-	)
+	ParticleManager:SetParticleControlEnt(effect_cast, 1, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	self:AddParticle(effect_cast, false, false, -1, false, false)
 end
 
@@ -504,12 +480,7 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 		if self.k == 0 then
 			self:GetCaster():ModifyGold(self.gold, false, 0)
 			EmitSoundOn( "papich_e_plane_start", self:GetCaster() )
-			self:GetCaster():AddNewModifier(
-				self.parent,
-				self.ability,
-				"modifier_papich_e_heal",
-				{ duration = 4 }
-			)
+			self:GetCaster():AddNewModifier(self.parent, self.ability,"modifier_papich_e_heal", { duration = 4 })
 		end
 		self:SetDirection( self.poss )
 		self.k = self.k + 1
@@ -518,12 +489,7 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 	local distance2 = (self.poss - self:GetParent():GetAbsOrigin()):Length2D()
 	if distance2 < 300 and self.k >= 1 then
 		EmitSoundOn( "papich_e_end", self:GetCaster() )
-		self:GetCaster():AddNewModifier(
-			self.parent,
-			self.ability,
-			"modifier_papich_bkb",
-			{ duration = self.bkb }
-		)
+		self:GetCaster():AddNewModifier(self.parent, self.ability, "modifier_papich_bkb", { duration = self.bkb })
 		self:Destroy()
 	end
 	self:HitLogic()

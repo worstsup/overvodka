@@ -94,6 +94,7 @@ function modifier_telka:CheckState()
 		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
 		[MODIFIER_STATE_NO_HEALTH_BAR] = true,
 		[MODIFIER_STATE_UNSELECTABLE] = true,
+        [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
 	}
 end
 
@@ -108,11 +109,17 @@ function modifier_telka:OnAttackLanded(params)
     if params.attacker ~= self:GetParent() then return end
     if params.target == nil then return end
     self:PlayEffects(params.target)
+    Timers:CreateTimer(0.45, function()
+        if self and not self:IsNull() then
+            self:Destroy()
+        end
+    end)
 end
 
 function modifier_telka:OnDestroy()
 	if not IsServer() then return end
-	UTIL_Remove(self:GetParent())
+    self:GetParent():ForceKill(false)
+	self:GetParent():AddNoDraw()
 end
 
 function modifier_telka:GetEffectName()

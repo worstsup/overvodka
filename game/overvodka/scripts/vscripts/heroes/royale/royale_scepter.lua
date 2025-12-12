@@ -12,12 +12,12 @@ function royale_scepter:Precache(context)
 end
 
 function royale_scepter:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_scepter:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_scepter:OnSpellStart()
@@ -170,11 +170,11 @@ end
 
 function modifier_royale_scepter:OnDestroy()
     if not IsServer() then return end
-    EmitSoundOn("Royale.Death", self:GetParent())
-    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:GetParent():EmitSound("Royale.Death")
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    UTIL_Remove(self:GetParent())
+    self:GetParent():AddNoDraw()
 end
 
 function modifier_royale_scepter:DeclareFunctions()

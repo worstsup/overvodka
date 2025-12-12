@@ -36,7 +36,7 @@ function modifier_item_swag:IsPurgeException() return false end
 function modifier_item_swag:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_swag:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
@@ -46,7 +46,6 @@ function modifier_item_swag:DeclareFunctions()
         MODIFIER_PROPERTY_HEALTH_BONUS,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT,
     }
-    return funcs
 end
 
 function modifier_item_swag:GetModifierMagicalResistanceBonus()
@@ -123,10 +122,10 @@ function modifier_item_swag_active:OnCreated()
 end
 
 function modifier_item_swag_active:AddCustomTransmitterData()
-    return {
-        barrier_max = self.barrier_max,
-        barrier_block = self.barrier_block,
-    }
+    self._txData = self._txData or {}
+    self._txData.barrier_max   = self.barrier_max or 0
+    self._txData.barrier_block = self.barrier_block or 0
+    return self._txData
 end
 
 function modifier_item_swag_active:HandleCustomTransmitterData( data )

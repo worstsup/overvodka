@@ -284,7 +284,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -814,19 +814,16 @@ function OvervodkaGameMode:GoldTrackFilter(event)
     local playerID  = event.player_id_const
 	local reason = event.reason_const
 	if reason == 6 then return true end -- DOTA_ModifyGold_SellItem
-    if gold <= 0 then
-        return true
-    end
+    if gold <= 0 then return true end
     if playerID ~= nil and playerID ~= -1 then
         local hero = PlayerResource:GetSelectedHeroEntity(playerID)
         if hero and not hero:IsNull() then
             if hero:HasTalent("special_bonus_unique_silvername_2") and hero:HasAbility("silvername_q_facet_1") then
-                local new_gold = math.floor(gold * 1.2 + 0.5)
+                local new_gold = math.floor(gold * 1.1 + 0.5)
                 event.gold = new_gold
             end
         end
     end
-
     return true
 end
 
@@ -834,38 +831,23 @@ function OvervodkaGameMode:XPToGoldFilter(event)
     local xp         = event.experience or 0
     local playerID   = event.player_id_const
     local heroIndex  = event.hero_entindex_const
-    if xp <= 0 then
-        return true
-    end
-
-    if not heroIndex or heroIndex == 0 then
-        return true
-    end
-
+    if xp <= 0 then return true end
+    if not heroIndex or heroIndex == 0 then return true end
     local hero = EntIndexToHScript(heroIndex)
-    if not hero or hero:IsNull() then
-        return true
-    end
-
-	if hero:GetUnitName() ~= "npc_dota_hero_phoenix" then
-		return true
-	end
-
-    if not hero:IsRealHero() or hero:IsTempestDouble() or hero:IsClone() then
-        return true
-    end
+    if not hero or hero:IsNull() then return true end
+	if hero:GetUnitName() ~= "npc_dota_hero_phoenix" then return true end
+    if not hero:IsRealHero() or hero:IsTempestDouble() or hero:IsClone() then return true end
 
 	if playerID ~= nil and playerID ~= -1 then
         if hero:HasTalent("special_bonus_unique_silvername_1") and hero:HasAbility("silvername_q_facet_1") then
-            local new_xp = math.floor(xp * 1.3 + 0.5)
+            local new_xp = math.floor(xp * 1.2 + 0.5)
             event.experience = new_xp
         end
     end
 
-    if hero:GetLevel() < 35 then
-        return true
-    end
-    local gold_float = xp * 2 / 10
+    if hero:GetLevel() < 35 then return true end
+	
+    local gold_float = xp * 0.2
     local gold = math.floor(gold_float + 0.5)
     if gold > 0 and playerID ~= nil and playerID ~= -1 then
 		hero:ModifyGold(gold, false, 0)

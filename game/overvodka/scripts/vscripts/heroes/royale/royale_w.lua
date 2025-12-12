@@ -16,12 +16,12 @@ function royale_w:Precache(context)
 end
 
 function royale_w:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_w:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_w:OnSpellStart()
@@ -65,8 +65,6 @@ function royale_w:OnSpellStart()
         melee:SetMinimumGoldBounty(gold)
         melee:SetMaximumGoldBounty(gold)
         melee:SetDeathXP(xp)
-        local weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/melee/g_sword.vmdl"})
-        weapon:FollowEntityMerge(melee, "attach_attack1")
         melee:AddNewModifier(caster, self, "modifier_phased", {duration = 0.1})
 
         local zOffsetR = isSide and sideOffset or 0
@@ -86,10 +84,6 @@ function royale_w:OnSpellStart()
         ranged:SetMinimumGoldBounty(gold)
         ranged:SetMaximumGoldBounty(gold)
         ranged:SetDeathXP(xp)
-        local bochka = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/bochka.vmdl"})
-        bochka:FollowEntityMerge(ranged, "attach_bochka")
-        local spear = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/spear.vmdl"})
-        spear:FollowEntityMerge(ranged, "attach_attack1")
         ranged:AddNewModifier(caster, self, "modifier_phased", {duration = 0.1})
 
         if gold_steal > 0 then
@@ -109,19 +103,28 @@ function modifier_royale_w_melee:DeclareFunctions()
     return { MODIFIER_EVENT_ON_ATTACK }
 end
 
+function modifier_royale_w_melee:OnCreated()
+    if not IsServer() then return end
+    self.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/melee/g_sword.vmdl"})
+    self.weapon:FollowEntityMerge(self:GetParent(), "attach_attack1")
+end
+
 function modifier_royale_w_melee:OnAttack(params)
     if params.attacker == self:GetParent() then
-        EmitSoundOn("GoblinGang.Melee.Attack", params.attacker)
+        params.attacker:EmitSound("GoblinGang.Melee.Attack")
     end
 end
 
 function modifier_royale_w_melee:OnDestroy()
     if not IsServer() then return end
-    EmitSoundOn("Royale.Death", self:GetParent())
-    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:GetParent():EmitSound("Royale.Death")
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    UTIL_Remove(self:GetParent())
+    self:GetParent():AddNoDraw()
+    if self.weapon then
+        self.weapon:RemoveSelf()
+    end
 end
 
 modifier_royale_w_ranged = class({})
@@ -132,19 +135,34 @@ function modifier_royale_w_ranged:DeclareFunctions()
     return { MODIFIER_EVENT_ON_ATTACK }
 end
 
+function modifier_royale_w_ranged:OnCreated()
+    if not IsServer() then return end
+    self.bochka = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/bochka.vmdl"})
+    self.bochka:FollowEntityMerge(self:GetParent(), "attach_bochka")
+    self.spear = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/royale/goblins/ranged/spear.vmdl"})
+    self.spear:FollowEntityMerge(self:GetParent(), "attach_attack1")
+end
+
+
 function modifier_royale_w_ranged:OnAttack(params)
     if params.attacker == self:GetParent() then
-        EmitSoundOn("GoblinGang.Ranged.Attack", params.attacker)
+        params.attacker:EmitSound("GoblinGang.Ranged.Attack")
     end
 end
 
 function modifier_royale_w_ranged:OnDestroy()
     if not IsServer() then return end
-    EmitSoundOn("Royale.Death", self:GetParent())
-    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:GetParent():EmitSound("Royale.Death")
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    UTIL_Remove(self:GetParent())
+    self:GetParent():AddNoDraw()
+    if self.bochka then
+        self.bochka:RemoveSelf()
+    end
+    if self.spear then
+        self.spear:RemoveSelf()
+    end
 end
 
 modifier_facet_royale_goblin = class({})

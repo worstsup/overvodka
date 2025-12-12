@@ -33,28 +33,18 @@ function stray_q:OnSpellStart()
         local image_out_dmg = self:GetSpecialValueFor("outgoing_damage")
         local incoming_damage = self:GetSpecialValueFor("incoming_damage")
         local vRandomSpawnPos = {
-            Vector(108, 0, 0),
-            Vector(108, 108, 0),
-            Vector(108, 0, 0),
-            Vector(0, 108, 0),
-            Vector(-108, 0, 0),
-            Vector(-108, 108, 0),
-            Vector(-108, -108, 0),
-            Vector(0, -108, 0),
+            Vector(108, 0, 0), Vector(108, 108, 0), Vector(108, 0, 0), Vector(0, 108, 0),
+            Vector(-108, 0, 0), Vector(-108, 108, 0), Vector(-108, -108, 0), Vector(0, -108, 0),
         }
         for i = 1, image_count do
             local illusions = CreateIllusions(
-                self:GetCaster(),
-                self:GetCaster(),
+                self:GetCaster(), self:GetCaster(),
                 {
                     outgoing_damage = image_out_dmg,
                     incoming_damage = incoming_damage,
                     duration = duration,
                 },
-                1,
-                108,
-                false,
-                true
+                1, 108, false, true
             )
             for k, illusion in pairs(illusions) do
                 local pos = self:GetCaster():GetAbsOrigin() + vRandomSpawnPos[i]
@@ -87,13 +77,8 @@ modifier_stray_q_asu = class({})
 function modifier_stray_q_asu:IsPurgable() return true end
 function modifier_stray_q_asu:IsHidden() return false end
 
-function modifier_stray_q_asu:OnCreated()
-    if not IsServer() then return end
-end
-
 function modifier_stray_q_asu:DeclareFunctions()
-    return 
-    {
+    return {
         MODIFIER_EVENT_ON_ATTACK_LANDED,
         MODIFIER_PROPERTY_EVASION_CONSTANT 
     }
@@ -125,10 +110,6 @@ function modifier_stray_q_asu:GetModifierEvasion_Constant()
     return self:GetAbility():GetSpecialValueFor( "evasion" )
 end
 
-function modifier_stray_q_asu:OnDestroy()
-    if not IsServer() then return end
-end
-
 function modifier_stray_q_asu:GetEffectName()
     return "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_debut_ambient_v2.vpcf"
 end
@@ -142,36 +123,10 @@ modifier_stray_q_nemec = class({})
 function modifier_stray_q_nemec:IsPurgable() return true end
 
 function modifier_stray_q_nemec:OnCreated()
-    self.effect_cast = ParticleManager:CreateParticle(
-        "particles/stray_q_3.vpcf",
-        PATTACH_ABSORIGIN_FOLLOW,
-        self:GetParent())
-    ParticleManager:SetParticleControlEnt(
-        self.effect_cast,
-        0,
-        self:GetParent(),
-        PATTACH_POINT_FOLLOW,
-        "attach_origin",
-        self:GetParent():GetAbsOrigin(),
-        true
-    )
-    ParticleManager:SetParticleControlEnt(
-        self.effect_cast,
-        1,
-        self:GetParent(),
-        PATTACH_POINT_FOLLOW,
-        "attach_origin",
-        self:GetParent():GetAbsOrigin(),
-        true
-    )
-	self:AddParticle(
-		self.effect_cast,
-		false,
-		false,
-		-1,
-		false,
-		true
-	)
+    self.effect_cast = ParticleManager:CreateParticle("particles/stray_q_3.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControlEnt(self.effect_cast, 0, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_origin", self:GetParent():GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(self.effect_cast, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_origin", self:GetParent():GetAbsOrigin(), true)
+	self:AddParticle(self.effect_cast, false, false, -1, false, true)
     self.shield_from_hp = self:GetAbility():GetSpecialValueFor("shield_from_hp")
     self.max_shield  = self:GetParent():GetHealth() / 100 * self.shield_from_hp
     if not IsServer() then return end
@@ -186,8 +141,7 @@ function modifier_stray_q_nemec:OnRefresh()
 end
 
 function modifier_stray_q_nemec:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT,
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
     }

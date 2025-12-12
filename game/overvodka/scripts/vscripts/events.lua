@@ -625,7 +625,6 @@ function OvervodkaGameMode:OnItemPickUp( event )
 		end
 		UTIL_Remove( item )
 	elseif event.itemname == "item_zhenya_present" then
-        if not owner or owner:IsNull() then return end
         UTIL_Remove(item)
         self:GiveZhenyaPresentReward(owner)
 	elseif event.itemname == "item_bag_of_gold_2" then
@@ -645,8 +644,7 @@ function OvervodkaGameMode:OnItemPickUp( event )
 		if owner:GetUnitName() == "npc_dota_hero_bounty_hunter" then
 			rewerd = 200
 		end
-		local playerID = owner:GetPlayerID()
-		PlayerResource:ModifyGoldFiltered( playerID, rewerd, false, 0 )
+		owner:ModifyGoldFiltered( rewerd, false, 0 )
 		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
 		UTIL_Remove( item )
 	elseif event.itemname == "item_treasure_chest" then

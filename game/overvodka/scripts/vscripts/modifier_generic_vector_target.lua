@@ -12,12 +12,6 @@ function modifier_generic_vector_target:GetAttributes()
 	return MODIFIER_ATTRIBUTE_MULTIPLE + MODIFIER_ATTRIBUTE_PERMANENT
 end
 
-function modifier_generic_vector_target:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-end
-
 function modifier_generic_vector_target:OnOrder( params )
 	if params.unit~=self:GetParent() then return end
 

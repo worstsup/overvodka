@@ -30,8 +30,7 @@ function modifier_stray_e:IsPurgable()
 end
 
 function modifier_stray_e:DeclareFunctions()
-    local declfuncs = {MODIFIER_EVENT_ON_ATTACK_LANDED}
-    return declfuncs
+    return {MODIFIER_EVENT_ON_ATTACK_LANDED}
 end
 
 function modifier_stray_e:OnAttackLanded(params)
@@ -96,8 +95,7 @@ function modifier_stray_e_damage_buff:OnIntervalThink()
 end
 
 function modifier_stray_e_damage_buff:DeclareFunctions()
-    return 
-    {
+    return {
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
     }
 end

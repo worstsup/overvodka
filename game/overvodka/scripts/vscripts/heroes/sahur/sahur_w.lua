@@ -41,7 +41,7 @@ function modifier_sahur_w:OnAttackLanded(params)
     if params.attacker ~= parent then return end
     if not ability or parent:PassivesDisabled() then return end
     if not target:IsAlive() or target:IsMagicImmune() or target:IsDebuffImmune() or target:IsInvulnerable() or target:IsOutOfGame() then return end
-    if target:IsBuilding() then return end
+    if target:IsBuilding() or target:IsOther() then return end
 
     if RandomInt(0, 100) > ability:GetSpecialValueFor("chance") then return end
     if params.attacker:HasShard() and not params.attacker:IsIllusion() then

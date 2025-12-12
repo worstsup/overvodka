@@ -17,15 +17,11 @@ function silvername_w_facet_2:FindRandomTarget(caster, search_radius)
     table.insert(candidates, caster)
 
     local allies = FindUnitsInRadius(
-        team,
-        pos,
-        nil,
-        search_radius,
+        team, pos, nil, search_radius,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER,
-        false
+        FIND_ANY_ORDER, false
     )
 
     for _,unit in ipairs(allies) do
@@ -35,15 +31,11 @@ function silvername_w_facet_2:FindRandomTarget(caster, search_radius)
     end
 
     local enemies = FindUnitsInRadius(
-        team,
-        pos,
-        nil,
-        search_radius,
+        team, pos, nil, search_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_NO_INVIS,
-        FIND_ANY_ORDER,
-        false
+        FIND_ANY_ORDER, false
     )
 
     for _,unit in ipairs(enemies) do
@@ -102,15 +94,11 @@ function silvername_w_facet_2:OnSpellStart()
     local playerID = caster:GetPlayerOwnerID()
 
     local allies = FindUnitsInRadius(
-        team,
-        pos,
-        nil,
-        aggro_radius,
+        team, pos, nil, aggro_radius,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED,
-        FIND_ANY_ORDER,
-        false
+        FIND_ANY_ORDER, false
     )
 
     for _,unit in ipairs(allies) do
@@ -130,15 +118,11 @@ function silvername_w_facet_2:OnSpellStart()
     end
 
     local enemies = FindUnitsInRadius(
-        team,
-        pos,
-        nil,
-        aggro_radius,
+        team, pos, nil, aggro_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER,
-        false
+        FIND_ANY_ORDER, false
     )
 
     for _,unit in ipairs(enemies) do
@@ -244,15 +228,13 @@ function modifier_silvername_w_facet_2_target:OnDestroy()
         { entindex = self.parent:entindex() }
     )
     if not self.ability or self.ability:IsNull() then return end
-    if not self.caster or self.caster:IsNull() or not self.caster:IsAlive() then return end
+    if not self.caster or self.caster:IsNull() then return end
     local p = ParticleManager:CreateParticle("particles/silvername_w_facet_2_exp.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
     ParticleManager:SetParticleControl(p, 0, self.parent:GetAbsOrigin())
     ParticleManager:SetParticleControl(p, 8, Vector(self.reflect_radius * 5, 0, 0))
     ParticleManager:ReleaseParticleIndex(p)
 
-    if self.damage_sum <= 0 then
-        return
-    end
+    if self.damage_sum <= 0 then return end
 
     local pct = self.reflect_pct or self.ability:GetSpecialValueFor("reflect_pct") or 0
     if pct <= 0 then return end
@@ -262,24 +244,16 @@ function modifier_silvername_w_facet_2_target:OnDestroy()
     local radius = self.reflect_radius or self.ability:GetSpecialValueFor("reflect_radius") or 0
     if radius <= 0 then return end
 
-    local team = self.caster:GetTeamNumber()
-
     local victims = FindUnitsInRadius(
-        team,
-        self.parent:GetAbsOrigin(),
-        nil,
-        radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        self.caster:GetTeamNumber(), self.parent:GetAbsOrigin(),
+        nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_NO_INVIS,
-        FIND_ANY_ORDER,
-        false
+        0, 0, false
     )
 
     local valid_targets = {}
     for _,enemy in ipairs(victims) do
         if enemy and not enemy:IsNull() and enemy:IsAlive()
-            and not enemy:IsMagicImmune()
             and not enemy:IsInvulnerable()
         then
             table.insert(valid_targets, enemy)

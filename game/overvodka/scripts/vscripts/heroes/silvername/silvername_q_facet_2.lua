@@ -330,7 +330,7 @@ function modifier_silvername_q_facet_2_buff:IsBuff()         return true  end
 function modifier_silvername_q_facet_2_buff:IsHidden()       return false end
 function modifier_silvername_q_facet_2_buff:RemoveOnDeath()  return true  end
 
-function modifier_silvername_q_facet_2_buff:OnCreated(kv)
+function modifier_silvername_q_facet_2_buff:OnCreated()
     self.as_bonus       = self.as_bonus       or 0
     self.dmg_bonus      = self.dmg_bonus      or 0
     self.armor_bonus    = self.armor_bonus    or 0
@@ -340,7 +340,11 @@ function modifier_silvername_q_facet_2_buff:OnCreated(kv)
 
     if IsServer() then
         self:SetHasCustomTransmitterData(true)
+    end
 
+    self._txData = self._txData or {}
+
+    if IsServer() then
         if not self.is_owner then
             self:StartIntervalThink(0.2)
         end
@@ -349,7 +353,7 @@ function modifier_silvername_q_facet_2_buff:OnCreated(kv)
     end
 end
 
-function modifier_silvername_q_facet_2_buff:OnRefresh(kv)
+function modifier_silvername_q_facet_2_buff:OnRefresh()
     if IsServer() then
         self:SendBuffRefreshToClients()
     end
@@ -407,13 +411,17 @@ function modifier_silvername_q_facet_2_buff:OnIntervalThink()
     self:SetStackCount(self.stack_internal or 0)
     self:SendBuffRefreshToClients()
 end
+
 function modifier_silvername_q_facet_2_buff:AddCustomTransmitterData()
-    return {
-        as_bonus       = self.as_bonus       or 0,
-        dmg_bonus      = self.dmg_bonus      or 0,
-        armor_bonus    = self.armor_bonus    or 0,
-        stack_internal = self.stack_internal or self:GetStackCount() or 0,
-    }
+    self._txData = self._txData or {}
+
+    local t = self._txData
+    t.as_bonus       = self.as_bonus       or 0
+    t.dmg_bonus      = self.dmg_bonus      or 0
+    t.armor_bonus    = self.armor_bonus    or 0
+    t.stack_internal = self.stack_internal or self:GetStackCount() or 0
+
+    return t
 end
 
 function modifier_silvername_q_facet_2_buff:HandleCustomTransmitterData(data)

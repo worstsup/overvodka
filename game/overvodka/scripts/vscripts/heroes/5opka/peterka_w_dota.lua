@@ -9,6 +9,10 @@ end
 function peterka_w_dota:Precache(context)
     PrecacheResource("soundfile", "soundevents/peterka_w.vsndevts", context)
     PrecacheResource("particle", "particles/centaur_ti6_warstomp_gold_ring_glow_new.vpcf", context)
+    PrecacheResource("particle", "particles/peterka_money_ring.vpcf", context)
+    PrecacheResource("particle", "particles/5opka_money_hit.vpcf", context)
+    PrecacheResource("particle", "particles/5opka_coins.vpcf", content)
+    PrecacheResource("particle", "particles/items3_fx/fish_bones_active.vpcf", context)
 end
 
 modifier_peterka_w_dota = class({})
@@ -115,8 +119,11 @@ function modifier_peterka_w_dota:OnIntervalThink()
 		        end
                 item_entity:RemoveSelf()
                 local enemies = FindUnitsInRadius(self.parent:GetTeamNumber(), self.parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+                local damage = newR * self:GetAbility():GetSpecialValueFor("damage") * 0.01
                 for _, enemy in pairs(enemies) do
-                    local damage = newR * self:GetAbility():GetSpecialValueFor("damage") * 0.01
+                    local d = ParticleManager:CreateParticle("particles/5opka_money_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
+                    ParticleManager:SetParticleControlEnt(d, 0, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+                    ParticleManager:ReleaseParticleIndex(d)
                     ApplyDamage({
                         victim = enemy,
                         attacker = self.parent,
@@ -124,10 +131,20 @@ function modifier_peterka_w_dota:OnIntervalThink()
                         damage_type = self:GetAbility():GetAbilityDamageType(),
                         ability = self:GetAbility()
                     })
-                    ParticleManager:CreateParticle("particles/centaur_ti6_warstomp_gold_ring_glow_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
                 end
-                self.parent:Heal(newR * self:GetAbility():GetSpecialValueFor("heal") * 0.01, self:GetAbility())
+                local h = newR * self:GetAbility():GetSpecialValueFor("heal") * 0.01
+                if h > 0 then
+                    self.parent:HealWithParams(h, self:GetAbility(), false, true, self.parent, false)
+                    SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self.parent, h, nil)
+                    local particle = ParticleManager:CreateParticle("particles/items3_fx/fish_bones_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+                    ParticleManager:ReleaseParticleIndex(particle)
+                end
                 self:GetAbility():UseResources(false, false, false, true)
+                local p = ParticleManager:CreateParticle("particles/peterka_money_ring.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+                ParticleManager:SetParticleControl(p, 1, Vector(self.radius, 0, 0))
+                ParticleManager:ReleaseParticleIndex(p)
+                local c = ParticleManager:CreateParticle("particles/5opka_coins.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+                ParticleManager:ReleaseParticleIndex(c)
                 EmitSoundOn("peterka_w", self.parent)
             end
         end

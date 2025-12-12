@@ -2084,11 +2084,16 @@ end
 
 function modifier_dvoreckov_qwe_nonchanneled:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE
+        MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE,
+		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
     }
 end
 
 function modifier_dvoreckov_qwe_nonchanneled:GetModifierMoveSpeed_Absolute()
+    return 300
+end
+
+function modifier_dvoreckov_qwe_nonchanneled:GetModifierMoveSpeed_Limit()
     return 300
 end
 

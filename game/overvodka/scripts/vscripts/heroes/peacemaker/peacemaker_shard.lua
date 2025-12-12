@@ -11,11 +11,11 @@ function modifier_peacemaker_shard:IsHidden()   return false end
 function modifier_peacemaker_shard:IsDebuff()   return false end
 function modifier_peacemaker_shard:IsPurgable() return false end
 
-function modifier_peacemaker_shard:OnCreated(kv)
-    if not IsServer() then return end
+function modifier_peacemaker_shard:OnCreated()
     self.dmg_per_kill = self:GetAbility():GetSpecialValueFor("dmg_reduction")
+    if not IsServer() then return end
     self:UpdateDamageStacks()
-    self:StartIntervalThink(1.0)
+    self:StartIntervalThink(0.5)
 end
 
 function modifier_peacemaker_shard:OnIntervalThink()
@@ -35,14 +35,12 @@ function modifier_peacemaker_shard:DeclareFunctions()
 end
 
 function modifier_peacemaker_shard:GetModifierIncomingDamage_Percentage()
-    return -self:GetStackCount()
+    return -self:GetStackCount() * self.dmg_per_kill
 end
 
 function modifier_peacemaker_shard:UpdateDamageStacks()
     if not IsServer() then return end
-    local kills = self:GetParent():GetKills()
-    local bonus = kills * self.dmg_per_kill
-    self:SetStackCount(math.floor(bonus))
+    self:SetStackCount(self:GetParent():GetKills())
 end
 
 function modifier_peacemaker_shard:OnDeath(params)

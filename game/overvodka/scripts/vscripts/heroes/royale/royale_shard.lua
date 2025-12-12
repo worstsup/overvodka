@@ -15,12 +15,12 @@ function royale_shard:Precache(context)
 end
 
 function royale_shard:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_shard:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_shard:OnSpellStart()
@@ -204,11 +204,11 @@ end
 function modifier_royale_shard_ai:OnDestroy()
     if not IsServer() then return end
     StopSoundOn("Sparky.Charge", self.parent)
-    EmitSoundOn("Royale.Death", self.parent)
-    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
+    self.parent:EmitSound("Royale.Death")
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(p, 1, self.parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    UTIL_Remove(self.parent)
+    self.parent:AddNoDraw()
 end
 
 function modifier_royale_shard_ai:SparkyStop()

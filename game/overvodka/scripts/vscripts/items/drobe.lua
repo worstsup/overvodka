@@ -55,11 +55,8 @@ end
 function modifier_item_drobe:GetModifierAttackRangeBonus()
     if not self:GetAbility() then return end
     if not self:GetParent():IsRangedAttacker() then return end
+    if self:GetParent():HasItemInInventory("item_dragon_lance") or self:GetParent():HasItemInInventory("item_hurricane_pike") then return end
     return self:GetAbility():GetSpecialValueFor('bonus_range')
-end
-
-function modifier_item_drobe:OnCreated()
-    self.true_attack = true
 end
 
 function modifier_item_drobe:OnAttackLanded(params)
@@ -89,6 +86,7 @@ function modifier_item_drobe:OnAttackLanded(params)
     end
     self:GetParent():EmitSound("drobe_cast")
 end
+
 function modifier_item_drobe:PlayEffects(target)
     local particle_cast = "particles/kotl_ti10_blinding_light_groundring_new.vpcf"
     local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )

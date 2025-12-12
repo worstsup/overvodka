@@ -12,11 +12,7 @@ function item_obossal_blade:OnSpellStart()
 	local caster = self:GetCaster()
 	local ability = self
 	local target = self:GetCursorTarget()
-	local sound_cast = "DOTA_Item.AbyssalBlade.Activate"    
-	local particle_abyssal = "particles/items_fx/abyssal_blade.vpcf"
-	local modifier_bash = "modifier_item_obossal_blade_bash"
-	local active_stun_duration = ability:GetSpecialValueFor("stun_duration")
-	EmitSoundOn(sound_cast, target)
+	EmitSoundOn("DOTA_Item.AbyssalBlade.Activate", target)
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		if target:TriggerSpellAbsorb(ability) then
 			return nil
@@ -30,7 +26,7 @@ function item_obossal_blade:OnSpellStart()
 	local blink_end_particle = ParticleManager:CreateParticle("particles/econ/events/ti10/blink_dagger_end_ti10_lvl2.vpcf", PATTACH_ABSORIGIN, self:GetCaster())
 	ParticleManager:ReleaseParticleIndex(blink_end_particle)
 
-	local particle_abyssal_fx = ParticleManager:CreateParticle(particle_abyssal, PATTACH_ABSORIGIN_FOLLOW, target)
+	local particle_abyssal_fx = ParticleManager:CreateParticle("particles/items_fx/abyssal_blade.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
 	ParticleManager:SetParticleControl(particle_abyssal_fx, 0, target:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(particle_abyssal_fx)
 	local damageTable = {
@@ -43,7 +39,7 @@ function item_obossal_blade:OnSpellStart()
 	ApplyDamage(damageTable)
 	if target and not target:IsNull() then
 		if target:IsAlive() then
-			target:AddNewModifier(caster, ability, modifier_bash, {duration = active_stun_duration * (1 - target:GetStatusResistance())})
+			target:AddNewModifier(caster, ability, "modifier_item_obossal_blade_bash", {duration = ability:GetSpecialValueFor("stun_duration") * (1 - target:GetStatusResistance())})
 		end
 	end
 end

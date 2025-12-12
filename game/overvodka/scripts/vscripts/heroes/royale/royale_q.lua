@@ -10,6 +10,7 @@ royale_q = class({})
 function royale_q:Precache(context)
     PrecacheResource("soundfile", "soundevents/royale_sounds.vsndevts", context)
     PrecacheResource("particle", "particles/royale_zap.vpcf", context)
+    PrecacheResource("particle", "particles/royale_zap_evo.vpcf", context)
     PrecacheResource("particle", "particles/royale_snowball.vpcf", context)
     PrecacheResource("particle", "particles/econ/events/snowball/snowball_projectile_ability_endcap.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_ancient_apparition/ancient_apparition_freeze_stacks.vpcf", context)
@@ -20,12 +21,12 @@ function royale_q:GetAOERadius()
 end
 
 function royale_q:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_q:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_q:GetAbilityTextureName()
@@ -85,8 +86,14 @@ function royale_q:ZapEnemies(point, radius)
         unit:AddNewModifier(caster, self, "modifier_royale_q_stun", {duration = self:GetSpecialValueFor("stun_duration") * (1 - unit:GetStatusResistance())})
         ApplyDamage(damageTable)
     end
-    EmitSoundOnLocationWithCaster(point, "Royale.Zap", caster)	
-    local p = ParticleManager:CreateParticle("particles/royale_zap.vpcf", PATTACH_WORLDORIGIN, caster)
+    local sound = "Royale.Zap"
+    local particle = "particles/royale_zap.vpcf"
+    if caster:HasTalent("special_bonus_unique_royale_6") then
+        sound = "Royale.Zap.Evo"
+        particle = "particles/royale_zap_evo.vpcf"
+    end
+    EmitSoundOnLocationWithCaster(point, sound, caster)
+    local p = ParticleManager:CreateParticle(particle, PATTACH_WORLDORIGIN, caster)
     ParticleManager:SetParticleControl(p, 0, point)
     ParticleManager:SetParticleControl(p, 1, Vector(radius + 50, radius + 50, radius + 50))
     ParticleManager:ReleaseParticleIndex(p)
@@ -219,8 +226,7 @@ function modifier_royale_q_stun:IsDebuff() return true end
 function modifier_royale_q_stun:IsStunDebuff() return true end
 
 function modifier_royale_q_stun:CheckState()
-	local state = { [MODIFIER_STATE_STUNNED] = true, }
-	return state
+	return { [MODIFIER_STATE_STUNNED] = true }
 end
 
 function modifier_royale_q_stun:GetEffectName()

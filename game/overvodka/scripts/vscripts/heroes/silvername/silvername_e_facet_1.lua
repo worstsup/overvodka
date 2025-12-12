@@ -8,10 +8,6 @@ silvername_e_facet_1 = class({})
 
 function silvername_e_facet_1:IsStealable() return false end
 
-function silvername_e_facet_1:GetIntrinsicModifierName()
-	return "modifier_silvername_e_facet_1"
-end
-
 function silvername_e_facet_1:OnSpellStart()
 	local caster = self:GetCaster()
 	if not caster or caster:IsNull() then return end
@@ -20,21 +16,12 @@ function silvername_e_facet_1:OnSpellStart()
 
 	if not IsServer() then return end
 
-	caster:AddNewModifier(
-		caster,
-		self,
-		"modifier_silvername_e_facet_1_buff",
-		{ duration = duration }
-	)
+	caster:AddNewModifier(caster, self, "modifier_silvername_e_facet_1", {duration = duration})
+	caster:AddNewModifier(caster, self, "modifier_silvername_e_facet_1_buff", { duration = duration })
 
 	Timers:CreateTimer(FrameTime(), function()
 		if not caster or caster:IsNull() then return end
-        caster:AddNewModifier(
-            caster,
-            self,
-            "modifier_silvername_e_facet_1_buff",
-            { duration = duration - FrameTime() }
-        )
+        caster:AddNewModifier(caster, self, "modifier_silvername_e_facet_1_buff", {duration = duration - FrameTime()})
 	end)
 	caster:EmitSound("silvername_e_facet_1")
 end
@@ -58,7 +45,6 @@ function modifier_silvername_e_facet_1:OnIntervalThink()
     if not self.parent or self.parent:IsNull() then return end
 	if not self.ability or self.ability:IsNull() then return end
     if not self.parent:IsAlive() then return end
-    if self.parent:PassivesDisabled() then return end
 
     local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(),
@@ -67,7 +53,7 @@ function modifier_silvername_e_facet_1:OnIntervalThink()
 		self.ability:GetSpecialValueFor("vision_radius"),
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_NONE,
+		DOTA_UNIT_TARGET_FLAG_NO_INVIS,
 		FIND_ANY_ORDER,
 		false
 	)
@@ -111,7 +97,7 @@ function modifier_silvername_e_facet_1_buff:GetModifierAura()
 	return "modifier_silvername_e_facet_1_debuff"
 end
 
-function modifier_silvername_e_facet_1_buff:OnCreated(kv)
+function modifier_silvername_e_facet_1_buff:OnCreated()
 	self.parent  = self:GetParent()
 	self.ability = self:GetAbility()
 
@@ -125,6 +111,7 @@ function modifier_silvername_e_facet_1_buff:OnCreated(kv)
 
 	if IsServer() then
 		self:SetHasCustomTransmitterData(true)
+		self._txData = self._txData or {}
 		self:SendBuffRefreshToClients()
 		self:StartIntervalThink(1.0)
 		self:OnIntervalThink()
@@ -136,7 +123,7 @@ function modifier_silvername_e_facet_1_buff:OnIntervalThink()
 	ParticleManager:ReleaseParticleIndex(p)
 end
 
-function modifier_silvername_e_facet_1_buff:OnRefresh(kv)
+function modifier_silvername_e_facet_1_buff:OnRefresh()
 	if IsServer() then
 		self:SendBuffRefreshToClients()
 	end
@@ -191,13 +178,14 @@ function modifier_silvername_e_facet_1_buff:RemoveContribution(str_gain, agi_gai
 end
 
 function modifier_silvername_e_facet_1_buff:AddCustomTransmitterData()
-	return {
-		ts = self.total_str    or 0,
-		ta = self.total_agi    or 0,
-		ti = self.total_int    or 0,
-		as = self.total_as     or 0,
-		ms = self.total_ms_pct or 0,
-	}
+    self._txData = self._txData or {}
+    local t = self._txData
+    t.ts = self.total_str    or 0
+    t.ta = self.total_agi    or 0
+    t.ti = self.total_int    or 0
+    t.as = self.total_as     or 0
+    t.ms = self.total_ms_pct or 0
+    return t
 end
 
 function modifier_silvername_e_facet_1_buff:HandleCustomTransmitterData(data)
@@ -446,6 +434,7 @@ function modifier_silvername_e_facet_1_perma_buff:OnCreated()
     self.perma_int = 0
     if IsServer() then
         self:SetHasCustomTransmitterData(true)
+		self._txData = self._txData or {}
         self:SendBuffRefreshToClients()
     end
 end
@@ -465,11 +454,14 @@ function modifier_silvername_e_facet_1_perma_buff:AddPermanentSteal(str_gain, ag
 end
 
 function modifier_silvername_e_facet_1_perma_buff:AddCustomTransmitterData()
-    return {
-        ps = self.perma_str or 0,
-        pa = self.perma_agi or 0,
-        pi = self.perma_int or 0,
-    }
+    self._txData = self._txData or {}
+    local t = self._txData
+
+    t.ps = self.perma_str or 0
+    t.pa = self.perma_agi or 0
+    t.pi = self.perma_int or 0
+
+    return t
 end
 
 function modifier_silvername_e_facet_1_perma_buff:HandleCustomTransmitterData(data)
@@ -513,6 +505,7 @@ function modifier_silvername_e_facet_1_perma_debuff:OnCreated()
     self.loss_int = 0
     if IsServer() then
         self:SetHasCustomTransmitterData(true)
+		self._txData = self._txData or {}
         self:SendBuffRefreshToClients()
     end
 end
@@ -532,11 +525,12 @@ function modifier_silvername_e_facet_1_perma_debuff:AddPermanentLoss(str_loss, a
 end
 
 function modifier_silvername_e_facet_1_perma_debuff:AddCustomTransmitterData()
-    return {
-        ls = self.loss_str or 0,
-        la = self.loss_agi or 0,
-        li = self.loss_int or 0,
-    }
+    self._txData = self._txData or {}
+    local t = self._txData
+    t.ls = self.loss_str or 0
+    t.la = self.loss_agi or 0
+    t.li = self.loss_int or 0
+    return t
 end
 
 function modifier_silvername_e_facet_1_perma_debuff:HandleCustomTransmitterData(data)

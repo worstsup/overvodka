@@ -13,13 +13,14 @@ local MOVEMENT_FIX = {
 	modifier_macan_r_charge = true,
 	modifier_shkolnik_r = true,
 	modifier_prince_r = true,
+	modifier_generic_vector_target = true,
 }
 
 function VectorTarget:RouteOrderToModifiers(unit, order, target, new_pos)
     if not unit or unit:IsNull() then return end
     local mods = unit.FindAllModifiers and unit:FindAllModifiers() or {}
     dprint("route->", unit:GetUnitName(), "order=", order, "pos=", new_pos)
-
+	
     for _, mod in ipairs(mods) do
         local name = mod:GetName()
         if MOVEMENT_FIX[name] and mod.OnOrder then
@@ -90,6 +91,17 @@ function VectorTarget:OrderFilter(event)
     end
 
     local order = event.order_type
+
+	if unit:HasModifier("modifier_peterka_e_cast") or unit:HasModifier("modifier_macan_r_charge") then
+        local LOCKED_ORDERS = {
+            [DOTA_UNIT_ORDER_DROP_ITEM] = true,
+            [DOTA_UNIT_ORDER_PICKUP_ITEM] = true,
+            [DOTA_UNIT_ORDER_CAST_POSITION] = true,
+        }
+        if LOCKED_ORDERS[order] then
+            return false
+        end
+    end
 
     local target = nil
     if event.entindex_target and event.entindex_target ~= 0 then

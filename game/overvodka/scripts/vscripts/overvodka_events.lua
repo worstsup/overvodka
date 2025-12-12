@@ -15,7 +15,7 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 11, 12.5 }, -- 11 12.5
+        { 11, 12.5 },
     },
     overvodka_5x5 = {
         { 18, 20 },
@@ -68,7 +68,11 @@ function OvervodkaEvents:Init()
     if self.initialized then return end
     if IsInToolsMode() then return end
 
-    if _G.overvodka_events ~= nil and not _G.overvodka_events then
+    local state = GameRules:State_Get()
+    if state ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+        Timers:CreateTimer(0.1, function()
+            OvervodkaEvents:Init()
+        end)
         return
     end
 
@@ -78,6 +82,7 @@ function OvervodkaEvents:Init()
     self.is5x5 = (self.mapName == "overvodka_5x5")
 
     self.initGameTime = GameRules:GetGameTime()
+
     self.blockedBombardiro = {}
 
     self.goldenRainTimes = {}
@@ -95,6 +100,7 @@ function OvervodkaEvents:Init()
     self:ScheduleHamsterEvents()
     self:ScheduleBombardiroEvents()
 end
+
 
 function OvervodkaEvents:SetBoss( boss )
     if not IsServer() then return end

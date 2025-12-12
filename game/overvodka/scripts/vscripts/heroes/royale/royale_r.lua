@@ -18,12 +18,12 @@ function royale_r:GetAOERadius()
 end
 
 function royale_r:OnAbilityPhaseStart()
-    EmitSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():EmitSound("Royale.Cast")
     return true
 end
 
 function royale_r:OnAbilityPhaseInterrupted()
-    StopSoundOn("Royale.Cast", self:GetCaster())
+    self:GetCaster():StopSound("Royale.Cast")
 end
 
 function royale_r:OnSpellStart()
@@ -122,9 +122,11 @@ function modifier_royale_megaknight:OnIntervalThink()
                 parent:Stop()
                 parent:FaceTowards(unit:GetAbsOrigin())
                 Timers:CreateTimer(0.25, function()
-                    parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
-                    if self:GetCaster():HasTalent("special_bonus_unique_royale_7") then
-                        EmitSoundOn("MegaKnight.Jump.Evo", parent)
+                    if self and self:GetCaster() then
+                        parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+                        if self:GetCaster():HasTalent("special_bonus_unique_royale_7") then
+                            EmitSoundOn("MegaKnight.Jump.Evo", parent)
+                        end
                     end
                 end)
                 Timers:CreateTimer(prepareTime, function()
@@ -167,11 +169,11 @@ end
 
 function modifier_royale_megaknight:OnDestroy()
     if not IsServer() then return end
-    EmitSoundOn("Royale.Death", self:GetParent())
-    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:GetParent():EmitSound("Royale.Death")
+    local p = ParticleManager:CreateParticle("particles/royale_die.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(p, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
-    UTIL_Remove(self:GetParent())
+    self:GetParent():AddNoDraw()
 end
 
 function modifier_royale_megaknight:DeclareFunctions()

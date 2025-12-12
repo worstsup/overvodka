@@ -976,7 +976,7 @@
 			"heal"
             {
             	"value"	"150 250 350 450"
-            	"special_bonus_unique_eldzhey_5" "+400"
+            	"special_bonus_unique_eldzhey_5" "+200"
             }
             "AbilityCastRange" "300"
             "radius"		   "300"
@@ -1049,15 +1049,17 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/eldzhey/eldzhey_r"
 		"AbilityTextureName"			"srsr"
-		"AbilityBehavior"		  		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"		  		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitTargetTeam"	 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"	 		"DAMAGE_TYPE_MAGICAL"
 		"AbilityCooldown"           	"90 80 70"
 		"AbilityManaCost"           	"125 175 225"
+		"AbilityCastRange"				"500 550 600"
 		"HasScepterUpgrade"				"1"
+		"AbilityCastPoint"				"0.15"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityValues"
 		{
 			"damage"
@@ -1067,13 +1069,7 @@
 		    }
 		    "radius"
 		    {
-		        "value"	"450 500 550"
-		        "special_bonus_unique_eldzhey_4" "+75"
-		        "affected_by_aoe_increase"	"1"
-		    }
-		    "AbilityCastRange"
-		    {
-		        "value"	"450 500 550"
+		        "value"	"450"
 		        "special_bonus_unique_eldzhey_4" "+75"
 		        "affected_by_aoe_increase"	"1"
 		    }
@@ -2334,7 +2330,7 @@
 					"value"	"350"
 					"affected_by_aoe_increase"	"1"
 				}
-				"duration"					"10 11 12"
+				"duration"					"10"
 				"damage"					"80 160 240"
 				"magic_resist"				"50 60 70"
 				"dmg_scepter"
@@ -3144,23 +3140,23 @@
 				{
 					"value"	"0"
 					"RequiresShard"	"1"
-					"special_bonus_shard" "+50"
+					"special_bonus_shard" "+30"
 				}
 				"illusion_damage_incoming"
 				{
 					"value"	"0"
 					"RequiresShard"	"1"
-					"special_bonus_shard" "+200"
+					"special_bonus_shard" "+300"
 				}
 		}
 	}
 	"sahur_hit"
 	{
-		"BaseClass"	"ability_lua"
-		"ScriptFile" "heroes/sahur/sahur_hit"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"MaxLevel"						"1"
+		"BaseClass"			"ability_lua"
+		"ScriptFile" 		"heroes/sahur/sahur_hit"
+		"AbilityType"		"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"			"1"
 	}
 	//=================================================================================================================
 	// TUNG JUMP
@@ -3510,7 +3506,7 @@
 			{
 				"value"						"1"
 				"special_bonus_shard"		"+1"
-			}	
+			}
 		}
 	}
 
@@ -3679,10 +3675,7 @@
 					"special_bonus_unique_macan_2" "+50"
 					"affected_by_aoe_increase"	"1"
 				}
-				"duration"
-				{
-					"value"	"10 15 20 25"
-				}
+				"duration" 	"10 15 20 25"
 				"radius"
 				{
 					"value"	"450 500 550 600"
@@ -3871,9 +3864,9 @@
 		{
 			"gold_pct"	"20"
 			"networth_step"  "2500"
-			"bonus_as"       "5"
-			"bonus_hp"       "50"
-			"bonus_ms"       "3"
+			"bonus_as"       "3"
+			"bonus_hp"       "30"
+			"bonus_ms"       "2"
 		}
 	}
 	//=================================================================================================================
@@ -3900,16 +3893,16 @@
 		{
 				"chaos_bolt_speed"		"700"
 				"stun_min"				"0.1 0.2 0.3 0.4"
-				"stun_max"				"1.75 2.0 2.25 2.5"
+				"stun_max"				"1.6 1.8 2.0 2.2"
 				"damage_min"			"30 60 90 120"
-				"damage_max"			"200 275 350 425"
+				"damage_max"			"125 200 275 350"
 				"cd_min"				"0 0 1 1"
 				"cd_max"				"1 2 3 4"
 				"targets"
 				{
 					"value"	"1"
 				}
-				"shard_duration"		"3"
+				"shard_duration"		"2"
 		}
 	}
 	//=================================================================================================================
@@ -3933,11 +3926,11 @@
 			"max_duration"      "5"
 			"gold_steal"
 			{
-				"value"  "20 40 60 80"
+				"value"  "15 30 45 60"
 			}
 			"gold_steal_pct"
 			{
-				"value"  "2 3 4 5"
+				"value"  "3"
 			}
 			"AbilityCastRange"
 			{
@@ -3946,7 +3939,7 @@
 			"AbilityCooldown"
 			{
 				"value"	"18 16 14 12"
-				"special_bonus_unique_silvername_7"	"-8"
+				"special_bonus_unique_silvername_7"	"-6"
 			}
 		}
 	}
@@ -3962,12 +3955,11 @@
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"       "30"
-		"AbilityManaCost"       "50 70 90 110"
-		"AbilityCastRange"		"1000 1100 1200 1300"
-		"IsBreakable"			"1"
+		"AbilityManaCost"       "100 120 140 160"
+		"AbilityCastRange"		"950 1000 1050 1100"
 		"AbilityValues"
 		{
-				"vision_radius" 		"1000 1100 1200 1300"
+				"vision_radius" 		"950 1000 1050 1100"
 				"attribute_steal_pct"   "4 6 8 10"
 				"attack_speed_steal"    "15 20 25 30"
 				"movespeed_steal_pct"   "5 6 7 8"
@@ -3992,22 +3984,29 @@
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
 		"SpellDispellableType"	"SPELL_DISPELLABLE_NO"
 		"AbilityCooldown"       "90 80 70"
-		"AbilityManaCost"       "200"
+		"AbilityManaCost"       "200 250 300"
 		"AbilityCastPoint"		"1"
 		"HasScepterUpgrade"		"1"
 		"AbilityValues"
 		{
-				"duration"          "6.0 6.25 6.5"
+				"duration"          "6.0"
 				"damage"			"55 60 65"
 				"inner_radius"      "300"
 				"outer_radius"      "750"
 				"radius_tooltip"
 				{
 					"value"	"750"
-					"special_bonus_unique_silvername_8"	"+350"
 				}
-				"inner_count"       "5"
-				"outer_count"       "9"
+				"inner_count"
+				{
+					"value"	"5"
+					"special_bonus_unique_silvername_8"	"+1"
+				}
+				"outer_count"
+				{
+					"value"	"9"
+					"special_bonus_unique_silvername_8"	"+1"
+				}
 				"attack_interval"   "1.0"
 				"scepter_radius"
 				{
@@ -4030,17 +4029,14 @@
 				"bonus_radius"
 				{
 					"value"	"0"
-					"special_bonus_unique_silvername_8"	"+1100"
 				}
 				"bonus_count"
 				{
 					"value"	"0"
-					"special_bonus_unique_silvername_8" "+7"
 				}
 				"AbilityCastRange"
 				{
 					"value"	"750"
-					"special_bonus_unique_silvername_8"	"+350"
 				}
 		}
 	}
@@ -4203,7 +4199,7 @@
 		}
 		"AbilityValues"
 		{
-			"duration" "20"
+			"duration" "16"
 			"speed"
 			{
 				"value"				"550 600 650"
@@ -9617,7 +9613,7 @@
 			}
 			"revolution_time"			"2.0"
 			"min_range"					"500"
-			"max_range"					
+			"max_range"
 			{
 					"value"		"500"
 			}
@@ -9839,7 +9835,6 @@
 		"AbilityCastPoint"				"0.15"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 		"AbilityManaCost"				"120 140 160 180"
-
 		"AbilityValues"
 		{
 			"charge_speed"
@@ -9935,16 +9930,10 @@
 		"DependentOnAbility"			"peterka_r"
 		"AbilityValues"
 		{
-				"radius"			"375 450 525 600"
-				"AbilityCastRange"  "375 450 525 600"
-				"AbilityCooldown"
-				{
-					"value"	"8 7 6 5"
-				}
-				"damage"
-				{
-					"value"	"35 45 55 65"
-				}
+				"radius"			"375 425 475 525"
+				"AbilityCastRange"  "375 425 475 525"
+				"AbilityCooldown"   "8 7 6 5"
+				"damage" "35 45 55 65"
 				"heal"
 				{
 					"value"	"0"
@@ -9974,8 +9963,8 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityValues"
 		{
-				"radius"			"500 550 600 650"
-				"AbilityCastRange"  "500 550 600 650"
+				"radius"			"450 500 550 600"
+				"AbilityCastRange"  "450 500 550 600"
 				"AbilityCooldown"
 				{
 					"value"	"9 8 7 6"
@@ -10030,7 +10019,6 @@
 		"HasScepterUpgrade"				"1"
 		"precache"
 		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_tinker.vsndevts"
 			"soundfile"	"soundevents/5opka_r.vsndevts"
 			"particle"	"particles/peterka_r.vpcf"
 			"particle"	"particles/peterka_r_cast.vpcf"
@@ -16320,7 +16308,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityValues"
 		{
-			"attack_range"		"550"
+			"attack_range"		"500"
 			"duration"
 			{
 				"value"	"3"
@@ -16341,7 +16329,7 @@
 		"MaxLevel"				"1"
 		"AbilityValues"
 		{
-			"each_stack_duration"	"12"
+			"each_stack_duration"	"10"
 			"bonus_magic_damage"
 			{
 				"value"	"4"
@@ -16364,7 +16352,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCastRange"				"1075"
 		"AbilityCastPoint"				"0.45"
-		"AbilityManaCost"				"60 70 80 90"
+		"AbilityManaCost"				"90 100 110 120"
 		"AbilityValues"
 		{
 			"damage"			"85 170 255 340"
@@ -16374,13 +16362,13 @@
 			"distance"			"1075"
 			"AbilityCooldown"
 			{
-				"value"	"11 10 9 8"
+				"value"	"13 12 11 10"
 				"special_bonus_unique_peacemaker_8"	"-3"
 			}
 			"stun_duration"
 			{
 				"value"	"0"
-				"special_bonus_unique_peacemaker_3"	"+0.5"
+				"special_bonus_unique_peacemaker_3"	"+0.4"
 			}
 		}
 	}
@@ -16393,13 +16381,13 @@
 		"ScriptFile"                    "heroes/peacemaker/peacemaker_w"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"            "peacemaker_w"
-		"AbilityCastPoint"              "0.25"
+		"AbilityCastPoint"              "0.35"
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_PHYSICAL"
 		"AbilityCooldown"               "22 20 18 16"
-		"AbilityManaCost"               "110 130 150 150"
+		"AbilityManaCost"               "110 130 150 170"
 		"AbilityValues"
 		{
 			"radius"
@@ -16415,14 +16403,14 @@
 			{
 				"value"	"300"
 			}
-			"armor_per_hero"	
+			"armor_per_hero"
 			{
 				"value"	"1 2 3 4"
 				"special_bonus_unique_peacemaker_4"	"+2"
 			}
 			"buff_duration"
 			{
-				"value" "10"
+				"value" "8"
 				"special_bonus_unique_peacemaker_2"	"+3" 
 			}
 			"push_duration"     "0.4"
@@ -16450,11 +16438,11 @@
 		"AbilityTextureName" 		"peacemaker_e_facet_deagle"
 		"AbilityValues"
 		{
-				"chance"    		"20 25 35 40"
+				"chance"    		"30"
 				"crit"      		"110 120 130 140"
 				"bleed_duration" 	"3"
 				"bleed_interval" 	"0.5"
-				"bleed_damage" 		"30 60 90 120"
+				"bleed_damage" 		"20 40 60 80"
 		}
 	}
 	//=================================================================================================================
@@ -16471,19 +16459,19 @@
 		"SpellDispellableType"	"SPELL_DISPELLABLE_YES"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName"    "peacemaker_e_facet_magic"
-		"AbilityCooldown"   	"13 12 11 10"
+		"AbilityCooldown"   	"14"
 		"AbilityManaCost"   	"110 130 150 170"
 		"AbilityCastPoint"		"0.25"
 		"AbilityCastRange"		"550 600 650 700"
 		"AbilityValues"
 		{
-			"poison_duration"   "5.5 6.0 6.5 7.0"
-			"poison_dps"        "30 60 90 120"
+			"poison_duration"   "6.0"
+			"poison_dps"        "25 50 75 100"
 			"poison_interval"   "0.5"
 			"sleep_duration"    "2.5 3.0 3.5 4.0"
 			"wake_damage"
 			{
-				"value"	"150 200 250 300"
+				"value"	"100 150 200 250"
 				"special_bonus_unique_peacemaker_7"	"+350"
 			}
 		}
@@ -16504,21 +16492,21 @@
 		"AbilityUnitTargetType" 		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"AbilityManaCost"				"200 250 300"
-		"AbilityCastPoint"				"0.35"
+		"AbilityCastPoint"				"0.4"
 		"AbilityValues"
 		{
 			"radius"
 			{
-				"value"	"700 750 800"
+				"value"	"600 625 650"
 				"affected_by_aoe_increase"	"1"
 			}
-			"duration"					"5 6 7"
+			"duration"					"5.0 5.5 6.0"
 			"damage"					"100 140 180"
-			"bonus_attack_damage_pct"	"25 50 75"
+			"bonus_attack_damage_pct"	"15 30 45"
 			"cooldown_reduction_pct"	"20 30 40"
 			"AbilityCastRange"
 			{
-				"value"	"700 750 800"
+				"value"	"600 625 650"
 				"affected_by_aoe_increase"	"1"
 			}
 			"AbilityCooldown"
@@ -16542,7 +16530,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityValues"
 		{
-			"dmg_reduction"		"1"
+			"dmg_reduction"		"0.75"
 		}
 	}
 	//=================================================================================================================
@@ -16560,7 +16548,7 @@
 		"AbilityManaCost"				"250"
 		"AbilityValues"
 		{
-			"duration" "20"
+			"duration" "16"
 			"dash_min_distance"	"150"
 			"dash_max_distance"	"800"
 			"dash_radius"		"150"

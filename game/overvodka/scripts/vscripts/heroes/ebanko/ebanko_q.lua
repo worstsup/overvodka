@@ -43,13 +43,14 @@ function modifier_ebanko_q:IsDebuff() return true end
 function modifier_ebanko_q:IsPurgable() return true end
 function modifier_ebanko_q:OnCreated()
 	if not IsServer() then return end
-	self:StartIntervalThink(1)
+	self.interval = 0.25
+	self:StartIntervalThink(self.interval)
 	self:OnIntervalThink()
 end
 
 function modifier_ebanko_q:OnIntervalThink()
 	if not IsServer() then return end
-	local damage = self:GetAbility():GetSpecialValueFor("damage")
+	local damage = self:GetAbility():GetSpecialValueFor("damage") * self.interval
 	ApplyDamage({
 		victim = self:GetParent(),
 		attacker = self:GetCaster(),

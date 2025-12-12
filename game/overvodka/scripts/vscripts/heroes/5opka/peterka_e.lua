@@ -293,7 +293,6 @@ end
 
 function modifier_peterka_e_charge:OnOrder(params)
     if params.unit ~= self:GetParent() then return end
-	print(params.new_pos)
     local order = params.order_type
 
     if order == DOTA_UNIT_ORDER_MOVE_TO_POSITION or order == DOTA_UNIT_ORDER_MOVE_TO_DIRECTION then

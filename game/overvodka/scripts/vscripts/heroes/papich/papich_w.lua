@@ -275,6 +275,7 @@ function modifier_papich_w_caster:OnCreated(kv)
 
     if IsServer() then
         self:SetHasCustomTransmitterData(true)
+        self._txData = self._txData or {}
         self:StartIntervalThink(0.2)
         self:SendBuffRefreshToClients()
     end
@@ -397,17 +398,28 @@ function modifier_papich_w_caster:RemoveContribution(int_gain, str_gain)
 end
 
 function modifier_papich_w_caster:AddCustomTransmitterData()
-    return {
-        as = self.as or 0, ms = self.ms or 0,
-        cx = self.center.x or 0, cy = self.center.y or 0, cz = self.center.z or 0,
-        r  = self.radius or 0,
-        ti = self.total_int or 0,
-        ts = self.total_str or 0,
-        hs = self.has_scepter and 1 or 0,
-        in_ = self._inside and 1 or 0,
-        vb = self._has_bonus and 1 or 0,
-    }
+    self._txData = self._txData or {}
+    local t = self._txData
+
+    t.as = self.as or 0
+    t.ms = self.ms or 0
+
+    t.cx = self.center and self.center.x or 0
+    t.cy = self.center and self.center.y or 0
+    t.cz = self.center and self.center.z or 0
+
+    t.r  = self.radius or 0
+
+    t.ti = self.total_int or 0
+    t.ts = self.total_str or 0
+
+    t.hs = self.has_scepter and 1 or 0
+    t.in_ = self._inside and 1 or 0
+    t.vb = self._has_bonus and 1 or 0
+
+    return t
 end
+
 function modifier_papich_w_caster:HandleCustomTransmitterData(d)
     self.as, self.ms = d.as or 0, d.ms or 0
     self.center = Vector(d.cx or 0, d.cy or 0, d.cz or 0)
@@ -434,6 +446,7 @@ end
 function modifier_papich_w_caster:GetModifierAttackSpeedBonus_Constant()
     return (self._has_bonus and self.as) or 0
 end
+
 function modifier_papich_w_caster:GetModifierMoveSpeedBonus_Percentage()
     return (self._has_bonus and self.ms) or 0
 end
@@ -442,7 +455,6 @@ function modifier_papich_w_caster:GetModifierBonusStats_Intellect()
     if not self._inside then return 0 end
     return self.total_int or 0
 end
-
 
 function modifier_papich_w_caster:GetModifierEvasion_Constant(params)
     if not params or not params.attacker then return 0 end
@@ -536,6 +548,7 @@ function modifier_papich_w_ally:OnCreated(kv)
     self.ability    = self:GetAbility()
 
     self:SetHasCustomTransmitterData(true)
+    self._txData = self._txData or {}
     if IsServer() then
         self:StartIntervalThink(0.2)
         self:SendBuffRefreshToClients()
@@ -570,11 +583,14 @@ function modifier_papich_w_ally:OnIntervalThink()
 end
 
 function modifier_papich_w_ally:AddCustomTransmitterData()
-    return {
-        as = self.as or 0,
-        ms = self.ms or 0,
-        ti = self.total_int or 0,
-    }
+    self._txData = self._txData or {}
+    local t = self._txData
+
+    t.as = self.as or 0
+    t.ms = self.ms or 0
+    t.ti = self.total_int or 0
+
+    return t
 end
 
 function modifier_papich_w_ally:HandleCustomTransmitterData(data)

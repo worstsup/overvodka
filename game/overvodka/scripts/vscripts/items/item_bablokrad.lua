@@ -99,14 +99,12 @@ function modifier_item_bablokrad:IsPurgeException() return false end
 function modifier_item_bablokrad:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_bablokrad:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
     }
-
-    return funcs
 end
 
 function modifier_item_bablokrad:GetModifierAttackSpeedBonus_Constant()
@@ -127,8 +125,4 @@ end
 function modifier_item_bablokrad:GetModifierBonusStats_Intellect()
     if not self:GetAbility() then return end
     return self:GetAbility():GetSpecialValueFor('atribute')
-end
-
-function modifier_item_bablokrad:OnCreated()
-    if not IsServer() then return end
 end

@@ -165,10 +165,10 @@ function modifier_frisk_d_barrier:OnCreated()
 end
 
 function modifier_frisk_d_barrier:AddCustomTransmitterData()
-    return {
-        barrier_max = self.barrier_max,
-        barrier_block = self.barrier_block,
-    }
+    self._txData = self._txData or {}
+    self._txData.barrier_max   = self.barrier_max or 0
+    self._txData.barrier_block = self.barrier_block or 0
+    return self._txData
 end
 
 function modifier_frisk_d_barrier:HandleCustomTransmitterData( data )
