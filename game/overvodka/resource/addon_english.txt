@@ -344,6 +344,7 @@
 		"npc_dota_hero_tusk"				"SEREGGA"
 		"npc_dota_hero_undying"				"PALE VISITOR"
 		"npc_dota_hero_ember_spirit"		"PEACEMAKER"
+		"npc_dota_hero_nyx_assassin"		"HUMMINGBIRD"
 		"npc_dota_lone_druid_bear1" "SAM"
 		"npc_dota_lone_druid_bear2" "SAM"
 		"npc_dota_lone_druid_bear3" "SAM"
@@ -365,6 +366,15 @@
 		"npc_gaster_blaster"						"Gaster Blaster"
 		"npc_kolyan_guard"				"Bodyguard"
 		"npc_evil_monke"				"Evil Monke"
+
+		"dota_tooltip_ability_special_bonus_unique_kolibri_1"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_2"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_3"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_4"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_5"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_6"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_7"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_8"				"+1 charge"
 
 		"npc_zhenya_boss"					"Zhenya Moroz"
 		"npc_burger"						"Food"

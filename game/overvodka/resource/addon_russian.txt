@@ -350,6 +350,7 @@
 		"npc_dota_hero_tusk"				"SEREGGA"
 		"npc_dota_hero_undying"				"PALE VISITOR"
 		"npc_dota_hero_ember_spirit"		"PEACEMAKER"
+		"npc_dota_hero_nyx_assassin"		"КОЛИБРИ"
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
 		"npc_worker"						"РАБОТЯГА"
@@ -370,6 +371,15 @@
 		"npc_gaster_blaster"				"Gaster Blaster"
 		"npc_kolyan_guard"					"Охранник"
 		"npc_evil_monke"					"Злая Обезьяна"
+
+		"dota_tooltip_ability_special_bonus_unique_kolibri_1"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_2"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_3"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_4"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_5"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_6"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_7"				""
+		"dota_tooltip_ability_special_bonus_unique_kolibri_8"				"+1 заряд"
 
 		"npc_zhenya_boss"					"Женя Мороз"
 		"npc_burger"						"Еда"

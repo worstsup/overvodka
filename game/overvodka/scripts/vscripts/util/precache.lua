@@ -217,6 +217,7 @@ PrecacheUtils.models = {
 		"models/bratishkin/bratishkin.vmdl",
 		"tamaev/1_tamaev_normal_normal_1024_lod1.vmdl",
 		"models/evelone/evelone.vmdl",
+		"models/kolibri/kolibri.vmdl",
 		"models/elixir_collector.vmdl",
 		"models/god.vmdl",
 		"bmw/models/heroes/bm/bmwe90.vmdl",
