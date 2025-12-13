@@ -16714,7 +16714,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
-	// Колибри (врожденная)
+	// Perpetual Flight (врожденная)
 	//=================================================================================================================
 	"kolibri_innate"
 	{
@@ -16729,6 +16729,9 @@
 				"steal_range"		"0"
 		}
 	}
+	//=================================================================================================================
+	// Needle Rush
+	//=================================================================================================================
 	"kolibri_q"
 	{
 		"BaseClass"					"ability_lua"
@@ -16752,6 +16755,53 @@
 			"damage"				"30 50 70 90"
 			"range"					"300"
 			"speed"					"2000"
+		}
+	}
+	//=================================================================================================================
+	// Pinpoint Dive
+	//=================================================================================================================
+	"kolibri_w"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"heroes/kolibri/kolibri_w"
+		"AbilityTextureName"		"peterka_xxl"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"	    "SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCooldown"			"14 12 10 8"
+		"AbilityManaCost"			"80"
+		"AbilityCastPoint"			"0.1"
+		"AbilityValues"
+		{
+			"fly_time"				"0.3"
+			"damage"				"100 140 180 220"
+			"cast_range"			"550"
+			"radius"
+			{
+				"value"	"250"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Egg Lapse
+	//=================================================================================================================
+	"kolibri_e"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"heroes/kolibri/kolibri_e"
+		"AbilityTextureName"		"sans_e"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCastPoint"			"0.1"
+		"AbilityCooldown"			"30 26 22 18"
+		"AbilityManaCost"			"100 125 150 175"
+		"HasScepterUpgrade"			"1"
+		"AbilityValues"
+		{
+			"time_back"				"1"
 		}
 	}
 }

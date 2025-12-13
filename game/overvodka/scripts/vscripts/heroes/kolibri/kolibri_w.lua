@@ -1,0 +1,92 @@
+LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
+
+kolibri_w = class({})
+
+function kolibri_w:Precache(ctx)
+    PrecacheResource("particle", "particles/units/heroes/hero_magnataur/magnataur_horn_toss_land.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/beastmaster/bm_weapon_2021/bm_weapon_2021_immortal_hawk_tail.vpcf", ctx)
+    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", ctx)
+end
+
+function kolibri_w:GetCastRange(vLocation, hTarget)
+	if IsClient() then
+		return self:GetSpecialValueFor("cast_range")
+	end
+end
+
+function kolibri_w:GetAOERadius()
+    return self:GetSpecialValueFor( "radius" )
+end
+
+function kolibri_w:OnSpellStart()
+    if not IsServer() then return end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    local point = self:GetCursorPosition()
+    local origin = caster:GetAbsOrigin()
+
+    local duration = self:GetSpecialValueFor("fly_time")
+    local direction = (point - origin)
+    local max_range = self:GetSpecialValueFor("cast_range") + self:GetCaster():GetCastRangeBonus()
+    if direction:Length2D() > max_range then
+        direction = direction:Normalized() * max_range
+    end
+
+    local distance = direction:Length2D()
+    point = origin + direction
+
+    caster:EmitSound("kolibri_w")
+    local p = ParticleManager:CreateParticle("particles/econ/items/beastmaster/bm_weapon_2021/bm_weapon_2021_immortal_hawk_tail.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    local arc = caster:AddNewModifier(
+        caster,
+        self,
+        "modifier_generic_arc_lua",
+        {
+            target_x = point.x,
+            target_y = point.y,
+            duration = duration,
+            distance = distance,
+            height = 50,
+            start_offset = 0,
+            end_offset   = 0,
+            fix_end      = 0,
+            fix_duration = 1,
+            fix_height   = 0,
+            isStun       = 0,
+            isRestricted = 1,
+            isForward    = 1,
+            activity     = 3,
+        }
+    )
+
+    if arc then
+        arc:SetEndCallback(function(interrupted)
+            if not IsServer() then return end
+            if p then
+                ParticleManager:DestroyParticle(p, false)
+            end
+            if interrupted then return end
+
+            local landing_pos = GetGroundPosition(point, caster)
+            GridNav:DestroyTreesAroundPoint(landing_pos, 200, false)
+            if caster:GetUnitName() ~= "npc_dota_hero_nyx_assassin" then
+                FindClearSpaceForUnit(caster, landing_pos, true)
+            end
+
+            caster:EmitSound("Hero_Beastmaster.Hawk.Target")
+            local stun_duration = self:GetSpecialValueFor("stun_duration")
+            local radius = self:GetSpecialValueFor("radius")
+            local damage = self:GetSpecialValueFor("damage")
+
+            local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_magnataur/magnataur_horn_toss_land.vpcf", PATTACH_WORLDORIGIN, caster)
+            ParticleManager:SetParticleControl(particle, 0, Vector(landing_pos.x,landing_pos.y,landing_pos.z))
+            local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+
+            for _,enemy in ipairs(units) do
+                ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
+            end
+        end)
+    end
+end

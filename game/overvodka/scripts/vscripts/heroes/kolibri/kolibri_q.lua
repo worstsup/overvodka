@@ -5,7 +5,7 @@ LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lu
 kolibri_q = class({})
 
 function kolibri_q:Precache(context)
-    PrecacheResource("soundfile", "soundevents/freak.vsndevts", context)
+    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
     PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", context)
 end
 
@@ -19,7 +19,7 @@ function kolibri_q:OnSpellStart()
     direction = direction:Normalized()
     local distance = range
     local duration = distance / speed
-    EmitSoundOn("shemelis_whoosh", caster)
+    EmitSoundOn("kolibri_q", caster)
     caster:AddNewModifier(caster, self, "modifier_kolibri_q_movement", {duration = duration})
     caster:AddNewModifier(
         caster, self, "modifier_generic_knockback_lua",
@@ -52,12 +52,9 @@ end
 
 function modifier_kolibri_q_movement:OnDestroy()
     if not IsServer() then return end
-    ExecuteOrderFromTable({
-        UnitIndex = self:GetCaster():entindex(),
-        OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE,
-        Position = self:GetCaster():GetAbsOrigin(),
-        Queue = true,
-    })
+    if self:GetParent():GetUnitName() ~= "npc_dota_hero_nyx_assassin" then
+        FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin(), true)
+    end
 end
 
 modifier_kolibri_q_movement_damage = class({})
