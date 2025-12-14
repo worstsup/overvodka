@@ -30,6 +30,7 @@ function kolibri_q:OnSpellStart()
             duration = duration,
         }
     )
+    self:StartCooldown(0.15)
 end
 
 modifier_kolibri_q_movement = class({})

@@ -1,10 +1,12 @@
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
+LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_kolibri_w_slow", "heroes/kolibri/kolibri_w", LUA_MODIFIER_MOTION_NONE)
 
 kolibri_w = class({})
 
 function kolibri_w:Precache(ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_magnataur/magnataur_horn_toss_land.vpcf", ctx)
+    PrecacheResource("particle", "particles/kolibri_w_land.vpcf", ctx)
     PrecacheResource("particle", "particles/econ/items/beastmaster/bm_weapon_2021/bm_weapon_2021_immortal_hawk_tail.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/skywrath_mage/skywrath_arcana/skywrath_arcana_concussive_shot_slow_debuff.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", ctx)
 end
 
@@ -40,27 +42,13 @@ function kolibri_w:OnSpellStart()
     caster:EmitSound("kolibri_w")
     local p = ParticleManager:CreateParticle("particles/econ/items/beastmaster/bm_weapon_2021/bm_weapon_2021_immortal_hawk_tail.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     local arc = caster:AddNewModifier(
-        caster,
-        self,
-        "modifier_generic_arc_lua",
+        caster, self, "modifier_generic_arc_lua",
         {
-            target_x = point.x,
-            target_y = point.y,
-            duration = duration,
-            distance = distance,
-            height = 50,
-            start_offset = 0,
-            end_offset   = 0,
-            fix_end      = 0,
-            fix_duration = 1,
-            fix_height   = 0,
-            isStun       = 0,
-            isRestricted = 1,
-            isForward    = 1,
-            activity     = 3,
+            target_x = point.x, target_y = point.y, duration = duration, distance = distance,
+            height = 50, start_offset = 0, end_offset = 0, fix_end = 0, fix_duration = 1, 
+            fix_height = 0, isStun = 1, isRestricted = 0, isForward = 1, activity = 3,
         }
     )
-
     if arc then
         arc:SetEndCallback(function(interrupted)
             if not IsServer() then return end
@@ -79,14 +67,32 @@ function kolibri_w:OnSpellStart()
             local stun_duration = self:GetSpecialValueFor("stun_duration")
             local radius = self:GetSpecialValueFor("radius")
             local damage = self:GetSpecialValueFor("damage")
+            local slow_duration = self:GetSpecialValueFor("slow_duration")
 
-            local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_magnataur/magnataur_horn_toss_land.vpcf", PATTACH_WORLDORIGIN, caster)
+            local particle = ParticleManager:CreateParticle("particles/kolibri_w_land.vpcf", PATTACH_WORLDORIGIN, caster)
             ParticleManager:SetParticleControl(particle, 0, Vector(landing_pos.x,landing_pos.y,landing_pos.z))
             local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
             for _,enemy in ipairs(units) do
+                enemy:AddNewModifier(caster, self, "modifier_kolibri_w_slow", {duration = slow_duration * (1 - enemy:GetStatusResistance())})
                 ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
             end
         end)
     end
+end
+
+modifier_kolibri_w_slow = class({})
+
+function modifier_kolibri_w_slow:IsHidden() return false end
+function modifier_kolibri_w_slow:IsPurgable() return true end
+function modifier_kolibri_w_slow:GetEffectName() return "particles/econ/items/skywrath_mage/skywrath_arcana/skywrath_arcana_concussive_shot_slow_debuff.vpcf" end
+
+function modifier_kolibri_w_slow:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    }
+end
+
+function modifier_kolibri_w_slow:GetModifierMoveSpeedBonus_Percentage()
+    return self:GetAbility():GetSpecialValueFor("slow_pct")
 end

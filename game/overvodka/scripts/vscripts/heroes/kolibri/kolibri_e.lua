@@ -5,6 +5,7 @@ kolibri_e = class({})
 function kolibri_e:Precache(context)
     PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
     PrecacheResource("particle", "particles/units/heroes/hero_weaver/weaver_timelapse.vpcf", context)
+    PrecacheResource("particle", "particles/kolibri_e.vpcf", context)
 end
 
 function kolibri_e:GetIntrinsicModifierName()
@@ -25,6 +26,10 @@ function kolibri_e:OnSpellStart()
         ParticleManager:SetParticleControl(time_lapse_particle, 0, caster:GetAbsOrigin())
         ParticleManager:SetParticleControl(time_lapse_particle, 2, self.intrinsic_modifier.instances_position[1] + Vector(0,0,200))
         ParticleManager:ReleaseParticleIndex(time_lapse_particle)
+
+        local per = ParticleManager:CreateParticle("particles/kolibri_e.vpcf", PATTACH_WORLDORIGIN, caster)
+        ParticleManager:SetParticleControl(per, 3, caster:GetAbsOrigin() + Vector(0,0,200))
+        ParticleManager:ReleaseParticleIndex(per)
 
         ProjectileManager:ProjectileDodge(caster)
         caster:Purge(false, true, false, true, true)

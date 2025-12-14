@@ -131,14 +131,6 @@ end
 function modifier_litvin_bledina:PlayEffects2( caster, target )
 	local particle_cast = "particles/units/heroes/hero_marci/marci_unleash_attack.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, caster )
-	ParticleManager:SetParticleControlEnt(
-		effect_cast,
-		1,
-		target,
-		PATTACH_POINT_FOLLOW,
-		"attach_hitloc",
-		Vector(0,0,0),
-		true
-	)
+	ParticleManager:SetParticleControlEnt(effect_cast, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
