@@ -27,22 +27,17 @@ local function _DoSideDash(ability, sign)
 	if range <= 0 or speed <= 0 then return end
 
 	local dir = _GetSideDir(caster, sign)
-	local distance = range
-	local duration = distance / speed
+	local duration = range / speed
 
 	EmitSoundOn("kolibri_d", caster)
 
 	caster:AddNewModifier(caster, ability, "modifier_kolibri_shard_movement", { duration = duration })
 
 	caster:AddNewModifier(
-		caster,
-		ability,
-		"modifier_generic_knockback_lua",
+		caster, ability, "modifier_generic_knockback_lua",
 		{
-			direction_x = dir.x,
-			direction_y = dir.y,
-			distance = distance,
-			duration = duration,
+			direction_x = dir.x, direction_y = dir.y,
+			distance = range, duration = duration,
 		}
 	)
 end

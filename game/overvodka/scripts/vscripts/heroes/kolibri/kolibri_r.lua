@@ -22,10 +22,8 @@ function kolibri_r:OnSpellStart()
 
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
-
-    local duration = self:GetSpecialValueFor("duration")
-
-    caster:AddNewModifier(caster, self, "modifier_kolibri_r", { duration = duration })
+    
+    caster:AddNewModifier(caster, self, "modifier_kolibri_r", { duration = self:GetSpecialValueFor("duration") })
 end
 
 modifier_kolibri_r = class({})

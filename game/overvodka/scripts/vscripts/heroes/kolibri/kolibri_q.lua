@@ -17,17 +17,14 @@ function kolibri_q:OnSpellStart()
     local direction = caster:GetForwardVector()
     direction.z = 0
     direction = direction:Normalized()
-    local distance = range
-    local duration = distance / speed
+    local duration = range / speed
     EmitSoundOn("kolibri_q", caster)
     caster:AddNewModifier(caster, self, "modifier_kolibri_q_movement", {duration = duration})
     caster:AddNewModifier(
         caster, self, "modifier_generic_knockback_lua",
         {
-            direction_x = direction.x,
-            direction_y = direction.y,
-            distance = distance,
-            duration = duration,
+            direction_x = direction.x, direction_y = direction.y,
+            distance = range, duration = duration,
         }
     )
     self:StartCooldown(0.15)
