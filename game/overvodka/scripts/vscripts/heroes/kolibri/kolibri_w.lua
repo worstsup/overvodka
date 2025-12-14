@@ -90,9 +90,14 @@ function modifier_kolibri_w_slow:GetEffectName() return "particles/econ/items/sk
 function modifier_kolibri_w_slow:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
     }
 end
 
 function modifier_kolibri_w_slow:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("slow_pct")
+end
+
+function modifier_kolibri_w_slow:GetModifierAttackSpeedBonus_Constant()
+    return self:GetAbility():GetSpecialValueFor("slow_as")
 end

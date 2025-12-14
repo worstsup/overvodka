@@ -27,6 +27,7 @@ function kolibri_q:OnSpellStart()
             distance = range, duration = duration,
         }
     )
+    ProjectileManager:ProjectileDodge(caster)
     self:StartCooldown(0.15)
 end
 
@@ -63,9 +64,16 @@ function modifier_kolibri_q_movement_damage:OnCreated()
 	if not IsServer() then return end
     local parent = self:GetParent()
     local caster = self:GetCaster()
-    local hit_blood = ParticleManager:CreateParticle("particles/shemelis_slash.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local hit_blood = ParticleManager:CreateParticle("particles/shemelis_slash.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
     ParticleManager:SetParticleControl(hit_blood, 0, parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(hit_blood)
-    ApplyDamage({victim = parent, attacker = caster, damage = self:GetAbility():GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility()})
-    --caster:PerformAttack(parent, true, true, true, true, false, false, true)
+    local damage = self:GetAbility():GetSpecialValueFor("damage")
+    local attack = self:GetAbility():GetSpecialValueFor("damage_from_attack")
+    if attack > 0 then
+        damage = damage + caster:GetAverageTrueAttackDamage(nil) * attack * 0.01
+        caster:PerformAttack( parent, true, true, true, false, false, true, true )
+    end
+    if parent and not parent:IsNull() then
+        ApplyDamage({victim = parent, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility()})
+    end
 end

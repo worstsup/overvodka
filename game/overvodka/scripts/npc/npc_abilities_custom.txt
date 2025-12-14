@@ -16730,6 +16730,24 @@
 		}
 	}
 	//=================================================================================================================
+	// CD Reduction Facet
+	//=================================================================================================================
+	"kolibri_ability_cdr"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/kolibri/kolibri_ability_cdr"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"cdr"				"1"
+			"duration"			"10"
+			"max_stacks"		"20"
+		}
+	}
+	//=================================================================================================================
 	// Needle Rush
 	//=================================================================================================================
 	"kolibri_q"
@@ -16742,7 +16760,6 @@
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityManaCost"			"50"
-		"AbilityCastRange"			"300"
 		"AbilityChargeRestoreTime" 	"8 7 6 5"
 		"AbilityValues"
 		{
@@ -16752,7 +16769,21 @@
 				"special_bonus_unique_kolibri_8"	"+1"
 			}
 			"damage"				"45 90 135 180"
-			"range"					"300"
+			"damage_from_attack"
+			{
+				"value"	"0"
+				"special_bonus_unique_kolibri_5"	"+60"
+			}
+			"range"
+			{
+				"value"	"300"
+				"special_bonus_unique_kolibri_3"	"+50"
+			}
+			"AbilityCastRange"
+			{
+				"value"	"300"
+				"special_bonus_unique_kolibri_3"	"+50"
+			}
 			"speed"					"2000"
 		}
 	}
@@ -16775,9 +16806,22 @@
 		"AbilityValues"
 		{
 			"fly_time"				"0.3"
-			"damage"				"100 150 200 250"
-			"cast_range"			"550"
-			"slow_pct"				"-25"
+			"damage"
+			{
+				"value"	"100 150 200 250"
+				"special_bonus_unique_kolibri_2"	"+75"
+			}
+			"cast_range"
+			{
+				"value"	"550"
+				"special_bonus_unique_kolibri_6"	"+200"
+			}
+			"slow_pct"				"-30"
+			"slow_as"
+			{
+				"value"	"0"
+				"special_bonus_unique_kolibri_4"	"-60"
+			}
 			"slow_duration"			"1.8 2.2 2.6 3.0"
 			"radius"
 			{
@@ -16798,11 +16842,23 @@
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityCastPoint"			"0.1"
 		"AbilityCooldown"			"30 26 22 18"
-		"AbilityManaCost"			"100 125 150 175"
+		"AbilityManaCost"			"75 100 125 150"
 		"HasScepterUpgrade"			"1"
 		"AbilityValues"
 		{
-			"time_back"				"1"
+			"time_back"				"2"
+			"give_evasion"
+			{
+				"value"	"0"
+				"special_bonus_facet_kolibri_e_misses"	"+1"
+				"RequiresFacet"	"kolibri_e_misses"
+			}
+			"duration"
+			{
+				"value"	"0 0 0 0"
+				"special_bonus_facet_kolibri_e_misses"	"+3.5 +4.0 +4.5 +5.0"
+				"RequiresFacet"	"kolibri_e_misses"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -16831,6 +16887,11 @@
 				"break_distance"        "1000"
 				"order_throttle"        "0.15"
 				"think_interval"        "0.03"
+				"bonus_movement_speed"
+				{
+					"value"	"0"
+					"special_bonus_unique_kolibri_1"	"+10"
+				}
 		}
 	}
 	//=================================================================================================================

@@ -4036,18 +4036,33 @@
 
 		"Facets"
 		{
-			"nyx_assassin_burn_mana"
+			"kolibri_e_misses"
+			{
+				"Icon"				"speed"
+				"Color"				"Green"
+				"GradientID"		"2"
+			}
+			"kolibri_facet_cdr"
 			{
 				"Icon"				"nuke"
 				"Color"				"Blue"
 				"GradientID"		"3"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"	"kolibri_ability_cdr"
+						"AutoLevelAbility"	"true"
+					}
+				}
 			}
-
+			"nyx_assassin_burn_mana"
+			{
+				"Deprecated"		"true"
+			}
 			"nyx_assassin_scuttle" 
 			{
-				"Icon"				"speed"
-				"Color"				"Red"
-				"GradientID"		"2"
+				"Deprecated"	"true"
 			}
 		}
 		
@@ -4055,7 +4070,7 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"6"
 		"AttackDamageMax"		"10"
-		"AttackRate"		"1.5"
+		"AttackRate"		"1.4"
 		"AttackAnimationPoint"		"0.25"
 		"AttackAcquisitionRange"		"600"
 		"AttackRange"		"200"
@@ -4067,7 +4082,7 @@
 		"AttributeBaseIntelligence"		"15"
 		"AttributeIntelligenceGain"		"1.8"
 		"StatusHealthRegen"		"0.5"
-		"MovementSpeed"		"325"
+		"MovementSpeed"		"320"
 		"MovementTurnRate"		"2"
 		"particle_folder"		"particles/units/heroes/hero_nyx_assassin"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_nyx_assassin.vsndevts"

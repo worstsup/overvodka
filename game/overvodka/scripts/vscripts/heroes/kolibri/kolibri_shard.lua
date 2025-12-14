@@ -30,7 +30,7 @@ local function _DoSideDash(ability, sign)
 	local duration = range / speed
 
 	EmitSoundOn("kolibri_d", caster)
-
+	ProjectileManager:ProjectileDodge(caster)
 	caster:AddNewModifier(caster, ability, "modifier_kolibri_shard_movement", { duration = duration })
 
 	caster:AddNewModifier(

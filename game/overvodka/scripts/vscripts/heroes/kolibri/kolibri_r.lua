@@ -38,6 +38,7 @@ function modifier_kolibri_r:OnCreated(kv)
     if not self.ability then return end
 
     self.bonus_as          = self.ability:GetSpecialValueFor("bonus_attack_speed")
+    self.bonus_ms          = self.ability:GetSpecialValueFor("bonus_movement_speed")
     self.orbit_start_range = self.ability:GetSpecialValueFor("orbit_start_range")
     self.break_distance    = self.ability:GetSpecialValueFor("break_distance")
     self.think_interval    = self.ability:GetSpecialValueFor("think_interval")
@@ -62,12 +63,17 @@ function modifier_kolibri_r:DeclareFunctions()
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_EVENT_ON_ORDER,
         MODIFIER_EVENT_ON_ABILITY_EXECUTED,
-        MODIFIER_PROPERTY_PROCATTACK_FEEDBACK
+        MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
     }
 end
 
 function modifier_kolibri_r:GetModifierAttackSpeedBonus_Constant()
     return self.bonus_as or 0
+end
+
+function modifier_kolibri_r:GetModifierMoveSpeedBonus_Percentage()
+    return self.bonus_ms or 0
 end
 
 function modifier_kolibri_r:_ResolveTarget()
