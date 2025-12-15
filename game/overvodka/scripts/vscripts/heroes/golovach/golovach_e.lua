@@ -22,19 +22,8 @@ function golovach_e:OnSpellStart()
 	local duration = self:GetSpecialValueFor("duration")
 	EmitSoundOn( "golovach_e_start", self:GetCaster() )
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_golovach_run", {target = target:entindex(), duration = duration})
-	self:GetCaster():AddNewModifier(
-		self:GetCaster(),
-		self,
-		"modifier_generic_lifesteal_lua",
-		{ duration = duration }
-	)
-	target:AddNewModifier(
-		caster,
-		self,
-		"modifier_golovach_e",
-		{ duration = duration }
-	)
-
+	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_generic_lifesteal_lua",{duration = duration})
+	target:AddNewModifier(caster, self, "modifier_golovach_e", { duration = duration })
 	self:PlayEffects( target )
 end
 
@@ -42,15 +31,7 @@ function golovach_e:PlayEffects( target )
 	local particle_cast = "particles/units/heroes/hero_invoker/invoker_cold_snap.vpcf"
 	local direction = target:GetOrigin()-self:GetCaster():GetOrigin()
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_POINT_FOLLOW, target )
-	ParticleManager:SetParticleControlEnt(
-		effect_cast,
-		0,
-		target,
-		PATTACH_POINT_FOLLOW,
-		"attach_hitloc",
-		Vector(0,0,0),
-		true
-	)
+	ParticleManager:SetParticleControlEnt(effect_cast, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:SetParticleControl( effect_cast, 1, self:GetCaster():GetOrigin() + direction )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 end

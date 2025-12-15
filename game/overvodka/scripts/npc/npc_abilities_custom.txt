@@ -16754,7 +16754,7 @@
 	{
 		"BaseClass"					"ability_lua"
 		"ScriptFile"				"heroes/kolibri/kolibri_q"
-  		"AbilityTextureName"		"shemelis"
+  		"AbilityTextureName"		"kolibri_q"
  		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -16768,7 +16768,7 @@
 				"value"	"2"
 				"special_bonus_unique_kolibri_8"	"+1"
 			}
-			"damage"				"45 90 135 180"
+			"damage"				"60 120 180 240"
 			"damage_from_attack"
 			{
 				"value"	"0"
@@ -16808,7 +16808,7 @@
 			"fly_time"				"0.3"
 			"damage"
 			{
-				"value"	"100 150 200 250"
+				"value"	"100 175 250 325"
 				"special_bonus_unique_kolibri_2"	"+75"
 			}
 			"cast_range"
@@ -16881,7 +16881,8 @@
 		{
 				"duration"              "10"
 				"bonus_attack_speed"    "80 120 160"
-				"orbit_start_range"     "250"
+				"lifesteal_pct"			"25"
+				"orbit_start_range"     "300"
 				"orbit_radius"          "180"
 				"angular_speed_deg_per_sec" "300"
 				"break_distance"        "1000"
@@ -16906,7 +16907,7 @@
 		"AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"	 "DAMAGE_TYPE_PHYSICAL"
 		"MaxLevel"				 "1"
-		"AbilityTextureName"	 "shemelis"
+		"AbilityTextureName"	 "kolibri_d"
 		"AbilitySharedCooldown"  "kolibri_side_dash"
 		"AbilityManaCost"		 "50"
 		"AbilityCooldown"        "6"
@@ -16931,7 +16932,7 @@
 		"AbilityUnitDamageType"	 "DAMAGE_TYPE_PHYSICAL"
 		"AbilityManaCost"		 "50"
 		"MaxLevel"				 "1"
-		"AbilityTextureName"	 "shemelis"
+		"AbilityTextureName"	 "kolibri_f"
 		"AbilitySharedCooldown"  "kolibri_side_dash"
 		"AbilityCooldown"        "6"
 		"IsGrantedByShard"		 "1"

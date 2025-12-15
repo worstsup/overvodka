@@ -4015,7 +4015,7 @@
 		"ModelScale"		"0.5"
 		"LoadoutScale"		"0.5"
 		"HeroSelectSoundEffect"		"Hero_Nyx.Pick"
-		"SimilarHeroes"		"1,2,3"
+		"SimilarHeroes"		"82,1,71"
 		"GibType"		"goo"
 		"GibTintColor"	"52 137 72 255"
 		"Ability1"		"kolibri_q"
@@ -4038,13 +4038,13 @@
 		{
 			"kolibri_e_misses"
 			{
-				"Icon"				"speed"
+				"Icon"				"spinning"
 				"Color"				"Green"
 				"GradientID"		"2"
 			}
 			"kolibri_facet_cdr"
 			{
-				"Icon"				"nuke"
+				"Icon"				"cooldown"
 				"Color"				"Blue"
 				"GradientID"		"3"
 				"Abilities"
