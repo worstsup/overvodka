@@ -545,6 +545,10 @@
 			{
 				"Deprecated"	"true"
 			}
+			"brewmaster_brewmaster"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"ArmorPhysical"		"-1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -1665,6 +1669,10 @@
 			{
 				"Deprecated"	"true"
 			}
+			"clinkz_clinkz"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -2683,6 +2691,10 @@
 			{
 				"Deprecated"	"true"
 			}
+			"riki_riki"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"HealthBarOffset"	"270"
 		"ArmorPhysical"		"0"
@@ -2974,6 +2986,10 @@
 				"Deprecated"		"true"
 			}
 			"phantom_lancer_lancelot"
+			{
+				"Deprecated"		"true"
+			}
+			"phantom_lancer_lancer"
 			{
 				"Deprecated"		"true"
 			}

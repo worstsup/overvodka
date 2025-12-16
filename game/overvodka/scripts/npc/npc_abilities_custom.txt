@@ -3134,7 +3134,7 @@
 				{
 					"value"	"0"
 					"RequiresShard"	"1"
-					"special_bonus_shard" "+1.25"
+					"special_bonus_shard" "+1"
 				}
 				"illusion_damage_outgoing"
 				{
@@ -9808,7 +9808,7 @@
 		"AbilityManaCost"				"60 100 140 180"
 		"AbilityValues"
 		{
-				"stun_duration"	"1.6 1.8 2.0 2.2"
+				"stun_duration"	"1.5 1.6 1.7 1.8"
 				"damage"
 				{
 					"value"	"80 110 140 170"
@@ -9903,7 +9903,7 @@
 		{
 			"fly_time"				"0.6"
 			"stun_duration"			"0.5 0.6 0.7 0.8"
-			"damage"				"100 140 180 220"
+			"damage"				"80 110 140 170"
 			"damage_per_hero"		"20 42 60 80"
 			"damage_per_unit"		"5 10 15 20"
 			"cast_range"			"650 700 750 800"
@@ -10040,7 +10040,7 @@
 				"radius"				"700 800 900"
 				"collision_radius"		"50"
 				"splash_radius"			"150"
-				"duration"				"8 9 10"
+				"duration"				"8"
 				"speed"					"1000"
 				"machines_per_sec"		"32 34 36"
 				"distance"				"2000 2200 2400"
@@ -12083,7 +12083,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"AbilityTextureName"   			"invincible_q"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"AbilityCastPoint"				"0.25"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
@@ -12097,7 +12097,7 @@
 			"damage"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+250"
+				"special_bonus_scepter"	"+200"
 				"RequiresScepter"		"1"
 			}
 			"secondary"

@@ -3813,7 +3813,7 @@
 		"DOTA_Tooltip_modifier_item_swag_invis" "Invisible"
 
 		"DOTA_Tooltip_ability_item_shemelis" "Shemelis"
-		"DOTA_Tooltip_ability_item_shemelis_Description" "<h1>Active: Strike</h1> Dashes towards the target enemy, dealing damage to them and all enemies in their path, slowing them for %duration% seconds, and generating a barrier with health equal to %barrier_pct%%% of the damage dealt. \n\n<h1>Passive: Manabreak</h1> Each attack burns %mana_per_hit% of the enemy's mana and deals %damage_per_burn% physical damage per point of mana burned.<br><br>Illusions of heroes burn %mana_per_hit_illusion% mana per attack."
+		"DOTA_Tooltip_ability_item_shemelis_Description" "<h1>Active: Strike</h1> Dashes towards the target enemy, dealing damage to them and all enemies in their path, slowing them for %duration% seconds, and generating a barrier with health equal to %barrier_pct%%% of the damage dealt. \n\n<h1>Passive: Manabreak</h1> Each attack burns %mana_per_hit% of the enemy's mana and deals %damage_per_burn% physical damage per point of mana burned.<br><br>Illusions do not burn mana."
 		"DOTA_Tooltip_Ability_item_shemelis_agi" "+$agi" 
 		"DOTA_Tooltip_Ability_item_shemelis_int" "+$int" 
 		"DOTA_Tooltip_Ability_item_shemelis_dmg" "+$damage" 

@@ -160,8 +160,8 @@ function modifier_item_shemelis:OnAttackLanded(params)
 	if params.attacker ~= self:GetParent() then return end
 	if params.target:IsWard() then return end
 	if params.target:IsMagicImmune() then return end
+    if self:GetParent():IsIllusion() then return end
 	if self:GetParent():FindAllModifiersByName("modifier_item_shemelis")[1] ~= self then return end
-	if self:GetParent():HasModifier("modifier_item_bloodthorn_arena") then return end
 	
     local target = params.target
 
@@ -180,20 +180,11 @@ function modifier_item_shemelis:OnAttackLanded(params)
 
 	if(target:GetMana() >= manaBurn) then
 		damageTable.damage = manaBurn * manaDamage
-		if not self:GetParent():IsIllusion() then
-			target:Script_ReduceMana(manaBurn, self:GetAbility())
-		else
-			target:Script_ReduceMana(self:GetAbility():GetSpecialValueFor("mana_per_hit_illusion"), self:GetAbility())
-		end
 	else
 		damageTable.damage = target:GetMana() * manaDamage
-		if not self:GetParent():IsIllusion() then
-			target:Script_ReduceMana(manaBurn, self:GetAbility())
-		else
-			target:Script_ReduceMana(self:GetAbility():GetSpecialValueFor("mana_per_hit_illusion"), self:GetAbility())
-		end
 	end
-
+    target:Script_ReduceMana(manaBurn, self:GetAbility())
+    
 	ApplyDamage(damageTable)
 end
 

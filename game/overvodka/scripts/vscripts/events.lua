@@ -704,7 +704,7 @@ function OvervodkaGameMode:GiveZhenyaPresentReward(hero)
     if roll <= 33 then
         self:GiveZhenyaGold(hero, 500)
     elseif roll <= 66 then
-        local coins = RandomInt(5, 15)
+        local coins = RandomInt(5, 10)
         self:GiveZhenyaHamsterCoins(playerID, coins)
     else
         local hours = self:RollZhenyaPrimeHours()

@@ -73,6 +73,15 @@ function modifier_invincible_e_debuff:IsPurgable() return true end
 
 function modifier_invincible_e_debuff:OnCreated()
     if not IsServer() then return end
+    self:StartIntervalThink(0.1)
+end
+
+function modifier_invincible_e_debuff:OnIntervalThink()
+    if not IsServer() then return end
+    if not self:GetParent() or self:GetParent():IsNull() then return end
+    if not self:GetCaster() or self:GetCaster():IsNull() then return end
+    if not self:GetParent():IsAlive() then return end
+    AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), 150, 0.15, false)
 end
 
 function modifier_invincible_e_debuff:DeclareFunctions()
@@ -83,13 +92,6 @@ end
 
 function modifier_invincible_e_debuff:GetModifierDamageOutgoing_Percentage()
     return -self:GetAbility():GetSpecialValueFor("pct_damage")
-end
-
-function modifier_invincible_e_debuff:CheckState()
-	local state = {
-		[MODIFIER_STATE_PROVIDES_VISION] = true,
-	}
-	return state
 end
 
 function modifier_invincible_e_debuff:GetEffectName()

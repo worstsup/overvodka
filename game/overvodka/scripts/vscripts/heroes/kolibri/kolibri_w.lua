@@ -46,7 +46,7 @@ function kolibri_w:OnSpellStart()
         {
             target_x = point.x, target_y = point.y, duration = duration, distance = distance,
             height = 50, start_offset = 0, end_offset = 0, fix_end = 0, fix_duration = 1, 
-            fix_height = 0, isStun = 1, isRestricted = 0, isForward = 1, activity = 3,
+            fix_height = 0, isStun = 1, isRestricted = 0, isForward = 1, activity = 2,
         }
     )
     if arc then
