@@ -10,8 +10,8 @@ let DamagePanel = null;
 
 let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
 let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
-let tormentor = DotaHUDPanel.FindChildTraverse("TormentorTimerContainer")
-if (dota_glyph && roshan && Game.GetMapInfo().map_display_name != "overvodka_5x5") {
+let tormentor = DotaHUDPanel.FindChildTraverse("TormentorTimerContainer");
+if (dota_glyph && roshan && tormentor && Game.GetMapInfo().map_display_name != "overvodka_5x5") {
     dota_glyph.style.visibility = "collapse";
     roshan.style.visibility = "collapse";
     tormentor.style.visibility = "collapse";

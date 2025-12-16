@@ -5,7 +5,7 @@ function modifier_generic_lifesteal_lua:IsDebuff() return false end
 function modifier_generic_lifesteal_lua:IsPurgable() return true end
  function modifier_generic_lifesteal_lua:ShouldUseOverheadOffset() return true end
  
-function modifier_generic_lifesteal_lua:OnCreated( kv )
+function modifier_generic_lifesteal_lua:OnCreated()
 	self.caster = self:GetCaster()
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
@@ -14,14 +14,15 @@ function modifier_generic_lifesteal_lua:OnCreated( kv )
 	self:PlayEffects1()
 end
 
-function modifier_generic_lifesteal_lua:OnRefresh( kv )
-	self:OnCreated( kv )
+function modifier_generic_lifesteal_lua:OnRefresh()
+	self:OnCreated()
 end
 
 function modifier_generic_lifesteal_lua:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
+		MODIFIER_PROPERTY_TOOLTIP,
 	}
 end
 
@@ -41,6 +42,10 @@ function modifier_generic_lifesteal_lua:OnTakeDamage( params )
 	end
 	self.parent:HealWithParams(heal, self.ability, true, true, self.parent, false)
 	self:PlayEffects2()
+end
+
+function modifier_generic_lifesteal_lua:OnTooltip()
+	return self:GetAbility():GetSpecialValueFor( "lifesteal_pct" )
 end
 
 function modifier_generic_lifesteal_lua:GetStatusEffectName()

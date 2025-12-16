@@ -4,9 +4,9 @@ LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lu
 
 kolibri_q = class({})
 
-function kolibri_q:Precache(context)
-    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
-    PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", context)
+function kolibri_q:Precache(ctx)
+    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", ctx)
+    PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", ctx)
 end
 
 function kolibri_q:OnSpellStart()

@@ -338,6 +338,7 @@ PrecacheUtils.sounds = {
     	"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts",
     	"soundevents/armature_crit.vsndevts",
 		"soundevents/5opka_start.vsndevts",
+		"soundevents/kolibri_start.vsndevts",
 		"soundevents/zhenya_start.vsndevts",
 		"soundevents/chara_start.vsndevts",
 		"soundevents/kolyan_start.vsndevts",

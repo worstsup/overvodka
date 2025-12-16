@@ -3,36 +3,63 @@ LinkLuaModifier("modifier_kolibri_r_orbit", "heroes/kolibri/kolibri_r", LUA_MODI
 LinkLuaModifier("modifier_generic_lifesteal_lua", "modifier_generic_lifesteal_lua", LUA_MODIFIER_MOTION_NONE)
 kolibri_r = class({})
 
-function kolibri_r:Precache(context)
-	PrecacheResource( "particle", "particles/kolibri_r_attack.vpcf", context )
-    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
+function kolibri_r:Precache(ctx)
+	PrecacheResource( "particle", "particles/kolibri_r_attack.vpcf", ctx )
+    PrecacheResource( "particle", "particles/kolibri_r.vpcf", ctx)
+    PrecacheResource( "soundfile", "soundevents/kolibri_sounds.vsndevts", ctx )
+    PrecacheResource( "particle", "particles/kolibri_r_buff.vpcf", ctx )
+    PrecacheResource( "particle", "particles/kolibri_r_cast.vpcf", ctx )
+    PrecacheResource( "particle", "particles/econ/items/jakiro/jakiro_ti10_immortal/jakiro_ti10_macropyre_projectile_flame_child_blue.vpcf", ctx )
 end
 
 function kolibri_r:OnAbilityPhaseStart()
+    if not IsServer() then return true end
     EmitSoundOn( "kolibri_r", self:GetCaster() )
+    self.precast_particle = ParticleManager:CreateParticle( "particles/kolibri_r_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
+    ParticleManager:SetParticleControlEnt(self.precast_particle, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:SetParticleControl(self.precast_particle, 1, self:GetCaster():GetAbsOrigin()+self:GetCaster():GetForwardVector()*100+Vector(0,0,150))
+    ParticleManager:SetParticleControl(self.precast_particle, 3, self:GetCaster():GetAbsOrigin()+self:GetCaster():GetForwardVector()*100+Vector(0,0,150))
     return true
 end
 
 function kolibri_r:OnAbilityPhaseInterrupted()
+    if not IsServer() then return end
     StopSoundOn( "kolibri_r", self:GetCaster() )
+    if self.precast_particle then
+        ParticleManager:DestroyParticle(self.precast_particle, true)
+        ParticleManager:ReleaseParticleIndex(self.precast_particle)
+        self.precast_particle = nil
+    end
 end
 
 function kolibri_r:OnSpellStart()
     if not IsServer() then return end
-
+    if self.precast_particle then
+        ParticleManager:DestroyParticle(self.precast_particle, false)
+        ParticleManager:ReleaseParticleIndex(self.precast_particle)
+        self.precast_particle = nil
+    end
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
     local duration = self:GetSpecialValueFor("duration")
     caster:AddNewModifier(caster, self, "modifier_kolibri_r", { duration = duration })
     caster:AddNewModifier(caster, self, "modifier_generic_lifesteal_lua", { duration = duration })
+    local p = ParticleManager:CreateParticle("particles/kolibri_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    ParticleManager:SetParticleControlEnt(p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:SetParticleControlEnt(p, 3, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:ReleaseParticleIndex(p)
+    local p2 = ParticleManager:CreateParticle("particles/econ/items/jakiro/jakiro_ti10_immortal/jakiro_ti10_macropyre_projectile_flame_child_blue.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    ParticleManager:SetParticleControlEnt(p2, 3, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:ReleaseParticleIndex(p2)
 end
 
 modifier_kolibri_r = class({})
 
 function modifier_kolibri_r:IsHidden()   return false end
 function modifier_kolibri_r:IsPurgable() return false  end
+function modifier_kolibri_r:GetEffectName() return "particles/kolibri_r_buff.vpcf" end
 
-function modifier_kolibri_r:OnCreated(kv)
+function modifier_kolibri_r:OnCreated()
     self.parent  = self:GetParent()
     self.ability = self:GetAbility()
 

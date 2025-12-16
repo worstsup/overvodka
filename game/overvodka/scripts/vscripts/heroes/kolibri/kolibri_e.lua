@@ -3,10 +3,10 @@ LinkLuaModifier("modifier_kolibri_e_evasion", "heroes/kolibri/kolibri_e", LUA_MO
 
 kolibri_e = class({})
 
-function kolibri_e:Precache(context)
-    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_weaver/weaver_timelapse.vpcf", context)
-    PrecacheResource("particle", "particles/kolibri_e.vpcf", context)
+function kolibri_e:Precache(ctx)
+    PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", ctx)
+    PrecacheResource("particle", "particles/units/heroes/hero_weaver/weaver_timelapse.vpcf", ctx)
+    PrecacheResource("particle", "particles/kolibri_e.vpcf", ctx)
 end
 
 function kolibri_e:GetBehavior()

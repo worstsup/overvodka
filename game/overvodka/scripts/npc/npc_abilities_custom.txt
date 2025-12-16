@@ -4898,7 +4898,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"35 30 25 20"
+		"AbilityCooldown"				"29 26 23 20"
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
@@ -5018,7 +5018,7 @@
 				"duration" "10"
 				"radius"   "350"
 				"slow_as"	"-20 -40 -60 -80"
-				"slow_ms"	"-15 -20 -25 -30"
+				"slow_ms"	"-30"
 		}
 	}
 	//=================================================================================================================
@@ -5140,7 +5140,7 @@
 				}
 				"duration"				"0.3"
 				"damage"				"200 400 600"
-				"radius_tree"			"300"
+				"radius_tree"			"300 400 500"
 				"buff_dur"				"10"
 				"damage_reduction"
 				{
@@ -5216,7 +5216,7 @@
 				}
 				"duration"				"0.3"
 				"damage"				"200 400 600"
-				"radius_tree"			"300"
+				"radius_tree"			"300 400 500"
 				"buff_dur"				"10"
 				"damage_reduction"
 				{
@@ -16794,7 +16794,7 @@
 	{
 		"BaseClass"					"ability_lua"
 		"ScriptFile"				"heroes/kolibri/kolibri_w"
-		"AbilityTextureName"		"peterka_xxl"
+		"AbilityTextureName"		"kolibri_w"
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
@@ -16837,7 +16837,7 @@
 	{
 		"BaseClass"					"ability_lua"
 		"ScriptFile"				"heroes/kolibri/kolibri_e"
-		"AbilityTextureName"		"sans_e"
+		"AbilityTextureName"		"kolibri_e"
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityCastPoint"			"0.1"
@@ -16868,13 +16868,12 @@
 	{
 		"BaseClass"                     "ability_lua"
 		"ScriptFile"                    "heroes/kolibri/kolibri_r"
-		"AbilityTextureName"            "sans_r"
+		"AbilityTextureName"            "kolibri_r"
 		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"          "SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"              "0.8"
-		"AbilityCastAnimation"          "ACT_DOTA_CAST_ABILITY_4"
 		"AbilityCooldown"               "80 70 60"
 		"AbilityManaCost"               "125 150 175"
 		"AbilityValues"

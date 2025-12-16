@@ -221,6 +221,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_tusk": "file://{images}/heroes/npc_dota_hero_seregga.png",
 			"npc_dota_hero_undying": "file://{images}/heroes/npc_dota_hero_visitor.png",
 			"npc_dota_hero_ember_spirit": "file://{images}/heroes/npc_dota_hero_peacemaker.png",
+			"npc_dota_hero_nyx_assassin": "file://{images}/heroes/npc_dota_hero_kolibri.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -293,6 +294,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"tusk": "file://{images}/heroes/npc_dota_hero_seregga.png",
 			"undying": "file://{images}/heroes/npc_dota_hero_visitor.png",
 			"ember_spirit": "file://{images}/heroes/npc_dota_hero_peacemaker.png",
+			"nyx_assassin": "file://{images}/heroes/npc_dota_hero_kolibri.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

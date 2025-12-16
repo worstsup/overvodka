@@ -2600,6 +2600,7 @@
 		"DOTA_Tooltip_ability_serega_topor_bonus_dmg" "%ДОП. УРОН:"
 		"DOTA_Tooltip_ability_serega_topor_topor_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_modifier_generic_lifesteal_lua" "Вампиризм"
+		"DOTA_Tooltip_modifier_generic_lifesteal_lua_description" "Восстанавливает здоровье в размере %dMODIFIER_PROPERTY_TOOLTIP%%% урона атак."
 		"DOTA_Tooltip_modifier_serega_topor" "МОЙ ТОПОР"
 		"DOTA_Tooltip_modifier_serega_topor_Description" "Ваша скорость передвижения снижена"
 		"DOTA_Tooltip_modifier_topor" "МОЙ ТОПОР"

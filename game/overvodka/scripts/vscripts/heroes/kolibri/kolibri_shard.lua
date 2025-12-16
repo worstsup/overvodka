@@ -44,10 +44,10 @@ end
 
 kolibri_d = class({})
 
-function kolibri_d:Precache(context)
-	PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
-	PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", context)
-	PrecacheResource("particle", "particles/shemelis_slash.vpcf", context)
+function kolibri_d:Precache(ctx)
+	PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", ctx)
+	PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", ctx)
+	PrecacheResource("particle", "particles/shemelis_slash.vpcf", ctx)
 end
 
 function kolibri_d:OnSpellStart()
@@ -56,10 +56,10 @@ end
 
 kolibri_f = class({})
 
-function kolibri_f:Precache(context)
-	PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", context)
-	PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", context)
-	PrecacheResource("particle", "particles/shemelis_slash.vpcf", context)
+function kolibri_f:Precache(ctx)
+	PrecacheResource("soundfile", "soundevents/kolibri_sounds.vsndevts", ctx)
+	PrecacheResource("particle", "particles/econ/events/fall_2021/force_staff_fall_2021.vpcf", ctx)
+	PrecacheResource("particle", "particles/shemelis_slash.vpcf", ctx)
 end
 
 function kolibri_f:OnSpellStart()
