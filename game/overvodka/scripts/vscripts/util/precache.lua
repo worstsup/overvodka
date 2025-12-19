@@ -8,6 +8,12 @@ PrecacheUtils.items = {
 }
 
 PrecacheUtils.particles = {
+		"particles/econ/items/drow/drow_arcana/drow_arcana_status_effect_frost_arrow.vpcf",
+		"particles/econ/items/drow/drow_ti9_immortal/drow_ti9_frost_arrow_debuff.vpcf",
+		"particles/kaska.vpcf",
+		"particles/badun_blade.vpcf",
+		"particles/badun_effect.vpcf",
+		"particles/status_effect_badun.vpcf",
         "particles/items2_fx/veil_of_discord.vpcf",
         "particles/golden_rain_start.vpcf",
         "particles/golden_rain_wave.vpcf",
@@ -330,6 +336,7 @@ PrecacheUtils.models = {
 PrecacheUtils.sounds = {
         "soundevents/golden_rain.vsndevts",
         "soundevents/golden_rain_announce.vsndevts",
+		"soundevents/badun.vsndevts",
         "soundevents/game_sounds_heroes/game_sounds_monkey_king.vsndevts",
     	"soundevents/armature.vsndevts",
 		"soundevents/swag.vsndevts",

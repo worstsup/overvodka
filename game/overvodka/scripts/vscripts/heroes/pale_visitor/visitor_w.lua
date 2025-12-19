@@ -179,8 +179,8 @@ function visitor_w:OnSpellStart()
     end
 
     if not target then
+        self:RefundManaCost()
         self:EndCooldown()
-        caster:GiveMana(self:GetManaCost(-1))
         SendErrorToPlayer(caster:GetPlayerOwnerID(), "#CUSTOM_ERROR_no_enemies_found")
         return
     end

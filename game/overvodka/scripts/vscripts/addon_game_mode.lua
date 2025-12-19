@@ -96,7 +96,7 @@ function OvervodkaGameMode:InitGameMode()
 	57905, --- 34
 	61905, --- 35
 	}
-  
+
   	require( "scripts/vscripts/filters" )
   	FilterManager:Init()
 	if GetMapName() ~= "overvodka_5x5" then

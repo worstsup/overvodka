@@ -457,7 +457,8 @@
 	//=================================================================================================================
 	"item_badun"
 	{
-		"BaseClass"                     "item_ethereal_blade"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/badun"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
@@ -477,20 +478,19 @@
 		"ShouldBeSuggested"				"1"
 		"AbilityValues"
 		{
-				"bonus_agility"			"0"
-				"bonus_strength"		"0"
-				"bonus_intellect"		"20"
+				"bonus_agility"			"5"
+				"bonus_strength"		"5"
+				"bonus_intellect"		"21"
 				"bonus_mana"			"400"
-				"bonus_cast_range"		"0"
-				"bonus_mana_regen"		"10"
+				"bonus_mana_regen_pct"	"40"
+				"spell_amp"				"10"
 				"blast_movement_slow"	"-80"
 				"duration"				"4.0"
 				"blast_agility_multiplier"			"2"
 				"blast_damage_base"			"150"
 				"duration_ally"				"4.0"
-				"ethereal_damage_bonus"	"-50"
+				"ethereal_damage_bonus"	"-40"
 				"projectile_speed"	"1500"
-
 		}
 	}
 	//=================================================================================================================
@@ -515,7 +515,8 @@
 	//=================================
 	"item_lesh"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/lesh"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY" 
 		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -531,53 +532,16 @@
 		"ItemStockInitial"				"1"
 		"ItemStockMax"					"1"
 		"ItemStockTime"					"9999.0"
-		"precache"
-		{
-			"soundfile"			"soundevents/ailesh.vsndevts"
-		}
 		"AbilityCastRange"              "300"
 		"AbilityCastPoint"              "0.0"
 		"AbilityCooldown"               "40.0"
 		"AbilityManaCost"               "0"
 		"ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemCost"                      "700"
-		"ItemShopTags"                  "damage;int;str;agi;hard_to_tag"
-		"ItemQuality"                   "rare"  
 		"AbilityValues"
 		{
-				"range_tooltip"         "300"
-				"stun_duration"         "1"
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"        "items/item_lesh.lua"
-				"Function"          "lesh_start"
-			}
-			"SpendCharge"
-				{}	
-		}
-		"Modifiers"
-		{
-			"modifier_item_abyssal_blade_datadriven_active"
-			{
-				"Duration"              "%stun_duration"
-				"Passive"               "0"
-				"IsHidden"              "0"
-				"IsBuff"                "0"
-				"IsDebuff"              "1"
-				"IsPurgable"            "1"
-				
-				"EffectName"            "particles/generic_gameplay/generic_stunned.vpcf"
-				"EffectAttachType"      "follow_overhead"
-				"OverrideAnimation"     "ACT_DOTA_DISABLED"
-				
-				"States"
-				{
-					"MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
+				"damage_pct"         	"40"
+				"stun_duration"      	"1"
 		}
 	}
 	"item_aegis_hero"
@@ -1861,7 +1825,8 @@
 	}
 	"item_jordan"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/jordan"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"                         "models/props_gameplay/red_box.vmdl"
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -1871,7 +1836,7 @@
 		"AbilityCooldown"               "8"
 		"AbilityManaCost"               "50"
 		"ItemCost"                      "5500"
-		
+
 		"AbilityValues"
 		{
 				"phase_duration"            "4.0"
@@ -1888,68 +1853,6 @@
 				"bonus_mana"            "0.5"
 				"bonus_mana_tooltip"	"50"
 				"cast_amp"				"15"
-		}
-		
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"            "CASTER"
-				"ModifierName"      "modifier_item_jordan_active"
-			}
-			
-			"FireSound"
-			{
-				"EffectName"        "DOTA_Item.PhaseBoots.Activate"
-				"Target"            "CASTER"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_item_phase_boots_datadriven"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%bonus_movement_speed"
-					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_all_stats"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_all_stats"
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_int"
-					"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%bonus_mana"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "%bonus_mregen"
-					"MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE" 	"%spell_amp"
-				}
-			}
-			"modifier_item_jordan_active"
-			{
-				"Duration"                  "%phase_duration"
-				"Passive"                   "0"
-				"IsHidden"                  "0"
-				"IsBuff"                    "1"
-				"IsDebuff"                  "0"
-				"IsPurgable"                "0"
-				"EffectName"                "particles/econ/events/ti9/phase_boots_ti9.vpcf"
-				"EffectAttachType"          "follow_origin"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%phase_movement_speed"
-					"MODIFIER_PROPERTY_CASTTIME_PERCENTAGE"				"%cast_amp"
-				}
-				
-				"States"
-				{
-					"MODIFIER_STATE_NO_UNIT_COLLISION"      "MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
 		}
 	}
 	"item_recipe_jordan"
@@ -1968,7 +1871,8 @@
 	}
 	"item_nikes"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/nikes"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -1994,91 +1898,6 @@
 				"cold_duration_ranged"  "3.0"
 				"cold_regen"  			"-40"
 		}
-		
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"            "CASTER"
-				"ModifierName"      "modifier_item_phase_boots_datadriven_active"
-			}
-			
-			"FireSound"
-			{
-				"EffectName"        "DOTA_Item.PhaseBoots.Activate"
-				"Target"            "CASTER"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_item_phase_boots_datadriven"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"      "%bonus_movement_speed"
-					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_all_stats"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_all_stats"
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"       "%bonus_all_stats"
-					"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-					"MODIFIER_PROPERTY_MANA_BONUS"                  "%bonus_mana"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%bonus_armor"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
-				}
-				"OnAttackLanded"
-				{
-					"RunScript"
-					{
-						"ScriptFile"            "items/item_nikes"
-						"Function"              "modifier_item_skadi_datadriven_on_orb_impact"
-						"ColdDurationMelee"     "%cold_duration_melee"
-						"ColdDurationRanged"    "%cold_duration_ranged"
-					}
-				}
-			}
-			"modifier_item_phase_boots_datadriven_active"
-			{
-				"Duration"                  "%phase_duration"
-				"Passive"                   "0"
-				"IsHidden"                  "0"
-				"IsBuff"                    "1"
-				"IsDebuff"                  "0"
-				"IsPurgable"                "1"
-				"EffectName"                "particles/item_nikes.vpcf"
-				"EffectAttachType"          "follow_origin"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%phase_movement_speed"
-				}
-				
-				"States"
-				{
-					"MODIFIER_STATE_NO_UNIT_COLLISION"      "MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-			"modifier_item_skadi_datadriven_cold_attack"
-			{
-				"Passive"               "0"
-				"IsHidden"              "0"
-				"IsDebuff"              "1"
-				"IsPurgable"            "1"
-				"StatusEffectName"     "particles/status_fx/status_effect_frost.vpcf"
-				
-					
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"      "%cold_attack_speed"
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%cold_movement_speed"
-					"MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE"        	"%cold_regen"
-				}
-			}
-		}
 	}
 	"item_recipe_nikes"
 	{
@@ -2096,7 +1915,8 @@
 	}
 	"item_govno"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/govno"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -2113,67 +1933,6 @@
 				"bonus_hpregen"				"7"
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
-		}
-
-		"Modifiers"
-		{
-			"modifier_govno"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%bonus_movement_speed"
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"         "%bonus_agility"
-					"MODIFIER_PROPERTY_HEALTH_BONUS"                "%bonus_health"
-					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_hpregen"
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%bonus_magic_resist"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_as"
-				}
-			}
-			"modifier_backtrack_datadriven"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-		
-				"ThinkInterval"		"0.03"
-		
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"items/item_govno.lua"
-						"Function"		"BacktrackHealth"
-					}
-				}
-		
-				"OnTakeDamage"
-				{
-					"Random"
-					{
-						"Chance"	"%dodge_chance_pct"
-
-						"OnSuccess"
-						{
-							"FireEffect"
-							{
-								"EffectName"	"particles/units/heroes/hero_faceless_void/faceless_void_backtrack.vpcf"
-								"EffectAttachType"	"follow_origin"
-								"Target"		"CASTER"
-							}
-		
-							"RunScript"
-							{
-								"ScriptFile"	"items/item_govno.lua"
-								"Function"		"BacktrackHeal"
-							}
-						}
-					}
-				}
-			}			
 		}
 	}
 	"item_recipe_govno"

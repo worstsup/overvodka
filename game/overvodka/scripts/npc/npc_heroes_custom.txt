@@ -2531,6 +2531,10 @@
 			{
 				"Deprecated"	"true"
 			}
+			"slark_slark"
+			{
+				"Deprecated"	"true"
+			}
 		}
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -3488,6 +3492,10 @@
 				"Deprecated" 	"true"
 			}
 			"spectre_twist_the_knife" 	
+			{
+				"Deprecated" 	"true"
+			}
+			"spectre_spectre"
 			{
 				"Deprecated" 	"true"
 			}

@@ -249,13 +249,6 @@ function modifier_sans_field:OnCreated( kv )
 	end
 end
 
-function modifier_sans_field:OnRefresh( kv )
-	
-end
-
-function modifier_sans_field:OnRemoved()
-end
-
 function modifier_sans_field:OnDestroy()
 	if not IsServer() then return end
 	if self.owner then

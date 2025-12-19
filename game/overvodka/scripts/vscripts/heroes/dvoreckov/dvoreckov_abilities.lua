@@ -1463,7 +1463,8 @@ end
 
 modifier_dvoreckov_wwe = class({})
 
-function modifier_dvoreckov_wwe:IsDebuff() return true end
+function modifier_dvoreckov_wwe:IsDebuff() return (self:GetCaster() ~= self:GetParent()) end
+function modifier_dvoreckov_wwe:IsBuff() return (self:GetCaster() == self:GetParent()) end
 function modifier_dvoreckov_wwe:IsAura() return (self:GetCaster() == self:GetParent()) end
 function modifier_dvoreckov_wwe:GetModifierAura() return "modifier_dvoreckov_wwe" end
 function modifier_dvoreckov_wwe:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
@@ -1472,6 +1473,7 @@ function modifier_dvoreckov_wwe:GetAuraRadius() return self.rot_radius end
 
 function modifier_dvoreckov_wwe:OnCreated()
 	self.rot_radius = self:GetAbility():GetSpecialValueFor( "rot_radius" )
+	self.parent = self:GetParent()
     if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
 		self.rot_slow = ability_manager:GetValueExort(self:GetAbility(), self:GetCaster(), "rot_slow")
 		self.rot_damage = ability_manager:GetValueWex(self:GetAbility(), self:GetCaster(), "rot_damaged")
@@ -1481,17 +1483,16 @@ function modifier_dvoreckov_wwe:OnCreated()
 	end
 	self.manacost = self:GetAbility():GetSpecialValueFor( "mana_cost_per_secondd" )
 	self.rot_tick = self:GetAbility():GetSpecialValueFor( "rot_tick" )
-	self.manacost = self.manacost * self:GetParent():GetMaxMana() * 0.01
-	self.parent = self:GetParent()
-	self:Burn()
+	self.manacost = self.manacost * self.parent:GetMaxMana() * 0.01
 	if IsServer() then
-		if self:GetParent() == self:GetCaster() then
+		if self.parent == self:GetCaster() then
+			self:Burn()
 			EmitSoundOn( "rotik", self:GetCaster() )
-			local nFXIndex = ParticleManager:CreateParticle( "particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+			local nFXIndex = ParticleManager:CreateParticle( "particles/econ/items/pudge/pudge_immortal_arm/pudge_immortal_arm_rot.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent )
 			ParticleManager:SetParticleControl( nFXIndex, 1, Vector( self.rot_radius, 1, self.rot_radius ) )
 			self:AddParticle( nFXIndex, false, false, -1, false, false )
 		else
-			local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_pudge/pudge_rot_recipient.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+			local nFXIndex = ParticleManager:CreateParticle( "particles/units/heroes/hero_pudge/pudge_rot_recipient.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent )
 			self:AddParticle( nFXIndex, false, false, -1, false, false )
 		end
 
@@ -1512,7 +1513,7 @@ function modifier_dvoreckov_wwe:DeclareFunctions()
 end
 
 function modifier_dvoreckov_wwe:GetModifierMoveSpeedBonus_Percentage( params )
-	if self:GetParent() == self:GetCaster() then
+	if self.parent == self:GetCaster() then
 		return 0
 	end
 	return self.rot_slow
@@ -1520,7 +1521,7 @@ end
 
 function modifier_dvoreckov_wwe:OnIntervalThink()
 	if IsServer() then
-		if self:GetParent() ~= self:GetCaster() then
+		if self.parent ~= self:GetCaster() then
 		    return 0
 	    end
 		local flDamagePerTick = self.rot_tick * self.rot_damage
@@ -1536,25 +1537,18 @@ function modifier_dvoreckov_wwe:OnIntervalThink()
 end
 
 function modifier_dvoreckov_wwe:Burn()
-	self:GetCaster():SpendMana( self.manacost, self:GetAbility() )
-	if self:GetParent() ~= self:GetCaster() then
-		return 0
-	end
+	if self.parent ~= self:GetCaster() then return end
+	self.parent:SpendMana( self.manacost, self:GetAbility() )
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),
-		self.parent:GetOrigin(),
-		nil,
-		self.rot_radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil,
+		self.rot_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0,
-		0,
-		false
+		0, 0, false
 	)
 	for _,enemy in pairs(enemies) do
 		self.dmg = self.rot_damage + enemy:GetMaxHealth() * 0.004
 		self.damageTable = {
-			attacker = self:GetParent(),
+			attacker = self.parent,
 			damage = self.dmg,
 			damage_type = self:GetAbility():GetAbilityDamageType(),
 			ability = self:GetAbility(),

@@ -63,7 +63,7 @@ function chara_d:OnSpellStart()
     EmitSoundOn("chara_d", caster)
 
     if self:GetSpecialValueFor("double") > 0 then
-        local delay = math.max(0, self:GetSpecialValueFor("double_delay"))
+        local delay = math.max(0.1, self:GetSpecialValueFor("double_delay"))
         caster:AddNewModifier(caster, self, "modifier_chara_d_double", { duration = delay })
     end
 end
