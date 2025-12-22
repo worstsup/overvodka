@@ -2178,10 +2178,10 @@
 		"Ability1"		"rostik_q"
 		"Ability2"		"rostik_w"
 		"Ability3"		"rostik_e"
-		"Ability4"		"skywrath_mage_ruin_and_restoration"
+		"Ability4"		"rostik_q_throw"
 		"Ability5"		"wisp_spirits"
 		"Ability6"		"rostik_r"
-		"Ability7"		"rostik_q_throw"
+		"Ability7"		"skywrath_mage_ruin_and_restoration"
 
 		"Ability10"		"special_bonus_unique_rostik_1"
 		"Ability11"		"special_bonus_hp_150"

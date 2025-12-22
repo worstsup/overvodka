@@ -1,29 +1,182 @@
 LinkLuaModifier( "modifier_rostik_q", "heroes/rostik/rostik_q", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_rostik_q_swap_state", "heroes/rostik/rostik_q", LUA_MODIFIER_MOTION_NONE)
+
+modifier_rostik_q_swap_state = class({})
+
+function modifier_rostik_q_swap_state:IsHidden() return true end
+function modifier_rostik_q_swap_state:IsPurgable() return false end
+function modifier_rostik_q_swap_state:RemoveOnDeath() return true end
+
+
+local function Rostik_EnsureThrow(caster, base)
+    if not IsServer() then return nil end
+    if not caster or caster:IsNull() then return nil end
+
+    local throw_ab = caster:FindAbilityByName("rostik_q_throw")
+    if not throw_ab then
+        throw_ab = caster:AddAbility("rostik_q_throw")
+        if throw_ab then
+            throw_ab:SetStolen(true)
+        end
+    end
+    if not throw_ab or throw_ab:IsNull() then return nil end
+
+    if base and not base:IsNull() then
+        throw_ab:SetLevel(base:GetLevel())
+    end
+
+    throw_ab:SetHidden(true)
+    throw_ab:SetActivated(false)
+    return throw_ab
+end
+
+local function Rostik_CleanupThrow(caster)
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+
+    if not caster:HasModifier("modifier_rostik_q_swap_state") then
+        local throw_ab = caster:FindAbilityByName("rostik_q_throw")
+        if throw_ab and not throw_ab:IsNull() then
+            throw_ab:SetHidden(true)
+            throw_ab:SetActivated(false)
+            throw_ab.stored_brew_time = nil
+            throw_ab.brew_time = nil
+        end
+        if _G.rostik_q_throw then
+            rostik_q_throw.reflected_brew_time = nil
+        end
+        return
+    end
+
+    local base = caster:FindAbilityByName("rostik_q")
+    local throw_ab = caster:FindAbilityByName("rostik_q_throw")
+
+    if not base or base:IsNull() then
+        if throw_ab and not throw_ab:IsNull() then
+            throw_ab:SetHidden(true)
+            throw_ab:SetActivated(false)
+            throw_ab.stored_brew_time = nil
+            throw_ab.brew_time = nil
+        end
+        if _G.rostik_q_throw then
+            rostik_q_throw.reflected_brew_time = nil
+        end
+        caster:RemoveModifierByName("modifier_rostik_q_swap_state")
+        return
+    end
+
+    if throw_ab and not throw_ab:IsNull() then
+        caster:SwapAbilities(base:GetAbilityName(), throw_ab:GetAbilityName(), true, false)
+        throw_ab:SetHidden(true)
+        throw_ab:SetActivated(false)
+        throw_ab.stored_brew_time = nil
+        throw_ab.brew_time = nil
+    end
+
+    base:SetHidden(false)
+    base:SetActivated(true)
+
+    if _G.rostik_q_throw then
+        rostik_q_throw.reflected_brew_time = nil
+    end
+
+    caster:RemoveModifierByName("modifier_rostik_q_swap_state")
+end
+
+
+local function Rostik_ExplodeAt(caster, ability, origin, brew_time)
+    if not caster or caster:IsNull() then return end
+    if not ability or ability:IsNull() then return end
+    if not origin then return end
+
+    local max_brew   = ability:GetSpecialValueFor("brew_time")
+    local min_stun   = ability:GetSpecialValueFor("min_stun")
+    local max_stun   = ability:GetSpecialValueFor("max_stun")
+    local min_damage = ability:GetSpecialValueFor("min_damage")
+    local max_damage = ability:GetSpecialValueFor("max_damage")
+
+    local radius = ability:GetSpecialValueFor("midair_explosion_radius")
+    if radius <= 0 then
+        radius = ability:GetSpecialValueFor("radius")
+    end
+    if radius <= 0 then radius = 300 end
+
+    if max_brew <= 0 then max_brew = 1 end
+    brew_time = math.max(0, math.min(brew_time or 0, max_brew))
+
+    local stun = (brew_time / max_brew) * (max_stun - min_stun) + min_stun
+    local damage = (brew_time / max_brew) * (max_damage - min_damage) + min_damage
+
+    local particle_cast = "particles/rostik_q_exp.vpcf"
+    local sound_cast = "rostik_q_exp"
+    local fx = ParticleManager:CreateParticle(particle_cast, PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(fx, 0, origin)
+    ParticleManager:ReleaseParticleIndex(fx)
+    EmitSoundOnLocationWithCaster(origin, sound_cast, caster)
+
+    local damageTable = {
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+        victim = nil,
+    }
+
+    local enemies = FindUnitsInRadius(
+        caster:GetTeamNumber(),
+        origin,
+        nil,
+        radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        0,
+        false
+    )
+
+    for _, enemy in pairs(enemies) do
+        if enemy and not enemy:IsNull() then
+            damageTable.victim = enemy
+            ApplyDamage(damageTable)
+            enemy:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = stun })
+        end
+    end
+end
 
 rostik_q = class({})
 
+function rostik_q:OnOwnerSpawned()
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    Timers:CreateTimer(0, function()
+        if not caster or caster:IsNull() then return end
+        Rostik_CleanupThrow(caster)
+    end)
+end
+
+
 function rostik_q:OnSpellStart()
-	local caster = self:GetCaster()
-	local duration = self:GetSpecialValueFor( "brew_explosion" )
-	caster:AddNewModifier(
-		caster,
-		self,
-		"modifier_rostik_q",
-		{ duration = duration }
-	)
-	local ability = caster:FindAbilityByName( "rostik_q_throw" )
-	if not ability then
-		ability = caster:AddAbility( "rostik_q_throw" )
-		ability:SetStolen( true )
-	end
-	ability:SetLevel( self:GetLevel() )
-	caster:SwapAbilities(
-		self:GetAbilityName(),
-		ability:GetAbilityName(),
-		false,
-		true
-	)
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+    if caster:HasModifier("modifier_rostik_q") then return end
+
+    local duration = self:GetSpecialValueFor("brew_explosion")
+    caster:AddNewModifier(caster, self, "modifier_rostik_q", { duration = duration })
+
+    local base = self
+    local throw_ab = Rostik_EnsureThrow(caster, base)
+    if not throw_ab then return end
+
+    throw_ab:SetHidden(false)
+    throw_ab:SetActivated(true)
+    throw_ab:EndCooldown()
+
+    caster:SwapAbilities(base:GetAbilityName(), throw_ab:GetAbilityName(), false, true)
+	caster:AddNewModifier(caster, self, "modifier_rostik_q_swap_state", {})
+
 end
 
 rostik_q_throw = class({})
@@ -39,11 +192,37 @@ end
 function rostik_q_throw:CastFilterResultLocation(location)
 	return UF_SUCCESS
 end
+
 function rostik_q_throw:IsStealable()
 	return false
 end
+
+function rostik_q_throw:OnOwnerSpawned()
+    if not IsServer() then return end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    Timers:CreateTimer(0, function()
+        if not caster or caster:IsNull() then return end
+
+        local base = caster:FindAbilityByName("rostik_q")
+        if (not caster:HasModifier("modifier_rostik_q")) or (not base or base:IsNull()) then
+            self:SetHidden(true)
+            self:SetActivated(false)
+            self.stored_brew_time = nil
+            self.brew_time = nil
+        end
+    end)
+end
+
+
 function rostik_q_throw:OnSpellStart()
 	local caster = self:GetCaster()
+	if not caster:HasModifier("modifier_rostik_q") and not rostik_q_throw.reflected_brew_time and not self.stored_brew_time then
+		Rostik_CleanupThrow(caster)
+		return
+	end
 	local target = self:GetCursorTarget()
 	local point = self:GetCursorPosition()
 	local max_brew = self:GetSpecialValueFor("brew_time")
@@ -86,6 +265,7 @@ function rostik_q_throw:OnSpellStart()
 		ProjectileManager:CreateTrackingProjectile(info)
 	else
 		info.vVelocity = (point - caster:GetOrigin()):Normalized() * projectile_speed
+		info.vVelocity.z = 0
 		info.fDistance = (point - caster:GetOrigin()):Length2D()
 		info.vSpawnOrigin  = self:GetCaster():GetOrigin()
 		info.EffectName = projectile_name_2
@@ -95,9 +275,11 @@ function rostik_q_throw:OnSpellStart()
 	local sound_cast = "rostik_q_fly"
 	EmitSoundOn(sound_cast, caster)
 
-	local ability = caster:FindAbilityByName("rostik_q")
-	if not ability then return end
-	caster:SwapAbilities(self:GetAbilityName(), ability:GetAbilityName(), false, true)
+	local base = caster:FindAbilityByName("rostik_q")
+	if base and caster:HasModifier("modifier_rostik_q_swap_state") then
+		caster:SwapAbilities(self:GetAbilityName(), base:GetAbilityName(), false, true)
+		caster:RemoveModifierByName("modifier_rostik_q_swap_state")
+	end
 end
 
 function rostik_q_throw:OnProjectileHit_ExtraData(target, location, ExtraData)
@@ -156,18 +338,11 @@ end
 
 modifier_rostik_q = class({})
 
-function modifier_rostik_q:IsHidden()
-	return true
-end
-function modifier_rostik_q:IsDebuff()
-	return false
-end
-function modifier_rostik_q:IsStunDebuff()
-	return false
-end
-function modifier_rostik_q:IsPurgable()
-	return false
-end
+function modifier_rostik_q:IsHidden() return true end
+function modifier_rostik_q:IsDebuff() return false end
+function modifier_rostik_q:IsStunDebuff() return false end
+function modifier_rostik_q:IsPurgable() return false end
+function modifier_rostik_q:RemoveOnDeath() return true end
 
 function modifier_rostik_q:OnCreated( kv )
 	self.min_stun = self:GetAbility():GetSpecialValueFor( "min_stun" )
@@ -186,17 +361,45 @@ function modifier_rostik_q:OnCreated( kv )
 	EmitSoundOn( sound_cast_2, self:GetParent() )
 end
 
-function modifier_rostik_q:OnRefresh( kv )
+function modifier_rostik_q:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_DEATH,
+    }
 end
-function modifier_rostik_q:OnRemoved()
+
+function modifier_rostik_q:OnDeath(params)
+    if not IsServer() then return end
+    if not params or params.unit ~= self:GetParent() then return end
+    if self._cleaned then return end
+    self._cleaned = true
+
+    local caster = self:GetCaster()
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    if not caster or caster:IsNull() then return end
+    if not ability or ability:IsNull() then
+        Rostik_CleanupThrow(caster)
+        return
+    end
+
+    local max_brew = ability:GetSpecialValueFor("brew_time")
+    if max_brew <= 0 then max_brew = 1 end
+    local brew_time = math.min(GameRules:GetGameTime() - self:GetCreationTime(), max_brew)
+
+    Rostik_ExplodeAt(caster, ability, parent:GetAbsOrigin(), brew_time)
+    Rostik_CleanupThrow(caster)
 end
 
 function modifier_rostik_q:OnDestroy()
-	if not IsServer() then return end
-	local sound_cast = "rostik_q_start"
-	StopSoundOn( sound_cast, self:GetParent() )
-	local sound_cast_2 = "rostik_q_start_fitil"
-	StopSoundOn( sound_cast_2, self:GetParent() )
+    if not IsServer() then return end
+
+    StopSoundOn("rostik_q_start", self:GetParent())
+    StopSoundOn("rostik_q_start_fitil", self:GetParent())
+
+    if not self._cleaned then
+        self._cleaned = true
+        Rostik_CleanupThrow(self:GetCaster())
+    end
 end
 
 function modifier_rostik_q:OnIntervalThink()
@@ -214,25 +417,16 @@ function modifier_rostik_q:OnIntervalThink()
 	}
 	local enemies = FindUnitsInRadius(
 		self:GetCaster():GetTeamNumber(),
-		self:GetParent():GetOrigin(),
-		nil,
-		self.radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		self:GetParent():GetOrigin(), nil,
+		self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_NONE,
-		0,
-		false
+		0, 0, false
 	)
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
 		ApplyDamage( damageTable )
 		if enemy and not enemy:IsNull() then
-			enemy:AddNewModifier(
-				self:GetCaster(),
-				self:GetAbility(),
-				"modifier_generic_stunned_lua",
-				{ duration = self.max_stun }
-			)
+			enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.max_stun })
 		end
 	end
 	if not self:GetParent():IsInvulnerable() then
@@ -240,27 +434,16 @@ function modifier_rostik_q:OnIntervalThink()
 		damageTable.damage = self.fail_damage * self:GetParent():GetMaxHealth() * 0.01
 		damageTable.victim = self:GetParent()
 		damageTable.damage_type = DAMAGE_TYPE_PURE
+		damageTable.damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS
 		ApplyDamage( damageTable )
 		if self:GetParent() and not self:GetParent():IsNull() then
-			self:GetParent():AddNewModifier(
-				self:GetParent(),
-				self:GetAbility(),
-				"modifier_generic_stunned_lua",
-				{ duration = self.max_stun }
-			)
+			self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.max_stun })
 		end
 	end
-	local ability = self:GetCaster():FindAbilityByName( "rostik_q_throw" )
-	self:GetCaster():SwapAbilities(
-		self:GetAbility():GetAbilityName(),
-		ability:GetAbilityName(),
-		true,
-		false
-	)
-	if ability:IsStolen() then
-		self:GetCaster():RemoveAbilityByHandle( ability )
-	end
-	self:PlayEffects1( self:GetParent() )
+	Rostik_CleanupThrow(self:GetCaster())
+
+	self:PlayEffects1(self:GetParent())
+	self._cleaned = true
 	self:Destroy()
 end
 

@@ -1318,8 +1318,8 @@
 				}
 				"aura_attack_speed"		"-45"
 				"blast_damage"			"300"
-				"blast_movement_speed"	"-30"
-				"blast_debuff_duration"	"3.0"
+				"blast_movement_speed"	"-40"
+				"blast_debuff_duration"	"4.0"
 				"blast_radius"
 				{
 					"value"		"1600"
@@ -1329,8 +1329,8 @@
 				"vision_range"			"1000"
 				"restoration_reduction_aura"	"25"
 				"illusion_multiplier_pct"	"100"
-				"spell_amp"			"25"				
-				"resist_debuff_duration"	"10.0"
+				"spell_amp"			"20"				
+				"resist_debuff_duration"	"16.0"
 		}
 	}
 	"item_recipe_suchiy"

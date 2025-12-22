@@ -358,12 +358,19 @@ function modifier_item_suchiy_blast_amp:OnCreated()
 end
 
 function modifier_item_suchiy_blast_amp:DeclareFunctions()
-    return { MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE }
+    return { 
+        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+        MODIFIER_PROPERTY_TOOLTIP,
+}
 end
 
 function modifier_item_suchiy_blast_amp:GetModifierIncomingDamage_Percentage(params)
     if not params then return 0 end
     if params.inflictor == nil then return 0 end
+    return self.amp or 0
+end
+
+function modifier_item_suchiy_blast_amp:OnTooltip()
     return self.amp or 0
 end
 
@@ -431,7 +438,22 @@ function modifier_item_suchiy_arctic_bind:IsPurgable() return true end
 function modifier_item_suchiy_arctic_bind:CheckState()
     return {
         [MODIFIER_STATE_ROOTED] = true,
+        [MODIFIER_STATE_INVISIBLE] = false,
     }
+end
+
+function modifier_item_suchiy_arctic_bind:GetPriority()
+	return MODIFIER_PRIORITY_SUPER_ULTRA
+end
+
+function modifier_item_suchiy_arctic_bind:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_INVISIBILITY_LEVEL,
+    }
+end
+
+function modifier_item_suchiy_arctic_bind:GetModifierInvisibilityLevel()
+    return 0
 end
 
 function modifier_item_suchiy_arctic_bind:GetEffectName()
