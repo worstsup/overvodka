@@ -271,7 +271,6 @@ function modifier_stariy_lasers_pull_thinker:OnCreated( kv )
 	self.radius = self:GetAbility():GetSpecialValueFor( "pull_radius" )
 end
 
-
 function modifier_stariy_lasers_pull_thinker:OnDestroy()
 	if IsServer() then
 	 	UTIL_Remove( self:GetParent())
@@ -303,7 +302,7 @@ function modifier_stariy_lasers_pull_thinker:GetAuraSearchType()
 end
 
 function modifier_stariy_lasers_pull_thinker:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD
 end
 
 modifier_stariy_lasers_pull = {}
@@ -330,7 +329,6 @@ function modifier_stariy_lasers_pull:OnCreated( kv )
 	self:StartIntervalThink(FrameTime())
 end
 
-
 function modifier_stariy_lasers_pull:OnIntervalThink()
 	if IsClient() then return end
 	local direction = self.center - self:GetParent():GetOrigin()
@@ -344,7 +342,11 @@ end
 function modifier_stariy_lasers_pull:OnDestroy()
 	if IsServer() then
 		local parent = self:GetParent()
-		FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+		if not parent:IsNull() then
+			if not parent:IsOutOfGame() and not parent:IsInvulnerable() then
+				FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+			end
+		end
 	end
 end
 

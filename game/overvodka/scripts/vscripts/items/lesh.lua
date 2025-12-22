@@ -19,9 +19,8 @@ function item_lesh:OnSpellStart()
     caster:EmitSound("ailesh")
     target:EmitSound("ailesh")
 
-    if target:IsDebuffImmune() then return end
-
     target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor("stun_duration")})
+    if target:IsDebuffImmune() or target:IsMagicImmune() or target:IsInvulnerable() then return end
     ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS})
     self:SpendCharge(1)
 end

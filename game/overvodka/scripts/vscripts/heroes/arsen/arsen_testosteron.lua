@@ -24,52 +24,28 @@ function arsen_testosteron:OnSpellStart()
 	local radius = self:GetSpecialValueFor("radius")
 	local duration = self:GetSpecialValueFor("duration")
 	local enemies = FindUnitsInRadius(
-		caster:GetTeamNumber(),
-		point,
-		nil,
-		radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		caster:GetTeamNumber(), point, nil,
+		radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-		0,
-		false
+		DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		0, false
 	)
 	local hero_enemies = FindUnitsInRadius(
-		caster:GetTeamNumber(),
-		point,
-		nil,
-		radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-		0,
-		false
+		caster:GetTeamNumber(), point, nil, radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+		0, false
 	)
 	for _,enemy in pairs(enemies) do
-		enemy:AddNewModifier(
-			caster,
-			self,
-			"modifier_arsen_testosteron_debuff",
-			{ duration = duration * (1 - enemy:GetStatusResistance()) }
-		)
+		enemy:AddNewModifier( caster, self, "modifier_arsen_testosteron_debuff", { duration = duration * (1 - enemy:GetStatusResistance()) } )
 	end
-	caster:AddNewModifier(
-		caster,
-		self,
-		"modifier_arsen_testosteron",
-		{ duration = buff_duration }
-	)
+	caster:AddNewModifier( caster, self, "modifier_arsen_testosteron", { duration = buff_duration } )
 	if #enemies>0 then
 		local sound_cast = "Hero_Axe.Berserkers_Call"
 		EmitSoundOn( sound_cast, self:GetCaster() )
 		if self:GetSpecialValueFor("str_per_hero") > 0 then
 			local str_gain = self:GetSpecialValueFor("str_per_hero") * #hero_enemies
-			caster:AddNewModifier(
-				caster,
-				self,
-				"modifier_arsen_testosteron_str",
-				{ duration = buff_duration, str_gain = str_gain }
-			)
+			caster:AddNewModifier( caster, self, "modifier_arsen_testosteron_str", { duration = buff_duration, str_gain = str_gain } )
 		end
 	end
 	self:PlayEffects(radius)
@@ -87,7 +63,6 @@ function modifier_arsen_testosteron_str:IsHidden() return true end
 function modifier_arsen_testosteron_str:IsPurgable() return false end
 
 function modifier_arsen_testosteron_str:OnCreated(kv)
-	if not IsServer() then return end
 	self.str_gain = kv.str_gain or 0
 end
 

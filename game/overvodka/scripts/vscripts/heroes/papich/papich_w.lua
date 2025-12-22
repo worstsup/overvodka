@@ -533,7 +533,9 @@ function modifier_papich_w_pull:OnDestroy()
     if not IsServer() then return end
     local parent = self:GetParent()
     if parent and not parent:IsNull() then
-        FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+        if not parent:IsOutOfGame() and not parent:IsInvulnerable() then
+            FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
+        end
     end
 end
 

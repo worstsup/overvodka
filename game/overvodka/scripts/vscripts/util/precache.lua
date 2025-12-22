@@ -10,6 +10,9 @@ PrecacheUtils.items = {
 PrecacheUtils.particles = {
 		"particles/econ/items/drow/drow_arcana/drow_arcana_status_effect_frost_arrow.vpcf",
 		"particles/econ/items/drow/drow_ti9_immortal/drow_ti9_frost_arrow_debuff.vpcf",
+		"particles/econ/events/ti9/shivas_guard_ti9_impact.vpcf",
+		"particles/econ/events/ti9/shivas_guard_ti9_active.vpcf",
+		"particles/events/crownfall/survivors/abilities/crystal_maiden/crystal_maiden_frostbite.vpcf",
 		"particles/kaska.vpcf",
 		"particles/badun_blade.vpcf",
 		"particles/badun_effect.vpcf",
@@ -367,6 +370,7 @@ PrecacheUtils.sounds = {
 		"soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_alchemist.vsndevts",
+		"soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts",
 		"soundevents/soundevents_conquest.vsndevts",
 		"sounds/weapons/hero/zuus/lightning_bolt.vsnd",
 		"soundevents/game_sounds_overthrow.vsndevts",

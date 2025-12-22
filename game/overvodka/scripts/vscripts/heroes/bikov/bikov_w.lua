@@ -36,7 +36,10 @@ function bikov_w:OnSpellStart()
 	local canAllies = self:GetSpecialValueFor("both_teams")>0
 	local is_ally   = (allies and canAllies) and 1 or 0
 
-	local dur = self:GetSpecialValueFor("prison_duration") * (1 - t:GetStatusResistance())
+	local dur = self:GetSpecialValueFor("prison_duration")
+	if not allies then
+		dur = dur * (1 - t:GetStatusResistance())
+	end
 	t:AddNewModifier(c, self, "modifier_bikov_w", { duration = dur, is_ally = is_ally })
 
 	if is_ally==1 then

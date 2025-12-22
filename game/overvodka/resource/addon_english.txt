@@ -3981,11 +3981,17 @@
 		"DOTA_Tooltip_ability_item_octarine_vodka_int" "+$int"
 		"DOTA_Tooltip_ability_item_octarine_vodka_mana_regen" "+$mana_regen"
 
-		"DOTA_Tooltip_ability_item_badun"                   "BADUN BLADE"
-		"DOTA_Tooltip_ability_item_badun_Description"        "<h1>Active: Hangover</h1> Places a hangover effect on an enemy for %duration% sec. and deals damage equal to %blast_agility_multiplier% * their primary attribute + %blast_damage_base%. During the hangover, the enemy cannot attack or receive physical damage, but receives magical damage increased by %ethereal_damage_bonus%%%."
+		"DOTA_Tooltip_ability_item_badun" "BADUN BLADE"
+		"DOTA_Tooltip_ability_item_badun_Description" "<h1>Use: Badun</h1>Applies Badun to an enemy for %duration% seconds and deals damage equal to %blast_agility_multiplier% * their primary attribute + %blast_damage_base%. While Badun is applied, the enemy cannot attack or take physical damage, but takes magical damage increased by %ethereal_damage_bonus%%%."
+		"DOTA_Tooltip_ability_item_badun_bonus_strength" "+$str" 
+		"DOTA_Tooltip_ability_item_badun_bonus_agility" "+$agi" 
+		"DOTA_Tooltip_ability_item_badun_bonus_mana_tooltip" "%+to mana recovery" 
 		"DOTA_Tooltip_ability_item_badun_bonus_intellect" "+$int"
-		"DOTA_Tooltip_ability_item_badun_bonus_mana" "+$mana"
-		"DOTA_Tooltip_ability_item_badun_bonus_mana_regen" "+$mana_regen"
+		"DOTA_Tooltip_ability_item_badun_bonus_mana" "+$mana" 
+		"DOTA_Tooltip_ability_item_badun_bonus_mana_regen" "+$mana_regen" 
+		"DOTA_Tooltip_ability_item_badun_spell_amp" "%+$spell_amp"
+		"DOTA_Tooltip_modifier_item_badun_ethereal" "Badun Blade"
+		"DOTA_Tooltip_modifier_item_badun_ethereal_description" "Cannot attack and takes increased magic damage."
 
 		"DOTA_Tooltip_modifier_black_king_bar_immune"				"Парение"
 

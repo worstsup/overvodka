@@ -760,15 +760,16 @@ function OvervodkaGameMode:GiveZhenyaHamsterCoins(playerID, amount)
 end
 
 function OvervodkaGameMode:RollZhenyaPrimeHours()
-    local roll24 = RandomInt(1, 100)
-    if roll24 == 1 then
+    if RandomInt(1, 1000) <= 5 then
         return 24
     end
 
     local totalWeight = 0
     local weights = {}
+
     for h = 1, 23 do
-        local w = (24 - h)
+        local d = (24 - h)
+        local w = d * d
         weights[h] = w
         totalWeight = totalWeight + w
     end
@@ -781,7 +782,7 @@ function OvervodkaGameMode:RollZhenyaPrimeHours()
             return h
         end
     end
-
+	
     return 1
 end
 
