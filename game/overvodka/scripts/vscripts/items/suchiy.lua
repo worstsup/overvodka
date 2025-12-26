@@ -49,6 +49,7 @@ function item_suchiy:OnSpellStart()
     }
 
     caster:EmitSound("DOTA_Item.ShivasGuard.Activate")
+    caster:EmitSound("suchiy")
 
     local blast_pfx = ParticleManager:CreateParticle("particles/econ/events/ti9/shivas_guard_ti9_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:SetParticleControl(blast_pfx, 0, caster:GetAbsOrigin())

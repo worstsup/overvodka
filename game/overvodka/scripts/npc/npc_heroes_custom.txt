@@ -4112,4 +4112,80 @@
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_nyx_assassin.vsndevts"
 		"VoiceFile"		""
 	}
+	"npc_dota_hero_hoodwink"
+	{
+		"Model"		"models/leon/leon.vmdl"
+		"SoundSet"		""
+		"BotImplemented"		"0"
+		"ModelScale"		"0.75"
+		"LoadoutScale"		"0.8"
+		"DisableWearables"	"1"
+		"SimilarHeroes"				"21,9,65"
+		"HeroSelectSoundEffect"		"Hero_Hoodwink.Pick"
+		"AbilityLayout"					"5"
+		"Ability1"					"leon_q"
+		"Ability2"					"hoodwink_bushwhack"
+		"Ability3"					"hoodwink_scurry"
+		"Ability4"					"generic_hidden"
+		"Ability5"					"generic_hidden"		
+		"Ability6"					"hoodwink_sharpshooter"
+		"Ability7"					"hoodwink_sharpshooter_release"
+		"Ability8"					"generic_hidden"
+		"Ability10"					"special_bonus_unique_hoodwink_bushwhack_damage"
+		"Ability11"					"special_bonus_hp_150"
+		"Ability12"					"special_bonus_unique_hoodwink_scurry_charges"
+		"Ability13"					"special_bonus_unique_hoodwink_acorn_shot_bounces"
+		"Ability14"					"special_bonus_unique_hoodwink_sharpshooter_vision"
+		"Ability15"					"special_bonus_corruption_3"
+		"Ability16"					"special_bonus_unique_hoodwink_acorn_shot_charges"
+		"Ability17"					"special_bonus_unique_hoodwink_sharpshooter_damage"
+
+		"Facets"
+		{
+			"hoodwink_hunter" 
+			{
+				"Icon"				"range"
+				"Color"				"Yellow"
+				"GradientID"		"0"
+			}
+			"hoodwink_treebounce_trickshot" 
+			{
+				"Icon"				"tree"
+			}
+			"hoodwink_hipshot" 
+			{
+				"Icon"				"cooldown"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
+		}
+
+		"ArmorPhysical"				"0.0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"22"
+		"AttackDamageMax"			"29"
+		"AttackRate"				"1.7"
+		"BaseAttackSpeed"			"100"
+		"AttackAnimationPoint"		"0.4"
+		"AttackAcquisitionRange"	"800"
+		"AttackRange"				"900"
+		"ProjectileModel"			"particles/units/heroes/hero_hoodwink/hoodwink_base_attack.vpcf"
+		"ProjectileSpeed"			"1800"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_ALL"
+		"AttributeBaseStrength"		"17"
+		"AttributeStrengthGain"		"2.0"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"3.6"
+		"AttributeBaseIntelligence"	"21"
+		"AttributeIntelligenceGain"	"2.9"
+		"StatusHealthRegen"			"0.25"
+		"MovementSpeed"				"315"
+		"MovementTurnRate"			"0.9"
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"HealthBarOffset"			"220"
+		
+		"particle_folder"		"particles/units/heroes/hero_hoodwink"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_hoodwink.vsndevts"
+		"VoiceFile"				""
+	}
 }

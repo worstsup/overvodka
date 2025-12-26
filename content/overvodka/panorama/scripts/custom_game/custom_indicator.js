@@ -58,7 +58,7 @@ function UpdateMousePosition() {
 		"behavior": GameUI.GetClickBehaviors(),
 		"ability": Abilities.GetLocalPlayerActiveAbility(),
 	}
-
+	
 	ConsiderBehavior( CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_CAST, last_state, current_state );
 	ConsiderBehavior( CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_VECTOR_CAST, last_state, current_state );
 

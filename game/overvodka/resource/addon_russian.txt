@@ -351,6 +351,7 @@
 		"npc_dota_hero_undying"				"PALE VISITOR"
 		"npc_dota_hero_ember_spirit"		"PEACEMAKER"
 		"npc_dota_hero_nyx_assassin"		"КОЛИБРИ"
+		"npc_dota_hero_hoodwink"			"ЛЕОН"
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
 		"npc_worker"						"РАБОТЯГА"

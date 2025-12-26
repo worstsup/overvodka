@@ -48,6 +48,7 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_undying",
     "npc_dota_hero_ember_spirit",
     "npc_dota_hero_nyx_assassin",
+    "npc_dota_hero_hoodwink",
 ]
 
 function FixModelScene(){

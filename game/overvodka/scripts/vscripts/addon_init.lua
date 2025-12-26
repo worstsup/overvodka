@@ -69,9 +69,6 @@ if IsClient() then
                     Convars:SetFloat("voice_threshold", stacks)
                 end, nil)
             end
-            print(Entities:GetLocalPlayerPawn())
-            print(Entities:GetLocalPlayerController())
-            print(Entities:GetLocalPlayer())
         end
     end, nil )
 end

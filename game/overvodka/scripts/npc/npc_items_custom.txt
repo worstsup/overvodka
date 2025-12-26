@@ -621,7 +621,7 @@
 		"BaseClass"					"item_lua"
 		"ScriptFile"				"items/octarine_vodka"
   		"AbilityTextureName"		"octarine_vodka"
-  		"AbilityBehavior"		   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"AbilityBehavior"		    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ItemCost"					"4800"
 		"ItemShopTags"				"damage"
 		"ItemQuality"				"magicks"
@@ -2191,7 +2191,6 @@
 
 		"AbilityValues"
 		{
-			// Пассивка
 			"int"                          "30"
 			"armor"                        "8"
 			"mp"                           "10"
@@ -2835,7 +2834,7 @@
 			"ev"					"35"
 			"attack"				"20"
 			"mana_per_hit"			"40"
-			"mana_per_hit_illusion"	"10"
+			"mana_per_hit_illusion"	"0"
 			"damage_per_burn"		"1"
 			"slow_movespeed"		"-80"
 			"duration"				"4"

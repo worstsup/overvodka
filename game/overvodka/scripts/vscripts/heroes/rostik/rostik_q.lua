@@ -8,7 +8,6 @@ function modifier_rostik_q_swap_state:IsHidden() return true end
 function modifier_rostik_q_swap_state:IsPurgable() return false end
 function modifier_rostik_q_swap_state:RemoveOnDeath() return true end
 
-
 local function Rostik_EnsureThrow(caster, base)
     if not IsServer() then return nil end
     if not caster or caster:IsNull() then return nil end
@@ -84,7 +83,6 @@ local function Rostik_CleanupThrow(caster)
     caster:RemoveModifierByName("modifier_rostik_q_swap_state")
 end
 
-
 local function Rostik_ExplodeAt(caster, ability, origin, brew_time)
     if not caster or caster:IsNull() then return end
     if not ability or ability:IsNull() then return end
@@ -115,26 +113,14 @@ local function Rostik_ExplodeAt(caster, ability, origin, brew_time)
     ParticleManager:ReleaseParticleIndex(fx)
     EmitSoundOnLocationWithCaster(origin, sound_cast, caster)
 
-    local damageTable = {
-        attacker = caster,
-        damage = damage,
-        damage_type = DAMAGE_TYPE_MAGICAL,
-        ability = ability,
-        victim = nil,
-    }
+    local damageTable = {attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = ability}
 
     local enemies = FindUnitsInRadius(
-        caster:GetTeamNumber(),
-        origin,
-        nil,
-        radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        caster:GetTeamNumber(), origin,
+		nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_NONE,
-        0,
-        false
+        0, 0, false
     )
-
     for _, enemy in pairs(enemies) do
         if enemy and not enemy:IsNull() then
             damageTable.victim = enemy
@@ -156,7 +142,6 @@ function rostik_q:OnOwnerSpawned()
         Rostik_CleanupThrow(caster)
     end)
 end
-
 
 function rostik_q:OnSpellStart()
     local caster = self:GetCaster()

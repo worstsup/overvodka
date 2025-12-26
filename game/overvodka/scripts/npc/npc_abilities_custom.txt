@@ -16943,4 +16943,35 @@
 		}
 	}
 
+	"leon_q"
+	{
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"leon_q"
+		"ScriptFile"					"heroes/leon/leon_q"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastPoint"				"0.15"
+		"MaxLevel"						"5"
+		"Innate"						"1"
+		"AbilityCastRange"				"900"
+		"AbilityValues"
+		{
+				"attacks_number"		"4"
+				"attack_damage_pct"		"40"
+				"projectile_speed"  	"1400"
+				"spread_angle"      	"18"
+				"damage_far_pct"    	"40"
+				"blade_radius"      	"28"
+				"shot_interval"     	"0.06"
+				"AbilityCharges"
+				{
+					"value"				"3"
+				}
+				"AbilityChargeRestoreTime"
+				{
+					"value"	"5 4 3 2 1"
+				}
+		}
+	}
+
 }
