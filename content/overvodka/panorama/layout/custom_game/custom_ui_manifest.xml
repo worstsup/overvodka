@@ -20,6 +20,7 @@
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/visitor/visitor_screamer.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/peacemaker/peacemaker_r_intro.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/heroes/zhenya_boss/boss_hp.xml" />
+		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/leon_ammo.xml" />
 		
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
 		<CustomUIElement type="Hud" 				layoutfile="file://{resources}/layout/custom_game/voice_loud_line/voice_loud_line.xml" />
