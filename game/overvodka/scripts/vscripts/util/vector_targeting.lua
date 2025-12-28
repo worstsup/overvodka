@@ -16,27 +16,23 @@ local MOVEMENT_FIX = {
 	modifier_generic_vector_target = true,
 }
 
-local LEON_INTERNAL_DISARM_MODS = {
-    modifier_leon_q_controller = true,
+LEON_INTERNAL_DISARM_MODS = LEON_INTERNAL_DISARM_MODS or {
+    ["modifier_leon_q_controller"] = true,
 }
 
 local function Leon_IsExternallyDisarmed(unit)
     if not unit or unit:IsNull() then return false end
     if not unit:IsDisarmed() then return false end
 
-    local mods = unit.FindAllModifiers and unit:FindAllModifiers() or {}
-    for _, mod in ipairs(mods) do
-        if mod and not mod:IsNull() and mod.CheckState then
-            local ok, st = pcall(function() return mod:CheckState() end)
-            if ok and st and st[MODIFIER_STATE_DISARMED] then
-                local name = mod:GetName()
-                if not LEON_INTERNAL_DISARM_MODS[name] then
-                    return true
-                end
+    for _, mod in pairs(unit:FindAllModifiers()) do
+        local tables = {}
+        mod:CheckStateToTable(tables)
+        for state_name, mod_table in pairs(tables) do
+            if tostring(state_name) == tostring(MODIFIER_STATE_DISARMED) and LEON_INTERNAL_DISARM_MODS[mod:GetName()] == nil then
+                return true
             end
         end
     end
-
     return false
 end
 
@@ -94,7 +90,7 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
     if not unit or unit:IsNull() then return false end
     if not target or target:IsNull() then return false end
     if event.order_type ~= DOTA_UNIT_ORDER_ATTACK_TARGET then return false end
-
+    
     if _CountSelectedUnits(event.units) ~= 1 then return false end
 
     local ab = unit:FindAbilityByName("leon_q")
@@ -147,13 +143,37 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
         if can_cast then
             local pos = target:GetAbsOrigin()
             pos.z = 0
-            ExecuteOrderFromTable({
-                UnitIndex    = unit:entindex(),
-                OrderType    = DOTA_UNIT_ORDER_CAST_POSITION,
-                AbilityIndex = ab2:entindex(),
-                Position     = pos,
-                Queue        = false,
-            })
+            if not unit:IsIllusion() then
+                ExecuteOrderFromTable({
+                    UnitIndex    = unit:entindex(),
+                    OrderType    = DOTA_UNIT_ORDER_CAST_POSITION,
+                    AbilityIndex = ab2:entindex(),
+                    Position     = pos,
+                    Queue        = false,
+                })
+            else
+                unit:Stop()
+                ab2:FireAttack(pos)
+                ab2:SetCurrentAbilityCharges(math.max(0, ab2:GetCurrentAbilityCharges() - 1))
+            end
+            if target:IsOther() or (not target:IsOther() and (target:GetUnitName() == "npc_peashooter_1" or target:GetUnitName() == "peashooter_freeze" or target:GetUnitName() == "npc_dota_prince_zombie") and not target:IsInvulnerable()) then
+                local dist = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
+                if dist <= unit:Script_GetAttackRange() then
+                    local idx = unit:entindex()
+                    local lastAttackTime = self._leonLastAttackTime or {}
+                    local currentTime = GameRules:GetGameTime()
+                    
+                    if not lastAttackTime[idx] or currentTime - lastAttackTime[idx] >= 0.5 then
+                        Timers:CreateTimer(0.15 + dist / 1400, function()
+                            if not unit or unit:IsNull() then return end
+                            if not target or target:IsNull() then return end
+                            unit:PerformAttack(target, true, true, true, false, false, false, true)
+                            lastAttackTime[idx] = currentTime
+                            self._leonLastAttackTime = lastAttackTime
+                        end)
+                    end
+                end
+            end
         else
             ExecuteOrderFromTable({
                 UnitIndex = unit:entindex(),
@@ -214,13 +234,19 @@ function VectorTarget:TryLeonAttackMoveOverride(event, unit, pos)
         local can_cast = has_charges and ab2:IsCooldownReady()
 
         if can_cast then
-            ExecuteOrderFromTable({
-                UnitIndex    = unit:entindex(),
-                OrderType    = DOTA_UNIT_ORDER_CAST_POSITION,
-                AbilityIndex = ab2:entindex(),
-                Position     = cast_pos,
-                Queue        = false,
-            })
+            if not unit:IsIllusion() then
+                ExecuteOrderFromTable({
+                    UnitIndex    = unit:entindex(),
+                    OrderType    = DOTA_UNIT_ORDER_CAST_POSITION,
+                    AbilityIndex = ab2:entindex(),
+                    Position     = cast_pos,
+                    Queue        = false,
+                })
+            else
+                unit:Stop()
+                ab2:FireAttack(cast_pos)
+                ab2:SetCurrentAbilityCharges(math.max(0, ab2:GetCurrentAbilityCharges() - 1))
+            end
         else
             ExecuteOrderFromTable({
                 UnitIndex = unit:entindex(),

@@ -373,6 +373,8 @@
 		"npc_kolyan_guard"					"Охранник"
 		"npc_evil_monke"					"Злая Обезьяна"
 
+		"dota_hud_error_leon_q_disarmed"	"Невозможно применить при бессилии"
+
 		"npc_zhenya_boss"					"Женя Мороз"
 		"npc_burger"						"Еда"
 		"dota_tooltip_modifier_zhenya_boss_phase1"							"Первая фаза"

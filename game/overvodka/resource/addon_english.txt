@@ -532,6 +532,7 @@
 		"zhenya_notif_prime_2" "hours of Overvodka Prime"
 		"zhenya_notif_prime_5" "hours of Overvodka Prime"
 
+		"dota_hud_error_leon_q_disarmed"	"Can't use while disarmed"
 
 		"dota_tooltip_Facet_peacemaker_facet_deagle"						"Desert Eagle"
 		"dota_tooltip_Facet_peacemaker_facet_deagle_description"			"Peacemaker becomes a ranged hero and gains X-Ray Vision and Explosive Bullet abilities."

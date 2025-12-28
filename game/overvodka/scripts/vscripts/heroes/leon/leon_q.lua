@@ -12,6 +12,46 @@ function leon_q:Spawn()
     end
 end
 
+function leon_q:GetCastPoint()
+    if self:GetCaster():HasModifier("modifier_arsen_testosteron_debuff") or self:GetCaster():HasModifier("modifier_silvername_w_facet_2_forced") or self:GetCaster():HasModifier("modifier_vihor_r_debuff") or self:GetCaster():HasModifier("modifier_kachok_test") then
+        return 0
+    end
+	return self:GetSpecialValueFor( "total_cast_time_tooltip" )
+end
+
+local function Leon_IsExternallyDisarmedAbility(unit)
+    if not unit or unit:IsNull() then return false end
+    if not unit:IsDisarmed() then return false end
+    for _, mod in pairs(unit:FindAllModifiers()) do
+        local tables = {}
+        mod:CheckStateToTable(tables)
+        for state_name, mod_table in pairs(tables) do
+            if tostring(state_name) == tostring(MODIFIER_STATE_DISARMED) and LEON_INTERNAL_DISARM_MODS[mod:GetName()] == nil then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function leon_q:CastFilterResultLocation(location)
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() or not location then
+        return UF_FAIL_CUSTOM
+    end
+    if Leon_IsExternallyDisarmedAbility(caster) then
+        self._cast_err = "#dota_hud_error_leon_q_disarmed"
+        return UF_FAIL_CUSTOM
+    end
+    return UF_SUCCESS
+end
+
+function leon_q:GetCustomCastErrorLocation(location)
+    if not IsServer() then return end
+    return self._cast_err
+end
+
 function leon_q:CreateCustomIndicator(pos, unit, behavior)
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
@@ -104,15 +144,12 @@ local function Leon_GetSecondsPerAttack(caster)
     return 0.7
 end
 
-function leon_q:OnSpellStart()
+function leon_q:FireAttack(aim_point)
     if not IsServer() then return end
-
+    if not aim_point then return end
+    if not self or self:IsNull() then return end
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
-
-    local aim_point = self:GetCursorPosition()
-    aim_point.z = 0
-
     local attacks = math.max(1, self:GetSpecialValueFor("attacks_number"))
 
     local speed  = self:GetSpecialValueFor("projectile_speed")
@@ -128,64 +165,84 @@ function leon_q:OnSpellStart()
     caster:EmitSound("Leon.Attack")
     local cd = Leon_GetSecondsPerAttack(caster)
     self:StartCooldown(math.max(0.03, cd))
-
-    for i = 1, attacks do
-        Timers:CreateTimer((i - 1) * dt, function()
-            if not caster or caster:IsNull() then return end
-            if not caster:IsAlive() then return end
-            if not self or self:IsNull() then return end
-
-            local origin = caster:GetAbsOrigin()
-            origin.z = 0
-
-            local range = caster:Script_GetAttackRange()
-            if range <= 0 then range = 1 end
-
-            local dir = (aim_point - origin)
-            dir.z = 0
-            if dir:Length2D() < 1 then
-                dir = caster:GetForwardVector()
-                dir.z = 0
-            end
-            dir = dir:Normalized()
-
-            local t   = (attacks == 1) and 0 or ((i - 1) / (attacks - 1))
-            local ang = half - spread * t
-
-            local dir_i = RotatePosition(Vector(0,0,0), QAngle(0, ang, 0), dir)
-            dir_i.z = 0
-            dir_i = dir_i:Normalized()
-
-            ProjectileManager:CreateLinearProjectile({
-                Ability = self,
-                EffectName = "particles/leon_attack.vpcf",
-                vSpawnOrigin = origin,
-                fDistance = range,
-
-                fStartRadius = radius,
-                fEndRadius   = radius,
-
-                Source = caster,
-                iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_BOTH,
-                iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING,
-                iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-
-                bDeleteOnHit = true,
-                bProvidesVision = true,
-                iVisionRadius = 100,
-                iVisionTeamNumber = caster:GetTeamNumber(),
-
-                vVelocity = dir_i * speed,
-
-                ExtraData = {
-                    ox = origin.x, oy = origin.y, oz = origin.z,
-                    range = range,
-                    pct   = self:GetSpecialValueFor("attack_damage_pct"),
-                    far   = self:GetSpecialValueFor("damage_far_pct"),
-                }
-            })
-        end)
+    local timeout = 0
+    if caster:IsIllusion() then
+        caster:AddNewModifier(caster, self, "modifier_rooted", { duration = self:GetCastPoint() + 0.1 })
+        caster:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK, 1.0)
+        timeout = self:GetSpecialValueFor( "total_cast_time_tooltip" )
+        self:UseResources(false, false, false, true)
     end
+    Timers:CreateTimer(timeout, function()
+        if not caster or caster:IsNull() then return end
+        if not caster:IsAlive() then return end
+        if not self or self:IsNull() then return end
+        for i = 1, attacks do
+            Timers:CreateTimer((i - 1) * dt, function()
+                if not caster or caster:IsNull() then return end
+                if not caster:IsAlive() then return end
+                if not self or self:IsNull() then return end
+
+                local spawn_origin = caster:GetAbsOrigin()
+                local attach = caster:ScriptLookupAttachment("attach_attack1")
+                if attach and attach > 0 then
+                    spawn_origin = caster:GetAttachmentOrigin(attach)
+                end
+                local origin2d = Vector(spawn_origin.x, spawn_origin.y, 0)
+                local range = caster:Script_GetAttackRange()
+                if range <= 0 then range = 1 end
+                local dir = (aim_point - origin2d)
+                dir.z = 0
+                if dir:Length2D() < 1 then
+                    dir = caster:GetForwardVector()
+                    dir.z = 0
+                end
+                dir = dir:Normalized()
+
+                local t   = (attacks == 1) and 0 or ((i - 1) / (attacks - 1))
+                local ang = half - spread * t
+
+                local dir_i = RotatePosition(Vector(0,0,0), QAngle(0, ang, 0), dir)
+                dir_i.z = 0
+                dir_i = dir_i:Normalized()
+
+                ProjectileManager:CreateLinearProjectile({
+                    Ability = self,
+                    EffectName = "particles/leon_attack.vpcf",
+                    vSpawnOrigin = spawn_origin,
+                    fDistance = range,
+                    fStartRadius = radius,
+                    fEndRadius   = radius,
+                    Source = caster,
+                    iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_BOTH,
+                    iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
+                    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+                    bDeleteOnHit = true,
+                    bProvidesVision = true,
+                    iVisionRadius = 100,
+                    iVisionTeamNumber = caster:GetTeamNumber(),
+                    vVelocity = dir_i * speed,
+
+                    ExtraData = {
+                        ox = spawn_origin.x, oy = spawn_origin.y, oz = spawn_origin.z,
+                        range = range,
+                        pct   = self:GetSpecialValueFor("attack_damage_pct"),
+                        far   = self:GetSpecialValueFor("damage_far_pct"),
+                    }
+                })
+            end)
+        end
+    end)
+end
+
+function leon_q:OnSpellStart()
+    if not IsServer() then return end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    local aim_point = self:GetCursorPosition()
+    aim_point.z = 0
+    self:FireAttack(aim_point)
 end
 
 function leon_q:OnProjectileHit_ExtraData(target, location, ExtraData)
@@ -240,7 +297,6 @@ function leon_q:OnProjectileHit_ExtraData(target, location, ExtraData)
     return true
 end
 
-
 modifier_leon_q_controller = class({})
 
 function modifier_leon_q_controller:IsHidden() return true end
@@ -285,7 +341,7 @@ local function Leon_CanCastAttackAbility(unit, ab)
     if ab:GetLevel() <= 0 then return false end
     if ab:IsHidden() or (not ab:IsActivated()) then return false end
 
-    if Leon_IsExternallyDisarmed(unit) or unit:IsStunned() or unit:IsHexed() or unit:IsSilenced() then
+    if Leon_IsExternallyDisarmedAbility(unit) or unit:IsStunned() or unit:IsHexed() or unit:IsSilenced() then
         return false
     end
 
