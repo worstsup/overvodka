@@ -117,8 +117,13 @@ function UpdateOnePosition(panel) {
     }
 
     const origin = Entities.GetAbsOrigin(unit);
+    if (!origin) {
+        panel.AddClass("Hidden");
+        return;
+        }
 
-    const hb = Entities.GetHealthBarOffset(unit) || 0;
+    let hb = Entities.GetHealthBarOffset(unit) || 0;
+    if (Entities.IsIllusion(unit)) hb -= 10;
     const worldZ = origin[2] + hb + 10;
 
     const sx = Game.WorldToScreenX(origin[0], origin[1], worldZ);

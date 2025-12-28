@@ -379,7 +379,6 @@ PrecacheUtils.sounds = {
 		"sounds/weapons/hero/zuus/lightning_bolt.vsnd",
 		"soundevents/game_sounds_overthrow.vsndevts",
 		"soundevents/ui_sounds.vsndevts",
-		"soundevents/leon_sounds.vsndevts",
 		"soundevents/peterka_shard.vsndevts",
 		"soundevents/overvodka_song.vsndevts",
 		"soundevents/sahur_start.vsndevts",

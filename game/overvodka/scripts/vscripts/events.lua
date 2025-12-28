@@ -140,6 +140,9 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if not spawnedUnit:IsIllusion() and winter_mode then
 				ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, PlayerResource:GetPlayer(spawnedUnit:GetPlayerID()))
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_hoodwink" and not spawnedUnit:IsIllusion() and not spawnedUnit:HasModifier("modifier_mazellov_r") then
+				EmitGlobalSound("Leon.Game.Start")
+			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 				spawnedUnit.voice_level = 0
 			end

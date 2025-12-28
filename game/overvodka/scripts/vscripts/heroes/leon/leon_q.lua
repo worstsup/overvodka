@@ -19,6 +19,33 @@ function leon_q:GetCastPoint()
 	return self:GetSpecialValueFor( "total_cast_time_tooltip" )
 end
 
+local function LeonQ_ConsumeOneCharge(ab)
+    if not ab or ab:IsNull() then return false end
+    if not ab.GetCurrentAbilityCharges then return false end
+
+    local before = ab:GetCurrentAbilityCharges()
+    if before <= 0 then return false end
+
+    if ab.SpendCharge then
+        ab:SpendCharge()
+    else
+        ab:UseResources(false, false, false, true)
+    end
+
+    local after = ab:GetCurrentAbilityCharges()
+    if after < before then
+        return true
+    end
+
+    if ab.SetCurrentAbilityCharges then
+        ab:SetCurrentAbilityCharges(math.max(0, before - 1))
+        return true
+    end
+
+    return false
+end
+
+
 local function Leon_IsExternallyDisarmedAbility(unit)
     if not unit or unit:IsNull() then return false end
     if not unit:IsDisarmed() then return false end
@@ -140,23 +167,32 @@ local function Leon_GetSecondsPerAttack(caster)
             return 1.0 / aps
         end
     end
-
+    
     return 0.7
 end
 
-function leon_q:FireAttack(aim_point)
+function leon_q:FireAttack(aim_point, manual)
     if not IsServer() then return end
     if not aim_point then return end
-    if not self or self:IsNull() then return end
-    local caster = self:GetCaster()
-    if not caster or caster:IsNull() then return end
-    local attacks = math.max(1, self:GetSpecialValueFor("attacks_number"))
 
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
+
+    aim_point = Vector(aim_point.x, aim_point.y, 0)
+
+    -- ВАЖНО: раз это ручной запуск, charge надо списывать вручную
+    if manual then
+        if not LeonQ_ConsumeOneCharge(self) then
+            return -- нет зарядов -> не кастуем
+        end
+    end
+
+    -- дальше твой код как есть
+    local attacks = math.max(1, self:GetSpecialValueFor("attacks_number"))
     local speed  = self:GetSpecialValueFor("projectile_speed")
     local spread = self:GetSpecialValueFor("spread_angle")
     local radius = self:GetSpecialValueFor("blade_radius")
     local dt     = self:GetSpecialValueFor("shot_interval")
-
     if dt <= 0 then dt = 0.03 end
     if radius <= 0 then radius = 14 end
 
@@ -165,21 +201,22 @@ function leon_q:FireAttack(aim_point)
     caster:EmitSound("Leon.Attack")
     local cd = Leon_GetSecondsPerAttack(caster)
     self:StartCooldown(math.max(0.03, cd))
+
     local timeout = 0
     if caster:IsIllusion() then
         caster:AddNewModifier(caster, self, "modifier_rooted", { duration = self:GetCastPoint() + 0.1 })
         caster:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK, 1.0)
-        timeout = self:GetSpecialValueFor( "total_cast_time_tooltip" )
-        self:UseResources(false, false, false, true)
+        timeout = self:GetSpecialValueFor("total_cast_time_tooltip")
+        if not timeout or timeout < 0 then timeout = 0 end
     end
+
     Timers:CreateTimer(timeout, function()
-        if not caster or caster:IsNull() then return end
-        if not caster:IsAlive() then return end
+        if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
         if not self or self:IsNull() then return end
+
         for i = 1, attacks do
             Timers:CreateTimer((i - 1) * dt, function()
-                if not caster or caster:IsNull() then return end
-                if not caster:IsAlive() then return end
+                if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
                 if not self or self:IsNull() then return end
 
                 local spawn_origin = caster:GetAbsOrigin()
@@ -187,20 +224,20 @@ function leon_q:FireAttack(aim_point)
                 if attach and attach > 0 then
                     spawn_origin = caster:GetAttachmentOrigin(attach)
                 end
+
                 local origin2d = Vector(spawn_origin.x, spawn_origin.y, 0)
+
                 local range = caster:Script_GetAttackRange()
                 if range <= 0 then range = 1 end
-                local dir = (aim_point - origin2d)
-                dir.z = 0
+
+                local dir = (aim_point - origin2d); dir.z = 0
                 if dir:Length2D() < 1 then
-                    dir = caster:GetForwardVector()
-                    dir.z = 0
+                    dir = caster:GetForwardVector(); dir.z = 0
                 end
                 dir = dir:Normalized()
 
                 local t   = (attacks == 1) and 0 or ((i - 1) / (attacks - 1))
                 local ang = half - spread * t
-
                 local dir_i = RotatePosition(Vector(0,0,0), QAngle(0, ang, 0), dir)
                 dir_i.z = 0
                 dir_i = dir_i:Normalized()
@@ -214,14 +251,13 @@ function leon_q:FireAttack(aim_point)
                     fEndRadius   = radius,
                     Source = caster,
                     iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_BOTH,
-                    iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
+                    iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_OTHER,
                     iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
                     bDeleteOnHit = true,
                     bProvidesVision = true,
                     iVisionRadius = 100,
                     iVisionTeamNumber = caster:GetTeamNumber(),
                     vVelocity = dir_i * speed,
-
                     ExtraData = {
                         ox = spawn_origin.x, oy = spawn_origin.y, oz = spawn_origin.z,
                         range = range,
@@ -234,6 +270,7 @@ function leon_q:FireAttack(aim_point)
     end)
 end
 
+
 function leon_q:OnSpellStart()
     if not IsServer() then return end
 
@@ -242,7 +279,7 @@ function leon_q:OnSpellStart()
 
     local aim_point = self:GetCursorPosition()
     aim_point.z = 0
-    self:FireAttack(aim_point)
+    self:FireAttack(aim_point, false)
 end
 
 function leon_q:OnProjectileHit_ExtraData(target, location, ExtraData)

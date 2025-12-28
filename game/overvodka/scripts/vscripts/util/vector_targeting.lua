@@ -110,7 +110,6 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
         local ab2 = unit:FindAbilityByName("leon_q")
         if not ab2 or ab2:IsNull() then self._leonOrderGuard[idx] = nil return end
         if not target or target:IsNull() then self._leonOrderGuard[idx] = nil return end
-
         if Leon_IsExternallyDisarmed(unit) or unit:IsStunned() or unit:IsHexed() then
             ExecuteOrderFromTable({
                 UnitIndex = unit:entindex(),
@@ -156,22 +155,33 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
                 ab2:FireAttack(pos)
                 ab2:SetCurrentAbilityCharges(math.max(0, ab2:GetCurrentAbilityCharges() - 1))
             end
-            if target:IsOther() or (not target:IsOther() and (target:GetUnitName() == "npc_peashooter_1" or target:GetUnitName() == "peashooter_freeze" or target:GetUnitName() == "npc_dota_prince_zombie") and not target:IsInvulnerable()) then
+            if target:GetClassname() ~= "dota_item_drop" and target:GetClassname() ~= "dota_item_rune"  then
+                if target:IsOther() then
+                    local dist = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
+                    if dist <= unit:Script_GetAttackRange() then
+                        local idx = unit:entindex()
+                        local lastAttackTime = self._leonLastAttackTime or {}
+                        local currentTime = GameRules:GetGameTime()
+                        
+                        if not lastAttackTime[idx] or currentTime - lastAttackTime[idx] >= 0.5 then
+                            Timers:CreateTimer(0.15 + dist / 1400, function()
+                                if not unit or unit:IsNull() then return end
+                                if not target or target:IsNull() then return end
+                                unit:PerformAttack(target, true, true, true, false, false, false, true)
+                                lastAttackTime[idx] = currentTime
+                                self._leonLastAttackTime = lastAttackTime
+                            end)
+                        end
+                    end
+                end
+            else
                 local dist = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
                 if dist <= unit:Script_GetAttackRange() then
-                    local idx = unit:entindex()
-                    local lastAttackTime = self._leonLastAttackTime or {}
-                    local currentTime = GameRules:GetGameTime()
-                    
-                    if not lastAttackTime[idx] or currentTime - lastAttackTime[idx] >= 0.5 then
-                        Timers:CreateTimer(0.15 + dist / 1400, function()
-                            if not unit or unit:IsNull() then return end
-                            if not target or target:IsNull() then return end
-                            unit:PerformAttack(target, true, true, true, false, false, false, true)
-                            lastAttackTime[idx] = currentTime
-                            self._leonLastAttackTime = lastAttackTime
-                        end)
-                    end
+                    Timers:CreateTimer(0.15 + dist / 1400, function()
+                        if not unit or unit:IsNull() then return end
+                        if not target or target:IsNull() then return end
+                        target:RemoveSelf()
+                    end)
                 end
             end
         else
