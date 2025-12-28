@@ -1,14 +1,53 @@
-LinkLuaModifier("modifier_leon_w_illusion_ai", "heroes/leon/leon_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_leon_w_illusion_ai",  "heroes/leon/leon_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_leon_w_uncontrolled", "heroes/leon/leon_w", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_leon_w_facet",        "heroes/leon/leon_w", LUA_MODIFIER_MOTION_NONE)
 
 leon_w = class({})
 
+function leon_w:GetIntrinsicModifierName()
+    return "modifier_leon_w_facet"
+end
+
+modifier_leon_w_facet = class({})
+
+function modifier_leon_w_facet:IsHidden() return true end
+function modifier_leon_w_facet:IsPurgable() return false end
+function modifier_leon_w_facet:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_ABILITY_EXECUTED,
+    }
+end
+
+function modifier_leon_w_facet:OnAbilityExecuted(params)
+    if not IsServer() then return end
+    if self:GetAbility():GetSpecialValueFor("facet_enabled") == 0 then return end
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return end
+    if params.unit ~= parent then return end
+    local ability = params.ability
+    if not ability or ability:IsNull() then return end
+
+    if ability:GetName() == "leon_r" then
+        self:GetAbility():MakeClones(1)
+    end
+end
+
 function leon_w:OnSpellStart()
     if not IsServer() then return end
-
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
+    local count = 1
+    if caster:HasTalent("special_bonus_unique_leon_6") then
+        count = 2
+    end
 
+    self:MakeClones(count)
+end
+
+function leon_w:MakeClones(count)
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
     local duration      = self:GetSpecialValueFor("duration")
     local search_radius = self:GetSpecialValueFor("search_radius")
     local attack_range  = self:GetSpecialValueFor("attack_range")
@@ -17,11 +56,6 @@ function leon_w:OnSpellStart()
 
     local incoming = self:GetSpecialValueFor("illusion_incoming_damage")
     local outgoing = self:GetSpecialValueFor("illusion_outgoing_damage")
-
-    local count = 1
-    if caster:HasTalent("special_bonus_unique_leon_6") then
-        count = 2
-    end
 
     local chosen_targets = self:Leon_FindInitialTargets(caster, search_radius, count)
 

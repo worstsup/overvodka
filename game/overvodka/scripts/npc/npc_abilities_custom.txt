@@ -17036,6 +17036,11 @@
 			"illusion_outgoing_damage"	"30 35 40 45"
 			"order_interval"			"0.25"
 			"think_interval"			"0.10"
+			"facet_enabled"
+			{
+				"value"	"0"
+				"special_bonus_facet_leon_clone"	"+1"
+			}
 		}
 	}
 	//=================================================================================================================
@@ -17097,7 +17102,7 @@
 		{
 				"duration"				"8 9 10"
 				"bonus_ms"				"25 30 35"
-				"minus_cd"				"2"
+				"minus_cd"				"1.5"
 		}
 	}
 
