@@ -38,6 +38,13 @@ function modifier_item_minion_generator_minion_as:IsHidden() return true end
 function modifier_item_minion_generator_minion_as:IsPurgable() return false end
 function modifier_item_minion_generator_minion_as:RemoveOnDeath() return false end
 
+function modifier_item_minion_generator_minion_as:OnCreated()
+	if not IsServer() then return end
+	local parent = self:GetParent()
+	local armor = self:GetAbility():GetSpecialValueFor("bonus_armor_minion")
+	parent:SetPhysicalArmorBaseValue(armor)
+end
+
 function modifier_item_minion_generator_minion_as:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,

@@ -87,7 +87,8 @@ end
 
 function modifier_minion_banana_root_debuff:CheckState()
     return {
-        [MODIFIER_STATE_ROOTED] = true
+        [MODIFIER_STATE_ROOTED] = true,
+        [MODIFIER_STATE_DISARMED] = true
     }
 end
 

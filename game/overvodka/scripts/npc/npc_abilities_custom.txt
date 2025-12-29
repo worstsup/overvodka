@@ -3320,19 +3320,20 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityCastPoint"				"0.6"
 		"AbilityCooldown"				"75.0"
-		"AbilityManaCost"				"150 200 250 300"
+		"AbilityManaCost"				"200 250 300"
 		"AbilityValues"
 		{
 				"radius"				"10000"
 				"duration"
 				{
-					"value"	"3.0 3.5 4.0 4.5"
+					"value"	"3.0 3.75 4.5"
 					"special_bonus_unique_worstsup_6" "+0.5"
 				}
-				"vision_radius"			"0"
-				"as"	"40 80 120 160"
+				"vision_radius"	 "0"
+				"as"	"80 120 160"
 		}
 	}
 	//=================================================================================================================
@@ -3346,9 +3347,10 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityCastPoint"				"0.6"
 		"AbilityCooldown"				"75.0"
-		"AbilityManaCost"				"150 200 250 300"
+		"AbilityManaCost"				"200 250 300"
 		"AbilityCastRange"				"900"
 		"AbilityValues"
 		{
@@ -3359,11 +3361,11 @@
 				}
 				"duration"
 				{
-					"value"	"3.0 3.5 4.0 4.5"
+					"value"	"3.0 3.75 4.5"
 					"special_bonus_unique_worstsup_6" "+0.5"
 				}
 				"vision_radius"			"900"
-				"as"	"40 80 120 160"
+				"as"	"100 140 180"
 		}
 	}
 	//=================================================================================================================
@@ -3452,31 +3454,30 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilitySound"					"Hero_Rubick.SpellSteal.Cast"
 		"AbilityTextureName"			"code"
-		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
+		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"HasScepterUpgrade"				"1"
-		"AbilityCastPoint"				"0.1 0.1 0.1"
+		"AbilityCastPoint"				"0.1 0.1 0.1 0.1"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_7"
-		"AbilityCooldown"				"9 6 3"
+		"AbilityCooldown"				"12 9 6 3"
 		"AbilityManaCost"				"50"
-		"AbilityCastRange"				"800 1000 1200"
+		"AbilityCastRange"				"700 800 900 1000"
 		"AbilityValues"
 		{
 			"projectile_speed"				"1500"
-			"stolen_debuff_amp"				"10 20 30"
+			"stolen_debuff_amp"				"10 15 20 25"
 			"cast_range_scepter"			
 			{
-				"value"						"1400"
+				"value"						"400"
 				"RequiresScepter"			"1"
 			}
 			"duration"
 			{
-				"value"						"30 45 60"
+				"value"						"15 25 35 45"
 				"special_bonus_unique_worstsup_3" "+15"
 			}
 			"stolen_mana_reduction"
 			{
-				"value"						"0"
-				"special_bonus_facet_rubick_mana"	"40 50 60"				
+				"special_bonus_facet_rubick_frugal_filch"	"30 40 50 60"				
 			}
 		}
 	}
@@ -9931,7 +9932,7 @@
 				"heal"
 				{
 					"value"	"0"
-					"special_bonus_facet_peterka_w" "+40"
+					"special_bonus_facet_peterka_w" "+42"
 				}
 				"gold_mult"
 				{
@@ -14232,7 +14233,7 @@
 			"buff_duration"
 			{
 				"value"	"0"
-				"special_bonus_unique_frisk_7" 	"+3"
+				"special_bonus_unique_frisk_7" 	"+2"
 			}
 			"pulse_radius"
 			{
@@ -14374,7 +14375,7 @@
 			"duration"
 			{
 				"value"	"5"
-				"special_bonus_unique_frisk_4"	"+1"
+				"special_bonus_unique_frisk_4"	"+0.75"
 			}
 			"magic_resist_pct"      "60"
 
@@ -16936,10 +16937,10 @@
 			"speed"					"2000"
 		}
 	}
+
 	//===================================================================================================================
 	//													ЛЕОН
 	//===================================================================================================================
-
 	"special_bonus_unique_leon_1"
 	{
         "BaseClass"						"special_bonus_base"														
@@ -17014,16 +17015,10 @@
 				"value"	"35"
 				"special_bonus_unique_leon_4"	"-10"
 			}
-			"blade_radius"      	"28"
-			"shot_interval"     	"0.06"
-			"AbilityCharges"
-			{
-				"value"				"3"
-			}
-			"AbilityChargeRestoreTime"
-			{
-				"value"	"4.0 3.5 3.0 2.5 2.0"
-			}
+			"blade_radius"      		"28"
+			"shot_interval"     		"0.06"
+			"AbilityCharges"			"3"
+			"AbilityChargeRestoreTime"  "4.0 3.5 3.0 2.5 2.0"
 			"total_cast_time_tooltip"	"0.15"
 			"restore_charges"
 			{

@@ -1809,7 +1809,7 @@
 		"DOTA_Tooltip_ability_minion_banana_slow_duration" "SLOW DURATION:"
 
 		"DOTA_Tooltip_Ability_item_minion_generator" "MINION GENERATOR"
-		"DOTA_Tooltip_Ability_item_minion_generator_description" "<h1>Active: PAPOY!</h1>Summons a minion to the target location with double health, %bonus_attack_speed_minion% increased attack speed and %bonus_movespeed_minion%%% increased movement speed. The minion lasts %minion_duration% sec.\n\n<h1>Passive: Minion Aura</h1> Increases the armor of allied buildings and units by %bonus_armor_aura% and their attack speed by %bonus_attack_speed_aura%. Reduces enemy armor by %minus_armor_aura%.<br><br>Radius: %radius%"
+		"DOTA_Tooltip_Ability_item_minion_generator_description" "<h1>Active: PAPOY!</h1>Summons a minion to the target location with 4x health, %bonus_attack_speed_minion% increased attack speed and %bonus_movespeed_minion%%% increased movement speed. The minion lasts %minion_duration% sec.\n\n<h1>Passive: Minion Aura</h1> Increases the armor of allied buildings and units by %bonus_armor_aura% and their attack speed by %bonus_attack_speed_aura%. Reduces enemy armor by %minus_armor_aura%.<br><br>Radius: %radius%"
 		"DOTA_Tooltip_modifier_item_minion_generator_aura_buff_armor" "Minion Generator"
 		"DOTA_Tooltip_modifier_item_minion_generator_aura_buff_armor_Description" "Armor increased by %dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%.\nAttack speed increased by %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%."
 		"DOTA_Tooltip_modifier_item_minion_generator_aura_debuff_armor" "Minion Generator"
