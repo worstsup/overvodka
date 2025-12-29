@@ -17034,13 +17034,14 @@
 	{
 		"BaseClass"                     "ability_lua"
 		"ScriptFile"                    "heroes/leon/leon_w"
+		"AbilityTextureName"			"leon_w"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown"               "22 20 18 16"
 		"AbilityManaCost"               "80"
 		"AbilityValues"
 		{
 			"duration"					"10.0"
-			"search_radius"				"4000"
+			"search_radius"				"5000"
 			"attack_range"				"300"
 			"illusion_incoming_damage"	"320 290 260 230"
 			"illusion_outgoing_damage"
@@ -17065,7 +17066,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/leon/leon_e"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityTextureName"			"stint_e"
+		"AbilityTextureName"			"leon_e"
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.2"
 		"AbilityCooldown"				"20"
@@ -17113,7 +17114,7 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"IsBreakable"			 "1"
 		"MaxLevel"				 "1"
-		"AbilityTextureName"     "whatever"
+		"AbilityTextureName"     "leon_shard"
 		"IsGrantedByShard"		 "1"
 		"AbilityValues"
 		{
@@ -17127,7 +17128,7 @@
 	"leon_r"
 	{
 		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"leon_q"
+		"AbilityTextureName"			"leon_r"
 		"ScriptFile"					"heroes/leon/leon_r"
 		"AbilityType"                   "ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"

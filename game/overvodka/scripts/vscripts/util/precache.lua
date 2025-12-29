@@ -354,6 +354,7 @@ PrecacheUtils.sounds = {
 		"soundevents/5opka_start.vsndevts",
 		"soundevents/kolibri_start.vsndevts",
 		"soundevents/zhenya_start.vsndevts",
+		"soundevents/leon_start.vsndevts",
 		"soundevents/chara_start.vsndevts",
 		"soundevents/kolyan_start.vsndevts",
 		"soundevents/flash_start.vsndevts",

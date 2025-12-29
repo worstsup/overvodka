@@ -422,6 +422,10 @@ function modifier_leon_q_controller:OnDeath(params)
 
     if not parent:IsRealHero() then return end
     if parent:IsIllusion() then return end
+    if parent == params.unit then
+        EmitSoundOnClient("Leon.Death", parent:GetPlayerOwner())
+        return
+    end
 
     if not parent:HasTalent("special_bonus_unique_leon_5") then return end
 

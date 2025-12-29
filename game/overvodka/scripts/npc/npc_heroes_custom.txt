@@ -4120,8 +4120,8 @@
 		"ModelScale"		"0.75"
 		"LoadoutScale"		"0.8"
 		"DisableWearables"	"1"
-		"SimilarHeroes"				"21,9,65"
-		"HeroSelectSoundEffect"		"Hero_Hoodwink.Pick"
+		"SimilarHeroes"				"82,109,88"
+		"HeroSelectSoundEffect"		"Hero_Leon.Pick"
 		"AbilityLayout"					"5"
 		"Ability1"					"leon_q"
 		"Ability2"					"leon_w"
@@ -4145,13 +4145,13 @@
 			"leon_clone"
 			{
 				"Icon"				"illusion"
-				"Color"				"Blue"
+				"Color"				"Green"
 				"GradientID"		"0"
 			}
 			"leon_lollipop"
 			{
-				"Icon"				"cooldown"
-				"Color"				"Green"
+				"Icon"				"spinning"
+				"Color"				"Blue"
 				"GradientID"		"0"
 			}
 			"hoodwink_hunter" 

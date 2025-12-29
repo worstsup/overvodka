@@ -43,7 +43,7 @@ end
 function modifier_leon_r_cd_reduce:OnIntervalThink()
     if not IsServer() then return end
     self:_UpdateReadyFx()
-    if self.was_on_cooldown and self:GetAbility():IsCooldownReady() then
+    if self.was_on_cooldown and self:GetAbility():IsCooldownReady() and not self:GetParent():IsIllusion() then
         self.was_on_cooldown = false
         self:GetParent():EmitSound("Leon.Invis.Ready")
     elseif not self.was_on_cooldown and not self:GetAbility():IsCooldownReady() then
