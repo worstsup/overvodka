@@ -16988,6 +16988,9 @@
 		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
+	//=================================================================================================================
+	// Крутящиеся Лезвия
+	//=================================================================================================================
 	"leon_q"
 	{
 		"BaseClass"						"ability_lua"
@@ -17003,10 +17006,14 @@
 		"AbilityValues"
 		{
 			"attacks_number"		"4"
-			"attack_damage_pct"		"40"
+			"attack_damage_pct"		"45"
 			"projectile_speed"  	"1400"
 			"spread_angle"      	"18"
-			"damage_far_pct"    	"35"
+			"damage_far_pct"
+			{
+				"value"	"35"
+				"special_bonus_unique_leon_4"	"-10"
+			}
 			"blade_radius"      	"28"
 			"shot_interval"     	"0.06"
 			"AbilityCharges"
@@ -17015,25 +17022,37 @@
 			}
 			"AbilityChargeRestoreTime"
 			{
-				"value"	"3"
+				"value"	"4.0 3.5 3.0 2.5 2.0"
 			}
 			"total_cast_time_tooltip"	"0.15"
+			"restore_charges"
+			{
+				"value"	"0"
+				"special_bonus_unique_leon_5"	"+2"
+			}
 		}
 	}
+	//=================================================================================================================
+	// Клонирование
+	//=================================================================================================================
 	"leon_w"
 	{
 		"BaseClass"                     "ability_lua"
 		"ScriptFile"                    "heroes/leon/leon_w"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCooldown"               "16"
+		"AbilityCooldown"               "22 20 18 16"
 		"AbilityManaCost"               "80"
 		"AbilityValues"
 		{
 			"duration"					"10.0"
 			"search_radius"				"4000"
 			"attack_range"				"300"
-			"illusion_incoming_damage"	"290 260 230 200"
-			"illusion_outgoing_damage"	"30 35 40 45"
+			"illusion_incoming_damage"	"320 290 260 230"
+			"illusion_outgoing_damage"
+			{
+				"value"	"25 30 35 40"
+				"special_bonus_unique_leon_2"	"+5"
+			}
 			"order_interval"			"0.25"
 			"think_interval"			"0.10"
 			"facet_enabled"
@@ -17044,7 +17063,7 @@
 		}
 	}
 	//=================================================================================================================
-	// Упавший леденец
+	// Упавший Леденец
 	//=================================================================================================================
 	"leon_e"
 	{
@@ -17060,7 +17079,8 @@
 		{
 			"duration"
 			{
-				"value"					"6.5 7.0 7.5 8.0"
+				"value"					"5.5 6.0 6.5 7.0"
+				"special_bonus_unique_leon_1"	"+1"
 			}
 			"radius"
 			{
@@ -17068,7 +17088,11 @@
 				"affected_by_aoe_increase"	"1"
 			}
 			"hit_destroy"	"3 3 4 4"
-			"interval"		"1.25"
+			"interval"
+			{
+				"value"	"1.25"
+				"special_bonus_unique_leon_8"	"-0.5"
+			}
 			"proj_range"
 			{
 				"value"	"450"
@@ -17079,10 +17103,14 @@
 				"value"	"0"
 				"special_bonus_facet_leon_lollipop"	"+1"
 			}
+			"blades_count"	"8"
 			"gold"	"50 60 70 80"
 			"xp" "60 90 120 150"
 		}
 	}
+	//=================================================================================================================
+	// Пассивное Исцеление
+	//=================================================================================================================
 	"leon_shard"
 	{
 		"BaseClass"              "ability_lua"
@@ -17095,9 +17123,12 @@
 		"AbilityValues"
 		{
 			"no_damage_delay"	"3.0"
-			"heal_pct"			"13.0"
+			"heal_pct"			"10.0"
 		}
 	}
+	//=================================================================================================================
+	// Дымовая Бомба
+	//=================================================================================================================
 	"leon_r"
 	{
 		"BaseClass"						"ability_lua"
@@ -17111,9 +17142,13 @@
 		"AbilityManaCost"				"75 100 125"
 		"AbilityValues"
 		{
-				"duration"				"8 9 10"
+				"duration"				"7.0 7.5 8.0"
 				"bonus_ms"				"25 30 35"
-				"minus_cd"				"1.5"
+				"minus_cd"
+				{
+					"value"	"1.5"
+					"special_bonus_unique_leon_3"	"+0.5"
+				}
 		}
 	}
 

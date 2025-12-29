@@ -100,8 +100,15 @@ function modifier_leon_e:OnIntervalThink()
     local facet = (e:GetSpecialValueFor("facet_enabled") == 1)
     local team = caster:GetTeamNumber()
     local travel_time = range / speed
-    for k = 0, 7 do
-        local ang = (self.t % 2 == 0 and k * 45 or k * 45 + 22.5)
+    local blades_count = self:GetAbility():GetSpecialValueFor("blades_count")
+    local period = 360 / blades_count
+    local sound = "Leon.Lollipop.Blades"
+    if facet then
+        sound = "Leon.Lollipop.Blades.Facet"
+    end
+    lollipop:EmitSound(sound)
+    for k = 0, blades_count - 1 do
+        local ang = (self.t % 2 == 0 and k * period or k * period + period / 2)
         local dir = RotatePosition(Vector(0,0,0), QAngle(0, ang, 0), Vector(1,0,0))
         dir.z = 0
         dir = dir:Normalized()
@@ -252,8 +259,7 @@ function modifier_leon_e_lollipop:IsHidden() return true end
 function modifier_leon_e_lollipop:IsPurgable() return false end
 
 function modifier_leon_e_lollipop:CheckState()
-    return 
-    {
+    return {
         [MODIFIER_STATE_MAGIC_IMMUNE] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true, 
     }

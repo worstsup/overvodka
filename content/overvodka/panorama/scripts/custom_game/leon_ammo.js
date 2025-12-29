@@ -4,6 +4,16 @@ let Container = null;
 let UISCALE_X = 1;
 let UISCALE_Y = 1;
 
+const LEON_Q_CHARGE_CD = [4.0, 3.5, 3.0, 2.5, 2.0];
+
+function GetLeonQChargeCdByLevel(ab) {
+    let lvl = 0;
+    try { lvl = Abilities.GetLevel(ab) || 0; } catch (e) { lvl = 0; }
+
+    lvl = Math.max(1, Math.min(LEON_Q_CHARGE_CD.length, lvl));
+    return LEON_Q_CHARGE_CD[lvl - 1];
+}
+
 const LeonAbilityCache = new Map();
 
 function SafeGetAbilityName(ab) {
@@ -90,7 +100,7 @@ function UpdateOneData(unit) {
     const max = Abilities.GetMaxAbilityCharges(ab);
     const rem = Abilities.GetAbilityChargeRestoreTimeRemaining(ab);
 
-    const tot = 3;
+    const tot = GetLeonQChargeCdByLevel(ab);
 
     for (let i = 1; i <= 3; i++) {
         if (i <= cur) {

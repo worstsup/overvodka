@@ -63,11 +63,9 @@ function modifier_evelone_q_shard:DestroyOnExpire()
 end
 
 function modifier_evelone_q_shard:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_EVENT_ON_HERO_KILLED
     }
-    return funcs
 end
 
 function modifier_evelone_q_shard:OnHeroKilled( params )

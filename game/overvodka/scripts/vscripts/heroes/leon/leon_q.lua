@@ -45,7 +45,6 @@ local function LeonQ_ConsumeOneCharge(ab)
     return false
 end
 
-
 local function Leon_IsExternallyDisarmedAbility(unit)
     if not unit or unit:IsNull() then return false end
     if not unit:IsDisarmed() then return false end
@@ -378,6 +377,79 @@ function modifier_leon_q_controller:CheckState()
     return {
         [MODIFIER_STATE_DISARMED] = true,
     }
+end
+
+function modifier_leon_q_controller:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_DEATH,
+    }
+end
+
+local function LeonQ_AddChargesSafe(ab, add)
+    if not ab or ab:IsNull() then return end
+
+    add = tonumber(add) or 0
+    if add <= 0 then return end
+
+    local lvl = ab:GetLevel()
+    if lvl <= 0 then return end
+
+    local cur = ab:GetCurrentAbilityCharges()
+    local max = nil
+    if ab.GetMaxAbilityCharges then
+        max = ab:GetMaxAbilityCharges(lvl)
+    end
+
+    if max and max > 0 then
+        local new = cur + add
+        if new > max then new = max end
+        if new ~= cur then
+            ab:SetCurrentAbilityCharges(new)
+        end
+        if new >= max and ab.RefreshCharges then
+            ab:RefreshCharges()
+        end
+    else
+        ab:SetCurrentAbilityCharges(cur + add)
+    end
+end
+
+function modifier_leon_q_controller:OnDeath(params)
+    if not IsServer() then return end
+
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return end
+
+    if not parent:IsRealHero() then return end
+    if parent:IsIllusion() then return end
+
+    if not parent:HasTalent("special_bonus_unique_leon_5") then return end
+
+    local victim = params.unit
+    local attacker = params.attacker
+    if not victim or victim:IsNull() then return end
+    if not attacker or attacker:IsNull() then return end
+
+    if not victim:IsRealHero() or victim:IsIllusion() then return end
+    if victim:GetTeamNumber() == parent:GetTeamNumber() then return end
+
+    local credited = false
+    if attacker == parent then
+        credited = true
+    else
+        if attacker.GetOwnerEntity then
+            local owner = attacker:GetOwnerEntity()
+            if owner == parent then
+                credited = true
+            end
+        end
+    end
+    if not credited then return end
+
+    local ab = self:GetAbility()
+    if not ab or ab:IsNull() then return end
+    local bonus_charges = ab:GetSpecialValueFor("restore_charges") or 0
+    LeonQ_AddChargesSafe(ab, bonus_charges)
 end
 
 function modifier_leon_q_controller:OnDestroy()
