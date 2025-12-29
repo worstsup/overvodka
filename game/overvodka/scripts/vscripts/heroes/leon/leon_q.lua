@@ -180,14 +180,12 @@ function leon_q:FireAttack(aim_point, manual)
 
     aim_point = Vector(aim_point.x, aim_point.y, 0)
 
-    -- ВАЖНО: раз это ручной запуск, charge надо списывать вручную
     if manual then
         if not LeonQ_ConsumeOneCharge(self) then
-            return -- нет зарядов -> не кастуем
+            return
         end
     end
 
-    -- дальше твой код как есть
     local attacks = math.max(1, self:GetSpecialValueFor("attacks_number"))
     local speed  = self:GetSpecialValueFor("projectile_speed")
     local spread = self:GetSpecialValueFor("spread_angle")
@@ -290,6 +288,30 @@ function leon_q:OnProjectileHit_ExtraData(target, location, ExtraData)
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return true end
     if target == caster then return false end
+
+    if ExtraData and tonumber(ExtraData.lolli) == 1 then
+        local src   = tonumber(ExtraData.src) or 0
+        local tick  = tonumber(ExtraData.tick) or -1
+        local phase = tonumber(ExtraData.phase) or 0
+
+        if src > 0 and tick >= 0 then
+            self._lolliHit = self._lolliHit or {}
+
+            local pack = self._lolliHit[src]
+            if not pack or pack.tick ~= tick then
+                pack = { tick = tick, phases = {} }
+                self._lolliHit[src] = pack
+            end
+
+            pack.phases[phase] = pack.phases[phase] or {}
+            local hitSet = pack.phases[phase]
+
+            local tidx = target:entindex()
+            if hitSet[tidx] then
+            end
+            hitSet[tidx] = true
+        end
+    end
 
     if target:GetTeamNumber() == caster:GetTeamNumber() then
         if target.IsBuilding and target:IsBuilding() then

@@ -17068,6 +17068,17 @@
 				"affected_by_aoe_increase"	"1"
 			}
 			"hit_destroy"	"3 3 4 4"
+			"interval"		"1.25"
+			"proj_range"
+			{
+				"value"	"450"
+				"affected_by_aoe_increase"	"1"
+			}
+			"facet_enabled"
+			{
+				"value"	"0"
+				"special_bonus_facet_leon_lollipop"	"+1"
+			}
 			"gold"	"50 60 70 80"
 			"xp" "60 90 120 150"
 		}

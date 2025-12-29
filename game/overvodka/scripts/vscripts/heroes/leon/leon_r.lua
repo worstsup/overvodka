@@ -122,6 +122,9 @@ function modifier_leon_r:RemoveOnDeath() return true end
 function modifier_leon_r:OnCreated()
 	if not IsServer() then return end
     local parent = self:GetParent()
+    if parent:HasTalent("special_bonus_unique_leon_7") then
+        parent:Purge( false, true, false, false, false )
+    end
 	local p = ParticleManager:CreateParticle( "particles/leon_r_start.vpcf", PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( p, 0, parent:GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( p )

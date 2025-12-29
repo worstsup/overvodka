@@ -8,6 +8,7 @@ function leon_e:Precache(context)
     PrecacheResource( "particle", "particles/leon_e.vpcf", context )
     PrecacheResource( "particle", "particles/hero_spawn_hero_level_6_model_core_glow_rostik.vpcf", context )
     PrecacheResource( "particle", "particles/hero_spawn_hero_level_6_sparks_b_rostik.vpcf", context )
+    PrecacheResource( "particle", "particles/leon_attack_e.vpcf", context )
     PrecacheUnitByNameSync( "npc_lollipop", context )
 end
 
@@ -48,20 +49,146 @@ function modifier_leon_e:IsHidden() return true end
 function modifier_leon_e:IsPurgable() return false end
 function modifier_leon_e:OnCreated()
     if not IsServer() then return end
+
     local effect_cast = ParticleManager:CreateParticle("particles/leon_e.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 1, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 2, self:GetParent():GetAbsOrigin())
     ParticleManager:SetParticleControl(effect_cast, 3, self:GetParent():GetAbsOrigin())
-    self:AddParticle(
-        effect_cast,
-        false,
-        false,
-        -1,
-        false,
-        false
-    )
+    self:AddParticle(effect_cast, false, false, -1, false, false)
+
+    local ab = self:GetAbility()
+    self._petal_interval = 1.0
+    if ab and not ab:IsNull() then
+        self._petal_interval = ab:GetSpecialValueFor("interval")
+        if self._petal_interval <= 0 then self._petal_interval = 1.0 end
+    end
+    self.t = 0
+    self:StartIntervalThink(self._petal_interval)
 end
+
+function modifier_leon_e:OnIntervalThink()
+    if not IsServer() then return end
+
+    local lollipop = self:GetParent()
+    if not lollipop or lollipop:IsNull() or (not lollipop:IsAlive()) then return end
+
+    local e = self:GetAbility()
+    if not e or e:IsNull() then
+        self:Destroy()
+        return
+    end
+
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
+
+    local q = caster:FindAbilityByName("leon_q")
+    if not q or q:IsNull() or q:GetLevel() <= 0 then return end
+
+    local origin = lollipop:GetAbsOrigin()
+
+    local range  = e:GetSpecialValueFor("proj_range")
+    if range <= 0 then range = 1 end
+
+    local speed  = q:GetSpecialValueFor("projectile_speed")
+    local radius = q:GetSpecialValueFor("blade_radius")
+    local pct    = q:GetSpecialValueFor("attack_damage_pct")
+    local far    = q:GetSpecialValueFor("damage_far_pct")
+
+    if radius <= 0 then radius = 28 end
+    if speed <= 0 then speed = 1200 end
+    local facet = (e:GetSpecialValueFor("facet_enabled") == 1)
+    local team = caster:GetTeamNumber()
+    local travel_time = range / speed
+    for k = 0, 7 do
+        local ang = (self.t % 2 == 0 and k * 45 or k * 45 + 22.5)
+        local dir = RotatePosition(Vector(0,0,0), QAngle(0, ang, 0), Vector(1,0,0))
+        dir.z = 0
+        dir = dir:Normalized()
+
+        ProjectileManager:CreateLinearProjectile({
+            Ability = q,
+            EffectName = "particles/leon_attack_e.vpcf",
+            vSpawnOrigin = origin,
+            fDistance = range,
+            fStartRadius = radius,
+            fEndRadius   = radius,
+
+            Source = caster,
+
+            iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_ENEMY,
+            iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_OTHER,
+            iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+
+            bDeleteOnHit = true,
+            bProvidesVision = true,
+            iVisionRadius = 100,
+            iVisionTeamNumber = team,
+
+            vVelocity = dir * speed,
+
+            ExtraData = {
+                lolli = 1,
+                src   = lollipop:entindex(),
+                tick  = tick,
+                phase = 0,
+
+                ox = origin.x, oy = origin.y, oz = origin.z,
+                range = range,
+                pct   = pct,
+                far   = far,
+            }
+        })
+        if facet then
+            local dir_copy = Vector(dir.x, dir.y, 0)
+            local endpos = origin + dir_copy * range
+            endpos.z = origin.z
+
+            Timers:CreateTimer(travel_time, function()
+                if not self or self:IsNull() then return end
+                if not lollipop or lollipop:IsNull() or (not lollipop:IsAlive()) then return end
+                if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
+                if not q or q:IsNull() then return end
+
+                ProjectileManager:CreateLinearProjectile({
+                    Ability = q,
+                    EffectName = "particles/leon_attack_e.vpcf",
+                    vSpawnOrigin = endpos,
+                    fDistance = range,
+                    fStartRadius = radius,
+                    fEndRadius   = radius,
+
+                    Source = caster,
+
+                    iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_ENEMY,
+                    iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_OTHER,
+                    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+
+                    bDeleteOnHit = true,
+                    bProvidesVision = true,
+                    iVisionRadius = 100,
+                    iVisionTeamNumber = team,
+
+                    vVelocity = (-dir_copy) * speed,
+
+                    ExtraData = {
+                        lolli = 1,
+                        src   = lollipop:entindex(),
+                        tick  = tick,
+                        phase = 1,
+
+                        ox = endpos.x, oy = endpos.y, oz = endpos.z,
+                        range = range,
+                        pct   = pct,
+                        far   = far,
+                    }
+                })
+            end)
+        end
+    end
+    self.t = self.t + 1
+end
+
 
 function modifier_leon_e:IsAura() return true end
 

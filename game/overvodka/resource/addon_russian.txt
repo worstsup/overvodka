@@ -374,6 +374,7 @@
 		"npc_evil_monke"					"Злая Обезьяна"
 
 		"dota_hud_error_leon_q_disarmed"	"Невозможно применить при бессилии"
+		"npc_lollipop"						"Леденец"
 		"dota_tooltip_ability_leon_q" 		"Крутящиеся лезвия"
 		"dota_tooltip_ability_leon_q_description" "Лёгким движением руки Леон отправляет вперёд четыре крутящихся лезвия. Чем дальше они летят, тем ниже урон."
 		"dota_tooltip_ability_leon_q_attack_damage_pct" "%УРОН ЛЕЗВИЯ ОТ АТАКИ:"
@@ -402,6 +403,8 @@
 		"dota_tooltip_ability_leon_shard_heal_pct"	"%ЗДОРОВЬЯ В СЕКУНДУ:"
 		"dota_tooltip_facet_leon_clone"	"Мутация"
 		"dota_tooltip_facet_leon_clone_description" "Применение способности Дымовая Бомба создаст дополнительного клона."
+		"dota_tooltip_facet_leon_lollipop"	"Тяжёлый дым"
+		"dota_tooltip_facet_leon_lollipop_description" "Лезвия от Леденца возвращаются обратно."
 		"dota_tooltip_ability_special_bonus_unique_leon_1"	""
 		"dota_tooltip_ability_special_bonus_unique_leon_2"	""
 		"dota_tooltip_ability_special_bonus_unique_leon_3"	""
@@ -409,7 +412,7 @@
 		"dota_tooltip_ability_special_bonus_unique_leon_5"	""
 		"dota_tooltip_ability_special_bonus_unique_leon_6"	"+1 двойник от Клонирование"
 		"dota_tooltip_ability_special_bonus_unique_leon_6_description" "Преследует второго по близости вражеского героя."
-		"dota_tooltip_ability_special_bonus_unique_leon_7"	""
+		"dota_tooltip_ability_special_bonus_unique_leon_7"	"Дымовая Бомба применяет развеивание"
 		"dota_tooltip_ability_special_bonus_unique_leon_8"	""
 
 		"npc_zhenya_boss"					"Женя Мороз"

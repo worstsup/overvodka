@@ -4148,6 +4148,12 @@
 				"Color"				"Blue"
 				"GradientID"		"0"
 			}
+			"leon_lollipop"
+			{
+				"Icon"				"cooldown"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
 			"hoodwink_hunter" 
 			{
 				"Deprecated"		"true"
@@ -4158,9 +4164,7 @@
 			}
 			"hoodwink_hipshot" 
 			{
-				"Icon"				"cooldown"
-				"Color"				"Green"
-				"GradientID"		"0"
+				"Deprecated"		"true"
 			}
 		}
 
