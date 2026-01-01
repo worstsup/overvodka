@@ -294,7 +294,7 @@ function modifier_leon_w_illusion_ai:_StartCastQ(target)
     local pos = target:GetAbsOrigin()
     pos.z = 0
 
-    local cast_point = 0.15
+    local cast_point = 0.05
     if q.GetCastPoint then
         local cp = q:GetCastPoint()
         if cp and cp > 0 then cast_point = cp end

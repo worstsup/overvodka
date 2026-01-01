@@ -164,7 +164,7 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
                         local currentTime = GameRules:GetGameTime()
                         
                         if not lastAttackTime[idx] or currentTime - lastAttackTime[idx] >= 0.5 then
-                            Timers:CreateTimer(0.15 + dist / 1400, function()
+                            Timers:CreateTimer(0.05 + dist / 1400, function()
                                 if not unit or unit:IsNull() then return end
                                 if not target or target:IsNull() then return end
                                 unit:PerformAttack(target, true, true, true, false, false, false, true)
@@ -177,7 +177,7 @@ function VectorTarget:TryLeonAttackOverride(event, unit, target)
             else
                 local dist = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
                 if dist <= unit:Script_GetAttackRange() then
-                    Timers:CreateTimer(0.15 + dist / 1400, function()
+                    Timers:CreateTimer(0.05 + dist / 1400, function()
                         if not unit or unit:IsNull() then return end
                         if not target or target:IsNull() then return end
                         target:RemoveSelf()

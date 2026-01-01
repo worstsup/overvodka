@@ -101,8 +101,43 @@ function modifier_item_badun:OnCreated()
     self.bonus_str = self.ability:GetSpecialValueFor("bonus_strength")
     self.bonus_int = self.ability:GetSpecialValueFor("bonus_intellect")
     self.bonus_mana = self.ability:GetSpecialValueFor("bonus_mana")
+
+    if not IsServer() then return end
+
     self.bonus_mana_regen_pct = self.ability:GetSpecialValueFor("bonus_mana_regen_pct")
-    self.spell_amp = self.ability:GetSpecialValueFor("spell_amp")
+    self.spell_amp            = self.ability:GetSpecialValueFor("spell_amp")
+
+    if self:GetParent():FindAllModifiersByName("modifier_item_badun")[1] ~= self or self:GetParent():HasItemInInventory("item_kaya") or self:GetParent():HasItemInInventory("item_jordan") then
+        self.spell_amp = 0
+        self.bonus_mana_regen_pct = 0
+    end
+
+    self:SetHasCustomTransmitterData(true)
+    self:StartIntervalThink(FrameTime())
+end
+
+function modifier_item_badun:OnIntervalThink()
+    if not IsServer() then return end
+    if self:GetParent():FindAllModifiersByName("modifier_item_badun")[1] ~= self or self:GetParent():HasItemInInventory("item_kaya") or self:GetParent():HasItemInInventory("item_jordan") then
+        self.spell_amp = 0
+        self.bonus_mana_regen_pct = 0
+    else
+        self.bonus_mana_regen_pct = self.ability:GetSpecialValueFor("bonus_mana_regen_pct")
+        self.spell_amp            = self.ability:GetSpecialValueFor("spell_amp")
+    end
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_item_badun:AddCustomTransmitterData()
+    self._txData = self._txData or {}
+    self._txData.bonus_mana_regen_pct   = self.bonus_mana_regen_pct or 0
+    self._txData.spell_amp = self.spell_amp or 0
+    return self._txData
+end
+
+function modifier_item_badun:HandleCustomTransmitterData( data )
+    self.bonus_mana_regen_pct = data.bonus_mana_regen_pct
+    self.spell_amp = data.spell_amp
 end
 
 function modifier_item_badun:DeclareFunctions()
@@ -111,7 +146,7 @@ function modifier_item_badun:DeclareFunctions()
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
-        MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE,
+        MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE,
         MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     }
 end
@@ -136,9 +171,9 @@ function modifier_item_badun:GetModifierManaBonus()
     return self.bonus_mana or 0
 end
 
-function modifier_item_badun:GetModifierTotalPercentageManaRegen()
+function modifier_item_badun:GetModifierMPRegenAmplify_Percentage()
     if not self:GetAbility() then return end
-    return self.bonus_mana_regen_pct or 0
+    return self.bonus_mana_regen_pct
 end
 
 function modifier_item_badun:GetModifierSpellAmplify_Percentage()

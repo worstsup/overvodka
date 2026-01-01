@@ -1,17 +1,15 @@
 .LeonAmmoRoot {
     width: 100%;
     height: 100%;
-    overflow: noclip;
+    z-index: -100;
 }
 
 .LeonAmmoContainer {
     width: 100%;
     height: 100%;
     flow-children: none;
-    overflow: noclip;
 }
 
-/* сам инстанс на юните — абсолютный, чтобы flow не влиял */
 .LeonAmmoUnit {
     position: 0px 0px 0px;
     overflow: noclip;

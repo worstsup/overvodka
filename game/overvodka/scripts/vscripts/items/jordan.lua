@@ -37,8 +37,43 @@ function modifier_item_jordan:OnCreated()
     self.bonus_armor          = self.ability:GetSpecialValueFor("bonus_armor")
     self.bonus_as             = self.ability:GetSpecialValueFor("bonus_as")
     self.bonus_mregen         = self.ability:GetSpecialValueFor("bonus_mregen")
+
+    if not IsServer() then return end
+
     self.bonus_mana_pct_regen = self.ability:GetSpecialValueFor("bonus_mana")
     self.spell_amp            = self.ability:GetSpecialValueFor("spell_amp")
+
+    if self:GetParent():FindAllModifiersByName("modifier_item_jordan")[1] ~= self or self:GetParent():HasItemInInventory("item_kaya") then
+        self.spell_amp = 0
+        self.bonus_mana_pct_regen = 0
+    end
+
+    self:SetHasCustomTransmitterData(true)
+    self:StartIntervalThink(FrameTime())
+end
+
+function modifier_item_jordan:OnIntervalThink()
+    if not IsServer() then return end
+    if self:GetParent():FindAllModifiersByName("modifier_item_jordan")[1] ~= self or self:GetParent():HasItemInInventory("item_kaya") then
+        self.spell_amp = 0
+        self.bonus_mana_pct_regen = 0
+    else
+        self.bonus_mana_pct_regen = self.ability:GetSpecialValueFor("bonus_mana")
+        self.spell_amp            = self.ability:GetSpecialValueFor("spell_amp")
+    end
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_item_jordan:AddCustomTransmitterData()
+    self._txData = self._txData or {}
+    self._txData.bonus_mana_pct_regen   = self.bonus_mana_pct_regen or 0
+    self._txData.spell_amp = self.spell_amp or 0
+    return self._txData
+end
+
+function modifier_item_jordan:HandleCustomTransmitterData( data )
+    self.bonus_mana_pct_regen = data.bonus_mana_pct_regen
+    self.spell_amp = data.spell_amp
 end
 
 function modifier_item_jordan:DeclareFunctions()
@@ -49,7 +84,7 @@ function modifier_item_jordan:DeclareFunctions()
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,
-        MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE,
+        MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
@@ -93,7 +128,7 @@ function modifier_item_jordan:GetModifierHealthBonus()
     end
 end
 
-function modifier_item_jordan:GetModifierTotalPercentageManaRegen()
+function modifier_item_jordan:GetModifierMPRegenAmplify_Percentage()
     if self:GetAbility() then
         return self.bonus_mana_pct_regen
     end

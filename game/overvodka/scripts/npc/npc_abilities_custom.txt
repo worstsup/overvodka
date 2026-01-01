@@ -16754,7 +16754,7 @@
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityManaCost"			"50"
+		"AbilityManaCost"			"50 55 60 65"
 		"AbilityChargeRestoreTime" 	"8.5 8.0 7.5 7.0"
 		"AbilityValues"
 		{
@@ -16796,7 +16796,7 @@
 		"SpellDispellableType"	    "SPELL_DISPELLABLE_YES"
 		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityCooldown"			"12 11 10 9"
-		"AbilityManaCost"			"80"
+		"AbilityManaCost"			"80 85 90 95"
 		"AbilityCastPoint"			"0.1"
 		"AbilityValues"
 		{
@@ -16873,8 +16873,8 @@
 		"AbilityManaCost"               "150 200 250"
 		"AbilityValues"
 		{
-				"duration"              "10"
-				"bonus_attack_speed"    "80 120 160"
+				"duration"              "8 9 10"
+				"bonus_attack_speed"    "60 90 120"
 				"lifesteal_pct"			"25"
 				"orbit_start_range"     "300"
 				"orbit_radius"          "180"
@@ -16903,8 +16903,8 @@
 		"MaxLevel"				 "1"
 		"AbilityTextureName"	 "kolibri_d"
 		"AbilitySharedCooldown"  "kolibri_side_dash"
-		"AbilityManaCost"		 "50"
-		"AbilityCooldown"        "6"
+		"AbilityManaCost"		 "65"
+		"AbilityCooldown"        "7"
 		"IsGrantedByShard"		 "1"
 		"AbilityValues"
 		{
@@ -16924,11 +16924,11 @@
 		"AbilityUnitTargetTeam"	 "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"	 "DAMAGE_TYPE_PHYSICAL"
-		"AbilityManaCost"		 "50"
+		"AbilityManaCost"		 "65"
 		"MaxLevel"				 "1"
 		"AbilityTextureName"	 "kolibri_f"
 		"AbilitySharedCooldown"  "kolibri_side_dash"
-		"AbilityCooldown"        "6"
+		"AbilityCooldown"        "7"
 		"IsGrantedByShard"		 "1"
 		"AbilityValues"
 		{
@@ -17000,26 +17000,26 @@
 		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"SpellImmunityType"             "SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastPoint"				"0.15"
+		"AbilityCastPoint"				"0.05"
 		"MaxLevel"						"5"
 		"Innate"						"1"
 		"AbilityCastRange"				"900"
 		"AbilityValues"
 		{
 			"attacks_number"		"4"
-			"attack_damage_pct"		"45"
+			"attack_damage_pct"		"75"
 			"projectile_speed"  	"1400"
 			"spread_angle"      	"18"
 			"damage_far_pct"
 			{
-				"value"	"35"
+				"value"	"15"
 				"special_bonus_unique_leon_4"	"-10"
 			}
-			"blade_radius"      		"28"
+			"blade_radius"      		"30"
 			"shot_interval"     		"0.06"
 			"AbilityCharges"			"3"
-			"AbilityChargeRestoreTime"  "4.0 3.5 3.0 2.5 2.0"
-			"total_cast_time_tooltip"	"0.15"
+			"AbilityChargeRestoreTime"  "3.0 2.6 2.2 1.8 1.4"
+			"total_cast_time_tooltip"	"0.05"
 			"restore_charges"
 			{
 				"value"	"0"
@@ -17036,17 +17036,17 @@
 		"ScriptFile"                    "heroes/leon/leon_w"
 		"AbilityTextureName"			"leon_w"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCooldown"               "22 20 18 16"
+		"AbilityCooldown"               "20 18 16 14"
 		"AbilityManaCost"               "80"
 		"AbilityValues"
 		{
 			"duration"					"10.0"
 			"search_radius"				"5000"
 			"attack_range"				"300"
-			"illusion_incoming_damage"	"320 290 260 230"
+			"illusion_incoming_damage"	"290 260 230 200"
 			"illusion_outgoing_damage"
 			{
-				"value"	"25 30 35 40"
+				"value"	"35 40 45 50"
 				"special_bonus_unique_leon_2"	"+5"
 			}
 			"order_interval"			"0.25"
@@ -17070,7 +17070,7 @@
 		"AbilityCastRange"				"600"
 		"AbilityCastPoint"				"0.2"
 		"AbilityCooldown"				"20"
-		"AbilityManaCost"				"100 115 130 145"
+		"AbilityManaCost"				"85 100 115 130"
 		"AbilityValues"
 		{
 			"duration"
@@ -17100,8 +17100,8 @@
 				"special_bonus_facet_leon_lollipop"	"+1"
 			}
 			"blades_count"	"8"
-			"gold"	"50 60 70 80"
-			"xp" "60 90 120 150"
+			"gold"	"40 50 60 70"
+			"xp" "30 60 90 120"
 		}
 	}
 	//=================================================================================================================
@@ -17138,7 +17138,7 @@
 		"AbilityManaCost"				"75 100 125"
 		"AbilityValues"
 		{
-				"duration"				"7.0 7.5 8.0"
+				"duration"				"7.0 8.0 9.0"
 				"bonus_ms"				"25 30 35"
 				"minus_cd"
 				{

@@ -4,7 +4,7 @@ let Container = null;
 let UISCALE_X = 1;
 let UISCALE_Y = 1;
 
-const LEON_Q_CHARGE_CD = [4.0, 3.5, 3.0, 2.5, 2.0];
+const LEON_Q_CHARGE_CD = [3.0, 2.6, 2.2, 1.8, 1.4];
 
 function GetLeonQChargeCdByLevel(ab) {
     let lvl = 0;
