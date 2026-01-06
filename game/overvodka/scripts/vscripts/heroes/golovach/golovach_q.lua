@@ -26,9 +26,6 @@ function modifier_golovach_q_buff:OnRefresh( kv )
 	self.reduction = self:GetAbility():GetSpecialValueFor( "back_damage_reduction" )
 end
 
-function modifier_golovach_q_buff:OnDestroy( kv )
-end
-
 function modifier_golovach_q_buff:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,

@@ -1,87 +1,73 @@
+LinkLuaModifier("modifier_vihor_innate", "heroes/vihor/vihor_innate", LUA_MODIFIER_MOTION_NONE)
+
 vihor_innate = class({})
-LinkLuaModifier( "modifier_vihor_innate", "heroes/vihor/vihor_innate", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_vihor_innate_effect", "heroes/vihor/vihor_innate", LUA_MODIFIER_MOTION_NONE )
 
 function vihor_innate:GetIntrinsicModifierName()
-	return "modifier_vihor_innate"
+    return "modifier_vihor_innate"
 end
 
 modifier_vihor_innate = class({})
 
-function modifier_vihor_innate:IsDebuff()
-	return true
-end
-function modifier_vihor_innate:IsHidden()
-	return true
-end
-function modifier_vihor_innate:IsAura()
-	return true
+function modifier_vihor_innate:IsHidden() return true end
+function modifier_vihor_innate:IsPurgable() return false end
+function modifier_vihor_innate:RemoveOnDeath() return false end
+
+function modifier_vihor_innate:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
+    }
 end
 
-function modifier_vihor_innate:GetModifierAura()
-	return "modifier_vihor_innate_effect"
-end
+function modifier_vihor_innate:OnAttackLanded(params)
+    if not IsServer() then return end
 
-function modifier_vihor_innate:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_BOTH
-end
-function modifier_vihor_innate:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO
-end
-function modifier_vihor_innate:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
-end
-function modifier_vihor_innate:GetAuraRadius()
-	return self.aura_radius
-end
-function modifier_vihor_innate:GetAuraEntityReject( hEntity )
-	return not hEntity:CanEntityBeSeenByMyTeam(self:GetCaster())
-end
-function modifier_vihor_innate:OnCreated( kv )
-	self.aura_radius = self:GetAbility():GetSpecialValueFor( "radius" )
-end
-function modifier_vihor_innate:OnRefresh( kv )
-	self.aura_radius = self:GetAbility():GetSpecialValueFor( "radius" )
-end
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return end
+    if params.attacker ~= parent then return end
 
-modifier_vihor_innate_effect = class({})
+    if parent:PassivesDisabled() or parent:IsIllusion() then return end
 
-function modifier_vihor_innate_effect:IsDebuff()
-	return true
-end
-function modifier_vihor_innate_effect:IsHidden()
-	return true
-end
+    local target = params.target
+    if not target or target:IsNull() or (not target:IsAlive()) then return end
+    if target:GetTeamNumber() == parent:GetTeamNumber() then return end
 
-function modifier_vihor_innate_effect:GetAuraEntityReject( hEntity )
-	return not hEntity:CanEntityBeSeenByMyTeam(self:GetCaster())
-end
+    if target:IsBuilding() or target:IsOther() then return end
 
-function modifier_vihor_innate_effect:OnCreated( kv )
-	self.bonus_hp = self:GetAbility():GetSpecialValueFor( "bonus_hp" )
-end
+    local innate = self:GetAbility()
+    if not innate or innate:IsNull() then return end
 
-function modifier_vihor_innate_effect:OnRefresh( kv )
-	self.bonus_hp = self:GetAbility():GetSpecialValueFor( "bonus_hp" )
-end
+    local q = parent:FindAbilityByName("vihor_q")
+    if not q or q:IsNull() or q:GetLevel() <= 0 then return end
 
-function modifier_vihor_innate_effect:DeclareFunctions()
-	local funcs = {
-		MODIFIER_PROPERTY_HEALTH_BONUS,
-	}
+    local duration_pct = innate:GetSpecialValueFor("duration_pct")
+    local damage_pct = innate:GetSpecialValueFor("damage_pct")
 
-	return funcs
-end
+    if duration_pct <= 0 and damage_pct <= 0 then return end
 
-function modifier_vihor_innate_effect:GetModifierHealthBonus( params )
-	if self:GetParent():GetUnitName() == "npc_dota_hero_skeleton_king" then
-		self.hp = self.bonus_hp * self:GetParent():GetMaxHealth() * 0.01
-		if self:GetParent():GetTeamNumber() ~= self:GetCaster():GetTeamNumber() then
-			return -self.hp
+    local base_duration = q:GetSpecialValueFor("duration")
+    local base_damage = q:GetSpecialValueFor("damage")
+
+    local dur = base_duration * (duration_pct / 100.0)
+    local dmg = base_damage * (damage_pct / 100.0)
+
+    local p = ParticleManager:CreateParticle("particles/vihor_innate.vpcf", PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(p, 0, target:GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(p)
+
+	local enemies = FindUnitsInRadius(parent:GetTeamNumber(), target:GetAbsOrigin(),
+		nil, innate:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+
+	for _,enemy in ipairs(enemies) do
+		if (enemy and not enemy:IsNull()) and (enemy:IsAlive()) then
+			if dur > 0 then
+				enemy:AddNewModifier(parent, q, "modifier_vihor_q_slow", {duration = dur * (1 - enemy:GetStatusResistance())})
+			end
+
+			if dmg > 0 then
+				ApplyDamage({victim = enemy, attacker = parent, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = q})
+			end
 		end
-		return self.hp
 	end
-	return 0
 end
-
---------------------------------------------------------------------------------

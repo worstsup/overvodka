@@ -187,6 +187,100 @@ function RollPseudoRandom(base_chance, entity)
 	end
 end
 
+if CDOTA_Modifier_Lua and CDOTA_Modifier_Lua.CheckMotionControllers == nil then
+    local NON_LUA_MOTION_CONTROLLERS = {
+        ["modifier_brewmaster_storm_cyclone"]                = true,
+        ["modifier_dark_seer_vacuum"]                        = true,
+        ["modifier_eul_cyclone"]                             = true,
+        ["modifier_earth_spirit_rolling_boulder_caster"]     = true,
+        ["modifier_huskar_life_break_charge"]                = true,
+        ["modifier_invoker_tornado"]                         = true,
+        ["modifier_item_forcestaff_active"]                  = true,
+        ["modifier_rattletrap_hookshot"]                     = true,
+        ["modifier_phoenix_icarus_dive"]                     = true,
+        ["modifier_shredder_timber_chain"]                   = true,
+        ["modifier_slark_pounce"]                            = true,
+        ["modifier_spirit_breaker_charge_of_darkness"]       = true,
+        ["modifier_tusk_walrus_punch_air_time"]              = true,
+        ["modifier_earthshaker_enchant_totem_leap"]          = true,
+    }
+
+    function CDOTA_Modifier_Lua:CheckMotionControllers()
+        if not IsServer() then return true end
+
+        local parent = self:GetParent()
+        if not parent or parent:IsNull() then return false end
+
+        local my_prio = DOTA_MOTION_CONTROLLER_PRIORITY_LOWEST
+        if self.GetMotionControllerPriority then
+            my_prio = self:GetMotionControllerPriority()
+        end
+
+        local my_time = 0
+        if self.GetCreationTime then
+            my_time = self:GetCreationTime()
+        end
+
+        local best_mod = nil
+        local best_prio = -1
+        local best_time = -1
+
+        local mods = parent:FindAllModifiers() or {}
+        for _, mod in pairs(mods) do
+            if mod and (mod ~= self) and (not mod:IsNull()) then
+                local is_mc = false
+                local prio = nil
+
+                if mod.IsMotionController and mod:IsMotionController() then
+                    is_mc = true
+                    if mod.GetMotionControllerPriority then
+                        prio = mod:GetMotionControllerPriority()
+                    end
+                elseif NON_LUA_MOTION_CONTROLLERS[mod:GetName()] then
+                    is_mc = true
+                    prio = DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
+                end
+
+                if is_mc then
+                    prio = prio or DOTA_MOTION_CONTROLLER_PRIORITY_LOWEST
+
+                    local t = 0
+                    if mod.GetCreationTime then
+                        t = mod:GetCreationTime()
+                    end
+
+                    if (prio > best_prio) or (prio == best_prio and t > best_time) then
+                        best_mod = mod
+                        best_prio = prio
+                        best_time = t
+                    end
+                end
+            end
+        end
+
+        if not best_mod then
+            return true
+        end
+
+        if best_prio > my_prio then
+            return false
+        end
+
+        if best_prio == my_prio then
+            if best_time >= my_time then
+                return false
+            end
+        end
+
+        parent:InterruptMotionControllers(true)
+        if best_mod and (not best_mod:IsNull()) and best_mod.Destroy then
+            best_mod:Destroy()
+        end
+
+        return true
+    end
+end
+
 function IsComebackTeam(TeamID)
 	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
 	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()

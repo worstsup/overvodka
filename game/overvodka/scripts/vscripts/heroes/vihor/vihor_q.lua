@@ -1,119 +1,145 @@
-vihor_q = class({})
 LinkLuaModifier("modifier_vihor_q_slow", "heroes/vihor/vihor_q", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_vihor_q_fly", "heroes/vihor/vihor_q", LUA_MODIFIER_MOTION_NONE )
+
+vihor_q = class({})
 
 function vihor_q:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_projectile.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_debuff.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_thinker.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/batrider/batrider_ti8_immortal_mount/batrider_ti8_immortal_firefly_mount_trail.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/vihor_q.vsndevts", context )
+	PrecacheResource("particle", "particles/vihor_innate.vpcf", context)
+    PrecacheResource("soundfile", "soundevents/vihor_q.vsndevts", context)
 end
+
 function vihor_q:OnSpellStart()
-	self.range = self:GetSpecialValueFor("range")
-	self.radius = self:GetSpecialValueFor("radius")
-	self.damage = self:GetSpecialValueFor("damage")
-	self.enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self.range, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-	self.k = 0
-	local target = self:GetCaster()
-	for _, enemy in pairs(self.enemies) do
-		if self.k > 0 then break end
-		target = enemy
-		self.k = self.k + 1
-	end
-	local projectile_speed = self:GetSpecialValueFor("blast_speed")
-	local projectile_name = "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_projectile.vpcf"
-	local info = {
-		EffectName = projectile_name,
-		Ability = self,
-		iMoveSpeed = projectile_speed,
-		Source = self:GetCaster(),
-		Target = target,
-		iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
-	}
-	ProjectileManager:CreateTrackingProjectile( info )
-	self.targets = self:GetSpecialValueFor("targets")
-	if self.targets == 2 then
-		self.second = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self.range, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-		self.t = 0
-		local target_2 = self:GetCaster()
-		for _, enemy in pairs(self.second) do
-			if self.t > 0 then break end
-			if enemy ~= target then
-				target = enemy
-				self.t = self.t + 1
-			end
-		end
-		local info_2 = {
-			EffectName = projectile_name,
-			Ability = self,
-			iMoveSpeed = projectile_speed,
-			Source = self:GetCaster(),
-			Target = target,
-			iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
-		}
-		ProjectileManager:CreateTrackingProjectile( info_2 )
-	end
+    if not IsServer() then return end
 
-	self.duration = self:GetSpecialValueFor( "duration" )
-	self.duration_fly = self:GetSpecialValueFor( "duration_fly" )
-	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_vihor_q_fly", { duration = self.duration_fly })
-	self:PlayEffects1()
-end
-function vihor_q:OnProjectileHit( hTarget, vLocation )
-	local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), vLocation, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-	for _, enemy in pairs(targets) do
-		enemy:AddNewModifier( self:GetCaster(), self, "modifier_vihor_q_slow", { duration = self.duration * (1 - enemy:GetStatusResistance()) } )
-		ApplyDamage({victim = enemy, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
-	end
-	self:PlayEffects2( hTarget )
-	return true
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return end
+
+    local range = self:GetSpecialValueFor("range")
+    local duration_fly = self:GetSpecialValueFor("duration_fly")
+    local targets_count = self:GetSpecialValueFor("targets")
+
+    local enemies = FindUnitsInRadius(
+        caster:GetTeamNumber(), caster:GetAbsOrigin(),
+        nil, range, DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false
+    )
+
+    local chosen = {}
+    local used = {}
+
+    if enemies and #enemies > 0 then
+        for _, enemy in ipairs(enemies) do
+            if enemy and not enemy:IsNull() and enemy:IsAlive() then
+                local idx = enemy:entindex()
+                if not used[idx] then
+                    used[idx] = true
+                    table.insert(chosen, enemy)
+                    if #chosen >= targets_count then
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    while #chosen < targets_count do
+        table.insert(chosen, caster)
+    end
+
+    for _, target in ipairs(chosen) do
+        local info = {
+            EffectName = "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_projectile.vpcf",
+            Ability = self,
+            iMoveSpeed = self:GetSpecialValueFor("blast_speed"),
+            Source = caster,
+            Target = target,
+            iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1,
+            ExtraData = {
+                radius = self:GetSpecialValueFor("radius"),
+                damage = self:GetSpecialValueFor("damage"),
+                duration = self:GetSpecialValueFor("duration"),
+            }
+        }
+        ProjectileManager:CreateTrackingProjectile(info)
+    end
+
+    caster:AddNewModifier(caster, self, "modifier_vihor_q_fly", { duration = duration_fly })
+    EmitSoundOn("vihor_q", self:GetCaster())
 end
 
-function vihor_q:PlayEffects1()
-	local sound_cast = "vihor_q"
-	EmitSoundOn( sound_cast, self:GetCaster() )
+function vihor_q:OnProjectileHit_ExtraData(hTarget, vLocation, ExtraData)
+    if not IsServer() then return true end
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then return true end
+    if not vLocation then return true end
+
+    local radius = (ExtraData and tonumber(ExtraData.radius)) or self:GetSpecialValueFor("radius")
+    local damage = (ExtraData and tonumber(ExtraData.damage)) or self:GetSpecialValueFor("damage")
+    local duration = (ExtraData and tonumber(ExtraData.duration)) or self:GetSpecialValueFor("duration")
+
+    local units = FindUnitsInRadius(
+        caster:GetTeamNumber(), vLocation,
+        nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false
+    )
+
+    for _, enemy in ipairs(units) do
+        if enemy and not enemy:IsNull() and enemy:IsAlive() then
+            enemy:AddNewModifier(caster, self, "modifier_vihor_q_slow", { duration = duration * (1 - enemy:GetStatusResistance()) })
+            ApplyDamage({victim = enemy, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+        end
+    end
+
+    if hTarget and not hTarget:IsNull() then
+        self:PlayEffects(hTarget)
+    end
+
+    return true
 end
-function vihor_q:PlayEffects2( target )
+
+function vihor_q:PlayEffects( target )
 	local particle_radius = ParticleManager:CreateParticle("particles/units/heroes/hero_clinkz/clinkz_tar_bomb_thinker.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle_radius, 0, target:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle_radius)
 end
 
 modifier_vihor_q_slow = class({})
-function modifier_vihor_q_slow:IsDebuff()
-	return true
-end
-function modifier_vihor_q_slow:OnCreated( kv )
-	self.dot_slow = self:GetAbility():GetSpecialValueFor( "blast_slow" )
-end
-function modifier_vihor_q_slow:OnRefresh( kv )
+
+function modifier_vihor_q_slow:IsDebuff() return true end
+
+function modifier_vihor_q_slow:OnCreated()
 	self.dot_slow = self:GetAbility():GetSpecialValueFor( "blast_slow" )
 end
 
-function modifier_vihor_q_slow:OnDestroy()
-end
 function modifier_vihor_q_slow:DeclareFunctions()	
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 	}
-	return funcs
 end
-function modifier_vihor_q_slow:GetModifierMoveSpeedBonus_Percentage( params )
+
+function modifier_vihor_q_slow:GetModifierMoveSpeedBonus_Percentage()
 	return self.dot_slow
 end
+
 function modifier_vihor_q_slow:GetEffectName()
 	return "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_debuff.vpcf"
 end
+
 function modifier_vihor_q_slow:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
+
 modifier_vihor_q_fly = class({})
 
-function modifier_vihor_q_fly:OnCreated(kv)
-    if not IsServer() then return end
-    self.bonus_speed = self:GetAbility() and self:GetAbility():GetSpecialValueFor("bonus_speed")
+function modifier_vihor_q_fly:OnCreated()
+    self.bonus_speed = self:GetAbility():GetSpecialValueFor("bonus_speed")
 end
 
 function modifier_vihor_q_fly:OnDestroy()
@@ -129,12 +155,10 @@ function modifier_vihor_q_fly:CheckState()
 end
 
 function modifier_vihor_q_fly:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION
     }
-    return funcs
 end
 
 function modifier_vihor_q_fly:GetModifierMoveSpeedBonus_Percentage()

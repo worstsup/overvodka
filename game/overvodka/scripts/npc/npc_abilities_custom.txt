@@ -9228,9 +9228,29 @@
 		}
 	}
 	//=================================================================================================================
+	// СВЕТЛОЛИКИЙ (врожденная)
+	//=================================================================================================================
+	"vihor_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/vihor/vihor_innate"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"4"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"DependentOnAbility"			"vihor_ultimate"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+				"radius"				"200"
+				"duration_pct"			"20 30 40 50"
+				"damage_pct"			"25 30 35 40"
+		}
+	}
+	//=================================================================================================================
 	// МУЗЫКАЛЬНАЯ ПАУЗА
 	//=================================================================================================================
-	"vihor_r"
+	"vihor_ultimate"
 	{
 		"BaseClass"						   "ability_lua"
 		"ScriptFile"					   "heroes/vihor/vihor_r"
@@ -9277,26 +9297,6 @@
 				"dota_damage" 				"50 100 150"
             	"slow"						 "-55"
         }
-	}
-	//=================================================================================================================
-	// ЛУЧШИЙ ДОНАТ (врожденная)
-	//=================================================================================================================
-	"vihor_innate"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/vihor/vihor_innate"
-		"MaxLevel"						"1"
-		"RequiredLevel"					"-1"
-		"Innate"						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityCastRange"				"900"
-		"AbilityValues"
-		{
-				"bonus_hp"				"15"
-				"radius"				"900"
-		}
 	}
 
 	//===================================================================================================================
@@ -17145,6 +17145,326 @@
 					"value"	"1.5"
 					"special_bonus_unique_leon_3"	"+0.5"
 				}
+		}
+	}
+	//===================================================================================================================
+	//											АЛЕКСАНДР ПИСТОЛЕТОВ
+	//===================================================================================================================
+	"special_bonus_unique_pistol_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_pistol_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Скачем на дельфинах
+	//=================================================================================================================
+	"pistol_q"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"				"heroes/pistol/pistol_q"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"		"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"		"pistol_q"
+		"AbilityManaCost"			"80 90 100 110"
+		"HasShardUpgrade"			"1"
+		"AbilityValues"
+		{
+			"damage" "50 100 150 200"
+			"stun_duration"	"0.6 0.7 0.8 0.9"
+			"radius"
+			{
+				"value"	"275 300 325 350"
+				"affected_by_aoe_increase"	"1"
+			}
+			"AbilityCharges"
+			{
+				"value"	"2"
+				"special_bonus_unique_pistol_4"	"+1"
+			}
+			"AbilityChargeRestoreTime" "18 16 14 12"
+			"fly_time"		"0.3"
+			"cast_range"
+			{
+				"value"	"300"
+				"special_bonus_unique_pistol_1"	"+50"
+			}			
+
+			"shard_torrent_damage"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+150"
+				"RequiresShard" "1"
+			}
+			"shard_torrent_delay"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+1.6"
+				"RequiresShard" "1"
+			}
+			"shard_torrent_radius"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+200"
+				"RequiresShard" "1"
+			}
+			"shard_torrent_slow_as"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+15"
+				"RequiresShard" "1"
+			}
+			"shard_torrent_slow_ms"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+25"
+				"RequiresShard" "1"
+			}
+			"shard_torrent_slow_duration"
+			{
+				"value"	"0"
+				"special_bonus_shard"	"+2.25"
+				"RequiresShard" "1"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Каратист
+	//=================================================================================================================
+	"pistol_w"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/pistol/pistol_w"
+		"AbilityTextureName"			"golovach_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_SELF"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"IsBreakable"					"1"
+		"AbilityCastPoint"				"0.2"
+		"AbilityManaCost"				"100 200 300"
+		"AbilityValues"
+		{
+				"counter_cooldown"			"1.5 1.2 0.9 0.6"
+				"chance"					"12 16 20 24"
+				"lifesteal"					"55 65 75 85"
+				"duration"					"8"
+				"charges_per_flurry"		"3"
+				"flurry_bonus_attack_speed"	"800"
+				"time_between_flurries"
+				{
+					"value"	"1.5"
+					"special_bonus_unique_pistol_7"	"-0.75"
+				}
+				"attack_damage"				"30 50 70 90"
+				"attack_damage_pct"
+				{
+					"value"	"0"
+					"special_bonus_unique_pistol_3"	"+35"
+				}
+				"pulse_damage"				"20 25 30 35"
+				"pulse_attack_kick"			"150"
+				"max_time_window_per_hit"	"3.0"
+				"recovery_fixed_attack_rate" "2.0"
+				"AbilityCooldown"
+				{
+					"value"	"32 30 28 26"
+					"special_bonus_unique_pistol_2"	"-4"
+				}
+		}
+	}
+	//=================================================================================================================
+	// Супермэн
+	//=================================================================================================================
+	"pistol_e"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/pistol/pistol_e"
+		"AbilityTextureName"			"pistol_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityDamage"					"40 80 120 160"
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.8"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCooldown"				"55 50 45 40"
+		"AbilityManaCost"				"100 125 150 175"
+		"LinkedAbility"					"pistol_e_stop"
+		"AbilityValues"
+		{
+			"cast_time_tooltip"		"0.8"
+			"tick_interval"			"0.05"
+			"damage_pct"			"60 70 80 90"
+			"forward_move_speed"
+			{
+				"value"	"550 600 650 700"
+				"special_bonus_unique_pistol_5"	"+100"
+			}
+			"turn_rate_boosted"		"165"
+			"turn_rate"				"120"
+			"radius"				"200"
+			"hit_radius"			"150"
+			"bounce_duration"		"0.4"
+			"stun_duration"			"0.6 0.7 0.8 0.9"
+			"knockback_radius"		"150"
+			"duration"				"7.0 7.5 8.0 8.5"
+			"jump_recover_time"		"0.25"
+			"damage_reduction"
+			{
+				"value"	"0"
+				"special_bonus_unique_pistol_6" "+40"
+			}
+		}
+	}
+	"pistol_e_stop"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/pistol/pistol_e"
+		"AbilityTextureName"			"pistol_e"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"LinkedAbility"					"pistol_e"
+		"MaxLevel"						"1"
+	}
+	//=================================================================================================================
+	// Новый Пират
+	//=================================================================================================================
+	"pistol_r"
+	{
+		"BaseClass"                 "ability_lua"
+		"ScriptFile"                "heroes/pistol/pistol_r"
+		"AbilityType"               "ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"		"pistol_r"
+		"AbilityCastRange"          "2000"
+		"AbilityCooldown"           "90"
+		"AbilityCastPoint"			"0.15"
+		"AbilityManaCost"           "150 250 350"
+		"HasScepterUpgrade"			"1"
+		"AbilityValues"
+		{
+			"crash_delay" 			"2.5"
+			"ship_interval" 		"3.5"
+			"ship_speed" 			"800"
+			"ship_number"			"4"
+
+			"stun_duration" 		"1.0 1.2 1.4"
+			"damage" 				"300 450 600"
+			"width"
+			{
+				"value"	"400"
+				"affected_by_aoe_increase"	"1"
+			}
+
+			"cannon_damage_pct" 	"40"
+			"cannon_range" 			"900"
+			"cannon_speed" 			"1400"
+			"cannon_radius" 		"90"
+
+			"storm_min_radius"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+300"
+				"RequiresScepter" "1"
+			}
+			"storm_max_radius"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+1000"
+				"RequiresScepter" "1"
+			}
+			"storm_duration"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+3.5"
+				"RequiresScepter" "1"
+			}
+			"storm_lift_duration"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+1.4"
+				"RequiresScepter" "1"
+			}
+			"storm_torrent_damage"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+240"
+				"RequiresScepter" "1"
+			}
+			"storm_torrent_radius"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+225"
+				"RequiresScepter" "1"
+			}
+			"storm_interval" 		"0.25"
+			"storm_torrent_delay"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+1.6"
+				"RequiresScepter" "1"
+			}
+			"storm_slow_pct"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+25"
+				"RequiresScepter" "1"
+			}
+			"storm_slow_dur"
+			{
+				"value"	"0"
+				"special_bonus_scepter"	"+2.25"
+				"RequiresScepter" "1"
+			}
 		}
 	}
 

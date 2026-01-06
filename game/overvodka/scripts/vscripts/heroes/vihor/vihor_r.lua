@@ -2,8 +2,8 @@ LinkLuaModifier("modifier_vihor_r", "heroes/vihor/vihor_r", LUA_MODIFIER_MOTION_
 LinkLuaModifier("modifier_vihor_r_debuff", "heroes/vihor/vihor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
-vihor_r = class({})
-function vihor_r:Precache(context)
+vihor_ultimate = class({})
+function vihor_ultimate:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", context)
     PrecacheResource("particle", "particles/econ/items/techies/techies_arcana/techies_suicide_arcana.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_marci/marci_bodyguard_radius_glow.vpcf", context)
@@ -16,17 +16,17 @@ function vihor_r:Precache(context)
 	PrecacheResource("soundfile", "soundevents/vihor_r.vsndevts", context )
 end
 
-function vihor_r:OnAbilityPhaseStart()
+function vihor_ultimate:OnAbilityPhaseStart()
     local particle_2 = ParticleManager:CreateParticle("particles/econ/items/arc_warden/arc_warden_frostivus_2023/arc_warden_magnetic_frostivus_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     local particle_3 = ParticleManager:CreateParticle("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_flame.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
     EmitSoundOn("vihor_r_start", self:GetCaster())
 end
 
-function vihor_r:OnAbilityPhaseInterrupted()
+function vihor_ultimate:OnAbilityPhaseInterrupted()
     StopSoundOn("vihor_r_start", self:GetCaster())
 end
 
-function vihor_r:OnSpellStart()
+function vihor_ultimate:OnSpellStart()
     if not IsServer() then return end
     local duration_to_explosion = self:GetSpecialValueFor("duration_to_explosion")
     AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), self:GetSpecialValueFor("radius"), duration_to_explosion, false)

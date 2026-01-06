@@ -40,12 +40,7 @@ function papich_e:OnChargeFinish( interrupt )
     end
 
     if interrupted then return end
-    caster:AddNewModifier(
-        caster,
-        self,
-        "modifier_papich_e",
-        { duration = -1 }
-    )
+    caster:AddNewModifier( caster, self, "modifier_papich_e", {duration = -1})
 end
 
 modifier_papich_e_passive = class({})
@@ -126,19 +121,9 @@ function modifier_papich_e_passive:OnIntervalThink()
         self.parent:Purge( true, true, false, true, true )
         caster:FaceTowards(point)
         local duration = self:GetAbility():GetSpecialValueFor( "chargeup_time" )
-        local mod = caster:AddNewModifier(
-           caster,
-           self.ability,
-           "modifier_papich_e_command",
-           { duration = duration+0.1 }
-        )
+        caster:AddNewModifier(caster, self.ability, "modifier_papich_e_command", {duration = duration + 0.1})
         self.ability:StartCooldown(self.ability:GetCooldown(self.ability:GetLevel() - 1))
-        local mod = caster:AddNewModifier(
-           caster,
-            self.ability,
-           "modifier_papich_e_charge",
-           { duration = duration }
-        )
+        caster:AddNewModifier(caster, self.ability, "modifier_papich_e_charge", {duration = duration})
         if self.parent:HasModifier("modifier_custom_min_health") then
             self.parent:RemoveModifierByName("modifier_custom_min_health")
         end

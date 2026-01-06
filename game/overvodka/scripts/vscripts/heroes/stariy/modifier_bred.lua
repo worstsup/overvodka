@@ -1,10 +1,8 @@
 modifier_bred = class({})
 
-function modifier_bred:IsPurgable()
-	return true
-end
+function modifier_bred:IsPurgable() return true end
 
-function modifier_bred:OnCreated( kv )
+function modifier_bred:OnCreated()
 	self.resist = self:GetAbility():GetSpecialValueFor( "resist" )
 	self.as_slow = self:GetAbility():GetSpecialValueFor("as_slow")
 	self.ms = self:GetAbility():GetSpecialValueFor( "bonus_ms" )
@@ -14,15 +12,13 @@ function modifier_bred:OnCreated( kv )
 end
 
 function modifier_bred:DeclareFunctions()
-	local funcs = 
-	{
+	return {
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
 	}
-	return funcs
 end
 function modifier_bred:GetEffectName()
 	return "particles/items2_fx/vindicators_axe_armor.vpcf"
@@ -47,7 +43,6 @@ function modifier_bred:GetModifierAttackSpeedPercentage()
 end
 
 function modifier_bred:PlayEffectsNew( target )
-	local particle_cast = "particles/events/muerta_ofrenda/muerta_death_reckoning_flames_green.vpcf"
-	local effect_cast_new = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
+	local effect_cast_new = ParticleManager:CreateParticle( "particles/events/muerta_ofrenda/muerta_death_reckoning_flames_green.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast_new )
 end
