@@ -17199,6 +17199,59 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 	//=================================================================================================================
+	// Трах Тибидох
+	//=================================================================================================================
+	"pistol_innate"
+	{
+		"BaseClass"                  "ability_lua"
+		"ScriptFile"                 "heroes/pistol/pistol_innate"
+		"AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"IsBreakable"				 "1"
+		"RequiredLevel"				 "-1"
+		"MaxLevel"					 "1"
+		"Innate"					 "1"
+		"AbilityValues"
+		{
+			"damage_per_charge" "2000"
+			"armor_per_charge"
+			{
+				"value"	"0.5"
+				"special_bonus_unique_pistol_8"	"x2"
+			}
+			"regen_per_charge"
+			{
+				"value"	"2.5"
+				"special_bonus_unique_pistol_8"	"x2"
+			}
+			"shield_pct"
+			{
+				"value"	"0"
+				"special_bonus_facet_pistol_shield"	"+10"
+				"RequiresFacet"	"pistol_shield"
+			}
+			"shield_duration"
+			{
+				"value"	"0"
+				"special_bonus_facet_pistol_shield"	"+4"
+				"RequiresFacet"	"pistol_shield"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Гладиатор
+	//=================================================================================================================
+	"juggernaut_duelist"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+		"IsBreakable"					"1"
+		"AbilityValues"
+		{
+			"front_angle"				"55"
+			"front_damage_increase"		"15"
+		}
+	}
+	//=================================================================================================================
 	// Скачем на дельфинах
 	//=================================================================================================================
 	"pistol_q"
@@ -17285,8 +17338,8 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 		"IsBreakable"					"1"
-		"AbilityCastPoint"				"0.2"
-		"AbilityManaCost"				"100 200 300"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"				"60 80 100 120"
 		"AbilityValues"
 		{
 				"counter_cooldown"			"1.5 1.2 0.9 0.6"
@@ -17306,7 +17359,7 @@
 					"value"	"0"
 					"special_bonus_unique_pistol_3"	"+35"
 				}
-				"pulse_damage"				"20 25 30 35"
+				"pulse_damage"				"20 30 40 50"
 				"pulse_attack_kick"			"150"
 				"max_time_window_per_hit"	"3.0"
 				"recovery_fixed_attack_rate" "2.0"
@@ -17346,13 +17399,25 @@
 				"value"	"550 600 650 700"
 				"special_bonus_unique_pistol_5"	"+100"
 			}
-			"turn_rate_boosted"		"165"
-			"turn_rate"				"120"
-			"radius"				"200"
-			"hit_radius"			"150"
+			"turn_rate_boosted"		"215"
+			"turn_rate"				"160"
+			"radius"				
+			{
+				"value"			"200"
+				"affected_by_aoe_increase"	"1"		
+			}			
+			"hit_radius"			
+			{
+				"value"		"150"
+				"affected_by_aoe_increase"	"1"		
+			}
 			"bounce_duration"		"0.4"
 			"stun_duration"			"0.6 0.7 0.8 0.9"
-			"knockback_radius"		"150"
+			"knockback_radius"		
+			{
+				"value"			"150"
+				"affected_by_aoe_increase"	"1"		
+			}	
 			"duration"				"7.0 7.5 8.0 8.5"
 			"jump_recover_time"		"0.25"
 			"damage_reduction"
@@ -17360,6 +17425,7 @@
 				"value"	"0"
 				"special_bonus_unique_pistol_6" "+40"
 			}
+			"magic_resistance"		"50"
 		}
 	}
 	"pistol_e_stop"
@@ -17387,7 +17453,7 @@
 		"AbilityTextureName"		"pistol_r"
 		"AbilityCastRange"          "2000"
 		"AbilityCooldown"           "90"
-		"AbilityCastPoint"			"0.15"
+		"AbilityCastPoint"			"0.25"
 		"AbilityManaCost"           "150 250 350"
 		"HasScepterUpgrade"			"1"
 		"AbilityValues"
@@ -17408,7 +17474,7 @@
 			"cannon_damage_pct" 	"40"
 			"cannon_range" 			"900"
 			"cannon_speed" 			"1400"
-			"cannon_radius" 		"90"
+			"cannon_radius" 		"80"
 
 			"storm_min_radius"
 			{

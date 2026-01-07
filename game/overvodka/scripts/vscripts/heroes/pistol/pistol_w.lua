@@ -3,6 +3,7 @@ LinkLuaModifier( "modifier_pistol_w_cooldown", "heroes/pistol/pistol_w", LUA_MOD
 LinkLuaModifier( "modifier_pistol_w_active", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_pistol_w_lifesteal", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_pistol_w_active_fury", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_pistol_w_active_animation", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_pistol_w_active_recovery", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 
@@ -25,6 +26,8 @@ function pistol_w:Precache( ctx )
     PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_marci.vsndevts", ctx )
     PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_cast.vpcf", ctx )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_buff.vpcf", ctx )
+	PrecacheResource( "particle", "particles/units/heroes/hero_largo/largo_croak_genius_buff.vpcf", ctx )
+	PrecacheResource( "particle", "particles/units/heroes/hero_largo/largo_amphibian_rhapsody_fightsong_buff.vpcf", ctx )
 	PrecacheResource( "particle", "particles/marci_unleash_stack_golovach.vpcf", ctx )
 	PrecacheResource( "particle", "particles/units/heroes/hero_marci/marci_unleash_attack.vpcf", ctx )
 	PrecacheResource( "particle", "particles/pistol_w_pulse.vpcf", ctx )
@@ -68,7 +71,6 @@ function modifier_pistol_w:OnAttackLanded( params )
     if params.target:IsWard() then return end
     if params.target:PassivesDisabled() then return end
     if parent:HasModifier( "modifier_pistol_w_cooldown" ) then return end
-    --if parent:IsIllusion() then return end
 
     if RollPercentage( self:GetAbility():GetSpecialValueFor( "chance" ) ) then
         parent:AddNewModifier( parent, self:GetAbility(), "modifier_pistol_w_lifesteal", { duration = 1.5 } )
@@ -114,7 +116,7 @@ function modifier_pistol_w_lifesteal:OnTakeDamage( params )
         end
 
         local p = ParticleManager:CreateParticle( "particles/units/heroes/hero_legion_commander/legion_commander_courage_hit.vpcf", PATTACH_CUSTOMORIGIN, parent )
-        ParticleManager:SetParticleControlEnt( p, 0, parent, PATTACH_POINT_FOLLOW, "attach_attack1", parent:GetAbsOrigin(), true )
+        ParticleManager:SetParticleControlEnt( p, 0, parent, PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true )
         ParticleManager:ReleaseParticleIndex( p )
         
         local heal = params.damage * lifesteal
@@ -141,15 +143,34 @@ function modifier_pistol_w_active:OnCreated()
     self.damage = self.attack_damage
 
     if not IsServer() then return end
+	if self.parent.weapon then
+		self.parent.weapon:SetModelScale(0)
+	end
 
-    self.damage = self.damage + self.parent:GetAverageTrueAttackDamage(nil) * self.attack_damage_pct * 0.01
+	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_largo/largo_croak_genius_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+	self:AddParticle(p, false, false, -1, false, false)
+
+	local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_largo/largo_amphibian_rhapsody_fightsong_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+	self:AddParticle(p2, false, false, -1, false, false)
+
+    self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage(nil) * self.attack_damage_pct * 0.01
 
     self.parent:AddNewModifier(self.parent, self.ability, "modifier_pistol_w_active_fury", {})
     self:PlayEffects()
+	self:StartIntervalThink(0.1)
+end
+
+function modifier_pistol_w_active:OnIntervalThink()
+	self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage(nil) * self.attack_damage_pct * 0.01
 end
 
 function modifier_pistol_w_active:OnDestroy()
 	if not IsServer() then return end
+
+	if self.parent.weapon then
+		self.parent.weapon:SetModelScale(0.5)
+	end
+
 	local fury = self.parent:FindModifierByNameAndCaster( "modifier_pistol_w_active_fury", self.parent )
 	if fury then
 		fury:ForceDestroy()
@@ -165,7 +186,12 @@ function modifier_pistol_w_active:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
         MODIFIER_PROPERTY_OVERRIDE_ATTACK_DAMAGE,
+		MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND
 	}
+end
+
+function modifier_pistol_w_active:GetAttackSound()
+	return "Hero_Marci.Flurry.Attack"
 end
 
 function modifier_pistol_w_active:GetModifierOverrideAttackDamage()
@@ -198,12 +224,16 @@ function modifier_pistol_w_active_fury:OnCreated()
 	self.counter = self.charges
 	self:SetStackCount( self.counter )
 	self.success = 0
+	self.animation = self.parent:AddNewModifier( self.parent, self.ability, "modifier_pistol_w_active_animation", {} )
 	self:PlayEffects1()
 	self:PlayEffects2( self.parent, self.counter )
 end
 
 function modifier_pistol_w_active_fury:OnDestroy()
 	if not IsServer() then return end
+	if not self.animation:IsNull() then
+		self.animation:Destroy()
+	end
 	local main = self.parent:FindModifierByNameAndCaster( "modifier_pistol_w_active", self.parent )
 	if not main then return end
 	if self.forced then return end
@@ -224,7 +254,16 @@ function modifier_pistol_w_active_fury:DeclareFunctions()
 		MODIFIER_PROPERTY_IGNORE_ATTACKSPEED_LIMIT,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS
 	}
+end
+
+function modifier_pistol_w_active_fury:GetActivityTranslationModifiers()
+	if self:GetStackCount()%2==0 then
+		return "flurry_attack_b"
+	end
+
+	return "flurry_attack_a"
 end
 
 function modifier_pistol_w_active_fury:GetModifierAttackSpeed_Limit()
@@ -282,7 +321,7 @@ function modifier_pistol_w_active_fury:ShouldUseOverheadOffset() return true end
 function modifier_pistol_w_active_fury:PlayEffects1()
 	local effect_cast = ParticleManager:CreateParticle( "particles/units/heroes/hero_marci/marci_unleash_buff.vpcf", PATTACH_POINT_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControlEnt( effect_cast, 1, self:GetParent(), PATTACH_POINT_FOLLOW, "eye_l", Vector(0,0,0), true )
-    ParticleManager:SetParticleControlEnt( effect_cast, 2, self:GetParent(), PATTACH_POINT_FOLLOW, "eye_l", Vector(0,0,0), true )
+    ParticleManager:SetParticleControlEnt( effect_cast, 2, self:GetParent(), PATTACH_POINT_FOLLOW, "eye_r", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( effect_cast, 3, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( effect_cast, 4, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_attack2", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( effect_cast, 5, self:GetParent(), PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true )
@@ -362,3 +401,20 @@ modifier_pistol_w_cooldown = class({})
 
 function modifier_pistol_w_cooldown:IsHidden() return false end
 function modifier_pistol_w_cooldown:IsPurgable() return false end
+
+
+modifier_pistol_w_active_animation = class({})
+
+function modifier_pistol_w_active_animation:IsHidden() return true end
+function modifier_pistol_w_active_animation:IsDebuff() return false end
+function modifier_pistol_w_active_animation:IsPurgable() return false end
+
+function modifier_pistol_w_active_animation:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
+	}
+end
+
+function modifier_pistol_w_active_animation:GetActivityTranslationModifiers()
+	return "unleash"
+end

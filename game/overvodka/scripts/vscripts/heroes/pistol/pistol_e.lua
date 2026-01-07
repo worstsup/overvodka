@@ -42,7 +42,7 @@ function pistol_e:OnSpellStart()
 	caster:AddNewModifier(caster, self, "modifier_pangolier_gyroshell", kv)
 	caster:AddNewModifier(caster, self, "modifier_pistol_e_swap", {duration = duration})
 	caster:AddNewModifier(caster, self, "modifier_pistol_mute", {duration = duration})
-	caster:AddNewModifier(caster, self, "modifier_pistol_e_damage", {duration = duration})
+	caster:AddNewModifier(caster, self, "modifier_pistol_e_damage", {duration = duration + 0.03})
 end
 
 
@@ -54,6 +54,7 @@ function pistol_e_stop:OnSpellStart()
 	self:GetCaster():RemoveModifierByName("modifier_pangolier_gyroshell")
 	self:GetCaster():RemoveModifierByName("modifier_pistol_e_swap")
 	self:GetCaster():RemoveModifierByName("modifier_pistol_mute")
+	self:GetCaster():RemoveModifierByName("modifier_pistol_e_damage")
 end
 
 
@@ -93,13 +94,12 @@ function modifier_pistol_e_damage:IsHidden() return true end
 function modifier_pistol_e_damage:IsPurgable() return false end
 
 function modifier_pistol_e_damage:OnCreated()
-	self.parent = self:GetParent()
-	self.radius = self:GetAbility():GetSpecialValueFor("hit_radius")
-	self.interval = self:GetAbility():GetSpecialValueFor("tick_interval")
-	self.duration = self:GetAbility():GetSpecialValueFor("stun_duration")
-	self.damage_pct = self:GetAbility():GetSpecialValueFor("damage_pct")
 	self.damage_reduction = self:GetAbility():GetSpecialValueFor("damage_reduction")
-	self:StartIntervalThink(self.interval)
+end
+
+function modifier_pistol_e_damage:OnDestroy()
+	if not IsServer() then return end
+	self:GetParent():StartGesture(ACT_DOTA_OVERRIDE_ABILITY_3)
 end
 
 function modifier_pistol_e_damage:DeclareFunctions()
@@ -110,16 +110,4 @@ end
 
 function modifier_pistol_e_damage:GetModifierIncomingDamage_Percentage()
 	return -self.damage_reduction
-end
-
-function modifier_pistol_e_damage:OnIntervalThink()
-	if not IsServer() then return end
-	self.damage = self.parent:GetAverageTrueAttackDamage(nil) * self.damage_pct * 0.01
-	local enemies = FindUnitsInRadius(self.parent:GetTeamNumber(), self.parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
-	for _, enemy in pairs(enemies) do
-		if not enemy or enemy:IsNull() then return end
-		if not enemy:IsAlive() then return end
-		if enemy:HasModifier("modifier_pangolier_gyroshell_timeout") then return end
-		ApplyDamage({victim = enemy, attacker = self.parent, damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-	end
 end

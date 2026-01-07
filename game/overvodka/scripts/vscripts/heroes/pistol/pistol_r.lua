@@ -6,9 +6,8 @@ LinkLuaModifier("modifier_pistol_r_torrent_slow", "heroes/pistol/pistol_r", LUA_
 pistol_r = class({})
 
 function pistol_r:Precache(ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_kunkka/kunkka_ghost_ship_cannons.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_kunkka/kunkka_ghostship_marker.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_kunkka/kunkka_boat_splash_end.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/kunkka/kunkka_immortal/kunkka_immortal_ghost_ship_cannons.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/kunkka/kunkka_immortal/kunkka_immortal_ghost_ship_marker.vpcf", ctx)
     PrecacheResource("particle", "particles/pistol_r_cannon.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_kunkka/kunkka_spell_torrent_bubbles.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_kunkka/kunkka_spell_torrent_splash.vpcf", ctx)
@@ -194,7 +193,7 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
     local spawn_pos = crash_pos - dir * travel_dist
     spawn_pos.z = GetGroundPosition(spawn_pos, caster).z
 
-    local marker = ParticleManager:CreateParticleForTeam("particles/units/heroes/hero_kunkka/kunkka_ghostship_marker.vpcf", PATTACH_CUSTOMORIGIN, caster, caster:GetTeamNumber())
+    local marker = ParticleManager:CreateParticleForTeam("particles/econ/items/kunkka/kunkka_immortal/kunkka_immortal_ghost_ship_marker.vpcf", PATTACH_CUSTOMORIGIN, caster, caster:GetTeamNumber())
     ParticleManager:SetParticleControl(marker, 0, crash_pos)
     Timers:CreateTimer(crash_delay + 0.1, function()
         ParticleManager:DestroyParticle(marker, false)
@@ -206,7 +205,7 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
 
     ProjectileManager:CreateLinearProjectile({
         Ability = self,
-        EffectName = "particles/units/heroes/hero_kunkka/kunkka_ghost_ship_cannons.vpcf",
+        EffectName = "particles/econ/items/kunkka/kunkka_immortal/kunkka_immortal_ghost_ship_cannons.vpcf",
         vSpawnOrigin = spawn_pos,
         fDistance = travel_dist,
         fStartRadius = width,
@@ -253,18 +252,24 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
             local left = RotatePosition(Vector(0,0,0), QAngle(0, 90, 0), dir);  left.z = 0; left = left:Normalized()
             local right = RotatePosition(Vector(0,0,0), QAngle(0,-90, 0), dir); right.z = 0; right = right:Normalized()
 
-            local function FireCannonPair(side_dir)
-                local angles = { -pair_spread, pair_spread }
+            local BROADSIDE_ANGLES = { 10, 25, 40, 55 }
+            local function FireBroadside(side_dir, towards_sign)
+                for i = 1, #BROADSIDE_ANGLES do
+                    local a = BROADSIDE_ANGLES[i]
 
-                for _, a in ipairs(angles) do
-                    local d = RotatePosition(Vector(0,0,0), QAngle(0, a, 0), side_dir)
+                    local jitter = RandomFloat(-1.0, 1.0)
+
+                    local d = RotatePosition(Vector(0,0,0), QAngle(0, towards_sign * (a + jitter), 0), side_dir)
                     d.z = 0
                     d = d:Normalized()
+
+                    local spawn = ship_pos + side_dir * math.min(120, width * 0.25)
+                    spawn.z = ship_pos.z
 
                     ProjectileManager:CreateLinearProjectile({
                         Ability = self,
                         EffectName = "particles/pistol_r_cannon.vpcf",
-                        vSpawnOrigin = ship_pos,
+                        vSpawnOrigin = spawn,
                         fDistance = cannon_range,
                         fStartRadius = cannon_radius,
                         fEndRadius   = cannon_radius,
@@ -283,8 +288,8 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
                 end
             end
 
-            FireCannonPair(left)
-            FireCannonPair(right)
+            FireBroadside(left, -1)
+            FireBroadside(right, 1)
         end)
     end
 

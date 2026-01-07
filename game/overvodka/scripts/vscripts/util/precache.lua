@@ -144,6 +144,7 @@ PrecacheUtils.particles = {
 		"particles/ui/ui_generic_treasure_impact.vpcf",
 		"particles/peacemaker_deagle_proj.vpcf",
 		"particles/peacemaker_e_facet2.vpcf",
+		"particles/pistol_shield.vpcf",
 
 		--silvername
 		"particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf",
@@ -330,6 +331,8 @@ PrecacheUtils.models = {
 		"models/blackflash/blackflash.vmdl",
 		"models/peacemaker/peacemaker.vmdl",
 		"models/peacemaker/deagle_peacemaker.vmdl",
+		"models/pistoletov/mechalexpistol.vmdl",
+		"models/pistoletov/alexpistol.vmdl",
 
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
@@ -424,6 +427,7 @@ PrecacheUtils.sounds = {
 		"soundevents/royale_start.vsndevts",
 		"soundevents/frisk_start.vsndevts",
 		"soundevents/seregga_start.vsndevts",
+		"soundevents/pistol_start.vsndevts",
 		"soundevents/peacemaker_start.vsndevts",
 		"soundevents/visitor_night.vsndevts",
 		"soundevents/ailesh.vsndevts",

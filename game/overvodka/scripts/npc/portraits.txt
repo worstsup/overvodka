@@ -865,6 +865,38 @@
             }
         }
     }
+    "models/pistoletov/alexpistol.vmdl"
+    {
+        "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
+        "PortraitLightAngles"       "12.96 83.92 0.00" // Углы, под которыми свет падает на модель
+        "PortraitLightFOV"          "51" // Угол обзора источника света для портрета
+        "PortraitLightDistance"     "85" // Расстояние от модели до источника света
+        "PortraitLightColor"        "254 210 218" // Цвет света в формате RGB
+        "PortraitShadowColor"       "93 93 93" // Цвет тени, создаваемой источником света, в формате RGB
+        "PortraitShadowScale"       "4.025000" // Масштаб теней
+        "PortraitAmbientColor"      "241 165 97" // Цвет окружающего освещения в формате RGB
+        "PortraitAmbientScale"      "5.000000" // Масштаб окружающего освещения
+        "PortraitSpecularColor"     "251 74 84" // Цвет бликов (спекулярный цвет) в формате RGB
+        "PortraitBackgroundTexture" "materials/portraits_card/portrait_backgrounds/kunkka.vmat" // Текстура фона для портрета
+        "PortraitBackgroundColor1"  "1.0 1.0 1.0" // Цвет градиента фона 1
+        "PortraitBackgroundColor2"  "1.0 1.0 1.0" // Цвет градиента фона 2
+        "PortraitBackgroundColor3"  "1.0 1.0 1.0" // Цвет градиента фона 3
+        "PortraitBackgroundColor4"  "1.0 1.0 1.0" // Цвет градиента фона 4
+        "PortraitLightScale"        "4.100000" // Масштаб интенсивности света
+        "PortraitGroundShadowScale" "1.500000" // Масштаб теней на земле под моделью
+        "PortraitAmbientDirection"  "-3.070 17.250 4.660" // Направление окружающего света
+        "PortraitAnimationActivity" "ACT_DOTA_IDLE" // Анимация, используемая для портрета модели
+
+        "cameras" // Раздел, описывающий камеры для портрета
+        {
+            "default" // Камера по умолчанию
+            {
+                "PortraitPosition"      "325 -20 210" // Позиция камеры для съемки портрета
+                "PortraitAngles"        "355.89 177.83 0.00" // Углы камеры для съемки портрета
+                "PortraitFOV"           "9" // Угол обзора камеры для съемки портрета
+            }
+        }
+    }
     "tamaev/1_tamaev_normal_normal_1024_lod1.vmdl"
     {
         "PortraitLightPosition"     "8.34 -51.72 127.79" // Позиция источника света для портрета модели
@@ -2496,6 +2528,37 @@
 		"PortraitAmbientScale"		"5.000000"
 		"PortraitSpecularColor"		"251 74 84"
 		"PortraitBackgroundTexture"		"materials/vgui/hud/heroportraits/portraitbackground_gradient_top.vmat"
+		"PortraitBackgroundColor1"		"1 1 1"
+		"PortraitBackgroundColor2"		"1 1 1"
+		"PortraitBackgroundColor3"		"1 1 1"
+		"PortraitBackgroundColor4"		"1 1 1"
+		"PortraitLightScale"		"4.500000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientDirection"		"-79.070 -84.150 -25.320"
+		"PortraitAnimationActivity"		"ACT_DOTA_IDLE"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"446.17 -88.29 -22.69"
+				"PortraitAngles"		"334.89 166.83 0.00"
+				"PortraitFOV"		"16"
+			}
+		}
+	}
+    "models/heroes/pangolier/pangolier_gyroshell2.vmdl"
+    {
+		"PortraitLightPosition"		"202.70 -23.15 308.17"
+		"PortraitLightAngles"		"54.79 171.70 0.00"
+		"PortraitLightFOV"		"69"
+		"PortraitLightDistance"		"377"
+		"PortraitLightColor"		"254 248 242"
+		"PortraitShadowColor"		"74 74 74"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitAmbientColor"		"79 108 108"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitBackgroundTexture"		"materials/portraits_card/portrait_backgrounds/kunkka.vmat"
 		"PortraitBackgroundColor1"		"1 1 1"
 		"PortraitBackgroundColor2"		"1 1 1"
 		"PortraitBackgroundColor3"		"1 1 1"

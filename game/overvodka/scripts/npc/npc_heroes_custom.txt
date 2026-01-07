@@ -4198,13 +4198,15 @@
 	}
 	"npc_dota_hero_slardar"
 	{
-		"Model"				"models/heroes/slardar/slardar.vmdl"
-		"SoundSet"			"Hero_Slardar"
-		"ModelScale"		"0.880000"
-		"VersusScale"		"0.88"
-		"SimilarHeroes"		"114,95,93"
+		"Model"				"models/pistoletov/alexpistol.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"230"
+		"SoundSet"			"Hero_Kunkka"
+		"ModelScale"		"0.88"
+		"LoadoutScale"		"0.75"
+		"SimilarHeroes"		"2,8,126"
 		"BotImplemented"	""
-		"HeroSelectSoundEffect"		"Hero_Slardar.Pick"
+		"HeroSelectSoundEffect"		"pistol_start"
 		"GibType"		"default"
 		"Ability1"		"pistol_q"
 		"Ability2"		"pistol_w"
@@ -4212,6 +4214,7 @@
 		"Ability4"		"generic_hidden"
 		"Ability5"		"pistol_e_stop"
 		"Ability6"		"pistol_r"
+		"Ability7"		"pistol_innate"
 
 		"Ability10"		"special_bonus_unique_pistol_1"
 		"Ability11"		"special_bonus_unique_pistol_2"
@@ -4223,17 +4226,33 @@
 		"Ability17"		"special_bonus_unique_pistol_8"
 		"Facets"
 		{
-			"slardar_leg_day"
+			"pistol_duelist"
 			{
 				"Icon"				"speed"
 				"Color"				"Red"
 				"GradientID"		"2"
+				"Abilities"
+				{
+					"Ability1"
+					{
+						"AbilityName"		"juggernaut_duelist"
+						"AutoLevelAbility"	"true"
+					}
+				}
 			}
-			"slardar_brineguard"
+			"pistol_shield"
 			{
 				"Icon"				"armor"
 				"Color"				"Purple"
 				"GradientID"		"1"
+			}
+			"slardar_leg_day"
+			{
+				"Deprecated"	"true"
+			}
+			"slardar_brineguard"
+			{
+				"Deprecated"	"true"
 			}
 		}		
 		"ArmorPhysical"		"2"
@@ -4257,6 +4276,6 @@
 		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"		""
 		"particle_folder"		"particles/units/heroes/hero_slardar"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
 	}
 }

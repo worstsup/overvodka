@@ -143,6 +143,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_hoodwink" and not spawnedUnit:IsIllusion() and not spawnedUnit:HasModifier("modifier_mazellov_r") then
 				EmitGlobalSound("Leon.Game.Start")
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_slardar" then
+				spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/pistoletov/mechalexpistol.vmdl"})
+				spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+				spawnedUnit.weapon:SetParent(spawnedUnit, "attach_sword")
+				spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
+				spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
+				spawnedUnit.weapon:SetModelScale(0.5)
+			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 				spawnedUnit.voice_level = 0
 			end
@@ -280,6 +288,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			end
 		end
 	else
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_slardar" then
+			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/pistoletov/mechalexpistol.vmdl"})
+			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+			spawnedUnit.weapon:SetParent(spawnedUnit, "attach_sword")
+			spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
+			spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
+			spawnedUnit.weapon:SetModelScale(0.5)
+		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_templar_assassin" then
 			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_items/magicstick.vmdl"})
 			sword:FollowEntity(spawnedUnit, true)
