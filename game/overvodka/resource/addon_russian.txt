@@ -509,7 +509,7 @@
 		"dota_tooltip_ability_pistol_w_description"				"<h1>Пассивно</h1>Будучи атакованным, Александр Пистолетов имеет шанс контратаковать врага, восстановив здоровье.\n<h1>Активация</h1>Александр Пистолетов становится истинным каратистом, получая возможность наносить серию быстрых ударов по врагам. Последний удар в серии нанесёт врагу дополнительный урон и оттолкнёт его на расстояние %pulse_attack_kick%."
 		"dota_tooltip_ability_pistol_w_lore"					"Герой создан благодаря <font color='#FFC0CB'>Happy</font>"
 		"dota_tooltip_ability_pistol_w_counter_cooldown"		"ПЕРЕЗАРЯДКА КОНТРАТАКИ:"
-		"dota_tooltip_ability_pistol_w_chance"					"ШАНС КОНТРАТАКИ:"
+		"dota_tooltip_ability_pistol_w_chance"					"%ШАНС КОНТРАТАКИ:"
 		"dota_tooltip_ability_pistol_w_lifesteal"				"%ВАМПИРИЗМ КОНТРАТАКИ:"
 		"dota_tooltip_ability_pistol_w_duration"				"ДЛИТЕЛЬНОCТЬ:"
 		"dota_tooltip_ability_pistol_w_charges_per_flurry"		"ЧИСЛО УДАРОВ:"
@@ -563,6 +563,10 @@
 		"dota_tooltip_facet_pistol_duelist_description"				"Герой наносит больше урона существам, стоящим лицом к нему."
 		"DOTA_Tooltip_ability_juggernaut_duelist"					"Гладиатор"
 		"DOTA_Tooltip_ability_juggernaut_duelist_Description"		"Герой наносит на %front_damage_increase%%% больше урона существам, стоящим лицом к нему."
+		"DOTA_Tooltip_modifier_pangolier_gyroshell"					"Супермэн"
+		"DOTA_Tooltip_modifier_pangolier_gyroshell_Description"		"Герой стал Супермэном!"
+		"DOTA_Tooltip_modifier_pangolier_gyroshell_stunned"			"Оглушение от Супермэна"
+		"DOTA_Tooltip_modifier_pangolier_gyroshell_stunned_Description"	"Это существо оглушено Супермэном."
 		
 
 		"dota_hud_error_leon_q_disarmed"	"Невозможно применить при бессилии"
