@@ -107,7 +107,7 @@ function modifier_pistol_w_lifesteal:OnTakeDamage( params )
     if parent == params.unit then return end
     if params.unit:IsBuilding() then return end
     if params.unit:IsWard() then return end
-    if params.inflictor == nil and not parent:IsIllusion() and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then 
+    if params.inflictor == nil and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then 
         
         local lifesteal = self:GetAbility():GetSpecialValueFor( "lifesteal" ) * 0.01
 

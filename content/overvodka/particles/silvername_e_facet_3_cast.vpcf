@@ -58,6 +58,8 @@
 		},
 		{
 			_class = "C_INIT_RandomColor"
+			m_ColorMin = [ 218, 112, 214 ]
+			m_ColorMax = [ 255, 0, 255 ]
 		},
 	]
 	m_Operators = 
@@ -658,14 +660,14 @@
 		},
 		{
 			m_bEndCap = true
-			m_ChildRef = resource:"particles/skeletonking_hellfireblast_explosion_frisk.vpcf"
+			m_ChildRef = resource:"particles/skeletonking_hellfireblast_explosion_silver.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_skeletonking/skeletonking_hellfireblast_trail_h.vpcf"
 			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/skeletonking_hellfireblast_trail_b_frisk.vpcf"
+			m_ChildRef = resource:"particles/skeletonking_hellfireblast_trail_b_silver.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/skeletonking_hellfireblast_trail_g_new.vpcf"

@@ -6,7 +6,6 @@ function stint_w:Precache(context)
     PrecacheResource("particle", "particles/stint_counter.vpcf", context)
     PrecacheResource("particle", "particles/stint_debt.vpcf", context)
     PrecacheResource("soundfile", "soundevents/stint_w.vsndevts", context)
-    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts", context)
 end
 
 function stint_w:GetGoldCost()

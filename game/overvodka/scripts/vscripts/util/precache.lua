@@ -164,7 +164,18 @@ PrecacheUtils.particles = {
 		"particles/silvername_r_facet_2_cast.vpcf",
 		"particles/silvername_r_facet_2_cast2.vpcf",
 		"particles/silvername_r_facet_2.vpcf",
-
+		"particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf",
+		"particles/underlord_firestorm_pre_new.vpcf",
+		"particles/abyssal_underlord_firestorm_wave_new.vpcf",
+		"particles/econ/events/ti5/dagon_lvl2_ti5.vpcf",
+		"particles/status_fx/status_effect_abaddon_borrowed_time.vpcf",
+		"particles/faceless_void_arcana_deny_symbol_question_new.vpcf",
+		"particles/econ/items/storm_spirit/storm_spirit_orchid_hat/stormspirit_orchid_ball_lightning.vpcf",
+		"particles/econ/items/viper/viper_ti7_immortal/viper_poison_crimson_debuff_ti7.vpcf",
+		"particles/econ/items/huskar/huskar_2022_immortal/huskar_2022_immortal_life_break_gold_fire.vpcf",
+		"particles/econ/items/huskar/huskar_2021_immortal/huskar_2021_immortal_burning_spear_debuff.vpcf",
+		"particles/silvername_e_facet_3_cast.vpcf",
+		"particles/econ/items/ogre_magi/ogre_magi_arcana/ogre_magi_arcana_multicast_style.vpcf",
 		"particles/econ/items/spirit_breaker/spirit_breaker_weapon_ti8/spirit_breaker_bash_ti8.vpcf",
 }
 
@@ -338,6 +349,7 @@ PrecacheUtils.models = {
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
 		"models/heroes/ogre_magi/ogre_magi_weapon.vmdl",
 		"models/silvername/silvername2.vmdl",
+		"models/silvername/card.vmdl",
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"models/elka/elka2.vmdl",
 		"models/props_winter/present.vmdl",
@@ -509,10 +521,11 @@ PrecacheUtils.sounds = {
 		"soundevents/sans_damage.vsndevts",
 		"soundevents/shemelis.vsndevts",
 		"soundevents/seregga_innate.vsndevts",
-
+		"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts",
 		"soundevents/silvername_sounds.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_chaos_knight.vsndevts",
 		"soundevents/game_sounds_heroes/game_sounds_phantom_lancer.vsndevts",
+		"soundevents/game_sounds_heroes/game_sounds_stormspirit.vsndevts",
 }
 
 PrecacheUtils.mapResources = {

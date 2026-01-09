@@ -1,14 +1,6 @@
 silvername_r = class({})
 LinkLuaModifier( "modifier_silvername_r_thinker", "heroes/silvername/silvername_r", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
-
-function silvername_r:Precache(context)
-	PrecacheResource( "soundfile", "soundevents/silvername_r.vsndevts", context )
-	PrecacheResource( "soundfile", "soundevents/silvername_r_start.vsndevts", context )
-	PrecacheResource( "particle", "particles/econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_crimson_missile_explosion.vpcf", context )
-	PrecacheResource( "particle", "particles/underlord_firestorm_pre_new.vpcf", context )
-	PrecacheResource( "particle", "particles/abyssal_underlord_firestorm_wave_new.vpcf", context )
-end
+LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function silvername_r:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )
