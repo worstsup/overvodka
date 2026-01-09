@@ -3329,11 +3329,11 @@
 				"radius"				"10000"
 				"duration"
 				{
-					"value"	"3.0 3.75 4.5"
+					"value"	"3.5 4.0 4.5"
 					"special_bonus_unique_worstsup_6" "+0.5"
 				}
 				"vision_radius"	 "0"
-				"as"	"80 120 160"
+				"as"	"100 140 180"
 		}
 	}
 	//=================================================================================================================
@@ -3361,7 +3361,7 @@
 				}
 				"duration"
 				{
-					"value"	"3.0 3.75 4.5"
+					"value"	"3.5 4.0 4.5"
 					"special_bonus_unique_worstsup_6" "+0.5"
 				}
 				"vision_radius"			"900"
@@ -3467,7 +3467,7 @@
 			"stolen_debuff_amp"				"10 15 20 25"
 			"cast_range_scepter"			
 			{
-				"value"						"400"
+				"value"						"600"
 				"RequiresScepter"			"1"
 			}
 			"duration"
@@ -4238,7 +4238,164 @@
 			"xp"			"200"
 		}
 	}
+	//=================================================================================================================
+	// Попалась Тварь
+	//=================================================================================================================
+	"silvername_q_facet_3"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_q_facet_3"
+		"AbilityTextureName"			"silvername_q_facet_3"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.25"
+		"AbilityCooldown"				"15 14 13 12"
+		"AbilityManaCost"				"120 140 160 180"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AnimationPlaybackRate"			"1.8"
+		"AbilityValues"
+		{
+				"damage"
+				{
+					"value"	"100 200 300 400"
+					"special_bonus_unique_silvername_2"	"+60"
+				}
+				"stun_duration"
+				{
+					"value"		"1.0 1.1 1.2 1.3"
+					"special_bonus_unique_silvername_6"	"+0.5"
+				}
+		}
+	}
+	//=================================================================================================================
+	// ГААААААЗ
+	//=================================================================================================================
+	"silvername_w_facet_3"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_w_facet_3"
+		"AbilityTextureName"			"silvername_w_facet_3"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastPoint"				"0.3 0.3 0.3"
+		"AbilityManaCost"				"90 120 150 180"
+		"AbilityValues"
+		{
+			"damage"						"50 100 150 200"
+			"ball_lightning_move_speed"		"2200"
+			"ball_lightning_aoe"
+			{
+				"value"	"200"
+				"affected_by_aoe_increase"	"1"
+			}
+			"ball_lightning_vision_radius"	"400"
+			"cast_range"
+			{
+				"value"	"750 900 1050 1200"
+				"special_bonus_unique_silvername_5"	"+300"
+			}
+			"AbilityCharges"
+			{
+				"value"										"0"
+				"special_bonus_unique_silvername_8"			 "+2"
+			}
+			"AbilityCooldown"
+			{
+				"value"										"20 18 16 14"
+				"special_bonus_unique_silvername_8"			  "=0"
+			}
+			"AbilityChargeRestoreTime"		"16 14 12 10"
+		}
+	}
 
+	//=================================================================================================================
+	// Карту!
+	//=================================================================================================================
+	"silvername_e_facet_3"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_e_facet_3"
+		"AbilityTextureName"			"silvername_e_facet_3"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.35"
+		"AbilityManaCost"				"140"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+		"AnimationPlaybackRate"			"1.7"
+		"AbilityValues"
+		{
+				"chaos_bolt_speed"		"700"
+				"damage"
+				{
+					"value"	"40 80 120 160"
+					"special_bonus_unique_silvername_3"	"+100"
+				}
+
+				"duration_poison"		"6.0 6.5 7.0 7.5"
+				"damage_poison"			"15 25 35 45"
+				"poison_slow"			"25"
+
+				"duration_fire"			"3.5 4.0 4.5 5.0"
+				"damage_fire"			"30 45 60 75"
+				"fire_rest"				"30"
+
+				"duration_hex"			"2.0 2.2 2.4 2.6"
+				"movespeed"             "120"
+
+				"AbilityCooldown"
+				{
+					"value"	"24 22 20 18"
+					"special_bonus_unique_silvername_1"	"-3"
+				}
+		}
+	}
+	//=================================================================================================================
+	// Кинжал Джо (Shard)
+	//=================================================================================================================
+	"silvername_shard"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_shard"
+		"AbilityTextureName"			"silvername_shard"
+		"MaxLevel"						"1"
+		"IsGrantedByShard"				"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityValues"
+		{
+			"spell_amp"	"2"
+		}
+	}
+	//=================================================================================================================
+    // Megabonk (Scepter)
+    //=================================================================================================================
+    "silvername_megabonk"
+    {
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/silvername/silvername_megabonk"
+		"AbilityTextureName"			"silvername_megabonk"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+        "AbilityCastAnimation"          "ACT_INVALID"
+        "IsBreakable"                   "1"
+		"IsGrantedByScepter"			"1"
+		"MaxLevel"						"1"
+        "AbilityValues"
+        {
+            "multicast_2_times" "75"
+            "multicast_3_times" "30"
+            "multicast_4_times" "15"
+        }
+    }
 	//=================================================================================================================
 	// ПОЛКОВОДЕЦ (ПАССИВКА МУРЛОКА)
 	//=================================================================================================================
@@ -4299,37 +4456,27 @@
 		}
 	}
 	//=================================================================================================================
-	// СЕКРЕТ: ЛЕДЯНАЯ ГЛЫБА
+	// Секрет: Ледяная Глыба
 	//=================================================================================================================
 	"silvername_secret"
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"Innate"						"1"
+		"RequiredLevel"					"-1"
+		"MaxLevel"						"1"
 		"AbilityTextureName"			"secret"
-		"HasScepterUpgrade"				"1"
 		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-				"hp_threshold"				"20"
-				"AbilityCooldown"			"75 70 65 60"
+				"hp_threshold"		"20"
+				"AbilityCooldown"	"60"
 				"duration"
 				{
-					"value"	"1.5 2.0 2.5 3.0"
-					"special_bonus_unique_silvername_7" "+2"
+					"value"	"3.0"
+					"special_bonus_unique_silvername_7"	"+2.0"
 				}
-				"strong"
-				{
-					"value"	"0"
-					"special_bonus_facet_silvername_e" "+1"
-				}
-		}
-
-		"precache"
-		{
-			"particle"  "particles/units/heroes/hero_abaddon/abaddon_borrowed_time.vpcf"
-			"particle"	"particles/status_fx/status_effect_abaddon_borrowed_time.vpcf"
-			"particle"	"particles/faceless_void_arcana_deny_symbol_question_new.vpcf"
 		}
 
 		"OnSpellStart"
@@ -4340,13 +4487,6 @@
 				"ModifierName"	"modifier_silvername_secret"
 				"Duration"		"%duration"
 			}
-
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/silvername/silvername_secret"
-				"Function"		"BorrowedTimePurge"
-			}
-			
 		}
 
 		"Modifiers"
@@ -4355,7 +4495,6 @@
 			{
 				"Passive"			"1"
 				"IsHidden"			"1"
-
 				"OnTakeDamage"
 				{
 					"RunScript"
@@ -4369,7 +4508,7 @@
 			"modifier_silvername_secret"
 			{
 				"IsBuff"			"1"
-
+				"IsPurgable"		"1"
 				"EffectName"		"particles/faceless_void_arcana_deny_symbol_question_new.vpcf"
 				"EffectAttachType"	"follow_overhead"
 
@@ -4409,28 +4548,7 @@
 		}
 	}
 	//=================================================================================================================
-	// ДРУГ ПТИЦ (шард)
-	//=================================================================================================================
-	"silvername_shard"
-	{
-		"BaseClass"						"ability_lua"
-		"AbilityTextureName"			"orlov"
-		"ScriptFile"					"heroes/silvername/silvername_shard"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"MaxLevel"						"1"
-		"IsGrantedByShard"				"1"
-		"AbilityCooldown"				"26"
-		"AbilityManaCost"				"150"	
-		"AbilityValues"
-		{
-				"duration" "7"
-		}
-		
-	}
-	//=================================================================================================================
-	// ПРОГРЕВ ПОЛЕЙ СРАЖЕНИЙ
+	// Прогрев Полей Сражений
 	//=================================================================================================================
 	"silvername_r"
 	{
@@ -4445,7 +4563,7 @@
 		"AbilityCastRange"				"750"
 		"AbilityCastPoint"				"1.0"
 		"AbilityCooldown"				"85.0"
-		"AbilityManaCost"				"200 400 600"
+		"AbilityManaCost"				"150 250 350"
 		"AbilityValues"
 		{
 				"radius"
@@ -4458,7 +4576,7 @@
 				"wave_damage"
 				{
 					"value"	"30 50 70"
-					"special_bonus_unique_silvername_6" "+30"
+					"special_bonus_unique_silvername_4" "+15"
 				}
 				"wave_interval"				"0.3"
 				"stun_duration"				"0.15"
@@ -16836,7 +16954,7 @@
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityCastPoint"			"0.1"
-		"AbilityCooldown"			"30 27 24 21"
+		"AbilityCooldown"			"30 28 26 24"
 		"AbilityManaCost"			"100 120 140 160"
 		"HasScepterUpgrade"			"1"
 		"AbilityValues"
