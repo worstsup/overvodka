@@ -95,7 +95,7 @@ function modifier_stariy_bolt:OnIntervalThink()
 end
 
 function modifier_stariy_bolt:PlayEffects( target )
-	local particle_cast = "particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start_bolt_parent.vpcf"
+	local particle_cast = "particles/stariy_bolt.vpcf"
 	if not target then return end
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	EmitSoundOn( "Hero_Zuus.LightningBolt", target )	

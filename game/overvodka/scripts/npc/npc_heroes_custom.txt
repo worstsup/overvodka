@@ -4306,7 +4306,7 @@
 				"Deprecated"	"true"
 			}
 		}		
-		"ArmorPhysical"		"2"
+		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"30"
 		"AttackDamageMax"		"38"
@@ -4318,7 +4318,7 @@
 		"MovementSpeed"		"300"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"21"
-		"AttributeStrengthGain"		"3.6"
+		"AttributeStrengthGain"		"3.1"
 		"AttributeBaseAgility"		"17"
 		"AttributeAgilityGain"		"2.1"
 		"AttributeBaseIntelligence"	"15"

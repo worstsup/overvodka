@@ -137,7 +137,7 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 	if spawnedUnit:IsRealHero() then
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
-			if not spawnedUnit:IsIllusion() and winter_mode then
+			if not spawnedUnit:IsIllusion() then
 				ParticleManager:CreateParticleForPlayer("particles/rain_fx/econ_snow.vpcf", PATTACH_EYES_FOLLOW, spawnedUnit, PlayerResource:GetPlayer(spawnedUnit:GetPlayerID()))
 			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_hoodwink" and not spawnedUnit:IsIllusion() and not spawnedUnit:HasModifier("modifier_mazellov_r") then
@@ -720,9 +720,9 @@ function OvervodkaGameMode:GiveZhenyaPresentReward(hero)
     if playerID == nil or playerID == -1 then return end
     local roll = RandomInt(1, 100)
 	if IsInToolsMode() or GameRules:IsCheatMode() then roll = 1 end
-    if roll <= 33 then
+    if roll <= 66 then
         self:GiveZhenyaGold(hero, 500)
-    elseif roll <= 66 then
+    elseif roll <= 88 then
         local coins = RandomInt(5, 8)
         self:GiveZhenyaHamsterCoins(playerID, coins)
     else
@@ -779,10 +779,6 @@ function OvervodkaGameMode:GiveZhenyaHamsterCoins(playerID, amount)
 end
 
 function OvervodkaGameMode:RollZhenyaPrimeHours()
-    if RandomInt(1, 1000) <= 1 then
-        return 24
-    end
-
     local totalWeight = 0
     local weights = {}
 

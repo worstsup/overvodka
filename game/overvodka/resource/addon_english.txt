@@ -208,6 +208,7 @@
 		"Store_Item_skin_4_name" "Ghoul Ivan Zolo"
 		"Store_Item_skin_5_name" "Golmiy - IShowSpeed"
 		"Store_Item_skin_6_name" "Black Flash"
+		"Store_Item_skin_7_name" "Zhenya Claus"
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
 

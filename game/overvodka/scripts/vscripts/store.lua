@@ -11,6 +11,7 @@ Store.Items = {
     skin_6 = { id = "skin_6", name = "#Store_Item_skin_6_name", type = "skins", price = 420, image = "file://{images}/custom_game/store/skins/skin_6.png", hero = "npc_dota_hero_spirit_breaker", modifier = "modifier_overvodka_store_skin_6" },
     sans_arcana = { id = "sans_arcana", name = "#Store_Item_sans_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/sans_arcana.png", hero = "npc_dota_hero_morphling", modifier = "modifier_sans_arcana" },
     invincible_arcana = { id = "invincible_arcana", name = "#Store_Item_invincible_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/invincible_arcana.png", hero = "npc_dota_hero_void_spirit", modifier = "modifier_invincible_arcana" },
+    skin_7 = { id = "skin_7", name = "#Store_Item_skin_7_name", type = "skins", price = 300, image = "file://{images}/custom_game/store/skins/skin_7.png", hero = "npc_dota_hero_mars", modifier = "modifier_overvodka_store_skin_7" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
@@ -23,7 +24,7 @@ Store.Items = {
     pet_6 = { id = "pet_6", name = "#Store_Item_pet_6_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_6.png", modifier = "modifier_overvodka_store_pet_6" },
     pet_7 = { id = "pet_7", name = "#Store_Item_pet_7_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_7.png", modifier = "modifier_overvodka_store_pet_7" },
     pet_8 = { id = "pet_8", name = "#Store_Item_pet_8_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_8.png", modifier = "modifier_overvodka_store_pet_8" },
-    prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 200, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
+    prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 250, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
     prime_week = { id = "prime_week", name = "#Store_Item_prime_week_name", type = "prime", price = 700, duration = "week", image = "file://{images}/custom_game/store/effects/effect_1.png" }
 }
 
@@ -410,9 +411,6 @@ function Store:OnCasesRequestInfo(event)
             local player = PlayerResource:GetPlayer(playerID)
             if not player then return end
 
-            -- cases: [
-            --   { case_id, name, icon, cost, items = [ { item_id, item_name, item_icon, rare }, ... ] }
-            -- ]
             CustomGameEventManager:Send_ServerToPlayer(player, "cases_info", {
                 cases = body.cases or {}
             })

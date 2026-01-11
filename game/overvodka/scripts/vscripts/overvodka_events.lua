@@ -16,6 +16,7 @@ local GOLDEN_RAIN_WINDOWS = {
 local HAMSTER_WINDOWS = {
     default = {
         { 11, 12.5 },
+        { 20.5, 22 },
     },
     overvodka_5x5 = {
         { 18, 20 },
@@ -222,7 +223,7 @@ function OvervodkaEvents:TriggerHamster()
             local hamster = SpawnHamster()
 
             if hamster and not hamster:IsNull() then
-                if OvervodkaEvents and OvervodkaEvents.StartZhenyaBoss then
+                if OvervodkaEvents and OvervodkaEvents.StartZhenyaBoss and winter_mode then
                     OvervodkaEvents:StartZhenyaBoss(hamster)
                 end
             else

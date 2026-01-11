@@ -24,9 +24,13 @@ function litvin_conditions:GetCustomCastErrorTarget( hTarget )
 end
 
 function litvin_conditions:OnSpellStart()
+	if not IsServer() then return end
 	local caster = self:GetCaster()
 	local target = self:GetCursorTarget()
 	if target:TriggerSpellAbsorb(self) then return end
+	if target:HasModifier("modifier_generic_arc_lua") and target:HasModifier("modifier_litvin_conditions") then
+		target:RemoveModifierByName("modifier_generic_arc_lua")
+	end
 	target:AddNewModifier(
 		caster,
 		self,

@@ -97,13 +97,13 @@ end
 function modifier_hamster:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
-		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+		MODIFIER_PROPERTY_AVOID_DAMAGE,
 	}
 	return funcs
 end
 
-function modifier_hamster:GetModifierIncomingDamage_Percentage()
-	return -100
+function modifier_hamster:GetModifierAvoidDamage()
+	return 1
 end
 
 function modifier_hamster:OnTakeDamage( params )

@@ -48,9 +48,10 @@ function modifier_pistol_innate:OnCreated()
     if not IsServer() then return end
 
     self._damage_accum = self._damage_accum or 0
+    self._was_not_original_model = false
+    self:StartIntervalThink(0.15)
 
     if self.parent:IsIllusion() then
-        self:StartIntervalThink(0.5)
         self:SyncFromOwner()
     end
 end
@@ -59,9 +60,52 @@ function modifier_pistol_innate:OnRefresh()
     self:OnCreated()
 end
 
+function modifier_pistol_innate:_IsOriginalModelNow()
+    if not self.parent or self.parent:IsNull() then return false end
+    return (self.parent:GetModelName() == "models/pistoletov/alexpistol.vmdl" and (not self.parent:HasModifier("modifier_pistol_w_active")))
+end
+
+function modifier_pistol_innate:_HideWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(0)
+        self.parent.weapon:SetParent(self.parent, "attach_hitloc")
+    end
+end
+
+function modifier_pistol_innate:_ShowWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(0.5)
+        self.parent.weapon:SetParent(self.parent, "attach_sword")
+        self.parent.weapon:SetLocalOrigin(Vector(0, 0, 0))
+		self.parent.weapon:SetLocalAngles(0, 0, 0)
+    end
+end
+
 function modifier_pistol_innate:OnIntervalThink()
     if not IsServer() then return end
-    self:SyncFromOwner()
+    if not self.parent or self.parent:IsNull() then return end
+
+    if self.parent:GetUnitName() ~= "npc_dota_hero_slardar" then return end
+
+    local is_original = self:_IsOriginalModelNow()
+
+    if not is_original then
+        self._was_not_original_model = true
+        self:_HideWeapon()
+        return
+    end
+
+    if self._was_not_original_model then
+        self._was_not_original_model = false
+        self:_ShowWeapon()
+        return
+    end
+
+    if self.parent:IsIllusion() then
+        self:SyncFromOwner()
+    end
 end
 
 function modifier_pistol_innate:SyncFromOwner()

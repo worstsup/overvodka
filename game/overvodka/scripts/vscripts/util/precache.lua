@@ -68,7 +68,6 @@ PrecacheUtils.particles = {
 		"particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf",
 		"particles/creatures/aghanim/aghanim_blink_warmup.vpcf",
    		"particles/creatures/aghanim/aghanim_blink_arrival.vpcf",
-		"particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start_bolt_parent.vpcf",
 		"particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_v2_debuff.vpcf",
 		"particles/econ/items/juggernaut/jugg_fall20_immortal/jugg_fall20_immortal_healing_ward.vpcf",
 		"particles/elixir_collector_ambient.vpcf",

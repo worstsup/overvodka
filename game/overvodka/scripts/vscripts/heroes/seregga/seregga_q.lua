@@ -270,6 +270,7 @@ function modifier_seregga_q_shard_window:GetEffectName() return "particles/sereg
 function modifier_seregga_q_shard_window:GetEffectAttachType() return PATTACH_ABSORIGIN_FOLLOW end
 
 function modifier_seregga_q_shard_window:OnCreated()
+    self.ability = self:GetAbility()
     if not IsServer() then return end
     self:StartIntervalThink(0.2)
 end

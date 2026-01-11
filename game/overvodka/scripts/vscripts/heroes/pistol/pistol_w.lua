@@ -138,38 +138,42 @@ function modifier_pistol_w_active:OnCreated()
 	self.parent = self:GetParent()
     self.ability = self:GetAbility()
 
-    self.attack_damage = self.ability:GetSpecialValueFor("attack_damage")
-    self.attack_damage_pct = self.ability:GetSpecialValueFor("attack_damage_pct")
-    self.damage = self.attack_damage
+    self.attack_damage = self.ability:GetSpecialValueFor( "attack_damage" )
+    self.attack_damage_pct = self.ability:GetSpecialValueFor( "attack_damage_pct" )
 
     if not IsServer() then return end
-	if self.parent.weapon then
-		self.parent.weapon:SetModelScale(0)
-	end
 
-	local p = ParticleManager:CreateParticle("particles/units/heroes/hero_largo/largo_croak_genius_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	self:AddParticle(p, false, false, -1, false, false)
+	local p = ParticleManager:CreateParticle( "particles/units/heroes/hero_largo/largo_croak_genius_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent )
+	self:AddParticle( p, false, false, -1, false, false )
 
-	local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_largo/largo_amphibian_rhapsody_fightsong_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	self:AddParticle(p2, false, false, -1, false, false)
+	local p2 = ParticleManager:CreateParticle( "particles/units/heroes/hero_largo/largo_amphibian_rhapsody_fightsong_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent )
+	self:AddParticle( p2, false, false, -1, false, false )
 
-    self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage(nil) * self.attack_damage_pct * 0.01
-
+    self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage( nil ) * self.attack_damage_pct * 0.01
+	self:SetHasCustomTransmitterData( true )
     self.parent:AddNewModifier(self.parent, self.ability, "modifier_pistol_w_active_fury", {})
     self:PlayEffects()
 	self:StartIntervalThink(0.1)
 end
 
+function modifier_pistol_w_active:AddCustomTransmitterData()
+    self._txData = self._txData or {}
+    self._txData.damage = self.damage
+    return self._txData
+end
+
+function modifier_pistol_w_active:HandleCustomTransmitterData( data )
+    self.damage = data.damage
+end
+
 function modifier_pistol_w_active:OnIntervalThink()
-	self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage(nil) * self.attack_damage_pct * 0.01
+	if not IsServer() then return end
+	self.damage = self.attack_damage + self.parent:GetAverageTrueAttackDamage( nil ) * self.attack_damage_pct * 0.01
+	self:SendBuffRefreshToClients()
 end
 
 function modifier_pistol_w_active:OnDestroy()
 	if not IsServer() then return end
-
-	if self.parent.weapon then
-		self.parent.weapon:SetModelScale(0.5)
-	end
 
 	local fury = self.parent:FindModifierByNameAndCaster( "modifier_pistol_w_active_fury", self.parent )
 	if fury then

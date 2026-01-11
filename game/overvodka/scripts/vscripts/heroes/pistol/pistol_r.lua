@@ -43,7 +43,7 @@ function pistol_r:_StartTorrentStorm(center)
     local slow_pct       = self:GetSpecialValueFor("storm_slow_pct") or 25
     local slow_dur       = self:GetSpecialValueFor("storm_slow_dur") or 2.25
 
-    local lift_duration  = self:GetSpecialValueFor("storm_lift_duration") or 1.4
+    local lift_duration  = self:GetSpecialValueFor("storm_lift_duration") or 1.0
 
     local start = GameRules:GetGameTime()
     local next_tick = 0
