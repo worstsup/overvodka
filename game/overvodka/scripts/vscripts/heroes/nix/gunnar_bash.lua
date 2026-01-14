@@ -1,7 +1,6 @@
 LinkLuaModifier( "modifier_gunnar_bash", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_armor", "modifier_generic_armor", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_gunnar_bash_armor", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
 
 gunnar_bash = class({})
 
@@ -21,32 +20,25 @@ end
 
 modifier_gunnar_bash = class({})
 
-function modifier_gunnar_bash:IsHidden()
-	return true
-end
-function modifier_gunnar_bash:IsDebuff()
-	return false
-end
-function modifier_gunnar_bash:IsPurgable()
-	return false
-end
+function modifier_gunnar_bash:IsHidden() return true end
+function modifier_gunnar_bash:IsDebuff() return false end
+function modifier_gunnar_bash:IsPurgable() return false end
 
-function modifier_gunnar_bash:OnCreated( kv )
+function modifier_gunnar_bash:OnCreated()
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 	self.pseudoseed = RandomInt( 1, 100 )
-	self.chance = self:GetAbility():GetSpecialValueFor( "chance_pct" )
-	self.damage = self:GetAbility():GetSpecialValueFor( "damage" )
-	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
-	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
-	self.armor_duration = self:GetAbility():GetSpecialValueFor( "armor_duration" )
-	self.knockback_duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
-	self.knockback_height = self:GetAbility():GetSpecialValueFor( "knockback_height" )
-	if not IsServer() then return end
+	self.chance = self.ability:GetSpecialValueFor( "chance_pct" )
+	self.damage = self.ability:GetSpecialValueFor( "damage" )
+	self.duration = self.ability:GetSpecialValueFor( "duration" )
+	self.armor = self.ability:GetSpecialValueFor( "armor" )
+	self.armor_duration = self.ability:GetSpecialValueFor( "armor_duration" )
+	self.knockback_duration = self.ability:GetSpecialValueFor( "knockback_duration" )
+	self.knockback_height = self.ability:GetSpecialValueFor( "knockback_height" )
 end
 
-function modifier_gunnar_bash:OnRefresh( kv )
-	self:OnCreated( kv )	
+function modifier_gunnar_bash:OnRefresh()
+	self:OnCreated()	
 end
 
 function modifier_gunnar_bash:DeclareFunctions()
@@ -75,7 +67,6 @@ function modifier_gunnar_bash:GetModifierProcAttack_Feedback( params )
 end
 
 function modifier_gunnar_bash:Bash( target )
-
 	target:AddNewModifier(
 		self.parent,
 		self.ability,
@@ -90,27 +81,10 @@ function modifier_gunnar_bash:Bash( target )
 			knockback_height = self.knockback_height,
 		}
 	)
-	target:AddNewModifier(
-		self.parent,
-		self.ability,
-		"modifier_generic_stunned_lua",
-		{ duration = self.duration }
-	)
-	target:AddNewModifier(
-		self.parent,
-		self.ability,
-		"modifier_generic_armor",
-		{ duration = self.armor_duration }
-	)
+	target:AddNewModifier( self.parent, self.ability, "modifier_generic_stunned_lua", { duration = self.duration } )
+	target:AddNewModifier( self.parent, self.ability, "modifier_gunnar_bash_armor", { duration = self.armor_duration } )
 	self:PlayEffects( target, target:IsCreep() )
-	local damageTable = {
-		victim = target,
-		attacker = self.parent,
-		damage = self.damage,
-		damage_type = DAMAGE_TYPE_MAGICAL,
-		ability = self.ability,
-	}
-	ApplyDamage(damageTable)
+	ApplyDamage( { victim = target, attacker = self.parent, damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self.ability } )
 end
 
 function modifier_gunnar_bash:PlayEffects( target, isCreep )
@@ -118,4 +92,24 @@ function modifier_gunnar_bash:PlayEffects( target, isCreep )
 	ParticleManager:SetParticleControlEnt(effect_cast, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( "gunnar", target )
+end
+
+
+modifier_gunnar_bash_armor = class({})
+
+function modifier_gunnar_bash_armor:IsHidden() return false end
+function modifier_gunnar_bash_armor:IsPurgable() return true end
+
+function modifier_gunnar_bash_armor:OnCreated()
+	self.armor = self:GetAbility():GetSpecialValueFor("armor")
+end
+
+function modifier_gunnar_bash_armor:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+	}
+end
+
+function modifier_gunnar_bash_armor:GetModifierPhysicalArmorBonus()
+	return -self.armor
 end

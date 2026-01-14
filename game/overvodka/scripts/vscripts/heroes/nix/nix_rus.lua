@@ -18,17 +18,15 @@ end
 
 modifier_nix_rus = class({})
 
-function modifier_nix_rus:IsPurgable()
-	return false
-end
+function modifier_nix_rus:IsPurgable() return false end
 
 function modifier_nix_rus:OnCreated()
-	if not IsServer() then return end
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_strength = self:GetAbility():GetSpecialValueFor( "bonus_strength" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 	self.dps = self:GetAbility():GetSpecialValueFor( "dps" )
 	self.interval = 0.5
+	if not IsServer() then return end
 	self:StartIntervalThink(self.interval)
 	self:OnIntervalThink()
     local particle = ParticleManager:CreateParticle("particles/nix_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
@@ -76,22 +74,10 @@ function modifier_nix_rus:GetModifierBonusStats_Strength()
 end
 
 function modifier_nix_rus:IsAura() return true end
-
-function modifier_nix_rus:GetAuraSearchTeam()
-    return DOTA_UNIT_TARGET_TEAM_ENEMY
-end
-
-function modifier_nix_rus:GetAuraSearchType()
-    return DOTA_UNIT_TARGET_HERO
-end
-
-function modifier_nix_rus:GetModifierAura()
-    return "modifier_nix_rus_debuff"
-end
-
-function modifier_nix_rus:GetAuraDuration()
-    return 0.5
-end
+function modifier_nix_rus:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_nix_rus:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO end
+function modifier_nix_rus:GetModifierAura() return "modifier_nix_rus_debuff" end
+function modifier_nix_rus:GetAuraDuration() return 0.5 end
 
 function modifier_nix_rus:GetAuraRadius()
     if self:GetAbility() then
@@ -101,23 +87,12 @@ end
 
 modifier_nix_rus_debuff = class({})
 
-function modifier_nix_rus_debuff:IsHidden()
-	return false
-end
+function modifier_nix_rus_debuff:IsHidden() return false end
+function modifier_nix_rus_debuff:IsDebuff() return true end
+function modifier_nix_rus_debuff:IsStunDebuff() return false end
+function modifier_nix_rus_debuff:IsPurgable() return false end
 
-function modifier_nix_rus_debuff:IsDebuff()
-	return true
-end
-
-function modifier_nix_rus_debuff:IsStunDebuff()
-	return false
-end
-
-function modifier_nix_rus_debuff:IsPurgable()
-	return false
-end
-
-function modifier_nix_rus_debuff:OnCreated( kv )
+function modifier_nix_rus_debuff:OnCreated()
 	if not IsServer() then return end
 	self.lose_strength = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("str_loss") * 0.01
 	self.scepter = self:GetCaster():HasScepter()
@@ -127,24 +102,22 @@ function modifier_nix_rus_debuff:OnCreated( kv )
 	end
 end
 
-function modifier_nix_rus_debuff:OnRefresh( kv )
+function modifier_nix_rus_debuff:OnRefresh()
 	self.lose_strength = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("str_loss") * 0.01
 end
 
 function modifier_nix_rus_debuff:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 	}
-	return funcs
 end
 
 function modifier_nix_rus_debuff:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_DISARMED] = self.scepter,
 	}
-	return state
 end
 
 function modifier_nix_rus_debuff:GetModifierBonusStats_Strength()

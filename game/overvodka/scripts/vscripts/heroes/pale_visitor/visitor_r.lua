@@ -4,6 +4,7 @@ LinkLuaModifier("modifier_visitor_r_aura",      "heroes/pale_visitor/visitor_r",
 LinkLuaModifier("modifier_visitor_r_night_buff","heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_burn",        "heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_r_permanent", "heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_disarmed_lua","modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE)
 
 visitor_r = class({})
 
@@ -48,7 +49,7 @@ function visitor_r:OnToggle()
 			self.modifier:Destroy()
 		end
 		self.modifier = nil
-		caster:AddNewModifier(caster, self, "modifier_visitor_r_cooldown", {duration = self:GetCooldown(self:GetLevel())}) -- needs checking
+		caster:AddNewModifier(caster, self, "modifier_visitor_r_cooldown", {duration = self:GetEffectiveCooldown(self:GetLevel())}) -- needs checking
 		self:UseResources(false, false, false, true)
 	end
 end
@@ -68,9 +69,19 @@ function modifier_visitor_r:RemoveOnDeath() return true end
 function modifier_visitor_r:OnCreated()
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
+    self.base_dmg = self.ability:GetSpecialValueFor("damage_base")
     self.hp_dmg_pct = self.ability:GetSpecialValueFor("hp_damage_pct")
 
     if not IsServer() then return end
+    local fountainEntities = Entities:FindAllByClassname("ent_dota_fountain")
+	for _,fountainEnt in pairs( fountainEntities ) do
+		if fountainEnt:GetTeamNumber() == self.parent:GetTeamNumber() then
+            self.fountain = fountainEnt
+            self.fountain:AddNewModifier(self.parent, self.ability, "modifier_generic_disarmed_lua", {duration = 999})
+			break
+		end
+    end
+
     self.aura = self.parent:AddNewModifier(self.parent, self.ability, "modifier_visitor_r_aura", {})
 	self.is_day = GameRules:IsDaytime()
 	if self.is_day then
@@ -128,14 +139,14 @@ function modifier_visitor_r:OnIntervalThink()
 		for _,u in pairs(units) do
             if u and not u:IsNull() then
                 if u:IsAlive() then
-					if u:IsHero() and self.first then
+					if self.first then
 						local p = ParticleManager:CreateParticle("particles/econ/items/phoenix/phoenix_ti10_immortal/phoenix_ti10_fire_spirit_ground.vpcf", PATTACH_ABSORIGIN_FOLLOW, u)
 						ParticleManager:SetParticleControl(p, 0, u:GetAbsOrigin())
 						ParticleManager:SetParticleControl(p, 3, u:GetAbsOrigin())
 						ParticleManager:ReleaseParticleIndex(p)
 					end
 					u:AddNewModifier(caster, self.ability, "modifier_visitor_burn", {duration = 1.1})
-                    local dmg = u:GetMaxHealth() * self.hp_dmg_pct * 0.01
+                    local dmg = self.base_dmg + u:GetMaxHealth() * self.hp_dmg_pct * 0.01
                     ApplyDamage({
                         victim = u,
                         attacker = caster,
@@ -161,6 +172,11 @@ function modifier_visitor_r:OnDestroy()
 		self.aura:Destroy()
         self.aura = nil
 	end
+    Timers:CreateTimer(self.ability:GetEffectiveCooldown(self.ability:GetLevel()), function()
+        if self.fountain then
+            self.fountain:RemoveModifierByName("modifier_generic_disarmed_lua")
+        end
+    end)
 end
 
 
@@ -188,14 +204,14 @@ function modifier_visitor_r_permanent:OnCreated()
 end
 
 function modifier_visitor_r_permanent:AddCustomTransmitterData()
-    return {
-        hp   = self.hp_regen_bonus or 0,
-        mana = self.mana_regen_bonus or 0,
-    }
+    self._txData = self._txData or {}
+    self._txData.hp = self.hp_regen_bonus or 0
+    self._txData.mana = self.mana_regen_bonus or 0
+    return self._txData
 end
 
 function modifier_visitor_r_permanent:HandleCustomTransmitterData(data)
-    self.hp_regen_bonus   = data.hp or 0
+    self.hp_regen_bonus = data.hp or 0
     self.mana_regen_bonus = data.mana or 0
 end
 

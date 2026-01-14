@@ -6531,7 +6531,7 @@
 				"armor"
 				{
 					"value" "0"
-					"special_bonus_facet_nix_pravin"	"-2 -4 -6 -8"
+					"special_bonus_facet_nix_pravin"	"=2 =4 =6 =8"
 					"RequiresFacet"	"nix_pravin"
 				}
 				"armor_duration"
@@ -9139,10 +9139,12 @@
 		"Innate"						"1"
 		"AbilityValues"
 		{
-				"duration" "10"
-				"base_amp" "2"
-				"base_str" "3"
-				"ms" 	   "20"
+				"duration" 	"10"
+				"base_amp" 	"15"
+				"amp_level" "1"
+				"base_str" 	"10"
+				"str_level"	"2"
+				"ms" 	   	"20"
 				"heal_pct"
 				{
 					"value"	"0"
@@ -9235,7 +9237,7 @@
 				"blast_slow"					"-10 -15 -20 -25"
 				"damage"
 				{
-					"value"	"75 150 225 300"
+					"value"	"65 130 195 260"
 					"special_bonus_unique_vihor_3" "+100"
 				}
 				"duration_fly"						"2.0"
@@ -9362,7 +9364,7 @@
 		{
 				"radius"				"200"
 				"duration_pct"			"20 30 40 50"
-				"damage_pct"			"25 30 35 40"
+				"damage_pct"			"15 20 25 30"
 		}
 	}
 	//=================================================================================================================
@@ -12467,8 +12469,8 @@
 				"special_bonus_unique_zhenya_4" "+200"
 			}
 			"damage"					"3 4 5 6"
-			"heal_pct"					"60"
-			"duration"		
+			"heal_pct"					"50"
+			"duration"
 			{
 				"value"					"5"
 			}
@@ -12542,8 +12544,8 @@
 		"AbilityValues"
 		{
 			"duration"					"4"
-			"armor"						"2 3 4 5"
-			"magicarmor"				"2 3 4 5"
+			"armor"						"1 2 3 4"
+			"magicarmor"				"1 2 3 4"
 			"maxstack"
 			{
 				"value"						"5"
@@ -16176,7 +16178,7 @@
 		"AbilityTextureName"	"visitor_q"
 		"AbilityCastRange"		"350"
 		"AbilityCooldown"		"22 18 14 10"
-		"AbilityManaCost"		"100 125 150 175"
+		"AbilityManaCost"		"75 95 115 135"
 		"HasShardUpgrade"		"1"
 		"AbilityCastPoint"		"0.1"
 		"AbilityValues"
@@ -16186,9 +16188,9 @@
 			"slow_duration"		"1 1.5 2 2.5"
 			"damage"			"90 180 270 360"
 			"damage_interval"	"0.25"
-			"kill_threshold"	"9 10 11 12"
+			"kill_threshold"	"12"
 			"slow_pct"			"25"
-			"manacost_stack"	"1.5"
+			"manacost_stack"	"1"
 			"bonus_respawn_time"
 			{
 				"value"	"0"
@@ -16212,7 +16214,7 @@
 		"SpellDispellableType"          "SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"              "0.2"
 		"AbilityCooldown"               "20 18 16 14"
-		"AbilityManaCost"               "200 235 270 305"
+		"AbilityManaCost"               "150 165 180 195"
 		"HasScepterUpgrade"				"1"
 		"AbilityCastRange"				"700"
 		"AbilityValues"
@@ -16250,7 +16252,7 @@
 		"AbilityManaCost"               "70"
 		"AbilityValues"
 		{
-			"bonus_damage"      "10 20 30 40"
+			"bonus_damage"      "15 25 35 45"
 			"crit_mult"         "130 150 170 190"
 			"amp_per_stack"     "2 3 4 5"
 			"max_stacks"        "6"
@@ -16286,13 +16288,13 @@
 			"heal_amp_pct"          "15 20 25 30"
 			"vision_radius"
 			{
-				"value" "750 1000 1250 1500"
+				"value" "900 1100 1300 1500"
 				"special_bonus_unique_visitor_4"	"+400"
 			}
-			"max_stacks_per_enemy" "5 10 15 20"
+			"max_stacks_per_enemy" "3 7 11 15"
 			"AbilityCastRange"
 			{
-				"value" "750 1000 1250 1500"
+				"value" "900 1100 1300 1500"
 				"special_bonus_unique_visitor_4"	"+400"
 			}
 		}
@@ -16313,12 +16315,13 @@
 		"AbilityValues"
 		{
 			"mana_perc_per_sec"		"5"
+			"damage_base"	"15 20 25"
 			"hp_damage_pct"
 			{
-				"value"	"1.5 2.0 2.5"
+				"value"	"1.0 1.5 2.0"
 				"special_bonus_unique_visitor_5"	"+1.0"
 			}
-			"vision_bonus"			"200 400 600"
+			"vision_bonus"			"200 350 500"
 			"hp_regen_bonus"		"10 20 30"
 			"ms_bonus"				"10 14 18"
 
@@ -16327,10 +16330,10 @@
 				"value"	"0"
 				"special_bonus_facet_visitor_facet_2"	"+1"
 			}
-			"bonus_hp_regen_enemy"       "5"
-			"bonus_mana_regen_enemy"     "2.5"
+			"bonus_hp_regen_enemy"       "3"
+			"bonus_mana_regen_enemy"     "1.5"
 			"penalty_hp_regen_ally"      "3"
-			"penalty_mana_regen_ally"    "1.25"
+			"penalty_mana_regen_ally"    "1.5"
 		}
 	}
 
@@ -16348,8 +16351,8 @@
 
 		"AbilityValues"
 		{
-			"gold"				"7 10 13 16"
-			"exp"				"5 10 15 20"
+			"gold"				"8 14 20 26"
+			"exp"				"8 14 20 26"
 		}
 	}
 	//===================================================================================================================

@@ -25,6 +25,7 @@ function papich_innate:OnSpellStart()
 	end
     self._cycle = (self._cycle or 0)
     local idx = self._cycle % 3
+    if caster:IsTempestDouble() then idx = RandomInt(1,3) end
     self._cycle = self._cycle + 1
 
     if idx == 0 then
@@ -77,7 +78,7 @@ function modifier_papich_innate_amp:DeclareFunctions()
 end
 
 function modifier_papich_innate_amp:GetModifierSpellAmplify_Percentage()
-    return self:GetAbility():GetSpecialValueFor("base_amp") * self:GetParent():GetLevel()
+    return self:GetAbility():GetSpecialValueFor("base_amp") + self:GetAbility():GetSpecialValueFor("amp_level") * self:GetParent():GetLevel()
 end
 
 function modifier_papich_innate_amp:GetEffectName()
@@ -103,7 +104,7 @@ function modifier_papich_innate_str:DeclareFunctions()
 end
 
 function modifier_papich_innate_str:GetModifierBonusStats_Strength()
-    return self:GetAbility():GetSpecialValueFor("base_str") * self:GetParent():GetLevel()
+    return self:GetAbility():GetSpecialValueFor("base_str") + self:GetAbility():GetSpecialValueFor("str_level") * self:GetParent():GetLevel()
 end
 
 function modifier_papich_innate_str:GetEffectName()

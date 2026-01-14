@@ -56,7 +56,7 @@ end
 modifier_kolibri_r = class({})
 
 function modifier_kolibri_r:IsHidden()   return false end
-function modifier_kolibri_r:IsPurgable() return false  end
+function modifier_kolibri_r:IsPurgable() return false end
 function modifier_kolibri_r:GetEffectName() return "particles/kolibri_r_buff.vpcf" end
 
 function modifier_kolibri_r:OnCreated()

@@ -35,6 +35,7 @@ function pistol_q:OnSpellStart()
     local origin = caster:GetAbsOrigin()
 
     local duration = self:GetSpecialValueFor("fly_time")
+    self:StartCooldown(duration)
     local max_range = self:GetSpecialValueFor("cast_range") + self:GetCaster():GetCastRangeBonus()
     local direction = caster:GetForwardVector():Normalized() * max_range
     direction.z = 0

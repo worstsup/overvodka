@@ -10,12 +10,8 @@ end
 
 modifier_serega_opa = class({})
 
-function modifier_serega_opa:IsHidden()
-	return false
-end
-function modifier_serega_opa:IsPurgable()
-	return false
-end
+function modifier_serega_opa:IsHidden() return false end
+function modifier_serega_opa:IsPurgable() return false end
 
 function modifier_serega_opa:OnCreated()
 	self.bonus = self:GetAbility():GetSpecialValueFor("bonus_resist_pct")
@@ -25,13 +21,12 @@ function modifier_serega_opa:OnCreated()
 end
 
 function modifier_serega_opa:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 		MODIFIER_PROPERTY_ABSORB_SPELL,
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 	}
-	return funcs
 end
 
 function modifier_serega_opa:GetModifierMagicalResistanceBonus()

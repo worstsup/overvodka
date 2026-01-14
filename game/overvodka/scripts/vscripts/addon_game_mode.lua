@@ -20,9 +20,9 @@ end
 ---------------------------------------------------------------------------
 -- Required .lua files
 ---------------------------------------------------------------------------
-require( "events" )
-require( "items" )
-require( "utility_functions" )
+require('events')
+require('items')
+require('utility_functions')
 require('timers')
 require('utils')
 require('server/debug_panel')
@@ -44,13 +44,6 @@ end
 
 function Activate()
 	OvervodkaGameMode:InitGameMode()
-	OvervodkaGameMode:CustomSpawnCamps()
-end
-
-function OvervodkaGameMode:CustomSpawnCamps()
-	for name,_ in pairs(spawncamps) do
-	spawnunits(name)
-	end
 end
 
 CustomNetTables:SetTableValue("voice_data", "ambient_noice_correction", {ambient_noice_correction = -30})
@@ -145,7 +138,6 @@ function OvervodkaGameMode:InitGameMode()
 	self.m_VictoryMessages[DOTA_TEAM_CUSTOM_8] = "#VictoryMessage_Custom8"
 
 	self.m_GatheredShuffledTeams = {}
-	self.numSpawnCamps = 6
 	self.specialItem = ""
 	self.spawnTime = 60
 	self.warnTime = 7
@@ -267,8 +259,8 @@ function OvervodkaGameMode:InitGameMode()
 		GameRules:SetUseUniversalShopMode( false )
 		GameRules:SetTimeOfDay( 0.25 )
 		GameRules:SetStrategyTime( 20.0 )
-		GameRules:SetCustomGameBansPerTeam( 3 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:SetCustomGameBansPerTeam( 5 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 15.0 )
 	else
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_BOUNTY, false )
 		GameRules:GetGameModeEntity():SetRuneEnabled( DOTA_RUNE_REGENERATION, false )
@@ -279,12 +271,8 @@ function OvervodkaGameMode:InitGameMode()
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
 		GameRules:SetStrategyTime( 15.0 )
-		if GetMapName() == "overvodka_duo" then
-			GameRules:SetCustomGameBansPerTeam( 1 )
-		else
-			GameRules:SetCustomGameBansPerTeam( 1 )
-		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:SetCustomGameBansPerTeam( 1 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -337,16 +325,6 @@ function OvervodkaGameMode:InitGameMode()
 
 	OvervodkaGameMode:SetUpFountains()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
-
-	spawncamps = {}
-	for i = 1, self.numSpawnCamps do
-		local campname = "camp"..i.."_path_customspawn"
-		spawncamps[campname] =
-		{
-			NumberToSpawn = RandomInt(3,5),
-			WaypointName = "camp"..i.."_path_wp1"
-		}
-	end
 
 	GameRules:SetPostGameLayout( DOTA_POST_GAME_LAYOUT_SINGLE_COLUMN )
 	GameRules:SetPostGameColumns( {
@@ -782,31 +760,6 @@ function OvervodkaGameMode:GatherAndRegisterValidTeams()
 		print( " - " .. team .. " ( " .. GetTeamName( team ) .. " ) -> max players = " .. tostring(maxPlayers) )
 		GameRules:SetCustomGameTeamMaxPlayers( team, maxPlayers )
 	end
-end
-
-function OvervodkaGameMode:spawncamp(campname)
-	spawnunits(campname)
-end
-
-function spawnunits(campname)
-	local spawndata = spawncamps[campname]
-	local NumberToSpawn = spawndata.NumberToSpawn
-    local SpawnLocation = Entities:FindByName( nil, campname )
-    local waypointlocation = Entities:FindByName ( nil, spawndata.WaypointName )
-	if SpawnLocation == nil then
-		return
-	end
-
-    local randomCreature = 
-    	{
-			"basic_zombie",
-			"berserk_zombie"
-	    }
-	local r = randomCreature[RandomInt(1,#randomCreature)]
-    for i = 1, NumberToSpawn do
-        local creature = CreateUnitByName( "npc_dota_creature_" ..r , SpawnLocation:GetAbsOrigin() + RandomVector( RandomFloat( 0, 200 ) ), true, nil, nil, DOTA_TEAM_NEUTRALS )
-        creature:SetInitialGoalEntity( waypointlocation )
-    end
 end
 
 function OvervodkaGameMode:GoldTrackFilter(event)

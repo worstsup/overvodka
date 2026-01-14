@@ -18,7 +18,7 @@ modifier_ejovik = class({})
 
 function modifier_ejovik:IsPurgable() return true end
 
-function modifier_ejovik:OnCreated( kv )
+function modifier_ejovik:OnCreated()
 	self.as = self:GetAbility():GetSpecialValueFor( "bonus_as" )
 	self.mp = self:GetAbility():GetSpecialValueFor( "bonus_mp" )
 	self.resist = self:GetAbility():GetSpecialValueFor( "bonus_resist" )
@@ -36,8 +36,7 @@ function modifier_ejovik:OnIntervalThink()
 end
 
 function modifier_ejovik:DeclareFunctions()
-	local funcs = 
-	{
+	return {
 		MODIFIER_PROPERTY_EVASION_CONSTANT,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 		MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
@@ -49,49 +48,45 @@ function modifier_ejovik:DeclareFunctions()
 		MODIFIER_PROPERTY_BONUS_NIGHT_VISION,
 		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 	}
-
-	return funcs
 end
 
 function modifier_ejovik:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_ROOTED] = true,
 		[MODIFIER_STATE_FORCED_FLYING_VISION] = true,
 		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.shard,
 	}
-
-	return state
 end
 
-function modifier_ejovik:GetModifierPhysicalArmorBonus( params )
+function modifier_ejovik:GetModifierPhysicalArmorBonus()
 	if not self.shard then return end
 	return self.armor
 end
-function modifier_ejovik:GetBonusDayVision( params )
+function modifier_ejovik:GetBonusDayVision()
 	return self.vision
 end
-function modifier_ejovik:GetBonusNightVision( params )
+function modifier_ejovik:GetBonusNightVision()
 	return self.vision
 end
-function modifier_ejovik:GetModifierConstantManaRegen( params )
+function modifier_ejovik:GetModifierConstantManaRegen()
 	return self.mp
 end
-function modifier_ejovik:GetModifierAttackRangeBonus( params )
+function modifier_ejovik:GetModifierAttackRangeBonus()
 	return self.range
 end
-function modifier_ejovik:GetModifierSpellAmplify_Percentage( params )
+function modifier_ejovik:GetModifierSpellAmplify_Percentage()
 	return self.mag
 end
-function modifier_ejovik:GetModifierMagicalResistanceBonus( params )
+function modifier_ejovik:GetModifierMagicalResistanceBonus()
 	return self.resist
 end
-function modifier_ejovik:GetModifierEvasion_Constant( params )
+function modifier_ejovik:GetModifierEvasion_Constant()
 	return self.evasion
 end
-function modifier_ejovik:GetModifierAttackSpeedBonus_Constant( params )
+function modifier_ejovik:GetModifierAttackSpeedBonus_Constant()
 	return self.as
 end
-function modifier_ejovik:GetModifierModelChange( params )
+function modifier_ejovik:GetModifierModelChange()
 	return "nix/pc_nightmare_mushroom.vmdl"
 end
 

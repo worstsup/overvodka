@@ -610,7 +610,7 @@ function DeleteDamageTitlePanel(entIndex) {
     DeleteAllChildren(TipsContainer)
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
-    GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
+    //GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
 
     GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);

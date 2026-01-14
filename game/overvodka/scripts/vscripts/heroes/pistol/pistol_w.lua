@@ -242,8 +242,7 @@ function modifier_pistol_w_active_fury:OnDestroy()
 	if not main then return end
 	if self.forced then return end
 	self.parent:AddNewModifier(
-		self.parent,
-		self.ability,
+		self.parent, self.ability,
 		"modifier_pistol_w_active_recovery",
 		{
 			duration = self.recovery,
@@ -357,7 +356,6 @@ function modifier_pistol_w_active_fury:PlayEffects4( target, radius )
 	ParticleManager:SetParticleControl( effect_cast, 0, target:GetAbsOrigin() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(radius,radius,radius) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	--EmitSoundOnLocationWithCaster( point, "golovach_r_hit", self:GetParent() )
 end
 
 modifier_pistol_w_active_recovery = class({})

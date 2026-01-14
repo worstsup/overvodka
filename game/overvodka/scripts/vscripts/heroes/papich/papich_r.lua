@@ -17,6 +17,7 @@ end
 function papich_r:OnAbilityPhaseInterrupted()
     StopSoundOn("papich_r_appear", self:GetCaster())
 end
+
 function papich_r:OnSpellStart()
     if not IsServer() then return end
      self.abilities_list = 
