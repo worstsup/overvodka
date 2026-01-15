@@ -2642,17 +2642,17 @@
 		"BotImplemented"	""
 		"Facets"
 		{
-			"azazin_facet_q"
-			{
-				"Icon"				"tree"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
 			"azazin_facet_e"
 			{
 				"Icon"				"fist"
 				"Color"				"Red"
 				"GradientID"		"1"
+			}
+			"azazin_facet_q"
+			{
+				"Icon"				"pudge_hook"
+				"Color"				"Blue"
+				"GradientID"		"0"
 			}
 			"weaver_skitterstep"
 			{

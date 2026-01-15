@@ -5,9 +5,8 @@ prince_innate = class({})
 function prince_innate:GetBehavior()
     if self:GetSpecialValueFor("active") == 1 then
         return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE
-    else
-        return DOTA_ABILITY_BEHAVIOR_PASSIVE
     end
+    return DOTA_ABILITY_BEHAVIOR_PASSIVE
 end
 
 function prince_innate:OnSpellStart()
