@@ -2177,7 +2177,7 @@
 		"DOTA_Tooltip_ability_azazin_innate_description" "Каждое действие Азазина создаёт невероятный кринж, из-за чего при ударе по врагам их мана выжигается, а также наносится урон, равный выжженной мане."
 		"DOTA_Tooltip_ability_azazin_innate_mana_per_hit" "СЖИГАНИЕ МАНЫ ЗА УДАР:"
 		"DOTA_Tooltip_Facet_azazin_facet_q" "Хучок)"
-		"DOTA_Tooltip_Facet_azazin_facet_q_description" "Способность Собеседование становится применяется на точку и наносит урон задетому врагу."
+		"DOTA_Tooltip_Facet_azazin_facet_q_description" "Способность Собеседование применяется на точку и наносит урон задетому врагу."
 		"DOTA_Tooltip_ability_azazin_q_Facet_azazin_facet_q" "Способность становится направленной на точку, увеличивается её дальность и длительность применения. Задев врага, притягивает его к себе и наносит ему чистый урон, а крипы, не являющиеся древними, сразу погибают."
 		"DOTA_Tooltip_ability_azazin_q_shard_description" "Герой может проходить сквозь деревья, созданные способностью."
 		"DOTA_Tooltip_Facet_azazin_facet_e" "ИСТОЩЕННОЕ ОЧКО"

@@ -1,53 +1,54 @@
-LinkLuaModifier("modifier_azazin_q_pull", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL)
-LinkLuaModifier("modifier_azazin_q_tree_walk_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_azazin_q_tree_walk", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_azazin_tether_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_azazin_tether", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_azazin_q_hook", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL)
-LinkLuaModifier("modifier_azazin_q_hook_self", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier( "modifier_azazin_q_pull",           "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL )
+LinkLuaModifier( "modifier_azazin_q_tree_walk_aura", "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_azazin_q_tree_walk",      "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_azazin_tether_aura",      "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_azazin_tether",           "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_azazin_q_hook",           "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_HORIZONTAL )
+LinkLuaModifier( "modifier_azazin_q_hook_self",      "heroes/azazin/azazin_q", LUA_MODIFIER_MOTION_NONE )
 
 azazin_q = class({})
 k = 0
-function azazin_q:Precache(context)
-    PrecacheResource("particle", "particles/azazin_q.vpcf", context)
-    PrecacheResource("soundfile", "soundevents/game_sounds_hero_pudge.vsndevts", context)
-	PrecacheResource("soundfile", "soundevents/azazin_q_1.vsndevts", context)
-	PrecacheResource("soundfile", "soundevents/azazin_q_2.vsndevts", context)
-	PrecacheResource("soundfile", "soundevents/azazin_q_3.vsndevts", context)
-	PrecacheResource("soundfile", "soundevents/azazin_q.vsndevts", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_pudge/pudge_meathook.vpcf", context)
-	PrecacheResource("model", "models/props_tree/ti7/ggbranch.vmdl", context)
+function azazin_q:Precache( context )
+    PrecacheResource( "particle", "particles/azazin_q.vpcf", context )
+    PrecacheResource( "particle", "particles/azazin_q_hook.vpcf", context )
+    PrecacheResource( "soundfile", "soundevents/game_sounds_hero_pudge.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/azazin_q_1.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/azazin_q_2.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/azazin_q_3.vsndevts", context )
+	PrecacheResource( "soundfile", "soundevents/azazin_q.vsndevts", context )
+	PrecacheResource( "model", "models/props_tree/ti7/ggbranch.vmdl", context )
 end
 
 function azazin_q:GetBehavior()
-    if self:GetSpecialValueFor("hook") == 1 then
+    if self:GetSpecialValueFor( "hook" ) == 1 then
         return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING
     end
     return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET
 end
 
-function azazin_q:GetCastRange(location, target)
-    if self:GetSpecialValueFor("hook") == 1 then
+function azazin_q:GetCastRange( location, target )
+    if self:GetSpecialValueFor( "hook" ) == 1 then
         if IsClient() then
-            return self:GetSpecialValueFor("cast_range")
+            return self:GetSpecialValueFor( "cast_range" )
         end
     else
-        return self:GetSpecialValueFor("cast_range")
+        return self:GetSpecialValueFor( "cast_range" )
     end
 end
 
 function azazin_q:GetCastPoint()
-	return self:GetSpecialValueFor("cast_point")
+	return self:GetSpecialValueFor( "cast_point" )
 end
 
 function azazin_q:OnSpellStart()
     local caster = self:GetCaster()
-    self.is_hook = self:GetSpecialValueFor("hook") == 1
+    self.is_hook = self:GetSpecialValueFor( "hook" ) == 1
     if not IsServer() then return end
     if self.is_hook then
         local point = self:GetCursorPosition()
         local projectile_name = ""
-        local projectile_distance = self:GetSpecialValueFor( "hook_distance" )
+        local projectile_distance = self:GetSpecialValueFor( "hook_distance" ) + caster:GetCastRangeBonus()
+        print(projectile_distance)
         if caster:HasTalent("special_bonus_unique_azazin_3") then
             projectile_distance = projectile_distance + 150
         end
@@ -55,6 +56,9 @@ function azazin_q:OnSpellStart()
         local projectile_radius = self:GetSpecialValueFor( "hook_width" )
         local origin = caster:GetAbsOrigin()
         local dir = point - origin
+        if dir:Length2D() < 1 then
+            dir = caster:GetForwardVector()
+        end
         dir.z = 0
         local projectile_direction = dir:Normalized()
 
@@ -89,19 +93,16 @@ function azazin_q:OnSpellStart()
         self:PlayEffects( target, data )
     else
         local target = self:GetCursorTarget()
-        if target:TriggerSpellAbsorb(self) then return end
         if not target or target:IsInvulnerable() then
             return
         end
-
-        local projectile_speed = 1600
 
         local info = {
             Target = target,
             Source = caster,
             Ability = self,
             EffectName = "particles/azazin_q.vpcf",
-            iMoveSpeed = projectile_speed,
+            iMoveSpeed = 1600,
             bDodgeable = true,
             bProvidesVision = false,
         }
@@ -123,7 +124,7 @@ end
 function azazin_q:PlayEffects( point, data )
 
 	local speed = self:GetSpecialValueFor( "hook_speed" )
-	local distance = self:GetSpecialValueFor( "hook_distance" )
+	local distance = self:GetSpecialValueFor( "hook_distance" ) + self:GetCaster():GetCastRangeBonus()
     if self:GetCaster():HasTalent("special_bonus_unique_azazin_3") then
         distance = distance + 150
     end
@@ -169,7 +170,7 @@ end
 function azazin_q:BaseHit( target, location )
     if not IsServer() then return end
     if not target then return end
-
+    if target:TriggerSpellAbsorb(self) then return end
     local caster = self:GetCaster()
     local min_pull = self:GetSpecialValueFor("min_pull")
     local max_pull = self:GetSpecialValueFor("max_pull")
@@ -235,16 +236,18 @@ function azazin_q:HookHit( target, location, handle )
 
 	if target:GetTeamNumber()~=self:GetCaster():GetTeamNumber() then
 		ApplyDamage( { victim = target, attacker = self:GetCaster(), damage = self:GetSpecialValueFor( "damage" ), damage_type = DAMAGE_TYPE_PURE, ability = self } )
-		if target:IsCreep() and not target:IsCreepHero() and not target:IsAncient() then
-			target:Kill( self, self:GetCaster() )
-		end
+        if target and not target:IsNull() then
+            if target:IsCreep() and not target:IsCreepHero() and not target:IsAncient() then
+                target:Kill( self, self:GetCaster() )
+            end
+        end
 	end
-
-	local radius = self:GetSpecialValueFor( "vision_radius" )
-	local duration = self:GetSpecialValueFor( "vision_duration" )
-	AddFOWViewer( self:GetCaster():GetTeamNumber(), target:GetAbsOrigin(), radius, duration, false )
-	self:SetEffects2( data, target )
-
+    if target and not target:IsNull() then
+        local radius = self:GetSpecialValueFor( "vision_radius" )
+        local duration = self:GetSpecialValueFor( "vision_duration" )
+        AddFOWViewer( self:GetCaster():GetTeamNumber(), target:GetAbsOrigin(), radius, duration, false )
+        self:SetEffects2( data, target )
+    end
 	return true
 end
 
@@ -435,24 +438,25 @@ function modifier_azazin_q_hook:OnDestroy()
 
 	ParticleManager:DestroyParticle( self.data.effect_cast, true )
 	ParticleManager:ReleaseParticleIndex( self.data.effect_cast )
-
-	if not self.interrupted then
-		self:GetParent():RemoveHorizontalMotionController( self )
-	end
-
-	FindClearSpaceForUnit( self.parent, self.origin - self.direction * self.offset, true )
-
-    if self.parent:GetTeamNumber()~=self.caster:GetTeamNumber() then
-        local midpoint = self.parent:GetAbsOrigin()
-        self:GetAbility():SpawnTreeRing(midpoint)
-        if self.caster:HasShard() then
-            CreateModifierThinker(self.caster, self:GetAbility(), "modifier_azazin_q_tree_walk_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self.caster:GetTeamNumber(), false)
+    if self.parent and not self.parent:IsNull() then
+        if not self.interrupted then
+            self:GetParent():RemoveHorizontalMotionController( self )
         end
-        if self:GetAbility():GetSpecialValueFor("tether") == 1 then
-            CreateModifierThinker(self.caster, self:GetAbility(), "modifier_azazin_tether_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self.caster:GetTeamNumber(), false)
+
+        FindClearSpaceForUnit( self.parent, self.origin - self.direction * self.offset, true )
+
+        if self.parent:GetTeamNumber()~=self.caster:GetTeamNumber() then
+            local midpoint = self.parent:GetAbsOrigin()
+            self:GetAbility():SpawnTreeRing(midpoint)
+            if self.caster:HasShard() then
+                CreateModifierThinker(self.caster, self:GetAbility(), "modifier_azazin_q_tree_walk_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self.caster:GetTeamNumber(), false)
+            end
+            if self:GetAbility():GetSpecialValueFor("tether") == 1 then
+                CreateModifierThinker(self.caster, self:GetAbility(), "modifier_azazin_tether_aura", {duration = self:GetAbility():GetSpecialValueFor("ring_duration")}, midpoint, self.caster:GetTeamNumber(), false)
+            end
         end
+        EmitSoundOn( "Hero_Pudge.AttackHookRetractStop", self.caster )
     end
-	EmitSoundOn( "Hero_Pudge.AttackHookRetractStop", self.caster )
 end
 
 function modifier_azazin_q_hook:DeclareFunctions()
