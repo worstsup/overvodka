@@ -1390,7 +1390,7 @@ end
 
 dvoreckov_www = class({})
 
-LinkLuaModifier("modifier_dvoreckov_www",             "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_dvoreckov_www",             "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_HORIZONTAL)
 LinkLuaModifier("modifier_dvoreckov_www_aura_thinker","heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_dvoreckov_www_aura_pull",   "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE)
 
