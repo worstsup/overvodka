@@ -143,10 +143,10 @@
                             </Panel>
 
                             <Panel id="MatchHistory" class="MatchHistory" visible="false">
-                                <Label class="MatchHistoryTitle" text="#ov_match_history_title" />
+                                <Label class="MatchHistoryTitle" text="#Menu_Profile_Game_History" />
                                 <Panel id="MatchList" class="MatchList">
                                 </Panel>
-                                <Label id="MatchPrivateNotice" class="MatchPrivateNotice" text="#ov_prime_required" visible="false" />
+                                <Label id="MatchPrivateNotice" class="MatchPrivateNotice" text="#Menu_Profile_Prime_Required" visible="false" />
                                 <Panel id="BuyButtonStats" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');" visible="false">
                                 <Panel class="Wrapper">
                                     <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>

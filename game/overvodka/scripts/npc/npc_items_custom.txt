@@ -482,7 +482,7 @@
 				"bonus_strength"		"5"
 				"bonus_intellect"		"21"
 				"bonus_mana"			"400"
-				"bonus_mana_regen_pct"	"0.4"
+				"bonus_mana_regen_pct"	"40"
 				"bonus_mana_tooltip"	"40"
 				"spell_amp"				"10"
 				"blast_movement_slow"	"-80"
@@ -1435,18 +1435,18 @@
         "ItemStockTime"                    "1"             
         "ItemStockInitial"                "0"
         "ItemStockMax"                    "1"
-        "ItemInitialStockTime"            "300.0" // Время до начала покупки в секундах. Поставь лучше 1)
+        "ItemInitialStockTime"            "300.0"
         "ItemInitialStockTimeTurbo"        "150.0"
 
         "ShouldBeSuggested"                "1"
     }
-	"item_burger_sobolev"
+	"item_red_chips"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"burum"
+		"AbilityTextureName"			"red_chips"
 		"ItemCost"						"1800"
 		"ItemShopTags"					"str;stat;shard"
 		"ItemQuality"					"uncommon"
@@ -1468,7 +1468,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items/items_burgers.lua"
+				"ScriptFile"	"items/chips"
 				"Function"		"AddStat"
 				"str"			"%bonus_str"
 			}
@@ -1477,13 +1477,13 @@
 		}
 	}
 
-	"item_burger_oblomoff"
+	"item_green_chips"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"burgir"
+		"AbilityTextureName"			"green_chips"
 		"ItemCost"						"1800"
 		"ItemShopTags"					"agi;stat;shard"
 		"ItemQuality"					"uncommon"
@@ -1505,7 +1505,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items/items_burgers.lua"
+				"ScriptFile"	"items/chips"
 				"Function"		"AddStat"
 				"agi"			"%bonus_agi"
 			}
@@ -1514,13 +1514,13 @@
 		}
 	}
 
-	"item_burger_larin"
+	"item_blue_chips"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"cocktail"
+		"AbilityTextureName"			"blue_chips"
 		"ItemCost"						"1800"
 		"ItemShopTags"					"int;stat;shard"
 		"ItemQuality"					"uncommon"
@@ -1542,7 +1542,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"items/items_burgers.lua"
+				"ScriptFile"	"items/chips"
 				"Function"		"AddStat"
 				"int"			"%bonus_int"
 			}
@@ -1857,7 +1857,7 @@
 				"bonus_armor"	  "5"
 				"bonus_as"		  "25"
 				"bonus_health"          "0"
-				"bonus_mana"            "0.5"
+				"bonus_mana"            "50"
 				"bonus_mana_tooltip"	"50"
 				"cast_amp"				"15"
 		}
@@ -2156,7 +2156,7 @@
 			}
 		}
 	}
-	"item_recipe_armlet_datadriven"
+	"item_recipe_sigma_staff"
 	{
 		"BaseClass"						"item_datadriven"
 		"Model"							"models/props_gameplay/recipe.vmdl"
@@ -2164,31 +2164,23 @@
 		"ItemCost"						"200"	
 		"ItemShopTags"					""
 		"ItemRecipe"					"1"
-		"ItemResult"					"item_armlet_datadriven"
+		"ItemResult"					"item_sigma_staff"
 		"ItemRequirements"
 		{
 			"01"						"item_mystic_staff;item_armlet"
 		}
 	}
-	"item_dummy_datadriven"
-	{
-		"BaseClass"                     "item_datadriven"
-		"ItemPurchasable"				"0"
-	}
 	
-	"item_armlet_datadriven"
+	"item_sigma_staff"
 	{
 		"BaseClass"                     "item_lua"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityTextureName"            "armlet_datadriven"
-		"ScriptFile"                    "items/item_armlet"
-
+		"AbilityTextureName"            "sigma_staff"
+		"ScriptFile"                    "items/item_sigma_staff"
 		"ItemCost"                      "5500"
 		"ItemQuality"                   "epic"
-
 		"AbilityCooldown"               "0"
 		"AbilityManaCost"               "0"
-
 		"AbilityValues"
 		{
 			"int"                          "30"
@@ -2792,8 +2784,8 @@
 			"bonus_agi"				"15"
 			"bonus_int"				"15"
 			"charge_cooldown"		"5"
-			"regen_per_charge"		"40"
-			"max_charges"			"20"
+			"regen_per_charge"		"30"
+			"max_charges"			"30"
 			"radius"				"1200"
 			"health"				"200"
 			"overheal_duration"		"10"

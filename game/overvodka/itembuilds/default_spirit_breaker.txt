@@ -35,7 +35,7 @@
 			"item"		"item_swift_blink"
             "item"		"item_yasha_and_kaya"
             "item"		"item_govno"
-			"item"		"item_burger_oblomoff"
+			"item"		"item_green_chips"
 		}
 	}
 }

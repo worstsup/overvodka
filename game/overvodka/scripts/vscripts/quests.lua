@@ -296,7 +296,7 @@ function Quests:OnAbilityUsed(event)
     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
     if not hero then return end
     
-    if abilityName == "item_burger_sobolev" or abilityName == "item_burger_oblomoff" or abilityName == "item_burger_larin" then
+    if abilityName == "item_red_chips" or abilityName == "item_green_chips" or abilityName == "item_blue_chips" then
         self:IncrementQuest(playerID, "chipsAmount")
     end
     if abilityName == "item_lesh" then

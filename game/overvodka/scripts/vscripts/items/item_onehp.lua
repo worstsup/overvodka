@@ -51,6 +51,7 @@ function modifier_item_onehp:OnCreated()
         self:StartIntervalThink(self.check_interval)
     end
 end
+
 function modifier_item_onehp:OnIntervalThink()
     if not IsServer() then return end
     if not self.ability or not self.parent or self.parent:IsIllusion() then return end

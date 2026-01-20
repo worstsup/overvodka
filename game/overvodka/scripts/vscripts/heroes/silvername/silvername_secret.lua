@@ -2,6 +2,7 @@ function BorrowedTimeActivate( event )
 	local caster = event.caster
 	local ability = event.ability
 	if caster:PassivesDisabled() then return end
+	if caster:IsIllusion() then return end
 	if caster:HasModifier("modifier_item_nullifier_mute") then return end
 	if not caster:IsAlive() then return end
 	local threshold = ability:GetLevelSpecialValueFor( "hp_threshold" , ability:GetLevel() - 1  )

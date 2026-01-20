@@ -51,9 +51,9 @@ var Leaderboard = {};
     function gamesWordRu(n) {
         n = Math.abs(Number(n)) || 0;
         const n10 = n % 10, n100 = n % 100;
-        if (n10 === 1 && n100 !== 11) return $.Localize("#ov_game_one");
-        if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return $.Localize("#ov_game_few");
-        return $.Localize("#ov_game_many");
+        if (n10 === 1 && n100 !== 11) return $.Localize("#Menu_Profile_Game_One");
+        if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return $.Localize("#Menu_Profile_Game_Few");
+        return $.Localize("#Menu_Profile_Game_Many");
     }
 
     function canViewerSeeMatches(ownerSteam32) {
@@ -106,7 +106,7 @@ var Leaderboard = {};
 
     function localizedSince(dateText) {
         if (!dateText) return "";
-        const prefix = $.Localize("#ov_in_game_since_prefix");
+        const prefix = $.Localize("#Menu_Profile_Game_Since");
         return prefix + " " + dateText;
     }
 
@@ -388,7 +388,7 @@ var Leaderboard = {};
                 matchList.visible = false;
                 matchNotice.visible = true;
                 BuyButtonStats.visible = true;
-                matchNotice.text = $.Localize("#ov_prime_required") || "Доступно с Overvodka Prime";
+                matchNotice.text = $.Localize("#Menu_Profile_Prime_Required") || "Доступно с Overvodka Prime";
                 return;
             }
 

@@ -27,13 +27,11 @@ function modifier_papich_facet_regen_no_enemies:OnIntervalThink()
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
         parent:GetAbsOrigin(),
-        nil,
-        self.radius,
+        nil, self.radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
         DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_CLOSEST,
-        false
+        FIND_CLOSEST, false
     )
 
     if #enemies == 0 then
@@ -45,11 +43,31 @@ end
 
 function modifier_papich_facet_regen_no_enemies:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE
+        MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
+        MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE,
+        MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
+        MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
+        MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE
     }
 end
 
+function modifier_papich_facet_regen_no_enemies:GetModifierHealAmplify_PercentageTarget()
+    return self:GetStackCount()
+end
+
 function modifier_papich_facet_regen_no_enemies:GetModifierHPRegenAmplify_Percentage()
+    return self:GetStackCount()
+end
+
+function modifier_papich_facet_regen_no_enemies:GetModifierLifestealRegenAmplify_Percentage()
+    return self:GetStackCount()
+end
+
+function modifier_papich_facet_regen_no_enemies:GetModifierSpellLifestealRegenAmplify_Percentage()
+    return self:GetStackCount()
+end
+
+function modifier_papich_facet_regen_no_enemies:GetModifierMPRegenAmplify_Percentage()
     return self:GetStackCount()
 end
 

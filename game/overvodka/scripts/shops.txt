@@ -89,7 +89,7 @@
 		"item"		"item_badun"	
 		"item"		"item_drobe"
 		"item"		"item_mask_of_quadrobe"
-		"item"		"item_armlet_datadriven"
+		"item"		"item_sigma_staff"
 		"item"		"item_armature_strike"
 		"item"		"item_magic_crystalis"
 		"item"		"item_magic_daedalus"
@@ -116,9 +116,9 @@
 			
 	"misc"
 	{
-		"item"		"item_burger_sobolev"
-		"item"		"item_burger_oblomoff"
-		"item"		"item_burger_larin"
+		"item"		"item_red_chips"
+		"item"		"item_green_chips"
+		"item"		"item_blue_chips"
 		"item"		"item_aghanims_shard"
 		"item"		"item_byebye_boots"
 		"item"		"item_bablokrad"

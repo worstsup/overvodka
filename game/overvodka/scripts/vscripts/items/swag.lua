@@ -179,10 +179,9 @@ function modifier_item_swag_active:GetModifierPhysicalArmorBonus()
 end
 
 function modifier_item_swag_active:OnAttack(params)
-	if IsServer() then
-		if params.attacker~=self:GetParent() then return end
-		self:BreakInvis()
-	end
+	if not IsServer() then return end
+	if params.attacker ~= self:GetParent() then return end
+	self:BreakInvis()
 end
 
 function modifier_item_swag_active:OnAbilityExecuted(params)

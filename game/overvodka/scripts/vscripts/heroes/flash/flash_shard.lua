@@ -14,7 +14,7 @@ end
 
 modifier_flash_shard = class({})
 
-function modifier_flash_shard:IsHidden()   return false end
+function modifier_flash_shard:IsHidden()   return self:GetStackCount() <= 0 end
 function modifier_flash_shard:IsDebuff()   return false end
 function modifier_flash_shard:IsPurgable() return false end
 
@@ -47,6 +47,9 @@ end
 function modifier_flash_shard:UpdateAgilityStacks()
     if not IsServer() then return end
     local kills = self:GetParent():GetKills()
+    if not self:GetParent():HasShard() then
+        kills = 0
+    end
     local bonus = kills * self.agi_per_kill
     self:SetStackCount(math.floor(bonus))
 end

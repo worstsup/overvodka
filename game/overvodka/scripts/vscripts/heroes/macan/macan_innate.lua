@@ -17,6 +17,7 @@ macan_innate.music_heroes = {
 	npc_dota_hero_weaver = true,
 	npc_dota_hero_omniknight = true,
 	npc_dota_hero_ringmaster = true,
+	npc_dota_hero_slardar = true,
 }
 
 

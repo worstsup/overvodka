@@ -29,7 +29,7 @@
 			"item"		"item_magic_daedalus"
 			"item"		"item_pasito"
 			"item"		"item_suchiy"
-			"item"		"item_armlet_datadriven"
+			"item"		"item_sigma_staff"
 		}
 		"#DOTA_Item_Build_Luxury"
 		{

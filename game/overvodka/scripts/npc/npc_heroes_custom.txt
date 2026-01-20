@@ -609,15 +609,21 @@
 
 		"Facets"
 		{
-			"dvoreckov_facet_magic"
+			"dvoreckov_facet_rap"
 			{
-				"Icon"				"unique"
+				"Icon"				"invoker_quas"
 				"Color"				"Purple"
 				"GradientID"		"0"
 			}
-			"dvoreckov_facet_phys"
+			"dvoreckov_facet_alco"
 			{
-				"Icon"				"damage"
+				"Icon"				"invoker_wex"
+				"Color"				"Blue"
+				"GradientID"		"0"
+			}
+			"dvoreckov_facet_nico"
+			{
+				"Icon"				"invoker_exort"
 				"Color"				"Yellow"
 				"GradientID"		"0"
 			}
@@ -652,7 +658,7 @@
 		"AttackAnimationPoint"		"0.400000"
 		"AttackAcquisitionRange"		"800"
 		"AttackRange"		"600"
-		"ProjectileModel"		"particles/units/heroes/hero_invoker/invoker_base_attack.vpcf"
+		"ProjectileModel"		"particles/units/heroes/hero_invoker_kid/invoker_kid_base_attack_all.vpcf"
 		"ProjectileSpeed"		"900"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"19"
@@ -1158,7 +1164,7 @@
 				{
 					"Ability1"
 					{
-						"AbilityName"	"alchemist_goblins_greed"
+						"AbilityName"	"mellstroy_money_sale"
 						"AutoLevelAbility" "true"
 					}
 				}
@@ -1840,7 +1846,7 @@
 		"Ability2"		"chillguy_w"
 		"Ability3"		"chillguy_e"
 		"Ability4"		"chillzone"
-		"Ability5"		"custom_passive_bonus_armor_regen"
+		"Ability5"		"chillguy_innate"
 		"Ability6"		"chillguy_r"
 		"Ability7"		"generic_hidden"
 

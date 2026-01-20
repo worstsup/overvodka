@@ -7,6 +7,17 @@ function mellstroy_scepter:Precache( context )
     PrecacheResource("particle", "particles/mellstroy_scepter.vpcf", context)
 end
 
+function mellstroy_scepter:GetGoldCost(iLevel)
+    local base = self:GetSpecialValueFor("gold_cost")
+
+    local low = tonumber(self:GetCaster()._low_gold) or 0
+    if low == 1 then
+        return math.floor(base * 0.75 + 0.5)
+    end
+
+    return base
+end
+
 function mellstroy_scepter:OnSpellStart()
 	if not IsServer() then return end
     local caster = self:GetCaster()
@@ -48,7 +59,7 @@ function modifier_mellstroy_scepter:OnTakeDamage(params)
     if params.unit ~= self.parent then return end
     if not params.attacker:GetPlayerOwner() then return end
     if self.on_cooldown then return end
-    self.damage = self.damage + params.damage
+    self.damage = self.damage + params.original_damage
     if self.damage >= self.purge_threshold then
         self.damage = 0
         self.on_cooldown = true

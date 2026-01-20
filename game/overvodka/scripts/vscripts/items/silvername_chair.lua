@@ -37,15 +37,11 @@ function item_silvername_chair:OnSpellStart()
     local owner = caster
 
     local allies = FindUnitsInRadius(
-        team,
-        caster:GetAbsOrigin(),
-        nil,
-        10000,
+        team, caster:GetAbsOrigin(), nil, 10000,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
-        FIND_ANY_ORDER,
-        false
+        FIND_ANY_ORDER, false
     )
 
     for _,unit in ipairs(allies) do
@@ -217,11 +213,7 @@ function modifier_item_silvername_chair_buff:OnTakeDamage(params)
             if heal > 0 then
                 parent:HealWithParams(heal, ability, true, true, parent, false)
 
-                local effect_cast = ParticleManager:CreateParticle(
-                    "particles/generic_gameplay/generic_lifesteal.vpcf",
-                    PATTACH_ABSORIGIN_FOLLOW,
-                    parent
-                )
+                local effect_cast = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
                 ParticleManager:ReleaseParticleIndex(effect_cast)
             end
         end

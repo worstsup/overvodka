@@ -190,20 +190,8 @@ end
 
 if CDOTA_Modifier_Lua and CDOTA_Modifier_Lua.CheckMotionControllers == nil then
     local NON_LUA_MOTION_CONTROLLERS = {
-        ["modifier_brewmaster_storm_cyclone"]                = true,
-        ["modifier_dark_seer_vacuum"]                        = true,
         ["modifier_eul_cyclone"]                             = true,
-        ["modifier_earth_spirit_rolling_boulder_caster"]     = true,
-        ["modifier_huskar_life_break_charge"]                = true,
-        ["modifier_invoker_tornado"]                         = true,
         ["modifier_item_forcestaff_active"]                  = true,
-        ["modifier_rattletrap_hookshot"]                     = true,
-        ["modifier_phoenix_icarus_dive"]                     = true,
-        ["modifier_shredder_timber_chain"]                   = true,
-        ["modifier_slark_pounce"]                            = true,
-        ["modifier_spirit_breaker_charge_of_darkness"]       = true,
-        ["modifier_tusk_walrus_punch_air_time"]              = true,
-        ["modifier_earthshaker_enchant_totem_leap"]          = true,
     }
 
     function CDOTA_Modifier_Lua:CheckMotionControllers()

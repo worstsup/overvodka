@@ -7,6 +7,17 @@ function mellstroy_business:Precache(context)
     PrecacheResource("soundfile", "soundevents/biznes.vsndevts", context ) 
 end
 
+function mellstroy_business:GetGoldCost(iLevel)
+    local base = self:GetSpecialValueFor("gold_cost")
+
+    local low = tonumber(self:GetCaster()._low_gold) or 0
+    if low == 1 then
+        return math.floor(base * 0.75 + 0.5)
+    end
+
+    return base
+end
+
 function mellstroy_business:OnSpellStart()
     if not IsServer() then return end
     local gold_cost = self:GetSpecialValueFor( "gold_cost" ) + self:GetSpecialValueFor("shield_from_gold")  * PlayerResource:GetGold(self:GetCaster():GetPlayerID()) * 0.01

@@ -7,6 +7,17 @@ function mellstroy_amam:Precache(context)
     PrecacheResource( "soundfile", "soundevents/amamam.vsndevts", context )
 end
 
+function mellstroy_amam:GetGoldCost(iLevel)
+    local base = self:GetSpecialValueFor("gold_cost")
+
+    local low = tonumber(self:GetCaster()._low_gold) or 0
+    if low == 1 then
+        return math.floor(base * 0.75 + 0.5)
+    end
+
+    return base
+end
+
 function mellstroy_amam:OnAbilityPhaseStart()
     if not IsServer() then return end
     if not global_sounds_muted then

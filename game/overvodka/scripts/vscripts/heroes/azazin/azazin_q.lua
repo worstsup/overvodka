@@ -48,7 +48,6 @@ function azazin_q:OnSpellStart()
         local point = self:GetCursorPosition()
         local projectile_name = ""
         local projectile_distance = self:GetSpecialValueFor( "hook_distance" ) + caster:GetCastRangeBonus()
-        print(projectile_distance)
         if caster:HasTalent("special_bonus_unique_azazin_3") then
             projectile_distance = projectile_distance + 150
         end
@@ -87,8 +86,7 @@ function azazin_q:OnSpellStart()
         data.cast_location = origin
         self.projectiles[id] = data
 
-        local duration = projectile_distance / projectile_speed
-        caster:AddNewModifier(caster, self, "modifier_azazin_q_hook_self", { duration = duration })
+        caster:AddNewModifier(caster, self, "modifier_azazin_q_hook_self", { duration = 0.59 })
 
         self:PlayEffects( target, data )
     else
@@ -231,7 +229,7 @@ function azazin_q:HookHit( target, location, handle )
 	if target==self:GetCaster() then
 		return false
 	end
-
+    self:GetCaster():RemoveModifierByName("modifier_azazin_q_hook_self")
 	target:AddNewModifier( self:GetCaster(), self, "modifier_azazin_q_hook", { handle = handle } )
 
 	if target:GetTeamNumber()~=self:GetCaster():GetTeamNumber() then

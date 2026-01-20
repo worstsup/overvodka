@@ -193,7 +193,10 @@ function modifier_item_nikes_cold:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
         MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE,
+        MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
+        MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
     }
 end
 
@@ -205,7 +208,19 @@ function modifier_item_nikes_cold:GetModifierMoveSpeedBonus_Percentage()
     return self.cold_movement_speed or 0
 end
 
+function modifier_item_nikes_cold:GetModifierHealAmplify_PercentageTarget()
+    return self.cold_regen or 0
+end
+
 function modifier_item_nikes_cold:GetModifierHPRegenAmplify_Percentage()
+    return self.cold_regen or 0
+end
+
+function modifier_item_nikes_cold:GetModifierLifestealRegenAmplify_Percentage()
+    return self.cold_regen or 0
+end
+
+function modifier_item_nikes_cold:GetModifierSpellLifestealRegenAmplify_Percentage()
     return self.cold_regen or 0
 end
 

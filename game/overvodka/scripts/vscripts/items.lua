@@ -114,9 +114,9 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 	local tier3 =
 	{
 		"item_lesh",
-		"item_burger_sobolev",
-		"item_burger_oblomoff",
-		"item_burger_larin",
+		"item_red_chips",
+		"item_green_chips",
+		"item_blue_chips",
 		"item_chapman_blue",
 		"item_chapman_red",
 		"item_chapman_green",
@@ -128,18 +128,18 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 	{
 		"item_lesh",
 		"item_cubin",
-		"item_burger_sobolev",
-		"item_burger_oblomoff",
-		"item_burger_larin"
+		"item_red_chips",
+		"item_green_chips",
+		"item_blue_chips"
 	}
 
 	local tier5 =
 	{
 		"item_lesh",
 		"item_cubin",
-		"item_burger_sobolev",
-		"item_burger_oblomoff",
-		"item_burger_larin"
+		"item_red_chips",
+		"item_green_chips",
+		"item_blue_chips"
 	}
 
 	local t1 = PickRandomShuffle( tier1, self.tier1ItemBucket )

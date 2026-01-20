@@ -35,7 +35,7 @@
 		{
 			"item"		"item_pasito"
 			"item"		"item_suchiy"
-			"item"		"item_armlet_datadriven"
+			"item"		"item_sigma_staff"
 		}
 	}
 }

@@ -27,7 +27,7 @@
 			"item"		"item_magic_aegis"
 			"item"		"item_suchiy"
 			"item"		"item_magic_daedalus"
-			"item"		"item_armlet_datadriven"
+			"item"		"item_sigma_staff"
 			"item"		"item_pasito"
 		}
 		"#DOTA_Item_Build_Late_Items"

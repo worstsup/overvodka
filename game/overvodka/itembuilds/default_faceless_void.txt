@@ -36,7 +36,7 @@
 			"item"		"item_shemelis"
 			"item"		"item_aghanims_shard"
 			"item"		"item_invis_sword_datadriven"
-			"item"		"item_armlet_datadriven"
+			"item"		"item_sigma_staff"
 		}
 	}
 }

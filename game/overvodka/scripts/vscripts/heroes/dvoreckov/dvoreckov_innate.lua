@@ -28,15 +28,10 @@ end
 function modifier_dvoreckov_innate:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
-        MODIFIER_PROPERTY_TOOLTIP
     }
 end
 
 function modifier_dvoreckov_innate:GetModifierSpellAmplify_Percentage()
-    return self.spell_amp or 0
-end
-
-function modifier_dvoreckov_innate:OnTooltip()
     return self.spell_amp
 end
 
