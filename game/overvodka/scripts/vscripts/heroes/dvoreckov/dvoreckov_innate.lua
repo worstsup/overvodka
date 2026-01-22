@@ -13,7 +13,7 @@ function modifier_dvoreckov_innate:IsPurgable() return false end
 
 function modifier_dvoreckov_innate:OnCreated()
     if IsServer() then
-        self:StartIntervalThink(0.5)
+        self:StartIntervalThink(0.1)
         self:OnIntervalThink()
     end
 end

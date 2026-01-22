@@ -753,6 +753,8 @@ end
 dvoreckov_qqq = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqq", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dvoreckov_qqq_shard", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_dvoreckov_qqq_manaempty_marker", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
+
 
 function dvoreckov_qqq:Precache(context)
 	PrecacheResource("soundfile", "soundevents/hehe.vsndevts", context )
@@ -805,15 +807,11 @@ function dvoreckov_qqq:FindAdditionalTargets()
 	local caster = self:GetCaster()
 	local break_distance = self:GetSpecialValueFor("break_distance")
 	local targets = FindUnitsInRadius(
-		caster:GetTeamNumber(),
-		caster:GetAbsOrigin(),
-		nil,
-		break_distance,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		caster:GetTeamNumber(), caster:GetAbsOrigin(),
+		nil, break_distance, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
 		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS,
-		FIND_CLOSEST,
-		false
+		FIND_CLOSEST, false
 	)
 	return targets
 end
@@ -855,24 +853,34 @@ function modifier_dvoreckov_qqq:IsStunDebuff() return false end
 function modifier_dvoreckov_qqq:IsPurgable() return false end
 
 function modifier_dvoreckov_qqq:OnCreated()
-	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		self.mana = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "mana_per_second")
-		self.slow = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "movespeed")
-	else
-		self.mana = 120
-		self.slow = -20
-	end
-	self.radius = self:GetAbility():GetSpecialValueFor( "break_distance" )
-	local interval = self:GetAbility():GetSpecialValueFor( "tick_interval" )
+    if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
+        self.mana = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "mana_per_second")
+        self.slow = ability_manager:GetValueQuas(self:GetAbility(), self:GetCaster(), "movespeed")
+    else
+        self.mana = 150
+        self.slow = -20
+    end
 
-	self.mana = self.mana * interval
+    self.radius = self:GetAbility():GetSpecialValueFor("break_distance")
+    local interval = self:GetAbility():GetSpecialValueFor("tick_interval")
 
-	if IsServer() then
-		self.parent = self:GetParent()
-		self:StartIntervalThink( interval )
-		self:PlayEffects()
-	end
+    self.mana_per_tick = (tonumber(self.mana) or 0) * (tonumber(interval) or 0)
+
+    self.empty_threshold = 10
+    self.did_stun = false
+
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    self.shard_mode = (caster and caster:HasShard() and (ability:GetSpecialValueFor("shard_magic_resist") or 0) > 0)
+    self.stun_duration = ability:GetSpecialValueFor("shard_stun_duration") or 0
+
+    if IsServer() then
+        self.parent = self:GetParent()
+        self:StartIntervalThink(interval)
+        self:PlayEffects()
+    end
 end
+
 
 function modifier_dvoreckov_qqq:OnDestroy()
 	if not IsServer() then return end
@@ -898,41 +906,63 @@ function modifier_dvoreckov_qqq:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function modifier_dvoreckov_qqq:OnIntervalThink()
-	if self.parent:IsMagicImmune() or self.parent:IsInvulnerable() or self.parent:IsIllusion() then
-		self:Destroy()
-		return
+    if self.parent:IsMagicImmune() or self.parent:IsInvulnerable() or self.parent:IsIllusion() then
+        self:Destroy()
+        return
+    end
+    if not self:GetCaster():IsAlive() then
+        self:Destroy()
+        return
+    end
+    if (self:GetParent():GetAbsOrigin() - self:GetCaster():GetAbsOrigin()):Length2D() > self.radius then
+        self:Destroy()
+        return
+    end
+
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+
+    local mana_before = parent:GetMana()
+    local drain = math.min(mana_before, self.mana_per_tick or 0)
+
+    if mana_before <= (self.empty_threshold or 10) or drain <= 0 then
+        if self.shard_mode and not self.did_stun and (self.stun_duration or 0) > 0 then
+            if not parent:HasModifier("modifier_dvoreckov_qqq_manaempty_marker") then
+				parent:EmitSound("Hero_KeeperOfTheLight.ManaLeak.Stun")
+                parent:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = self.stun_duration })
+                parent:AddNewModifier(caster, ability, "modifier_dvoreckov_qqq_manaempty_marker", { duration = math.max(0.1, self:GetRemainingTime()) })
+            end
+            self.did_stun = true
+        end
+
+        self:Destroy()
+        return
+    end
+
+    parent:Script_ReduceMana(drain, ability)
+    caster:GiveMana(drain)
+
+	if caster:HasTalent("special_bonus_unique_dvoreckov_1") then
+		ApplyDamage( { victim = parent, attacker = caster, damage = drain, damage_type = DAMAGE_TYPE_MAGICAL,  ability = ability } )
 	end
-	if not self:GetCaster():IsAlive() then
-		self:Destroy()
-		return
-	end
-	if (self:GetParent():GetAbsOrigin()-self:GetCaster():GetAbsOrigin()):Length2D()>self.radius then
-		self:Destroy()
-		return
-	end
-	local mana = self:GetParent():GetMana()
-	local empty = false
-	if mana<self.mana then
-		empty = true
-		self.mana = mana
-	end
-	local damageTable = {
-		victim = self:GetParent(),
-		attacker = self:GetCaster(),
-		damage = self.mana,
-		damage_type = DAMAGE_TYPE_MAGICAL,
-	}
-	self:GetParent():Script_ReduceMana( self.mana, self:GetAbility() )
-	self:GetCaster():GiveMana( self.mana )
-	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_1")
-		if Talented:GetLevel() == 1 then
-			ApplyDamage(damageTable)
-		end
-	end
-	if empty then
-		self:Destroy()
-	end
+
+    local mana_after = parent:GetMana()
+
+    if self.shard_mode and not self.did_stun and (self.stun_duration or 0) > 0 then
+        if mana_after <= (self.empty_threshold or 10) then
+            if not parent:HasModifier("modifier_dvoreckov_qqq_manaempty_marker") then
+				parent:EmitSound("Hero_KeeperOfTheLight.ManaLeak.Stun")
+                parent:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = self.stun_duration })
+                parent:AddNewModifier(caster, ability, "modifier_dvoreckov_qqq_manaempty_marker", { duration = math.max(0.1, self:GetRemainingTime()) })
+            end
+            self.did_stun = true
+        end
+    end
+
+    if mana_after <= (self.empty_threshold or 10) then
+        self:Destroy()
+    end
 end
 
 function modifier_dvoreckov_qqq:PlayEffects()
@@ -941,6 +971,13 @@ function modifier_dvoreckov_qqq:PlayEffects()
 	ParticleManager:SetParticleControlEnt(effect_cast, 1, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_mouth", Vector(0,0,0), true)
 	self:AddParticle(effect_cast, false, false, -1, false, false)
 end
+
+modifier_dvoreckov_qqq_manaempty_marker = class({})
+
+function modifier_dvoreckov_qqq_manaempty_marker:IsHidden() return true end
+function modifier_dvoreckov_qqq_manaempty_marker:IsDebuff() return true end
+function modifier_dvoreckov_qqq_manaempty_marker:IsPurgable() return false end
+function modifier_dvoreckov_qqq_manaempty_marker:RemoveOnDeath() return true end
 
 dvoreckov_qqw = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqw", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
@@ -1080,15 +1117,9 @@ function dvoreckov_qqe:CastFilterResultLocation( vLoc )
 	end
 	local caster = self:GetCaster()
 	local allies = FindUnitsInRadius(
-		caster:GetTeamNumber(),
-		vLoc,
-		nil,
-		300,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
-		0,
-		false
+		caster:GetTeamNumber(), vLoc, nil, 300,
+		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, 0, false
 	)
 
 	if #allies<1 then
@@ -1105,15 +1136,9 @@ function dvoreckov_qqe:GetCustomCastErrorLocation( vLoc )
 		return ""
 	end
 	local allies = FindUnitsInRadius(
-		caster:GetTeamNumber(),
-		vLoc,
-		nil,
-		300,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
-		DOTA_UNIT_TARGET_HERO,
-		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
-		0,
-		false
+		caster:GetTeamNumber(), vLoc, nil, 300,
+		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, 0, false
 	)
 
 	if #allies<1 then
@@ -1135,8 +1160,7 @@ function dvoreckov_qqe:OnSpellStart()
 	local leaptime = self:GetSpecialValueFor( "airtime_duration" )
 	AddFOWViewer( caster:GetTeamNumber(), point, radius, channel+leaptime, false )
 	caster:AddNewModifier(
-		caster,
-		self,
+		caster, self,
 		"modifier_dvoreckov_qqe",
 		{
 			duration = channel+leaptime,
@@ -1159,8 +1183,7 @@ function dvoreckov_qqe:OnChannelFinish( interrupted )
 	end
 	local duration = self:GetSpecialValueFor( "airtime_duration" )
 	caster:AddNewModifier(
-		caster,
-		self,
+		caster, self,
 		"modifier_dvoreckov_qqe_leap",
 		{
 			duration = duration,
@@ -1221,41 +1244,25 @@ end
 
 function modifier_dvoreckov_qqe:OnIntervalThink()
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),
-		self.point,
-		nil,
-		self.radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		self.parent:GetTeamNumber(), self.point,
+		nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0,
-		0,
-		false
+		0, 0, false
 	)
 	for _,enemy in pairs(enemies) do
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
 	end
 	local allies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),
-		self.point,
-		nil,
-		self.radius,
-		DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+		self.parent:GetTeamNumber(), self.point,
+		nil, self.radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0,
-		0,
-		false
+		0, 0, false
 	)
 	for _,ally in pairs(allies) do
 		ally:Heal( self.heal, self.ability )
 		self:PlayEffects4( ally )
-		SendOverheadEventMessage(
-			nil,
-			OVERHEAD_ALERT_HEAL,
-			ally,
-			self.heal,
-			self.parent:GetPlayerOwner()
-		)
+		SendOverheadEventMessage( nil, OVERHEAD_ALERT_HEAL, ally, self.heal, self.parent:GetPlayerOwner() )
 	end
 	self:PlayEffects3( self.point, self.radius )
 end
@@ -1341,26 +1348,16 @@ function modifier_dvoreckov_qqe_leap:OnDestroy()
 	if not IsServer() then return end
 	if self.interrupted then return end
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(),
-		self.point,
-		nil,
-		self.radius,
-		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		self.parent:GetTeamNumber(), self.point,
+		nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0,
-		0,
-		false
+		0, 0, false
 	)
-	local damageTable = {
-		attacker = self.parent,
-		damage = self.damage,
-		damage_type = self.abilityDamageType,
-		ability = self.ability,
-	}
+	local damageTable = { attacker = self.parent, damage = self.damage, damage_type = self.abilityDamageType, ability = self.ability }
 
 	for _,enemy in pairs(enemies) do
 		damageTable.victim = enemy
-		enemy:AddNewModifier(self.parent, self.ability, "modifier_generic_stunned_lua", { duration = self.duration })
+		enemy:AddNewModifier( self.parent, self.ability, "modifier_generic_stunned_lua", { duration = self.duration } )
 		ApplyDamage( damageTable )
 	end
 	GridNav:DestroyTreesAroundPoint( self.point, self.radius/2, false )
@@ -1499,7 +1496,6 @@ function modifier_dvoreckov_www_aura_thinker:OnCreated(kv)
         tonumber(kv.cy or 0) or 0,
         tonumber(kv.cz or 0) or 0
     )
-
     local parent = self:GetParent()
     if parent and not parent:IsNull() then
         parent:SetAbsOrigin(self.center)
@@ -1516,7 +1512,7 @@ function modifier_dvoreckov_www_aura_thinker:GetModifierAura() return "modifier_
 function modifier_dvoreckov_www_aura_thinker:GetAuraRadius() return self.radius or 0 end
 function modifier_dvoreckov_www_aura_thinker:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
 function modifier_dvoreckov_www_aura_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
-function modifier_dvoreckov_www_aura_thinker:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_INVULNERABLE end
+function modifier_dvoreckov_www_aura_thinker:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
 
 
 modifier_dvoreckov_www_aura_pull = class({})
@@ -1597,8 +1593,9 @@ function modifier_dvoreckov_www_aura_pull:OnIntervalThink()
         local step = self.pull_speed * dt
         local maxStep = dist - self.min_radius
         if step > maxStep then step = maxStep end
-
-        parent:SetAbsOrigin(pos + dir * step)
+		if not parent:IsDebuffImmune() then
+        	parent:SetAbsOrigin(pos + dir * step)
+		end
     end
 
     self._accum = (self._accum or 0) + FrameTime()
@@ -1606,13 +1603,7 @@ function modifier_dvoreckov_www_aura_pull:OnIntervalThink()
         self._accum = self._accum - self.tick
 
         if self.damage_per_tick and self.damage_per_tick > 0 then
-            ApplyDamage({
-                victim = parent,
-                attacker = caster,
-                damage = self.damage_per_tick,
-                damage_type = self.dtype,
-                ability = ability,
-            })
+            ApplyDamage( { victim = parent, attacker = caster, damage = self.damage_per_tick, damage_type = self.dtype, ability = ability } )
         end
     end
 end
@@ -1645,7 +1636,7 @@ function modifier_dvoreckov_www:OnCreated( kv )
 	if not IsServer() then return end
 	local center = Vector( kv.x, kv.y, 0 )
 	self.direction = center - self:GetParent():GetAbsOrigin()
-	self.speed = self.direction:Length2D()/self:GetDuration()
+	self.speed = self.direction:Length2D() / self:GetDuration()
 
 	self.direction.z = 0
 	self.direction = self.direction:Normalized()
@@ -1915,14 +1906,7 @@ function modifier_dvoreckov_wwe:Burn()
 	)
 	for _,enemy in pairs(enemies) do
 		self.dmg = self.rot_damage + enemy:GetMaxHealth() * 0.004
-		self.damageTable = {
-			attacker = self.parent,
-			damage = self.dmg,
-			damage_type = self:GetAbility():GetAbilityDamageType(),
-			ability = self:GetAbility(),
-		}
-		self.damageTable.victim = enemy
-		ApplyDamage( self.damageTable )
+		ApplyDamage( { victim = enemy, attacker = self.parent, damage = self.dmg, damage_type = self:GetAbility():GetAbilityDamageType(), ability = self:GetAbility() } )
 	end
 end
 
@@ -2296,17 +2280,14 @@ function dvoreckov_qee:OnSpellStart()
 	local info7 = MakeProjectile(dirs[7])
 	local info8 = MakeProjectile(dirs[8])
 	ProjectileManager:CreateLinearProjectile(info)
-	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_7")
-		if Talented:GetLevel() == 1 then
-        	ProjectileManager:CreateLinearProjectile(info2)
-			ProjectileManager:CreateLinearProjectile(info3)
-			ProjectileManager:CreateLinearProjectile(info4)
-			ProjectileManager:CreateLinearProjectile(info5)
-			ProjectileManager:CreateLinearProjectile(info6)
-			ProjectileManager:CreateLinearProjectile(info7)
-			ProjectileManager:CreateLinearProjectile(info8)
-    	end
+	if caster:HasTalent("special_bonus_unique_dvoreckov_7") then
+        ProjectileManager:CreateLinearProjectile(info2)
+		ProjectileManager:CreateLinearProjectile(info3)
+		ProjectileManager:CreateLinearProjectile(info4)
+		ProjectileManager:CreateLinearProjectile(info5)
+		ProjectileManager:CreateLinearProjectile(info6)
+		ProjectileManager:CreateLinearProjectile(info7)
+		ProjectileManager:CreateLinearProjectile(info8)
     end
 	EmitSoundOn( "ebalo", caster )
 end
@@ -2344,11 +2325,8 @@ function dvoreckov_qee:OnProjectileHit_ExtraData( target, location, data )
 			direction_y = vec.y,
 		}
 	)
-	if self:GetCaster():GetUnitName() == "npc_dota_hero_invoker" then
-		local Talented = self:GetCaster():FindAbilityByName("special_bonus_unique_dvoreckov_6")
-		if Talented:GetLevel() == 1 then
-        	target:AddNewModifier(self:GetCaster(), self, "modifier_generic_muted_lua", { duration = silence })
-    	end
+	if self:GetCaster():HasTalent("special_bonus_unique_dvoreckov_6") then
+        target:AddNewModifier( self:GetCaster(), self, "modifier_generic_muted_lua", { duration = silence } )
 	end
 	target:AddNewModifier(self:GetCaster(), self, "modifier_generic_silenced_lua", { duration = silence })
 	ApplyDamage({victim = target, attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
@@ -2470,7 +2448,6 @@ function dvoreckov_qwe:OnAbilityPhaseStart()
     if IsServer() then
         self.channel_duration = self:GetSpecialValueFor("channel_duration")
         self.immune_duration = self:GetCaster():HasScepter() and self.channel_duration or (self.channel_duration + self:GetCastPoint())
-        
 
         self.nPreviewFX = ParticleManager:CreateParticle("particles/booom/1.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
         ParticleManager:SetParticleControlEnt(self.nPreviewFX, 0, self:GetCaster(), PATTACH_ABSORIGIN_FOLLOW, nil, self:GetCaster():GetAbsOrigin(), true)
@@ -2488,9 +2465,7 @@ function dvoreckov_qwe:OnSpellStart()
         self.effect_radius = self:GetSpecialValueFor("effect_radius")
         self.interval = self:GetSpecialValueFor("interval")
         if self:GetCaster():HasScepter() then
-            self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_dvoreckov_qwe_nonchanneled", {
-                duration = self:GetSpecialValueFor("channel_duration")
-            })
+            self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_dvoreckov_qwe_nonchanneled", {duration = self:GetSpecialValueFor("channel_duration")})
         end
     end
 end
@@ -2509,10 +2484,8 @@ function dvoreckov_qwe:HandleExplosionEffects()
     local currentTime = GameRules:GetGameTime()
     if currentTime - self.lastExplosionTime >= self:GetSpecialValueFor("interval") then
         local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), 
-            self:GetCaster():GetAbsOrigin(), 
-            nil, 
-            300, 
-            DOTA_UNIT_TARGET_TEAM_ENEMY, 
+            self:GetCaster():GetAbsOrigin(), nil, 300, 
+    		DOTA_UNIT_TARGET_TEAM_ENEMY, 
             DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 
             DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 
             FIND_ANY_ORDER, 
@@ -2601,6 +2574,7 @@ function modifier_dvoreckov_qwe:OnCreated()
 		self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 		ability_level = math.floor(self:GetCaster():GetLevel() / 3) - 1
 		self.blast_damage = self:GetAbility():GetLevelSpecialValueFor("blast_damage", ability_level)
+		self.damageInfo = { attacker = self:GetCaster(), damage = self.blast_damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() }
 		
 		self:StartIntervalThink( self.delay )
 
@@ -2624,28 +2598,16 @@ function modifier_dvoreckov_qwe:OnIntervalThink()
 
 		EmitSoundOn( "Hero_Techies.Suicide", self:GetParent() )
 		local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
-		
 		for _,enemy in pairs( enemies ) do
 			if enemy ~= nil and enemy:IsInvulnerable() == false then
-				local damageInfo =
-				{
-					victim = enemy,
-					attacker = self:GetCaster(),
-					damage = self.blast_damage,
-					damage_type = DAMAGE_TYPE_MAGICAL,
-					ability = self:GetAbility(),
-				}
-				ApplyDamage( damageInfo )
+				self.damageInfo.victim = enemy
+				ApplyDamage( self.damageInfo )
 				if enemy and not enemy:IsNull() then
 					local knockbackProperties =
 					{
-						center_x = 0,
-						center_y = 0,
-						center_z = 0,
-						duration = 0.2,
-						knockback_duration = 0.2,
-						knockback_distance = 200,
-						knockback_height = 200
+						center_x = 0, center_y = 0, center_z = 0,
+						duration = 0.2, knockback_duration = 0.2,
+						knockback_distance = 200, knockback_height = 200
 					}
 					if not enemy:HasModifier("modifier_knockback") and not enemy:IsDebuffImmune() and not enemy:IsMagicImmune() then
 						enemy:AddNewModifier( enemy, nil, "modifier_knockback", knockbackProperties )

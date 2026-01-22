@@ -1168,7 +1168,7 @@
 			m_ChildRef = resource:"particles/dw_2021_willow_wisp_spell_marker_ground_steam_n.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/furion_sprout_damage_aoe_ground_cover_new.vpcf"
+			m_ChildRef = resource:"particles/furion_sprout_damage_aoe_ground_cover_n.vpcf"
 		},
 	]
 }
