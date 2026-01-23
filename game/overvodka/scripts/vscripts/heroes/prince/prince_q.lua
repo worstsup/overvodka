@@ -118,7 +118,7 @@ function modifier_prince_q_caster:OnTakeDamage(params)
 
     local heal = params.damage * (self.magic_lifesteal * 0.01)
     if heal > 0 then
-        self.caster:Heal(heal, self.ability)
+        self.caster:HealWithParams( heal, self, false, true, self.caster, false )
         local p = ParticleManager:CreateParticle("particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
         ParticleManager:ReleaseParticleIndex(p)
     end

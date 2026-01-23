@@ -1207,7 +1207,6 @@ function modifier_dvoreckov_qqe:OnCreated( kv )
 	else
 		self.damage = 100
 	end
-	self.heal = self:GetAbility():GetSpecialValueFor( "base_heal" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "pulse_interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
 
@@ -1253,17 +1252,6 @@ function modifier_dvoreckov_qqe:OnIntervalThink()
 		self.damageTable.victim = enemy
 		ApplyDamage( self.damageTable )
 	end
-	local allies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(), self.point,
-		nil, self.radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		0, 0, false
-	)
-	for _,ally in pairs(allies) do
-		ally:Heal( self.heal, self.ability )
-		self:PlayEffects4( ally )
-		SendOverheadEventMessage( nil, OVERHEAD_ALERT_HEAL, ally, self.heal, self.parent:GetPlayerOwner() )
-	end
 	self:PlayEffects3( self.point, self.radius )
 end
 
@@ -1292,11 +1280,6 @@ function modifier_dvoreckov_qqe:PlayEffects3( point, radius )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( radius, radius, radius ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOnLocationWithCaster( point, "Hero_Dawnbreaker.Solar_Guardian.Damage", self.parent )
-end
-
-function modifier_dvoreckov_qqe:PlayEffects4( target )
-	local effect_cast = ParticleManager:CreateParticle( "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_healing_buff.vpcf", PATTACH_ABSORIGIN_FOLLOW, target )
-	ParticleManager:ReleaseParticleIndex( effect_cast )
 end
 
 modifier_dvoreckov_qqe_leap = class({})

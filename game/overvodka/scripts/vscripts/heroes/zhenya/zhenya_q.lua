@@ -92,7 +92,7 @@ function modifier_zhenya_q_debuff:OnIntervalThink()
             ability     = self.abil,
         })
         local heal = dmg * self:GetAbility():GetSpecialValueFor("heal_pct") * 0.01
-        self.caster:Heal(heal, self.abil)
+        self.caster:HealWithParams( heal, self.abil, false, true, self.caster, true )
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self.caster, heal, nil)
     end
 end

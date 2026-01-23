@@ -65,17 +65,9 @@ end
 
 modifier_item_charik_new_regen = class({})
 
-function modifier_item_charik_new_regen:IsHidden() 
-    return true 
-end
-
-function modifier_item_charik_new_regen:IsPurgable() 
-    return false 
-end
-
-function modifier_item_charik_new_regen:RemoveOnDeath() 
-    return false 
-end
+function modifier_item_charik_new_regen:IsHidden() return true end
+function modifier_item_charik_new_regen:IsPurgable() return false end
+function modifier_item_charik_new_regen:RemoveOnDeath() return false end
 
 function modifier_item_charik_new_regen:DeclareFunctions()
     return {
@@ -121,7 +113,7 @@ function modifier_item_charik_new_regen:OnIntervalThink()
             end
             if self.standing_time >= 3.0 then
                 local healAmount = parent:GetMaxHealth() * percent_heal
-                parent:Heal(healAmount, ability)
+                parent:HealWithParams(healAmount, ability, false, true, parent, false)
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, self:GetParent(), healAmount, self:GetParent():GetPlayerOwner())
                 local manaRestore = parent:GetMaxMana() * percent_heal
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_ADD, self:GetParent(), manaRestore, self:GetParent():GetPlayerOwner()) 

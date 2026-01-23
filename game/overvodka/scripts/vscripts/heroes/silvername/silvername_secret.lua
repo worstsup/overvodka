@@ -28,5 +28,5 @@ function BorrowedTimeHeal( event )
 	local caster = event.caster
 	local ability = event.ability
 	if caster:HasModifier("modifier_item_nullifier_mute") then return end
-	caster:Heal(damage * 2, caster)
+	caster:HealWithParams( damage * 2, ability, false, false, caster, false )
 end

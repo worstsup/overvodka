@@ -74,7 +74,7 @@ function zhenya_r:DealDamage(caster, target, tick)
     self.damage = (self.base_damage + self.strength_damage) * tick
     local damageTable = { victim = target, attacker = caster, damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self}
     ApplyDamage(damageTable)
-    caster:Heal(self.damage, self)
+    caster:HealWithParams( self.danage, self, false, true, caster, false )
     SendOverheadEventMessage(caster, 10, caster, self.damage, nil)
 end
 

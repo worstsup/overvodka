@@ -194,7 +194,7 @@ function modifier_azazin_e_caster:OnTakeDamage(params)
     if params.unit:IsWard() then return end
     if params.inflictor ~= nil and not self:GetParent():IsIllusion() and bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then
         local heal = self:GetAbility():GetSpecialValueFor("magic_lifesteal") / 100 * params.damage
-        self:GetParent():Heal(heal, self:GetAbility())
+        self:GetParent():HealWithParams(heal, self:GetAbility(), false, true, self:GetParent(), true)
         local effect_cast = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.attacker)
         ParticleManager:ReleaseParticleIndex(effect_cast)
     end

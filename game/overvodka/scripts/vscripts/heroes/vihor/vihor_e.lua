@@ -57,7 +57,7 @@ function modifier_vihor_e:OnAttackLanded( params )
 			EmitSoundOn("vihor_e", self:GetParent())
 			self:GetAbility():UseResources( false, false, false, true )
 			if self.blocked == 1 then
-				self:GetParent():Heal(params.damage*2, self:GetParent())
+				self:GetParent():HealWithParams( params.damage*2, self:GetAbility(), false, false, self:GetParent(), false )
 			end
 		end
 	end

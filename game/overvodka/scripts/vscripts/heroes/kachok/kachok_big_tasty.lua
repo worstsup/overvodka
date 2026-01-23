@@ -15,5 +15,5 @@ function kachok_big_tasty:OnSpellStart()
 
     local casterMaxHealth = caster:GetMaxHealth()
     local healing = casterMaxHealth * self:GetSpecialValueFor("shard_healing_percent") / 100
-    caster:Heal( healing, caster )
+    caster:HealWithParams( healing, self, false, true, caster, false )
 end

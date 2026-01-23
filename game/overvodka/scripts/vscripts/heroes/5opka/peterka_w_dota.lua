@@ -69,7 +69,7 @@ function modifier_peterka_w_dota:OnDeath(params)
     ParticleManager:CreateParticle("particles/centaur_ti6_warstomp_gold_ring_glow_new.vpcf", PATTACH_ABSORIGIN_FOLLOW, attacker)
     local heal_pct = self.ability:GetSpecialValueFor("heal")
     local heal_amount = bounty * heal_pct * 0.01
-    self.parent:Heal(heal_amount, self.ability)
+    self.parent:HealWithParams(heal_amount, self.ability, false, true, self.parent, false)
     self.ability:UseResources(false, false, false, true)
     EmitSoundOn("peterka_w", self.parent)
 end

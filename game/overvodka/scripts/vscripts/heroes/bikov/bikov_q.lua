@@ -120,7 +120,7 @@ function modifier_bikov_q:OnIntervalThink()
     for _,u in ipairs(allies) do
         if u and not u:IsNull() and u:IsAlive() and u ~= igor then
             if self.heal_per_pulse > 0 then
-                u:Heal(self.heal_per_pulse, ability)
+                u:HealWithParams(self.heal_per_pulse, ability, false, true, caster, false)
                 SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, u, self.heal_per_pulse, nil)
             end
             if self.mana_per_pulse > 0 then

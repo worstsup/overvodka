@@ -26,7 +26,7 @@ function vovchik:OnSpellStart()
 	if target:TriggerSpellAbsorb( self ) then
 		return
 	end
-	caster:Heal( heal, self )
+	caster:HealWithParams( heal, self, false, false, caster, false)
 	local damageTable = {
 		victim = target,
 		attacker = caster,

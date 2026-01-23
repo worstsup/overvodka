@@ -103,7 +103,7 @@ function modifier_speed_shake:OnIntervalThink()
         self.damageTable.victim = enemy
         self.damageTable.damage = self.damage + (self:GetCaster():GetIdealSpeed() * 0.01 * self:GetAbility():GetSpecialValueFor("dmg_scepter") * self.spinner_damage_tick)
         local heal = self:GetAbility():GetSpecialValueFor("lifesteal") * self.damage * 0.01
-        self:GetCaster():Heal( heal, self:GetAbility() )
+        self:GetCaster():HealWithParams( heal, self:GetAbility(), false, true, self:GetCaster(), false )
         SendOverheadEventMessage( self:GetCaster(), OVERHEAD_ALERT_HEAL, self:GetCaster(), heal, nil )
         local particle = ParticleManager:CreateParticle( "particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_omni_slash_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy )
         ParticleManager:SetParticleControl( particle, 0, enemy:GetAbsOrigin() )

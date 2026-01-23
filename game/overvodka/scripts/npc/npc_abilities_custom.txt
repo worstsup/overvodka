@@ -2950,7 +2950,6 @@
 					"value"	"40 60 80 100 120 140 160"
 					"levelkey"				"quaslevel"
 				}
-				"base_heal"				"0"
 				"pulse_interval"				"0.5"
 				"land_damage"
 				{
@@ -11283,7 +11282,7 @@
 		"AbilityTextureName"			"azazin_q"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCooldown"				"28 26 24 22"
 		"AbilityManaCost"				"100"

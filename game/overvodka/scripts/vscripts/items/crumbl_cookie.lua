@@ -22,7 +22,7 @@ function item_crumbl_cookie:OnSpellStart()
     local bonus_charge = self:GetSpecialValueFor("regen_per_charge")
     local bonus_heal_mana = self:GetCurrentCharges() * bonus_charge
     self:CheckOverheal(target, bonus_heal_mana)
-    target:Heal(bonus_heal_mana, self)
+    target:HealWithParams( bonus_heal_mana, self, false, true, self:GetCaster(), false )
     target:GiveMana(bonus_heal_mana)
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, target, bonus_heal_mana, self:GetCaster():GetPlayerOwner())
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_ADD, target, bonus_heal_mana, self:GetCaster():GetPlayerOwner())

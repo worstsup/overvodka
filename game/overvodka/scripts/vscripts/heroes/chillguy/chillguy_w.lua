@@ -93,7 +93,7 @@ function modifier_chillguy_w:Burn()
 	for _,ally in pairs(friends) do
 		if ally ~= self.parent then
 			local heal = (self:GetAbility():GetSpecialValueFor( "damage_pct" ) * ally:GetMaxHealth() * 0.01 + damage) * self:GetAbility():GetSpecialValueFor("heal") * 0.01
-			ally:Heal( heal, self:GetAbility() )
+			ally:HealWithParams(heal, self:GetAbility(), false, true, self.parent, false)
 			SendOverheadEventMessage( ally, OVERHEAD_ALERT_HEAL, ally, heal, nil )
 		end
 	end

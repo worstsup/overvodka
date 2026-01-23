@@ -40,7 +40,7 @@ function sasavot_e_new:OnChannelFinish(interrupted)
     else
         local heal = self.hp_perc * caster:GetMaxHealth() * 0.01
         local mana = self.mp_perc * caster:GetMaxMana() * 0.01
-        caster:Heal(heal, self)
+        caster:HealWithParams( heal, self, false, true, caster, false )
         caster:GiveMana(mana)
         caster:AddNewModifier(caster, self, "modifier_sasavot_bonus_buff", { duration = self.buffs_duration })
         caster:AddNewModifier(

@@ -78,7 +78,7 @@ function modifier_chara_ultimate:OnTakeDamage( params )
 	if not IsServer() then return end
 	if self.attack_record ~= params.record then return end
 	local heal = params.damage * self.lifesteal
-	self.parent:Heal( heal, self.ability )
+    self.parent:HealWithParams(heal, self.ability, true, true, self.parent, false)
 	self:PlayEffects2()
 end
 
