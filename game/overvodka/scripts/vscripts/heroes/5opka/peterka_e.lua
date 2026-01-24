@@ -156,6 +156,7 @@ function modifier_peterka_e_cast:CheckState()
 	return {
 		[MODIFIER_STATE_DISARMED] = true,
 		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self:GetParent():HasTalent("special_bonus_unique_peterka_6")
 	}
 end
 
@@ -237,7 +238,7 @@ function modifier_peterka_e_charge:IsPurgable() return false end
 function modifier_peterka_e_charge:CheckState()
 	return {
 		[MODIFIER_STATE_DISARMED] = true,
-		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.debuff_immune
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self:GetParent():HasTalent("special_bonus_unique_peterka_6")
 	}
 end
 
@@ -249,10 +250,6 @@ function modifier_peterka_e_charge:OnCreated( kv )
 	self.distance = self:GetAbility():GetSpecialValueFor( "knockback_distance" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
 	self.stun = self:GetAbility():GetSpecialValueFor( "stun_duration" )
-	self.debuff_immune = false
-	if self:GetAbility():GetSpecialValueFor("debuff_immune") == 1 then
-		self.debuff_immune = true
-	end
 	local damage = self:GetAbility():GetSpecialValueFor( "knockback_damage" )
 	self.tree_radius = 100
 	self.height = 50

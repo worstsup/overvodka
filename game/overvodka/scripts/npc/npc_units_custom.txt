@@ -1608,7 +1608,7 @@
         "HasInventory"          "0"
        
         "ArmorPhysical"         "4"
-        "MagicalResistance"     "25"
+        "MagicalResistance"     "50"
        
         // Attack
         //----------------------------------------------------------------

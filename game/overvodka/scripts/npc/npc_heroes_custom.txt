@@ -449,7 +449,7 @@
 			}
 			"dave_armor"
 			{
-				"Icon"				"armor_broken"
+				"Icon"				"nuke"
 				"Color"				"Red"
 				"GradientID"		"0"
 				"Abilities"
@@ -3150,7 +3150,7 @@
 		"AttributeAgilityGain"		"1.2"
 		"AttributeBaseIntelligence"	"20"
 		"AttributeIntelligenceGain"	"1.9"
-		"MovementSpeed"				"305"
+		"MovementSpeed"				"315"
 		"MovementTurnRate"			"0.600000"
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"VoiceFile"					""

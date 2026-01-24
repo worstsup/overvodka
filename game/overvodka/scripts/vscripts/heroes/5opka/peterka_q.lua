@@ -46,7 +46,7 @@ end
 function modifier_peterka_q:OnCreated(kv)
     if not IsServer() then return end
     self.damage = kv.damage
-    self.interval = 0.5
+    self.interval = 0.25
     self:StartIntervalThink(self.interval)
 end
 
@@ -66,6 +66,7 @@ end
 
 function modifier_peterka_q:OnDestroy()
     if not IsServer() then return end
+    if not self:GetParent() or self:GetParent():IsNull() then return end
 	self:PlayEffects()
 end
 

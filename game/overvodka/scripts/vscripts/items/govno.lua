@@ -33,6 +33,18 @@ function modifier_govno:OnCreated()
 	parent:AddNewModifier(parent, self.ability, "modifier_govno_backtrack", {})
 end
 
+function modifier_govno:OnDestroy()
+	if not IsServer() then return end
+
+	local parent = self:GetParent()
+	if not parent or parent:IsNull() then return end
+
+	local mod = parent:FindModifierByName("modifier_govno_backtrack")
+	if mod and not mod:IsNull() then
+		mod:Destroy()
+	end
+end
+
 function modifier_govno:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
@@ -93,66 +105,60 @@ function modifier_govno_backtrack:IsHidden() return true end
 function modifier_govno_backtrack:IsPurgable() return false end
 
 function modifier_govno_backtrack:OnCreated()
-	self.parent  = self:GetParent()
-	self.ability = self:GetAbility()
+    self.parent  = self:GetParent()
+    self.ability = self:GetAbility()
 
-	if not self.ability or self.ability:IsNull() then return end
+    if not self.ability or self.ability:IsNull() then return end
 
-	self.dodge_chance_pct = self.ability:GetSpecialValueFor("dodge_chance_pct") or 0
-	self.interval = 0.03
-
-	local max_hp = (self.parent and not self.parent:IsNull()) and self.parent:GetMaxHealth() or 1
-	self.hp_old = max_hp
-	self.hp_cur = max_hp
-
-	if not IsServer() then return end
-	self:StartIntervalThink(self.interval)
-	self:OnIntervalThink()
+    self.block_chance_pct = self.ability:GetSpecialValueFor("dodge_chance_pct") or 0
+    self.block_pct        = self.ability:GetSpecialValueFor("block_pct") or 0
 end
 
-function modifier_govno_backtrack:OnIntervalThink()
-	if not IsServer() then return end
-	if not self.parent or self.parent:IsNull() then return end
-
-	self.hp_old = self.hp_cur or self.parent:GetMaxHealth()
-	self.hp_cur = self.parent:GetHealth()
+function modifier_govno_backtrack:OnRefresh()
+    self:OnCreated()
 end
 
 function modifier_govno_backtrack:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_TAKEDAMAGE,
-	}
+    return {
+        MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK,
+    }
 end
 
-function modifier_govno_backtrack:OnTakeDamage(params)
-	if not IsServer() then return end
-	if not params or params.unit ~= self.parent then return end
+function modifier_govno_backtrack:GetModifierTotal_ConstantBlock(params)
+    if not IsServer() then return 0 end
+    if not params or params.target ~= self.parent then return 0 end
 
-	local ability = self.ability
-	if not ability or ability:IsNull() then return end
+    local ability = self.ability
+    if not ability or ability:IsNull() then return 0 end
 
-	if ability:GetCooldownTimeRemaining() > 0 then return end
+    if ability:GetCooldownTimeRemaining() > 0 then return 0 end
 
-    if self:GetParent():FindAllModifiersByName("modifier_govno_backtrack")[1] ~= self then return end
+    if self.parent:FindAllModifiersByName("modifier_govno_backtrack")[1] ~= self then return 0 end
+	if not self.parent:HasItemInInventory("item_govno") then return 0 end
 
-	local chance = self.dodge_chance_pct or 0
-	if chance <= 0 then return end
+    local chance = self.block_chance_pct or 0
+    local pct    = self.block_pct or 0
+    if chance <= 0 or pct <= 0 then return 0 end
 
-	if not RollPercentage(chance) then return end
+    if not RollPercentage(chance) then return 0 end
 
-	local p = ParticleManager:CreateParticle("particles/kaska.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	ParticleManager:ReleaseParticleIndex(p)
+    local dmg = params.damage or 0
+    if dmg <= 0 then return 0 end
 
-	local restore = self.hp_old or self.parent:GetHealth()
-	restore = math.max(1, math.min(restore, self.parent:GetMaxHealth()))
-	self.parent:SetHealth(restore)
+    local block = dmg * pct / 100
+    if block <= 0 then return 0 end
 
-	ability:UseResources(false, false, false, true)
+    local p = ParticleManager:CreateParticle("particles/kaska.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    ParticleManager:ReleaseParticleIndex(p)
 
-	local playerID = self.parent:GetPlayerOwnerID()
-	if playerID and PlayerResource:IsValidPlayerID(playerID) then
-		if Quests and Quests.IncrementQuest then
-			Quests:IncrementQuest(playerID, "kaskaAmount")
-		end
-	end
+    ability:UseResources(false, false, false, true)
+
+    local playerID = self.parent:GetPlayerOwnerID()
+    if playerID and PlayerResource:IsValidPlayerID(playerID) then
+        if Quests and Quests.IncrementQuest then
+            Quests:IncrementQuest(playerID, "kaskaAmount")
+        end
+    end
+
+    return block
 end

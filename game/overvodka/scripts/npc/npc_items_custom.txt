@@ -1932,7 +1932,8 @@
 		"ItemCost"                      "7550"
 		"AbilityValues"
 		{
-				"dodge_chance_pct"			"20"
+				"dodge_chance_pct"			"35"
+				"block_pct"					"50"
 		    	"bonus_movement_speed"		"10"
 				"bonus_strength"			"10"
 				"bonus_agility"				"28"

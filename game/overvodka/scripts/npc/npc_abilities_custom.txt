@@ -1852,7 +1852,7 @@
 		{
 			"damage_per_mana"
 			{
-				"value"	"1.5 1.6 1.7 1.8 1.9"
+				"value"	"1.7 1.8 1.9 2.0 2.1"
 				"special_bonus_scepter" "+0.4"
 			}
 			"barrier_duration"
@@ -1971,15 +1971,15 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/dave/dave_scepter"
 		"AbilityTextureName"			"dave_scepter"
-		"FightRecapLevel"				"1"
 		"MaxLevel"						"1"
-		"AbilityType"					"ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"AbilityCooldown"				"30"
+		"IsBreakable"					"1"
 		"AbilityValues"
 		{
-				"damage"	"10"
+			"damage"	"15"
 		}
 	}
 	//==================================================================================================================
@@ -2045,9 +2045,9 @@
 		"AbilityCastRange"		"900"
 		"AbilityValues"
 		{
-		        "base_tooltip"	"3"
-		        "unit_tooltip"	"1"
-		        "max_tooltip"	"15"
+		        "base_tooltip"	"5"
+		        "unit_tooltip"	"3"
+		        "max_tooltip"	"35"
 		        "radius_tooltip" "900"
 		}
 	}
@@ -2405,7 +2405,7 @@
 			"spell_lifesteal"
 			{
 				"value"	"0"
-				"special_bonus_facet_dvoreckov_facet_rap"	"4 5 6 7 8 9 10"
+				"special_bonus_facet_dvoreckov_facet_rap"	"2 3 4 5 6 7 8"
 				"RequiresFacet"					"dvoreckov_facet_rap"
 			}
 		}
@@ -4255,7 +4255,7 @@
 		"AbilityValues"
 		{
 			"duration"		"7"
-			"chance"        "17"
+			"chance"        "16 20 24 28"
 			"bonus_damage"  "10 20 30 40"
 			"slow"          "100"
 			"slow_duration" "0.4"
@@ -4303,7 +4303,7 @@
 				"value"	"160 200 240"
 				"special_bonus_unique_kachok_6" "+40"
 			}
-			"transformation_time"       "3.0"
+			"transformation_time"       "2.5"
 		}
 	}
 	//=================================================================================================================
@@ -10061,11 +10061,6 @@
 				"value"									"0.8 0.9 1.0 1.1"
 				"special_bonus_unique_peterka_2" "+0.42"
 			}
-			"debuff_immune"
-			{
-				"value"	"0"
-				"special_bonus_unique_peterka_6" "+1"
-			}
 		}
 	}
 	"peterka_e_release"	
@@ -12328,7 +12323,7 @@
 			"damage"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+200"
+				"special_bonus_scepter"	"+150"
 				"RequiresScepter"		"1"
 			}
 			"secondary"
@@ -12410,7 +12405,7 @@
 					"value"	"35 70 105 140"
 					"special_bonus_unique_invincible_3"	"+100"
 				}
-				"lifesteal"	"40 50 60 70"
+				"lifesteal"	"40 45 50 55"
 				"AbilityCooldown"
 				{
 					"value"	"7.5 7.0 6.5 6.0"
@@ -12467,7 +12462,7 @@
 			"chain_dur"
 			{
 				"value"	"5"
-				"special_bonus_unique_invincible_7" "+3"
+				"special_bonus_unique_invincible_7" "+2"
 			}
 			"slow"			"-100"
 			"slow_dur"		"2.0"
@@ -13353,9 +13348,9 @@
 		{
 				"arrow_range"			"3000"
 				"arrow_max_stunrange"	"1800"
-				"arrow_speed"			"1600"
+				"arrow_speed"			"1800"
 				"arrow_width"			"115"
-				"arrow_min_stun"		"1.5"
+				"arrow_min_stun"		"2.0"
 				"arrow_max_stun"		"8.0"
 				"damage"				"300"
 				"arrow_bonus_damage"	"600"
