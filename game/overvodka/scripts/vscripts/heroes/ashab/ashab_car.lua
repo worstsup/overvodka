@@ -72,10 +72,10 @@ end
 
 function modifier_ashab_car_passive:OnDestroy()
     if not IsServer() then return end
-    local particle = ParticleManager:CreateParticle("particles/ashab_car_destroy.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local particle = ParticleManager:CreateParticle("particles/ashab_car_destroy.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
-    UTIL_Remove(self:GetParent())
+    self:GetParent():AddNoDraw()
 end
 
 function modifier_ashab_car_passive:DeclareFunctions()
@@ -96,7 +96,8 @@ function modifier_ashab_car_passive:OnAttackLanded(keys)
         if keys.attacker:GetTeamNumber() == self:GetParent():GetTeamNumber() then
             if self:GetParent():GetHealthPercent() > 50 then
                 self:GetParent():SetHealth(self:GetParent():GetHealth() - 10)
-            else 
+            else
+                self:Destroy()
                 self:GetParent():Kill(nil, keys.attacker)
             end
             return
@@ -104,6 +105,7 @@ function modifier_ashab_car_passive:OnAttackLanded(keys)
         local new_health = self:GetParent():GetHealth() - 1
         new_health = math.floor(new_health)
         if new_health <= 0 then
+            self:Destroy()
             self:GetParent():Kill(nil, keys.attacker)
         else
             self:GetParent():SetHealth(new_health)

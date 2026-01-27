@@ -45,6 +45,248 @@ let DoubleRatingLastTime = 0
 
 let TeamLeavedLastTime = 0
 
+const LocalizeFormat = function () {
+	let formatted = $.Localize(arguments[0]);
+	for (let i = 1; i < arguments.length; i++) {
+		const regex = new RegExp(`%s${i}`, 'g');
+		formatted = formatted.replace(regex, arguments[i]);
+	}
+	return formatted;
+};
+
+const GetPlayerColorHex = (playerID) => {
+	let color = Players.GetPlayerColor(playerID).toString(16);
+	color = color.substring(6, 8) + color.substring(4, 6) + color.substring(2, 4) + color.substring(0, 2);
+	return `#${color}`;
+};
+
+
+const CHAT_PATCH_RETRIES = 12;
+const CHAT_PATCH_INTERVAL = 0.05;
+const CHAT_MAX_LINES_SCAN = 25;
+
+function _GetChatRoot() {
+    const hud = GetDotaHud && GetDotaHud();
+    if (!hud) return null;
+
+    return (
+        hud.FindChildTraverse("ChatLinesContainer") ||
+        hud.FindChildTraverse("ChatLinesPanel") ||
+        hud.FindChildTraverse("ChatLines")
+    );
+}
+
+function _FindInlineImagesRecursive(panel, outArr) {
+    if (!panel) return;
+    if (panel.paneltype === "Image" && panel.id && panel.id.startsWith("InlineImage")) {
+        outArr.push(panel);
+    }
+    const n = panel.GetChildCount ? panel.GetChildCount() : 0;
+    for (let i = 0; i < n; i++) {
+        _FindInlineImagesRecursive(panel.GetChild(i), outArr);
+    }
+}
+
+function _StripTags(s) {
+    return (s || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+}
+
+function _LineText(linePanel) {
+    let res = [];
+    const stack = [linePanel];
+    while (stack.length) {
+        const p = stack.pop();
+        if (!p) continue;
+        if (p.paneltype === "Label" && typeof p.text === "string" && p.text.length > 0) {
+            res.push(p.text);
+        }
+        const n = p.GetChildCount ? p.GetChildCount() : 0;
+        for (let i = 0; i < n; i++) stack.push(p.GetChild(i));
+    }
+    return _StripTags(res.join(" "));
+}
+
+function _GetChatLines(chatRoot) {
+    if (!chatRoot) return [];
+
+    if (chatRoot.FindChildrenWithClassTraverse) {
+        const arr = chatRoot.FindChildrenWithClassTraverse("ChatLine");
+        if (arr && arr.length) return arr;
+    }
+
+    const out = [];
+    const n = chatRoot.GetChildCount ? chatRoot.GetChildCount() : 0;
+    for (let i = 0; i < n; i++) out.push(chatRoot.GetChild(i));
+    return out;
+}
+
+function PatchHeroIconInChatPrintf(playerID, heroName, rawText) {
+    const iconPath = "file://{images}/heroes/" + GetOvervodkaHeroName(heroName) + ".png";
+    const needle = _StripTags(rawText);
+    if (!needle) return;
+
+    let attempt = 0;
+
+    const tick = () => {
+        attempt++;
+
+        const root = _GetChatRoot();
+        if (!root) {
+            if (attempt < CHAT_PATCH_RETRIES) $.Schedule(CHAT_PATCH_INTERVAL, tick);
+            return;
+        }
+
+        const lines = _GetChatLines(root);
+        if (!lines || lines.length === 0) {
+            if (attempt < CHAT_PATCH_RETRIES) $.Schedule(CHAT_PATCH_INTERVAL, tick);
+            return;
+        }
+
+        let start = Math.max(0, lines.length - CHAT_MAX_LINES_SCAN);
+        let patchedAny = false;
+
+        for (let i = lines.length - 1; i >= start; i--) {
+            const line = lines[i];
+            if (!line || !line.IsValid()) continue;
+
+            const lineText = _LineText(line);
+            if (!lineText) continue;
+
+            if (lineText.indexOf(needle) === -1) continue;
+
+            const stamp = `${playerID}|${iconPath}|${needle}`;
+            if (line._ovk_icon_stamp === stamp) {
+                patchedAny = true;
+                continue;
+            }
+
+            const imgs = [];
+            _FindInlineImagesRecursive(line, imgs);
+            if (!imgs.length) continue;
+
+            for (const img of imgs) {
+                img.SetImage(iconPath);
+            }
+
+            line._ovk_icon_stamp = stamp;
+            patchedAny = true;
+        }
+
+        if (attempt < CHAT_PATCH_RETRIES) {
+            $.Schedule(CHAT_PATCH_INTERVAL, tick);
+        }
+    };
+
+    $.Schedule(0.0, tick);
+}
+
+
+let rune = 0;
+const AlertBehavior_Skip = Symbol("AlertBehavior_Skip");
+const ExplicitBehaviors = {
+	["modifier_oracle_prognosticate"]: AlertBehavior_Skip,
+	["modifier_bounty_hunter_track"]: AlertBehavior_Skip,
+	["modifier_spirit_breaker_charge_of_darkness_target"]: AlertBehavior_Skip,
+	modifier_ability_test_passive: function (data) {
+		let [playerid, ent, serial, hasstacks] = [data.playerid, data.ent, data.serial, data.hasstacks]
+		return [
+			"#Custom_Modifier_Alert", // loc_string like "%s1 is %s2 affected by %s3"
+			[
+				//params
+			]
+		]
+	}
+}
+GameEvents.Subscribe("cdota_buff_alert", function (data) {
+	let [playerid, ent, serial, hasstacks] = [data.playerid, data.ent, data.serial, data.hasstacks];
+	if (Players.GetTeam(playerid) != Players.GetTeam(Players.GetLocalPlayer())) return;
+	let name = Buffs.GetName(ent, serial);
+	if (name === "") return;
+	let behavior = ExplicitBehaviors[name];
+	if (behavior) {
+		let [loc_string, values] = behavior(data)
+        const msg = LocalizeFormat(loc_string, ...values);
+        $.DispatchEvent("DOTAChatMessagePrintf", msg, playerid, 0);
+
+        const heroEnt = Players.GetPlayerHeroEntityIndex(playerid);
+        const heroName = (heroEnt !== -1) ? Entities.GetUnitName(heroEnt) : "";
+        if (heroName !== "") {
+            PatchHeroIconInChatPrintf(playerid, heroName, msg);
+        }
+
+	} else {
+		let playerowner = Entities.GetPlayerOwnerID(ent);
+		let iscontrol = Entities.GetPlayerOwnerID(ent) == playerid;
+		let isdebuff = Buffs.IsDebuff(ent, serial);
+		let remaining_time = Buffs.GetRemainingTime(ent, serial);
+		let hasduration = Buffs.GetDuration(ent, serial) > 0 && remaining_time > 0;
+		let stackcount = Buffs.GetStackCount(ent, serial);
+		let ishero = Entities.IsHero(ent);
+		let isenemy = Entities.IsEnemy(ent);
+		let loc_string = iscontrol ? "#DOTA_Modifier_Alert" :
+			ishero ?
+				isenemy ? "#DOTA_Modifier_Alert_Enemy_Hero" : "#DOTA_Modifier_Alert_Ally_Hero" :
+				isenemy ? "#DOTA_Modifier_Alert_Enemy_Unit" : "#DOTA_Modifier_Alert_Ally_Unit";
+		let [s1, s2, s3, s4, s5, s6] = [];
+		s1 = isdebuff ? "#ff0000" : "#00ff00"
+		s2 = hasstacks || stackcount > 1 ? `${stackcount} ` : "";
+		s3 = $.Localize("#DOTA_Tooltip_" + name);
+		switch (loc_string) {
+			case "#DOTA_Modifier_Alert":
+				s4 = hasduration ? LocalizeFormat("#DOTA_Modifier_Alert_Time_Remaining", remaining_time.toFixed(1)) : "";
+                const msg = LocalizeFormat(loc_string, s1, s2, s3, s4);
+                $.DispatchEvent("DOTAChatMessagePrintf", msg, playerid, 0);
+
+                const heroEnt = Players.GetPlayerHeroEntityIndex(playerid);
+                const heroName = (heroEnt !== -1) ? Entities.GetUnitName(heroEnt) : "";
+                if (heroName !== "") {
+                    PatchHeroIconInChatPrintf(playerid, heroName, msg);
+                }
+				break;
+			default:
+				s4 = GetPlayerColorHex(playerowner);
+				s5 = $.Localize(`#${Entities.GetUnitName(ent)}`);
+				s6 = hasduration ? LocalizeFormat("#DOTA_Modifier_Alert_Time_Remaining", remaining_time.toFixed(1)) : "";
+                const msg2 = LocalizeFormat(loc_string, s1, s2, s3, s4, s5, s6);
+                $.DispatchEvent("DOTAChatMessagePrintf", msg2, playerid, 0);
+
+                const heroEnt2 = Players.GetPlayerHeroEntityIndex(playerid);
+                const heroName2 = (heroEnt2 !== -1) ? Entities.GetUnitName(heroEnt2) : "";
+                if (heroName2 !== "") {
+                    PatchHeroIconInChatPrintf(playerid, heroName2, msg2);
+                }
+		}
+	}
+})
+
+let ping_stacks = 2;
+let ping_cooldown = 5;
+$.RegisterForUnhandledEvent("DOTAShowBuffTooltip", function (buffpanel, ent, serial) {
+	let button = buffpanel.GetChild(0);
+	let name = Buffs.GetName(ent, serial);
+	if (button) {
+		button.SetPanelEvent("onactivate", function () {
+			if (ExplicitBehaviors[name] == AlertBehavior_Skip) {
+				Players.BuffClicked(ent, serial, IsDotaAltPressed());
+			} else if (IsDotaAltPressed()) {
+				if (ping_stacks <= 0) {
+					return;
+				};
+				ping_stacks--;
+				$.Schedule(ping_cooldown, () => {
+					ping_stacks++;
+				});
+				GameEvents.SendCustomGameEventToAllClients("cdota_buff_alert", {
+					playerid: Players.GetLocalPlayer(),
+					ent: ent,
+					serial: serial,
+					hasstacks: buffpanel.BHasClass("has_stacks"),
+				});
+			}
+		});
+	}
+})
+
 function StartSecondaryAbilities() {
     let dota_sec = DotaHUDPanel.FindChildTraverse("SecondaryAbilityContainer");
     if (dota_sec) {
@@ -128,6 +370,103 @@ function CheckCastableOnUnit(Unit){
     }
     return false
 }
+
+GameEvents.Subscribe("overvodka_player_chat", (data) => {
+    const pid = data.playerid | 0;
+    const heroName = data.hero || "";
+    const msgText = (data.text || "").toString();
+
+    const customIconPath = "file://{images}/heroes/" + GetOvervodkaHeroName(heroName) + ".png";
+
+    PatchChatLineForMessage(pid, msgText, customIconPath);
+});
+
+function PatchChatLineForMessage(playerID, msgText, iconPath) {
+    const startTime = Game.GetGameTime();
+    const maxTime = 0.8;
+    const interval = 0.0;
+
+    function attempt() {
+        const chatContainer = DotaHUDPanel.FindChildTraverse("ChatLinesContainer");
+        if (!chatContainer) {
+            if (Game.GetGameTime() - startTime < maxTime) $.Schedule(interval, attempt);
+            return;
+        }
+
+        const lines = chatContainer.FindChildrenWithClassTraverse("ChatLine");
+        if (!lines || lines.length === 0) {
+            if (Game.GetGameTime() - startTime < maxTime) $.Schedule(interval, attempt);
+            return;
+        }
+
+        const from = Math.max(0, lines.length - 10);
+        for (let i = lines.length - 1; i >= from; i--) {
+            const line = lines[i];
+            if (!line) continue;
+
+            if (msgText && !ChatLineContainsText(line, msgText)) continue;
+
+            const img = GetFirstInlineImageRecursive(line);
+            if (img) {
+                img.SetImage(iconPath);
+
+                $.Schedule(0.15, () => { if (img && img.IsValid()) img.SetImage(iconPath); });
+                $.Schedule(0.30, () => { if (img && img.IsValid()) img.SetImage(iconPath); });
+
+                return;
+            }
+        }
+
+        if (Game.GetGameTime() - startTime < maxTime) {
+            $.Schedule(interval, attempt);
+        }
+    }
+
+    attempt();
+}
+
+function ChatLineContainsText(root, text) {
+    const labels = [];
+    CollectPanelsByTypeRecursive(root, "Label", labels);
+    for (const l of labels) {
+        if (l && typeof l.text === "string" && l.text.indexOf(text) !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function GetFirstInlineImageRecursive(root) {
+    const images = [];
+    CollectInlineImagesRecursive(root, images);
+    return images.length > 0 ? images[0] : null;
+}
+
+function CollectInlineImagesRecursive(panel, out) {
+    if (!panel) return;
+
+    if (panel.paneltype === "Image" && panel.id && panel.id.startsWith("InlineImage")) {
+        out.push(panel);
+    }
+
+    const cnt = panel.GetChildCount ? panel.GetChildCount() : 0;
+    for (let i = 0; i < cnt; i++) {
+        CollectInlineImagesRecursive(panel.GetChild(i), out);
+    }
+}
+
+function CollectPanelsByTypeRecursive(panel, typeName, out) {
+    if (!panel) return;
+
+    if (panel.paneltype === typeName) out.push(panel);
+
+    const cnt = panel.GetChildCount ? panel.GetChildCount() : 0;
+    for (let i = 0; i < cnt; i++) {
+        CollectPanelsByTypeRecursive(panel.GetChild(i), typeName, out);
+    }
+}
+
+
 
 function CastHighFive(){
     let Unit = Players.GetLocalPlayerPortraitUnit()

@@ -3005,6 +3005,7 @@
 		"DOTA_Tooltip_ability_ashab_dogon_Facet_ashab_q_facet"		"Герой получает невосприимчивость к эффектам после столкновения с противником."
 		"DOTA_Tooltip_Facet_ashab_q_facet"										"ЧЕЧЕНСКИЙ ХАЛК"
 		"DOTA_Tooltip_Facet_ashab_q_facet_Description"						"Герой получает невосприимчивость к эффектам после столкновения с противником от способности ДОГОНЯЮ!"
+		"DOTA_Tooltip_modifier_magresist_ashab"	"Невосприимчивость к эффектам"
 		"DOTA_Tooltip_modifier_ashab_dogon" "Догоняю!"
 		"DOTA_Tooltip_modifier_ashab_dogon_Description" "Асхаб догоняет своего противника"
 		"DOTA_Tooltip_ability_ashab_slushay" "СЛУШАЙ ТЫ"
