@@ -1,5 +1,7 @@
 LinkLuaModifier("modifier_govno",           "items/govno", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_govno_backtrack", "items/govno", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_charik_new_regen", "items/item_charik_new", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_charik_new_regen_effect", "items/item_charik_new", LUA_MODIFIER_MOTION_NONE)
 
 item_govno = class({})
 
@@ -30,6 +32,10 @@ function modifier_govno:OnCreated()
 	local parent = self:GetParent()
 	if not parent or parent:IsNull() then return end
 
+    if not parent:HasModifier("modifier_item_charik_new_regen") then
+		parent:AddNewModifier(parent, self.ability, "modifier_item_charik_new_regen", {})
+	end
+
 	parent:AddNewModifier(parent, self.ability, "modifier_govno_backtrack", {})
 end
 
@@ -38,6 +44,10 @@ function modifier_govno:OnDestroy()
 
 	local parent = self:GetParent()
 	if not parent or parent:IsNull() then return end
+
+    if not parent:HasModifier("modifier_item_charik_new_regen") then
+		parent:RemoveModifierByName("modifier_item_charik_new_regen")
+	end
 
 	local mod = parent:FindModifierByName("modifier_govno_backtrack")
 	if mod and not mod:IsNull() then

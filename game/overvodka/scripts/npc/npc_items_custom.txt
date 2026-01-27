@@ -1941,6 +1941,9 @@
 				"bonus_hpregen"				"7"
 				"bonus_magic_resist"		"15"
 				"bonus_as"					"30"
+				"percent_min"				"35"
+				"percent_heal"				"25"
+				"time_to_heal"				"3"
 		}
 	}
 	"item_recipe_govno"
@@ -1998,15 +2001,16 @@
 	}
 	"item_mask_of_quadrobe"
 	{
-		"BaseClass"						"item_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"mask_of_quadrobe"
-		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"25.0"
-		"AbilityManaCost"				"100"
-		"ItemCost"						"6000"
+		"BaseClass"             "item_lua"
+    	"ScriptFile"            "items/mask_of_quadrobe"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"Model"					"models/props_gameplay/red_box.vmdl" 
+		"Effect"				"particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"	"mask_of_quadrobe"
+		"AbilityCastPoint"		"0.0"
+		"AbilityCooldown"		"25.0"
+		"AbilityManaCost"		"100"
+		"ItemCost"				"6000"
 		
 		"AbilityValues"
 		{	
@@ -2020,141 +2024,6 @@
 				"aura_negative_armor"							"-5"
 				"aura_radius"									"900"
 				"bonus_damage"									"50"
-		}
-		
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"			"CASTER"
-				"ModifierName"		"modifier_item_mask_of_madness_datadriven_berserk"
-			}
-			"ApplyModifier"
-			{
-				"Target"			"CASTER"
-				"ModifierName"		"modifier_item_assault_datadriven_enemy_aura_emitter"
-			}
-			
-			"FireSound"
-			{
-				"EffectName"		"kittymeow"
-				"Target"			"CASTER"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_item_mask_of_madness_datadriven"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
-				"Properties"
-            	{
-                	"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
-                	"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_as"
-                }
-				"OnAttackLanded"
-				{
-					"RunScript"
-					{
-						"ScriptFile"			"items/item_mask_of_madness.lua"
-						"Function"				"modifier_item_mask_of_madness_datadriven_on_orb_impact"
-					}
-				}
-			}
-			"modifier_item_mask_of_madness_datadriven_berserk"
-			{
-				"Duration"			"%berserk_duration"
-				"Passive"			"0"
-				"IsHidden"			"0"
-				
-				"EffectName"			"particles/quadrobe_buff.vpcf"
-				"EffectAttachType"		"follow_origin"
-					
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%berserk_bonus_movement_speed_percentage"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%berserk_bonus_attack_speed"
-					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE"		"%berserk_extra_incoming_damage_percentage"
-					"MODIFIER_PROPERTY_EVASION_CONSTANT"				"%berserk_evasion"
-				}
-				"States"
-				{
-					"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-			"modifier_item_mask_of_madness_datadriven_lifesteal"
-			{
-				"Passive"			"0"
-				"IsHidden"			"1"
-				
-				"OnDealDamage"
-				{
-					"Lifesteal"
-					{
-						"Target"			"ATTACKER"
-						"LifestealPercent"	"%lifesteal_percent"
-					}
-				}
-			}
-			"modifier_item_assault_datadriven_enemy_aura_emitter"
-			{
-				"Passive"				"0"
-				"IsHidden"				"1"
-				"Duration"			"%berserk_duration"
-				"Aura" 					"modifier_item_assault_datadriven_enemy_aura"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				"Aura_ApplyToCaster" 	"0"
-			}
-			"modifier_item_assault_datadriven_enemy_aura"
-			{
-				"Passive"			"0"
-				"IsHidden"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_negative_armor"
-				}
-				
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"items/item_assault.lua"
-						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_interval_think"
-					}
-				}
-				"ThinkInterval"			".03"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"items/item_assault.lua"
-						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_interval_think"
-					}
-				}
-				
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"items/item_assault.lua"
-						"Function"			"modifier_item_assault_datadriven_enemy_aura_on_destroy"
-					}
-				}
-			}
-			"modifier_item_assault_datadriven_enemy_aura_visible"
-			{
-				"Passive"			"0"
-				"IsHidden"			"0"
-				"IsBuff"			"0"
-				"IsDebuff"			"1"
-				"IsPurgable"		"0"
-			}
 		}
 	}
 	"item_recipe_sigma_staff"
