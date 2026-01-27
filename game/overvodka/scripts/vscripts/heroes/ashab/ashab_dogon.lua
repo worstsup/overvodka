@@ -275,11 +275,9 @@ function modifier_magresist_ashab:IsPurgable()
 end
 
 function modifier_magresist_ashab:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_DEBUFF_IMMUNE] = true,
 	}
-
-	return state
 end
 function modifier_magresist_ashab:GetEffectName()
 	return "particles/econ/items/lifestealer/lifestealer_immortal_backbone/lifestealer_immortal_backbone_rage.vpcf"

@@ -3,6 +3,18 @@ require('server/debug_panel')
 require('util/custom_indicator')
 
 if IsServer() then
+    ListenToGameEvent("player_chat", function(keys)
+        local pid = keys.playerid
+        if pid == nil then return end
+
+        local hero = PlayerResource:GetSelectedHeroName(pid) or ""
+        CustomGameEventManager:Send_ServerToAllClients("overvodka_player_chat", {
+            playerid = pid,
+            hero = hero,
+            text = keys.text or "",
+            teamonly = keys.teamonly or 0,
+        })
+    end, nil)
     ListenToGameEvent("game_rules_state_change", function()
         local state = GameRules:State_Get()
         if state == 10 then
@@ -78,6 +90,7 @@ ListenToGameEvent("chat_wheel_console_command", function (data, event)
         SendToConsole(data.command)
     end
 end, nil)
+
 
 if IsServer() then
     return
