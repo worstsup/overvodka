@@ -40,6 +40,7 @@ function modifier_item_mask_of_quadrobe:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+        MODIFIER_PROPERTY_PROCATTACK_FEEDBACK,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
 end

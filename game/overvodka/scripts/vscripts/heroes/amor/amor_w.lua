@@ -8,7 +8,24 @@ amor_w = class({})
 function amor_w:Precache( ctx )
     PrecacheResource( "soundfile", "soundevents/amor_sounds.vsndevts", ctx )
     PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf", ctx )
-    PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_impact.vpcf", ctx )
+    PrecacheResource( "particle", "particles/units/heroes/hero_lone_druid/lone_druid_savage_roar_debuff.vpcf", ctx )
+end
+
+local function StartKnockUtility(unit, push_dir, duration)
+	local end_time = GameRules:GetGameTime() + (duration or 0) + 0.1
+
+	Timers:CreateTimer(function()
+		if not unit or unit:IsNull() or not unit:IsAlive() then
+			return nil
+		end
+		if GameRules:GetGameTime() >= end_time then
+			return nil
+		end
+		local pos = unit:GetAbsOrigin()
+		GridNav:DestroyTreesAroundPoint(pos, 100, false)
+
+		return 0.05
+	end)
 end
 
 function amor_w:OnSpellStart()
@@ -51,10 +68,7 @@ function amor_w:OnSpellStart()
 
 	dmg.victim = target
 	target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_dur })
-
-	local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-	ParticleManager:SetParticleControl(p2, 0, target:GetAbsOrigin())
-	ParticleManager:ReleaseParticleIndex(p2)
+	target:AddNewModifier(caster, self, "modifier_amor_w_slow", { duration = slow_dur * (1 - target:GetStatusResistance()) })
 
 	target:EmitSound("Hero_Beastmaster.Primal_Roar.Target")
 
@@ -64,7 +78,7 @@ function amor_w:OnSpellStart()
 		caster:GetTeamNumber(), origin, tpos,
 		nil, width, DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_INVULNERABLE
+		DOTA_UNIT_TARGET_FLAG_NONE
 	)
 
 	for _, enemy in ipairs(enemies) do
@@ -88,6 +102,8 @@ function amor_w:OnSpellStart()
 			else
 				away = away:Normalized()
 			end
+			enemy:FaceTowards(epos + away * 100)
+			enemy:SetForwardVector(away)
 
 			enemy:AddNewModifier(caster, self, "modifier_generic_arc_lua", {
 				dir_x = away.x,
@@ -100,11 +116,11 @@ function amor_w:OnSpellStart()
 				fix_end = 1,
 				fix_height = 1,
 
-				isStun = 1,
+				isStun = 0,
 				isRestricted = 0,
-				isForward = 0,
+				isForward = 1,
 			})
-
+			StartKnockUtility(enemy, away, knock_dur)
             ApplyDamage(dmg)
 		end
 	end
@@ -127,6 +143,7 @@ function modifier_amor_w_self_buff:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
+		MODIFIER_PROPERTY_TOOLTIP
 	}
 end
 
@@ -136,6 +153,10 @@ end
 
 function modifier_amor_w_self_buff:GetModifierAttackSpeedPercentage()
 	return self.as or 0
+end
+
+function modifier_amor_w_self_buff:OnTooltip()
+	return self.as
 end
 
 
@@ -155,6 +176,7 @@ function modifier_amor_w_slow:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
+		MODIFIER_PROPERTY_TOOLTIP
 	}
 end
 
@@ -164,4 +186,16 @@ end
 
 function modifier_amor_w_slow:GetModifierAttackSpeedPercentage()
 	return -(self.as or 0)
+end
+
+function modifier_amor_w_slow:OnTooltip()
+	return self.as
+end
+
+function modifier_amor_w_slow:GetEffectName()
+	return "particles/units/heroes/hero_lone_druid/lone_druid_savage_roar_debuff.vpcf"
+end
+
+function modifier_amor_w_slow:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end

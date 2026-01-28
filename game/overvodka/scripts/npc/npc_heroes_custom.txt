@@ -4417,7 +4417,7 @@
 		"HeroSelectSoundEffect"		"Hero_Bristleback.Pick"
 
 		"Ability1"		"amor_q"
-		"Ability2"		"bristleback_quill_spray"
+		"Ability2"		"amor_w"
 		"Ability3"		"bristleback_bristleback"
 		"Ability4"		"bristleback_hairball"
 		"Ability5"		"generic_hidden"
