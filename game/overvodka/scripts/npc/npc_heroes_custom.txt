@@ -4404,4 +4404,76 @@
 		"particle_folder"			"particles/units/heroes/hero_pangolier"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_pangolier.vsndevts"
 	}
+	"npc_dota_hero_bristleback"
+	{
+		"Model"				"models/heroes/bristleback/bristleback.vmdl"
+		"SoundSet"			"Hero_Bristleback"
+		"IdleSoundLoop"		""
+		"BotImplemented"	""
+		"ModelScale"		"0.800000"
+		"VersusScale"		"0.80"
+		"LoadoutScale"		"0.80"
+		"SimilarHeroes"		"102,98,129"
+		"HeroSelectSoundEffect"		"Hero_Bristleback.Pick"
+
+		"Ability1"		"amor_q"
+		"Ability2"		"bristleback_quill_spray"
+		"Ability3"		"bristleback_bristleback"
+		"Ability4"		"bristleback_hairball"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"bristleback_warpath"
+		"Ability7"		"bristleback_prickly"
+
+		"Ability10"		"special_bonus_unique_amor_1"
+		"Ability11"		"special_bonus_unique_amor_2"
+		"Ability12"		"special_bonus_unique_amor_3"
+		"Ability13"		"special_bonus_unique_amor_4"
+		"Ability14"		"special_bonus_unique_amor_5"
+		"Ability15"		"special_bonus_unique_amor_6"
+		"Ability16"		"special_bonus_unique_amor_7"
+		"Ability17"		"special_bonus_unique_amor_8"
+		
+		"Facets"
+		{
+			"bristleback_berserk" 
+			{
+				"Deprecated"		"true"
+			}
+			"bristleback_snot_rocket" 
+			{
+				"Icon"				"snot"
+				"Color"				"Green"
+				"GradientID"		"0"
+			}
+			"bristleback_seeing_red"
+			{
+				"Icon"				"no_vision"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
+		}
+		
+		"ArmorPhysical"		"1.0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"31"
+		"AttackDamageMax"		"37"
+		"AttackRate"		"1.7"
+		"AttackAnimationPoint"		"0.3"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"150"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"2.8"
+		"AttributeBaseAgility"		"22"
+		"AttributeAgilityGain"		"2.4"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"1.8"
+		"StatusManaRegen"	"0.4"
+		"StatusHealthRegen"		"1"
+		"MovementSpeed"		"295"
+		"MovementTurnRate"		"0.9"
+		"particle_folder"		"particles/units/heroes/hero_bristleback"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
+		"VoiceFile"		""
+	}
 }

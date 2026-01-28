@@ -34,7 +34,6 @@ function modifier_item_mask_of_quadrobe:OnCreated()
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 	self.lifesteal = self.ability:GetSpecialValueFor( "lifesteal_percent" )/100
-	if not IsServer() then return end
 end
 
 function modifier_item_mask_of_quadrobe:DeclareFunctions()
@@ -147,7 +146,7 @@ function modifier_item_mask_of_quadrobe_aura_emitter:GetAuraSearchTeam()
     return DOTA_UNIT_TARGET_TEAM_ENEMY
 end
 function modifier_item_mask_of_quadrobe_aura_emitter:GetAuraSearchType()
-    return bit.bor(DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_BUILDING)
+    return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING
 end
 function modifier_item_mask_of_quadrobe_aura_emitter:GetAuraSearchFlags()
     return DOTA_UNIT_TARGET_FLAG_INVULNERABLE

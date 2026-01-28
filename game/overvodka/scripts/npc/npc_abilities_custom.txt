@@ -17764,5 +17764,107 @@
 			}
 		}
 	}
-
+	//===================================================================================================================
+	//													AmoR
+	//===================================================================================================================
+	"special_bonus_unique_amor_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_amor_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Я погнал
+	//=================================================================================================================
+	"amor_q"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/amor/amor_q"
+		"AbilityTextureName"			"amor_q"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCooldown"				"25 23 21 19"
+		"AbilityManaCost"				"35 45 55 65"
+		"AbilityValues"
+		{
+			"bonus_speed"				"17 22 27 32"
+			"bonus_slow_resist"			"35 45 55 65"
+			"slow_resistance"			"35 45 55 65"
+			"duration"					"12"
+		}
+	}
+	//=================================================================================================================
+	// Чих
+	//=================================================================================================================
+	"amor_w"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/amor/amor_w"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastRange"              "700"
+		"AbilityCastPoint"              "0.15"
+		"AbilityCooldown"               "36 34 32 30"
+		"AbilityManaCost"               "100 120 140 160"
+		"AbilityTextureName"            "beastmaster_primal_roar"
+		"AbilityValues"
+		{
+			"damage"                    "150 200 250 300"
+			"slow_ms_pct"               "60"
+			"slow_as"                   "60"
+			"slow_duration"             "3 3.5 4 4.5"
+			"self_bonus_ms_pct"         "40"
+			"self_bonus_as"             "40"
+			"self_bonus_duration"       "2.75 3.25 3.75 4.25"
+			"stun_duration"             "1.2 1.4 1.6 1.8"
+			"sneeze_width"              "300"
+			"knock_distance"            "450"
+			"knock_duration"            "1.0"
+		}
+	}
 }
