@@ -354,6 +354,7 @@
 		"npc_dota_hero_nyx_assassin"		"КОЛИБРИ"
 		"npc_dota_hero_hoodwink"			"ЛЕОН"
 		"npc_dota_hero_slardar"				"АЛЕКСАНДР ПИСТОЛЕТОВ"
+		"npc_dota_hero_bristleback"			"AmoR"
 		
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
@@ -479,6 +480,7 @@
 		"npc_dota_hero_nyx_assassin_npedesc1"		"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_hoodwink_npedesc1"			"Сложность персонажа: НИЗКАЯ"
 		"npc_dota_hero_slardar_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
+		"npc_dota_hero_bristleback_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 
 		"dota_tooltip_ability_amor_q"					"Я погнал"
 		"dota_tooltip_ability_amor_q_description"		"Амор быстро уебываёт от противников, получая бонус к скорости передвижения и сопротивление замедлениям."

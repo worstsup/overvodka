@@ -11,23 +11,6 @@ function amor_w:Precache( ctx )
     PrecacheResource( "particle", "particles/units/heroes/hero_lone_druid/lone_druid_savage_roar_debuff.vpcf", ctx )
 end
 
-local function StartKnockUtility(unit, push_dir, duration)
-	local end_time = GameRules:GetGameTime() + (duration or 0) + 0.1
-
-	Timers:CreateTimer(function()
-		if not unit or unit:IsNull() or not unit:IsAlive() then
-			return nil
-		end
-		if GameRules:GetGameTime() >= end_time then
-			return nil
-		end
-		local pos = unit:GetAbsOrigin()
-		GridNav:DestroyTreesAroundPoint(pos, 100, false)
-
-		return 0.05
-	end)
-end
-
 function amor_w:OnSpellStart()
 	if not IsServer() then return end
 
@@ -120,10 +103,27 @@ function amor_w:OnSpellStart()
 				isRestricted = 0,
 				isForward = 1,
 			})
-			StartKnockUtility(enemy, away, knock_dur)
+			self:TreesDestroy(enemy, away, knock_dur)
             ApplyDamage(dmg)
 		end
 	end
+end
+
+function amor_w:TreesDestroy(unit, push_dir, duration)
+	local end_time = GameRules:GetGameTime() + (duration or 0) + 0.1
+
+	Timers:CreateTimer(function()
+		if not unit or unit:IsNull() or not unit:IsAlive() then
+			return nil
+		end
+		if GameRules:GetGameTime() >= end_time then
+			return nil
+		end
+		local pos = unit:GetAbsOrigin()
+		GridNav:DestroyTreesAroundPoint(pos, 100, false)
+
+		return 0.05
+	end)
 end
 
 
