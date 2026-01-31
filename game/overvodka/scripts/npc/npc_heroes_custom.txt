@@ -4344,6 +4344,7 @@
 		"VersusScale"				"0.9"
 		"LoadoutScale"				"0.9"
 		"SimilarHeroes"				"108,38,129"
+		"BotImplemented"			""
 		"Ability1"					"pangolier_swashbuckle"
 		"Ability2"					"pangolier_shield_crash"
 		"Ability3"					"pangolier_lucky_shot"
@@ -4418,11 +4419,11 @@
 
 		"Ability1"		"amor_q"
 		"Ability2"		"amor_w"
-		"Ability3"		"bristleback_bristleback"
-		"Ability4"		"bristleback_hairball"
+		"Ability3"		"amor_e"
+		"Ability4"		"generic_hidden"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"bristleback_warpath"
-		"Ability7"		"bristleback_prickly"
+		"Ability7"		"generic_hidden"
 
 		"Ability10"		"special_bonus_unique_amor_1"
 		"Ability11"		"special_bonus_unique_amor_2"

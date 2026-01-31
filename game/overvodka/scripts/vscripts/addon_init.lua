@@ -35,6 +35,8 @@ if IsClient() then
     require( 'util/functions_client' )
     SendToConsole("voice_vox 0")
     Convars:SetInt("voice_vox", 0)
+    Convars:SetBool("dota_clientside_wearables", false)
+    
     ListenToGameEvent("game_rules_state_change", function()
         local state = GameRules:State_Get()
         if state == 10 then

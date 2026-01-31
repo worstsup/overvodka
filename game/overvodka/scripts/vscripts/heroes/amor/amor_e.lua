@@ -1,4 +1,4 @@
-LinkLuaModifier("modifier_amor_e_skewer",        "heroes/amor/amor_e", LUA_MODIFIER_MOTION_HORIZONTAL)
+LinkLuaModifier("modifier_amor_e_skewer",        "heroes/amor/amor_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_e_pinned_fx",     "heroes/amor/amor_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua",  "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_arc_lua",      "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
@@ -7,8 +7,8 @@ amor_e = class({})
 amor_e._proj = amor_e._proj or {}
 
 function amor_e:Precache(ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_mars/mars_spear.vpcf", ctx)
-    PrecacheResource("particle", "particles/units/heroes/hero_mars/mars_spear_impact.vpcf", ctx)
+    PrecacheResource("particle", "particles/amor_e.vpcf", ctx)
+    PrecacheResource("particle", "particles/amor_e_impact.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_mars/mars_spear_impact_debuff.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_mars.vsndevts", ctx)
     PrecacheResource("model", "models/props_tree/ti7/ggbranch.vmdl", ctx)
@@ -20,9 +20,6 @@ function amor_e:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     if not caster or caster:IsNull() or not target or target:IsNull() then return end
-
-    local speed  = self:GetSpecialValueFor("spear_speed")
-    local vision = self:GetSpecialValueFor("spear_vision")
 
     local origin = caster:GetAbsOrigin()
     local tpos   = target:GetAbsOrigin()
@@ -40,13 +37,13 @@ function amor_e:OnSpellStart()
         Source = caster,
         Ability = self,
 
-        EffectName = "particles/units/heroes/hero_mars/mars_spear.vpcf",
-        iMoveSpeed = speed,
+        EffectName = "particles/amor_e.vpcf",
+        iMoveSpeed = self:GetSpecialValueFor("spear_speed"),
 
         bDodgeable = true,
         bVisibleToEnemies = true,
         bProvidesVision = true,
-        iVisionRadius = vision,
+        iVisionRadius = self:GetSpecialValueFor("spear_vision"),
         iVisionTeamNumber = caster:GetTeamNumber(),
 
         ExtraData = {
@@ -164,8 +161,6 @@ function amor_e:_StartProjectileThink(proj_id)
                             local sign = (dir.x * to_unit.y - dir.y * to_unit.x) >= 0 and 1 or -1
                             local side = _Rotate90(dir, sign)
 
-                            enemy:FaceTowards(enemy:GetAbsOrigin() + side * 100)
-
                             enemy:AddNewModifier(caster, self, "modifier_generic_arc_lua", {
                                 dir_x = side.x, dir_y = side.y,
                                 distance = knock_dist,
@@ -220,7 +215,31 @@ function amor_e:OnProjectileHit_ExtraData(target, location, extra)
             dir = dir:Normalized()
         end
 
-        target:AddNewModifier(caster, self, "modifier_amor_e_skewer", { dir_x = dir.x, dir_y = dir.y })
+        local drag_speed = self:GetSpecialValueFor("drag_speed")
+        local max_dist   = self:GetSpecialValueFor("max_drag_distance")
+
+        local dur = 0.1
+        if drag_speed and drag_speed > 0 and max_dist and max_dist > 0 then
+            dur = (max_dist / drag_speed)
+        end
+
+        target:AddNewModifier(caster, self, "modifier_generic_arc_lua", {
+            dir_x = dir.x, dir_y = dir.y,
+            distance = max_dist,
+            duration = dur, height = 0,
+
+            fix_duration = 1, fix_end = 1, fix_height = 1,
+            isStun = 1, isRestricted = 0, isForward = 1,
+        })
+
+        target:AddNewModifier(caster, self, "modifier_amor_e_skewer", {
+            duration = dur + 0.1,
+            dir_x = dir.x,
+            dir_y = dir.y,
+            max_dist = max_dist,
+        })
+
+
         EmitSoundOn("Hero_Mars.Spear.Target", target)
     end
 
@@ -233,7 +252,6 @@ modifier_amor_e_skewer = class({})
 
 function modifier_amor_e_skewer:IsHidden() return false end
 function modifier_amor_e_skewer:IsDebuff() return true end
-function modifier_amor_e_skewer:IsStunDebuff() return true end
 function modifier_amor_e_skewer:IsPurgable() return true end
 
 function modifier_amor_e_skewer:OnCreated(kv)
@@ -254,103 +272,25 @@ function modifier_amor_e_skewer:OnCreated(kv)
         self.dir = self.dir:Normalized()
     end
 
-    self.drag_speed     = self.ability:GetSpecialValueFor("drag_speed")
-    self.max_distance   = self.ability:GetSpecialValueFor("max_drag_distance")
+    self.max_distance   = tonumber(kv.max_dist) or self.ability:GetSpecialValueFor("max_drag_distance")
     self.tree_radius    = self.ability:GetSpecialValueFor("pin_tree_radius")
     self.cliff_dist     = self.ability:GetSpecialValueFor("pin_cliff_check_dist")
     self.cliff_z_thresh = self.ability:GetSpecialValueFor("pin_cliff_z_threshold")
 
-    self.scan_step = 50
-    self.pin_distance, self.pin_pos, self.spawned_trees = self:_ComputePinPoint()
-
     self.start_pos = self.parent:GetAbsOrigin()
-    self.traveled = 0
+    self.end_pos   = self.start_pos + self.dir * self.max_distance
 
-    self.parent:SetForwardVector(self.dir)
-    self.parent:FaceTowards(self.parent:GetAbsOrigin() + self.dir * 100)
+    self.tree_pos = GetGroundPosition(self.end_pos + self.dir * 80, self.parent)
+    self.spawned_trees = false
 
-    if self:ApplyHorizontalMotionController() == false then
-        self:Destroy()
-        return
-    end
-end
+    local fx = ParticleManager:CreateParticle("particles/amor_e_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    ParticleManager:SetParticleControl(fx, 0, self.parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(fx, 1, self.dir * 1000)
+    ParticleManager:SetParticleControl(fx, 2, Vector(kv.duration + self.ability:GetSpecialValueFor("stun_duration"), 0, 0))
+    ParticleManager:SetParticleControlForward(fx, 0, self.dir)
+    ParticleManager:ReleaseParticleIndex(fx)
 
-function modifier_amor_e_skewer:_ComputePinPoint()
-    if not IsServer() then return self.max_distance, (self.start_pos + self.dir * self.max_distance), false end
-
-    local start = self.start_pos
-    local dir = self.dir
-    local maxd = math.max(0, self.max_distance or 0)
-
-    local best_tree = nil
-    local best_cliff = nil
-
-    local step = math.max(10, self.scan_step or 50)
-
-    local last_ground = GetGroundPosition(start, self.parent)
-    for d = step, maxd, step do
-        local p = start + dir * d
-
-        -- 1) дерево
-        if (not best_tree) and GridNav:IsNearbyTree(p, self.tree_radius, false) then
-            best_tree = d
-        end
-
-        -- 2) уступ (аналог твоей логики, но “вдоль маршрута”)
-        if not best_cliff then
-            local base_loc = GetGroundPosition(p, self.parent)
-            local ahead_loc = GetGroundPosition(base_loc + dir * (self.cliff_dist or 50), self.parent)
-
-            if (ahead_loc.z - base_loc.z) > (self.cliff_z_thresh or 10) and (not GridNav:IsTraversable(ahead_loc)) then
-                best_cliff = d
-            end
-        end
-
-        if best_tree and best_cliff then break end
-        last_ground = GetGroundPosition(p, self.parent)
-    end
-
-    local pin_d = maxd
-    if best_tree and best_cliff then
-        pin_d = math.min(best_tree, best_cliff)
-    elseif best_tree then
-        pin_d = best_tree
-    elseif best_cliff then
-        pin_d = best_cliff
-    else
-        local pin_pos = start + dir * maxd
-        self:_SpawnTempTrees(pin_pos)
-        return maxd, pin_pos, true
-    end
-
-    local pin_pos = start + dir * pin_d
-    return pin_d, pin_pos, false
-end
-
-function modifier_amor_e_skewer:_SpawnTempTrees(pin_pos)
-    if not IsServer() then return end
-
-    local duration = (self.ability and self.ability:GetSpecialValueFor("stun_duration") or 1.0) + 2.0
-
-    local offsets = {Vector(0, 0, 0), Vector(80, 0, 0), Vector(-80, 0, 0), Vector(0, 80, 0), Vector(0, -80, 0)}
-
-    for _, off in ipairs(offsets) do
-        local p = GetGroundPosition(pin_pos + off, self.parent)
-        CreateTempTreeWithModel(p, duration, "models/props_tree/ti7/ggbranch.vmdl")
-    end
-end
-
-function modifier_amor_e_skewer:OnRemoved()
-    if not IsServer() then return end
-    self.parent:InterruptMotionControllers(false)
-end
-
-function modifier_amor_e_skewer:DeclareFunctions()
-    return { MODIFIER_PROPERTY_OVERRIDE_ANIMATION }
-end
-
-function modifier_amor_e_skewer:GetOverrideAnimation()
-    return ACT_DOTA_FLAIL
+    self:StartIntervalThink(0.03)
 end
 
 function modifier_amor_e_skewer:CheckState()
@@ -360,40 +300,38 @@ function modifier_amor_e_skewer:CheckState()
     }
 end
 
-function modifier_amor_e_skewer:UpdateHorizontalMotion(me, dt)
+function modifier_amor_e_skewer:OnIntervalThink()
     if not IsServer() then return end
-
     if not self.parent or self.parent:IsNull() or not self.parent:IsAlive() then
         self:Destroy()
         return
     end
 
-    local step = self.drag_speed * dt
+    local cur = self.parent:GetAbsOrigin()
 
-    local remaining = (self.pin_distance or self.max_distance) - self.traveled
-    if remaining <= 0 then
-        self:_Pin(me:GetAbsOrigin())
+    if self:_ShouldPin(cur) then
+        self:_Pin(cur)
         return
     end
 
-    local move = math.min(step, remaining)
-    local next_pos = self.start_pos + self.dir * (self.traveled + move)
+    local traveled_vec = (cur - self.start_pos); traveled_vec.z = 0
+    local traveled = traveled_vec:Length2D()
 
-    me:SetAbsOrigin(next_pos)
-    me:SetForwardVector(self.dir)
-    me:FaceTowards(next_pos + self.dir * 100)
+    if (not self.spawned_trees) and traveled >= (self.max_distance * 0.5) then
+        self.spawned_trees = true
+        self:_SpawnTempTrees(self.tree_pos)
+    end
 
-    self.traveled = self.traveled + move
+    if traveled >= (self.max_distance - 20) then
+        if not self.spawned_trees then
+            self.spawned_trees = true
+            self:_SpawnTempTrees(self.tree_pos)
+        end
 
-    if self.traveled >= (self.pin_distance or self.max_distance) - 0.01 then
-        self:_Pin(next_pos)
+        self:_Pin(self.end_pos)
         return
     end
-end
 
-function modifier_amor_e_skewer:OnHorizontalMotionInterrupted()
-    if not IsServer() then return end
-    self:Destroy()
 end
 
 function modifier_amor_e_skewer:_ShouldPin(location)
@@ -411,38 +349,73 @@ function modifier_amor_e_skewer:_ShouldPin(location)
     return false
 end
 
+function modifier_amor_e_skewer:_StopArc()
+    if self.parent and not self.parent:IsNull() then
+        local arc = self.parent:FindModifierByName("modifier_generic_arc_lua")
+        if arc and not arc:IsNull() then
+            arc:Destroy()
+        end
+    end
+end
+
+function modifier_amor_e_skewer:_SpawnTempTrees(pin_pos)
+    if not IsServer() then return end
+
+    local duration = (self.ability and self.ability:GetSpecialValueFor("stun_duration") or 1.0) + 2.0
+
+    local dir = self.dir or Vector(1,0,0)
+    dir.z = 0
+    dir = dir:Normalized()
+
+    local right = Vector(-dir.y, dir.x, 0)
+
+    local step = 90
+    local offsets = {right * step, -right * step, right * (2*step), -right * (2*step), dir * 40}
+
+    for _, off in ipairs(offsets) do
+        local p = GetGroundPosition(pin_pos + off, self.parent)
+        CreateTempTreeWithModel(p, duration, "models/props_tree/ti7/ggbranch.vmdl")
+    end
+end
+
+
 function modifier_amor_e_skewer:_Pin(location)
+    if not IsServer() then return end
+
     local parent = self.parent
     local caster = self.caster
     local ability = self.ability
+    if not parent or parent:IsNull() then self:Destroy(); return end
 
-    if not parent or parent:IsNull() then
-        self:Destroy()
-        return
-    end
+    self:_StopArc()
 
     parent:SetAbsOrigin(GetGroundPosition(location, parent))
     FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
-    GridNav:DestroyTreesAroundPoint(parent:GetAbsOrigin(), 120, false)
+
+    if not self.spawned_trees then
+        GridNav:DestroyTreesAroundPoint(parent:GetAbsOrigin(), 120, false)
+    end
+
     local stun = ability:GetSpecialValueFor("stun_duration")
     parent:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", { duration = stun })
     parent:AddNewModifier(caster, ability, "modifier_amor_e_pinned_fx", { duration = stun })
-
-    local fx = ParticleManager:CreateParticle("particles/units/heroes/hero_mars/mars_spear_impact.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(fx, 0, parent:GetAbsOrigin())
-    ParticleManager:SetParticleControl(fx, 1, self.dir * 1000)
-    ParticleManager:SetParticleControl(fx, 2, Vector(stun, 0, 0))
-    ParticleManager:SetParticleControlForward(fx, 0, self.dir)
-    ParticleManager:ReleaseParticleIndex(fx)
 
     EmitSoundOn("Hero_Mars.Spear.Root", parent)
 
     self:Destroy()
 end
 
+function modifier_amor_e_skewer:GetEffectName()
+    return "particles/units/heroes/hero_mars/mars_spear_impact_debuff.vpcf"
+end
+
+function modifier_amor_e_skewer:GetEffectAttachType()
+    return PATTACH_OVERHEAD_FOLLOW
+end
+
 modifier_amor_e_pinned_fx = class({})
 
-function modifier_amor_e_pinned_fx:IsHidden() return false end
+function modifier_amor_e_pinned_fx:IsHidden() return true end
 function modifier_amor_e_pinned_fx:IsDebuff() return true end
 function modifier_amor_e_pinned_fx:IsPurgable() return false end
 
