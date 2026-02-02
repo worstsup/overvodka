@@ -482,10 +482,7 @@ function OvervodkaGameMode:OnEntityKilled( event )
 		if hero and hero:IsRealHero() and hero:GetUnitName() == "npc_dota_hero_undying" then
 			if event.entindex_inflictor ~= nil then
 				local ability = EntIndexToHScript(event.entindex_inflictor)
-				if ability 
-					and ability:GetAbilityName() == "visitor_q" 
-					and hero:HasShard() then
-
+				if ability and ability:GetAbilityName() == "visitor_q" and hero:HasShard() then
 					local bonus_pct = ability:GetSpecialValueFor("bonus_respawn_time") or 0
 					if bonus_pct > 0 then
 						killedUnit._visitorBonusRespawnPct = bonus_pct

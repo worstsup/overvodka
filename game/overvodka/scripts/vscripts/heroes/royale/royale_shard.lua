@@ -115,7 +115,7 @@ function modifier_royale_shard_ai:OnIntervalThink()
             1200,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
             FIND_CLOSEST,
             false)
         if #enemies > 0 then

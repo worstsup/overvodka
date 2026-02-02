@@ -69,7 +69,7 @@ function modifier_inferno_tower_ai:OnIntervalThink()
     local parent = self:GetParent()
     if not parent:IsAlive() then return end
     if self.current_target and not self.current_target:IsNull() then
-        if not self.current_target:IsAlive() or (self.current_target:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > (self.range + 25) then
+        if not self.current_target:IsAlive() or (self.current_target:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D() > (self.range + 25) or self.current_target:IsInvulnerable() then
             parent:RemoveModifierByName("modifier_inferno_tower_beam")
             self.current_target = nil
         end
@@ -82,12 +82,12 @@ function modifier_inferno_tower_ai:OnIntervalThink()
             self.range,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
             FIND_CLOSEST,
             false
         )
         for _, enemy in ipairs(enemies) do
-            if enemy:GetUnitName() ~= "npc_nelya" then
+            if not enemy:IsInvulnerable() then
                 self.current_target = enemy
                 if not parent:HasModifier("modifier_inferno_tower_beam") then
                     parent:AddNewModifier(parent, self:GetAbility(), "modifier_inferno_tower_beam", {})
