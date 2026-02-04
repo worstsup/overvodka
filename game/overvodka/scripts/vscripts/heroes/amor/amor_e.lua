@@ -60,10 +60,10 @@ function amor_e:OnSpellStart()
     self._proj[proj_id] = {
         caster_ent = caster:entindex(),
         target_ent = target:entindex(),
-        last_pos   = origin,
-        dir        = init_dir,
-        init_dir   = init_dir,
-        hit        = {},
+        last_pos = origin,
+        dir = init_dir,
+        init_dir = init_dir,
+        hit = {},
     }
 
     self:_StartProjectileThink(proj_id)
@@ -130,9 +130,7 @@ function amor_e:_StartProjectileThink(proj_id)
             local target = EntIndexToHScript(data.target_ent or -1)
 
             local width = self:GetSpecialValueFor("spear_width")
-            if width <= 0 then width = 75 end
-
-            local damage     = self:GetSpecialValueFor("damage")
+            local damage = self:GetSpecialValueFor("damage")
             local knock_dur  = self:GetSpecialValueFor("sidestep_duration")
             local knock_dist = self:GetSpecialValueFor("sidestep_distance")
 
@@ -288,18 +286,18 @@ function amor_e:OnProjectileHit_ExtraData(target, location, extra)
             dir_x = dir.x,
             dir_y = dir.y,
             max_dist = max_dist,
-            move_dur   = dur,
-            width      = self:GetSpecialValueFor("spear_width"),
-            dmg        = self:GetSpecialValueFor("damage"),
-            knock_dur  = self:GetSpecialValueFor("sidestep_duration"),
+            move_dur = dur,
+            width = self:GetSpecialValueFor("spear_width"),
+            dmg = self:GetSpecialValueFor("damage"),
+            knock_dur = self:GetSpecialValueFor("sidestep_duration"),
             knock_dist = self:GetSpecialValueFor("sidestep_distance"),
-            cache_key   = cache_key,
+            cache_key = cache_key,
         })
 
         EmitSoundOn("Hero_Mars.Spear.Target", target)
     end
 
-    ApplyDamage({ victim = target, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_PHYSICAL, ability = self })
+    ApplyDamage({victim = target, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_PHYSICAL, ability = self})
     return true
 end
 
@@ -314,8 +312,8 @@ function modifier_amor_e_skewer:OnCreated(kv)
     if not IsServer() then return end
 
     self.ability = self:GetAbility()
-    self.caster  = self:GetCaster()
-    self.parent  = self:GetParent()
+    self.caster = self:GetCaster()
+    self.parent = self:GetParent()
 
     if not self.ability or self.ability:IsNull() then self:Destroy(); return end
     if not self.caster or self.caster:IsNull() then self:Destroy(); return end
@@ -328,20 +326,20 @@ function modifier_amor_e_skewer:OnCreated(kv)
         self.dir = self.dir:Normalized()
     end
 
-    self.max_distance   = tonumber(kv.max_dist) or self.ability:GetSpecialValueFor("max_drag_distance")
-    self.tree_radius    = self.ability:GetSpecialValueFor("pin_tree_radius")
-    self.cliff_dist     = self.ability:GetSpecialValueFor("pin_cliff_check_dist")
+    self.max_distance = tonumber(kv.max_dist) or self.ability:GetSpecialValueFor("max_drag_distance")
+    self.tree_radius = self.ability:GetSpecialValueFor("pin_tree_radius")
+    self.cliff_dist = self.ability:GetSpecialValueFor("pin_cliff_check_dist")
     self.cliff_z_thresh = self.ability:GetSpecialValueFor("pin_cliff_z_threshold")
 
     self.start_pos = self.parent:GetAbsOrigin()
-    self.end_pos   = self.start_pos + self.dir * self.max_distance
+    self.end_pos = self.start_pos + self.dir * self.max_distance
 
     self.tree_pos = GetGroundPosition(self.end_pos + self.dir * 80, self.parent)
     self.spawned_trees = false
 
-    self.width      = tonumber(kv.width) or self.ability:GetSpecialValueFor("spear_width")
-    self.damage     = tonumber(kv.dmg) or self.ability:GetSpecialValueFor("damage")
-    self.knock_dur  = tonumber(kv.knock_dur) or self.ability:GetSpecialValueFor("sidestep_duration")
+    self.width = tonumber(kv.width) or self.ability:GetSpecialValueFor("spear_width")
+    self.damage = tonumber(kv.dmg) or self.ability:GetSpecialValueFor("damage")
+    self.knock_dur = tonumber(kv.knock_dur) or self.ability:GetSpecialValueFor("sidestep_duration")
     self.knock_dist = tonumber(kv.knock_dist) or self.ability:GetSpecialValueFor("sidestep_distance")
 
     self.last_pos = self.parent:GetAbsOrigin()
