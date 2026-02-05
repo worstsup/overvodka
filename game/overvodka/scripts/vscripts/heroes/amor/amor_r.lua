@@ -1,4 +1,5 @@
 LinkLuaModifier("modifier_amor_ultimate_beer", "heroes/amor/amor_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
 amor_ultimate = class({})
 
@@ -13,8 +14,33 @@ end
 
 function amor_ultimate:OnAbilityPhaseStart()
     if not IsServer() then return end
-    self:GetCaster():EmitSound( "amor_r" )
+    self:GetCaster():EmitSound("amor_r")
     return true
+end
+
+function amor_ultimate:OnAbilityPhaseInterrupted()
+    if not IsServer() then return end
+    self:GetCaster():StopSound("amor_r")
+end
+
+function amor_ultimate:GetBehavior()
+    local caster = self:GetCaster()
+    if caster and caster:HasScepter() then
+        return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_AOE
+    end
+    return DOTA_ABILITY_BEHAVIOR_NO_TARGET
+end
+
+function amor_ultimate:GetAOERadius()
+    return self:GetSpecialValueFor("slam_radius")
+end
+
+function amor_ultimate:GetCastRange(location, target)
+    local caster = self:GetCaster()
+    if caster and caster:HasScepter() then
+        return self:GetSpecialValueFor("scepter_cast_range")
+    end
+    return self:GetSpecialValueFor("slam_radius")
 end
 
 function amor_ultimate:OnAbilityUpgrade( hAbility )
@@ -29,84 +55,141 @@ function amor_ultimate:OnAbilityUpgrade( hAbility )
     return result
 end
 
-function amor_ultimate:OnAbilityPhaseInterrupted()
-    if not IsServer() then return end
-    self:GetCaster():StopSound( "amor_r" )
-end
-
 function amor_ultimate:OnSpellStart()
     if not IsServer() then return end
 
     local caster = self:GetCaster()
     if not caster or caster:IsNull() then return end
 
+    if caster:HasScepter() then
+        local point = self:GetCursorPosition()
+        local origin = caster:GetAbsOrigin()
+        local v = (point - origin); v.z = 0
+        local dist = v:Length2D()
+
+        local fw = v
+        if fw:Length2D() < 0.01 then
+            fw = caster:GetForwardVector()
+        else
+            fw = fw:Normalized()
+        end
+        fw.z = 0
+
+        local fly_speed = 2500
+        local duration = math.max(0.12, dist / fly_speed)
+
+        local arc = caster:AddNewModifier(
+            caster, self, "modifier_generic_arc_lua",
+            {
+                target_x = point.x, target_y = point.y, duration = duration,
+                distance = dist, height = 50, start_offset = 0, end_offset = 0,
+                fix_end = 0, fix_duration = 1, fix_height = 0,
+                isStun = 0, isRestricted = 0, isForward = 1, activity = 2,
+            }
+        )
+
+        if arc and not arc:IsNull() and arc.SetEndCallback then
+            arc:SetEndCallback(function(interrupted)
+                if not IsServer() then return end
+                if interrupted then return end
+                if not caster or caster:IsNull() then return end
+
+                local landing_pos = GetGroundPosition(point, caster)
+                FindClearSpaceForUnit(caster, landing_pos, true)
+
+                self:_ExecuteUltimateAt(caster, landing_pos, fw)
+            end)
+        else
+            local landing_pos = GetGroundPosition(point, caster)
+            FindClearSpaceForUnit(caster, landing_pos, true)
+            self:_ExecuteUltimateAt(caster, landing_pos, fw)
+        end
+
+        return
+    end
+
     local origin = caster:GetAbsOrigin()
+    local fw = caster:GetForwardVector(); fw.z = 0
+    if fw:Length2D() < 0.01 then fw = Vector(1, 0, 0) end
+    fw = fw:Normalized()
+
+    self:_ExecuteUltimateAt(caster, origin, fw)
+end
+
+function amor_ultimate:_ExecuteUltimateAt(caster, center, fw)
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+
     local team = caster:GetTeamNumber()
 
-    local slam_radius = self:GetSpecialValueFor("slam_radius")
-    local clap_damage = self:GetSpecialValueFor("clap_damage")
+    local slam_radius   = self:GetSpecialValueFor("slam_radius")
+    local clap_damage   = self:GetSpecialValueFor("clap_damage")
     local beer_duration = self:GetSpecialValueFor("beer_duration")
-    local crack_delay = self:GetSpecialValueFor("crack_delay")
-    local crack_width = self:GetSpecialValueFor("crack_width")
-    local crack_length = self:GetSpecialValueFor("crack_length")
+    local crack_delay   = self:GetSpecialValueFor("crack_delay")
+    local crack_width   = self:GetSpecialValueFor("crack_width")
+    local crack_length  = self:GetSpecialValueFor("crack_length")
+    self.beer_dps       = self:GetSpecialValueFor("beer_dps")
 
-    local fw = caster:GetForwardVector()
+    fw = fw or caster:GetForwardVector()
     fw.z = 0
     if fw:Length2D() < 0.01 then fw = Vector(1, 0, 0) end
     fw = fw:Normalized()
+
     local right = Vector(-fw.y, fw.x, 0)
 
-    local s1 = origin - fw * crack_length * 0.5
-    local e1 = origin + fw * crack_length * 0.5
-    local s2 = origin - right * crack_length * 0.5
-    local e2 = origin + right * crack_length * 0.5
+    local s1 = center - fw * crack_length * 0.5
+    local e1 = center + fw * crack_length * 0.5
+    local s2 = center - right * crack_length * 0.5
+    local e2 = center + right * crack_length * 0.5
 
     local p = ParticleManager:CreateParticle("particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_splash.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(p, 0, origin)
-    ParticleManager:SetParticleControl(p, 1, origin)
-    ParticleManager:SetParticleControl(p, 3, origin)
+    ParticleManager:SetParticleControl(p, 0, center)
+    ParticleManager:SetParticleControl(p, 1, center)
+    ParticleManager:SetParticleControl(p, 3, center)
     ParticleManager:ReleaseParticleIndex(p)
 
     local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_brewmaster/brewmaster_thunder_clap.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(p2, 0, origin)
+    ParticleManager:SetParticleControl(p2, 0, center)
     ParticleManager:SetParticleControl(p2, 1, Vector(slam_radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(p2)
 
-    GridNav:DestroyTreesAroundPoint(origin, slam_radius, false)
+    GridNav:DestroyTreesAroundPoint(center, slam_radius, false)
     caster:EmitSound("Hero_Brewmaster.ThunderClap")
 
-    local enemies = FindUnitsInRadius(team, origin, nil, slam_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local enemies = FindUnitsInRadius(
+        team, center, nil, slam_radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        0, 0, false
+    )
 
     for _, enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
-            enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()) })
-            ApplyDamage({victim = enemy, attacker = caster, damage = clap_damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+            enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()), dps = self.beer_dps })
+            ApplyDamage({ victim = enemy, attacker = caster, damage = clap_damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self })
         end
     end
 
-    local crack_p1 = self:_CreateCrackParticle(s1, e1, crack_delay)
-    local crack_p2 = self:_CreateCrackParticle(s2, e2, crack_delay)
-    self:_CreateCrackParticle(e1, s1, crack_delay)
-    self:_CreateCrackParticle(e2, s2, crack_delay)
-
     EmitSoundOn("Hero_ElderTitan.EarthSplitter.Cast", caster)
+
+    local crack_particles = {}
+    crack_particles[#crack_particles+1] = self:_CreateCrackParticle(s1, e1, crack_delay)
+    crack_particles[#crack_particles+1] = self:_CreateCrackParticle(e1, s1, crack_delay)
+    crack_particles[#crack_particles+1] = self:_CreateCrackParticle(s2, e2, crack_delay)
+    crack_particles[#crack_particles+1] = self:_CreateCrackParticle(e2, s2, crack_delay)
 
     local affected = {}
 
     Timers:CreateTimer(crack_delay, function()
-        if crack_p1 then
-            ParticleManager:DestroyParticle(crack_p1, false)
-            ParticleManager:ReleaseParticleIndex(crack_p1)
-        end
-        if crack_p2 then
-            ParticleManager:DestroyParticle(crack_p2, false)
-            ParticleManager:ReleaseParticleIndex(crack_p2)
-        end
-
         if not caster or caster:IsNull() then return nil end
 
+        for _, pid in ipairs(crack_particles) do
+            if pid then
+                ParticleManager:DestroyParticle(pid, false)
+                ParticleManager:ReleaseParticleIndex(pid)
+            end
+        end
         EmitSoundOn("Hero_ElderTitan.EarthSplitter.Destroy", caster)
-
         self:_ExplodeCrack(caster, s1, e1, crack_width, affected)
         self:_ExplodeCrack(caster, s2, e2, crack_width, affected)
 
@@ -160,8 +243,7 @@ function amor_ultimate:_ExplodeCrack(caster, start_pos, end_pos, width, affected
                 nearest = GetGroundPosition(nearest, enemy)
                 FindClearSpaceForUnit(enemy, nearest, false)
 
-                enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()) })
-
+                enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()), dps = self.beer_dps })
                 ApplyDamage({victim = enemy, attacker = caster,damage = enemy:GetMaxHealth() * hp_pct * 0.01, damage_type = DAMAGE_TYPE_MAGICAL, ability = self, damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION})
             end
         end
@@ -194,7 +276,7 @@ function modifier_amor_ultimate_beer:GetModifierMoveSpeedBonus_Percentage()
     return -ability:GetSpecialValueFor("beer_slow_pct")
 end
 
-function modifier_amor_ultimate_beer:OnCreated()
+function modifier_amor_ultimate_beer:OnCreated(kv)
     if not IsServer() then return end
 
     local ability = self:GetAbility()
@@ -206,7 +288,7 @@ function modifier_amor_ultimate_beer:OnCreated()
 
     self.tick = ability:GetSpecialValueFor("beer_tick") or 0.25
 
-    self.dps = ability:GetSpecialValueFor("beer_dps")
+    self.dps = kv.dps or ability:GetSpecialValueFor("beer_dps") or 0
     self:StartIntervalThink(self.tick)
 end
 

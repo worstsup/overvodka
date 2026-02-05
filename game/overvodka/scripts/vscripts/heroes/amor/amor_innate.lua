@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_amor_innate_handler", "heroes/amor/amor_innate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_innate_buff",    "heroes/amor/amor_innate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_innate_charges", "heroes/amor/amor_innate", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_amor_bkb",            "heroes/amor/amor_innate", LUA_MODIFIER_MOTION_NONE)
 
 amor_innate = class({})
 
@@ -65,6 +66,9 @@ function modifier_amor_innate_handler:OnIntervalThink()
     if dur <= 0 then dur = 4 end
 
     parent:AddNewModifier(parent, ability, "modifier_amor_innate_buff", { duration = dur })
+    if parent:HasTalent("special_bonus_unique_amor_8") then
+        parent:AddNewModifier(parent, ability, "modifier_amor_bkb", { duration = ability:GetSpecialValueFor("immune_duration") })
+    end
 
     local charges = parent:FindModifierByName("modifier_amor_innate_charges")
     if not charges or charges:IsNull() then
@@ -78,6 +82,7 @@ function modifier_amor_innate_handler:OnIntervalThink()
     ParticleManager:ReleaseParticleIndex(p)
     ability:UseResources(false, false, false, true)
     parent:EmitSound("amor_innate")
+    parent:EmitSound("DOTA_Item.HealingSalve.Activate")
 end
 
 modifier_amor_innate_buff = class({})
@@ -203,4 +208,29 @@ function modifier_amor_innate_charges:OnStackCountChanged(iOldCount)
     if mod_f and not mod_f:IsNull() then
         mod_f:_SyncFromInnate(true)
     end
+end
+
+
+modifier_amor_bkb = class({})
+
+function modifier_amor_bkb:IsPurgable() return false end
+
+function modifier_amor_bkb:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+    }
+end
+
+function modifier_amor_bkb:GetModifierMagicalResistanceBonus()
+    return self:GetAbility():GetSpecialValueFor("magic_resistance") or 0
+end
+
+function modifier_amor_bkb:CheckState()
+    return {
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
+    }
+end
+
+function modifier_amor_bkb:GetEffectName()
+    return "particles/items_fx/black_king_bar_avatar.vpcf"
 end

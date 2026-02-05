@@ -4415,7 +4415,7 @@
 		"VersusScale"		"0.80"
 		"LoadoutScale"		"0.80"
 		"SimilarHeroes"		"102,98,129"
-		"HeroSelectSoundEffect"		"Hero_Bristleback.Pick"
+		"HeroSelectSoundEffect"		"amor_start"
 
 		"Ability1"		"amor_q"
 		"Ability2"		"amor_w"
@@ -4436,21 +4436,29 @@
 		
 		"Facets"
 		{
+			"amor_beer_trail"
+			{
+				"Icon"              "bubbles"
+                "Color"             "Yellow"
+                "GradientID"        "1"
+			}
+			"amor_double_spear"
+			{
+				"Icon"				"snake"
+				"Color"				"Red"
+				"GradientID"		"0"
+			}
 			"bristleback_berserk" 
 			{
 				"Deprecated"		"true"
 			}
 			"bristleback_snot_rocket" 
 			{
-				"Icon"				"snot"
-				"Color"				"Green"
-				"GradientID"		"0"
+				"Deprecated"		"true"
 			}
 			"bristleback_seeing_red"
 			{
-				"Icon"				"no_vision"
-				"Color"				"Red"
-				"GradientID"		"0"
+				"Deprecated"		"true"
 			}
 		}
 		
@@ -4466,9 +4474,9 @@
 		"AttributeBaseStrength"		"25"
 		"AttributeStrengthGain"		"2.8"
 		"AttributeBaseAgility"		"22"
-		"AttributeAgilityGain"		"2.4"
-		"AttributeBaseIntelligence"		"16"
-		"AttributeIntelligenceGain"		"1.8"
+		"AttributeAgilityGain"		"2.0"
+		"AttributeBaseIntelligence"		"18"
+		"AttributeIntelligenceGain"		"2.4"
 		"StatusManaRegen"	"0.4"
 		"StatusHealthRegen"		"1"
 		"MovementSpeed"		"295"

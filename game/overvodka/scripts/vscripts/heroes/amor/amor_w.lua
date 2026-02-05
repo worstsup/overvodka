@@ -72,6 +72,9 @@ function amor_w:OnSpellStart()
     dmg.victim = target
     target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_dur })
     target:AddNewModifier(caster, self, "modifier_amor_w_slow", { duration = slow_dur * (1 - target:GetStatusResistance()) })
+    if caster:HasTalent("special_bonus_unique_amor_4") then
+        caster:PerformAttack(target, true, true, true, true, false, false, true)
+    end
     ApplyDamage(dmg)
 
     if caster:HasShard() then
@@ -91,6 +94,9 @@ function amor_w:OnSpellStart()
                     dmg.victim = enemy
                     enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_dur })
                     enemy:AddNewModifier(caster, self, "modifier_amor_w_slow", { duration = slow_dur * (1 - enemy:GetStatusResistance()) })
+                    if caster:HasTalent("special_bonus_unique_amor_4") then
+                        caster:PerformAttack(enemy, true, true, true, true, false, false, true)
+                    end
 					aoe_mark[eid] = true
                     ApplyDamage(dmg)
                 end
@@ -201,12 +207,14 @@ function modifier_amor_w_slow:OnCreated()
 	local abil = self:GetAbility()
 	self.ms = abil and abil:GetSpecialValueFor("slow_ms_pct") or 0
 	self.as = abil and abil:GetSpecialValueFor("slow_as") or 0
+    self.mag_resist = abil and abil:GetSpecialValueFor("magic_resist_reduction") or 0
 end
 
 function modifier_amor_w_slow:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
+        MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
 		MODIFIER_PROPERTY_TOOLTIP
 	}
 end
@@ -217,6 +225,10 @@ end
 
 function modifier_amor_w_slow:GetModifierAttackSpeedPercentage()
 	return -(self.as or 0)
+end
+
+function modifier_amor_w_slow:GetModifierMagicalResistanceBonus()
+    return -(self.mag_resist or 0)
 end
 
 function modifier_amor_w_slow:OnTooltip()

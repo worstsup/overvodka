@@ -10,7 +10,10 @@ function amor_e:Precache(ctx)
     PrecacheResource("particle", "particles/amor_e.vpcf", ctx)
     PrecacheResource("particle", "particles/amor_e_impact.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_mars/mars_spear_impact_debuff.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_v2_crit_tgt.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/chaos_knight/chaos_knight_ti9_weapon/chaos_knight_ti9_weapon_crit_tgt.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_mars.vsndevts", ctx)
+    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_kez.vsndevts", ctx)
     PrecacheResource("model", "models/heroes/ringmaster/ringmaster_wheel.vmdl", ctx)
 end
 
@@ -71,6 +74,39 @@ function amor_e:OnSpellStart()
     EmitSoundOn("Hero_Mars.Spear.Cast", caster)
     EmitSoundOn("Hero_Mars.Spear", caster)
     caster:EmitSound("amor_e")
+end
+
+function amor_e:_PlayCritPfx(enemy)
+    if not enemy or enemy:IsNull() then return end
+    enemy:EmitSound("Hero_Kez.Sai.Crit")
+    local hit_pfx = ParticleManager:CreateParticle("particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_v2_crit_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
+    ParticleManager:SetParticleControlEnt(hit_pfx, 0, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:SetParticleControlEnt(hit_pfx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:ReleaseParticleIndex(hit_pfx)
+
+    local crit_fx = ParticleManager:CreateParticle("particles/econ/items/chaos_knight/chaos_knight_ti9_weapon/chaos_knight_ti9_weapon_crit_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
+    ParticleManager:SetParticleControlEnt(crit_fx, 0, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:SetParticleControlEnt(crit_fx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    ParticleManager:ReleaseParticleIndex(crit_fx)
+end
+
+function amor_e:_ApplyDamageWithCrit(caster, victim, base_damage, damage_type, damage_flags)
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+    if not victim or victim:IsNull() or (not victim:IsAlive()) then return end
+    if base_damage <= 0 then return end
+
+    local chance = self:GetSpecialValueFor("crit_chance") or 0
+    local mult = self:GetSpecialValueFor("crit_damage") or 100
+
+    local is_crit = (chance > 0) and RollPercentage(chance)
+    if is_crit then
+        mult = math.max(0, mult)
+        base_damage = base_damage * mult / 100
+        self:_PlayCritPfx(victim)
+    end
+
+    ApplyDamage({victim = victim, attacker = caster, damage = base_damage, damage_type = damage_type or DAMAGE_TYPE_PHYSICAL, ability = self, damage_flags = damage_flags})
 end
 
 local function _Rotate90(dir, sign)
@@ -134,8 +170,6 @@ function amor_e:_StartProjectileThink(proj_id)
             local knock_dur  = self:GetSpecialValueFor("sidestep_duration")
             local knock_dist = self:GetSpecialValueFor("sidestep_distance")
 
-            local dmg = { attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self }
-
             local enemies = FindUnitsInLine(
                 caster:GetTeamNumber(), prev,
                 cur, nil, width,
@@ -155,7 +189,6 @@ function amor_e:_StartProjectileThink(proj_id)
                         local eid = enemy:entindex()
                         if not data.hit[eid] then
                             data.hit[eid] = true
-                            dmg.victim = enemy
 
                             if has_drag_talent then
                                 data.drag_candidates[eid] = true
@@ -197,9 +230,8 @@ function amor_e:_StartProjectileThink(proj_id)
 
                                 GridNav:DestroyTreesAroundPoint(enemy:GetAbsOrigin(), 75, false)
                             end
-
                             EmitSoundOn("Hero_Mars.Spear.Knockback", enemy)
-                            ApplyDamage(dmg)
+                            self:_ApplyDamageWithCrit(caster, enemy, damage, DAMAGE_TYPE_PHYSICAL)
                         end
                     end
                 end
@@ -297,7 +329,7 @@ function amor_e:OnProjectileHit_ExtraData(target, location, extra)
         EmitSoundOn("Hero_Mars.Spear.Target", target)
     end
 
-    ApplyDamage({victim = target, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_PHYSICAL, ability = self})
+    self:_ApplyDamageWithCrit(caster, target, self:GetSpecialValueFor("damage"), DAMAGE_TYPE_PHYSICAL)
     return true
 end
 
@@ -477,7 +509,9 @@ function modifier_amor_e_skewer:_ProcessDragSegment()
                 else
                     self:_KnockEnemySide(enemy, cur, move_dir)
                 end
-                ApplyDamage({victim = enemy, attacker = self.caster, damage = self.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self.ability})
+                if self.ability and not self.ability:IsNull() then
+                    self.ability:_ApplyDamageWithCrit(self.caster, enemy, self.damage, DAMAGE_TYPE_PHYSICAL)
+                end
             end
         end
     end
@@ -608,7 +642,7 @@ function modifier_amor_e_skewer:_Pin(location)
     self.drag_end_pos = GetGroundPosition(location, parent)
     local stun = ability:GetSpecialValueFor("stun_duration")
     _ApplyPinToUnit(parent, location, stun)
-    AddFOWViewer(caster:GetTeamNumber(), parent:GetAbsOrigin(), 150, stun + 0.5, false)
+    AddFOWViewer(caster:GetTeamNumber(), parent:GetAbsOrigin(), 200, stun + 0.5, false)
     EmitSoundOn("Hero_Mars.Spear.Root", parent)
 
     if self.has_drag_talent and self.dragged_units then
