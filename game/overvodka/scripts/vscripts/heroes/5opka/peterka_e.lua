@@ -1,6 +1,7 @@
 LinkLuaModifier("modifier_peterka_e_cast", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peterka_e_charge", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peterka_e_debuff", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_peterka_e_cooldown", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 peterka_e = class({})
@@ -25,7 +26,6 @@ function peterka_e:OnSpellStart()
 	if release_ability then
 		release_ability:UseResources( false, false, false, true )
 	end
-
 	EmitSoundOn("5opka_e", self:GetCaster())
 end
 
@@ -91,7 +91,7 @@ function modifier_peterka_e_cast:OnCreated( kv )
 	self.current_angle = self.target_angle
 	self.face_target = true
 
-	self.time = (self:GetAbility():GetSpecialValueFor("max_distance") / self:GetAbility():GetSpecialValueFor( "charge_speed" ))
+	self.time = (self:GetAbility():GetSpecialValueFor( "max_distance" ) / self:GetAbility():GetSpecialValueFor( "charge_speed" ))
 
 	self:StartIntervalThink( FrameTime() )
 	
@@ -204,23 +204,16 @@ end
 
 function modifier_peterka_e_cast:PlayEffects1()
 	self.effect_cast = ParticleManager:CreateParticleForPlayer( "particles/units/heroes/hero_primal_beast/primal_beast_onslaught_range_finder.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner() )
-	
 	ParticleManager:SetParticleControl( self.effect_cast, 0, self:GetParent():GetOrigin() )
-	
 	self:AddParticle( self.effect_cast, false, false, -1, false, false )
-	
 	self:SetEffects()
 end
 
 function modifier_peterka_e_cast:SetEffects()
 	local time = self:GetElapsedTime()
-
-	local k =  time/self.max_time
-
-	local speed_time = k*self.time
-	
+	local k = time / self.max_time
+	local speed_time = k * self.time
 	local target_pos = self.origin + self:GetParent():GetForwardVector() * self.speed * speed_time
-
 	ParticleManager:SetParticleControl( self.effect_cast, 1, target_pos )
 end
 
@@ -250,14 +243,11 @@ function modifier_peterka_e_charge:OnCreated( kv )
 	self.distance = self:GetAbility():GetSpecialValueFor( "knockback_distance" )
 	self.duration = self:GetAbility():GetSpecialValueFor( "knockback_duration" )
 	self.stun = self:GetAbility():GetSpecialValueFor( "stun_duration" )
-	local damage = self:GetAbility():GetSpecialValueFor( "knockback_damage" )
 	self.tree_radius = 100
 	self.height = 50
 	self.duration = 0.3
 
 	if not IsServer() then return end
-
-	self.damage = damage
 
 	self.target_angle = self:GetParent():GetAnglesAsVector().y
 	self.current_angle = self.target_angle
@@ -271,8 +261,6 @@ function modifier_peterka_e_charge:OnCreated( kv )
 	end
 
 	self.distance_pass = 0
-
-	self.damageTable = { attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() }
 end
 
 function modifier_peterka_e_charge:DeclareFunctions()
@@ -393,7 +381,7 @@ function modifier_peterka_e_charge:GetAuraRadius() return self:GetAbility():GetS
 function modifier_peterka_e_charge:GetAuraDuration() return 0.1 end
 function modifier_peterka_e_charge:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
 function modifier_peterka_e_charge:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
-function modifier_peterka_e_charge:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES  end
+function modifier_peterka_e_charge:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
 function modifier_peterka_e_charge:GetAuraEntityReject(target) return false end
 
 modifier_peterka_e_debuff = class({})
@@ -413,8 +401,11 @@ function modifier_peterka_e_debuff:OnDestroy()
 	self:GetParent():RemoveHorizontalMotionController( self )
 	if self:GetParent():IsDebuffImmune() or self:GetParent():IsMagicImmune() then return end
 	local damage = self:GetAbility():GetSpecialValueFor("knockback_damage")
-	ApplyDamage({ attacker = self:GetCaster(), victim = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+	if not self:GetParent():HasModifier("modifier_peterka_e_cooldown") then
+		ApplyDamage({ attacker = self:GetCaster(), victim = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+	end
 	if self:GetParent() and not self:GetParent():IsNull() then
+		self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_peterka_e_cooldown", { duration = self:GetAbility():GetSpecialValueFor("stun_duration") * (1 - self:GetParent():GetStatusResistance()) } )
 		self:GetParent():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("stun_duration") } )
 	end
 end
@@ -445,3 +436,8 @@ end
 function modifier_peterka_e_debuff:OnHorizontalMotionInterrupted()
 	self:Destroy()
 end
+
+
+modifier_peterka_e_cooldown = class({})
+function modifier_peterka_e_cooldown:IsHidden() return true end
+function modifier_peterka_e_cooldown:IsPurgable() return false end
