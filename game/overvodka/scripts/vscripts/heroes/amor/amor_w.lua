@@ -7,7 +7,7 @@ amor_w = class({})
 
 function amor_w:Precache( ctx )
     PrecacheResource( "soundfile", "soundevents/amor_sounds.vsndevts", ctx )
-    PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf", ctx )
+    PrecacheResource( "particle", "particles/amor_w.vpcf", ctx )
     PrecacheResource( "particle", "particles/units/heroes/hero_lone_druid/lone_druid_savage_roar_debuff.vpcf", ctx )
 	PrecacheResource( "particle", "particles/jugg_fall20_immortal_healing_ward_death_sparks_flash.vpcf", ctx )
 	PrecacheResource( "particle", "particles/units/heroes/hero_largo/largo_catchy_lick_heal.vpcf", ctx )
@@ -62,7 +62,7 @@ function amor_w:OnSpellStart()
 
     caster:AddNewModifier(caster, self, "modifier_amor_w_self_buff", { duration = self_buff_dur })
 
-    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    local p = ParticleManager:CreateParticle("particles/amor_w.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControl(p, 0, origin)
     ParticleManager:SetParticleControl(p, 1, tpos)
     ParticleManager:ReleaseParticleIndex(p)
