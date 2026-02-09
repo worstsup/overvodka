@@ -5175,7 +5175,12 @@
 				"base_hp"
 				{
 					"value"	"300 500 700 900"
-					"special_bonus_unique_litvin_5" "+1500"
+					"special_bonus_unique_litvin_5" "x2"
+				}
+				"base_damage"
+				{
+					"value"	"25 45 65 85"
+					"special_bonus_unique_litvin_5" "x2"
 				}
 				"xp" "40 60 80 100"
 				"gold" "50 100 150 200"
@@ -5200,10 +5205,10 @@
 		"AbilityCastRange"				"350"
 		"AbilityValues"
 		{
-				"duration" "10"
+				"duration" "8"
 				"radius"   "350"
-				"slow_as"	"-20 -40 -60 -80"
-				"slow_ms"	"-30"
+				"slow_as"  "-20 -40 -60 -80"
+				"slow_ms"  "-30"
 		}
 	}
 	//=================================================================================================================

@@ -158,8 +158,6 @@ function modifier_amor_q_trail_thinker:OnCreated()
 		self:AddParticle(p2, false, false, -1, false, false)
 	end
 
-    GridNav:DestroyTreesAroundPoint(parent:GetAbsOrigin(), 100, false)
-
     self:StartIntervalThink(self.apply_interval)
 end
 
@@ -190,9 +188,5 @@ function modifier_amor_q_trail_thinker:OnIntervalThink()
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
             enemy:AddNewModifier(caster, ult, "modifier_amor_ultimate_beer", { duration = self.debuff_dur * (1 - enemy:GetStatusResistance()), dps = ult:GetSpecialValueFor("beer_dps") })
         end
-    end
-
-    if self.tree_radius and self.tree_radius > 0 then
-        GridNav:DestroyTreesAroundPoint(parent:GetAbsOrigin(), self.tree_radius, false)
     end
 end

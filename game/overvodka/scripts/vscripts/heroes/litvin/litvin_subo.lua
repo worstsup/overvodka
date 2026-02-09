@@ -14,6 +14,7 @@ function litvin_subo:OnSpellStart()
     local point = self:GetCursorPosition()
     local duration = self:GetSpecialValueFor("duration")
     local base_hp = self:GetSpecialValueFor("base_hp")
+    local base_damage = self:GetSpecialValueFor("base_damage")
     local gold = self:GetSpecialValueFor("gold")
     local xp = self:GetSpecialValueFor("xp")
     local subo = CreateUnitByName("npc_subo", point, true, caster, caster, caster:GetTeamNumber())
@@ -27,6 +28,8 @@ function litvin_subo:OnSpellStart()
     subo:SetBaseMaxHealth(base_hp)
     subo:SetMaxHealth(base_hp)
     subo:SetHealth(base_hp)
+    subo:SetBaseDamageMin(base_damage)
+    subo:SetBaseDamageMax(base_damage)
     subo:SetMaximumGoldBounty(gold)
     subo:SetMinimumGoldBounty(gold)
     subo:SetDeathXP(xp)
@@ -109,6 +112,12 @@ end
 function modifier_subo_dance:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_OVERRIDE_ANIMATION
+    }
+end
+
+function modifier_subo_dance:CheckState()
+    return {
+        [MODIFIER_STATE_DISARMED] = true,
     }
 end
 
