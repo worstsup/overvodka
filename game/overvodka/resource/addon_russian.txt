@@ -355,6 +355,7 @@
 		"npc_dota_hero_hoodwink"			"ЛЕОН"
 		"npc_dota_hero_slardar"				"АЛЕКСАНДР ПИСТОЛЕТОВ"
 		"npc_dota_hero_bristleback"			"AmoR"
+		"npc_dota_hero_beastmaster"			"Джеффри Эпштейн"
 		
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
@@ -482,8 +483,32 @@
 		"npc_dota_hero_slardar_npedesc1"			"Сложность персонажа: СРЕДНЯЯ"
 		"npc_dota_hero_bristleback_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 
-		"dota_tooltip_ability_epstein_e"					"███████"
-		"dota_tooltip_ability_epstein_e_description"		"Джеффри ████████ ███████ ██ врага ██████ █████ наносит урон ███ █████ ████████ ████ █ ██████ ██████, оглушая его. Если ███████ ████ █ ██████ менее 18 лет, ██ █████ █████ █ █████ от макс. здоровья, ██████ ████████ бессилие."
+		
+		"dota_tooltip_ability_epstein_island"                               "Чудо-Остров"
+		"dota_tooltip_ability_epstein_island_description"                   "Джеффри создаёт коллапс вокруг себя, стягивая к нему <b><font color='#ffffff'>всех</font></b> героев и существ в радиусе %collapse_radius% (включая невосприимчивых к магии).\n\nПо завершении стяжки все затронутые мгновенно переносятся на <b><font color='#ffffff'>Чудо-Остров</font></b> на %island_duration% сек., после чего коллапс повторяется и возвращает их обратно, раскидывая в радиусе до %scatter_radius%.\n\nПока Джеффри находится на острове, он получает <b><font color='#ffffff'>снижение входящего урона</font></b> на %caster_damage_reduction_pct%%% и <b><font color='#ffffff'>сопротивление эффектам</font></b> %caster_status_resistance%%%.\n\nВраги на острове находятся в состоянии <b><font color='#ffffff'>привязки</font></b>."
+		"dota_tooltip_ability_epstein_island_collapse_radius"                "РАДИУС КОЛЛАПСА:"
+		"dota_tooltip_ability_epstein_island_island_duration"                "ДЛИТЕЛЬНОСТЬ ОСТРОВА:"
+		"dota_tooltip_ability_epstein_island_scatter_radius"                 "РАЗБРОС ПОСЛЕ ТЕЛЕПОРТА:"
+		"dota_tooltip_ability_epstein_island_caster_damage_reduction_pct"    "%СНИЖЕНИЕ ВХОДЯЩЕГО УРОНА:"
+		"dota_tooltip_ability_epstein_island_caster_status_resistance"       "%СОПРОТИВЛЕНИЕ ЭФФЕКТАМ:"
+
+		"dota_tooltip_ability_epstein_r"                               "Дом"
+		"dota_tooltip_ability_epstein_r_description"                   "Эпштейн ████████████ █ ████████ █████ <b><font color='#ffffff'>Дом</font></b> ██ ███ █████. ███ притягивает █ ████ всех врагов █ ███████ ███ ██ ████████ ████████.\n\nЕсли ████ враг ████████ близко к дому █ ██ ████████ ███ ███ █ ███████ ███ ███, ██ ████ вылетает рука, █ █████ █████████ затягивает внутрь.\n\nЗапертые █ ████ враги ████████ █ █████, оглушаются █ ████████ периодический урон ██ ████████ ████████ █ █████████."
+		"dota_tooltip_ability_epstein_r_house_duration"                 "ДЛИТЕЛЬНОСТЬ ДОМА:"
+		"dota_tooltip_ability_epstein_r_pull_radius"                    "РАДИУС ПРИТЯЖЕНИЯ:"
+		"dota_tooltip_ability_epstein_r_pull_speed"                     "СКОРОСТЬ ПРИТЯЖЕНИЯ:"
+		"dota_tooltip_ability_epstein_r_grab_radius"                    "РАДИУС ЗАХВАТА:"
+		"dota_tooltip_ability_epstein_r_grab_windup"                    "ВРЕМЯ ДО ЗАХВАТА:"
+		"dota_tooltip_ability_epstein_r_imprison_damage_base"           "БАЗОВЫЙ УРОН:"
+		"dota_tooltip_ability_epstein_r_imprison_damage_pct"            "%УРОН ОТ МАКС. ЗДОРОВЬЯ:"
+
+		"dota_tooltip_ability_epstein_e"                          "Танец"
+		"dota_tooltip_ability_epstein_e_description"              "███ █████████ Джеффри начинает █████████ █ ██████, получая █████ █ скорости передвижения, ██ ██ не может атаковать.\n████ ██████, █████ ████████ накапливает █████ █ урон: █████ ██ █████████.\n█████ ████████ ██████████ бонус █ █████ сохраняется ██ ███████ ███."
+		"dota_tooltip_ability_epstein_e_move_speed_bonus_pct"     "%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
+		"dota_tooltip_ability_epstein_e_damage_per_sec"           "ДОП. УРОН В СЕКУНДУ:"
+		"dota_tooltip_ability_epstein_e_max_bonus_damage"         "МАКС. БОНУС К УРОНУ:"
+		"dota_tooltip_ability_epstein_e_hold_duration"            "ДЛИТЕЛЬНОСТЬ УРОНА:"
+		"dota_tooltip_ability_epstein_e_cooldown"                 "ПЕРЕЗАРЯДКА:"
 
 		"dota_tooltip_ability_amor_innate"				"Выживалово"
 		"dota_tooltip_ability_amor_innate_description"              "Когда здоровье Эдуарда падает ниже %hp_threshold_pct%%%, он получает нормальное развеивание, восстанавливая здоровье и получая доп. скорость передвижения.\nТакже каждый раз получает постоянный заряд, дающий бонус к урону и скорости атаки, а способность <b><font color='#ffffff'>Добыча</font></b> начинает приносить больше золота.\n<h1>Изменения для режима 5x5</h1>Каждый заряд даёт вдвое меньше перманентных бонусов."

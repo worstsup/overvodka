@@ -409,7 +409,6 @@ end
 -- Set up fountain regen
 ---------------------------------------------------------------------------
 function OvervodkaGameMode:SetUpFountains()
-
 	LinkLuaModifier( "modifier_fountain_aura_lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier( "modifier_fountain_aura_effect_lua", LUA_MODIFIER_MOTION_NONE )
 

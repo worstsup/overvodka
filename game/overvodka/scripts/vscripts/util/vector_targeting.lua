@@ -6,7 +6,7 @@ local ORDER_DEBUG = false
 local function dprint(...) if ORDER_DEBUG then print("[ORDER]", ...) end end
 
 local MOVEMENT_FIX = {
-    modifier_peterka_e_cast   = true,
+    modifier_peterka_e_cast = true,
     modifier_peterka_e_charge = true,
 	modifier_invincible_w = true,
 	modifier_macan_r = true,
@@ -14,6 +14,7 @@ local MOVEMENT_FIX = {
 	modifier_shkolnik_r = true,
 	modifier_prince_r = true,
 	modifier_generic_vector_target = true,
+    modifier_epstein_innate_phase = true,
 }
 
 LEON_INTERNAL_DISARM_MODS = LEON_INTERNAL_DISARM_MODS or {

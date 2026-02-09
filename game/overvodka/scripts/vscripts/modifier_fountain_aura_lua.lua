@@ -47,6 +47,9 @@ function modifier_fountain_aura_lua:OnIntervalThink()
 				local new_pos = enemy:GetAbsOrigin() + direction * (1600 - distance)
 				FindClearSpaceForUnit(enemy, new_pos, true)
 			end
+			if enemy:HasModifier("modifier_epstein_island_on_island") then
+				self:GetParent():AddNewModifier(self:GetParent(), nil, "modifier_generic_disarmed_lua", {duration = 0.1})
+			end
 		end
 	end
 end

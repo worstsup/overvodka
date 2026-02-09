@@ -18073,5 +18073,127 @@
 			}
 		}
 	}
+	"epstein_innate"
+	{
+		"BaseClass"              "ability_lua"
+		"ScriptFile"             "heroes/epstein/epstein_innate"
+		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"     "void_spirit_dissimilate"
+		"AbilityCooldown"        "60"
+		"IsBreakable"            "1"
+		"Innate"				 "1"
+		"MaxLevel"				 "1"
+		"AbilityValues"
+		{
+			"trigger_hp_pct" 	"1"
+			"phase_duration" 	"1.1"
+			"blink_radius" 		"700"
+			"heal_pct" 			"15"
+			"post_invuln" 		"0.20"
+		}
+	}
+	"epstein_island"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/epstein/epstein_island"
+		"AbilityType"           "ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"    "amor_e"
+		"AbilityCastPoint"      "1.0"
+		"AbilityCooldown"       "90 85 80"
+		"AbilityManaCost"       "200"
+		"AbilityValues"
+		{
+			"collapse_radius"
+			{
+				"value"	"900"
+				"affected_by_aoe_increase"	"1"
+			}
+			"collapse_duration" 	"0.5"
+
+			"island_duration" 		"10"
+			"island_effect_radius" 	"2200"
+			"island_aura_radius" 	"1400"
+			"return_collapse_duration" "0.25"
+
+			"scatter_radius" 		"650"
+			"scatter_min_radius" 	"250"
+			"scatter_duration" 		"0.45"
+			"scatter_height" 		"220"
+			"caster_damage_reduction_pct" "35 40 45"
+			"caster_status_resistance" "30 40 50"
+
+			"AbilityCastRange"
+			{
+				"value"	"900"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+	"epstein_e"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/epstein/epstein_e"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"            "ebanko_e"
+		"AbilityCooldown"               "13 12 11 10"
+		"AbilityValues"
+		{
+			"move_speed_bonus_pct" "12"
+			"damage_per_sec"      "5 10 15 20"
+			"max_bonus_damage"    "50 100 150 200"
+			"hold_duration"       "10"
+		}
+	}
+	"epstein_r"
+	{
+		"BaseClass"             "ability_lua"
+		"ScriptFile"            "heroes/epstein/epstein_r"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"    "amor_r"
+		"AbilityCastRange"      "900"
+		"AbilityCastPoint"      "0.2"
+		"AbilityCooldown"       "50 45 40 35"
+		"AbilityManaCost"       "100 130 160 190"
+		"AbilityValues"
+		{
+			"house_duration"	"12"
+			"pull_radius"
+			{
+				"value"	"900"
+				"affected_by_aoe_increase"	"1"
+			}
+			"pull_speed" 		"100 120 140 160"
+			"grab_radius"
+			{
+				"value"	"550 575 600 625"
+				"affected_by_aoe_increase"	"1"
+			}
+			"grab_windup" 		"2.0" 
+
+			"warning_interval" 	"0.15"
+			"escape_cd" 		"0.6"
+			"min_pull_distance" "60"
+
+			"grab_projectile_speed" "1200"
+			"hand_pull_speed" 	"1200"
+			"hand_pull_stop_distance" "80"
+			"hand_pull_max_duration" "1.5"
+
+			"imprison_damage_interval" "0.5"
+			"imprison_damage_base" "10 20 30 40"
+			"imprison_damage_pct" "2.5 3.0 3.5 4.0"
+
+			"release_distance" "180"
+		}
+	}
 
 }

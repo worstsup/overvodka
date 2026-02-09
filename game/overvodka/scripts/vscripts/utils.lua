@@ -4,6 +4,7 @@ LinkLuaModifier("modifier_sans_arcana", 				"modifiers/modifier_sans_arcana", 		
 LinkLuaModifier("modifier_invincible_arcana", 			"modifiers/modifier_invincible_arcana", 			 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_pet", 				"modifiers/modifier_overvodka_pet", 				 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_arc_lua",				"modifier_generic_arc_lua", 						 LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_generic_disarmed_lua",		"modifier_generic_disarmed_lua",					 LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_zhenya_boss", 				"units/zhenya_boss", 				 				 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_running", 		"units/zhenya_boss", 				 		 		 LUA_MODIFIER_MOTION_NONE)
