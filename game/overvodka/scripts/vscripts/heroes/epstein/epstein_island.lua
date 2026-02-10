@@ -329,17 +329,10 @@ function modifier_epstein_island_controller:TeleportAndScatterSet(entindex_set, 
 
             local dist = RandomInt(self.scatter_min_radius, self.scatter_radius)
             local kv = {
-                duration = self.scatter_duration,
-                distance = dist,
-                height = self.scatter_height,
-                dir_x = dir2.x,
-                dir_y = dir2.y,
-                fix_end = 1,
-                fix_duration = 1,
-                fix_height = 1,
-                isStun = 1,
-                isRestricted = 1,
-                isForward = 0,
+                duration = self.scatter_duration, distance = dist, height = self.scatter_height,
+                dir_x = dir2.x, dir_y = dir2.y,
+                fix_end = 1, fix_duration = 1, fix_height = 1,
+                isStun = 1, isRestricted = 0, isForward = 0,
                 activity = ACT_DOTA_FLAIL,
             }
 
@@ -503,17 +496,28 @@ function modifier_epstein_island_caster_buff:IsPurgable() return false end
 function modifier_epstein_island_caster_buff:OnCreated()
     self.ability = self:GetAbility()
     if not self.ability then return end
+    self.talent = self:GetCaster():HasTalent("special_bonus_unique_epstein_8")
     self.damage_reduction_pct = self.ability:GetSpecialValueFor("caster_damage_reduction_pct")
     self.status_resist = self.ability:GetSpecialValueFor("caster_status_resistance")
     local effect_cast = ParticleManager:CreateParticle( "particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(1,0,0) )
 	self:AddParticle(effect_cast, false, false, -1, false, false)
+    
+    if not self.talent then return end
+    local bkb = ParticleManager:CreateParticle("particles/items_fx/black_king_bar_avatar.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:AddParticle(bkb, false, false, -1, false, false)
 end
 
 function modifier_epstein_island_caster_buff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_STATUS_RESISTANCE,
+    }
+end
+
+function modifier_epstein_island_caster_buff:CheckState()
+    return {
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = self.talent
     }
 end
 

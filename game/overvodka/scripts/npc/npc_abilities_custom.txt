@@ -18073,22 +18073,81 @@
 			}
 		}
 	}
+	//===================================================================================================================
+	//												Jeffrey Epstein
+	//===================================================================================================================
+	"special_bonus_unique_epstein_1"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_2"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_3"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_4"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_5"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_6"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_7"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	"special_bonus_unique_epstein_8"
+	{
+        "BaseClass"						"special_bonus_base"														
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	}
+	//=================================================================================================================
+	// Шкижмеш
+	//=================================================================================================================
 	"epstein_innate"
 	{
 		"BaseClass"              "ability_lua"
 		"ScriptFile"             "heroes/epstein/epstein_innate"
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"     "void_spirit_dissimilate"
-		"AbilityCooldown"        "60"
+		"AbilityCooldown"        "60 55 50 45"
 		"IsBreakable"            "1"
 		"Innate"				 "1"
-		"MaxLevel"				 "1"
+		"MaxLevel"				 "4"
+		"DependentOnAbility"	 "epstein_island"
 		"AbilityValues"
 		{
 			"trigger_hp_pct" 	"1"
 			"phase_duration" 	"1.1"
 			"blink_radius" 		"700"
-			"heal_pct" 			"15"
+			"heal_pct"
+			{
+				"value"	"15"
+				"special_bonus_unique_epstein_3"	"+10"
+			}
 			"post_invuln" 		"0.20"
 		}
 	}
@@ -18169,6 +18228,7 @@
 			"pull_radius"
 			{
 				"value"	"900"
+				"special_bonus_unique_epstein_4"	"+200"
 				"affected_by_aoe_increase"	"1"
 			}
 			"pull_speed" 		"100 120 140 160"

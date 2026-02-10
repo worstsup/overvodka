@@ -43,7 +43,6 @@ end
 
 function modifier_epstein_innate:OnTakeDamage(params)
     if not IsServer() then return end
-
     local parent = self:GetParent()
     if params.unit ~= parent then return end
     if not _IsValidAliveHero(parent) then return end
@@ -58,7 +57,6 @@ function modifier_epstein_innate:OnTakeDamage(params)
     if not params.damage or params.damage <= 0 then return end
 
     local trigger_hp_pct = ability:GetSpecialValueFor("trigger_hp_pct")
-    if trigger_hp_pct <= 0 then trigger_hp_pct = 1 end
 
     local hp = parent:GetHealth()
     local maxhp = parent:GetMaxHealth()
@@ -67,18 +65,14 @@ function modifier_epstein_innate:OnTakeDamage(params)
     local hp_pct = (hp / maxhp) * 100.0
     if hp_pct > trigger_hp_pct then return end
 
-    local phase_duration = ability:GetSpecialValueFor("phase_duration")
-    if phase_duration <= 0 then phase_duration = 1.1 end
-
     local origin = parent:GetAbsOrigin()
 
     parent:AddNewModifier(parent, ability, "modifier_epstein_innate_phase", {
-        duration = phase_duration,
+        duration = ability:GetSpecialValueFor("phase_duration"),
         center_x = origin.x, center_y = origin.y, center_z = origin.z
     })
 
     ability:UseResources(false, false, false, true)
-
     parent:EmitSound("Hero_VoidSpirit.Dissimilate.Cast")
 end
 

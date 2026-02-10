@@ -510,6 +510,15 @@
 		"dota_tooltip_ability_epstein_e_hold_duration"            "ДЛИТЕЛЬНОСТЬ УРОНА:"
 		"dota_tooltip_ability_epstein_e_cooldown"                 "ПЕРЕЗАРЯДКА:"
 
+		"dota_tooltip_ability_special_bonus_unique_epstein_1"		""
+		"dota_tooltip_ability_special_bonus_unique_epstein_2"		""
+		"dota_tooltip_ability_special_bonus_unique_epstein_3"		"+{s:bonus_heal_pct}% к восстановлению макс. здоровья от Инсценирование"
+		"dota_tooltip_ability_special_bonus_unique_epstein_4"		"+{s:bonus_pull_radius} к радиусу притяжения Дом"
+		"dota_tooltip_ability_special_bonus_unique_epstein_5"		""
+		"dota_tooltip_ability_special_bonus_unique_epstein_6"		""
+		"dota_tooltip_ability_special_bonus_unique_epstein_7"		""
+		"dota_tooltip_ability_special_bonus_unique_epstein_8"		"Герой невосприимчив к эффектам на острове"
+
 		"dota_tooltip_ability_amor_innate"				"Выживалово"
 		"dota_tooltip_ability_amor_innate_description"              "Когда здоровье Эдуарда падает ниже %hp_threshold_pct%%%, он получает нормальное развеивание, восстанавливая здоровье и получая доп. скорость передвижения.\nТакже каждый раз получает постоянный заряд, дающий бонус к урону и скорости атаки, а способность <b><font color='#ffffff'>Добыча</font></b> начинает приносить больше золота.\n<h1>Изменения для режима 5x5</h1>Каждый заряд даёт вдвое меньше перманентных бонусов."
 		"dota_tooltip_ability_amor_innate_bonus_regen"              "ДОП. ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ:"

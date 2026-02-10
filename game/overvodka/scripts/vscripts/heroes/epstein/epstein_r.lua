@@ -39,11 +39,11 @@ function modifier_epstein_r_house:IsHidden() return true end
 function modifier_epstein_r_house:IsPurgable() return false end
 
 function modifier_epstein_r_house:OnCreated(kv)
-    if not IsServer() then return end
-
     self.pull_radius = self:GetAbility():GetSpecialValueFor("pull_radius")
     self.grab_radius = self:GetAbility():GetSpecialValueFor("grab_radius")
     self.warning_interval = self:GetAbility():GetSpecialValueFor("warning_interval")
+
+    if not IsServer() then return end
 
     self:StartIntervalThink(self.warning_interval)
 end
@@ -61,11 +61,9 @@ function modifier_epstein_r_house:OnIntervalThink()
         return
     end
 
-    local center = parent:GetAbsOrigin()
-
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
-        center,
+        parent:GetAbsOrigin(),
         nil,
         self.grab_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
