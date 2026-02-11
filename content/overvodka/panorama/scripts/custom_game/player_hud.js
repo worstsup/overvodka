@@ -7,6 +7,7 @@ const TeamLeavedEncounter = $("#TeamLeavedEncounter");
 const DotaHUDPanel = GetDotaHud();
 let SilvernameFacet2Target = -1;
 let DamagePanel = null;
+let EpsteinWSquares = {};
 
 let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
 let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
@@ -943,6 +944,83 @@ function DeleteDamageTitlePanel(entIndex) {
     }
 }
 
+function OnEpsteinWSquareStart(event) {
+    if (!event || event.entindex == null) return;
+    EpsteinWSquares[event.entindex] = true;
+}
+
+function OnEpsteinWSquareEnd(event) {
+    if (!event || event.entindex == null) return;
+    delete EpsteinWSquares[event.entindex];
+    DeleteEpsteinWSquarePanel(event.entindex);
+}
+
+function GetOrCreateEpsteinWSquarePanel(entIndex) {
+    const id = `epstein_w_square_${entIndex}`;
+    let panel = Container.FindChildTraverse(id);
+    if (panel) return panel;
+
+    panel = $.CreatePanel("Panel", Container, id);
+    panel.hittest = false;
+    panel.hittestchildren = false;
+    panel.BLoadLayout("file://{resources}/layout/custom_game/heroes/epstein/epstein_w_square.xml", false, false);
+    return panel;
+}
+
+function DeleteEpsteinWSquarePanel(entIndex) {
+    const id = `epstein_w_square_${entIndex}`;
+    const panel = Container.FindChildTraverse(id);
+    if (panel) panel.DeleteAsync(0);
+}
+
+const SQUARE_SIZE = 180;
+const Z_OFFSET    = 110;
+
+function UpdateEpsteinWSquares() {
+    UISCALE_X = DotaHUDPanel.actualuiscale_x;
+    UISCALE_Y = DotaHUDPanel.actualuiscale_y;
+
+    for (const entStr in EpsteinWSquares) {
+        const ent = parseInt(entStr);
+
+        if (!Entities.IsValidEntity(ent)) {
+            DeleteEpsteinWSquarePanel(ent);
+            delete EpsteinWSquares[entStr];
+            continue;
+        }
+
+        const has = HasModifierOnUnit(ent, "modifier_epstein_w_debuff");
+        if (!has) {
+            DeleteEpsteinWSquarePanel(ent);
+            delete EpsteinWSquares[entStr];
+            continue;
+        }
+
+        const panel = GetOrCreateEpsteinWSquarePanel(ent);
+
+        const origin = Entities.GetAbsOrigin(ent);
+        const sx = Game.WorldToScreenX(origin[0], origin[1], origin[2] + Z_OFFSET);
+        const sy = Game.WorldToScreenY(origin[0], origin[1], origin[2] + Z_OFFSET);
+
+        const bIsOutScreen = (GameUI.GetScreenWorldPosition(sx, sy) == null);
+        if (sx === -1 || sy === -1 || bIsOutScreen) {
+            panel.visible = false;
+            continue;
+        }
+
+        panel.visible = true;
+
+        const half = (SQUARE_SIZE * 0.5);
+
+        const x = (sx - (half * UISCALE_Y)) / UISCALE_X;
+        const y = (sy - (half * UISCALE_Y)) / UISCALE_Y;
+
+        panel.style.position = Math.floor(x) + "px " + Math.floor(y) + "px 0";
+    }
+
+    $.Schedule(0, UpdateEpsteinWSquares);
+}
+
 (function(){
     StartSecondaryAbilities();
 
@@ -953,8 +1031,11 @@ function DeleteDamageTitlePanel(entIndex) {
 
     GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);
-
     UpdateSilvernameFacet2Damage();
+
+    GameEvents.Subscribe("epstein_w_square_start", OnEpsteinWSquareStart);
+    GameEvents.Subscribe("epstein_w_square_end", OnEpsteinWSquareEnd);
+    UpdateEpsteinWSquares();
 
     SubscribeAndFireNetTableByKey("players", `player_${LocalPlayer}_double_rating_time`, function(v){
         DoubleRatingLastTime = v.time

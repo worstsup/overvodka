@@ -225,6 +225,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_hoodwink": "file://{images}/heroes/npc_dota_hero_leon.png",
 			"npc_dota_hero_slardar": "file://{images}/heroes/npc_dota_hero_pistol.png",
 			"npc_dota_hero_bristleback": "file://{images}/heroes/npc_dota_hero_amor.png",
+			"npc_dota_hero_beastmaster": "file://{images}/heroes/npc_dota_hero_epstein.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
@@ -301,6 +302,7 @@ function UpdatePlayer( teamPanel, playerId )
 			"hoodwink": "file://{images}/heroes/npc_dota_hero_leon.png",
 			"slardar": "file://{images}/heroes/npc_dota_hero_pistol.png",
 			"bristleback": "file://{images}/heroes/npc_dota_hero_amor.png",
+			"beastmaster": "file://{images}/heroes/npc_dota_hero_epstein.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {

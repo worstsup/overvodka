@@ -151,6 +151,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 				spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
 				spawnedUnit.weapon:SetModelScale(0.5)
 			end
+			if spawnedUnit:GetUnitName() == "npc_dota_hero_beastmaster" then
+				spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/epstein/folder.vmdl"})
+				spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+				spawnedUnit.weapon:SetParent(spawnedUnit, "attach_weapon")
+				spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
+				spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
+				spawnedUnit.weapon:SetModelScale(0.5)
+			end
 			if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
 				spawnedUnit.voice_level = 0
 			end
@@ -242,14 +250,6 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
 			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
-		end
-		if spawnedUnit:GetUnitName() == "npc_dota_hero_bloodseeker" then
-			local crown = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_gameplay/crown001.vmdl"})
-				crown:FollowEntity(spawnedUnit, true)
-				crown:SetParent(spawnedUnit, "attach_head")
-				crown:SetLocalOrigin(Vector(0, 0, 0))
-				crown:SetLocalAngles(0, 0, 0)
-				crown:SetModelScale(0.255)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_invoker" then
 			local cigarette = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/dvoreckov/cigarette.vmdl"})

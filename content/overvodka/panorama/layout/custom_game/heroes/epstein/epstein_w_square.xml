@@ -1,0 +1,7 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/epstein_w_square.css" />
+    </styles>
+
+    <Panel class="EpsteinWBlackSquare" hittest="false" hittestchildren="false" />
+</root>

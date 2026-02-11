@@ -1597,148 +1597,103 @@
 		{
 			"default"
 			{
-				"PortraitPosition"		"889.249329 -403.007111 112.000000"
-				"PortraitAngles"		"1.004829 154.776840 0.000000"
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"1.290534 155.100006 0.000000"
 				"PortraitFOV"		"21.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"econ_set_preview"
 			{
-				"PortraitPosition"		"980.426575 -309.133179 57.000000"
-				"PortraitAngles"		"357.625549 161.677124 0.000000"
+				"PortraitPosition"		"691.278076 -319.666412 170.872559"
+				"PortraitAngles"		"9.515344 154.850647 0.000000"
 				"PortraitFOV"		"14.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"summons"
-			{
-				"PortraitPosition"		"753.251526 -348.029297 111.106148"
-				"PortraitAngles"		"0.384700 154.136078 0.000000"
-				"PortraitFOV"		"19.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_weapon"
-			{
-				"PortraitPosition"		"889.249329 -403.007111 112.000000"
-				"PortraitAngles"		"1.004210 154.701965 0.000000"
-				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_head"
 			{
-				"PortraitPosition"		"889.249329 -403.007111 112.000000"
-				"PortraitAngles"		"0.443740 154.900711 0.000000"
-				"PortraitFOV"		"13.000000"
+				"PortraitPosition"		"770.615662 -369.589996 525.688171"
+				"PortraitAngles"		"29.491228 154.279053 0.000000"
+				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
-			"slot_shoulder"
+			"slot_legs"
 			{
-				"PortraitPosition"		"814.987427 -403.007111 254.434021"
-				"PortraitAngles"		"9.889145 152.773453 0.000000"
-				"PortraitFOV"		"15.000000"
+				"PortraitPosition"		"670.542358 -369.589996 397.294556"
+				"PortraitAngles"		"24.954285 151.027725 0.000000"
+				"PortraitFOV"		"22.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_arms"
 			{
-				"PortraitPosition"		"889.249329 -403.007111 112.000000"
-				"PortraitAngles"		"1.010994 155.533844 0.000000"
-				"PortraitFOV"		"15.000000"
+				"PortraitPosition"		"799.700012 -369.589996 450.985962"
+				"PortraitAngles"		"24.950283 155.100006 0.000000"
+				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
-			"slot_belt"
+			"slot_back"
 			{
-				"PortraitPosition"		"889.249329 -403.007111 112.000000"
-				"PortraitAngles"		"1.000426 154.248901 0.000000"
+				"PortraitPosition"		"703.144409 -369.589996 362.296753"
+				"PortraitAngles"		"21.297022 152.166733 0.000000"
 				"PortraitFOV"		"18.000000"
 				"PortraitFar"		"2000.000000"
 			}
-			"slot_ability2"
+			"slot_misc"
 			{
-				"PortraitPosition"		"799.700012 -369.589996 84.514008"
-				"PortraitAngles"		"355.256439 152.803192 0.000000"
-				"PortraitFOV"		"11.000000"
-				"PortraitFar"		"2000.000000"
-			}
-			"slot_summon"
-			{
-				"PortraitPosition"		"799.700012 -369.589996 35.204620"
-				"PortraitAngles"		"358.717468 155.409393 0.000000"
-				"PortraitFOV"		"12.000000"
+				"PortraitPosition"		"799.700012 -369.589996 223.297180"
+				"PortraitAngles"		"10.582209 155.100006 0.000000"
+				"PortraitFOV"		"17.000000"
 				"PortraitFar"		"2000.000000"
 			}
 			"slot_taunt"
 			{
 				"PortraitPosition"		"799.700012 -369.589996 333.137512"
-				"PortraitAngles"		"13.346159 155.375107 0.000000"
-				"PortraitFOV"		"28.000000"
+				"PortraitAngles"		"14.299254 155.375107 0.000000"
+				"PortraitFOV"		"26.000000"
 				"PortraitFar"		"2000.000000"
 			}
 		}
-		"PortraitPlayIdleExpression"		"0"
-		"PortraitHideParticles"		"0"
-		"PortraitHideDropShadow"		"0"
-		"PortraitDesaturateParticles"		"0"
-		"PortraitDesaturateHero"		"1"
-		"SummonPosition"		"-41.520950 25.550430 0.000000"
 		"hero_presets"
 		{
 			"Default"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
-			"slot_weapon"
-			{
-				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
-			}
 			"slot_head"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
-			"slot_shoulder"
+			"slot_legs"
 			{
-				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+				"PortraitHeroRotation"		"-0.000000 25.072338 0.000000"
 			}
 			"slot_arms"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
-			"slot_belt"
+			"slot_back"
 			{
-				"PortraitHeroRotation"		"-0.000000 -18.739155 0.000000"
+				"PortraitHeroRotation"		"-0.000000 120.577911 0.000000"
 			}
-			"slot_ability2"
+			"slot_misc"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
-			}
-			"slot_summon"
-			{
-				"PortraitHeroRotation"		"-0.000000 15.910810 0.000000"
 			}
 			"slot_taunt"
 			{
 				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
 			}
 		}
-		"PortraitVignetteItem"		"0"
 		"EffectDissolveColor"		"0.550000 0.280000 0.210000"
+		"PortraitPlayIdleExpression"		"0"
+		"PortraitHideParticles"		"0"
+		"PortraitHideDropShadow"		"0"
+		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateHero"		"1"
+		"PortraitVignetteItem"		"0"
 		"PortraitBackgroundMap"		"maps/ui/dota_hud_loadout_2022.vmap"
 		"PortraitAllowAnimatedPortrait"		"1"
 		"GodraysFXColor"		"0.600000 0.282338 0.200000"
 		"GroundfogFXColor"		"0.600000 0.282338 0.200000"
-		"summons"
-		{
-			"npc_dota_beastmaster_hawk"
-			{
-				"Position"		"-69.028854 100.273361 108.727882"
-				"Angles"		"-0.000000 -42.524204 0.000000"
-				"Scale"		"0.689454"
-			}
-			"npc_dota_beastmaster_boar"
-			{
-				"Position"		"42.533463 -43.181091 0.000000"
-				"Angles"		"-0.000000 5.067359 0.000000"
-				"Scale"		"0.650458"
-			}
-		}
 	}
 	"npc_dota_hero_bloodseeker"
 	{

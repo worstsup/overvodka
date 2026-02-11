@@ -9,9 +9,10 @@ epstein_r = class({})
 
 function epstein_r:Precache(ctx)
     PrecacheResource("particle", "particles/epstein_r_warn.vpcf", ctx)
-    PrecacheResource("particle", "particles/azazin_q.vpcf", ctx)
+    PrecacheResource("particle", "particles/epstein_hand.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/epstein_sounds.vsndevts", ctx)
     PrecacheUnitByNameSync("npc_epstein_house", ctx)
+    PrecacheUnitByNameSync("npc_epstein_clone", ctx)
 end
 
 function epstein_r:OnSpellStart()
@@ -19,7 +20,7 @@ function epstein_r:OnSpellStart()
 
     local caster = self:GetCaster()
     local point = self:GetCursorPosition()
-
+    self.already_playing_sound = false
     local house_duration = self:GetSpecialValueFor("house_duration")
 
     local house = CreateUnitByName("npc_epstein_house", point, true, caster, caster, caster:GetTeamNumber())
@@ -211,7 +212,10 @@ function modifier_epstein_r_grab_warning:OnCreated(kv)
 
     local p = ParticleManager:CreateParticle("particles/epstein_r_warn.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent())
     self:AddParticle(p, false, false, -1, false, false)
-
+    if self:GetParent():IsRealHero() and not self:GetAbility().already_playing_sound then
+        self:GetParent():EmitSound("epstein_warning")
+        self:GetAbility().already_playing_sound = true
+    end
     self.fired = false
     self:StartIntervalThink(FrameTime())
 end
@@ -267,7 +271,7 @@ function modifier_epstein_r_grab_warning:FireHandProjectile(house, target)
         Target = target,
         Source = house,
         Ability = self:GetAbility(),
-        EffectName = "particles/azazin_q.vpcf",
+        EffectName = "particles/epstein_hand.vpcf",
         iMoveSpeed = self.grab_projectile_speed,
         bDodgeable = true,
         bVisibleToEnemies = true,
@@ -279,10 +283,15 @@ function modifier_epstein_r_grab_warning:FireHandProjectile(house, target)
         }
     }
     ProjectileManager:CreateTrackingProjectile(info)
+    house:EmitSound("Item.Harpoon.Cast")
 end
 
 function modifier_epstein_r_grab_warning:OnDestroy()
     if not IsServer() then return end
+    self:GetParent():StopSound("epstein_warning")
+    if self:GetAbility() then
+        self:GetAbility().already_playing_sound = false
+    end
 end
 
 modifier_epstein_r_grab_cd = class({})
@@ -305,7 +314,7 @@ function epstein_r:OnProjectileHit_ExtraData(target, location, extraData)
     if target:HasModifier("modifier_epstein_r_imprisoned") or target:HasModifier("modifier_epstein_r_hand_pull") then
         return true
     end
-
+    target:EmitSound("Item.Harpoon.Target")
     target:AddNewModifier(house, self, "modifier_epstein_r_hand_pull", {
         duration = self:GetSpecialValueFor("hand_pull_max_duration"),
         house_entindex = house:entindex()
@@ -433,25 +442,17 @@ function modifier_epstein_r_imprisoned:OnCreated(kv)
     end
 
     local parent = self:GetParent()
-
     parent:AddNoDraw()
 
-    if self.house and not self.house:IsNull() and IsValidEntity(self.house) then
-        parent:SetAbsOrigin(self.house:GetAbsOrigin())
-    end
-
-    self:StartIntervalThink(self.damage_interval)
+    self._acc = 0
+    self:StartIntervalThink(FrameTime())
 end
 
 function modifier_epstein_r_imprisoned:OnIntervalThink()
     if not IsServer() then return end
 
     local parent = self:GetParent()
-    if not parent or parent:IsNull() or not IsValidEntity(parent) then
-        self:Destroy()
-        return
-    end
-    if not parent:IsAlive() then
+    if not parent or parent:IsNull() or not IsValidEntity(parent) or not parent:IsAlive() then
         self:Destroy()
         return
     end
@@ -461,6 +462,12 @@ function modifier_epstein_r_imprisoned:OnIntervalThink()
         self:Destroy()
         return
     end
+
+    parent:SetAbsOrigin(house:GetAbsOrigin())
+
+    self._acc = (self._acc or 0) + FrameTime()
+    if self._acc < (self.damage_interval or 0.5) then return end
+    self._acc = 0
 
     local caster_hero = self:GetAbility():GetCaster()
     if not caster_hero or caster_hero:IsNull() or not IsValidEntity(caster_hero) then
@@ -474,7 +481,7 @@ function modifier_epstein_r_imprisoned:OnIntervalThink()
 end
 
 function modifier_epstein_r_imprisoned:CheckState()
-    local state = {
+    return {
         [MODIFIER_STATE_OUT_OF_GAME] = true,
         [MODIFIER_STATE_FROZEN] = true,
         [MODIFIER_STATE_NIGHTMARED] = true,
@@ -487,7 +494,6 @@ function modifier_epstein_r_imprisoned:CheckState()
         [MODIFIER_STATE_UNSELECTABLE] = true,
         [MODIFIER_STATE_NOT_ON_MINIMAP] = true,
     }
-    return state
 end
 
 function modifier_epstein_r_imprisoned:DeclareFunctions()

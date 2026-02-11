@@ -50,6 +50,7 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_nyx_assassin",
     "npc_dota_hero_hoodwink",
     "npc_dota_hero_slardar",
+    "npc_dota_hero_beastmaster",
 ]
 
 function FixModelScene(){

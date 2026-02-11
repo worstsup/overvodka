@@ -113,7 +113,7 @@ function modifier_vihor_r_debuff:OnCreated(kv)
     self:GetParent():Interrupt()
     self:GetParent():SetIdleAcquire(false)
     self:GetParent():SetAcquisitionRange(0)
-    self:GetParent():SetForceAttackTarget(target)
+    self:GetParent():SetForceAttackTarget(nil)
     self:IssueAttackOrder()
     self:StartIntervalThink(self.interval)
 end
@@ -163,6 +163,14 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
     local caster = self:GetCaster()
+
+    if not parent or parent:IsNull() then self:Destroy(); return end
+    if not caster or caster:IsNull() then self:Destroy(); return end
+    if not caster:HasModifier("modifier_vihor_r") then self:Destroy(); return end
+
+    local r = self.radius or (self:GetAbility() and self:GetAbility():GetSpecialValueFor("radius")) or 0
+    local dist = (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D()
+    if dist > r then self:Destroy(); return end
 
     local dps = self.tick_damage * parent:GetMaxHealth() * 0.01
     local dmg = dps * self.interval

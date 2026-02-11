@@ -1,0 +1,10 @@
+.EpsteinWBlackSquare
+{
+    width: 180px;
+    height: 180px;
+
+    background-color: #000000;
+    opacity: 0.99;
+
+    /* border-radius: 6px; */
+}

@@ -242,6 +242,7 @@ PrecacheUtils.models = {
 		"models/kachok/kachok.vmdl",
 		"models/stray/stray.vmdl",
 		"models/azazin/azazin.vmdl",
+		"models/epstein/folder.vmdl",
 		"models/bratishkin/bratishkin.vmdl",
 		"tamaev/1_tamaev_normal_normal_1024_lod1.vmdl",
 		"models/evelone/evelone.vmdl",

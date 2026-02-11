@@ -12,7 +12,7 @@ LinkLuaModifier("modifier_generic_arc_lua",              "modifier_generic_arc_l
 epstein_island = class({})
 
 function epstein_island:Precache(ctx)
-    PrecacheResource("particle", "particles/dark_seer_vacuum_new.vpcf", ctx)
+    PrecacheResource("particle", "particles/epstein_island_pull.vpcf", ctx)
     PrecacheResource("particle", "particles/epstein_island_screen_effect.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/epstein_sounds.vsndevts", ctx)
     PrecacheResource("particle", "particles/epstein_innate.vpcf", ctx)
@@ -38,8 +38,14 @@ function epstein_island:OnSpellStart()
     if not IsServer() then return end
 
     local caster = self:GetCaster()
+    caster:StartGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
     local origin = caster:GetAbsOrigin()
-
+    caster:StopSound("epstein_dance")
+    StopGlobalSound( "5opka_r" )
+    StopGlobalSound( "stray_scepter" )
+    StopGlobalSound( "evelone_r_ambient" )
+	StopGlobalSound( "golden_rain" )
+    StopGlobalSound( "flash_r" )
     if caster._epstein_island_ctrl_entindex then
         local old = EntIndexToHScript(caster._epstein_island_ctrl_entindex)
         if old and IsValidEntity(old) and not old:IsNull() then
@@ -51,9 +57,6 @@ function epstein_island:OnSpellStart()
     local collapse_duration = self:GetSpecialValueFor("collapse_duration")
     local island_duration = self:GetSpecialValueFor("island_duration")
     local return_collapse_duration = self:GetSpecialValueFor("return_collapse_duration")
-    if return_collapse_duration <= 0 then
-        return_collapse_duration = collapse_duration
-    end
 
     local total = collapse_duration + island_duration + return_collapse_duration + 1.0
 
@@ -67,7 +70,7 @@ function epstein_island:OnSpellStart()
         caster._epstein_island_ctrl_entindex = thinker:entindex()
     end
 
-    local effect_cast = ParticleManager:CreateParticle( "particles/dark_seer_vacuum_new.vpcf", PATTACH_WORLDORIGIN, nil )
+    local effect_cast = ParticleManager:CreateParticle( "particles/epstein_island_pull.vpcf", PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, origin )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector( 700, 700, 700 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
@@ -75,10 +78,14 @@ end
 
 local function _IsValidAliveUnit(u)
     if not u then return false end
+    if u:GetUnitName() == "npc_epstein_house" then return true end
     if u:IsNull() then return false end
     if not IsValidEntity(u) then return false end
     if not u:IsAlive() then return false end
     if u:IsOutOfGame() then return false end
+    if u:IsBuilding() then return false end
+    if u:IsCourier() then return false end
+    if u:IsOther() then return false end
     return true
 end
 
@@ -158,6 +165,9 @@ function modifier_epstein_island_controller:OnIntervalThink()
 
         self:TeleportAndScatterSet(self.units_main, self.island_center)
 
+        self.caster:RemoveGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
+        self.caster:StartGesture(ACT_DOTA_SPAWN)
+
         self.aura_thinker = CreateModifierThinker(
             self.caster,
             self.ability,
@@ -209,6 +219,7 @@ function modifier_epstein_island_controller:OnIntervalThink()
     if self.phase == 3 and (elapsed >= self.collapse_duration + self.island_duration + self.return_collapse_duration) then
         self.phase = 4
         self:TeleportAndScatterSet(self.units_island, self.main_center)
+        self.caster:StartGesture(ACT_DOTA_SPAWN)
         self:Destroy()
         return
     end
@@ -247,7 +258,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
     if not IsServer() then return end
     if not out_set then return end
 
-    local friends = FindUnitsInRadius(self.caster:GetTeamNumber(), center, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local friends = FindUnitsInRadius(self.caster:GetTeamNumber(), center, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 
     for _, u in pairs(friends) do
         if _IsValidAliveUnit(u) then
@@ -259,7 +270,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
         self.caster:GetTeamNumber(), center,
         nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false
     )
 
     for _, u in pairs(enemies) do
@@ -320,7 +331,7 @@ function modifier_epstein_island_controller:TeleportAndScatterSet(entindex_set, 
                     end)
                 end
             end
-
+            ProjectileManager:ProjectileDodge(u)
             u:SetAbsOrigin(Vector(target_center.x, target_center.y, target_center.z))
 
             local dir2 = RandomVector(1)
@@ -502,22 +513,21 @@ function modifier_epstein_island_caster_buff:OnCreated()
     local effect_cast = ParticleManager:CreateParticle( "particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(1,0,0) )
 	self:AddParticle(effect_cast, false, false, -1, false, false)
-    
     if not self.talent then return end
     local bkb = ParticleManager:CreateParticle("particles/items_fx/black_king_bar_avatar.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     self:AddParticle(bkb, false, false, -1, false, false)
+end
+
+function modifier_epstein_island_caster_buff:CheckState()
+    return {
+        [MODIFIER_STATE_DEBUFF_IMMUNE] = self.talent
+    }
 end
 
 function modifier_epstein_island_caster_buff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_STATUS_RESISTANCE,
-    }
-end
-
-function modifier_epstein_island_caster_buff:CheckState()
-    return {
-        [MODIFIER_STATE_DEBUFF_IMMUNE] = self.talent
     }
 end
 
@@ -566,12 +576,23 @@ function modifier_epstein_island_enemy_tethered:OnCreated()
     local effect_cast = ParticleManager:CreateParticle("particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     ParticleManager:SetParticleControl(effect_cast, 1, Vector(1,0,0))
     self:AddParticle(effect_cast, false, false, -1, false, false)
+    self.enemy_as = self:GetAbility():GetSpecialValueFor("enemy_as")
 end
 
 function modifier_epstein_island_enemy_tethered:CheckState()
     return {
         [MODIFIER_STATE_TETHERED] = true,
     }
+end
+
+function modifier_epstein_island_enemy_tethered:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
+	}
+end
+
+function modifier_epstein_island_enemy_tethered:GetModifierAttackSpeedPercentage()
+	return self.enemy_as or 0
 end
 
 modifier_epstein_island_zone_thinker = class({})

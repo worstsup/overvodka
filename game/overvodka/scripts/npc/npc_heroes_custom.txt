@@ -4487,44 +4487,54 @@
 	}
 	"npc_dota_hero_beastmaster"
     {
-        "Model"     		"models/heroes/beastmaster/beastmaster.vmdl"
+        "Model"     		"models/epstein/epstein.vmdl"
+		"DisableWearables"	"1"
         "SoundSet"      	"Hero_Beastmaster"
 		"BotImplemented"	""
-        "ModelScale"        "0.77"
-		"LoadoutScale"		"0.77"
+        "ModelScale"        "1.25"
+		"LoadoutScale"		"1.2"
         "SimilarHeroes"     "77,92,61"
-        "HeroSelectSoundEffect" "Hero_Beastmaster.Pick"
+		"HealthBarOffset"	"230"
+        "HeroSelectSoundEffect" "epstein_start"
         "GibType"       	"default"
 
         "Ability1"      "epstein_r"
-        "Ability2"      "generic_hidden"
+        "Ability2"      "epstein_w"
         "Ability3"      "epstein_e"
         "Ability4"      "generic_hidden"
         "Ability5"      "epstein_innate"
         "Ability6"      "epstein_island"
         "Ability7"      "generic_hidden"
-        "Ability10"     "special_bonus_unique_epstein_1"
+        "Ability10"     "special_bonus_unique_epstein_4"
         "Ability11"     "special_bonus_unique_epstein_2"
-        "Ability12"     "special_bonus_unique_epstein_3"
-        "Ability13"     "special_bonus_unique_epstein_4"
-        "Ability14"     "special_bonus_unique_epstein_5"
-        "Ability15"     "special_bonus_unique_epstein_6"
+        "Ability12"     "special_bonus_unique_epstein_1"
+        "Ability13"     "special_bonus_unique_epstein_3"
+        "Ability14"     "special_bonus_unique_epstein_6"
+        "Ability15"     "special_bonus_unique_epstein_5"
         "Ability16"     "special_bonus_unique_epstein_7"
         "Ability17"     "special_bonus_unique_epstein_8"
 
         "Facets"
         {
+			"epstein_silence"
+			{
+                "Icon"              "summons"
+                "Color"             "Purple"
+                "GradientID"        "1"
+            }
+			"epstein_heal"
+			{
+				"Icon"              "twin_hearts"
+                "Color"             "Blue"
+                "GradientID"        "1"
+			}
             "beastmaster_wild_hunt" 
             {
-                "Icon"              "summons"
-                "Color"             "Red"
-                "GradientID"        "1"
+                "Deprecated"	"true"
             }               
             "beastmaster_beast_mode" 
             {
-                "Icon"              "damage"
-                "Color"             "Yellow"
-                "GradientID"        "1"
+                "Deprecated"	"true"
             } 
         }
         "ArmorPhysical"     "-1"
@@ -4548,6 +4558,6 @@
         "BoundsHullName"        "DOTA_HULL_SIZE_HERO"
         "particle_folder"       "particles/units/heroes/hero_beastmaster"
         "GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts"
-        "VoiceFile"     "soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts"
+        "VoiceFile"     		""
 	}
 }

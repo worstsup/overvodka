@@ -1,6 +1,30 @@
 LinkLuaModifier("modifier_epstein_innate", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_innate_phase", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_innate_post", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_epstein_innate_clone", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
+
+local function _SpawnFakeDeathClone(parent, ability, origin)
+    if not parent or parent:IsNull() or not IsValidEntity(parent) then return end
+
+    local clone = CreateUnitByName("npc_epstein_clone", origin, false, parent, parent, parent:GetTeamNumber())
+    if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
+
+    clone:SetOwner(parent)
+    clone:SetControllableByPlayer(-1, false)
+    clone:SetForwardVector(parent:GetForwardVector())
+    clone:AddNewModifier(parent, ability, "modifier_epstein_innate_clone", { duration = 2.0 })
+
+    Timers:CreateTimer(FrameTime(), function()
+        if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
+        clone:ForceKill(false)
+    end)
+
+    Timers:CreateTimer(5.0, function()
+        if clone and not clone:IsNull() and IsValidEntity(clone) then
+            clone:AddNoDraw()
+        end
+    end)
+end
 
 epstein_innate = class({})
 
@@ -67,6 +91,8 @@ function modifier_epstein_innate:OnTakeDamage(params)
 
     local origin = parent:GetAbsOrigin()
 
+    _SpawnFakeDeathClone(parent, ability, origin)
+
     parent:AddNewModifier(parent, ability, "modifier_epstein_innate_phase", {
         duration = ability:GetSpecialValueFor("phase_duration"),
         center_x = origin.x, center_y = origin.y, center_z = origin.z
@@ -122,11 +148,13 @@ function modifier_epstein_innate_phase:OnCreated(kv)
 
     self.fx_marker = ParticleManager:CreateParticle("particles/epstein_innate.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(self.fx_marker, 0, self.selected)
-    ParticleManager:SetParticleControl(self.fx_marker, 1, Vector(self.radius + 250, 0, 1))
+    ParticleManager:SetParticleControl(self.fx_marker, 1, Vector(self.radius + 275, 0, 1))
     ParticleManager:SetParticleControl(self.fx_marker, 2, Vector(1, 0, 0))
 
     local fx_start = ParticleManager:CreateParticle( "particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate_exit.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent )
     ParticleManager:ReleaseParticleIndex(fx_start)
+
+    EmitSoundOnLocationWithCaster(self.selected, "epstein_innate", self.parent)
 end
 
 function modifier_epstein_innate_phase:OnOrder(params)
@@ -195,7 +223,8 @@ function modifier_epstein_innate_phase:OnDestroy()
         if heal_pct and heal_pct > 0 and parent:IsAlive() then
             local add = math.floor(parent:GetMaxHealth() * heal_pct * 0.01)
             if add > 0 then
-                parent:Heal(add, ability)
+                parent:HealWithParams(add, ability, false, true, parent, false)
+                SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, parent, add, nil)
             end
         end
 
@@ -217,5 +246,22 @@ function modifier_epstein_innate_post:CheckState()
     return {
         [MODIFIER_STATE_INVULNERABLE] = true,
         [MODIFIER_STATE_NO_HEALTH_BAR] = true,
+    }
+end
+
+modifier_epstein_innate_clone = class({})
+
+function modifier_epstein_innate_clone:IsHidden() return true end
+function modifier_epstein_innate_clone:IsPurgable() return false end
+
+function modifier_epstein_innate_clone:CheckState()
+    return {
+        [MODIFIER_STATE_UNSELECTABLE] = true,
+        [MODIFIER_STATE_NO_HEALTH_BAR] = true,
+        [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_DISARMED] = true,
+        [MODIFIER_STATE_SILENCED] = true,
+        [MODIFIER_STATE_MUTED] = true,
+        [MODIFIER_STATE_ROOTED] = true,
     }
 end
