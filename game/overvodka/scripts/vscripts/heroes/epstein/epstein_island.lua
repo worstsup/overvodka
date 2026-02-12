@@ -38,7 +38,6 @@ function epstein_island:OnSpellStart()
     if not IsServer() then return end
 
     local caster = self:GetCaster()
-    caster:StartGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
     local origin = caster:GetAbsOrigin()
     caster:StopSound("epstein_dance")
     StopGlobalSound( "5opka_r" )
@@ -165,7 +164,6 @@ function modifier_epstein_island_controller:OnIntervalThink()
 
         self:TeleportAndScatterSet(self.units_main, self.island_center)
 
-        self.caster:RemoveGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
         self.caster:StartGesture(ACT_DOTA_SPAWN)
 
         self.aura_thinker = CreateModifierThinker(

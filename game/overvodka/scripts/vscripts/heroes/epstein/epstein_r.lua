@@ -4,15 +4,23 @@ LinkLuaModifier("modifier_epstein_r_grab_warning",   "heroes/epstein/epstein_r",
 LinkLuaModifier("modifier_epstein_r_hand_pull",      "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_HORIZONTAL)
 LinkLuaModifier("modifier_epstein_r_imprisoned",     "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_r_grab_cd",        "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_epstein_r_diddy_state",    "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_epstein_r_diddy_ai",       "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_epstein_r_diddy_oil",      "heroes/epstein/epstein_r", LUA_MODIFIER_MOTION_NONE)
 
 epstein_r = class({})
 
 function epstein_r:Precache(ctx)
     PrecacheResource("particle", "particles/epstein_r_warn.vpcf", ctx)
     PrecacheResource("particle", "particles/epstein_hand.vpcf", ctx)
+    PrecacheResource("particle", "particles/epstein_house_spawn.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/epstein_sounds.vsndevts", ctx)
     PrecacheUnitByNameSync("npc_epstein_house", ctx)
     PrecacheUnitByNameSync("npc_epstein_clone", ctx)
+    PrecacheUnitByNameSync("npc_diddy", ctx)
+    PrecacheResource("particle", "particles/units/heroes/hero_batrider/batrider_stickynapalm_impact.vpcf", ctx)
+    PrecacheResource("particle", "particles/units/heroes/hero_batrider/batrider_stickynapalm_debuff.vpcf", ctx)
+    PrecacheResource("particle", "particles/status_fx/status_effect_stickynapalm.vpcf", ctx)
 end
 
 function epstein_r:OnSpellStart()
@@ -25,13 +33,16 @@ function epstein_r:OnSpellStart()
 
     local house = CreateUnitByName("npc_epstein_house", point, true, caster, caster, caster:GetTeamNumber())
     if not house or house:IsNull() then return end
-
     house:SetOwner(caster)
+    house:SetAngles(0, -90, 0)
     house:SetControllableByPlayer(caster:GetPlayerOwnerID(), false)
     FindClearSpaceForUnit(house, point, true)
 
     house:AddNewModifier(house, nil, "modifier_kill", { duration = house_duration })
     house:AddNewModifier(house, self, "modifier_epstein_r_house", { duration = house_duration })
+
+    local p = ParticleManager:CreateParticle("particles/epstein_house_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, house)
+    ParticleManager:ReleaseParticleIndex(p)
 end
 
 modifier_epstein_r_house = class({})
@@ -40,13 +51,46 @@ function modifier_epstein_r_house:IsHidden() return true end
 function modifier_epstein_r_house:IsPurgable() return false end
 
 function modifier_epstein_r_house:OnCreated(kv)
-    self.pull_radius = self:GetAbility():GetSpecialValueFor("pull_radius")
-    self.grab_radius = self:GetAbility():GetSpecialValueFor("grab_radius")
-    self.warning_interval = self:GetAbility():GetSpecialValueFor("warning_interval")
+    local ability = self:GetAbility()
+    local caster = ability:GetCaster()
+    self.pull_radius = ability:GetSpecialValueFor("pull_radius")
+    self.grab_radius = ability:GetSpecialValueFor("grab_radius")
 
     if not IsServer() then return end
+    self:StartIntervalThink(0.15)
 
-    self:StartIntervalThink(self.warning_interval)
+    if caster:HasScepter() then
+        local house_eidx = self:GetParent():entindex()
+        local caster_eidx = caster:entindex()
+        local delay = ability:GetSpecialValueFor("scepter_delay")
+        Timers:CreateTimer(delay, function()
+            local house = EntIndexToHScript(house_eidx)
+            local c = EntIndexToHScript(caster_eidx)
+            if not house or house:IsNull() or not IsValidEntity(house) then return end
+            if not c or c:IsNull() or not IsValidEntity(c) then return end
+            if not c:HasScepter() then return end
+
+            if self._diddy_spawned then return end
+            self._diddy_spawned = true
+
+            local diddy_duration = ability:GetSpecialValueFor("diddy_duration")
+            local diddy = CreateUnitByName("npc_diddy", house:GetAbsOrigin(), true, c, c, c:GetTeamNumber())
+            if not diddy or diddy:IsNull() then return end
+
+            diddy:SetOwner(c)
+            diddy:SetControllableByPlayer(c:GetPlayerOwnerID(), false)
+            FindClearSpaceForUnit(diddy, house:GetAbsOrigin(), true)
+
+            diddy:AddNewModifier(diddy, nil, "modifier_kill", { duration = diddy_duration })
+            diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_state", { duration = diddy_duration })
+
+            diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_ai", {
+                duration = diddy_duration,
+                caster_entindex = c:entindex(),
+                house_entindex  = house:entindex(),
+            })
+        end)
+    end
 end
 
 function modifier_epstein_r_house:OnIntervalThink()
@@ -138,7 +182,6 @@ function modifier_epstein_r_pull:OnCreated(kv)
         return
     end
     self.pull_speed = self:GetAbility():GetSpecialValueFor("pull_speed")
-    self.min_pull_distance = self:GetAbility():GetSpecialValueFor("min_pull_distance")
     self:StartIntervalThink(FrameTime())
 end
 
@@ -171,7 +214,7 @@ function modifier_epstein_r_pull:OnIntervalThink()
     delta.z = 0
     local dist = delta:Length2D()
 
-    if dist <= self.min_pull_distance then
+    if dist <= 60 then
         return
     end
 
@@ -200,8 +243,6 @@ function modifier_epstein_r_grab_warning:OnCreated(kv)
     if not IsServer() then return end
 
     self.grab_radius = self:GetAbility():GetSpecialValueFor("grab_radius")
-    self.grab_projectile_speed = self:GetAbility():GetSpecialValueFor("grab_projectile_speed")
-    self.escape_cd = self:GetAbility():GetSpecialValueFor("escape_cd")
     self.grab_windup = self:GetAbility():GetSpecialValueFor("grab_windup")
     self.time = 0
 
@@ -248,7 +289,7 @@ function modifier_epstein_r_grab_warning:OnIntervalThink()
 
     local dist = (house:GetAbsOrigin() - parent:GetAbsOrigin()):Length2D()
     if dist > self.grab_radius then
-        parent:AddNewModifier(house, self:GetAbility(), "modifier_epstein_r_grab_cd", { duration = self.escape_cd })
+        parent:AddNewModifier(house, self:GetAbility(), "modifier_epstein_r_grab_cd", { duration = 0.5 })
         self:Destroy()
         return
     end
@@ -272,12 +313,13 @@ function modifier_epstein_r_grab_warning:FireHandProjectile(house, target)
         Source = house,
         Ability = self:GetAbility(),
         EffectName = "particles/epstein_hand.vpcf",
-        iMoveSpeed = self.grab_projectile_speed,
+        iMoveSpeed = 1200,
         bDodgeable = true,
         bVisibleToEnemies = true,
         bProvidesVision = true,
         iVisionRadius = 200,
         iVisionTeamNumber = self:GetCaster():GetTeamNumber(),
+        iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION,
         ExtraData = {
             house_entindex = house:entindex()
         }
@@ -316,7 +358,7 @@ function epstein_r:OnProjectileHit_ExtraData(target, location, extraData)
     end
     target:EmitSound("Item.Harpoon.Target")
     target:AddNewModifier(house, self, "modifier_epstein_r_hand_pull", {
-        duration = self:GetSpecialValueFor("hand_pull_max_duration"),
+        duration = 2.5,
         house_entindex = house:entindex()
     })
 
@@ -332,8 +374,8 @@ function modifier_epstein_r_hand_pull:RemoveOnDeath() return true end
 function modifier_epstein_r_hand_pull:OnCreated(kv)
     if not IsServer() then return end
 
-    self.hand_pull_speed = self:GetAbility():GetSpecialValueFor("hand_pull_speed")
-    self.hand_pull_stop_distance = self:GetAbility():GetSpecialValueFor("hand_pull_stop_distance")
+    self.hand_pull_speed = 1200
+    self.hand_pull_stop_distance = 80
 
     self.house = nil
     if kv and kv.house_entindex then
@@ -434,8 +476,6 @@ function modifier_epstein_r_imprisoned:OnCreated(kv)
     self.damage_base = self:GetAbility():GetSpecialValueFor("imprison_damage_base")
     self.damage_pct = self:GetAbility():GetSpecialValueFor("imprison_damage_pct")
 
-    self.release_distance = self:GetAbility():GetSpecialValueFor("release_distance")
-
     self.house = nil
     if kv and kv.house_entindex then
         self.house = EntIndexToHScript(tonumber(kv.house_entindex))
@@ -530,10 +570,259 @@ function modifier_epstein_r_imprisoned:OnDestroy()
         local house = self.house
         if house and not house:IsNull() and IsValidEntity(house) then
             local center = house:GetAbsOrigin()
-            local release_pos = center + RandomVector(self.release_distance)
+            local release_pos = center + RandomVector(180)
             FindClearSpaceForUnit(parent, release_pos, true)
         else
             FindClearSpaceForUnit(parent, parent:GetAbsOrigin(), true)
         end
     end
+end
+
+
+modifier_epstein_r_diddy_state = class({})
+
+function modifier_epstein_r_diddy_state:IsHidden() return true end
+function modifier_epstein_r_diddy_state:IsPurgable() return false end
+
+function modifier_epstein_r_diddy_state:CheckState()
+    return {
+        [MODIFIER_STATE_INVULNERABLE] = true,
+        [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+        [MODIFIER_STATE_NO_HEALTH_BAR] = true,
+        [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_DISARMED] = true,
+    }
+end
+
+modifier_epstein_r_diddy_ai = class({})
+
+function modifier_epstein_r_diddy_ai:IsHidden() return true end
+function modifier_epstein_r_diddy_ai:IsPurgable() return false end
+
+function modifier_epstein_r_diddy_ai:OnCreated(kv)
+    if not IsServer() then return end
+
+    self.parent = self:GetParent()
+    self.ability = self:GetAbility()
+    self.caster = self:GetCaster()
+
+    self.caster_entindex = kv and kv.caster_entindex and tonumber(kv.caster_entindex) or -1
+    self.house_entindex  = kv and kv.house_entindex and tonumber(kv.house_entindex) or -1
+
+    self.guard_radius = 800
+    self.guard_tp_dist = 1000
+    self.follow_tp_dist = 2000
+    self.follow_dist_min = 300
+    self.follow_dist_max = 400
+
+    self.enemy_search_radius = self.ability:GetSpecialValueFor("diddy_enemy_search_radius")
+    self.oil_interval = math.max(0.3, self.ability:GetSpecialValueFor("diddy_oil_cooldown"))
+
+    self.oil_aoe = self.ability:GetSpecialValueFor("diddy_oil_aoe") or 275
+
+    self.oil_duration = self.ability:GetSpecialValueFor("diddy_oil_duration") or 6
+    if self.oil_duration <= 0 then self.oil_duration = 6 end
+
+    self._next_order_t = 0
+    self._orbit_angle = RandomFloat(0, math.pi * 2)
+    self._orbit_dir = (RandomInt(0, 1) == 1) and 1 or -1
+    self._next_oil_t = GameRules:GetGameTime()
+
+    self:StartIntervalThink(0.20)
+end
+
+local function _Valid(u)
+    return u and (not u:IsNull()) and IsValidEntity(u)
+end
+
+function modifier_epstein_r_diddy_ai:OnIntervalThink()
+    if not IsServer() then return end
+    if not _Valid(self.parent) then self:Destroy(); return end
+
+    local caster = EntIndexToHScript(self.caster_entindex or -1)
+    local house  = EntIndexToHScript(self.house_entindex or -1)
+    local now = GameRules:GetGameTime()
+    local house_alive = _Valid(house)
+    local caster_alive = _Valid(caster) and caster:IsAlive() and (not caster:IsOutOfGame())
+
+    if house_alive then
+        local hpos = house:GetAbsOrigin()
+        local ppos = self.parent:GetAbsOrigin()
+        local dist = (hpos - ppos):Length2D()
+
+        if dist > self.guard_tp_dist then
+            FindClearSpaceForUnit(self.parent, hpos, true)
+        else
+            self._orbit_angle = self._orbit_angle + self._orbit_dir * 0.35
+            local desired = hpos + Vector(math.cos(self._orbit_angle), math.sin(self._orbit_angle), 0) * self.guard_radius
+
+            if now >= (self._next_order_t or 0) then
+                self._next_order_t = now + 0.35
+                self.parent:MoveToPosition(desired)
+            end
+        end
+    elseif caster_alive then
+        local cpos = caster:GetAbsOrigin()
+        local ppos = self.parent:GetAbsOrigin()
+        local dist = (cpos - ppos):Length2D()
+
+        if dist > self.follow_tp_dist then
+            local dir = caster:GetForwardVector()
+            dir.z = 0
+            dir = dir:Normalized()
+            local r = RotatePosition(Vector(0,0,0), QAngle(0, RandomInt(-110,110), 0), dir * RandomInt(self.follow_dist_min, self.follow_dist_max))
+            local tp = cpos + r
+            FindClearSpaceForUnit(self.parent, tp, true)
+        else
+            if now >= (self._next_order_t or 0) then
+                self._next_order_t = now + 0.35
+
+                local owner_dir = caster:GetForwardVector()
+                owner_dir.z = 0
+                owner_dir = owner_dir:Normalized()
+
+                local base = owner_dir * RandomInt(self.follow_dist_min, self.follow_dist_max)
+                local right = RotatePosition(Vector(0,0,0), QAngle(0, -90, 0), base) + cpos
+                local left  = RotatePosition(Vector(0,0,0), QAngle(0,  90, 0), base) + cpos
+
+                if (ppos - right):Length2D() > (ppos - left):Length2D() then
+                    self.parent:MoveToPosition(left)
+                else
+                    self.parent:MoveToPosition(right)
+                end
+            end
+        end
+    end
+
+    if now < (self._next_oil_t or 0) then return end
+    if not caster_alive then return end
+
+    local enemies = FindUnitsInRadius(
+        caster:GetTeamNumber(),
+        self.parent:GetAbsOrigin(), nil,
+        self.enemy_search_radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+        FIND_CLOSEST, false
+    )
+
+    if not enemies or #enemies == 0 then return end
+    local sortedEnemies = SortUnits_HeroesFirst(enemies)
+
+    local target = sortedEnemies[1]
+    if not _Valid(target) or (not target:IsAlive()) or target:IsOutOfGame() then return end
+
+    self._next_oil_t = now + self.oil_interval
+    self:OilAt(target:GetAbsOrigin(), caster)
+end
+
+function modifier_epstein_r_diddy_ai:OilAt(pos, caster)
+    if not IsServer() then return end
+    if not _Valid(self.parent) or not _Valid(caster) then return end
+
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_batrider/batrider_stickynapalm_impact.vpcf", PATTACH_WORLDORIGIN, self.parent)
+	ParticleManager:SetParticleControl(p, 0, pos)
+	ParticleManager:SetParticleControl(p, 1, Vector(self.oil_aoe, 0, 0))
+	ParticleManager:SetParticleControl(p, 2, self.parent:GetAbsOrigin())
+	ParticleManager:ReleaseParticleIndex(p)
+
+    local victims = FindUnitsInRadius(
+        caster:GetTeamNumber(), pos, nil, self.oil_aoe,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+        FIND_ANY_ORDER, false
+    )
+
+    for _, v in pairs(victims) do
+        if _Valid(v) and v:IsAlive() and (not v:IsOutOfGame()) then
+            v:AddNewModifier(caster, self.ability, "modifier_epstein_r_diddy_oil", { duration = self.oil_duration })
+        end
+    end
+end
+
+
+modifier_epstein_r_diddy_oil = class({})
+
+function modifier_epstein_r_diddy_oil:IsHidden() return false end
+function modifier_epstein_r_diddy_oil:IsDebuff() return true end
+function modifier_epstein_r_diddy_oil:IsPurgable() return true end
+
+function modifier_epstein_r_diddy_oil:GetStatusEffectName()
+    return "particles/status_fx/status_effect_stickynapalm.vpcf"
+end
+
+function modifier_epstein_r_diddy_oil:DeclareFunctions()
+    return {
+        MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+    }
+end
+
+function modifier_epstein_r_diddy_oil:GetModifierMoveSpeedBonus_Percentage()
+    local s = self:GetStackCount() or 0
+    return -(self.ms_slow_per_stack or 0) * s
+end
+
+function modifier_epstein_r_diddy_oil:GetModifierAttackSpeedBonus_Constant()
+    local s = self:GetStackCount() or 0
+    return -(self.as_slow_per_stack or 0) * s
+end
+
+function modifier_epstein_r_diddy_oil:_ReadSpecials()
+    local ability = self:GetAbility()
+    self.ability = ability
+    self.caster = self:GetCaster()
+
+    self.ms_slow_per_stack = (ability and ability:GetSpecialValueFor("diddy_oil_ms_slow")) or 0
+    self.as_slow_per_stack = (ability and ability:GetSpecialValueFor("diddy_oil_as_slow")) or 0
+    self.damage_per_stack = (ability and ability:GetSpecialValueFor("diddy_oil_damage")) or 0
+    self.max_stacks = (ability and ability:GetSpecialValueFor("diddy_oil_max_stacks")) or 20
+end
+
+function modifier_epstein_r_diddy_oil:_EnsureFx()
+    if self._fx_applied then return end
+    self._fx_applied = true
+
+    local parent = self:GetParent()
+    local fx = ParticleManager:CreateParticle("particles/units/heroes/hero_batrider/batrider_stickynapalm_debuff.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    self:AddParticle(fx, false, false, -1, false, false)
+end
+
+function modifier_epstein_r_diddy_oil:_DealOilDamage(stacks)
+    if not IsServer() then return end
+    local dmg = (self.damage_per_stack or 0) * (stacks or 0)
+    if dmg <= 0 then return end
+
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() or not IsValidEntity(parent) or not parent:IsAlive() or parent:IsOutOfGame() then return end
+
+    local attacker = self.caster
+    if not attacker or attacker:IsNull() or not IsValidEntity(attacker) then
+        attacker = parent
+    end
+
+    ApplyDamage({victim = parent, attacker = attacker, ability = self.ability, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL})
+end
+
+function modifier_epstein_r_diddy_oil:OnCreated()
+    self:_ReadSpecials()
+    if not IsServer() then return end
+    self:SetStackCount(1)
+    self:_EnsureFx()
+    self:_DealOilDamage(1)
+end
+
+function modifier_epstein_r_diddy_oil:OnRefresh()
+    self:_ReadSpecials()
+    if not IsServer() then return end
+
+    local s = (self:GetStackCount() or 0) + 1
+    local cap = self.max_stacks or 0
+    if cap > 0 then s = math.min(s, cap) end
+
+    self:SetStackCount(s)
+    self:_EnsureFx()
+    self:_DealOilDamage(s)
 end

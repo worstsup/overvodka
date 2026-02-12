@@ -1,11 +1,14 @@
 LinkLuaModifier("modifier_epstein_e_active", "heroes/epstein/epstein_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_e_damage", "heroes/epstein/epstein_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_e_dance",  "heroes/epstein/epstein_e", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_epstein_e_enemy",  "heroes/epstein/epstein_e", LUA_MODIFIER_MOTION_NONE)
 
 epstein_e = class({})
 
 function epstein_e:Precache(ctx)
     PrecacheResource("particle", "particles/epstein_dance.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/events/fall_2021/radiance_owner_fall_2021.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/events/fall_2021/radiance_fall_2021.vpcf", ctx)
 end
 
 function epstein_e:OnToggle()
@@ -59,43 +62,94 @@ function modifier_epstein_e_active:OnCreated()
     end
 
     self.move_speed_bonus_pct = ability:GetSpecialValueFor("move_speed_bonus_pct")
-    self.damage_per_sec = ability:GetSpecialValueFor("damage_per_sec")
-    self.max_bonus_damage = ability:GetSpecialValueFor("max_bonus_damage")
-    self.hold_duration = ability:GetSpecialValueFor("hold_duration")
-    self.regen_pct = ability:GetSpecialValueFor("regen_pct")
+    self.damage_per_sec       = ability:GetSpecialValueFor("damage_per_sec")
+    self.max_bonus_damage     = ability:GetSpecialValueFor("max_bonus_damage")
+    self.hold_duration        = ability:GetSpecialValueFor("hold_duration")
+    self.regen_pct            = ability:GetSpecialValueFor("regen_pct")
+
+    self.shard_radius   = ability:GetSpecialValueFor("shard_radius")
+    self.shard_dps_base = ability:GetSpecialValueFor("shard_dps_base")
+    self.shard_dps_gain = ability:GetSpecialValueFor("shard_dps_gain")
+    self.shard_dps_decay= ability:GetSpecialValueFor("shard_dps_decay")
+    self.shard_dps_cap  = ability:GetSpecialValueFor("shard_dps_cap")
 
     if not IsServer() then return end
-    --self:GetParent():StartGesture(ACT_DOTA_TAUNT)
     self:SetStackCount(0)
-    self:StartIntervalThink(1.0)
+    self._acc_bonus = 1
+    self._heat = 0
+    self._tick = 0.33
+    self:StartIntervalThink(self._tick)
     self:OnIntervalThink()
+
     if not self:GetParent():HasModifier("modifier_epstein_island_caster_buff") then
         self:GetParent():EmitSound("epstein_dance")
     end
 
     local p2 = ParticleManager:CreateParticle("particles/epstein_dance.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
     self:AddParticle(p2, false, false, -1, false, false)
+
+    if self:GetParent():HasShard() then
+        local p = ParticleManager:CreateParticle("particles/econ/events/fall_2021/radiance_owner_fall_2021.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+        self:AddParticle(p, false, false, -1, false, false)
+    end
 end
 
 function modifier_epstein_e_active:OnIntervalThink()
+    if not IsServer() then return end
+
     local parent = self:GetParent()
     local ability = self:GetAbility()
-    if not parent or parent:IsNull() or not IsValidEntity(parent) then
-        self:Destroy()
-        return
+    if not parent or parent:IsNull() or not IsValidEntity(parent) then self:Destroy(); return end
+    if not ability then self:Destroy(); return end
+
+    if self.damage_per_sec > 0 and self.shard_dps_cap > 0 then
+        self._acc_bonus = (self._acc_bonus or 0) + self._tick
+        if self._acc_bonus >= 1.0 then
+            local ticks = math.floor(self._acc_bonus)
+            self._acc_bonus = self._acc_bonus - ticks
+
+            local new = (self:GetStackCount() or 0) + self.damage_per_sec * ticks
+            if new > self.max_bonus_damage then new = self.max_bonus_damage end
+            self:SetStackCount(new)
+        end
     end
-    if not ability then
-        self:Destroy()
+
+    if not parent:HasShard() then
+        self._heat = 0
         return
     end
 
-    local add = self.damage_per_sec or 0
-    local cap = self.max_bonus_damage or 0
-    if add <= 0 or cap <= 0 then return end
+    local enemies = FindUnitsInRadius(
+        parent:GetTeamNumber(), parent:GetAbsOrigin(),
+        nil, self.shard_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        0, FIND_ANY_ORDER, false
+    )
 
-    local new = self:GetStackCount() + add
-    if new > cap then new = cap end
-    self:SetStackCount(new)
+    local has_enemy = enemies and (#enemies > 0)
+
+    local heat = self._heat or 0
+    if has_enemy then
+        heat = heat + self.shard_dps_gain * self._tick
+        if self.shard_dps_cap > 0 and heat > self.shard_dps_cap then heat = self.shard_dps_cap end
+    else
+        heat = heat - self.shard_dps_decay * self._tick
+        if heat < 0 then heat = 0 end
+    end
+    self._heat = heat
+
+    if (not has_enemy) then return end
+
+    local dps = self.shard_dps_base + heat
+    if dps <= 0 then return end
+
+    local damage = dps * self._tick
+    for _, enemy in pairs(enemies) do
+        if enemy and (not enemy:IsNull()) and IsValidEntity(enemy) and enemy:IsAlive() and (not enemy:IsOutOfGame()) then
+            enemy:AddNewModifier(parent, ability, "modifier_epstein_e_enemy", {duration = 0.4})
+            ApplyDamage({victim = enemy, attacker = parent, ability = ability, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
+        end
+    end
 end
 
 function modifier_epstein_e_active:DeclareFunctions()
@@ -170,4 +224,16 @@ end
 
 function modifier_epstein_e_damage:GetModifierPreAttack_BonusDamage()
     return self:GetStackCount()
+end
+
+modifier_epstein_e_enemy = class({})
+
+function modifier_epstein_e_enemy:IsHidden() return true end
+function modifier_epstein_e_enemy:IsPurgable() return false end
+
+function modifier_epstein_e_enemy:OnCreated()
+    if not IsServer() then return end
+    self.p = ParticleManager:CreateParticle("particles/econ/events/fall_2021/radiance_fall_2021.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControlEnt(self.p, 1, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
+    self:AddParticle(self.p, false, false, -1, false, false)
 end

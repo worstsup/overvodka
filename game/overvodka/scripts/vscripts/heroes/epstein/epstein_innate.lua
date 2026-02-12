@@ -3,29 +3,6 @@ LinkLuaModifier("modifier_epstein_innate_phase", "heroes/epstein/epstein_innate"
 LinkLuaModifier("modifier_epstein_innate_post", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_innate_clone", "heroes/epstein/epstein_innate", LUA_MODIFIER_MOTION_NONE)
 
-local function _SpawnFakeDeathClone(parent, ability, origin)
-    if not parent or parent:IsNull() or not IsValidEntity(parent) then return end
-
-    local clone = CreateUnitByName("npc_epstein_clone", origin, false, parent, parent, parent:GetTeamNumber())
-    if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
-
-    clone:SetOwner(parent)
-    clone:SetControllableByPlayer(-1, false)
-    clone:SetForwardVector(parent:GetForwardVector())
-    clone:AddNewModifier(parent, ability, "modifier_epstein_innate_clone", { duration = 2.0 })
-
-    Timers:CreateTimer(FrameTime(), function()
-        if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
-        clone:ForceKill(false)
-    end)
-
-    Timers:CreateTimer(5.0, function()
-        if clone and not clone:IsNull() and IsValidEntity(clone) then
-            clone:AddNoDraw()
-        end
-    end)
-end
-
 epstein_innate = class({})
 
 function epstein_innate:GetIntrinsicModifierName()
@@ -38,6 +15,60 @@ function modifier_epstein_innate:IsHidden() return true end
 function modifier_epstein_innate:IsPurgable() return false end
 function modifier_epstein_innate:RemoveOnDeath() return false end
 
+function modifier_epstein_innate:OnCreated()
+    self.parent = self:GetParent()
+    if not IsServer() then return end
+    self._was_not_original_model = false
+    self:StartIntervalThink(0.15)
+end
+
+function modifier_epstein_innate:OnRefresh()
+    self:OnCreated()
+end
+
+function modifier_epstein_innate:_IsOriginalModelNow()
+    if not self.parent or self.parent:IsNull() then return false end
+    return (self.parent:GetModelName() == "models/epstein/epstein.vmdl" and (not self.parent:HasModifier("modifier_epstein_innate_phase")))
+end
+
+function modifier_epstein_innate:_HideWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(0)
+        self.parent.weapon:SetParent(self.parent, "attach_hitloc")
+    end
+end
+
+function modifier_epstein_innate:_ShowWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(0.5)
+        self.parent.weapon:SetParent(self.parent, "attach_weapon")
+        self.parent.weapon:SetLocalOrigin(Vector(0, 0, 0))
+		self.parent.weapon:SetLocalAngles(0, 0, 0)
+    end
+end
+
+function modifier_epstein_innate:OnIntervalThink()
+    if not IsServer() then return end
+    if not self.parent or self.parent:IsNull() then return end
+
+    if self.parent:GetUnitName() ~= "npc_dota_hero_beastmaster" then return end
+
+    local is_original = self:_IsOriginalModelNow()
+
+    if not is_original then
+        self._was_not_original_model = true
+        self:_HideWeapon()
+        return
+    end
+
+    if self._was_not_original_model then
+        self._was_not_original_model = false
+        self:_ShowWeapon()
+        return
+    end
+end
 function modifier_epstein_innate:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MIN_HEALTH,
@@ -63,6 +94,34 @@ function modifier_epstein_innate:GetMinHealth()
     if parent:PassivesDisabled() then return 0 end
     if ability:IsCooldownReady() then return 1 end
     return 0
+end
+
+function modifier_epstein_innate:SpawnFakeDeathClone(parent, ability, origin)
+    if not parent or parent:IsNull() or not IsValidEntity(parent) then return end
+
+    local clone = CreateUnitByName("npc_epstein_clone", origin, false, parent, parent, parent:GetTeamNumber())
+    if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
+    clone:RemoveGesture(ACT_DOTA_SPAWN)
+    clone:StartGesture(ACT_DOTA_DIE)
+    clone:SetOwner(parent)
+    clone:SetControllableByPlayer(-1, false)
+    clone:SetForwardVector(parent:GetForwardVector())
+    clone:AddNewModifier(parent, ability, "modifier_epstein_innate_clone", { duration = 2.0 })
+    Timers:CreateTimer(FrameTime(), function()
+        if not clone or clone:IsNull() or not IsValidEntity(clone) then return end
+        clone:ForceKill(false)
+        clone:RemoveGesture(ACT_DOTA_SPAWN)
+        clone:RemoveGesture(ACT_DOTA_SPAWN)
+        clone:RemoveGesture(ACT_DOTA_SPAWN)
+        clone:RemoveGesture(ACT_DOTA_SPAWN)
+        clone:RemoveGesture(ACT_DOTA_SPAWN)
+    end)
+
+    Timers:CreateTimer(5.0, function()
+        if clone and not clone:IsNull() and IsValidEntity(clone) then
+            clone:AddNoDraw()
+        end
+    end)
 end
 
 function modifier_epstein_innate:OnTakeDamage(params)
@@ -91,7 +150,7 @@ function modifier_epstein_innate:OnTakeDamage(params)
 
     local origin = parent:GetAbsOrigin()
 
-    _SpawnFakeDeathClone(parent, ability, origin)
+    self:SpawnFakeDeathClone(parent, ability, origin)
 
     parent:AddNewModifier(parent, ability, "modifier_epstein_innate_phase", {
         duration = ability:GetSpecialValueFor("phase_duration"),

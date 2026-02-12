@@ -518,6 +518,16 @@
 		"dota_tooltip_modifier_epstein_r_imprisoned"					"В гостях у Эпштейна"
 		"dota_tooltip_modifier_epstein_r_imprisoned_description"		"Вы заключены в храме Эпштейна, не можете передвигаться и получаете периодический урон."
 
+		"dota_tooltip_ability_epstein_r_scepter_description"             			 "Через %scepter_delay% сек. ███████ <b><font color='#ffffff'>Храма</font></b> из него выходит <b><font color='#ffffff'>P. Diddy</font></b> на %diddy_duration% сек.<br>████ охраняет храм и Эпштейна.\n\nЕсли рядом есть враги, ███████ ███ ██ обливает маслом, █████ ███████. Масло █████████ передвижение и скорость атаки, █ █████ наносит урон ██████ █████."
+		"dota_tooltip_ability_epstein_r_diddy_duration"                  "ДЛИТЕЛЬНОСТЬ DIDDY:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_max_stacks"            "МАКС. ЭФФЕКТОВ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_damage"				 "УРОН ЗА ЭФФЕКТ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_ms_slow"				 "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ ЗА ЭФФЕКТ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_as_slow"				 "ЗАМЕДЛЕНИЕ АТАКИ ЗА ЭФФЕКТ МАСЛА:"
+
+		"dota_tooltip_modifier_epstein_r_diddy_oil"                      "Облит маслом"
+		"dota_tooltip_modifier_epstein_r_diddy_oil_description"          "Вы облиты маслом. Каждое попадание добавляет слой, замедляя передвижение и скорость атаки. При получении нового слоя вы получаете дополнительный урон."
+
 		"dota_tooltip_ability_epstein_w"                                        "Цензура"
 		"dota_tooltip_ability_epstein_w_Description"                            "Эпштейн ████████ █████ врага, ████████ ████ ████████ периодический урон ███████ █ █████████ снижение брони. Если ████ использует █████ способность, ███████ продлевается и ███████████ усиливается."
 		"dota_tooltip_ability_epstein_w_facet_epstein_silence"					"Применив способность, враг также получит безмолвие."
@@ -540,9 +550,15 @@
 		"dota_tooltip_ability_epstein_e_cooldown"                 "ПЕРЕЗАРЯДКА:"
 		"dota_tooltip_ability_epstein_e_regen_pct"				  "%ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ:"
 		"dota_tooltip_modifier_epstein_e_active"				  "Бонус к урону"
-		"dota_tooltip_modifier_epstein_e_active_description"	  "Эпштейн танцует и увеличивает свой урон от атак."
+		"dota_tooltip_modifier_epstein_e_active_description"	  "Эпштейн танцует и увеличивает свой урон от атак на %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE%."
 		"dota_tooltip_modifier_epstein_e_damage"				  "Бонус к урону"
-		"dota_tooltip_modifier_epstein_e_damage_description"	  "Эпштейн потанцевал и увеличил свой урон от атак."
+		"dota_tooltip_modifier_epstein_e_damage_description"	  "Эпштейн потанцевал и увеличил свой урон от атак на %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE%."
+		"dota_tooltip_ability_epstein_e_shard_description"        "Танцуя, Эпштейн █████ ██ выжигает ██ врагов в радиусе.<br>Урон увеличивается, когда рядом есть враги: ████ ████████ ████.Если рядом никого нет, ████ ██████ быстро уменьшается."
+		"dota_tooltip_ability_epstein_e_shard_radius"             "РАДИУС:"
+		"dota_tooltip_ability_epstein_e_shard_dps_base"			  "БАЗОВЫЙ УРОН:"
+		"dota_tooltip_ability_epstein_e_shard_dps_gain"			  "ПРИРОСТ УРОНА:"
+		"dota_tooltip_ability_epstein_e_shard_dps_cap"            "МАКС. УРОН:"
+
 
 		"dota_tooltip_facet_epstein_silence"					  "Неразглашение"
 		"dota_tooltip_facet_epstein_silence_description"		  "После применения способности под эффектом Цензуры враг получает безмолвие."
