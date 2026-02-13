@@ -347,6 +347,7 @@
 		"npc_dota_hero_ember_spirit"		"PEACEMAKER"
 		"npc_dota_hero_nyx_assassin"		"HUMMINGBIRD"
 		"npc_dota_hero_hoodwink"			"LEON"
+		"npc_dota_hero_beastmaster"			"JEFFREY EPSTEIN"
 		"npc_dota_lone_druid_bear1" "SAM"
 		"npc_dota_lone_druid_bear2" "SAM"
 		"npc_dota_lone_druid_bear3" "SAM"
