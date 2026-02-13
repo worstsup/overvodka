@@ -29,6 +29,133 @@
     }
   }
 }
+"epstein_diddy_oil"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/epstein_diddy_oil.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "0.0300" }
+          "pitch_rand_max"  {  "value"   "-0.0300" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"epstein_r"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/epstein_r.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "0.0300" }
+          "pitch_rand_max"  {  "value"   "-0.0300" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1800.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"epstein_w"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/epstein_w.vsnd"
+            }
+          }
+          "volume"      {  "value"   "2.5" }
+          "pitch_rand_min"  {  "value"   "0.0300" }
+          "pitch_rand_max"  {  "value"   "-0.0300" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1600.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"epstein_house_diddy"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/epstein_house_diddy.vsnd"
+            }
+          }
+          "volume"      {  "value"   "5.5" }
+          "pitch_rand_min"  {  "value"   "0.0300" }
+          "pitch_rand_max"  {  "value"   "-0.0300" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "1800.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
 
 "epstein_innate"
 {
@@ -61,7 +188,6 @@
     }
   }
 }
-
 
 "epstein_warning"
 {

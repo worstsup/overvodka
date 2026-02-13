@@ -104,9 +104,15 @@ function modifier_epstein_island_controller:OnCreated(kv)
         return
     end
 
+    self.ability:SetActivated(false)
+
     self.main_center = Vector(kv.origin_x or 0, kv.origin_y or 0, kv.origin_z or 0)
 
     self.island_center = Vector(4608, 4864, 408)
+
+    if GetMapName() == "overvodka_duo" then
+        self.island_center = Vector(-5376, -5376, 500)
+    end
 
     self.collapse_radius = self.ability:GetSpecialValueFor("collapse_radius")
     self.collapse_duration = self.ability:GetSpecialValueFor("collapse_duration")
@@ -225,6 +231,9 @@ end
 
 function modifier_epstein_island_controller:OnDestroy()
     if not IsServer() then return end
+    if self.ability then
+        self.ability:SetActivated(true)
+    end
     local parent = self:GetParent()
     if parent and not parent:IsNull() and IsValidEntity(parent) then
         UTIL_Remove(parent)
@@ -298,8 +307,17 @@ function modifier_epstein_island_controller:TeleportAndScatterSet(entindex_set, 
     
     local camera_lock = math.max(0.15, (self.scatter_duration or 0.3) + 0.15)
 
+    local from = fx_origin
+    if not from then
+        if self.caster and not self.caster:IsNull() and IsValidEntity(self.caster) then
+            from = self.caster:GetAbsOrigin()
+        else
+            from = target_center
+        end
+    end
+
     local start = ParticleManager:CreateParticle("particles/econ/events/ti7/blink_dagger_start_ti7_lvl2.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(start, 0, self:GetCaster():GetAbsOrigin())
+    ParticleManager:SetParticleControl(start, 0, from)
     ParticleManager:ReleaseParticleIndex(start)
 
     local p = ParticleManager:CreateParticle("particles/econ/events/ti7/blink_dagger_end_ti7_lvl2.vpcf", PATTACH_WORLDORIGIN, nil)

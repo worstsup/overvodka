@@ -102,14 +102,18 @@ function modifier_epstein_e_active:OnIntervalThink()
     if not parent or parent:IsNull() or not IsValidEntity(parent) then self:Destroy(); return end
     if not ability then self:Destroy(); return end
 
-    if self.damage_per_sec > 0 and self.shard_dps_cap > 0 then
+    local add = self.damage_per_sec or 0
+    local cap = self.max_bonus_damage or 0
+
+    if add > 0 and cap > 0 then
         self._acc_bonus = (self._acc_bonus or 0) + self._tick
+
         if self._acc_bonus >= 1.0 then
             local ticks = math.floor(self._acc_bonus)
             self._acc_bonus = self._acc_bonus - ticks
 
-            local new = (self:GetStackCount() or 0) + self.damage_per_sec * ticks
-            if new > self.max_bonus_damage then new = self.max_bonus_damage end
+            local new = (self:GetStackCount() or 0) + add * ticks
+            if new > cap then new = cap end
             self:SetStackCount(new)
         end
     end
@@ -119,9 +123,15 @@ function modifier_epstein_e_active:OnIntervalThink()
         return
     end
 
+    if (self.shard_radius or 0) <= 0 then
+        self._heat = 0
+        return
+    end
+
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(), parent:GetAbsOrigin(),
-        nil, self.shard_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
+        nil, self.shard_radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         0, FIND_ANY_ORDER, false
     )
@@ -130,17 +140,18 @@ function modifier_epstein_e_active:OnIntervalThink()
 
     local heat = self._heat or 0
     if has_enemy then
-        heat = heat + self.shard_dps_gain * self._tick
-        if self.shard_dps_cap > 0 and heat > self.shard_dps_cap then heat = self.shard_dps_cap end
+        heat = heat + (self.shard_dps_gain or 0) * self._tick
+        local heat_cap = self.shard_dps_cap or 0
+        if heat_cap > 0 and heat > heat_cap then heat = heat_cap end
     else
-        heat = heat - self.shard_dps_decay * self._tick
+        heat = heat - (self.shard_dps_decay or 0) * self._tick
         if heat < 0 then heat = 0 end
     end
     self._heat = heat
 
-    if (not has_enemy) then return end
+    if not has_enemy then return end
 
-    local dps = self.shard_dps_base + heat
+    local dps = (self.shard_dps_base or 0) + heat
     if dps <= 0 then return end
 
     local damage = dps * self._tick

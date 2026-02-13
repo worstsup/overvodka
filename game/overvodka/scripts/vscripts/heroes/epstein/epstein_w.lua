@@ -8,6 +8,7 @@ function epstein_w:OnSpellStart()
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
     target:AddNewModifier(self:GetCaster(), self, "modifier_epstein_w_debuff", { duration = self:GetSpecialValueFor("duration") })
+    target:EmitSound("epstein_w")
 end
 
 

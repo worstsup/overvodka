@@ -4748,8 +4748,8 @@
 	"npc_diddy"
 	{
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/peacemaker/scepter/vigilante.vmdl"
-        "ModelScale"            "1.5"
+        "Model"                 "models/diddy/diddy.vmdl"
+        "ModelScale"            "0.23"
 		"SoundSet"				""
         "Level"                 "15"
         "HasInventory"          "0"

@@ -18329,7 +18329,7 @@
 		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"    "epstein_q"
 		"AbilityCastRange"      "900"
-		"AbilityCastPoint"      "0.2"
+		"AbilityCastPoint"      "0.3"
 		"AbilityCooldown"       "50 45 40 35"
 		"AbilityManaCost"       "100 130 160 190"
 		"HasScepterUpgrade"		"1"

@@ -377,6 +377,7 @@
 		"npc_gaster_blaster"				"Gaster Blaster"
 		"npc_kolyan_guard"					"Охранник"
 		"npc_evil_monke"					"Злая Обезьяна"
+		"npc_diddy"							"P. Diddy"
 
 		"npc_zhenya_boss"					"Женя Мороз"
 		"npc_burger"						"Еда"
@@ -517,16 +518,14 @@
 		"dota_tooltip_modifier_epstein_r_grab_warning_description"		"Храм вот-вот притянет вас, если не успеете уйти подальше!"
 		"dota_tooltip_modifier_epstein_r_imprisoned"					"В гостях у Эпштейна"
 		"dota_tooltip_modifier_epstein_r_imprisoned_description"		"Вы заключены в храме Эпштейна, не можете передвигаться и получаете периодический урон."
-
-		"dota_tooltip_ability_epstein_r_scepter_description"             			 "Через %scepter_delay% сек. ███████ <b><font color='#ffffff'>Храма</font></b> из него выходит <b><font color='#ffffff'>P. Diddy</font></b> на %diddy_duration% сек.<br>████ охраняет храм и Эпштейна.\n\nЕсли рядом есть враги, ███████ ███ ██ обливает маслом, █████ ███████. Масло █████████ передвижение и скорость атаки, █ █████ наносит урон ██████ █████."
-		"dota_tooltip_ability_epstein_r_diddy_duration"                  "ДЛИТЕЛЬНОСТЬ DIDDY:"
-		"dota_tooltip_ability_epstein_r_diddy_oil_max_stacks"            "МАКС. ЭФФЕКТОВ МАСЛА:"
-		"dota_tooltip_ability_epstein_r_diddy_oil_damage"				 "УРОН ЗА ЭФФЕКТ МАСЛА:"
-		"dota_tooltip_ability_epstein_r_diddy_oil_ms_slow"				 "%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ ЗА ЭФФЕКТ МАСЛА:"
-		"dota_tooltip_ability_epstein_r_diddy_oil_as_slow"				 "ЗАМЕДЛЕНИЕ АТАКИ ЗА ЭФФЕКТ МАСЛА:"
-
-		"dota_tooltip_modifier_epstein_r_diddy_oil"                      "Облит маслом"
-		"dota_tooltip_modifier_epstein_r_diddy_oil_description"          "Вы облиты маслом. Каждое попадание добавляет слой, замедляя передвижение и скорость атаки. При получении нового слоя вы получаете дополнительный урон."
+		"dota_tooltip_ability_epstein_r_scepter_description"            "Через %scepter_delay% сек. ███████ <b><font color='#ffffff'>Храма</font></b> из него выходит <b><font color='#ffffff'>P. Diddy</font></b> на %diddy_duration% сек.<br>████ охраняет Эпштейна.\n\nЕсли рядом есть враги, ███████ ███ ██ обливает маслом, █████ ███████. Масло █████████ передвижение и скорость атаки, █ █████ наносит урон ██████ █████."
+		"dota_tooltip_ability_epstein_r_diddy_duration"                 "ДЛИТЕЛЬНОСТЬ DIDDY:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_max_stacks"           "МАКС. ЭФФЕКТОВ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_damage"				"УРОН ЗА ЭФФЕКТ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_ms_slow"				"%ЗАМЕДЛЕНИЕ ПЕРЕДВИЖЕНИЯ ЗА ЭФФЕКТ МАСЛА:"
+		"dota_tooltip_ability_epstein_r_diddy_oil_as_slow"				"ЗАМЕДЛЕНИЕ АТАКИ ЗА ЭФФЕКТ МАСЛА:"
+		"dota_tooltip_modifier_epstein_r_diddy_oil"                     "Облит маслом"
+		"dota_tooltip_modifier_epstein_r_diddy_oil_description"         "Вы облиты маслом. Каждое попадание добавляет слой, замедляя передвижение и скорость атаки. При получении нового слоя вы получаете дополнительный урон."
 
 		"dota_tooltip_ability_epstein_w"                                        "Цензура"
 		"dota_tooltip_ability_epstein_w_Description"                            "Эпштейн ████████ █████ врага, ████████ ████ ████████ периодический урон ███████ █ █████████ снижение брони. Если ████ использует █████ способность, ███████ продлевается и ███████████ усиливается."
@@ -558,7 +557,6 @@
 		"dota_tooltip_ability_epstein_e_shard_dps_base"			  "БАЗОВЫЙ УРОН:"
 		"dota_tooltip_ability_epstein_e_shard_dps_gain"			  "ПРИРОСТ УРОНА:"
 		"dota_tooltip_ability_epstein_e_shard_dps_cap"            "МАКС. УРОН:"
-
 
 		"dota_tooltip_facet_epstein_silence"					  "Неразглашение"
 		"dota_tooltip_facet_epstein_silence_description"		  "После применения способности под эффектом Цензуры враг получает безмолвие."

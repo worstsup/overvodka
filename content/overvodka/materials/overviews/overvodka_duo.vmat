@@ -1,6 +1,18 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"Shader"	"ui.vfx"
-	"F_TRANSLUCENT"	"0"
-	"Texture"	"materials/overviews/overvodka_duo.tga"
+	shader "ui.vfx"
+
+	//---- Color ----
+	g_flIntensity "1.000"
+	Texture "panorama/images/custom_game/overvodka_duo.png"
+
+
+	VariableState
+	{
+		"Color"
+		{
+		}
+	}
 }

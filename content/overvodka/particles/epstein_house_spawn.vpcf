@@ -833,4 +833,10 @@
 			m_nOutputBlendMode = "PARTICLE_OUTPUT_BLEND_MODE_ADD"
 		},
 	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/golem_respawn_n.vpcf"
+		},
+	]
 }

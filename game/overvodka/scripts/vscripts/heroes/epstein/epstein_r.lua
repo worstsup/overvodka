@@ -15,6 +15,7 @@ function epstein_r:Precache(ctx)
     PrecacheResource("particle", "particles/epstein_hand.vpcf", ctx)
     PrecacheResource("particle", "particles/epstein_house_spawn.vpcf", ctx)
     PrecacheResource("soundfile", "soundevents/epstein_sounds.vsndevts", ctx)
+    PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts", ctx)
     PrecacheUnitByNameSync("npc_epstein_house", ctx)
     PrecacheUnitByNameSync("npc_epstein_clone", ctx)
     PrecacheUnitByNameSync("npc_diddy", ctx)
@@ -36,6 +37,7 @@ function epstein_r:OnSpellStart()
     house:SetOwner(caster)
     house:SetAngles(0, -90, 0)
     house:SetControllableByPlayer(caster:GetPlayerOwnerID(), false)
+    EmitSoundOn("epstein_r", house)
     FindClearSpaceForUnit(house, point, true)
 
     house:AddNewModifier(house, nil, "modifier_kill", { duration = house_duration })
@@ -84,11 +86,9 @@ function modifier_epstein_r_house:OnCreated(kv)
             diddy:AddNewModifier(diddy, nil, "modifier_kill", { duration = diddy_duration })
             diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_state", { duration = diddy_duration })
 
-            diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_ai", {
-                duration = diddy_duration,
-                caster_entindex = c:entindex(),
-                house_entindex  = house:entindex(),
-            })
+            diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_ai", {duration = diddy_duration, caster_entindex = c:entindex()})
+
+            EmitSoundOn("epstein_house_diddy", diddy)
         end)
     end
 end
@@ -107,15 +107,11 @@ function modifier_epstein_r_house:OnIntervalThink()
     end
 
     local enemies = FindUnitsInRadius(
-        parent:GetTeamNumber(),
-        parent:GetAbsOrigin(),
-        nil,
-        self.grab_radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        parent:GetTeamNumber(), parent:GetAbsOrigin(), nil,
+        self.grab_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
         DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-        FIND_CLOSEST,
-        false
+        FIND_CLOSEST, false
     )
 
     for _, enemy in pairs(enemies) do
@@ -591,6 +587,7 @@ function modifier_epstein_r_diddy_state:CheckState()
         [MODIFIER_STATE_NO_HEALTH_BAR] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_DISARMED] = true,
+        [MODIFIER_STATE_UNSELECTABLE] = true,
     }
 end
 
@@ -607,7 +604,6 @@ function modifier_epstein_r_diddy_ai:OnCreated(kv)
     self.caster = self:GetCaster()
 
     self.caster_entindex = kv and kv.caster_entindex and tonumber(kv.caster_entindex) or -1
-    self.house_entindex  = kv and kv.house_entindex and tonumber(kv.house_entindex) or -1
 
     self.guard_radius = 800
     self.guard_tp_dist = 1000
@@ -623,12 +619,13 @@ function modifier_epstein_r_diddy_ai:OnCreated(kv)
     self.oil_duration = self.ability:GetSpecialValueFor("diddy_oil_duration") or 6
     if self.oil_duration <= 0 then self.oil_duration = 6 end
 
+    self._oil_winding = false
     self._next_order_t = 0
     self._orbit_angle = RandomFloat(0, math.pi * 2)
     self._orbit_dir = (RandomInt(0, 1) == 1) and 1 or -1
     self._next_oil_t = GameRules:GetGameTime()
 
-    self:StartIntervalThink(0.20)
+    self:StartIntervalThink(0.2)
 end
 
 local function _Valid(u)
@@ -638,30 +635,12 @@ end
 function modifier_epstein_r_diddy_ai:OnIntervalThink()
     if not IsServer() then return end
     if not _Valid(self.parent) then self:Destroy(); return end
-
+    if self._oil_winding then return end
     local caster = EntIndexToHScript(self.caster_entindex or -1)
-    local house  = EntIndexToHScript(self.house_entindex or -1)
     local now = GameRules:GetGameTime()
-    local house_alive = _Valid(house)
     local caster_alive = _Valid(caster) and caster:IsAlive() and (not caster:IsOutOfGame())
 
-    if house_alive then
-        local hpos = house:GetAbsOrigin()
-        local ppos = self.parent:GetAbsOrigin()
-        local dist = (hpos - ppos):Length2D()
-
-        if dist > self.guard_tp_dist then
-            FindClearSpaceForUnit(self.parent, hpos, true)
-        else
-            self._orbit_angle = self._orbit_angle + self._orbit_dir * 0.35
-            local desired = hpos + Vector(math.cos(self._orbit_angle), math.sin(self._orbit_angle), 0) * self.guard_radius
-
-            if now >= (self._next_order_t or 0) then
-                self._next_order_t = now + 0.35
-                self.parent:MoveToPosition(desired)
-            end
-        end
-    elseif caster_alive then
+    if caster_alive then
         local cpos = caster:GetAbsOrigin()
         local ppos = self.parent:GetAbsOrigin()
         local dist = (cpos - ppos):Length2D()
@@ -692,10 +671,11 @@ function modifier_epstein_r_diddy_ai:OnIntervalThink()
                 end
             end
         end
+    else
+        return
     end
 
     if now < (self._next_oil_t or 0) then return end
-    if not caster_alive then return end
 
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
@@ -714,8 +694,59 @@ function modifier_epstein_r_diddy_ai:OnIntervalThink()
     if not _Valid(target) or (not target:IsAlive()) or target:IsOutOfGame() then return end
 
     self._next_oil_t = now + self.oil_interval
-    self:OilAt(target:GetAbsOrigin(), caster)
+    self:BeginOil(target, caster)
 end
+
+function modifier_epstein_r_diddy_ai:BeginOil(target, caster)
+    if not IsServer() then return end
+    if self._oil_winding then return end
+    if not _Valid(self.parent) or not _Valid(caster) then return end
+
+    self._oil_winding = true
+
+    local target_entindex = (_Valid(target) and target:entindex()) or -1
+    local fallback_pos = (_Valid(target) and target:GetAbsOrigin()) or self.parent:GetAbsOrigin()
+    local caster_entindex = caster:entindex()
+
+    do
+        local face_pos = fallback_pos
+        if target_entindex ~= -1 then
+            local t = EntIndexToHScript(target_entindex)
+            if _Valid(t) and t:IsAlive() and (not t:IsOutOfGame()) then
+                face_pos = t:GetAbsOrigin()
+            end
+        end
+        self.parent:FaceTowards(face_pos)
+    end
+
+    self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+
+    Timers:CreateTimer(0.25, function()
+        if not _Valid(self.parent) then return end
+
+        local c = EntIndexToHScript(caster_entindex)
+        if not _Valid(c) or not c:IsAlive() or c:IsOutOfGame() then
+            self._oil_winding = false
+            self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
+            return
+        end
+
+        --self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
+
+        local pos = fallback_pos
+        if target_entindex ~= -1 then
+            local t = EntIndexToHScript(target_entindex)
+            if _Valid(t) and t:IsAlive() and (not t:IsOutOfGame()) then
+                pos = t:GetAbsOrigin()
+            end
+        end
+
+        self.parent:FaceTowards(pos)
+        self:OilAt(pos, c)
+        self._oil_winding = false
+    end)
+end
+
 
 function modifier_epstein_r_diddy_ai:OilAt(pos, caster)
     if not IsServer() then return end
@@ -726,6 +757,8 @@ function modifier_epstein_r_diddy_ai:OilAt(pos, caster)
 	ParticleManager:SetParticleControl(p, 1, Vector(self.oil_aoe, 0, 0))
 	ParticleManager:SetParticleControl(p, 2, self.parent:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(p)
+    caster:EmitSound("epstein_diddy_oil")
+    EmitSoundOnLocationWithCaster(pos, "Hero_Batrider.StickyNapalm.Impact", caster)
 
     local victims = FindUnitsInRadius(
         caster:GetTeamNumber(), pos, nil, self.oil_aoe,
