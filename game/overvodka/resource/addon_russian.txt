@@ -486,14 +486,14 @@
 		"npc_dota_hero_beastmaster_npedesc1"		"Сложность персонажа: НИЗКАЯ"
 
 		"dota_tooltip_ability_epstein_innate"                          		"Псевдоцид"
-		"dota_tooltip_ability_epstein_innate_Description"              		"██████ █████ ███ при получении летального урона ███████ ██████ инсценирует ██████████ смерть, █ ███ ████████ пропадает █ █████ █ █ ███████ перемещается в █████████ точку, ███████████ ███████."
+		"dota_tooltip_ability_epstein_innate_Description"              		"████ ███ при получении летального урона ██████ инсценирует ███ смерть, █ ██ ████████ пропадает █ ███████ перемещается в █████████ точку, ███ ███████."
 		"dota_tooltip_ability_epstein_innate_Note0"                    		"После перемещения дополнительно неуязвим %post_invuln% сек."
 		"dota_tooltip_ability_epstein_innate_phase_duration"           		"ЗАДЕРЖКА ПЕРЕД ПЕРЕМЕЩЕНИЕМ:"
 		"dota_tooltip_ability_epstein_innate_blink_radius"             		"РАДИУС ПЕРЕМЕЩЕНИЯ:"
 		"dota_tooltip_ability_epstein_innate_heal_pct"                 		"%ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ:"
 
 		"dota_tooltip_ability_epstein_island"                               "Чудо-Остров"
-		"dota_tooltip_ability_epstein_island_description"                   "Джеффри █████████ притягивает ██████ █ ███████ █████ вокруг себя, ███████ █ ██████ ███ █████.\n\n██ █████████ ███████ все ████████ █████████ переносятся на <b><font color='#ffffff'>Чудо-Остров</font></b> ██ ████████ ███., █████ ████ ███████ ██████████ возвращает обратно, ███████ █ ███ █████████.\n\n████ Джеффри ████████ на острове, ██ ███████ снижение входящего урона ██ █████████ █ сопротивление эффектам █ ███████ ███████.\n\nВраги на острове ████████ █ ██████ привязки."
+		"dota_tooltip_ability_epstein_island_description"                   "Джеффри █████ притягивает ███ █████ вокруг себя, ███████ █ ████.\n\n██ ██████ все ████ переносятся на <b><font color='#ffffff'>Чудо-Остров</font></b> ██ ██████., █████ ██ ████ возвращает обратно, ███████ █ ███.\n\n██ Джеффри ████ на острове, ██ ████ снижение входящего урона ██ ██████ сопротивление эффектам █ ███████.\n\nВраги на острове ████████ █ ██████ привязки."
 		"dota_tooltip_ability_epstein_island_collapse_radius"               "РАДИУС:"
 		"dota_tooltip_ability_epstein_island_island_duration"               "ВРЕМЯ ПРЕБЫВАНИЯ НА ОСТРОВЕ:"
 		"dota_tooltip_ability_epstein_island_scatter_radius"                "РАЗБРОС ПОСЛЕ ТЕЛЕПОРТА:"
@@ -504,7 +504,7 @@
 		"dota_tooltip_modifier_epstein_island_collapse"						"Чудо-Остров"
 
 		"dota_tooltip_ability_epstein_r"                                "Храм"
-		"dota_tooltip_ability_epstein_r_description"                    "Эпштейн ████████████ █ ████████ █████ <b><font color='#ffffff'>Храм</font></b> ██ ███ █████. ███ притягивает █ ████ всех врагов █ ███████ ███ ██ ████████ ████████.\n\nЕсли ████ враг ████████ близко к дому █ ██ ████████ ███ ███ █ ███████ ███ ███, ██ ████ вылетает рука, █ █████ █████████ затягивает внутрь.\n\nЗапертые █ ████ враги ████████ █ █████, оглушаются █ ████████ периодический урон ██ ████████ ████████ █ █████████."
+		"dota_tooltip_ability_epstein_r_description"                    "Эпштейн ███████ █ █████ <b><font color='#ffffff'>Храм</font></b> █████. ███ притягивает █ ████ всех врагов ██ ████ ████████.\n\nЕсли ████ враг ████████ близко к храму ███ █ █████ ███, ██ ████ вылетает рука, █ █████ █████████ затягивает внутрь.\n\nЗапертые █ ████ враги ████████ █ █████, оглушаются █ ████████ периодический урон ██ ████ ███."
 		"dota_tooltip_ability_epstein_r_house_duration"                 "ДЛИТЕЛЬНОСТЬ ХРАМА:"
 		"dota_tooltip_ability_epstein_r_pull_radius"                    "РАДИУС ПРИТЯЖЕНИЯ:"
 		"dota_tooltip_ability_epstein_r_pull_speed"                     "СКОРОСТЬ ПРИТЯЖЕНИЯ:"
@@ -518,7 +518,7 @@
 		"dota_tooltip_modifier_epstein_r_grab_warning_description"		"Храм вот-вот притянет вас, если не успеете уйти подальше!"
 		"dota_tooltip_modifier_epstein_r_imprisoned"					"В гостях у Эпштейна"
 		"dota_tooltip_modifier_epstein_r_imprisoned_description"		"Вы заключены в храме Эпштейна, не можете передвигаться и получаете периодический урон."
-		"dota_tooltip_ability_epstein_r_scepter_description"            "Через %scepter_delay% сек. ███████ <b><font color='#ffffff'>Храма</font></b> из него выходит <b><font color='#ffffff'>P. Diddy</font></b> на %diddy_duration% сек.<br>████ охраняет Эпштейна.\n\nЕсли рядом есть враги, ███████ ███ ██ обливает маслом, █████ ███████. Масло █████████ передвижение и скорость атаки, █ █████ наносит урон ██████ █████."
+		"dota_tooltip_ability_epstein_r_scepter_description"            "Через %scepter_delay% сек. ███████ из <b><font color='#ffffff'>Храма</font></b> выходит <b><font color='#ffffff'>P. Diddy</font></b> на %diddy_duration% сек.<br>████ охраняет Эпштейна.\n\nЕсли рядом есть враги, ███████ ███ ██ обливает маслом, █████ ███████. Масло █████████ передвижение и скорость атаки, █ █████ наносит урон ██████ █████."
 		"dota_tooltip_ability_epstein_r_diddy_duration"                 "ДЛИТЕЛЬНОСТЬ DIDDY:"
 		"dota_tooltip_ability_epstein_r_diddy_oil_max_stacks"           "МАКС. ЭФФЕКТОВ МАСЛА:"
 		"dota_tooltip_ability_epstein_r_diddy_oil_damage"				"УРОН ЗА ЭФФЕКТ МАСЛА:"
@@ -528,7 +528,7 @@
 		"dota_tooltip_modifier_epstein_r_diddy_oil_description"         "Вы облиты маслом. Каждое попадание добавляет слой, замедляя передвижение и скорость атаки. При получении нового слоя вы получаете дополнительный урон."
 
 		"dota_tooltip_ability_epstein_w"                                        "Цензура"
-		"dota_tooltip_ability_epstein_w_Description"                            "Эпштейн ████████ █████ врага, ████████ ████ ████████ периодический урон ███████ █ █████████ снижение брони. Если ████ использует █████ способность, ███████ продлевается и ███████████ усиливается."
+		"dota_tooltip_ability_epstein_w_Description"                            "Эпштейн ████████ █████ врага, ████ █████ периодический урон █ █████ снижение брони. Если ████ использует █████ способность, ███████ продлевается и ███████████ усиливается."
 		"dota_tooltip_ability_epstein_w_facet_epstein_silence"					"Применив способность, враг также получит безмолвие."
 		"dota_tooltip_ability_epstein_w_duration"                               "ДЛИТЕЛЬНОСТЬ:"
 		"dota_tooltip_ability_epstein_w_armor"                                  "СНИЖЕНИЕ БРОНИ:"
@@ -540,7 +540,7 @@
 		"dota_tooltip_modifier_epstein_w_debuff_description"					"Вы закрашены чёрным, ваша броня снижена на %dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%, а при применении способностей длительность эффекта увеличивается."
 
 		"dota_tooltip_ability_epstein_e"                          "Танец"
-		"dota_tooltip_ability_epstein_e_description"              "███ █████████ Джеффри начинает █████████ █ ██████, получая █████ █ скорости передвижения, ██ ██ не может атаковать.\n████ ██████, █████ ████████ накапливает █████ █ урон: █████ ██ █████████.\n█████ ████████ ██████████ бонус █ █████ сохраняется ██ ███████ ███."
+		"dota_tooltip_ability_epstein_e_description"              "███ █████ Джеффри начинает ████ █ ██████, получая █████ █ скорости передвижения, ██ ██ не может атаковать.\n████ ██████, ██ накапливает █████ █ урон: █████ ██.\n█████ ███ бонус █ █████ сохраняется ████ ███."
 		"dota_tooltip_ability_epstein_e_facet_epstein_heal"		  "Пока активна, способность также восстанавливает здоровье:"
 		"dota_tooltip_ability_epstein_e_move_speed_bonus_pct"     "%ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:"
 		"dota_tooltip_ability_epstein_e_damage_per_sec"           "ДОП. УРОН В СЕКУНДУ:"
