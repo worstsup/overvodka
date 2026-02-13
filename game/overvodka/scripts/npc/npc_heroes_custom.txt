@@ -4493,7 +4493,7 @@
 		"BotImplemented"	""
         "ModelScale"        "1.25"
 		"LoadoutScale"		"1.2"
-        "SimilarHeroes"     "77,92,61"
+        "SimilarHeroes"     "70,42,51"
 		"HealthBarOffset"	"230"
         "HeroSelectSoundEffect" "epstein_start"
         "GibType"       	"default"
