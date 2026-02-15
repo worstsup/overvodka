@@ -69,6 +69,7 @@ function modifier_epstein_innate:OnIntervalThink()
         return
     end
 end
+
 function modifier_epstein_innate:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MIN_HEALTH,
@@ -80,18 +81,18 @@ local function _IsValidAliveHero(h)
     if not h then return false end
     if h:IsNull() then return false end
     if not IsValidEntity(h) then return false end
-    if not h:IsAlive() then return false end
-    if h:IsOutOfGame() then return false end
     return true
 end
 
 function modifier_epstein_innate:GetMinHealth()
     if not IsServer() then return 0 end
     local parent = self:GetParent()
+    if parent:IsIllusion() then return 0 end
     local ability = self:GetAbility()
     if not _IsValidAliveHero(parent) then return 0 end
     if not ability then return 0 end
     if parent:PassivesDisabled() then return 0 end
+    if parent:GetMana() < self:GetAbility():GetManaCost(self:GetAbility():GetLevel() - 1) then return 0 end
     if ability:IsCooldownReady() then return 1 end
     return 0
 end
@@ -136,6 +137,7 @@ function modifier_epstein_innate:OnTakeDamage(params)
     if parent:PassivesDisabled() then return end
     if not ability:IsCooldownReady() then return end
     if parent:HasModifier("modifier_epstein_innate_phase") then return end
+    if parent:GetMana() < ability:GetManaCost(ability:GetLevel() - 1) then return 0 end
 
     if not params.damage or params.damage <= 0 then return end
 
@@ -157,7 +159,7 @@ function modifier_epstein_innate:OnTakeDamage(params)
         center_x = origin.x, center_y = origin.y, center_z = origin.z
     })
 
-    ability:UseResources(false, false, false, true)
+    ability:UseResources(true, false, false, true)
     parent:EmitSound("Hero_VoidSpirit.Dissimilate.Cast")
 end
 
@@ -224,7 +226,7 @@ function modifier_epstein_innate_phase:OnOrder(params)
 		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
 		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET
 	then
-		self:SetValidTarget( params.target:GetOrigin() )
+		self:SetValidTarget( params.target:GetAbsOrigin() )
 	end
 end
 

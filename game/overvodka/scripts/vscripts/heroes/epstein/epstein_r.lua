@@ -22,6 +22,7 @@ function epstein_r:Precache(ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_batrider/batrider_stickynapalm_impact.vpcf", ctx)
     PrecacheResource("particle", "particles/units/heroes/hero_batrider/batrider_stickynapalm_debuff.vpcf", ctx)
     PrecacheResource("particle", "particles/status_fx/status_effect_stickynapalm.vpcf", ctx)
+    PrecacheResource("particle", "particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_spawn_v2.vpcf", ctx)
 end
 
 function epstein_r:OnSpellStart()
@@ -81,13 +82,14 @@ function modifier_epstein_r_house:OnCreated(kv)
 
             diddy:SetOwner(c)
             diddy:SetControllableByPlayer(c:GetPlayerOwnerID(), false)
-            FindClearSpaceForUnit(diddy, house:GetAbsOrigin(), true)
+            FindClearSpaceForUnit(diddy, house:GetAbsOrigin() + RandomVector(150), true)
 
             diddy:AddNewModifier(diddy, nil, "modifier_kill", { duration = diddy_duration })
             diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_state", { duration = diddy_duration })
 
             diddy:AddNewModifier(c, ability, "modifier_epstein_r_diddy_ai", {duration = diddy_duration, caster_entindex = c:entindex()})
-
+            local p = ParticleManager:CreateParticle("particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_spawn_v2.vpcf", PATTACH_ABSORIGIN_FOLLOW, diddy)
+            ParticleManager:ReleaseParticleIndex(p)
             EmitSoundOn("epstein_house_diddy", diddy)
         end)
     end
@@ -683,7 +685,7 @@ function modifier_epstein_r_diddy_ai:OnIntervalThink()
         self.enemy_search_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
         FIND_CLOSEST, false
     )
 

@@ -24,23 +24,33 @@ function litvin_conditions:GetCustomCastErrorTarget( hTarget )
 end
 
 function litvin_conditions:OnSpellStart()
-	if not IsServer() then return end
-	local caster = self:GetCaster()
-	local target = self:GetCursorTarget()
-	if target:TriggerSpellAbsorb(self) then return end
-	if target:HasModifier("modifier_generic_arc_lua") and target:HasModifier("modifier_litvin_conditions") then
-		target:RemoveModifierByName("modifier_generic_arc_lua")
-	end
-	target:AddNewModifier(
-		caster,
-		self,
-		"modifier_litvin_conditions",
-		{
-			target = target:entindex(),
-		}
-	)
-end
+    if not IsServer() then return end
+    local caster = self:GetCaster()
+    local target = self:GetCursorTarget()
+    if target:TriggerSpellAbsorb( self ) then return end
 
+    if target:HasModifier( "modifier_generic_arc_lua" ) and target:HasModifier( "modifier_litvin_conditions" ) then
+        target:RemoveModifierByName( "modifier_generic_arc_lua" )
+    end
+    target:AddNewModifier( caster, self, "modifier_litvin_conditions", { target = target:entindex() } )
+
+    if caster:HasScepter() then
+		local bledina_ability = caster:FindAbilityByName("litvin_bledina")
+		if bledina_ability then
+			local max_attacks = bledina_ability:GetSpecialValueFor("max_attacks") or 0
+			local add = math.floor(max_attacks * 0.5)
+			if add > 0 then
+				local dur = bledina_ability:GetSpecialValueFor("duration") or 0
+
+				if not caster:HasModifier("modifier_litvin_bledina") then
+					caster:AddNewModifier(caster, bledina_ability, "modifier_litvin_bledina", {})
+				end
+
+				caster:AddNewModifier(caster, bledina_ability, "modifier_litvin_bledina_stack", { duration = dur, stacks = add })
+			end
+		end
+	end
+end
 
 modifier_litvin_conditions = class({})
 
@@ -62,23 +72,11 @@ function modifier_litvin_conditions:OnCreated( kv )
 	local duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.target = EntIndexToHScript( kv.target )
 	local height = 400
-	self.parent:AddNewModifier(
-		self.caster,
-		self:GetAbility(),
-		"modifier_generic_stunned_lua",
-		{ duration = duration + 0.1 }
-	)
-	self.arc = self.parent:AddNewModifier(
-		self.caster,
-		self:GetAbility(),
-		"modifier_generic_arc_lua",
+	self.parent:AddNewModifier( self.caster, self:GetAbility(), "modifier_generic_stunned_lua", { duration = duration + 0.1 } )
+	self.arc = self.parent:AddNewModifier( self.caster, self:GetAbility(), "modifier_generic_arc_lua",
 		{
-			duration = duration,
-			distance = 0,
-			height = height,
-			fix_duration = false,
-			isStun = true,
-			activity = ACT_DOTA_FLAIL,
+			duration = duration, distance = 0, height = height,
+			fix_duration = false, isStun = true, activity = ACT_DOTA_FLAIL,
 		}
 	)
 	self.arc:SetEndCallback(function( interrupted )
@@ -95,12 +93,7 @@ function modifier_litvin_conditions:OnCreated( kv )
 			0,
 			false
 		)
-		local damageTable = {
-			attacker = self.caster,
-			damage = self.damage,
-			damage_type = self:GetAbility():GetAbilityDamageType(),
-			ability = self:GetAbility(),
-		}
+		local damageTable = { attacker = self.caster, damage = self.damage, damage_type = self:GetAbility():GetAbilityDamageType(), ability = self:GetAbility()}
 		for _,enemy in pairs(enemies) do
 			damageTable.victim = enemy
 			if enemy==self.parent then
@@ -108,12 +101,7 @@ function modifier_litvin_conditions:OnCreated( kv )
 			else
 				damageTable.damage = self.damage
 			end
-			enemy:AddNewModifier(
-			self:GetCaster(),
-			self:GetAbility(), 
-			"modifier_generic_stunned_lua", 
-			{duration = self.stun_duration}
-		)
+			enemy:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.stun_duration} )
 			ApplyDamage(damageTable)
 		end
 		GridNav:DestroyTreesAroundPoint( self.parent:GetOrigin(), self.radius, false )

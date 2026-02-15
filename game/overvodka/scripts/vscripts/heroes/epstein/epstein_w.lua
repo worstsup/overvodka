@@ -1,5 +1,11 @@
 LinkLuaModifier("modifier_epstein_w_debuff", "heroes/epstein/epstein_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_muted_lua", "modifier_generic_muted_lua", LUA_MODIFIER_MOTION_NONE)
+
+local epstein_w_exceptions = {
+	["dvoreckov_q"] = true,
+	["dvoreckov_w"] = true,
+	["dvoreckov_e"] = true
+}
 
 epstein_w = class({})
 
@@ -7,7 +13,7 @@ function epstein_w:OnSpellStart()
     if not IsServer() then return end
     local target = self:GetCursorTarget()
     if target:TriggerSpellAbsorb(self) then return end
-    target:AddNewModifier(self:GetCaster(), self, "modifier_epstein_w_debuff", { duration = self:GetSpecialValueFor("duration") })
+    target:AddNewModifier(self:GetCaster(), self, "modifier_epstein_w_debuff", { duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance()) })
     target:EmitSound("epstein_w")
 end
 
@@ -58,6 +64,12 @@ function modifier_epstein_w_debuff:OnDestroy()
     CustomGameEventManager:Send_ServerToAllClients("epstein_w_square_end", {entindex = self:GetParent():entindex()})
 end
 
+function modifier_epstein_w_debuff:CheckState()
+    return {
+        [MODIFIER_STATE_UNTARGETABLE_ALLIED] = (self.silence_duration > 0)
+    }
+end
+
 function modifier_epstein_w_debuff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
@@ -94,6 +106,11 @@ function modifier_epstein_w_debuff:OnAbilityFullyCast(params)
     if params.unit ~= parent then return end
     if params.ability:IsItem() then return end
 
+    local aname = params.ability.GetAbilityName and params.ability:GetAbilityName() or nil
+    if aname and epstein_w_exceptions[aname] then
+        return
+    end
+
     self:SetStackCount((self:GetStackCount() or 0) + 1)
 
     local add = self.add_duration or 0
@@ -112,6 +129,6 @@ function modifier_epstein_w_debuff:OnAbilityFullyCast(params)
             caster = parent
         end
 
-        parent:AddNewModifier(caster, self.ability, "modifier_generic_silenced_lua", { duration = silence })
+        parent:AddNewModifier(caster, self.ability, "modifier_generic_muted_lua", { duration = silence })
     end
 end

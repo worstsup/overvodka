@@ -11,6 +11,12 @@ function epstein_e:Precache(ctx)
     PrecacheResource("particle", "particles/econ/events/fall_2021/radiance_fall_2021.vpcf", ctx)
 end
 
+function epstein_e:GetManaCost(lvl)
+    local m = self:GetCaster():GetMaxMana()
+    local mc = self:GetSpecialValueFor("mana_cost_per_second") * 0.01
+    return math.ceil(m * mc)
+end
+
 function epstein_e:OnToggle()
     local caster = self:GetCaster()
     local toggle = self:GetToggleState()
@@ -66,6 +72,7 @@ function modifier_epstein_e_active:OnCreated()
     self.max_bonus_damage     = ability:GetSpecialValueFor("max_bonus_damage")
     self.hold_duration        = ability:GetSpecialValueFor("hold_duration")
     self.regen_pct            = ability:GetSpecialValueFor("regen_pct")
+    self.manacost             = ability:GetSpecialValueFor("mana_cost_per_second")
 
     self.shard_radius   = ability:GetSpecialValueFor("shard_radius")
     self.shard_dps_base = ability:GetSpecialValueFor("shard_dps_base")
@@ -104,10 +111,18 @@ function modifier_epstein_e_active:OnIntervalThink()
 
     local add = self.damage_per_sec or 0
     local cap = self.max_bonus_damage or 0
+    local spend = self.manacost * self._tick * parent:GetMaxMana() * 0.01
 
     if add > 0 and cap > 0 then
         self._acc_bonus = (self._acc_bonus or 0) + self._tick
-
+        local mana = parent:GetMana()
+        if mana < spend then
+            if ability:GetToggleState() then
+                ability:ToggleAbility()
+            end
+            return
+        end
+        parent:SpendMana(spend, ability)
         if self._acc_bonus >= 1.0 then
             local ticks = math.floor(self._acc_bonus)
             self._acc_bonus = self._acc_bonus - ticks

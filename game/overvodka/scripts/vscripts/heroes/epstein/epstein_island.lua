@@ -9,6 +9,18 @@ LinkLuaModifier("modifier_epstein_island_zone_thinker", "heroes/epstein/epstein_
 LinkLuaModifier("modifier_epstein_island_on_island",    "heroes/epstein/epstein_island", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_arc_lua",              "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
+local forbidden_units = {
+    ["npc_dota_c4_bomb"] = true,
+	["npc_gaster_blaster"] = true,
+	["npc_gaster_blaster_arcana"] = true,
+    ["npc_telka"] = true,
+    ["npc_dota_azazin_clone"] = true,
+    ["npc_bombardiro"] = true,
+    ["npc_overvodka_pet"] = true,
+    ["npc_dota_arsen_tg_soldier"] = true,
+    ["npc_sunflower"] = true,
+}
+
 epstein_island = class({})
 
 function epstein_island:Precache(ctx)
@@ -25,19 +37,20 @@ end
 
 function epstein_island:OnAbilityPhaseStart()
     if not IsServer() then return end
-    EmitSoundOn("epstein_island", self:GetCaster())
+    EmitSoundOn("epstein_island_cast", self:GetCaster())
     return true
 end
 
 function epstein_island:OnAbilityPhaseInterrupted()
     if not IsServer() then return end
-    StopSoundOn("epstein_island", self:GetCaster())
+    StopSoundOn("epstein_island_cast", self:GetCaster())
 end
 
 function epstein_island:OnSpellStart()
     if not IsServer() then return end
 
     local caster = self:GetCaster()
+    EmitSoundOn("epstein_island_music", caster)
     local origin = caster:GetAbsOrigin()
     caster:StopSound("epstein_dance")
     StopGlobalSound( "5opka_r" )
@@ -118,6 +131,10 @@ function modifier_epstein_island_controller:OnCreated(kv)
     self.collapse_duration = self.ability:GetSpecialValueFor("collapse_duration")
 
     self.scatter_radius = self.ability:GetSpecialValueFor("scatter_radius")
+    if GetMapName() == "overvodka_5x5" then
+        self.island_center = Vector(-7790, 9590, 408)
+        self.scatter_radius = 300
+    end
     self.scatter_duration = self.ability:GetSpecialValueFor("scatter_duration")
     self.scatter_height = self.ability:GetSpecialValueFor("scatter_height")
     self.scatter_min_radius = self.ability:GetSpecialValueFor("scatter_min_radius")

@@ -4768,7 +4768,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_CHANNELLED  | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AOERadius"						"%splash_radius"
 		"AbilityCastPoint"				"0.25"
@@ -4982,7 +4982,7 @@
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
-		"AbilityCooldown"			"90 85 80"
+		"AbilityCooldown"			"85 80 75"
 		"AbilityCastPoint"			"0.45"
 		"AbilityValues"
 		{
@@ -5083,7 +5083,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"29 26 23 20"
+		"AbilityCooldown"				"26 23 20 17"
 		"AbilityManaCost"				"100 125 150 175"
 		"AbilityValues"
 		{
@@ -5161,7 +5161,7 @@
 		"ScriptFile"					"heroes/litvin/litvin_subo"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityTextureName"			"subo"
-		"AbilityCooldown"				"28 27 26 25"
+		"AbilityCooldown"				"26 24 22 20"
 		"AbilityManaCost"				"60 100 140 180"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastRange"				"400"
@@ -18133,7 +18133,8 @@
 		"ScriptFile"             "heroes/epstein/epstein_innate"
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityTextureName"     "void_spirit_dissimilate"
-		"AbilityCooldown"        "60 55 50 45"
+		"AbilityCooldown"        "70 65 60 55"
+		"AbilityManaCost"		 "75"
 		"AbilityTextureName"     "epstein_innate"
 		"IsBreakable"            "1"
 		"Innate"				 "1"
@@ -18221,7 +18222,7 @@
 		"SpellDispellableType"	 "SPELL_DISPELLABLE_YES"
 		"AbilityTextureName"     "epstein_w"
 		"AbilityCooldown"        "22 20 18 16"
-		"AbilityManaCost"        "90"
+		"AbilityManaCost"        "90 100 110 120"
 		"AbilityCastRange"		 "600"
 		"AbilityCastPoint"		 "0.2"
 		"AbilityValues"
@@ -18274,10 +18275,11 @@
 				"special_bonus_unique_epstein_7"	"+100%"
 			}
 			"hold_duration"       "10"
+			"mana_cost_per_second"	"3"
 			"regen_pct"
 			{
 				"value"	"0"
-				"special_bonus_facet_epstein_heal"	"+3"
+				"special_bonus_facet_epstein_heal"	"+2"
 				"RequiresFacet"	"epstein_heal"
 			}
 			"shard_radius"
@@ -18303,7 +18305,7 @@
 			"shard_dps_cap"
 			{
 				"value"	"0"
-				"special_bonus_shard"	"+260"
+				"special_bonus_shard"	"+240"
 				"RequiresShard"	"1"
 			}
 			"AbilityCastRange"
@@ -18335,7 +18337,7 @@
 		"HasScepterUpgrade"		"1"
 		"AbilityValues"
 		{
-			"house_duration"	"12"
+			"house_duration"	"10"
 			"pull_radius"
 			{
 				"value"	"900"
@@ -18353,11 +18355,11 @@
 			"imprison_damage_interval" "0.5"
 			"imprison_damage_base" "10 20 30 40"
 			"imprison_damage_pct" "3 4 5 6"
-			"scepter_delay"	   "3.0"
+			"scepter_delay" "3.0"
 			"diddy_duration"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+20"
+				"special_bonus_scepter"	"+15"
 				"RequiresScepter"	"1"
 			}
 			"diddy_enemy_search_radius"
@@ -18387,7 +18389,7 @@
 			"diddy_oil_ms_slow"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+4"
+				"special_bonus_scepter"	"+3"
 				"RequiresScepter"	"1"
 			}
 			"diddy_oil_as_slow"
@@ -18399,7 +18401,7 @@
 			"diddy_oil_damage"
 			{
 				"value"	"0"
-				"special_bonus_scepter"	"+40"
+				"special_bonus_scepter"	"+30"
 				"RequiresScepter"	"1"
 			}
 			"diddy_oil_max_stacks"

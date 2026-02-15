@@ -106,24 +106,23 @@ function modifier_seregga_r_debuff:OnCreated()
     self.caster  = self:GetCaster()
     self.ability = self:GetAbility()
 
-    local aura = self:GetAuraOwner()
-
     self.slow_pct       = self.ability:GetSpecialValueFor("slow_pct")
     self.radius         = self.ability:GetSpecialValueFor("radius")
     self.wall_width     = self.ability:GetSpecialValueFor("wall_width")
     self.min_speed      = self.ability:GetSpecialValueFor("min_edge_speed")
     self.max_edge_bonus = self.ability:GetSpecialValueFor("max_edge_bonus")
 
-    self.aura_origin = Vector(0,0,0)
     local thinker = self:GetAuraOwner()
     if thinker and not thinker:IsNull() then
         self.aura_origin = thinker:GetAbsOrigin()
     else
         self.aura_origin = self.parent:GetAbsOrigin()
     end
-    self.max_min   = self.max_edge_bonus
-    self.inside    = true
+
+    self.max_min = self.max_edge_bonus
+    self.inside = true
     self.last_pos = self.parent:GetAbsOrigin()
+
     self.timer = 0.3
     self:StartIntervalThink(FrameTime())
     self:OnIntervalThink()
@@ -133,17 +132,31 @@ function modifier_seregga_r_debuff:OnIntervalThink()
     if not IsServer() then return end
     local parent = self.parent
     if not parent or parent:IsNull() then return end
+
+    local pos = parent:GetAbsOrigin()
+    local last = self.last_pos or pos
+    local moved = (pos - last):Length2D()
+
+    if moved > 1000 then
+        self:Destroy()
+        return
+    end
+
     self.timer = self.timer + FrameTime()
     if self.timer >= 0.3 then
         self.timer = 0.0
         parent:RemoveModifierByName("modifier_seregga_r_reveal")
         parent:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_seregga_r_reveal", { duration = 0.4 })
     end
-    if self.parent:IsDebuffImmune() or self.parent:IsMagicImmune() or self.parent:IsInvulnerable() then
+
+    if parent:IsDebuffImmune() or parent:IsMagicImmune() or parent:IsInvulnerable() then
+        self.last_pos = pos
         return
     end
-    local v = parent:GetAbsOrigin() - self.aura_origin
+
+    local v = pos - self.aura_origin
     local dist = v:Length2D()
+
     if dist > self.radius then
         local dir = v:Normalized()
         local back_pos = self.aura_origin + dir * (self.radius - 2)
@@ -174,7 +187,7 @@ function modifier_seregga_r_debuff:GetModifierMoveSpeed_Limit(params)
     local parent = self.parent or self:GetParent()
     if not parent or parent:IsNull() then return 0 end
 
-    local parent_vector  = parent:GetOrigin() - self.aura_origin
+    local parent_vector  = parent:GetAbsOrigin() - self.aura_origin
     local dist           = parent_vector:Length2D()
     if dist < 0.01 then return 0 end
 

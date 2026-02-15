@@ -1,4 +1,4 @@
-"epstein_island"
+"epstein_island_music"
 {
   "operator_stacks"
   {
@@ -14,7 +14,39 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/epstein_island.vsnd"
+               "value0"    "sounds/abilities/epstein_island_music.vsnd"
+            }
+          }
+          "volume"      {  "value"   "3.5" }
+          "pitch_rand_min"  {  "value"   "0.000" }
+          "pitch_rand_max"  {  "value"   "0.000" }
+          "pitch"       {  "value"   "1.000000" }
+          "soundlevel"    {  "value"   "100.00000" }
+          "distance_max"   {  "value"   "3000.000" }
+          "event_type"    {  "value"   "1.000000" }
+        }
+      }
+    }
+  }
+}
+
+"epstein_island_cast"
+{
+  "operator_stacks"
+  {
+    "update_stack"
+    {
+      "reference_operator"
+      {
+        "operator"       "sos_reference_stack"
+        "reference_stack"    "dota_src1_3d"
+        "operator_variables"
+        {
+          "vsnd_files"
+          {
+            "value"
+            {
+               "value0"    "sounds/abilities/epstein_island_cast.vsnd"
             }
           }
           "volume"      {  "value"   "3.5" }

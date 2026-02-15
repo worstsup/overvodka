@@ -4489,7 +4489,7 @@
     {
         "Model"     		"models/epstein/epstein.vmdl"
 		"DisableWearables"	"1"
-        "SoundSet"      	"Hero_Beastmaster"
+        "SoundSet"      	"Hero_NightStalker"
 		"BotImplemented"	""
         "ModelScale"        "1.25"
 		"LoadoutScale"		"1.2"
@@ -4541,7 +4541,7 @@
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageMin"       "23"
         "AttackDamageMax"       "27"
-        "AttackRate"        "1.700000"
+        "AttackRate"        "1.7"
         "BaseAttackSpeed"       "100"
         "AttackAnimationPoint"      "0.300000"
         "AttackAcquisitionRange"        "600"
@@ -4557,7 +4557,7 @@
         "MovementSpeed"     "305"
         "BoundsHullName"        "DOTA_HULL_SIZE_HERO"
         "particle_folder"       "particles/units/heroes/hero_beastmaster"
-        "GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts"
+        "GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
         "VoiceFile"     		""
 	}
 }
