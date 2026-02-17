@@ -3,7 +3,7 @@
 --Spawns Bags of Gold in the middle
 function OvervodkaGameMode:ThinkGoldDrop()
 	local r = RandomInt( 1, 100 )
-	if r > ( 100 - self.m_GoldDropPercent ) then
+	if r > ( 100 - self.m_GoldDropPercent ) and overvodka_events then
 		self:SpawnGold()
 	end
 end
@@ -207,6 +207,7 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 end
 
 function OvervodkaGameMode:ThinkSpecialItemDrop()
+	if not overvodka_events then return end
 	-- Stop spawning items after the maximum amount
 	if self.nNextSpawnItemNumber >= self.nMaxItemSpawns then
 		return

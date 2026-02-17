@@ -21,7 +21,7 @@ local function LeonShard_IsEligible(parent)
     if not parent:IsAlive() then return false end
     if parent:PassivesDisabled() then return false end
     if parent:IsOutOfGame() then return false end
-
+    if not parent:HasShard() then return false end
     return true
 end
 
