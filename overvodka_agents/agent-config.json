@@ -1,0 +1,23 @@
+{
+  "allowedSources": [
+    "https://moddota.com/api/#!/vscripts",
+    "https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Panorama/Javascript/API"
+  ],
+  "forbiddenActions": [
+    "publish-keys",
+    "upload-to-public",
+    "expose-secrets"
+  ],
+  "entrypoints": [
+    "game/overvodka/scripts/vscripts/**/*.lua",
+    "content/overvodka/**/panorama/**/*.js",
+    "content/overvodka/**/panorama/**/*.xml",
+    "content/overvodka/**/panorama/**/*.css"
+  ],
+  "codeStyle": {
+    "lua": "use project lua-style (if absent: lua-format default)",
+    "panorama": "eslint + recommended rules for Panorama JS"
+  },
+  "transmitterPreference": "reuse_self_txData",
+  "notes": "If missing data (file path, KV location, existing SpecialValues) the agent should ask minimal required questions or assume safe defaults and mark them explicitly."
+}

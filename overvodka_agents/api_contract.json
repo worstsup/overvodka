@@ -1,0 +1,41 @@
+{
+  "base_url": "http://overvodka.com/api/",
+  "endpoints": {
+    "get_cases_info": {
+      "method": "POST",
+      "required": ["SteamID"],
+      "description": "Returns available cases and their items.",
+      "response_keys": ["success","cases"]
+    },
+    "open_case": {
+      "method": "POST",
+      "required": ["SteamID","case_id"],
+      "description": "Open a case, debit coins, add inventory or prime time.",
+      "response_keys": ["success","new_balance","drop_id","items","inventory","duplicate","compensation","case_name","drop_item_name"]
+    },
+    "get_store_info": {"method":"POST","required":["SteamID"],"response_keys":["success","coins","inventory","equipped_effect","equipped_skin","equipped_pet","prime_claims"]},
+    "equip_item": {"method":"POST","required":["SteamID","item_id","item_type"],"response_keys":["success","equipped_item"]},
+    "unequip_item": {"method":"POST","required":["SteamID","item_type"],"response_keys":["success","unequipped_type"]},
+    "buy_item": {"method":"POST","required":["SteamID","item_id"],"response_keys":["success","new_balance","inventory"]},
+    "buy_prime": {"method":"POST","required":["SteamID","duration"],"response_keys":["success","duration","price_charged","new_balance"]},
+    "update_balance": {"method":"POST","required":["SteamID","amount"],"description":"Server-side top-up used by Lua to grant coins.","response_keys":["success"]},
+    "get_vote_info": {"method":"POST","required":["SteamID"],"response_keys":["success","candidates","player_vote","vote_counts"]},
+    "submit_vote": {"method":"POST","required":["SteamID","hero_name"],"response_keys":["success"]},
+    "get_player_profile": {"method":"POST","required":["SteamID"],"response_keys":["end_date","active"]},
+    "get_player_profile_rating": {"method":"POST","required":["SteamID","Category"],"response_keys":["end_date","active","rating","double_rating"]},
+    "get_player_profile_chatwheel": {"method":"POST","required":["SteamID","Category"],"response_keys":["Profile","ChatWheel"]},
+    "get_player_profile_stats": {"method":"POST","required":["SteamID"],"response_keys":["games","win_pct","kda","top_heroes","first_game_date","matches"]},
+    "get_player_quests": {"method":"POST","required":["SteamID"],"response_keys":["quests","quest_date"]},
+    "quest_progress_batch": {"method":"POST","required":["SteamID","Progress","QuestDate"],"response_keys":["success"]},
+    "game_ended": {"method":"POST","required":["SteamID","PlayerData","Category","MatchID"],"description":"Store end-game rating and match data.","response_keys":[]},
+    "player_used_double_rating": {"method":"POST","required":["SteamID"],"response_keys":["success"]},
+    "chat_wheel_changed": {"method":"POST","required":["SteamID","LineID","ItemID"],"response_keys":["success"]},
+    "Top100": {"method":"POST","required":[],"response_keys":["array_of_players"]},
+    "get_leaderboard_info": {"method":"POST","required":["category","players"],"response_keys":["records","players"]},
+    "heroes_stats": {"method":"POST","required":[],"response_keys":["heroes_stats"]},
+    "wiki": {"method":"POST","required":[],"response_keys":["heroes_list"]},
+    "contracts_get": {"method":"POST","required":["GameKey"],"response_keys":["ok","mask"]},
+    "contracts_set": {"method":"POST","required":["GameKey","mask"],"response_keys":["ok"]}
+  },
+  "notes": "All Lua requests append GameKey = SERVER_KEY. All endpoints use POST and return JSON. Keep contract in sync with worstup_server/routes/api.js"
+}
