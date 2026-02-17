@@ -9,7 +9,7 @@ LinkLuaModifier("modifier_epstein_island_zone_thinker", "heroes/epstein/epstein_
 LinkLuaModifier("modifier_epstein_island_on_island",    "heroes/epstein/epstein_island", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_arc_lua",              "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
-local forbidden_units = {
+local epstein_forbidden_units = {
     ["npc_dota_c4_bomb"] = true,
 	["npc_gaster_blaster"] = true,
 	["npc_gaster_blaster_arcana"] = true,
@@ -285,7 +285,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
     local friends = FindUnitsInRadius(self.caster:GetTeamNumber(), center, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 
     for _, u in pairs(friends) do
-        if _IsValidAliveUnit(u) then
+        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) then
             out_set[u:entindex()] = true
         end
     end
@@ -298,7 +298,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
     )
 
     for _, u in pairs(enemies) do
-        if _IsValidAliveUnit(u) then
+        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) then
             out_set[u:entindex()] = true
         end
     end
