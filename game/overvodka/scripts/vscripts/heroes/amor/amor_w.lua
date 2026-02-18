@@ -63,6 +63,7 @@ function amor_w:OnSpellStart()
     caster:AddNewModifier(caster, self, "modifier_amor_w_self_buff", { duration = self_buff_dur })
 
     local p = ParticleManager:CreateParticle("particles/amor_w.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+
     ParticleManager:SetParticleControl(p, 0, origin)
     ParticleManager:SetParticleControl(p, 1, tpos)
     ParticleManager:ReleaseParticleIndex(p)

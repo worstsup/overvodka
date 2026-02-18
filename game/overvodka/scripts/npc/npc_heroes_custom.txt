@@ -4407,13 +4407,15 @@
 	}
 	"npc_dota_hero_bristleback"
 	{
-		"Model"				"models/heroes/bristleback/bristleback.vmdl"
+		"Model"				"models/amor/amor.vmdl"
+		"DisableWearables"	"1"
+		"HealthBarOffset"	"230"
 		"SoundSet"			"Hero_Bristleback"
 		"IdleSoundLoop"		""
 		"BotImplemented"	""
-		"ModelScale"		"0.800000"
-		"VersusScale"		"0.80"
-		"LoadoutScale"		"0.80"
+		"ModelScale"		"1.26"
+		"VersusScale"		"1.26"
+		"LoadoutScale"		"1.05"
 		"SimilarHeroes"		"102,98,129"
 		"HeroSelectSoundEffect"		"amor_start"
 
