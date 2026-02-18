@@ -217,7 +217,14 @@ end
 
 modifier_silvername_q_facet_2_debuff = class({})
 
-function modifier_silvername_q_facet_2_debuff:IsPurgable()   return true end
+function modifier_silvername_q_facet_2_debuff:IsPurgable()
+    local caster = self:GetCaster()
+    if not caster or caster:IsNull() then
+        return true
+    end
+
+    return not caster:HasTalent("special_bonus_unique_silvername_6")
+end
 function modifier_silvername_q_facet_2_debuff:IsDebuff()     return true end
 function modifier_silvername_q_facet_2_debuff:IsBuff()       return false end
 
