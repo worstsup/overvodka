@@ -31,11 +31,9 @@ function modifier_govno:OnCreated()
 
 	local parent = self:GetParent()
 	if not parent or parent:IsNull() then return end
-
-    if not parent:HasModifier("modifier_item_charik_new_regen") then
-		parent:AddNewModifier(parent, self.ability, "modifier_item_charik_new_regen", {})
-	end
-
+    parent:RemoveModifierByName("modifier_item_charik_new_regen")
+    
+	parent:AddNewModifier(parent, self.ability, "modifier_item_charik_new_regen", {})
 	parent:AddNewModifier(parent, self.ability, "modifier_govno_backtrack", {})
 end
 
@@ -45,7 +43,7 @@ function modifier_govno:OnDestroy()
 	local parent = self:GetParent()
 	if not parent or parent:IsNull() then return end
 
-    if not parent:HasModifier("modifier_item_charik_new_regen") then
+	if not parent:HasItemInInventory("item_charik_new") and not parent:HasItemInInventory("item_govno") then
 		parent:RemoveModifierByName("modifier_item_charik_new_regen")
 	end
 

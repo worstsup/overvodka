@@ -16,16 +16,37 @@ function modifier_item_charik_new:GetAttributes()  return MODIFIER_ATTRIBUTE_MUL
 
 function modifier_item_charik_new:OnCreated()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_charik_new_regen") then
-		self:GetCaster():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_charik_new_regen", {})
+
+	local parent = self:GetCaster()
+	local ability = self:GetAbility()
+	if not parent or parent:IsNull() then return end
+	if not ability or ability:IsNull() then return end
+
+	local regen = parent:FindModifierByName("modifier_item_charik_new_regen")
+	if regen and not regen:IsNull() then
+		local regen_ability = regen:GetAbility()
+		if not regen_ability or regen_ability:IsNull() then
+			regen:Destroy()
+			regen = nil
+		end
+	end
+
+	if not regen then
+		parent:AddNewModifier(parent, ability, "modifier_item_charik_new_regen", {})
 	end
 end
 
 function modifier_item_charik_new:OnDestroy()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_charik_new_regen") then
-		self:GetCaster():RemoveModifierByName("modifier_item_charik_new_regen")
+
+	local parent = self:GetCaster()
+	if not parent or parent:IsNull() then return end
+
+	if parent:HasItemInInventory("item_charik_new") or parent:HasItemInInventory("item_govno") then
+		return
 	end
+
+	parent:RemoveModifierByName("modifier_item_charik_new_regen")
 end
 
 function modifier_item_charik_new:DeclareFunctions()
