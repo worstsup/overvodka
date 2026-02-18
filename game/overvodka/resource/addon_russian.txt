@@ -642,6 +642,8 @@
 		"dota_tooltip_ability_amor_ultimate_crack_hp_pct"		"%УРОН ОТ МАКС. ЗДОРОВЬЯ:"
 		"dota_tooltip_ability_amor_ultimate_Note0"				"Схлопывание трещины прерывает текущие действия целей и принудительно останавливает их."
 		"dota_tooltip_ability_amor_ultimate_Note1"				"Схлопывание также обновит эффект пива на задетых врагах."
+		"dota_tooltip_ability_amor_scepter"				"Киберспортивные нормативы"
+		"dota_tooltip_ability_amor_scepter_description"		"Эдуард заканчивает упражнение, сбрасывая перезарядку своих способностей и предметов. Не действует на не обновляемые способности и предметы."
 		"dota_tooltip_modifier_amor_ultimate_beer"				"Пиво"
 		"dota_tooltip_modifier_amor_ultimate_beer_description"	"Скорость передвижения снижена на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%. Получает периодический урон."
 		"dota_tooltip_facet_amor_beer_trail"					"Пивной След"
