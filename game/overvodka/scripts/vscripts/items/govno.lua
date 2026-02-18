@@ -45,7 +45,7 @@ function modifier_govno:OnDestroy()
 	local parent = self:GetParent()
 	if not parent or parent:IsNull() then return end
 
-    if not parent:HasModifier("modifier_item_charik_new_regen") then
+	if not parent:HasItemInInventory("item_charik_new") and not parent:HasItemInInventory("item_govno") then
 		parent:RemoveModifierByName("modifier_item_charik_new_regen")
 	end
 

@@ -23,9 +23,15 @@ end
 
 function modifier_item_charik_new:OnDestroy()
 	if not IsServer() then return end
-	if not self:GetCaster():HasModifier("modifier_item_charik_new_regen") then
-		self:GetCaster():RemoveModifierByName("modifier_item_charik_new_regen")
+
+	local parent = self:GetCaster()
+	if not parent or parent:IsNull() then return end
+
+	if parent:HasItemInInventory("item_charik_new") or parent:HasItemInInventory("item_govno") then
+		return
 	end
+
+	parent:RemoveModifierByName("modifier_item_charik_new_regen")
 end
 
 function modifier_item_charik_new:DeclareFunctions()
