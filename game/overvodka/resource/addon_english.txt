@@ -631,6 +631,8 @@
 		"dota_tooltip_ability_amor_ultimate_crack_hp_pct"		"%MAX HP AS DAMAGE:"
 		"dota_tooltip_ability_amor_ultimate_Note0"				"The collapse of the rift interrupts the targets' current actions and forcibly stops them."
 		"dota_tooltip_ability_amor_ultimate_Note1"				"Collapsing will also refresh the beer effect on enemies hit."
+		"dota_tooltip_ability_amor_scepter"				"Esports Standards"
+		"dota_tooltip_ability_amor_scepter_description"		"Eduard finishes his exercise, refreshing cooldowns of his abilities and items. Does not affect non-refreshable abilities and items."
 		"dota_tooltip_modifier_amor_ultimate_beer"				"Beer"
 		"dota_tooltip_modifier_amor_ultimate_beer_description"	"Movement speed reduced by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%. Receives damage over time."
 		"dota_tooltip_facet_amor_beer_trail"					"Beer Trail"

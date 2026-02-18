@@ -18073,6 +18073,20 @@
 			}
 		}
 	}
+	//=================================================================================================================
+	// Киберспортивные нормативы (аганим)
+	//=================================================================================================================
+	"amor_scepter"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/amor/amor_scepter"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityTextureName"            "item_refresher"
+		"AbilityCooldown"               "85"
+		"AbilityManaCost"               "300"
+		"IsGrantedByScepter"            "1"
+		"MaxLevel"                      "1"
+	}
 	//===================================================================================================================
 	//												Jeffrey Epstein
 	//===================================================================================================================
