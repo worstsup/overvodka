@@ -7,6 +7,8 @@ function item_onehp:GetIntrinsicModifierName()
     return "modifier_item_onehp"
 end
 
+function item_onehp:IsRefreshable() return false end
+
 modifier_item_onehp = class({})
 
 function modifier_item_onehp:IsHidden() return true end

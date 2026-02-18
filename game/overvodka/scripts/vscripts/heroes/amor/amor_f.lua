@@ -134,6 +134,7 @@ function modifier_amor_f:OnDeath(event)
     if not killer or killer:IsNull() then return end
 
     if killer:GetTeamNumber() == victim:GetTeamNumber() then return end
+    if not victim:IsRealHero() or victim:IsIllusion() then return end
 
     local bonus_owner = self:GetAbility():GetSpecialValueFor("bonus_gold_owner_kill") or 0
     local bonus_near = self:GetAbility():GetSpecialValueFor("bonus_gold_nearby_kill") or 0

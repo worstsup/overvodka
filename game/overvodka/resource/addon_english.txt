@@ -349,6 +349,7 @@
 		"npc_dota_hero_nyx_assassin"		"HUMMINGBIRD"
 		"npc_dota_hero_hoodwink"			"LEON"
 		"npc_dota_hero_slardar"				"ALEXANDER PISTOLETOV"
+		"npc_dota_hero_bristleback"			"AmoR"
 		"npc_dota_hero_beastmaster"			"JEFFREY EPSTEIN"
 		"npc_dota_lone_druid_bear1" "SAM"
 		"npc_dota_lone_druid_bear2" "SAM"
@@ -536,7 +537,7 @@
 
 		"dota_tooltip_ability_epstein_e"                          "Dance"
 		"dota_tooltip_ability_epstein_e_description"              "███ █████████ Jeffrey starts █████████ █ ██████, gaining █████ █ movement speed, ██ ██ cannot attack.\n███ ██████, █████ ████████ gains █████ █ damage: █████ ██ █████████.\n█████ ████████ █████████ bonus █ █████ retained ██ ███████ ███."
-		"dota_tooltip_ability_epstein_e_facet_epstein_heal"		  "While active, the ability also restores health:"
+		"dota_tooltip_ability_epstein_e_facet_epstein_heal"		  "While active, the ability also restores health."
 		"dota_tooltip_ability_epstein_e_move_speed_bonus_pct"     "%BONUS MOVE SPEED:"
 		"dota_tooltip_ability_epstein_e_damage_per_sec"           "BONUS DAMAGE PER SECOND:"
 		"dota_tooltip_ability_epstein_e_max_bonus_damage"         "MAX BONUS DAMAGE:"
@@ -4844,6 +4845,8 @@
 		"DOTA_Tooltip_ability_mazellov_q_worker_movespeed" "WORKER MOVEMENT SPEED:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_hit_count" "ATTACKS TO DESTROY PLANT:"
 		"DOTA_Tooltip_ability_mazellov_q_factory_lifetime" "PLANT DURATION:"
+		"npc_factory"	"Factory"
+		"npc_worker"	"Worker"
 
 		"DOTA_Tooltip_ability_mazellov_q_worker_spawn_interval" "WORKER SPAWN INTERVAL:"
 

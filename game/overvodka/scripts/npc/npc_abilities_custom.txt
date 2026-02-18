@@ -17932,7 +17932,7 @@
 			"magic_resist_reduction"
 			{
 				"value"	"0"
-				"special_bonus_unique_amor_7"	"+25"
+				"special_bonus_unique_amor_7"	"+35"
 			}
 		}
 	}
