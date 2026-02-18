@@ -2974,7 +2974,7 @@
 		"DOTA_Tooltip_modifier_serega_topor" "МОЙ ТОПОР"
 		"DOTA_Tooltip_modifier_serega_topor_Description" "Ваша скорость передвижения снижена"
 		"DOTA_Tooltip_modifier_topor" "МОЙ ТОПОР"
-		"DOTA_Tooltip_modifier_topor_Description" "Герой превратился в тролля, cкорость передвижения и атаки увеличена, а также он не может умереть"
+		"DOTA_Tooltip_modifier_topor_Description" "Герой превратился в тролля, cкорость передвижения и атаки увеличена"
 		"DOTA_Tooltip_ability_serega_radiance" "РАДИК"
 		"DOTA_Tooltip_ability_serega_radiance_Description"	"Серега Шпинат с нулевой минуты собрал Радик на ама как настоящий талант. Урон в секунду и шанс промаха от радика увеличивается за каждый уровень Сереги. Урон от радика у иллюзий вдвое меньше."
 		"DOTA_Tooltip_ability_serega_radiance_base_damage" "УРОН В СЕКУНДУ ЗА УРОВЕНЬ:"
