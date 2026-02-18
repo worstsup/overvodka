@@ -5,3 +5,4 @@ game/overvodka/tools_asset_info.bin
 game/overvodka/tools_asset_info.bin
 *.DS_Store
 *.bin
+*.vmdl_c
