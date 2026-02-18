@@ -68,6 +68,7 @@ function OvervodkaEvents:Init()
     if not IsServer() then return end
     if self.initialized then return end
     if IsInToolsMode() then return end
+    if not overvodka_events then return end
 
     local state = GameRules:State_Get()
     if state ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -151,7 +152,7 @@ end
 
 function OvervodkaEvents:TriggerGoldenRain( level )
     if not IsServer() then return end
-
+    if not overvodka_events then return end
     local boss = self:GetBoss()
     if not boss then
         print("[OvervodkaEvents] Golden Rain: boss not found")
@@ -210,7 +211,7 @@ end
 
 function OvervodkaEvents:TriggerHamster()
     if not IsServer() then return end
-
+    if not overvodka_events then return end
     CustomGameEventManager:Send_ServerToAllClients("item_has_spawned", {})
     if not winter_mode then
         EmitGlobalSound("hamster_announce")
@@ -343,7 +344,7 @@ end
 
 function OvervodkaEvents:TriggerBombardiro()
     if not IsServer() then return end
-
+    if not overvodka_events then return end
     local now = GameRules:GetGameTime()
 
     local minAllowedTime = (self.initGameTime or 0) + BOMBARDIRO_FIRST_MINUTE * 60.0
