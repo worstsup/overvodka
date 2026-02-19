@@ -26,7 +26,6 @@
 			"item"		"item_nikes"
 			"item"		"item_waka"
             "item"		"item_pasito"
-			"item"		"item_govno"
             "item"      "item_shemelis"
             "item"		"item_armature_strike"
             "item"		"item_derzko"
@@ -37,6 +36,7 @@
 			"item"		"item_jordan"
 			"item"		"item_magic_daedalus"
 			"item"		"item_magic_aegis"
+			"item"		"item_ultimate_scepter"
 			"item"		"item_suchiy"
 			"item"		"item_aghanims_shard"
 			"item"		"item_badun"
@@ -45,6 +45,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_invis_sword_datadriven"
+			"item"		"item_govno"
             "item"		"item_aegis_hero"
 		}
 	}

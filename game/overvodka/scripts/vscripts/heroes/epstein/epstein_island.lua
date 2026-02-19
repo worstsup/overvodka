@@ -285,7 +285,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
     local friends = FindUnitsInRadius(self.caster:GetTeamNumber(), center, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 
     for _, u in pairs(friends) do
-        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) then
+        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) and not u:HasModifier("modifier_macan_r") then
             out_set[u:entindex()] = true
         end
     end
@@ -298,7 +298,7 @@ function modifier_epstein_island_controller:CollectUnitsAt(center, radius, out_s
     )
 
     for _, u in pairs(enemies) do
-        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) then
+        if _IsValidAliveUnit(u) and (u.GetUnitName and not epstein_forbidden_units[u:GetUnitName()]) and not u:HasModifier("modifier_macan_r") then
             out_set[u:entindex()] = true
         end
     end

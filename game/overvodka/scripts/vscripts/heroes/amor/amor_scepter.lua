@@ -1,5 +1,11 @@
 amor_scepter = class({})
 
+function amor_scepter:IsRefreshable() return false end
+
+function amor_scepter:Precache(ctx)
+    PrecacheResource("particle", "particles/units/heroes/hero_rattletrap/clock_overclock_buff_recharge.vpcf", ctx)
+end
+
 function amor_scepter:OnSpellStart()
     if not IsServer() then return end
 
@@ -10,9 +16,7 @@ function amor_scepter:OnSpellStart()
         local ability = caster:GetAbilityByIndex(i)
         if ability and ability ~= self and ability.IsRefreshable and ability:IsRefreshable() then
             ability:EndCooldown()
-            if ability.RefreshCharges then
-                ability:RefreshCharges()
-            end
+            ability:RefreshCharges()
         end
     end
 
@@ -20,11 +24,13 @@ function amor_scepter:OnSpellStart()
         local item = caster:GetItemInSlot(i)
         if item and item.IsRefreshable and item:IsRefreshable() then
             item:EndCooldown()
-            if item.RefreshCharges then
-                item:RefreshCharges()
-            end
+            item:RefreshCharges()
         end
     end
-
+    local nFXIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_rattletrap/clock_overclock_buff_recharge.vpcf", PATTACH_CUSTOMORIGIN, caster)
+	ParticleManager:SetParticleControlEnt(nFXIndex, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0, 0, 0), true)
+	ParticleManager:ReleaseParticleIndex(nFXIndex)
+	ParticleManager:DestroyParticle(nFXIndex, false)
     caster:EmitSound("DOTA_Item.Refresher.Activate")
+    caster:EmitSound("amor_scepter")
 end

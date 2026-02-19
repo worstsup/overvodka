@@ -9,8 +9,7 @@ function modifier_custom_evasion:OnCreated()
     self.current_evasion = 30
     self:StartIntervalThink(0.1)
 end
-function modifier_custom_evasion:OnRemoved()
-end
+
 function modifier_custom_evasion:OnIntervalThink()
     if not IsServer() then return end
     if self:GetParent():PassivesDisabled() then
