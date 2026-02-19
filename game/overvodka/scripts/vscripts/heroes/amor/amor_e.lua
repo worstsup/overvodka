@@ -34,6 +34,12 @@ function amor_e:OnSpellStart()
     else
         init_dir = init_dir:Normalized()
     end
+    
+    amor_e._crit_seq = amor_e._crit_seq or {}
+    local cid = caster:entindex()
+    local seq = (amor_e._crit_seq[cid] or 0) + 1
+    amor_e._crit_seq[cid] = seq
+    local cast_force_crit = (seq % 2 == 0)
 
     local info = {
         Target = target,
@@ -67,6 +73,7 @@ function amor_e:OnSpellStart()
         dir = init_dir,
         init_dir = init_dir,
         hit = {},
+        force_crit = cast_force_crit,
     }
 
     self:_StartProjectileThink(proj_id)
@@ -90,23 +97,23 @@ function amor_e:_PlayCritPfx(enemy)
     ParticleManager:ReleaseParticleIndex(crit_fx)
 end
 
-function amor_e:_ApplyDamageWithCrit(caster, victim, base_damage, damage_type, damage_flags)
+function amor_e:_ApplyDamageWithCrit(caster, victim, base_damage, damage_type, damage_flags, force_crit)
     if not IsServer() then return end
     if not caster or caster:IsNull() then return end
     if not victim or victim:IsNull() or (not victim:IsAlive()) then return end
     if base_damage <= 0 then return end
 
-    local chance = self:GetSpecialValueFor("crit_chance") or 0
     local mult = self:GetSpecialValueFor("crit_damage") or 100
+    local chance = self:GetSpecialValueFor("crit_chance") or 0
 
-    local is_crit = (chance > 0) and RollPercentage(chance)
+    local is_crit = (force_crit == true and chance > 0)
     if is_crit then
         mult = math.max(0, mult)
         base_damage = base_damage * mult / 100
         self:_PlayCritPfx(victim)
     end
 
-    ApplyDamage({victim = victim, attacker = caster, damage = base_damage, damage_type = damage_type or DAMAGE_TYPE_PHYSICAL, ability = self, damage_flags = damage_flags})
+    ApplyDamage({victim = victim, attacker = caster, damage = base_damage, damage_type = damage_type or DAMAGE_TYPE_MAGICAL, ability = self, damage_flags = damage_flags})
 end
 
 local function _Rotate90(dir, sign)
@@ -231,7 +238,7 @@ function amor_e:_StartProjectileThink(proj_id)
                                 GridNav:DestroyTreesAroundPoint(enemy:GetAbsOrigin(), 75, false)
                             end
                             EmitSoundOn("Hero_Mars.Spear.Knockback", enemy)
-                            self:_ApplyDamageWithCrit(caster, enemy, damage, DAMAGE_TYPE_PHYSICAL)
+                            self:_ApplyDamageWithCrit(caster, enemy, damage, DAMAGE_TYPE_MAGICAL, nil, data.force_crit)
                         end
                     end
                 end
@@ -329,7 +336,7 @@ function amor_e:OnProjectileHit_ExtraData(target, location, extra)
         EmitSoundOn("Hero_Mars.Spear.Target", target)
     end
 
-    self:_ApplyDamageWithCrit(caster, target, self:GetSpecialValueFor("damage"), DAMAGE_TYPE_PHYSICAL)
+    self:_ApplyDamageWithCrit(caster, target, self:GetSpecialValueFor("damage"), DAMAGE_TYPE_MAGICAL, nil, proj_data and proj_data.force_crit)
     return true
 end
 
@@ -373,6 +380,7 @@ function modifier_amor_e_skewer:OnCreated(kv)
     self.damage = tonumber(kv.dmg) or self.ability:GetSpecialValueFor("damage")
     self.knock_dur = tonumber(kv.knock_dur) or self.ability:GetSpecialValueFor("sidestep_duration")
     self.knock_dist = tonumber(kv.knock_dist) or self.ability:GetSpecialValueFor("sidestep_distance")
+    self.force_crit = (tonumber(kv.force_crit) or 0) == 1
 
     self.last_pos = self.parent:GetAbsOrigin()
 
@@ -510,7 +518,7 @@ function modifier_amor_e_skewer:_ProcessDragSegment()
                     self:_KnockEnemySide(enemy, cur, move_dir)
                 end
                 if self.ability and not self.ability:IsNull() then
-                    self.ability:_ApplyDamageWithCrit(self.caster, enemy, self.damage, DAMAGE_TYPE_PHYSICAL)
+                    self.ability:_ApplyDamageWithCrit(self.caster, enemy, self.damage, DAMAGE_TYPE_MAGICAL, nil, self.force_crit)
                 end
             end
         end
