@@ -20,30 +20,16 @@ function ashab_shard:OnSpellStart()
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
         DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAG_NO_INVIS,
-        FIND_ANY_ORDER,
+        FIND_FARTHEST,
         false
     )
 
-    local target = nil
-    local max_dist = -1
-
-    for _, enemy in pairs(enemies) do
-        if enemy and not enemy:IsNull() and enemy:IsAlive() then
-            local dist = (enemy:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D()
-            if dist > max_dist then
-                max_dist = dist
-                target = enemy
-            end
-        end
-    end
-
+    local target = enemies[1]
     if not target then return end
 
-    target:AddNewModifier(caster, self, "modifier_ashab_shard_vision", {
-        duration = self:GetSpecialValueFor("duration"),
-    })
-
-    caster:EmitSound("DOTA_Item.DustOfAppearance.Activate")
+    target:AddNewModifier(caster, self, "modifier_ashab_shard_vision", {duration = self:GetSpecialValueFor("duration")})
+    MinimapEvent(caster:GetTeamNumber(), caster, target:GetAbsOrigin().x, target:GetAbsOrigin().y, DOTA_MINIMAP_EVENT_HINT_LOCATION, 3)
+    --caster:EmitSound("ashab_shard")
 end
 
 modifier_ashab_shard_vision = class({})

@@ -5978,19 +5978,15 @@
 		"BaseClass"                     "ability_lua"
 		"ScriptFile"                    "heroes/ashab/ashab_shard"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityTextureName"            "item_dust"
+		"AbilityTextureName"            "ashab_shard"
 		"AbilityCooldown"               "20"
-		"AbilityManaCost"               "0"
+		"AbilityManaCost"               "50"
 		"IsGrantedByShard"              "1"
 		"MaxLevel"                      "1"
-		"precache"
-		{
-			"particle"	"particles/econ/items/sniper/sniper_fall20_immortal/sniper_fall20_immortal_crosshair.vpcf"
-		}
 		"AbilityValues"
 		{
 			"duration"			"3.0"
-			"vision_radius"	"250"
+			"vision_radius"		"250"
 			"vision_interval"	"0.1"
 		}
 	}
@@ -6039,15 +6035,15 @@
 	//=================================================================================================================
 	// МОХИТО КЛУБНИЧНЫЙ (врожденная)
 	//=================================================================================================================
-	"imba_batrider_sticky_napalm"
+	"ashab_innate"
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/ashab/ashab_innate_passive"
 		"AbilityTextureName"			"ashab_mohito"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
 		"IsBreakable"					"1"
 		"Innate"						"1"
 		"MaxLevel"						"1"

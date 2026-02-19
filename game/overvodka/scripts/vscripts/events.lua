@@ -186,7 +186,7 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if amor_f then
 				amor_f:SetLevel(1)
 			end
-			local ash = spawnedUnit:FindAbilityByName("imba_batrider_sticky_napalm_new")
+			local ash = spawnedUnit:FindAbilityByName("ashab_innate_new")
 			if ash then
 				ash:SetLevel(1)
 			end
