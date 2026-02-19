@@ -1369,7 +1369,8 @@
 		"Ability4"		"ashab_train"
 		"Ability5"		"imba_batrider_sticky_napalm"
 		"Ability6"		"Ashab_rocket"
-		"Ability7"		"imba_batrider_sticky_napalm_new"
+		"Ability7"		"generic_hidden"
+		"Ability8"		"ashab_shard"
 
 		"Ability10"		"special_bonus_unique_ashab_1"
 		"Ability11"		"special_bonus_unique_ashab_2"
@@ -4423,7 +4424,7 @@
 		"Ability4"		"amor_innate"
 		"Ability5"		"amor_f"
 		"Ability6"		"amor_ultimate"
-		"Ability7"		"generic_hidden"
+		"Ability7"		"amor_scepter"
 
 		"Ability10"		"special_bonus_unique_amor_1"
 		"Ability11"		"special_bonus_unique_amor_2"

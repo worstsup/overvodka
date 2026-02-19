@@ -13,12 +13,9 @@ function ashab_slushay:OnSpellStart()
 	local reduction_radius = self:GetSpecialValueFor("radius")
 	local reduction_duration = self:GetSpecialValueFor("reduction_duration")
 	local bonus_damage = self:GetSpecialValueFor("attack_damage")
-	 if caster:HasShard() then
-		caster:Purge( false, true, false, true, false)
-	end
 	local enemies = FindUnitsInRadius(
 		caster:GetTeamNumber(),
-		caster:GetOrigin(),
+		caster:GetAbsOrigin(),
 		nil,
 		reduction_radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -53,7 +50,7 @@ function ashab_slushay:PlayEffects()
 	local particle_cast = "particles/base_statue_destruction_gold_lvl2_new.vpcf"
 	local sound_cast = "slushay"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
-	ParticleManager:SetParticleControl( effect_cast, 0, self:GetCaster():GetOrigin() )
+	ParticleManager:SetParticleControl( effect_cast, 0, self:GetCaster():GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
 	EmitSoundOn( sound_cast, self:GetCaster() )
 end
