@@ -1,24 +1,20 @@
-LinkLuaModifier("modifier_imba_batrider_sticky_napalm_handler", "heroes/ashab/ashab_innate_passive", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_imba_batrider_sticky_napalm", "heroes/ashab/ashab_innate_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_ashab_innate_handler", "heroes/ashab/ashab_innate_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_ashab_innate", "heroes/ashab/ashab_innate_passive", LUA_MODIFIER_MOTION_NONE)
 
-imba_batrider_sticky_napalm						= class({})
-modifier_imba_batrider_sticky_napalm_handler		= class({})
-modifier_imba_batrider_sticky_napalm				= class({})
+ashab_innate						= class({})
+modifier_ashab_innate_handler		= class({})
+modifier_ashab_innate				= class({})
 
-function imba_batrider_sticky_napalm:IsStealable()
+function ashab_innate:IsStealable()
 	return false
 end
-function imba_batrider_sticky_napalm:ProcsMagicStick() return false end
+function ashab_innate:ProcsMagicStick() return false end
 
-function imba_batrider_sticky_napalm:GetIntrinsicModifierName()
-	return "modifier_imba_batrider_sticky_napalm_handler"
+function ashab_innate:GetIntrinsicModifierName()
+	return "modifier_ashab_innate_handler"
 end
 
-function imba_batrider_sticky_napalm:GetAOERadius()
-	return self:GetSpecialValueFor("radius")
-end
-
-function imba_batrider_sticky_napalm:OnSpellStart()
+function ashab_innate:OnSpellStart()
 	self:GetCaster():EmitSound("Hero_Batrider.StickyNapalm.Cast")
 	EmitSoundOnLocationWithCaster(self:GetCursorPosition(), "Hero_Batrider.StickyNapalm.Impact", self:GetCaster())
 	
@@ -32,7 +28,7 @@ function imba_batrider_sticky_napalm:OnSpellStart()
 	self.enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetCursorPosition(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 	
 	for _, enemy in pairs(self.enemies) do
-		enemy:AddNewModifier(self:GetCaster(), self, "modifier_imba_batrider_sticky_napalm", {duration = self:GetSpecialValueFor("duration") * (1 - enemy:GetStatusResistance())})
+		enemy:AddNewModifier(self:GetCaster(), self, "modifier_ashab_innate", {duration = self:GetSpecialValueFor("duration") * (1 - enemy:GetStatusResistance())})
 	end
 	AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCursorPosition(), 400, 2, false)
 	
@@ -41,87 +37,83 @@ function imba_batrider_sticky_napalm:OnSpellStart()
 end
 
 
-function modifier_imba_batrider_sticky_napalm_handler:IsHidden()	return true end
+function modifier_ashab_innate_handler:IsHidden()	return true end
 
-function modifier_imba_batrider_sticky_napalm_handler:OnIntervalThink()
+function modifier_ashab_innate_handler:OnIntervalThink()
 	if not IsServer() then return end
-	if self:GetCaster():PassivesDisabled() then return end
-	if not self:GetCaster():IsHexed() and not self:GetCaster():IsIllusion() and not self:GetCaster():IsInvisible() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
-		local targets = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),	-- int, your team number
-			self:GetCaster():GetAbsOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			600,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
-			FIND_CLOSEST,	-- int, order filter
-			false	-- bool, can grow cache
-		)
-		if targets == nil then return end
-		if self:GetCaster():IsInvisible() then return end
-		for _,unit in pairs(targets) do
-			local pointd = unit:GetAbsOrigin()
-			break
-		end
-		self:GetCaster():SetCursorPosition(pointd)
-		self:GetCaster():CastAbilityOnPosition(pointd, "imba_batrider_sticky_napalm_new", self:GetCaster():GetPlayerID())
+
+	local caster = self:GetCaster()
+	local ability = self:GetAbility()
+	if not caster or caster:IsNull() then return end
+	if not ability or ability:IsNull() then return end
+	if caster:PassivesDisabled() then return end
+
+	if not caster:IsAlive() or not ability:IsFullyCastable() or ability:IsInAbilityPhase() then return end
+	if caster:IsHexed() or caster:IsIllusion() or caster:IsInvisible() or caster:IsNightmared() or caster:IsOutOfGame() or caster:IsSilenced() or caster:IsStunned() or caster:IsChanneling() then
+		return
+	end
+
+	local targets = FindUnitsInRadius(
+		caster:GetTeamNumber(),
+		caster:GetAbsOrigin(),
+		nil,
+		600,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+		FIND_CLOSEST,
+		false
+	)
+
+	if not targets or #targets == 0 then return end
+
+	local point = targets[1]:GetAbsOrigin()
+	caster:SetCursorPosition(point)
+	ability:OnSpellStart()
+	ability:UseResources(false, false, false, true)
+
+	if RandomInt(1, 2) == 1 then
+		EmitSoundOn("mohito_1", caster)
+	else
+		EmitSoundOn("mohito_2", caster)
 	end
 end
 
-function modifier_imba_batrider_sticky_napalm_handler:DeclareFunctions()
-	local decFuncs = {MODIFIER_EVENT_ON_ORDER, MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
+
+function modifier_ashab_innate_handler:OnCreated()
+	if not IsServer() then return end
+	self:StartIntervalThink(0.1)
+end
+
+function modifier_ashab_innate_handler:DeclareFunctions()
+	local decFuncs = {MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
 	
 	return decFuncs
 end
 
-function modifier_imba_batrider_sticky_napalm_handler:OnOrder(keys)
-	if not IsServer() or keys.unit ~= self:GetParent() then return end
-	
-	if keys.ability == self:GetAbility() then
-		if keys.order_type == DOTA_UNIT_ORDER_CAST_POSITION and (keys.new_pos - self:GetCaster():GetAbsOrigin()):Length2D() <= self:GetAbility():GetCastRange(self:GetCaster():GetCursorPosition(), self:GetCaster()) + self:GetCaster():GetCastRangeBonus() then
-			self.bActive = true
-		else
-			self.bActive = false
-		end
-		
-		if keys.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO then
-			if self:GetAbility():GetAutoCastState() then
-				self:SetStackCount(0)
-				self:StartIntervalThink(-1)
-			else
-				self:StartIntervalThink(0.1)
-				self:SetStackCount(1)
-			end
-		end
-	else
-		self.bActive = false
-	end
-end
-
-function modifier_imba_batrider_sticky_napalm_handler:GetModifierIgnoreCastAngle()
+function modifier_ashab_innate_handler:GetModifierIgnoreCastAngle()
 	if not IsServer() or self.bActive == false then return end
 	return 0
 end
 
-function modifier_imba_batrider_sticky_napalm_handler:GetModifierDisableTurning()
+function modifier_ashab_innate_handler:GetModifierDisableTurning()
 	if not IsServer() or self.bActive == false then return end
 	return 0
 end
 
-function modifier_imba_batrider_sticky_napalm:GetEffectName()
+function modifier_ashab_innate:GetEffectName()
 	return "particles/units/heroes/hero_batrider/batrider_napalm_damage_debuff.vpcf"
 end
 
-function modifier_imba_batrider_sticky_napalm:GetStatusEffectName()
+function modifier_ashab_innate:GetStatusEffectName()
 	return "particles/status_fx/status_effect_stickynapalm.vpcf"
 end
 
-function modifier_imba_batrider_sticky_napalm:OnCreated()
+function modifier_ashab_innate:OnCreated()
 	self.max_stacks			= self:GetAbility():GetSpecialValueFor("max_stacks")
 	self.movement_speed_pct	= self:GetAbility():GetSpecialValueFor("movement_speed_pct")
 	self.turn_rate_pct		= self:GetAbility():GetSpecialValueFor("turn_rate_pct")
-	self.damage				= self:GetAbility():GetSpecialValueFor("damage")
+	self.damage				= self:GetAbility():GetSpecialValueFor("damage") + self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor("damage_per_level")
 	
 	if not IsServer() then return end
 	
@@ -134,11 +126,9 @@ function modifier_imba_batrider_sticky_napalm:OnCreated()
 		ability 		= self:GetAbility()
 	}
 	self.non_trigger_inflictors = {
-		["imba_batrider_sticky_napalm"] = true,
-		
+		["ashab_innate"] = true,
 		["item_imba_cloak_of_flames"]	= true,
 		["item_imba_radiance"]			= true,
-		
 		["item_imba_urn_of_shadows"]	= true,
 		["item_imba_spirit_vessel"]		= true,
 	}
@@ -150,11 +140,11 @@ function modifier_imba_batrider_sticky_napalm:OnCreated()
 	self:AddParticle(self.stack_particle, false, false, -1, false, false)
 end
 
-function modifier_imba_batrider_sticky_napalm:OnRefresh()
+function modifier_ashab_innate:OnRefresh()
 	self.max_stacks			= self:GetAbility():GetSpecialValueFor("max_stacks")
 	self.movement_speed_pct	= self:GetAbility():GetSpecialValueFor("movement_speed_pct")
 	self.turn_rate_pct		= self:GetAbility():GetSpecialValueFor("turn_rate_pct")
-	self.damage				= self:GetAbility():GetSpecialValueFor("damage")
+	self.damage				= self:GetAbility():GetSpecialValueFor("damage") + self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor("damage_per_level")
 
 	if not IsServer() then return end
 
@@ -167,25 +157,24 @@ function modifier_imba_batrider_sticky_napalm:OnRefresh()
 	end
 end
 
-function modifier_imba_batrider_sticky_napalm:DeclareFunctions()
+function modifier_ashab_innate:DeclareFunctions()
 	return {MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE, MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE, MODIFIER_EVENT_ON_TAKEDAMAGE}
 end
 
-function modifier_imba_batrider_sticky_napalm:GetModifierMoveSpeedBonus_Percentage()
+function modifier_ashab_innate:GetModifierMoveSpeedBonus_Percentage()
 	return math.min(self:GetStackCount(), self.max_stacks) * self.movement_speed_pct
 end
 
-function modifier_imba_batrider_sticky_napalm:GetModifierTurnRate_Percentage()
+function modifier_ashab_innate:GetModifierTurnRate_Percentage()
 	return self.turn_rate_pct
 end
 
-function modifier_imba_batrider_sticky_napalm:OnTakeDamage(keys)
+function modifier_ashab_innate:OnTakeDamage(keys)
 	if keys.attacker == self:GetCaster() and keys.unit == self:GetParent() and (not keys.inflictor or not self.non_trigger_inflictors[keys.inflictor:GetName()]) and bit.band(keys.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) ~= DOTA_DAMAGE_FLAG_REFLECTION then
 		self.damage_debuff_particle = ParticleManager:CreateParticle("particles/batrider_napalm_damage_debuff_new.vpcf", PATTACH_ABSORIGIN, self:GetParent())
 		ParticleManager:ReleaseParticleIndex(self.damage_debuff_particle)
 		self.damage_debuff_particle = nil
 		
-		-- The wikis don't say anything about creep-heroes so I'll just assume they'll be treated as creeps
 		if self:GetParent():IsHero() then
 			self.damage_table.damage = self.damage * self:GetStackCount()
 		else

@@ -5863,7 +5863,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/ashab/ashab_slushay"
 		"AbilityTextureName"			"slushay"
-		"HasShardUpgrade"				"1"
 		"precache"
 		{
 			"particle"	"particles/base_statue_destruction_gold_lvl2_new.vpcf"
@@ -5972,6 +5971,26 @@
 		}
 	}
 	//=================================================================================================================
+	// ИДИ СЮДА! (шард)
+	//=================================================================================================================
+	"ashab_shard"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/ashab/ashab_shard"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityTextureName"            "ashab_shard"
+		"AbilityCooldown"               "20"
+		"AbilityManaCost"               "50"
+		"IsGrantedByShard"              "1"
+		"MaxLevel"                      "1"
+		"AbilityValues"
+		{
+			"duration"			"3.0"
+			"vision_radius"		"250"
+			"vision_interval"	"0.1"
+		}
+	}
+	//=================================================================================================================
 	// РАКЕТКА
 	//=================================================================================================================
 	"Ashab_rocket"
@@ -6016,15 +6035,15 @@
 	//=================================================================================================================
 	// МОХИТО КЛУБНИЧНЫЙ (врожденная)
 	//=================================================================================================================
-	"imba_batrider_sticky_napalm"
+	"ashab_innate"
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/ashab/ashab_innate_passive"
 		"AbilityTextureName"			"ashab_mohito"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
 		"IsBreakable"					"1"
 		"Innate"						"1"
 		"MaxLevel"						"1"
@@ -6055,40 +6074,9 @@
 				"damage_per_level"		"2"
 		}
 	}
-	"imba_batrider_sticky_napalm_new"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/ashab/ashab_innate"
-		"AbilityTextureName"			"ashab_mohito"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"MaxLevel"	"1"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
-		"precache"
-		{
-			"particle"	"particles/batrider_stickynapalm_impact_new.vpcf"
-			"particle"	"particles/status_fx/status_effect_stickynapalm.vpcf"
-			"particle"	"particles/batrider_napalm_damage_debuff_new.vpcf"
-			"particle"	"particles/batrider_stickynapalm_stack_new.vpcf"
-		}
-		"AbilityCastRange"				"550"
-		"AbilityCastPoint"				"0"
-		"AbilityManaCost"				"0"
-		"IsBreakable"					"1"
-		"AbilityModifierSupportValue"	"0.5"
-		"AbilityValues"
-		{
-			"AbilityCooldown"
-			{
-				"value"	"5.0"
-				"special_bonus_unique_ashab_8" "-2"
-			}
-		}
-	}
 
 	//===================================================================================================================
-	//													АРСЕН МАРКАРЯН
+	//												АРСЕН МАРКАРЯН
 	//===================================================================================================================
 
 	"special_bonus_unique_arsen_1"
