@@ -58,14 +58,50 @@ function modifier_visitor_q_counter:IsPurgable() return false end
 function modifier_visitor_q_counter:RemoveOnDeath() return false end
 
 function modifier_visitor_q_counter:DeclareFunctions()
-    return {MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING, MODIFIER_EVENT_ON_DEATH}
+    return {
+        MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING,
+        MODIFIER_EVENT_ON_DEATH,
+        MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
+        MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
+    }
 end
 
 function modifier_visitor_q_counter:GetModifierPercentageManacostStacking()
-	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("manacost_stack")
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return 0 end
+
+    local has_facet_2 = ability:GetSpecialValueFor("has_facet_2") or 0
+    if has_facet_2 <= 0 then return 0 end
+
+    return self:GetStackCount() * ability:GetSpecialValueFor("manacost_stack")
+end
+
+function modifier_visitor_q_counter:GetModifierOverrideAbilitySpecial(params)
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return 0 end
+
+    if params.ability and params.ability:GetAbilityName() == "visitor_d" and params.ability_special_value == "max_stacks_per_enemy" then
+        if ability:GetSpecialValueFor("has_facet_1") > 0 then
+            return 1
+        end
+    end
+
+    return 0
+end
+
+function modifier_visitor_q_counter:GetModifierOverrideAbilitySpecialValue(params)
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+
+    if not params.ability or params.ability:GetAbilityName() ~= "visitor_d" then return end
+    if params.ability_special_value ~= "max_stacks_per_enemy" then return end
+
+    local base = params.ability:GetLevelSpecialValueNoOverride("max_stacks_per_enemy", params.ability_special_level)
+    return base + self:GetStackCount()
 end
 
 function modifier_visitor_q_counter:OnDeath(params)
+    if not IsServer() then return end
 
     local parent  = self:GetParent()
     local ability = self:GetAbility()
