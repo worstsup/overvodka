@@ -45,58 +45,54 @@ function modifier_imba_batrider_sticky_napalm_handler:IsHidden()	return true end
 
 function modifier_imba_batrider_sticky_napalm_handler:OnIntervalThink()
 	if not IsServer() then return end
-	if self:GetCaster():PassivesDisabled() then return end
-	if not self:GetCaster():IsHexed() and not self:GetCaster():IsIllusion() and not self:GetCaster():IsInvisible() and not self:GetCaster():IsNightmared() and not self:GetCaster():IsOutOfGame() and not self:GetCaster():IsSilenced() and not self:GetCaster():IsStunned() and not self:GetCaster():IsChanneling() then
-		local targets = FindUnitsInRadius(
-			self:GetCaster():GetTeamNumber(),	-- int, your team number
-			self:GetCaster():GetAbsOrigin(),	-- point, center point
-			nil,	-- handle, cacheUnit. (not known)
-			600,	-- float, radius. or use FIND_UNITS_EVERYWHERE
-			DOTA_UNIT_TARGET_TEAM_ENEMY,	-- int, team filter
-			DOTA_UNIT_TARGET_HERO,	-- int, type filter
-			DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,	-- int, flag filter
-			FIND_CLOSEST,	-- int, order filter
-			false	-- bool, can grow cache
-		)
-		if targets == nil then return end
-		if self:GetCaster():IsInvisible() then return end
-		for _,unit in pairs(targets) do
-			local pointd = unit:GetAbsOrigin()
-			break
-		end
-		self:GetCaster():SetCursorPosition(pointd)
-		self:GetCaster():CastAbilityOnPosition(pointd, "imba_batrider_sticky_napalm_new", self:GetCaster():GetPlayerID())
+
+	local caster = self:GetCaster()
+	local ability = self:GetAbility()
+	if not caster or caster:IsNull() then return end
+	if not ability or ability:IsNull() then return end
+	if caster:PassivesDisabled() then return end
+
+	if not caster:IsAlive() or not ability:IsFullyCastable() or ability:IsInAbilityPhase() then return end
+	if caster:IsHexed() or caster:IsIllusion() or caster:IsInvisible() or caster:IsNightmared() or caster:IsOutOfGame() or caster:IsSilenced() or caster:IsStunned() or caster:IsChanneling() then
+		return
 	end
+
+	local targets = FindUnitsInRadius(
+		caster:GetTeamNumber(),
+		caster:GetAbsOrigin(),
+		nil,
+		600,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+		FIND_CLOSEST,
+		false
+	)
+
+	if not targets or #targets == 0 then return end
+
+	local point = targets[1]:GetAbsOrigin()
+	caster:SetCursorPosition(point)
+	ability:OnSpellStart()
+	ability:UseResources(false, false, false, true)
+
+	if RandomInt(1, 2) == 1 then
+		EmitSoundOn("mohito_1", caster)
+	else
+		EmitSoundOn("mohito_2", caster)
+	end
+end
+
+
+function modifier_imba_batrider_sticky_napalm_handler:OnCreated()
+	if not IsServer() then return end
+	self:StartIntervalThink(0.1)
 end
 
 function modifier_imba_batrider_sticky_napalm_handler:DeclareFunctions()
-	local decFuncs = {MODIFIER_EVENT_ON_ORDER, MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
+	local decFuncs = {MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
 	
 	return decFuncs
-end
-
-function modifier_imba_batrider_sticky_napalm_handler:OnOrder(keys)
-	if not IsServer() or keys.unit ~= self:GetParent() then return end
-	
-	if keys.ability == self:GetAbility() then
-		if keys.order_type == DOTA_UNIT_ORDER_CAST_POSITION and (keys.new_pos - self:GetCaster():GetAbsOrigin()):Length2D() <= self:GetAbility():GetCastRange(self:GetCaster():GetCursorPosition(), self:GetCaster()) + self:GetCaster():GetCastRangeBonus() then
-			self.bActive = true
-		else
-			self.bActive = false
-		end
-		
-		if keys.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO then
-			if self:GetAbility():GetAutoCastState() then
-				self:SetStackCount(0)
-				self:StartIntervalThink(-1)
-			else
-				self:StartIntervalThink(0.1)
-				self:SetStackCount(1)
-			end
-		end
-	else
-		self.bActive = false
-	end
 end
 
 function modifier_imba_batrider_sticky_napalm_handler:GetModifierIgnoreCastAngle()

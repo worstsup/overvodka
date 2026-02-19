@@ -5863,7 +5863,6 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/ashab/ashab_slushay"
 		"AbilityTextureName"			"slushay"
-		"HasShardUpgrade"				"1"
 		"precache"
 		{
 			"particle"	"particles/base_statue_destruction_gold_lvl2_new.vpcf"
@@ -5972,6 +5971,30 @@
 		}
 	}
 	//=================================================================================================================
+	// ИДИ СЮДА! (шард)
+	//=================================================================================================================
+	"ashab_shard"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/ashab/ashab_shard"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityTextureName"            "item_dust"
+		"AbilityCooldown"               "20"
+		"AbilityManaCost"               "0"
+		"IsGrantedByShard"              "1"
+		"MaxLevel"                      "1"
+		"precache"
+		{
+			"particle"	"particles/econ/items/sniper/sniper_fall20_immortal/sniper_fall20_immortal_crosshair.vpcf"
+		}
+		"AbilityValues"
+		{
+			"duration"			"3.0"
+			"vision_radius"	"250"
+			"vision_interval"	"0.1"
+		}
+	}
+	//=================================================================================================================
 	// РАКЕТКА
 	//=================================================================================================================
 	"Ashab_rocket"
@@ -6055,40 +6078,9 @@
 				"damage_per_level"		"2"
 		}
 	}
-	"imba_batrider_sticky_napalm_new"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"heroes/ashab/ashab_innate"
-		"AbilityTextureName"			"ashab_mohito"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"MaxLevel"	"1"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Batrider.StickyNapalm.Impact"
-		"precache"
-		{
-			"particle"	"particles/batrider_stickynapalm_impact_new.vpcf"
-			"particle"	"particles/status_fx/status_effect_stickynapalm.vpcf"
-			"particle"	"particles/batrider_napalm_damage_debuff_new.vpcf"
-			"particle"	"particles/batrider_stickynapalm_stack_new.vpcf"
-		}
-		"AbilityCastRange"				"550"
-		"AbilityCastPoint"				"0"
-		"AbilityManaCost"				"0"
-		"IsBreakable"					"1"
-		"AbilityModifierSupportValue"	"0.5"
-		"AbilityValues"
-		{
-			"AbilityCooldown"
-			{
-				"value"	"5.0"
-				"special_bonus_unique_ashab_8" "-2"
-			}
-		}
-	}
 
 	//===================================================================================================================
-	//													АРСЕН МАРКАРЯН
+	//												АРСЕН МАРКАРЯН
 	//===================================================================================================================
 
 	"special_bonus_unique_arsen_1"
@@ -18072,6 +18064,20 @@
 				"RequiresScepter"		"1"
 			}
 		}
+	}
+	//=================================================================================================================
+	// Киберспортивные нормативы (аганим)
+	//=================================================================================================================
+	"amor_scepter"
+	{
+		"BaseClass"                     "ability_lua"
+		"ScriptFile"                    "heroes/amor/amor_scepter"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityTextureName"            "item_refresher"
+		"AbilityCooldown"               "85"
+		"AbilityManaCost"               "300"
+		"IsGrantedByScepter"            "1"
+		"MaxLevel"                      "1"
 	}
 	//===================================================================================================================
 	//												Jeffrey Epstein
