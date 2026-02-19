@@ -16295,7 +16295,12 @@
 			"damage_interval"	"0.25"
 			"kill_threshold"	"12"
 			"slow_pct"			"25"
-			"manacost_stack"	"1"
+			"manacost_stack"
+			{
+				"value"	"0"
+				"special_bonus_facet_visitor_facet_2"	"+1"
+				"RequiresFacet"	"visitor_facet_2"
+			}
 			"bonus_respawn_time"
 			{
 				"value"	"0"
@@ -16400,6 +16405,12 @@
 			{
 				"value"	"3 7 11 15"
 				"dynamic_value" "true"
+			}
+			"max_stacks_kill_bonus"
+			{
+				"value"	"0"
+				"special_bonus_facet_visitor_facet_1"	"+1"
+				"RequiresFacet"	"visitor_facet_1"
 			}
 			"AbilityCastRange"
 			{

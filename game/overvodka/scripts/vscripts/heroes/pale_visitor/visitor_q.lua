@@ -58,11 +58,46 @@ function modifier_visitor_q_counter:IsPurgable() return false end
 function modifier_visitor_q_counter:RemoveOnDeath() return false end
 
 function modifier_visitor_q_counter:DeclareFunctions()
-    return {MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING, MODIFIER_EVENT_ON_DEATH}
+    return {
+        MODIFIER_PROPERTY_MANACOST_PERCENTAGE_STACKING,
+        MODIFIER_EVENT_ON_DEATH,
+        MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
+        MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
+    }
 end
 
 function modifier_visitor_q_counter:GetModifierPercentageManacostStacking()
 	return self:GetStackCount() * self:GetAbility():GetSpecialValueFor("manacost_stack")
+end
+
+function modifier_visitor_q_counter:GetModifierOverrideAbilitySpecial(params)
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return 0 end
+
+    local ability_d = parent:FindAbilityByName("visitor_d")
+    if not ability_d or ability_d:IsNull() then return 0 end
+    if params.ability ~= ability_d then return 0 end
+
+    if params.ability_special_value == "max_stacks_per_enemy" then
+        return 1
+    end
+
+    return 0
+end
+
+function modifier_visitor_q_counter:GetModifierOverrideAbilitySpecialValue(params)
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return end
+
+    local ability_d = parent:FindAbilityByName("visitor_d")
+    if not ability_d or ability_d:IsNull() then return end
+    if params.ability ~= ability_d then return end
+    if params.ability_special_value ~= "max_stacks_per_enemy" then return end
+
+    local base = ability_d:GetLevelSpecialValueNoOverride("max_stacks_per_enemy", params.ability_special_level)
+    local bonus_per_kill = ability_d:GetSpecialValueFor("max_stacks_kill_bonus") or 0
+
+    return base + (self:GetStackCount() * bonus_per_kill)
 end
 
 function modifier_visitor_q_counter:OnDeath(params)
