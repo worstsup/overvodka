@@ -5985,7 +5985,7 @@
 		"MaxLevel"                      "1"
 		"AbilityValues"
 		{
-			"duration"			"3.0"
+			"duration"			"3.5"
 			"vision_radius"		"250"
 			"vision_interval"	"0.1"
 		}
@@ -16396,7 +16396,11 @@
 				"value" "900 1100 1300 1500"
 				"special_bonus_unique_visitor_4"	"+400"
 			}
-			"max_stacks_per_enemy" "3 7 11 15"
+			"max_stacks_per_enemy"
+			{
+				"value"	"3 7 11 15"
+				"dynamic_value" "true"
+			}
 			"AbilityCastRange"
 			{
 				"value" "900 1100 1300 1500"

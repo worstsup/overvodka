@@ -25,11 +25,16 @@ function ashab_shard:OnSpellStart()
     )
 
     local target = enemies[1]
-    if not target then return end
+    if not target or target:IsNull() then
+        self:RefundManaCost()
+        self:EndCooldown()
+        SendErrorToPlayer(caster:GetPlayerOwnerID(), "#CUSTOM_ERROR_no_enemies_found")
+        return
+    end
 
     target:AddNewModifier(caster, self, "modifier_ashab_shard_vision", {duration = self:GetSpecialValueFor("duration")})
-    MinimapEvent(caster:GetTeamNumber(), caster, target:GetAbsOrigin().x, target:GetAbsOrigin().y, DOTA_MINIMAP_EVENT_HINT_LOCATION, 3)
-    --caster:EmitSound("ashab_shard")
+    MinimapEvent(caster:GetTeamNumber(), caster, target:GetAbsOrigin().x, target:GetAbsOrigin().y, DOTA_MINIMAP_EVENT_HINT_LOCATION, 2)
+    caster:EmitSound("ashab_shard")
 end
 
 modifier_ashab_shard_vision = class({})
@@ -78,5 +83,5 @@ function modifier_ashab_shard_vision:OnIntervalThink()
         return
     end
 
-    AddFOWViewer(self.team, parent:GetAbsOrigin(), self.radius, self.interval + 0.03, false)
+    AddFOWViewer(self.team, parent:GetAbsOrigin(), self.radius, self.interval + 0.1, false)
 end

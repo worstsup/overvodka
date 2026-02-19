@@ -46,10 +46,11 @@
           {
             "value"
             {
-               "value0"    "sounds/abilities/ashab_shard.vsnd"
+               "value0"    "sounds/abilities/ashab_shard_1.vsnd"
+               "value1"    "sounds/abilities/ashab_shard_2.vsnd"
             }
           }
-          "volume"      {  "value"   "2.5" }
+          "volume"      {  "value"   "1.5" }
           "pitch_rand_min"  {  "value"   "-0.03000" }
           "pitch_rand_max"  {  "value"   "0.030000" }
           "pitch"       {  "value"   "1.000000" }
