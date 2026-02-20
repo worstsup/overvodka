@@ -20,43 +20,75 @@ function IsPrimeOnlyHero(heroName) {
 	return !!PRIME_ONLY_HEROES[NormalizeHeroName(heroName)];
 }
 
+function IsPlayerSubscribedSafe(playerId) {
+	if (typeof IsPlayerSubscribed === "function") {
+		try {
+			return !!IsPlayerSubscribed(playerId);
+		} catch (e) {
+			$.Msg("IsPlayerSubscribedSafe: IsPlayerSubscribed failed", e);
+		}
+	}
+
+	const playerInfo = CustomNetTables.GetTableValue("players", "player_" + playerId);
+	return !!(playerInfo && playerInfo.active == 1);
+}
+
+function IsPrimeOnlyHeroCard(heroCard) {
+	if (!heroCard) {
+		return false;
+	}
+
+	const heroId = heroCard.GetAttributeInt("heroid", -1);
+	if (PRIME_ONLY_HERO_IDS[heroId]) {
+		return true;
+	}
+
+	if (typeof heroCard.GetAttributeString === "function") {
+		const heroName = heroCard.GetAttributeString("hero_name", "");
+		if (IsPrimeOnlyHero(heroName)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 function UpdatePrimeHeroCardsState() {
 	const localPlayerId = Game.GetLocalPlayerID();
 	if (localPlayerId < 0) {
-		$.Schedule(0.1, UpdatePrimeHeroCardsState);
+		$.Schedule(0.01, UpdatePrimeHeroCardsState);
 		return;
 	}
 
-	const isSubscribed = IsPlayerSubscribed(localPlayerId);
+	const isSubscribed = IsPlayerSubscribedSafe(localPlayerId);
 	const preGame = FindDotaHudElement("PreGame");
 	if (!preGame) {
-		$.Schedule(0.1, UpdatePrimeHeroCardsState);
+		$.Schedule(0.01, UpdatePrimeHeroCardsState);
 		return;
 	}
 
 	const heroCards = preGame.FindChildrenWithClassTraverse("HeroCard");
+	const hasHeroCards = heroCards && heroCards.length > 0;
+
 	for (let i = 0; i < heroCards.length; i++) {
 		const heroCard = heroCards[i];
-		if (!heroCard) {
-			continue;
-		}
-
-		const heroId = heroCard.GetAttributeInt("heroid", -1);
-		const isPrimeOnlyCard = !!PRIME_ONLY_HERO_IDS[heroId];
+		const isPrimeOnlyCard = IsPrimeOnlyHeroCard(heroCard);
 		if (isPrimeOnlyCard && !isSubscribed) {
 			heroCard.hittest = false;
 			heroCard.hittestchildren = false;
 			heroCard.style.saturation = "0.25";
 			heroCard.style.opacity = "0.45";
+			heroCard.style.washColor = "#777777";
 		} else {
 			heroCard.hittest = true;
 			heroCard.hittestchildren = true;
 			heroCard.style.saturation = "1";
 			heroCard.style.opacity = "1";
+			heroCard.style.washColor = "#FFFFFF";
 		}
 	}
 
-	$.Schedule(0.1, UpdatePrimeHeroCardsState);
+	$.Schedule(hasHeroCards ? 0.03 : 0.01, UpdatePrimeHeroCardsState);
 }
 
 function OnUpdateHeroSelection()
@@ -288,11 +320,11 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
-			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribed(playerId)) {
+			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribedSafe(playerId)) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
 				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
-			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && IsPlayerSubscribed(playerId)) {
+			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && IsPlayerSubscribedSafe(playerId)) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
@@ -367,18 +399,18 @@ function UpdatePlayer( teamPanel, playerId )
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
 			let HeroPick = FindDotaHudElement("HeroPickRightColumn");
 			HeroPick.style.visibility = "visible";
-			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 
+			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribedSafe(playerId)) 
 			{
 				ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
 				
 			}
-			else if (playerInfo.possible_hero_selection == "void_spirit" && IsPlayerSubscribed(playerId))
+			else if (playerInfo.possible_hero_selection == "void_spirit" && IsPlayerSubscribedSafe(playerId))
 			{
 				ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 			}
-			else if (IsPrimeOnlyHero(playerInfo.possible_hero_selection) && !IsPlayerSubscribed(playerId))
+			else if (IsPrimeOnlyHero(playerInfo.possible_hero_selection) && !IsPlayerSubscribedSafe(playerId))
 			{
 				ToggleLockInNotice(HeroPick, true);
 			}
