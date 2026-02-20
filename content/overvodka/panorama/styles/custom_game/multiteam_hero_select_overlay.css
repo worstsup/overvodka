@@ -131,19 +131,42 @@
 	horizontal-align: center;
 }
 
+#PlayerPortraitContainer
+{
+    width: 90px;
+    height: 50px;
+    overflow: noclip;
+}
+
+#PrimePortraitGlow
+{
+    width: 96px;
+    height: 56px;
+    border: 2px solid transparent;
+    horizontal-align: center;
+    vertical-align: center;
+    opacity: 0;
+    z-index: 0;
+}
+
 #PlayerPortrait
 {
     background-color: #444444;
     border: 1px solid black;
     width: 90px;
     height: 50px;
+    horizontal-align: center;
+    vertical-align: center;
+    z-index: 1;
 }
 
-.PrimeFramesEnabled .HeroSelectPlayerRoot.PrimeSubscribed #PlayerPortrait
+.PrimeFramesEnabled .HeroSelectPlayerRoot.PrimeSubscribed #PrimePortraitGlow
 {
+    opacity: 1;
     border: 2px solid white;
     border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-    animation-name: subscribe_glow;
+    box-shadow: 0px 0px 12px 0px #ffb836aa;
+    animation-name: subscribe_glow_outer;
     animation-duration: 10s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
@@ -167,60 +190,71 @@
     saturation: 0.0;
 }
 
-@keyframes 'subscribe_glow'
+@keyframes 'subscribe_glow_outer'
 {
 	0%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 
 	10%
 	{
         border-brush: #ffe100ef;
+		box-shadow: 0px 0px 14px 0px #ffe10088;
 	}
 
     20%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 
     30%
 	{
         border-brush: #ff4a2e;
+		box-shadow: 0px 0px 14px 0px #ff4a2e88;
 	}
 
     40%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 
     50%
 	{
         border-brush: #9dff2e;
+		box-shadow: 0px 0px 14px 0px #9dff2e88;
 	}
 
     60%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 
     70%
 	{
         border-brush: #2effaf;
+		box-shadow: 0px 0px 14px 0px #2effaf88;
 	}
 
     80%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 
     90%
 	{
         border-brush: #2eb6ff;
+		box-shadow: 0px 0px 14px 0px #2eb6ff88;
 	}
 	
 	100%
 	{
         border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
+		box-shadow: 0px 0px 12px 0px #ff852e88;
 	}
 }
