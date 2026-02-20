@@ -2,7 +2,11 @@
 var heroModelPanel = heroModelPanel || null;
 function OnUpdateHeroSelection()
 {
-	for ( var teamId of Game.GetAllTeamIDs() )
+	var teamIds = Game.GetAllTeamIDs();
+	if ( !teamIds )
+		return;
+
+	for ( var teamId of teamIds )
 	{
 		UpdateTeam( teamId );
 	}
@@ -12,7 +16,20 @@ function UpdateTeam( teamId )
 {
 	var teamPanelName = "team_" + teamId;
 	var teamPanel = $( "#"+teamPanelName );
+	if ( !teamPanel )
+		return;
+
 	var teamPlayers = Game.GetPlayerIDsOnTeam( teamId );
+	if ( !teamPlayers )
+		return;
+
+	var isLocalTeamPrimeSubscribed = false;
+	if ( teamPanel.BHasClass( "local_player_team" ) && typeof IsPlayerSubscribed === "function" )
+	{
+		isLocalTeamPrimeSubscribed = IsPlayerSubscribed( Game.GetLocalPlayerID() );
+	}
+	teamPanel.SetHasClass( "TeamPrimeSubscribed", isLocalTeamPrimeSubscribed );
+
 	teamPanel.SetHasClass( "no_players", ( teamPlayers.length == 0 ) );
 	for ( var playerId of teamPlayers )
 	{
@@ -344,6 +361,13 @@ function UpdatePlayer( teamPanel, playerId )
 	var playerName = playerPanel.FindChildInLayoutFile( "PlayerName" );
 	playerName.text = playerInfo.player_name;
 
+	var isPrimeSubscribed = false;
+	if ( typeof IsPlayerSubscribed === "function" )
+	{
+		isPrimeSubscribed = IsPlayerSubscribed( playerId );
+	}
+
+	playerPanel.SetHasClass( "PrimeSubscribed", isPrimeSubscribed );
 	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );
 }
 
@@ -439,6 +463,11 @@ function UpdateTimer()
 	GameEvents.Subscribe( "dota_player_hero_selection_dirty", OnUpdateHeroSelection );
 	GameEvents.Subscribe( "dota_player_update_hero_selection", OnUpdateHeroSelection );
 
+	$.Schedule( 0.5, function()
+	{
+		$.GetContextPanel().AddClass( "PrimeFramesEnabled" );
+		OnUpdateHeroSelection();
+	} );
+
 	UpdateTimer();
 })();
-

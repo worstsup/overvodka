@@ -164,7 +164,14 @@
 }
 
 .ScoreboardTeamWrapper.local_player_team #LocalTeamOverlay {
-    box-shadow: -3px 0px 12px 0px #ffffff88;
+    box-shadow: 0px 0px 12px 0px #ffffff88;
+}
+
+.ScoreboardTeamWrapper.local_player_team.HasPrimeSubscriber #LocalTeamOverlay {
+    animation-name: subscribe_glow_local_overlay;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 #ComebackActivated{
@@ -204,86 +211,61 @@
     overflow: noclip;
 }
 
-.IsSubscribed .ScoreboardPlayer{
-    border-bottom: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
-
-    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-    box-shadow: 0px 0px 10px 0px #2eb6ff;
-
-    animation-name: subscribe_glow;
-    animation-duration: 10s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-}
-
-@keyframes 'subscribe_glow'
+@keyframes 'subscribe_glow_local_overlay'
 {
 	0%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
 	10%
 	{
-        border-brush: #ffe100ef;
 		box-shadow: 0px 0px 15px 0px #ffe100ef;
 	}
 
     20%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     30%
 	{
-        border-brush: #ff4a2e;
 		box-shadow: 0px 0px 15px 0px #ff4a2e;
 	}
 
     40%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     50%
 	{
-        border-brush: #9dff2e;
 		box-shadow: 0px 0px 15px 0px #9dff2e;
 	}
 
     60%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     70%
 	{
-        border-brush: #2effaf;
 		box-shadow: 0px 0px 15px 0px #2effaf;
 	}
 
     80%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     90%
 	{
-        border-brush: #2eb6ff;
 		box-shadow: 0px 0px 15px 0px #2eb6ff;
 	}
 	
 	100%
 	{
-        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-		box-shadow: 0px 0px 10px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 }
 

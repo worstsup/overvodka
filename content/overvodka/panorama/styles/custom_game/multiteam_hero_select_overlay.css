@@ -83,7 +83,15 @@
 {
 	width: 100%;
     height: 50px;
-    box-shadow: fill #ffffff80 0px 0px 3px 3px;
+    box-shadow: fill #66666680 0px 0px 3px 3px;
+}
+
+.PrimeFramesEnabled .local_player_team.TeamPrimeSubscribed #PlayerPortraitsOverlay
+{
+    animation-name: subscribe_glow_pick_overlay;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 #EndSpacer
@@ -134,7 +142,7 @@
 #PlayerPortrait
 {
     background-color: #444444;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     width: 90px;
     height: 50px;
 }
@@ -155,4 +163,22 @@
 .HeroSelectPlayerRoot.hero_highlighted #PlayerPortrait
 {
     saturation: 0.0;
+}
+
+@keyframes 'subscribe_glow_pick_overlay'
+{
+    0%
+    {
+        box-shadow: fill #FFD70080 0px 0px 10px 3px;
+    }
+
+    50%
+    {
+        box-shadow: fill #FFED4E80 0px 0px 15px 3px;
+    }
+
+    100%
+    {
+        box-shadow: fill #FFD70080 0px 0px 10px 3px;
+    }
 }

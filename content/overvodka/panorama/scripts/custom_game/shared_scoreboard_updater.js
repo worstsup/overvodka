@@ -311,14 +311,18 @@ function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, t
 	teamPanel.SetHasClass( "not_local_player_team", localPlayerTeamId != teamId );
 
 	var teamPlayers = Game.GetPlayerIDsOnTeam( teamId )
+	var hasPrimeSubscriber = false;
 	var playersContainer = teamPanel.FindChildInLayoutFile( "PlayersContainer" );
 	if ( playersContainer )
 	{
 		for ( var playerId of teamPlayers )
 		{
+			hasPrimeSubscriber = hasPrimeSubscriber || IsPlayerSubscribed( playerId );
 			_ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContainer, playerId, localPlayerTeamId )
 		}
 	}
+
+	teamPanel.SetHasClass( "HasPrimeSubscriber", hasPrimeSubscriber );
 	
 	teamPanel.SetHasClass( "no_players", (teamPlayers.length == 0) )
 	teamPanel.SetHasClass( "one_player", (teamPlayers.length == 1) )
@@ -579,4 +583,3 @@ function ScoreboardUpdater_GetSortedTeamInfoList( scoreboardHandle )
 	
 	return teamsList;
 }
-
