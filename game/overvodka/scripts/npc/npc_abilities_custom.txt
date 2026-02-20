@@ -6746,16 +6746,17 @@
 		"AbilityCooldown"				"23.0 21.0 19.0 17.0"
 		"AbilityManaCost"				"100 115 130 145"
 		"AbilityDamage"					"50 100 150 200"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 		"AbilityValues"
 		{
-				"width"				"125 125 125 125"
+				"width"				"125"
 				"duration"
 				{
 					"value"	"1.0 1.2 1.4 1.6"
 					"special_bonus_unique_serega_7" "+0.7"
 				}
 				"length_buffer"		"325"
-				"speed"				"1600 1600 1600 1600"
+				"speed"				"1600"
 		}
 	}
 	//=================================================================================================================
@@ -6825,6 +6826,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown"				"18 15 12 9"
 		"AbilityManaCost"				"45"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCastGestureSlot"		"DEFAULT"
 		"AbilityValues"
 		{
 			"duration"	"3"
