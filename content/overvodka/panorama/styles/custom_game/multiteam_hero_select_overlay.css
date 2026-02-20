@@ -142,7 +142,7 @@
 #PlayerPortrait
 {
     background-color: #444444;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     width: 90px;
     height: 50px;
 }
@@ -167,58 +167,18 @@
 
 @keyframes 'subscribe_glow_pick_overlay'
 {
-	0%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
-
-	10%
-	{
-		box-shadow: fill #ffe10080 0px 0px 3px 3px;
-	}
-
-    20%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
-
-    30%
-	{
-		box-shadow: fill #ff4a2e80 0px 0px 3px 3px;
-	}
-
-    40%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
+    0%
+    {
+        box-shadow: fill #FFD70080 0px 0px 10px 3px;
+    }
 
     50%
-	{
-		box-shadow: fill #9dff2e80 0px 0px 3px 3px;
-	}
+    {
+        box-shadow: fill #FFED4E80 0px 0px 15px 3px;
+    }
 
-    60%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
-
-    70%
-	{
-		box-shadow: fill #2effaf80 0px 0px 3px 3px;
-	}
-
-    80%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
-
-    90%
-	{
-		box-shadow: fill #2eb6ff80 0px 0px 3px 3px;
-	}
-	
-	100%
-	{
-		box-shadow: fill #ff852e80 0px 0px 3px 3px;
-	}
+    100%
+    {
+        box-shadow: fill #FFD70080 0px 0px 10px 3px;
+    }
 }
