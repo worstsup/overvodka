@@ -62,12 +62,7 @@ function modifier_ashab_shard_vision:OnCreated()
     end
 
     self.team = caster:GetTeamNumber()
-
-    self.particle = ParticleManager:CreateParticle(
-        "particles/econ/items/sniper/sniper_fall20_immortal/sniper_fall20_immortal_crosshair.vpcf",
-        PATTACH_OVERHEAD_FOLLOW,
-        self:GetParent()
-    )
+    self.particle = ParticleManager:CreateParticleForTeam("particles/econ/items/sniper/sniper_fall20_immortal/sniper_fall20_immortal_crosshair.vpcf", PATTACH_OVERHEAD_FOLLOW, self:GetParent(), self.team)
     self:AddParticle(self.particle, false, false, -1, false, true)
 
     self:StartIntervalThink(self.interval)
