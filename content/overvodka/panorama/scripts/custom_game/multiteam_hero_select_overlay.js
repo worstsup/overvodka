@@ -1,5 +1,64 @@
 "use strict";
 var heroModelPanel = heroModelPanel || null;
+const PRIME_ONLY_HEROES = {
+	puck: true,
+};
+
+const PRIME_ONLY_HERO_IDS = {
+	13: true,
+};
+
+function NormalizeHeroName(heroName) {
+	if (!heroName) {
+		return "";
+	}
+
+	return heroName.replace("npc_dota_hero_", "");
+}
+
+function IsPrimeOnlyHero(heroName) {
+	return !!PRIME_ONLY_HEROES[NormalizeHeroName(heroName)];
+}
+
+function UpdatePrimeHeroCardsState() {
+	const localPlayerId = Game.GetLocalPlayerID();
+	if (localPlayerId < 0) {
+		$.Schedule(0.1, UpdatePrimeHeroCardsState);
+		return;
+	}
+
+	const isSubscribed = IsPlayerSubscribed(localPlayerId);
+	const preGame = FindDotaHudElement("PreGame");
+	if (!preGame) {
+		$.Schedule(0.1, UpdatePrimeHeroCardsState);
+		return;
+	}
+
+	const heroCards = preGame.FindChildrenWithClassTraverse("HeroCard");
+	for (let i = 0; i < heroCards.length; i++) {
+		const heroCard = heroCards[i];
+		if (!heroCard) {
+			continue;
+		}
+
+		const heroId = heroCard.GetAttributeInt("heroid", -1);
+		const isPrimeOnlyCard = !!PRIME_ONLY_HERO_IDS[heroId];
+		if (isPrimeOnlyCard && !isSubscribed) {
+			heroCard.hittest = false;
+			heroCard.hittestchildren = false;
+			heroCard.style.saturation = "0.25";
+			heroCard.style.opacity = "0.45";
+		} else {
+			heroCard.hittest = true;
+			heroCard.hittestchildren = true;
+			heroCard.style.saturation = "1";
+			heroCard.style.opacity = "1";
+		}
+	}
+
+	$.Schedule(0.1, UpdatePrimeHeroCardsState);
+}
+
 function OnUpdateHeroSelection()
 {
 	for ( var teamId of Game.GetAllTeamIDs() )
@@ -319,7 +378,7 @@ function UpdatePlayer( teamPanel, playerId )
 				ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 			}
-			else if (playerInfo.possible_hero_selection == "puck" && !IsPlayerSubscribed(playerId))
+			else if (IsPrimeOnlyHero(playerInfo.possible_hero_selection) && !IsPlayerSubscribed(playerId))
 			{
 				ToggleLockInNotice(HeroPick, true);
 			}
@@ -438,7 +497,7 @@ function UpdateTimer()
 	OnUpdateHeroSelection();
 	GameEvents.Subscribe( "dota_player_hero_selection_dirty", OnUpdateHeroSelection );
 	GameEvents.Subscribe( "dota_player_update_hero_selection", OnUpdateHeroSelection );
+	UpdatePrimeHeroCardsState();
 
 	UpdateTimer();
 })();
-
