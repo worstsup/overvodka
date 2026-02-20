@@ -23,6 +23,13 @@ function UpdateTeam( teamId )
 	if ( !teamPlayers )
 		return;
 
+	var isLocalTeamPrimeSubscribed = false;
+	if ( teamPanel.BHasClass( "local_player_team" ) && typeof IsPlayerSubscribed === "function" )
+	{
+		isLocalTeamPrimeSubscribed = IsPlayerSubscribed( Game.GetLocalPlayerID() );
+	}
+	teamPanel.SetHasClass( "TeamPrimeSubscribed", isLocalTeamPrimeSubscribed );
+
 	teamPanel.SetHasClass( "no_players", ( teamPlayers.length == 0 ) );
 	for ( var playerId of teamPlayers )
 	{

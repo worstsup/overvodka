@@ -164,7 +164,7 @@
 }
 
 .ScoreboardTeamWrapper.local_player_team #LocalTeamOverlay {
-    box-shadow: -3px 0px 12px 0px #ffffff88;
+    box-shadow: 0px 0px 12px 0px #ffffff88;
 }
 
 .ScoreboardTeamWrapper.local_player_team.HasPrimeSubscriber #LocalTeamOverlay {
@@ -215,57 +215,57 @@
 {
 	0%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
 	10%
 	{
-		box-shadow: -3px 0px 14px 0px #ffe100ef;
+		box-shadow: 0px 0px 15px 0px #ffe100ef;
 	}
 
     20%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     30%
 	{
-		box-shadow: -3px 0px 14px 0px #ff4a2e;
+		box-shadow: 0px 0px 15px 0px #ff4a2e;
 	}
 
     40%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     50%
 	{
-		box-shadow: -3px 0px 14px 0px #9dff2e;
+		box-shadow: 0px 0px 15px 0px #9dff2e;
 	}
 
     60%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     70%
 	{
-		box-shadow: -3px 0px 14px 0px #2effaf;
+		box-shadow: 0px 0px 15px 0px #2effaf;
 	}
 
     80%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 
     90%
 	{
-		box-shadow: -3px 0px 14px 0px #2eb6ff;
+		box-shadow: 0px 0px 15px 0px #2eb6ff;
 	}
 	
 	100%
 	{
-		box-shadow: -3px 0px 12px 0px #ff852e;
+		box-shadow: 0px 0px 12px 0px #ff852e;
 	}
 }
 
