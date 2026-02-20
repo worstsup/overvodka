@@ -344,6 +344,7 @@ function UpdatePlayer( teamPanel, playerId )
 	var playerName = playerPanel.FindChildInLayoutFile( "PlayerName" );
 	playerName.text = playerInfo.player_name;
 
+	playerPanel.SetHasClass( "PrimeSubscribed", IsPlayerSubscribed( playerId ) );
 	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );
 }
 
@@ -439,6 +440,11 @@ function UpdateTimer()
 	GameEvents.Subscribe( "dota_player_hero_selection_dirty", OnUpdateHeroSelection );
 	GameEvents.Subscribe( "dota_player_update_hero_selection", OnUpdateHeroSelection );
 
+	$.Schedule( 0.5, function()
+	{
+		$.GetContextPanel().AddClass( "PrimeFramesEnabled" );
+		OnUpdateHeroSelection();
+	} );
+
 	UpdateTimer();
 })();
-
