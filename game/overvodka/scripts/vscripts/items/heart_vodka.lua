@@ -14,11 +14,10 @@ function modifier_item_heart_vodka:IsPurgeException() return false end
 function modifier_item_heart_vodka:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_heart_vodka:DeclareFunctions()
-    local funcs = {
+    return {
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE
     }
-    return funcs
 end
 
 function modifier_item_heart_vodka:OnCreated()

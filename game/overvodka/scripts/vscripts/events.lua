@@ -194,10 +194,6 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			if pap then
 				pap:SetLevel(1)
 			end
-			local dave = spawnedUnit:FindAbilityByName("dave_ambient")
-			if dave then
-				dave:SetLevel(1)
-			end
 			local chara = spawnedUnit:FindAbilityByName("chara_f")
 			if chara then
 				chara:SetLevel(1)
@@ -629,12 +625,6 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			if GetMapName() == "overvodka_5x5" then
 				r = 50
 			end
-			if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
-				r = 600
-				if GetMapName() == "overvodka_5x5" then
-					r = 100
-				end
-			end
 			if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
 				r = 0
 			end
@@ -661,9 +651,6 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
 		end
 		local rewerd = 100
-		if owner:GetUnitName() == "npc_dota_hero_bounty_hunter" then
-			rewerd = 200
-		end
 		owner:ModifyGoldFiltered( rewerd, false, 0 )
 		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
 		UTIL_Remove( item )

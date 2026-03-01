@@ -22,9 +22,6 @@
 			"item"		"item_crumbl_cookie"
 			"item"		"item_chapman_blue"
 			"item"		"item_chapman_pink"
-			"item"		"item_red_chips"
-			"item"		"item_green_chips"
-			"item"		"item_blue_chips"
 		}
 		"#DOTA_Item_Build_Mid_Items"
 		{
@@ -51,6 +48,9 @@
 			"item"		"item_derzko"
 			"item"		"item_govno"
 			"item"		"item_invis_sword_datadriven"
+			"item"		"item_red_chips"
+			"item"		"item_green_chips"
+			"item"		"item_blue_chips"
 		}
 	}
 }

@@ -18,7 +18,7 @@ function eldzhey_q:OnSpellStart()
 	local incoming = self:GetSpecialValueFor( "illusion_incoming_damage" )
 	local distance = 72
 	local num = self:GetSpecialValueFor( "num" )
-	local illusions = CreateIllusions(
+	local illusions = OvervodkaCreateIllusions(
 		caster,
 		caster,
 		{

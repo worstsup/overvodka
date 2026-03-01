@@ -1440,114 +1440,67 @@
 
         "ShouldBeSuggested"                "1"
     }
+
 	"item_red_chips"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/chips"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"red_chips"
-		"ItemCost"						"1800"
+		"ItemCost"						"2250"
 		"ItemShopTags"					"str;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-
 		"ItemStackable"					"1"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-				"bonus_str"							"10"
-		}
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"items/chips"
-				"Function"		"AddStat"
-				"str"			"%bonus_str"
-			}
-  		    "SpendCharge"
-			{}
+			"bonus_str"							"10"
+			"resist"							"0.5"
 		}
 	}
 
 	"item_green_chips"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/chips"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"green_chips"
-		"ItemCost"						"1800"
+		"ItemCost"						"2250"
 		"ItemShopTags"					"agi;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-
 		"ItemStackable"					"1"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"bonus_agi"							"10"
-		}
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"items/chips"
-				"Function"		"AddStat"
-				"agi"			"%bonus_agi"
-			}
-  		    "SpendCharge"
-			{}
+				"movespeed"							"1"
 		}
 	}
 
 	"item_blue_chips"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/chips"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityTextureName"			"blue_chips"
-		"ItemCost"						"1800"
+		"ItemCost"						"2250"
 		"ItemShopTags"					"int;stat;shard"
 		"ItemQuality"					"uncommon"
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-
 		"ItemStackable"					"1"
 		"ItemPermanent"					"0"
 		"ItemInitialCharges"			"1"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
 				"bonus_int"							"10"
-		}
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"items/chips"
-				"Function"		"AddStat"
-				"int"			"%bonus_int"
-			}
-  		    "SpendCharge"
-			{}
+				"spell_amplify"						"1"
 		}
 	}
 	

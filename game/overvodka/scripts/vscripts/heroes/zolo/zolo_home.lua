@@ -20,7 +20,7 @@ function zolo_home:OnSpellStart()
 	local ms_duration = self:GetSpecialValueFor( "ms_duration" )
 	local distance = 0
 	local num = self:GetSpecialValueFor( "illusion_num" )
-	local illusions = CreateIllusions(
+	local illusions = OvervodkaCreateIllusions(
 		caster,
 		caster,
 		{

@@ -10,29 +10,26 @@ function mellstroy_casino:Precache(context)
     PrecacheResource( "soundfile", "soundevents/normalwin.vsndevts", context )
 end
 
+function mellstroy_casino:GetGoldCost(iLevel)
+    local base = self:GetSpecialValueFor("base_cost")
+    local each = self:GetSpecialValueFor("each_level")
+    return base + each * (self:GetCaster():GetLevel() - 1)
+end
+
 function mellstroy_casino:GetIntrinsicModifierName()
     return "modifier_mellstroy_casino_sounds"
 end
 
-loses = 0
 function mellstroy_casino:OnSpellStart()
     if not IsServer() then return end
+
     local caster = self:GetCaster()
-    local player_id = caster:GetPlayerID()
-    local hero_level = caster:GetLevel()
-    local gold = PlayerResource:GetGold(player_id)
+    local hero_level = caster:GetLevel() - 1
     local base_cost = self:GetSpecialValueFor( "base_cost" )
     local each_level = self:GetSpecialValueFor( "each_level" )
     local jackpot_chance = self:GetSpecialValueFor( "jackpot_chance" )
     local ability_cost = base_cost + (each_level * hero_level)
-    if gold < ability_cost then
-        caster:EmitSound("nomoney")
-        if self:GetCaster():GetUnitName() == "npc_dota_hero_bounty_hunter" then
-            self:EndCooldown()
-        end
-        return
-    end
-    PlayerResource:SpendGold(player_id, ability_cost, 4)
+
     local random_chance = RandomInt(1, 100)
     if random_chance <= jackpot_chance then
         local reward = ability_cost * 10
@@ -49,16 +46,11 @@ function mellstroy_casino:OnSpellStart()
                 ability:StartCooldown(new_cooldown)
             end
         end
-    elseif random_chance <= 55 or loses >= 2 then
-        local reward = ability_cost * 2 
-        local notion = reward - ability_cost
+    else
+        local reward = ability_cost * 2
         caster:ModifyGold(reward, false, 0)
         caster:EmitSound("normalwin")
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, notion, nil)
-        loses = 0
-    else
-        caster:EmitSound("lose_"..RandomInt(1,2))
-        loses = loses + 1
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, caster, ability_cost, nil)
     end
 end
 

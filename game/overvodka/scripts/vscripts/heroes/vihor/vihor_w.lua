@@ -15,7 +15,7 @@ function vihor_w:OnSpellStart()
 	self.damage = target:GetMaxHealth() * self.damage_percent * 0.01
 	EmitSoundOn("vihor_w", self:GetCaster())
 	self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_vihor_w", {duration = self.duration})
-	self.illusions = CreateIllusions(
+	self.illusions = OvervodkaCreateIllusions(
 		self:GetCaster(),
 		target,
 		{
@@ -34,7 +34,7 @@ function vihor_w:OnSpellStart()
 	ProjectileManager:ProjectileDodge(self:GetCaster())
 	self:GetCaster():SetAbsOrigin(target:GetAbsOrigin())
 	if self.facet == 1 then
-		self.illusions_facet = CreateIllusions(
+		self.illusions_facet = OvervodkaCreateIllusions(
 			self:GetCaster(),
 			self:GetCaster(),
 			{

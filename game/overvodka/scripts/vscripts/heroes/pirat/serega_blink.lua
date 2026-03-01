@@ -67,7 +67,7 @@ function modifier_serega_blink:OnIntervalThink()
 	self.mana_damage_pct = self:GetAbility():GetSpecialValueFor("mana_void_damage_per_mana")
 	self.distance = 72
 	if self.k == 1 then
-		local illusions = CreateIllusions(
+		local illusions = OvervodkaCreateIllusions(
 			self:GetCaster(),
 			self:GetCaster(),
 			{

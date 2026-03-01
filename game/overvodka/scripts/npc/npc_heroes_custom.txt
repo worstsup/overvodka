@@ -420,7 +420,7 @@
 		"Ability4"		"dave_peashooter_freeze"
 		"Ability5"		"generic_hidden"
 		"Ability6"		"dave_loonboon"
-		"Ability7"		"dave_ambient"
+		"Ability7"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_dave_1"
 		"Ability11"		"special_bonus_mana_reduction_8"
 		"Ability12"		"special_bonus_unique_dave_3"

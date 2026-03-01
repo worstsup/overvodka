@@ -1,7 +1,7 @@
 LinkLuaModifier("modifier_amor_w_self_buff",    "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_w_slow",         "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_amor_w_superslow",    "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_generic_arc_lua",     "modifier_generic_arc_lua",     LUA_MODIFIER_MOTION_BOTH)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 amor_w = class({})
 
@@ -71,7 +71,7 @@ function amor_w:OnSpellStart()
     local dmg = {attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
 	local aoe_mark = {}
     dmg.victim = target
-    target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_dur })
+    target:AddNewModifier(caster, self, "modifier_amor_w_superslow", { duration = stun_dur * (1 - target:GetStatusResistance()) })
     target:AddNewModifier(caster, self, "modifier_amor_w_slow", { duration = slow_dur * (1 - target:GetStatusResistance()) })
     if caster:HasTalent("special_bonus_unique_amor_4") then
         caster:PerformAttack(target, true, true, true, true, false, false, true)
@@ -93,7 +93,7 @@ function amor_w:OnSpellStart()
                 if enemy and not enemy:IsNull() and enemy:IsAlive() and enemy ~= target then
                     local eid = enemy:entindex()
                     dmg.victim = enemy
-                    enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_dur })
+                    enemy:AddNewModifier(caster, self, "modifier_amor_w_superslow", { duration = stun_dur * (1 - enemy:GetStatusResistance()) })
                     enemy:AddNewModifier(caster, self, "modifier_amor_w_slow", { duration = slow_dur * (1 - enemy:GetStatusResistance()) })
                     if caster:HasTalent("special_bonus_unique_amor_4") then
                         caster:PerformAttack(enemy, true, true, true, true, false, false, true)
@@ -242,4 +242,21 @@ end
 
 function modifier_amor_w_slow:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
+end
+
+
+modifier_amor_w_superslow = class({})
+
+function modifier_amor_w_superslow:IsHidden() return false end
+function modifier_amor_w_superslow:IsDebuff() return true end
+function modifier_amor_w_superslow:IsPurgable() return true end
+
+function modifier_amor_w_superslow:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
+    }
+end
+
+function modifier_amor_w_superslow:GetModifierMoveSpeedBonus_Percentage()
+    return -100
 end

@@ -105,9 +105,6 @@ function modifier_peterka_w_dota:OnIntervalThink()
                     if heroes[i]:GetUnitName() ~= self.parent:GetUnitName() then
 			            playerID = heroes[i]:GetPlayerID()
 			            r = 50
-			            if heroes[i]:GetUnitName() == "npc_dota_hero_bounty_hunter" and not heroes[i]:IsIllusion() then
-				            r = 100
-			            end
 			            if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
 					        r = 0
 			            end

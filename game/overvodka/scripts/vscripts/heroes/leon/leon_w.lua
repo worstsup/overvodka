@@ -60,7 +60,7 @@ function leon_w:MakeClones(count)
     local chosen_targets = self:Leon_FindInitialTargets(caster, search_radius, count)
 
     local origin = caster:GetAbsOrigin()
-    local illusions = CreateIllusions(caster, caster, {duration = duration, outgoing_damage = outgoing - 100, incoming_damage = incoming - 100}, count, 0, false, false)
+    local illusions = OvervodkaCreateIllusions(caster, caster, {duration = duration, outgoing_damage = outgoing - 100, incoming_damage = incoming - 100}, count, 0, false, false)
     
     if not illusions then return end
     caster:EmitSound("Leon.Clones.Spawn")

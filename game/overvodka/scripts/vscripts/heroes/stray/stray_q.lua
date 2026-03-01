@@ -37,7 +37,7 @@ function stray_q:OnSpellStart()
             Vector(-108, 0, 0), Vector(-108, 108, 0), Vector(-108, -108, 0), Vector(0, -108, 0),
         }
         for i = 1, image_count do
-            local illusions = CreateIllusions(
+            local illusions = OvervodkaCreateIllusions(
                 self:GetCaster(), self:GetCaster(),
                 {
                     outgoing_damage = image_out_dmg,

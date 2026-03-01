@@ -34,7 +34,7 @@ function modifier_flash_q_facet_2:IsHidden() return false end
 function modifier_flash_q_facet_2:IsPurgable() return true end
 
 function modifier_flash_q_facet_2:OnCreated()
-    if not IsServer() then return end
+    self.damage = self:GetAbility():GetSpecialValueFor("damage")
     self:StartIntervalThink(0.1)
 end
 
@@ -49,7 +49,8 @@ function modifier_flash_q_facet_2:OnIntervalThink()
             ParticleManager:SetParticleControl(particle, 0, enemy:GetAbsOrigin())
             ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin())
             ParticleManager:ReleaseParticleIndex(particle)
-            ApplyDamage({victim = enemy, attacker = caster, damage = self:GetAbility():GetSpecialValueFor("damage_speed") * caster:GetMoveSpeedModifier(caster:GetBaseMoveSpeed(), true) * 0.01, damage_type = self:GetAbility():GetAbilityDamageType()})
+            local damage = self:GetAbility():GetSpecialValueFor("damage") + (self:GetAbility():GetSpecialValueFor("damage_speed") * caster:GetMoveSpeedModifier(caster:GetBaseMoveSpeed(), true) * 0.01) + self.damage
+            ApplyDamage({victim = enemy, attacker = caster, damage = damage, damage_type = self:GetAbility():GetAbilityDamageType()})
         end
     end
 end

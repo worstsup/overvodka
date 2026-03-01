@@ -17,8 +17,7 @@ function modifier_item_onehp:IsPurgeException() return false end
 function modifier_item_onehp:GetAttributes()  return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_onehp:DeclareFunctions()
-    return  
-    {
+    return {
         MODIFIER_PROPERTY_HEALTH_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
@@ -82,12 +81,12 @@ function modifier_item_onehp_active:IsHidden() return false end
 function modifier_item_onehp_active:IsPurgable() return true end
 
 function modifier_item_onehp_active:DeclareFunctions()
-    return  
-    {
+    return {
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
     }
 end
+
 function modifier_item_onehp_active:GetModifierIncomingDamage_Percentage()
     return -100
 end

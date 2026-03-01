@@ -21,7 +21,10 @@
 		isStun (false), parent is stunned
 		isRestricted (false), parent is command restricted
 		isForward (false), lock parent forward facing
-		activity (none), activity when leaping
+
+		activity (none) - анимация во время полета 
+
+		а еще я добавил сюда isInvulnerable, isOutOfGame
 ]] 
 --------------------------------------------------------------------------------
 modifier_generic_arc_lua = class({})

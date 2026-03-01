@@ -70,7 +70,7 @@ function modifier_evelone_e:OnIntervalThink()
 		false
 	)
 	for _,enemy in pairs(enemies) do
-		self.illusions = CreateIllusions(
+		self.illusions = OvervodkaCreateIllusions(
 		    self:GetParent(),
 		    enemy,
 		    {

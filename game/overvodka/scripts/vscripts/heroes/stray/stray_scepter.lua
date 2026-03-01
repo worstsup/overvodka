@@ -37,7 +37,7 @@ function stray_scepter:OnSpellStart()
     end
 	if #heroes<1 then return end
 
-	local illusions = CreateIllusions(
+	local illusions = OvervodkaCreateIllusions(
 		caster,
 		caster,
 		{

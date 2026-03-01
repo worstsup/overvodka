@@ -33,6 +33,10 @@ LinkLuaModifier("modifier_overvodka_store_pet_6", 		"modifiers/store/modifier_ov
 LinkLuaModifier("modifier_overvodka_store_pet_7", 		"modifiers/store/modifier_overvodka_store_pet_7", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_8", 		"modifiers/store/modifier_overvodka_store_pet_8", 	 LUA_MODIFIER_MOTION_NONE)
 
+LinkLuaModifier("modifier_item_red_chips", 		"items/chips", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_green_chips", 	"items/chips", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_blue_chips", 	"items/chips", LUA_MODIFIER_MOTION_NONE)
+
 GAME_CATEGORY_DEFINITIONS = {
 	NONE = 0,
 	SOLO = 1,
@@ -555,4 +559,57 @@ function GetCurrentCategory()
 	end
 
 	return GAME_CATEGORY_DEFINITIONS.NONE
+end
+
+local function _PackKVFromHeroMod(hero, modName)
+    local src = hero:FindModifierByName(modName)
+    if not src then return nil end
+
+    local kv = { stacks = src:GetStackCount() or 0 }
+
+    local v = rawget(src, "_v")
+
+    if modName == "modifier_item_red_chips" then
+        kv.bonus_str = (v and v.bonus_str) or src.bonus_str or src.bonus or 0
+        kv.resist    = (v and v.resist)    or src.resist    or 0
+    elseif modName == "modifier_item_green_chips" then
+        kv.bonus_agi = (v and v.bonus_agi) or src.bonus_agi or src.bonus or 0
+        kv.movespeed = (v and v.movespeed) or src.movespeed or 0
+    elseif modName == "modifier_item_blue_chips" then
+        kv.bonus_int = (v and v.bonus_int) or src.bonus_int or src.bonus or 0
+        kv.amp       = (v and v.amp)       or src.amplify   or 0
+    end
+
+    return kv
+end
+
+function OvervodkaCreateIllusions(v1, v2, v3, v4, v5, v6, v7)
+    local illusions = CreateIllusions(v1, v2, v3, v4, v5, v6, v7)
+
+    Timers:CreateTimer(FrameTime(), function()
+        for _, illusion in pairs(illusions) do
+            if illusion and (not illusion:IsNull()) and IsValidEntity(illusion) then
+                illusion.manta = nil
+
+                local kvR = _PackKVFromHeroMod(v2, "modifier_item_red_chips")
+                if kvR and kvR.stacks > 0 then
+                    illusion:AddNewModifier(v2, nil, "modifier_item_red_chips", kvR)
+                end
+
+                local kvG = _PackKVFromHeroMod(v2, "modifier_item_green_chips")
+                if kvG and kvG.stacks > 0 then
+                    illusion:AddNewModifier(v2, nil, "modifier_item_green_chips", kvG)
+                end
+
+                local kvB = _PackKVFromHeroMod(v2, "modifier_item_blue_chips")
+                if kvB and kvB.stacks > 0 then
+                    illusion:AddNewModifier(v2, nil, "modifier_item_blue_chips", kvB)
+                end
+
+                illusion:CalculateStatBonus(true)
+            end
+        end
+    end)
+
+    return illusions
 end

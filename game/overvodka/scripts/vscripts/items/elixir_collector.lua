@@ -33,15 +33,13 @@ function modifier_item_elixir_collector:OnCreated()
 end
 
 function modifier_item_elixir_collector:DeclareFunctions()
-    local funcs = 
-    {
+    return {
         MODIFIER_PROPERTY_CAST_RANGE_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
-    return funcs
 end
 
 function modifier_item_elixir_collector:GetModifierCastRangeBonus()
@@ -111,7 +109,7 @@ function modifier_elixir_collector_buff:OnCreated()
 end
 
 function modifier_elixir_collector_buff:DeclareFunctions()
-	local decFuncs = {
+	return {
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
         MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
@@ -120,7 +118,6 @@ function modifier_elixir_collector_buff:DeclareFunctions()
         MODIFIER_PROPERTY_HEALTHBAR_PIPS,
         MODIFIER_PROPERTY_DISABLE_HEALING
 	}
-	return decFuncs
 end
 
 function modifier_elixir_collector_buff:GetDisableHealing()

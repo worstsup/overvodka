@@ -21,7 +21,7 @@ function macan_shard:OnSpellStart()
 		local angle = math.rad(angle_step * (i - 1))
 		local spawn_pos = caster:GetAbsOrigin() + Vector(math.cos(angle), math.sin(angle), 0) * radius
 
-		local illusion = CreateIllusions(
+		local illusion = OvervodkaCreateIllusions(
 			caster,
 			caster,
 			{

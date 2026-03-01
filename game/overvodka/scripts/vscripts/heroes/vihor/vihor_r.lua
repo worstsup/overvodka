@@ -170,7 +170,7 @@ function modifier_vihor_r_debuff:OnIntervalThink()
 
     local r = self.radius or (self:GetAbility() and self:GetAbility():GetSpecialValueFor("radius")) or 0
     local dist = (parent:GetAbsOrigin() - caster:GetAbsOrigin()):Length2D()
-    if dist > r then self:Destroy(); return end
+    if dist > (r + 50) then self:Destroy(); return end
 
     local dps = self.tick_damage * parent:GetMaxHealth() * 0.01
     local dmg = dps * self.interval
@@ -184,7 +184,7 @@ function modifier_vihor_r_debuff:OnIntervalThink()
     end
     ApplyDamage({
         victim = parent, attacker = caster, damage = dmg,
-        damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE,
+        damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
         ability = self:GetAbility()
     })
 

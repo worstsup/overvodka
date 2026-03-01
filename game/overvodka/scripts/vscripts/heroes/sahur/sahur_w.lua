@@ -45,7 +45,7 @@ function modifier_sahur_w:OnAttackLanded(params)
 
     if RandomInt(0, 100) > ability:GetSpecialValueFor("chance") then return end
     if params.attacker:HasShard() and not params.attacker:IsIllusion() then
-        local illusions = CreateIllusions(
+        local illusions = OvervodkaCreateIllusions(
             parent,
             parent,
             {

@@ -5,7 +5,7 @@ function IphoneNew( event )
 	local outgoing = ability:GetSpecialValueFor( "illusion_outgoing_damage" )
 	local incoming = ability:GetSpecialValueFor( "illusion_incoming_damage" )
 	local distance = 0
-	local illusions = CreateIllusions(
+	local illusions = OvervodkaCreateIllusions(
 		caster,
 		caster,
 		{

@@ -2051,16 +2051,6 @@
 		        "radius_tooltip" "900"
 		}
 	}
-	//==================================================================================================================
-	// ambient
-	//================================================================================================================
-	"dave_ambient"
-	{
-    	"BaseClass"               "ability_lua"
-    	"ScriptFile"              "heroes/dave/dave_ambient"
-    	"AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    	"MaxLevel"				  "1"
-	}
 
 	//===================================================================================================================
 	//													ISHOWSPEED
@@ -4821,7 +4811,7 @@
 				"fire_duration" "4"
 				"gold"
 				{
-					"value"	"25 50 75 100"
+					"value"	"0"
 					"special_bonus_unique_mellstroy_4" "+50"
 				}
 				"gold_cost" "150 275 400 525"
@@ -4915,13 +4905,13 @@
 		"MaxLevel"						"4"
 		"DependentOnAbility"			"mellstroy_amam"
 		"Innate"						"1"
-		"AbilityCooldown"				"6"
+		"AbilityCooldown"				"8"
 		"AbilityValues"
 		{
 				"base_cost"
 				{
 					"value"	"25"
-					"special_bonus_unique_mellstroy_7" "+400"
+					"special_bonus_unique_mellstroy_7" "+200"
 				}
 				"jackpot_chance"	"1 2 3 4"
 				"each_level"					"25"
@@ -5004,7 +4994,7 @@
 		        }
 		        "interv"	 "1.0"
 		        "duration"   "10"
-		        "bonus_gold" "90 180 270"
+		        "bonus_gold" "50 100 150"
 		        "gold_cost"	 "700 1550 2400"
 		}
 	}
@@ -9458,13 +9448,13 @@
             	"radius"
             	{
             		"value"	"750"
-					"special_bonus_unique_vihor_5" "+150"
+					"special_bonus_unique_vihor_5" "+100"
             		"affected_by_aoe_increase"	"1"
             	}
             	"AbilityCastRange"
             	{
             		"value"	"750"
-					"special_bonus_unique_vihor_5" "+150"
+					"special_bonus_unique_vihor_5" "+100"
             		"affected_by_aoe_increase"	"1"
             	}
             	"duration_to_explosion"             "7 8 9"
@@ -14065,19 +14055,23 @@
 		"AbilityManaCost"				"75"
 		"AbilityValues"
 		{
-			"bonus_speed"				"12 14 16 18"
+			"bonus_speed"				"15 18 21 24"
+			"damage"					"15 30 45 60"
 			"damage_speed"
 			{
 				"value"	"20"
 				"special_bonus_unique_flash_7"	"+20"
 			}
 			"radius"					"200"
-			"duration"					"3"
+			"duration"
+			{
+				"value"	"3.5"
+				"special_bonus_unique_flash_5"	"+1.5"
+			}
 			"interval"					"0.8"
 			"AbilityCooldown"
 			{
 				"value"	"15 14 13 12"
-				"special_bonus_unique_flash_5"	"-3"
 			}
 		}
 	}
@@ -17845,10 +17839,10 @@
 			"hp_threshold_pct" 			"40"
 			"bonus_regen"         		"50 100 150 200"
 			"buff_duration"         	"4.0 4.5 5.0 5.5"
-			"bonus_ms_pct"				"16 18 20 22"
-			"bonus_damage_per_charge"	"5"
-			"bonus_as_per_charge"		"6"
-			"bonus_gold_per_charge"		"5 15 25 35"
+			"bonus_ms_pct"				"10 12 14 16"
+			"bonus_damage_per_charge"	"4"
+			"bonus_as_per_charge"		"5"
+			"bonus_gold_per_charge"		"5 10 15 20"
 			"immune_duration"
 			{
 				"value"	"0"
@@ -18016,12 +18010,12 @@
 			}
 			"nearby_radius"
 			{
-				"value"	"750"
+				"value"	"600"
 				"special_bonus_unique_amor_1"	"+200"
 			}
 			"AbilityCastRange"
 			{
-				"value"	"750"
+				"value"	"600"
 				"special_bonus_unique_amor_1"	"+200"
 			}
 		}
@@ -18055,7 +18049,7 @@
 			"beer_dps"
 			{
 				"value"	"60 90 120"
-				"special_bonus_unique_amor_5" "+80"
+				"special_bonus_unique_amor_5" "+60"
 			}
 			"beer_slow_pct"   "25 30 35"
 			"beer_tick"       "0.25"
