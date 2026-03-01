@@ -25,6 +25,10 @@
 								from = "slide.vmat"
 								to = "models/peacemaker/deagle/deagle3.vmat"
 							},
+							{
+								from = "models/peacemaker/shirt.vmat"
+								to = "models/peacemaker/shirt.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""

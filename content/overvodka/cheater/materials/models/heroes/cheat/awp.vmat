@@ -4,10 +4,6 @@ Layer0
 {
 	shader "hero.vfx"
 
-	//---- Masks ----
-	F_MASKS_1 1
-	F_MASKS_2 1
-
 	//---- Blend To Full ----
 	g_flEnvMapBlendToFull "0.000"
 	g_flMetalnessBlendToFull "0.000"
@@ -28,7 +24,12 @@ Layer0
 	g_flTexCoordRotation "0.000"
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
-	TextureColor "cheater/materials/models/heroes/cheat/awp_substrate_color.png"
+	TextureColor "cheater/materials/models/heroes/cheat/awp_substrate_color.jpg"
+
+	//---- Detail 1 ----
+	g_flDetailTexCoordRotation "0.000"
+	g_vDetailTexCoordOffset "[0.000 0.000]"
+	g_vDetailTexCoordScale "[1.000 1.000]"
 
 	//---- Fresnel ----
 	g_flFresnelModulatesAlpha "0.000"
@@ -42,20 +43,8 @@ Layer0
 	g_flBloomShift "0.000"
 	g_vBloomColor "[1.000000 1.000000 1.000000 0.000000]"
 
-	//---- Mask 1 ----
-	TextureDetailMask ""
-	TextureDiffuseWarpMask ""
-	TextureMetalnessMask ""
-	TextureSelfIllumMask ""
-
-	//---- Mask 2 ----
-	TextureRimMask "[1.000000 1.000000 1.000000 0.000000]"
-	TextureSpecularExponent ""
-	TextureSpecularMask ""
-	TextureTintByBaseMask ""
-
 	//---- Normal Map ----
-	TextureNormal "cheater/materials/models/heroes/cheat/awp_default_normal_png_e882fc00.png"
+	TextureNormal "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Rim ----
 	g_flRimLightScale "1.000"
@@ -65,4 +54,50 @@ Layer0
 	g_flSpecularExponent "32.000"
 	g_flSpecularScale "1.000"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
+
+	UnusedVariables
+	{
+		"TextureRimMask" "[1.000000 1.000000 1.000000 0.000000]"
+		"TextureSpecularExponent" "materials/default/default_specexp.tga"
+		"TextureSpecularMask" "materials/default/default_specmask.tga"
+		"TextureTintByBaseMask" "materials/default/default_basetintmask.tga"
+		"TextureDetailMask" "materials/default/default_detailmask.tga"
+		"TextureDiffuseWarpMask" "materials/default/default_diffusemask.tga"
+		"TextureMetalnessMask" "materials/default/default_metalnessmask.tga"
+		"TextureSelfIllumMask" "materials/default/default_selfillummask.tga"
+	}
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Detail 1"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
+	}
 }

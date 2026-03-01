@@ -303,6 +303,7 @@ function OnSayLine(event){
             let msgPanel = $.CreatePanel("Panel", ChatLines, "", {class:"ChatLine"})
             msgPanel.BLoadLayout("file://{resources}/layout/custom_game/custom_chat_line.xml", false, false)
             msgPanel.hittest = false
+            msgPanel.hittestchildren = false
     
             let HeroImage = msgPanel.FindChildTraverse("HeroImage")
     

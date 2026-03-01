@@ -8,13 +8,8 @@
     text-shadow: 1px 1.5px 0px 2 #000000;
 }
 
-DOTAChat#HudChat .ChatLine.Expired{
-    opacity: 1;
-}
-
-DOTAChat#HudChat .ChatLine.ExpireThis{
-    opacity: 0;
-}
+DOTAChat#HudChat .ChatLine.OVKChatLine.Expired { opacity: 1; }
+DOTAChat#HudChat .ChatLine.OVKChatLine.ExpireThis { opacity: 0; }
 
 #HeroImage{
     width: 40px;

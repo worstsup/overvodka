@@ -2,7 +2,7 @@
 	<styles>
     	<include src="file://{resources}/styles/custom_game/custom_chat_line.css" />
   	</styles>
-  	<Panel class="CustomChatLine" hittest="false">
+  	<Panel class="CustomChatLine" hittest="false" hittestchildren="false">
 		<Image id="HeroImage" />
 		<Label class="Text" text="{s:text}" html="true"/>
   	</Panel>

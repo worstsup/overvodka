@@ -11,21 +11,7 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "materials/models/courier/greevil/greevil_highres_eyes_t_c4c2dd0.vmat"
-								to = "materials/models/heroes/treant_protector/treantprotector_eyes_in_the_forest_transparent.vmat"
-							},
-							{
-								from = "material.vmat"
-								to = "models/epstein/textures/ep1.vmat"
-							},
-							{
-								from = ""
-								to = "models/epstein/textures/usa.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = ""
 					},

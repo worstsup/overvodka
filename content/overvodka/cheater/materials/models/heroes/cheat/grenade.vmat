@@ -4,10 +4,6 @@ Layer0
 {
 	shader "hero.vfx"
 
-	//---- Masks ----
-	F_MASKS_1 1
-	F_MASKS_2 1
-
 	//---- Blend To Full ----
 	g_flEnvMapBlendToFull "0.000"
 	g_flMetalnessBlendToFull "0.000"
@@ -30,6 +26,11 @@ Layer0
 	g_vTexCoordScale "[1.000 1.000]"
 	TextureColor "cheater/materials/models/heroes/cheat/grenadecolor.png"
 
+	//---- Detail 1 ----
+	g_flDetailTexCoordRotation "0.000"
+	g_vDetailTexCoordOffset "[0.000 0.000]"
+	g_vDetailTexCoordScale "[1.000 1.000]"
+
 	//---- Fresnel ----
 	g_flFresnelModulatesAlpha "0.000"
 	TextureFresnelWarpColor "materials/default/default_fresnelwarpcolor.tga"
@@ -42,20 +43,8 @@ Layer0
 	g_flBloomShift "0.000"
 	g_vBloomColor "[1.000000 1.000000 1.000000 0.000000]"
 
-	//---- Mask 1 ----
-	TextureDetailMask "materials/default/default_detailmask.tga"
-	TextureDiffuseWarpMask "materials/default/default_diffusemask.tga"
-	TextureMetalnessMask "materials/default/default_metalnessmask.tga"
-	TextureSelfIllumMask "materials/default/default_selfillummask.tga"
-
-	//---- Mask 2 ----
-	TextureRimMask "[1.000000 1.000000 1.000000 0.000000]"
-	TextureSpecularExponent "materials/default/default_specexp.tga"
-	TextureSpecularMask "cheater/materials/models/heroes/cheat/grenadespecular.png"
-	TextureTintByBaseMask "materials/default/default_basetintmask.tga"
-
 	//---- Normal Map ----
-	TextureNormal "cheater/materials/models/heroes/cheat/grenadenormal.png"
+	TextureNormal "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Rim ----
 	g_flRimLightScale "1.000"
@@ -65,4 +54,50 @@ Layer0
 	g_flSpecularExponent "32.000"
 	g_flSpecularScale "1.000"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
+
+	UnusedVariables
+	{
+		"TextureDetailMask" "materials/default/default_detailmask.tga"
+		"TextureDiffuseWarpMask" "materials/default/default_diffusemask.tga"
+		"TextureMetalnessMask" "materials/default/default_metalnessmask.tga"
+		"TextureSelfIllumMask" "materials/default/default_selfillummask.tga"
+		"TextureRimMask" "[1.000000 1.000000 1.000000 0.000000]"
+		"TextureSpecularExponent" "materials/default/default_specexp.tga"
+		"TextureSpecularMask" "[1.000000 1.000000 1.000000 0.000000]"
+		"TextureTintByBaseMask" "materials/default/default_basetintmask.tga"
+	}
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Detail 1"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
+	}
 }

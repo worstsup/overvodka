@@ -24,7 +24,7 @@ Layer0
 	g_flTexCoordRotation "0.000"
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
-	TextureColor "models/epstein/textures/tshirt_diffuse.jpg"
+	TextureColor "models/prince/prince.fbm/hip hopper.fbm/primary_white_color_tga_f468dad0.jpg"
 
 	//---- Detail 1 ----
 	g_flDetailTexCoordRotation "0.000"
@@ -44,7 +44,7 @@ Layer0
 	g_vBloomColor "[1.000000 1.000000 1.000000 0.000000]"
 
 	//---- Normal Map ----
-	TextureNormal "models/epstein/textures/tshirt_normal.jpg"
+	TextureNormal "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Rim ----
 	g_flRimLightScale "1.000"
@@ -54,4 +54,38 @@ Layer0
 	g_flSpecularExponent "32.000"
 	g_flSpecularScale "1.000"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
+
+
+	VariableState
+	{
+		"Blend To Full"
+		{
+		}
+		"Cloak"
+		{
+		}
+		"Color"
+		{
+		}
+		"Detail 1"
+		{
+		}
+		"Fresnel"
+		{
+		}
+		"Lighting"
+		{
+			"Ambient" 0
+			"Bloom" 0
+		}
+		"Normal Map"
+		{
+		}
+		"Rim"
+		{
+		}
+		"Specular"
+		{
+		}
+	}
 }
