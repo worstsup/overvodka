@@ -272,7 +272,7 @@ function OvervodkaGameMode:InitGameMode()
 		GameRules:SetUseUniversalShopMode( true )
 		GameRules:SetStrategyTime( 15.0 )
 		GameRules:SetCustomGameBansPerTeam( 1 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )

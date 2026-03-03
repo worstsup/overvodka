@@ -75,6 +75,7 @@ PrecacheUtils.particles = {
 		"particles/econ/items/faceless_void/faceless_void_arcana/faceless_void_arcana_time_dialate_v2_debuff.vpcf",
 		"particles/econ/items/juggernaut/jugg_fall20_immortal/jugg_fall20_immortal_healing_ward.vpcf",
 		"particles/elixir_collector_ambient.vpcf",
+		"particles/econ/items/skywrath_mage/skywrath_arcana/skywrath_arcana_base_attack_v2.vpcf",
 		"particles/econ/items/pugna/pugna_ti10_immortal/pugna_ti10_immortal_life_drain.vpcf",
 		"particles/econ/items/pugna/pugna_ti10_immortal/pugna_ti10_immortal_life_drain_shard.vpcf",
 		"particles/units/heroes/hero_rattletrap/clock_overclock_buff_stun.vpcf",

@@ -707,7 +707,7 @@
 						_class = "AnimFile"
 						name = "Hip_Hop_Dancing"
 						is_default_idle_anim = false
-						activity_name = "ACT_DOTA_CAST_ABILITY_3"
+						activity_name = "ACT_DOTA_TAUNT"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2

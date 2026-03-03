@@ -4404,7 +4404,7 @@
 		"DOTA_Tooltip_ability_item_green_chips"                 	"GREEN LIT ENERGY CHIPS"
 		"DOTA_Tooltip_ability_item_green_chips_Description"      	"<h1>Использование: Сожрать</h1>Навсегда добавляет %bonus_agi% <font color='#81FF0B'>Ловкости</font> вашему герою и %movespeed%%% к скорости передвижения."
 		"DOTA_Tooltip_ability_item_blue_chips"                    	"BLUE LIT ENERGY CHIPS"
-		"DOTA_Tooltip_ability_item_blue_chips_Description"      	"<h1>Использование: Сожрать</h1>Навсегда добавляет %bonus_int% <font color='#00D4FF'>Интеллекта</font> вашему герою и %spell_amplify%%% к урону от способностей."
+		"DOTA_Tooltip_ability_item_blue_chips_Description"      	"<h1>Использование: Сожрать</h1>Навсегда добавляет %bonus_int% <font color='#00D4FF'>Интеллекта</font> вашему герою и %spell_amplify%%% к урону от заклинаний."
 		"DOTA_Tooltip_modifier_item_red_chips"						"Red Lit Energy Chips"
 		"DOTA_Tooltip_modifier_item_red_chips_Description"			"Сила навсегда увеличена на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%, сопротивление эффектам — на %fMODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING%%%."
 		"DOTA_Tooltip_modifier_item_green_chips"					"Green Lit Energy Chips"

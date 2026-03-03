@@ -106,6 +106,9 @@ function modifier_papich_e_passive:OnIntervalThink()
         if self.parent:HasModifier("modifier_knockback") then
             self.parent:RemoveModifierByName("modifier_knockback")
         end
+		if self.parent:HasModifier("modifier_epstein_r_imprisoned") then
+			self.parent:RemoveModifierByName("modifier_epstein_r_imprisoned")
+		end
         self.parent:Stop()
         local caster = self:GetParent()
         local team = caster:GetTeam()

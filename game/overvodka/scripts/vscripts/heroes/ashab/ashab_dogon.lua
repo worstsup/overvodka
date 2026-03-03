@@ -121,9 +121,6 @@ end
 function modifier_ashab_dogon:OnOrder( params )
 	if params.unit~=self.parent then return end
 	if
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_POSITION or
-		params.order_type==DOTA_UNIT_ORDER_MOVE_TO_TARGET or
-		params.order_type==DOTA_UNIT_ORDER_ATTACK_TARGET or
 		params.order_type==DOTA_UNIT_ORDER_STOP or
 		params.order_type==DOTA_UNIT_ORDER_HOLD_POSITION or
 		params.order_type==DOTA_UNIT_ORDER_CAST_POSITION or

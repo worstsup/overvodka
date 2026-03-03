@@ -311,7 +311,7 @@ function OnSayLine(event){
     
             msgPanel.SetDialogVariable("text", Text)
             $.Schedule(5, function(){
-                msgPanel.AddClass("ExpireThis")
+                msgPanel.AddClass("ExpireThisAfter")
             })
         }
     }
@@ -462,7 +462,7 @@ function OnCaseOpened(event) {
         msgPanel.SetDialogVariable("text", Text);
 
         $.Schedule(10, function () {
-            msgPanel.AddClass("ExpireThis");
+            msgPanel.AddClass("ExpireThisAfter");
         });
     });
 }

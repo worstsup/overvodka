@@ -52,6 +52,7 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_slardar",
     "npc_dota_hero_beastmaster",
     "npc_dota_hero_bristleback",
+    "npc_dota_hero_rubick",
 ]
 
 function FixModelScene(){

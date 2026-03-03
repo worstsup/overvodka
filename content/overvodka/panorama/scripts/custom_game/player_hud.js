@@ -601,7 +601,7 @@ function SendCustomMessageToChat(event){
 
         msgPanel.SetDialogVariable("text", Text)
         $.Schedule(5, function(){
-            msgPanel.AddClass("ExpireThis")
+            msgPanel.AddClass("ExpireThisAfter")
         })
     }
 }

@@ -4,7 +4,6 @@ LinkLuaModifier("modifier_sasavot_debuff", "heroes/sasavot/sasavot_e_new.lua", L
 LinkLuaModifier("modifier_sasavot_bonus_buff", "heroes/sasavot/sasavot_e_new.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_magresist_sasavot", "heroes/sasavot/sasavot_e_new.lua", LUA_MODIFIER_MOTION_NONE)
 
-
 function sasavot_e_new:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
@@ -30,12 +29,7 @@ function sasavot_e_new:OnChannelFinish(interrupted)
     caster:RemoveModifierByName("modifier_sasavot_debuff")
     if interrupted then
         caster:AddNewModifier(caster, self, "modifier_sasavot_bonus_buff", { duration = self.buffs_duration })
-        caster:AddNewModifier(
-            caster,
-            self,
-            "modifier_magresist_sasavot",
-            { duration = self.magresist_duration_min }
-        )
+        caster:AddNewModifier(caster, self, "modifier_magresist_sasavot", { duration = self.magresist_duration_min })
         self:PlayEffects1()
     else
         local heal = self.hp_perc * caster:GetMaxHealth() * 0.01
@@ -53,9 +47,11 @@ function sasavot_e_new:OnChannelFinish(interrupted)
         EmitSoundOn("sasavot_dance_success", self:GetCaster())
     end
 end
+
 function sasavot_e_new:PlayEffects()
     self.nChannelFX = ParticleManager:CreateParticle( "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green_mid.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 end
+
 function sasavot_e_new:PlayEffects1()
     self.nChannelFX = ParticleManager:CreateParticle( "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster() )
 end
@@ -75,6 +71,7 @@ end
 function modifier_sasavot_debuff:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_TAKEDAMAGE,
+        MODIFIER_PR
     }
 end
 

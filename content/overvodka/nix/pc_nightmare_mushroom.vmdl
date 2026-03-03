@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc39:version{1ceecb0d-4093-4729-ab18-b76886c64cde} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc41:version{12fc9d44-453a-4ae4-b4d9-7e2ac0bbd4e0} -->
 {
 	rootNode = 
 	{
@@ -30,6 +30,15 @@
 					{
 						_class = "Attachment"
 						name = "attach_attack1"
+						parent_bone = "CATRig2Bone001"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "attach_hitloc"
 						parent_bone = "CATRig2Bone001"
 						relative_origin = [ 0.0, 0.0, 0.0 ]
 						relative_angles = [ 0.0, 0.0, 0.0 ]

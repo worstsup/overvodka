@@ -135,7 +135,7 @@ function modifier_hamster:OnTakeDamage( params )
 end
 
 function modifier_hamster:GetEffectName()
-	return "particles/winter_hamster.vpcf"
+	return "particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf"
 end
 
 function modifier_hamster:GetEffectAttachType()
