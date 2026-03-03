@@ -50,12 +50,14 @@ function item_bablokrad:OnSpellStart()
 	local drop = CreateItemOnPositionForLaunch( target:GetAbsOrigin(), newItem )
     local drop2 = CreateItemOnPositionForLaunch( target:GetAbsOrigin(), newItem2 )
     local drop3 = CreateItemOnPositionForLaunch( target:GetAbsOrigin(), newItem3 )
-	local dropRadius = RandomFloat( 250, 300 )
-    local dropRadius2 = RandomFloat( -250, -300 )
-    local dropRadius3 = RandomFloat( 200, 300 )
-	newItem:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius ) )
-    newItem2:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius2 ) )
-    newItem3:LaunchLootInitialHeight( false, 0, 500, 0.75, target:GetAbsOrigin() + RandomVector( dropRadius3 ) )
+	local tpos = target:GetAbsOrigin()
+    local cpos = self:GetCaster():GetAbsOrigin()
+    local p1 = self:LootPosWithSideBias(self.LootTargetPosTowardCaster, tpos, cpos, -90 + RandomFloat(-15,15))
+    local p2 = self:LootPosWithSideBias(self.LootTargetPosTowardCaster, tpos, cpos,  0  + RandomFloat(-15,15))
+    local p3 = self:LootPosWithSideBias(self.LootTargetPosTowardCaster, tpos, cpos,  90 + RandomFloat(-15,15))
+    newItem:LaunchLootInitialHeight(false, 0, 500, 0.75, p1)
+    newItem2:LaunchLootInitialHeight(false, 0, 500, 0.75, p2)
+    newItem3:LaunchLootInitialHeight(false, 0, 500, 0.75, p3)
 	newItem:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem, drop ) end, 20 )
     newItem2:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem2, drop2 ) end, 20 )
     newItem3:SetContextThink( "KillLoot", function() return OvervodkaGameMode:KillLoot( newItem3, drop3 ) end, 20 )
@@ -69,8 +71,54 @@ function item_bablokrad:OnSpellStart()
             Quests:IncrementQuest(playerID, "bablokradAmount", gold_enemy)
         end
     end
+    if IsInToolsMode() then return end
     target:AddNewModifier(self:GetCaster(), self, "modifier_item_bablokrad_cooldown", {duration = 30})
     self:SpendCharge(1)
+end
+
+function item_bablokrad:LootTargetPosTowardCaster(target_pos, caster_pos)
+    local dir = caster_pos - target_pos
+    dir.z = 0
+
+    local distToCaster = dir:Length2D()
+    if distToCaster < 1 then
+        dir = RandomVector(1); dir.z = 0
+        distToCaster = 1
+    end
+    dir = dir:Normalized()
+
+    local t = distToCaster / 600
+    if t < 0 then t = 0 end
+    if t > 1 then t = 1 end
+
+    local MIN_THROW = 120
+    local MAX_THROW = 400
+
+    local base = MIN_THROW + (MAX_THROW - MIN_THROW) * t
+
+    local dist = base + RandomFloat(-25, 25)
+    if dist < MIN_THROW then dist = MIN_THROW end
+    if dist > MAX_THROW then dist = MAX_THROW end
+
+    local right = Vector(-dir.y, dir.x, 0)
+
+    local minSide = 25
+    local maxSide = 110
+    local sideMax = minSide + (maxSide - minSide) * t
+    local side = RandomFloat(-sideMax, sideMax)
+
+    local forwardJitter = RandomFloat(-dist * 0.05, dist * 0.05)
+
+    local pos = target_pos + dir * (dist + forwardJitter) + right * side
+    return GetGroundPosition(pos, nil)
+end
+
+function item_bablokrad:LootPosWithSideBias(baseFunc, target_pos, caster_pos, bias)
+    local pos = baseFunc(self, target_pos, caster_pos)
+    local dir = caster_pos - target_pos; dir.z = 0
+    dir = (dir:Length2D() > 0.01) and dir:Normalized() or RandomVector(1)
+    local right = Vector(-dir.y, dir.x, 0)
+    return GetGroundPosition(pos + right * bias, nil)
 end
 
 modifier_item_bablokrad_cooldown = class({})
