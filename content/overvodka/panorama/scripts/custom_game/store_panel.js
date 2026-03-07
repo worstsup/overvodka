@@ -4,6 +4,7 @@ var Store = {};
 const StoreBody = $("#StoreBody");
 (function() {
     const coinBalanceLabel = $("#CoinBalanceLabel");
+    const coinBalanceTooltip = $("#CoinBalanceTooltip");
     const categories = {
         skins: { button: $("#StoreTab_Skins"), panel: $("#StoreItems_Skins") },
         effects: { button: $("#StoreTab_Effects"), panel: $("#StoreItems_Effects") },
@@ -31,11 +32,57 @@ const StoreBody = $("#StoreBody");
         "npc_dota_hero_morphling": "sans_arcana",
         "npc_dota_hero_void_spirit": "invincible_arcana",
     };
+    const STORE_ITEM_ORDER = [
+        "prime_day",
+        "prime_week",
+        "pet_8",
+        "pet_7",
+        "pet_6",
+        "pet_5",
+        "pet_4",
+        "pet_3",
+        "pet_2",
+        "pet_1",
+        "effect_4",
+        "effect_3",
+        "effect_2",
+        "effect_1",
+        "skin_8",
+        "skin_7",
+        "skin_6",
+        "skin_4",
+        "invincible_arcana",
+        "sans_arcana",
+        "skin_9",
+        "skin_12",
+        "skin_5",
+        "skin_3",
+        "skin_2",
+        "skin_1",
+    ];
+    const STORE_ITEM_ORDER_INDEX = {};
     let primeAutoApplied = false;
+
+    for (let i = 0; i < STORE_ITEM_ORDER.length; i++) {
+        STORE_ITEM_ORDER_INDEX[STORE_ITEM_ORDER[i]] = i;
+    }
+
+    Store.ShowCoinsTooltip = function() {
+        if (coinBalanceTooltip) {
+            coinBalanceTooltip.SetHasClass("Visible", true);
+        }
+    };
+
+    Store.HideCoinsTooltip = function() {
+        if (coinBalanceTooltip) {
+            coinBalanceTooltip.SetHasClass("Visible", false);
+        }
+    };
 
     Store.Initialize = function() {
         if (isInitialized) return;
         StoreBody.SetHasClass("Visible", true);
+        Store.HideCoinsTooltip();
         
         $.Msg("[Store] Initializing for SteamID:", localSteamID);
         
@@ -130,12 +177,30 @@ const StoreBody = $("#StoreBody");
             }
         }
     }
+
+    function GetSortedStoreItems() {
+        return Object.values(allItems).sort((a, b) => {
+            const aOrder = Object.prototype.hasOwnProperty.call(STORE_ITEM_ORDER_INDEX, a.id)
+                ? STORE_ITEM_ORDER_INDEX[a.id]
+                : Number.MAX_SAFE_INTEGER;
+            const bOrder = Object.prototype.hasOwnProperty.call(STORE_ITEM_ORDER_INDEX, b.id)
+                ? STORE_ITEM_ORDER_INDEX[b.id]
+                : Number.MAX_SAFE_INTEGER;
+
+            if (aOrder !== bOrder) {
+                return aOrder - bOrder;
+            }
+
+            return (a.id || "").localeCompare(b.id || "");
+        });
+    }
+
     function BuildStoreUI() {
         for (const cat of Object.values(categories)) {
             cat.panel.RemoveAndDeleteChildren();
         }
 
-        for (const item of Object.values(allItems)) {
+        for (const item of GetSortedStoreItems()) {
             const parentPanel = categories[item.type] ? categories[item.type].panel : null;
             if (parentPanel) {
                 CreateItemPanel(item, parentPanel);

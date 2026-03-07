@@ -72,7 +72,9 @@ function modifier_bombardiro_bombs:OnIntervalThink()
         damageTable.victim = enemy
         damageTable.damage = self.damage * enemy:GetMaxHealth() * 0.01
         enemy:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self:GetAbility():GetSpecialValueFor("duration") } )
-        if not enemy:IsDebuffImmune() then
+        if ChaosOrb and ChaosOrb.IsEffectActive and ChaosOrb:IsEffectActive("bombardiro_execute") and IsRealHero(enemy) and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:IsDebuffImmune() then
+            enemy:Kill(self:GetAbility(), self:GetCaster())
+        elseif not enemy:IsDebuffImmune() then
             ApplyDamage( damageTable )
         end
     end

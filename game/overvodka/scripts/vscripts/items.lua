@@ -2,13 +2,30 @@
 
 --Spawns Bags of Gold in the middle
 function OvervodkaGameMode:ThinkGoldDrop()
+	if ChaosOrb and ChaosOrb.ShouldForceMidDrop and ChaosOrb:ShouldForceMidDrop() and overvodka_events then
+		self:SpawnGold()
+		return
+	end
+
 	local r = RandomInt( 1, 100 )
 	if r > ( 100 - self.m_GoldDropPercent ) and overvodka_events then
 		self:SpawnGold()
 	end
 end
 
+function OvervodkaGameMode:ResolveMidDropType()
+	if ChaosOrb and ChaosOrb.ShouldReplaceNextMidDrop and ChaosOrb:ShouldReplaceNextMidDrop() then
+		ChaosOrb:ReserveNextMidDrop()
+		return "chaos_orb"
+	end
+
+	return "gold"
+end
+
 function OvervodkaGameMode:SpawnGold()
+	self.midDropQueue = self.midDropQueue or {}
+	table.insert(self.midDropQueue, self:ResolveMidDropType())
+
 	local overBoss = Entities:FindByName( nil, "@overboss" )
 	local throwCoin = nil
 	local throwCoin2 = nil
@@ -26,13 +43,140 @@ function OvervodkaGameMode:SpawnGold()
 	end
 end
 
-function OvervodkaGameMode:SpawnGoldEntity( spawnPoint )
+function OvervodkaGameMode:SpawnMidLootEntity( itemName, spawnPoint, minRadius, maxRadius )
 	EmitGlobalSound("Item.PickUpGemWorld")
-	local newItem = CreateItem( "item_bag_of_gold", nil, nil )
+	local newItem = CreateItem( itemName, nil, nil )
 	local drop = CreateItemOnPositionForLaunch( spawnPoint, newItem )
-	local dropRadius = RandomFloat( self.m_GoldRadiusMin, self.m_GoldRadiusMax )
+	local dropRadius = RandomFloat( minRadius or self.m_GoldRadiusMin, maxRadius or self.m_GoldRadiusMax )
 	newItem:LaunchLootInitialHeight( false, 0, 500, 0.75, spawnPoint + RandomVector( dropRadius ) )
 	newItem:SetContextThink( "KillLoot", function() return self:KillLoot( newItem, drop ) end, 20 )
+
+	if itemName == "item_chaos_orb" then
+		self:AttachChaosOrbParticles(newItem, drop)
+	end
+
+	return newItem, drop
+end
+
+function OvervodkaGameMode:AttachChaosOrbParticles(item, drop)
+	if not item or item:IsNull() or not drop or drop:IsNull() then return end
+
+	local origin = drop:GetAbsOrigin()
+	local dummy = CreateUnitByName("npc_dummy_unit", origin, false, nil, nil, DOTA_TEAM_NEUTRALS)
+	if dummy and not dummy:IsNull() then
+		dummy:AddNoDraw()
+	end
+
+	local data = {
+		item = item,
+		drop = drop,
+		tracker = dummy,
+	}
+
+	data.particle_id = ParticleManager:CreateParticle(
+		"particles/overvodka_prime_effect.vpcf",
+		PATTACH_CUSTOMORIGIN,
+		nil
+	)
+	ParticleManager:SetParticleControl(data.particle_id, 0, origin)
+
+	item.chaos_orb_particle_data = data
+	drop.chaos_orb_particle_data = data
+	if dummy and not dummy:IsNull() then
+		dummy.chaos_orb_particle_data = data
+		dummy:SetContextThink(DoUniqueString("ChaosOrbParticleTrack"), function()
+			return self:ThinkChaosOrbParticles(dummy)
+		end, FrameTime())
+	end
+end
+
+function OvervodkaGameMode:ThinkChaosOrbParticles(tracker)
+	if not tracker or tracker:IsNull() then
+		return nil
+	end
+
+	local data = tracker.chaos_orb_particle_data
+	if not data then
+		return nil
+	end
+
+	local item = data.item
+	if not item or item:IsNull() then
+		self:CleanupChaosOrbParticles(tracker)
+		return nil
+	end
+
+	local container = item:GetContainer()
+	if not container or container:IsNull() then
+		self:CleanupChaosOrbParticles(tracker)
+		return nil
+	end
+
+	data.drop = container
+	local origin = container:GetAbsOrigin()
+	if data.tracker and not data.tracker:IsNull() then
+		data.tracker:SetAbsOrigin(origin)
+	end
+
+	if data.particle_id then
+		ParticleManager:SetParticleControl(data.particle_id, 0, origin)
+	end
+
+	return FrameTime()
+end
+
+function OvervodkaGameMode:CleanupChaosOrbParticles(target)
+	if not target or target:IsNull() then return end
+
+	local data = target.chaos_orb_particle_data
+	if not data or data.cleaned then
+		return
+	end
+
+	data.cleaned = true
+
+	if data.particle_id then
+		ParticleManager:DestroyParticle(data.particle_id, false)
+		ParticleManager:ReleaseParticleIndex(data.particle_id)
+	end
+
+	if data.item and not data.item:IsNull() then
+		data.item.chaos_orb_particle_data = nil
+	end
+
+	if data.drop and not data.drop:IsNull() then
+		data.drop.chaos_orb_particle_data = nil
+	end
+
+	if data.tracker and not data.tracker:IsNull() then
+		data.tracker.chaos_orb_particle_data = nil
+		UTIL_Remove(data.tracker)
+	end
+end
+
+function OvervodkaGameMode:SpawnGoldEntity( spawnPoint )
+	self.midDropQueue = self.midDropQueue or {}
+
+	local dropType = "gold"
+	if #self.midDropQueue > 0 then
+		dropType = table.remove( self.midDropQueue, 1 )
+	end
+
+	if dropType == "chaos_orb" then
+		self:SpawnChaosOrbEntity( spawnPoint, true )
+		return
+	end
+
+	self:SpawnMidLootEntity( "item_bag_of_gold", spawnPoint )
+end
+
+function OvervodkaGameMode:SpawnChaosOrbEntity( spawnPoint, useMidDropRadius )
+	if not useMidDropRadius then
+		self:SpawnMidLootEntity( "item_chaos_orb", GetGroundPosition( spawnPoint, nil ), 80, 160 )
+		return
+	end
+
+	self:SpawnMidLootEntity( "item_chaos_orb", spawnPoint )
 end
 
 
@@ -42,6 +186,9 @@ function OvervodkaGameMode:KillLoot( item, drop )
 	if drop:IsNull() then
 		return
 	end
+
+	self:CleanupChaosOrbParticles(item)
+	self:CleanupChaosOrbParticles(drop)
 
 	local nFXIndex = ParticleManager:CreateParticle( "particles/items2_fx/veil_of_discord.vpcf", PATTACH_CUSTOMORIGIN, drop )
 	ParticleManager:SetParticleControl( nFXIndex, 0, drop:GetOrigin() )
@@ -194,7 +341,8 @@ function OvervodkaGameMode:SpecialItemAdd( event )
 		local dropPos = owner:GetAbsOrigin() + owner:GetForwardVector() * 150
 		local drop = CreateItemOnPositionSync(dropPos, itemEntity)
 	else
-		owner:AddItemByName(spawnedItem)
+		local added_item = owner:AddItemByName(spawnedItem)
+		added_item:SetPurchaseTime(0)
 	end
 
 	EmitGlobalSound("Overthrow.Item.Claimed")

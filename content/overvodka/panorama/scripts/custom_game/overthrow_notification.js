@@ -1,16 +1,24 @@
 "use strict";
 // Notifications for Overthrow
 
+var ANNOUNCE_HIDE_DELAY = 0.32;
+
+function SetAlertMessage( titleKey, descriptionKey )
+{
+	$.GetContextPanel().SetHasClass( "item_alert_hiding", false );
+	$( "#AlertMessage_Chest" ).html = true;
+	$( "#AlertMessage_Delivery" ).html = true;
+	$( "#AlertMessage_Chest" ).text = $.Localize( titleKey );
+	$( "#AlertMessage_Delivery" ).text = $.Localize( descriptionKey );
+}
+
 function OnItemWillSpawn( msg )
 {
 //	$.Msg( "OnItemWillSpawn: ", msg );
 	$.GetContextPanel().SetHasClass( "item_will_spawn", true );
 	$.GetContextPanel().SetHasClass( "item_has_spawned", false );
 	GameUI.PingMinimapAtLocation( msg.spawn_location );
-	$( "#AlertMessage_Chest" ).html = true;
-	$( "#AlertMessage_Delivery" ).html = true;
-	$( "#AlertMessage_Chest" ).text = $.Localize( "#Chest" );
-	$( "#AlertMessage_Delivery" ).text = $.Localize( "#ItemWillSpawn" );
+	SetAlertMessage( "#Chest", "#ItemWillSpawn" );
 
 	$.Schedule( 3, ClearItemSpawnMessage );
 }
@@ -20,10 +28,7 @@ function OnItemHasSpawned( msg )
 //	$.Msg( "OnItemHasSpawned: ", msg );
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
 	$.GetContextPanel().SetHasClass( "item_has_spawned", true );
-	$( "#AlertMessage_Chest" ).html = true;
-	$( "#AlertMessage_Delivery" ).html = true;
-	$( "#AlertMessage_Chest" ).text = $.Localize( "#HamsterWillSpawn" );
-	$( "#AlertMessage_Delivery" ).text = $.Localize( "#ItemHasSpawned" );
+	SetAlertMessage( "#HamsterWillSpawn", "#ItemHasSpawned" );
 				
 	$.Schedule( 5, ClearItemSpawnMessage );
 }
@@ -31,16 +36,22 @@ function OnItemHasSpawned( msg )
 function OnHamsterSpawn( msg ) {
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
 	$.GetContextPanel().SetHasClass( "item_has_spawned", true );
-	$( "#AlertMessage_Chest" ).html = true;
-	$( "#AlertMessage_Delivery" ).html = true;
-	$( "#AlertMessage_Chest" ).text = $.Localize( "#HamsterSpawnAnnounce" );
-	$( "#AlertMessage_Delivery" ).text = $.Localize( "#HamsterSpawn" );
+	SetAlertMessage( "#HamsterSpawnAnnounce", "#HamsterSpawn" );
 
 	$.Schedule( 10, ClearItemSpawnMessage );
 }
 
+function OnChaosOrbPicked( msg ) {
+	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$.GetContextPanel().SetHasClass( "item_has_spawned", true );
+	SetAlertMessage( "#CHAOS_ORB_ANNOUNCE_TITLE", "#CHAOS_ORB_ANNOUNCE_DESC" );
+
+	$.Schedule( 5, ClearItemSpawnMessage );
+}
+
 function GoldenRainAnnounce( msg ) {
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$.GetContextPanel().SetHasClass( "golden_rain_hiding", false );
 	$.GetContextPanel().SetHasClass( "golden_rain_started", true );
 	$( "#GoldenRain_TextOne" ).html = true;
 	$( "#GoldenRain_TextTwo" ).html = true;
@@ -52,6 +63,7 @@ function GoldenRainAnnounce( msg ) {
 
 function GoldenRainStart( msg ) {
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
+	$.GetContextPanel().SetHasClass( "golden_rain_hiding", false );
 	$.GetContextPanel().SetHasClass( "golden_rain_started", true );
 	$( "#GoldenRain_TextOne" ).html = true;
 	$( "#GoldenRain_TextTwo" ).html = true;
@@ -63,14 +75,32 @@ function GoldenRainStart( msg ) {
 function ClearGoldenRainMessage() {
 	$.GetContextPanel().SetHasClass( "golden_rain_started", false );
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
-	$( "#GoldenRain" ).text = "";
+	$.GetContextPanel().SetHasClass( "golden_rain_hiding", true );
+	$.Schedule( ANNOUNCE_HIDE_DELAY, function() {
+		if ( $.GetContextPanel().BHasClass( "golden_rain_started" ) ) {
+			return;
+		}
+
+		$.GetContextPanel().SetHasClass( "golden_rain_hiding", false );
+		$( "#GoldenRain_TextOne" ).text = "";
+		$( "#GoldenRain_TextTwo" ).text = "";
+	} );
 }
 
 function ClearItemSpawnMessage()
 {
 	$.GetContextPanel().SetHasClass( "item_will_spawn", false );
 	$.GetContextPanel().SetHasClass( "item_has_spawned", false );
-	$( "#AlertMessage" ).text = "";
+	$.GetContextPanel().SetHasClass( "item_alert_hiding", true );
+	$.Schedule( ANNOUNCE_HIDE_DELAY, function() {
+		if ( $.GetContextPanel().BHasClass( "item_will_spawn" ) || $.GetContextPanel().BHasClass( "item_has_spawned" ) ) {
+			return;
+		}
+
+		$.GetContextPanel().SetHasClass( "item_alert_hiding", false );
+		$( "#AlertMessage_Chest" ).text = "";
+		$( "#AlertMessage_Delivery" ).text = "";
+	} );
 }
 
 //==============================================================
@@ -193,6 +223,7 @@ function ClearKillMessage()
 	GameEvents.Subscribe( "item_will_spawn", OnItemWillSpawn );
 	GameEvents.Subscribe( "item_has_spawned", OnItemHasSpawned );
 	GameEvents.Subscribe( "hamster_spawn", OnHamsterSpawn );
+	GameEvents.Subscribe( "chaos_orb_picked_announce", OnChaosOrbPicked );
 	GameEvents.Subscribe( "golden_rain_start", GoldenRainStart );
 	GameEvents.Subscribe( "golden_rain_announce", GoldenRainAnnounce );
 	GameEvents.Subscribe( "overthrow_item_drop", OnItemDrop );

@@ -4,10 +4,47 @@ const TipsContainer = $("#TipsContainer")
 const SecondaryAbilities = $("#DFGMSecondaryAbilities");
 const DoubleRating = $("#DoubleRating");
 const TeamLeavedEncounter = $("#TeamLeavedEncounter");
+const ChaosSelectionRoot = $("#ChaosSelectionRoot");
+const ChaosSelectionTimerText = $("#ChaosSelectionTimerText");
+const ChaosSelectionTimerFill = $("#ChaosSelectionTimerFill");
+const ChaosHistoryPanel = $("#ChaosHistoryPanel");
+const ChaosHistoryEntries = $("#ChaosHistoryEntries");
+const ChaosHistoryToggleButton = $("#ChaosHistoryToggleButton");
 const DotaHUDPanel = GetDotaHud();
 let SilvernameFacet2Target = -1;
 let DamagePanel = null;
 let EpsteinWSquares = {};
+let ChaosSelectionCards = {};
+let ChaosSelectionEndTime = -1;
+let ChaosSelectionSeq = -1;
+let ChaosSelectionTimerSeq = 0;
+let ChaosHistoryCollapsed = false;
+let ChaosHistoryHasEntries = false;
+const CHAOS_HISTORY_ANIM_DURATION = 0.24;
+const CHAOS_HISTORY_HIGHLIGHT_DURATION = 10.0;
+let ChaosHistoryInitialized = false;
+let ChaosHistoryLatestSignature = null;
+let ChaosHistoryHighlightSignature = null;
+let ChaosHistoryHighlightUntil = 0;
+let ChaosHistoryHighlightSeq = 0;
+
+const ChaosCardPanels = {
+    1: $("#ChaosCard1"),
+    2: $("#ChaosCard2"),
+    3: $("#ChaosCard3"),
+};
+
+const ChaosCardTitles = {
+    1: $("#ChaosCardTitle1"),
+    2: $("#ChaosCardTitle2"),
+    3: $("#ChaosCardTitle3"),
+};
+
+const ChaosCardDescriptions = {
+    1: $("#ChaosCardDesc1"),
+    2: $("#ChaosCardDesc2"),
+    3: $("#ChaosCardDesc3"),
+};
 
 let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
 let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
@@ -1022,8 +1059,278 @@ function UpdateEpsteinWSquares() {
     $.Schedule(0, UpdateEpsteinWSquares);
 }
 
+function HideChaosSelection() {
+    ChaosSelectionCards = {};
+    ChaosSelectionEndTime = -1;
+    ChaosSelectionSeq = -1;
+    ChaosSelectionTimerSeq += 1;
+    ChaosSelectionRoot.RemoveClass("Visible");
+    ChaosSelectionTimerFill.style.width = "0%";
+    ChaosSelectionTimerText.text = $.Localize("#CHAOS_SELECTION_TIMER_DEFAULT");
+
+    for (let index = 1; index <= 3; index++) {
+        const cardPanel = ChaosCardPanels[index];
+        if (cardPanel) {
+            cardPanel.visible = false;
+        }
+    }
+}
+
+function UpdateChaosSelectionTimer(timerSeq) {
+    if (timerSeq !== ChaosSelectionTimerSeq) {
+        return;
+    }
+
+    if (ChaosSelectionEndTime <= 0) {
+        ChaosSelectionTimerFill.style.width = "0%";
+        ChaosSelectionTimerText.text = $.Localize("#CHAOS_SELECTION_TIMER_DEFAULT");
+        return;
+    }
+
+    const remaining = Math.max(ChaosSelectionEndTime - Game.GetGameTime(), 0);
+    const seconds = Math.max(Math.ceil(remaining), 0);
+    const progress = Math.max(Math.min(remaining / 10, 1), 0);
+
+    ChaosSelectionTimerText.text = LocalizeFormat("#CHAOS_SELECTION_TIMER", seconds);
+    ChaosSelectionTimerFill.style.width = `${(progress * 100).toFixed(2)}%`;
+
+    if (remaining > 0 && ChaosSelectionEndTime > 0) {
+        $.Schedule(0.016, () => UpdateChaosSelectionTimer(timerSeq));
+    }
+}
+
+function OnChaosSelectionUpdate(value) {
+    if (!value || value.active !== 1) {
+        HideChaosSelection();
+        return;
+    }
+
+    ChaosSelectionCards = {};
+    ChaosSelectionEndTime = value.end_time || -1;
+
+    for (let index = 1; index <= 3; index++) {
+        const cardData = value[`card_${index}`];
+        const cardPanel = ChaosCardPanels[index];
+        const title = ChaosCardTitles[index];
+        const description = ChaosCardDescriptions[index];
+
+        if (!cardPanel || !title || !description) {
+            continue;
+        }
+
+        if (cardData) {
+            ChaosSelectionCards[index] = cardData;
+            cardPanel.visible = true;
+            title.text = $.Localize(cardData.title_key);
+            description.text = $.Localize(cardData.desc_key);
+        } else {
+            cardPanel.visible = false;
+            title.text = "";
+            description.text = "";
+        }
+    }
+
+    if (ChaosSelectionSeq !== value.seq) {
+        const selectionSeq = value.seq;
+        ChaosSelectionSeq = selectionSeq;
+        ChaosSelectionTimerSeq += 1;
+        ChaosSelectionRoot.RemoveClass("Visible");
+        $.Schedule(0.0, () => {
+            if (ChaosSelectionSeq === selectionSeq && ChaosSelectionEndTime > 0) {
+                ChaosSelectionRoot.AddClass("Visible");
+            }
+        });
+    } else {
+        ChaosSelectionRoot.AddClass("Visible");
+    }
+
+    UpdateChaosSelectionTimer(ChaosSelectionTimerSeq);
+}
+
+function OnChaosHistoryUpdate(value) {
+    const count = value && value.count ? value.count : 0;
+    const newestEntry = count > 0 ? value["entry_1"] : null;
+    const newestSignature = BuildChaosHistoryEntrySignature(newestEntry);
+    const hasNewEntry =
+        ChaosHistoryInitialized &&
+        newestSignature &&
+        newestSignature !== ChaosHistoryLatestSignature;
+
+    DeleteAllChildren(ChaosHistoryEntries);
+
+    ChaosHistoryHasEntries = count > 0;
+
+    if (!ChaosHistoryHasEntries) {
+        ChaosHistoryCollapsed = false;
+        ClearChaosHistoryHighlight();
+    }
+
+    for (let index = 1; index <= count; index++) {
+        const entry = value[`entry_${index}`];
+        if (!entry) {
+            continue;
+        }
+
+        const row = $.CreatePanel("Panel", ChaosHistoryEntries, "");
+        row.AddClass("ChaosHistoryEntry");
+        row._chaosHistorySignature = BuildChaosHistoryEntrySignature(entry);
+        if (index === 1 && IsChaosHistoryEntryHighlighted(row._chaosHistorySignature)) {
+            row.AddClass("NewChaosHistoryEntry");
+        }
+
+        const title = $.CreatePanel("Label", row, "");
+        title.AddClass("ChaosHistoryEntryTitle");
+        title.text = $.Localize(entry.title_key);
+
+        const text = $.CreatePanel("Label", row, "");
+        text.AddClass("ChaosHistoryEntryText");
+        text.text = $.Localize(entry.summary_key);
+    }
+
+    if (hasNewEntry) {
+        BeginChaosHistoryHighlight(newestSignature);
+    }
+
+    ChaosHistoryLatestSignature = newestSignature;
+    ChaosHistoryInitialized = true;
+    UpdateChaosHistoryState();
+    RefreshChaosHistoryHighlightClasses();
+}
+
+function UpdateChaosHistoryState() {
+    if (!ChaosHistoryPanel || !ChaosHistoryToggleButton) {
+        return;
+    }
+
+    const showPanel = ChaosHistoryHasEntries && !ChaosHistoryCollapsed;
+    const showToggle = ChaosHistoryHasEntries && ChaosHistoryCollapsed;
+
+    SetAnimatedPanelVisible(ChaosHistoryPanel, showPanel);
+    SetAnimatedPanelVisible(ChaosHistoryToggleButton, showToggle);
+}
+
+function SetAnimatedPanelVisible(panel, shouldShow) {
+    if (!panel) {
+        return;
+    }
+
+    const nextSeq = (panel._chaosVisSeq || 0) + 1;
+    panel._chaosVisSeq = nextSeq;
+
+    if (shouldShow) {
+        panel.style.visibility = "visible";
+        $.Schedule(0.0, () => {
+            if (panel._chaosVisSeq !== nextSeq) {
+                return;
+            }
+
+            panel.AddClass("Visible");
+        });
+        return;
+    }
+
+    panel.RemoveClass("Visible");
+    $.Schedule(CHAOS_HISTORY_ANIM_DURATION, () => {
+        if (panel._chaosVisSeq !== nextSeq || panel.BHasClass("Visible")) {
+            return;
+        }
+
+        panel.style.visibility = "collapse";
+    });
+}
+
+function BuildChaosHistoryEntrySignature(entry) {
+    if (!entry) {
+        return null;
+    }
+
+    return `${entry.effect_id || ""}|${entry.player_id || ""}|${entry.time || ""}`;
+}
+
+function IsChaosHistoryEntryHighlighted(signature) {
+    return !!signature &&
+        signature === ChaosHistoryHighlightSignature &&
+        ChaosHistoryHighlightUntil > Game.GetGameTime();
+}
+
+function RefreshChaosHistoryHighlightClasses() {
+    if (!ChaosHistoryEntries) {
+        return;
+    }
+
+    for (let index = 0; index < ChaosHistoryEntries.GetChildCount(); index++) {
+        const row = ChaosHistoryEntries.GetChild(index);
+        if (!row) {
+            continue;
+        }
+
+        row.SetHasClass("NewChaosHistoryEntry", IsChaosHistoryEntryHighlighted(row._chaosHistorySignature));
+    }
+}
+
+function ClearChaosHistoryHighlight() {
+    ChaosHistoryHighlightSignature = null;
+    ChaosHistoryHighlightUntil = 0;
+    ChaosHistoryHighlightSeq += 1;
+}
+
+function BeginChaosHistoryHighlight(signature) {
+    if (!signature) {
+        return;
+    }
+
+    ChaosHistoryCollapsed = false;
+    ChaosHistoryHighlightSignature = signature;
+    ChaosHistoryHighlightUntil = Game.GetGameTime() + CHAOS_HISTORY_HIGHLIGHT_DURATION;
+    ChaosHistoryHighlightSeq += 1;
+    const highlightSeq = ChaosHistoryHighlightSeq;
+
+    RefreshChaosHistoryHighlightClasses();
+
+    $.Schedule(CHAOS_HISTORY_HIGHLIGHT_DURATION, () => {
+        if (ChaosHistoryHighlightSeq !== highlightSeq) {
+            return;
+        }
+
+        ClearChaosHistoryHighlight();
+        RefreshChaosHistoryHighlightClasses();
+    });
+}
+
+function OpenChaosHistory() {
+    if (!ChaosHistoryHasEntries || !ChaosHistoryCollapsed) {
+        return;
+    }
+
+    ChaosHistoryCollapsed = false;
+    Game.EmitSound("UUI_SOUNDS.QuestsOpen");
+    UpdateChaosHistoryState();
+}
+
+function CloseChaosHistory() {
+    if (!ChaosHistoryHasEntries || ChaosHistoryCollapsed) {
+        return;
+    }
+
+    ChaosHistoryCollapsed = true;
+    Game.EmitSound("UUI_SOUNDS.QuestsClose");
+    UpdateChaosHistoryState();
+}
+
+function OnChaosCardActivated(slot) {
+    const cardData = ChaosSelectionCards[slot];
+    if (!cardData) {
+        return;
+    }
+
+    GameEvents.SendCustomGameEventToServer("chaos_pick_card", {
+        effect_id: cardData.id,
+    });
+}
+
 (function(){
     StartSecondaryAbilities();
+    HideChaosSelection();
 
     DeleteAllChildren(TipsContainer)
     GameEvents.Subscribe("player_tipped", PlayerTipped)
@@ -1058,4 +1365,7 @@ function UpdateEpsteinWSquares() {
             UpdatePlayerHUD(PlayerInfo)
         }
     })
+
+    SubscribeAndFireNetTableByKey("chaos", "history", OnChaosHistoryUpdate)
+    SubscribeAndFireNetTableByKey("chaos", `selection_${LocalPlayer}`, OnChaosSelectionUpdate)
 })();

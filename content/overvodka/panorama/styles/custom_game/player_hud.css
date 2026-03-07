@@ -180,6 +180,7 @@
     height: 545px;
     
     align: center bottom;
+    overflow: noclip;
 
     background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a291fef), color-stop(0.5, #292618ef), to(#383219ef));
 
@@ -195,7 +196,7 @@
 #SubscribeHeader{
     align: center top;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 6px;
     font-size: 60px;
     font-weight: bold;
     text-transform: uppercase;
@@ -209,6 +210,121 @@
 	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
 }
 
+.PrimeAccent{
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
+    font-weight: bold;
+    text-shadow: 0px 0px 8px 1 #ddce9c33;
+    animation-name: prime_word_glow;
+    animation-duration: 1.65s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.PrimeAccentStrong{
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.4, #e8ddb7 ), color-stop( 0.55, #c6b684 ), to( #e5ce82 ) );
+    font-weight: bold;
+    text-shadow: 0px 0px 10px 1 #ddce9c44;
+    animation-name: prime_word_glow_strong;
+    animation-duration: 1.35s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.PrimeAccentHero{
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.38, #f0e4bc ), color-stop( 0.56, #cdbd8a ), to( #e5ce82 ) );
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 12px 2 #ddce9c55;
+    animation-name: prime_word_glow_hero;
+    animation-duration: 1.1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes 'prime_word_glow'
+{
+    0%
+    {
+        text-shadow: 0px 0px 6px 1 #ddce9c22;
+        brightness: 1.0;
+    }
+
+    50%
+    {
+        text-shadow: 0px 0px 12px 2 #e5ce82;
+        brightness: 1.12;
+    }
+
+    100%
+    {
+        text-shadow: 0px 0px 6px 1 #ddce9c22;
+        brightness: 1.0;
+    }
+}
+
+@keyframes 'prime_word_glow_strong'
+{
+    0%
+    {
+        text-shadow: 0px 0px 8px 1 #ddce9c33;
+        brightness: 1.0;
+    }
+
+    50%
+    {
+        text-shadow: 0px 0px 14px 2 #f0e4bc;
+        brightness: 1.16;
+    }
+
+    100%
+    {
+        text-shadow: 0px 0px 8px 1 #ddce9c33;
+        brightness: 1.0;
+    }
+}
+
+@keyframes 'prime_word_glow_hero'
+{
+    0%
+    {
+        text-shadow: 0px 0px 10px 2 #ddce9c44;
+        brightness: 1.05;
+    }
+
+    50%
+    {
+        text-shadow: 0px 0px 16px 3 #f0e4bc;
+        brightness: 1.2;
+    }
+
+    100%
+    {
+        text-shadow: 0px 0px 10px 2 #ddce9c44;
+        brightness: 1.05;
+    }
+}
+
+@keyframes 'prime_word_glow_soft'
+{
+    0%
+    {
+        text-shadow: 0px 0px 4px 1 #ddce9c22;
+        brightness: 1.0;
+    }
+
+    50%
+    {
+        text-shadow: 0px 0px 8px 1 #e5ce8277;
+        brightness: 1.08;
+    }
+
+    100%
+    {
+        text-shadow: 0px 0px 4px 1 #ddce9c22;
+        brightness: 1.0;
+    }
+}
+
 #SubscribeDescription{
     align: left top;
     font-size: 22px;
@@ -216,7 +332,7 @@
     line-height: 1.4;
     text-align: left;
     font-family: Radiance;
-    margin-top: 130px;
+    margin-top: 115px;
     margin-left: 25px;
     
     color: #c7c4ac;
@@ -226,7 +342,7 @@
     align: center top;
     font-size: 30px;
     font-weight: bold;
-    margin-top: 90px;
+    margin-top: 80px;
     color: rgb(255, 247, 214);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -260,54 +376,152 @@
 }
 
 #BuyButton{
-    width: 225px;
-    height: 65px;
+    width: 268px;
+    height: 72px;
 
     align: center bottom;
 
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 
-    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
+    overflow: clip;
+    pre-transform-scale2d: 1;
 
-    border: 3px solid white;
-    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
-    border-radius: 32px;
-    transition-property: brightness, border-brush;
-    transition-duration: .1s;
+    background-color: gradient(linear, 0% 100%, 0% 0%, from(#261f16), color-stop(0.48, #453a28), color-stop(0.72, #655738), to(#857143));
+
+    border: 2px solid #e5ce82;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#7a6840), color-stop(0.45, #b5a770), color-stop(0.72, #ddce9c), to(#f0e4bc));
+    border-radius: 37px;
+    box-shadow: fill #2a150000 0px 0px 0px 0px;
+
+    animation-name: prime_button_idle_glow;
+    animation-duration: 1.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+    transition-property: brightness, border-brush, box-shadow, pre-transform-scale2d, background-color;
+    transition-duration: .16s;
+    transition-timing-function: ease-in-out;
 }
 
 .PlayerSubscribed #BuyButton{
-    width: 250px;
+    width: 292px;
 }
 
 #BuyButton:hover{
-    brightness: 1.5;
-    border-brush: #87782cef;
+    brightness: 1.08;
+    pre-transform-scale2d: 1.02;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#8a7546), color-stop(0.45, #c4b57c), color-stop(0.72, #ece0b4), to(#fff7dc));
+    box-shadow: fill #ddce9c33 0px 0px 12px 1px;
 }
 
-.Wrapper{
+#BuyButton:active{
+    brightness: 0.97;
+    pre-transform-scale2d: 0.95;
+    box-shadow: fill #ddce9c18 0px 0px 6px 1px;
+}
+
+.BuyButtonGlow{
+    width: 100%;
+    height: 100%;
+    border-radius: 37px;
+    background-color: gradient(radial, 50% 50%, 0% 0%, 60% 60%, from(#f0e4bc20), color-stop(0.55, #ddce9c10), to(#ffffff00));
+    opacity: 0.65;
+    transition-property: opacity, brightness;
+    transition-duration: .16s;
+    transition-timing-function: ease-in-out;
+}
+
+.BuyButtonShine{
+    width: 86px;
+    height: 180%;
+    vertical-align: center;
+    horizontal-align: left;
+    margin-left: -150px;
+    transform: rotateZ(18deg);
+    background-color: gradient(linear, 0% 0%, 100% 0%, from(#ffffff00), color-stop(0.35, #ffffff10), color-stop(0.5, #f5e7bd66), color-stop(0.65, #ffffff10), to(#ffffff00));
+    opacity: 0.0;
+    transition-property: opacity, transform;
+    transition-duration: .32s;
+    transition-timing-function: ease-in-out;
+}
+
+#BuyButton:hover .BuyButtonGlow{
+    opacity: 0.9;
+    brightness: 1.05;
+}
+
+#BuyButton:hover .BuyButtonShine{
+    opacity: 0.75;
+    transform: translateX(360px) rotateZ(18deg);
+}
+
+#BuyButton:active .BuyButtonShine{
+    opacity: 0.5;
+    transform: translateX(260px) rotateZ(18deg);
+}
+
+#BuyButton .Wrapper{
     align: center center;
     flow-children: right;
+    overflow: noclip;
+    padding: 0px 14px;
+    z-index: 2;
 }
 
-.TelegramIcon{
-    width: 35px;
-    height: 35px;
+#BuyButton .TelegramIcon{
+    width: 42px;
+    height: 42px;
     align: center center;
+    overflow: noclip;
+    margin: 0px 1px;
+    wash-color: #ddce9c;
+    transition-property: pre-transform-scale2d, brightness;
+    transition-duration: .16s;
+    transition-timing-function: ease-in-out;
 }
 
-.TelegramText{
+#BuyButton .TelegramText{
     font-size: 30px;
-    color: gradient( linear, 0% 0%, 0% 100%, from( #ddd09c ), color-stop( 0.55, #b5ac70 ), to( #e5db82 ) );
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
     text-transform: uppercase;
-    font-weight: thin;
+    font-weight: bold;
     font-family: 'Roboto';
+    letter-spacing: 1.2px;
+    brightness: 1.0;
 
-    brightness: 1.5;
-
-    margin-left: 10px;
+    margin-left: 12px;
     align: center center;
     text-align: center;
+}
+
+#BuyButton:hover .TelegramText{
+    brightness: 1.08;
+}
+
+#BuyButton:hover .TelegramIcon{
+    pre-transform-scale2d: 1.04;
+    brightness: 1.08;
+}
+
+@keyframes 'prime_button_idle_glow'
+{
+    0%
+    {
+        box-shadow: fill #ddce9c10 0px 0px 8px 0px;
+        brightness: 1.0;
+    }
+
+    50%
+    {
+        box-shadow: fill #ddce9c22 0px 0px 12px 1px;
+        brightness: 1.03;
+    }
+
+    100%
+    {
+        box-shadow: fill #ddce9c10 0px 0px 8px 0px;
+        brightness: 1.0;
+    }
 }
 
 #TipsContainer{
@@ -442,13 +656,33 @@
     margin-top: 200px;
     margin-right: 700px;
     opacity: 0;
+    z-index: 5;
     transform: translateX(200px) translateY(0px);
-    transition-property: transform;
-	transition-duration: 0.1s;
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
 	transition-timing-function: ease-in-out;
 }
 
 #ModelPreview.Visible{
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
+}
+
+#ModelPreview3{
+    width: 900px;
+    height: 900px;
+    align: center center;
+    margin-top: 40px;
+    margin-right: 1180px;
+    opacity: 0;
+    z-index: 5;
+    transform: translateX(220px) translateY(0px);
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
+	transition-timing-function: ease-in-out;
+}
+
+#ModelPreview3.Visible{
     opacity: 1;
     transform: translateX(0px) translateY(0px);
 }
@@ -461,9 +695,10 @@
     margin-top: 200px;
     margin-right: -280px;
     opacity: 0;
+    z-index: 5;
     transform: translateX(-200px) translateY(0px);
-    transition-property: transform;
-	transition-duration: 0.1s;
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
 	transition-timing-function: ease-in-out;
 }
 
@@ -503,8 +738,9 @@
     margin-left: -50px;
     margin-top: 40px;
     opacity: 0;
+    z-index: 5;
     transform: translateX(0px) translateY(20px);
-    transition-property: transform;
+	transition-property: transform;
 	transition-duration: 0.1s;
 	transition-timing-function: ease-in-out;
     visibility: collapse;
@@ -528,12 +764,13 @@
 
     align: right top;
     transform: translateX(-100px) translateY(100px) rotateZ(10deg);
-    transition-property: transform;
-	transition-duration: 0.1s;
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
 	transition-timing-function: ease-in-out;
     margin-right: 570px;
     margin-top: 160px;
     opacity: 0;
+    z-index: 5;
 
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.5);
 }
@@ -558,9 +795,10 @@
     margin-left: 600px;
     margin-top: 120px;
     opacity: 0;
+    z-index: 5;
     transform: translateX(100px) translateY(100px) rotateZ(-10deg);
-    transition-property: transform;
-	transition-duration: 0.1s;
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
 	transition-timing-function: ease-in-out;
 }
 
@@ -576,11 +814,12 @@
 }
 
 #SubscribedEndDatePanel{
-    align: right bottom;
+    align: left bottom;
     flow-children: down;
+    overflow: noclip;
 
-    margin-bottom: 5px;
-    margin-right: 5px;
+    margin-bottom: 24px;
+    margin-left: 25px;
 
     opacity: 0;
 }
@@ -590,21 +829,33 @@
 }
 
 .SubscribedEndDateText{
-    text-transform: uppercase;
-    font-size: 12px;
-
-    color: lightgreen;
-
-    align: right bottom;
+    width: 260px;
+    font-size: 18px;
+    line-height: 1.2;
+    font-family: Radiance;
+    color: #c7c4ac;
+    align: left bottom;
 }
 
 .SubscribedEndDateDate{
-    text-transform: uppercase;
-    font-size: 20px;
+    width: 260px;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: bold;
+    font-family: Radiance;
+    overflow: noclip;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-left: -12px;
+    margin-right: -12px;
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
+    text-shadow: 0px 0px 4px 1 #ddce9c22;
+    animation-name: prime_word_glow_soft;
+    animation-duration: 1.65s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 
-    color: white;
-
-    align: right bottom;
+    align: left bottom;
 }
 
 #PlayersTitlesContainer{
@@ -1030,4 +1281,409 @@
 
     align: center top;
     text-align: center;
+}
+
+#ChaosSelectionRoot{
+    width: 100%;
+    height: 100%;
+    visibility: collapse;
+    overflow: noclip;
+    opacity: 0;
+    transform: scale3d(1.03, 1.03, 1);
+    transition-property: opacity, transform;
+    transition-duration: 0.22s;
+    transition-timing-function: ease-in-out;
+    z-index: 90;
+}
+
+#ChaosSelectionRoot.Visible{
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+#ChaosSelectionBackdrop{
+    width: 100%;
+    height: 100%;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#050402e8), to(#0e0903f2));
+}
+
+#ChaosSelectionFrame{
+    align: center center;
+    width: 1140px;
+    flow-children: down;
+    overflow: noclip;
+}
+
+#ChaosSelectionTitle{
+    horizontal-align: center;
+    color: #f4e6b8;
+    text-shadow: 0px 0px 22px #7b6026;
+    font-size: 54px;
+    font-family: Radiance;
+    font-weight: semi-bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+#ChaosSelectionSubtitle{
+    width: 900px;
+    horizontal-align: center;
+    margin-top: 8px;
+    color: #d0c6ae;
+    text-shadow: 0px 1px 4px black;
+    text-align: center;
+    font-size: 22px;
+    font-family: Radiance;
+}
+
+#ChaosSelectionTimerWrap{
+    width: 420px;
+    horizontal-align: center;
+    flow-children: down;
+    margin-top: 24px;
+}
+
+#ChaosSelectionTimerText{
+    horizontal-align: center;
+    color: #ead8a0;
+    text-shadow: 0px 0px 10px #715621;
+    font-size: 22px;
+    font-family: Radiance;
+    letter-spacing: 1px;
+}
+
+#ChaosSelectionTimerBar{
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    background-color: #161008dd;
+    border: 1px solid #5f4921;
+    border-radius: 8px;
+    overflow: clip;
+    box-shadow: fill #0000004a 0px 0px 10px 0px;
+}
+
+#ChaosSelectionTimerFill{
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    background-color: gradient(linear, 0% 0%, 100% 0%, from(#f0deb0), color-stop(0.42, #ccb06a), color-stop(0.76, #9d7630), to(#6d521c));
+    transition-property: width;
+    transition-duration: 0.016s;
+    transition-timing-function: linear;
+}
+
+#ChaosCardsRow{
+    horizontal-align: center;
+    flow-children: right;
+    margin-top: 34px;
+    overflow: noclip;
+}
+
+.ChaosCard{
+    width: 336px;
+    height: 404px;
+    margin: 0px 14px;
+    padding: 24px 22px 18px 22px;
+    flow-children: down;
+    overflow: noclip;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#342613f4), color-stop(0.18, #2a1d0df2), color-stop(0.58, #171008f4), to(#090603f6));
+    border: 1px solid #8f6d31;
+    border-radius: 22px;
+    box-shadow: fill #00000084 0px 18px 34px -8px;
+    opacity: 0;
+    transform: translateY(42px);
+    pre-transform-scale2d: 0.93;
+    transition-property: transform, pre-transform-scale2d, opacity, brightness, box-shadow, border-brush;
+    transition-duration: 0.24s;
+    transition-timing-function: ease-in-out;
+}
+
+#ChaosCard1{
+    transition-delay: 0.03s;
+}
+
+#ChaosCard2{
+    transition-delay: 0.07s;
+}
+
+#ChaosCard3{
+    transition-delay: 0.11s;
+}
+
+#ChaosSelectionRoot.Visible .ChaosCard{
+    opacity: 1;
+    transform: none;
+    pre-transform-scale2d: 1;
+}
+
+#ChaosSelectionRoot.Visible .ChaosCard:hover{
+    brightness: 1.1;
+    transform: translateY(-12px);
+    pre-transform-scale2d: 1.035;
+    box-shadow: fill #9f74243a 0px 18px 38px -4px;
+}
+
+#ChaosSelectionRoot.Visible .ChaosCard:active{
+    brightness: 0.99;
+    transform: translateY(-5px);
+    pre-transform-scale2d: 0.988;
+    box-shadow: fill #7d5a1a2a 0px 12px 24px -8px;
+}
+
+.ChaosCardGlow{
+    ignore-parent-flow: true;
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+}
+
+.ChaosCardTitle{
+    width: 100%;
+    height: 68px;
+    color: #f4e6b8;
+    text-shadow: 0px 0px 12px #6a501d;
+    font-size: 28px;
+    line-height: 30px;
+    font-family: Radiance;
+    font-weight: semi-bold;
+    text-align: center;
+    letter-spacing: 1px;
+    text-overflow: shrink;
+    white-space: normal;
+    vertical-align: center;
+    margin-top: 8px;
+    z-index: 1;
+}
+
+.ChaosCardDesc{
+    width: 100%;
+    height: 194px;
+    margin-top: 10px;
+    color: #efe6cf;
+    text-shadow: 0px 1px 3px #000000cc;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: Radiance;
+    text-overflow: shrink;
+    white-space: normal;
+    text-align: center;
+    vertical-align: top;
+    z-index: 1;
+}
+
+.ChaosCardHint{
+    width: 100%;
+    margin-top: 8px;
+    color: #d0b170;
+    text-shadow: 0px 0px 6px #463311;
+    font-size: 16px;
+    font-family: Radiance;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    z-index: 1;
+}
+
+#ChaosHistoryPanel{
+    width: 304px;
+    horizontal-align: right;
+    vertical-align: top;
+    margin-top: 66px;
+    margin-right: 18px;
+    padding: 12px 12px 10px 12px;
+    flow-children: down;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#20170ef2), to(#0b0804f0));
+    border: 1px solid #7c602c;
+    border-radius: 20px;
+    box-shadow: fill #00000090 0px 14px 30px -10px;
+    overflow: noclip;
+    visibility: collapse;
+    opacity: 0;
+    transform: translateX(40px);
+    transition-property: opacity, transform;
+    transition-duration: 0.24s;
+    transition-timing-function: ease-in-out;
+    z-index: 70;
+}
+
+#ChaosHistoryPanel.Visible{
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+#ChaosHistoryHeader{
+    width: 100%;
+    flow-children: right;
+    vertical-align: center;
+}
+
+#ChaosHistoryTitle{
+    width: fill-parent-flow(1.0);
+    color: #f0ddb0;
+    text-shadow: 0px 0px 14px #6f5622;
+    font-size: 22px;
+    font-family: Radiance;
+    font-weight: semi-bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#ChaosHistoryCloseButton{
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
+    vertical-align: center;
+    background-image: url("s2r://panorama/images/control_icons/24px/caret_right.vsvg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    wash-color: #efdba4;
+    brightness: 1.8;
+    transition-property: wash-color, brightness, transform;
+    transition-duration: 0.16s;
+    transition-timing-function: ease-in-out;
+}
+
+#ChaosHistoryCloseButton:hover{
+    wash-color: #fff1c9;
+    brightness: 2.15;
+    transform: translateX(2px);
+}
+
+#ChaosHistoryEntries{
+    width: 100%;
+    flow-children: down;
+    margin-top: 8px;
+}
+
+.ChaosHistoryEntry{
+    width: 100%;
+    flow-children: down;
+    margin-top: 6px;
+    padding: 8px 10px;
+    background-color: #17110acc;
+    border: 1px solid #59431f;
+    border-radius: 14px;
+    transition-property: background-color, border, box-shadow, brightness;
+    transition-duration: 0.18s;
+    transition-timing-function: ease-in-out;
+}
+
+.ChaosHistoryEntry.NewChaosHistoryEntry{
+    background-color: gradient(linear, 0% 0%, 100% 0%, from(#3c2a10f2), color-stop(0.45, #22170cf0), to(#17110acc));
+    border: 1px solid #c99a3a;
+    box-shadow: fill #b6842426 0px 0px 18px 0px;
+    animation-name: chaos_history_new_entry_pulse;
+    animation-duration: 1.18s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.ChaosHistoryEntry.NewChaosHistoryEntry .ChaosHistoryEntryTitle{
+    color: #f3e3b8;
+    text-shadow: 0px 0px 12px #8a6523;
+}
+
+.ChaosHistoryEntry.NewChaosHistoryEntry .ChaosHistoryEntryText{
+    color: #efe2c4;
+    text-shadow: 0px 0px 8px #5b4217;
+}
+
+.ChaosHistoryEntryTitle{
+    width: 100%;
+    color: #edd8a0;
+    text-shadow: 0px 0px 10px #61481d;
+    font-size: 17px;
+    line-height: 21px;
+    font-family: Radiance;
+    font-weight: semi-bold;
+    text-overflow: shrink;
+    white-space: normal;
+}
+
+.ChaosHistoryEntryText{
+    width: 100%;
+    margin-top: 4px;
+    color: #d6ccb3;
+    text-shadow: 0px 1px 3px black;
+    font-size: 14px;
+    font-family: Radiance;
+    line-height: 18px;
+    text-overflow: shrink;
+    white-space: normal;
+}
+
+#ChaosHistoryToggleButton{
+    width: 46px;
+    height: 56px;
+    horizontal-align: right;
+    vertical-align: top;
+    margin-top: 66px;
+    margin-right: 18px;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#2b2115f2), to(#0f0a05f2));
+    border: 1px solid #7c602c;
+    border-radius: 16px;
+    box-shadow: fill #0000008a 0px 12px 26px -8px;
+    visibility: collapse;
+    opacity: 0;
+    transform: translateX(26px);
+    transition-property: opacity, transform, brightness, box-shadow;
+    transition-duration: 0.22s;
+    transition-timing-function: ease-in-out;
+    z-index: 71;
+}
+
+#ChaosHistoryToggleButton.Visible{
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+#ChaosHistoryToggleButton:hover{
+    brightness: 1.15;
+    box-shadow: fill #9f7b2a26 0px 0px 18px 0px;
+}
+
+#ChaosHistoryToggleButton:active{
+    pre-transform-scale2d: 0.95;
+}
+
+#ChaosHistoryToggleGlow{
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background-color: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from(#f0ddb020), color-stop(0.55, #c7a65010), to(#ffffff00));
+}
+
+#ChaosHistoryToggleIcon{
+    width: 20px;
+    height: 20px;
+    align: center center;
+    background-image: url("s2r://panorama/images/control_icons/24px/caret_left.vsvg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    wash-color: #efdba4;
+    brightness: 1.9;
+}
+
+@keyframes 'chaos_history_new_entry_pulse'{
+    0%{
+        brightness: 1.0;
+        box-shadow: fill #8c661d22 0px 0px 12px 0px;
+    }
+
+    50%{
+        brightness: 1.22;
+        box-shadow: fill #d09a3338 0px 0px 24px 0px;
+    }
+
+    100%{
+        brightness: 1.0;
+        box-shadow: fill #8c661d22 0px 0px 12px 0px;
+    }
 }

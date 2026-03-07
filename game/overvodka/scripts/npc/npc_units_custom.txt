@@ -4413,6 +4413,26 @@
         "VisionNighttimeRange" "0" 
         "AttackDesire" "1.5" 
     }
+	"arsen_skin_loadout"
+    {
+        "BaseClass" "npc_dota_base_additive"
+        "Model" "models/arsen/arsen_skin/arsen_skin.vmdl"
+        "AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+        "BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+        "MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed" "450"
+        "MovementTurnRate" "10"
+        "FollowRange" "250"
+        "StatusHealth" "1"
+		"ModelScale"	"1.25"
+        "TeamName" "DOTA_TEAM_GOODGUYS"
+        "CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+        "VisionDaytimeRange" "0"
+        "VisionNighttimeRange" "0"
+        "AttackDesire" "1.2"
+    }
 	"invincible_arcana_loadout"
     {
         "BaseClass" "npc_dota_base_additive"

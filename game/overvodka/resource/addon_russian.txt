@@ -192,6 +192,7 @@
 		"Store_Free"					"Бесплатно"
 		"Store_Claim"					"Забрать"
 		"Store_Claimed"					"Получено"
+		"Store_Hamster_Coins_Tooltip"	"<span class='CoinBalanceTooltipTitle'>Hamster Coins можно заработать:</span><br>• За выполнение заданий<br>• За каждую завершённую игру<br>• За открытие кейсов<br><span class='CoinBalanceTooltipAccent'>С Overvodka Prime получение монет заметно ускоряется!</span>"
 
 		"Store_Item_skin_1_name"		"Литвин с Lit Energy"
 		"Store_Item_skin_2_name"		"Злой Chill Guy"
@@ -200,8 +201,11 @@
 		"Store_Item_skin_5_name"		"Гольмий IShowSpeed"
 		"Store_Item_skin_6_name"		"Чёрный Флэш"
 		"Store_Item_skin_7_name"		"Женя Мороз"
+		"Store_Item_skin_8_name" 		"Оборотень Леон"
+		"Store_Item_skin_9_name" 		"Зек Арсен Маркарян"
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
+		"Store_Item_skin_12_name"		"Red Royale King"
 
 		"Store_Item_effect_1_name"		"Золотой эффект"
 		"Store_Item_effect_2_name"		"Diretide эффект"
@@ -262,7 +266,7 @@
 		"COMEBACK_SYSTEM_DESC"							"Эта команда получает x2 опыта в кругу, x2 золота за монеты а также x2 очков счета за убийство"
 		"COMEBACK_SYSTEM_DESC2"							"Эта команда получает x1.5 опыта в кругу, x1.5 золота за монеты а также x2 очков счета за убийство"
 
-		"PLAYER_HUD_Subscribe_Description"				"• Новое колесо чата, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность удваивать свою ставку рейтинга;<br>• Возможность давать пять, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность прогревать других игроков за плохую игру;<br>• Специальную рамку героя на панели счета команд;<br>• По 2 дополнительных ежедневных задания;<br>• Возможность играть за эксклюзивного героя — ЛЕВ!<br>• Эксклюзивные Arcana-предметы для персонажей САНС и SINISTER MARK."
+		"PLAYER_HUD_Subscribe_Description"				"• Новое <span class='PrimeAccent'>колесо чата</span>, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность <span class='PrimeAccentStrong'>удваивать</span> свою ставку рейтинга;<br>• Возможность <span class='PrimeAccent'>давать пять</span>, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность <span class='PrimeAccentStrong'>прогревать</span> других игроков за плохую игру;<br>• Специальную <span class='PrimeAccent'>рамку героя</span> на панели счета команд;<br>• <span class='PrimeAccent'>2 дополнительных ежедневных задания</span>;<br>• Возможность играть за эксклюзивного героя — <span class='PrimeAccentHero'>ЛЕВ</span>!<br>• <span class='PrimeAccent'>Эксклюзивные Arcana-предметы</span> для персонажей Санс, Sinister Mark, Арсен Маркарян и Sasavot."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
@@ -4183,9 +4187,23 @@
 		"DOTA_Tooltip_ability_worstsup_w_vision" "%УМЕНЬШЕНИЕ ОБЗОРА:"
 		"DOTA_Tooltip_ability_silencer_brain_drain" "ВЕЧНЫЕ ФИКСЫ"
 		"DOTA_Tooltip_ability_silencer_brain_drain_Description" "После каждой смерти вражеского героя он навсегда теряет 1 интеллекта, который переходит М Русу."
+		"DOTA_Tooltip_ability_worstsup_e" "БАФФ"
+		"DOTA_Tooltip_ability_worstsup_e_Description" "Написание кода кастомки усиливает заклинания мруса: они применяются с большего расстояния и действуют эффективнее."
+		"DOTA_Tooltip_ability_worstsup_e_Note0" "Получение бонусов от аспекта НУЖНЫЙ РАЗМЕР отключается истощением."
+		"DOTA_Tooltip_ability_worstsup_e_Note1" "Существующие бонусы от аспекта НУЖНЫЙ РАЗМЕР не отключаются истощением."
+		"DOTA_Tooltip_ability_worstsup_e_cast_range" "ДАЛЬНОСТЬ ПРИМЕНЕНИЯ:"
+		"DOTA_Tooltip_ability_worstsup_e_spell_amp" "%ДОП. УРОН ОТ ЗАКЛИНАНИЙ:"
+		"DOTA_Tooltip_ability_worstsup_e_aoe_bonus" "ДОП. РАДИУС ЗАКЛИНАНИЙ:"
+		"DOTA_Tooltip_ability_worstsup_e_aoe_bonus_duration" "ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"
+		"dota_tooltip_ability_worstsup_e_shard_description" "Способность становится активной и при применении активирует <font color='#edd8a0'>Сферу Хаоса</font>."
 		"DOTA_Tooltip_modifier_silencer_brain_drain" "Вечные фиксы"
 		"DOTA_Tooltip_ability_rubick_arcane_supremacy" "БАФФ"
 		"DOTA_Tooltip_ability_rubick_arcane_supremacy_Description" "Написание кода кастомки усиливает заклинания мруса: они применяются с большего расстояния и действуют эффективнее."
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_aoe_bonus" ""
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_aoe_bonus_duration" ""
+		"DOTA_Tooltip_ability_worstsup_e_Facet_rubick_arcane_accumulation"             "Применив способность, герой на время получит бонус к области действия заклинаний."
+		"DOTA_Tooltip_modifier_rubick_arcane_supremacy"                 "Нужный Размер"
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_Facet_rubick_arcane_accumulation"             ""
 		"DOTA_Tooltip_ability_special_bonus_unique_worstsup_1" "+{s:bonus_cast_range} к дальности заклинаний от БАФФ"
 		"DOTA_Tooltip_ability_special_bonus_unique_worstsup_2" "+{s:bonus_slow}% к замедлению передвижения от НЕРФ"
 		"DOTA_Tooltip_ability_special_bonus_unique_worstsup_3" "+{s:bonus_duration} сек. к длительности СМЕНА КОДА"
@@ -4410,7 +4428,7 @@
 		"DOTA_Tooltip_modifier_item_green_chips"					"Green Lit Energy Chips"
 		"DOTA_Tooltip_modifier_item_green_chips_Description"		"Ловкость навсегда увеличена на %dMODIFIER_PROPERTY_STATS_AGILITY_BONUS%, скорость передвижения — на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
 		"DOTA_Tooltip_modifier_item_blue_chips"						"Blue Lit Energy Chips"
-		"DOTA_Tooltip_modifier_item_blue_chips_Description"			"Интеллект навсегда увеличен на %dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%, урон от заклинаний — на %dMODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE%%%."
+		"DOTA_Tooltip_modifier_item_blue_chips_Description"			"Интеллект навсегда увеличен на %dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%, урон от заклинаний — на %fMODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE%%%."
 
 		"DOTA_Tooltip_ability_item_chapman_red"                     "CHAPMAN RED"
 		"DOTA_Tooltip_ability_item_chapman_red_Description"         "<h1>Использование: Выкурить</h1> Даёт эффект руны ускорения на %duration% сек."
@@ -5055,5 +5073,93 @@
 		"DOTA_Tooltip_ability_item_heart_vodka_Lore"								"Сохранившееся сердце вымершего монстра, которое укрепляет стойкость владельца."
 		"DOTA_Tooltip_ability_item_heart_vodka_bonus_strength"						"+$str"
 		"DOTA_Tooltip_ability_item_heart_vodka_health_regen_pct"					"%+макс. здоровья в секунду"
+		"DOTA_Tooltip_ability_item_chaos_orb"										"Сфера Хаоса"
+		"DOTA_Tooltip_Ability_item_chaos_orb"										"Сфера Хаоса"
+		"DOTA_Tooltip_ability_item_chaos_orb_Description"							""
+
+		"CHAOS_SELECTION_TITLE"														"Сфера Хаоса"
+		"CHAOS_SELECTION_SUBTITLE"													"Выбери одно искажение, которое изменит текущую игру."
+		"CHAOS_SELECTION_TIMER"														"Автовыбор через %s1 сек."
+		"CHAOS_SELECTION_TIMER_DEFAULT"												"Автовыбор через 10 сек."
+		"CHAOS_CARD_PICK_HINT"														"Нажмите, чтобы выбрать"
+		"CHAOS_LIST_TITLE"															"Список Хаоса"
+		"CHAOS_ORB_ANNOUNCE_TITLE"													"Сфера Хаоса подобрана!"
+		"CHAOS_ORB_ANNOUNCE_DESC"													"Сейчас будет выбрано новое искажение"
+		"CHAOS_ORB_ONLY_REAL_HERO"													"Сферу Хаоса может подобрать только настоящий герой"
+
+		"CHAOS_EFFECT_REFLECT_TITLE"												"Зеркало Боли"
+		"CHAOS_EFFECT_REFLECT_DESC"													"Все герои отражают 50% входящего урона."
+		"CHAOS_EFFECT_REFLECT_SUMMARY"												"Все герои отражают 50% входящего урона."
+
+		"CHAOS_EFFECT_COOLDOWN_TITLE"												"Сломанные Таймеры"
+		"CHAOS_EFFECT_COOLDOWN_DESC"												"Перезарядка всех способностей ускоряется на 20%."
+		"CHAOS_EFFECT_COOLDOWN_SUMMARY"												"Перезарядка всех способностей ускорена на 20%."
+
+		"CHAOS_EFFECT_MANA_AMP_TITLE"												"Жадная Магия"
+		"CHAOS_EFFECT_MANA_AMP_DESC"												"Все манакосты удваиваются, но урон от заклинаний увеличивается на 40%."
+		"CHAOS_EFFECT_MANA_AMP_SUMMARY"												"Все манакосты увеличены в 2 раза, а урон от заклинаний усилен на 40%."
+
+		"CHAOS_EFFECT_GOLD_STEAL_TITLE"												"Золотая Клептомания"
+		"CHAOS_EFFECT_GOLD_STEAL_DESC"												"Каждая атака героя крадёт у врага 2% от его текущего золота."
+		"CHAOS_EFFECT_GOLD_STEAL_SUMMARY"											"Теперь атаки героев крадут 2% текущего золота у врагов."
+
+		"CHAOS_EFFECT_GOLD_HEAL_TITLE"												"Золотая Регенерация"
+		"CHAOS_EFFECT_GOLD_HEAL_DESC"												"Каждая подобранная монетка восстанавливает 300 здоровья."
+		"CHAOS_EFFECT_GOLD_HEAL_SUMMARY"											"Подбор монетки теперь восстанавливает 300 здоровья."
+
+		"CHAOS_EFFECT_ATTACK_RANGE_TITLE"											"Длинные Руки"
+		"CHAOS_EFFECT_ATTACK_RANGE_DESC"											"Все герои получают +200 к дальности атаки."
+		"CHAOS_EFFECT_ATTACK_RANGE_SUMMARY"											"Все герои получили +200 к дальности атаки."
+
+		"CHAOS_EFFECT_ETERNAL_NIGHT_TITLE"											"Вечная Ночь"
+		"CHAOS_EFFECT_ETERNAL_NIGHT_DESC"											"На карте навсегда наступает ночь."
+		"CHAOS_EFFECT_ETERNAL_NIGHT_SUMMARY"										"На карте теперь вечная ночь."
+
+		"CHAOS_EFFECT_TURBO_MODE_TITLE"												"Turbo Mode"
+		"CHAOS_EFFECT_TURBO_MODE_DESC"												"Время возрождения всех героев уменьшается на 75%."
+		"CHAOS_EFFECT_TURBO_MODE_SUMMARY"											"Все герои теперь возрождаются на 75% быстрее."
+
+		"CHAOS_EFFECT_BACKPACK_TITLE"												"9 слотов"
+		"CHAOS_EFFECT_BACKPACK_DESC"												"Все герои могут использовать предметы из рюкзака."
+		"CHAOS_EFFECT_BACKPACK_SUMMARY"												"Теперь все герои могут использовать предметы из рюкзака."
+
+		"CHAOS_EFFECT_DEATH_LESH_TITLE"												"Утешительный Лещ"
+		"CHAOS_EFFECT_DEATH_LESH_DESC"												"После каждой смерти герой получает Лещ."
+		"CHAOS_EFFECT_DEATH_LESH_SUMMARY"											"После смерти герои теперь получают Лещ."
+
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_TITLE"										"Атрибутные Чипсы"
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_DESC"											"Каждый герой получает 3 пачки чипсов по своему основному атрибуту: сила - красные, ловкость - зелёные, интеллект - синие. Универсалы получают по одной каждого цвета."
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_SUMMARY"										"Все герои получили чипсы по своему основному атрибуту."
+
+		"CHAOS_EFFECT_DOUBLE_CHEST_TITLE"											"Жадные Сундуки"
+		"CHAOS_EFFECT_DOUBLE_CHEST_DESC"											"Из сундуков выпадает вдвое больше предметов."
+		"CHAOS_EFFECT_DOUBLE_CHEST_SUMMARY"											"Сундуки теперь выдают вдвое больше предметов."
+
+		"CHAOS_EFFECT_BOMBARDIRO_TITLE"												"Приказ Крокодило"
+		"CHAOS_EFFECT_BOMBARDIRO_DESC"												"Бомбы Bombardiro Crocodilo мгновенно убивают героев."
+		"CHAOS_EFFECT_BOMBARDIRO_SUMMARY"											"Бомбы Bombardiro Crocodilo теперь мгновенно убивают героев."
+
+		"CHAOS_EFFECT_GLOBAL_DOOM_TITLE"											"Пелена Дума"
+		"CHAOS_EFFECT_GLOBAL_DOOM_DESC"												"На всех героев, кроме поднявшего сферу, накладывается Doom на 10 секунд."
+		"CHAOS_EFFECT_GLOBAL_DOOM_SUMMARY"											"Глобальный Doom на 10 секунд поразил всех героев, кроме поднявшего сферу."
+
+		"CHAOS_EFFECT_DEATH_EXPLOSION_TITLE"										"Последний Вздох"
+		"CHAOS_EFFECT_DEATH_EXPLOSION_DESC"											"Смерть героя теперь создаёт взрыв вокруг него, наносящий урон по области."
+		"CHAOS_EFFECT_DEATH_EXPLOSION_SUMMARY"										"Смерть героя теперь вызывает взрыв по области."
+
+		"CHAOS_EFFECT_SWAP_TITLE"													"Перемешивание"
+		"CHAOS_EFFECT_SWAP_DESC"													"Все живые герои прямо сейчас случайно меняются местами."
+		"CHAOS_EFFECT_SWAP_SUMMARY"													"Все живые герои поменялись местами."
+
+		"CHAOS_EFFECT_METEOR_TITLE"													"Небесный Обстрел"
+		"CHAOS_EFFECT_METEOR_DESC"													"В течение 10 секунд в случайных точках арены падают метеоры."
+		"CHAOS_EFFECT_METEOR_SUMMARY"												"В течение 10 секунд по арене падают метеоры."
+
+		"CHAOS_EFFECT_PRIMARY_TITLE"												"Сломанные Атрибуты"
+		"CHAOS_EFFECT_PRIMARY_DESC"													"Основной атрибут каждого героя меняется на случайный другой."
+		"CHAOS_EFFECT_PRIMARY_SUMMARY"												"Основной атрибут каждого героя сменился на случайный другой."
+
+		"dota_tooltip_modifier_chaos_global_doom"									"Doom"
+		"dota_tooltip_modifier_chaos_meteor_burn"									"Chaos Meteor"
 	}
 }

@@ -168,104 +168,149 @@
     flow-children: down;
 }
 
+.OverthrowItemNotification Label
+{
+    text-transform: uppercase;
+}
+
 #AlertMessage
 {
     flow-children: down;
     horizontal-align: center;
     opacity: 0;
-    transform: scaleX(2) scaleY(2);
-    margin-top: 80px;
-    transition-property: transform, opacity;
-    transition-duration: 0.3s;
+    transform: translateY(-14px);
+    pre-transform-scale2d: 1.03;
+    margin-top: 78px;
+    padding: 0px;
+    transition-property: transform, opacity, pre-transform-scale2d;
+    transition-duration: 0.32s;
+    transition-timing-function: ease-in-out;
     visibility: collapse;
-    border: 0px solid blue;
+    overflow: noclip;
 }
 
 #AlertMessage_Chest
 {
-    color: pink;
+    color: #edd8a0;
     horizontal-align: center;
-    text-shadow: 4px 4px 4px #121212;
-    font-size: 40px;
+    text-align: center;
+    text-shadow: 0px 0px 10px #61481d, 0px 0px 4px #7b602638;
+    font-size: 34px;
     font-weight: bold;
+    text-overflow: shrink;
+    max-width: 980px;
+    animation-name: overvodka_announce_glow;
+    animation-duration: 2.6s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 #AlertMessage_Delivery
 {
-    color: pink;
+    color: #edd8a0;
     horizontal-align: center;
-    text-shadow: 4px 4px 4px #121212;
-    font-size: 40px;
+    text-align: center;
+    text-shadow: 0px 0px 8px #61481d, 0px 0px 3px #7b602630;
+    font-size: 28px;
     font-weight: bold;
+    text-overflow: shrink;
+    max-width: 1040px;
 }
 #GoldenRain
 {
     flow-children: down;
     horizontal-align: center;
     opacity: 0;
-    transform: scaleX(2) scaleY(2);
-    margin-top: 80px;
-    transition-property: transform, opacity, visibility;
-    transition-duration: 0.5s;
+    transform: translateY(-14px);
+    pre-transform-scale2d: 1.03;
+    margin-top: 78px;
+    padding: 0px;
+    transition-property: transform, opacity, visibility, pre-transform-scale2d;
+    transition-duration: 0.32s;
     transition-timing-function: ease-in-out;
     visibility: collapse;
-    border: 0px solid blue;
+    overflow: noclip;
 }
+.item_alert_hiding #AlertMessage
+{
+    opacity: 0;
+    transform: translateY(-12px);
+    pre-transform-scale2d: 1.02;
+    visibility: visible;
+}
+
+.golden_rain_hiding #GoldenRain
+{
+    opacity: 0;
+    transform: translateY(-12px);
+    pre-transform-scale2d: 1.02;
+    visibility: visible;
+}
+
 .golden_rain_started #GoldenRain
 {
     opacity: 1;
-    transform: scaleX(1) scaleY(1);
+    transform: translateY(0px);
+    pre-transform-scale2d: 1;
     visibility: visible;
 }
 #GoldenRain_TextOne
 {
-    color: gold;
+    color: #edd8a0;
     horizontal-align: center;
-    text-shadow: 4px 4px 4px #121212;
-    font-size: 54px;
+    text-align: center;
+    text-shadow: 0px 0px 12px #61481d, 0px 0px 5px #7b602640;
+    font-size: 46px;
     font-weight: bold;
-    animation-name: glowPulse;
-    animation-duration: 2s;
+    animation-name: overvodka_announce_glow;
+    animation-duration: 2.2s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    text-overflow: shrink;
+    max-width: 1020px;
 }
 
 #GoldenRain_TextTwo
 {
-    color: gold;
+    color: #edd8a0;
     horizontal-align: center;
-    text-shadow: 4px 4px 4px #121212;
-    font-size: 28px;
+    text-align: center;
+    text-shadow: 0px 0px 8px #61481d, 0px 0px 3px #7b602634;
+    font-size: 24px;
     font-weight: bold;
-    animation-name: floatText;
+    animation-name: overvodka_announce_float;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    text-overflow: shrink;
+    max-width: 1100px;
 }
 
-@keyframes 'glowPulse' {
-    0% { text-shadow: 4px 4px 4px #121212; }
-    50% { text-shadow: 0 0 20px gold, 0 0 30px gold; }
-    100% { text-shadow: 4px 4px 4px #121212; }
+@keyframes 'overvodka_announce_glow' {
+    0% { text-shadow: 0px 0px 10px #61481d, 0px 0px 4px #7b602630; }
+    50% { text-shadow: 0px 0px 14px #61481d, 0px 0px 7px #9c78384a; }
+    100% { text-shadow: 0px 0px 10px #61481d, 0px 0px 4px #7b602630; }
 }
 
-@keyframes 'floatText' {
+@keyframes 'overvodka_announce_float' {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-6px); }
     100% { transform: translateY(0px); }
 }
 
 .item_has_spawned #AlertMessage
 {
     opacity: 1;
-    transform: scaleX(1) scaleY(1);
+    transform: translateY(0px);
+    pre-transform-scale2d: 1;
     visibility: visible;
 }
 
 .item_will_spawn #AlertMessage
 {
     opacity: 1;
-    transform: scaleX(1) scaleY(1);
+    transform: translateY(0px);
+    pre-transform-scale2d: 1;
     visibility: visible;
 }
 

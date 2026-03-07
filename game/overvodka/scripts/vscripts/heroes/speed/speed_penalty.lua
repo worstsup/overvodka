@@ -5,6 +5,17 @@ speed_penalty = class({})
 
 tartar = {}
 
+local function RotateVector2D(vec, degrees)
+    local rad = math.rad(degrees)
+    local c = math.cos(rad)
+    local s = math.sin(rad)
+    return Vector(
+        vec.x * c - vec.y * s,
+        vec.x * s + vec.y * c,
+        0
+    )
+end
+
 function speed_penalty:GetAbilityTextureName()
     if self:GetCaster():HasModifier("modifier_overvodka_store_skin_5") then
         return "futbik_skin"
@@ -69,17 +80,6 @@ function speed_penalty:OnSpellStart()
         info.vVelocity = dir * speed
         ProjectileManager:CreateLinearProjectile(info)
     end
-end
-
-function RotateVector2D(vec, degrees)
-    local rad = math.rad(degrees)
-    local c = math.cos(rad)
-    local s = math.sin(rad)
-    return Vector(
-        vec.x * c - vec.y * s,
-        vec.x * s + vec.y * c,
-        0
-    )
 end
 
 function speed_penalty:OnProjectileHit( target, location )

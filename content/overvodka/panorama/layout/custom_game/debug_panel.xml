@@ -160,6 +160,11 @@
 									<Label text="Макс" />
 								</Button>
 							</Panel>
+							<Panel class="Row">
+								<Button class="DemoButton MiddleButton" acceptsjoyfocus="true" onactivate="OnSpawnChaosOrbPressed()">
+									<Label text="Spawn Chaos Orb" />
+								</Button>
+							</Panel>
 							<!-- <Panel class="Row">
 								<Button class="DemoButton" acceptsjoyfocus="true" onactivate="AdjustHeroStats('DOTA_ATTRIBUTE_STRENGTH', 0)">
 									<Label text="STR" />

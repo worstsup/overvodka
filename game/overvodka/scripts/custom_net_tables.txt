@@ -14,5 +14,6 @@
 		"ov_flags",
 		"overvodka_events",
 		"overvodka_notifications",
+		"chaos",
 	]
 }

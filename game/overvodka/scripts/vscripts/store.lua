@@ -12,6 +12,9 @@ Store.Items = {
     sans_arcana = { id = "sans_arcana", name = "#Store_Item_sans_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/sans_arcana.png", hero = "npc_dota_hero_morphling", modifier = "modifier_sans_arcana" },
     invincible_arcana = { id = "invincible_arcana", name = "#Store_Item_invincible_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/invincible_arcana.png", hero = "npc_dota_hero_void_spirit", modifier = "modifier_invincible_arcana" },
     skin_7 = { id = "skin_7", name = "#Store_Item_skin_7_name", type = "skins", price = 300, image = "file://{images}/custom_game/store/skins/skin_7.png", hero = "npc_dota_hero_mars", modifier = "modifier_overvodka_store_skin_7" },
+    skin_8 = { id = "skin_8", name = "#Store_Item_skin_8_name", type = "skins", price = 325, image = "file://{images}/custom_game/store/skins/skin_8.png", hero = "npc_dota_hero_hoodwink", modifier = "modifier_overvodka_store_skin_8" },
+    skin_9 = { id = "skin_9", name = "#Store_Item_skin_9_name", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/skin_9.png", hero = "npc_dota_hero_earthshaker", modifier = "modifier_overvodka_store_skin_9" },
+    skin_12 = { id = "skin_12", name = "#Store_Item_skin_12_name", type = "skins", price = 120, image = "file://{images}/custom_game/store/skins/skin_12.png", hero = "npc_dota_hero_warlock", modifier = "modifier_overvodka_store_skin_12" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
     effect_2 = { id = "effect_2", name = "#Store_Item_effect_2_name", type = "effects", price = 100, image = "file://{images}/custom_game/store/effects/effect_2.png", modifier = "modifier_overvodka_store_effect_2" },
     effect_3 = { id = "effect_3", name = "#Store_Item_effect_3_name", type = "effects", price = 125, image = "file://{images}/custom_game/store/effects/effect_3.png", modifier = "modifier_overvodka_store_effect_3" },
@@ -52,7 +55,7 @@ function Store:OnNPCSpawned(event)
     if npc:IsHero() and not DebugPanel:IsDummy(npc) then
         local playerID = npc:GetPlayerOwnerID()
         if playerID >= 0 then
-            Timers:CreateTimer(0.1, function()
+            Timers:CreateTimer(FrameTime(), function()
                 if npc and not npc:IsNull() then
                     self:ApplyEquippedEffect(playerID, npc)
                     self:ApplyEquippedSkin(playerID, npc)

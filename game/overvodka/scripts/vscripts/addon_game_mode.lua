@@ -35,6 +35,7 @@ require('quests')
 require('store')
 require('vote')
 require('overvodka_events')
+require('chaos_orb')
 ---------------------------------------------------------------------------
 -- Precache
 ---------------------------------------------------------------------------
@@ -302,6 +303,12 @@ function OvervodkaGameMode:InitGameMode()
 	ListenToGameEvent( "dota_npc_goal_reached", Dynamic_Wrap( OvervodkaGameMode, "OnNpcGoalReached" ), self )
 	ListenToGameEvent( "player_disconnect", Dynamic_Wrap( OvervodkaGameMode, "OnPlayerDisconnected" ), self )
 	ListenToGameEvent( "hero_selected", Dynamic_Wrap( OvervodkaGameMode, "OnHeroSelected" ), self )
+	self.OnChat = self.OnChat or OvervodkaGameMode.OnChat
+	ListenToGameEvent( "player_chat", Dynamic_Wrap( self, "OnChat" ), self )
+
+	if ChaosOrb and ChaosOrb.Init then
+		ChaosOrb:Init(self)
+	end
 
 	Convars:RegisterCommand( "overthrow_force_item_drop", function(...) self:ForceSpawnItem() end, "Force an item drop.", FCVAR_CHEAT )
 	Convars:RegisterCommand( "overthrow_force_gold_drop", function(...) self:ForceSpawnGold() end, "Force gold drop.", FCVAR_CHEAT )
@@ -347,6 +354,48 @@ function OvervodkaGameMode:event_update_loud_server(data)
         return
     end
     hHero.voice_level = max(0.01, 1 - math.abs(((data.voice_level + _G.ambient_noice_correction) / 60)))
+end
+
+function OvervodkaGameMode:OnChat(keys)
+	if not IsServer() then return end
+
+	local text = tostring(keys.text or "")
+	if text == "" then return end
+
+	local commandText = string.lower(text)
+	if not string.find(commandText, "^%-sphere") then
+		return
+	end
+
+	local playerID = tonumber(keys.playerid or keys.PlayerID)
+	if playerID == nil or playerID < 0 then
+		return
+	end
+
+	if not IsInToolsMode() then
+		SendErrorToPlayer(playerID, "Tools Mode only")
+		return
+	end
+
+	local sphereIndex = tonumber(string.match(commandText, "^%-sphere%s+(%d+)%s*$"))
+	if not sphereIndex then
+		SendErrorToPlayer(playerID, "Usage: -sphere <index>")
+		return
+	end
+
+	if ChaosOrb and ChaosOrb.Init and not ChaosOrb.initialized then
+		ChaosOrb:Init(self)
+	end
+
+	if not ChaosOrb or not ChaosOrb.DebugApplyEffectByIndex then
+		SendErrorToPlayer(playerID, "Chaos Orb system is unavailable")
+		return
+	end
+
+	local ok, err = ChaosOrb:DebugApplyEffectByIndex(sphereIndex, playerID)
+	if not ok then
+		SendErrorToPlayer(playerID, err or "Failed to apply Chaos Orb")
+	end
 end
 
 function OvervodkaGameMode:UpdateMute(hero_name_to_mute, hero_owner, player, reverce, abi_name)
@@ -546,6 +595,9 @@ end
 
 function OvervodkaGameMode:OnPlayerDisconnected(event)
 	local PlayerID = event.PlayerID
+	if ChaosOrb and ChaosOrb.OnPlayerDisconnected then
+		ChaosOrb:OnPlayerDisconnected(PlayerID)
+	end
 	local Team = PlayerResource:GetTeam(PlayerID)
 	local ActiveTeams = self:GetSortedValidActiveTeams()
 	local bTeamActive = false

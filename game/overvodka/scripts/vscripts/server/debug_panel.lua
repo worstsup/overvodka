@@ -50,6 +50,7 @@ function DebugPanel:RegisterPanoramaListeners()
 	CustomGameEventManager:RegisterListener('debug_panel_kill', Dynamic_Wrap(DebugPanel, 'OnKillRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_remove_items_on_ground', Dynamic_Wrap(DebugPanel, 'OnRemoveItemsOnGroundRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_respawn_hero', Dynamic_Wrap(DebugPanel, 'OnRespawnHeroRequest'))
+	CustomGameEventManager:RegisterListener('debug_panel_spawn_chaos_orb', Dynamic_Wrap(DebugPanel, 'OnSpawnChaosOrbRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_add_ability', Dynamic_Wrap(DebugPanel, 'OnAddAbilityRequest'))
 	CustomGameEventManager:RegisterListener('debug_panel_switch_title_status', Dynamic_Wrap(DebugPanel, 'OnSwitchTitleStatus'))
 end
@@ -252,6 +253,35 @@ function DebugPanel:OnRespawnHeroRequest(kv)
 	if Unit and not Unit:IsNull() and IsRealHero(Unit) then
 		Unit:RespawnHero(false, false)
 		Unit:SetBuybackCooldownTime(1)
+	end
+end
+
+function DebugPanel:OnSpawnChaosOrbRequest(kv)
+	local playerID = kv.PlayerID
+	if not DebugPanel:IsPlayerAllowedToExecuteCommand(playerID) then return end
+
+	if ChaosOrb and ChaosOrb.Init and not ChaosOrb.initialized then
+		ChaosOrb:Init(GameRules:GetGameModeEntity().OvervodkaGameMode)
+	end
+
+	local spawnPoint = nil
+	local unitIndex = tonumber(kv.unit)
+	if unitIndex and unitIndex ~= -1 then
+		local unit = EntIndexToHScript(unitIndex)
+		if unit and not unit:IsNull() then
+			spawnPoint = unit:GetAbsOrigin()
+		end
+	end
+
+	if not spawnPoint then
+		local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+		if hero and not hero:IsNull() then
+			spawnPoint = hero:GetAbsOrigin()
+		end
+	end
+
+	if ChaosOrb and ChaosOrb.ForceSpawnOrb then
+		ChaosOrb:ForceSpawnOrb(spawnPoint or Vector(0, 0, 0))
 	end
 end
 

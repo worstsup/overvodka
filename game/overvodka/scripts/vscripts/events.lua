@@ -63,6 +63,10 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 		end
 
 	elseif nNewState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		if ChaosOrb and ChaosOrb.Init then
+			ChaosOrb:Init(self)
+		end
+
 		if not Is5v5() then
 			self.countdownEnabled = true
 			CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
@@ -135,6 +139,10 @@ golovach_spawned = 0
 function OvervodkaGameMode:OnNPCSpawned( event )
 	local spawnedUnit = EntIndexToHScript( event.entindex )
 	if spawnedUnit:IsRealHero() then
+		if ChaosOrb and ChaosOrb.OnHeroSpawned then
+			ChaosOrb:OnHeroSpawned(spawnedUnit)
+		end
+
 		if spawnedUnit.bFirstSpawned == nil then
 			spawnedUnit.bFirstSpawned = true
 			--if not spawnedUnit:IsIllusion() then
@@ -479,6 +487,10 @@ function OvervodkaGameMode:OnEntityKilled( event )
 	if killedUnit:IsRealHero() then
 		self.allSpawned = true
 
+		if ChaosOrb and ChaosOrb.OnHeroKilled then
+			ChaosOrb:OnHeroKilled(killedUnit, hero)
+		end
+
 		if hero and hero:IsRealHero() and hero:GetUnitName() == "npc_dota_hero_undying" then
 			if event.entindex_inflictor ~= nil then
 				local ability = EntIndexToHScript(event.entindex_inflictor)
@@ -579,6 +591,10 @@ function OvervodkaGameMode:SetRespawnTime( killedTeam, killedUnit, extraTime )
 		killedUnit._visitorBonusRespawnPct = nil
 	end
 
+	if ChaosOrb and ChaosOrb.IsEffectActive and ChaosOrb:IsEffectActive("turbo_mode") then
+		respawnTime = math.max(math.floor(respawnTime * 0.25 + 0.5), 1)
+	end
+
 	killedUnit:SetTimeUntilRespawn( respawnTime )
 end
 
@@ -589,13 +605,20 @@ end
 function OvervodkaGameMode:OnItemPickUp( event )
 	VectorTarget:OnItemPickup(event)
 	local item = EntIndexToHScript( event.ItemEntityIndex )
-	local owner
+	local picker
 	if event.HeroEntityIndex then
-		owner = EntIndexToHScript(event.HeroEntityIndex)
+		picker = EntIndexToHScript(event.HeroEntityIndex)
 	elseif event.UnitEntityIndex then
-		owner = EntIndexToHScript(event.UnitEntityIndex)
+		picker = EntIndexToHScript(event.UnitEntityIndex)
 	end
-	if not owner:IsRealHero() then owner = owner:GetOwner() end
+	if not picker or picker:IsNull() then return end
+	local owner = picker
+	if not owner:IsRealHero() then
+		owner = owner:GetOwner()
+	end
+	if not owner or owner:IsNull() then
+		owner = picker
+	end
 	r = 300
 	local function RemoveItemByName(unit, itemName)
 		for i = 0, 8 do
@@ -633,7 +656,50 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			owner:ModifyGoldFiltered(newR, false, 0)
 			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
+		if ChaosOrb and ChaosOrb.OnGoldPickup then
+			ChaosOrb:OnGoldPickup(owner)
+		end
 		UTIL_Remove( item )
+	elseif event.itemname == "item_chaos_orb" then
+		if not IsRealHero(picker) then
+			local playerID = picker and picker.GetPlayerOwnerID and picker:GetPlayerOwnerID() or -1
+			if playerID and playerID ~= -1 then
+				SendErrorToPlayer(playerID, "#CHAOS_ORB_ONLY_REAL_HERO")
+			end
+
+			Timers:CreateTimer(FrameTime(), function()
+				if item and not item:IsNull() then
+					if OvervodkaGameMode and OvervodkaGameMode.CleanupChaosOrbParticles then
+						OvervodkaGameMode:CleanupChaosOrbParticles(item)
+						local container = item:GetContainer()
+						if container and not container:IsNull() then
+							OvervodkaGameMode:CleanupChaosOrbParticles(container)
+						end
+					end
+					if picker and not picker:IsNull() then
+						picker:RemoveItem(item)
+						self:SpawnChaosOrbEntity(picker:GetAbsOrigin(), false)
+					else
+						self:SpawnChaosOrbEntity(Vector(0, 0, 0), false)
+					end
+					UTIL_Remove(item)
+				end
+			end)
+			return
+		end
+
+		if OvervodkaGameMode and OvervodkaGameMode.CleanupChaosOrbParticles then
+			OvervodkaGameMode:CleanupChaosOrbParticles(item)
+			local container = item:GetContainer()
+			if container and not container:IsNull() then
+				OvervodkaGameMode:CleanupChaosOrbParticles(container)
+			end
+		end
+		UTIL_Remove(item)
+
+		if ChaosOrb and not ChaosOrb:BeginSelection(owner) then
+			self:SpawnChaosOrbEntity(owner:GetAbsOrigin(), false)
+		end
 	elseif event.itemname == "item_zhenya_present" then
         UTIL_Remove(item)
         self:GiveZhenyaPresentReward(owner)
@@ -645,6 +711,9 @@ function OvervodkaGameMode:OnItemPickUp( event )
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
 			SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, 300, nil )
 		end
+		if ChaosOrb and ChaosOrb.OnGoldPickup then
+			ChaosOrb:OnGoldPickup(owner)
+		end
 		UTIL_Remove( item )
 	elseif event.itemname == "item_bag_of_gold_bablokrad" then
 		if owner:GetUnitName() == "npc_dota_hero_necrolyte" then
@@ -653,8 +722,12 @@ function OvervodkaGameMode:OnItemPickUp( event )
 		local rewerd = 100
 		owner:ModifyGoldFiltered( rewerd, false, 0 )
 		SendOverheadEventMessage( owner, OVERHEAD_ALERT_GOLD, owner, rewerd, nil )
+		if ChaosOrb and ChaosOrb.OnGoldPickup then
+			ChaosOrb:OnGoldPickup(owner)
+		end
 		UTIL_Remove( item )
 	elseif event.itemname == "item_treasure_chest" then
+		local chestMultiplier = ChaosOrb and ChaosOrb.IsEffectActive and ChaosOrb:IsEffectActive("double_chest") and 2 or 1
 		local treasureItemName = event.itemname
 		local hContainer = item:GetContainer()
 		for k, v in pairs(self.itemSpawnLocationsInUse) do
@@ -669,20 +742,26 @@ function OvervodkaGameMode:OnItemPickUp( event )
 				break
 			end
 		end
-		OvervodkaGameMode:SpecialItemAdd(event)
+		for _ = 1, chestMultiplier do
+			OvervodkaGameMode:SpecialItemAdd(event)
+		end
 		Timers:CreateTimer(0.03, function()
 			RemoveItemByName(owner, treasureItemName)
 			UTIL_Remove(item)
-			local bonusItem = CreateItem("item_madstone_bundle", owner, owner)
-			owner:AddItem(bonusItem)
-			if GetMapName ~= "overvodka_5x5" then
-				Timers:CreateTimer(0.03, function()
-					local bonusItem2 = CreateItem("item_madstone_bundle", owner, owner)
-					owner:AddItem(bonusItem2)
-				end)
+			for _ = 1, chestMultiplier do
+				local bonusItem = CreateItem("item_madstone_bundle", owner, owner)
+				owner:AddItem(bonusItem)
+				if GetMapName ~= "overvodka_5x5" then
+					Timers:CreateTimer(0.03, function()
+						local bonusItem2 = CreateItem("item_madstone_bundle", owner, owner)
+						owner:AddItem(bonusItem2)
+					end)
+				end
 			end
 			if owner:GetUnitName() == "npc_dota_hero_phoenix" and owner:HasTalent("special_bonus_unique_silvername_3") and owner:HasAbility("silvername_q_facet_1") then
-				OvervodkaGameMode:SpecialItemAdd(event)
+				for _ = 1, chestMultiplier do
+					OvervodkaGameMode:SpecialItemAdd(event)
+				end
 			end
 		end)
 	end

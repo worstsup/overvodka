@@ -176,7 +176,10 @@ function leon_q:FireAttack(aim_point, manual)
 
     local caster = self:GetCaster()
     if not caster or caster:IsNull() or (not caster:IsAlive()) then return end
-
+    local effect_name = "particles/leon_attack.vpcf"
+    if caster:HasModifier("modifier_overvodka_store_skin_8") then
+        effect_name = "particles/leon_attack_skin.vpcf"
+    end
     aim_point = Vector(aim_point.x, aim_point.y, 0)
 
     if manual then
@@ -241,7 +244,7 @@ function leon_q:FireAttack(aim_point, manual)
 
                 ProjectileManager:CreateLinearProjectile({
                     Ability = self,
-                    EffectName = "particles/leon_attack.vpcf",
+                    EffectName = effect_name,
                     vSpawnOrigin = spawn_origin,
                     fDistance = range,
                     fStartRadius = radius,

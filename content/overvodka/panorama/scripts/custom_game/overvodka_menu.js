@@ -5,6 +5,7 @@ var Menu = {};
 (function() {
     const mainPanel = $("#MenuMainPanel");
     const OvervodkaHamster = $("#OvervodkaHamster");
+    const ModelPreview3 = $("#ModelPreview3");
     const ModelPreview = $("#ModelPreview");
     const ModelPreview2 = $("#ModelPreview2");
     const TipPreview = $("#TipPreview");
@@ -25,10 +26,26 @@ var Menu = {};
         Vote: $("#TabButton_Vote")
     };
 
+    $.CreatePanel("DOTAScenePanel", ModelPreview3, "", { class: "hero_model_strategy", style: "width:70%;height:90%;", unit: "arsen_skin_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
+    ModelPreview3.SetHasClass("Visible", false);
     $.CreatePanel("DOTAScenePanel", ModelPreview, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview.SetHasClass("Visible", false);
     $.CreatePanel("DOTAScenePanel", ModelPreview2, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview2.SetHasClass("Visible", false);
+
+    const primePreviewPanels = [
+        ModelPreview3,
+        ModelPreview,
+        ModelPreview2,
+        TipPreview,
+        DoubleRatingPreview
+    ];
+
+    function SetPrimePreviewVisible(isVisible) {
+        for (let i = 0; i < primePreviewPanels.length; i++) {
+            primePreviewPanels[i].SetHasClass("Visible", isVisible);
+        }
+    }
     
     let isMenuOpen = false;
     let currentTab = null;
@@ -39,21 +56,18 @@ var Menu = {};
         OvervodkaHamster.SetHasClass("Visible", isMenuOpen);
 
         if (!isMenuOpen) {
-            TipPreview.SetHasClass("Visible", false);
-            DoubleRatingPreview.SetHasClass("Visible", false);
-            ModelPreview.SetHasClass("Visible", false);
-            ModelPreview2.SetHasClass("Visible", false);
+            SetPrimePreviewVisible(false);
+            if (Store && Store.HideCoinsTooltip) {
+                Store.HideCoinsTooltip();
+            }
         }
         Game.EmitSound("UUI_SOUNDS.OvervodkaMenu");
 
         if (isMenuOpen && currentTab === null) {
             Menu.SwitchTab('Leaderboard');
         }
-        if (currentTab === 'Prime' && isMenuOpen) {
-            ModelPreview.SetHasClass("Visible", true);
-            ModelPreview2.SetHasClass("Visible", true);
-            TipPreview.SetHasClass("Visible", true);
-            DoubleRatingPreview.SetHasClass("Visible", true);
+        else {
+            SetPrimePreviewVisible(currentTab === 'Prime' && isMenuOpen);
         }
     };
 
@@ -64,10 +78,10 @@ var Menu = {};
         currentTab = tabName;
         
         const isPrimeOpen = tabName === 'Prime';
-        ModelPreview.SetHasClass("Visible", isPrimeOpen);
-        ModelPreview2.SetHasClass("Visible", isPrimeOpen);
-        TipPreview.SetHasClass("Visible", isPrimeOpen);
-        DoubleRatingPreview.SetHasClass("Visible", isPrimeOpen);
+        SetPrimePreviewVisible(isPrimeOpen);
+        if (Store && Store.HideCoinsTooltip && tabName !== 'Store') {
+            Store.HideCoinsTooltip();
+        }
 
         for (const name in tabButtons) {
             tabButtons[name].SetHasClass("Selected", name === tabName);

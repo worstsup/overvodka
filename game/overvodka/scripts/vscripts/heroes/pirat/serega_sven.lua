@@ -32,7 +32,7 @@ function serega_sven:OnSpellStart()
     if dir:Length2D() < 1 then dir = caster:GetForwardVector(); dir.z = 0 end
     dir = dir:Normalized()
 
-    local maxDistance = self:GetCastRange(caster:GetAbsOrigin(), target)
+    local maxDistance = self:GetEffectiveCastRange(caster:GetAbsOrigin(), target)
     if not maxDistance or maxDistance <= 0 then
         maxDistance = 750
     end
@@ -47,8 +47,6 @@ function serega_sven:OnSpellStart()
         target:AddNewModifier(caster, self, "modifier_serega_sven", { duration = travel + stun })
     end
 
-    local projectile_name = "particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_ti6.vpcf"
-
     local function Fire(dir2d)
         ProjectileManager:CreateLinearProjectile({
             Source = caster,
@@ -60,7 +58,7 @@ function serega_sven:OnSpellStart()
             iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
             iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
 
-            EffectName   = projectile_name,
+            EffectName   = "particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_ti6.vpcf",
             fDistance    = maxDistance,
             fStartRadius = radius,
             fEndRadius   = radius,
@@ -107,20 +105,11 @@ function serega_sven:OnProjectileHit(target, location)
 
     EmitSoundOn("Hero_Lion.ImpaleTargetLand", target)
     self:PlayEffects(target)
-	ApplyDamage({
-        victim      = target,
-        attacker    = caster,
-        damage      = damage,
-        damage_type = self:GetAbilityDamageType(),
-        ability     = self,
-    })
+	ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self})
 end
 
 function serega_sven:PlayEffects(target)
-    local fx = ParticleManager:CreateParticle(
-        "particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_hit_ti6.vpcf",
-        PATTACH_ABSORIGIN_FOLLOW, target
-    )
+    local fx = ParticleManager:CreateParticle("particles/econ/items/nyx_assassin/nyx_assassin_ti6/nyx_assassin_impale_hit_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
     ParticleManager:ReleaseParticleIndex(fx)
     EmitSoundOn("Hero_Lion.ImpaleHitTarget", target)
 end

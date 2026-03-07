@@ -24,9 +24,13 @@ function modifier_arsen_tg_blocker:OnCreated( kv )
 		self.caster = self:GetCaster()
 		self.parent = self:GetParent()
 		self.origin = self.parent:GetOrigin()
+		local model = "models/arsen/arsen_arena.vmdl"
+		if self.caster:HasModifier( "modifier_overvodka_store_skin_9" ) then
+			model = "models/arsen/arsen_skin/arsen_skin_arena.vmdl"
+		end
 
 		-- replace model for even soldiers
-		self:GetParent():SetOriginalModel( "models/arsen/arsen_arena.vmdl" )
+		self:GetParent():SetOriginalModel( model )
 		self:GetParent():SetRenderAlpha( 0 )
 		self:GetParent():SetModelScale( 1.4 )
 		self:GetParent().model = 1

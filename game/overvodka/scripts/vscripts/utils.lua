@@ -6,6 +6,17 @@ LinkLuaModifier("modifier_overvodka_pet", 				"modifiers/modifier_overvodka_pet"
 LinkLuaModifier("modifier_generic_arc_lua",				"modifier_generic_arc_lua", 						 LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_generic_disarmed_lua",		"modifier_generic_disarmed_lua",					 LUA_MODIFIER_MOTION_NONE)
 
+LinkLuaModifier("modifier_chaos_orb_selection",			"modifiers/chaos/modifier_chaos_orb_selection",	 	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_reflect",				"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_cooldown",				"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_spell_surge",			"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_gold_steal",			"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_attack_range",			"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_backpack",				"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_global_doom",			"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_meteor_thinker",		"modifiers/chaos/modifier_chaos_meteor",	 		 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_chaos_meteor_burn",			"modifiers/chaos/modifier_chaos_meteor",	 		 LUA_MODIFIER_MOTION_NONE)
+
 LinkLuaModifier("modifier_zhenya_boss", 				"units/zhenya_boss", 				 				 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_running", 		"units/zhenya_boss", 				 		 		 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_hamster_carried", 		"units/zhenya_boss", 						 		 LUA_MODIFIER_MOTION_NONE)
@@ -24,6 +35,9 @@ LinkLuaModifier("modifier_overvodka_store_skin_4", 		"modifiers/store/modifier_o
 LinkLuaModifier("modifier_overvodka_store_skin_5", 		"modifiers/store/modifier_overvodka_store_skin_5",   LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_6", 		"modifiers/store/modifier_overvodka_store_skin_6",   LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_7", 		"modifiers/store/modifier_overvodka_store_skin_7",   LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_8", 		"modifiers/store/modifier_overvodka_store_skin_8",   LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_9", 		"modifiers/store/modifier_overvodka_store_skin_9",   LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_12", 	"modifiers/store/modifier_overvodka_store_skin_12",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_1", 		"modifiers/store/modifier_overvodka_store_pet_1", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_2", 		"modifiers/store/modifier_overvodka_store_pet_2", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_3", 		"modifiers/store/modifier_overvodka_store_pet_3", 	 LUA_MODIFIER_MOTION_NONE)
@@ -279,7 +293,7 @@ function IsComebackTeam(TeamID)
 	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
 	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
 
-	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
+	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 300 then
 		return false
 	end
 
@@ -304,7 +318,7 @@ function ChangeValueByTeamPlace(value, Team)
 	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
 	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
 
-	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 900 then
+	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 300 then
 		return value
 	end
 	

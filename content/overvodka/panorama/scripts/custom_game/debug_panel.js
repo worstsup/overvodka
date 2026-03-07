@@ -329,6 +329,12 @@ function OnRespawnPressed() {
 	}
 }
 
+function OnSpawnChaosOrbPressed() {
+	let SelectedUnit = Players.GetLocalPlayerPortraitUnit()
+	GameEvents.SendCustomGameEventToServer("debug_panel_spawn_chaos_orb", {unit: SelectedUnit});
+	Game.EmitSound( "UI.Button.Pressed" );
+}
+
 
 function OnHostTimeScaleSliderValueChanged()
 {

@@ -18,6 +18,52 @@
     </snippets>
 
     <Panel class="PlayerHUD" hittest="false">
+        <Panel id="ChaosSelectionRoot" hittest="false">
+            <Panel id="ChaosSelectionBackdrop" hittest="false" />
+            <Panel id="ChaosSelectionFrame" hittest="false">
+                <Label id="ChaosSelectionTitle" text="#CHAOS_SELECTION_TITLE" />
+                <Label id="ChaosSelectionSubtitle" text="#CHAOS_SELECTION_SUBTITLE" />
+                <Panel id="ChaosSelectionTimerWrap" hittest="false">
+                    <Label id="ChaosSelectionTimerText" text="#CHAOS_SELECTION_TIMER_DEFAULT" />
+                    <Panel id="ChaosSelectionTimerBar" hittest="false">
+                        <Panel id="ChaosSelectionTimerFill" hittest="false" />
+                    </Panel>
+                </Panel>
+                <Panel id="ChaosCardsRow" hittest="false">
+                    <Panel id="ChaosCard1" class="ChaosCard" hittest="true" onactivate="OnChaosCardActivated(1)">
+                        <Panel class="ChaosCardGlow" hittest="false" />
+                        <Label id="ChaosCardTitle1" class="ChaosCardTitle" />
+                        <Label id="ChaosCardDesc1" class="ChaosCardDesc" />
+                        <Label class="ChaosCardHint" text="#CHAOS_CARD_PICK_HINT" />
+                    </Panel>
+                    <Panel id="ChaosCard2" class="ChaosCard" hittest="true" onactivate="OnChaosCardActivated(2)">
+                        <Panel class="ChaosCardGlow" hittest="false" />
+                        <Label id="ChaosCardTitle2" class="ChaosCardTitle" />
+                        <Label id="ChaosCardDesc2" class="ChaosCardDesc" />
+                        <Label class="ChaosCardHint" text="#CHAOS_CARD_PICK_HINT" />
+                    </Panel>
+                    <Panel id="ChaosCard3" class="ChaosCard" hittest="true" onactivate="OnChaosCardActivated(3)">
+                        <Panel class="ChaosCardGlow" hittest="false" />
+                        <Label id="ChaosCardTitle3" class="ChaosCardTitle" />
+                        <Label id="ChaosCardDesc3" class="ChaosCardDesc" />
+                        <Label class="ChaosCardHint" text="#CHAOS_CARD_PICK_HINT" />
+                    </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+
+        <Panel id="ChaosHistoryPanel" hittest="false">
+            <Panel id="ChaosHistoryHeader" hittest="false">
+                <Label id="ChaosHistoryTitle" text="#CHAOS_LIST_TITLE" />
+                <Button id="ChaosHistoryCloseButton" hittest="true" onactivate="CloseChaosHistory()" />
+            </Panel>
+            <Panel id="ChaosHistoryEntries" hittest="false" />
+        </Panel>
+        <Button id="ChaosHistoryToggleButton" hittest="true" onactivate="OpenChaosHistory()">
+            <Panel id="ChaosHistoryToggleGlow" hittest="false" />
+            <Panel id="ChaosHistoryToggleIcon" hittest="false" />
+        </Button>
+
         <Panel hittest="false" id="PlayersTitlesContainer" />
         <!-- <Panel id="TestButton" onactivate="TipPlayer();"/> -->
 

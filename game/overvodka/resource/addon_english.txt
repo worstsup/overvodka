@@ -201,6 +201,7 @@
 		"Store_Free"	"Free"
 		"Store_Claim"	"Claim"
 		"Store_Claimed"	"Claimed"
+		"Store_Hamster_Coins_Tooltip" "<span class='CoinBalanceTooltipTitle'>Hamster Coins can be earned:</span><br>• By completing daily tasks<br>• For every match<br>• By opening cases<br><span class='CoinBalanceTooltipAccent'>With Overvodka Prime, you earn Hamster Coins noticeably faster!</span>"
 
 		"Store_Item_skin_1_name" "Litvin with Lit Energy"
 		"Store_Item_skin_2_name" "Evil Chill Guy"
@@ -209,8 +210,11 @@
 		"Store_Item_skin_5_name" "Golmiy - IShowSpeed"
 		"Store_Item_skin_6_name" "Black Flash"
 		"Store_Item_skin_7_name" "Zhenya Claus"
+		"Store_Item_skin_8_name" "Werewolf Leon"
+		"Store_Item_skin_9_name" "Prisoner Arsen Markaryan"
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
+		"Store_Item_skin_12_name"		"Red Royale King"
 
 		"Store_Item_effect_1_name" "Golden Effect"
 		"Store_Item_effect_2_name" "Diretide effect"
@@ -260,7 +264,7 @@
 		"COMEBACK_SYSTEM_DESC"							"This team gets x2 circle XP, x2 gold for coins, and x2 score points for kills."
 		"COMEBACK_SYSTEM_DESC2"							"This team gets x1.5 circle XP, x1.5 gold for coins, and x2 score points for kills."
 
-		"PLAYER_HUD_Subscribe_Description" 				"• New chat wheel, consisting of exclusive meme phrases that are not in the default Dota 2 wheels;<br>• The ability to double your rating bet;<br>• The ability to high-five, punch enemies in the face and use inflatable toys;<br>• The ability to warm up other players for bad play;<br>• A special hero frame on the team scoreboard;<br>• 2 additional daily tasks;<br>• Exclusive Arcana items for the characters SANS and SINISTER MARK."
+		"PLAYER_HUD_Subscribe_Description" 				"• New <span class='PrimeAccent'>chat wheel</span>, consisting of exclusive meme phrases that are not in the default Dota 2 wheels;<br>• The ability to <span class='PrimeAccentStrong'>double</span> your rating bet;<br>• The ability to <span class='PrimeAccent'>high-five</span>, punch enemies in the face and use inflatable toys;<br>• The ability to <span class='PrimeAccentStrong'>warm up</span> other players for bad play;<br>• A special <span class='PrimeAccent'>hero frame</span> on the team scoreboard;<br>• <span class='PrimeAccent'>2 additional daily tasks</span>;<br>• The ability to play as the exclusive hero — <span class='PrimeAccentHero'>LEV</span>!<br>• <span class='PrimeAccent'>Exclusive Arcana items</span> for the characters SANS and SINISTER MARK."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Fucking"
 		"PLAYER_HUD_Tip_GoodGame2"						"Loser"
@@ -4103,8 +4107,23 @@
 		"DOTA_Tooltip_modifier_worstsup_w_debuff_Description" "Your attributes, armor, magic resistance, vision, and attack speed have been reduced"
 		"DOTA_Tooltip_ability_silencer_brain_drain" "PERMANENT FIXES"
 		"DOTA_Tooltip_ability_silencer_brain_drain_Description" "Every time an enemy hero dies, they permanently lose 1 intellect, which goes to M Rus."
+		"DOTA_Tooltip_ability_worstsup_e" "BUFF"
+		"DOTA_Tooltip_ability_worstsup_e_Description" "Writing custom code enhances Mrus' spells: they are cast from a greater range and are more effective."
+		"DOTA_Tooltip_ability_worstsup_e_Note0" "Bonuses from the RIGHT SIZE aspect are disabled by exhaustion."
+		"DOTA_Tooltip_ability_worstsup_e_Note1" "Existing bonuses from the RIGHT SIZE aspect are not disabled by exhaustion."
+		"DOTA_Tooltip_ability_worstsup_e_cast_range" "CAST RANGE:"
+		"DOTA_Tooltip_ability_worstsup_e_spell_amp" "%BONUS SPELL DAMAGE:"
+		"DOTA_Tooltip_ability_worstsup_e_aoe_bonus" "BONUS SPELL RADIUS:"
+		"DOTA_Tooltip_ability_worstsup_e_aoe_bonus_duration" "EFFECT DURATION:"
+		"dota_tooltip_ability_worstsup_e_shard_description" "The ability becomes active and activates a <font color='#edd8a0'>Chaos Orb</font> when cast."
+		"DOTA_Tooltip_modifier_silencer_brain_drain" "Permanent Fixes"
 		"DOTA_Tooltip_ability_rubick_arcane_supremacy" "BUFF"
-		"DOTA_Tooltip_ability_rubick_arcane_supremacy_Description" "Writing custom code makes Mrus' spells stronger: they are cast from a greater distance and act more effectively."
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_Description" "Writing custom code enhances Mrus' spells: they are cast from a greater range and are more effective."
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_aoe_bonus" ""
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_aoe_bonus_duration" ""
+		"DOTA_Tooltip_ability_worstsup_e_Facet_rubick_arcane_accumulation" "After using this ability, the hero will temporarily gain a bonus to the area of ​​effect of spells."
+		"DOTA_Tooltip_modifier_rubick_arcane_supremacy" "Required Size" 
+		"DOTA_Tooltip_ability_rubick_arcane_supremacy_Facet_rubick_arcane_accumulation" ""
 		"DOTA_Tooltip_modifier_generic_stunned_lua" "Stun"
 		"DOTA_Tooltip_modifier_generic_silenced_lua" "Silence"
 		"DOTA_Tooltip_modifier_generic_muted_lua" "Silence"
@@ -4333,7 +4352,7 @@
 		"DOTA_Tooltip_modifier_item_green_chips" "Green Lit Energy Chips"
 		"DOTA_Tooltip_modifier_item_green_chips_Description" "Permanently increases agility by %dMODIFIER_PROPERTY_STATS_AGILITY_BONUS%, movement speed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
 		"DOTA_Tooltip_modifier_item_blue_chips" "Blue Lit Energy Chips"
-		"DOTA_Tooltip_modifier_item_blue_chips_Description" "Permanently increases intelligence by %dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%, spell damage by %dMODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE%%%."
+		"DOTA_Tooltip_modifier_item_blue_chips_Description" "Permanently increases intelligence by %dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%, spell damage by %fMODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE%%%."
 
 		"DOTA_Tooltip_ability_item_chapman_red"                     "CHAPMAN RED"
 		"DOTA_Tooltip_ability_item_chapman_red_Description"         "<h1>Use: Smoke</h1> Grants the Haste rune effect for <font color='#FFFFFF'>30</font> seconds."
@@ -4956,6 +4975,95 @@
 		"DOTA_Tooltip_ability_item_heart_vodka_Lore" "The preserved heart of an extinct monster that strengthens the wielder's stamina."
 		"DOTA_Tooltip_ability_item_heart_vodka_bonus_strength" "+$str"
 		"DOTA_Tooltip_ability_item_heart_vodka_health_regen_pct" "%+max health per second"
+		"DOTA_Tooltip_ability_item_chaos_orb" "Chaos Orb"
+		"DOTA_Tooltip_Ability_item_chaos_orb" "Chaos Orb"
+		"DOTA_Tooltip_ability_item_chaos_orb_Description" "Grants 10 seconds of invulnerability and forces the picker to choose one of three global distortions that changes the current match."
+		"DOTA_Tooltip_Ability_item_chaos_orb_Description" "Grants 10 seconds of invulnerability and forces the picker to choose one of three global distortions that changes the current match."
+
+		"CHAOS_SELECTION_TITLE" "Chaos Orb"
+		"CHAOS_SELECTION_SUBTITLE" "While invulnerability lasts, choose one distortion that will change the current match."
+		"CHAOS_SELECTION_TIMER" "Auto-pick in %s1 sec."
+		"CHAOS_SELECTION_TIMER_DEFAULT" "Auto-pick in 10 sec."
+		"CHAOS_CARD_PICK_HINT" "Click to choose"
+		"CHAOS_LIST_TITLE" "Chaos List"
+		"CHAOS_ORB_ANNOUNCE_TITLE" "Chaos Orb claimed!"
+		"CHAOS_ORB_ANNOUNCE_DESC" "A new distortion is being chosen."
+		"CHAOS_ORB_ONLY_REAL_HERO" "Only a real hero can pick up the Chaos Orb"
+
+		"CHAOS_EFFECT_REFLECT_TITLE" "Mirror of Pain"
+		"CHAOS_EFFECT_REFLECT_DESC" "All real heroes reflect 50% of incoming damage for the rest of the match."
+		"CHAOS_EFFECT_REFLECT_SUMMARY" "All real heroes now reflect 50% of incoming damage."
+
+		"CHAOS_EFFECT_COOLDOWN_TITLE" "Broken Timers"
+		"CHAOS_EFFECT_COOLDOWN_DESC" "All abilities recharge 20% faster for the rest of the match."
+		"CHAOS_EFFECT_COOLDOWN_SUMMARY" "All abilities now recharge 20% faster."
+
+		"CHAOS_EFFECT_MANA_AMP_TITLE" "Greedy Magic"
+		"CHAOS_EFFECT_MANA_AMP_DESC" "All mana costs are doubled, but spell damage is increased by 40% for the rest of the match."
+		"CHAOS_EFFECT_MANA_AMP_SUMMARY" "All mana costs are doubled and spell damage is increased by 40%."
+
+		"CHAOS_EFFECT_GOLD_STEAL_TITLE" "Golden Kleptomania"
+		"CHAOS_EFFECT_GOLD_STEAL_DESC" "Every hero attack steals 3% of an enemy real hero's current gold."
+		"CHAOS_EFFECT_GOLD_STEAL_SUMMARY" "Hero attacks now steal 3% of an enemy real hero's current gold."
+
+		"CHAOS_EFFECT_GOLD_HEAL_TITLE" "Golden Regeneration"
+		"CHAOS_EFFECT_GOLD_HEAL_DESC" "Every picked coin restores 300 health for the rest of the match."
+		"CHAOS_EFFECT_GOLD_HEAL_SUMMARY" "Picking up a coin now restores 300 health."
+
+		"CHAOS_EFFECT_ATTACK_RANGE_TITLE" "Long Arms"
+		"CHAOS_EFFECT_ATTACK_RANGE_DESC" "All real heroes gain +200 attack range for the rest of the match."
+		"CHAOS_EFFECT_ATTACK_RANGE_SUMMARY" "All real heroes gained +200 attack range."
+
+		"CHAOS_EFFECT_ETERNAL_NIGHT_TITLE" "Eternal Night"
+		"CHAOS_EFFECT_ETERNAL_NIGHT_DESC" "Night falls across the map forever for the rest of the match."
+		"CHAOS_EFFECT_ETERNAL_NIGHT_SUMMARY" "The map is now locked in eternal night."
+
+		"CHAOS_EFFECT_TURBO_MODE_TITLE" "Turbo Mode"
+		"CHAOS_EFFECT_TURBO_MODE_DESC" "All hero respawn times are reduced by 75% for the rest of the match."
+		"CHAOS_EFFECT_TURBO_MODE_SUMMARY" "All heroes now respawn 75% faster."
+
+		"CHAOS_EFFECT_BACKPACK_TITLE" "Backpack Freedom"
+		"CHAOS_EFFECT_BACKPACK_DESC" "All heroes can use items directly from their backpack for the rest of the match."
+		"CHAOS_EFFECT_BACKPACK_SUMMARY" "All heroes can now use items from their backpack."
+
+		"CHAOS_EFFECT_DEATH_LESH_TITLE" "Funeral Lesh"
+		"CHAOS_EFFECT_DEATH_LESH_DESC" "After every death, the hero receives a Lesh."
+		"CHAOS_EFFECT_DEATH_LESH_SUMMARY" "Heroes now receive a Lesh after every death."
+
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_TITLE" "Attribute Chips"
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_DESC" "Each hero receives 3 chip packs based on their primary attribute: red for Strength, green for Agility, blue for Intelligence. Universal heroes receive one of each color."
+		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_SUMMARY" "All heroes received chips based on their primary attribute."
+
+		"CHAOS_EFFECT_DOUBLE_CHEST_TITLE" "Greedy Chests"
+		"CHAOS_EFFECT_DOUBLE_CHEST_DESC" "Chests drop twice as many items for the rest of the match."
+		"CHAOS_EFFECT_DOUBLE_CHEST_SUMMARY" "Chests now drop twice as many items."
+
+		"CHAOS_EFFECT_BOMBARDIRO_TITLE" "Crocodilo Order"
+		"CHAOS_EFFECT_BOMBARDIRO_DESC" "Bombardiro Crocodilo bombs instantly kill real heroes for the rest of the match."
+		"CHAOS_EFFECT_BOMBARDIRO_SUMMARY" "Bombardiro Crocodilo bombs now instantly kill real heroes."
+
+		"CHAOS_EFFECT_GLOBAL_DOOM_TITLE" "Veil of Doom"
+		"CHAOS_EFFECT_GLOBAL_DOOM_DESC" "A global Doom is immediately applied for 5 seconds to all real heroes except the orb picker."
+		"CHAOS_EFFECT_GLOBAL_DOOM_SUMMARY" "A global Doom hit every real hero except the orb picker for 5 seconds."
+
+		"CHAOS_EFFECT_DEATH_EXPLOSION_TITLE" "Last Breath"
+		"CHAOS_EFFECT_DEATH_EXPLOSION_DESC" "A hero death now creates an area explosion around the corpse for the rest of the match."
+		"CHAOS_EFFECT_DEATH_EXPLOSION_SUMMARY" "A hero death now creates an area explosion."
+
+		"CHAOS_EFFECT_SWAP_TITLE" "Shuffle"
+		"CHAOS_EFFECT_SWAP_DESC" "All living real heroes instantly swap places in random pairs."
+		"CHAOS_EFFECT_SWAP_SUMMARY" "All living real heroes swapped places in random pairs."
+
+		"CHAOS_EFFECT_METEOR_TITLE" "Heavenly Barrage"
+		"CHAOS_EFFECT_METEOR_DESC" "Meteors fall at random arena points for 10 seconds."
+		"CHAOS_EFFECT_METEOR_SUMMARY" "Meteors are falling across the arena for 10 seconds."
+
+		"CHAOS_EFFECT_PRIMARY_TITLE" "Broken Stats"
+		"CHAOS_EFFECT_PRIMARY_DESC" "Every real hero changes their primary attribute to a random different one for the rest of the match."
+		"CHAOS_EFFECT_PRIMARY_SUMMARY" "Every real hero changed their primary attribute to a random different one."
+
+		"dota_tooltip_modifier_chaos_global_doom"									"Doom"
+		"dota_tooltip_modifier_chaos_meteor_burn"									"Chaos Meteor"
 	}
 }
 

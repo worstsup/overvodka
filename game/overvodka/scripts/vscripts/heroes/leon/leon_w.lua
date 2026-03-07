@@ -72,6 +72,12 @@ function leon_w:MakeClones(count)
             FindClearSpaceForUnit(illu, origin + RandomVector(150), false)
 
             illu:AddNewModifier(caster, self, "modifier_leon_w_uncontrolled", { duration = duration })
+            illu:AddNoDraw()
+            Timers:CreateTimer(FrameTime()*3, function()
+                if illu and not illu:IsNull() then
+                    illu:RemoveNoDraw()
+                end
+            end)
 
             local tgt = chosen_targets[i]
             local tgt_eidx = (tgt and not tgt:IsNull()) and tgt:entindex() or -1

@@ -87,6 +87,7 @@
         <Button id="MenuOpenButton" onactivate="Menu.Toggle()">
             <Label text="#Menu_Name" />
         </Button>
+        <Panel id="ModelPreview3" />
         <Panel id="ModelPreview" />
         <Panel id="ModelPreview2" />
         <Panel id="MenuMainPanel">
@@ -253,7 +254,7 @@
                                 <Button id="StoreTab_Cases" class="StoreSubTabButton" onactivate="Store.SwitchCategory('cases')"><Label text="#Store_Category_Cases" /></Button>
                                 <Button id="StoreTab_Prime" class="StoreSubTabButton" onactivate="Store.SwitchCategory('prime')"><Label text="#Store_Category_Prime" /></Button>
                             </Panel>
-                            <Panel id="CoinBalancePanel">
+                            <Panel id="CoinBalancePanel" hittest="true" onmouseover="Store.ShowCoinsTooltip()" onmouseout="Store.HideCoinsTooltip()">
                                 <Label id="CoinBalanceLabel" text="0" />
                                 <Panel id="CoinBalanceIcon" />
                             </Panel>
@@ -338,7 +339,9 @@
                             <Panel id="EffectPreview" />
                             <Panel id="ChatWheelPreview" />
                             <Panel id="BuyButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');">
-                                <Panel class="Wrapper">
+                                <Panel class="BuyButtonGlow" hittest="false" />
+                                <Panel class="BuyButtonShine" hittest="false" />
+                                <Panel class="Wrapper" hittest="false">
                                     <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
                                     <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
                                     <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
@@ -352,6 +355,9 @@
                     </Panel>
                 </Panel>
             </Panel>
+        </Panel>
+        <Panel id="CoinBalanceTooltip" hittest="false">
+            <Label id="CoinBalanceTooltipText" class="CoinBalanceTooltipText" html="true" text="#Store_Hamster_Coins_Tooltip" />
         </Panel>
         <Panel id="TipPreview" />
         <Panel id="DoubleRatingPreview" />
