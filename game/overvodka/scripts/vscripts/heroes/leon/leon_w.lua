@@ -106,7 +106,7 @@ function leon_w:Leon_FindInitialTargets(caster, search_radius, count)
         search_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
         FIND_CLOSEST,
         false
     )
@@ -207,7 +207,7 @@ function modifier_leon_w_illusion_ai:FindBestTarget()
         self.search_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        0,
         FIND_CLOSEST,
         false
     )
@@ -222,7 +222,7 @@ function modifier_leon_w_illusion_ai:FindBestTarget()
         self.search_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+        0,
         FIND_CLOSEST,
         false
     )

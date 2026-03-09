@@ -1409,7 +1409,7 @@ function dvoreckov_www:OnSpellStart()
         caster:GetTeamNumber(), point, nil,
         radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false
+        0, 0, false
     )
 
     for _,enemy in pairs(enemies) do
@@ -1495,7 +1495,7 @@ function modifier_dvoreckov_www_aura_thinker:GetModifierAura() return "modifier_
 function modifier_dvoreckov_www_aura_thinker:GetAuraRadius() return self.radius or 0 end
 function modifier_dvoreckov_www_aura_thinker:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
 function modifier_dvoreckov_www_aura_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
-function modifier_dvoreckov_www_aura_thinker:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
+function modifier_dvoreckov_www_aura_thinker:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
 
 
 modifier_dvoreckov_www_aura_pull = class({})
@@ -2003,7 +2003,7 @@ function modifier_dvoreckov_eee:_LaunchBounceProjectiles( primary_target, primar
         primary_target:GetAbsOrigin(), nil,
         self.bounce_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
+        DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
         FIND_CLOSEST, false
     )
 

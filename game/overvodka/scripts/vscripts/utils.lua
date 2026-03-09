@@ -37,6 +37,8 @@ LinkLuaModifier("modifier_overvodka_store_skin_6", 		"modifiers/store/modifier_o
 LinkLuaModifier("modifier_overvodka_store_skin_7", 		"modifiers/store/modifier_overvodka_store_skin_7",   LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_8", 		"modifiers/store/modifier_overvodka_store_skin_8",   LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_9", 		"modifiers/store/modifier_overvodka_store_skin_9",   LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_10", 	"modifiers/store/modifier_overvodka_store_skin_10",  LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_11", 	"modifiers/store/modifier_overvodka_store_skin_11",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_12", 	"modifiers/store/modifier_overvodka_store_skin_12",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_1", 		"modifiers/store/modifier_overvodka_store_pet_1", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_2", 		"modifiers/store/modifier_overvodka_store_pet_2", 	 LUA_MODIFIER_MOTION_NONE)
@@ -289,53 +291,51 @@ if CDOTA_Modifier_Lua and CDOTA_Modifier_Lua.CheckMotionControllers == nil then
     end
 end
 
-function IsComebackTeam(TeamID)
-	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
-	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
-
-	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 300 then
+function IsComebackSystemActive()
+	if GetMapName() == "overvodka_5x5" then
 		return false
 	end
 
-	if IsSolo() then
-		if #CurrentTeams > 2 then
-			if TeamID == CurrentTeams[#CurrentTeams].teamID or TeamID == CurrentTeams[#CurrentTeams-1].teamID then
-				return true
-			end
-		end
-	elseif IsDuo() then
-		if #CurrentTeams > 3 then
-			if TeamID == CurrentTeams[#CurrentTeams].teamID then
-				return true
-			end
-		end
+	if not OvervodkaGameMode or not OvervodkaGameMode.IsFirstBlooded then
+		return false
 	end
-	
-	return false
+
+	if not OvervodkaGameMode:IsFirstBlooded() then
+		return false
+	end
+
+	local gameTime = math.max(GameRules:GetDOTATime(false, false), 0)
+	return gameTime >= 300
+end
+
+local function GetComebackTeams()
+	if not IsComebackSystemActive() or not OvervodkaGameMode or not OvervodkaGameMode.GetSortedValidActiveTeams then
+		return nil, nil
+	end
+
+	local currentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
+	if #currentTeams <= 2 then
+		return nil, nil
+	end
+
+	return currentTeams[#currentTeams].teamID, currentTeams[#currentTeams - 1].teamID
+end
+
+function IsComebackTeam(TeamID)
+	local lastTeamID, preLastTeamID = GetComebackTeams()
+	return TeamID == lastTeamID or TeamID == preLastTeamID
 end
 
 function ChangeValueByTeamPlace(value, Team)
-	local CurrentTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
-	local bIsFirstBlooded = OvervodkaGameMode:IsFirstBlooded()
-
-	if not bIsFirstBlooded or nCOUNTDOWNTIMER > 300 then
+	local lastTeamID, preLastTeamID = GetComebackTeams()
+	if not lastTeamID then
 		return value
 	end
-	
-	if IsSolo() then
-		if #CurrentTeams > 2 then
-			if Team == CurrentTeams[#CurrentTeams].teamID then
-				value = value * 2
-			elseif Team == CurrentTeams[#CurrentTeams-1].teamID then
-				value = value * 1.5
-			end
-		end
-	elseif IsDuo() then
-		if #CurrentTeams > 3 then
-			if Team == CurrentTeams[#CurrentTeams].teamID then
-				value = value * 2
-			end
-		end
+
+	if Team == lastTeamID then
+		value = value * 2
+	elseif Team == preLastTeamID then
+		value = value * 1.5
 	end
 
 	return value

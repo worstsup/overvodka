@@ -59,17 +59,7 @@ function peacemaker_w:OnSpellStart()
     ParticleManager:SetParticleControlEnt(p4, 0, caster, PATTACH_POINT_FOLLOW, "attach_head", Vector(0,0,0), true)
     ParticleManager:ReleaseParticleIndex(p4)
     
-    local enemies = FindUnitsInRadius(
-        caster:GetTeamNumber(),
-        origin,
-        nil,
-        radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-        FIND_ANY_ORDER,
-        false
-    )
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
     local heroes_hit = 0
 

@@ -318,8 +318,7 @@ function modifier_peacemaker_scepter_vigilante:DoAstralDash(target)
         parent:GetTeamNumber(),
         origin, dash_end, nil, radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0
     )
 
     for _,enemy in ipairs(enemies) do

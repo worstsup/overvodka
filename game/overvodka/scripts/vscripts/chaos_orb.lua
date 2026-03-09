@@ -4,15 +4,15 @@ end
 
 local CHAOS_ORB_SELECTION_DURATION = 10
 local CHAOS_ORB_FORCE_GRACE = 12
+local CHAOS_ORB_SECOND_ORB_CHANCE = 60
 local CHAOS_ORB_SELECTION_SOUNDS = {
     "Hero_Terrorblade.Metamorphosis.Scepter",
     "Hero_Terrorblade.Sunder.Target",
     "ui.set_applied",
 }
 local CHAOS_ORB_WINDOWS = {
-    { 5 * 60, 9.5 * 60 },
-    { 9.5 * 60, 15.5 * 60 },
-    { 15.5 * 60, 21.0 * 60 },
+    { 5 * 60, 15 * 60 },
+    { 15 * 60, 25 * 60 },
 }
 
 local CHAOS_METEOR_DURATION = 10
@@ -25,7 +25,7 @@ local CHAOS_METEOR_VISION = 200
 local CHAOS_METEOR_END_VISION_DURATION = 3
 local CHAOS_METEOR_DAMAGE_INTERVAL = 0.5
 local CHAOS_METEOR_BURN_DURATION = 3.0
-local CHAOS_METEOR_IMPACT_DAMAGE_PCT = 30
+local CHAOS_METEOR_IMPACT_DAMAGE_PCT = 20
 local CHAOS_METEOR_BURN_DAMAGE_PCT = 8
 
 local CHAOS_DEATH_EXPLOSION_RADIUS = 400
@@ -191,7 +191,10 @@ function ChaosOrb:Init(gameMode)
         table.insert(self.availableEffects, effectID)
     end
 
-    self.totalScheduledOrbs = RandomInt(1, 3)
+    self.totalScheduledOrbs = 1
+    if RandomInt(1, 100) <= CHAOS_ORB_SECOND_ORB_CHANCE then
+        self.totalScheduledOrbs = 2
+    end
     self.reservedOrbDrops = 0
     self.orbSpawnTimes = self:BuildOrbSpawnSchedule(self.totalScheduledOrbs)
 

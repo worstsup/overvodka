@@ -252,7 +252,7 @@ function leon_q:FireAttack(aim_point, manual)
                     Source = caster,
                     iUnitTargetTeam  = DOTA_UNIT_TARGET_TEAM_BOTH,
                     iUnitTargetType  = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_COURIER + DOTA_UNIT_TARGET_OTHER,
-                    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+                    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
                     bDeleteOnHit = true,
                     bProvidesVision = true,
                     iVisionRadius = 100,

@@ -57,10 +57,6 @@
 								from = "outfit_top.vmat"
 								to = "sasavot/sasavot_shirt.vmat"
 							},
-							{
-								from = "avatareyelashes.vmat"
-								to = "avatareyelashes.vmat"
-							},
 						]
 						use_global_default = false
 						global_default_material = ""

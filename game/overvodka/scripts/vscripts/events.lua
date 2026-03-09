@@ -404,7 +404,7 @@ function OvervodkaGameMode:OnTeamKillCredit( event )
 		broadcast_kill_event.close_to_victory = 1
 	end
 
-	if nCOUNTDOWNTIMER <= self.MIN_COUNTDOWN_TIME then
+	if IsComebackSystemActive() then
 		local SortedTeams = self:GetSortedValidActiveTeams()
 
 		CustomNetTables:SetTableValue("globals", "teams_top", SortedTeams)

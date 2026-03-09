@@ -707,6 +707,26 @@
     transform: translateX(0px) translateY(0px);
 }
 
+#ModelPreview4{
+    width: 900px;
+    height: 900px;
+    horizontal-align: right;
+    vertical-align: center;
+    margin-top: -60px;
+    margin-right: -360px;
+    opacity: 0;
+    z-index: 4;
+    transform: translateX(-220px) translateY(0px);
+    transition-property: transform, opacity;
+	transition-duration: 0.18s;
+	transition-timing-function: ease-in-out;
+}
+
+#ModelPreview4.Visible{
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
+}
+
 #ChatWheelPreview{
     width: 150px;
     height: 100px;
@@ -1505,7 +1525,7 @@
     transition-property: opacity, transform;
     transition-duration: 0.24s;
     transition-timing-function: ease-in-out;
-    z-index: 70;
+    z-index: 8;
 }
 
 #ChaosHistoryPanel.Visible{
@@ -1634,7 +1654,7 @@
     transition-property: opacity, transform, brightness, box-shadow;
     transition-duration: 0.22s;
     transition-timing-function: ease-in-out;
-    z-index: 71;
+    z-index: 9;
 }
 
 #ChaosHistoryToggleButton.Visible{

@@ -90,6 +90,7 @@
         <Panel id="ModelPreview3" />
         <Panel id="ModelPreview" />
         <Panel id="ModelPreview2" />
+        <Panel id="ModelPreview4" />
         <Panel id="MenuMainPanel">
             <Panel id="MenuHeader">
                 <Panel class="TabButtonContainer">

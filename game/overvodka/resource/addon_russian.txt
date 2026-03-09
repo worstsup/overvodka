@@ -203,6 +203,8 @@
 		"Store_Item_skin_7_name"		"Женя Мороз"
 		"Store_Item_skin_8_name" 		"Оборотень Леон"
 		"Store_Item_skin_9_name" 		"Зек Арсен Маркарян"
+		"Store_Item_skin_10_name" 		"Пожарный Sasavot"
+		"Store_Item_skin_11_name" 		"Солдат Macan"
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
 		"Store_Item_skin_12_name"		"Red Royale King"
@@ -266,7 +268,7 @@
 		"COMEBACK_SYSTEM_DESC"							"Эта команда получает x2 опыта в кругу, x2 золота за монеты а также x2 очков счета за убийство"
 		"COMEBACK_SYSTEM_DESC2"							"Эта команда получает x1.5 опыта в кругу, x1.5 золота за монеты а также x2 очков счета за убийство"
 
-		"PLAYER_HUD_Subscribe_Description"				"• Новое <span class='PrimeAccent'>колесо чата</span>, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность <span class='PrimeAccentStrong'>удваивать</span> свою ставку рейтинга;<br>• Возможность <span class='PrimeAccent'>давать пять</span>, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность <span class='PrimeAccentStrong'>прогревать</span> других игроков за плохую игру;<br>• Специальную <span class='PrimeAccent'>рамку героя</span> на панели счета команд;<br>• <span class='PrimeAccent'>2 дополнительных ежедневных задания</span>;<br>• Возможность играть за эксклюзивного героя — <span class='PrimeAccentHero'>ЛЕВ</span>!<br>• <span class='PrimeAccent'>Эксклюзивные Arcana-предметы</span> для персонажей Санс, Sinister Mark, Арсен Маркарян и Sasavot."
+		"PLAYER_HUD_Subscribe_Description"				"• Новое <span class='PrimeAccent'>колесо чата</span>, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность <span class='PrimeAccentStrong'>удваивать</span> свою ставку рейтинга;<br>• Возможность <span class='PrimeAccent'>давать пять</span>, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность <span class='PrimeAccentStrong'>прогревать</span> других игроков за плохую игру;<br>• Специальную <span class='PrimeAccent'>рамку героя</span> на панели счета команд;<br>• <span class='PrimeAccent'>2 дополнительных ежедневных задания</span>;<br>• Возможность играть за эксклюзивного героя — <span class='PrimeAccentHero'>ЛЕВ</span>!<br>• <span class='PrimeAccent'>Эксклюзивные Arcana-предметы</span> для персонажей Санс, Sinister Mark, Арсен Маркарян и Macan."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
@@ -5088,8 +5090,8 @@
 		"CHAOS_ORB_ONLY_REAL_HERO"													"Сферу Хаоса может подобрать только настоящий герой"
 
 		"CHAOS_EFFECT_REFLECT_TITLE"												"Зеркало Боли"
-		"CHAOS_EFFECT_REFLECT_DESC"													"Все герои отражают 50% входящего урона."
-		"CHAOS_EFFECT_REFLECT_SUMMARY"												"Все герои отражают 50% входящего урона."
+		"CHAOS_EFFECT_REFLECT_DESC"													"Все герои отражают 40% входящего урона."
+		"CHAOS_EFFECT_REFLECT_SUMMARY"												"Все герои отражают 40% входящего урона."
 
 		"CHAOS_EFFECT_COOLDOWN_TITLE"												"Сломанные Таймеры"
 		"CHAOS_EFFECT_COOLDOWN_DESC"												"Перезарядка всех способностей ускоряется на 20%."
@@ -5099,11 +5101,11 @@
 		"CHAOS_EFFECT_MANA_AMP_DESC"												"Все манакосты удваиваются, но урон от заклинаний увеличивается на 40%."
 		"CHAOS_EFFECT_MANA_AMP_SUMMARY"												"Все манакосты увеличены в 2 раза, а урон от заклинаний усилен на 40%."
 
-		"CHAOS_EFFECT_GOLD_STEAL_TITLE"												"Золотая Клептомания"
+		"CHAOS_EFFECT_GOLD_STEAL_TITLE"												"Пиздёж-Грабёж"
 		"CHAOS_EFFECT_GOLD_STEAL_DESC"												"Каждая атака героя крадёт у врага 2% от его текущего золота."
 		"CHAOS_EFFECT_GOLD_STEAL_SUMMARY"											"Теперь атаки героев крадут 2% текущего золота у врагов."
 
-		"CHAOS_EFFECT_GOLD_HEAL_TITLE"												"Золотая Регенерация"
+		"CHAOS_EFFECT_GOLD_HEAL_TITLE"												"Шоколадные Монеты"
 		"CHAOS_EFFECT_GOLD_HEAL_DESC"												"Каждая подобранная монетка восстанавливает 300 здоровья."
 		"CHAOS_EFFECT_GOLD_HEAL_SUMMARY"											"Подбор монетки теперь восстанавливает 300 здоровья."
 
@@ -5111,11 +5113,11 @@
 		"CHAOS_EFFECT_ATTACK_RANGE_DESC"											"Все герои получают +200 к дальности атаки."
 		"CHAOS_EFFECT_ATTACK_RANGE_SUMMARY"											"Все герои получили +200 к дальности атаки."
 
-		"CHAOS_EFFECT_ETERNAL_NIGHT_TITLE"											"Вечная Ночь"
+		"CHAOS_EFFECT_ETERNAL_NIGHT_TITLE"											"Тёмная Ночь"
 		"CHAOS_EFFECT_ETERNAL_NIGHT_DESC"											"На карте навсегда наступает ночь."
 		"CHAOS_EFFECT_ETERNAL_NIGHT_SUMMARY"										"На карте теперь вечная ночь."
 
-		"CHAOS_EFFECT_TURBO_MODE_TITLE"												"Turbo Mode"
+		"CHAOS_EFFECT_TURBO_MODE_TITLE"												"Реактивное Нитро"
 		"CHAOS_EFFECT_TURBO_MODE_DESC"												"Время возрождения всех героев уменьшается на 75%."
 		"CHAOS_EFFECT_TURBO_MODE_SUMMARY"											"Все герои теперь возрождаются на 75% быстрее."
 
@@ -5131,11 +5133,11 @@
 		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_DESC"											"Каждый герой получает 3 пачки чипсов по своему основному атрибуту: сила - красные, ловкость - зелёные, интеллект - синие. Универсалы получают по одной каждого цвета."
 		"CHAOS_EFFECT_ATTRIBUTE_CHIPS_SUMMARY"										"Все герои получили чипсы по своему основному атрибуту."
 
-		"CHAOS_EFFECT_DOUBLE_CHEST_TITLE"											"Жадные Сундуки"
+		"CHAOS_EFFECT_DOUBLE_CHEST_TITLE"											"Щедрые Сундуки"
 		"CHAOS_EFFECT_DOUBLE_CHEST_DESC"											"Из сундуков выпадает вдвое больше предметов."
 		"CHAOS_EFFECT_DOUBLE_CHEST_SUMMARY"											"Сундуки теперь выдают вдвое больше предметов."
 
-		"CHAOS_EFFECT_BOMBARDIRO_TITLE"												"Приказ Крокодило"
+		"CHAOS_EFFECT_BOMBARDIRO_TITLE"												"Аллигатор-Уебатор"
 		"CHAOS_EFFECT_BOMBARDIRO_DESC"												"Бомбы Bombardiro Crocodilo мгновенно убивают героев."
 		"CHAOS_EFFECT_BOMBARDIRO_SUMMARY"											"Бомбы Bombardiro Crocodilo теперь мгновенно убивают героев."
 
@@ -5147,7 +5149,7 @@
 		"CHAOS_EFFECT_DEATH_EXPLOSION_DESC"											"Смерть героя теперь создаёт взрыв вокруг него, наносящий урон по области."
 		"CHAOS_EFFECT_DEATH_EXPLOSION_SUMMARY"										"Смерть героя теперь вызывает взрыв по области."
 
-		"CHAOS_EFFECT_SWAP_TITLE"													"Перемешивание"
+		"CHAOS_EFFECT_SWAP_TITLE"													"Рокировка"
 		"CHAOS_EFFECT_SWAP_DESC"													"Все живые герои прямо сейчас случайно меняются местами."
 		"CHAOS_EFFECT_SWAP_SUMMARY"													"Все живые герои поменялись местами."
 

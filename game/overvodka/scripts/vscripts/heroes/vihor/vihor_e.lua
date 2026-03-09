@@ -13,24 +13,18 @@ end
 
 modifier_vihor_e = class({})
 
-function modifier_vihor_e:IsHidden()
-	return true
-end
-function modifier_vihor_e:IsDebuff()
-	return false
-end
-function modifier_vihor_e:IsPurgable()
-	return false
-end
+function modifier_vihor_e:IsHidden() return true end
+function modifier_vihor_e:IsDebuff() return false end
+function modifier_vihor_e:IsPurgable() return false end
 
-function modifier_vihor_e:OnCreated( kv )
+function modifier_vihor_e:OnCreated()
 	self.duration = self:GetAbility():GetSpecialValueFor("hex_duration")
 	self.blocked = self:GetAbility():GetSpecialValueFor("blocked")
 	self.chance = self:GetAbility():GetSpecialValueFor("chance")
 	self.damage = self:GetAbility():GetSpecialValueFor("damage")
 end
 
-function modifier_vihor_e:OnRefresh( kv )
+function modifier_vihor_e:OnRefresh()
 	self.duration = self:GetAbility():GetSpecialValueFor("hex_duration")
 	self.blocked = self:GetAbility():GetSpecialValueFor("blocked")
 	self.chance = self:GetAbility():GetSpecialValueFor("chance")
@@ -49,6 +43,7 @@ function modifier_vihor_e:OnAttackLanded( params )
 		if params.attacker == self:GetParent() then return end
 		if params.target ~= self:GetParent() then return end
 		if not params.attacker:IsRealHero() then return end
+		if params.target:IsIllusion() then return end
 		local random_chance = RandomInt(1, 100)
 		if random_chance <= self.chance then
 			params.attacker:AddNewModifier( self:GetParent(), self:GetAbility(), "modifier_shadow_shaman_voodoo", { duration = self.duration } )
@@ -65,33 +60,28 @@ end
 
 modifier_vihor_e_debuff = class({})
 
-function modifier_vihor_e_debuff:IsPurgable()
-	return false
-end
-function modifier_vihor_e_debuff:IsHidden()
-	return false
-end
+function modifier_vihor_e_debuff:IsPurgable() return false end
+function modifier_vihor_e_debuff:IsHidden() return false end
 
 function modifier_vihor_e_debuff:OnCreated()
+	self.ability = self:GetAbility()
+	self.caster = self:GetCaster()
+	self.parent = self:GetParent()
+	self.damage = self.ability:GetSpecialValueFor("damage")
 	if not IsServer() then return end
 	self:StartIntervalThink(1)
 end
 
 function modifier_vihor_e_debuff:OnIntervalThink()
-	if IsServer() then
-		local damage = {
-			victim = self:GetParent(),
-			attacker = self:GetCaster(),
-			damage = self:GetAbility():GetSpecialValueFor("damage"),
-			damage_type = DAMAGE_TYPE_PURE,
-			ability = self:GetAbility()
-		}
-		ApplyDamage( damage )
+	if IsServer() and self.ability then
+		ApplyDamage( {victim = self.parent, attacker = self.caster, damage = self.damage, damage_type = DAMAGE_TYPE_PURE, ability = self.ability} )
 	end
 end
+
 function modifier_vihor_e_debuff:GetEffectName()
 	return "particles/econ/courier/courier_greevil_purple/courier_greevil_purple_ambient_2.vpcf"
 end
+
 function modifier_vihor_e_debuff:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end

@@ -75,7 +75,7 @@ function peacemaker_r:OnSpellStart()
     ParticleManager:SetParticleControl(p, 1, Vector(radius, radius, radius))
     ParticleManager:ReleaseParticleIndex(p)
 
-    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, false)
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
     for _,enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then

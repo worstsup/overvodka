@@ -185,6 +185,8 @@ function OvervodkaGameMode:InitGameMode()
 
 	self.TeamKills = {}
 
+	CustomNetTables:SetTableValue("globals", "teams_top", {})
+
 	---------------------------------------------------------------------------
 	
 	self:GatherAndRegisterValidTeams()
@@ -272,8 +274,12 @@ function OvervodkaGameMode:InitGameMode()
 		GameRules:SetHideKillMessageHeaders( true )
 		GameRules:SetUseUniversalShopMode( true )
 		GameRules:SetStrategyTime( 15.0 )
-		GameRules:SetCustomGameBansPerTeam( 1 )
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		if GetMapName() == "overvodka_duo" then
+			GameRules:SetCustomGameBansPerTeam( 2 )
+		else
+			GameRules:SetCustomGameBansPerTeam( 1 )
+		end
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -726,7 +732,7 @@ function OvervodkaGameMode:OnThink()
 	if self.countdownEnabled == true then
 		CountdownTimer()
 
-		if nCOUNTDOWNTIMER <= 900 and self.bShowsComeback == false then
+		if IsComebackSystemActive() and self.bShowsComeback == false then
 			self.bShowsComeback = true
 
 			local SortedTeams = self:GetSortedValidActiveTeams()

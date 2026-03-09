@@ -26,7 +26,7 @@ function vihor_q:OnSpellStart()
         caster:GetTeamNumber(), caster:GetAbsOrigin(),
         nil, range, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_CLOSEST, false
+        0, FIND_CLOSEST, false
     )
 
     local chosen = {}
@@ -86,7 +86,7 @@ function vihor_q:OnProjectileHit_ExtraData(hTarget, vLocation, ExtraData)
         caster:GetTeamNumber(), vLocation,
         nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false
+        0, 0, false
     )
 
     for _, enemy in ipairs(units) do

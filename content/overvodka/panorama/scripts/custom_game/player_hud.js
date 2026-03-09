@@ -20,6 +20,7 @@ let ChaosSelectionSeq = -1;
 let ChaosSelectionTimerSeq = 0;
 let ChaosHistoryCollapsed = false;
 let ChaosHistoryHasEntries = false;
+let ChaosHistoryHiddenByShop = false;
 const CHAOS_HISTORY_ANIM_DURATION = 0.24;
 const CHAOS_HISTORY_HIGHLIGHT_DURATION = 10.0;
 let ChaosHistoryInitialized = false;
@@ -1202,11 +1203,60 @@ function UpdateChaosHistoryState() {
         return;
     }
 
-    const showPanel = ChaosHistoryHasEntries && !ChaosHistoryCollapsed;
-    const showToggle = ChaosHistoryHasEntries && ChaosHistoryCollapsed;
+    const showPanel = ChaosHistoryHasEntries && !ChaosHistoryCollapsed && !ChaosHistoryHiddenByShop;
+    const showToggle = ChaosHistoryHasEntries && ChaosHistoryCollapsed && !ChaosHistoryHiddenByShop;
 
     SetAnimatedPanelVisible(ChaosHistoryPanel, showPanel);
     SetAnimatedPanelVisible(ChaosHistoryToggleButton, showToggle);
+}
+
+function IsPanelActuallyVisible(panel) {
+    if (!panel) {
+        return false;
+    }
+
+    return panel.visible !== false &&
+        panel.style.visibility !== "collapse" &&
+        panel.actuallayoutwidth > 0 &&
+        panel.actuallayoutheight > 0;
+}
+
+function IsDotaShopOpen() {
+    if (GameUI && typeof GameUI.IsShopOpen === "function") {
+        return GameUI.IsShopOpen();
+    }
+
+    if (Game && typeof Game.IsShopOpen === "function") {
+        return Game.IsShopOpen();
+    }
+
+    if (!DotaHUDPanel) {
+        return false;
+    }
+
+    const possibleShopPanels = [
+        DotaHUDPanel.FindChildTraverse("shop"),
+        DotaHUDPanel.FindChildTraverse("ShopMain"),
+        DotaHUDPanel.FindChildTraverse("HudShop"),
+    ];
+
+    for (let index = 0; index < possibleShopPanels.length; index++) {
+        if (IsPanelActuallyVisible(possibleShopPanels[index])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function UpdateChaosHistoryShopState() {
+    const shouldHide = IsDotaShopOpen();
+    if (ChaosHistoryHiddenByShop !== shouldHide) {
+        ChaosHistoryHiddenByShop = shouldHide;
+        UpdateChaosHistoryState();
+    }
+
+    $.Schedule(0.1, UpdateChaosHistoryShopState);
 }
 
 function SetAnimatedPanelVisible(panel, shouldShow) {
@@ -1331,6 +1381,7 @@ function OnChaosCardActivated(slot) {
 (function(){
     StartSecondaryAbilities();
     HideChaosSelection();
+    UpdateChaosHistoryShopState();
 
     DeleteAllChildren(TipsContainer)
     GameEvents.Subscribe("player_tipped", PlayerTipped)

@@ -162,7 +162,7 @@
 							</Panel>
 							<Panel class="Row">
 								<Button class="DemoButton MiddleButton" acceptsjoyfocus="true" onactivate="OnSpawnChaosOrbPressed()">
-									<Label text="Spawn Chaos Orb" />
+									<Label text="Сфера Хаоса" />
 								</Button>
 							</Panel>
 							<!-- <Panel class="Row">

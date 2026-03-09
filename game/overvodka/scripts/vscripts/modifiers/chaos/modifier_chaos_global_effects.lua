@@ -33,7 +33,7 @@ function modifier_chaos_reflect:OnTakeDamage(keys)
     if bit.band(damageFlags, DOTA_DAMAGE_FLAG_HPLOSS) ~= 0 then return end
     if bit.band(damageFlags, DOTA_DAMAGE_FLAG_REFLECTION) ~= 0 then return end
 
-    local reflectedDamage = (keys.original_damage or 0) * 0.5
+    local reflectedDamage = (keys.original_damage or 0) * 0.4
     if reflectedDamage <= 0 then return end
 
     ApplyDamage({

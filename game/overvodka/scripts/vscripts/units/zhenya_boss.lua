@@ -260,8 +260,7 @@ function modifier_zhenya_boss:BasicAttackAI()
         team, origin, nil, radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-        FIND_CLOSEST, false
+        0, FIND_CLOSEST, false
     )
 
     local target = nil

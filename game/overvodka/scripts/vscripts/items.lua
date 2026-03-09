@@ -48,8 +48,9 @@ function OvervodkaGameMode:SpawnMidLootEntity( itemName, spawnPoint, minRadius, 
 	local newItem = CreateItem( itemName, nil, nil )
 	local drop = CreateItemOnPositionForLaunch( spawnPoint, newItem )
 	local dropRadius = RandomFloat( minRadius or self.m_GoldRadiusMin, maxRadius or self.m_GoldRadiusMax )
+	local lootLifetime = itemName == "item_chaos_orb" and 30 or 20
 	newItem:LaunchLootInitialHeight( false, 0, 500, 0.75, spawnPoint + RandomVector( dropRadius ) )
-	newItem:SetContextThink( "KillLoot", function() return self:KillLoot( newItem, drop ) end, 20 )
+	newItem:SetContextThink( "KillLoot", function() return self:KillLoot( newItem, drop ) end, lootLifetime )
 
 	if itemName == "item_chaos_orb" then
 		self:AttachChaosOrbParticles(newItem, drop)
@@ -74,7 +75,7 @@ function OvervodkaGameMode:AttachChaosOrbParticles(item, drop)
 	}
 
 	data.particle_id = ParticleManager:CreateParticle(
-		"particles/overvodka_prime_effect.vpcf",
+		"particles/orb_main_glow.vpcf",
 		PATTACH_CUSTOMORIGIN,
 		nil
 	)
@@ -173,10 +174,12 @@ end
 function OvervodkaGameMode:SpawnChaosOrbEntity( spawnPoint, useMidDropRadius )
 	if not useMidDropRadius then
 		self:SpawnMidLootEntity( "item_chaos_orb", GetGroundPosition( spawnPoint, nil ), 80, 160 )
+		EmitGlobalSound("ORBS.Drop")
 		return
 	end
 
 	self:SpawnMidLootEntity( "item_chaos_orb", spawnPoint )
+	EmitGlobalSound("ORBS.Drop")
 end
 
 

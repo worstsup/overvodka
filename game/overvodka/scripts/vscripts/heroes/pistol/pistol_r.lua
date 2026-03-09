@@ -100,8 +100,7 @@ function pistol_r:_StartTorrentStorm(center)
                 torrent_radius,
                 DOTA_UNIT_TARGET_TEAM_ENEMY,
                 DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-                DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-                FIND_ANY_ORDER, false
+                0, 0, false
             )
 
             for _, enemy in pairs(enemies) do
@@ -305,7 +304,7 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
             caster:GetTeamNumber(), crash_pos, nil,
             width, DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-            DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false
+            0, 0, false
         )
 
         for _, enemy in pairs(enemies) do

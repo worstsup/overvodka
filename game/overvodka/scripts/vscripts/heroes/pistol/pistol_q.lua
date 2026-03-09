@@ -83,7 +83,7 @@ function pistol_q:OnSpellStart()
                 ParticleManager:ReleaseParticleIndex(particle)
             end
             
-            local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
+            local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
             for _,enemy in ipairs(units) do
                 local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_slardar/slardar_crush_entity.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
@@ -123,7 +123,7 @@ function pistol_q:OnSpellStart()
                         caster:GetTeamNumber(), landing_pos, nil,
                         shard_radius, DOTA_UNIT_TARGET_TEAM_ENEMY,
                         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false
+                        0, 0, false
                     )
 
                     for _, enemy in pairs(enemies2) do

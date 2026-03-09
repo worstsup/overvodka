@@ -85,8 +85,7 @@ function zhenya_e_boss:OnLeapLanded()
         team, origin, nil, radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-        FIND_ANY_ORDER, false
+        0, 0, false
     )
 
     if not enemies or #enemies == 0 then return end

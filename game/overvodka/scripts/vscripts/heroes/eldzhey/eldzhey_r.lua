@@ -79,17 +79,7 @@ function modifier_eldzhey_r:Knock()
     ParticleManager:SetParticleControl(particle, 1, Vector(radius, radius, 1))
     ParticleManager:ReleaseParticleIndex(particle)
 
-    local targets = FindUnitsInRadius(
-        self.caster:GetTeamNumber(),
-        center,
-        nil,
-        radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-        FIND_ANY_ORDER,
-        false
-    )
+    local targets = FindUnitsInRadius(self.caster:GetTeamNumber(), center, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
 
     for _, unit in pairs(targets) do
         if unit and not unit:IsNull() then

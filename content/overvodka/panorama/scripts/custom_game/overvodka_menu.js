@@ -8,6 +8,7 @@ var Menu = {};
     const ModelPreview3 = $("#ModelPreview3");
     const ModelPreview = $("#ModelPreview");
     const ModelPreview2 = $("#ModelPreview2");
+    const ModelPreview4 = $("#ModelPreview4");
     const TipPreview = $("#TipPreview");
     const DoubleRatingPreview = $("#DoubleRatingPreview");
     
@@ -32,11 +33,14 @@ var Menu = {};
     ModelPreview.SetHasClass("Visible", false);
     $.CreatePanel("DOTAScenePanel", ModelPreview2, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview2.SetHasClass("Visible", false);
+    $.CreatePanel("DOTAScenePanel", ModelPreview4, "", { class: "hero_model_strategy", style: "width:70%;height:95%;", unit: "macan_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
+    ModelPreview4.SetHasClass("Visible", false);
 
     const primePreviewPanels = [
         ModelPreview3,
         ModelPreview,
         ModelPreview2,
+        ModelPreview4,
         TipPreview,
         DoubleRatingPreview
     ];

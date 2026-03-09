@@ -57,7 +57,7 @@ function modifier_vihor_innate:OnAttackLanded(params)
 	local enemies = FindUnitsInRadius(parent:GetTeamNumber(), target:GetAbsOrigin(),
 		nil, innate:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY,
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+		0, 0, false)
 
 	for _,enemy in ipairs(enemies) do
 		if (enemy and not enemy:IsNull()) and (enemy:IsAlive()) then

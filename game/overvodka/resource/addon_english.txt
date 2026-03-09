@@ -212,6 +212,8 @@
 		"Store_Item_skin_7_name" "Zhenya Claus"
 		"Store_Item_skin_8_name" "Werewolf Leon"
 		"Store_Item_skin_9_name" "Prisoner Arsen Markaryan"
+		"Store_Item_skin_10_name" "Firefighter Sasavot"
+		"Store_Item_skin_11_name" "Soldier Macan"
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
 		"Store_Item_skin_12_name"		"Red Royale King"
@@ -4991,8 +4993,8 @@
 		"CHAOS_ORB_ONLY_REAL_HERO" "Only a real hero can pick up the Chaos Orb"
 
 		"CHAOS_EFFECT_REFLECT_TITLE" "Mirror of Pain"
-		"CHAOS_EFFECT_REFLECT_DESC" "All real heroes reflect 50% of incoming damage for the rest of the match."
-		"CHAOS_EFFECT_REFLECT_SUMMARY" "All real heroes now reflect 50% of incoming damage."
+		"CHAOS_EFFECT_REFLECT_DESC" "All real heroes reflect 40% of incoming damage for the rest of the match."
+		"CHAOS_EFFECT_REFLECT_SUMMARY" "All real heroes now reflect 40% of incoming damage."
 
 		"CHAOS_EFFECT_COOLDOWN_TITLE" "Broken Timers"
 		"CHAOS_EFFECT_COOLDOWN_DESC" "All abilities recharge 20% faster for the rest of the match."

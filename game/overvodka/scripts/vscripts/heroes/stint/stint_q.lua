@@ -185,7 +185,7 @@ function modifier_stint_q_trigger:OnIntervalThink()
         self.radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
         FIND_CLOSEST,
         false
     )
@@ -196,7 +196,7 @@ function modifier_stint_q_trigger:OnIntervalThink()
             self.radius,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
             DOTA_UNIT_TARGET_BASIC,
-            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
+            DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
             FIND_CLOSEST,
             false
         )
