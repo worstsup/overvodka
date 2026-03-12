@@ -667,29 +667,9 @@
 }
 
 #BuyButtonStats{
-    width: 225px;
-    height: 65px;
-
-    align: center bottom;
-
-    margin-bottom: 20px;
-
-    background-color: gradient(linear, 20% 70%, 0% 0%, from(#2a281fef), color-stop(0.5, #292618ef), to(#383319ef));
-
-    border: 3px solid white;
-    border-brush: gradient(linear, 20% 70%, 0% 0%, from(#504d41), color-stop(0.5, #6b653aef), to(#87812cef));
-    border-radius: 32px;
-    transition-property: brightness, border-brush;
-    transition-duration: .1s;
-}
-
-.PlayerSubscribed #BuyButtonStats{
-    width: 250px;
-}
-
-#BuyButtonStats:hover{
-    brightness: 1.5;
-    border-brush: #87782cef;
+  horizontal-align: center;
+  margin-top: 12px;
+  margin-bottom: 20px;
 }
 
 

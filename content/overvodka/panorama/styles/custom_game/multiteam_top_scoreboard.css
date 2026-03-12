@@ -161,20 +161,16 @@
 }
 
 #LocalTeamOverlay {
-    width: 100%;
-    height: 43px;
+    width: 84%;
+    height: 44px;
+    horizontal-align: center;
+    vertical-align: top;
     overflow: noclip;
+    border: 0px solid transparent;
 }
 
 .ScoreboardTeamWrapper.local_player_team #LocalTeamOverlay {
-    box-shadow: 0px 0px 12px 0px #ffffff88;
-}
-
-.ScoreboardTeamWrapper.local_player_team.HasPrimeSubscriber #LocalTeamOverlay {
-    animation-name: subscribe_glow_local_overlay;
-    animation-duration: 10s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    box-shadow: none;
 }
 
 #ComebackActivated{
@@ -208,6 +204,14 @@
 .ScoreboardPlayer {
     border-left: 1px solid black;
     border-right: 1px solid black;
+    overflow: noclip;
+}
+
+.ScoreboardTeamWrapper.HasPrimeSubscriber #LocalTeamOverlay {
+    animation-name: subscribe_glow_local_overlay;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 .ScoreboardPlayerWrapper{
@@ -215,64 +219,6 @@
 }
 
 @keyframes 'subscribe_glow_local_overlay'
-{
-	0%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-
-	10%
-	{
-		box-shadow: 0px 0px 15px 0px #ffe100ef;
-	}
-
-    20%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-
-    30%
-	{
-		box-shadow: 0px 0px 15px 0px #ff4a2e;
-	}
-
-    40%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-
-    50%
-	{
-		box-shadow: 0px 0px 15px 0px #9dff2e;
-	}
-
-    60%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-
-    70%
-	{
-		box-shadow: 0px 0px 15px 0px #2effaf;
-	}
-
-    80%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-
-    90%
-	{
-		box-shadow: 0px 0px 15px 0px #2eb6ff;
-	}
-	
-	100%
-	{
-		box-shadow: 0px 0px 12px 0px #ff852e;
-	}
-}
-
-@keyframes 'subscribe_glow'
 {
     0%
     {
@@ -399,20 +345,6 @@
 .PlayerPortraitWrapper {
     flow-children: down;
     overflow: noclip;
-}
-
-.IsSubscribed .ScoreboardPlayer{
-    border-bottom: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
-
-    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#ff852e), color-stop(0.5, #ffb836ef), to(#ffe100ef));
-    box-shadow: 0px 0px 10px 0px #2eb6ff;
-
-    animation-name: subscribe_glow;
-    animation-duration: 10s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
 }
 
 #PlayerColorBar {

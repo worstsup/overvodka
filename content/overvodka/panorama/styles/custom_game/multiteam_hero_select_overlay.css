@@ -79,14 +79,19 @@
     height: 70px;
 }
 
-.local_player_team #PlayerPortraitsOverlay
+#PlayerPortraitsOverlay
 {
 	width: 100%;
     height: 50px;
+    overflow: noclip;
+}
+
+.local_player_team #PlayerPortraitsOverlay
+{
     box-shadow: fill #66666680 0px 0px 3px 3px;
 }
 
-.PrimeFramesEnabled .local_player_team.TeamPrimeSubscribed #PlayerPortraitsOverlay
+.PrimeFramesEnabled .TeamPrimeSubscribed #PlayerPortraitsOverlay
 {
     animation-name: subscribe_glow_pick_overlay;
     animation-duration: 10s;
@@ -106,6 +111,7 @@
 .HeroSelectPlayerRoot
 {
     flow-children: down;
+    overflow: noclip;
 }
 
 #TeamHeader
@@ -147,6 +153,16 @@
     height: 50px;
 }
 
+.PrimeSubscribed #PlayerPortrait
+{
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#fff6d0), color-stop(0.5, #d8b75d), to(#f3dd93));
+    box-shadow: fill #ffd70060 0px 0px 10px 3px;
+    animation-name: subscribe_glow_pick_player;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
 #PlayerName
 {
 	margin-top: 4px;
@@ -180,5 +196,26 @@
     100%
     {
         box-shadow: fill #FFD70080 0px 0px 10px 3px;
+    }
+}
+
+@keyframes 'subscribe_glow_pick_player'
+{
+    0%
+    {
+        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#fff6d0), color-stop(0.5, #d8b75d), to(#f3dd93));
+        box-shadow: fill #ffd70060 0px 0px 8px 3px;
+    }
+
+    50%
+    {
+        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#fffbea), color-stop(0.5, #f0cf6f), to(#ffedaa));
+        box-shadow: fill #ffed4e80 0px 0px 16px 3px;
+    }
+
+    100%
+    {
+        border-brush: gradient(linear, 0% 100%, 0% 0%, from(#fff6d0), color-stop(0.5, #d8b75d), to(#f3dd93));
+        box-shadow: fill #ffd70060 0px 0px 8px 3px;
     }
 }

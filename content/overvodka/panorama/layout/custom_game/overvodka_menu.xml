@@ -150,12 +150,14 @@
                                 </Panel>
                                 <Label id="MatchPrivateNotice" class="MatchPrivateNotice" text="#Menu_Profile_Prime_Required" visible="false" />
                                 <Panel id="BuyButtonStats" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka_bot');" visible="false">
-                                <Panel class="Wrapper">
-                                    <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
-                                    <Label id="TelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
-                                    <Label id="SubscribedTelegramText" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                                    <Panel class="BuyButtonGlow" hittest="false" />
+                                    <Panel class="BuyButtonShine" hittest="false" />
+                                    <Panel class="Wrapper" hittest="false">
+                                        <Image class="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                                        <Label id="TelegramTextStats" class="TelegramText" text="#PLAYER_HUD_Subscribe_Buy" />
+                                        <Label id="SubscribedTelegramTextStats" class="TelegramText" text="#PLAYER_HUD_Subscribe_Subscribed_Buy" />
+                                    </Panel>
                                 </Panel>
-                            </Panel>
                             </Panel>
 
                         </Panel>

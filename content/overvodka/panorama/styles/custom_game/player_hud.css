@@ -363,19 +363,23 @@
     opacity: 1;
 }
 
-#SubscribedTelegramText{
+#SubscribedTelegramText,
+#SubscribedTelegramTextStats{
     visibility: collapse;
 }
 
-.PlayerSubscribed #TelegramText{
+.PlayerSubscribed #TelegramText,
+.PlayerSubscribed #TelegramTextStats{
     visibility: collapse;
 }
 
-.PlayerSubscribed #SubscribedTelegramText{
+.PlayerSubscribed #SubscribedTelegramText,
+.PlayerSubscribed #SubscribedTelegramTextStats{
     visibility: visible;
 }
 
-#BuyButton{
+#BuyButton,
+#BuyButtonStats{
     width: 268px;
     height: 72px;
 
@@ -403,18 +407,21 @@
     transition-timing-function: ease-in-out;
 }
 
-.PlayerSubscribed #BuyButton{
+.PlayerSubscribed #BuyButton,
+.PlayerSubscribed #BuyButtonStats{
     width: 292px;
 }
 
-#BuyButton:hover{
+#BuyButton:hover,
+#BuyButtonStats:hover{
     brightness: 1.08;
     pre-transform-scale2d: 1.02;
     border-brush: gradient(linear, 0% 100%, 0% 0%, from(#8a7546), color-stop(0.45, #c4b57c), color-stop(0.72, #ece0b4), to(#fff7dc));
     box-shadow: fill #ddce9c33 0px 0px 12px 1px;
 }
 
-#BuyButton:active{
+#BuyButton:active,
+#BuyButtonStats:active{
     brightness: 0.97;
     pre-transform-scale2d: 0.95;
     box-shadow: fill #ddce9c18 0px 0px 6px 1px;
@@ -445,22 +452,26 @@
     transition-timing-function: ease-in-out;
 }
 
-#BuyButton:hover .BuyButtonGlow{
+#BuyButton:hover .BuyButtonGlow,
+#BuyButtonStats:hover .BuyButtonGlow{
     opacity: 0.9;
     brightness: 1.05;
 }
 
-#BuyButton:hover .BuyButtonShine{
+#BuyButton:hover .BuyButtonShine,
+#BuyButtonStats:hover .BuyButtonShine{
     opacity: 0.75;
     transform: translateX(360px) rotateZ(18deg);
 }
 
-#BuyButton:active .BuyButtonShine{
+#BuyButton:active .BuyButtonShine,
+#BuyButtonStats:active .BuyButtonShine{
     opacity: 0.5;
     transform: translateX(260px) rotateZ(18deg);
 }
 
-#BuyButton .Wrapper{
+#BuyButton .Wrapper,
+#BuyButtonStats .Wrapper{
     align: center center;
     flow-children: right;
     overflow: noclip;
@@ -468,19 +479,20 @@
     z-index: 2;
 }
 
-#BuyButton .TelegramIcon{
+#BuyButton .TelegramIcon,
+#BuyButtonStats .TelegramIcon{
     width: 42px;
     height: 42px;
     align: center center;
     overflow: noclip;
     margin: 0px 1px;
-    wash-color: #ddce9c;
     transition-property: pre-transform-scale2d, brightness;
     transition-duration: .16s;
     transition-timing-function: ease-in-out;
 }
 
-#BuyButton .TelegramText{
+#BuyButton .TelegramText,
+#BuyButtonStats .TelegramText{
     font-size: 30px;
     color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( 0.45, #ddce9c ), color-stop( 0.55, #b5a770 ), to( #e5ce82 ) );
     text-transform: uppercase;
@@ -494,11 +506,13 @@
     text-align: center;
 }
 
-#BuyButton:hover .TelegramText{
+#BuyButton:hover .TelegramText,
+#BuyButtonStats:hover .TelegramText{
     brightness: 1.08;
 }
 
-#BuyButton:hover .TelegramIcon{
+#BuyButton:hover .TelegramIcon,
+#BuyButtonStats:hover .TelegramIcon{
     pre-transform-scale2d: 1.04;
     brightness: 1.08;
 }

@@ -4,6 +4,14 @@
 ---------------------------------------------------------------------------
 function OvervodkaGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
+	local bShowCustomLoadingScreen =
+		nNewState == DOTA_GAMERULES_STATE_INIT or
+		nNewState == DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
+
+	CustomGameEventManager:Send_ServerToAllClients("custom_loading_screen_state", {
+		visible = bShowCustomLoadingScreen and 1 or 0
+	})
+
 	if nNewState == DOTA_GAMERULES_STATE_INIT then
         CustomGameEventManager:Send_ServerToAllClients("gamesetup", nil)
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
