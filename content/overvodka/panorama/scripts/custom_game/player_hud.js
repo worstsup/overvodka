@@ -150,20 +150,6 @@ const CHAT_PATCH_RETRIES = 12;
 const CHAT_PATCH_INTERVAL = 0.05;
 const CHAT_MAX_LINES_SCAN = 25;
 
-function UpdateInnateIconOffset() {
-    if (!innate_icon) {
-        innate_icon = DotaHUDPanel.FindChildTraverse("InnateIcon");
-    }
-
-    if (innate_icon) {
-        const heroEnt = Players.GetPlayerHeroEntityIndex(LocalPlayer);
-        const heroName = heroEnt !== -1 ? Entities.GetUnitName(heroEnt) : "";
-        innate_icon.style.marginTop = HEROES_WITH_NO_FACET[heroName] ? "0px" : "-5px";
-    }
-
-    $.Schedule(0.5, UpdateInnateIconOffset);
-}
-
 function _GetChatRoot() {
     const hud = GetDotaHud && GetDotaHud();
     if (!hud) return null;
@@ -1451,7 +1437,6 @@ function OnChaosCardActivated(slot) {
     GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);
     UpdateSilvernameFacet2Damage();
-    UpdateInnateIconOffset();
 
     GameEvents.Subscribe("epstein_w_square_start", OnEpsteinWSquareStart);
     GameEvents.Subscribe("epstein_w_square_end", OnEpsteinWSquareEnd);
