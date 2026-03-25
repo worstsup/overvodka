@@ -16,7 +16,6 @@ end
 
 function ashab_innate:OnSpellStart()
 	self:GetCaster():EmitSound("Hero_Batrider.StickyNapalm.Cast")
-	EmitSoundOnLocationWithCaster(self:GetCursorPosition(), "Hero_Batrider.StickyNapalm.Impact", self:GetCaster())
 	
 	self.napalm_impact_particle = ParticleManager:CreateParticle("particles/batrider_stickynapalm_impact_new.vpcf", PATTACH_WORLDORIGIN, self:GetCaster())
 	ParticleManager:SetParticleControl(self.napalm_impact_particle, 0, self:GetCursorPosition())
@@ -77,6 +76,8 @@ function modifier_ashab_innate_handler:OnIntervalThink()
 	else
 		EmitSoundOn("mohito_2", caster)
 	end
+
+	EmitSoundOnLocationWithCaster(point, "Hero_Batrider.StickyNapalm.Impact", caster)
 end
 
 
@@ -86,9 +87,7 @@ function modifier_ashab_innate_handler:OnCreated()
 end
 
 function modifier_ashab_innate_handler:DeclareFunctions()
-	local decFuncs = {MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
-	
-	return decFuncs
+	return {MODIFIER_PROPERTY_IGNORE_CAST_ANGLE, MODIFIER_PROPERTY_DISABLE_TURNING}
 end
 
 function modifier_ashab_innate_handler:GetModifierIgnoreCastAngle()

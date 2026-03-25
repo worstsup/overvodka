@@ -11,6 +11,51 @@ const ChaosHistoryPanel = $("#ChaosHistoryPanel");
 const ChaosHistoryEntries = $("#ChaosHistoryEntries");
 const ChaosHistoryToggleButton = $("#ChaosHistoryToggleButton");
 const DotaHUDPanel = GetDotaHud();
+const HEROES_WITH_NO_FACET = {
+    npc_dota_hero_necrolyte: true,
+    npc_dota_hero_skeleton_king: true,
+    npc_dota_hero_bloodseeker: true,
+    npc_dota_hero_ursa: true,
+    npc_dota_hero_zuus: true,
+    npc_dota_hero_tidehunter: true,
+    npc_dota_hero_beastmaster: true,
+    npc_dota_hero_abaddon: true,
+    npc_dota_hero_bounty_hunter: true,
+    npc_dota_hero_warlock: true,
+    npc_dota_hero_antimage: true,
+    npc_dota_hero_morphling: true,
+    npc_dota_hero_faceless_void: true,
+    npc_dota_hero_bristleback: true,
+    npc_dota_hero_nyx_assassin: true,
+    npc_dota_hero_kunkka: true,
+    npc_dota_hero_axe: true,
+    npc_dota_hero_tusk: true,
+    npc_dota_hero_primal_beast: true,
+    npc_dota_hero_mars: true,
+    npc_dota_hero_slardar: true,
+    npc_dota_hero_lion: true,
+    npc_dota_hero_omniknight: true,
+    npc_dota_hero_ogre_magi: true,
+    npc_dota_hero_earthshaker: true,
+    npc_dota_hero_meepo: true,
+    npc_dota_hero_hoodwink: true,
+    npc_dota_hero_phantom_lancer: true,
+    npc_dota_hero_terrorblade: true,
+    npc_dota_hero_ringmaster: true,
+    npc_dota_hero_void_spirit: true,
+    npc_dota_hero_slark: true,
+    npc_dota_hero_spectre: true,
+    npc_dota_hero_puck: true,
+    npc_dota_hero_templar_assassin: true,
+    npc_dota_hero_brewmaster: true,
+    npc_dota_hero_juggernaut: true,
+    npc_dota_hero_tinker: true,
+    npc_dota_hero_winter_wyvern: true,
+    npc_dota_hero_ancient_apparition: true,
+    npc_dota_hero_storm_spirit: true,
+    npc_dota_hero_sniper: true,
+    npc_dota_hero_rattletrap: true,
+};
 let SilvernameFacet2Target = -1;
 let DamagePanel = null;
 let EpsteinWSquares = {};
@@ -50,6 +95,7 @@ const ChaosCardDescriptions = {
 let dota_glyph = DotaHUDPanel.FindChildTraverse("GlyphScanContainer");
 let roshan = DotaHUDPanel.FindChildTraverse("RoshanTimerContainer");
 let tormentor = DotaHUDPanel.FindChildTraverse("TormentorTimerContainer");
+let innate_icon = DotaHUDPanel.FindChildTraverse("InnateIcon");
 if (dota_glyph && roshan && tormentor && Game.GetMapInfo().map_display_name != "overvodka_5x5") {
     dota_glyph.style.visibility = "collapse";
     roshan.style.visibility = "collapse";
@@ -103,6 +149,20 @@ const GetPlayerColorHex = (playerID) => {
 const CHAT_PATCH_RETRIES = 12;
 const CHAT_PATCH_INTERVAL = 0.05;
 const CHAT_MAX_LINES_SCAN = 25;
+
+function UpdateInnateIconOffset() {
+    if (!innate_icon) {
+        innate_icon = DotaHUDPanel.FindChildTraverse("InnateIcon");
+    }
+
+    if (innate_icon) {
+        const heroEnt = Players.GetPlayerHeroEntityIndex(LocalPlayer);
+        const heroName = heroEnt !== -1 ? Entities.GetUnitName(heroEnt) : "";
+        innate_icon.style.marginTop = HEROES_WITH_NO_FACET[heroName] ? "0px" : "-5px";
+    }
+
+    $.Schedule(0.5, UpdateInnateIconOffset);
+}
 
 function _GetChatRoot() {
     const hud = GetDotaHud && GetDotaHud();
@@ -1391,6 +1451,7 @@ function OnChaosCardActivated(slot) {
     GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);
     UpdateSilvernameFacet2Damage();
+    UpdateInnateIconOffset();
 
     GameEvents.Subscribe("epstein_w_square_start", OnEpsteinWSquareStart);
     GameEvents.Subscribe("epstein_w_square_end", OnEpsteinWSquareEnd);

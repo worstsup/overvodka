@@ -148,8 +148,7 @@ function modifier_stint_r_2:IsDebuff()   return false end
 
 function modifier_stint_r_2:OnCreated()
     if not IsServer() then return end
-    self.saved_time = GameRules:GetTimeOfDay()
-    GameRules:SetTimeOfDay(0)
+    GameRules:BeginTemporaryNight(self:GetDuration(), self:GetParent():GetHeroID())
     self.interval = self:GetAbility():GetSpecialValueFor("armageddon_interval")
     self.radius = self:GetAbility():GetSpecialValueFor("armageddon_radius")
     self:StartIntervalThink(self.interval)
@@ -169,13 +168,6 @@ function modifier_stint_r_2:OnIntervalThink()
         local damage = base_damage + pct_damage * enemy:GetHealth() * 0.01
         ApplyDamage({ attacker = self:GetCaster(), victim = enemy, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
     end
-end
-
-function modifier_stint_r_2:OnDestroy()
-    if not IsServer() then return end
-    if self.saved_time then
-		GameRules:SetTimeOfDay(self.saved_time)
-	end
 end
 
 modifier_stint_r_3 = class({})

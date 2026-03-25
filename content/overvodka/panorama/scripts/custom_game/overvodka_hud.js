@@ -12,7 +12,6 @@ function RemovePickBg() {
 remove = 0
 bgid = 0
 
-
 function HeroSelection() {
 
     // if game state is not hero pick or stategy time   

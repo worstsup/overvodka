@@ -39,7 +39,7 @@ function worstsup_w:OnProjectileHit(target, location)
     target:AddNewModifier(caster, self, "modifier_worstsup_w_debuff", {
         duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance())
     })
-    if self:GetSpecialValueFor("buff") == 1 then
+    if caster:HasTalent("special_bonus_unique_worstsup_7") then
         caster:AddNewModifier(caster, self, "modifier_worstsup_w_buff", {
             duration = self:GetSpecialValueFor("duration")
         })

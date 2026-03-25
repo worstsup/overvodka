@@ -44,10 +44,10 @@ function royale_shard:OnSpellStart()
     local p = ParticleManager:CreateParticle( "particles/econ/items/phantom_lancer/phantom_lancer_fall20_immortal/phantom_lancer_fall20_immortal_doppelganger_aoe_gold_bits.vpcf", PATTACH_ABSORIGIN_FOLLOW, sparky )
 	ParticleManager:SetParticleControl( p, 0, sparky:GetOrigin() )
 	ParticleManager:ReleaseParticleIndex( p )
-    EmitSoundOnLocationWithCaster(point, "Sparky.Deploy", caster)
     Timers:CreateTimer(0.4, function()
         sparky:AddNewModifier(caster, self, "modifier_royale_shard_ai", {duration = duration})
     end)
+    EmitSoundOnLocationWithCaster(point, "Sparky.Deploy", caster)
 end
 
 function royale_shard:OnProjectileHit(target, location)

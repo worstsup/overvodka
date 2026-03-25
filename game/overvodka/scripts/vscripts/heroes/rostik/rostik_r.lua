@@ -8,7 +8,7 @@ LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua",
 function rostik_r:OnSpellStart()
 	local caster = self:GetCaster()
 	local point = self:GetCursorPosition()
-	local direction = point - caster:GetAbsOrigin() +Vector(3,3,0)
+	local direction = point - caster:GetAbsOrigin() + Vector(3,3,0)
 	direction.z = 0
 	direction = direction:Normalized()
 	self.direction = direction
@@ -20,8 +20,7 @@ function rostik_r:OnSpellStart()
 			y = direction.y,
 		}
 	)
-	local sound_cast = "rostik_r"
-	EmitSoundOn(sound_cast, caster)
+	EmitSoundOn( "rostik_r", caster )
 end
 
 function rostik_r:OnProjectileHitHandle(target, location, iHandle)
@@ -32,8 +31,6 @@ function rostik_r:OnProjectileHitHandle(target, location, iHandle)
 		return false
 	end
 
-	local rock_speed = self:GetSpecialValueFor("rock_speed")
-	local rock_distance = self:GetSpecialValueFor("rock_distance")
 	local damage = self:GetSpecialValueFor("damage")
 	local slow_duration = self:GetSpecialValueFor("slow_duration")
 	local filter = UnitFilter(
@@ -76,10 +73,6 @@ function modifier_rostik_r_slow:IsStunDebuff() return false end
 function modifier_rostik_r_slow:IsPurgable() return true end
 
 function modifier_rostik_r_slow:OnCreated()
-	self.slow = self:GetAbility():GetSpecialValueFor( "move_slow" )
-end
-
-function modifier_rostik_r_slow:OnRefresh()
 	self.slow = self:GetAbility():GetSpecialValueFor( "move_slow" )
 end
 
@@ -149,10 +142,8 @@ function modifier_rostik_r:OnRemoved( kv )
 		else
 			ParticleManager:SetParticleControl( self.effect_cast, 3, self:GetParent():GetAbsOrigin() )
 		end
-		local sound_loop = "Hero_EarthSpirit.RollingBoulder.Loop"
-		StopSoundOn( sound_loop, self:GetParent() )
-		local sound_end = "Hero_EarthSpirit.RollingBoulder.Destroy"
-		EmitSoundOn( sound_end, self:GetParent() )
+		StopSoundOn( "Hero_EarthSpirit.RollingBoulder.Loop", self:GetParent() )
+		EmitSoundOn( "Hero_EarthSpirit.RollingBoulder.Destroy", self:GetParent() )
 	end
 end
 
@@ -180,6 +171,8 @@ function modifier_rostik_r:OnIntervalThink()
 		self:Destroy()
 		return
 	end
+	self:StartIntervalThink( -1 )
+
 	local info = {
 		Source = self:GetCaster(),
 		Ability = self:GetAbility(),
@@ -225,34 +218,17 @@ function modifier_rostik_r:End( vector )
 end
 
 function modifier_rostik_r:PlayEffects()
-	local particle_cast = "particles/rostik_r.vpcf"
-	local sound_loop = "Hero_EarthSpirit.RollingBoulder.Loop"
-	self.effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
-	self:AddParticle(
-		self.effect_cast,
-		false,
-		false,
-		-1,
-		false,
-		false
-	)
-	EmitSoundOn( sound_loop, self:GetParent() )
+	self.effect_cast = ParticleManager:CreateParticle( "particles/rostik_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	self:AddParticle( self.effect_cast, false, false, -1, false, false )
+	EmitSoundOn( "Hero_EarthSpirit.RollingBoulder.Loop", self:GetParent() )
 end
 
 modifier_rostik_r_thinker = class({})
 
-function modifier_rostik_r_thinker:IsHidden()
-	return false
-end
-function modifier_rostik_r_thinker:IsDebuff()
-	return false
-end
-function modifier_rostik_r_thinker:IsStunDebuff()
-	return false
-end
-function modifier_rostik_r_thinker:IsPurgable()
-	return false
-end
+function modifier_rostik_r_thinker:IsHidden() return false end
+function modifier_rostik_r_thinker:IsDebuff() return false end
+function modifier_rostik_r_thinker:IsStunDebuff() return false end
+function modifier_rostik_r_thinker:IsPurgable() return false end
 
 function modifier_rostik_r_thinker:OnCreated( kv )
 	self.caster = self:GetCaster()
@@ -321,40 +297,19 @@ function modifier_rostik_r_thinker:OnIntervalThink()
 end
 
 function modifier_rostik_r_thinker:PlayEffects()
-	local particle_cast = "particles/rostik_r_fire.vpcf"
-	local duration = self:GetAbility():GetSpecialValueFor( "fire_duration" )
-
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, self.parent )
+	local effect_cast = ParticleManager:CreateParticle( "particles/rostik_r_fire.vpcf", PATTACH_WORLDORIGIN, self.parent )
 	ParticleManager:SetParticleControl( effect_cast, 0, self.startpoint )
 	ParticleManager:SetParticleControl( effect_cast, 1, self.endpoint )
-	ParticleManager:SetParticleControl( effect_cast, 2, Vector( duration, 0, 0 ) )
-	self:AddParticle(
-		effect_cast,
-		false,
-		false,
-		-1,
-		false,
-		false
-	)
+	ParticleManager:SetParticleControl( effect_cast, 2, Vector( self:GetAbility():GetSpecialValueFor( "fire_duration" ), 0, 0 ) )
+	self:AddParticle( effect_cast, false, false, -1, false, false )
 end
 
 modifier_rostik_r_fire = class({})
 
-function modifier_rostik_r_fire:IsHidden()
-	return false
-end
-
-function modifier_rostik_r_fire:IsDebuff()
-	return true
-end
-
-function modifier_rostik_r_fire:IsStunDebuff()
-	return false
-end
-
-function modifier_rostik_r_fire:IsPurgable()
-	return false
-end
+function modifier_rostik_r_fire:IsHidden() return false end
+function modifier_rostik_r_fire:IsDebuff() return true end
+function modifier_rostik_r_fire:IsStunDebuff() return false end
+function modifier_rostik_r_fire:IsPurgable() return false end
 
 function modifier_rostik_r_fire:OnCreated( kv )
 	if not IsServer() then return end
@@ -362,14 +317,7 @@ function modifier_rostik_r_fire:OnCreated( kv )
 	local damage = kv.damage
 	local damage_type = kv.damage_type
 
-	self.damageTable = {
-		victim = self:GetParent(),
-		attacker = self:GetCaster(),
-		damage = damage,
-		damage_type = damage_type,
-		ability = self:GetAbility(),
-	}
-
+	self.damageTable = { victim = self:GetParent(), attacker = self:GetCaster(), damage = damage, damage_type = damage_type, ability = self:GetAbility() }
 	self:StartIntervalThink( interval )
 end
 

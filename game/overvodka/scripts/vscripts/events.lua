@@ -6,7 +6,8 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 	local nNewState = GameRules:State_Get()
 	local bShowCustomLoadingScreen =
 		nNewState == DOTA_GAMERULES_STATE_INIT or
-		nNewState == DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD
+		nNewState == DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD or
+		nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP
 
 	CustomGameEventManager:Send_ServerToAllClients("custom_loading_screen_state", {
 		visible = bShowCustomLoadingScreen and 1 or 0
@@ -671,6 +672,19 @@ function OvervodkaGameMode:OnItemPickUp( event )
 	elseif event.itemname == "item_chaos_orb" then
 		if not IsRealHero(picker) then
 			local playerID = picker and picker.GetPlayerOwnerID and picker:GetPlayerOwnerID() or -1
+			local respawnOrigin = Vector(0, 0, 0)
+			local hasRespawnOrigin = false
+			if item and not item:IsNull() then
+				local container = item:GetContainer()
+				if container and not container:IsNull() then
+					respawnOrigin = container:GetAbsOrigin()
+					hasRespawnOrigin = true
+				end
+			end
+			if not hasRespawnOrigin and picker and not picker:IsNull() then
+				respawnOrigin = picker:GetAbsOrigin()
+			end
+
 			if playerID and playerID ~= -1 then
 				SendErrorToPlayer(playerID, "#CHAOS_ORB_ONLY_REAL_HERO")
 			end
@@ -686,12 +700,11 @@ function OvervodkaGameMode:OnItemPickUp( event )
 					end
 					if picker and not picker:IsNull() then
 						picker:RemoveItem(item)
-						self:SpawnChaosOrbEntity(picker:GetAbsOrigin(), false)
-					else
-						self:SpawnChaosOrbEntity(Vector(0, 0, 0), false)
 					end
 					UTIL_Remove(item)
 				end
+
+				self:SpawnChaosOrbEntity(respawnOrigin, false)
 			end)
 			return
 		end

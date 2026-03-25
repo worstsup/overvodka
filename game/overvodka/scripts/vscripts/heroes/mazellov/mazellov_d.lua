@@ -1,5 +1,33 @@
 LinkLuaModifier("modifier_mazellov_w", "heroes/mazellov/mazellov_d", LUA_MODIFIER_MOTION_NONE)
 
+if not Mazellov_DisableReturnAbility then
+    function Mazellov_DisableReturnAbility(caster)
+        if not IsServer() then return end
+        if not caster or caster:IsNull() then return end
+        if not caster.mazellov_orb_return_enabled then return end
+
+        local return_name = caster.mazellov_orb_return_name or "mazellov_d"
+        local return_ability = caster:FindAbilityByName(return_name)
+        local base_name = caster.mazellov_orb_return_base_name
+        local base_ability = base_name and caster:FindAbilityByName(base_name) or nil
+
+        if base_ability and not base_ability:IsNull() and return_ability and not return_ability:IsNull() then
+            caster:SwapAbilities(base_ability:GetAbilityName(), return_ability:GetAbilityName(), true, false)
+            base_ability:SetHidden(false)
+            base_ability:SetActivated(true)
+            return_ability:SetHidden(true)
+            return_ability:SetActivated(false)
+        elseif return_ability and not return_ability:IsNull() then
+            return_ability:SetActivated(false)
+        end
+
+        caster.mazellov_orb_return_enabled = nil
+        caster.mazellov_orb_return_base_name = nil
+        caster.mazellov_orb_return_name = nil
+        caster.mazellov_orb_return_added_temporarily = nil
+    end
+end
+
 mazellov_d = class({})
 
 function mazellov_d:Spawn()
@@ -14,6 +42,9 @@ function mazellov_d:OnSpellStart()
     local expire = caster.mazellov_orb_expire or 0
 
     if caster.mazellov_orb_teleported then
+        if Mazellov_DisableReturnAbility then
+            Mazellov_DisableReturnAbility(caster)
+        end
         caster:Interrupt()
         return
     end
@@ -38,4 +69,7 @@ function mazellov_d:OnSpellStart()
         caster:Interrupt()
     end
     self:SetActivated( false )
+    if Mazellov_DisableReturnAbility then
+        Mazellov_DisableReturnAbility(caster)
+    end
 end

@@ -36,11 +36,12 @@ function stariy_lasers:OnAbilityPhaseStart()
 	local caster = self:GetCaster()
 	EmitSoundOn( "stariy_ult_start", caster )
 	self.radius = self:GetSpecialValueFor( "radius" )
-	self.facet = (self:GetSpecialValueFor("has_facet") == 1)
+	self.vecTargets = {}
+	self.Projectiles = {}
 	caster:AddNewModifier( caster, self, "modifier_stariy_fly", {duration = 1.5} )
 	if IsServer() then
 		self:PlayEffects1()
-		if not caster:HasModifier("modifier_stariy_lasers_pull_cooldown") and self.facet then 
+		if not caster:HasModifier("modifier_stariy_lasers_pull_cooldown") then 
 			caster:AddNewModifier(caster, self, "modifier_stariy_lasers_pull_cooldown", {duration = self:GetSpecialValueFor("cooldown_pull")})
 			self.thinker = CreateModifierThinker(
 				caster,
@@ -57,7 +58,7 @@ function stariy_lasers:OnAbilityPhaseStart()
 			ParticleManager:SetParticleControl( self.effect_radius, 0, caster:GetOrigin() )
 			ParticleManager:SetParticleControl( self.effect_radius, 1, Vector(radius,radius, 0) )
 		end
-		StartSoundEventFromPositionReliable( "Aghanim.StaffBeams.WindUp", caster:GetAbsOrigin() )
+		EmitSoundOn( "Aghanim.StaffBeams.WindUp", caster )
 		self.nChannelFX = ParticleManager:CreateParticle( "particles/creatures/aghanim/aghanim_beam_channel.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
 		self.vecTargets = FindUnitsInRadius( caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
 		for k,enemy in pairs ( self.vecTargets ) do
@@ -92,13 +93,23 @@ end
 function stariy_lasers:OnAbilityPhaseInterrupted()
 	StopSoundOn( "stariy_ult_start", self:GetCaster() )
 	self:GetCaster():RemoveModifierByName( "modifier_stariy_fly" )
-	ParticleManager:DestroyParticle( self.nChannelFX, false )
+	if self.nChannelFX then
+		ParticleManager:DestroyParticle( self.nChannelFX, false )
+		self.nChannelFX = nil
+	end
 	if self.thinker then self.thinker:Destroy() end
 	self.thinker = nil
+	if self.phaseUpdateTimer then
+		Timers:RemoveTimer(self.phaseUpdateTimer)
+		self.phaseUpdateTimer = nil
+	end
 	self:StopEffects1( false )
 	for k,enemy in pairs ( self.vecTargets ) do
 		if enemy ~= nil then
-			ParticleManager:DestroyParticle(enemy.nWarningFXIndex, false)
+			if enemy.nWarningFXIndex then
+				ParticleManager:DestroyParticle(enemy.nWarningFXIndex, false)
+				enemy.nWarningFXIndex = nil
+			end
 		end
 	end
 end
@@ -113,11 +124,15 @@ function stariy_lasers:OnSpellStart()
 		end
 		EmitSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
 		self.Projectiles = {}
+		self.vecTargets = self.vecTargets
 
 		for k,enemy in pairs ( self.vecTargets ) do
 			if enemy ~= nil then
 				local hBeamThinker = CreateModifierThinker( self:GetCaster(), self, "modifier_stariy_lasers_thinker", { duration = self:GetChannelTime() }, enemy.vSourceLoc, self:GetCaster():GetTeamNumber(), false )
-				ParticleManager:DestroyParticle( enemy.nWarningFXIndex, false )
+				if enemy.nWarningFXIndex then
+					ParticleManager:DestroyParticle( enemy.nWarningFXIndex, false )
+					enemy.nWarningFXIndex = nil
+				end
 				local projectile =
 				{
 					Target = enemy,
@@ -164,10 +179,13 @@ function stariy_lasers:StopEffects1( success )
 		ParticleManager:ReleaseParticleIndex(self.effect_radius)
 		self.effect_radius = nil
 	end
-	if not success then
+	if self.effect_precast and not success then
 		ParticleManager:DestroyParticle( self.effect_precast, true )
 	end
-	ParticleManager:ReleaseParticleIndex( self.effect_precast )
+	if self.effect_precast then
+		ParticleManager:ReleaseParticleIndex( self.effect_precast )
+		self.effect_precast = nil
+	end
 end
 function stariy_lasers:OnProjectileThinkHandle( nProjectileHandle )
 	if IsServer() then
@@ -206,6 +224,8 @@ end
 
 function stariy_lasers:OnChannelThink( flInterval )
 	if IsServer() then
+		self.vecTargets = self.vecTargets
+		self.Projectiles = self.Projectiles
 		self.newTargets = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FIND_CLOSEST, false )
 		for k,enemy in pairs ( self.newTargets ) do
 			if enemy ~= nil and not isUnitInTable(enemy, self.vecTargets) then
@@ -246,18 +266,27 @@ end
 
 function stariy_lasers:OnChannelFinish( bInterrupted )
 	if IsServer() then
-		ParticleManager:DestroyParticle( self.nChannelFX, false )
+		if self.nChannelFX then
+			ParticleManager:DestroyParticle( self.nChannelFX, false )
+			self.nChannelFX = nil
+		end
 		StopSoundOn( "Hero_Phoenix.SunRay.Cast", self:GetCaster() )
 		StopSoundOn( "Hero_Phoenix.SunRay.Loop", self:GetCaster() )
 		StopSoundOn( "stariy_ult", self:GetCaster() )
 		EmitSoundOn( "Hero_Phoenix.SunRay.Stop", self:GetCaster() )
 		self:GetCaster():RemoveModifierByName( "modifier_stariy_fly" )
+		if self.phaseUpdateTimer then
+			Timers:RemoveTimer(self.phaseUpdateTimer)
+			self.phaseUpdateTimer = nil
+		end
 		for _,v in pairs ( self.Projectiles ) do
 			ParticleManager:DestroyParticle( v.nFXIndex, false )
 			if v.hThinker and v.hThinker:IsNull() == false then
 				UTIL_Remove( v.hThinker )
 			end
 		end
+		self.Projectiles = {}
+		self.vecTargets = {}
 	end
 end
 

@@ -8,7 +8,6 @@ function bikov_e:Precache(ctx)
     PrecacheResource("soundfile", "soundevents/bikov_sounds.vsndevts", ctx)
     PrecacheResource("particle", "particles/bikov_attack_e.vpcf", ctx)
 	PrecacheResource("particle", "particles/econ/items/void_spirit/void_spirit_immortal_2021/void_spirit_immortal_2021_astral_step_dmg_burst.vpcf", ctx)
-	PrecacheResource("particle", "particles/items_fx/chain_lightning.vpcf", ctx)
 end
 
 function bikov_e:GetIntrinsicModifierName()

@@ -48,13 +48,60 @@ function modifier_macan_q:IsHidden() return false end
 function modifier_macan_q:IsDebuff() return false end
 function modifier_macan_q:IsPurgable() return false end
 
+function modifier_macan_q:HasDrivingModifier()
+	return self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")
+end
+
+function modifier_macan_q:DestroySecondaryWisp()
+	if self.wisp_new and not self.wisp_new:IsNull() then
+		UTIL_Remove(self.wisp_new)
+	end
+	self.wisp_new = nil
+	self.position_new = nil
+	self.facing_new = nil
+end
+
+function modifier_macan_q:EnsureSecondaryWisp()
+	if self.wisp_new and not self.wisp_new:IsNull() then
+		return
+	end
+
+	self.base_facing_new = Vector(0,1,0)
+	self.rotate_radius_new = self.rotate_radius
+	self.relative_pos_new = Vector( self.rotate_radius_new, 0, 100 )
+	local origin = self.parent:GetOrigin()
+	local rotation = self.rotation or 0
+	self.position_new = RotatePosition( origin, QAngle( 0, -rotation, 0 ), origin + self.relative_pos_new )
+	self.facing_new = RotatePosition( self.zero, QAngle( 0, -rotation, 0 ), self.base_facing_new )
+	self.wisp_new = CreateUnitByName(
+		"npc_dota_dark_willow_creature",
+		self.position_new,
+		true,
+		self.parent,
+		self.parent:GetOwner(),
+		self.parent:GetTeamNumber()
+	)
+	self.wisp_new:SetForwardVector( self.facing_new )
+	self.wisp_new:AddNewModifier(
+		self:GetCaster(),
+		self:GetAbility(),
+		"modifier_wisp_ambient",
+		{}
+	)
+	self.wisp_new:AddNewModifier(
+		self:GetCaster(),
+		self:GetAbility(),
+		"modifier_macan_q_attack",
+		{ duration = self:GetRemainingTime() }
+	)
+end
+
 function modifier_macan_q:OnCreated( kv )
 	self.parent = self:GetParent()
 	self.zero = Vector(0,0,0)
 	self.revolution = self:GetAbility():GetSpecialValueFor( "roaming_seconds_per_rotation" )
 	self.rotate_radius = self:GetAbility():GetSpecialValueFor( "roaming_radius" )
 	if not IsServer() then return end
-	self.bol = self:GetAbility():GetSpecialValueFor( "bol" )
 	self.interval = 0.03
 	self.base_facing = Vector(0,1,0)
 	self.relative_pos = Vector( -self.rotate_radius, 0, 100 )
@@ -83,35 +130,8 @@ function modifier_macan_q:OnCreated( kv )
 		"modifier_macan_q_attack",
 		{ duration = kv.duration }
 	)
-	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) and self.bol == 1 then 
-		self.base_facing_new = Vector(0,1,0)
-		self.rotate_radius_new = self:GetAbility():GetSpecialValueFor( "roaming_radius" )
-		self.rotate_delta_new = 360/self.revolution * self.interval
-		self.relative_pos_new = Vector( self.rotate_radius_new, 0, 100 )
-		self.position_new = self.parent:GetOrigin() + self.relative_pos_new
-		self.rotation_new = 0
-		self.facing_new = self.base_facing_new
-		self.wisp_new = CreateUnitByName(
-			"npc_dota_dark_willow_creature",
-			self.position_new,
-			true,
-			self.parent,
-			self.parent:GetOwner(),
-			self.parent:GetTeamNumber()
-		)
-		self.wisp_new:SetForwardVector( self.facing_new )
-		self.wisp_new:AddNewModifier(
-			self:GetCaster(),
-			self:GetAbility(),
-			"modifier_wisp_ambient",
-			{}
-		)
-		self.wisp_new:AddNewModifier(
-			self:GetCaster(),
-			self:GetAbility(),
-			"modifier_macan_q_attack",
-			{ duration = kv.duration }
-		)
+	if self:HasDrivingModifier() then
+		self:EnsureSecondaryWisp()
 	end
 	self:StartIntervalThink( self.interval )
 	self:PlayEffects()
@@ -120,7 +140,6 @@ end
 function modifier_macan_q:OnRefresh( kv )
 	self.revolution = self:GetAbility():GetSpecialValueFor( "roaming_seconds_per_rotation" )
 	self.rotate_radius = self:GetAbility():GetSpecialValueFor( "roaming_radius" )
-	self.bol = self:GetAbility():GetSpecialValueFor( "bol" )
 	if not IsServer() then return end
 	self.relative_pos = Vector( -self.rotate_radius, 0, 100 )
 	self.rotate_delta = 360/self.revolution * self.interval
@@ -130,23 +149,25 @@ function modifier_macan_q:OnRefresh( kv )
 		"modifier_macan_q_attack",
 		{ duration = kv.duration }
 	)
-	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) and self.bol == 1 then 
-		self.rotate_delta_new = 360/self.revolution * self.interval
-		self.rotate_radius_new = self:GetAbility():GetSpecialValueFor( "roaming_radius" ) + 500
-		self.relative_pos_new = Vector( -self.rotate_radius_new, 0, 100 )
+	if self:HasDrivingModifier() then
+		self:EnsureSecondaryWisp()
+		self.rotate_radius_new = self.rotate_radius
+		self.relative_pos_new = Vector( self.rotate_radius_new, 0, 100 )
 		self.wisp_new:AddNewModifier(
 			self:GetCaster(),
 			self:GetAbility(),
 			"modifier_macan_q_attack",
 			{ duration = kv.duration }
 		)
+	else
+		self:DestroySecondaryWisp()
 	end
 end
 
 function modifier_macan_q:OnDestroy()
 	if not IsServer() then return end
 	UTIL_Remove( self.wisp )
-	UTIL_Remove( self.wisp_new )
+	self:DestroySecondaryWisp()
 end
 
 function modifier_macan_q:OnIntervalThink()
@@ -156,14 +177,14 @@ function modifier_macan_q:OnIntervalThink()
 	self.facing = RotatePosition( self.zero, QAngle( 0, -self.rotation, 0 ), self.base_facing )
 	self.wisp:SetOrigin( self.position )
 	self.wisp:SetForwardVector( self.facing )
-	if (self:GetCaster():HasModifier("modifier_macan_r") or self:GetCaster():HasModifier("modifier_macan_r_charge")) then 
-		self.rotation_new = self.rotation_new + self.rotate_delta_new
-		self.position_new = RotatePosition( origin, QAngle( 0, -self.rotation_new, 0 ), origin + self.relative_pos_new )
-		self.facing_new = RotatePosition( self.zero, QAngle( 0, -self.rotation_new, 0 ), self.base_facing_new )
+	if self:HasDrivingModifier() then
+		self:EnsureSecondaryWisp()
+		self.position_new = RotatePosition( origin, QAngle( 0, -self.rotation, 0 ), origin + self.relative_pos_new )
+		self.facing_new = RotatePosition( self.zero, QAngle( 0, -self.rotation, 0 ), self.base_facing_new )
 		self.wisp_new:SetOrigin( self.position_new )
 		self.wisp_new:SetForwardVector( self.facing_new )
 	else
-		UTIL_Remove( self.wisp_new )
+		self:DestroySecondaryWisp()
 	end
 end
 

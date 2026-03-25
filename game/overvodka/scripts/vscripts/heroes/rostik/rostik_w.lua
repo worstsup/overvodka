@@ -4,18 +4,6 @@ LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", 
 
 rostik_w = class ({})
 
-function rostik_w:GetCooldown(level)
-    return self.BaseClass.GetCooldown(self, level)
-end
-
-function rostik_w:GetCastRange(location, target)
-    return self.BaseClass.GetCastRange(self, location, target)
-end
-
-function rostik_w:GetManaCost(level)
-    return self.BaseClass.GetManaCost(self, level)
-end
-
 function rostik_w:GetAOERadius()
 	return self:GetSpecialValueFor("target_radius")
 end
@@ -25,6 +13,7 @@ function rostik_w:OnAbilityPhaseStart()
 	self.point = self:GetCursorPosition()
 	return true
 end
+
 function rostik_w:OnSpellStart()
 	if not IsServer() then return end
 	self.modifier = self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_rostik_w_casting", {duration = self:GetSpecialValueFor("duration")})
@@ -47,10 +36,6 @@ function modifier_rostik_w_casting:OnCreated(kv)
 	self:StartIntervalThink(self.interval)
 end
 
-function modifier_rostik_w_casting:OnDestroy()
-	if not IsServer() then return end
-end
-
 function modifier_rostik_w_casting:OnIntervalThink()
 	if not IsServer() then return end
 	self.caster = self:GetCaster()
@@ -69,7 +54,7 @@ function modifier_rostik_w_casting:OnIntervalThink()
 	ParticleManager:SetParticleControl(particle, 0, point)
 	ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, self.radius, self.radius))
 	
-	local units = FindUnitsInRadius(self.caster:GetTeamNumber(), point, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+	local units = FindUnitsInRadius(self.caster:GetTeamNumber(), point, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 				
 	for _,unit in pairs(units) do
 		local damageTable = { victim = unit, attacker = self.caster, damage = self.damage + (self.caster:GetIntellect(false) / 100 * self.multi), damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()}
@@ -84,8 +69,7 @@ function modifier_rostik_w_casting:OnIntervalThink()
 end
 
 function modifier_rostik_w_casting:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_OVERRIDE_ANIMATION
     }
 end
@@ -93,7 +77,6 @@ end
 function modifier_rostik_w_casting:GetOverrideAnimation()
     return ACT_DOTA_OVERRIDE_ABILITY_2
 end
---------------------------------------------------------------------------------
 
 
 modifier_ability_zuus_arc_lightning = class({
@@ -105,8 +88,14 @@ modifier_ability_zuus_arc_lightning = class({
     GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
 })
 
-
---------------------------------------------------------------------------------
+local function HasAffected(Table, unit)
+    for k,v in pairs(Table) do
+        if v == unit then
+            return true
+        end
+    end
+    return false
+end
 
 function modifier_ability_zuus_arc_lightning:OnCreated(kv)
     self.delay = self:GetAbility():GetSpecialValueFor("jump_delay")
@@ -121,32 +110,21 @@ function modifier_ability_zuus_arc_lightning:OnCreated(kv)
         return
     end
     self.affected_units = {}
-
+    if not IsServer() then return end
     self:CreateArcLightning(self.actual_unit)
-
     self:StartIntervalThink(self.delay)
 end
 
 function modifier_ability_zuus_arc_lightning:OnIntervalThink()
     local caster = self:GetCaster()
 
-    local all = FindUnitsInRadius(caster:GetTeam(), 
-    self.actual_unit:GetOrigin(), 
-    nil, 
-    self.radius,
-    DOTA_UNIT_TARGET_TEAM_ENEMY, 
-    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 
-    DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
-    FIND_ANY_ORDER, 
-    false)
-
+    local all = FindUnitsInRadius(caster:GetTeamNumber(), self.actual_unit:GetAbsOrigin(),  nil,  self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY,  DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, 0, false)
     local old_actual_unit = self.actual_unit
 
     for _, unit in ipairs(all) do
         if not HasAffected(self.affected_units, unit) then
             unit:EmitSound("Hero_Zuus.ArcLightning.Target")
             self:CreateArcLightning(unit)
-
             break
         end
     end
@@ -163,13 +141,7 @@ function modifier_ability_zuus_arc_lightning:CreateArcLightning(target)
         OldTarget = caster
     end
 	self.dmg = self.damage_percent * target:GetMaxHealth() * 0.01
-	ApplyDamage({
-        victim = target,
-        attacker = caster,
-        damage = self.dmg,
-        damage_type = self:GetAbility():GetAbilityDamageType(),
-        ability = self:GetAbility()
-    })
+	ApplyDamage({victim = target, attacker = caster, damage = self.dmg, damage_type = self:GetAbility():GetAbilityDamageType(), ability = self:GetAbility()})
     if not target or target:IsNull() then return end
     local fx = ParticleManager:CreateParticle("particles/rostik_q_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, OldTarget)
     ParticleManager:SetParticleControlEnt(fx, 0, OldTarget, PATTACH_POINT_FOLLOW, "attach_attack1", OldTarget:GetAbsOrigin(), true)
@@ -177,13 +149,4 @@ function modifier_ability_zuus_arc_lightning:CreateArcLightning(target)
     ParticleManager:ReleaseParticleIndex(fx)
     self.actual_unit = target
     table.insert(self.affected_units, target)
-end
-
-function HasAffected(Table, unit)
-    for k,v in pairs(Table) do
-        if v == unit then
-            return true
-        end
-    end
-    return false
 end
