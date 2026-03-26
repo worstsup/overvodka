@@ -2654,7 +2654,7 @@
 			}
 		}
 	}
-    "models/heroes/antimage/antimage.vmdl"
+    "models/pirat/serega_pirat.vmdl"
 	{
 		"PortraitLightPosition"		"14.01 -58.95 179.59"
 		"PortraitLightAngles"		"39.61 63.38 0.00"

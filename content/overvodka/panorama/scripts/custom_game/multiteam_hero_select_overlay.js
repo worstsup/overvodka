@@ -1,5 +1,54 @@
 "use strict";
 var heroModelPanel = heroModelPanel || null;
+
+const HEROES_WITH_NO_FACET = {
+    necrolyte: true,
+    skeleton_king: true,
+    bloodseeker: true,
+    ursa: true,
+    zuus: true,
+    tidehunter: true,
+    beastmaster: true,
+    abaddon: true,
+    bounty_hunter: true,
+    warlock: true,
+    antimage: true,
+    morphling: true,
+    faceless_void: true,
+    bristleback: true,
+    nyx_assassin: true,
+    kunkka: true,
+    axe: true,
+    tusk: true,
+    primal_beast: true,
+    mars: true,
+    slardar: true,
+    lion: true,
+    omniknight: true,
+    ogre_magi: true,
+    earthshaker: true,
+    meepo: true,
+    hoodwink: true,
+    phantom_lancer: true,
+    terrorblade: true,
+    ringmaster: true,
+    void_spirit: true,
+    slark: true,
+    spectre: true,
+    puck: true,
+    templar_assassin: true,
+    brewmaster: true,
+    juggernaut: true,
+    tinker: true,
+    winter_wyvern: true,
+    ancient_apparition: true,
+    storm_spirit: true,
+    sniper: true,
+    rattletrap: true,
+	riki: true,
+	rubick: true,
+};
+
 function OnUpdateHeroSelection()
 {
 	var teamIds = Game.GetAllTeamIDs();
@@ -322,6 +371,12 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
+			let facet_pick_panel = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildrenWithClassTraverse("HeroFacetOuter");
+
+			if (facet_pick_panel) {
+				facet_pick_panel[0].style.visibility = HEROES_WITH_NO_FACET[playerInfo.possible_hero_selection] ? "collapse" : "visible";
+			}
+
 			let HeroPick = FindDotaHudElement("HeroPickRightColumn");
 			HeroPick.style.visibility = "visible";
 			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 

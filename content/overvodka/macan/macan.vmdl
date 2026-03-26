@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc40:version{da0ab1f8-9722-4910-94b8-10b6a08c0934} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc41:version{12fc9d44-453a-4ae4-b4d9-7e2ac0bbd4e0} -->
 {
 	rootNode = 
 	{
@@ -89,6 +89,15 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "attach_attack2"
+						parent_bone = "LeftHandMiddle3"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 			{
@@ -108,7 +117,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -19.338844, -24.529259, -13.293377 ]
-								hitbox_maxs = [ 19.133148, 27.337761, 17.450045 ]
+								hitbox_maxs = [ 19.133148, 27.33776, 17.450045 ]
 							},
 							{
 								_class = "Hitbox"
@@ -117,7 +126,7 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -18.047859, -18.120743, -16.410576 ]
+								hitbox_mins = [ -18.04786, -18.120743, -16.410576 ]
 								hitbox_maxs = [ 18.015396, 19.245758, 15.646652 ]
 							},
 							{
@@ -198,7 +207,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -17.94791, -9.22247, -8.322632 ]
-								hitbox_maxs = [ 9.449457, 32.496349, 18.59034 ]
+								hitbox_maxs = [ 9.449457, 32.49635, 18.59034 ]
 							},
 							{
 								_class = "Hitbox"
@@ -208,7 +217,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -9.913426, -9.906374, -7.613312 ]
-								hitbox_maxs = [ 4.671668, 24.971359, 5.311508 ]
+								hitbox_maxs = [ 4.671668, 24.97136, 5.311508 ]
 							},
 							{
 								_class = "Hitbox"
@@ -347,7 +356,7 @@
 								surface_property = ""
 								translation_only = false
 								group_id = 0
-								hitbox_mins = [ -10.501419, -17.697399, -14.42984 ]
+								hitbox_mins = [ -10.501419, -17.6974, -14.42984 ]
 								hitbox_maxs = [ 17.03635, 20.25285, 18.926811 ]
 							},
 							{
@@ -508,7 +517,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -12.04204, -11.284906, -14.554059 ]
-								hitbox_maxs = [ 14.824875, 58.866081, 13.348174 ]
+								hitbox_maxs = [ 14.824875, 58.86608, 13.348174 ]
 							},
 							{
 								_class = "Hitbox"
@@ -518,7 +527,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -8.301675, -10.15554, -10.867924 ]
-								hitbox_maxs = [ 7.095079, 47.960251, 10.17098 ]
+								hitbox_maxs = [ 7.095079, 47.96025, 10.17098 ]
 							},
 							{
 								_class = "Hitbox"
@@ -538,7 +547,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -14.855911, -11.191437, -14.694453 ]
-								hitbox_maxs = [ 11.959839, 58.846169, 13.380593 ]
+								hitbox_maxs = [ 11.959839, 58.84617, 13.380593 ]
 							},
 							{
 								_class = "Hitbox"

@@ -84,63 +84,6 @@ function IsRealHero(Unit)
     return true
 end
 
--- Valve's RotatePosition started misbehaving after a Dota patch, so we override it globally.
-function RotatePosition(origin, angles, position)
-    if not origin or not angles or not position then
-        return position
-    end
-
-    local rel = position - origin
-
-    local pitch = math.rad(angles.x or 0)
-    local yaw = math.rad(angles.y or 0)
-    local roll = math.rad(angles.z or 0)
-
-    local sp = math.sin(pitch)
-    local cp = math.cos(pitch)
-    local sy = math.sin(yaw)
-    local cy = math.cos(yaw)
-    local sr = math.sin(roll)
-    local cr = math.cos(roll)
-
-    local forward = Vector(cp * cy, cp * sy, -sp)
-    local right = Vector(
-        -sr * sp * cy + cr * sy,
-        -sr * sp * sy - cr * cy,
-        -sr * cp
-    )
-    local up = Vector(
-        cr * sp * cy + sr * sy,
-        cr * sp * sy - sr * cy,
-        cr * cp
-    )
-
-    local left = right * -1
-
-    return origin + forward * rel.x + left * rel.y + up * rel.z
-end
-
-if rawget(_G, "__OriginalEmitSoundOnLocationWithCaster") == nil then
-    _G.__OriginalEmitSoundOnLocationWithCaster = rawget(_G, "EmitSoundOnLocationWithCaster")
-end
-
-local OriginalEmitSoundOnLocationWithCaster = rawget(_G, "__OriginalEmitSoundOnLocationWithCaster")
-
--- Temporary compatibility wrapper: use the engine function when it works,
--- and gracefully fall back to EmitSoundOn if the patched engine call throws.
-function EmitSoundOnLocationWithCaster(location, soundName, caster)
-    if OriginalEmitSoundOnLocationWithCaster then
-        local ok, result = pcall(OriginalEmitSoundOnLocationWithCaster, location, soundName, caster)
-        if ok then
-            return result
-        end
-    end
-
-    if caster and (not caster.IsNull or not caster:IsNull()) then
-        return EmitSoundOn(soundName, caster)
-    end
-end
-
 function RollPseudoRandom(base_chance, entity)
 	local chances_table = {
 		{1, 0.015604},

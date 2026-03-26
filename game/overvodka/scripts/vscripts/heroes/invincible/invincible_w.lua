@@ -69,8 +69,7 @@ function modifier_invincible_w_start:OnCreated()
 end
 
 function modifier_invincible_w_start:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_DISABLE_TURNING,
     }
 end
@@ -119,8 +118,7 @@ function modifier_invincible_w:IsPurgable() return false end
 function modifier_invincible_w:IsPurgeException() return false end
 
 function modifier_invincible_w:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_DISABLE_TURNING,
     }
 end
@@ -165,10 +163,6 @@ function modifier_invincible_w:OnCreated( kv )
 	self.flCreationTime = GameRules:GetDOTATime( false, true )
 	local hAbility = self:GetAbility()
 	self.max_speed = self:GetAbility():GetSpecialValueFor("speed")
-	self.creep_damage = self:GetAbility():GetSpecialValueFor("creep_damage")
-    if self.creep_damage == 100 then
-        self.max_speed = self.max_speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 3
-    end
 	self.acceleration = 350
 	self.deceleration = 500
 	self.turn_rate_min = 360
@@ -252,27 +246,12 @@ function modifier_invincible_w:CheckEnemies(radius)
         return
     end
 
-    if self.creep_damage == 100 then
-        local creeps = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
-        for _, target in pairs(creeps) do
-            if not target:HasModifier("modifier_invincible_w_creep_damage") then
-                target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
-                target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_creep_damage", {duration = 0.25})
-                self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
-            end
-        end
-    else
-        local creeps = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
-        for _, target in pairs(creeps) do
-            if not target:HasModifier("modifier_invincible_w_creep_damage") then
-                target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
-                target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_creep_damage", {duration = 0.25})
-                local modifier = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_invincible_w_buff_attack", {} )
-                self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
-                if modifier and not modifier:IsNull() then
-                    modifier:Destroy()
-                end
-            end
+    local creeps = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
+    for _, target in pairs(creeps) do
+        if not target:HasModifier("modifier_invincible_w_creep_damage") then
+            target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
+            target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_creep_damage", {duration = 0.25})
+            self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
         end
     end
 end
@@ -401,10 +380,6 @@ function modifier_invincible_w_end:OnCreated()
     self:GetCaster():RemoveGesture(ACT_DOTA_POOF_END)
     self:GetCaster():StartGestureWithPlaybackRate(ACT_DOTA_SPAWN, 1.0)
     self.speed = self:GetAbility():GetSpecialValueFor("speed")
-    self.creep_damage = self:GetAbility():GetSpecialValueFor("creep_damage")
-    if self.creep_damage == 100 then
-        self.speed = self.speed + self:GetCaster():GetMoveSpeedModifier(self:GetParent():GetBaseMoveSpeed(), true) * 3
-    end
     self:StartIntervalThink(0.01)
 end
 
@@ -497,10 +472,6 @@ function modifier_invincible_w_buff_attack_speed:OnIntervalThink()
     self:StartIntervalThink(-1)
 end
 
-function modifier_invincible_w_buff_attack_speed:OnDestroy()
-    if not IsServer() then return end
-end
-
 function modifier_invincible_w_buff_attack_speed:CheckState()
     return
     {
@@ -510,8 +481,7 @@ function modifier_invincible_w_buff_attack_speed:CheckState()
 end
 
 function modifier_invincible_w_buff_attack_speed:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT
     }
 end
@@ -524,17 +494,9 @@ function modifier_invincible_w_creep_damage:IsHidden() return true end
 
 modifier_generic_knockback_invincible = class({})
 
-function modifier_generic_knockback_invincible:IsHidden()
-	return true
-end
-
-function modifier_generic_knockback_invincible:IsPurgable()
-	return false
-end
-
-function modifier_generic_knockback_invincible:GetAttributes()
-	return MODIFIER_ATTRIBUTE_MULTIPLE
-end
+function modifier_generic_knockback_invincible:IsHidden() return true end
+function modifier_generic_knockback_invincible:IsPurgable() return false end
+function modifier_generic_knockback_invincible:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_generic_knockback_invincible:OnCreated( kv )
 	if IsServer() then
@@ -584,11 +546,7 @@ function modifier_generic_knockback_invincible:OnCreated( kv )
 	end
 end
 
-function modifier_generic_knockback_invincible:OnRefresh( kv )
-	if not IsServer() then return end
-end
-
-function modifier_generic_knockback_invincible:OnDestroy( kv )
+function modifier_generic_knockback_invincible:OnDestroy()
 	if not IsServer() then return end
 
 	if not self.interrupted then
@@ -616,11 +574,9 @@ function modifier_generic_knockback_invincible:SetEndCallback( func )
 end
 
 function modifier_generic_knockback_invincible:CheckState()
-	local state = 
-    {
+	return {
 		[MODIFIER_STATE_STUNNED] = true,
 	}
-	return state
 end
 
 function modifier_generic_knockback_invincible:UpdateHorizontalMotion( me, dt )
