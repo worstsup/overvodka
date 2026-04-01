@@ -578,10 +578,11 @@
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"aegis_hero"
-		"ItemCost"						"7000"
+		"ItemCost"						"7300"
 		"AbilityValues"
 		{
-			"bonus_attack_speed"	"105"
+			"bonus_attack_speed"	"110"
+			"bonus_range"			"50"
 			"minibash_chance"		"80"
 			"bash_damage"			"30"
 			"cleave_percent" 		"60"
@@ -1328,6 +1329,7 @@
 		"ShouldBeSuggested"				"1"
 		"AbilityValues"
 		{
+				"aoe_bonus"				"75"
 				"bonus_health"			"275"
 				"bonus_intellect"		"20"
 				"bonus_strength"		"5"

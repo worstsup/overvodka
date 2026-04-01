@@ -4387,14 +4387,16 @@
 		"DOTA_Tooltip_ability_item_suchiy_bonus_intellect" "+$int"
 		"DOTA_Tooltip_ability_item_suchiy_bonus_armor" "+$armor"
 		"DOTA_Tooltip_ability_item_suchiy_bonus_hp_regen" "+$hp_regen"
+		"DOTA_Tooltip_ability_item_suchiy_aoe_bonus"	"+$aoe_bonus"
 
 		"DOTA_Tooltip_ability_item_bablokrad"			  "CASH THIEF"
 		"DOTA_Tooltip_ability_item_bablokrad_Description" "<h1>Use: Steal!</h1> Instantly steals %gold%%% of the current gold of the target hero, as well as another %gold_b% of gold in the form of three coins that drop near the target. \nHas 3 charges."
 		"DOTA_Tooltip_ability_item_bablokrad_Attackspeed" "+$attack"
 
 		"DOTA_Tooltip_ability_item_aegis_hero"            "AEGIS HERO"
-		"DOTA_Tooltip_ability_item_aegis_hero_Description" "<h1>Passive: Minibash</h1> The hero's attack has a %minibash_chance%%% chance to pass through evasion and slow the enemy's movement speed by %movement_speed_slow%%% and attack speed by %attack_speed_slow% for %slow_duration% sec, and also deals %cleave_percent%%% cleave damage in a %cleave_radius% radius and %bash_damage%%% magic damage from the owner's attack to the target.\n\n The item does not stack and does not work on illusions.\nThe cleave attack and slow do not work on ranged heroes."
+		"DOTA_Tooltip_ability_item_aegis_hero_Description" "<h1>Passive: Minibash</h1> The hero's attack has a %minibash_chance%%% chance to pass through evasion and slow the enemy's movement speed by %movement_speed_slow%%% and attack speed by %attack_speed_slow% for %slow_duration% sec, and also deals %cleave_percent%%% cleave damage in a %cleave_radius% radius and %bash_damage%%% magic damage from the owner's attack to the target.\n\nMelee heroes also gain %bonus_range% attack range.\n\n The item does not stack and does not work on illusions.\nThe cleave attack and slow do not work on ranged heroes."
 		"DOTA_Tooltip_ability_item_aegis_hero_bonus_attack_speed" "+$attack"
+		"DOTA_Tooltip_ability_item_aegis_hero_bonus_range" "+$attack_range_melee"
 		"DOTA_Tooltip_modifier_item_aegis_hero_slow" "AEGIS HERO"
 		"DOTA_Tooltip_modifier_item_aegis_hero_slow_Description" "Your movement and attack speeds are reduced"
 
