@@ -23,6 +23,9 @@ function modifier_kachok_trenbolone:OnCreated( kv )
     local transformParticle = ParticleManager:CreateParticle("particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(transformParticle, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(transformParticle)
+
+    local p = ParticleManager:CreateParticle("particles/kachok_trenbolone.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:AddParticle(p, false, false, -1, false, false)
 end
 
 function modifier_kachok_trenbolone:OnRefresh( kv )

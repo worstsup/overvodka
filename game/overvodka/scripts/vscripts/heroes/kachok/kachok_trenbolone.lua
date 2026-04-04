@@ -4,6 +4,7 @@ kachok_trenbolone = class({})
 
 function kachok_trenbolone:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_transform.vpcf", context)
+    PrecacheResource("particle", "particles/kachok_trenbolone.vpcf", context)
     PrecacheResource("model", "models/items/warlock/golem/hellsworn_golem/hellsworn_golem.vmdl", context)
 end
 

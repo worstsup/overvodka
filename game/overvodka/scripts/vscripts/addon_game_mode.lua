@@ -31,6 +31,7 @@ require('server/server')
 require('music_zone_trigger')
 require('util/vector_targeting')
 require('util/functions')
+require('util/team_shuffle')
 require('quests')
 require('store')
 require('vote')
@@ -225,6 +226,7 @@ function OvervodkaGameMode:InitGameMode()
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
+	GameRules:SetCustomGameSetupAutoLaunchDelay( 30 )
 	if GetMapName() == "overvodka_5x5" then
 		GameRules:SetPreGameTime( 90.0 )
 		GameRules:SetCustomGameSetupTimeout( 3 ) -- was 3
