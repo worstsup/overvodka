@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_papich_q", "heroes/papich/papich_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua.lua", LUA_MODIFIER_MOTION_NONE)
 
 papich_q = class({})
 modifier_papich_q = class({})

@@ -1,7 +1,5 @@
 LinkLuaModifier( "modifier_serega_topor", "heroes/pirat/serega_topor", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_topor", "heroes/pirat/serega_topor", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_lifesteal_lua", "modifier_generic_lifesteal_lua", LUA_MODIFIER_MOTION_NONE )
 
 serega_topor = class({})
 

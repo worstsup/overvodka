@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_rostik_w_casting", "heroes/rostik/rostik_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_ability_zuus_arc_lightning", "heroes/rostik/rostik_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 rostik_w = class ({})
 

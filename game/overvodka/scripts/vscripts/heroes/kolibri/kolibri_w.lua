@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_kolibri_w_slow", "heroes/kolibri/kolibri_w", LUA_MODIFIER_MOTION_NONE)
 
 kolibri_w = class({})

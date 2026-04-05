@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_epstein_w_debuff", "heroes/epstein/epstein_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_muted_lua", "modifier_generic_muted_lua", LUA_MODIFIER_MOTION_NONE)
 
 local epstein_w_exceptions = {
 	["dvoreckov_q"] = true,

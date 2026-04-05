@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_bombardiro_bombs",  "units/bombardiro/bombardiro_bombs", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 bombardiro_bombs = class({})
 
 function bombardiro_bombs:IsStealable()

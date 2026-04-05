@@ -2,7 +2,6 @@ ashab_dogon = class({})
 LinkLuaModifier( "modifier_ashab_dogon", "heroes/ashab/ashab_dogon", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_ashab_dogon_debuff", "heroes/ashab/ashab_dogon", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_magresist_ashab", "heroes/ashab/ashab_dogon", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_BOTH )
 
 function ashab_dogon:Precache( context )
 	PrecacheResource( "particle", "particles/econ/items/primal_beast/primal_beast_2022_prestige/primal_beast_2022_prestige_onslaught_charge_mesh.vpcf", context )

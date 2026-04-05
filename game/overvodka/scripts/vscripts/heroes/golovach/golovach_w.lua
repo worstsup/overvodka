@@ -1,5 +1,3 @@
-LinkLuaModifier( "modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE )
-
 golovach_w = class({})
 
 function golovach_w:Precache( context )

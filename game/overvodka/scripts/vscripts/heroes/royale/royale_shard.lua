@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_royale_shard_ai", "heroes/royale/royale_shard", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
 royale_shard = class({})
 

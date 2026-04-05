@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_kolibri_r",       "heroes/kolibri/kolibri_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_kolibri_r_orbit", "heroes/kolibri/kolibri_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_lifesteal_lua", "modifier_generic_lifesteal_lua", LUA_MODIFIER_MOTION_NONE)
 kolibri_r = class({})
 
 function kolibri_r:Precache(ctx)

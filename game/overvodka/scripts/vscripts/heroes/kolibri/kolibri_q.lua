@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_kolibri_q_movement", "heroes/kolibri/kolibri_q", LUA_MODIFIER_MOTION_HORIZONTAL)
 LinkLuaModifier("modifier_kolibri_q_movement_damage", "heroes/kolibri/kolibri_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
 kolibri_q = class({})
 

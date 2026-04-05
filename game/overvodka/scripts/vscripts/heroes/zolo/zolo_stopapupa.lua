@@ -1,5 +1,4 @@
 zolo_stopapupa = class({})
-LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_stopapupa", "heroes/zolo/zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_slow", "heroes/zolo/zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
 

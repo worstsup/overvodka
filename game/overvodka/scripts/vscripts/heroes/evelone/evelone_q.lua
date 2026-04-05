@@ -2,8 +2,6 @@ LinkLuaModifier("modifier_evelone_q", "heroes/evelone/evelone_q", LUA_MODIFIER_M
 LinkLuaModifier("modifier_evelone_q_damage", "heroes/evelone/evelone_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_q_debuff", "heroes/evelone/evelone_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_q_shard", "heroes/evelone/evelone_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
 evelone_q = class({})
 

@@ -1,7 +1,6 @@
 LinkLuaModifier("modifier_royale_megaknight", "heroes/royale/royale_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_megaknight_jump", "heroes/royale/royale_r", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_overvodka_creep", "modifiers/modifier_overvodka_creep", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
 royale_r = class({})
 

@@ -224,18 +224,16 @@ PrecacheUtils.particle_folders = {
 }
 
 PrecacheUtils.units = {
-    "npc_dota_creature_basic_zombie",
-    "npc_dota_creature_berserk_zombie",
-    "npc_dota_treasure_courier",
-	"npc_nelya",
-	"npc_rivendare",
-	"npc_dota_courier",
-	"npc_overvodka_pet",
-	"npc_dota_silvername_clone",
-	"npc_murloc",
-	"npc_silvername_chair",
-	"npc_silvername_garr",
-	"npc_zhenya_boss",
+		"npc_dota_treasure_courier",
+		"npc_nelya",
+		"npc_rivendare",
+		"npc_dota_courier",
+		"npc_overvodka_pet",
+		"npc_dota_silvername_clone",
+		"npc_murloc",
+		"npc_silvername_chair",
+		"npc_silvername_garr",
+		"npc_zhenya_boss",
 }
 
 PrecacheUtils.models = {

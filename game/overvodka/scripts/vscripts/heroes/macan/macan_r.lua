@@ -1,8 +1,6 @@
 macan_r = class({})
 LinkLuaModifier( "modifier_macan_r_charge", "heroes/macan/macan_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_macan_r", "heroes/macan/macan_r", LUA_MODIFIER_MOTION_HORIZONTAL )
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua.lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 
 function macan_r:Precache( context )
 	PrecacheResource( "particle", "particles/macan_r.vpcf", context )

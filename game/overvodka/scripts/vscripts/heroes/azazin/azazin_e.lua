@@ -2,7 +2,6 @@ LinkLuaModifier("modifier_azazin_e", "heroes/azazin/azazin_e", LUA_MODIFIER_MOTI
 LinkLuaModifier("modifier_azazin_e_caster", "heroes/azazin/azazin_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_azazin_e_enemy", "heroes/azazin/azazin_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_azazin_e_debuff", "heroes/azazin/azazin_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 azazin_e = class({})
 k = 0

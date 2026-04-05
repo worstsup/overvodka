@@ -2,8 +2,6 @@ LinkLuaModifier("modifier_royale_q", "heroes/royale/royale_q", LUA_MODIFIER_MOTI
 LinkLuaModifier("modifier_royale_q_stun", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_q_snowball_slow", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_q_snowball_roll", "heroes/royale/royale_q", LUA_MODIFIER_MOTION_HORIZONTAL)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
 royale_q = class({})
 

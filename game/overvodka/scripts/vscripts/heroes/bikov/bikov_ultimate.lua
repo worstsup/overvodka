@@ -3,7 +3,6 @@ bikov_ultimate = class({})
 LinkLuaModifier("modifier_bikov_r_caster",      "heroes/bikov/bikov_ultimate", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_bikov_r_hold",        "heroes/bikov/bikov_ultimate", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_bikov_r_throw_timer", "heroes/bikov/bikov_ultimate", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 function bikov_ultimate:Precache(ctx)
     PrecacheResource("soundfile",  "soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts", ctx)

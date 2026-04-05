@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_speed_penalty", "heroes/speed/speed_penalty", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 speed_penalty = class({})
 

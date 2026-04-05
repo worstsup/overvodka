@@ -6,8 +6,6 @@ LinkLuaModifier("modifier_item_suchiy_blast_amp",    "items/suchiy", LUA_MODIFIE
 LinkLuaModifier("modifier_item_suchiy_vision",       "items/suchiy", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_suchiy_arctic_bind",  "items/suchiy", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE)
-
 item_suchiy = class({})
 
 function item_suchiy:GetIntrinsicModifierName()

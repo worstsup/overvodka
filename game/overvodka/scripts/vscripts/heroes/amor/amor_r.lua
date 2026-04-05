@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_amor_ultimate_beer", "heroes/amor/amor_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
 amor_ultimate = class({})
 

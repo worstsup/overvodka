@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_armature_strike_crit", "items/armature_strike", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_armature_strike", "items/armature_strike", LUA_MODIFIER_MOTION_NONE)
 

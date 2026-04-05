@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_papich_e_clone_thinker", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_papich_e_clone_debuff", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
+
 papich_e_clone = class({})
 
 function papich_e_clone:Precache(context)

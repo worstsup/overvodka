@@ -1,5 +1,4 @@
 LinkLuaModifier( "modifier_gunnar_bash", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_gunnar_bash_armor", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
 
 gunnar_bash = class({})

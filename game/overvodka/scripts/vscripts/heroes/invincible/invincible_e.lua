@@ -1,5 +1,4 @@
 invincible_e = class({})
-LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_invincible_e_buff", "heroes/invincible/invincible_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_invincible_e_debuff", "heroes/invincible/invincible_e", LUA_MODIFIER_MOTION_NONE )
 

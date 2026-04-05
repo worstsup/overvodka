@@ -5,7 +5,6 @@ LinkLuaModifier( "modifier_pistol_w_lifesteal", "heroes/pistol/pistol_w", LUA_MO
 LinkLuaModifier( "modifier_pistol_w_active_fury", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_pistol_w_active_animation", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_pistol_w_active_recovery", "heroes/pistol/pistol_w", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
 
 pistol_w = class({})
 

@@ -1,7 +1,6 @@
 LinkLuaModifier("modifier_evelone_r", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_r_debuff", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_r_aura", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
 
 evelone_r = class({})
 

@@ -1,6 +1,5 @@
 sans_w = class({})
 
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_bone_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier( "modifier_sans_w_walk", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )

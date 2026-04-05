@@ -1,5 +1,4 @@
 ebanko_w = class({})
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ebanko_w", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ebanko_w_slow", "heroes/ebanko/ebanko_w", LUA_MODIFIER_MOTION_NONE )
 

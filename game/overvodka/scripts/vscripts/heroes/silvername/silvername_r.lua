@@ -1,6 +1,5 @@
 silvername_r = class({})
 LinkLuaModifier( "modifier_silvername_r_thinker", "heroes/silvername/silvername_r", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function silvername_r:GetAOERadius()
 	return self:GetSpecialValueFor( "radius" )

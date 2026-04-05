@@ -1,5 +1,5 @@
 arsen_tg = class({})
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
+
 LinkLuaModifier( "modifier_arsen_tg", "heroes/arsen/modifier_arsen_tg", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_arsen_tg_blocker", "heroes/arsen/modifier_arsen_tg_blocker", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_arsen_tg_thinker", "heroes/arsen/modifier_arsen_tg_thinker", LUA_MODIFIER_MOTION_NONE )

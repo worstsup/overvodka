@@ -2,7 +2,6 @@ LinkLuaModifier("modifier_peterka_e_cast", "heroes/5opka/peterka_e", LUA_MODIFIE
 LinkLuaModifier("modifier_peterka_e_charge", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peterka_e_debuff", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peterka_e_cooldown", "heroes/5opka/peterka_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 peterka_e = class({})
 function peterka_e:Precache(context)

@@ -3,7 +3,6 @@ LinkLuaModifier("modifier_invincible_w_debuff", "heroes/invincible/invincible_w"
 LinkLuaModifier("modifier_invincible_w_end", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_w_start", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_invincible_w_visual", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier("modifier_generic_knockback_invincible_knockback_cooldown", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_invincible_w_buff_attack_speed", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_w_buff_attack", "heroes/invincible/invincible_w", LUA_MODIFIER_MOTION_NONE)

@@ -1,7 +1,6 @@
 dave_loonboon = class({})
 LinkLuaModifier( "modifier_dave_loonboon", "heroes/dave/dave_loonboon", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dave_loonboon_plants", "heroes/dave/dave_loonboon", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dave_sunflower_passive", "heroes/dave/dave_sunflower", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dave_sunflower_passive_aura", "heroes/dave/dave_sunflower", LUA_MODIFIER_MOTION_NONE )
 

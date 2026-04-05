@@ -1049,8 +1049,6 @@ end
 dvoreckov_qqe = class({})
 LinkLuaModifier( "modifier_dvoreckov_qqe", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_dvoreckov_qqe_leap", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function dvoreckov_qqe:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_dawnbreaker.vsndevts", context )
@@ -1666,7 +1664,6 @@ end
 
 dvoreckov_qww = class({})
 LinkLuaModifier( "modifier_dvoreckov_qww", "heroes/dvoreckov/dvoreckov_abilities", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function dvoreckov_qww:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_ogre_magi/ogre_magi_ignite.vpcf", context )
@@ -2182,9 +2179,6 @@ function modifier_dvoreckov_eee_debuff:GetEffectAttachType()
 end
 
 dvoreckov_qee = class({})
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_muted_lua", "modifier_generic_muted_lua", LUA_MODIFIER_MOTION_NONE )
 
 function dvoreckov_qee:Precache(context)
 	PrecacheResource("soundfile", "soundevents/ebalo.vsndevts", context)

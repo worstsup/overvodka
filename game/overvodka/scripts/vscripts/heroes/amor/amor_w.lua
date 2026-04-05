@@ -1,7 +1,6 @@
 LinkLuaModifier("modifier_amor_w_self_buff",    "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_w_slow",         "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_w_superslow",    "heroes/amor/amor_w",           LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_arc_lua",     "modifier_generic_arc_lua",     LUA_MODIFIER_MOTION_BOTH)
 
 amor_w = class({})
 

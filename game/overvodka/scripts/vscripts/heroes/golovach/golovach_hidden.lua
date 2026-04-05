@@ -1,7 +1,6 @@
 golovach_hidden = class({})
 LinkLuaModifier( "modifier_golovach_hidden", "heroes/golovach/modifier_golovach_hidden", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_golovach_slow", "heroes/golovach/modifier_golovach_slow", LUA_MODIFIER_MOTION_HORIZONTAL )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_HORIZONTAL )
 
 function golovach_hidden:IsStealable()
 	return false

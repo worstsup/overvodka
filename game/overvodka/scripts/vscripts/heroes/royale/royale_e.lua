@@ -3,7 +3,6 @@ LinkLuaModifier("modifier_royale_e_rage", "heroes/royale/royale_e", LUA_MODIFIER
 LinkLuaModifier("modifier_royale_e_freeze", "heroes/royale/royale_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_e_freeze_aura", "heroes/royale/royale_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_royale_e_rage_aura", "heroes/royale/royale_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 
 royale_e = class({})
 

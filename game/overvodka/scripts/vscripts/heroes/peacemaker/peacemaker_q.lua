@@ -1,6 +1,4 @@
-LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("modifier_peacemaker_q", "heroes/peacemaker/peacemaker_q", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 peacemaker_q = class({})
 

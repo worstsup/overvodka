@@ -1,5 +1,4 @@
 silvername_q_facet_1 = class({})
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_silvername_r_facet_1_soldier", "heroes/silvername/silvername_r_facet_1", LUA_MODIFIER_MOTION_NONE)
 
 function silvername_q_facet_1:FindAdditionalTargets(primaryTarget, maxTargets)

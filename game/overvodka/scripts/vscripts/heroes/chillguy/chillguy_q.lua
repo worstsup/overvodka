@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_chillguy_q_slow", "heroes/chillguy/chillguy_q", LUA_MODIFIER_MOTION_NONE )
 
 chillguy_q = class({})

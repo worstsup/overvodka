@@ -1,5 +1,3 @@
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-
 silvername_q_facet_3 = class({})
 
 function silvername_q_facet_3:OnAbilityPhaseStart()

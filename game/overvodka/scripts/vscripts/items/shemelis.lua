@@ -4,7 +4,6 @@ LinkLuaModifier("modifier_item_shemelis_debuff", "items/shemelis", LUA_MODIFIER_
 LinkLuaModifier("modifier_item_shemelis_movement_damage", "items/shemelis", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_shemelis_movement_listener", "items/shemelis", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_shemelis_barrier", "items/shemelis", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
 item_shemelis = class({})
 

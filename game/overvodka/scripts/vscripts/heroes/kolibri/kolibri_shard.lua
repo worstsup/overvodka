@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_kolibri_shard_movement",        "heroes/kolibri/kolibri_shard", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_kolibri_shard_movement_damage", "heroes/kolibri/kolibri_shard", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_knockback_lua",         "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
 
 local function _GetSideDir(caster, sign)
 	local f = caster:GetForwardVector()

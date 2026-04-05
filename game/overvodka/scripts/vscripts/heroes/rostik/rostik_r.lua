@@ -3,7 +3,6 @@ LinkLuaModifier( "modifier_rostik_r", "heroes/rostik/rostik_r", LUA_MODIFIER_MOT
 LinkLuaModifier( "modifier_rostik_r_slow", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_rostik_r_thinker", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_rostik_r_fire", "heroes/rostik/rostik_r", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function rostik_r:OnSpellStart()
 	local caster = self:GetCaster()

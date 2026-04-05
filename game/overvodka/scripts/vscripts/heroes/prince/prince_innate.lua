@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_prince_innate", "heroes/prince/prince_innate", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE)
 
 prince_innate = class({})
 

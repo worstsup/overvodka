@@ -1,7 +1,5 @@
 sasavot_q = class({})
 LinkLuaModifier( "modifier_sasavot_q", "heroes/sasavot/modifier_sasavot_q", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 
 function sasavot_q:GetCastPoint()
 	return self:GetSpecialValueFor( "total_cast_time_tooltip" )
