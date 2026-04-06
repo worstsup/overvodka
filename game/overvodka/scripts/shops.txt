@@ -83,7 +83,7 @@
 		"item"		"item_magic_aegis"
 		"item"		"item_aegis_hero"	
 		"item"		"item_charik_new"
-		"item"		"item_manta_datadriven"
+		"item"		"item_pick_me"
 		"item"		"item_suchiy"
 		"item"		"item_invis_sword_datadriven"
 		"item"		"item_badun"	
@@ -153,7 +153,6 @@
 		"item"		"item_oblivion_staff"
 
 		"item"		"item_travel_boots"
-		"item"		"item_hand_of_midas"
 		"item"		"item_moon_shard"
 		"item"		"item_soul_booster"
 	}
@@ -221,7 +220,6 @@
 		"item"		"item_vladmir"
 		"item"		"item_crimson_guard"
 		"item"		"item_armlet"
-		"item"		"item_helm_of_the_overlord"
 
 		"item"		"item_consecrated_wraps"
 		"item"		"item_aeon_disk"

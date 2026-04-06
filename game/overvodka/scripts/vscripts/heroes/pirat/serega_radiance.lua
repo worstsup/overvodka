@@ -52,7 +52,7 @@ end
 function modifier_serega_radiance_debuff:OnIntervalThink()
 	if not self:GetAbility() then return end
 	if not self:GetCaster():IsAlive() then return end
-	self.dmg = self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor("base_damage") * self.interval
+	self.dmg = self:GetAbility():GetSpecialValueFor("base_damage") * self.interval
 	if self:GetCaster():IsIllusion() then
 		self.dmg = self.dmg / 2
 	end
@@ -79,5 +79,5 @@ function modifier_serega_radiance_debuff:DeclareFunctions()
 end
 
 function modifier_serega_radiance_debuff:GetModifierMiss_Percentage()
-	return self:GetAbility():GetSpecialValueFor( "base_miss" ) + self:GetCaster():GetLevel() * self:GetAbility():GetSpecialValueFor( "level_miss" )
+	return self:GetAbility():GetSpecialValueFor( "base_miss" )
 end

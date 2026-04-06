@@ -157,7 +157,7 @@ end
 
 function modifier_invincible_q_debuff:OnDestroy()
     if not IsServer() then return end
-	if self.target and not self.target:IsNull() and self.target:IsAlive() then
+	if self.target and not self.target:IsNull() and self.target:IsAlive() and self.target:IsMoving() and not self.target:IsChanneling() then
         self.target:Stop()
     end
 end

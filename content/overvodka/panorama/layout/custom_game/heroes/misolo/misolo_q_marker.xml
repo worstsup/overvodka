@@ -1,0 +1,10 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/misolo_q_marker.css" />
+    </styles>
+
+    <Panel class="MisoloQMarker" hittest="false" hittestchildren="false">
+        <Image class="MisoloQArrow" src="file://{images}/custom_game/red_arrow.png" />
+        <Label class="MisoloQText" text="#MISOLO_Q_MARKER_TEXT" />
+    </Panel>
+</root>

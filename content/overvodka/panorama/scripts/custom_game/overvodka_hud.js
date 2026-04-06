@@ -139,7 +139,7 @@ function HeroSelection() {
     HeroSkill1.style.visibility = "visible"
     let SelectedHeroDetails = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectedHeroDetails")
     SelectedHeroDetails.style.visibility = "visible"
-    SelectedHeroDetails.style.marginLeft = "0%"
+    SelectedHeroDetails.style.marginLeft = "-20%"
     SelectedHeroDetails.style.marginTop = "0%"
     SelectedHeroDetails.style.position = "58.4% 25% 0px"
     let SelectedHeroName = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectedHeroName")
@@ -149,6 +149,13 @@ function HeroSelection() {
     let PreGameHeroIcons = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("StrategyScreen")
     let PregameHeroicon = PreGameHeroIcons.FindChildTraverse("SelectedHeroDetails")
     PregameHeroicon.style.width = "800px"
+
+    let SelectedHeroFacets = PreGameHeroIcons.FindChildrenWithClassTraverse("SelectedHeroFacets")
+    if (SelectedHeroFacets && SelectedHeroFacets.length > 0) {
+        SelectedHeroFacets[0].style.marginLeft = "2%"
+        SelectedHeroFacets[0].style.marginRight = "0%"
+    }
+
     let HeroAbilities = PregameHeroicon.FindChildTraverse("SelectedAbilitiesContainer")
     let PersonaSelector = PregameHeroicon.FindChildTraverse("PersonaSelector")
     PersonaSelector.style.visibility = "collapse"
@@ -212,7 +219,7 @@ function HeroSelection() {
     RightContainer.style.visibility = "visible"
     RightContainer.style.paddingRight = "0%"
     const aspectRatio = RightContainer.actualLayoutWidth / RightContainer.actualLayoutHeight;
-    RightContainer.style.position = aspectRatio < 1.7 ? "0% 30% 0px" : "5% 30% 0px"
+    RightContainer.style.position = aspectRatio < 1.7 ? "0% 30% 0px" : "-15% 30% 0px" // ДОДЕЛАЙ БЛЯ НЕ ЗАБУДЬ
     let RightContainerMain = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("RightContainerMain")
     RightContainerMain.style.visibility = "visible"
     RightContainerMain.style.position = "0% 0% 0px"
@@ -237,6 +244,9 @@ function HeroSelection() {
     PregameFastBuy.style.height = "360px"
     PregameFastBuy.style.boxShadow = "0px 0px 10px 0px rgba(0,0,0, 0.7)";
     
+    let Chat = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("Chat")
+    Chat.style.marginRight = "23.5%"
+
     let PregameInventory = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("StartingItemsInventory")
     PregameInventory.style.visibility = "visible"
     PregameInventory.style.backgroundColor = "transparent";
@@ -259,7 +269,9 @@ function HeroSelection() {
     HeroModelOverlay.style.height = "1000px"
     HeroModelOverlay.style.width = "100%"
     let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
-    HeroModelLoadout.style.marginTop = "-10%"
+    HeroModelLoadout.style.marginTop = "-8%"
+    HeroModelLoadout.style.marginLeft = "-2%"
+    
     let StatBranchPick = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("SelectedHeroAbilitiesHitTargets");
     StatBranchPick.style.visibility = "collapse"
 

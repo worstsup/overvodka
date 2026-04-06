@@ -27,7 +27,7 @@
 			"item"		"item_nikes"
 			"item"		"item_aegis_hero"
 			"item"		"item_waka"
-			"item"		"item_manta_datadriven"
+			"item"		"item_pick_me"
 			"item"		"item_pasito"
 			"item"		"item_aghanims_shard"
 		}

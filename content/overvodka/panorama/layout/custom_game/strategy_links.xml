@@ -1,0 +1,25 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/strategy_links.js" />
+    </scripts>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/strategy_links.css" />
+    </styles>
+
+    <Panel class="StrategyLinksRoot" hittest="false">
+        <Panel id="StrategyLinksDock" hittest="false">
+            <Button id="StrategyTelegramButton" class="StrategyIconButton StrategyIconButton--telegram" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka')">
+                <Image id="StrategyTelegramIcon" class="StrategyIconImage" src="file://{images}/custom_game/tg_icon.png" />
+            </Button>
+
+            <Button id="StrategyWebsiteButton" class="StrategyIconButton StrategyIconButton--website" onactivate="ExternalBrowserGoToURL('https://overvodka.com/')">
+                <Image id="StrategyWebsiteIcon" class="StrategyIconImage StrategyIconImage--website" src="file://{images}/custom_game/ranks/gold.png" />
+            </Button>
+
+            <Button id="StrategyDiscordButton" class="StrategyIconButton StrategyIconButton--discord" onactivate="ExternalBrowserGoToURL('https://discord.com/invite/fc5Z4Wp5sk')">
+                <Image id="StrategyDiscordIcon" class="StrategyIconImage" src="file://{images}/custom_game/discord_icon.png" />
+            </Button>
+        </Panel>
+    </Panel>
+</root>

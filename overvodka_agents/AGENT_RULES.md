@@ -1,80 +1,65 @@
-# Правила и инструкции для агента (OVERVODKA)
+# Правила агента — OVERVODKA
 
-## 0) Контекст проекта
-- Серверный код: Lua (vscripts). UI: Panorama JS (HTML/XML/CSS). Backend/store: Node.js (Express) + MySQL.
-- Часто используются: создание героев/способностей, модификаторы, таланты/аспекты, парсеры KV/локализаций.
-- Код и стиль: аккуратные null-check, server guards, чистые таймеры/партиклы, отсутствие утечек сущностей.
+Это общий набор правил для работы по проекту. Узкоспециализированный workflow по героям и способностям вынесен в `LUA_HERO_EXPERT.md`.
 
-## 1) Обязательные код-стандарты (не нарушать)
+## 1) Общие принципы
+- Сначала искать по репо, потом задавать вопросы.
+- Не делать массовые рефакторы без прямого запроса.
+- Делать минимальный дифф и не ломать существующий gameplay/UI.
+- Если в проекте уже есть рабочий паттерн, копировать именно его.
 
-Lua (сервер)
-- Всегда: `if not IsServer() then return end` в серверных хуках.
-- Всегда: использовать `GetAbsOrigin()` (не `GetOrigin()`).
-- Юниты: создаём через `CreateUnitByName(...)`.
-- Задержки/таймеры: использовать `Timers:CreateTimer(...)`.
-- Кулдауны/ресурсы: использовать `UseResources(...)`, не применять костыли на `GameModeEntity`.
-- `Modifiers`: отдельные классы; реализовывать `DeclareFunctions()`, `CheckState()`, `OnCreated`/`OnDestroy`.
-- Партиклы: обязательно `ParticleManager:DestroyParticle` (если нужно) и `ParticleManager:ReleaseParticleIndex` — никаких утечек. Prefer `self:AddParticle(...)` for modifier-owned particles.
-- Не хранить «голые» entity handles без проверок `IsValidEntity()` / `IsNull()`.
-- В контекстах motion modifier: не применять `SetForwardVector` (ломает движение), использовать `FaceTowards` или корректно обновлять после перемещения.
+## 2) Запрещено
+- Публиковать или логировать секреты, `SERVER_KEY`, приватные URL и токены.
+- Придумывать методы Dota API, Panorama API или несуществующие KV-ключи.
+- Менять архитектуру слоя без прямого запроса.
+- Трогать backend, если задача ограничена Lua/KV/UI.
 
-Доп. предпочтение по transmitters
-- В модификаторах с кастомными передатчиками переиспользовать кешированную таблицу `self._txData` в `AddCustomTransmitterData`, а не создавать новый литерал таблицы при каждом вызове — это снижает аллокации при частых `SendBuffRefreshToClients`.
+## 3) Обязательные стандарты для Lua
+- В серверных хуках использовать `if not IsServer() then return end`, и если хук не должен (или не способен) вызываться на клиенте.
+- Использовать `GetAbsOrigin()`, а не `GetOrigin()`.
+- Для таймеров использовать `Timers:CreateTimer(...)`.
+- Для расхода кулдауна/маны/charges использовать нормальные игровые механизмы (`UseResources(...)` и т.п.), а не костыли поверх `GameModeEntity`.
+- Для modifier-owned particles предпочитать `self:AddParticle(...)`, если паттерн это позволяет.
+- Не оставлять утечки: частицы, timers, motion controllers, thinkers.
+- Не хранить entity handles без проверок `IsValid(...)`.
+- В motion modifier не использовать `SetForwardVector` во время движения; после motion использовать безопасные варианты вроде `FaceTowards`, если это действительно нужно.
 
-## 2) Как я хочу, чтобы ты отвечал
-- Если даёшь код: целиком готовый кусок, с указанием пути файла, имени класса, `LinkLuaModifier` сверху и куда подключать.
-- Если меняешь существующий файл: показывай дифф / заменяемые функции (что удалить / что вставить).
-- Если предлагаешь механику: указывай сложность `сложно/средне/легко` и почему (на основании Dota 2 реализации).
-- Не предлагай несуществующие методы Dota API; при сомнении отмечай это и давай проверяемую альтернативу.
-- Проверяемые API: https://moddota.com/api/#!/vscripts и https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Panorama/Javascript/API
+## 4) Обязательные стандарты для KV и локализации
+- Любой новый `GetSpecialValueFor(...)` должен иметь соответствующий ключ в KV.
+- Любое заметное изменение способности/предмета должно быть синхронизировано с локализацией.
+- Не плодить новые localization keys, если уже есть рабочий паттерн для такого же текста.
+- При изменении героя/способности проверять, не затронуты ли таланты, аспекты, shard/scepter, innate или UI-подсказки.
 
-## 3) Частые ошибки — запрещено
-- Не оставлять таймеры без удаления/условий завершения.
-- Не допускать утечек партиклов и сущностей.
+## 5) Обязательные стандарты для Panorama
+- Не делать бесконечные `$.Schedule(...)` без условий остановки.
+- Для действий использовать события, для состояния — `CustomNetTables`.
+- Не плодить скрытые таймеры и повторные expensive DOM-search loop без нужды.
+- При UI ↔ Lua синхронизации проверять совпадение имён событий, payload и NetTable keys.
 
-## 4) Что ты должен спросить в начале (если данных нет)
-Минимум необходимого:
-- путь/имя файла (куда вносить изменения),
-- где лежит KV/локализация,
-- какие `SpecialValue`/ключи уже есть в ability KV.
-Если чего-то нет — делай разумные дефолты и помечай их явно в ответе.
+## 6) Когда спрашивать пользователя
+Спрашивать только если после поиска по репо осталась реальная неоднозначность, которая может сломать реализацию. Например:
+- неясно, какой из нескольких однотипных файлов должен быть источником истины;
+- поведение можно реализовать принципиально по-разному и это влияет на gameplay;
+- в задаче не хватает domain-решения, а не просто пути файла.
 
-## 5) Источники знаний (рекомендуемые)
-- Valve / Dota 2 Workshop Tools docs (Panorama API)
-- moddota.com API (Dota 2 Lua API)
-- Официальные примеры из Workshop Tools и существующие популярные аддоны
+Не спрашивать то, что можно найти самому:
+- путь к hero/ability/item файлу;
+- где лежит KV;
+- какие похожие паттерны уже есть в проекте;
+- как оформлены тултипы и локализация в аналогичных местах.
 
-## 6) Формат машинной конфигурации
-- Дополнительно в `agent-config.json` лежат: `allowedSources`, `forbiddenActions`, `entrypoints`, `codeStyle`.
+## 7) Источники знаний
+При необходимости проверять:
+- ModDota Lua API
+- Valve Workshop Tools / Panorama docs
 
-## 7) Panorama ↔ Lua contract (how we wire things)
-Use **events for commands** and **net tables for state**.
+Но приоритет всегда такой:
+1. Существующий код этого репо
+2. Официальная документация
+3. ModDota / проверенные комьюнити-источники
 
-**Panorama → Server (command)**
-- `GameEvents.SendCustomGameEventToServer("event_name", payload)`
-
-**Server side listener**
-- `CustomGameEventManager:RegisterListener("event_name", function(_, payload) ... end)`
-
-**Server → Clients (notifications / one-shot)**
-- `CustomGameEventManager:Send_ServerToPlayer(player, "event_name", payload)`
-- `CustomGameEventManager:Send_ServerToAllClients("event_name", payload)`
-
-**State replication (persistent / UI reads)**
-- `CustomNetTables:SetTableValue("table_name", key, value)`
-- Panorama: `CustomNetTables.SubscribeNetTableListener("table_name", callback)`
-- Panorama: `CustomNetTables.GetTableValue("table_name", key)`
-
-Rule of thumb:
-- If UI needs to “press a button” → **CustomGameEvent**.
-- If UI needs to “show data / keep updated” → **CustomNetTables**.
-
-## 8) KV + Localization are part of the change
-Whenever adding/changing SpecialValues, ability behavior, shard/scepter, etc:
-- Update KV (`npc_abilities_custom.txt` / items / heroes) accordingly.
-- Update localization keys (tooltips, modifiers, shard/scepter descriptions).
-- Keep tooltips concise: prefer one scepter/shard description key instead of many micro-keys.
-
----
-
-Вопросы по правилам: если хотите расширить или добавить конкретные ленты CI/линтеров (lua-format, eslint для panorama), пришлите команды/конфиги или укажите, чтобы я добавил разумные дефолты.
+## 8) Формат ответа агента
+- Коротко сформулировать цель
+- Назвать затрагиваемые слои: Lua / KV / localization / Panorama / API
+- Показать конкретные изменения
+- Дать ручной чек-лист проверки в игре

@@ -84,6 +84,18 @@ modifier_item_mask_of_quadrobe_berserk = class({})
 function modifier_item_mask_of_quadrobe_berserk:IsHidden() return false end
 function modifier_item_mask_of_quadrobe_berserk:IsPurgable() return true end
 
+function modifier_item_mask_of_quadrobe_berserk:OnCreated()
+    if not IsServer() then return end
+    self.mod = self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_item_vindicators_axe", {})
+end
+
+function modifier_item_mask_of_quadrobe_berserk:OnDestroy()
+    if not IsServer() then return end
+    if self.mod and not self.mod:IsNull() then
+        self.mod:Destroy()
+    end
+end
+
 function modifier_item_mask_of_quadrobe_berserk:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,

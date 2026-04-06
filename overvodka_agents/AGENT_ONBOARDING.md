@@ -1,82 +1,90 @@
 # Agent Onboarding — OVERVODKA
 
-Короткий набор файлов и правил, чтобы новый агент быстро вник в проект.
+Короткий onboarding по реальной структуре этого репо.
 
-1) Краткий контекст
-- Сервер: Lua (`game/overvodka/scripts/vscripts`) — основная логика, `Server:SendRequest` использует `CreateHTTPRequestScriptVM` к `SERVER_URL`.
-- UI: Panorama (JS/XML/CSS) в `content/overvodka/panorama`.
-- Бэкенд: Node.js + MySQL (API-примеры в `worstup_server/routes/api.js` приложенном к репо).
+## 1) Что это за проект
+- Серверная и gameplay-логика: Lua в `game/overvodka/scripts/vscripts`
+- KV и игровые данные: `game/overvodka/scripts/npc`
+- Локализация: `game/overvodka/resource`
+- UI: Panorama в `content/overvodka/panorama`
 
-2) Быстрый старт — что посмотреть первым делом
-- `game/overvodka/scripts/vscripts/addon_init.lua` — инициализация игры.
-- `game/overvodka/scripts/vscripts/addon_game_mode.lua` и `server.lua` — основная серверная логика и `Server:SendRequest`.
-- `game/overvodka/scripts/vscripts/store.lua`, `quests.lua`, `vote.lua`, `events.lua` — пример взаимодействий с внешним API и CustomNetTables.
-- `content/overvodka/panorama/layout/custom_game/custom_ui_manifest.xml` — манифест UI.
+## 2) Что смотреть первым делом
+- `game/overvodka/scripts/vscripts/addon_init.lua`
+  Начальная инициализация, client/server split, часть ListenToGameEvent.
+- `game/overvodka/scripts/vscripts/addon_game_mode.lua`
+  Главный bootstrap игры: `require(...)`, `Precache`, `Activate`, `InitGameMode`.
+- `content/overvodka/panorama/layout/custom_game/custom_ui_manifest.xml`
+  Главный вход в Panorama-слой и список подключённых `CustomUIElement`.
 
-### Core gameplay (Lua)
-- `vscripts/` (heroes, abilities, items, modifiers)
-- Typical patterns:
-  - abilities: `heroes/<hero>/<hero>_<spell>.lua`
-  - shared: `modifiers/`, `utils/`, `modifier_generic_<name>.lua`
+## 3) Базовая карта репо
 
-### KV / data
+### Lua
+- `game/overvodka/scripts/vscripts/heroes`
+  Герои и их способности. Частый паттерн: `heroes/<hero>/<hero>_<spell>.lua`
+- `game/overvodka/scripts/vscripts/items`
+  Предметы
+- `game/overvodka/scripts/vscripts/modifiers`
+  Общие модификаторы
+- `game/overvodka/scripts/vscripts/server`
+  Серверные системы, API, guides и т.п.
+- `game/overvodka/scripts/vscripts/util`
+  Общие utility-модули
+
+### KV
+- `game/overvodka/scripts/npc/npc_abilities_custom.txt`
+- `game/overvodka/scripts/npc/npc_heroes_custom.txt`
+- `game/overvodka/scripts/npc/npc_items_custom.txt`
+- `game/overvodka/scripts/npc/npc_units_custom.txt`
+- Дополнительно в этой же директории есть ванильные/override-файлы, которые иногда тоже нужно учитывать
+
+### Локализация
+- `game/overvodka/resource/addon_russian.txt`
+- `game/overvodka/resource/addon_english.txt`
+
+### Panorama
+- `content/overvodka/panorama/layout/custom_game`
+- `content/overvodka/panorama/scripts/custom_game`
+- `content/overvodka/panorama/styles/custom_game`
+
+## 4) Реальные паттерны проекта
+- В ability-файлах часто рядом живут сама способность и несколько modifier-классов.
+- `LinkLuaModifier(...)` обычно объявляется сверху ability-файла.
+- `Precache(ctx)` используется прямо внутри ability/item файла, если нужны particles/sounds.
+- `OnCreated` / `OnRefresh` часто читают `GetSpecialValueFor(...)` и кэшируют значения в полях.
+- Motion modifiers используют `ApplyHorizontalMotionController` / `SetAbsOrigin` / `FindClearSpaceForUnit`.
+- Server/UI стыкуются через `CustomGameEventManager` и `CustomNetTables`.
+
+## 5) Что агент должен проверить при типичной правке
+
+### Если меняется способность
+- Lua ability logic
+- связанные modifiers
 - `npc_abilities_custom.txt`
-- `npc_items_custom.txt`
+- локализация
+- при необходимости `npc_heroes_custom.txt`
+- precache / particles / sounds
+
+### Если меняется герой
+- набор и порядок способностей
 - `npc_heroes_custom.txt`
-- `npc_units_custom.txt`
-- `game/scripts/npc/`
+- `npc_abilities_custom.txt`
+- локализация героя и его способностей
+- таланты / аспекты / innate / shard / scepter, если затронуты
 
-### Localization
-- `resource/addon_<lang>.txt`
-- `panorama/localization/addon_<lang>.txt`
-- Keys:
-  - `dota_tooltip_ability_<name>`, `_description`
-  - `dota_tooltip_modifier_<name>`, `_description`
-  - shard/scepter keys as dedicated entries
+### Если меняется предмет
+- Lua item file
+- `npc_items_custom.txt`
+- локализация предмета
+- UI/tooltips, если они читают эти данные отдельно
 
-### Panorama UI
-- `panorama/layout/custom_game/` (XML)
-- `panorama/scripts/custom_game/` (JS)
-- `panorama/styles/custom_game/` (CSS)
-- `content/overvodka/panorama/layout/custom_game/custom_ui_manifest.xml` (if used)
+## 6) Как думать про UI ↔ server
+- Команда или действие: `GameEvents.SendCustomGameEventToServer(...)`
+- Состояние и данные для интерфейса: `CustomNetTables`
+- Не надо спамить событиями там, где нужна просто подписка на состояние
 
-### UI ↔ server sync primitives
-- Commands: CustomGameEventManager events (Panorama → Server)
-- State: CustomNetTables (Server → Panorama)
-
-3) Какие документы уже есть (и где их читать)
-- `AGENT_RULES.md` — обязательные код-стандарты и anti-prompts.
-- `agent-config.json` — машинная конфигурация с точками входа и разрешёнными источниками.
-- `api_contract.json` — машинный контракт HTTP API (создан по `api.js`).
-- `endpoint_map.json` — где в Lua вызываются endpoint'ы из API.
-
-4) Ключевые вещи, которые агент всегда должен делать
-- Всегда сверять все изменения с `AGENT_RULES.md`.
-- При изменении Lua: вставлять полные патчи (diff), указывать путь/класс и `LinkLuaModifier` если добавляется модификатор.
-- При добавлении/изменении endpoint'ов: обновить `api_contract.json` и `endpoint_map.json`.
-
-5) Что спросить разработчику перед изменением
-- Какая точная цель правки (файл/функция)?
-- Где лежит соответствующее KV / локализация (path)?
-- Какие `SpecialValue` уже существуют в ability KV?
-- Есть ли изменения в внешнем API (`api.js`) или ключах (SERVER_KEY)?
-
-6) Быстрые команды для локальной проверки
-Если хотите поднять mock-server на основе `api.js`, используйте Node/Express (см. `worstup_server`):
-
-```bash
-# Запуск (пример):
-cd worstup_server
-npm install
-NODE_ENV=development node server.js
-```
-
-7) Чек-лист для PR/изменений
-- Вставил `if not IsServer() then return end` в серверные хуки — да/нет?
-- Проверил `GetAbsOrigin()` vs `GetOrigin()` — нет `GetOrigin()` в проде.
-- Все таймеры имеют условия завершения или `Timers:RemoveTimer` — да/нет?
-- Все партиклы уничтожаются и освобождаются — да/нет?
-- Нет хранения “голых” entity handles без `IsValidEntity()`/`IsNull()` — да/нет?
-
-8) Куда добавлять знания/доки
-- Расширяйте `AGENT_RULES.md` и `AGENT_ONBOARDING.md` по мере появления новых практик.
+## 7) Definition of done для локальной правки
+- Нет сломанных `LinkLuaModifier`
+- Нет `GetSpecialValueFor(...)` без KV-ключа
+- Нет новой логики без локализации, если текст виден игроку
+- Нет утечек particles/timers/motion
+- Есть список ручных тестов в игре

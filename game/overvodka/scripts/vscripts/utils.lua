@@ -638,3 +638,13 @@ function OvervodkaCreateIllusions(v1, v2, v3, v4, v5, v6, v7)
 
     return illusions
 end
+
+function IsValid(...)
+    for i = 1, select("#", ...) do
+        local entity = select(i, ...)
+        if not entity or not entity.IsNull or entity:IsNull() then
+            return false
+        end
+    end
+    return true
+end

@@ -1,4 +1,5 @@
 {
+  "primaryRole": "lua-hero-expert",
   "allowedSources": [
     "https://moddota.com/api/#!/vscripts",
     "https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Panorama/Javascript/API"
@@ -10,14 +11,16 @@
   ],
   "entrypoints": [
     "game/overvodka/scripts/vscripts/**/*.lua",
-    "content/overvodka/**/panorama/**/*.js",
-    "content/overvodka/**/panorama/**/*.xml",
-    "content/overvodka/**/panorama/**/*.css"
+    "game/overvodka/scripts/npc/*.txt",
+    "game/overvodka/resource/addon_*.txt",
+    "content/overvodka/panorama/layout/custom_game/**/*.xml",
+    "content/overvodka/panorama/scripts/custom_game/**/*.js",
+    "content/overvodka/panorama/styles/custom_game/**/*.css"
   ],
   "codeStyle": {
-    "lua": "use project lua-style (if absent: lua-format default)",
-    "panorama": "eslint + recommended rules for Panorama JS"
+    "lua": "Preserve surrounding project style. Do not assume a formatter exists. Keep diffs local.",
+    "panorama": "Preserve surrounding project style. Do not reformat unrelated code."
   },
   "transmitterPreference": "reuse_self_txData",
-  "notes": "If missing data (file path, KV location, existing SpecialValues) the agent should ask minimal required questions or assume safe defaults and mark them explicitly."
+  "notes": "Search the repository first. Ask the user only when ambiguity remains after inspection and the ambiguity can change gameplay or architecture."
 }

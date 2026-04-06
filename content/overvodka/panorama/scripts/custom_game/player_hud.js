@@ -14,6 +14,7 @@ const DotaHUDPanel = GetDotaHud();
 let SilvernameFacet2Target = -1;
 let DamagePanel = null;
 let EpsteinWSquares = {};
+let MisoloQMarkers = {};
 let ChaosSelectionCards = {};
 let ChaosSelectionEndTime = -1;
 let ChaosSelectionSeq = -1;
@@ -996,6 +997,81 @@ function DeleteDamageTitlePanel(entIndex) {
     }
 }
 
+function OnMisoloQMarkerStart(event) {
+    if (!event || event.entindex == null) return;
+    MisoloQMarkers[event.entindex] = true;
+}
+
+function OnMisoloQMarkerEnd(event) {
+    if (!event || event.entindex == null) return;
+    delete MisoloQMarkers[event.entindex];
+    DeleteMisoloQMarkerPanel(event.entindex);
+}
+
+function GetOrCreateMisoloQMarkerPanel(entIndex) {
+    const id = `misolo_q_marker_${entIndex}`;
+    let panel = Container.FindChildTraverse(id);
+    if (panel) return panel;
+
+    panel = $.CreatePanel("Panel", Container, id);
+    panel.hittest = false;
+    panel.hittestchildren = false;
+    panel.BLoadLayout("file://{resources}/layout/custom_game/heroes/misolo/misolo_q_marker.xml", false, false);
+    return panel;
+}
+
+function DeleteMisoloQMarkerPanel(entIndex) {
+    const id = `misolo_q_marker_${entIndex}`;
+    const panel = Container.FindChildTraverse(id);
+    if (panel) panel.DeleteAsync(0);
+}
+
+const MISOLO_Q_MARKER_Z_OFFSET = 235;
+const MISOLO_Q_MARKER_HALF_WIDTH = 150;
+const MISOLO_Q_MARKER_OFFSET = 150;
+
+function UpdateMisoloQMarkers() {
+    UISCALE_X = DotaHUDPanel.actualuiscale_x;
+    UISCALE_Y = DotaHUDPanel.actualuiscale_y;
+
+    for (const entStr in MisoloQMarkers) {
+        const ent = parseInt(entStr);
+
+        if (!Entities.IsValidEntity(ent) || !Entities.IsAlive(ent)) {
+            DeleteMisoloQMarkerPanel(ent);
+            delete MisoloQMarkers[entStr];
+            continue;
+        }
+
+        const has = HasModifierOnUnit(ent, "modifier_misolo_q_debuff");
+        if (!has) {
+            DeleteMisoloQMarkerPanel(ent);
+            delete MisoloQMarkers[entStr];
+            continue;
+        }
+
+        const panel = GetOrCreateMisoloQMarkerPanel(ent);
+        const origin = Entities.GetAbsOrigin(ent);
+        const sx = Game.WorldToScreenX(origin[0], origin[1], origin[2] + MISOLO_Q_MARKER_Z_OFFSET);
+        const sy = Game.WorldToScreenY(origin[0], origin[1], origin[2] + MISOLO_Q_MARKER_Z_OFFSET);
+        const bIsOutScreen = (GameUI.GetScreenWorldPosition(sx, sy) == null);
+
+        if (sx === -1 || sy === -1 || bIsOutScreen) {
+            panel.visible = false;
+            continue;
+        }
+
+        panel.visible = true;
+
+        const x = (sx - (MISOLO_Q_MARKER_HALF_WIDTH * UISCALE_Y)) / UISCALE_X;
+        const y = (sy - (MISOLO_Q_MARKER_OFFSET * UISCALE_Y)) / UISCALE_Y;
+
+        panel.style.position = Math.floor(x) + "px " + Math.floor(y) + "px 0";
+    }
+
+    $.Schedule(0, UpdateMisoloQMarkers);
+}
+
 function OnEpsteinWSquareStart(event) {
     if (!event || event.entindex == null) return;
     EpsteinWSquares[event.entindex] = true;
@@ -1405,6 +1481,10 @@ function OnChaosCardActivated(slot) {
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);
     UpdateSilvernameFacet2Damage();
     UpdateInnateIconOffset();
+
+    GameEvents.Subscribe("misolo_q_marker_start", OnMisoloQMarkerStart);
+    GameEvents.Subscribe("misolo_q_marker_end", OnMisoloQMarkerEnd);
+    UpdateMisoloQMarkers();
 
     GameEvents.Subscribe("epstein_w_square_start", OnEpsteinWSquareStart);
     GameEvents.Subscribe("epstein_w_square_end", OnEpsteinWSquareEnd);

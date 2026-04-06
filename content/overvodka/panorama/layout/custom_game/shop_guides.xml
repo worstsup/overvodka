@@ -1,0 +1,73 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/shop_guides.js" />
+    </scripts>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/shop_guides.css" />
+    </styles>
+
+    <Panel class="ShopGuidesRoot" hittest="false">
+        <Panel id="ShopGuidesFrame" hittest="true">
+            <Panel id="ShopGuidesHeader" hittest="false">
+                <Label id="ShopGuidesHeaderTitle" text="#SHOP_GUIDES_TITLE" />
+                <Button id="ShopGuidesPickerButton" onactivate="ToggleShopGuidePicker()">
+                    <Label id="ShopGuidesPickerButtonText" text="#SHOP_GUIDES_SELECT" />
+                </Button>
+            </Panel>
+
+            <Panel id="ShopGuidesStateBar" hittest="false">
+                <Label id="ShopGuidesSelectedTitle" text="#SHOP_GUIDES_LOADING" />
+                <Label id="ShopGuidesSelectedMeta" text="" />
+            </Panel>
+
+            <Panel id="ShopGuidesContent" hittest="true">
+                <Label id="ShopGuidesSummary" text="" />
+                <Panel id="ShopGuidesVoteRow" hittest="true">
+                    <Button id="ShopGuidesVoteLikeButton">
+                        <Panel class="ShopGuidesVoteButtonContent" hittest="false">
+                            <Image id="ShopGuidesVoteLikeIcon" class="ShopGuidesVoteIcon" src="file://{images}/custom_game/guides/guide_like.png" />
+                            <Label id="ShopGuidesVoteLikeCount" text="0" />
+                        </Panel>
+                    </Button>
+                    <Button id="ShopGuidesVoteDislikeButton">
+                        <Panel class="ShopGuidesVoteButtonContent" hittest="false">
+                            <Image id="ShopGuidesVoteDislikeIcon" class="ShopGuidesVoteIcon" src="file://{images}/custom_game/guides/guide_dislike.png" />
+                            <Label id="ShopGuidesVoteDislikeCount" text="0" />
+                        </Panel>
+                    </Button>
+                    <Button id="ShopGuidesFavoriteButton">
+                        <Image id="ShopGuidesFavoriteIcon" class="ShopGuidesFavoriteIcon" src="file://{images}/custom_game/guides/guide_favorite_bookmark.png" />
+                    </Button>
+                </Panel>
+                <Panel id="ShopGuidesSections" hittest="false" />
+                <Panel id="ShopGuidesSkillsBlock" hittest="false">
+                    <Label id="ShopGuidesSkillsHeader" text="#SHOP_GUIDES_SKILL_BUILD" />
+                    <Panel id="ShopGuidesSkillsList" hittest="false" />
+                    <Panel id="ShopGuidesTalentsWrap" hittest="false">
+                        <Label id="ShopGuidesTalentsHeader" text="#SHOP_GUIDES_TALENTS" />
+                        <Panel id="ShopGuidesTalentsList" hittest="false" />
+                    </Panel>
+                </Panel>
+                <Label id="ShopGuidesEmpty" text="#SHOP_GUIDES_EMPTY" />
+            </Panel>
+        </Panel>
+
+        <Panel id="ShopGuidesPicker" hittest="true">
+            <Panel id="ShopGuidesPickerHeader" hittest="false">
+                <Label id="ShopGuidesPickerTitle" text="#SHOP_GUIDES_PICKER_TITLE" />
+                <Button id="ShopGuidesPickerCloseButton" onactivate="CloseShopGuidePicker()">
+                    <Label id="ShopGuidesPickerCloseButtonText" text="x" />
+                </Button>
+            </Panel>
+            <Panel id="ShopGuidesPickerSearchWrap" hittest="true">
+                <TextEntry id="ShopGuidesPickerSearchEntry" maxchars="80" placeholder="#SHOP_GUIDES_SEARCH_PLACEHOLDER" ontextentrychange="OnShopGuidesSearchChanged()" />
+                <Button id="ShopGuidesPickerFavoritesButton" onactivate="ToggleShopGuidesFavoritesOnly()">
+                    <Image id="ShopGuidesPickerFavoritesIcon" class="ShopGuidesFavoriteIcon" src="file://{images}/custom_game/guides/guide_favorite_bookmark.png" />
+                </Button>
+            </Panel>
+            <Panel id="ShopGuidesPickerList" hittest="true" />
+            <Panel id="ShopGuidesPickerPagination" hittest="true" />
+        </Panel>
+    </Panel>
+</root>

@@ -1,0 +1,683 @@
+.ShopGuidesRoot
+{
+    width: 0px;
+    height: 0px;
+    horizontal-align: left;
+    vertical-align: top;
+    flow-children: none;
+    ignore-parent-flow: true;
+    overflow: noclip;
+    z-index: 10;
+    visibility: collapse;
+    opacity: 0;
+}
+
+.ShopGuidesRoot.Visible
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+#ShopGuidesFrame
+{
+    width: 100%;
+    height: 100%;
+    flow-children: down;
+    overflow: noclip;
+}
+
+#ShopGuidesHeader
+{
+    width: 100%;
+    flow-children: right;
+    padding: 10px 12px 8px 12px;
+    border-bottom: 1px solid #3c465355;
+}
+
+#ShopGuidesHeaderTitle
+{
+    width: fill-parent-flow(1);
+    margin-top: 2px;
+    margin-left: 1px;
+    vertical-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: gradient(linear, 0% 0%, 0% 100%, from(#fff7d6), color-stop(0.5, #ddc071), to(#a87b2a));
+    text-transform: uppercase;
+}
+
+#ShopGuidesPickerButton
+{
+    width: 84px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#3c434d), to(#2a3038));
+    border: 1px solid #6b727c88;
+    box-shadow: fill #00000055 0px 0px 6px 0px;
+    transition-property: brightness, background-color, border;
+    transition-duration: 0.12s;
+}
+
+#ShopGuidesPickerButton:hover
+{
+    brightness: 1.15;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#4d5661), to(#343b45));
+    border: 1px solid #939ba6aa;
+}
+
+#ShopGuidesPickerButton:active
+{
+    brightness: 0.92;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#2c3239), to(#22272d));
+}
+
+#ShopGuidesPickerButtonText
+{
+    horizontal-align: center;
+    vertical-align: center;
+    text-align: center;
+    color: #e7ebef;
+    font-size: 12px;
+    font-weight: semi-bold;
+}
+
+#ShopGuidesStateBar
+{
+    width: 100%;
+    flow-children: down;
+    padding: 8px 12px 4px 12px;
+}
+
+#ShopGuidesSelectedTitle
+{
+    width: 100%;
+    font-size: 15px;
+    font-weight: semi-bold;
+    color: #f2f4f7;
+    text-overflow: shrink;
+    max-height: 36px;
+}
+
+#ShopGuidesSelectedMeta
+{
+    width: 100%;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #98a4b3;
+    max-height: 32px;
+    text-overflow: shrink;
+}
+
+#ShopGuidesContent
+{
+    width: 100%;
+    height: fit-children;
+    flow-children: down;
+    padding: 8px 12px 10px 12px;
+    overflow: noclip;
+}
+
+#ShopGuidesSummary
+{
+    width: 100%;
+    margin-bottom: 12px;
+    color: #d9dee4;
+    font-size: 11px;
+    line-height: 15px;
+    visibility: collapse;
+}
+
+#ShopGuidesVoteRow
+{
+    width: 100%;
+    flow-children: right;
+    horizontal-align: left;
+    margin-bottom: 12px;
+    visibility: collapse;
+}
+
+#ShopGuidesVoteLikeButton,
+#ShopGuidesVoteDislikeButton
+{
+    width: 68px;
+    height: 34px;
+    padding: 0px 8px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    transition-property: brightness, background-color, border, box-shadow;
+    transition-duration: 0.12s;
+}
+
+#ShopGuidesVoteLikeButton
+{
+    margin-right: 6px;
+    border-color: #54dc8585;
+    color: #d8ffe7;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#1d4d4873), to(#0e2317dd));
+    box-shadow: inset #54dc8514 0px 0px 0px 1px;
+}
+
+#ShopGuidesVoteLikeButton:hover
+{
+    brightness: 1.1;
+    border: 1px solid #54dc85e0;
+    box-shadow: fill #54dc8542 0px 0px 6px 0px;
+}
+
+#ShopGuidesVoteLikeButton.Active
+{
+    border: 1px solid #54dc85f2;
+    color: #f3fff8;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#33815080), to(#153623e6));
+    box-shadow: fill #54dc8555 0px 0px 10px 0px;
+}
+
+#ShopGuidesVoteDislikeButton
+{
+    margin-right: 6px;
+    border-color: #ff616185;
+    color: #ffe0e0;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#5f1c1c73), to(#270c0cdd));
+    box-shadow: inset #ff616114 0px 0px 0px 1px;
+}
+
+#ShopGuidesVoteDislikeButton:hover
+{
+    brightness: 1.1;
+    border: 1px solid #ff6161e0;
+    box-shadow: fill #ff616142 0px 0px 10px 0px;
+}
+
+#ShopGuidesVoteDislikeButton.Active
+{
+    border: 1px solid #ff6161f2;
+    color: #fff6f6;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#8f272780), to(#380f0fe6));
+    box-shadow: fill #ff61614d 0px 0px 12px 0px;
+}
+
+#ShopGuidesVoteLikeButton.Disabled,
+#ShopGuidesVoteDislikeButton.Disabled,
+#ShopGuidesFavoriteButton.Disabled
+{
+    saturation: 0.35;
+    brightness: 0.75;
+    wash-color: #7c8794aa;
+}
+
+.ShopGuidesVoteButtonContent
+{
+    width: 100%;
+    height: 100%;
+    flow-children: right;
+    horizontal-align: center;
+    vertical-align: center;
+}
+
+.ShopGuidesVoteIcon
+{
+    width: 17px;
+    height: 17px;
+    vertical-align: center;
+    wash-color: none;
+}
+
+#ShopGuidesVoteLikeCount,
+#ShopGuidesVoteDislikeCount
+{
+    min-width: 14px;
+    margin-left: 5px;
+    vertical-align: center;
+    font-size: 12px;
+    font-weight: semi-bold;
+    text-align: right;
+}
+
+#ShopGuidesFavoriteButton
+{
+    width: 34px;
+    height: 34px;
+    padding: 0px;
+    border-radius: 8px;
+    border: 1px solid #5d68768f;
+    background-color: #2a3139e6;
+    transition-property: brightness, background-color, border, box-shadow;
+    transition-duration: 0.12s;
+}
+
+#ShopGuidesFavoriteButton:hover
+{
+    brightness: 1.12;
+    border: 1px solid #8e99a8cc;
+    background-color: #3a434ddf;
+    box-shadow: fill #ffffff12 0px 0px 8px 0px;
+}
+
+#ShopGuidesFavoriteButton.Active
+{
+    border: 1px solid #f0d289ee;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#f0d38e), to(#ae8130));
+    box-shadow: fill #f5d98a3a 0px 0px 10px 0px;
+}
+
+.ShopGuidesFavoriteIcon
+{
+    width: 16px;
+    height: 16px;
+    horizontal-align: center;
+    vertical-align: center;
+    wash-color: #ead9d9;
+}
+
+#ShopGuidesFavoriteButton.Active .ShopGuidesFavoriteIcon,
+#ShopGuidesPickerFavoritesButton.Active .ShopGuidesFavoriteIcon
+{
+    wash-color: #241707;
+}
+
+#ShopGuidesSections
+{
+    width: 100%;
+    flow-children: down;
+}
+
+.ShopGuidesSection
+{
+    width: 100%;
+    flow-children: down;
+    margin-bottom: 8px;
+    padding: 8px 8px 8px 8px;
+    border-radius: 0px;
+    background-color: #171c2399;
+    border: 1px solid #414a5555;
+}
+
+.ShopGuidesSectionTitle
+{
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+    color: #f0f3f6;
+    letter-spacing: 1px;
+}
+
+.ShopGuidesItemsWrap
+{
+    width: 100%;
+    flow-children: down;
+}
+
+.ShopGuidesItemsRow
+{
+    width: 100%;
+    flow-children: right;
+    margin-bottom: 2px;
+}
+
+.ShopGuidesShopItem
+{
+    horizontal-align: center;
+    vertical-align: center;
+    border-radius: 6px;
+    box-shadow: fill #00000066 0px 0px 6px 0px;
+}
+
+#ShopGuidesSkillsBlock
+{
+    width: 100%;
+    flow-children: down;
+    margin-top: 4px;
+    padding: 8px;
+    border-radius: 0px;
+    background-color: #171c2399;
+    border: 1px solid #414a5555;
+}
+
+#ShopGuidesSkillsHeader,
+#ShopGuidesTalentsHeader
+{
+    font-size: 12px;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+    color: #f0f3f6;
+    letter-spacing: 1px;
+}
+
+#ShopGuidesSkillsList
+{
+    width: 100%;
+    flow-children: down;
+    margin-top: 6px;
+}
+
+.ShopGuidesSkillRow
+{
+    width: 100%;
+    height: 24px;
+    flow-children: right;
+    margin-bottom: 3px;
+    border-radius: 0px;
+    background-color: #0f1318cc;
+}
+
+.ShopGuidesSkillLevel
+{
+    width: 24px;
+    margin-left: 4px;
+    vertical-align: center;
+    color: #95a3b2;
+    font-size: 12px;
+    font-weight: semi-bold;
+    text-align: center;
+}
+
+.ShopGuidesSkillIcon
+{
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    margin-left: 2px;
+}
+
+.ShopGuidesSkillName
+{
+    width: fill-parent-flow(1);
+    margin-left: 6px;
+    margin-right: 6px;
+    vertical-align: center;
+    color: #e9edf2;
+    font-size: 12px;
+    text-overflow: shrink;
+}
+
+#ShopGuidesTalentsWrap
+{
+    width: 100%;
+    flow-children: down;
+    margin-top: 8px;
+    visibility: collapse;
+}
+
+#ShopGuidesTalentsList
+{
+    width: 100%;
+    flow-children: right;
+    margin-top: 6px;
+}
+
+.ShopGuidesTalentChip
+{
+    margin-right: 6px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background-color: #232a32;
+    border: 1px solid #56606d88;
+    color: #e6ebf0;
+    font-size: 11px;
+    font-weight: semi-bold;
+}
+
+#ShopGuidesEmpty
+{
+    width: 100%;
+    margin-top: 8px;
+    color: #b8c2cd;
+    font-size: 11px;
+}
+
+#ShopGuidesPicker
+{
+    width: 238px;
+    max-height: 450px;
+    flow-children: down;
+    ignore-parent-flow: true;
+    z-index: 20;
+    position: 0px 0px 0px;
+    margin-left: 100px;
+    margin-top: -15px;
+    visibility: collapse;
+    opacity: 0;
+    padding: 8px 10px 10px 10px;
+    border-radius: 2px;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#232a32f5), color-stop(0.5, #1a2027f2), to(#13181ef5));
+    border: 1px solid #545e6bcc;
+    box-shadow: fill #000000bb 0px 0px 12px 0px;
+    transition-property: opacity;
+    transition-duration: 0.14s;
+}
+
+#ShopGuidesPicker.Open
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+#ShopGuidesPickerHeader
+{
+    width: 100%;
+    height: 28px;
+    flow-children: none;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    padding: 0px;
+}
+
+#ShopGuidesPickerSearchWrap
+{
+    width: 100%;
+    flow-children: right;
+    margin-bottom: 8px;
+}
+
+#ShopGuidesPickerSearchEntry
+{
+    width: 182px;
+    height: 30px;
+    padding: 4px 8px 4px 8px;
+    margin-right: 6px;
+    border: 1px solid #4b566388;
+    background-color: #12171ddd;
+    color: #e5ebf1;
+    font-size: 14px;
+    text-align: left;
+}
+
+#ShopGuidesPickerSearchEntry:focus
+{
+    border: 1px solid #8da7c4cc;
+}
+
+#ShopGuidesPickerFavoritesButton
+{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #5d68768f;
+    background-color: #2a3139e6;
+    transition-property: brightness, background-color, border, box-shadow;
+    transition-duration: 0.12s;
+}
+
+#ShopGuidesPickerFavoritesButton:hover
+{
+    brightness: 1.12;
+    border: 1px solid #8e99a8cc;
+    background-color: #3a434ddf;
+    box-shadow: fill #ffffff12 0px 0px 8px 0px;
+}
+
+#ShopGuidesPickerFavoritesButton.Active
+{
+    border: 1px solid #f0d289ee;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#f0d38e), to(#ae8130));
+    box-shadow: fill #f5d98a30 0px 0px 9px 0px;
+}
+
+#ShopGuidesPickerTitle
+{
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    text-align: center;
+    font-size: 16px;
+    color: #dce2e8;
+    text-transform: uppercase;
+    position: 0px 2px 0px;
+}
+
+#ShopGuidesPickerCloseButton
+{
+    width: 22px;
+    height: 22px;
+    horizontal-align: right;
+    vertical-align: center;
+    flow-children: none;
+    z-index: 1;
+    border-radius: 2px;
+    background-color: #2f363f;
+    border: 1px solid #65707d88;
+    transition-property: brightness, background-color, border;
+    transition-duration: 0.12s;
+}
+
+#ShopGuidesPickerCloseButton:hover
+{
+    brightness: 1.15;
+    background-color: #414b56;
+    border: 1px solid #96a1aeaa;
+}
+
+#ShopGuidesPickerCloseButton:active
+{
+    brightness: 0.92;
+    background-color: #242a30;
+}
+
+#ShopGuidesPickerCloseButtonText
+{
+    width: 100%;
+    height: 100%;
+    align: center center;
+    text-align: center;
+    color: #e7edf3;
+    font-size: 12px;
+    font-weight: bold;
+    position: 0px 0px 0px;
+}
+
+#ShopGuidesPickerList
+{
+    width: 100%;
+    max-height: 308px;
+    flow-children: down;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    overflow: squish scroll;
+}
+
+#ShopGuidesPickerPagination
+{
+    width: 100%;
+    flow-children: right;
+    horizontal-align: center;
+    margin-top: 8px;
+}
+
+.ShopGuidesPageButton
+{
+    min-width: 22px;
+    height: 22px;
+    margin-right: 4px;
+    padding: 0px 6px;
+    border-radius: 2px;
+    background-color: #2f363f;
+    border: 1px solid #65707d88;
+    transition-property: brightness, background-color, border;
+    transition-duration: 0.12s;
+}
+
+.ShopGuidesPageButton:hover
+{
+    brightness: 1.12;
+    background-color: #414b56;
+    border: 1px solid #96a1aeaa;
+}
+
+.ShopGuidesPageButton.Active
+{
+    background-color: #586575;
+    border: 1px solid #b2bfd0cc;
+}
+
+.ShopGuidesPageButtonLabel
+{
+    horizontal-align: center;
+    vertical-align: center;
+    text-align: center;
+    color: #e7edf3;
+    font-size: 12px;
+    font-weight: semi-bold;
+}
+
+.ShopGuidesPickerEmpty
+{
+    width: 100%;
+    color: #97a4b2;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.ShopGuidesPickerEntry
+{
+    width: 100%;
+    height: fit-children;
+    flow-children: down;
+    ignore-parent-flow: false;
+    overflow: noclip;
+    margin-bottom: 6px;
+    padding: 7px 8px;
+    border-radius: 0px;
+    background-color: #161c22d9;
+    border: 1px solid #46505b88;
+    transition-property: brightness, border;
+    transition-duration: 0.12s;
+}
+
+.ShopGuidesPickerEntry:hover
+{
+    brightness: 1.12;
+}
+
+.ShopGuidesPickerEntry.Selected
+{
+    border: 1px solid #8da7c4;
+}
+
+.ShopGuidesPickerEntryTitle
+{
+    width: 100%;
+    height: fit-children;
+    margin-bottom: 2px;
+    color: #edf1f5;
+    font-size: 12px;
+    font-weight: semi-bold;
+    white-space: normal;
+    text-overflow: shrink;
+}
+
+.ShopGuidesPickerEntryMeta
+{
+    width: 100%;
+    height: fit-children;
+    margin-top: 2px;
+    color: #97a4b2;
+    font-size: 10px;
+    white-space: normal;
+    text-overflow: shrink;
+}

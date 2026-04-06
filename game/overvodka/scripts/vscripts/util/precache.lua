@@ -70,7 +70,6 @@ PrecacheUtils.particles = {
 		"particles/bloodseeker_rupture_new.vpcf",
 		"particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf",
 		"particles/ember_spirit_hit_shockwave_new.vpcf",
-		"particles/dark_seer_punch_glove_attack_new.vpcf",
 		"particles/generic_gameplay/generic_sleep.vpcf",
 		"particles/duel/legion_duel_ring_arcana.vpcf",
 		"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf",
@@ -237,6 +236,7 @@ PrecacheUtils.units = {
 }
 
 PrecacheUtils.models = {
+		"models/misolo/untitled.vmdl",
 		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",
         "models/props_gameplay/rune_goldxp.vmdl",
         "models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl",

@@ -5,6 +5,35 @@ function GameUpdater()
     $.Schedule(1/144, GameUpdater)
 }
 
+function EnsureScenePanel(parent, panelId, mapName)
+{
+    if (!parent || !mapName)
+    {
+        return null
+    }
+
+    let panel = parent.FindChildTraverse(panelId)
+    if (panel && panel._mapName !== mapName)
+    {
+        panel.DeleteAsync(0)
+        panel = null
+    }
+
+    if (panel == null)
+    {
+        panel = $.CreatePanel("DOTAScenePanel", parent, panelId, {
+            style: "width:100%;height:100%;opacity:0;z-index:1;",
+            map: mapName,
+            particleonly: "false",
+            hittest: "false",
+            camera: "camera_1"
+        })
+        panel._mapName = mapName
+    }
+
+    return panel
+}
+
 function UpdateLevelPanelMax(ability_panel, hero)
 {
     let ButtonSize = ability_panel.FindChildTraverse("ButtonSize")
@@ -34,6 +63,59 @@ function UpdateLevelPanelMax(ability_panel, hero)
         }
     }
 }
+
+function UpdateNixPanel(ability_panel, hero)
+{
+    let ButtonSize = ability_panel.FindChildTraverse("ButtonSize")
+    if (!ButtonSize)
+    {
+        return
+    }
+
+    let abilityImage = ability_panel.FindChildTraverse("AbilityImage")
+    if (abilityImage == null || !abilityImage.abilityname)
+    {
+        return
+    }
+
+    let nix_effect = ButtonSize.FindChildTraverse("nix_effect")
+
+    if (hero == null || hero === -1 || Entities.GetUnitName(hero) !== "npc_dota_hero_furion")
+    {
+        if (nix_effect)
+        {
+            nix_effect.style.opacity = "0"
+        }
+        return
+    }
+
+    let showLevin = FindModifierByName(hero, "modifier_nix_swap_levin_updater") != "none"
+    let showPravin = FindModifierByName(hero, "modifier_nix_swap_pravin_updater") != "none"
+    let mapName = ""
+
+    if (showPravin)
+    {
+        mapName = "maps/nix_pravin.vmap"
+    }
+    else if (showLevin)
+    {
+        mapName = "maps/nix_levin.vmap"
+    }
+
+    if (mapName != "")
+    {
+        nix_effect = EnsureScenePanel(ButtonSize, "nix_effect", mapName)
+        if (nix_effect)
+        {
+            nix_effect.style.opacity = "1"
+        }
+    }
+    else if (nix_effect)
+    {
+        nix_effect.style.opacity = "0"
+    }
+}
+
 function FindModifierByName(EntityIndex, BuffName)
 {
     for (let i = 0; i <= Entities.GetNumBuffs(EntityIndex) - 1; i++)
@@ -74,12 +156,21 @@ function UpdateLevelPanel(hero)
     if (AbilitiesAndStatBranch == null) { return }
     let abilities = AbilitiesAndStatBranch.FindChildTraverse("abilities")
     if (abilities == null) { return }
+    let childCount = abilities.GetChildCount ? abilities.GetChildCount() : 0
     for (var i = 0; i < 3; i++)
     {
         let ability_panel = abilities.GetChild(i)
         if (ability_panel)
         {
             UpdateLevelPanelMax(ability_panel, hero)
+        }
+    }
+    for (var i = 0; i < childCount; i++)
+    {
+        let ability_panel = abilities.GetChild(i)
+        if (ability_panel)
+        {
+            UpdateNixPanel(ability_panel, hero)
         }
     }
     current_selected_hero = hero
