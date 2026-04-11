@@ -100,7 +100,6 @@ function modifier_misolo_e:OnIntervalThink()
             if parent:IsAlive() and not parent:IsIllusion() and not parent:PassivesDisabled() and game_time >= self.dodge_lock then
                 self.dodge_lock = game_time + 0.12
 
-                -- This is the Manta-style part: wait until the tracking projectile is close, then disjoint, purge and spawn illusions.
                 ProjectileManager:ProjectileDodge(parent)
                 parent:AddNewModifier(parent, ability, "modifier_misolo_e_manta_frame", {duration = ability:GetSpecialValueFor("manta_invuln_duration")})
                 parent:Purge(false, true, false, false, false)

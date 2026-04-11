@@ -15,7 +15,7 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 0.2, 0.3 },
+        { 11, 12.5 },
         { 20.5, 22 },
     },
     overvodka_5x5 = {
@@ -67,7 +67,7 @@ end
 function OvervodkaEvents:Init()
     if not IsServer() then return end
     if self.initialized then return end
-    --if IsInToolsMode() then return end
+    if IsInToolsMode() then return end
     if not overvodka_events then return end
 
     local state = GameRules:State_Get()

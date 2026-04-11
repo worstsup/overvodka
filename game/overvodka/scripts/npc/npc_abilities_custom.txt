@@ -18280,7 +18280,7 @@
 				"value"	"80 120 160 200"
 				"special_bonus_unique_misolo_3"	"+175"
 			}
-			"spider_damage"					"36" //10 16 22 28
+			"spider_damage"					"10 16 22 28"
 			"spider_movespeed"				"350"
 			"spider_bat"					"1.5"
 			"spider_bounty_gold"			"8 10 12 14"
@@ -18327,7 +18327,7 @@
 			"trigger_radius"				"450"
 			"scan_interval"					"0.15"
 			"auto_silence_duration"			"1.5 2.0 2.5 3.0"
-			"projectile_dodge_chance"		"60" // 15 18 21 24
+			"projectile_dodge_chance"		"15 18 21 24"
 			"manta_invuln_duration"			"0.1"
 			"illusion_duration"				"6 7 8 9"
 			"illusion_outgoing_damage"		"30 40 50 60"
