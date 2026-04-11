@@ -7,6 +7,7 @@ _G.nCOUNTDOWNTIMER = 1501
 _G.overvodka_events = true
 _G.winter_mode = false
 _G.global_sounds_muted = false
+_G.misolo_boss_enabled = true
 
 local PrecacheUtils = require("util/precache")
 
@@ -36,6 +37,7 @@ require('util/team_shuffle')
 require('quests')
 require('store')
 require('vote')
+require('units/hero_boss_event')
 require('overvodka_events')
 require('chaos_orb')
 ---------------------------------------------------------------------------

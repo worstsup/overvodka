@@ -60,9 +60,6 @@
     height: 100%;
     horizontal-align: center;
     vertical-align: center;
-
-    background-image: url("file://{images}/custom_game/zhenya_boss_avatar.png");
-    background-size: cover;
     wash-color: #FFFFFFFF;
 }
 
@@ -79,32 +76,33 @@
     width: 100%;
     height: 44px;
     margin-top: 10px;
-    flow-children: right;
-    horizontal-align: left;
+    flow-children: none;
+    horizontal-align: center;
     vertical-align: top;
 }
 
 .BossNameLabel
 {
     font-size: 32px;
-    width: 67%;
+    width: 100%;
     color: #94f2f4;
     text-shadow: 1px 1px 3px #000000ff;
     font-weight: bold;
-
-    text-align: right;
+    horizontal-align: center;
+    text-align: center;
     vertical-align: center;
 }
 
 .BossTimerLabel
 {
-    width: 100%;
-    vertical-align: bottom;
+    width: fit-children;
+    horizontal-align: right;
+    vertical-align: center;
+    margin-right: 4px;
     text-align: right;
     font-size: 24px;
     color: #FFD26Bff;
     text-shadow: 1px 1px 3px #000000ff;
-
 }
 
 
@@ -163,7 +161,48 @@
     margin-top: 2px;
 }
 
-.BossAvatarImage.BossAvatarAngry
+.BossHPPanel.BossThemeBloody .BossAvatarCircle
 {
-    background-image: url("file://{images}/custom_game/zhenya_boss_avatar_angry.png");
+    border: 3px solid #7a131aee;
+    background-color: #120506ff;
+    box-shadow: 0px 0px 12px 0px #350204ee;
+}
+
+.BossHPPanel.BossThemeBloody .BossNameLabel
+{
+    color: #d94a57ff;
+    text-shadow: 0px 0px 6px #000000ff;
+}
+
+.BossHPPanel.BossThemeBloody .BossTimerLabel
+{
+    color: #e2a6acff;
+    text-shadow: 0px 0px 6px #000000ff;
+}
+
+.BossHPPanel.BossThemeBloody .BossHPProgress
+{
+    background-color: #080102ee;
+    border: 2px solid #7a131aee;
+}
+
+.BossHPPanel.BossThemeBloody .BossHPProgress .ProgressBarLeft
+{
+    background-color: gradient( linear, 0% 0%, 100% 0%, from( #2c0205 ), to( #7a0b13 ) );
+}
+
+.BossHPPanel.BossThemeBloody .BossHPProgress .ProgressBarRight
+{
+    background-color: #130405cc;
+}
+
+.BossHPPanel.BossThemeBloody .BossHPPhaseDivider
+{
+    background-color: #0a0203dd;
+    border: 2px solid #7a131aee;
+}
+
+.BossHPPanel.BossThemeBloody #hp_burner
+{
+    wash-color: #7a0b13ff;
 }

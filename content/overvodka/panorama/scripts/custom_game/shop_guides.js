@@ -837,17 +837,28 @@ function ApplyShopGuidesItemVisualState(shopItem) {
 
     shopItem.AddClass("MainShopItem");
     shopItem.AddClass("SideShopItem");
-    shopItem.AddClass("CanPurchase");
+    shopItem.RemoveClass("CanPurchase");
     shopItem.RemoveClass("Popular");
 
-    const popularOverlay = shopItem.FindChildTraverse("PopularOverlay");
-    if (popularOverlay) {
-        popularOverlay.style.visibility = "collapse";
-    }
+    const panelsToHide = [
+        "PopularOverlay",
+        "Popular",
+        "CanPurchaseOverlay",
+        "CanPurchase",
+    ];
 
-    const canPurchaseOverlay = shopItem.FindChildTraverse("CanPurchaseOverlay");
-    if (canPurchaseOverlay) {
-        canPurchaseOverlay.style.visibility = "collapse";
+    for (const panelId of panelsToHide) {
+        const panel = shopItem.FindChildTraverse ? shopItem.FindChildTraverse(panelId) : null;
+        if (!panel) {
+            continue;
+        }
+
+        panel.visible = false;
+        panel.hittest = false;
+        panel.hittestchildren = false;
+        if (panel.style) {
+            panel.style.visibility = "collapse";
+        }
     }
 }
 
@@ -1384,7 +1395,12 @@ function OnShopGuidesListResponse(event) {
 
     ShopGuidesState.list = MoveDefaultGuideToTop(ShopGuidesToArray(event.guides));
     ShopGuidesState.selectedGuideId = Number(event.selected_guide_id || 0);
-    ShopGuidesState.loading = ShopGuidesState.list.length > 0;
+    if (ShopGuidesState.selectedGuideId === 0) {
+        ShopGuidesState.guide = ShopGuidesState.list.find((guide) => IsDefaultShopGuide(guide)) || null;
+        ShopGuidesState.loading = false;
+    } else {
+        ShopGuidesState.loading = ShopGuidesState.list.length > 0;
+    }
     ShopGuidesState.votePending = false;
     ShopGuidesState.favoritePending = false;
     RenderShopGuidesPicker();

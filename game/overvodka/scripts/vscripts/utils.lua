@@ -34,6 +34,10 @@ LinkLuaModifier("modifier_zhenya_hamster_carried", 		"units/zhenya_boss", 						
 LinkLuaModifier("modifier_zhenya_boss_phase1", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_phase2", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_escape", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_hero_boss_running", 			"units/hero_boss_event", 							 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_hero_boss_simple_ai", 		"units/hero_boss_event", 							 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_misolo_boss", 				"units/misolo_boss", 								 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_misolo_boss_phase2", 			"units/misolo_boss", 								 LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_overvodka_store_effect_1", 	"modifiers/store/modifier_overvodka_store_effect_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_effect_2", 	"modifiers/store/modifier_overvodka_store_effect_2", LUA_MODIFIER_MOTION_NONE)

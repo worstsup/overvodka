@@ -15,7 +15,7 @@ local GOLDEN_RAIN_WINDOWS = {
 
 local HAMSTER_WINDOWS = {
     default = {
-        { 11, 12.5 },
+        { 0.2, 0.3 },
         { 20.5, 22 },
     },
     overvodka_5x5 = {
@@ -67,7 +67,7 @@ end
 function OvervodkaEvents:Init()
     if not IsServer() then return end
     if self.initialized then return end
-    if IsInToolsMode() then return end
+    --if IsInToolsMode() then return end
     if not overvodka_events then return end
 
     local state = GameRules:State_Get()
@@ -94,6 +94,9 @@ function OvervodkaEvents:Init()
     self.zhenyaBoss       = nil
     self.zhenyaHamster    = nil
     self.zhenyaEndTime    = nil
+    self.heroBossActive   = false
+    self.heroBoss         = nil
+    self.heroBossEndTime  = nil
 
     CustomNetTables:SetTableValue("overvodka_events", "golden_rain", { t1 = -1, t2 = -1 })
     CustomNetTables:SetTableValue("overvodka_events", "hamster",     { t1 = -1, t2 = -1 })
@@ -119,6 +122,210 @@ function OvervodkaEvents:GetBoss()
     end
 
     return nil
+end
+
+function OvervodkaEvents:IsMisoloBossEnabled()
+    return _G.misolo_boss_enabled == true
+end
+
+function OvervodkaEvents:SetActiveHeroBoss(boss, data)
+    if not IsServer() or not IsValid(boss) then
+        return
+    end
+
+    self.heroBossActive = true
+    self.heroBoss = boss
+    self.heroBossEndTime = data.end_time or (GameRules:GetGameTime() + (data.duration or 70.0))
+
+    local payload = {
+        entindex = boss:entindex(),
+        end_time = self.heroBossEndTime,
+        boss_modifier = data.boss_modifier,
+        phase2_modifier = data.phase2_modifier,
+        name = data.name,
+        avatar = data.avatar,
+        avatar_phase2 = data.avatar_phase2,
+        theme = data.theme,
+    }
+
+    if HeroBossEvent then
+        HeroBossEvent:ShowBossUI(payload)
+    end
+
+    CustomGameEventManager:Send_ServerToAllClients("zhenya_boss_spawned", payload)
+end
+
+function OvervodkaEvents:ClearActiveHeroBoss(boss)
+    if not IsServer() then
+        return
+    end
+
+    if IsValid(boss) and IsValid(self.heroBoss) and self.heroBoss ~= boss then
+        return
+    end
+
+    self.heroBossActive = false
+    self.heroBoss = nil
+    self.heroBossEndTime = nil
+
+    if HeroBossEvent then
+        HeroBossEvent:ClearBossUI({
+            entindex = IsValid(boss) and boss:entindex() or -1,
+        })
+    end
+end
+
+function OvervodkaEvents:LevelMisoloBossAbilities(boss)
+    if not IsValid(boss) then
+        return
+    end
+
+    local levels = {
+        misolo_q = 4,
+        misolo_w = 4,
+        misolo_e = 4,
+        misolo_r = 3,
+        misolo_innate = 1,
+        misolo_shard = 1,
+    }
+
+    for ability_name, level in pairs(levels) do
+        local ability = boss:FindAbilityByName(ability_name)
+        if IsValid(ability) and ability:GetLevel() < level then
+            ability:SetLevel(level)
+        end
+    end
+end
+
+function OvervodkaEvents:GetMisoloBossPreludePoints(web_radius, count)
+    local center = Vector(0, 0, 0)
+    local radius_from_center = GetMapName() == "overvodka_5x5" and 2600 or 1800
+    local points = {}
+    local heroes = {}
+
+    for player_id = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+        local hero = PlayerResource:GetSelectedHeroEntity(player_id)
+        if IsValid(hero) and hero:IsAlive() and hero:IsRealHero() and not hero:IsIllusion() then
+            if (hero:GetAbsOrigin() - center):Length2D() <= radius_from_center + 400 then
+                heroes[#heroes + 1] = hero
+            end
+        end
+    end
+
+    if #heroes <= 0 then
+        for player_id = 0, DOTA_MAX_TEAM_PLAYERS - 1 do
+            local hero = PlayerResource:GetSelectedHeroEntity(player_id)
+            if IsValid(hero) and hero:IsAlive() and hero:IsRealHero() and not hero:IsIllusion() then
+                heroes[#heroes + 1] = hero
+            end
+        end
+    end
+
+    local min_distance = math.max(web_radius * 0.8, 450)
+    local attempts = 0
+
+    while #points < count and attempts < 80 do
+        attempts = attempts + 1
+
+        local point = center + RandomVector(RandomFloat(250, radius_from_center))
+        local anchor = #heroes > 0 and heroes[RandomInt(1, #heroes)] or nil
+        if IsValid(anchor) then
+            point = anchor:GetAbsOrigin() + RandomVector(RandomFloat(web_radius * 0.2, web_radius * 0.7))
+
+            local offset = point - center
+            offset.z = 0
+            if offset:Length2D() > radius_from_center then
+                point = center + offset:Normalized() * radius_from_center
+            end
+        end
+
+        point = GetGroundPosition(point, nil)
+
+        if GridNav:IsTraversable(point) and not GridNav:IsBlocked(point) then
+            local can_use = true
+            for _, existing in ipairs(points) do
+                if (existing - point):Length2D() < min_distance then
+                    can_use = false
+                    break
+                end
+            end
+
+            if can_use then
+                points[#points + 1] = point
+            end
+        end
+    end
+
+    while #points < count do
+        points[#points + 1] = GetGroundPosition(center + RandomVector(RandomFloat(250, radius_from_center)), nil)
+    end
+
+    return points
+end
+
+function OvervodkaEvents:StartMisoloBossEvent()
+    if not IsServer() or self.heroBossActive then
+        return
+    end
+
+    local center = Vector(0, 0, 0)
+    local spawn_distance = GetMapName() == "overvodka_5x5" and 7000 or 5000
+    local spawn_direction = RandomVector(spawn_distance)
+    local spawn_position = GetGroundPosition(center + spawn_direction, nil)
+    local duration = 70.0
+
+    _G.global_sounds_muted = true
+    Timers:CreateTimer(duration, function()
+        _G.global_sounds_muted = false
+    end)
+
+    local boss = CreateUnitByName(
+        "npc_misolo_boss",
+        spawn_position,
+        true,
+        nil,
+        nil,
+        DOTA_TEAM_NEUTRALS
+    )
+
+    if not IsValid(boss) then
+        print("[OvervodkaEvents] Failed to spawn npc_misolo_boss")
+        _G.global_sounds_muted = false
+        self:ClearActiveHeroBoss()
+        return
+    end
+
+    self:LevelMisoloBossAbilities(boss)
+    boss:AddNewModifier(boss, nil, "modifier_misolo_boss", {
+        duration = duration,
+        intro_x = center.x,
+        intro_y = center.y,
+        intro_z = center.z,
+    })
+
+    self:SetActiveHeroBoss(boss, {
+        duration = duration,
+        boss_modifier = "modifier_misolo_boss",
+        phase2_modifier = "modifier_misolo_boss_phase2",
+        name = "#npc_misolo_boss",
+        avatar = "file://{images}/custom_game/misolo_boss_avatar.png",
+        avatar_phase2 = "file://{images}/custom_game/misolo_boss_avatar_angry.png",
+        theme = "bloody",
+    })
+
+    local web_ability = boss:FindAbilityByName("misolo_w")
+    if IsValid(web_ability) and web_ability.CreateWebAtPoint then
+        local points = self:GetMisoloBossPreludePoints(web_ability:GetSpecialValueFor("web_radius"), 5)
+        for i, point in ipairs(points) do
+            Timers:CreateTimer((i - 1) * 0.18, function()
+                if self.heroBoss ~= boss or not IsValid(boss, web_ability) or not boss:IsAlive() then
+                    return
+                end
+
+                web_ability:CreateWebAtPoint(point)
+            end)
+        end
+    end
 end
 
 --------------------------------------------------------------------
@@ -213,13 +420,20 @@ function OvervodkaEvents:TriggerHamster()
     if not IsServer() then return end
     if not overvodka_events then return end
     CustomGameEventManager:Send_ServerToAllClients("item_has_spawned", {})
-    if not winter_mode then
+    if self:IsMisoloBossEnabled() or not winter_mode then
         EmitGlobalSound("hamster_announce")
     else
         EmitGlobalSound("zhenya_announce")
     end
 
     Timers:CreateTimer(15.0, function()
+        if self:IsMisoloBossEnabled() then
+            StopGlobalSound("misolo_start")
+            EmitGlobalSound("misolo_start")
+            self:StartMisoloBossEvent()
+            return
+        end
+
         if SpawnHamster then
             local hamster = SpawnHamster()
 
@@ -305,6 +519,18 @@ function OvervodkaEvents:SpawnZhenyaBoss()
         entindex = boss:entindex(),
         end_time = self.zhenyaEndTime or 0,
     })
+
+    if HeroBossEvent then
+        HeroBossEvent:ShowBossUI({
+            entindex = boss:entindex(),
+            end_time = self.zhenyaEndTime or 0,
+            boss_modifier = "modifier_zhenya_boss",
+            phase2_modifier = "modifier_zhenya_boss_phase2",
+            name = "#npc_zhenya_boss",
+            avatar = "file://{images}/custom_game/zhenya_boss_avatar.png",
+            avatar_phase2 = "file://{images}/custom_game/zhenya_boss_avatar_angry.png",
+        })
+    end
 end
 
 

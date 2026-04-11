@@ -15,7 +15,7 @@ modifier_misolo_web_spider = class({})
 function misolo_w:Precache(context)
     PrecacheUnitByNameSync("npc_dota_misolo_web", context)
     PrecacheUnitByNameSync("npc_dota_misolo_web_spider", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_broodmother/broodmother_web.vpcf", context)
+    PrecacheResource("particle", "particles/econ/items/broodmother/broodmother_2022_immortal/broodmother_2022_immortal_web.vpcf", context) --particles/units/heroes/hero_broodmother/broodmother_web.vpcf
     PrecacheResource("particle", "particles/items_fx/necronomicon_spawn.vpcf", context)
 end
 
@@ -96,20 +96,17 @@ function misolo_w:IsMisoloSpider(target, owner)
     return target:GetUnitName() == "npc_dota_misolo_web_spider" or target:HasModifier("modifier_misolo_web_spider")
 end
 
-function misolo_w:OnSpellStart()
-    if not IsServer() then
-        return
-    end
-
+function misolo_w:CreateWebAtPoint(point)
     local caster = self:GetCaster()
-    if not IsValid(caster) then
-        return
+    if not IsServer() or not IsValid(caster) then
+        return nil
     end
 
-    local point = GetGroundPosition(self:GetCursorPosition(), nil)
+    point = GetGroundPosition(point, nil)
+
     local web = CreateUnitByName("npc_dota_misolo_web", point, true, caster, caster, caster:GetTeamNumber())
     if not IsValid(web) then
-        return
+        return nil
     end
 
     caster._misolo_webs = caster._misolo_webs or {}
@@ -130,10 +127,6 @@ function misolo_w:OnSpellStart()
 
     web:AddNewModifier(caster, self, "modifier_misolo_w_web", {})
 
-    local particle = ParticleManager:CreateParticle("particles/items_fx/necronomicon_spawn.vpcf", PATTACH_ABSORIGIN_FOLLOW, web)
-    ParticleManager:SetParticleControl(particle, 0, web:GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(particle)
-
     EmitSoundOn("Hero_Broodmother.SpinWebCast", caster)
 
     local webs = self:PruneWebs()
@@ -146,6 +139,12 @@ function misolo_w:OnSpellStart()
             self:RemoveWeb(oldest, true)
         end
     end
+
+    return web
+end
+
+function misolo_w:OnSpellStart()
+    self:CreateWebAtPoint(self:GetCursorPosition())
 end
 
 function misolo_w:OnUnStolen()
@@ -268,7 +267,7 @@ function modifier_misolo_w_web:OnCreated()
     self.spider_count_per_tick = self.ability:GetSpecialValueFor("spider_count_per_tick")
     self.spider_lifetime = self.ability:GetSpecialValueFor("spider_lifetime")
 
-    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_broodmother/broodmother_web.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    local particle = ParticleManager:CreateParticle("particles/econ/items/broodmother/broodmother_2022_immortal/broodmother_2022_immortal_web.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
     ParticleManager:SetParticleControl(particle, 0, self.parent:GetAbsOrigin())
     ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, 1, 1))
     ParticleManager:SetParticleControl(particle, 2, self.parent:GetAbsOrigin())
@@ -441,6 +440,7 @@ function modifier_misolo_w_web:CheckState()
         [MODIFIER_STATE_ROOTED] = true,
         [MODIFIER_STATE_NO_HEALTH_BAR] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+        [MODIFIER_STATE_UNTARGETABLE_ENEMY] = true,
     }
 end
 

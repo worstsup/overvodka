@@ -5256,8 +5256,6 @@
 		"DOTA_Tooltip_ability_misolo_w_spider_lifetime"									"ВРЕМЯ ЖИЗНИ ПАУЧКОВ:"
 		"DOTA_Tooltip_ability_misolo_w_spider_health"									"ЗДОРОВЬЕ ПАУЧКОВ:"
 		"DOTA_Tooltip_ability_misolo_w_spider_damage"									"УРОН ПАУЧКОВ:"
-		"DOTA_Tooltip_ability_misolo_w_AbilityCharges"									"МАКС. ЗАРЯДОВ:"
-		"DOTA_Tooltip_ability_misolo_w_AbilityChargeRestoreTime"						"ВОССТАНОВЛЕНИЕ ЗАРЯДА:"
 		"DOTA_Tooltip_ability_misolo_e"													"Umbrella"
 		"DOTA_Tooltip_ability_misolo_e_Description"										"Misolo держит зонтик наготове. Если вражеский герой оказывается слишком близко, он автоматически получает безмолвие.\nТакже Misolo имеет шанс задоджить мантой вражеский снаряд, создав 2 иллюзии.\nПереключив способность, автосайленс не будет срабатывать."
 		"DOTA_Tooltip_ability_misolo_e_Note0"											""
@@ -5311,6 +5309,7 @@
 		"npc_dota_misolo_beast_warrior"													"Воин Beastmaster"
 		"npc_dota_misolo_visage_warrior"												"Воин Visage"
 		"npc_dota_misolo_arc_warrior"													"Воин Arc Warden"
+		"npc_misolo_boss"																"Misolo"
 
 		"dota_tooltip_ability_special_bonus_unique_misolo_1"							"+{s:bonus_duration} сек. к длительности Чеканэ"
 		"dota_tooltip_ability_special_bonus_unique_misolo_2"							"+{s:bonus_AbilityCharges} к числу зарядов Паутинка"

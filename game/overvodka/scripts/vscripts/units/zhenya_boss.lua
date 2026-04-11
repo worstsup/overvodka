@@ -141,6 +141,9 @@ function modifier_zhenya_boss:OnDeath(event)
         OvervodkaEvents.zhenyaBossActive = false
         OvervodkaEvents.zhenyaBoss       = nil
     end
+    if HeroBossEvent then
+        HeroBossEvent:ClearBossUI({ entindex = unit:entindex() })
+    end
 
     local origin = unit:GetAbsOrigin()
 
@@ -531,6 +534,9 @@ function modifier_zhenya_boss:OnDestroy()
     if OvervodkaEvents then
         OvervodkaEvents.zhenyaBossActive = false
         OvervodkaEvents.zhenyaBoss = nil
+    end
+    if HeroBossEvent then
+        HeroBossEvent:ClearBossUI({ entindex = boss:entindex() })
     end
 
     boss:Stop()

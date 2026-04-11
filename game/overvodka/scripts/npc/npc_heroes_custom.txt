@@ -3412,7 +3412,7 @@
 		"ModelScale"		"0.93"
 		"VersusScale"		"0.93"
 		"SimilarHeroes"		"92,38,82"
-		"HeroSelectSoundEffect"		"Hero_Broodmother.Pick"
+		"HeroSelectSoundEffect"		"misolo_start"
 		"GibType"		"goo"
 		"GibTintColor"	"39 131 80 255"
 		"Ability1"		"misolo_q"

@@ -4513,8 +4513,6 @@
 
 		"DOTA_Tooltip_ability_item_lesh"                    "SLAP"
 		"DOTA_Tooltip_ability_item_lesh_Description" "<h1>Use: Give a slap</h1> Gives an enemy a slap that deals %damage_pct%%% of their max health in damage and stuns them for %stun_duration% sec.\nHas 1 charge in the shop."
-		"DOTA_Tooltip_modifier_item_heart_datadriven_regen_visible" "Настоящий Лев"
-		"DOTA_Tooltip_modifier_item_heart_datadriven_regen_visible_Description" "Пока вам не наносят урон враги, вы регенерируете здоровье"
 
 		"DOTA_Tooltip_ability_item_sigma_staff" "SIGMA STAFF"
 		"DOTA_Tooltip_ability_item_sigma_staff_Description" "<h1>Toggle: SIGMA MODE</h1> When enabled, increases spell damage by %unholy_bonus_damage%%%, strength by %unholy_bonus_strength%, and armor by %bonus_armor%, but reduces your max mana per second by %unholy_health_drain_per_second%%%."
@@ -5209,6 +5207,7 @@
 		"npc_dota_misolo_beast_warrior" "Beastmaster Warrior"
 		"npc_dota_misolo_visage_warrior" "Visage Warrior"
 		"npc_dota_misolo_arc_warrior" "Arc Warden Warrior"
+		"npc_misolo_boss" "Misolo"
 
 		"dota_tooltip_ability_special_bonus_unique_misolo_1" "+{s:bonus_duration}s Chekane duration"
 		"dota_tooltip_ability_special_bonus_unique_misolo_2" "+{s:bonus_AbilityCharges} Web charge"

@@ -34,7 +34,7 @@
 								bone_name = "head"
 							},
 						]
-						filename = "models/misolo/untitled.fbx"
+						filename = "models/misolo/better_head.fbx"
 						import_scale = 0.4
 						import_filter = 
 						{
@@ -1164,6 +1164,30 @@
 						[
 							{
 								from = "model.vmat"
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = ""
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = "futbolka.vmat"
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = "imba.vmat"
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = "kozha.vmat"
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = "sandali.vmat"
+								to = "models/misolo/misolo_face.vmat"
+							},
+							{
+								from = "shorti.vmat"
 								to = "models/misolo/misolo_face.vmat"
 							},
 						]

@@ -233,9 +233,11 @@ PrecacheUtils.units = {
 		"npc_silvername_chair",
 		"npc_silvername_garr",
 		"npc_zhenya_boss",
+		"npc_misolo_boss",
 }
 
 PrecacheUtils.models = {
+		"models/misolo/misolo_brood.vmdl",
 		"models/misolo/untitled.vmdl",
 		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",
         "models/props_gameplay/rune_goldxp.vmdl",
@@ -376,6 +378,7 @@ PrecacheUtils.models = {
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"models/elka/elka2.vmdl",
 		"models/props_winter/present.vmdl",
+		"models/props_gameplay/neutral_box.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -483,6 +486,7 @@ PrecacheUtils.sounds = {
 		"soundevents/byebye_start.vsndevts",
 		"soundevents/byebye.vsndevts",
 		"soundevents/hamster_announce.vsndevts",
+		"soundevents/misolo_start.vsndevts",
 		"soundevents/jump.vsndevts",
 		"soundevents/jump_2.vsndevts",
 		"soundevents/jump_3.vsndevts",

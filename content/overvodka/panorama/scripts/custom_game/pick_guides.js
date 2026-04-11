@@ -773,9 +773,21 @@ function RenderPickGuidesStrategyStartingItems() {
         return;
     }
 
-    const section = GetPickGuidePrimaryItemSection(guide);
+    const isDefaultGuide = IsDefaultPickGuide(guide);
+    const section = isDefaultGuide ? null : GetPickGuidePrimaryItemSection(guide);
     const renderKey = BuildPickGuidesStrategyItemsRenderKey(guide, section);
     if (PickGuidesState.strategyItemsRenderKey === renderKey) {
+        return;
+    }
+
+    if (isDefaultGuide) {
+        const previousRenderKey = PickGuidesState.strategyItemsRenderKey;
+        PickGuidesState.strategyItemsRenderKey = renderKey;
+
+        if (previousRenderKey && previousRenderKey !== renderKey) {
+            RestorePickGuidesStrategyBaseline();
+        }
+
         return;
     }
 
