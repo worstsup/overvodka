@@ -18,7 +18,7 @@
                "value0"    "sounds/abilities/misolo_e_2.vsnd"
             }
           }
-          "volume"      {  "value"   "6.00000" }
+          "volume"      {  "value"   "4.00000" }
           "pitch_rand_min"  {  "value"   "-0.03000" }
           "pitch_rand_max"  {  "value"   "0.030000" }
           "pitch"       {  "value"   "1.000000" }
@@ -50,7 +50,7 @@
                "value0"    "sounds/abilities/misolo_r.vsnd"
             }
           }
-          "volume"      {  "value"   "5.00000" }
+          "volume"      {  "value"   "4.0" }
           "pitch_rand_min"  {  "value"   "-0.03000" }
           "pitch_rand_max"  {  "value"   "0.030000" }
           "pitch"       {  "value"   "1.000000" }
@@ -82,7 +82,7 @@
                "value0"    "sounds/abilities/misolo_r_start.vsnd"
             }
           }
-          "volume"      {  "value"   "4.00000" }
+          "volume"      {  "value"   "4.0" }
           "pitch_rand_min"  {  "value"   "-0.03000" }
           "pitch_rand_max"  {  "value"   "0.030000" }
           "pitch"       {  "value"   "1.000000" }

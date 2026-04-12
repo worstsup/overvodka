@@ -1,10 +1,12 @@
 LinkLuaModifier("modifier_misolo_r_hidden", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_misolo_r_warrior", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_misolo_r_scepter_shield", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_misolo_visage_silent_as_the_grave", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_misolo_arc_flux", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_misolo_arc_spark_wraith", "heroes/misolo/misolo_r", LUA_MODIFIER_MOTION_NONE)
 
 misolo_r = class({})
+misolo_r_return = class({})
 misolo_visage_soul_assumption = class({})
 misolo_visage_silent_as_the_grave = class({})
 misolo_arc_flux = class({})
@@ -12,6 +14,7 @@ misolo_arc_spark_wraith = class({})
 
 modifier_misolo_r_hidden = class({})
 modifier_misolo_r_warrior = class({})
+modifier_misolo_r_scepter_shield = class({})
 modifier_misolo_visage_silent_as_the_grave = class({})
 modifier_misolo_arc_flux = class({})
 modifier_misolo_arc_spark_wraith = class({})
@@ -26,12 +29,19 @@ function misolo_r:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_flux_tgt.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_wraith_prj.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_wraith.vpcf", context)
+    PrecacheResource("particle", "particles/econ/events/ti6/mjollnir_shield_ti6.vpcf", context)
+    PrecacheResource("particle", "particles/econ/events/ti6/maelstorm_ti6.vpcf", context)
     PrecacheResource("particle_folder", "particles/units/heroes/hero_beastmaster", context)
     PrecacheResource("particle", "particles/broodskoe_hatsapp.vpcf", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_brewmaster.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_visage.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_arc_warden.vsndevts", context)
     PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts", context)
+end
+
+function misolo_r:HasScepterUpgradeActive()
+    local caster = self:GetCaster()
+    return IsValid(caster) and caster:HasScepter()
 end
 
 function misolo_r:OnAbilityPhaseInterrupted()
@@ -205,6 +215,32 @@ function misolo_r:SetupWarrior(warrior)
             end
         end
     end
+
+    self:UpdateWarriorScepterState(warrior)
+end
+
+function misolo_r:UpdateWarriorScepterState(warrior)
+    if not IsValid(warrior) then return end
+
+    local has_scepter = self:HasScepterUpgradeActive()
+    local return_ability = warrior:FindAbilityByName("misolo_r_return")
+
+    if IsValid(return_ability) then
+        if return_ability:GetLevel() < 1 then
+            return_ability:SetLevel(1)
+        end
+
+        return_ability:SetHidden(not has_scepter)
+        return_ability:SetActivated(has_scepter)
+    end
+
+    if has_scepter then
+        if not warrior:HasModifier("modifier_misolo_r_scepter_shield") then
+            warrior:AddNewModifier(self:GetCaster(), self, "modifier_misolo_r_scepter_shield", {})
+        end
+    else
+        warrior:RemoveModifierByName("modifier_misolo_r_scepter_shield")
+    end
 end
 
 function misolo_r:RemoveWarriors()
@@ -219,14 +255,25 @@ function misolo_r:RemoveWarriors()
     self._warriors = {}
 end
 
-function misolo_r:FinishSplit(success, killer)
+function misolo_r:FinishSplit(success, killer, forced_warrior)
     local caster = self:GetCaster()
     if not IsValid(caster) or self._split_finished then return end
 
     self._split_finished = true
     self._split_active = false
 
-    local warrior = self:GetPriorityWarrior()
+    local is_forced_return = IsValid(forced_warrior)
+    if is_forced_return then
+        StopSoundOn("misolo_r", caster)
+    end
+
+    local warrior = nil
+    if IsValid(forced_warrior) and forced_warrior:IsAlive() then
+        warrior = forced_warrior
+    else
+        warrior = self:GetPriorityWarrior()
+    end
+
     local return_position = self._hidden_position or caster:GetAbsOrigin()
     local return_forward = caster:GetForwardVector()
 
@@ -264,6 +311,30 @@ function misolo_r:FinishSplit(success, killer)
 
     self._hidden_position = nil
     self._split_killer = nil
+end
+
+function misolo_r_return:Spawn()
+    if not IsServer() then return end
+    if self:IsTrained() then return end
+    self:SetLevel(1)
+end
+
+function misolo_r_return:IsStealable() return false end
+function misolo_r_return:ProcsMagicStick() return false end
+
+function misolo_r_return:OnSpellStart()
+    if not IsServer() then return end
+
+    local warrior = self:GetCaster()
+    if not IsValid(warrior) or not warrior:IsAlive() then return end
+
+    local owner = warrior:GetOwner()
+    if not IsValid(owner) or not owner:HasScepter() then return end
+
+    local split = owner:FindAbilityByName("misolo_r")
+    if not IsValid(split) or split._split_finished or not split._split_active then return end
+
+    split:FinishSplit(true, nil, warrior)
 end
 
 function modifier_misolo_r_hidden:IsHidden() return true end
@@ -359,6 +430,103 @@ function modifier_misolo_r_warrior:OnDeath(params)
     end)
 end
 
+function modifier_misolo_r_scepter_shield:IsHidden() return true end
+function modifier_misolo_r_scepter_shield:IsPurgable() return false end
+function modifier_misolo_r_scepter_shield:RemoveOnDeath() return false end
+
+function modifier_misolo_r_scepter_shield:OnCreated()
+    self.chance = self:GetAbility():GetSpecialValueFor("scepter_shield_chance")
+    self.damage = self:GetAbility():GetSpecialValueFor("scepter_shield_damage")
+    self.radius = self:GetAbility():GetSpecialValueFor("scepter_shield_radius")
+    self.additional_targets = self:GetAbility():GetSpecialValueFor("scepter_shield_additional_targets")
+end
+
+function modifier_misolo_r_scepter_shield:OnRefresh()
+    self:OnCreated()
+end
+
+function modifier_misolo_r_scepter_shield:DeclareFunctions()
+    return {
+        MODIFIER_EVENT_ON_ATTACK_LANDED,
+    }
+end
+
+function modifier_misolo_r_scepter_shield:GetEffectName()
+    return "particles/econ/events/ti6/mjollnir_shield_ti6.vpcf"
+end
+
+function modifier_misolo_r_scepter_shield:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
+end
+
+function modifier_misolo_r_scepter_shield:OnAttackLanded(params)
+    if not IsServer() then return end
+
+    local parent = self:GetParent()
+    local owner = self:GetCaster()
+    local ability = self:GetAbility()
+    local attacker = params.attacker
+
+    if params.target ~= parent or not IsValid(parent, owner, ability, attacker) then return end
+    if attacker:GetTeamNumber() == parent:GetTeamNumber() then return end
+    if attacker:IsBuilding() or attacker:IsOther() or attacker:IsInvulnerable() or attacker:IsOutOfGame() then return end
+    if not owner:HasScepter() or not RollPercentage(self.chance) then return end
+
+    local victims = {}
+
+    local function add_target(target)
+        if not IsValid(target) or not target:IsAlive() then return end
+        if target:IsBuilding() or target:IsOther() or target:IsInvulnerable() or target:IsOutOfGame() then return end
+        if target:GetTeamNumber() == parent:GetTeamNumber() then return end
+
+        local entindex = target:entindex()
+        if victims[entindex] then return end
+        victims[entindex] = target
+    end
+
+    add_target(attacker)
+
+    local enemies = FindUnitsInRadius(
+        parent:GetTeamNumber(),
+        parent:GetAbsOrigin(),
+        nil,
+        self.radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_CLOSEST,
+        false
+    )
+
+    for _, enemy in ipairs(enemies) do
+        add_target(enemy)
+
+        local count = 0
+        for _ in pairs(victims) do
+            count = count + 1
+        end
+
+        if count >= self.additional_targets + 1 then
+            break
+        end
+    end
+
+    for _, target in pairs(victims) do
+        ApplyDamage({
+            victim = target,
+            attacker = parent,
+            damage = self.damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = ability,
+        })
+
+        local particle = ParticleManager:CreateParticle("particles/econ/events/ti6/maelstorm_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+        ParticleManager:SetParticleControlEnt(particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0, 0, 0), true)
+        ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0, 0, 0), true)
+        ParticleManager:ReleaseParticleIndex(particle)
+    end
+end
+
 function misolo_visage_soul_assumption:OnSpellStart()
     if not IsServer() then return end
 
@@ -427,7 +595,7 @@ function modifier_misolo_visage_silent_as_the_grave:CheckState()
 end
 
 function modifier_misolo_visage_silent_as_the_grave:GetModifierMoveSpeedBonus_Constant()
-    return 550
+    return 300
 end
 
 function modifier_misolo_visage_silent_as_the_grave:GetTexture()

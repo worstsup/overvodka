@@ -7,7 +7,7 @@ _G.nCOUNTDOWNTIMER = 1501
 _G.overvodka_events = true
 _G.winter_mode = false
 _G.global_sounds_muted = false
-_G.misolo_boss_enabled = true
+_G.misolo_boss_enabled = false
 
 local PrecacheUtils = require("util/precache")
 

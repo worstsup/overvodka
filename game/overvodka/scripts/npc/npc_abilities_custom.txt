@@ -18234,7 +18234,7 @@
 			}
 			"bonus_magic_damage"
 			{
-				"value"	"60" // 10 20 30 40
+				"value"	"10 20 30 40"
 				"special_bonus_unique_misolo_8"	"+25"
 			}
 			"post_damage_pct"
@@ -18343,6 +18343,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/misolo/misolo_r"
 		"AbilityTextureName"			"misolo_r"
+		"HasScepterUpgrade"				"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityType"					"ABILITY_TYPE_ULTIMATE"
 		"AbilityCastPoint"				"0.6"
@@ -18368,7 +18369,22 @@
 				"value"	"80 120 160"
 				"special_bonus_unique_misolo_7"	"x2"
 			}
+			"scepter_shield_chance"				"30"
+			"scepter_shield_damage"				"225"
+			"scepter_shield_radius"				"900"
+			"scepter_shield_additional_targets"	"4"
 		}
+	}
+
+	"misolo_r_return"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/misolo/misolo_r"
+		"AbilityTextureName"			"misolo_r"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"1"
 	}
 
 	"misolo_visage_soul_assumption"
