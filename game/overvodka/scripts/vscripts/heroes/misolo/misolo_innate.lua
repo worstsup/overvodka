@@ -187,6 +187,14 @@ function modifier_misolo_innate:OnDeath(params)
         return
     end
 
+    if victim == parent then
+        if not parent:IsIllusion() and RollPercentage(50) then
+            EmitSoundOn("misolo_die", parent)
+        end
+
+        return
+    end
+
     if victim:GetTeamNumber() == parent:GetTeamNumber() then
         return
     end

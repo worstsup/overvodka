@@ -150,5 +150,5 @@ function modifier_misolo_shard_debuff:GetEffectAttachType()
 end
 
 function modifier_misolo_shard_debuff:GetTexture()
-    return "broodmother_incapacitating_bite"
+    return "misolo_shard"
 end

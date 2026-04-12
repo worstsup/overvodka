@@ -19,6 +19,7 @@ function misolo_q:OnSpellStart()
 
     target:AddNewModifier(caster, self, "modifier_misolo_q_debuff", {duration = self:GetSpecialValueFor("duration") * (1 - target:GetStatusResistance())})
 
+    EmitSoundOn("misolo_q", target)
     EmitSoundOn("DOTA_Item.Bloodthorn.Activate", target)
 end
 

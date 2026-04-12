@@ -470,6 +470,58 @@ return {
             }
         },
     },
+    ["npc_dota_hero_broodmother"] = {
+        source_file = "default_broodmother.txt",
+        item_sections = {
+            {
+                key = "starting",
+                title = "#DOTA_Item_Build_Starting_Items",
+                items = {
+                    { item_name = "item_ward_observer", note = "" },
+                    { item_name = "item_boots", note = "" },
+                    { item_name = "item_magic_wand", note = "" },
+                    { item_name = "item_chapman_red", note = "" }
+                },
+            },
+            {
+                key = "early",
+                title = "#DOTA_Item_Build_Early_Game",
+                items = {
+                    { item_name = "item_balbe", note = "" },
+                    { item_name = "item_hqd", note = "" },
+                    { item_name = "item_crumbl_cookie", note = "" },
+                    { item_name = "item_chapman_green", note = "" },
+                    { item_name = "item_aghanims_shard", note = "" }
+                },
+            },
+            {
+                key = "core",
+                title = "#DOTA_Item_Build_Late_Items",
+                items = {
+                    { item_name = "item_nikes", note = "" },
+                    { item_name = "item_bloodthorn", note = "" },
+                    { item_name = "item_shemelis", note = "" },
+                    { item_name = "item_pick_me", note = "" },
+                    { item_name = "item_pasito", note = "" },
+                    { item_name = "item_mask_of_quadrobe", note = "" },
+                    { item_name = "item_govno", note = "" },
+                    { item_name = "item_ultimate_scepter", note = "" }
+                },
+            },
+            {
+                key = "luxury",
+                title = "#DOTA_Item_Build_Luxury",
+                items = {
+                    { item_name = "item_bablokrad", note = "" },
+                    { item_name = "item_armature_strike", note = "" },
+                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_govno", note = "" },
+                    { item_name = "item_derzko", note = "" },
+                    { item_name = "item_minion_generator", note = "" }
+                },
+            }
+        },
+    },
     ["npc_dota_hero_clinkz"] = {
         source_file = "default_clinkz.txt",
         item_sections = {

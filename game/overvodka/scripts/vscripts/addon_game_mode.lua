@@ -923,6 +923,20 @@ end
 function OvervodkaGameMode:AssignTeams()
 	local vecTeamValid = {}
 	local vecTeamNeededPlayers = {}
+	local function ApplyResolvedTeam(nPlayerID, nTeamNumber)
+		if nTeamNumber <= 0 or not PlayerResource:IsValidPlayerID(nPlayerID) then
+			return
+		end
+
+		PlayerResource:SetCustomTeamAssignment(nPlayerID, nTeamNumber)
+		PlayerResource:UpdateTeamSlot(nPlayerID, nTeamNumber, -1)
+
+		local hPlayer = PlayerResource:GetPlayer(nPlayerID)
+		if hPlayer and not hPlayer:IsNull() then
+			hPlayer:SetTeam(nTeamNumber)
+		end
+	end
+
 	for nTeam = 0, (DOTA_TEAM_COUNT-1) do
 		local nMax = GameRules:GetCustomGameTeamMaxPlayers( nTeam )
 		if nMax > 0 then
@@ -937,12 +951,17 @@ function OvervodkaGameMode:AssignTeams()
 	local hPlayers = {}
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		if PlayerResource:IsValidPlayerID( nPlayerID ) then
-			local nTeam = PlayerResource:GetTeam( nPlayerID )
+			local nActualTeam = PlayerResource:GetTeam( nPlayerID )
+			local nTeam = nActualTeam
 			if vecTeamValid[ nTeam ] == false then
 				nTeam = PlayerResource:GetCustomTeamAssignment( nPlayerID )
 			end
 			--print( "Found player " .. nPlayerID .. " on team " .. nTeam )
 			if vecTeamValid[ nTeam ] then
+				if nActualTeam ~= nTeam or PlayerResource:GetCustomTeamAssignment( nPlayerID ) ~= nTeam then
+					ApplyResolvedTeam(nPlayerID, nTeam)
+				end
+
 				if vecTeamNeededPlayers[ nTeam ] > 0 then
 					vecTeamNeededPlayers[ nTeam ] = vecTeamNeededPlayers[ nTeam ] - 1
 				else
@@ -972,7 +991,7 @@ function OvervodkaGameMode:AssignTeams()
 			end
 		end
 		if nTeamNumber > 0 then
-			PlayerResource:SetCustomTeamAssignment( nPlayerID, nTeamNumber )
+			ApplyResolvedTeam(nPlayerID, nTeamNumber)
 			vecTeamNeededPlayers[ nTeamNumber ] = vecTeamNeededPlayers[ nTeamNumber ] - 1
 		end
 	end

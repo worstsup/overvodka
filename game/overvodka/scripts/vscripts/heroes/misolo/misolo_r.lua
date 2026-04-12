@@ -282,6 +282,10 @@ function misolo_r:FinishSplit(success, killer, forced_warrior)
         return_forward = warrior:GetForwardVector()
     end
 
+    if is_forced_return and IsValid(warrior) then
+        EmitSoundOn("Hero_Brewmaster.PrimalSplit.Return", warrior)
+    end
+
     self:RemoveWarriors()
 
     if caster:HasModifier("modifier_misolo_r_hidden") then

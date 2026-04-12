@@ -63,12 +63,39 @@
         return !!playerInfo && playerInfo.player_connection_state === DOTAConnectionState_t.DOTA_CONNECTION_STATE_CONNECTED;
     }
 
+    function GetKnownPlayerInfo(playerId) {
+        if (typeof Players !== "undefined" && typeof Players.IsValidPlayerID === "function" && !Players.IsValidPlayerID(playerId)) {
+            return null;
+        }
+
+        const playerInfo = Game.GetPlayerInfo(playerId);
+        if (!playerInfo) {
+            return null;
+        }
+
+        const connectionState = playerInfo.player_connection_state;
+        if (
+            connectionState === DOTAConnectionState_t.DOTA_CONNECTION_STATE_UNKNOWN ||
+            connectionState === DOTAConnectionState_t.DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
+        ) {
+            return null;
+        }
+
+        const steamId = String(playerInfo.player_steamid || "");
+        const playerName = String(playerInfo.player_name || "");
+        const hasKnownIdentity =
+            (steamId !== "" && steamId !== "0") ||
+            (playerName !== "" && playerName !== "[unknown]" && playerName !== "[неизвестно]");
+
+        return hasKnownIdentity ? playerInfo : null;
+    }
+
     function GetLobbyPlayerIds() {
         const ids = [];
         const maxPlayers = (typeof DOTALimits_t !== "undefined" && DOTALimits_t.DOTA_MAX_TEAM_PLAYERS) || 24;
 
         for (let playerId = 0; playerId < maxPlayers; playerId++) {
-            if (Game.GetPlayerInfo(playerId)) {
+            if (GetKnownPlayerInfo(playerId)) {
                 ids.push(playerId);
             }
         }
@@ -97,7 +124,7 @@
         });
 
         playerIds.forEach((playerId) => {
-            const playerInfo = Game.GetPlayerInfo(playerId);
+            const playerInfo = GetKnownPlayerInfo(playerId);
             const panel = $.CreatePanel("Panel", LS.PLAYERS_LIST, `LS_Player_${playerId}`);
             panel.BLoadLayoutSnippet("LoadingPlayer");
             panel.SetHasClass("BLocalPlayer", playerId === Game.GetLocalPlayerID());
@@ -119,7 +146,7 @@
         let loadedPlayers = 0;
 
         playerIds.forEach((playerId) => {
-            const playerInfo = Game.GetPlayerInfo(playerId);
+            const playerInfo = GetKnownPlayerInfo(playerId);
             const panel = playerPanels[playerId];
             if (!panel) {
                 return;

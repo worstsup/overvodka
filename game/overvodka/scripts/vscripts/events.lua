@@ -26,6 +26,7 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 			self:ReplaceWinContidion()
 		end
 	elseif nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
+		self:AssignTeams()
 		OvervodkaGameMode:UpdateMute(_, _, _)
 		local numberOfPlayers = PlayerResource:GetPlayerCount()
 		if numberOfPlayers > 7 then
