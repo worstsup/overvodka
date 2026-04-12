@@ -28,7 +28,7 @@ function modifier_epstein_w_debuff:OnCreated()
     self.ability = self:GetAbility()
     self.caster = self:GetCaster()
 
-    if not self.ability then
+    if not IsValid(self.ability) then
         self:Destroy()
         return
     end
@@ -50,7 +50,7 @@ function modifier_epstein_w_debuff:OnRefresh()
     self.ability = self:GetAbility()
     self.caster = self:GetCaster()
 
-    if not self.ability then return end
+    if not IsValid(self.ability) then return end
 
     self.armor = self.ability:GetSpecialValueFor("armor")
     self.damage = self.ability:GetSpecialValueFor("damage")
@@ -84,13 +84,13 @@ end
 
 function modifier_epstein_w_debuff:OnIntervalThink()
     local parent = self:GetParent()
-    if not parent or parent:IsNull() or not IsValidEntity(parent) or not parent:IsAlive() then
+    if not IsValid(parent) or not parent:IsAlive() then
         self:Destroy()
         return
     end
 
     local caster = self.caster
-    if not caster or caster:IsNull() or not IsValidEntity(caster) then
+    if not IsValid(caster) then
         caster = parent
     end
     ApplyDamage({victim = parent, attacker = caster, ability = self.ability, damage = self.damage * self.damage_interval, damage_type = DAMAGE_TYPE_PHYSICAL})
@@ -98,10 +98,10 @@ end
 
 function modifier_epstein_w_debuff:OnAbilityFullyCast(params)
     if not IsServer() then return end
-    if not params or not params.ability then return end
+    if not params or not IsValid(params.ability) then return end
 
     local parent = self:GetParent()
-    if not parent or parent:IsNull() or not IsValidEntity(parent) then return end
+    if not IsValid(parent) then return end
 
     if params.unit ~= parent then return end
     if params.ability:IsItem() then return end
@@ -122,10 +122,10 @@ function modifier_epstein_w_debuff:OnAbilityFullyCast(params)
     local silence = self.silence_duration or 0
     if silence > 0 then
         local caster = self.caster
-        if not caster or caster:IsNull() or not IsValidEntity(caster) then
+        if not IsValid(caster) then
             caster = self:GetCaster()
         end
-        if not caster or caster:IsNull() or not IsValidEntity(caster) then
+        if not IsValid(caster) then
             caster = parent
         end
 
