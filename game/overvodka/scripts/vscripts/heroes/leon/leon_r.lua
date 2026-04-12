@@ -31,7 +31,7 @@ function modifier_leon_r_cd_reduce:OnCreated()
     if not IsServer() then return end
     self._fx = nil
     self.was_on_cooldown = false
-    self:StartIntervalThink(0.03)
+    self:StartIntervalThink(0.05)
     self:_UpdateReadyFx()
 end
 
@@ -93,6 +93,7 @@ function modifier_leon_r_cd_reduce:OnAttackLanded(params)
 
     local target = params.target
     if not target or target:IsNull() then return end
+    if not target:IsRealHero() then return end
 
     if target:GetTeamNumber() == parent:GetTeamNumber() then return end
 

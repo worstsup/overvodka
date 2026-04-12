@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_vihor_r", "heroes/vihor/vihor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_vihor_r_debuff", "heroes/vihor/vihor_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 vihor_ultimate = class({})
 function vihor_ultimate:Precache(context)

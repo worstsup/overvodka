@@ -1,6 +1,5 @@
 sans_w = class({})
 
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sans_w_bone_thinker", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier( "modifier_sans_w_walk", "heroes/sans/sans_w", LUA_MODIFIER_MOTION_NONE )
@@ -365,13 +364,13 @@ function sans_w:PlayEffects( start_pos, end_pos, duration )
 		sound_cast_2 = "sans_w_wall"
 	end
 	local caster = self:GetCaster()
-	local effect_cast = assert(loadfile("rubick_spell_steal_lua/rubick_spell_steal_lua_arcana"))(self, particle_cast, PATTACH_WORLDORIGIN, caster )
+	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_WORLDORIGIN, caster )
 	ParticleManager:SetParticleControl( effect_cast, 0, start_pos )
 	ParticleManager:SetParticleControl( effect_cast, 1, end_pos )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( duration, 0, 0 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOnLocationWithCaster( start_pos, sound_cast_2, caster )
-	EmitSoundOnLocationWithCaster( end_pos, sound_cast_2, caster )
+	--EmitSoundOnLocationWithCaster( start_pos, sound_cast_2, caster )
+	--EmitSoundOnLocationWithCaster( end_pos, sound_cast_2, caster )
 end
 
 modifier_sans_w_thinker = class({})

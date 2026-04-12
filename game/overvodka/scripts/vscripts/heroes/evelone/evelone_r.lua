@@ -1,7 +1,6 @@
 LinkLuaModifier("modifier_evelone_r", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_r_debuff", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_evelone_r_aura", "heroes/evelone/evelone_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
 
 evelone_r = class({})
 
@@ -49,9 +48,7 @@ function modifier_evelone_r:RemoveOnDeath() return false end
 
 function modifier_evelone_r:OnCreated()
     if IsServer() then
-        self.saved_time = GameRules:GetTimeOfDay()
-        GameRules:SetTimeOfDay(0)
-        self:StartIntervalThink(0.5)
+        GameRules:BeginTemporaryNight(self:GetDuration(), self:GetParent():GetHeroID())
         self.particle = ParticleManager:CreateParticle("particles/evelone_r_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
         self.particle_2 = ParticleManager:CreateParticle("particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear_aura.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
         ParticleManager:SetParticleControl(self.particle_2, 2, Vector(self.radius, self.radius, self.radius))
@@ -81,9 +78,6 @@ end
 
 function modifier_evelone_r:OnDestroy()
     if IsServer() then
-        if self.saved_time then
-            GameRules:SetTimeOfDay(self.saved_time)
-        end
         ParticleManager:DestroyParticle(self.particle, false)
         ParticleManager:ReleaseParticleIndex(self.particle)
         ParticleManager:DestroyParticle(self.particle_2, false)

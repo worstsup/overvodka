@@ -1,7 +1,4 @@
 ebanko_shard = class({})
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_vector_target", "modifier_generic_vector_target", LUA_MODIFIER_MOTION_NONE )
 
 function ebanko_shard:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/fof.vsndevts", context )

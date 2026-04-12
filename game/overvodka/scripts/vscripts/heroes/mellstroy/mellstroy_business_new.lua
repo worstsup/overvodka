@@ -1,5 +1,4 @@
 mellstroy_business_new = class({})
-LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mellstroy_business_new", "heroes/mellstroy/modifier_mellstroy_business_new", LUA_MODIFIER_MOTION_NONE )
 
 function mellstroy_business_new:GetIntrinsicModifierName()

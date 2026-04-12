@@ -17,6 +17,34 @@ GameUI.CustomUIConfig().team_select =
     "bShowSpectatorTeam" : false
 }
 
+let PICK_SCREEN_HIDDEN = false;
+
+function HidePregameUntilTeamSelection()
+{
+    let pregameRoot = null;
+    try {
+        pregameRoot = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame");
+    } catch (e) {}
+
+    if (!pregameRoot) {
+        $.Schedule(0.1, HidePregameUntilTeamSelection);
+        return;
+    }
+
+    if (Game.GameStateIsBefore(DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP)) {
+        if (!PICK_SCREEN_HIDDEN) {
+            PICK_SCREEN_HIDDEN = true;
+            pregameRoot.style.opacity = "0";
+        }
+
+        $.Schedule(0.1, HidePregameUntilTeamSelection);
+        return;
+    }
+
+    pregameRoot.style.opacity = "1";
+    PICK_SCREEN_HIDDEN = false;
+}
+
 function UpdateHeroSelection() {
     if (Game.GameStateIs(DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME)) {
         UnmuteAll()
@@ -26,6 +54,8 @@ function UpdateHeroSelection() {
 (function () {
     GameEvents.Subscribe('game_rules_state_change', UpdateHeroSelection);
 })();
+
+HidePregameUntilTeamSelection();
 
 function RemoveMute() 
 {

@@ -88,7 +88,7 @@ function modifier_epstein_e_active:OnCreated()
     self:StartIntervalThink(self._tick)
     self:OnIntervalThink()
 
-    if not self:GetParent():HasModifier("modifier_epstein_island_caster_buff") then
+    if not self:GetParent():HasModifier("modifier_epstein_island_caster_buff") and not global_sounds_muted then
         self:GetParent():EmitSound("epstein_dance")
     end
 

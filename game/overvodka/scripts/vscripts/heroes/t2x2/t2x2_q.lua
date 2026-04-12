@@ -1,5 +1,4 @@
 t2x2_q = class({})
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_t2x2_q_shard", "heroes/t2x2/t2x2_q", LUA_MODIFIER_MOTION_NONE)
 function t2x2_q:GetAOERadius()
     return self:GetSpecialValueFor("radius")

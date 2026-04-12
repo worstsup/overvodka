@@ -1,7 +1,5 @@
 chef_shout = class({})
 
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
-
 function chef_shout:GetAOERadius()
     return self:GetSpecialValueFor( "radius" )
 end

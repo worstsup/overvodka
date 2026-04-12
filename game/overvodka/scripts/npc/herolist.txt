@@ -116,7 +116,7 @@
 
 	"npc_dota_hero_batrider"			"0"
 	"npc_dota_hero_bloodseeker"			"1"
-	"npc_dota_hero_broodmother"			"0"
+	"npc_dota_hero_broodmother"			"1"
 	"npc_dota_hero_chen"				"0"
 	"npc_dota_hero_doom_bringer"		"0"
 	"npc_dota_hero_enchantress"			"0"

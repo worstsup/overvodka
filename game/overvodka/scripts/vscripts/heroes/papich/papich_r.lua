@@ -2,6 +2,69 @@ LinkLuaModifier("modifier_papich_r", "heroes/papich/papich_r", LUA_MODIFIER_MOTI
 
 papich_r = class({})
 
+local papich_clone_abilities = {
+    [0] = { ability = "papich_q_clone" },
+    [1] = { ability = "papich_w_clone" },
+    [2] = { ability = "papich_maniac" },
+    [3] = { ability = "papich_innate" },
+    [5] = { ability = "papich_e_clone" },
+}
+
+local function EnsureAbility(unit, abilityName)
+    local ability = unit:FindAbilityByName(abilityName)
+    if ability and not ability:IsNull() then
+        return ability
+    end
+
+    ability = unit:AddAbility(abilityName)
+    if ability and not ability:IsNull() then
+        ability:SetStolen(false)
+        ability:SetHidden(false)
+    end
+
+    return ability
+end
+
+local function MoveAbilityToIndex(unit, abilityName, targetIndex)
+    local desiredAbility = EnsureAbility(unit, abilityName)
+    if not desiredAbility or desiredAbility:IsNull() then
+        return
+    end
+
+    local currentAbility = unit:GetAbilityByIndex(targetIndex)
+    if currentAbility == desiredAbility then
+        desiredAbility:SetActivated(true)
+        return
+    end
+
+    if currentAbility and not currentAbility:IsNull() then
+        unit:SwapAbilities(currentAbility:GetAbilityName(), abilityName, false, true)
+    else
+        desiredAbility:SetActivated(true)
+    end
+end
+
+local function ConfigurePapichCloneAbilities(clone, ability)
+    for slotIndex = 0, 5 do
+        local layoutInfo = papich_clone_abilities[slotIndex]
+        if layoutInfo then
+            MoveAbilityToIndex(clone, layoutInfo.ability, slotIndex)
+        end
+    end
+
+    for _, layoutInfo in pairs(papich_clone_abilities) do
+        local cloneAbility = EnsureAbility(clone, layoutInfo.ability)
+        if cloneAbility and not cloneAbility:IsNull() then
+            cloneAbility:SetLevel(ability:GetLevel())
+        end
+    end
+
+    local innate = clone:FindAbilityByName("papich_innate")
+    if innate and not innate:IsNull() then
+        innate:SetActivated(ability:GetSpecialValueFor("innate_activated") == 1)
+    end
+end
+
 function papich_r:Precache(context)
     PrecacheResource( "soundfile", "soundevents/papich_r_spawn.vsndevts", context )
     PrecacheResource( "soundfile", "soundevents/papich_r_end.vsndevts", context )
@@ -20,20 +83,13 @@ end
 
 function papich_r:OnSpellStart()
     if not IsServer() then return end
-     self.abilities_list = 
-    {
-        {"papich_q", "papich_q_clone"},
-        {"papich_w", "papich_w_clone"},
-        {"papich_e", "papich_maniac"},
-        {"papich_r",   "papich_e_clone"},
-    }
-    local target = Entities:FindByNameNearest("npc_dota_hero_skeleton_king", self:GetCaster():GetAbsOrigin(), 10000)
+    local caster = self:GetCaster()
     if self.knight ~= nil then
         self.knight:RemoveModifierByName("modifier_papich_r")
     end
-    if target then
+    if caster then
         local spawn_point = self:GetCursorPosition()
-        local knight = CreateUnitByName( target:GetUnitName(), spawn_point, true, self:GetCaster(), self:GetCaster(), self:GetCaster():GetTeamNumber()  )
+        local knight = CreateUnitByName( caster:GetUnitName(), spawn_point, true, self:GetCaster(), self:GetCaster(), self:GetCaster():GetTeamNumber()  )
         if knight then
             self.knight = knight
             knight:AddNewModifier(self:GetCaster(), self, "modifier_papich_r", {duration = self:GetSpecialValueFor("duration")})
@@ -56,7 +112,7 @@ function papich_r:OnSpellStart()
             ParticleManager:ReleaseParticleIndex(particle)
 
             for itemSlot = 0,16 do
-                local itemName = target:GetItemInSlot(itemSlot)
+                local itemName = caster:GetItemInSlot(itemSlot)
                 if itemName then 
                     if itemName:GetName() ~= "item_rapier" and itemName:GetName() ~= "item_ward_dispenser" and itemName:GetName() ~= "item_gem" and itemName:GetName() ~= "item_refresher" and itemName:GetName() ~= "item_lesh" and itemName:GetName() ~= "item_moon_shard" and itemName:GetName() ~= "item_hand_of_midas" and itemName:GetName() ~= "item_bablokrad" and itemName:IsPermanent() then
                         local newItem = CreateItem(itemName:GetName(), nil, nil)
@@ -74,29 +130,19 @@ function papich_r:OnSpellStart()
                     end
                 end
             end
-            while knight:GetLevel() < target:GetLevel() do
+            Timers:CreateTimer(FrameTime(), function()
+                for i = 0, DOTA_ITEM_MAX -1 do
+                    local item = knight:GetItemInSlot(i)
+                    if item and item:GetName() == "item_tpscroll" then
+                        knight:RemoveItem(item)
+                    end
+                end
+            end)
+            while knight:GetLevel() < caster:GetLevel() do
                 knight:HeroLevelUp( false )
                 knight:SetAbilityPoints(0)
             end
-            for _, info in pairs(self.abilities_list) do
-                knight:SwapAbilities(info[1], info[2], false, true)
-            end
-            for i = 0, 24 do
-                local ability = target:GetAbilityByIndex(i)
-                if ability then
-                    local knight_ability = knight:FindAbilityByName(ability:GetAbilityName())
-                    if i == 3 then
-                        if self:GetSpecialValueFor("innate_activated") == 1 then
-                            knight_ability:SetActivated(true)
-                        else
-                            knight_ability:SetActivated(false)
-                        end
-                    end
-                    if knight_ability then
-                        knight_ability:SetLevel(self:GetLevel())
-                    end
-                end
-            end
+            ConfigurePapichCloneAbilities(knight, self)
             knight:CalculateStatBonus(true)
         end
     end
@@ -104,6 +150,7 @@ end
 
 
 modifier_papich_r = class({})
+
 function modifier_papich_r:IsPurgable() return false end
 function modifier_papich_r:IsPurgeException() return false end
 
@@ -118,6 +165,7 @@ function modifier_papich_r:OnCreated()
         self:StartIntervalThink(self.check_interval)
     end
 end
+
 function modifier_papich_r:OnIntervalThink()
     if not IsServer() then return end
     local current_health = self:GetParent():GetHealth()
@@ -128,8 +176,7 @@ function modifier_papich_r:OnIntervalThink()
     end
 end
 function modifier_papich_r:DeclareFunctions()
-    return
-    {
+    return {
         MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
         MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         MODIFIER_PROPERTY_LIFETIME_FRACTION,
@@ -140,18 +187,23 @@ function modifier_papich_r:DeclareFunctions()
         MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND,
     }
 end
+
 function modifier_papich_r:GetAttackSound()
     return "fof"
 end
+
 function modifier_papich_r:GetModifierModelChange()
     return "arthas/papich_maniac.vmdl"
 end
+
 function modifier_papich_r:GetModifierModelScale()
     return 10
 end
+
 function modifier_papich_r:GetModifierAttackRangeBonus()
     return -350
 end
+
 function modifier_papich_r:GetModifierIncomingDamage_Percentage()
     if not self:GetAbility() then return 0 end
     return self:GetAbility():GetSpecialValueFor("incoming_damage") - 100

@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_pistol_r_drag", "heroes/pistol/pistol_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_pistol_mute", "heroes/pistol/pistol_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_pistol_r_torrent_slow", "heroes/pistol/pistol_r", LUA_MODIFIER_MOTION_NONE)
 
 pistol_r = class({})

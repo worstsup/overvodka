@@ -1,18 +1,39 @@
 <root>
 	<styles>
 		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
-		<include src="file://{resources}/styles/custom_game/custom_loading_screen.css" />
+		<include src="s2r://panorama/layout/custom_game/custom_loading_screen/custom_loading_screen.vcss_c" />
 	</styles>
 	<scripts>
-		<include src="file://{resources}/scripts/custom_game/custom_loading_screen.js" />
+		<include src="s2r://panorama/layout/custom_game/custom_loading_screen/custom_loading_screen_utils.vjs_c" />
+		<include src="s2r://panorama/layout/custom_game/custom_loading_screen/custom_loading_screen.vjs_c" />
 	</scripts>
-	<Panel class="LoadingScreen">
-		<Image id="BackgroundImage" src="file://{images}/custom_game/loading_screen/loading_screen.png" />
+	<snippets>
+		<snippet name="LoadingPlayer">
+			<Panel class="LS_Player">
+				<Panel class="LS_Player_Overlay" />
+				<Panel class="LS_Player_LoadingState" />
+				<Panel id="LS_PlayerInfo">
+					<DOTAAvatarImage steamid="local" />
+					<DOTAUserName steamid="local" />
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+	<Panel class="OvervodkaLoadingRoot">
+		<Image id="BackgroundImage" src="s2r://panorama/images/custom_game/loading_screen/loading_screen_png.vtex" />
+		<Panel class="LoadingBackdrop" />
+		<Panel class="LoadingGoldTint" />
+		<Panel id="LoadingPlayersRoot">
+			<Panel id="LoadingPlayersHeaderRow">
+				<Label id="LoadingPlayersHeader" text="#LoadingScreenPlayersInfo" />
+			</Panel>
+			<Panel id="LoadingPlayersList" />
+		</Panel>
 		<Panel id="TelegramButton" onactivate="ExternalBrowserGoToURL('https://t.me/overvodka')">
 			<Panel id="TelegramPanel">
 				<Label class="TelegramText" text="#LOADING_SCREEN_Telegramm" />
 			</Panel>
-			<Image id="TelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+			<Image id="TelegramIcon" src="s2r://panorama/images/custom_game/tg_icon_png.vtex"/>
 		</Panel>
 	</Panel>
 </root>

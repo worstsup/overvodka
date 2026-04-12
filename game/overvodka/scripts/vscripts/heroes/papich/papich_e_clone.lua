@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_papich_e_clone_thinker", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_papich_e_clone_debuff", "heroes/papich/papich_e_clone", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
+
 papich_e_clone = class({})
 
 function papich_e_clone:Precache(context)
@@ -200,7 +200,6 @@ end
 
 function papich_e_clone_slam:OnProjectileHit_ExtraData(target, location, data)
     if not target and self.ice_blast_ability then
-        EmitSoundOnLocationWithCaster(location, "papich_e_clone_exp", self:GetCaster())
 
         local particle = ParticleManager:CreateParticle("particles/shredder_whirling_death_new.vpcf", PATTACH_WORLDORIGIN, self:GetCaster())
         ParticleManager:SetParticleControl(particle, 0, location)
@@ -245,6 +244,7 @@ function papich_e_clone_slam:OnProjectileHit_ExtraData(target, location, data)
                 ApplyDamage(damageTable)
             end
         end
+        EmitSoundOnLocationWithCaster(location, "papich_e_clone_exp", self:GetCaster())
     end
 end
 

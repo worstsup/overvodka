@@ -27,7 +27,7 @@
 			"item"		"item_nikes"
 			"item"		"item_shemelis"
 			"item"		"item_govno"
-			"item"		"item_manta_datadriven"
+			"item"		"item_pick_me"
 			"item"		"item_pasito"
 			"item"		"item_ultimate_scepter"
 		}

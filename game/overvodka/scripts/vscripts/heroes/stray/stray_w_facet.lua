@@ -1,4 +1,3 @@
-LinkLuaModifier( "modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_stray_w_facet_damage", "heroes/stray/stray_w_facet", LUA_MODIFIER_MOTION_BOTH )
 LinkLuaModifier( "modifier_stray_w_facet", "heroes/stray/stray_w_facet", LUA_MODIFIER_MOTION_BOTH )
 stray_w_facet = class({})

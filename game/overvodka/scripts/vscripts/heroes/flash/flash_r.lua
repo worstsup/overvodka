@@ -122,8 +122,7 @@ function modifier_flash_r_buff:OnCreated()
 	ParticleManager:SetParticleControlEnt(self.p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:SetParticleControlEnt(self.p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	self:AddParticle(self.p, false, false, -1, false, false)
-	self.saved_time = GameRules:GetTimeOfDay()
-	GameRules:SetTimeOfDay(0)
+	GameRules:BeginTemporaryNight(self:GetDuration(), self:GetParent():GetHeroID())
 	self:PlayEffects()
 end
 
@@ -146,9 +145,6 @@ function modifier_flash_r_buff:OnDestroy()
 	ParticleManager:SetParticleControlEnt( p, 0, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
     ParticleManager:SetParticleControlEnt( p, 4, self:GetCaster(), PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	ParticleManager:ReleaseParticleIndex(p)
-	if self.saved_time then
-		GameRules:SetTimeOfDay(self.saved_time)
-	end
 end
 
 function modifier_flash_r_buff:DeclareFunctions()

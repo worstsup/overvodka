@@ -6,8 +6,6 @@ LinkLuaModifier("modifier_item_suchiy_blast_amp",    "items/suchiy", LUA_MODIFIE
 LinkLuaModifier("modifier_item_suchiy_vision",       "items/suchiy", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_suchiy_arctic_bind",  "items/suchiy", LUA_MODIFIER_MOTION_NONE)
 
-LinkLuaModifier("modifier_generic_ring_lua", "modifier_generic_ring_lua", LUA_MODIFIER_MOTION_NONE)
-
 item_suchiy = class({})
 
 function item_suchiy:GetIntrinsicModifierName()
@@ -147,6 +145,7 @@ function modifier_item_suchiy:OnCreated()
     self.bonus_health     = self.ability:GetSpecialValueFor("bonus_health")
 
     if not IsServer() then return end
+    self.mod = self:GetParent():AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_item_chasm_stone", {})
     self:_EnsureAuraController()
 end
 
@@ -160,6 +159,9 @@ function modifier_item_suchiy:OnDestroy()
             self.parent:RemoveModifierByName("modifier_item_suchiy_aura")
         end
     end)
+
+    if not self.mod or self.mod:IsNull() then return end
+	self.mod:Destroy()
 end
 
 function modifier_item_suchiy:_HasActiveSuchiyInInventory(unit)
@@ -202,6 +204,7 @@ function modifier_item_suchiy:DeclareFunctions()
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,
+        MODIFIER_PROPERTY_AOE_BONUS_PERCENTAGE
     }
 end
 

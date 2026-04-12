@@ -1,5 +1,4 @@
 serega_sven = class({})
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_serega_sven",        "heroes/pirat/serega_sven",     LUA_MODIFIER_MOTION_NONE)
 
 local function Rotate2D(vec, degrees)

@@ -1,13 +1,6 @@
-LinkLuaModifier("modifier_prince_innate", "heroes/prince/prince_innate.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE )
-prince_innate = class({})
+LinkLuaModifier("modifier_prince_innate", "heroes/prince/prince_innate", LUA_MODIFIER_MOTION_NONE)
 
-function prince_innate:GetBehavior()
-    if self:GetSpecialValueFor("active") == 1 then
-        return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE
-    end
-    return DOTA_ABILITY_BEHAVIOR_PASSIVE
-end
+prince_innate = class({})
 
 function prince_innate:OnSpellStart()
     if not IsServer() then return end

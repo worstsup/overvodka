@@ -19,20 +19,17 @@ modifier_ejovik = class({})
 function modifier_ejovik:IsPurgable() return true end
 
 function modifier_ejovik:OnCreated()
-	self.as = self:GetAbility():GetSpecialValueFor( "bonus_as" )
-	self.mp = self:GetAbility():GetSpecialValueFor( "bonus_mp" )
-	self.resist = self:GetAbility():GetSpecialValueFor( "bonus_resist" )
-	self.evasion = self:GetAbility():GetSpecialValueFor( "evasion" )
-	self.mag = self:GetAbility():GetSpecialValueFor( "bonus_mag" )
-	self.range = self:GetAbility():GetSpecialValueFor( "bonus_range" )
-	self.vision = self:GetAbility():GetSpecialValueFor( "bonus_vision" )
 	self.shard = self:GetParent():HasShard()
 	self.armor = self:GetAbility():GetSpecialValueFor( "armor" )
 	self:StartIntervalThink(1)
 end
 
 function modifier_ejovik:OnIntervalThink()
-	self.armor = self.armor + 2
+	self.shard = self:GetParent():HasShard()
+	local armor_step = self:GetAbility():GetSpecialValueFor( "armor" )
+	if armor_step > 0 then
+		self.armor = self.armor + armor_step
+	end
 end
 
 function modifier_ejovik:DeclareFunctions()
@@ -54,44 +51,44 @@ function modifier_ejovik:CheckState()
 	return {
 		[MODIFIER_STATE_ROOTED] = true,
 		[MODIFIER_STATE_FORCED_FLYING_VISION] = true,
-		[MODIFIER_STATE_DEBUFF_IMMUNE] = self.shard,
+		[MODIFIER_STATE_DEBUFF_IMMUNE] = self:GetParent():HasShard(),
 	}
 end
 
 function modifier_ejovik:GetModifierPhysicalArmorBonus()
-	if not self.shard then return end
+	if not self:GetParent():HasShard() then return end
 	return self.armor
 end
 function modifier_ejovik:GetBonusDayVision()
-	return self.vision
+	return self:GetAbility():GetSpecialValueFor( "bonus_vision" )
 end
 function modifier_ejovik:GetBonusNightVision()
-	return self.vision
+	return self:GetAbility():GetSpecialValueFor( "bonus_vision" )
 end
 function modifier_ejovik:GetModifierConstantManaRegen()
-	return self.mp
+	return self:GetAbility():GetSpecialValueFor( "bonus_mp" )
 end
 function modifier_ejovik:GetModifierAttackRangeBonus()
-	return self.range
+	return self:GetAbility():GetSpecialValueFor( "bonus_range" )
 end
 function modifier_ejovik:GetModifierSpellAmplify_Percentage()
-	return self.mag
+	return self:GetAbility():GetSpecialValueFor( "bonus_mag" )
 end
 function modifier_ejovik:GetModifierMagicalResistanceBonus()
-	return self.resist
+	return self:GetAbility():GetSpecialValueFor( "bonus_resist" )
 end
 function modifier_ejovik:GetModifierEvasion_Constant()
-	return self.evasion
+	return self:GetAbility():GetSpecialValueFor( "evasion" )
 end
 function modifier_ejovik:GetModifierAttackSpeedBonus_Constant()
-	return self.as
+	return self:GetAbility():GetSpecialValueFor( "bonus_as" )
 end
 function modifier_ejovik:GetModifierModelChange()
 	return "nix/pc_nightmare_mushroom.vmdl"
 end
 
 function modifier_ejovik:GetEffectName()
-	if not self.shard then return end
+	if not self:GetParent():HasShard() then return end
 	return "particles/pangolier_shard_rollup_magic_immune_nix.vpcf"
 end
 

@@ -1,6 +1,5 @@
 LinkLuaModifier("modifier_item_aegis_hero", "items/aegis_hero", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_aegis_hero_slow", "items/aegis_hero", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 item_aegis_hero = class({})
 
 function item_aegis_hero:GetIntrinsicModifierName()
@@ -30,6 +29,7 @@ end
 function modifier_item_aegis_hero:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+		MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
         MODIFIER_EVENT_ON_ATTACK
@@ -40,6 +40,12 @@ function modifier_item_aegis_hero:GetModifierAttackSpeedBonus_Constant()
     if self:GetAbility() then
     	return self:GetAbility():GetSpecialValueFor("bonus_attack_speed")
 	end
+end
+
+function modifier_item_aegis_hero:GetModifierAttackRangeBonus()
+	if not self:GetAbility() then return end
+	if self:GetParent():IsRangedAttacker() then return end
+	return self:GetAbility():GetSpecialValueFor("bonus_range")
 end
 
 function modifier_item_aegis_hero:OnAttack(params)

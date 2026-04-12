@@ -1,6 +1,4 @@
 LinkLuaModifier( "modifier_litvin_conditions", "heroes/litvin/litvin_conditions", LUA_MODIFIER_MOTION_HORIZONTAL )
-LinkLuaModifier( "modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 litvin_conditions = class({})
 

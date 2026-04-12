@@ -1,5 +1,4 @@
 ashab_slushay = class({})
-LinkLuaModifier( "modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_ashab_slushay_buff", "heroes/ashab/ashab_slushay", LUA_MODIFIER_MOTION_NONE )
 
 function ashab_slushay:OnAbilityUpgrade( hAbility )

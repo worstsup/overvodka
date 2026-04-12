@@ -59,10 +59,7 @@ function frisk_w:OnSpellStart()
     end
 
     c:EmitSound("frisk_w")
-    local p = ParticleManager:CreateParticle(
-        "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refraction_form.vpcf",
-        PATTACH_WORLDORIGIN, nil
-    )
+    local p = ParticleManager:CreateParticle("particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refraction_form.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(p, 1, c:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
 end

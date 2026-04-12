@@ -124,35 +124,7 @@
 		"Ability16"		"special_bonus_unique_ebanko_7"
 		"Ability17"		"special_bonus_unique_ebanko_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"ebanko_q"
-			{
-				"Icon"				"snowflake"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"ebanko_w"
-			{
-				"Icon"				"damage"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"ebanko_e"
-			{
-				"Icon"				"unique"
-				"Color"				"Green"
-				"GradientID"		"2"
-			}
-			"kunkka_high_tide"	
-			{
-				"Deprecated"		"true"
-			}
-			"kunkka_grog"	
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		"AbilityDraftIgnoreCount"		"7"
 		"ArmorPhysical"		"4"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -202,29 +174,7 @@
 		"Ability16"		"special_bonus_unique_eldzhey_7"
 		"Ability17"		"special_bonus_unique_eldzhey_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"eldzhey_w"
-			{
-				"Icon"				"twin_hearts"
-				"Color"				"Gray"
-				"GradientID"		"0"
-			}
-			"eldzhey_e"
-			{
-				"Icon"				"illusion"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"terrorblade_condemned" 	
-			{
-				"Deprecated"		"true"
-			}
-			"terrorblade_soul_fragment" 	
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"			""
 		"ArmorPhysical"		"2"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"28"
@@ -236,7 +186,7 @@
 		"AttackRange"		"150"
 		"MovementTurnRate"		"0.800000"
 		"ProjectileSpeed"		"900"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"18"
 		"AttributeStrengthGain"		"1.8"
 		"AttributeBaseIntelligence"		"15"
@@ -277,29 +227,7 @@
 		"Ability16"		"special_bonus_unique_shkolnik_7"
 		"Ability17"		"special_bonus_unique_shkolnik_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"shkolnik_w"
-			{
-				"Icon"				"armor_broken"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-			}
-			"shkolnik_e"
-			{
-				"Icon"				"nuke"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"sniper_ghillie_suit" 
-			{
-				"Deprecated"		"true"
-			}
-			"sniper_scattershot" 	
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		"HealthBarOffset"	"250"
 		"ArmorPhysical"		"-1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -379,29 +307,7 @@
 		"AttributeBaseAgility"		"15"
 		"AttributeAgilityGain"		"1.4"
 		"MovementSpeed"		"290"
-		"Facets"
-		{
-			"chef_r" 
-			{
-				"Icon"				"damage"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"chef_q" 
-			{
-				"Icon"				"unique"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"lion_essence_eater" 
-			{
-				"Deprecated"		"true"
-			}
-			"lion_fist_of_death" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"	""
 		"VoiceFile"	""
 	}
 	"npc_dota_hero_tinker"
@@ -418,7 +324,7 @@
 		"Ability2"		"dave_sunflower"
 		"Ability3"		"dave_e"
 		"Ability4"		"dave_peashooter_freeze"
-		"Ability5"		"generic_hidden"
+		"Ability5"		"dave_scepter"
 		"Ability6"		"dave_loonboon"
 		"Ability7"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_dave_1"
@@ -430,53 +336,7 @@
 		"Ability16"		"special_bonus_unique_dave_7"
 		"Ability17"		"special_bonus_unique_dave_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"dave_old_scepter"
-			{
-				"Icon"				"vortex_out"
-				"Color"				"Green"
-				"GradientID"		"2"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"dave_scepter"
-						"AbilityIndex"	"4"
-						"AutoLevelAbility" "true"
-					}
-				}
-			}
-			"dave_armor"
-			{
-				"Icon"				"nuke"
-				"Color"				"Red"
-				"GradientID"		"0"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"shatter_aura"
-						"AbilityIndex"	"7"
-						"AutoLevelAbility" "true"
-					}
-				}
-			}
-			"dave_r"
-			{
-				"Icon"				"sun"
-				"Color"				"Yellow"
-				"GradientID"		"2"
-			}
-			"tinker_repair_bots"
-			{
-				"Deprecated"		"true"
-			}
-			"tinker_translocator"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"8"
@@ -523,33 +383,7 @@
 		"Ability16"		"special_bonus_unique_speed_8"
 		"Ability17"		"special_bonus_unique_speed_7"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"speed_facet_q"
-			{
-				"Icon"				"nuke"
-				"Color"				"Red"
-				"GradientID"		"1"
-			}
-			"speed_facet_w"
-			{
-				"Icon"				"speed"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-			}
-			"brewmaster_roll_out_the_barrel"
-			{
-				"Deprecated"	"true"
-			}
-			"brewmaster_drunken_master"
-			{
-				"Deprecated"	"true"
-			}
-			"brewmaster_brewmaster"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"-1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"17"
@@ -700,29 +534,7 @@
 		"Ability16"		"special_bonus_unique_sahur_7"
 		"Ability17"		"special_bonus_unique_sahur_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"sahur_facet_q" 
-			{
-				"Icon"				"summons"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"sahur_facet_e" 
-			{
-				"Icon"				"illusion"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-			}
-			"meepo_more_meepo"
-			{
-				"Deprecated"	"true"
-			}
-			"meepo_codependent"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"25"
@@ -866,29 +678,7 @@
 		"Ability16"		"special_bonus_unique_macan_7"
 		"Ability17"		"special_bonus_unique_macan_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"macan_r"
-			{
-				"Icon"				"armor"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"macan_w"
-			{
-				"Icon"				"strength"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"axe_one_man_army"
-			{
-				"Deprecated"	"true"
-			}
-			"axe_call_out"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" 		""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"30"
@@ -1150,37 +940,7 @@
 		"Ability16"		"special_bonus_unique_mellstroy_7"
 		"Ability17"		"special_bonus_unique_mellstroy_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"mellstroy_e"
-			{
-				"Icon"				"nuke"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"mellstroy_gold"
-			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"mellstroy_money_sale"
-						"AutoLevelAbility" "true"
-					}
-				}
-			}
-			"bounty_hunter_shuriken"
-			{
-				"Deprecated"	"true"
-			}
-			"bounty_hunter_mugging"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"3"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"32"
@@ -1232,29 +992,7 @@
 		"Ability16"		"special_bonus_unique_litvin_7"
 		"Ability17"		"special_bonus_unique_litvin_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"litvin_d" 
-			{
-				"Icon"				"damage"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"litvin_w"
-			{
-				"Icon"				"cooldown"
-				"Color"				"Blue"
-				"GradientID"		"0"
-			}
-			"ursa_grudge_bearer" 
-			{
-				"Deprecated"	"true"
-			}
-			"ursa_debuff_reduce"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"30"
@@ -1304,35 +1042,7 @@
 		"Ability16"		"special_bonus_unique_stariy_6"
 		"Ability17"		"special_bonus_unique_stariy_7"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"stariy_r_facet"
-			{
-				"Icon"				"teleport"
-				"Color"				"Blue"
-				"GradientID"		"0"
-			}
-			"stariy_e_facet"
-			{
-				"Icon"				"movement"
-				"Color"				"Blue"
-				"GradientID"		"1"
-			}
-			"stariy_w_facet"
-			{
-				"Icon"				"unique"
-				"Color"				"Green"
-				"GradientID"		""
-			}
-			"zuus_livewire"	
-			{
-				"Deprecated" "true"
-			}			
-			"zuus_divine_rampage" 
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets"			""
 		"ArmorPhysical"		"2"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"28"
@@ -1383,29 +1093,7 @@
 		"Ability16"		"special_bonus_unique_ashab_7"
 		"Ability17"		"special_bonus_unique_ashab_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"ashab_q_facet"
-			{
-				"Icon"				"armor"
-				"Color"				"Green"
-				"GradientID"		"2"
-			}
-			"tidehunter_kraken_swell"
-			{
-				"Deprecated" "true"
-			}
-			"ashab_r_facet"
-			{
-				"Icon"				"overshadow"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"tidehunter_sizescale"
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets"	""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"25"
@@ -1452,39 +1140,7 @@
 		"Ability16"		"special_bonus_unique_arsen_7"
 		"Ability17"		"special_bonus_unique_arsen_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"arsen_facet_testosteron"
-			{
-				"Icon"	"fist"
-				"Color" "Red"
-				"GradientID"	"1"
-			}
-			"arsen_facet_tgk"
-			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-			}
-			"arsen_facet_baza"
-			{
-				"Icon"				"debuff"
-				"Color"				"green"
-				"GradientID"		"1"
-			}
-			"earthshaker_reverberating_ridge"
-			{
-				"Deprecated"	"true"
-			}
-			"earthshaker_tectonic_buildup" 
-			{
-				"Deprecated"	"true"
-			}
-			"earthshaker_slugger" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets"	""
 		"ArmorPhysical"		"3"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"27"
@@ -1526,9 +1182,10 @@
 		"Ability1"		"ejovik"
 		"Ability2"		"nix_semya"
 		"Ability3"		"gunnar_bash"
-		"Ability4"		"generic_hidden"
+		"Ability4"		"nix_levin"
 		"Ability5"		"vengefulspirit_soul_strike"
 		"Ability6"		"nix_rus"
+		"Ability7"		"nix_pravin"
 		"Ability10"		"special_bonus_unique_nix_1"
 		"Ability11"		"special_bonus_unique_nix_2"
 		"Ability12"		"special_bonus_unique_nix_3"
@@ -1538,33 +1195,7 @@
 		"Ability16"		"special_bonus_unique_nix_7"
 		"Ability17"		"special_bonus_unique_nix_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"nix_levin"
-			{
-				"Icon"				"healing"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"nix_pravin"
-			{
-				"Icon"				"siege"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"furion_soothing_saplings"	
-			{
-				"Deprecated"	"true"
-			}
-			"furion_ironwood_treant" 	
-			{
-				"Deprecated"	"true"
-			}
-			"furion_natures_profit"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"28"
@@ -1576,7 +1207,7 @@
 		"AttackRange"		"550"
 		"ProjectileModel"		"particles/units/heroes/hero_furion/furion_base_attack.vpcf"
 		"ProjectileSpeed"		"1125"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"19"
 		"AttributeStrengthGain"		"1.9"
 		"AttributeBaseIntelligence"		"15"
@@ -1588,9 +1219,9 @@
 	}
 	"npc_dota_hero_antimage"
 	{
-		"Model"		"models/heroes/antimage/antimage.vmdl"
+		"Model"		"models/pirat/serega_pirat.vmdl"
+		"DisableWearables"	"1"
 		"SoundSet"		"Hero_Antimage"
-		"IdleExpression"		"scenes/antimage/antimage_exp_idle_01.vcd"
 		"Enabled"		"1"
 		"ModelScale"		"0.900000"
 		"VersusScale"		"0.9"
@@ -1611,29 +1242,7 @@
 		"Ability16"		"special_bonus_unique_serega_7"
 		"Ability17"		"special_bonus_unique_serega_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"serega_magic_facet" 
-			{
-				"Icon"				"mana"
-				"Color"				"Blue"
-				"GradientID"		"1"
-			}
-			"serega_physical_facet" 
-			{
-				"Icon"				"armor"
-				"Color"				"red"
-				"GradientID"		"1"
-			}
-			"antimage_magebanes_mirror" 
-			{
-				"Deprecated"	"true"
-			}
-			"antimage_mana_thirst" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" 			""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"29"
@@ -1657,6 +1266,7 @@
 		"AttributeAgilityGain"		"2.5"
 		"StatusHealthRegen"		"1.0"
 		"MovementSpeed"		"295"
+		"VoiceFile"		""
 	}
 	"npc_dota_hero_clinkz"
 	{
@@ -1788,29 +1398,7 @@
 		"Ability16"		"special_bonus_unique_zolo_7"
 		"Ability17"		"special_bonus_unique_zolo_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"zolo_q_facet" 
-			{
-				"Icon"				"rng"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"zolo_e_facet" 
-			{
-				"Icon"				"ogre"
-				"Color"				"Blue"
-				"GradientID"		"1"
-			}
-			"ogre_magi_fat_chance" 
-			{
-				"Deprecated"	"true"
-			}
-			"ogre_magi_learning_curve" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"HealthBarOffset"		"270"
 		"ArmorPhysical"		"3.000000"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -1862,29 +1450,7 @@
 		"Ability16"		"special_bonus_unique_chillguy_7"
 		"Ability17"		"special_bonus_unique_chillguy_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"chillguy_e_facet" 
-			{
-				"Icon"				"debuff"
-				"Color"				"Gray"
-				"GradientID"		"3"
-			}
-			"chillguy_w_facet" 
-			{
-				"Icon"				"area_of_effect"
-				"Color"				"Blue"
-				"GradientID"		"0"
-			}
-			"ancient_apparition_bone_chill" 
-			{
-				"Deprecated"	"true"
-			}
-			"ancient_apparition_exposure" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"21"
@@ -1933,33 +1499,7 @@
 		"Ability16"				"special_bonus_unique_sasavot_7"
 		"Ability17"				"special_bonus_unique_sasavot_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"sasavot_e_facet" 
-			{
-				"Icon"				"movement"
-				"Color"				"Red"
-				"GradientID"		"1"
-			}
-			"sasavot_q_facet" 
-			{
-				"Icon"				"speed"
-				"Color"				"Gray"
-				"GradientID"		"1"
-			}
-			"bloodseeker_old_blood" 
-			{
-				"Deprecated"	"true"
-			}
-			"bloodseeker_arterial_spray" 
-			{
-				"Deprecated"	"true"
-			}
-			"bloodseeker_bloodrush" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"				"0.3"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"35"
@@ -1997,8 +1537,8 @@
 		"Ability1"		"golovach_e"
 		"Ability2"		"golovach_w"
 		"Ability3"		"golovach_q"
-		"Ability4"		"golovach_hidden"
-		"Ability5"		"golovach_innate"
+		"Ability4"		"golovach_innate"
+		"Ability5"		"generic_hidden"
 		"Ability6"		"golovach_r"
 		"Ability10"		"special_bonus_unique_golovach_1"
 		"Ability11"		"special_bonus_unique_golovach_2"
@@ -2009,35 +1549,7 @@
 		"Ability16"		"special_bonus_unique_golovach_7"
 		"Ability17"		"special_bonus_unique_golovach_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"golovach_facet_innate"
-			{
-				"Icon"	"fist"
-				"Color"	"Green"
-				"GradientID"	"1"
-			}
-			"golovach_facet_e" 
-			{
-				"Icon"				"spinning"
-				"Color"				"Yellow"
-				"GradientID"		"1"
-			}
-			"golovach_facet_r"
-			{
-				"Icon"				"agility"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"juggernaut_bladestorm" 
-			{
-				"Deprecated"	"true"
-			}
-			"juggernaut_agigain"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"22"
@@ -2094,38 +1606,7 @@
 		"Ability16"		"special_bonus_unique_papich_7"
 		"Ability17"		"special_bonus_unique_papich_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"papich_e_gold"
-			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-			}
-			"papich_asket"
-			{
-				"Icon"				"damage"
-				"Color"				"Red"
-				"GradientID"		"0"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"papich_facet_regen"
-						"AbilityIndex"	"5"
-						"AutoLevelAbility" "true"
-					}
-				}
-			}
-			"skeleton_king_facet_bone_guard" 
-			{
-				"Deprecated"	"true"
-			}
-			"skeleton_king_facet_cursed_blade"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -2175,33 +1656,7 @@
 		"Ability16"		"special_bonus_unique_vihor_7"
 		"Ability17"		"special_bonus_unique_vihor_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"vihor_heal"
-			{
-				"Icon"				"healing"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"vihor_illusion"
-			{
-				"Icon"				"illusion"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"rattletrap_hookup" 
-			{
-				"Deprecated" "true"
-			}
-			"rattletrap_expanded_armature" 
-			{
-				"Deprecated" "true"
-			}
-			"rattletrap_junk_mail"
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"StatusHealthRegen"		"0.5"
@@ -2252,31 +1707,7 @@
 		"Ability16"		"special_bonus_unique_rostik_7"
 		"Ability17"		"special_bonus_unique_rostik_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"rostik_e"
-			{
-				"Icon"				"nuke"
-				"Color"				"Blue"
-				"GradientID"		"1"
-			}
-
-			"rostik_r"	
-			{
-				"Icon"				"movement"
-				"Color"				"Gray"
-				"GradientID"		"3"
-			}
-			"storm_spirit_shock_collar"
-			{
-				"Deprecated" "true"
-			}
-
-			"storm_spirit_static_slide"	
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets"			""
 
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -2333,29 +1764,7 @@
 		"Ability17"		"special_bonus_unique_peterka_8"
 		"BotImplemented"	""
 		
-		"Facets"
-		{
-			"peterka_r" 
-			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-			}
-			"peterka_w" 
-			{
-				"Icon"				"speed"
-				"Color"				"Green"
-				"GradientID"		"3"
-			}
-			"necrolyte_profane_potency" 
-			{
-				"Deprecated" "true"
-			}
-			"necrolyte_rapid_decay" 
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets" ""
 		
 		"ArmorPhysical"		"2"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -2409,31 +1818,7 @@
 		"Ability22"		"special_bonus_unique_sans_8"
 		"BotImplemented"	""
 		
-		"Facets"
-		{
-			"sans_e"
-			{
-				"Icon"				"chrono_cube"
-				"Color"				"Blue"
-				"GradientID"		"1"
-			}
-
-			"sans_w"
-			{
-				"Icon"				"fence"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"morphling_agi"
-			{
-				"Deprecated" "true"
-			}
-
-			"morphling_str"
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets"		""
 		
 		"AbilityTalentStart"		"15"
 		"AbilityDraftIgnoreCount"	"8"
@@ -2489,34 +1874,7 @@
 		"Ability17"		"special_bonus_unique_evelone_8"
 		"BotImplemented"	""
 
-		"Facets"
-		{
-			"evelone_facet_q"
-			{
-				"Icon"				"slow"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"evelone_facet_e"
-			{
-				"Icon"				"illusion"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-			}
-			"faceless_void_temporal_impunity"
-			{
-				"Deprecated"		"true"
-			}
-			"faceless_void_chronosphere"
-			{
-				"Deprecated"		"true"
-			}
-
-			"faceless_void_time_zone"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"	""
 
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -2569,33 +1927,7 @@
 		"Ability16"		"special_bonus_unique_bratishkin_7"
 		"Ability17"		"special_bonus_unique_bratishkin_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"bratishkin_facet_knight"
-			{
-				"Icon"				"strength"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"bratishkin_facet_base"
-			{
-				"Icon"				"agility"
-				"Color"				"Green"
-				"GradientID"		"2"
-			}
-			"slark_leeching_leash" 
-			{
-				"Deprecated"	"true"
-			}
-			"slark_dark_reef_renegade"
-			{
-				"Deprecated"	"true"
-			}
-			"slark_slark"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"37"
@@ -2709,7 +2041,7 @@
 		"HeroSelectSoundEffect"		"stray_start"
 		"GibType"		"default"
 		"Ability1"		"stray_q"
-		"Ability2"		"stray_w"
+		"Ability2"		"stray_w_facet"
 		"Ability3"		"stray_e"
 		"Ability4"		"stray_scepter"
 		"Ability5"		"stray_innate"
@@ -2724,42 +2056,7 @@
 		"Ability16"		"special_bonus_unique_stray_7"
 		"Ability17"		"special_bonus_unique_stray_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"stray_facet_q"
-			{
-				"Icon"				"gold"
-				"Color"				"Yellow"
-				"GradientID"		"0"
-			}
-			"stray_facet_w"
-			{
-				"Icon"				"snot"
-				"Color"				"Green"
-				"GradientID"		"0"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"stray_w_facet"
-						"ReplaceAbility"   	"stray_w"
-						"AutoLevelAbility"	"false"
-					}
-				}
-			}
-			"riki_contract_killer" 	
-			{
-				"Deprecated"	"true"
-			}			
-			"riki_exterminator" 
-			{
-				"Deprecated"	"true"
-			}
-			"riki_riki"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets" 	""
 		"HealthBarOffset"	"270"
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -2809,29 +2106,7 @@
 		"Ability17"		"special_bonus_unique_stint_8"
 		"BotImplemented"	""
 		
-		"Facets"
-		{
-			"stint_inator"
-			{
-				"Icon"				"no_vision"
-				"Color"				"Purple"
-				"GradientID"		"0"
-			}
-			"omniknight_omnipresent"		
-			{
-				"Deprecated" "true"
-			}
-			"stint_crypto"
-			{
-				"Icon"				"gold"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"omniknight_dmgheals"
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"31"
@@ -2879,34 +2154,7 @@
 		"Ability17"					"special_bonus_unique_invincible_6"
 		"BotImplemented"	""
 		
-		"Facets"
-		{
-			"invincible_facet_heal"
-			{
-				"Icon"				"meat"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"invincible_facet_fly"
-			{
-				"Icon"				"speed"
-				"Color"				"Green"
-				"GradientID"		"1"
-			}
-			"void_spirit_sanctuary" 
-			{
-				"Deprecated" "true"
-			}			
-			"void_spirit_phys_barrier"
-			{
-				"Deprecated" "true"
-			}
-			"void_spirit_aether_artifice"
-			{
-				"Deprecated" "true"
-			}
-
-		}
+		"Facets" ""
 		"HealthBarOffset"			"250"
 		"ArmorPhysical"				"-1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -2955,29 +2203,7 @@
 		"Ability16"					"special_bonus_unique_zhenya_7"
 		"Ability17"					"special_bonus_unique_zhenya_6"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"zhenya_facet_q"
-			{
-				"Icon"				"debuff"
-				"Color"				"Green"
-				"GradientID"		"2"
-			}
-			"zhenya_facet_r"
-			{
-				"Icon"				"meat"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"mars_victory_feast" 
-			{
-				"Deprecated"		"true"
-			}
-			"mars_arena" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"	""
 		"ArmorPhysical"				"-1"
 		"HealthBarOffset"			"250"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -3027,37 +2253,7 @@
 		"Ability16"					"special_bonus_unique_kolyan_7"
 		"Ability17"					"special_bonus_unique_kolyan_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"kolyan_stacks"
-			{
-				"Icon"				"multi_arrow"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"kolyan_vision"
-			{
-				"Icon"				"vision"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"phantom_lancer_convergence" 
-			{
-				"Deprecated"		"true"
-			}
-			"phantom_lancer_divergence" 
-			{
-				"Deprecated"		"true"
-			}
-			"phantom_lancer_lancelot"
-			{
-				"Deprecated"		"true"
-			}
-			"phantom_lancer_lancer"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"				"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"26"
@@ -3111,33 +2307,7 @@
 		"Ability17"				"special_bonus_unique_t2x2_8"
 		"BotImplemented"	""
 		
-		"Facets"
-		{
-			"t2x2_purge"
-			{
-				"Icon"				"broken_chain"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"t2x2_double"
-			{
-				"Icon"				"area_of_effect"
-				"Color"				"Yellow"
-				"GradientID"		"3"
-			}
-			"primal_beast_romp_n_stomp"		
-			{
-				"Deprecated"		"true"
-			}
-			"primal_beast_provoke_the_beast"
-			{
-				"Deprecated"		"true"
-			}
-			"primal_beast_ferocity"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"					""
 		"ArmorPhysical"				"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"36"
@@ -3187,6 +2357,11 @@
 		"Ability15"				"special_bonus_unique_mazellov_3"
 		"Ability16"				"special_bonus_unique_mazellov_7"
 		"Ability17"				"special_bonus_unique_mazellov_8"
+		"Ability18"		"generic_hidden"
+		"Ability19"		"generic_hidden"
+		"Ability20"		"generic_hidden"
+		"Ability21"		"generic_hidden"
+		"Ability22"		"generic_hidden"
 		"BotImplemented"	""
 		"ArmorPhysical"			"0"
 		"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -3212,29 +2387,7 @@
 		"particle_folder"		"particles/units/heroes/hero_ringmaster"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_ringmaster.vsndevts"
 		"VoiceFile"		""
-		"Facets"
-		{
-			"mazellov_e" 
-			{
-				"Icon"				"vortex_in"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"mazellov_q" 
-			{
-				"Icon"				"summons"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"ringmaster_carny_classics" 
-			{
-				"Deprecated"		"true"
-			}
-			"ringmaster_sideshow_secrets" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"	""
 	}
 	"npc_dota_hero_warlock"
 	{
@@ -3266,30 +2419,7 @@
 		"Ability17"		"special_bonus_unique_royale_8"
 		"BotImplemented"	""
 
-		"Facets"
-		{
-			"royale_megaknight"
-			{
-				"Icon"				"summons"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"royale_goblin"
-			{
-				"Icon"				"gold"
-				"Color"				"Green"
-				"GradientID"		"3"
-			}
-			"warlock_golem" 
-			{
-				"Deprecated" "true"
-			}
-
-			"warlock_grimoire"
-			{
-				"Deprecated" "true"
-			}
-		}
+		"Facets" 		""
 
 		"ArmorPhysical"			"0"
 		"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -3447,41 +2577,7 @@
 		"Ability17"		"special_bonus_unique_frisk_8"
 		"BotImplemented"	""
 
-		"Facets"
-		{
-			"dazzle_facet_nothl_boon"
-			{
-				"Icon"				"armor"
-				"Color"				"Green"
-				"GradientID"		"0"
-
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"dazzle_nothl_boon"
-					}
-				}
-			}
-			"frisk_post_genocide"
-			{
-				"Icon"				"teleport"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"templar_assassin_voidblades" 
-			{
-				"Deprecated"		"true"
-			}
-			"templar_assassin_refractor" 
-			{
-				"Deprecated"		"true"
-			}
-			"templar_assassin_hidden_reach" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"	""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"35"
@@ -3533,33 +2629,7 @@
 		"Ability16"		"special_bonus_unique_chara_7"
 		"Ability17"		"special_bonus_unique_chara_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"chara_q_armor"
-			{
-				"Icon"				"armor_broken"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"chara_more_waves"
-			{
-				"Icon"				"spectre"
-				"Color"				"Gray"
-				"GradientID"		"0"
-			}
-			"spectre_forsaken" 
-			{
-				"Deprecated" 	"true"
-			}
-			"spectre_twist_the_knife" 	
-			{
-				"Deprecated" 	"true"
-			}
-			"spectre_spectre"
-			{
-				"Deprecated" 	"true"
-			}
-		}
+		"Facets" ""
 
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -3611,37 +2681,7 @@
 		"Ability16"		"special_bonus_unique_bikov_7"
 		"Ability17"		"special_bonus_unique_bikov_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"bikov_igor"
-			{
-				"Icon"				"tower"
-				"Color"				"Green"
-				"GradientID"		"2"
-			}
-			"bikov_e_bounce"
-			{
-				"Icon"				"ricochet"
-				"Color"				"Blue"
-				"GradientID"		"0"
-			}
-			"winter_wyvern_heal_mana"
-			{
-				"Deprecated"		"True"
-			}
-			"winter_wyvern_atk_range"
-			{
-				"Deprecated"		"True"
-			}
-			"winter_wyvern_winterproof"
-			{
-				"Deprecated"		"True"
-			}
-			"winter_wyvern_recursive"
-			{
-				"Deprecated"		"True"
-			}
-		}
+		"Facets" ""
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"		"25"
@@ -3717,29 +2757,7 @@
 		"AttributeBaseAgility"		"15"
 		"AttributeAgilityGain"		"1.4"
 		"MovementSpeed"		"290"
-		"Facets"
-		{
-			"lev_r" 
-			{
-				"Icon"				"nuke"
-				"Color"				"Purple"
-				"GradientID"		"2"
-			}
-			"lev_q" 
-			{
-				"Icon"				"fist"
-				"Color"				"Red"
-				"GradientID"		"2"
-			}
-			"puck_jostling_rift" 
-			{
-				"Deprecated"		"true"
-			}
-			"puck_curveball" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		"particle_folder"		"particles/units/heroes/hero_lion"
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
 		"VoiceFile"	""
@@ -3773,33 +2791,7 @@
 		"Ability16"		"special_bonus_unique_prince_7"
 		"Ability17"		"special_bonus_unique_prince_8"
 		"BotImplemented"	""
-		"Facets"
-		{
-			"prince_w_int"
-			{
-				"Icon"				"intelligence"
-				"Color"				"Gray"
-				"GradientID"		"0"
-			}
-			"prince_innate_active"
-			{
-				"Icon"				"barrier"
-				"Color"				"Gray"
-				"GradientID"		"2"
-			}
-			"abaddon_death_dude"
-			{
-				"Deprecated"		"true"
-			}
-			"abaddon_mephitic_shroud" 
-			{
-				"Deprecated"		"true"
-			}
-			"abaddon_mists_of_fate"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets"			""
 		"ArmorPhysical"			"-1"
 		"AttackCapabilities"	"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"22"
@@ -3842,6 +2834,8 @@
 		"Ability5"		"seregga_innate"
 		"Ability6"		"seregga_r"
 		"Ability7"		"seregga_scepter_stop"
+		"Ability8"		"generic_hidden"
+		"Ability9"		"generic_hidden"
 		"Ability10"		"special_bonus_unique_seregga_1"
 		"Ability11"		"special_bonus_unique_seregga_2"
 		"Ability12"		"special_bonus_unique_seregga_3"
@@ -3852,29 +2846,7 @@
 		"Ability17"		"special_bonus_unique_seregga_8"
 		"BotImplemented"	""
 
-		"Facets"
-		{
-			"tusk_facet_tag_team"
-			{
-				"Deprecated"	"true"
-			}
-			"seregga_e_move"
-			{
-				"Icon"	"movement"
-				"Color"	"Yellow"
-				"GradientID"	"0"
-			}
-			"seregga_w_bounce"
-			{
-				"Icon"	"chen"
-				"Color"	"Purple"
-				"GradientID"	"0"
-			}
-			"tusk_facet_fist_bump"
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets"	""
 
 		"ArmorPhysical"		"1"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -4118,37 +3090,7 @@
 		"Ability16"		"special_bonus_unique_kolibri_7"
 		"Ability17"		"special_bonus_unique_kolibri_8"
 
-		"Facets"
-		{
-			"kolibri_e_misses"
-			{
-				"Icon"				"spinning"
-				"Color"				"Blue"
-				"GradientID"		"2"
-			}
-			"kolibri_facet_cdr"
-			{
-				"Icon"				"cooldown"
-				"Color"				"Blue"
-				"GradientID"		"3"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"	"kolibri_ability_cdr"
-						"AutoLevelAbility"	"true"
-					}
-				}
-			}
-			"nyx_assassin_burn_mana"
-			{
-				"Deprecated"		"true"
-			}
-			"nyx_assassin_scuttle" 
-			{
-				"Deprecated"	"true"
-			}
-		}
+		"Facets"		""
 		
 		"ArmorPhysical"		"-2"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -4200,33 +3142,7 @@
 		"Ability16"					"special_bonus_unique_leon_7"
 		"Ability17"					"special_bonus_unique_leon_8"
 
-		"Facets"
-		{
-			"leon_clone"
-			{
-				"Icon"				"illusion"
-				"Color"				"Green"
-				"GradientID"		"0"
-			}
-			"leon_lollipop"
-			{
-				"Icon"				"spinning"
-				"Color"				"Blue"
-				"GradientID"		"0"
-			}
-			"hoodwink_hunter" 
-			{
-				"Deprecated"		"true"
-			}
-			"hoodwink_treebounce_trickshot" 
-			{
-				"Deprecated"		"true"
-			}
-			"hoodwink_hipshot" 
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 
 		"ArmorPhysical"				"0.0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -4284,37 +3200,7 @@
 		"Ability15"		"special_bonus_unique_pistol_6"
 		"Ability16"		"special_bonus_unique_pistol_7"
 		"Ability17"		"special_bonus_unique_pistol_8"
-		"Facets"
-		{
-			"pistol_duelist"
-			{
-				"Icon"				"speed"
-				"Color"				"Red"
-				"GradientID"		"2"
-				"Abilities"
-				{
-					"Ability1"
-					{
-						"AbilityName"		"juggernaut_duelist"
-						"AutoLevelAbility"	"true"
-					}
-				}
-			}
-			"pistol_shield"
-			{
-				"Icon"				"armor"
-				"Color"				"Purple"
-				"GradientID"		"1"
-			}
-			"slardar_leg_day"
-			{
-				"Deprecated"	"true"
-			}
-			"slardar_brineguard"
-			{
-				"Deprecated"	"true"
-			}
-		}		
+		"Facets" ""
 		"ArmorPhysical"		"0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"		"30"
@@ -4439,33 +3325,7 @@
 		"Ability16"		"special_bonus_unique_amor_7"
 		"Ability17"		"special_bonus_unique_amor_8"
 		
-		"Facets"
-		{
-			"amor_beer_trail"
-			{
-				"Icon"              "bubbles"
-                "Color"             "Yellow"
-                "GradientID"        "1"
-			}
-			"amor_double_spear"
-			{
-				"Icon"				"snake"
-				"Color"				"Red"
-				"GradientID"		"0"
-			}
-			"bristleback_berserk" 
-			{
-				"Deprecated"		"true"
-			}
-			"bristleback_snot_rocket" 
-			{
-				"Deprecated"		"true"
-			}
-			"bristleback_seeing_red"
-			{
-				"Deprecated"		"true"
-			}
-		}
+		"Facets" ""
 		
 		"ArmorPhysical"		"1.0"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -4519,29 +3379,7 @@
         "Ability16"     "special_bonus_unique_epstein_7"
         "Ability17"     "special_bonus_unique_epstein_8"
 
-        "Facets"
-        {
-			"epstein_silence"
-			{
-                "Icon"              "summons"
-                "Color"             "Purple"
-                "GradientID"        "1"
-            }
-			"epstein_heal"
-			{
-				"Icon"              "twin_hearts"
-                "Color"             "Blue"
-                "GradientID"        "1"
-			}
-            "beastmaster_wild_hunt" 
-            {
-                "Deprecated"	"true"
-            }               
-            "beastmaster_beast_mode" 
-            {
-                "Deprecated"	"true"
-            } 
-        }
+        "Facets" ""
         "ArmorPhysical"     "-1"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageMin"       "23"
@@ -4564,5 +3402,57 @@
         "particle_folder"       "particles/units/heroes/hero_beastmaster"
         "GameSoundsFile"        "soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
         "VoiceFile"     		""
+	}
+	"npc_dota_hero_broodmother"
+	{
+		"Model"		"models/misolo/misolo_brood.vmdl"
+		"DisableWearables"	"1"
+		"SoundSet"		"Hero_Broodmother"
+		"Enabled"		"1"
+		"ModelScale"		"0.93"
+		"VersusScale"		"0.93"
+		"SimilarHeroes"		"92,38,82"
+		"HeroSelectSoundEffect"		"misolo_start"
+		"GibType"		"goo"
+		"GibTintColor"	"39 131 80 255"
+		"Ability1"		"misolo_q"
+		"Ability2"		"misolo_w"
+		"Ability3"		"misolo_e"
+		"Ability4"		"misolo_innate"
+		"Ability5"		"misolo_shard"
+		"Ability6"		"misolo_r"
+
+		"Ability10"		"special_bonus_unique_misolo_1"
+		"Ability11"		"special_bonus_unique_misolo_2"
+		"Ability12"		"special_bonus_unique_misolo_3"
+		"Ability13"		"special_bonus_unique_misolo_4"
+		"Ability14"		"special_bonus_unique_misolo_5"
+		"Ability15"		"special_bonus_unique_misolo_6"
+		"Ability16"		"special_bonus_unique_misolo_7"
+		"Ability17"		"special_bonus_unique_misolo_8"
+
+		"Facets" ""
+		"ArmorPhysical"		"-1"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"		"27"
+		"AttackDamageMax"		"33"
+		"BaseAttackSpeed"		"125"
+		"AttackRate"		"1.7"
+		"AttackAnimationPoint"		"0.4"
+		"AttackAcquisitionRange"		"600"
+		"AttackRange"		"175"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"18"
+		"AttributeStrengthGain"		"2.9"
+		"AttributeBaseAgility"		"20"
+		"AttributeAgilityGain"		"3.4"
+		"AttributeBaseIntelligence"		"18"
+		"AttributeIntelligenceGain"		"2.0"
+		"MovementSpeed"		"285"
+		"VisionDaytimeRange"	"1800"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"		""
+		"particle_folder"		"particles/units/heroes/hero_broodmother"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_broodmother.vsndevts"
 	}
 }

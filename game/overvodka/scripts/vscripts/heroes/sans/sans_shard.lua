@@ -1,5 +1,4 @@
 sans_shard = class({})
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_gaster_blaster_shard", "heroes/sans/sans_shard", LUA_MODIFIER_MOTION_NONE)
 
 function sans_shard:Precache(context)

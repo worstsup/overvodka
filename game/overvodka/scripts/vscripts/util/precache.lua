@@ -70,7 +70,6 @@ PrecacheUtils.particles = {
 		"particles/bloodseeker_rupture_new.vpcf",
 		"particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf",
 		"particles/ember_spirit_hit_shockwave_new.vpcf",
-		"particles/dark_seer_punch_glove_attack_new.vpcf",
 		"particles/generic_gameplay/generic_sleep.vpcf",
 		"particles/duel/legion_duel_ring_arcana.vpcf",
 		"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf",
@@ -224,21 +223,22 @@ PrecacheUtils.particle_folders = {
 }
 
 PrecacheUtils.units = {
-    "npc_dota_creature_basic_zombie",
-    "npc_dota_creature_berserk_zombie",
-    "npc_dota_treasure_courier",
-	"npc_nelya",
-	"npc_rivendare",
-	"npc_dota_courier",
-	"npc_overvodka_pet",
-	"npc_dota_silvername_clone",
-	"npc_murloc",
-	"npc_silvername_chair",
-	"npc_silvername_garr",
-	"npc_zhenya_boss",
+		"npc_dota_treasure_courier",
+		"npc_nelya",
+		"npc_rivendare",
+		"npc_dota_courier",
+		"npc_overvodka_pet",
+		"npc_dota_silvername_clone",
+		"npc_murloc",
+		"npc_silvername_chair",
+		"npc_silvername_garr",
+		"npc_zhenya_boss",
+		"npc_misolo_boss",
 }
 
 PrecacheUtils.models = {
+		"models/misolo/misolo_brood.vmdl",
+		"models/misolo/untitled.vmdl",
 		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",
         "models/props_gameplay/rune_goldxp.vmdl",
         "models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl",
@@ -378,6 +378,7 @@ PrecacheUtils.models = {
 		"models/creeps/mega_greevil/mega_greevil.vmdl",
 		"models/elka/elka2.vmdl",
 		"models/props_winter/present.vmdl",
+		"models/props_gameplay/neutral_box.vmdl",
 }
 
 PrecacheUtils.sounds = {
@@ -485,6 +486,7 @@ PrecacheUtils.sounds = {
 		"soundevents/byebye_start.vsndevts",
 		"soundevents/byebye.vsndevts",
 		"soundevents/hamster_announce.vsndevts",
+		"soundevents/misolo_start.vsndevts",
 		"soundevents/jump.vsndevts",
 		"soundevents/jump_2.vsndevts",
 		"soundevents/jump_3.vsndevts",

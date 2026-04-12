@@ -1,7 +1,6 @@
 mellstroy_shavel = class({})
 LinkLuaModifier( "modifier_mellstroy_shavel", "heroes/mellstroy/mellstroy_shavel", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_mellstroy_shavel_debuff", "heroes/mellstroy/mellstroy_shavel", LUA_MODIFIER_MOTION_BOTH )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function mellstroy_shavel:Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", context )

@@ -1,0 +1,223 @@
+.LoadingScreen
+{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.OvervodkaLoadingRoot
+{
+	width: 100%;
+	height: 100%;
+	overflow: clip;
+}
+
+#BackgroundImage
+{
+	width: 100%;
+	height: 100%;
+}
+
+.LoadingBackdrop
+{
+	width: 100%;
+	height: 100%;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#f7edd808), color-stop(0.45, #17110c6f), to(#050403c8));
+}
+
+.LoadingGoldTint
+{
+	width: 100%;
+	height: 100%;
+}
+
+#LoadingPlayersRoot
+{
+	width: 352px;
+	flow-children: down;
+	horizontal-align: left;
+	vertical-align: top;
+	margin-left: 44px;
+	margin-top: 34px;
+	padding: 14px;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#3a2818e0), color-stop(0.5, #24180fee), to(#120c08f1));
+	border: 1px solid #8d6a29;
+	border-brush: gradient(linear, 0% 0%, 100% 0%, from(#8d6a2918), color-stop(0.2, #a98336), color-stop(0.5, #f0deb0), color-stop(0.8, #a98336), to(#8d6a2918));
+	box-shadow: fill #000000c6 0px 8px 36px -10px;
+	border-radius: 14px;
+}
+
+#LoadingPlayersHeaderRow
+{
+	width: 100%;
+	height: 46px;
+	padding: 0 14px;
+	margin-bottom: 10px;
+}
+
+#LoadingPlayersHeader
+{
+	width: 100%;
+	align: center center;
+	text-align: center;
+	font-family: titleFont;
+	font-size: 22px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: gradient(linear, 0% 100%, 0% 0%, from(#a98336), color-stop(0.55, #e7c778), to(#fff1c7));
+	text-shadow: #000000dd 0px 1px 4px 2;
+}
+
+#LoadingPlayersList
+{
+	width: 100%;
+	max-height: 640px;
+	flow-children: down;
+	overflow: clip scroll;
+}
+
+.LS_Player
+{
+	width: 100%;
+	height: 52px;
+	margin: 0 0 6px 0;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#392716ea), to(#1d150cf0));
+	border: 1px solid #74541f;
+	border-brush: gradient(linear, 0% 0%, 100% 0%, from(#74541f44), color-stop(0.5, #cda758), to(#74541f44));
+	box-shadow: fill #00000085 0px 4px 12px -6px;
+	border-radius: 11px;
+}
+
+.LS_Player.BLocalPlayer
+{
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#4a331be6), to(#24180df2));
+	border-brush: gradient(linear, 0% 0%, 100% 0%, from(#cda758), color-stop(0.5, #fff1c7), to(#cda758));
+}
+
+.LS_Player_Overlay
+{
+	width: 100%;
+	height: 100%;
+	opacity: 0.65;
+}
+
+.LS_Player_LoadingState
+{
+	width: 5px;
+	height: 100%;
+	horizontal-align: right;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#35353a), color-stop(0.5, #7d8087), to(#35353a));
+}
+
+.BState_Loaded .LS_Player_Overlay
+{
+	background-color: gradient(linear, 0% 0%, 260% 0%, from(transparent), to(#7dbe6640));
+}
+
+.BState_Loaded .LS_Player_LoadingState
+{
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#5c8f4a), color-stop(0.5, #87d068), to(#5c8f4a));
+}
+
+.BState_Failed .LS_Player_Overlay
+{
+	background-color: gradient(linear, 0% 0%, 260% 0%, from(transparent), to(#b24c4c40));
+}
+
+.BState_Failed .LS_Player_LoadingState
+{
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#7c2f2f), color-stop(0.5, #c95d5d), to(#7c2f2f));
+}
+
+#LS_PlayerInfo
+{
+	flow-children: right;
+	vertical-align: center;
+	padding: 0 12px;
+}
+
+#LS_PlayerInfo DOTAAvatarImage
+{
+	width: 36px;
+	height: 36px;
+	vertical-align: center;
+	border: 1px solid #4f3914;
+	box-shadow: #000000b5 0px 2px 6px 1;
+}
+
+#LS_PlayerInfo DOTAUserName
+{
+	vertical-align: center;
+	margin-left: 10px;
+}
+
+#LS_PlayerInfo DOTAUserName Label
+{
+	max-width: 230px;
+	font-size: 18px;
+	color: #f4ead4;
+	text-shadow: #000000cc 0px 1px 3px 2;
+	text-overflow: shrink;
+}
+
+#TelegramButton{
+	height: 100px;
+	margin-left: 30px;
+	margin-top: 87.5%;
+	align: left top;
+	flow-children: left;
+}
+
+#TelegramButton:hover .TelegramText{
+	text-shadow: 0px 0px 8px 2 #f0deb022;
+}
+
+#TelegramButton:hover #TelegramPanel{
+	border: 1px solid white;
+	border-brush: gradient( linear, 0% 0%, 0% 100%, from(#fff1c7), color-stop(0.45, #e7c778), color-stop(0.55, #cda758), to(#a98336) );
+	box-shadow: 0px 0px 16px #f0deb022;
+}
+
+#TelegramButton:hover #TelegramIcon{
+	border: 1px solid white;
+	border-brush: gradient( linear, 0% 0%, 0% 100%, from(#fff1c7), color-stop(0.45, #e7c778), color-stop(0.55, #cda758), to(#a98336) );
+	box-shadow: 0px 0px 16px #f0deb022;
+}
+
+#TelegramIcon{
+	border-radius: 150px;
+	width: 100px;
+	height: 100px;
+	border: 1px solid white;
+	border-brush: rgba(0, 0, 0, 0);
+
+	transition-property: border-brush, box-shadow;
+	transition-duration: .2s;
+}
+
+#TelegramPanel{
+	width: 350px;
+	height: 75px;
+	margin-left: -25px;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#382511eb), color-stop(0.5, #22170bea), to(#120d07ef));
+	box-shadow: 0px 6px 24px -8px rgba(0, 0, 0, 0.8);
+	border: 1px solid white;
+	border-brush: rgba(0, 0, 0, 0);
+	align: left center;
+	border-top-right-radius: 46px;
+	border-bottom-right-radius: 46px;
+
+	transition-property: border-brush, box-shadow;
+	transition-duration: .2s;
+}
+
+.TelegramText{
+	margin-left: 25px;
+	font-size: 35px;
+	text-transform: uppercase;
+	align: center center;
+	letter-spacing: 1px;
+	color: gradient( linear, 0% 0%, 0% 100%, from(#fff1c7), color-stop(0.45, #e7c778), color-stop(0.55, #cda758), to(#a98336) );
+	transition-property: text-shadow;
+	transition-duration: .2s;
+}

@@ -1,5 +1,3 @@
-LinkLuaModifier("modifier_generic_knockback_lua", "modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_BOTH)
-LinkLuaModifier("modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_bratishkin_w_fear", "heroes/bratishkin/bratishkin_w", LUA_MODIFIER_MOTION_HORIZONTAL)
 bratishkin_w = class({})
 t = 0

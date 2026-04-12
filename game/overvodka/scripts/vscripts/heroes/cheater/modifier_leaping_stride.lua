@@ -81,14 +81,11 @@ function modifier_leaping_stride:DeclareFunctions()
         MODIFIER_EVENT_ON_ATTACK,
     }
 end
-function modifier_leaping_stride:CheckState()
-    local state = {
-        [MODIFIER_STATE_ALLOW_PATHING_THROUGH_CLIFFS] = true,
-        [MODIFIER_STATE_ALLOW_PATHING_THROUGH_FISSURE] = true,
-        [MODIFIER_STATE_ALLOW_PATHING_THROUGH_TREES] = true,
-    }
 
-    return state
+function modifier_leaping_stride:CheckState()
+    return {
+        [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+    }
 end
 
 function modifier_leaping_stride:OnAttack( params )

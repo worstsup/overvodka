@@ -1,7 +1,5 @@
 LinkLuaModifier("modifier_amor_e_skewer",        "heroes/amor/amor_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_amor_e_pinned_fx",     "heroes/amor/amor_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua",  "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_arc_lua",      "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
 amor_e = class({})
 amor_e._proj = amor_e._proj or {}

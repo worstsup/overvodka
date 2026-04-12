@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_chef_e", "heroes/chef/chef_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_chef_e_blood", "heroes/chef/chef_e", LUA_MODIFIER_MOTION_NONE)
 
 chef_e = class({})

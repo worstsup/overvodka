@@ -1,5 +1,62 @@
 const LocalPIDPlayer = Players.GetLocalPlayer()
 
+const GUIDE_SHARED_ABILITY_NAME_REMAP = {
+    vihor_r: "vihor_ultimate",
+    frisk_r: "frisk_ultimate",
+    bikov_r: "bikov_ultimate",
+    amor_r: "amor_ultimate",
+    epstein_q: "epstein_r", acer: "sahur_ultimate", redak: "sahur_e", abuse: "sahur_w", koleso: "sahur_q",
+    materka: "dvoreckov_q", alko: "dvoreckov_w", wakas: "dvoreckov_e",
+    adod: "kachok_pure_protein", tasty: "kachok_big_tasty", nosex: "kachok_abstention", churban: "kachok_trenbolone", soska: "kachok_test",
+    vovacho: "ebanko_q", fofan: "ebanko_w", parit: "ebanko_e", minis: "ebanko_r",
+    fei: "eldzhey_q", novape: "eldzhey_w", qmar: "eldzhey_e", srsr: "eldzhey_r",
+    shkolota: "shkolnik_peremena", zvonk: "shkolnik_e", or: "shkolnik_r", chef_q: "chef_shout",
+    peashooter: "dave_peashooter", sunflower: "dave_sunflower", shield: "dave_e",
+    futbik: "speed_penalty", bleval: "speed_bark", twenty: "speed_cr7", gena: "speed_shake",
+    stop: "worstsup_q", nerf: "worstsup_w", bigwin: "worstsup_e", code: "rubick_spell_steal",
+    pchela: "macan_q", razg: "macan_w", baidul: "macan_e", largus: "macan_r",
+    shavel: "mellstroy_shavel", fruits: "mellstroy_meteors", biznes: "mellstroy_business", amamam: "mellstroy_amam",
+    bledina: "litvin_bledina", cond: "litvin_conditions", subo: "litvin_subo", zhishi: "litvin_zhishi",
+    zveri: "stariy_zveri", yu: "stariy_bolt", lasers: "stariy_lasers",
+    dogon: "ashab_dogon", slushay: "ashab_slushay", car: "ashab_car", rocket: "Ashab_rocket",
+    konchai: "arsen_konchai", testosteron: "arsen_testosteron", baza: "arsen_baza", tgk: "arsen_tg",
+    semya: "nix_semya", gunnar: "gunnar_bash", stopapupa: "zolo_stopapupa",
+    awp: "custom_critical_strike", granade: "cheater_granades", antiaim: "custom_passive_evasion", wallhack: "custom_vision_aura", aimlock: "cheater_rage",
+    sasavot_e: "sasavot_e_new", sasavot_r: "sasavot_r_new", golovach_e: "golovach_q", golovach_q: "golovach_e",
+};
+
+const GUIDE_SHARED_ITEM_NAME_REMAP = {
+    item_octarine_core: "item_octarine_vodka",
+    item_heart: "item_heart_vodka",
+};
+
+function NormalizeGuideAbilityNameShared(abilityName) {
+    const normalized = typeof abilityName === "string" ? abilityName : "";
+    return GUIDE_SHARED_ABILITY_NAME_REMAP[normalized] || normalized;
+}
+
+function NormalizeGuideItemNameShared(itemName) {
+    const normalized = typeof itemName === "string" ? itemName : "";
+    return GUIDE_SHARED_ITEM_NAME_REMAP[normalized] || normalized;
+}
+
+function GetGuideAbilityDisplayNameShared(abilityName) {
+    const normalized = NormalizeGuideAbilityNameShared(abilityName);
+    const tokens = [
+        `#DOTA_Tooltip_ability_${normalized}`,
+        `#DOTA_Tooltip_Ability_${normalized}`,
+    ];
+
+    for (const token of tokens) {
+        const localized = $.Localize(token);
+        if (localized !== token) {
+            return localized;
+        }
+    }
+
+    return normalized;
+}
+
 function GetDotaHud() {
 	var rootUI = $.GetContextPanel();
 	while (rootUI.id != "Hud" && rootUI.GetParent() != null) {
@@ -441,6 +498,10 @@ function GetOvervodkaHeroName(HeroName){
     {
         OvervodkaName = "npc_dota_hero_epstein"
     }
+    if (HeroName == "npc_dota_hero_broodmother")
+    {
+        OvervodkaName = "npc_dota_hero_misolo"
+    }
     return OvervodkaName	
 }
 
@@ -692,6 +753,89 @@ function PeacemakerRIntroCloseClicked() {
     GameEvents.SendCustomGameEventToServer("peacemaker_r_close_clicked", {});
 }
 
+let MisoloRSplitState = null;
+
+function GetMisoloRPriorityUnit() {
+    if (!MisoloRSplitState) {
+        return -1;
+    }
+
+    const order = ["beast", "visage", "arc"];
+    for (const key of order) {
+        const entindex = Number(MisoloRSplitState[key] || -1);
+        if (entindex > -1 && Entities.IsValidEntity(entindex) && Entities.IsAlive(entindex)) {
+            return entindex;
+        }
+    }
+
+    return -1;
+}
+
+function TrySelectMisoloRUnits(data, attempt = 0) {
+    const unitIds = [];
+
+    ["beast", "visage", "arc"].forEach((key) => {
+        const entindex = Number(data[key] || -1);
+        if (entindex > -1 && Entities.IsValidEntity(entindex)) {
+            unitIds.push(entindex);
+        }
+    });
+
+    if (unitIds.length <= 0) {
+        if (attempt < 10) {
+            $.Schedule(0.03, () => TrySelectMisoloRUnits(data, attempt + 1));
+        }
+        return;
+    }
+
+    GameUI.SelectUnit(unitIds[0], false);
+    for (let i = 1; i < unitIds.length; i++) {
+        GameUI.SelectUnit(unitIds[i], true);
+    }
+}
+
+function OnMisoloRSelectSplitUnits(data) {
+    MisoloRSplitState = {
+        caster: Number(data.caster || -1),
+        beast: Number(data.beast || -1),
+        visage: Number(data.visage || -1),
+        arc: Number(data.arc || -1),
+    };
+    TrySelectMisoloRUnits(data, 0);
+}
+
+function OnMisoloRSelectReturnUnit(data) {
+    MisoloRSplitState = null;
+
+    const entindex = Number(data.unit_entindex || -1);
+    if (entindex > -1 && Entities.IsValidEntity(entindex)) {
+        GameUI.SelectUnit(entindex, false);
+        return;
+    }
+
+    $.Schedule(0.03, () => {
+        if (entindex > -1 && Entities.IsValidEntity(entindex)) {
+            GameUI.SelectUnit(entindex, false);
+        }
+    });
+}
+
+function OnMisoloRSelectedUnitChanged() {
+    if (!MisoloRSplitState) {
+        return;
+    }
+
+    const selected = Players.GetLocalPlayerPortraitUnit();
+    if (selected !== MisoloRSplitState.caster) {
+        return;
+    }
+
+    const priority = GetMisoloRPriorityUnit();
+    if (priority > -1 && priority !== selected) {
+        GameUI.SelectUnit(priority, false);
+    }
+}
+
 (function () {
     GameEvents.Subscribe( "CharaScreamerTrue", CharaScreamerTrue );
     GameEvents.Subscribe( "CharaScreamerFalse", CharaScreamerFalse );
@@ -699,4 +843,7 @@ function PeacemakerRIntroCloseClicked() {
     GameEvents.Subscribe( "VisitorScreamerFalse", VisitorScreamerFalse );
     GameEvents.Subscribe("PeacemakerRIntroShow", PeacemakerRIntroShow);
     GameEvents.Subscribe("PeacemakerRIntroHide", PeacemakerRIntroHide);
+    GameEvents.Subscribe("misolo_r_select_split_units", OnMisoloRSelectSplitUnits);
+    GameEvents.Subscribe("misolo_r_select_return_unit", OnMisoloRSelectReturnUnit);
+    GameEvents.Subscribe("dota_player_update_selected_unit", OnMisoloRSelectedUnitChanged);
 })();

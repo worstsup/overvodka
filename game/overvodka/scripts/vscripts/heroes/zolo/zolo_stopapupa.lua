@@ -1,5 +1,4 @@
 zolo_stopapupa = class({})
-LinkLuaModifier( "modifier_generic_orb_effect_lua", "modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_stopapupa", "heroes/zolo/zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_zolo_slow", "heroes/zolo/zolo_stopapupa", LUA_MODIFIER_MOTION_NONE )
 
@@ -18,7 +17,7 @@ function zolo_stopapupa:OnOrbImpact( params )
 	local str = self:GetCaster():GetStrength()
 	local damage = self:GetSpecialValueFor( "str_damage" ) * str * 0.01
 	local random_chance = RandomInt(1, 100)
-	if random_chance <= chance then
+	if random_chance < chance then
 		self:GetCaster():ModifyGold(300, false, 0)
 		SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, self:GetCaster(), 300, nil)
 	end

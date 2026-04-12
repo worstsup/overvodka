@@ -1,7 +1,6 @@
 stariy_zveri = class({})
 LinkLuaModifier( "modifier_stariy_disarmed", "heroes/stariy/stariy_zveri", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_stariy_silenced", "heroes/stariy/stariy_zveri", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 function stariy_zveri:Precache(context)
 	PrecacheResource("soundfile", "soundevents/borsh.vsndevts", context)

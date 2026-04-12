@@ -1,4 +1,3 @@
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e_thinker", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e_jump", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_BOTH )

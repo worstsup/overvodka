@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_stray_q_asu", "heroes/stray/stray_q", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_stray_q_nemec", "heroes/stray/stray_q", LUA_MODIFIER_MOTION_NONE)
 
 stray_q = class({})

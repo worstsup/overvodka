@@ -1,0 +1,68 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/team_selection.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/team_selection.js" />
+	</scripts>
+	<snippets>
+		<snippet name="TS_Team">
+			<Button class="TS_Team">
+				<Panel class="TS_Team_Header">
+					<Panel id="TS_Team_Header_Overlay" />
+					<Label text="{s:team_name}" />
+				</Panel>
+				<Panel class="TS_Team_Players_Root">
+					<Panel id="TS_Team_Players_Overlay" />
+					<Panel id="TS_Team_Players_List" />
+				</Panel>
+			</Button>
+		</snippet>
+		<snippet name="TS_Player">
+			<Button class="TS_Player">
+				<Panel class="TS_Player_Overlay" />
+				<Panel class="TS_Player_LoadingState" />
+				<Label class="TS_EmptyPlayer" text="#OVERVODKA_TEAM_SELECT_EMPTY" />
+				<Panel id="TS_PlayerInfo">
+					<DOTAAvatarImage steamid="local" />
+					<DOTAUserName steamid="local" />
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+	<Panel class="TeamSelection_Root" hittest="false">
+		<Panel class="TS_Base">
+			<Panel id="TS_TeamsRoot" />
+			<Panel class="TS_BottomButtons">
+				<Panel class="TS_ActionRow">
+					<Button class="TS_Button_Lock BHostElement" onactivate="LockAndStart()">
+						<Panel class="TS_Button_Shine" />
+						<Label text="#OVERVODKA_TEAM_SELECT_LOCK" />
+					</Button>
+					<Button class="TS_Button_Shuffle BHostElement" onactivate="ShuffleTeams()">
+						<Panel class="TS_Button_Shine" />
+						<Image src="s2r://panorama/images/control_icons/shuffle_psd.vtex" />
+					</Button>
+				</Panel>
+				<Panel class="TeamUnlockButtons">
+					<Button class="TS_Button_Unlock" onactivate="UnlockTeams()">
+						<Panel class="TS_Button_Shine" />
+						<Label text="#OVERVODKA_TEAM_SELECT_UNLOCK" />
+					</Button>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="TS_TimerPanel">
+			<Label id="TS_TimerLabel" />
+		</Panel>
+		<Panel id="UnassignedPlayerPanel" hittest="true">
+			<Panel id="UnassignedPlayersHeader">
+				<Label text="#OVERVODKA_TEAM_SELECT_UNASSIGNED" />
+			</Panel>
+			<Button id="UnassignedPlayersButton" onactivate="OnLeaveTeamPressed()">
+				<Panel id="UnassignedPlayersContainer" />
+			</Button>
+		</Panel>
+	</Panel>
+</root>

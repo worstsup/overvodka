@@ -2,6 +2,76 @@ LinkLuaModifier("modifier_mazellov_w_thinker", "heroes/mazellov/mazellov_w", LUA
 
 mazellov_w = class({})
 
+function Mazellov_EnableReturnAbility(caster, base_ability)
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+    if not base_ability or base_ability:IsNull() then return end
+
+    if base_ability:IsStolen() then
+        local return_ability = caster:FindAbilityByName("mazellov_d")
+        local added_temporarily = false
+
+        if not return_ability or return_ability:IsNull() then
+            return_ability = caster:AddAbility("mazellov_d")
+            added_temporarily = return_ability ~= nil
+            if return_ability and not return_ability:IsNull() then
+                return_ability:SetStolen(true)
+            end
+        end
+
+        if not return_ability or return_ability:IsNull() then return end
+
+        return_ability:SetLevel(1)
+        return_ability:SetHidden(false)
+        return_ability:SetActivated(true)
+
+        base_ability:SetHidden(true)
+        base_ability:SetActivated(false)
+        caster:SwapAbilities(base_ability:GetAbilityName(), return_ability:GetAbilityName(), false, true)
+
+        caster.mazellov_orb_return_enabled = true
+        caster.mazellov_orb_return_base_name = base_ability:GetAbilityName()
+        caster.mazellov_orb_return_name = return_ability:GetAbilityName()
+        caster.mazellov_orb_return_added_temporarily = added_temporarily
+        return
+    end
+
+    local return_ability = caster:FindAbilityByName("mazellov_d")
+    if not return_ability or return_ability:IsNull() then return end
+
+    return_ability:SetActivated(true)
+    caster.mazellov_orb_return_enabled = true
+    caster.mazellov_orb_return_base_name = nil
+    caster.mazellov_orb_return_name = return_ability:GetAbilityName()
+    caster.mazellov_orb_return_added_temporarily = false
+end
+
+function Mazellov_DisableReturnAbility(caster)
+    if not IsServer() then return end
+    if not caster or caster:IsNull() then return end
+    if not caster.mazellov_orb_return_enabled then return end
+
+    local return_name = caster.mazellov_orb_return_name or "mazellov_d"
+    local return_ability = caster:FindAbilityByName(return_name)
+    local base_name = caster.mazellov_orb_return_base_name
+    local base_ability = base_name and caster:FindAbilityByName(base_name) or nil
+
+    if base_ability and not base_ability:IsNull() and return_ability and not return_ability:IsNull() then
+        caster:SwapAbilities(base_ability:GetAbilityName(), return_ability:GetAbilityName(), true, false)
+        base_ability:SetHidden(false)
+        base_ability:SetActivated(true)
+        return_ability:SetHidden(true)
+        return_ability:SetActivated(false)
+    elseif return_ability and not return_ability:IsNull() then
+        return_ability:SetActivated(false)
+    end
+
+    caster.mazellov_orb_return_enabled = nil
+    caster.mazellov_orb_return_base_name = nil
+    caster.mazellov_orb_return_name = nil
+    caster.mazellov_orb_return_added_temporarily = nil
+end
+
 function mazellov_w:GetCastRange(location, target)
     return self:GetSpecialValueFor("max_distance")
 end
@@ -95,10 +165,7 @@ modifier_mazellov_w_thinker = class({})
 
 function modifier_mazellov_w_thinker:OnCreated(kv)
     if not IsServer() then return end
-    local secondary = self:GetCaster():FindAbilityByName("mazellov_d")
-    if secondary and not secondary:IsNull() then
-        secondary:SetActivated(true)
-    end
+    Mazellov_EnableReturnAbility(self:GetCaster(), self:GetAbility())
     self.damage = kv.damage * 0.10
     self.radius = kv.radius
     self.speed = kv.speed
@@ -141,10 +208,7 @@ function modifier_mazellov_w_thinker:OnIntervalThink()
 end
 
 function modifier_mazellov_w_thinker:OnDestroy()
-    local secondary = self:GetCaster():FindAbilityByName("mazellov_d")
-    if secondary and not secondary:IsNull() and secondary:IsActivated() then
-        secondary:SetActivated(false)
-    end
+    Mazellov_DisableReturnAbility(self:GetCaster())
 end
 
 function modifier_mazellov_w_thinker:IsHidden() return true end

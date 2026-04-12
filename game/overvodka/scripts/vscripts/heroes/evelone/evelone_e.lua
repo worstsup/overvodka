@@ -28,7 +28,7 @@ function modifier_evelone_e:IsPurgable()
 	return false
 end
 
-function modifier_evelone_e:OnCreated( kv )
+function modifier_evelone_e:OnCreated()
     if not IsServer() then return end
 	self.k = 0
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
@@ -40,16 +40,13 @@ function modifier_evelone_e:OnCreated( kv )
 	self:OnIntervalThink()
 end
 
-function modifier_evelone_e:OnRefresh( kv )
+function modifier_evelone_e:OnRefresh()
     if not IsServer() then return end
 	self.duration = self:GetAbility():GetSpecialValueFor( "duration" )
 	self.interval = self:GetAbility():GetSpecialValueFor( "interval" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
     self.outgoing = self:GetAbility():GetSpecialValueFor("illusion_outgoing_damage")
 	self.incoming = self:GetAbility():GetSpecialValueFor("illusion_incoming_damage")
-end
-
-function modifier_evelone_e:OnDestroy( kv )
 end
 
 function modifier_evelone_e:OnIntervalThink()
@@ -85,10 +82,9 @@ function modifier_evelone_e:OnIntervalThink()
 	    )
         illusion = self.illusions[1]
 		illusion:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_evelone_e_illusions", {duration = -1})
-		if self:GetAbility():GetSpecialValueFor("hasfacet") == 0 then
-        	illusion:SetAbsOrigin(self:GetParent():GetAbsOrigin())
-        	FindClearSpaceForUnit(illusion, self:GetParent():GetAbsOrigin(), true)
-		end
+        FindClearSpaceForUnit(illusion, enemy:GetAbsOrigin(), true)
+		illusion:SetForceAttackTarget(self.target)
+        illusion:MoveToTargetToAttack(self.target)
 		self:PlayEffectsNew( illusion )
 		self:PlayEffects( enemy )
 		self:GetAbility():UseResources(false, false, false, true)
@@ -104,7 +100,7 @@ function modifier_evelone_e:PlayEffects( target )
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:SetParticleControl( effect_cast, 1, self:GetParent():GetOrigin() + Vector( 0, 0, 64 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	if target:GetUnitName() == "npc_dota_hero_tidehunter" then
+	if target:GetUnitName() == "npc_dota_hero_tidehunter" and RandomInt(1, 2) == 1 then
 		EmitSoundOn( "evelone_e_tamaev", self:GetParent() )
 	else
 		if self.k == 0 then

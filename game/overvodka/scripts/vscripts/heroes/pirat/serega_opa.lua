@@ -1,6 +1,5 @@
 serega_opa = class({})
 LinkLuaModifier( "modifier_serega_opa", "heroes/pirat/serega_opa", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_silenced_lua", "modifier_generic_silenced_lua", LUA_MODIFIER_MOTION_NONE )
 
 function serega_opa:OnSpellStart()
 	local caster = self:GetCaster()
@@ -14,26 +13,15 @@ function modifier_serega_opa:IsHidden() return false end
 function modifier_serega_opa:IsPurgable() return false end
 
 function modifier_serega_opa:OnCreated()
-	self.bonus = self:GetAbility():GetSpecialValueFor("bonus_resist_pct")
-	self.armor = self:GetAbility():GetSpecialValueFor("armor")
 	self.duration = self:GetAbility():GetSpecialValueFor("silence_duration")
-	self.hex_duration = self:GetAbility():GetSpecialValueFor("hex_duration")
+	self.mana_cost_damage_pct = self:GetAbility():GetSpecialValueFor("mana_cost_damage_pct")
 end
 
 function modifier_serega_opa:DeclareFunctions()
 	return {
-		MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
-		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
 		MODIFIER_PROPERTY_ABSORB_SPELL,
 		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 	}
-end
-
-function modifier_serega_opa:GetModifierMagicalResistanceBonus()
-	return self.bonus
-end
-function modifier_serega_opa:GetModifierPhysicalArmorBonus()
-	return self.armor
 end
 
 function modifier_serega_opa:GetModifierIncomingDamage_Percentage()
@@ -43,7 +31,21 @@ end
 function modifier_serega_opa:GetAbsorbSpell( params )
 	if IsServer() then
 		if (not self:GetParent():IsIllusion()) and params.ability:GetCaster() ~= self:GetParent() and params.ability:GetAbilityName() ~= "rubick_spell_steal" then
-			params.ability:GetCaster():AddNewModifier( self:GetParent(), self, "modifier_generic_silenced_lua", { duration = self.duration } )
+			local enemy = params.ability:GetCaster()
+			local abilityLevel = math.max(params.ability:GetLevel() - 1, 0)
+			local manaCost = params.ability:GetManaCost(abilityLevel)
+			local damage = manaCost * self.mana_cost_damage_pct / 100
+
+			enemy:AddNewModifier( self:GetParent(), self, "modifier_generic_silenced_lua", { duration = self.duration } )
+			if damage > 0 then
+				ApplyDamage({
+					victim = enemy,
+					attacker = self:GetParent(),
+					damage = damage,
+					damage_type = DAMAGE_TYPE_PURE,
+					ability = self:GetAbility(),
+				})
+			end
 			self:PlayEffects(true)
 			return 1
 		end

@@ -2,6 +2,12 @@ LinkLuaModifier("modifier_dave_scepter", "heroes/dave/dave_scepter", LUA_MODIFIE
 
 dave_scepter = class({})
 
+function dave_scepter:Spawn()
+    if not IsServer() then return end
+    if self:IsTrained() then return end
+    self:SetLevel(1)
+end
+
 function dave_scepter:GetIntrinsicModifierName()
     return "modifier_dave_scepter"
 end

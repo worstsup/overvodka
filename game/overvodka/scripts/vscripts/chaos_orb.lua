@@ -28,6 +28,8 @@ local CHAOS_METEOR_DAMAGE_INTERVAL = 0.5
 local CHAOS_METEOR_BURN_DURATION = 3.0
 local CHAOS_METEOR_IMPACT_DAMAGE_PCT = 20
 local CHAOS_METEOR_BURN_DAMAGE_PCT = 8
+local CHAOS_SWAP_SEQUENCE_COUNT = 10
+local CHAOS_SWAP_SEQUENCE_INTERVAL = 0.4
 
 local CHAOS_DEATH_EXPLOSION_RADIUS = 400
 local CHAOS_DEATH_EXPLOSION_DAMAGE = 350
@@ -482,7 +484,7 @@ function ChaosOrb:ApplyEffect(effectID, playerID, sourceHeroEntIndex)
     elseif effectID == "eternal_night" then
         self:ApplyEternalNight()
     elseif effectID == "hero_swap" then
-        self:SwapHeroesInPairs()
+        self:StartHeroSwapSequence()
     elseif effectID == "meteor_rain" then
         self:StartMeteorRain(sourceHeroEntIndex)
     elseif effectID == "random_primary" then
@@ -593,6 +595,14 @@ function ChaosOrb:SwapHeroesInPairs()
             firstHero:Stop()
             secondHero:Stop()
         end
+    end
+end
+
+function ChaosOrb:StartHeroSwapSequence()
+    for swapIndex = 1, CHAOS_SWAP_SEQUENCE_COUNT do
+        Timers:CreateTimer((swapIndex - 1) * CHAOS_SWAP_SEQUENCE_INTERVAL, function()
+            self:SwapHeroesInPairs()
+        end)
     end
 end
 

@@ -1,5 +1,4 @@
 shkolnik_w = class({})
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_shkolnik_armor", "heroes/shkolnik/shkolnik_w", LUA_MODIFIER_MOTION_NONE )
 
 function shkolnik_w:Precache(context)

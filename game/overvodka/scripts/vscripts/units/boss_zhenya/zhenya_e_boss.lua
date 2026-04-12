@@ -1,5 +1,3 @@
-LinkLuaModifier("modifier_generic_arc_lua", "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
-
 zhenya_e_boss = class({})
 
 function zhenya_e_boss:OnAbilityPhaseStart()

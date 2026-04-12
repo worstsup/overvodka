@@ -1,5 +1,54 @@
 "use strict";
 var heroModelPanel = heroModelPanel || null;
+
+const HEROES_WITH_NO_FACET = {
+    necrolyte: true,
+    skeleton_king: true,
+    bloodseeker: true,
+    ursa: true,
+    zuus: true,
+    tidehunter: true,
+    beastmaster: true,
+    abaddon: true,
+    bounty_hunter: true,
+    warlock: true,
+    antimage: true,
+    morphling: true,
+    faceless_void: true,
+    bristleback: true,
+    nyx_assassin: true,
+    kunkka: true,
+    axe: true,
+    tusk: true,
+    primal_beast: true,
+    mars: true,
+    slardar: true,
+    lion: true,
+    omniknight: true,
+    ogre_magi: true,
+    earthshaker: true,
+    meepo: true,
+    hoodwink: true,
+    phantom_lancer: true,
+    terrorblade: true,
+    ringmaster: true,
+    void_spirit: true,
+    slark: true,
+    spectre: true,
+    puck: true,
+    templar_assassin: true,
+    brewmaster: true,
+    juggernaut: true,
+    tinker: true,
+    winter_wyvern: true,
+    ancient_apparition: true,
+    storm_spirit: true,
+    sniper: true,
+    rattletrap: true,
+	riki: true,
+	rubick: true,
+};
+
 function OnUpdateHeroSelection()
 {
 	var teamIds = Game.GetAllTeamIDs();
@@ -161,6 +210,9 @@ function ToggleLockInNotice(heroPickPanel, showNotice) {
 function UpdatePlayer( teamPanel, playerId )
 {
 	var playerContainer = teamPanel.FindChildInLayoutFile( "PlayersContainer" );
+	if ( !playerContainer )
+		return;
+
 	var playerPanelName = "player_" + playerId;
 	var playerPanel = playerContainer.FindChild( playerPanelName );
 	if ( playerPanel === null )
@@ -180,6 +232,15 @@ function UpdatePlayer( teamPanel, playerId )
 
 	var localPlayerTeamId = localPlayerInfo.player_team_id;
 	var playerPortrait = playerPanel.FindChildInLayoutFile( "PlayerPortrait" );
+	if ( !playerPortrait )
+		return;
+
+	var isPrimeSubscribed = false;
+	if ( typeof IsPlayerSubscribed === "function" )
+	{
+		isPrimeSubscribed = IsPlayerSubscribed( playerId );
+	}
+
 	if ( playerId == localPlayerInfo.player_id )
 	{
 		playerPanel.AddClass( "is_local_player" );
@@ -242,14 +303,15 @@ function UpdatePlayer( teamPanel, playerId )
 			"npc_dota_hero_slardar": "file://{images}/heroes/npc_dota_hero_pistol.png",
 			"npc_dota_hero_bristleback": "file://{images}/heroes/npc_dota_hero_amor.png",
 			"npc_dota_hero_beastmaster": "file://{images}/heroes/npc_dota_hero_epstein.png",
+			"npc_dota_hero_broodmother": "file://{images}/heroes/npc_dota_hero_misolo.png",
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
-			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && IsPlayerSubscribed(playerId)) {
+			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && isPrimeSubscribed) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
 				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
-			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && IsPlayerSubscribed(playerId)) {
+			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && isPrimeSubscribed) {
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
 			}
@@ -319,29 +381,39 @@ function UpdatePlayer( teamPanel, playerId )
 			"slardar": "file://{images}/heroes/npc_dota_hero_pistol.png",
 			"bristleback": "file://{images}/heroes/npc_dota_hero_amor.png",
 			"beastmaster": "file://{images}/heroes/npc_dota_hero_epstein.png",
+			"broodmother": "file://{images}/heroes/npc_dota_hero_misolo.png",
 		};
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
+			let facet_pick_panel = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildrenWithClassTraverse("HeroFacetOuter");
+
+			if (facet_pick_panel && facet_pick_panel.length > 0) {
+				facet_pick_panel[0].style.visibility = HEROES_WITH_NO_FACET[playerInfo.possible_hero_selection] ? "collapse" : "visible";
+			}
+
 			let HeroPick = FindDotaHudElement("HeroPickRightColumn");
-			HeroPick.style.visibility = "visible";
-			if (playerInfo.possible_hero_selection == "morphling" && IsPlayerSubscribed(playerId)) 
+			if ( HeroPick )
 			{
-				ToggleLockInNotice(HeroPick, false);
+				HeroPick.style.visibility = "visible";
+			}
+			if (playerInfo.possible_hero_selection == "morphling" && isPrimeSubscribed) 
+			{
+				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
 				
 			}
-			else if (playerInfo.possible_hero_selection == "void_spirit" && IsPlayerSubscribed(playerId))
+			else if (playerInfo.possible_hero_selection == "void_spirit" && isPrimeSubscribed)
 			{
-				ToggleLockInNotice(HeroPick, false);
+				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
 			}
-			else if (playerInfo.possible_hero_selection == "puck" && !IsPlayerSubscribed(playerId))
+			else if (playerInfo.possible_hero_selection == "puck" && !isPrimeSubscribed)
 			{
-				ToggleLockInNotice(HeroPick, true);
+				if ( HeroPick ) ToggleLockInNotice(HeroPick, true);
 			}
 			else
 			{
-				ToggleLockInNotice(HeroPick, false);
+				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage(possibleHeroImages[playerInfo.possible_hero_selection]);
 			}
 		}
@@ -358,13 +430,8 @@ function UpdatePlayer( teamPanel, playerId )
 	}
 	
 	var playerName = playerPanel.FindChildInLayoutFile( "PlayerName" );
-	playerName.text = playerInfo.player_name;
-
-	var isPrimeSubscribed = false;
-	if ( typeof IsPlayerSubscribed === "function" )
-	{
-		isPrimeSubscribed = IsPlayerSubscribed( playerId );
-	}
+	if ( playerName )
+		playerName.text = playerInfo.player_name;
 
 	playerPanel.SetHasClass( "PrimeSubscribed", isPrimeSubscribed );
 	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );

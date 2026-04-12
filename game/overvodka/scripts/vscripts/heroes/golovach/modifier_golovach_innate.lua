@@ -12,7 +12,6 @@ function modifier_golovach_innate:OnCreated( kv )
 	self.reincarnate_time = self:GetAbility():GetSpecialValueFor( "reincarnate_time" )
 	self.slow_radius = self:GetAbility():GetSpecialValueFor( "slow_radius" )
 	self.slow_duration = self:GetAbility():GetSpecialValueFor( "slow_duration" )
-	self.ability_proc = "golovach_hidden"
 	self.cooldown = self:GetAbility():GetCooldown( self:GetAbility():GetLevel() )
 	local interval = 0.2
 	self:StartIntervalThink( interval )
@@ -22,12 +21,9 @@ function modifier_golovach_innate:OnRefresh( kv )
 	self.reincarnate_time = self:GetAbility():GetSpecialValueFor( "reincarnate_time" )
 	self.slow_radius = self:GetAbility():GetSpecialValueFor( "slow_radius" )
 	self.slow_duration = self:GetAbility():GetSpecialValueFor( "slow_duration" )
-	self.ability_proc = "golovach_hidden"
 	self.cooldown = self:GetAbility():GetCooldown( self:GetAbility():GetLevel() )
 end
 
-function modifier_golovach_innate:OnDestroy( kv )
-end
 function modifier_golovach_innate:OnIntervalThink()
 	if self:GetParent():HasScepter() and (self:GetAbility():GetCooldownTimeRemaining() >= 135.4 and self:GetAbility():GetCooldownTimeRemaining() <= 136) then
 		self:GetParent():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_black_king_bar_immune", {duration = 4})

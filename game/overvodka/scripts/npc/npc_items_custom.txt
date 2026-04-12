@@ -129,7 +129,7 @@
 		"ItemCastOnPickup"				"1"
 	}
 	//=================================================================================================================
-	// Подарки Жени
+	// Сфера Хаоса
 	//=================================================================================================================
 	"item_chaos_orb"
 	{
@@ -155,13 +155,16 @@
 		"ItemKillable"					"0"
 		"ItemCastOnPickup"				"1"
 	}
+	//=================================================================================================================
+	// Подарки Жени
+	//=================================================================================================================
 	"item_zhenya_present"
 	{
 		"BaseClass"						"item_bag_of_gold"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
-		"Model"							"models/props_winter/present.vmdl"
+		"Model"							"models/props_gameplay/neutral_box.vmdl" // was models/props_winter/present.vmdl
 		"ItemKillable"					"0"
 		"AbilityTextureName"			"zhenya_present"
 		
@@ -354,7 +357,7 @@
 			"magic_resist"			"70"
 		}
 	}
-		//=================================================================================================================
+	//=================================================================================================================
 	// Recipe: PASITO 2
 	//=================================================================================================================
 	"item_recipe_pasito"
@@ -379,7 +382,7 @@
 			"01"						"item_hqd_maxx"
 		}
 	}
-"item_phase_boots"
+	"item_phase_boots"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -578,10 +581,11 @@
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityTextureName"			"aegis_hero"
-		"ItemCost"						"7000"
+		"ItemCost"						"7300"
 		"AbilityValues"
 		{
-			"bonus_attack_speed"	"105"
+			"bonus_attack_speed"	"110"
+			"bonus_range"			"50"
 			"minibash_chance"		"80"
 			"bash_damage"			"30"
 			"cleave_percent" 		"60"
@@ -1074,14 +1078,14 @@
 			"duration_minutes_tooltip"				"6"
 		}
 	}
-	"item_manta_datadriven"
+	"item_pick_me"
 	{
 		"BaseClass"                     "item_datadriven"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"            "manta_datadriven"
-		"AbilityCooldown"               "25.0" 
+		"AbilityTextureName"            "pick_me"
+		"AbilityCooldown"               "25.0"
 		"AbilityCastPoint"              "0.0"
 		"AbilityManaCost"               "125"
 		"ItemCost"                      "5200"
@@ -1139,7 +1143,7 @@
 		
 		"Modifiers"
 		{
-			"modifier_item_manta_datadriven"
+			"modifier_item_pick_me"
 			{
 				"Passive"           "1"
 				"IsHidden"          "1"
@@ -1214,7 +1218,7 @@
 				}
 		}
 	}
-	"item_recipe_manta_datadriven"
+	"item_recipe_pick_me"
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
@@ -1222,7 +1226,7 @@
   		"ItemCost"					"100"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
-		"ItemResult"				"item_manta_datadriven"
+		"ItemResult"				"item_pick_me"
 		"ItemRequirements"
 		{
 			"01" "item_invis_sword;item_yasha;"
@@ -1328,6 +1332,7 @@
 		"ShouldBeSuggested"				"1"
 		"AbilityValues"
 		{
+				"aoe_bonus"				"75"
 				"bonus_health"			"275"
 				"bonus_intellect"		"20"
 				"bonus_strength"		"5"
@@ -1993,9 +1998,11 @@
 		"AbilityValues"
 		{	
 				"bonus_as"										"60"
+				"bonus_slow_resist"								"30"
+				"slow_resistance"								"30"
 				"lifesteal_percent"								"25"
 				"berserk_bonus_attack_speed"					"100"
-				"berserk_bonus_movement_speed_percentage"		"30"
+				"berserk_bonus_movement_speed_percentage"		"20"
 				"berserk_extra_incoming_damage_percentage"		"0"
 				"berserk_duration"								"10.0"
 				"berserk_evasion"								"0"

@@ -24,7 +24,6 @@ function shkolnik_e:OnSpellStart()
 		local duration = self:GetSpecialValueFor("immun")
 		if duration > 0 then
 			caster:AddNewModifier( caster, self, "modifier_black_king_bar_immune", { duration = duration } )
-			self:SpawnSchoolboys(caster, origin, ab)
 		end
 	end
 	self:PlayEffects( origin, direction )

@@ -1,5 +1,4 @@
 LinkLuaModifier( "modifier_gunnar_bash", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_gunnar_bash_armor", "heroes/nix/gunnar_bash", LUA_MODIFIER_MOTION_NONE )
 
 gunnar_bash = class({})
@@ -29,12 +28,6 @@ function modifier_gunnar_bash:OnCreated()
 	self.ability = self:GetAbility()
 	self.pseudoseed = RandomInt( 1, 100 )
 	self.chance = self.ability:GetSpecialValueFor( "chance_pct" )
-	self.damage = self.ability:GetSpecialValueFor( "damage" )
-	self.duration = self.ability:GetSpecialValueFor( "duration" )
-	self.armor = self.ability:GetSpecialValueFor( "armor" )
-	self.armor_duration = self.ability:GetSpecialValueFor( "armor_duration" )
-	self.knockback_duration = self.ability:GetSpecialValueFor( "knockback_duration" )
-	self.knockback_height = self.ability:GetSpecialValueFor( "knockback_height" )
 end
 
 function modifier_gunnar_bash:OnRefresh()
@@ -67,6 +60,12 @@ function modifier_gunnar_bash:GetModifierProcAttack_Feedback( params )
 end
 
 function modifier_gunnar_bash:Bash( target )
+	local stun_duration = self.ability:GetSpecialValueFor( "duration" ) * (1 - target:GetStatusResistance())
+	local knockback_duration = self.ability:GetSpecialValueFor( "knockback_duration" )
+	local knockback_height = self.ability:GetSpecialValueFor( "knockback_height" )
+	local armor_duration = self.ability:GetSpecialValueFor("armor_duration")
+	local damage = self.ability:GetSpecialValueFor("damage")
+
 	target:AddNewModifier(
 		self.parent,
 		self.ability,
@@ -75,16 +74,18 @@ function modifier_gunnar_bash:Bash( target )
 			center_x = target:GetAbsOrigin().x,
 			center_y = target:GetAbsOrigin().y,
 			center_z = target:GetAbsOrigin().z,
-			duration = self.knockback_duration,
-			knockback_duration = self.knockback_duration,
+			duration = knockback_duration,
+			knockback_duration = knockback_duration,
 			knockback_distance = 0,
-			knockback_height = self.knockback_height,
+			knockback_height = knockback_height,
 		}
 	)
-	target:AddNewModifier( self.parent, self.ability, "modifier_generic_stunned_lua", { duration = self.duration } )
-	target:AddNewModifier( self.parent, self.ability, "modifier_gunnar_bash_armor", { duration = self.armor_duration } )
+	target:AddNewModifier( self.parent, self.ability, "modifier_generic_stunned_lua", { duration = stun_duration } )
+	if armor_duration > 0 then
+		target:AddNewModifier( self.parent, self.ability, "modifier_gunnar_bash_armor", { duration = armor_duration * (1 - target:GetStatusResistance()) } )
+	end
 	self:PlayEffects( target, target:IsCreep() )
-	ApplyDamage( { victim = target, attacker = self.parent, damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self.ability } )
+	ApplyDamage( { victim = target, attacker = self.parent, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self.ability } )
 end
 
 function modifier_gunnar_bash:PlayEffects( target, isCreep )

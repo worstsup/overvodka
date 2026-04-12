@@ -7,6 +7,7 @@ _G.nCOUNTDOWNTIMER = 1501
 _G.overvodka_events = true
 _G.winter_mode = false
 _G.global_sounds_muted = false
+_G.misolo_boss_enabled = false
 
 local PrecacheUtils = require("util/precache")
 
@@ -28,12 +29,15 @@ require('utils')
 require('server/debug_panel')
 require('chat_wheel/chat_wheel')
 require('server/server')
+require('server/guides')
 require('music_zone_trigger')
 require('util/vector_targeting')
 require('util/functions')
+require('util/team_shuffle')
 require('quests')
 require('store')
 require('vote')
+require('units/hero_boss_event')
 require('overvodka_events')
 require('chaos_orb')
 ---------------------------------------------------------------------------
@@ -225,6 +229,7 @@ function OvervodkaGameMode:InitGameMode()
 	else
 		GameRules:SetCustomGameSetupTimeout( 0 )
 	end
+	GameRules:SetCustomGameSetupAutoLaunchDelay( 30 )
 	if GetMapName() == "overvodka_5x5" then
 		GameRules:SetPreGameTime( 90.0 )
 		GameRules:SetCustomGameSetupTimeout( 3 ) -- was 3
@@ -279,7 +284,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -938,7 +943,11 @@ function OvervodkaGameMode:AssignTeams()
 			end
 			--print( "Found player " .. nPlayerID .. " on team " .. nTeam )
 			if vecTeamValid[ nTeam ] then
-				vecTeamNeededPlayers[ nTeam ] = vecTeamNeededPlayers[ nTeam ] - 1
+				if vecTeamNeededPlayers[ nTeam ] > 0 then
+					vecTeamNeededPlayers[ nTeam ] = vecTeamNeededPlayers[ nTeam ] - 1
+				else
+					table.insert( hPlayers, nPlayerID )
+				end
 			else
 				table.insert( hPlayers, nPlayerID )
 			end

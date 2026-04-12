@@ -5,7 +5,6 @@ LinkLuaModifier("modifier_sans_e_caster", "heroes/sans/sans_e", LUA_MODIFIER_MOT
 LinkLuaModifier("modifier_sans_pathing", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_e_thinker_orange", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_sans_e_thinker_blue", "heroes/sans/sans_e", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 sans_e = class({})
 

@@ -1,5 +1,4 @@
 LinkLuaModifier( "modifier_flash_w_orb_effect", "heroes/flash/flash_w", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE )
 
 flash_w = class({})
 

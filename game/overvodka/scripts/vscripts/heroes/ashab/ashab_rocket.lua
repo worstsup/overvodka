@@ -1,5 +1,3 @@
-LinkLuaModifier("modifier_generic_stunned_lua", "modifier_generic_stunned_lua", LUA_MODIFIER_MOTION_NONE)
-
 Ashab_rocket = class({})
 
 function Ashab_rocket:Precache(context)

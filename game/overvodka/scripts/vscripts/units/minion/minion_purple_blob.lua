@@ -1,5 +1,4 @@
 LinkLuaModifier("modifier_minion_purple_blob_passive", "units/minion/minion_purple_blob", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_disarmed_lua", "modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE)
 
 minion_purple_blob = class({})
 

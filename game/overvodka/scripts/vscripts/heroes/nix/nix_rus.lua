@@ -4,6 +4,9 @@ LinkLuaModifier( "modifier_nix_rus_debuff", "heroes/nix/nix_rus", LUA_MODIFIER_M
 
 function nix_rus:Precache(context)
 	PrecacheResource("particle", "particles/nix_r.vpcf", context)
+	PrecacheResource("particle", "particles/pravin_nix_r.vpcf", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green.vpcf", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/nix_rus.vsndevts", context )
 	PrecacheResource("particle", "particles/units/heroes/hero_oracle/oracle_fatesedict_disarm_ovrhead.vpcf", context)
 end
@@ -20,40 +23,86 @@ modifier_nix_rus = class({})
 
 function modifier_nix_rus:IsPurgable() return false end
 
+function modifier_nix_rus:GetCurrentParticleName()
+	local caster = self:GetCaster()
+	if caster and not caster:IsNull() and caster:HasModifier("modifier_nix_swap_pravin") then
+		return "particles/pravin_nix_r.vpcf"
+	end
+
+	return "particles/nix_r.vpcf"
+end
+
+function modifier_nix_rus:RefreshParticle()
+	if not IsServer() then return end
+
+	local particle_name = self:GetCurrentParticleName()
+	if self.current_particle_name == particle_name then return end
+
+	if self.particle then
+		ParticleManager:DestroyParticle(self.particle, false)
+		ParticleManager:ReleaseParticleIndex(self.particle)
+		self.particle = nil
+	end
+
+	self.particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	ParticleManager:SetParticleControl(self.particle, 1, Vector(self.radius + 25, self.radius + 25, self.radius + 25))
+	self.current_particle_name = particle_name
+end
+
+function modifier_nix_rus:ApplyRusTick()
+	local damage = self:GetAbility():GetSpecialValueFor("dps") * self.logic_interval
+	local enemies = FindUnitsInRadius(
+		self:GetParent():GetTeamNumber(),
+		self:GetParent():GetAbsOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+		0,
+		0,
+		false
+	)
+
+	for _, unit in pairs(enemies) do
+		if damage > 0 then
+			ApplyDamage({ victim = unit, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+		end
+	end
+end
+
 function modifier_nix_rus:OnCreated()
 	self.model_scale = self:GetAbility():GetSpecialValueFor( "model_scale" )
 	self.bonus_strength = self:GetAbility():GetSpecialValueFor( "bonus_strength" )
 	self.radius = self:GetAbility():GetSpecialValueFor( "radius" )
-	self.dps = self:GetAbility():GetSpecialValueFor( "dps" )
-	self.interval = 0.5
+	self.logic_interval = 0.5
 	if not IsServer() then return end
-	self:StartIntervalThink(self.interval)
-	self:OnIntervalThink()
-    local particle = ParticleManager:CreateParticle("particles/nix_r.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(particle, 1, Vector(self.radius + 25, self.radius + 25, self.radius + 25))
-    self:AddParticle(particle, false, false, -1, false, false)
+	self.next_logic_time = GameRules:GetGameTime() + self.logic_interval
+	self:ApplyRusTick()
+	self:RefreshParticle()
+	self:StartIntervalThink(0.1)
+end
+
+function modifier_nix_rus:OnDestroy()
+	if not IsServer() then return end
+	if self.particle then
+		ParticleManager:DestroyParticle(self.particle, false)
+		ParticleManager:ReleaseParticleIndex(self.particle)
+		self.particle = nil
+	end
 end
 
 function modifier_nix_rus:OnIntervalThink()
 	if IsServer() then
+		self:RefreshParticle()
 		if not self:GetParent():IsAlive() then
 			self:Destroy()
 			return
 		end
-		local damage = self.dps * self.interval
-		local enemies = FindUnitsInRadius(
-			self:GetParent():GetTeamNumber(),
-			self:GetParent():GetAbsOrigin(),
-			nil,
-			self.radius,
-			DOTA_UNIT_TARGET_TEAM_ENEMY,
-			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-			DOTA_UNIT_TARGET_FLAG_NONE,
-			0,
-			false
-		)
-		for _,unit in pairs(enemies) do
-			ApplyDamage({ victim = unit, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL })
+
+		local game_time = GameRules:GetGameTime()
+		while game_time >= (self.next_logic_time or 0) do
+			self:ApplyRusTick()
+			self.next_logic_time = (self.next_logic_time or game_time) + self.logic_interval
 		end
 	end
 end
@@ -104,6 +153,7 @@ end
 
 function modifier_nix_rus_debuff:OnRefresh()
 	self.lose_strength = self:GetParent():GetStrength() * self:GetAbility():GetSpecialValueFor("str_loss") * 0.01
+	self.scepter = self:GetCaster():HasScepter()
 end
 
 function modifier_nix_rus_debuff:DeclareFunctions()
@@ -125,7 +175,7 @@ function modifier_nix_rus_debuff:GetModifierBonusStats_Strength()
 end
 
 function modifier_nix_rus_debuff:GetModifierAttackSpeedBonus_Constant()
-	return self:GetAbility():GetSpecialValueFor( "as_loss" )
+	return self:GetAbility():GetSpecialValueFor("as_loss")
 end
 
 function modifier_nix_rus_debuff:GetModifierModelScale()
@@ -133,6 +183,11 @@ function modifier_nix_rus_debuff:GetModifierModelScale()
 end
 
 function modifier_nix_rus_debuff:GetEffectName()
+	local caster = self:GetCaster()
+	if caster and not caster:IsNull() and caster:HasModifier("modifier_nix_swap_pravin") then
+		return "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_red.vpcf"
+	end
+
 	return "particles/units/heroes/hero_dragon_knight/dragon_knight_transform_green.vpcf"
 end
 

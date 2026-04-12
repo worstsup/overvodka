@@ -7,7 +7,6 @@ LinkLuaModifier("modifier_epstein_island_enemy_aura_thinker", "heroes/epstein/ep
 LinkLuaModifier("modifier_epstein_island_enemy_tethered", "heroes/epstein/epstein_island", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_island_zone_thinker", "heroes/epstein/epstein_island", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_epstein_island_on_island",    "heroes/epstein/epstein_island", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_arc_lua",              "modifier_generic_arc_lua", LUA_MODIFIER_MOTION_BOTH)
 
 local epstein_forbidden_units = {
     ["npc_dota_c4_bomb"] = true,

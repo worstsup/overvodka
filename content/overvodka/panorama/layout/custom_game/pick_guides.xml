@@ -1,0 +1,75 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/pick_guides.js" />
+    </scripts>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/pick_guides.css" />
+    </styles>
+
+    <Panel class="PickGuidesRoot" hittest="false">
+        <Panel id="PickGuidesFrame" hittest="true">
+            <Panel id="PickGuidesHeader" hittest="false">
+                <Label id="PickGuidesHeaderTitle" text="#SHOP_GUIDES_TITLE" />
+                <Button id="PickGuidesButton">
+                    <Label id="PickGuidesButtonText" text="#SHOP_GUIDES_SELECT" />
+                </Button>
+            </Panel>
+
+            <Panel id="PickGuidesState" hittest="false">
+                <Label id="PickGuidesSelectedTitle" text="#SHOP_GUIDES_LOADING" />
+                <Label id="PickGuidesSelectedMeta" text="" />
+            </Panel>
+
+            <Panel id="PickGuidesPicker" hittest="true">
+                <Panel id="PickGuidesPickerContent" hittest="true">
+                    <Panel id="PickGuidesPickerSearchWrap" hittest="true">
+                        <Panel id="PickGuidesPickerSearchEntryWrap" hittest="true">
+                            <TextEntry id="PickGuidesPickerSearchEntry" maxchars="80" ontextentrychange="OnPickGuidesSearchChanged()" />
+                            <Label id="PickGuidesPickerSearchPlaceholder" text="#SHOP_GUIDES_SEARCH_PLACEHOLDER" hittest="false" />
+                        </Panel>
+                        <Button id="PickGuidesPickerFavoritesButton">
+                            <Image id="PickGuidesPickerFavoritesIcon" class="PickGuidesFavoriteIcon" src="file://{images}/custom_game/guides/guide_favorite_bookmark.png" />
+                        </Button>
+                    </Panel>
+
+                    <Panel id="PickGuidesPickerList" hittest="true" />
+                    <Panel id="PickGuidesPickerPagination" hittest="true" />
+                </Panel>
+            </Panel>
+        </Panel>
+
+        <Panel id="PickGuidesPreview" hittest="false">
+            <Panel id="PickGuidesPreviewHeader" hittest="false">
+                <DOTAHeroImage id="PickGuidesPreviewHeroImage" heroname="" heroimagestyle="icon" />
+                <Panel id="PickGuidesPreviewHeaderText" hittest="false">
+                    <Label id="PickGuidesPreviewTitle" text="#SHOP_GUIDES_LOADING" />
+                    <Label id="PickGuidesPreviewMeta" text="" />
+                </Panel>
+            </Panel>
+
+            <Panel id="PickGuidesPreviewBody" hittest="false">
+                <Label id="PickGuidesPreviewLoading" text="#SHOP_GUIDES_LOADING" />
+
+                <Panel id="PickGuidesPreviewContent" hittest="false">
+                    <Panel id="PickGuidesPreviewTopRow" hittest="false">
+                        <Panel id="PickGuidesPreviewSkillsBlock" hittest="false">
+                            <Label id="PickGuidesPreviewSkillsHeader" text="#SHOP_GUIDES_SKILL_BUILD" />
+                            <Panel id="PickGuidesPreviewSkillsList" hittest="false" />
+                        </Panel>
+
+                        <Panel id="PickGuidesPreviewTalentsBlock" hittest="false">
+                            <Label id="PickGuidesPreviewTalentsHeader" text="#SHOP_GUIDES_TALENTS" />
+                            <Panel id="PickGuidesPreviewTalentsList" hittest="false" />
+                        </Panel>
+                    </Panel>
+
+                    <Panel id="PickGuidesPreviewItemsBlock" hittest="false">
+                        <Label id="PickGuidesPreviewItemsHeader" text="#SHOP_GUIDES_ITEM_BUILD" />
+                        <Panel id="PickGuidesPreviewItemsSections" hittest="false" />
+                    </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

@@ -4,7 +4,6 @@ LinkLuaModifier("modifier_visitor_r_aura",      "heroes/pale_visitor/visitor_r",
 LinkLuaModifier("modifier_visitor_r_night_buff","heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_burn",        "heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_r_permanent", "heroes/pale_visitor/visitor_r", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_disarmed_lua","modifier_generic_disarmed_lua", LUA_MODIFIER_MOTION_NONE)
 
 visitor_r = class({})
 

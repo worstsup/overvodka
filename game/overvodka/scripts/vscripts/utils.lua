@@ -3,8 +3,19 @@ LinkLuaModifier("modifier_win_condition", 				"modifiers/modifier_win_condition"
 LinkLuaModifier("modifier_sans_arcana", 				"modifiers/modifier_sans_arcana", 					 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_invincible_arcana", 			"modifiers/modifier_invincible_arcana", 			 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_pet", 				"modifiers/modifier_overvodka_pet", 				 LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_generic_arc_lua",				"modifier_generic_arc_lua", 						 LUA_MODIFIER_MOTION_BOTH)
-LinkLuaModifier("modifier_generic_disarmed_lua",		"modifier_generic_disarmed_lua",					 LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier("modifier_generic_stunned_lua", 		"modifiers/generic/modifier_generic_stunned_lua",    LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_arc_lua",				"modifiers/generic/modifier_generic_arc_lua", 		 LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_generic_disarmed_lua",		"modifiers/generic/modifier_generic_disarmed_lua",	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_silenced_lua", 		"modifiers/generic/modifier_generic_silenced_lua", 	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_muted_lua", 			"modifiers/generic/modifier_generic_muted_lua", 	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_knockback_lua", 		"modifiers/generic/modifier_generic_knockback_lua",  LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_generic_ring_lua", 			"modifiers/generic/modifier_generic_ring_lua", 		 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_lifesteal_lua", 		"modifiers/generic/modifier_generic_lifesteal_lua",  LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_orb_effect_lua", 		"modifiers/generic/modifier_generic_orb_effect_lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_vector_target", 		"modifiers/generic/modifier_generic_vector_target",  LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_generic_motion", 				"modifiers/generic/modifier_generic_motion", 		 LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("modifier_generic_leashed_lua", 		"modifiers/generic/modifier_generic_leashed_lua", 	 LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_chaos_orb_selection",			"modifiers/chaos/modifier_chaos_orb_selection",	 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_chaos_reflect",				"modifiers/chaos/modifier_chaos_global_effects",	 LUA_MODIFIER_MOTION_NONE)
@@ -23,6 +34,10 @@ LinkLuaModifier("modifier_zhenya_hamster_carried", 		"units/zhenya_boss", 						
 LinkLuaModifier("modifier_zhenya_boss_phase1", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_phase2", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_zhenya_boss_escape", 			"units/zhenya_boss", 								 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_hero_boss_running", 			"units/hero_boss_event", 							 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_hero_boss_simple_ai", 		"units/hero_boss_event", 							 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_misolo_boss", 				"units/misolo_boss", 								 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_misolo_boss_phase2", 			"units/misolo_boss", 								 LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_overvodka_store_effect_1", 	"modifiers/store/modifier_overvodka_store_effect_1", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_effect_2", 	"modifiers/store/modifier_overvodka_store_effect_2", LUA_MODIFIER_MOTION_NONE)
@@ -626,4 +641,14 @@ function OvervodkaCreateIllusions(v1, v2, v3, v4, v5, v6, v7)
     end)
 
     return illusions
+end
+
+function IsValid(...)
+    for i = 1, select("#", ...) do
+        local entity = select(i, ...)
+        if not entity or not entity.IsNull or entity:IsNull() then
+            return false
+        end
+    end
+    return true
 end

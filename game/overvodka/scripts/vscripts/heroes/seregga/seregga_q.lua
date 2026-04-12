@@ -271,6 +271,7 @@ function modifier_seregga_q_shard_window:GetEffectAttachType() return PATTACH_AB
 
 function modifier_seregga_q_shard_window:OnCreated()
     self.ability = self:GetAbility()
+    self.parent = self:GetParent()
     if not IsServer() then return end
     self:StartIntervalThink(0.2)
 end

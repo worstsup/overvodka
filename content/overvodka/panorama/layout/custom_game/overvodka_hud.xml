@@ -1,6 +1,5 @@
 <root>
     <styles>
-        <include src="file://{resources}/styles/custom_game/custom_loading_screen.css" />
         <include src="file://{resources}/styles/custom_game/player_hud.css" />
     </styles>
     <scripts>
