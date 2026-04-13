@@ -8851,12 +8851,8 @@
 			"chargeup_time" 			"1.6"
 			"max_distance"				"25000"
 			"turn_rate" 				"180"
+			"return_turn_rate"			"22"
 			"gold"	"400"
-			"bkb_duration"
-			{
-				"value"	"0"
-				"special_bonus_unique_papich_8"	"+5"
-			}
 		}
 	}
 	//=================================================================================================================

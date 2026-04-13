@@ -4,7 +4,6 @@ LinkLuaModifier( "modifier_papich_e_charge",    "heroes/papich/papich_e", LUA_MO
 LinkLuaModifier( "modifier_papich_e",           "heroes/papich/papich_e", LUA_MODIFIER_MOTION_HORIZONTAL )
 LinkLuaModifier( "modifier_papich_e_command",   "heroes/papich/papich_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_papich_e_heal",      "heroes/papich/papich_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_papich_bkb",         "heroes/papich/papich_e", LUA_MODIFIER_MOTION_NONE )
 
 papich_e = class({})
 
@@ -187,22 +186,6 @@ function modifier_papich_e_heal:GetModifierTotalPercentageManaRegen()
 end
 
 
-modifier_papich_bkb = class({})
-
-function modifier_papich_bkb:IsHidden() return false end
-function modifier_papich_bkb:IsPurgable() return false end
-
-function modifier_papich_bkb:CheckState()
-    return {
-        [MODIFIER_STATE_DEBUFF_IMMUNE] = true,
-    }
-end
-
-function modifier_papich_bkb:GetEffectName()
-    return "particles/items_fx/black_king_bar_avatar.vpcf"
-end
-
-
 modifier_papich_e_charge = class({})
 
 function modifier_papich_e_charge:IsHidden() return false end
@@ -338,8 +321,12 @@ function modifier_papich_e:OnCreated()
 	self.ability = self:GetAbility()
 	self.speed = self:GetAbility():GetSpecialValueFor( "charge_speed" )
 	self.turn_speed = self:GetAbility():GetSpecialValueFor( "turn_rate" )
+	self.return_turn_speed = self:GetAbility():GetSpecialValueFor( "return_turn_rate" )
 	self.gold = self:GetAbility():GetSpecialValueFor( "gold" )
-	self.bkb = self:GetAbility():GetSpecialValueFor( "bkb_duration" )
+	self.flight_speed = 1600
+	if GetMapName() == "overvodka_5x5" then
+		self.flight_speed = 2000
+	end
 	self.point = 0
 	self.poss = self:GetParent():GetAbsOrigin()
 	local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
@@ -357,6 +344,10 @@ function modifier_papich_e:OnCreated()
 	self.target_angle = self.parent:GetAnglesAsVector().y
 	self.current_angle = self.target_angle
 	self.face_target = true
+	self.reached_fountain = false
+	self.return_turn_started = false
+	self.rest_end_time = nil
+	self.return_finish_time = nil
 
 	if not self:ApplyHorizontalMotionController() then
 		self:Destroy()
@@ -393,12 +384,17 @@ function modifier_papich_e:GetMinHealth()
 end
 
 function modifier_papich_e:CheckState()
-	return {
+	local state = {
 		[MODIFIER_STATE_MAGIC_IMMUNE] = true,
-		[MODIFIER_STATE_COMMAND_RESTRICTED] = true,
 		[MODIFIER_STATE_OUT_OF_GAME] = true,
 		[MODIFIER_STATE_INVULNERABLE] = true,
 	}
+
+	if not (self.parent:HasTalent("special_bonus_unique_papich_8") and self.k >= 1) then
+		state[MODIFIER_STATE_COMMAND_RESTRICTED] = true
+	end
+
+	return state
 end
 
 function modifier_papich_e:GetModifierDisableTurning()
@@ -427,11 +423,37 @@ function modifier_papich_e:GetModifierModelScale()
 	return 0
 end
 
+function modifier_papich_e:OnOrder( params )
+	if params.unit ~= self:GetParent() then return end
+	if not self.parent:HasTalent("special_bonus_unique_papich_8") or self.k < 1 then return end
+
+	if params.order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION then
+		ExecuteOrderFromTable({
+			UnitIndex = self.parent:entindex(),
+			OrderType = DOTA_UNIT_ORDER_MOVE_TO_DIRECTION,
+			Position = params.new_pos,
+		})
+	elseif params.order_type == DOTA_UNIT_ORDER_MOVE_TO_DIRECTION then
+		if params.new_pos then
+			self:SetDirection( params.new_pos )
+		end
+	elseif params.order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET or
+		params.order_type == DOTA_UNIT_ORDER_ATTACK_TARGET
+	then
+		if params.target and not params.target:IsNull() then
+			self:SetDirection( params.target:GetAbsOrigin() )
+		end
+	end
+end
+
 function modifier_papich_e:TurnLogic( dt )
 	if self.face_target then return end
 
 	local angle_diff = AngleDiff( self.current_angle, self.target_angle )
 	local turn_speed = self.turn_speed*dt
+	if self.k >= 1 and self.parent:HasTalent("special_bonus_unique_papich_8") then
+		turn_speed = self.return_turn_speed*dt
+	end
 
 	local sign = -1
 	if angle_diff<0 then sign = 1 end
@@ -455,31 +477,65 @@ function modifier_papich_e:UpdateHorizontalMotion( me, dt )
 		self:Destroy()
 		return
 	end
-	local distance = (self.point - self:GetParent():GetAbsOrigin()):Length2D()
-	if distance < 750 then
-		self.speed = 100
-	else
-		self.speed = 1600
-		if GetMapName() == "overvodka_5x5" then
-			self.speed = 2000
+	local current_time = GameRules:GetGameTime()
+
+	if self.k == 0 then
+		if not self.reached_fountain then
+			local distance = (self.point - self:GetParent():GetAbsOrigin()):Length2D()
+			if distance < 750 then
+				self.speed = 100
+			else
+				self.speed = self.flight_speed
+			end
+
+			if distance < 500 or (GetMapName() ~= "overvodka_5x5" and distance > 11000) or (GetMapName() == "overvodka_5x5" and distance > 20000) then
+				self.reached_fountain = true
+				self.speed = 0
+				self.rest_end_time = current_time + 4
+				self.return_turn_started = true
+				self:SetDirection( self.poss )
+				self:GetCaster():ModifyGold(self.gold, false, 0)
+				EmitSoundOn( "papich_e_plane_start", self:GetCaster() )
+				self:GetCaster():AddNewModifier(self.parent, self.ability,"modifier_papich_e_heal", { duration = 4 })
+				return
+			end
+
+			self:HitLogic()
+			self:TurnLogic( dt )
+			local nextpos = me:GetOrigin() + me:GetForwardVector() * self.speed * dt
+			me:SetOrigin(nextpos)
+			return
 		end
-	end
-	if distance < 500 or (GetMapName() ~= "overvodka_5x5" and distance > 11000) or (GetMapName() == "overvodka_5x5" and distance > 20000) then
-		if self.k == 0 then
-			self:GetCaster():ModifyGold(self.gold, false, 0)
-			EmitSoundOn( "papich_e_plane_start", self:GetCaster() )
-			self:GetCaster():AddNewModifier(self.parent, self.ability,"modifier_papich_e_heal", { duration = 4 })
+
+		if current_time < self.rest_end_time then
+			self.speed = 70
+			self:HitLogic( )
+			self:TurnLogic( dt )
+			local nextpos = me:GetOrigin() + me:GetForwardVector() * self.speed * dt
+			me:SetOrigin(nextpos)
+			return
 		end
-		self:SetDirection( self.poss )
-		self.k = self.k + 1
-		self.speed = 70
+
+		self.speed = 0
+		self:TurnLogic( dt )
+		if not self.face_target then
+			return
+		end
+
+		self.k = 1
+		self.return_finish_time = current_time + ((self.poss - self:GetParent():GetAbsOrigin()):Length2D() / self.flight_speed)
 	end
-	local distance2 = (self.poss - self:GetParent():GetAbsOrigin()):Length2D()
-	if distance2 < 300 and self.k >= 1 then
+
+	if current_time >= self.return_finish_time then
+		if not self.parent:HasTalent("special_bonus_unique_papich_8") then
+			me:SetOrigin(self.poss)
+		end
 		EmitSoundOn( "papich_e_end", self:GetCaster() )
-		self:GetCaster():AddNewModifier(self.parent, self.ability, "modifier_papich_bkb", { duration = self.bkb })
 		self:Destroy()
+		return
 	end
+
+	self.speed = self.flight_speed
 	self:HitLogic()
 	self:TurnLogic( dt )
 	local nextpos = me:GetOrigin() + me:GetForwardVector() * self.speed * dt
