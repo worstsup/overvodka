@@ -29,6 +29,7 @@ function misolo_r:Precache(context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_flux_tgt.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_wraith_prj.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_wraith.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_arc_warden/arc_warden_flux_cast.vpcf", context)
     PrecacheResource("particle", "particles/econ/events/ti6/mjollnir_shield_ti6.vpcf", context)
     PrecacheResource("particle", "particles/econ/events/ti6/maelstorm_ti6.vpcf", context)
     PrecacheResource("particle_folder", "particles/units/heroes/hero_beastmaster", context)
@@ -173,6 +174,7 @@ function misolo_r:SpawnWarriors()
             warrior:SetMaximumGoldBounty(0)
             warrior._misolo_split_role = data[1]
 
+            warrior:AddNewModifier(caster, self, "modifier_phased", {})
             FindClearSpaceForUnit(warrior, data[3], true)
             self:SetupWarrior(warrior)
             self._warriors[data[1]] = warrior
@@ -186,6 +188,7 @@ end
 function misolo_r:SetupWarrior(warrior)
     local health = self:GetSpecialValueFor("units_health")
     local damage = self:GetSpecialValueFor("units_damage")
+    local mana = self:GetSpecialValueFor("units_mana")
     local level = self:GetLevel()
 
     warrior:AddNewModifier(self:GetCaster(), self, "modifier_misolo_r_warrior", {})
@@ -194,7 +197,6 @@ function misolo_r:SetupWarrior(warrior)
     warrior:SetHealth(health)
     warrior:SetBaseDamageMin(damage)
     warrior:SetBaseDamageMax(damage)
-    warrior:SetMana(warrior:GetMaxMana())
 
     for i = 0, 5 do
         local ability = warrior:GetAbilityByIndex(i)
@@ -217,6 +219,11 @@ function misolo_r:SetupWarrior(warrior)
     end
 
     self:UpdateWarriorScepterState(warrior)
+
+    Timers:CreateTimer(FrameTime(), function()
+        if not IsValid(warrior) then return end
+        warrior:SetMana(mana)
+    end)
 end
 
 function misolo_r:UpdateWarriorScepterState(warrior)
@@ -407,7 +414,17 @@ function modifier_misolo_r_warrior:RemoveOnDeath() return false end
 function modifier_misolo_r_warrior:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_DEATH,
+        MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
     }
+end
+
+function modifier_misolo_r_warrior:GetModifierExtraManaBonus()
+    local ability = self:GetAbility()
+    if not IsValid(ability) then
+        return 0
+    end
+
+    return math.max(0, ability:GetSpecialValueFor("units_mana") - 300)
 end
 
 function modifier_misolo_r_warrior:OnDeath(params)
@@ -441,6 +458,7 @@ function modifier_misolo_r_scepter_shield:RemoveOnDeath() return false end
 function modifier_misolo_r_scepter_shield:OnCreated()
     self.chance = self:GetAbility():GetSpecialValueFor("scepter_shield_chance")
     self.damage = self:GetAbility():GetSpecialValueFor("scepter_shield_damage")
+    self.health_pct = self:GetAbility():GetSpecialValueFor("scepter_shield_health_pct")
     self.radius = self:GetAbility():GetSpecialValueFor("scepter_shield_radius")
     self.additional_targets = self:GetAbility():GetSpecialValueFor("scepter_shield_additional_targets")
 end
@@ -476,6 +494,7 @@ function modifier_misolo_r_scepter_shield:OnAttackLanded(params)
     if attacker:IsBuilding() or attacker:IsOther() or attacker:IsInvulnerable() or attacker:IsOutOfGame() then return end
     if not owner:HasScepter() or not RollPercentage(self.chance) then return end
 
+    local shield_damage = (self.damage or 0) + attacker:GetHealth() * (self.health_pct or 0) * 0.01
     local victims = {}
 
     local function add_target(target)
@@ -519,7 +538,7 @@ function modifier_misolo_r_scepter_shield:OnAttackLanded(params)
         ApplyDamage({
             victim = target,
             attacker = parent,
-            damage = self.damage,
+            damage = shield_damage,
             damage_type = DAMAGE_TYPE_MAGICAL,
             ability = ability,
         })
@@ -592,12 +611,6 @@ function modifier_misolo_visage_silent_as_the_grave:GetModifierIgnoreMovespeedLi
 	return 1
 end
 
-function modifier_misolo_visage_silent_as_the_grave:CheckState()
-    return {
-        [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-    }
-end
-
 function modifier_misolo_visage_silent_as_the_grave:GetModifierMoveSpeedBonus_Constant()
     return 300
 end
@@ -614,6 +627,11 @@ function misolo_arc_flux:OnSpellStart()
     if not IsValid(caster, target) then return end
     if target:TriggerSpellAbsorb(self) then return end
 
+    local cast_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_arc_warden/arc_warden_flux_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(cast_particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(cast_particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(cast_particle, 2, caster, PATTACH_POINT_FOLLOW, "attach_attack2", caster:GetAbsOrigin(), true)
+
     target:AddNewModifier(caster, self, "modifier_misolo_arc_flux", {duration = self:GetSpecialValueFor("duration")})
     EmitSoundOn("Hero_ArcWarden.Flux.Cast", caster)
     EmitSoundOn("Hero_ArcWarden.Flux.Target", target)
@@ -628,6 +646,11 @@ function modifier_misolo_arc_flux:OnCreated()
     self.slow_pct = self:GetAbility():GetSpecialValueFor("slow_pct")
 
     if not IsServer() then return end
+
+    self.flux_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_arc_warden/arc_warden_flux_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	ParticleManager:SetParticleControlEnt(self.flux_particle, 2, self:GetParent(), PATTACH_ABSORIGIN_FOLLOW, nil, self:GetParent():GetAbsOrigin(), true)
+	self:AddParticle(self.flux_particle, false, false, -1, false, false)
+
     self:StartIntervalThink(1.0)
 end
 
@@ -656,14 +679,6 @@ end
 
 function modifier_misolo_arc_flux:GetModifierMoveSpeedBonus_Percentage()
     return -(self.slow_pct or 0)
-end
-
-function modifier_misolo_arc_flux:GetEffectName()
-    return "particles/units/heroes/hero_arc_warden/arc_warden_flux_tgt.vpcf"
-end
-
-function modifier_misolo_arc_flux:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
 end
 
 function modifier_misolo_arc_flux:GetTexture()

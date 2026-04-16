@@ -30,6 +30,31 @@ function misolo_innate:GetCurrentLifestealPct()
     return self:GetSpecialValueFor("lifesteal_pct")
 end
 
+function misolo_innate:PruneSpiders()
+    local web_ability = self:GetCaster() and self:GetCaster():FindAbilityByName("misolo_w")
+    if IsValid(web_ability) and web_ability.PruneSpiders then
+        return web_ability:PruneSpiders()
+    end
+    return {}
+end
+
+function misolo_innate:RegisterSpider(spider)
+    local web_ability = self:GetCaster() and self:GetCaster():FindAbilityByName("misolo_w")
+    if IsValid(web_ability) and web_ability.RegisterSpider then
+        return web_ability:RegisterSpider(spider)
+    end
+    return false
+end
+
+function misolo_innate:GetMaxSpiders()
+    local web_ability = self:GetCaster() and self:GetCaster():FindAbilityByName("misolo_w")
+    if IsValid(web_ability) and web_ability.GetMaxSpiders then
+        return web_ability:GetMaxSpiders()
+    end
+
+    return self:GetSpecialValueFor("max_spiders") or 16
+end
+
 function misolo_innate:SpawnSpider(position)
     local caster = self:GetCaster()
     if not IsValid(caster) then
@@ -40,6 +65,8 @@ function misolo_innate:SpawnSpider(position)
     if not IsValid(spider) then
         return
     end
+
+    self:RegisterSpider(spider)
 
     spider:SetOwner(caster)
     spider:SetControllableByPlayer(caster:GetPlayerOwnerID(), true)

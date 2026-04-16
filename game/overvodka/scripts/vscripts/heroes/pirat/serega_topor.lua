@@ -111,7 +111,6 @@ function modifier_topor:IsPurgable()
 end
 
 function modifier_topor:OnCreated( kv )
-	if not IsServer() then return end
 	self.as = 1000
 	self.bat = self:GetAbility():GetSpecialValueFor( "bat" )
 	self.speed = self:GetAbility():GetSpecialValueFor( "bonus_speed" )
@@ -124,6 +123,7 @@ function modifier_topor:OnCreated( kv )
 	end
 	self.slow = self:GetAbility():GetSpecialValueFor( "slow_max" )
 	self.slow_radius = self:GetAbility():GetSpecialValueFor( "slow_radius" )
+	if not IsServer() then return end
 	self:GetParent():SetAttackCapability( DOTA_UNIT_CAP_RANGED_ATTACK )
 	self:StartIntervalThink( 0.4 )
 	self:OnIntervalThink()

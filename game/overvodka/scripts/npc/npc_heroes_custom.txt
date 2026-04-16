@@ -3317,10 +3317,10 @@
 		"Ability7"		"amor_f"
 
 		"Ability10"		"special_bonus_unique_amor_1"
-		"Ability11"		"special_bonus_unique_amor_2"
+		"Ability11"		"special_bonus_unique_amor_5"
 		"Ability12"		"special_bonus_unique_amor_3"
 		"Ability13"		"special_bonus_unique_amor_4"
-		"Ability14"		"special_bonus_unique_amor_5"
+		"Ability14"		"special_bonus_unique_amor_2"
 		"Ability15"		"special_bonus_unique_amor_6"
 		"Ability16"		"special_bonus_unique_amor_7"
 		"Ability17"		"special_bonus_unique_amor_8"
@@ -3423,11 +3423,11 @@
 		"Ability6"		"misolo_r"
 
 		"Ability10"		"special_bonus_unique_misolo_1"
-		"Ability11"		"special_bonus_unique_misolo_2"
+		"Ability11"		"special_bonus_unique_misolo_6"
 		"Ability12"		"special_bonus_unique_misolo_3"
 		"Ability13"		"special_bonus_unique_misolo_4"
 		"Ability14"		"special_bonus_unique_misolo_5"
-		"Ability15"		"special_bonus_unique_misolo_6"
+		"Ability15"		"special_bonus_unique_misolo_2"
 		"Ability16"		"special_bonus_unique_misolo_7"
 		"Ability17"		"special_bonus_unique_misolo_8"
 

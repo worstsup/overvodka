@@ -27,6 +27,78 @@ function misolo_w:GetIntrinsicModifierName()
     return "modifier_misolo_w_handler"
 end
 
+function misolo_w:GetMaxSpiders()
+    local caster = self:GetCaster()
+    if not IsValid(caster) then
+        return 16
+    end
+
+    local innate = caster:FindAbilityByName("misolo_innate")
+    if IsValid(innate) then
+        return innate:GetSpecialValueFor("max_spiders")
+    end
+
+    return 16
+end
+
+function misolo_w:PruneSpiders()
+    local caster = self:GetCaster()
+    if not IsValid(caster) then
+        return {}
+    end
+
+    caster._misolo_spiders = caster._misolo_spiders or {}
+
+    for i = #caster._misolo_spiders, 1, -1 do
+        local spider = caster._misolo_spiders[i]
+        if not IsValid(spider) or not spider:IsAlive() then
+            table.remove(caster._misolo_spiders, i)
+        end
+    end
+
+    return caster._misolo_spiders
+end
+
+function misolo_w:RegisterSpider(spider)
+    local caster = self:GetCaster()
+    if not IsValid(caster, spider) then
+        return false
+    end
+
+    local spiders = self:PruneSpiders()
+
+    for _, current in ipairs(spiders) do
+        if current == spider then
+            return true
+        end
+    end
+
+    caster._misolo_spider_sequence = (caster._misolo_spider_sequence or 0) + 1
+    spider._misolo_spider_order = caster._misolo_spider_sequence
+    spiders[#spiders + 1] = spider
+
+    local max_spiders = self:GetMaxSpiders()
+    while #spiders > max_spiders do
+        local oldest_index = 1
+        local oldest_order = spiders[1] and spiders[1]._misolo_spider_order or math.huge
+
+        for i = 2, #spiders do
+            local order = spiders[i] and spiders[i]._misolo_spider_order or math.huge
+            if order < oldest_order then
+                oldest_order = order
+                oldest_index = i
+            end
+        end
+
+        local oldest = table.remove(spiders, oldest_index)
+        if IsValid(oldest) and oldest ~= spider and oldest:IsAlive() then
+            oldest:Kill(self, caster)
+        end
+    end
+
+    return true
+end
+
 function misolo_w:PruneWebs()
     local caster = self:GetCaster()
     if not IsValid(caster) then
@@ -94,6 +166,32 @@ function misolo_w:IsMisoloSpider(target, owner)
     end
 
     return target:GetUnitName() == "npc_dota_misolo_web_spider" or target:HasModifier("modifier_misolo_web_spider")
+end
+
+function misolo_w:IsMisoloWebAlly(target, owner)
+    if not IsValid(target, owner) then
+        return false
+    end
+
+    if target == owner then
+        return true
+    end
+
+    if self:IsMisoloSpider(target, owner) then
+        return true
+    end
+
+    if target:IsIllusion() then
+        if target:GetOwner() == owner then
+            return true
+        end
+
+        if target:GetPlayerOwnerID() == owner:GetPlayerOwnerID() and target:GetUnitName() == owner:GetUnitName() then
+            return true
+        end
+    end
+
+    return false
 end
 
 function misolo_w:CreateWebAtPoint(point)
@@ -327,6 +425,8 @@ function modifier_misolo_w_web:TrySpawnSpiders()
 
         local spider = CreateUnitByName("npc_dota_misolo_web_spider", spawn_pos, true, self.caster, self.caster, self.caster:GetTeamNumber())
         if IsValid(spider) then
+            self.ability:RegisterSpider(spider)
+
             spider:SetOwner(self.caster)
             spider:SetControllableByPlayer(self.caster:GetPlayerOwnerID(), true)
             FindClearSpaceForUnit(spider, spawn_pos, true)
@@ -421,15 +521,11 @@ function modifier_misolo_w_web:GetAuraEntityReject(target)
         return true
     end
 
-    if target == self.caster then
-        return false
-    end
-
     if not IsValid(self.ability) then
         return true
     end
 
-    return not self.ability:IsMisoloSpider(target, self.caster)
+    return not self.ability:IsMisoloWebAlly(target, self.caster)
 end
 
 function modifier_misolo_w_web:CheckState()

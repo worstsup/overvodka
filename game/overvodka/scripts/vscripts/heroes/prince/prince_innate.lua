@@ -67,10 +67,14 @@ modifier_prince_innate = class({})
 
 function modifier_prince_innate:IsHidden()   return true end
 function modifier_prince_innate:IsPurgable() return false end
+function modifier_prince_innate:RemoveOnDeath() return false end
 
 function modifier_prince_innate:OnCreated()
+    self.parent = self:GetParent()
     if not IsServer() then return end
     self.attackers = {}
+    self._was_not_original_model = false
+    self:StartIntervalThink(0.15)
 end
 
 function modifier_prince_innate:DeclareFunctions()
@@ -84,6 +88,53 @@ local function cleanup_old_attackers(t, now)
         if expire <= now then
             t[k] = nil
         end
+    end
+end
+
+function modifier_prince_innate:OnRefresh()
+    self:OnCreated()
+end
+
+function modifier_prince_innate:_IsOriginalModelNow()
+    if not self.parent or self.parent:IsNull() then return false end
+    return self.parent:GetModelName() == "models/prince/prince.vmdl"
+end
+
+function modifier_prince_innate:_HideWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(0)
+        self.parent.weapon:SetParent(self.parent, "attach_hitloc")
+    end
+end
+
+function modifier_prince_innate:_ShowWeapon()
+    if not IsServer() then return end
+    if self.parent.weapon then
+        self.parent.weapon:SetModelScale(1)
+        self.parent.weapon:SetParent(self.parent, "attach_sword")
+        self.parent.weapon:SetLocalOrigin(Vector(0, 0, 0))
+        self.parent.weapon:SetLocalAngles(0, 0, 0)
+    end
+end
+
+function modifier_prince_innate:OnIntervalThink()
+    if not IsServer() then return end
+    if not self.parent or self.parent:IsNull() then return end
+
+    if self.parent:GetUnitName() ~= "npc_dota_hero_abaddon" then return end
+
+    local is_original = self:_IsOriginalModelNow()
+
+    if not is_original then
+        self._was_not_original_model = true
+        self:_HideWeapon()
+        return
+    end
+
+    if self._was_not_original_model then
+        self._was_not_original_model = false
+        self:_ShowWeapon()
     end
 end
 

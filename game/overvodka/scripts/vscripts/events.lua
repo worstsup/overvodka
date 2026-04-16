@@ -258,12 +258,12 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			weapon:SetModelScale(0.5)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
-			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl"})
-			sword:FollowEntity(spawnedUnit, true)
-			sword:SetParent(spawnedUnit, "attach_sword")
-			sword:SetLocalOrigin(Vector(0, 0, 0))
-			sword:SetLocalAngles(0, 0, 0)
-			sword:SetModelScale(1)
+			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl"})
+			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+			spawnedUnit.weapon:SetParent(spawnedUnit, "attach_sword")
+			spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
+			spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
+			spawnedUnit.weapon:SetModelScale(1)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_antimage" then
 			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/god.vmdl"})
@@ -317,6 +317,14 @@ function OvervodkaGameMode:OnNPCSpawned( event )
 			spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
 			spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
 			spawnedUnit.weapon:SetModelScale(0.5)
+		end
+		if spawnedUnit:GetUnitName() == "npc_dota_hero_abaddon" then
+			spawnedUnit.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/abaddon/weta_fractured_sword_of_eternity_weapon/weta_fractured_sword_of_eternity_weapon.vmdl"})
+			spawnedUnit.weapon:FollowEntity(spawnedUnit, true)
+			spawnedUnit.weapon:SetParent(spawnedUnit, "attach_sword")
+			spawnedUnit.weapon:SetLocalOrigin(Vector(0, 0, 0))
+			spawnedUnit.weapon:SetLocalAngles(0, 0, 0)
+			spawnedUnit.weapon:SetModelScale(1)
 		end
 		if spawnedUnit:GetUnitName() == "npc_dota_hero_templar_assassin" then
 			local sword = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/props_items/magicstick.vmdl"})
@@ -627,8 +635,18 @@ function OvervodkaGameMode:OnItemPickUp( event )
 	end
 	if not picker or picker:IsNull() then return end
 	local owner = picker
-	if not owner:IsRealHero() then
-		owner = owner:GetOwner()
+	while owner and not owner:IsNull() and not owner:IsRealHero() do
+		local next_owner = owner.GetOwner and owner:GetOwner() or nil
+		if (not next_owner or next_owner:IsNull()) and owner.GetPlayerOwnerID then
+			local playerID = owner:GetPlayerOwnerID()
+			if playerID ~= nil and playerID ~= -1 then
+				next_owner = PlayerResource:GetSelectedHeroEntity(playerID)
+			end
+		end
+		if not next_owner or next_owner:IsNull() or next_owner == owner then
+			break
+		end
+		owner = next_owner
 	end
 	if not owner or owner:IsNull() then
 		owner = picker
@@ -647,28 +665,25 @@ function OvervodkaGameMode:OnItemPickUp( event )
 		if owner:GetUnitName() == "npc_dota_hero_necrolyte" then
 			ApplyDamage( { victim = owner, attacker = owner, damage = owner:GetHealth() * 0.2, damage_type = DAMAGE_TYPE_PURE } )
 		end
-		local heroes = FindUnitsInRadius(owner:GetTeamNumber(),
-							owner:GetAbsOrigin(),
-							nil,
-							10000,
-							DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-							DOTA_UNIT_TARGET_HERO,
-							DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
-							FIND_ANY_ORDER,
-							false )
+		local heroes = HeroList:GetAllHeroes()
 		for i = 1, #heroes do
-			local playerID = heroes[i]:GetPlayerID()
-			r = 300
-			if GetMapName() == "overvodka_5x5" then
-				r = 50
+			local hero = heroes[i]
+			if hero:IsRealHero() and hero:GetTeamNumber() == owner:GetTeamNumber() and hero:IsAlive() then
+				local playerID = hero:GetPlayerID()
+				if playerID ~= nil and playerID ~= -1 then
+					r = 300
+					if GetMapName() == "overvodka_5x5" then
+						r = 50
+					end
+					if hero:GetUnitName() == "npc_dota_hero_skeleton_king" and hero:IsTempestDouble() then
+						r = 0
+					end
+					local Team = PlayerResource:GetTeam(playerID)
+					local newR = ChangeValueByTeamPlace(r, Team)
+					hero:ModifyGoldFiltered(newR, false, 0)
+					SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, newR, nil)
+				end
 			end
-			if heroes[i]:GetUnitName() == "npc_dota_hero_skeleton_king" and heroes[i]:IsTempestDouble() then
-				r = 0
-			end
-			local Team = PlayerResource:GetTeam(playerID)
-			local newR = ChangeValueByTeamPlace(r, Team)
-			owner:ModifyGoldFiltered(newR, false, 0)
-			SendOverheadEventMessage( heroes[i], OVERHEAD_ALERT_GOLD, heroes[i], newR, nil )
 		end
 		if ChaosOrb and ChaosOrb.OnGoldPickup then
 			ChaosOrb:OnGoldPickup(owner)

@@ -8851,7 +8851,7 @@
 			"chargeup_time" 			"1.6"
 			"max_distance"				"25000"
 			"turn_rate" 				"180"
-			"return_turn_rate"			"22"
+			"return_turn_rate"			"30"
 			"gold"	"400"
 		}
 	}
@@ -9014,7 +9014,7 @@
 				"value"	"500"
 				"affected_by_aoe_increase"	"1"
 			}
-			"frostbite_duration"	"5"
+			"frostbite_duration"	"4"
 			"dot_damage"			"50 70 90"
 			"think_interval"		"1.0"
 			"duration"				"0.75 1.25 1.75"
@@ -12170,7 +12170,7 @@
         {
             "duration"
             {
-                "value"                             "1.75 2.0 2.25 2.5"
+                "value"                             "2.25 2.5 2.75 3.0"
 				"special_bonus_unique_invincible_8"     "+1"        
             }
             "speed"
@@ -12181,7 +12181,7 @@
             "end_delay"                 "0.25"
             "slow_enemy"                "-100"
             "duration_slow"             "1.25 1.5 1.75 2.0"
-            "damage_from_attack"        "50"
+            "damage_from_attack"        "100"
             "buff_attack_speed"         "60 80 100 120"
             "creep_damage"
             {
@@ -12219,8 +12219,8 @@
 				"lifesteal"	"40 45 50 55"
 				"AbilityCooldown"
 				{
-					"value"	"7.5 7.0 6.5 6.0"
-					"special_bonus_unique_invincible_6"	"-4"
+					"value"	"6.5 6.0 5.5 5.0"
+					"special_bonus_unique_invincible_6"	"-3"
 				}
 				"pct_damage"
 				{
@@ -17575,13 +17575,13 @@
 		"AbilityTextureName"    "amor_innate"
 		"Innate"       			"1"
 		"IsBreakable"           "1"
-		"AbilityCooldown"		"45"
+		"AbilityCooldown"		"55"
 		"MaxLevel"				"4"
 		"DependentOnAbility"	"amor_ultimate"
 		"AbilityValues"
 		{
 			"hp_threshold_pct" 			"40"
-			"bonus_regen"         		"50 100 150 200"
+			"bonus_regen"         		"50 75 100 125"
 			"buff_duration"         	"4.0 4.5 5.0 5.5"
 			"bonus_ms_pct"				"10 12 14 16"
 			"bonus_damage_per_charge"	"4"
@@ -17615,19 +17615,19 @@
 		{
 			"bonus_speed"
 			{
-				"value"	"14 16 18 20"
-				"special_bonus_unique_amor_2"	"+8"
+				"value"	"12 13 14 15"
+				"special_bonus_unique_amor_2"	"+10"
 			}
-			"bonus_slow_resist"			"35 45 55 65"
-			"slow_resistance"			"35 45 55 65"
-			"duration"					"12"
+			"bonus_slow_resist"			"25 30 35 40"
+			"slow_resistance"			"25 30 35 40"
+			"duration"					"10"
 			"has_facet"
 			{
 				"value"	"1"
 			}
 			"trail_duration"
 			{
-				"value"	"6"
+				"value"	"5"
 			}
 			"trail_radius"
 			{
@@ -17658,11 +17658,11 @@
 		{
 			"damage"                    "75 150 225 300"
 			"stun_duration"             "1.2 1.4 1.6 1.8"
-			"slow_ms_pct"               "25 30 35 40"
+			"slow_ms_pct"               "24 26 28 30"
 			"slow_as"                   "20 25 30 35"
 			"slow_duration"             "2.25 2.75 3.25 3.75"
 			"self_bonus_ms_pct"         "25 30 35 40"
-			"self_bonus_as"             "30"
+			"self_bonus_as"             "20"
 			"self_bonus_duration"       "2.25 2.75 3.25 3.75"
 			"sneeze_width"              "300"
 			"knock_distance"            "400"
@@ -17784,7 +17784,7 @@
 			"beer_dps"
 			{
 				"value"	"60 90 120"
-				"special_bonus_unique_amor_5" "+60"
+				"special_bonus_unique_amor_5" "+30"
 			}
 			"beer_slow_pct"   "25 30 35"
 			"beer_tick"       "0.25"
@@ -17817,7 +17817,7 @@
 		"ScriptFile"                    "heroes/amor/amor_scepter"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityTextureName"            "amor_scepter"
-		"AbilityCooldown"               "95"
+		"AbilityCooldown"               "120"
 		"AbilityManaCost"               "300"
 		"IsGrantedByScepter"            "1"
 		"MaxLevel"                      "1"
@@ -18242,7 +18242,7 @@
 	}
 
 	//=================================================================================================================
-	// Паутинка
+	// Broodильня
 	//=================================================================================================================
 	"misolo_w"
 	{
@@ -18264,7 +18264,7 @@
 			}
 			"health_regen_bonus"			"2 5 8 11"
 			"turn_rate_bonus"				"0.2"
-			"move_speed_bonus_pct"			"10 15 20 25"
+			"move_speed_bonus_pct"			"10 16 22 28"
 			"max_webs"						"2 3 4 5"
 			"web_spawn_duration"			"4.5 5.0 5.5 6.0"
 			"web_spawn_interval"			"1.0"
@@ -18273,7 +18273,7 @@
 			"linger_duration"				"0.15"
 			"spider_health"
 			{
-				"value"	"80 120 160 200"
+				"value"	"100 150 200 250"
 				"special_bonus_unique_misolo_3"	"+175"
 			}
 			"spider_damage"					"10 16 22 28"
@@ -18283,8 +18283,8 @@
 			"spider_bounty_xp"				"8 10 12 14"
 			"AbilityCharges"
 			{
-				"value"	"2 3 4 5"
-				"special_bonus_unique_misolo_2"	"+1"
+				"value"	"3 4 5 6"
+				"special_bonus_unique_misolo_2"	"+2"
 			}
 			"AbilityChargeRestoreTime"
 			{
@@ -18365,8 +18365,10 @@
 				"value"	"80 120 160"
 				"special_bonus_unique_misolo_7"	"x2"
 			}
-			"scepter_shield_chance"				"30"
-			"scepter_shield_damage"				"225"
+			"units_mana"					"300 450 600"
+			"scepter_shield_chance"				"50"
+			"scepter_shield_damage"				"200"
+			"scepter_shield_health_pct"			"10"
 			"scepter_shield_radius"				"900"
 			"scepter_shield_additional_targets"	"4"
 		}
@@ -18546,6 +18548,7 @@
 				"value"					"25"
 				"hero_levelup"			"+1"
 			}
+			"max_spiders"				"16"
 			"creep_spawn_count"
 			{
 				"value"	"2"
@@ -18565,7 +18568,7 @@
 	}
 
 	//=================================================================================================================
-	// Паутинка
+	// Broodoмор
 	//=================================================================================================================
 	"misolo_shard"
 	{

@@ -68,7 +68,7 @@ function modifier_item_derzko:OnCreated()
         self.health_regen_pct = 0
     end
     self:SetHasCustomTransmitterData(true)
-    self:StartIntervalThink(FrameTime())
+    self:StartIntervalThink(0.1)
 end
 
 function modifier_item_derzko:OnIntervalThink()
