@@ -379,6 +379,7 @@ PrecacheUtils.models = {
 		"models/elka/elka2.vmdl",
 		"models/props_winter/present.vmdl",
 		"models/props_gameplay/neutral_box.vmdl",
+		"models/invincible/maska.vmdl",
 }
 
 PrecacheUtils.sounds = {

@@ -226,6 +226,7 @@
 		"Store_Item_sans_arcana"		"Underfell Sans"
 		"Store_Item_invincible_arcana"	"WhatsApp Mark"
 		"Store_Item_skin_12_name"		"Red Royale King"
+		"Store_Item_skin_13_name"		"Mango Mark"
 
 		"Store_Item_effect_1_name" "Golden Effect"
 		"Store_Item_effect_2_name" "Diretide effect"

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc40:version{da0ab1f8-9722-4910-94b8-10b6a08c0934} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc41:version{12fc9d44-453a-4ae4-b4d9-7e2ac0bbd4e0} -->
 {
 	rootNode = 
 	{
@@ -25,6 +25,14 @@
 								from = "material__158.vmat"
 								to = "models/invincible/invincible_skin.vmat"
 							},
+							{
+								from = "speredi.vmat"
+								to = "models/invincible/trollface.vmat"
+							},
+							{
+								from = "szadi.vmat"
+								to = "models/invincible/trollface.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -48,6 +56,42 @@
 						_class = "Attachment"
 						name = "attach_attack1"
 						parent_bone = "arm_right_finger_5_helper"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "attach_attack2"
+						parent_bone = "arm_left_finger_5_helper"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "attach_head"
+						parent_bone = "head_lip_upper_middle"
+						relative_origin = [ 0.0, 3.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, -90.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "eye_l"
+						parent_bone = "head_eyeball_left"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "eye_r"
+						parent_bone = "head_eyeball_right"
 						relative_origin = [ 0.0, 0.0, 0.0 ]
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
@@ -532,7 +576,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -6.157982, -10.994747, -6.845158 ]
-								hitbox_maxs = [ 37.056099, 8.966663, 7.289316 ]
+								hitbox_maxs = [ 37.0561, 8.966663, 7.289316 ]
 							},
 							{
 								_class = "Hitbox"
@@ -542,7 +586,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -4.003784, -7.877741, -4.579947 ]
-								hitbox_maxs = [ 39.012348, 8.274284, 4.903676 ]
+								hitbox_maxs = [ 39.01235, 8.274284, 4.903676 ]
 							},
 							{
 								_class = "Hitbox"
@@ -562,7 +606,7 @@
 								translation_only = false
 								group_id = 0
 								hitbox_mins = [ -6.157982, -8.966646, -6.845354 ]
-								hitbox_maxs = [ 37.056099, 10.994745, 7.289146 ]
+								hitbox_maxs = [ 37.0561, 10.994745, 7.289146 ]
 							},
 							{
 								_class = "Hitbox"

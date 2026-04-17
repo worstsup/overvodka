@@ -57,6 +57,7 @@ const StoreBody = $("#StoreBody");
         "skin_11",
         "skin_12",
         "invincible_arcana",
+        "skin_13",
         "skin_5",
         "skin_3",
         "skin_2",
