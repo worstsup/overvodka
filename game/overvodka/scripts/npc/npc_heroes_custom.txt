@@ -583,7 +583,7 @@
 		"Ability7"		"rubick_telekinesis_land"
 		"Ability8"		"rubick_hidden1"
 		"Ability9"		"rubick_hidden2"
-		"Ability10"		"silencer_brain_drain"
+		"Ability10"		"worstsup_innate"
 		"Ability11"		"wisp_spirits"
 		"Ability12"		"special_bonus_unique_worstsup_1"
 		"Ability13"		"special_bonus_unique_worstsup_2"
