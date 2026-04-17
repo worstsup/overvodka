@@ -3562,25 +3562,38 @@
 		"AbilityValues"
 		{
 			"projectile_speed"				"1500"
-			"stolen_debuff_amp"				"10 15 20 25"
-			"cast_range_scepter"			
-			{
-				"value"						"600"
-				"RequiresScepter"			"1"
-			}
 			"duration"
 			{
 				"value"						"15 30 45 60"
 				"special_bonus_unique_worstsup_3" "+30"
 			}
-			"stolen_mana_reduction"
+			"stolen_debuff_amp"				"10 15 20 25"
+			"cast_range_scepter"			
 			{
-				"special_bonus_facet_rubick_frugal_filch"	"30 40 50 60"				
+				"special_bonus_scepter"					"600"
+			}
+			"stolen_mana_reduction"			
+			{
+				"value"									"0"
+				"special_bonus_unique_rubick_6"			"+50"
+			}
+			"stolen_spell_cooldown_percent"
+			{
+				"value"									"10 20 30 40"
+				
+			}
+			"spell_amp_percent"
+			{
+				"special_bonus_unique_rubick_5"			"40"
+			}
+			"curiosity_steal_factor"			
+			{
+				"value"						"1"
 			}
 		}
 	}
 	//=================================================================================================================
-	// ПЕРЕПИСЫВАНИЕ КОДА (врожденная)
+	// ПОДКРУТКА (врожденная)
 	//=================================================================================================================
 	"worstsup_innate"
 	{

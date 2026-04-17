@@ -6,6 +6,7 @@ function worstsup_w:Precache(context)
     PrecacheResource("particle", "particles/econ/items/wisp/wisp_tether_ti7.vpcf", context)
     PrecacheResource("particle", "particles/units/heroes/hero_demonartist/demonartist_soulchain_debuff.vpcf", context)
     PrecacheResource("particle", "particles/worstsup_buff.vpcf", context)
+    PrecacheResource("particle", "particles/units/heroes/hero_abaddon/abaddon_death_cdr.vpcf", context)
     PrecacheResource( "soundfile", "soundevents/cheza.vsndevts", context )
 end
 

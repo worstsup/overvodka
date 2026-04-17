@@ -74,9 +74,15 @@ function modifier_worstsup_innate_aura:OnAbilityExecuted(params)
     if not ability or ability:IsNull() then return end
     if not used_ability or used_ability:IsNull() or used_ability:IsItem() then return end
     if used_ability:GetCaster() ~= enemy then return end
+    if used_ability:IsToggle() or used_ability:ProcsMagicStick() == false then return 0 end
 
     local cd_reduction = ability:GetSpecialValueFor("cd_reduction")
     if cd_reduction <= 0 then return end
+    
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_abaddon/abaddon_death_cdr.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
+    ParticleManager:SetParticleControl(p, 0, enemy:GetAbsOrigin())
+    ParticleManager:SetParticleControlEnt(p, 1, rubick, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy:GetAbsOrigin(), true)
+    ParticleManager:ReleaseParticleIndex(p)
 
     for slot = 0, 23 do
         local own_ability = rubick:GetAbilityByIndex(slot)
