@@ -3580,26 +3580,27 @@
 		}
 	}
 	//=================================================================================================================
-	// ВЕЧНЫЕ ФИКСЫ (врожденная)
+	// ПЕРЕПИСЫВАНИЕ КОДА (врожденная)
 	//=================================================================================================================
-	"silencer_brain_drain"
+	"worstsup_innate"
 	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/worstsup/worstsup_innate"
+		"AbilityTextureName"			"silencer_brain_drain"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"IsBreakable"					"1"
 		"MaxLevel"						"1"
 		"Innate"						"1"
 
 		"AbilityValues"
 		{
-			"permanent_int_steal_range"	
+			"radius"
 			{
-				"value"		"600"			
+				"value"		"600"
+				"hero_levelup" "+15"
 				"affected_by_aoe_increase"	"1"
 			}
-			"permanent_int_steal_amount"
-			{
-				"value"						"1"
-				"special_bonus_shard"		"+1"
-			}
+			"cd_reduction"				"0.25"
 		}
 	}
 
@@ -15199,7 +15200,8 @@
 	//=================================================================================================================
 	"lev_smeh"
 	{
-		"BaseClass"             		"ability_datadriven"
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/lev/lev_smeh"
 		"AbilityTextureName"			"hah"
 		"MaxLevel" 						"4"
 		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
@@ -15240,129 +15242,14 @@
 			"particle"  "particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_ti6_knockback_debuff.vpcf"
 			"particle"  "particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_ti6_debuff_feet.vpcf"
 		}
-		
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"	"smeh"
-				"Target" 		"CASTER"
-			}
-			"LinearProjectile"
-			{
-			    "Target"      	 "POINT"
-				"EffectName"	 "particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_ti6.vpcf"
-				"MoveSpeed"		 "900"
-				"StartRadius"	 "175"
-				"StartPosition"  "attach_hitloc"
-				"EndRadius"      "225"
-				"HasFrontalCone" "0"
-				"FixedDistance"  "900"
-				"TargetTeams"	 "DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"TargetTypes"	 "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"						
-			    "ProvidesVision" "1"
-			    "VisionRadius" 	 "400"
-			}
-		}
-		
-		"OnProjectileHitUnit"
-		{
-			"DeleteOnHit"	"0"
-			"Knockback"
-			{
-				"Target"            "TARGET"
-				"Center" 	        "CASTER"
-				"Distance"	        "1000"
-				"Duration"	        "1.25"
-				"Height"	        "0"
-				"IsFixedDistance"	"1"
-				"ShouldStun"        "0"	
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_lev_smeh_debuff"
-				"Target" 		"TARGET"
-				"Duration"		"1.25"
-			}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_lev_smeh_debuff"
-			{
-				"Passive"			"0"
-				"IsHidden"			"1"
-				"IsPurgable"		"0"
-				"IsBuff"			"0"
-				"IsDebuff"			"1"
-				"IsStunDebuff"		"0"
-				"ThinkInterval"  	"0.03"
-				"OnIntervalThink"
-				{
-					"DestroyTrees"
-					{
-						"Target" 		"TARGET"
-						"Radius"		"100"
-					}
-				}
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"		"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_ti6_knockback_debuff.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"            "TARGET"
-					}
-					"AttachEffect"
-					{
-						"EffectName"        "particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_ti6_debuff_feet.vpcf"
-						"EffectAttachType"  "follow_origin"
-						"Target"            "TARGET"
-					}
-					"RunScript"
-					{
-						"ScriptFile"        "heroes/lev/lev_smeh"
-						"Function"          "lev_smeh"
-					}
-				}
-				"OnDestroy"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_lev_smeh_debuff_2"
-						"Target" 		"TARGET"
-						"Duration"		"%duration"
-					}
-				}
-			}
-			"modifier_lev_smeh_debuff_2"
-			{
-				"Passive"			"0"
-				"IsHidden"			"1"
-				"IsPurgable"		"1"
-				"IsBuff"			"0"
-				"IsDebuff"			"1"
-				"IsStunDebuff"		"0"
-				"EffectName"		"particles/econ/items/invoker/invoker_ti6/invoker_deafening_blast_disarm_ti6_debuff.vpcf"
-				"EffectAttachType"	"follow_overhead"
-				"Properties"
-				{
-				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow_pct" 
-				}
-				"States"
-				{
-					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
 	}
 	//=================================================================================================================
 	// ЭНЕРГОСИК
 	//=================================================================================================================
 	"energosik"
 	{
-		"BaseClass"             		"ability_datadriven"
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"					"heroes/lev/energosik"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"MaxLevel"						"1"
 		"IsGrantedByShard"              "1"
@@ -15378,20 +15265,6 @@
 		"precache"
 		{
 			"soundfile"	"soundevents/redbull.vsndevts"
-		}
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"Target"                "CASTER"
-				"EffectName"            "redbull"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName" "modifier_rune_haste"
-				"Target"       "CASTER"
-				"Duration"     "%duration"
-			}
 		}
 	}
 	//=================================================================================================================
