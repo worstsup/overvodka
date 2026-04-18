@@ -9,41 +9,19 @@ local FOUNTAIN_THINK_INTERVAL = 0.05
 local FOUNTAIN_DAMAGE_PCT = 0.25
 local FOUNTAIN_CUSTOM_INTERACTION_RADIUS = 1500
 local FOUNTAIN_PUSH_DISTANCE = 1600
-local FOUNTAIN_HIT_SOUND = "Ability.LagunaBlade"
-local FOUNTAIN_HIT_PARTICLE = "particles/econ/items/lina/lina_ti6/lina_ti6_laguna_blade.vpcf"
 
 function modifier_overvodka_fountain_passive:IsHidden() return true end
 function modifier_overvodka_fountain_passive:IsPurgable() return false end
 function modifier_overvodka_fountain_passive:IsPurgeException() return false end
 function modifier_overvodka_fountain_passive:RemoveOnDeath() return false end
 
-function modifier_overvodka_fountain_passive:IsAura()
-	return true
-end
-
-function modifier_overvodka_fountain_passive:GetModifierAura()
-	return "modifier_fountain_aura_effect_lua"
-end
-
-function modifier_overvodka_fountain_passive:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
-end
-
-function modifier_overvodka_fountain_passive:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP
-end
-
-function modifier_overvodka_fountain_passive:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD
-end
-
-function modifier_overvodka_fountain_passive:GetAuraDuration()
-	return 0.1
-end
-
-function modifier_overvodka_fountain_passive:GetAuraRadius()
-	return FOUNTAIN_REGEN_AURA_RADIUS
-end
+function modifier_overvodka_fountain_passive:IsAura() return true end
+function modifier_overvodka_fountain_passive:GetModifierAura() return "modifier_fountain_aura_effect_lua" end
+function modifier_overvodka_fountain_passive:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
+function modifier_overvodka_fountain_passive:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP end
+function modifier_overvodka_fountain_passive:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD end
+function modifier_overvodka_fountain_passive:GetAuraDuration() return 0.1 end
+function modifier_overvodka_fountain_passive:GetAuraRadius() return FOUNTAIN_REGEN_AURA_RADIUS end
 
 function modifier_overvodka_fountain_passive:DeclareFunctions()
 	local funcs = {}
@@ -94,22 +72,12 @@ end
 
 function modifier_overvodka_fountain_passive:ProcessOvervodkaCustomInteractions()
 	local fountain = self:GetParent()
-	if not fountain or fountain:IsNull() then return end
+	if not IsValid(fountain) then return end
 
-	local enemies = FindUnitsInRadius(
-		fountain:GetTeamNumber(),
-		fountain:GetAbsOrigin(),
-		nil,
-		FOUNTAIN_CUSTOM_INTERACTION_RADIUS,
-		DOTA_UNIT_TARGET_TEAM_BOTH,
-		DOTA_UNIT_TARGET_HERO,
-		0,
-		FIND_ANY_ORDER,
-		false
-	)
+	local enemies = FindUnitsInRadius(fountain:GetTeamNumber(), fountain:GetAbsOrigin(), nil, FOUNTAIN_CUSTOM_INTERACTION_RADIUS, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, 0, 0, false)
 
 	for _, enemy in pairs(enemies) do
-		if enemy and not enemy:IsNull() then
+		if IsValid(enemy) then
 			if enemy:IsAlive() and enemy:HasModifier("modifier_mazellov_r") and not enemy:HasModifier("modifier_knockback") then
 				local direction = (enemy:GetAbsOrigin() - fountain:GetAbsOrigin()):Normalized()
 				local distance = (fountain:GetAbsOrigin() - enemy:GetAbsOrigin()):Length2D()
@@ -126,16 +94,14 @@ end
 
 function modifier_overvodka_fountain_passive:IsAttackDisabled()
 	local fountain = self.fountain or self:GetParent()
-	if not fountain or fountain:IsNull() then
-		return true
-	end
+	if not IsValid(fountain) then return true end
 
 	return fountain:HasModifier("modifier_generic_disarmed_lua")
 end
 
 function modifier_overvodka_fountain_passive:AttackEnemies()
 	local fountain = self.fountain or self:GetParent()
-	if not fountain or fountain:IsNull() then return end
+	if not IsValid(fountain) then return end
 	if self:IsAttackDisabled() then return end
 
 	local units = FindUnitsInRadius(
@@ -151,25 +117,19 @@ function modifier_overvodka_fountain_passive:AttackEnemies()
 	)
 
 	for _, target in pairs(units) do
-		if target and not target:IsNull() and target:IsAlive() and target:GetUnitName() ~= "npc_dota_courier" then
+		if IsValid(target) and target:IsAlive() and target:GetUnitName() ~= "npc_dota_courier" then
 			if target:IsRealHero() then
-				target:EmitSound(FOUNTAIN_HIT_SOUND)
+				target:EmitSound("Hero_Lina.LagunaBlade.Immortal")
 			end
 
-			local particle = ParticleManager:CreateParticle(FOUNTAIN_HIT_PARTICLE, PATTACH_CUSTOMORIGIN, nil)
+			local particle = ParticleManager:CreateParticle("particles/econ/items/lina/lina_ti6/lina_ti6_laguna_blade.vpcf", PATTACH_CUSTOMORIGIN, nil)
 			ParticleManager:SetParticleControlEnt(particle, 0, fountain, PATTACH_POINT_FOLLOW, "attach_attack1", fountain:GetAbsOrigin() + Vector(0, 0, 96), true)
 			ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 			ParticleManager:ReleaseParticleIndex(particle)
 
-			ApplyDamage({
-				attacker = fountain,
-				victim = target,
-				ability = nil,
-				damage = target:GetMaxHealth() * FOUNTAIN_DAMAGE_PCT,
-				damage_type = DAMAGE_TYPE_PURE,
-			})
+			ApplyDamage({attacker = fountain, victim = target, ability = nil, damage = target:GetMaxHealth() * FOUNTAIN_DAMAGE_PCT, damage_type = DAMAGE_TYPE_PURE})
 
-			if target and not target:IsNull() and target:IsAlive() and not target:IsRealHero() then
+			if IsValid(target) and target:IsAlive() and not target:IsRealHero() then
 				target:Kill(nil, fountain)
 			end
 		end
