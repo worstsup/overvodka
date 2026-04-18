@@ -469,12 +469,13 @@ end
 -- Set up fountain regen
 ---------------------------------------------------------------------------
 function OvervodkaGameMode:SetUpFountains()
-	LinkLuaModifier( "modifier_fountain_aura_lua", LUA_MODIFIER_MOTION_NONE )
-	LinkLuaModifier( "modifier_fountain_aura_effect_lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier( "modifier_overvodka_fountain_passive", "modifier_fountain_aura_lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier( "modifier_fountain_aura_lua", "modifier_fountain_aura_lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier( "modifier_fountain_aura_effect_lua", "modifier_fountain_aura_effect_lua", LUA_MODIFIER_MOTION_NONE )
 
 	local fountainEntities = Entities:FindAllByClassname( "ent_dota_fountain")
 	for _,fountainEnt in pairs( fountainEntities ) do
-		fountainEnt:AddNewModifier( fountainEnt, fountainEnt, "modifier_fountain_aura_lua", {} )
+		fountainEnt:AddNewModifier( fountainEnt, nil, "modifier_overvodka_fountain_passive", { fountain = fountainEnt:entindex() } )
 	end
 end
 
