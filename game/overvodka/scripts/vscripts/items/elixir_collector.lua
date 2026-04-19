@@ -2,8 +2,13 @@ LinkLuaModifier("modifier_elixir_collector_buff", "items/elixir_collector", LUA_
 LinkLuaModifier("modifier_elixir_collector_debuff", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_elixir_collector_buff_hero", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_elixir_collector", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_bloodstone_vodka_aura_debuff", "items/item_bloodstone_vodka", LUA_MODIFIER_MOTION_NONE)
 
 item_elixir_collector = class({})
+
+function item_elixir_collector:Precache(context)
+    PrecacheResource("particle", "particles/items_fx/bloodstone/bloodstone_aoe.vpcf", context)
+end
 
 function item_elixir_collector:GetIntrinsicModifierName()
     return "modifier_item_elixir_collector"
@@ -28,8 +33,82 @@ function modifier_item_elixir_collector:IsPurgable() return false end
 function modifier_item_elixir_collector:IsPurgeException() return false end
 
 function modifier_item_elixir_collector:OnCreated()
+    self:RefreshBloodstonePassiveValues()
+
     if not IsServer() then return end
     self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
+    self:StartIntervalThink(0.25)
+    self:RefreshBloodstoneAuraParticle()
+end
+
+function modifier_item_elixir_collector:OnRefresh()
+    self:RefreshBloodstonePassiveValues()
+
+    if not IsServer() then return end
+    self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
+    self:RefreshBloodstoneAuraParticle()
+end
+
+function modifier_item_elixir_collector:OnDestroy()
+    if not IsServer() then return end
+    self:DestroyBloodstoneAuraParticle()
+end
+
+function modifier_item_elixir_collector:OnIntervalThink()
+    if not IsServer() then return end
+    self:RefreshBloodstoneAuraParticle()
+end
+
+function modifier_item_elixir_collector:RefreshBloodstonePassiveValues()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+
+    self.bloodstone_aura_radius = ability:GetSpecialValueFor("bloodstone_aura_radius")
+    self.aura_spell_vulnerability = ability:GetSpecialValueFor("aura_spell_vulnerability")
+end
+
+function modifier_item_elixir_collector:IsItemReady()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return false end
+    return not ability:IsInBackpack()
+end
+
+function modifier_item_elixir_collector:IsPrimaryElixirCollectorModifier()
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return false end
+
+    for _, modifier in pairs(parent:FindAllModifiersByName("modifier_item_elixir_collector")) do
+        if modifier and not modifier:IsNull() and modifier.IsItemReady and modifier:IsItemReady() then
+            return modifier == self
+        end
+    end
+
+    return false
+end
+
+function modifier_item_elixir_collector:DestroyBloodstoneAuraParticle()
+    if not self.bloodstone_aura_particle then return end
+    ParticleManager:DestroyParticle(self.bloodstone_aura_particle, false)
+    ParticleManager:ReleaseParticleIndex(self.bloodstone_aura_particle)
+    self.bloodstone_aura_particle = nil
+end
+
+function modifier_item_elixir_collector:RefreshBloodstoneAuraParticle()
+    if not IsServer() then return end
+
+    if not self:IsItemReady() or not self:IsPrimaryElixirCollectorModifier() then
+        self:DestroyBloodstoneAuraParticle()
+        return
+    end
+
+    if self.bloodstone_aura_particle then return end
+
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return end
+
+    self.bloodstone_aura_particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone/bloodstone_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    ParticleManager:SetParticleControl(self.bloodstone_aura_particle, 0, parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(self.bloodstone_aura_particle, 1, Vector(self.bloodstone_aura_radius or 0, 0, 0))
 end
 
 function modifier_item_elixir_collector:DeclareFunctions()
@@ -40,6 +119,42 @@ function modifier_item_elixir_collector:DeclareFunctions()
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
+end
+
+function modifier_item_elixir_collector:IsAura()
+    return self:IsItemReady() and self:IsPrimaryElixirCollectorModifier()
+end
+
+function modifier_item_elixir_collector:GetModifierAura()
+    return "modifier_item_bloodstone_vodka_aura_debuff"
+end
+
+function modifier_item_elixir_collector:GetAuraSearchTeam()
+    return DOTA_UNIT_TARGET_TEAM_ENEMY
+end
+
+function modifier_item_elixir_collector:GetAuraSearchType()
+    return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+end
+
+function modifier_item_elixir_collector:GetAuraSearchFlags()
+    return DOTA_UNIT_TARGET_FLAG_NONE
+end
+
+function modifier_item_elixir_collector:GetAuraRadius()
+    if not self:IsItemReady() or not self:IsPrimaryElixirCollectorModifier() then return 0 end
+    return self.bloodstone_aura_radius or 0
+end
+
+function modifier_item_elixir_collector:GetAuraDuration()
+    return 0.5
+end
+
+function modifier_item_elixir_collector:AuraEntityReject(target)
+    if not target or target:IsNull() then return true end
+    if target:IsBuilding() or target:IsOther() then return true end
+    if target:IsInvulnerable() or target:IsOutOfGame() then return true end
+    return false
 end
 
 function modifier_item_elixir_collector:GetModifierCastRangeBonus()
@@ -62,6 +177,7 @@ end
 
 function modifier_item_elixir_collector:OnTakeDamage(params)
     if not IsServer() then return end
+    if not self:IsPrimaryElixirCollectorModifier() then return end
     if self:GetParent() ~= params.attacker then return end
     if self:GetParent() == params.unit then return end
     if params.unit:IsBuilding() then return end

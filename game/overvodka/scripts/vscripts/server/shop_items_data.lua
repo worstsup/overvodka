@@ -24,7 +24,7 @@ return {
     ["item_blink"] = true,
     ["item_blitz_knuckles"] = true,
     ["item_blood_grenade"] = true,
-    ["item_bloodstone"] = true,
+    ["item_bloodstone_vodka"] = true,
     ["item_bloodthorn"] = true,
     ["item_blue_chips"] = true,
     ["item_boots"] = true,
