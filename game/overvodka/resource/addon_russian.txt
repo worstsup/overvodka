@@ -373,6 +373,7 @@
 		"npc_dota_hero_bristleback"			"AmoR"
 		"npc_dota_hero_beastmaster"			"Джеффри Эпштейн"
 		"npc_dota_hero_broodmother"			"Misolo"
+		"npc_dota_hero_pangolier"			"Nightfall"
 		
 		"npc_dota_elixir_collector"			"СБОРЩИК ЭЛИКСИРА"
 		"npc_dota_c4_bomb"					"C4"
@@ -1521,7 +1522,7 @@
 		"dota_tooltip_facet_bikov_e_bounce_description"         "Атака Эво Как / Фуфуфу отскакивает в ближайшего врага."
 		"dota_tooltip_ability_bikov_e_facet_bikov_e_bounce"     "Атака отскакивает в ближайшую цель в радиусе %search_radius%, нанося %bounce_pct%%% урона."
 		"dota_tooltip_ability_bikov_innate"                     "Зав. терапевтическим отделением"
-		"dota_tooltip_ability_bikov_innate_description"         "Опыт руководителя позволяет Быкову невольно дисциплинировать союзников рядом. Те действуют собраннее и эффективнее. Союзники в радиусе получают бонус к регенерации здоровья, скорости атаки и сопротивление эффектам."
+		"dota_tooltip_ability_bikov_innate_description"         "Опыт руководителя позволяет Быкову невольно дисциплинировать союзников рядом. Те действуют собраннее и эффективнее. Союзники в радиусе получают бонус к регенерации здоровья и сопротивлению магии и эффектам."
 		"dota_tooltip_ability_bikov_innate_radius"              "РАДИУС:"
 		"dota_tooltip_ability_bikov_innate_bonus_hp_regen"      "ДОП. ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ:"
 		"dota_tooltip_ability_bikov_innate_bonus_mag_res"       "%ДОП. СОПРОТИВЛЕНИЕ МАГИИ:"

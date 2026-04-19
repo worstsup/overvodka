@@ -54,6 +54,8 @@ const HEROES_TO_DELETE = [
     "npc_dota_hero_bristleback",
     "npc_dota_hero_rubick",
     "npc_dota_hero_antimage",
+    "npc_dota_hero_pangolier",
+    "npc_dota_hero_broodmother",
 ]
 
 function FixModelScene(){
