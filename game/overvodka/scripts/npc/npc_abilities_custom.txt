@@ -3570,7 +3570,7 @@
 			"stolen_debuff_amp"				"10 15 20 25"
 			"cast_range_scepter"			
 			{
-				"special_bonus_scepter"					"600"
+				"special_bonus_scepter"					"1600"
 			}
 			"stolen_mana_reduction"			
 			{
@@ -12023,7 +12023,7 @@
 		{
 			"duration"					"17"
 			"bonus_ms"					"20 25 30"
-			"bonus_spell"				"10 15 20"
+			"bonus_spell"				"15 20 25"
 			"projector_radius"			"350"
 			"projector_width"			"200"
 			"projector_miss"			"35 50 65"

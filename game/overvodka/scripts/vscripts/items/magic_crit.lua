@@ -45,6 +45,7 @@ function modifier_item_magic_crystalis:GetModifierBonusStats_Intellect()
 end
 
 function modifier_item_magic_crystalis:GetModifierTotalDamageOutgoing_Percentage(params)
+    if not IsServer() then return end
     if self:GetParent():FindAllModifiersByName("modifier_item_magic_crystalis")[1] ~= self then return end
     if params.inflictor and params.inflictor:IsItem() then return end
     if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
@@ -120,6 +121,7 @@ function modifier_item_magic_daedalus:GetModifierBonusStats_Agility()
 end
 
 function modifier_item_magic_daedalus:GetModifierTotalDamageOutgoing_Percentage(params)
+    if not IsServer() then return end
     if self:GetParent():FindAllModifiersByName("modifier_item_magic_daedalus")[1] ~= self then return end
     if params.inflictor and params.inflictor:IsItem() then return end
     if params.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then

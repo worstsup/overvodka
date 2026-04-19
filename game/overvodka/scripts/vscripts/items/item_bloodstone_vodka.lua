@@ -4,18 +4,6 @@ LinkLuaModifier("modifier_item_bloodstone_vodka_aura_debuff", "items/item_bloods
 
 item_bloodstone_vodka = class({})
 
-local BLOODSTONE_NON_HERO_SPELL_LIFESTEAL_MULTIPLIER = 0.2
-local BLOODSTONE_VEIL_DEBUFF_NAME = "modifier_item_veil_of_discord_debuff"
-local BLOODSTONE_ELIXIR_COLLECTOR_ITEM_NAME = "item_elixir_collector"
-
-function item_bloodstone_vodka:Precache(context)
-    PrecacheResource("particle", "particles/items_fx/bloodstone_heal.vpcf", context)
-    PrecacheResource("particle", "particles/items_fx/bloodstone_heal_start.vpcf", context)
-    PrecacheResource("particle", "particles/items_fx/bloodstone/bloodstone_aoe.vpcf", context)
-    PrecacheResource("particle", "particles/items_fx/bloodstone/bloodstone_siphon.vpcf", context)
-    PrecacheResource("particle", "particles/items3_fx/octarine_core_lifesteal.vpcf", context)
-end
-
 function item_bloodstone_vodka:GetIntrinsicModifierName()
     return "modifier_item_bloodstone_vodka"
 end
@@ -29,10 +17,6 @@ function item_bloodstone_vodka:OnSpellStart()
     local duration = self:GetSpecialValueFor("buff_duration")
     caster:AddNewModifier(caster, self, "modifier_item_bloodstone_vodka_active", { duration = duration })
     caster:EmitSound("DOTA_Item.Bloodstone.Cast")
-
-    local particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone_heal_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-    ParticleManager:SetParticleControl(particle, 0, caster:GetAbsOrigin())
-    ParticleManager:ReleaseParticleIndex(particle)
 end
 
 modifier_item_bloodstone_vodka = class({})
@@ -44,27 +28,10 @@ function modifier_item_bloodstone_vodka:GetAttributes() return MODIFIER_ATTRIBUT
 
 function modifier_item_bloodstone_vodka:OnCreated()
     self:RefreshValues()
-
-    if not IsServer() then return end
-    self:StartIntervalThink(0.25)
-    self:RefreshAuraParticle()
 end
 
 function modifier_item_bloodstone_vodka:OnRefresh()
     self:RefreshValues()
-
-    if not IsServer() then return end
-    self:RefreshAuraParticle()
-end
-
-function modifier_item_bloodstone_vodka:OnDestroy()
-    if not IsServer() then return end
-    self:DestroyAuraParticle()
-end
-
-function modifier_item_bloodstone_vodka:OnIntervalThink()
-    if not IsServer() then return end
-    self:RefreshAuraParticle()
 end
 
 function modifier_item_bloodstone_vodka:RefreshValues()
@@ -105,12 +72,13 @@ function modifier_item_bloodstone_vodka:IsItemReady()
 end
 
 function modifier_item_bloodstone_vodka:HasActiveElixirCollector()
+    if not IsServer() then return false end
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return false end
 
     for slot = 0, 5 do
         local item = parent:GetItemInSlot(slot)
-        if item and not item:IsNull() and item:GetName() == BLOODSTONE_ELIXIR_COLLECTOR_ITEM_NAME then
+        if item and not item:IsNull() and item:GetName() == "item_elixir_collector" then
             return true
         end
     end
@@ -123,6 +91,7 @@ function modifier_item_bloodstone_vodka:IsPassiveReady()
 end
 
 function modifier_item_bloodstone_vodka:IsPrimaryBloodstoneModifier()
+    if not IsServer() then return false end
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return false end
 
@@ -156,30 +125,6 @@ function modifier_item_bloodstone_vodka:GetBestBloodstoneSpellLifesteal()
     return best_lifesteal
 end
 
-function modifier_item_bloodstone_vodka:DestroyAuraParticle()
-    if not self.aura_particle then return end
-    ParticleManager:DestroyParticle(self.aura_particle, false)
-    ParticleManager:ReleaseParticleIndex(self.aura_particle)
-    self.aura_particle = nil
-end
-
-function modifier_item_bloodstone_vodka:RefreshAuraParticle()
-    if not IsServer() then return end
-
-    if not self:IsPassiveReady() or not self:IsPrimaryBloodstoneModifier() then
-        self:DestroyAuraParticle()
-        return
-    end
-
-    if self.aura_particle then return end
-
-    local parent = self:GetParent()
-    if not parent or parent:IsNull() then return end
-
-    self.aura_particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone/bloodstone_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-    ParticleManager:SetParticleControl(self.aura_particle, 0, parent:GetAbsOrigin())
-    ParticleManager:SetParticleControl(self.aura_particle, 1, Vector(self.aura_radius or 0, 0, 0))
-end
 
 function modifier_item_bloodstone_vodka:IsAura()
     return self:IsPassiveReady() and self:IsPrimaryBloodstoneModifier()
@@ -295,7 +240,7 @@ function modifier_item_bloodstone_vodka:OnTakeDamage(params)
     if lifesteal <= 0 then return end
 
     if not params.unit:IsRealHero() then
-        lifesteal = lifesteal * BLOODSTONE_NON_HERO_SPELL_LIFESTEAL_MULTIPLIER
+        lifesteal = lifesteal * 0.2
     end
 
     local amplify = self:GetSpellLifestealAmplification()
@@ -307,13 +252,6 @@ function modifier_item_bloodstone_vodka:OnTakeDamage(params)
 
     local lifesteal_particle = ParticleManager:CreateParticle("particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
     ParticleManager:ReleaseParticleIndex(lifesteal_particle)
-
-    if params.unit and not params.unit:IsNull() then
-        local siphon_particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone/bloodstone_siphon.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-        ParticleManager:SetParticleControlEnt(siphon_particle, 0, params.unit, PATTACH_POINT_FOLLOW, "attach_hitloc", params.unit:GetAbsOrigin(), true)
-        ParticleManager:SetParticleControlEnt(siphon_particle, 1, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", parent:GetAbsOrigin(), true)
-        ParticleManager:ReleaseParticleIndex(siphon_particle)
-    end
 end
 
 modifier_item_bloodstone_vodka_active = class({})
@@ -323,26 +261,45 @@ function modifier_item_bloodstone_vodka_active:IsPurgable() return false end
 function modifier_item_bloodstone_vodka_active:IsPurgeException() return false end
 function modifier_item_bloodstone_vodka_active:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
-function modifier_item_bloodstone_vodka_active:OnCreated()
+function modifier_item_bloodstone_vodka_active:RefreshValues()
     local ability = self:GetAbility()
     if ability and not ability:IsNull() then
         self.spell_lifesteal_while_active = ability:GetSpecialValueFor("spell_lifesteal_while_active")
     else
         self.spell_lifesteal_while_active = 0
     end
+end
+
+function modifier_item_bloodstone_vodka_active:OnCreated()
+    self:RefreshValues()
 
     if not IsServer() then return end
+
+    self._txData = self._txData or {}
+    self:SetHasCustomTransmitterData(true)
 
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return end
 
-    local particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    local particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone_heal.vpcf", PATTACH_OVERHEAD_FOLLOW, parent)
     ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
     self:AddParticle(particle, false, false, -1, false, false)
 end
 
 function modifier_item_bloodstone_vodka_active:OnRefresh()
-    self:OnCreated()
+    self:RefreshValues()
+    if not IsServer() then return end
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_item_bloodstone_vodka_active:AddCustomTransmitterData()
+    self._txData = self._txData or {}
+    self._txData.spell_lifesteal_while_active = self.spell_lifesteal_while_active or 0
+    return self._txData
+end
+
+function modifier_item_bloodstone_vodka_active:HandleCustomTransmitterData(data)
+    self.spell_lifesteal_while_active = data.spell_lifesteal_while_active or 0
 end
 
 function modifier_item_bloodstone_vodka_active:DeclareFunctions()
@@ -352,11 +309,7 @@ function modifier_item_bloodstone_vodka_active:DeclareFunctions()
 end
 
 function modifier_item_bloodstone_vodka_active:OnTooltip()
-    return self.spell_lifesteal_while_active or 0
-end
-
-function modifier_item_bloodstone_vodka_active:GetTexture()
-    return "bloodstone"
+    return self.spell_lifesteal_while_active
 end
 
 modifier_item_bloodstone_vodka_aura_debuff = class({})
@@ -368,24 +321,56 @@ function modifier_item_bloodstone_vodka_aura_debuff:GetAttributes()
     return MODIFIER_ATTRIBUTE_MULTIPLE + MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
 end
 
+function modifier_item_bloodstone_vodka_aura_debuff:RefreshValues()
+    local ability = self:GetAbility()
+    if ability and not ability:IsNull() then
+        self.aura_spell_vulnerability = ability:GetSpecialValueFor("aura_spell_vulnerability")
+    else
+        self.aura_spell_vulnerability = 0
+    end
+
+    if not IsServer() then return end
+
+    if self:IsPrimarySpellWeakness() then
+        self.tooltip_spell_vulnerability = self.aura_spell_vulnerability or 0
+        self.incoming_damage_pct = math.max((self.aura_spell_vulnerability or 0) - self:GetVeilSpellWeakness(), 0)
+    else
+        self.tooltip_spell_vulnerability = 0
+        self.incoming_damage_pct = 0
+    end
+end
+
 function modifier_item_bloodstone_vodka_aura_debuff:OnCreated()
     self:RefreshValues()
+    if not IsServer() then return end
+
+    self._txData = self._txData or {}
+    self:SetHasCustomTransmitterData(true)
 end
 
 function modifier_item_bloodstone_vodka_aura_debuff:OnRefresh()
     self:RefreshValues()
+    if not IsServer() then return end
+    self:SendBuffRefreshToClients()
 end
 
-function modifier_item_bloodstone_vodka_aura_debuff:RefreshValues()
-    local ability = self:GetAbility()
-    if not ability or ability:IsNull() then return end
+function modifier_item_bloodstone_vodka_aura_debuff:AddCustomTransmitterData()
+    self._txData = self._txData or {}
+    self._txData.aura_spell_vulnerability = self.aura_spell_vulnerability or 0
+    self._txData.tooltip_spell_vulnerability = self.tooltip_spell_vulnerability or 0
+    self._txData.incoming_damage_pct = self.incoming_damage_pct or 0
+    return self._txData
+end
 
-    self.aura_spell_vulnerability = ability:GetSpecialValueFor("aura_spell_vulnerability")
+function modifier_item_bloodstone_vodka_aura_debuff:HandleCustomTransmitterData(data)
+    self.aura_spell_vulnerability = data.aura_spell_vulnerability or 0
+    self.tooltip_spell_vulnerability = data.tooltip_spell_vulnerability or 0
+    self.incoming_damage_pct = data.incoming_damage_pct or 0
 end
 
 function modifier_item_bloodstone_vodka_aura_debuff:IsElixirCollectorSource()
     local ability = self:GetAbility()
-    return ability and not ability:IsNull() and ability:GetName() == BLOODSTONE_ELIXIR_COLLECTOR_ITEM_NAME
+    return ability and not ability:IsNull() and ability:GetName() == "item_elixir_collector"
 end
 
 function modifier_item_bloodstone_vodka_aura_debuff:GetSourcePriority()
@@ -394,6 +379,7 @@ function modifier_item_bloodstone_vodka_aura_debuff:GetSourcePriority()
 end
 
 function modifier_item_bloodstone_vodka_aura_debuff:IsPrimarySpellWeakness()
+    if not IsServer() then return false end
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return false end
 
@@ -428,7 +414,7 @@ function modifier_item_bloodstone_vodka_aura_debuff:GetVeilSpellWeakness()
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return 0 end
 
-    local veil = parent:FindModifierByName(BLOODSTONE_VEIL_DEBUFF_NAME)
+    local veil = parent:FindModifierByName("modifier_item_veil_of_discord_debuff")
     if not veil or veil:IsNull() then return 0 end
 
     local ability = veil:GetAbility()
@@ -445,19 +431,17 @@ end
 function modifier_item_bloodstone_vodka_aura_debuff:GetModifierIncomingDamage_Percentage(params)
     if not params then return 0 end
     if params.inflictor == nil then return 0 end
+    if not IsServer() then
+        return self.incoming_damage_pct or 0
+    end
     if not self:IsPrimarySpellWeakness() then return 0 end
-
-    local vulnerability = self.aura_spell_vulnerability or 0
-    local veil_vulnerability = self:GetVeilSpellWeakness()
-
-    return math.max(vulnerability - veil_vulnerability, 0)
+    return math.max((self.aura_spell_vulnerability or 0) - self:GetVeilSpellWeakness(), 0)
 end
 
 function modifier_item_bloodstone_vodka_aura_debuff:OnTooltip()
+    if not IsServer() then
+        return self.tooltip_spell_vulnerability or 0
+    end
     if not self:IsPrimarySpellWeakness() then return 0 end
     return self.aura_spell_vulnerability or 0
-end
-
-function modifier_item_bloodstone_vodka_aura_debuff:GetTexture()
-    return "bloodstone"
 end

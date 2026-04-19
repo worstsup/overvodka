@@ -6,10 +6,6 @@ LinkLuaModifier("modifier_item_bloodstone_vodka_aura_debuff", "items/item_bloods
 
 item_elixir_collector = class({})
 
-function item_elixir_collector:Precache(context)
-    PrecacheResource("particle", "particles/items_fx/bloodstone/bloodstone_aoe.vpcf", context)
-end
-
 function item_elixir_collector:GetIntrinsicModifierName()
     return "modifier_item_elixir_collector"
 end
@@ -34,29 +30,14 @@ function modifier_item_elixir_collector:IsPurgeException() return false end
 
 function modifier_item_elixir_collector:OnCreated()
     self:RefreshBloodstonePassiveValues()
-
-    if not IsServer() then return end
     self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
-    self:StartIntervalThink(0.25)
-    self:RefreshBloodstoneAuraParticle()
+    self.spell_lifesteal_while_active = self:GetAbility():GetSpecialValueFor("spell_lifesteal_while_active")
 end
 
 function modifier_item_elixir_collector:OnRefresh()
     self:RefreshBloodstonePassiveValues()
-
-    if not IsServer() then return end
     self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
-    self:RefreshBloodstoneAuraParticle()
-end
-
-function modifier_item_elixir_collector:OnDestroy()
-    if not IsServer() then return end
-    self:DestroyBloodstoneAuraParticle()
-end
-
-function modifier_item_elixir_collector:OnIntervalThink()
-    if not IsServer() then return end
-    self:RefreshBloodstoneAuraParticle()
+    self.spell_lifesteal_while_active = self:GetAbility():GetSpecialValueFor("spell_lifesteal_while_active")
 end
 
 function modifier_item_elixir_collector:RefreshBloodstonePassiveValues()
@@ -74,6 +55,7 @@ function modifier_item_elixir_collector:IsItemReady()
 end
 
 function modifier_item_elixir_collector:IsPrimaryElixirCollectorModifier()
+    if not IsServer() then return false end
     local parent = self:GetParent()
     if not parent or parent:IsNull() then return false end
 
@@ -86,36 +68,12 @@ function modifier_item_elixir_collector:IsPrimaryElixirCollectorModifier()
     return false
 end
 
-function modifier_item_elixir_collector:DestroyBloodstoneAuraParticle()
-    if not self.bloodstone_aura_particle then return end
-    ParticleManager:DestroyParticle(self.bloodstone_aura_particle, false)
-    ParticleManager:ReleaseParticleIndex(self.bloodstone_aura_particle)
-    self.bloodstone_aura_particle = nil
-end
-
-function modifier_item_elixir_collector:RefreshBloodstoneAuraParticle()
-    if not IsServer() then return end
-
-    if not self:IsItemReady() or not self:IsPrimaryElixirCollectorModifier() then
-        self:DestroyBloodstoneAuraParticle()
-        return
-    end
-
-    if self.bloodstone_aura_particle then return end
-
-    local parent = self:GetParent()
-    if not parent or parent:IsNull() then return end
-
-    self.bloodstone_aura_particle = ParticleManager:CreateParticle("particles/items_fx/bloodstone/bloodstone_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-    ParticleManager:SetParticleControl(self.bloodstone_aura_particle, 0, parent:GetAbsOrigin())
-    ParticleManager:SetParticleControl(self.bloodstone_aura_particle, 1, Vector(self.bloodstone_aura_radius or 0, 0, 0))
-end
-
 function modifier_item_elixir_collector:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_CAST_RANGE_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,
+        MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
@@ -175,6 +133,12 @@ function modifier_item_elixir_collector:GetModifierHealthBonus()
     end
 end
 
+function modifier_item_elixir_collector:GetModifierBonusStats_Intellect()
+    if self:GetAbility() then
+        return self:GetAbility():GetSpecialValueFor('bonus_intellect')
+    end
+end
+
 function modifier_item_elixir_collector:OnTakeDamage(params)
     if not IsServer() then return end
     if not self:IsPrimaryElixirCollectorModifier() then return end
@@ -188,12 +152,13 @@ function modifier_item_elixir_collector:OnTakeDamage(params)
                 bonus_percentage = bonus_percentage + mod:GetModifierSpellLifestealRegenAmplify_Percentage()
             end
         end
-        local heal = self.spell_lifesteal / 100 * params.damage
+        local lifesteal = self.spell_lifesteal or 0
+        if self:GetParent():HasModifier("modifier_elixir_collector_buff_hero") then
+            lifesteal = self.spell_lifesteal_while_active or lifesteal
+        end
+        local heal = lifesteal / 100 * params.damage
         heal = heal * (bonus_percentage / 100 + 1)
         self:GetParent():Heal(heal, params.inflictor)
-        if self:GetParent():HasModifier("modifier_elixir_collector_buff_hero") then
-            self:GetParent():Heal(heal * 3, params.inflictor)
-        end
         local octarine = ParticleManager:CreateParticle( "particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.attacker )
         ParticleManager:ReleaseParticleIndex( octarine )
     end
@@ -395,6 +360,12 @@ modifier_elixir_collector_buff_hero = class({})
 
 function modifier_elixir_collector_buff_hero:IsPurgable() return true end
 
+function modifier_elixir_collector_buff_hero:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_TOOLTIP,
+	}
+end
+
 function modifier_elixir_collector_buff_hero:OnCreated()
 	if not IsServer() then return end
 
@@ -436,4 +407,10 @@ end
 
 function modifier_elixir_collector_buff_hero:GetTexture()
     return "elixir_collector"
+end
+
+function modifier_elixir_collector_buff_hero:OnTooltip()
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then return 0 end
+	return ability:GetSpecialValueFor("spell_lifesteal_while_active")
 end

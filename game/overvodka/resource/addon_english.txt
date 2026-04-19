@@ -4545,14 +4545,15 @@
 		"DOTA_Tooltip_modifier_item_bloodstone_vodka_aura_debuff_Description" "Incoming spell damage increased by %dMODIFIER_PROPERTY_TOOLTIP%%."
 
 		"DOTA_Tooltip_ability_item_elixir_collector" "ELIXIR COLLECTOR"
-		"DOTA_Tooltip_ability_item_elixir_collector_Description" "<h1>Active: Place</h1>Places an elixir collector at the target location, draining %mana_tooltip%%% of max mana per second from all enemy heroes within %radius%. While under the effect of the collector, spell lifesteal from this item is %lifesteal_multiplier% times. Duration: %duration% sec.\n\n<h1>Passive: Spell Weakness Aura</h1>Enemy units within %bloodstone_aura_radius% take %aura_spell_vulnerability%%% increased damage from spells."
+		"DOTA_Tooltip_ability_item_elixir_collector_Description" "<h1>Active: Place</h1>Places an elixir collector at the target location, draining %mana_tooltip%%% of max mana per second from all enemy heroes within %radius%. While under the effect of the collector, spell lifesteal from this item is increased to %spell_lifesteal_while_active%%%. Duration: %duration% sec.\n\n<h1>Passive: Spell Weakness Aura</h1>Enemy units within %bloodstone_aura_radius% take %aura_spell_vulnerability%%% increased damage from spells."
 		"DOTA_Tooltip_ability_item_elixir_collector_hp" "+$health"
 		"DOTA_Tooltip_ability_item_elixir_collector_mp" "+$mana"
+		"DOTA_Tooltip_ability_item_elixir_collector_bonus_intellect" "+$int"
 		"DOTA_Tooltip_ability_item_elixir_collector_mana_regen" "+$mana_regen"
 		"DOTA_Tooltip_ability_item_elixir_collector_spell_lifesteal" "%+$spell_lifesteal"
 		"DOTA_Tooltip_ability_item_elixir_collector_cast_range" "+$cast_range"
 		"DOTA_Tooltip_modifier_elixir_collector_buff_hero" "Elixir Collector"
-		"DOTA_Tooltip_modifier_elixir_collector_buff_hero_description" "Your lifesteal from spells increased"
+		"DOTA_Tooltip_modifier_elixir_collector_buff_hero_description" "Your spell lifesteal from this item is increased to %dMODIFIER_PROPERTY_TOOLTIP%%%."
 		"DOTA_Tooltip_modifier_elixir_collector_debuff" "Elixir Collector"
 		"DOTA_Tooltip_modifier_elixir_collector_debuff_description" "Every second your mana is drained"
 
