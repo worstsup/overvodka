@@ -3570,7 +3570,7 @@
 			"stolen_debuff_amp"				"10 15 20 25"
 			"cast_range_scepter"			
 			{
-				"special_bonus_scepter"					"600"
+				"special_bonus_scepter"					"1600"
 			}
 			"stolen_mana_reduction"			
 			{
@@ -6483,10 +6483,10 @@
 		"AbilityTextureName"			"semya"
 		"AbilityUnitTargetFlags" 		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE" 
 		"AbilityUnitDamageType" 		"DAMAGE_TYPE_MAGICAL" 
-		"AbilityCastRange"				"500"
-		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"550"
+		"AbilityCastPoint"				"0.1"
 		"AbilityCooldown"				"32 30 28 26"
-		"AbilityManaCost"				"120"
+		"AbilityManaCost"				"75 90 105 120"
 		"AbilityValues"
 		{
 				"duration"				"10"
@@ -12023,7 +12023,7 @@
 		{
 			"duration"					"17"
 			"bonus_ms"					"20 25 30"
-			"bonus_spell"				"10 15 20"
+			"bonus_spell"				"15 20 25"
 			"projector_radius"			"350"
 			"projector_width"			"200"
 			"projector_miss"			"35 50 65"
@@ -14970,13 +14970,24 @@
 		"ScriptFile"         "heroes/bikov/bikov_innate"
 		"AbilityBehavior"    "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"Innate"			 "1"
-		"DependentOnAbility" "bikov_ultimate"
-		"MaxLevel"           "4"
+		"MaxLevel"           "1"
 		"AbilityValues"
 		{
-			"bonus_hp_regen"    "5 10 15 20"
-			"bonus_mag_res"     "10 15 20 25"
-			"bonus_status_res"  "10 13 16 19"
+			"bonus_hp_regen"
+			{
+				"value"	"5"
+				"hero_levelup"	"+1"
+			}
+			"bonus_mag_res"
+			{
+				"value"	"10"
+				"hero_levelup"	"+0.6"
+			}
+			"bonus_status_res"
+			{
+				"value"	"10"
+				"hero_levelup"	"+0.4"
+			}
 			"radius"
 			{
 				"value"	"600"
@@ -17541,7 +17552,7 @@
 			"slow_ms_pct"               "24 26 28 30"
 			"slow_as"                   "20 25 30 35"
 			"slow_duration"             "2.25 2.75 3.25 3.75"
-			"self_bonus_ms_pct"         "25 30 35 40"
+			"self_bonus_ms_pct"         "16 20 24 28"
 			"self_bonus_as"             "20"
 			"self_bonus_duration"       "2.25 2.75 3.25 3.75"
 			"sneeze_width"              "300"
@@ -17668,7 +17679,7 @@
 			}
 			"beer_slow_pct"   "25 30 35"
 			"beer_tick"       "0.25"
-			"crack_hp_pct"    "35 40 45"
+			"crack_hp_pct"    "30 35 40"
 			"crack_delay"     "2.5"
 			"crack_width"
 			{
@@ -17677,7 +17688,7 @@
 			}
 			"crack_length"
 			{
-				"value"	"1600"
+				"value"	"1400"
 				"special_bonus_scepter" "+200"
 			}
 			"scepter_cast_range"
@@ -18111,7 +18122,7 @@
 			"bonus_magic_damage"
 			{
 				"value"	"10 20 30 40"
-				"special_bonus_unique_misolo_8"	"+25"
+				"special_bonus_unique_misolo_8"	"+30"
 			}
 			"post_damage_pct"
 			{
@@ -18144,10 +18155,10 @@
 			}
 			"health_regen_bonus"			"2 5 8 11"
 			"turn_rate_bonus"				"0.2"
-			"move_speed_bonus_pct"			"10 16 22 28"
+			"move_speed_bonus_pct"			"12 20 28 36"
 			"max_webs"						"2 3 4 5"
 			"web_spawn_duration"			"4.5 5.0 5.5 6.0"
-			"web_spawn_interval"			"1.0"
+			"web_spawn_interval"			"0.75"
 			"spider_lifetime"				"25"
 			"spider_count_per_tick"			"1"
 			"linger_duration"				"0.15"
@@ -18203,7 +18214,7 @@
 			"trigger_radius"				"450"
 			"scan_interval"					"0.15"
 			"auto_silence_duration"			"1.0 1.5 2.0 2.5"
-			"projectile_dodge_chance"		"15 18 21 24"
+			"projectile_dodge_chance"		"16 20 24 28"
 			"manta_invuln_duration"			"0.1"
 			"illusion_duration"				"6 7 8 9"
 			"illusion_outgoing_damage"		"30 40 50 60"
@@ -18371,7 +18382,7 @@
 			"radius"					"90"
 			"spread"					"150"
 			"duration"					"7 8 9"
-			"damage_amp"				"5 6 7"
+			"damage_amp"				"8 10 12"
 			"AbilityCooldown"			"6 5 4"
 		}
 	}
@@ -18461,7 +18472,7 @@
 		"MaxLevel"						"1"
 		"AbilityValues"
 		{
-			"duration"					"2.0"
+			"duration"					"2.5"
 			"hero_miss_per_hit"			"8"
 			"spider_miss_per_hit"		"2"
 			"hero_slow_per_hit"			"5"

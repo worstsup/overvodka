@@ -2091,6 +2091,55 @@
 			"gold_b"				"300"
 		}
 	}
+	"item_recipe_bloodstone_vodka"
+	{
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"					 	"item_datadriven"
+		"ItemCost"						"0"
+		"ItemShopTags"					""
+		"ItemRecipe"					"1"
+		"AbilityTextureName"			"recipe"
+		"ItemResult"					"item_bloodstone_vodka"
+		"ItemRequirements"
+		{
+			"01"						"item_veil_of_discord;item_soul_booster"
+		}
+	}
+	"item_bloodstone_vodka"
+	{
+		"BaseClass"						"item_lua"
+		"ScriptFile"					"items/item_bloodstone_vodka"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"Model"							"models/props_items/bloodstone.vmdl"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"bloodstone_vodka"
+		"AbilityCooldown"				"30.0"
+		"ItemCost"						"4700"
+		"ItemShopTags"					"int;regen_health;mana_pool;health_pool;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"AllowedInBackpack"				"1"
+		"SuggestLategame"				"1"
+		"AbilitySharedCooldown" 		"bloodstone"
+		"AbilityValues"
+		{
+			"bonus_health"					"650"
+			"bonus_mana"					"450"
+			"bonus_mp_regen"				"0"
+			"bonus_hp_regen"				"0"
+			"bonus_intellect"				"15"
+			"spell_lifesteal"				"20"
+			"buff_duration"					"5"
+			"spell_lifesteal_while_active"	"60"
+			"hp_cost"						"0"
+			"aura_spell_vulnerability"		"12"
+			"aura_radius"
+			{
+				"value"						"1200"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
 	"item_elixir_collector"
 	{
 		"BaseClass"						"item_lua"
@@ -2099,39 +2148,46 @@
 		"Model"							"models/props_gameplay/red_box.vmdl"		
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityTextureName"			"elixir_collector"
 		"AbilityCastPoint"				"0.1"
 		"AbilityCastRange"				"375"
 		"AbilityCooldown"				"35"
 		"AbilityManaCost"				"100"
-		"ItemCost"						"7000"
+		"ItemCost"						"7800"
+		"AbilitySharedCooldown" 		"bloodstone"
 		"AbilityValues"
 		{
 			"radius"					"800"
 			"damage"					"2.5"
 			"attack_destroy"			"10"
 			"duration"					"6"
-			"hp"						"450"
+			"hp"						"650"
 			"mp"						"750"
-			"mana_regen"				"6"
+			"bonus_intellect"			"15"
+			"mana_regen"				"2.5"
 			"cast_range"				"225"
 			"spell_lifesteal"			"20"
+			"spell_lifesteal_while_active"	"60"
 			"mana_tooltip"				"10"
-			"lifesteal_multiplier"		"4"
+			"aura_spell_vulnerability"	"12"
+			"bloodstone_aura_radius"
+			{
+				"value"						"1200"
+				"affected_by_aoe_increase"	"1"
+			}
 		}
 	}
 	"item_recipe_elixir_collector"
 	{
 		"Model"							"models/props_gameplay/recipe.vmdl"
 		"BaseClass"					 	"item_datadriven"
-		"ItemCost"						"325"
+		"ItemCost"						"825"
 		"ItemRecipe"					"1"
 		"AbilityTextureName"			"item_recipe"
 		"ItemResult"					"item_elixir_collector"
 		"ItemRequirements"
 		{
-			"01"						"item_bloodstone;item_aether_lens"
+			"01"						"item_bloodstone_vodka;item_aether_lens"
 		}
 	}
 	"item_recipe_byebye_boots"

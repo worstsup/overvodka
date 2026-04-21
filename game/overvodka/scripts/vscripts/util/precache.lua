@@ -370,6 +370,7 @@ PrecacheUtils.models = {
 		"models/pistoletov/alexpistol.vmdl",
 		"models/amor/amor.vmdl",
 		"models/epstein/epstein.vmdl",
+		"models/nightfall/nightfall.vmdl",
 
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary

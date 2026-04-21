@@ -96,7 +96,7 @@ return {
                     { item_name = "item_oboyudno", note = "" },
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_revenants_brooch", note = "" },
-                    { item_name = "item_bloodstone", note = "" }
+                    { item_name = "item_bloodstone_vodka", note = "" }
                 },
             }
         },

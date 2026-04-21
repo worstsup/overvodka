@@ -2,6 +2,7 @@ LinkLuaModifier("modifier_elixir_collector_buff", "items/elixir_collector", LUA_
 LinkLuaModifier("modifier_elixir_collector_debuff", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_elixir_collector_buff_hero", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_elixir_collector", "items/elixir_collector", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_bloodstone_vodka_aura_debuff", "items/item_bloodstone_vodka", LUA_MODIFIER_MOTION_NONE)
 
 item_elixir_collector = class({})
 
@@ -28,8 +29,43 @@ function modifier_item_elixir_collector:IsPurgable() return false end
 function modifier_item_elixir_collector:IsPurgeException() return false end
 
 function modifier_item_elixir_collector:OnCreated()
-    if not IsServer() then return end
+    self:RefreshBloodstonePassiveValues()
     self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
+    self.spell_lifesteal_while_active = self:GetAbility():GetSpecialValueFor("spell_lifesteal_while_active")
+end
+
+function modifier_item_elixir_collector:OnRefresh()
+    self:RefreshBloodstonePassiveValues()
+    self.spell_lifesteal = self:GetAbility():GetSpecialValueFor("spell_lifesteal")
+    self.spell_lifesteal_while_active = self:GetAbility():GetSpecialValueFor("spell_lifesteal_while_active")
+end
+
+function modifier_item_elixir_collector:RefreshBloodstonePassiveValues()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return end
+
+    self.bloodstone_aura_radius = ability:GetSpecialValueFor("bloodstone_aura_radius")
+    self.aura_spell_vulnerability = ability:GetSpecialValueFor("aura_spell_vulnerability")
+end
+
+function modifier_item_elixir_collector:IsItemReady()
+    local ability = self:GetAbility()
+    if not ability or ability:IsNull() then return false end
+    return not ability:IsInBackpack()
+end
+
+function modifier_item_elixir_collector:IsPrimaryElixirCollectorModifier()
+    if not IsServer() then return false end
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return false end
+
+    for _, modifier in pairs(parent:FindAllModifiersByName("modifier_item_elixir_collector")) do
+        if modifier and not modifier:IsNull() and modifier.IsItemReady and modifier:IsItemReady() then
+            return modifier == self
+        end
+    end
+
+    return false
 end
 
 function modifier_item_elixir_collector:DeclareFunctions()
@@ -37,9 +73,46 @@ function modifier_item_elixir_collector:DeclareFunctions()
         MODIFIER_PROPERTY_CAST_RANGE_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_HEALTH_BONUS,
+        MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
     }
+end
+
+function modifier_item_elixir_collector:IsAura()
+    return self:IsItemReady() and self:IsPrimaryElixirCollectorModifier()
+end
+
+function modifier_item_elixir_collector:GetModifierAura()
+    return "modifier_item_bloodstone_vodka_aura_debuff"
+end
+
+function modifier_item_elixir_collector:GetAuraSearchTeam()
+    return DOTA_UNIT_TARGET_TEAM_ENEMY
+end
+
+function modifier_item_elixir_collector:GetAuraSearchType()
+    return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+end
+
+function modifier_item_elixir_collector:GetAuraSearchFlags()
+    return DOTA_UNIT_TARGET_FLAG_NONE
+end
+
+function modifier_item_elixir_collector:GetAuraRadius()
+    if not self:IsItemReady() or not self:IsPrimaryElixirCollectorModifier() then return 0 end
+    return self.bloodstone_aura_radius or 0
+end
+
+function modifier_item_elixir_collector:GetAuraDuration()
+    return 0.5
+end
+
+function modifier_item_elixir_collector:AuraEntityReject(target)
+    if not target or target:IsNull() then return true end
+    if target:IsBuilding() or target:IsOther() then return true end
+    if target:IsInvulnerable() or target:IsOutOfGame() then return true end
+    return false
 end
 
 function modifier_item_elixir_collector:GetModifierCastRangeBonus()
@@ -60,8 +133,15 @@ function modifier_item_elixir_collector:GetModifierHealthBonus()
     end
 end
 
+function modifier_item_elixir_collector:GetModifierBonusStats_Intellect()
+    if self:GetAbility() then
+        return self:GetAbility():GetSpecialValueFor('bonus_intellect')
+    end
+end
+
 function modifier_item_elixir_collector:OnTakeDamage(params)
     if not IsServer() then return end
+    if not self:IsPrimaryElixirCollectorModifier() then return end
     if self:GetParent() ~= params.attacker then return end
     if self:GetParent() == params.unit then return end
     if params.unit:IsBuilding() then return end
@@ -72,12 +152,13 @@ function modifier_item_elixir_collector:OnTakeDamage(params)
                 bonus_percentage = bonus_percentage + mod:GetModifierSpellLifestealRegenAmplify_Percentage()
             end
         end
-        local heal = self.spell_lifesteal / 100 * params.damage
+        local lifesteal = self.spell_lifesteal or 0
+        if self:GetParent():HasModifier("modifier_elixir_collector_buff_hero") then
+            lifesteal = self.spell_lifesteal_while_active or lifesteal
+        end
+        local heal = lifesteal / 100 * params.damage
         heal = heal * (bonus_percentage / 100 + 1)
         self:GetParent():Heal(heal, params.inflictor)
-        if self:GetParent():HasModifier("modifier_elixir_collector_buff_hero") then
-            self:GetParent():Heal(heal * 3, params.inflictor)
-        end
         local octarine = ParticleManager:CreateParticle( "particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, params.attacker )
         ParticleManager:ReleaseParticleIndex( octarine )
     end
@@ -279,6 +360,12 @@ modifier_elixir_collector_buff_hero = class({})
 
 function modifier_elixir_collector_buff_hero:IsPurgable() return true end
 
+function modifier_elixir_collector_buff_hero:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_TOOLTIP,
+	}
+end
+
 function modifier_elixir_collector_buff_hero:OnCreated()
 	if not IsServer() then return end
 
@@ -320,4 +407,10 @@ end
 
 function modifier_elixir_collector_buff_hero:GetTexture()
     return "elixir_collector"
+end
+
+function modifier_elixir_collector_buff_hero:OnTooltip()
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then return 0 end
+	return ability:GetSpecialValueFor("spell_lifesteal_while_active")
 end

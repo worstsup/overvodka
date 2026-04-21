@@ -312,6 +312,7 @@
 	}
 	"item_helm_of_the_overlord"				"REMOVE"
 	"item_hand_of_midas"				"REMOVE"
+	"item_bloodstone"					"REMOVE"
 
 	//=================================================================================================================
 	// Remove Tome of Knowledge

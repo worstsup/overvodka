@@ -22,25 +22,11 @@ function modifier_worstsup_innate:IsAura()
     return true
 end
 
-function modifier_worstsup_innate:GetModifierAura()
-    return "modifier_worstsup_innate_aura"
-end
-
-function modifier_worstsup_innate:GetAuraRadius()
-    return self:GetAbility():GetSpecialValueFor("radius")
-end
-
-function modifier_worstsup_innate:GetAuraSearchTeam()
-    return DOTA_UNIT_TARGET_TEAM_ENEMY
-end
-
-function modifier_worstsup_innate:GetAuraSearchType()
-    return DOTA_UNIT_TARGET_HERO
-end
-
-function modifier_worstsup_innate:GetAuraSearchFlags()
-    return DOTA_UNIT_TARGET_FLAG_NONE
-end
+function modifier_worstsup_innate:GetModifierAura() return "modifier_worstsup_innate_aura" end
+function modifier_worstsup_innate:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("radius") end
+function modifier_worstsup_innate:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function modifier_worstsup_innate:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO end
+function modifier_worstsup_innate:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_NONE end
 
 function modifier_worstsup_innate:GetAuraEntityReject(target)
     if not target or target:IsNull() then return true end
