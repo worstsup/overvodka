@@ -5328,5 +5328,12 @@
 		"dota_tooltip_ability_special_bonus_unique_misolo_6"							"+{s:bonus_creep_spawn_count} к числу паучков после убийств"
 		"dota_tooltip_ability_special_bonus_unique_misolo_7"							"x{s:bonus_units_health} Здоровье/урон Гильдии Брудских"
 		"dota_tooltip_ability_special_bonus_unique_misolo_8"							"+{s:bonus_bonus_magic_damage} к урону от Чеканэ"
+
+		"DOTA_Tooltip_ability_nightfall_innate"										"Бкб Тпаут"
+		"DOTA_Tooltip_ability_nightfall_innate_Description"							"ПРЕРЫВАЕМАЯ - Nightfall начинает телепорт на свой фонтан. Во время подготовки герой невосприимчив к эффектам и получает +%magic_resistance%%% к сопротивлению магии. Если канал прерван оглушением, оцепенением, превращением или ручной отменой, телепорт не происходит."
+		"DOTA_Tooltip_ability_nightfall_innate_channel_duration"						"ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_ability_nightfall_innate_magic_resistance"						"%СОПРОТИВЛЕНИЕ МАГИИ:"
+		"DOTA_Tooltip_modifier_nightfall_innate_teleport"								"Бкб Тпаут"
+		"DOTA_Tooltip_modifier_nightfall_innate_teleport_Description"					"Герой невосприимчив к эффектам, получает сопротивление магии и готовит телепорт на фонтан."
 	}
 }

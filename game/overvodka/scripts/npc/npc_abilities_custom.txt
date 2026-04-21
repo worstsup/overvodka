@@ -18470,4 +18470,28 @@
 			"max_slow"					"30"
 		}
 	}
+
+	//=================================================================================================================
+	// Бкб Тпаут
+	//=================================================================================================================
+	"nightfall_innate"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/nightfall/nightfall_innate"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_INNATE_UI"
+		"AbilityTextureName"			"item_black_king_bar"
+		"AbilityCastPoint"				"0.0"
+		"AbilityChannelTime"			"3.0"
+		"AbilityChannelAnimation"		"ACT_DOTA_TELEPORT"
+		"AbilityCooldown"				"120"
+		"AbilityManaCost"				"0"
+		"MaxLevel"						"1"
+		"RequiredLevel"					"-1"
+		"Innate"						"1"
+		"AbilityValues"
+		{
+			"channel_duration"			"3.0"
+			"magic_resistance"			"60"
+		}
+	}
 }
