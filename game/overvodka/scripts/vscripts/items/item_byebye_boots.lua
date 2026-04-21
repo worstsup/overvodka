@@ -106,10 +106,6 @@ function item_byebye_boots:FinishTeleport(caster, destination, point_start)
     caster:EmitSound("Portal.Hero_Disappear")
     caster:EmitSound("byebye")
     caster:StartGesture(ACT_DOTA_TELEPORT_END)
-
-    local arrival_particle = ParticleManager:CreateParticle("particles/items2_fx/teleport_end.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-    ParticleManager:SetParticleControlEnt(arrival_particle, 1, caster, PATTACH_ABSORIGIN_FOLLOW, nil, caster:GetAbsOrigin(), true)
-    ParticleManager:ReleaseParticleIndex(arrival_particle)
     self:CreateLegacyWorldParticle("particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", destination)
     self:CreateLegacyWorldParticle("particles/creatures/aghanim/aghanim_blink_arrival.vpcf", destination)
 end

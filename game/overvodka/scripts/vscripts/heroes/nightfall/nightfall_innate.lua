@@ -85,10 +85,6 @@ function nightfall_innate:OnChannelFinish(bInterrupted)
     caster:Interrupt()
     caster:EmitSound("Portal.Hero_Disappear")
     caster:StartGesture(ACT_DOTA_TELEPORT_END)
-
-    local arrival_particle = ParticleManager:CreateParticle("particles/items2_fx/teleport_end.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-    ParticleManager:SetParticleControlEnt(arrival_particle, 1, caster, PATTACH_ABSORIGIN_FOLLOW, nil, caster:GetAbsOrigin(), true)
-    ParticleManager:ReleaseParticleIndex(arrival_particle)
 end
 
 function nightfall_innate:CleanupTeleport(caster)
