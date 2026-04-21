@@ -15,11 +15,18 @@ let team_panels = [];
 let players_panels = [];
 let previousTeamsLocked = false;
 
-function GetKnownPlayerInfo(player_id) {
-    if (typeof Players !== "undefined" && typeof Players.IsValidPlayerID === "function" && !Players.IsValidPlayerID(player_id)) {
-        return null;
-    }
+function IsUnknownPlayerName(player_name) {
+    const normalized_name = String(player_name || "").trim().toLowerCase();
+    return (
+        normalized_name === "" ||
+        normalized_name === "unknown" ||
+        normalized_name === "[unknown]" ||
+        normalized_name === "неизвестно" ||
+        normalized_name === "[неизвестно]"
+    );
+}
 
+function GetKnownPlayerInfo(player_id) {
     const player_info = Game.GetPlayerInfo(player_id);
     if (!player_info) {
         return null;
@@ -28,8 +35,7 @@ function GetKnownPlayerInfo(player_id) {
     const connection_state = player_info.player_connection_state;
     if (typeof DOTAConnectionState_t !== "undefined") {
         if (
-            connection_state === DOTAConnectionState_t.DOTA_CONNECTION_STATE_UNKNOWN ||
-            connection_state === DOTAConnectionState_t.DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
+            connection_state === DOTAConnectionState_t.DOTA_CONNECTION_STATE_UNKNOWN
         ) {
             return null;
         }
@@ -39,7 +45,7 @@ function GetKnownPlayerInfo(player_id) {
     const player_name = String(player_info.player_name || "");
     const has_known_identity =
         (steam_id !== "" && steam_id !== "0") ||
-        (player_name !== "" && player_name !== "[unknown]" && player_name !== "[неизвестно]");
+        !IsUnknownPlayerName(player_name);
 
     return has_known_identity ? player_info : null;
 }

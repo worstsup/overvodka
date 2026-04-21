@@ -84,7 +84,24 @@ let SlotsKeys = [
 
 let DoubleRatingLastTime = 0
 
-let TeamLeavedLastTime = 0
+let TeamLeavedSequence = 0
+
+function GetMinuteText(minutes){
+    let AbsMinutes = Math.abs(minutes)
+    let LastTwoDigits = AbsMinutes % 100
+    let LastDigit = AbsMinutes % 10
+
+    if(LastTwoDigits >= 11 && LastTwoDigits <= 14){
+        return $.Localize("#PLAYER_HUD_TeamLeavedValue2")
+    }
+    if(LastDigit == 1){
+        return $.Localize("#PLAYER_HUD_TeamLeavedValue")
+    }
+    if(LastDigit >= 2 && LastDigit <= 4){
+        return $.Localize("#PLAYER_HUD_TeamLeavedValue3")
+    }
+    return $.Localize("#PLAYER_HUD_TeamLeavedValue2")
+}
 
 const LocalizeFormat = function () {
 	let formatted = $.Localize(arguments[0]);
@@ -869,13 +886,19 @@ function DoubleRatingTimer(){
 }
 
 function OnTeamLeaved(event){
-    TeamLeavedLastTime = event.last_time
+    TeamLeavedSequence += 1
+    let CurrentSequence = TeamLeavedSequence
+
+    let color = GameUI.CustomUIConfig().team_colors[event.team]
+    let icon = GameUI.CustomUIConfig().team_icons[event.team]
+    let TeamDetails = Game.GetTeamDetails( event.team )
+    if(!TeamLeavedEncounter || !TeamDetails || !color || !icon){
+        return
+    }
 
     Game.EmitSound("UUI_SOUNDS.TeamLeaved")
 
     TeamLeavedEncounter.AddClass("Show")
-
-    let TeamDetails = Game.GetTeamDetails( event.team )
 
     let TeamName = $.Localize( TeamDetails.team_name )
 
@@ -884,17 +907,26 @@ function OnTeamLeaved(event){
     let CurrentBonusGold = event.bonus_gold * event.missing_teams
     let CurrentBonusXp = event.bonus_xp * event.missing_teams
 
-    let MinuteText = ReducedTime > 4 ? $.Localize("#PLAYER_HUD_TeamLeavedValue2") : $.Localize("#PLAYER_HUD_TeamLeavedValue")
+    let TimeDescription = $.Localize("#PLAYER_HUD_TeamLeavedDescription1")
+    let TimeReducedText = $.Localize("#PLAYER_HUD_TeamLeavedNoTimeReduced")
+    if(ReducedTime > 0){
+        let MinuteText = GetMinuteText(ReducedTime)
+        TimeReducedText = `${ReducedTime} ${MinuteText}`
+    }else{
+        TimeDescription = ""
+    }
 
     TeamLeavedEncounter.SetDialogVariable("LeavedTeamName", TeamName)
-    TeamLeavedEncounter.SetDialogVariable("TimeReduced", `${ReducedTime} ${MinuteText}`)
+    TeamLeavedEncounter.SetDialogVariable("TimeReduced", TimeReducedText)
     TeamLeavedEncounter.SetDialogVariableInt("XpIncrease", event.bonus_xp)
     TeamLeavedEncounter.SetDialogVariableInt("GoldIncrease", event.bonus_gold)
     TeamLeavedEncounter.SetDialogVariableInt("GoldIncreaseCurrent", CurrentBonusGold)
     TeamLeavedEncounter.SetDialogVariableInt("XpIncreaseCurrent", CurrentBonusXp)
 
-    let color = GameUI.CustomUIConfig().team_colors[event.team]
-    let icon = GameUI.CustomUIConfig().team_icons[event.team]
+    let TimeDescriptionPanel = TeamLeavedEncounter.FindChildTraverse("TeamLeavedTimeDescription")
+    if(TimeDescriptionPanel){
+        TimeDescriptionPanel.text = TimeDescription
+    }
 
     let NamePanel = TeamLeavedEncounter.FindChildTraverse("TeamLeavedName")
     if(NamePanel){
@@ -911,16 +943,12 @@ function OnTeamLeaved(event){
         IconPanel2.style.washColor = color
     }
 
-    UpdateTeamLeaved()
-}
-
-function UpdateTeamLeaved(){
-    let Diff = Math.max(Math.floor(TeamLeavedLastTime - Game.GetGameTime()), 0)
-    if(Diff > 0){
-        $.Schedule(1, UpdateTeamLeaved)
-    }else{
-        TeamLeavedEncounter.RemoveClass("Show")
-    }
+    let Duration = Number(event.duration) || 5
+    $.Schedule(Duration, function(){
+        if(CurrentSequence == TeamLeavedSequence){
+            TeamLeavedEncounter.RemoveClass("Show")
+        }
+    })
 }
 
 function OnSilvernameFacet2TargetStart(event) {
@@ -1475,7 +1503,7 @@ function OnChaosCardActivated(slot) {
     DeleteAllChildren(TipsContainer)
     GameEvents.Subscribe("player_tipped", PlayerTipped)
 
-    //GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
+    GameEvents.Subscribe("on_team_leaved", OnTeamLeaved)
 
     GameEvents.Subscribe("silvername_w_facet_2_target_start", OnSilvernameFacet2TargetStart);
     GameEvents.Subscribe("silvername_w_facet_2_target_end", OnSilvernameFacet2TargetEnd);

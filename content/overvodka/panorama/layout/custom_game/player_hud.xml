@@ -73,19 +73,20 @@
 
         <Panel hittest="false" id="EncountersContainer">
             <Panel hittest="false" id="TeamLeavedEncounter">
+                <Panel hittest="false" id="TeamLeavedShine" />
                 <Label class="TeamLeavedEncounterHeader" text="#PLAYER_HUD_TeamLeavedHeader" />
                 <Panel hittest="false" id="TeamLeavedContainer">
                     <Panel hittest="false" id="TeamLeavedIconContainer">
-                        <Panel hittest="false" id="TeamLeavedShieldIconShadow" />
-                        <Panel hittest="false" id="TeamLeavedShieldIconBorder" />
-                        <Panel hittest="false" id="TeamLeavedShieldIcon" />
-                        <Image hittest="false" id="TeamLeavedIcon" />
+                        <Image hittest="false" id="TeamLeavedShieldIconShadow" src="file://{images}/custom_game/team_icons/team_shield_shadow_01.psd" />
+                        <Image hittest="false" id="TeamLeavedShieldIconBorder" src="file://{images}/custom_game/team_icons/team_shield_border_01.psd" />
+                        <Image hittest="false" id="TeamLeavedShieldIcon" src="file://{images}/custom_game/team_icons/team_shield_color_01.psd" />
+                        <Image hittest="false" id="TeamLeavedIcon" style="wash-color: none;" />
                     </Panel>
                     <Label id="TeamLeavedName" class="TeamLeavedEncounterHeader" text="{s:LeavedTeamName}" />
                 </Panel>
                 <Label class="TeamLeavedEncounterHeader2" text="#PLAYER_HUD_TeamLeavedHeader2" />
                 <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">
-                    <Label class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription1" />
+                    <Label id="TeamLeavedTimeDescription" class="TeamLeavedEncounterDescription" html="true" text="#PLAYER_HUD_TeamLeavedDescription1" />
                     <Label class="TeamLeavedEncounterDescriptionValue" html="true" text="{s:TimeReduced}" />
                 </Panel>
                 <Panel hittest="false" class="TeamLeavedEncounterDescriptionPanel">

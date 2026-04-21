@@ -40,7 +40,7 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 		end
 		
 		self.TEAMS_MISSING = self:GetCountMissingTeams()
-		self:ReduceCountdownTimer(self.TEAMS_MISSING)
+		self:ReduceCountdownTimer(self:GetCountdownReductionCount(self.TEAMS_MISSING))
 		
 		if GetMapName() == "overvodka_solo" then
 			self.TEAM_KILLS_TO_WIN = self.KILLS_TO_WIN_SINGLES

@@ -1159,162 +1159,224 @@
 }
 
 #CurrentBonus{
-    margin-top: 20px;
+    margin-top: 6px;
 }
 
 #TeamLeavedEncounter{
-    width: 600px;
-    height: 300px;
+    width: 430px;
+    height: 224px;
     align: center top;
+    margin-top: 28px;
 
     flow-children: down;
 
     opacity: 0;
+    transform: translateY(-18px) scaleX(0.96) scaleY(0.96);
 
-    transform: scaleX(1.5) scaleY(1.5);
+    padding: 10px 16px 12px 16px;
+    overflow: clip;
 
-    background-color: rgba(0,0,0,0.9);
-    border: 1px solid black;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#4a3119f4), color-stop(0.42, #24170bf4), to(#100b07fa));
+    border: 1px solid #fff1c7;
+    border-brush: gradient(linear, 0% 0%, 100% 0%, from(#7e5f2444), color-stop(0.22, #b98c41), color-stop(0.5, #f0deb0), color-stop(0.78, #b98c41), to(#7e5f2444));
+    border-radius: 11px;
+    box-shadow: fill #000000c8 0px 8px 28px -8px;
 
-    transition-property: opacity, transform;
-    transition-duration: .15s;
+    transition-property: opacity, transform, box-shadow, brightness;
+    transition-duration: .22s;
+    transition-timing-function: ease-in-out;
 }
 
 #TeamLeavedEncounter.Show{
     opacity: 1;
-    transform: scaleX(1) scaleY(1);
+    transform: translateY(0px) scaleX(1) scaleY(1);
+    animation-name: TeamLeavedSoftPulse;
+    animation-duration: 2.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#TeamLeavedShine{
+    ignore-parent-flow: true;
+    width: 96px;
+    height: 260px;
+    vertical-align: center;
+    horizontal-align: left;
+    margin-left: -120px;
+    background-color: gradient(linear, 0% 0%, 100% 0%, from(#ffffff00), color-stop(0.46, #fff6dc12), color-stop(0.5, #fff6dc55), color-stop(0.54, #fff6dc12), to(#ffffff00));
+    opacity: 0;
+    transform: rotateZ(-18deg);
+}
+
+#TeamLeavedEncounter.Show #TeamLeavedShine{
+    animation-name: TeamLeavedShineSweep;
+    animation-duration: 3.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 #TeamLeavedContainer{
     align: center top;
     flow-children: right;
+    margin-top: -2px;
+    margin-bottom: 3px;
 }
 
 .TeamLeavedEncounterDescriptionPanel{
+    width: fit-children;
+    min-height: 18px;
     flow-children: right;
-
-    padding-left: 50px;
-    padding-right: 50px;
-
+    padding-left: 18px;
+    padding-right: 18px;
     align: center top;
 }
 
 .TeamLeavedEncounterDescriptionValue{
-    text-shadow: 1px 2px 3px black;
-    font-size: 20px;
-
-    align: left center;
-
-    color: white;
+    text-shadow: #000000dd 0px 1px 3px 2;
+    font-size: 15px;
+    align: center center;
+    color: gradient(linear, 0% 100%, 0% 0%, from(#b98c41), color-stop(0.55, #f0deb0), to(#fff7db));
     font-weight: bold;
-
-    margin-left: 5px;
+    margin-left: 4px;
 }
 
 .GoldIcon{
-    width: 20px;
-    height: 20px;
-
-    align: left center;
-
+    width: 17px;
+    height: 17px;
+    align: center center;
     background-image: url("s2r://panorama/images/hud/reborn/gold_small_psd.vtex");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-
     margin-left: 3px;
+    brightness: 1.15;
 }
 
 .XpIcon{
-    width: 20px;
-    height: 20px;
-
-    align: left center;
-
+    width: 17px;
+    height: 17px;
+    align: center center;
     background-image: url("file://{resources}/images/custom_game/xp_icon.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-
     margin-left: 3px;
+    brightness: 1.15;
 }
 
 #TeamLeavedIconContainer{
-    width: 64px;
-    height: 64px;
-    margin-right: 5px;
-    margin-top: -5px;
+    width: 46px;
+    height: 46px;
+    margin-right: 8px;
+    margin-top: -3px;
 }
 
 #TeamLeavedIcon{
     width: 100%;
     height: 100%;
-
-    wash-color: black;
+    wash-color: none;
 }
 
-#TeamLeavedShieldIconShadow{
-    width: 100%;
-    height: 100%;
-
-    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_shadow_01.psd");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-#TeamLeavedShieldIconBorder{
-    width: 100%;
-    height: 100%;
-
-    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_border_01.psd");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
+#TeamLeavedShieldIconShadow,
+#TeamLeavedShieldIconBorder,
 #TeamLeavedShieldIcon{
     width: 100%;
     height: 100%;
-
-    background-image: url("file://{resources}/images/custom_game/team_icons/team_shield_color_01.psd");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
 }
 
-.TeamLeavedEncounterHeader{
-    color: white;
-    text-shadow: 1px 2px 3px black;
-    font-size: 40px;
+#TeamLeavedShieldIconShadow{
+    opacity: 0.5;
+}
 
+.TeamLeavedEncounterHeader{
+    color: gradient(linear, 0% 100%, 0% 0%, from(#a98336), color-stop(0.55, #e7c778), to(#fff1c7));
+    text-shadow: #000000dd 0px 1px 4px 2;
+    font-size: 23px;
     align: center top;
     text-align: center;
-
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: semi-bold;
+    font-family: titleFont;
+}
+
+#TeamLeavedName{
+    max-width: 300px;
+    height: 34px;
+    text-overflow: shrink;
+    font-size: 26px;
+    padding-top: 2px;
 }
 
 .TeamLeavedEncounterHeader2{
-    color: crimson;
-    text-shadow: 1px 2px 3px black;
-    font-size: 30px;
-    margin-top: -10px;
-
+    color: gradient(linear, 0% 100%, 0% 0%, from(#7f2c24), color-stop(0.55, #d36a47), to(#ffd6ad));
+    text-shadow: #000000dd 0px 1px 4px 2;
+    font-size: 18px;
+    margin-top: -4px;
+    margin-bottom: 5px;
     align: center top;
     text-align: center;
-
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: semi-bold;
+    font-family: titleFont;
 }
 
 .TeamLeavedEncounterDescription{
-    color: #ccc;
-    text-shadow: 1px 2px 3px black;
-    font-size: 20px;
-
+    color: #d7c3a3;
+    text-shadow: #000000cc 0px 1px 3px 2;
+    font-size: 14px;
     align: center top;
     text-align: center;
+}
+
+@keyframes 'TeamLeavedSoftPulse'
+{
+    0%
+    {
+        box-shadow: fill #000000c8 0px 8px 28px -8px;
+        brightness: 1;
+    }
+    50%
+    {
+        box-shadow: fill #b98c412a 0px 0px 22px -3px;
+        brightness: 1.04;
+    }
+    100%
+    {
+        box-shadow: fill #000000c8 0px 8px 28px -8px;
+        brightness: 1;
+    }
+}
+
+@keyframes 'TeamLeavedShineSweep'
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateX(0px) rotateZ(-18deg);
+    }
+    15%
+    {
+        opacity: 0.16;
+    }
+    46%
+    {
+        opacity: 0.34;
+        transform: translateX(560px) rotateZ(-18deg);
+    }
+    70%
+    {
+        opacity: 0.08;
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translateX(560px) rotateZ(-18deg);
+    }
 }
 
 #ChaosSelectionRoot{

@@ -13,6 +13,7 @@ local DEFAULT_GUIDE_SECTION_ORDER = { "starting", "early", "core", "luxury", "si
 local GUIDE_ITEM_NAME_REMAP = {
     item_octarine_core = "item_octarine_vodka",
     item_heart = "item_heart_vodka",
+    item_bloodstone = "item_bloodstone_vodka",
 }
 local DEFAULT_GUIDE_SECTION_KEY_BY_TOKEN = {
     ["#DOTA_Item_Build_Starting_Items"] = "starting",

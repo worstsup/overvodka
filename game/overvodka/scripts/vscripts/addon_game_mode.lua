@@ -175,11 +175,16 @@ function OvervodkaGameMode:InitGameMode()
 	self.CLOSE_TO_VICTORY_THRESHOLD = 5
 
 	self.TEAMS_MISSING = 0
+	self.TeamsLeftGame = {}
+	self.TeamLeaveCheckTimers = {}
+	self.bDisableLastTeamAutoEnd = false -- поставить true если не хотим, чтобы игра заканчивалась, когда останется одна активная команда 
 	self.GoldBonusPerTeam = 2
 	self.XpBonusPerTeam = 4
 	self.MIN_COUNTDOWN_TIME = 1200
 	self.SOLO_TIME_PER_TEAM = 60
 	self.DUO_TIME_PER_TEAM = 120
+	self.SOLO_FULL_TIMER_TEAM_THRESHOLD = 8
+	self.DUO_FULL_TIMER_TEAM_THRESHOLD = 4
 
 	self.LeaveTeamEncounterDuration = 5
 
@@ -329,9 +334,10 @@ function OvervodkaGameMode:InitGameMode()
 		local Data = {
 			team = 2,
 			last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+			duration = self.LeaveTeamEncounterDuration,
 			bonus_gold = self.GoldBonusPerTeam,
 			bonus_xp = self.XpBonusPerTeam,
-			time_reduce = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM,
+			time_reduce = self:GetCountdownTimeReduceForMissingTeams(self.TEAMS_MISSING),
 			missing_teams = self.TEAMS_MISSING
 			}
 		return CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", Data ) 
@@ -555,17 +561,9 @@ function OvervodkaGameMode:GetSortedValidActiveTeams()
 		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
 			for i = 1, PlayerResource:GetPlayerCountForTeam(team) do
 				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
-				if PlayerID ~= -1 then
-					local Connection = PlayerResource:GetConnectionState(PlayerID)
-					local FakeClient = PlayerResource:IsFakeClient(PlayerID)
-					local Check = DOTA_CONNECTION_STATE_ABANDONED
-					if FakeClient then
-						Check = DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
-					end
-					if Connection ~= Check and Connection ~= DOTA_CONNECTION_STATE_UNKNOWN then
-						table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
-						break
-					end
+				if self:IsPlayerActiveForTeam(PlayerID) then
+					table.insert( sortedTeams, { teamID = team, teamScore = self:GetTeamHeroKills( team ) } )
+					break
 				end
 			end
 		end
@@ -574,6 +572,18 @@ function OvervodkaGameMode:GetSortedValidActiveTeams()
 	table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
 
 	return sortedTeams
+end
+
+function OvervodkaGameMode:IsPlayerActiveForTeam(nPlayerID)
+	if nPlayerID == nil or nPlayerID == -1 or not PlayerResource:IsValidPlayerID(nPlayerID) then
+		return false
+	end
+
+	local Connection = PlayerResource:GetConnectionState(nPlayerID)
+	return Connection ~= DOTA_CONNECTION_STATE_ABANDONED
+		and Connection ~= DOTA_CONNECTION_STATE_FAILED
+		and Connection ~= DOTA_CONNECTION_STATE_NOT_YET_CONNECTED
+		and Connection ~= DOTA_CONNECTION_STATE_UNKNOWN
 end
 
 function OvervodkaGameMode:GetCountMissingTeams()
@@ -610,36 +620,134 @@ function OvervodkaGameMode:OnPlayerDisconnected(event)
 	if ChaosOrb and ChaosOrb.OnPlayerDisconnected then
 		ChaosOrb:OnPlayerDisconnected(PlayerID)
 	end
+	if PlayerID == nil or not PlayerResource:IsValidPlayerID(PlayerID) then return end
 	local Team = PlayerResource:GetTeam(PlayerID)
+	if not self:IsValidLeavableTeam(Team) then return end
+	if self.countdownEnabled ~= true then return end
+
+	self:StartTeamLeaveCheck(Team)
+	self:TryHandleTeamLeft(Team)
+end
+
+function OvervodkaGameMode:StartTeamLeaveCheck(nTeam)
+	if self.TeamLeaveCheckTimers[nTeam] then return end
+
+	self.TeamLeaveCheckTimers[nTeam] = true
+	Timers:CreateTimer(1.0, function()
+		if self.bGameHasEnded or self.countdownEnabled ~= true then
+			self.TeamLeaveCheckTimers[nTeam] = nil
+			return nil
+		end
+
+		if self:TryHandleTeamLeft(nTeam) then
+			self.TeamLeaveCheckTimers[nTeam] = nil
+			return nil
+		end
+
+		if not self:TeamHasPendingDisconnectedPlayers(nTeam) then
+			self.TeamLeaveCheckTimers[nTeam] = nil
+			return nil
+		end
+
+		return 1.0
+	end)
+end
+
+function OvervodkaGameMode:TeamHasPendingDisconnectedPlayers(nTeam)
+	for i = 1, PlayerResource:GetPlayerCountForTeam(nTeam) do
+		local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(nTeam, i)
+		if PlayerID ~= -1 and PlayerResource:IsValidPlayerID(PlayerID) then
+			if PlayerResource:GetConnectionState(PlayerID) == DOTA_CONNECTION_STATE_DISCONNECTED then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+function OvervodkaGameMode:TryHandleTeamLeft(nTeam)
+	if self.TeamsLeftGame[nTeam] then return true end
+	if not self:IsValidLeavableTeam(nTeam) then return true end
+
 	local ActiveTeams = self:GetSortedValidActiveTeams()
 	local bTeamActive = false
 	for _, TeamInfo in ipairs(ActiveTeams) do
-		if TeamInfo.teamID == Team then
+		if TeamInfo.teamID == nTeam then
 			bTeamActive = true
 			break
 		end
 	end
-	if bTeamActive == true then return end
-	print("Team Disconnected: "..Team)
+	if bTeamActive == true then return false end
+
+	self.TeamsLeftGame[nTeam] = true
+	print("Team Disconnected: "..nTeam)
+	local PreviousMissingTeams = self.TEAMS_MISSING or 0
 	self.TEAMS_MISSING = self:GetCountMissingTeams()
-	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
-	self:ReduceCountdownTimer(1)
+	local PreviousReductionCount = self:GetCountdownReductionCount(PreviousMissingTeams)
+	local CurrentReductionCount = self:GetCountdownReductionCount(self.TEAMS_MISSING)
+	local ReductionCount = math.max(0, CurrentReductionCount - PreviousReductionCount)
+	local TimeReduced = self:ReduceCountdownTimer(ReductionCount)
 
 	CustomGameEventManager:Send_ServerToAllClients( "on_team_leaved", {
-		team = Team, 
+		team = nTeam,
 		last_time = GameRules:GetGameTime()+self.LeaveTeamEncounterDuration,
+		duration = self.LeaveTeamEncounterDuration,
 		bonus_gold = self.GoldBonusPerTeam,
 		bonus_xp = self.XpBonusPerTeam,
-		time_reduce = MinusTime,
+		time_reduce = TimeReduced,
 		missing_teams = self.TEAMS_MISSING
 	} )
+
+	self:EndGameIfOnlyOneActiveTeam()
+	return true
+end
+
+function OvervodkaGameMode:EndGameIfOnlyOneActiveTeam()
+	if self.bGameHasEnded or self.bDisableLastTeamAutoEnd then return end
+
+	local ActiveTeams = self:GetSortedValidActiveTeams()
+	if #ActiveTeams == 1 then
+		self:EndGame(ActiveTeams[1].teamID)
+	end
+end
+
+function OvervodkaGameMode:IsValidLeavableTeam(nTeam)
+	if not nTeam or nTeam < DOTA_TEAM_FIRST then return false end
+	for _, Team in pairs(self.m_GatheredShuffledTeams or {}) do
+		if Team == nTeam then
+			return true
+		end
+	end
+	return false
+end
+
+function OvervodkaGameMode:GetCountdownReductionCount(nMissingTeams)
+	local MissingTeams = nMissingTeams or 0
+	if IsSolo() then
+		local FullTimerMissingTeams = math.max(0, #self.m_GatheredShuffledTeams - self.SOLO_FULL_TIMER_TEAM_THRESHOLD)
+		return math.max(0, MissingTeams - FullTimerMissingTeams)
+	elseif IsDuo() then
+		local FullTimerMissingTeams = math.max(0, #self.m_GatheredShuffledTeams - self.DUO_FULL_TIMER_TEAM_THRESHOLD)
+		return math.max(0, MissingTeams - FullTimerMissingTeams)
+	end
+
+	return MissingTeams
+end
+
+function OvervodkaGameMode:GetCountdownTimeReduceForMissingTeams(nMissingTeams)
+	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
+	return self:GetCountdownReductionCount(nMissingTeams) * MinusTime
 end
 
 function OvervodkaGameMode:ReduceCountdownTimer(nTimes)
 	local MinusTime = IsSolo() and self.SOLO_TIME_PER_TEAM or self.DUO_TIME_PER_TEAM
-	if _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
-		_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-(MinusTime*nTimes))
+	local TimeReduction = MinusTime * (nTimes or 0)
+	if TimeReduction > 0 and _G.nCOUNTDOWNTIMER > self.MIN_COUNTDOWN_TIME then
+		local PreviousTime = _G.nCOUNTDOWNTIMER
+		_G.nCOUNTDOWNTIMER = math.max(self.MIN_COUNTDOWN_TIME, _G.nCOUNTDOWNTIMER-TimeReduction)
+		return PreviousTime - _G.nCOUNTDOWNTIMER
 	end
+	return 0
 end
 
 ---------------------------------------------------------------------------

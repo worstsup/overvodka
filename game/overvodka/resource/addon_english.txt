@@ -92,8 +92,10 @@
 
 		"PLAYER_HUD_TeamLeavedHeader"					"Team"
 		"PLAYER_HUD_TeamLeavedHeader2"					"Left the game!"
-		"PLAYER_HUD_TeamLeavedValue"					"minutes"
+		"PLAYER_HUD_TeamLeavedValue"					"minute"
 		"PLAYER_HUD_TeamLeavedValue2"					"minutes"
+		"PLAYER_HUD_TeamLeavedValue3"					"minutes"
+		"PLAYER_HUD_TeamLeavedNoTimeReduced"			"Game duration did not change"
 
 		"PLAYER_HUD_TeamLeavedDescription1"				"Game time reduced by"
 		"PLAYER_HUD_TeamLeavedDescription2"				"Gold gain in middle increased by"
