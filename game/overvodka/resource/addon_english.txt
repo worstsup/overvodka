@@ -5239,6 +5239,12 @@
 		"dota_tooltip_ability_special_bonus_unique_misolo_6" "+{s:bonus_creep_spawn_count} spiders from kills"
 		"dota_tooltip_ability_special_bonus_unique_misolo_7" "x{s:bonus_units_health} Guild of Brudski warrior health/damage"
 		"dota_tooltip_ability_special_bonus_unique_misolo_8" "+{s:bonus_bonus_magic_damage} Chekane damage"
+
+		"DOTA_Tooltip_ability_nightfall_innate" "BKB TP Out"
+		"DOTA_Tooltip_ability_nightfall_innate_Description" "CHANNELED - Nightfall begins teleporting to his fountain. While channeling, the hero is debuff immune and gains +%magic_resistance%%% magic resistance. If the channel is interrupted by stun, root, hex, or manual cancel, the teleport does not happen."
+		"DOTA_Tooltip_ability_nightfall_innate_channel_duration" "DURATION:"
+		"DOTA_Tooltip_ability_nightfall_innate_magic_resistance" "%MAGIC RESISTANCE:"
+		"DOTA_Tooltip_modifier_nightfall_innate_teleport" "BKB TP Out"
+		"DOTA_Tooltip_modifier_nightfall_innate_teleport_Description" "Debuff immune, magic resistant, and channeling a teleport to the fountain."
 	}
 }
-
