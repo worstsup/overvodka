@@ -28,6 +28,7 @@ const GUIDE_SHARED_ABILITY_NAME_REMAP = {
 const GUIDE_SHARED_ITEM_NAME_REMAP = {
     item_octarine_core: "item_octarine_vodka",
     item_heart: "item_heart_vodka",
+    item_bloodstone: "item_bloodstone_vodka",
 };
 
 function NormalizeGuideAbilityNameShared(abilityName) {

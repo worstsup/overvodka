@@ -94,8 +94,10 @@
 
 		"PLAYER_HUD_TeamLeavedHeader"					"Команда"
 		"PLAYER_HUD_TeamLeavedHeader2"					"Покинула игру!"
-		"PLAYER_HUD_TeamLeavedValue"					"минуты"
+		"PLAYER_HUD_TeamLeavedValue"					"минута"
 		"PLAYER_HUD_TeamLeavedValue2"					"минут"
+		"PLAYER_HUD_TeamLeavedValue3"					"минуты"
+		"PLAYER_HUD_TeamLeavedNoTimeReduced"			"Длительность игры не изменилась"
 
 		"PLAYER_HUD_TeamLeavedDescription1"				"Время игры уменьшено на"
 		"PLAYER_HUD_TeamLeavedDescription2"				"Золото в центре увеличено на"

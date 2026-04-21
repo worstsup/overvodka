@@ -526,6 +526,7 @@ end
 
 function Server:OnPlayerDisconnected(event)
     if self.bGameEnded == true then return end
+    if OvervodkaGameMode and OvervodkaGameMode.bDisableLastTeamAutoEnd then return end
 
     local ConnectedTeams = OvervodkaGameMode:GetSortedValidActiveTeams()
 

@@ -5502,22 +5502,22 @@
 				}
 				"stun_duration"
 				{
-					"value"	"1.3 1.7 2.1 2.5"
+					"value"	"1.25 1.5 1.75 2.0"
 					"special_bonus_unique_stariy_7" "+1"
 				}
 				"hex_duration"
 				{
-					"value"	"1.3 1.7 2.1 2.5"
+					"value"	"1.25 1.5 1.75 2.0"
 					"special_bonus_unique_stariy_7" "+1"
 				}
 				"silence_duration"
 				{
-					"value"	"2.0 2.5 3.0 3.5"
+					"value"	"1.8 2.2 2.6 3.0"
 					"special_bonus_unique_stariy_7" "+1"
 				}
 				"disarm_duration"
 				{
-					"value"	"2.0 2.5 3.0 3.5"
+					"value"	"1.8 2.2 2.6 3.0"
 					"special_bonus_unique_stariy_7" "+1"
 				}
         		"damage"
@@ -5607,7 +5607,7 @@
                 "linger_create_interval"       "0.1"
                 "damage_interval"   "0.1"
 				"duration" 			"1.0"
-				"ms"				"-14 -21 -28 -35"
+				"ms"				"-14 -18 -22 -26"
 		}
 	}
 	//=================================================================================================================
@@ -5692,6 +5692,7 @@
 				"pull_radius"
 				{
 					"value"	"1000"
+					"affected_by_aoe_increase"	"1"
 				}
 				"cooldown_pull"
 				{
@@ -8505,8 +8506,8 @@
 		"AbilityValues"
 		{
 				"duration"				"4.0"
-				"cr"			"800 850 900 950"
-				"freeze_duration" "0.25"
+				"cr"					"800 850 900 950"
+				"freeze_duration" 		"0.25"
 				"freeze_cooldown"		"0.4"
 				"freeze_damage"			"0"
 				"damage_trigger"		"10.0"

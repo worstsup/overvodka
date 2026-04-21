@@ -542,7 +542,8 @@ function modifier_epstein_island_caster_buff:OnCreated()
     self.talent = self:GetCaster():HasTalent("special_bonus_unique_epstein_8")
     self.damage_reduction_pct = self.ability:GetSpecialValueFor("caster_damage_reduction_pct")
     self.status_resist = self.ability:GetSpecialValueFor("caster_status_resistance")
-    local effect_cast = ParticleManager:CreateParticle( "particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+    if not IsServer() then return end
+    local effect_cast = ParticleManager:CreateParticleForPlayer( "particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner() )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(1,0,0) )
 	self:AddParticle(effect_cast, false, false, -1, false, false)
     if not self.talent then return end
@@ -576,7 +577,7 @@ modifier_epstein_island_enemy_aura_thinker = class({})
 function modifier_epstein_island_enemy_aura_thinker:IsHidden() return true end
 function modifier_epstein_island_enemy_aura_thinker:IsPurgable() return false end
 
-function modifier_epstein_island_enemy_aura_thinker:OnCreated(kv)
+function modifier_epstein_island_enemy_aura_thinker:OnCreated()
     if not IsServer() then return end
     self.ability = self:GetAbility()
     self.radius = self.ability and self.ability:GetSpecialValueFor("island_effect_radius") or 0
@@ -605,10 +606,12 @@ function modifier_epstein_island_enemy_tethered:IsDebuff() return true end
 function modifier_epstein_island_enemy_tethered:IsPurgable() return false end
 
 function modifier_epstein_island_enemy_tethered:OnCreated()
-    local effect_cast = ParticleManager:CreateParticle("particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self.enemy_as = self:GetAbility():GetSpecialValueFor("enemy_as")
+    if not IsServer() then return end
+    if not self:GetParent():IsRealHero() or self:GetParent():IsIllusion() then return end
+    local effect_cast = ParticleManager:CreateParticleForPlayer("particles/epstein_island_screen_effect.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent(), self:GetParent():GetPlayerOwner())
     ParticleManager:SetParticleControl(effect_cast, 1, Vector(1,0,0))
     self:AddParticle(effect_cast, false, false, -1, false, false)
-    self.enemy_as = self:GetAbility():GetSpecialValueFor("enemy_as")
 end
 
 function modifier_epstein_island_enemy_tethered:CheckState()
@@ -644,9 +647,7 @@ function modifier_epstein_island_zone_thinker:GetAuraRadius() return self.radius
 function modifier_epstein_island_zone_thinker:GetAuraDuration() return 0.3 end
 function modifier_epstein_island_zone_thinker:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_BOTH end
 function modifier_epstein_island_zone_thinker:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
-function modifier_epstein_island_zone_thinker:GetAuraSearchFlags()
-    return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
-end
+function modifier_epstein_island_zone_thinker:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
 
 function modifier_epstein_island_zone_thinker:OnDestroy()
     if not IsServer() then return end

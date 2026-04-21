@@ -57,6 +57,7 @@ const SHOP_GUIDES_ABILITY_NAME_REMAP = {
 const SHOP_GUIDES_ITEM_NAME_REMAP = {
     item_octarine_core: "item_octarine_vodka",
     item_heart: "item_heart_vodka",
+    item_bloodstone: "item_bloodstone_vodka",
 };
 
 const SHOP_GUIDES_NATIVE_HEIGHT_DEFAULT = 148;
