@@ -3,8 +3,8 @@ LinkLuaModifier("modifier_item_byebye_teleport", "items/modifier_item_byebye_tel
 item_byebye = class({})
 
 function item_byebye:Precache(context)
-    PrecacheResource("particle", "particles/items2_fx/teleport_start.vpcf", context)
-    PrecacheResource("particle", "particles/items2_fx/teleport_end.vpcf", context)
+    PrecacheResource("particle", "particles/econ/events/fall_2021/teleport_start_fall_2021_lvl2.vpcf", context)
+    PrecacheResource("particle", "particles/econ/events/fall_2021/teleport_end_fall_2021_lvl2.vpcf", context)
     PrecacheResource("particle", "particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf", context)
     PrecacheResource("particle", "particles/econ/events/fall_2021/blink_dagger_fall_2021_end_lvl2.vpcf", context)
 end
@@ -79,16 +79,16 @@ function item_byebye:StartTeleportVisuals(caster, destination)
         return
     end
 
-    local particle_start = ParticleManager:CreateParticle("particles/items2_fx/teleport_start.vpcf", PATTACH_WORLDORIGIN, nil)
+    local particle_start = ParticleManager:CreateParticle("particles/econ/events/fall_2021/teleport_start_fall_2021_lvl2.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(particle_start, 0, caster:GetAbsOrigin())
     ParticleManager:SetParticleControl(particle_start, 2, Vector(255, 255, 255))
     modifier:AddParticle(particle_start, false, false, -1, false, false)
 
     if self.teleport_center then
-        local particle_end = ParticleManager:CreateParticle("particles/items2_fx/teleport_end.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.teleport_center)
+        local particle_end = ParticleManager:CreateParticle("particles/econ/events/fall_2021/teleport_end_fall_2021_lvl2.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.teleport_center)
         ParticleManager:SetParticleControlEnt(particle_end, 1, self.teleport_center, PATTACH_ABSORIGIN_FOLLOW, nil, self.teleport_center:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(particle_end, 3, caster, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", self.teleport_center:GetAbsOrigin(), true)
-        ParticleManager:SetParticleControl(particle_end, 4, Vector(0.9, 0, 0))
+        ParticleManager:SetParticleControl(particle_end, 4, Vector(caster:GetModelScale() * 0.9, 0, 0))
         ParticleManager:SetParticleControlEnt(particle_end, 5, self.teleport_center, PATTACH_ABSORIGIN_FOLLOW, nil, self.teleport_center:GetAbsOrigin(), true)
         modifier:AddParticle(particle_end, false, false, -1, false, false)
     end

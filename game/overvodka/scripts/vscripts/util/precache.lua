@@ -9,6 +9,8 @@ PrecacheUtils.items = {
 }
 
 PrecacheUtils.particles = {
+		"particles/econ/events/fall_2021/teleport_start_fall_2021_lvl2.vpcf",
+		"particles/econ/events/fall_2021/teleport_end_fall_2021_lvl2.vpcf",
 		"particles/econ/items/drow/drow_arcana/drow_arcana_status_effect_frost_arrow.vpcf",
 		"particles/econ/items/drow/drow_ti9_immortal/drow_ti9_frost_arrow_debuff.vpcf",
 		"particles/econ/events/ti9/shivas_guard_ti9_impact.vpcf",
