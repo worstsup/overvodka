@@ -85,40 +85,227 @@ function UpdateTeam( teamId )
 	teamPanel.SetHasClass( "TeamPrimeSubscribed", hasTeamPrimeSubscriber );
 }
 
+function GetHeroModelLoadoutPanel()
+{
+	if (typeof FindDotaHudElement !== "function") {
+		return null;
+	}
+	return FindDotaHudElement("HeroModelLoadout");
+}
+
+function IsPanelAlive(panel)
+{
+	return !!(panel && (!panel.IsValid || panel.IsValid()));
+}
+
+function GetHeroSkinSwitcherRoot()
+{
+	if (typeof FindDotaHudElement === "function") {
+		const panel = FindDotaHudElement("HeroSkinSwitcherRoot");
+		if (panel) {
+			return panel;
+		}
+	}
+
+	return $("#HeroSkinSwitcherRoot");
+}
+
+function GetHeroSkinSwitcherPanel()
+{
+	const root = GetHeroSkinSwitcherRoot();
+	if (!root) {
+		return null;
+	}
+
+	return root.FindChildTraverse("HeroSkinSwitcher");
+}
+
+function DockHeroSkinSwitcherRoot()
+{
+	const root = GetHeroSkinSwitcherRoot();
+	if (!(root && root.GetParent && root.SetParent)) {
+		return null;
+	}
+
+	if (typeof FindDotaHudElement !== "function") {
+		return root;
+	}
+
+	const strategyScreen = FindDotaHudElement("StrategyScreen");
+	if (strategyScreen && root.GetParent() !== strategyScreen) {
+		root.SetParent(strategyScreen);
+	}
+
+	return root;
+}
+
+function ClearCustomHeroSelectionUI()
+{
+	if (typeof ClearHeroSkinSwitcherPreviewModel === "function") {
+		ClearHeroSkinSwitcherPreviewModel();
+	}
+
+	if (IsPanelAlive(heroModelPanel)) {
+		heroModelPanel.DeleteAsync(0);
+	}
+	heroModelPanel = null;
+
+	const heroSkinSwitcherRoot = GetHeroSkinSwitcherRoot();
+	if (heroSkinSwitcherRoot) {
+		heroSkinSwitcherRoot.SetHasClass("Visible", false);
+	}
+
+	const heroModelLoadout = GetHeroModelLoadoutPanel();
+	if (heroModelLoadout) {
+		heroModelLoadout.style.visibility = "visible";
+	}
+}
+
+function ApplyHeroSkinSelection(heroName, equipSpecialSkin)
+{
+	if (typeof ApplyHeroSkinSwitcherSelection === "function") {
+		ApplyHeroSkinSwitcherSelection(heroName, equipSpecialSkin);
+		if (typeof PickIconsStyles === "function") {
+			PickIconsStyles();
+		}
+		return;
+	}
+
+	const config = GetHeroSkinConfig(heroName);
+	if (!config) {
+		return;
+	}
+
+	const localPlayerId = GetOvervodkaLocalPlayerID();
+	const nextEquippedSkin = equipSpecialSkin ? config.itemId : null;
+	SetLocalHeroSkinSelectionOverride(heroName, nextEquippedSkin);
+
+	if (equipSpecialSkin) {
+		GameEvents.SendCustomGameEventToServer("store_equip_item", {
+			item_id: config.itemId,
+			item_type: "skins"
+		});
+	} else {
+		GameEvents.SendCustomGameEventToServer("store_unequip_item", {
+			item_type: "skins"
+		});
+	}
+
+	UpdateCustomHeroModel(heroName, localPlayerId);
+	OnUpdateHeroSelection();
+
+	if (typeof PickIconsStyles === "function") {
+		PickIconsStyles();
+	}
+}
+
+function EnsureHeroSkinSwitcher(heroName, playerId)
+{
+	if (String(playerId) !== String(GetOvervodkaLocalPlayerID())) {
+		return;
+	}
+
+	const config = GetHeroSkinConfig(heroName);
+	const switcherRoot = DockHeroSkinSwitcherRoot();
+	const switcher = GetHeroSkinSwitcherPanel();
+	if (!config || !switcherRoot || !switcher) {
+		return;
+	}
+
+	switcherRoot.SetHasClass("Visible", true);
+
+	const baseButton = switcher.FindChildTraverse("HeroSkinBaseButton");
+	const specialButton = switcher.FindChildTraverse("HeroSkinSpecialButton");
+	const baseLabel = switcher.FindChildTraverse("HeroSkinBaseButtonLabel");
+	const specialLabel = switcher.FindChildTraverse("HeroSkinSpecialButtonLabel");
+	const hasSpecialSkin = IsSpecialHeroSkinEquippedForPlayer(playerId, heroName);
+	const hasSpecialSkinAccess = HasAccessToSpecialHeroSkin(playerId, heroName);
+
+	baseLabel.text = $.Localize(config.baseLabel);
+	specialLabel.text = $.Localize(config.specialLabel);
+
+	baseButton.SetHasClass("IsSelected", !hasSpecialSkin);
+	specialButton.SetHasClass("IsSelected", hasSpecialSkin);
+	specialButton.enabled = true;
+	specialButton.SetHasClass("IsDisabled", !hasSpecialSkinAccess);
+
+	baseButton.SetPanelEvent("onactivate", function () {
+		if (!hasSpecialSkin) {
+			return;
+		}
+
+		ApplyHeroSkinSelection(heroName, false);
+	});
+
+	specialButton.SetPanelEvent("onactivate", function () {
+		if (hasSpecialSkin) {
+			return;
+		}
+
+		ApplyHeroSkinSelection(heroName, true);
+	});
+}
+
 function UpdateCustomHeroModel(hero_name, playerId)
 {
-	if (playerId != Game.GetLocalPlayerID()) {
+	if (String(playerId) != String(GetOvervodkaLocalPlayerID())) {
+		return;
+	}
+	if (typeof FindDotaHudElement !== "function") {
 		return;
 	}
 	let strategyScreen = FindDotaHudElement("StrategyScreen");
-    if (!strategyScreen) {
-        return;
-    }
-	let existing = strategyScreen.FindChildTraverse("custom_hero_model_panel");
-    if (existing) {
-        heroModelPanel = existing;
-        heroModelPanel.style.visibility = "visible";
+    const config = GetHeroSkinConfig(hero_name);
+    const heroModelLoadout = GetHeroModelLoadoutPanel();
+	if (!strategyScreen || !config || !heroModelLoadout) {
+        ClearCustomHeroSelectionUI();
         return;
     }
 
-	let HeroModelLoadout = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HeroModelLoadout")
-	HeroModelLoadout.style.visibility = "collapse";
-	if (heroModelPanel) {
-		return
+	EnsureHeroSkinSwitcher(hero_name, playerId);
+
+	if (typeof RefreshHeroSkinSwitcherPreviewModel === "function") {
+		RefreshHeroSkinSwitcherPreviewModel(hero_name);
+		return;
 	}
 
-	if (!heroModelPanel && hero_name === "npc_dota_hero_morphling") 
-	{
-		let panel = FindDotaHudElement("StrategyScreen")
-		heroModelPanel = $.CreatePanel("DOTAScenePanel", strategyScreen, "custom_hero_model_panel", { class: "hero_model_strategy", style: "width:46.5%;height:90%;margin-top:-40px;", drawbackground: true, unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true"});
-		heroModelPanel.SetParent(panel);
+	if (!IsSpecialHeroSkinEquippedForPlayer(playerId, hero_name)) {
+		if (IsPanelAlive(heroModelPanel)) {
+			heroModelPanel.DeleteAsync(0);
+		}
+		heroModelPanel = null;
+		heroModelLoadout.style.visibility = "visible";
+		return;
 	}
-	if (!heroModelPanel && hero_name === "npc_dota_hero_void_spirit") 
-	{
-		let panel = FindDotaHudElement("StrategyScreen")
-		heroModelPanel = $.CreatePanel("DOTAScenePanel", strategyScreen, "custom_hero_model_panel", { class: "hero_model_strategy", style: "width:46.5%;height:90%;margin-top:-40px;", drawbackground: true, unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true"});
-		heroModelPanel.SetParent(panel);
+
+	heroModelLoadout.style.visibility = "collapse";
+
+	const desiredUnit = config.previewUnit;
+	const existing = strategyScreen.FindChildTraverse("custom_hero_model_panel");
+	if (existing) {
+		heroModelPanel = existing;
+		const currentUnit = heroModelPanel.GetAttributeString("overvodka_unit", "");
+		if (currentUnit === desiredUnit) {
+			heroModelPanel.style.visibility = "visible";
+			return;
+		}
+		heroModelPanel.DeleteAsync(0);
+		heroModelPanel = null;
 	}
+
+	heroModelPanel = $.CreatePanel("DOTAScenePanel", strategyScreen, "custom_hero_model_panel", {
+		class: "hero_model_strategy",
+		style: "width:46.5%;height:90%;margin-top:-40px;",
+		drawbackground: true,
+		unit: desiredUnit,
+		particleonly: "false",
+		renderdeferred: "false",
+		antialias: "true",
+		renderwaterreflections: "true",
+		allowrotation: "true"
+	});
+	heroModelPanel.SetAttributeString("overvodka_unit", desiredUnit);
+
 	try {
         let firstChild = strategyScreen.GetChild(0);
         if (firstChild && strategyScreen.MoveChildBefore) {
@@ -240,8 +427,9 @@ function UpdatePlayer( teamPanel, playerId )
 	{
 		isPrimeSubscribed = IsPlayerSubscribed( playerId );
 	}
+	const isLocalPlayer = playerId == localPlayerInfo.player_id;
 
-	if ( playerId == localPlayerInfo.player_id )
+	if ( isLocalPlayer )
 	{
 		playerPanel.AddClass( "is_local_player" );
 	}
@@ -307,19 +495,21 @@ function UpdatePlayer( teamPanel, playerId )
 		};
 
 		if (heroImages[playerInfo.player_selected_hero]) {
-			if (playerInfo.player_selected_hero == "npc_dota_hero_morphling" && isPrimeSubscribed) {
-				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
-				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
-			}
-			else if (playerInfo.player_selected_hero == "npc_dota_hero_void_spirit" && isPrimeSubscribed) {
-				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
-				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
-			}
-			else {
-				playerPortrait.SetImage(heroImages[playerInfo.player_selected_hero]);
-			}
+			playerPortrait.SetImage(GetHeroPickPortraitImage(
+				playerInfo.player_selected_hero,
+				playerId,
+				heroImages[playerInfo.player_selected_hero]
+			));
 		} else {
 			playerPortrait.SetImage("file://{images}/heroes/" + playerInfo.player_selected_hero + ".png");
+		}
+
+		if (isLocalPlayer) {
+			if (GetHeroSkinConfig(playerInfo.player_selected_hero)) {
+				UpdateCustomHeroModel(playerInfo.player_selected_hero, playerId);
+			} else {
+				ClearCustomHeroSelectionUI();
+			}
 		}
 		playerPanel.SetHasClass("hero_selected", true);
 		playerPanel.SetHasClass("hero_highlighted", false);
@@ -396,16 +586,24 @@ function UpdatePlayer( teamPanel, playerId )
 			{
 				HeroPick.style.visibility = "visible";
 			}
-			if (playerInfo.possible_hero_selection == "morphling" && isPrimeSubscribed) 
+			if (playerInfo.possible_hero_selection == "morphling")
 			{
 				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
-				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_underfell_sans.png");
+				playerPortrait.SetImage(GetHeroPickPortraitImage(
+					"npc_dota_hero_morphling",
+					playerId,
+					possibleHeroImages[playerInfo.possible_hero_selection]
+				));
 				
 			}
-			else if (playerInfo.possible_hero_selection == "void_spirit" && isPrimeSubscribed)
+			else if (playerInfo.possible_hero_selection == "void_spirit")
 			{
 				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
-				playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_invincible_arcana.png");
+				playerPortrait.SetImage(GetHeroPickPortraitImage(
+					"npc_dota_hero_void_spirit",
+					playerId,
+					possibleHeroImages[playerInfo.possible_hero_selection]
+				));
 			}
 			else if (playerInfo.possible_hero_selection == "puck" && !isPrimeSubscribed)
 			{
@@ -421,12 +619,19 @@ function UpdatePlayer( teamPanel, playerId )
 		{
 			playerPortrait.SetImage("file://{images}/heroes/npc_dota_hero_" + playerInfo.possible_hero_selection + ".png");
 		}
+
+		if (isLocalPlayer) {
+			ClearCustomHeroSelectionUI();
+		}
 		playerPanel.SetHasClass("hero_selected", false);
 		playerPanel.SetHasClass("hero_highlighted", true);
 	}
 	else
 	{
 		playerPortrait.SetImage( "file://{images}/custom_game/unassigned.png" );
+		if (isLocalPlayer) {
+			ClearCustomHeroSelectionUI();
+		}
 	}
 	
 	var playerName = playerPanel.FindChildInLayoutFile( "PlayerName" );
@@ -434,7 +639,7 @@ function UpdatePlayer( teamPanel, playerId )
 		playerName.text = playerInfo.player_name;
 
 	playerPanel.SetHasClass( "PrimeSubscribed", isPrimeSubscribed );
-	playerPanel.SetHasClass( "is_local_player", ( playerId == Game.GetLocalPlayerID() ) );
+	playerPanel.SetHasClass( "is_local_player", ( String(playerId) == String(GetOvervodkaLocalPlayerID()) ) );
 }
 
 function UpdateTimer()
@@ -528,6 +733,18 @@ function UpdateTimer()
 	OnUpdateHeroSelection();
 	GameEvents.Subscribe( "dota_player_hero_selection_dirty", OnUpdateHeroSelection );
 	GameEvents.Subscribe( "dota_player_update_hero_selection", OnUpdateHeroSelection );
+	CustomNetTables.SubscribeNetTableListener("player_data", function (tableName, key, data) {
+		const localSteamId = GetSteamID32(GetOvervodkaLocalPlayerID()).toString();
+		if (key !== localSteamId) {
+			return;
+		}
+
+		ClearLocalHeroSkinSelectionOverrides();
+		OnUpdateHeroSelection();
+		if (typeof PickIconsStyles === "function") {
+			PickIconsStyles();
+		}
+	});
 
 	$.Schedule( 0.5, function()
 	{

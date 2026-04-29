@@ -138,12 +138,19 @@ function OvervodkaGameMode:ReplaceWinContidion()
 end
 
 function OvervodkaGameMode:OnHeroSelected(event)
+	local player = PlayerResource:GetPlayer(event.player_id)
+	if not player then
+		return
+	end
+
 	if event.hero_unit == "npc_dota_hero_morphling" then
-		if Server:IsPlayerSubscribed(event.player_id) then
-			EmitSoundOnClient("sans_arcana_start", PlayerResource:GetPlayer(event.player_id))
-		else
-			EmitSoundOnClient("sans_start", PlayerResource:GetPlayer(event.player_id))
-		end
+		local equippedSkin = Store and Store.playerData and Store.playerData[event.player_id] and Store.playerData[event.player_id].equipped_skin
+		local soundName = equippedSkin == "sans_arcana" and "sans_arcana_start" or "sans_start"
+		CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
+			sound_name = soundName
+		})
+	else
+		CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_stop", {})
 	end
 end
 --------------------------------------------------------------------------------

@@ -219,3 +219,346 @@
         box-shadow: fill #ffd70060 0px 0px 8px 3px;
     }
 }
+
+@keyframes 'prime_button_idle_glow'
+{
+    0%
+    {
+        box-shadow: fill #ddce9c10 0px 0px 8px 0px;
+        brightness: 1.0;
+    }
+
+    50%
+    {
+        box-shadow: fill #ddce9c22 0px 0px 12px 1px;
+        brightness: 1.03;
+    }
+
+    100%
+    {
+        box-shadow: fill #ddce9c10 0px 0px 8px 0px;
+        brightness: 1.0;
+    }
+}
+
+.HeroSkinSwitcherRoot
+{
+    width: 100%;
+    height: 100%;
+    flow-children: none;
+    ignore-parent-flow: true;
+    overflow: noclip;
+    visibility: collapse;
+}
+
+.HeroSkinSwitcherRoot.Visible
+{
+    visibility: visible;
+}
+
+.HeroSkinSwitcherRoot.HasFacet #HeroSkinSwitcher
+{
+    margin-bottom: 255px;
+}
+
+#HeroSkinSwitcher
+{
+    width: fit-children;
+    horizontal-align: left;
+    vertical-align: bottom;
+    margin-bottom: 45px;
+    margin-left: 12.5%;
+    flow-children: down;
+    padding: 0px;
+    background-color: none;
+    border: 0px solid transparent;
+    box-shadow: none;
+    overflow: noclip;
+}
+
+#HeroSkinSwitcherWarning
+{
+    width: fit-children;
+    max-width: 280px;
+    horizontal-align: center;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#43251df4), to(#24110df2));
+    border: 1px solid #c08a69cc;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#8e5331), color-stop(0.45, #f0b7a0), to(#b56a45));
+    border-radius: 6px;
+    box-shadow: fill #00000088 0px 4px 10px 0px;
+    opacity: 0;
+    visibility: collapse;
+    transform: translateY(8px);
+    transition-property: opacity, transform;
+    transition-duration: 0.16s;
+    transition-timing-function: ease-in-out;
+}
+
+#HeroSkinSwitcherWarning.Visible
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+#HeroSkinSwitcherWarningLabel
+{
+    horizontal-align: center;
+    text-align: center;
+    color: #f8dcc9;
+    font-size: 15px;
+    font-weight: semi-bold;
+    text-shadow: 0px 1px 2px #000000cc;
+}
+
+#HeroSkinSwitcherTitle
+{
+    width: 100%;
+    horizontal-align: left;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    color: gradient(linear, 0% 0%, 0% 100%, from(#fffdf2), color-stop(0.42, #e7d8ab), color-stop(0.62, #c9af6d), to(#9f7428));
+    text-shadow: 0px 0px 10px #6b4d18aa;
+    text-transform: uppercase;
+}
+
+#HeroSkinSwitcherButtons
+{
+    width: fit-children;
+    flow-children: right;
+    overflow: noclip;
+    horizontal-align: left;
+    margin-bottom: 12px;
+}
+
+#HeroSkinBaseButton,
+#HeroSkinSpecialButton
+{
+    min-width: 148px;
+    height: 46px;
+    margin: 0px 10px 0px 0px;
+    padding: 0px 14px;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#4b3920), color-stop(0.48, #2a1f12), to(#181108));
+    border: 1px solid #b6975ccc;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#6c5428), color-stop(0.45, #d9c48a), to(#8c6d30));
+    border-radius: 6px;
+    box-shadow: fill #00000066 0px 2px 8px 0px;
+    pre-transform-scale2d: 1;
+    transition-property: pre-transform-scale2d, brightness, background-color, border, box-shadow;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    overflow: noclip;
+}
+
+#HeroSkinBaseButton:hover,
+#HeroSkinSpecialButton:hover
+{
+    pre-transform-scale2d: 1.04;
+    brightness: 1.08;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#5a4627), color-stop(0.48, #332514), to(#1c1409));
+    border: 1px solid #dfc98acc;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#82662f), color-stop(0.45, #f0deb0), to(#af8a3f));
+    box-shadow: fill #e2c06a24 0px 0px 10px 0px;
+}
+
+#HeroSkinBaseButton:active,
+#HeroSkinSpecialButton:active
+{
+    pre-transform-scale2d: 0.96;
+    brightness: 0.92;
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#352714), to(#140e07));
+}
+
+#HeroSkinBaseButton.IsSelected,
+#HeroSkinSpecialButton.IsSelected
+{
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#7d5c28), color-stop(0.5, #4a3214), to(#24160a));
+    border: 1px solid #e3c985dd;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#8a6a31), color-stop(0.45, #f0dfb0), to(#bb9650));
+    box-shadow: fill #f0cb7333 0px 0px 12px 0px;
+}
+
+#HeroSkinBaseButton.IsDisabled,
+#HeroSkinSpecialButton.IsDisabled
+{
+    saturation: 0.12;
+    brightness: 0.7;
+    border: 1px solid #8f8572aa;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#5f584d), color-stop(0.45, #a29a8a), to(#6d6558));
+    box-shadow: fill #00000044 0px 2px 8px 0px;
+}
+
+#HeroSkinBaseButton.ButtonPulse,
+#HeroSkinSpecialButton.ButtonPulse
+{
+    pre-transform-scale2d: 0.95;
+    brightness: 1.16;
+    box-shadow: fill #f0cb7355 0px 0px 14px 0px;
+}
+
+#HeroSkinBaseButtonLabel,
+#HeroSkinSpecialButtonLabel
+{
+    align: center center;
+    text-align: center;
+    text-align: center;
+    color: gradient(linear, 0% 0%, 0% 100%, from(#fff8e1), color-stop(0.52, #ddc98d), to(#b2904f));
+    font-size: 14px;
+    font-weight: semi-bold;
+    text-shadow: 0px 1px 2px #000000cc;
+}
+
+#HeroSkinSubscribeButton
+{
+    width: 240px;
+    height: 54px;
+    horizontal-align: center;
+    margin-top: 2px;
+    flow-children: none;
+    padding: 0px 18px;
+    background-color: gradient(linear, 0% 100%, 0% 0%, from(#261f16), color-stop(0.48, #453a28), color-stop(0.72, #655738), to(#857143));
+    border: 2px solid #e5ce82;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#7a6840), color-stop(0.45, #b5a770), color-stop(0.72, #ddce9c), to(#f0e4bc));
+    border-radius: 37px;
+    box-shadow: fill #2a150000 0px 0px 0px 0px;
+    opacity: 0;
+    pre-transform-scale2d: 1;
+    animation-name: prime_button_idle_glow;
+    animation-duration: 1.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transition-property: brightness, border-brush, box-shadow, pre-transform-scale2d, background-color;
+    transition-duration: .16s;
+    transition-timing-function: ease-in-out;
+    overflow: clip;
+}
+
+#HeroSkinSubscribeButton.Visible
+{
+    opacity: 1;
+}
+
+#HeroSkinSubscribeButton.HasPrice
+{
+    width: 224px;
+}
+
+#HeroSkinSubscribeButton:hover
+{
+    brightness: 1.08;
+    pre-transform-scale2d: 1.02;
+    border-brush: gradient(linear, 0% 100%, 0% 0%, from(#8a7546), color-stop(0.45, #c4b57c), color-stop(0.72, #ece0b4), to(#fff7dc));
+    box-shadow: fill #ddce9c33 0px 0px 12px 1px;
+}
+
+#HeroSkinSubscribeButton:active
+{
+    brightness: 0.97;
+    pre-transform-scale2d: 0.95;
+    box-shadow: fill #ddce9c18 0px 0px 6px 1px;
+}
+
+.HeroSkinSubscribeButtonGlow
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 37px;
+    background-color: gradient(radial, 50% 50%, 0% 0%, 60% 60%, from(#f0e4bc20), color-stop(0.55, #ddce9c10), to(#ffffff00));
+    opacity: 0.65;
+    transition-property: opacity, brightness;
+    transition-duration: .16s;
+    transition-timing-function: ease-in-out;
+}
+
+.HeroSkinSubscribeButtonShine
+{
+    width: 86px;
+    height: 180%;
+    vertical-align: center;
+    horizontal-align: left;
+    margin-left: -150px;
+    transform: rotateZ(18deg);
+    background-color: gradient(linear, 0% 0%, 100% 0%, from(#ffffff00), color-stop(0.35, #ffffff10), color-stop(0.5, #f5e7bd66), color-stop(0.65, #ffffff10), to(#ffffff00));
+    opacity: 0.0;
+    transition-property: opacity, transform;
+    transition-duration: .32s;
+    transition-timing-function: ease-in-out;
+}
+
+#HeroSkinSubscribeButton:hover .HeroSkinSubscribeButtonGlow
+{
+    opacity: 0.9;
+    brightness: 1.05;
+}
+
+#HeroSkinSubscribeButton:hover .HeroSkinSubscribeButtonShine
+{
+    opacity: 0.75;
+    transform: translateX(360px) rotateZ(18deg);
+}
+
+#HeroSkinSubscribeButton:active .HeroSkinSubscribeButtonShine
+{
+    opacity: 0.5;
+    transform: translateX(260px) rotateZ(18deg);
+}
+
+.HeroSkinSubscribeButtonWrapper
+{
+    width: fit-children;
+    height: 100%;
+    flow-children: right;
+    horizontal-align: center;
+    vertical-align: center;
+}
+
+.HeroSkinSubscribeTelegramIcon
+{
+    width: 22px;
+    height: 22px;
+    vertical-align: center;
+    margin-right: 10px;
+    wash-color: #f0e4bc;
+    img-shadow: 0px 1px 2px #00000088;
+}
+
+#HeroSkinSubscribeButton.IsPurchaseAction .HeroSkinSubscribeTelegramIcon
+{
+    width: 24px;
+    height: 24px;
+    horizontal-align: center;
+    wash-color: none;
+}
+
+.HeroSkinSubscribeButtonText
+{
+    vertical-align: center;
+    horizontal-align: center;
+    color: #f4e8c2;
+    font-size: 20px;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+    text-shadow: 0px 1px 2px #000000aa;
+}
+
+.HeroSkinSubscribeButtonPrice
+{
+    vertical-align: center;
+    horizontal-align: center;
+    margin-left: 10px;
+    color: #fff1bd;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0px 1px 2px #000000aa;
+    visibility: collapse;
+}
+
+#HeroSkinSubscribeButton.HasPrice .HeroSkinSubscribeButtonPrice
+{
+    visibility: visible;
+}

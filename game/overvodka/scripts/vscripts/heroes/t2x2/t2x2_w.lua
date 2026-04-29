@@ -1,6 +1,5 @@
 LinkLuaModifier( "modifier_t2x2_w_buff", "heroes/t2x2/t2x2_w", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_t2x2_w_debuff", "heroes/t2x2/t2x2_w", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_t2x2_w", "heroes/t2x2/t2x2_w", LUA_MODIFIER_MOTION_NONE )
 
 t2x2_w = class({})
 
@@ -10,10 +9,6 @@ function t2x2_w:Precache( context )
     PrecacheResource( "particle", "particles/units/heroes/hero_mars/mars_arena_of_blood_heal.vpcf", context )
     PrecacheResource( "particle", "particles/econ/items/wraith_king/wraith_king_arcana/wk_arc_slow_debuff.vpcf", context )
     PrecacheResource( "particle", "particles/t2x2_w_bad.vpcf", context )
-end
-
-function t2x2_w:GetIntrinsicModifierName()
-	return "modifier_t2x2_w"
 end
 
 function t2x2_w:OnSpellStart()
@@ -43,42 +38,10 @@ function t2x2_w:OnSpellStart()
     EmitSoundOn(sound, caster)
 end
 
-modifier_t2x2_w = class({})
-function modifier_t2x2_w:IsHidden() return true end
-function modifier_t2x2_w:IsPurgable() return false end
-function modifier_t2x2_w:RemoveOnDeath() return false end
-function modifier_t2x2_w:OnCreated()
-	if not IsServer() then return end
-end
-function modifier_t2x2_w:DeclareFunctions()
-	local funcs = {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-	return funcs
-end
-
-function modifier_t2x2_w:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
-    	FireGameEvent("event_toggle_alt_cast", 
-    	{
-            ent_index = self:GetAbility():GetEntityIndex(),
-            is_alted = not self:GetAbility().alt_casted
-        })
-        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
-	end
-end
-
 modifier_t2x2_w_buff = class({})
 function modifier_t2x2_w_buff:IsHidden() return false end
 function modifier_t2x2_w_buff:IsPurgable() return true end
 function modifier_t2x2_w_buff:IsDebuff() return false end
-function modifier_t2x2_w_buff:OnCreated()
-    if not IsServer() then return end
-end
-
-function modifier_t2x2_w_buff:OnDestroy()
-end
 
 function modifier_t2x2_w_buff:DeclareFunctions()
     return {
@@ -112,10 +75,6 @@ modifier_t2x2_w_debuff = class({})
 function modifier_t2x2_w_debuff:IsHidden() return false end
 function modifier_t2x2_w_debuff:IsPurgable() return true end
 function modifier_t2x2_w_debuff:IsDebuff() return true end
-
-function modifier_t2x2_w_debuff:OnCreated()
-    if not IsServer() then return end
-end
 
 function modifier_t2x2_w_debuff:DeclareFunctions()
     return {

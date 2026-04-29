@@ -64,6 +64,7 @@ LinkLuaModifier("modifier_overvodka_store_pet_5", 		"modifiers/store/modifier_ov
 LinkLuaModifier("modifier_overvodka_store_pet_6", 		"modifiers/store/modifier_overvodka_store_pet_6", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_7", 		"modifiers/store/modifier_overvodka_store_pet_7", 	 LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_8", 		"modifiers/store/modifier_overvodka_store_pet_8", 	 LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_pet_9", 		"modifiers/store/modifier_overvodka_store_pet_9", 	 LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier("modifier_item_red_chips", 		"items/chips", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_item_green_chips", 	"items/chips", LUA_MODIFIER_MOTION_NONE)

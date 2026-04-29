@@ -153,7 +153,6 @@ function HeroSelection() {
     let SelectedHeroFacets = PreGameHeroIcons.FindChildrenWithClassTraverse("SelectedHeroFacets")
     if (SelectedHeroFacets && SelectedHeroFacets.length > 0) {
         SelectedHeroFacets[0].style.marginLeft = "2%"
-        SelectedHeroFacets[0].style.marginRight = "0%"
     }
 
     let HeroAbilities = PregameHeroicon.FindChildTraverse("SelectedAbilitiesContainer")
@@ -288,33 +287,56 @@ function HeroSelection() {
 HeroSelection()
 RemoveWearablesFromDotaScenePanel()
 
+function EnsurePickHeroMovie(cardPanel, movieSrc)
+{
+    if (!cardPanel || !movieSrc) {
+        return;
+    }
+
+    let moviePanel = cardPanel.FindChild("Movie");
+    const currentMovieSrc = moviePanel ? moviePanel.GetAttributeString("overvodka_movie_src", "") : "";
+    if (moviePanel && currentMovieSrc === movieSrc) {
+        return;
+    }
+
+    if (moviePanel) {
+        moviePanel.DeleteAsync(0);
+    }
+
+    moviePanel = $.CreatePanel("MoviePanel", cardPanel, "Movie", { src: movieSrc, repeat: "true", autoplay: "onload" });
+    moviePanel.SetAttributeString("overvodka_movie_src", movieSrc);
+    moviePanel.style.width = "100%";
+    moviePanel.style.height = "100%";
+}
+
 function PickIconsStyles()
 {
     let PreGame = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("GridCategories");
     // Get all player panels in the pick screen
     let PickIconArray = PreGame.FindChildrenWithClassTraverse("HeroCard")
+    const playerID = Players.GetLocalPlayer();
     for (let key in PickIconArray)
     {
-        let playerID = Players.GetLocalPlayer()
         PickIconArray[key].style.height = "104px"
         PickIconArray[key].style.width = "63px"
         PickIconArray[key].style.borderRadius = "0%"
         PickIconArray[key].style.margin = "5px"
-        if (IsPlayerSubscribed(playerID) && PickIconArray[key].GetAttributeInt("heroid", -1) == 10) {
+        const heroId = PickIconArray[key].GetAttributeInt("heroid", -1);
+        const moviePanel = PickIconArray[key].FindChild("Movie");
+        if (IsSpecialHeroSkinEquippedForPlayer(playerID, "npc_dota_hero_morphling") && heroId == 10) {
             PickIconArray[key].style.border = "1px solid #FF4500"
             PickIconArray[key].style.boxShadow = "0 0 25px rgba(255, 69, 0, 0.8), inset 0 0 8px rgba(255, 0, 0, 0.5)"
-            if (!PickIconArray[key].FindChild("Movie")) {
-            let sans = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/underfell_sans.webm", repeat: "true", autoplay: "onload" });
-            }
+            EnsurePickHeroMovie(PickIconArray[key], "file://{resources}/videos/heroes/underfell_sans.webm");
         }
-        else if (IsPlayerSubscribed(playerID) && PickIconArray[key].GetAttributeInt("heroid", -1) == 126) {
-            if (!PickIconArray[key].FindChild("Movie")) {
-            let invincible = $.CreatePanel("MoviePanel", PickIconArray[key], "Movie", { src: "file://{resources}/videos/heroes/invincible_arcana.webm", repeat: "true", autoplay: "onload" });
-            }
+        else if (IsSpecialHeroSkinEquippedForPlayer(playerID, "npc_dota_hero_void_spirit") && heroId == 126) {
+            EnsurePickHeroMovie(PickIconArray[key], "file://{resources}/videos/heroes/invincible_arcana.webm");
             PickIconArray[key].style.border = "1px solid #00FF00"  // Green border
             PickIconArray[key].style.boxShadow = "0 0 25px rgba(0, 255, 0, 0.8), inset 0 0 8px rgba(0, 255, 0, 0.5)" // Green glow
         }
         else {
+            if (moviePanel) {
+                moviePanel.DeleteAsync(0);
+            }
             PickIconArray[key].style.border = "1px solid #FFD700" // Default gold border 
             PickIconArray[key].style.boxShadow = "0 0 10px rgba(255, 215, 0, 0.5)" // Default gold glow
         }

@@ -92,15 +92,3 @@ ListenToGameEvent("chat_wheel_console_command", function (data, event)
         SendToConsole(data.command)
     end
 end, nil)
-
-
-if IsServer() then
-    return
-end
-
-ListenToGameEvent("event_toggle_alt_cast", function(event)
-    local ability = EntIndexToHScript(event.ent_index)
-    if ability then
-        ability.alt_casted = event.is_alted == 1
-    end
-end,nil)

@@ -226,7 +226,7 @@ function TeamShuffle:EnforceSetupTeamCapacity()
     local valid_team_lookup = {}
     local team_player_counts = {}
     local team_capacities = {}
-    local overflow_players = {}
+    local players_to_assign = {}
 
     for _, team_id in ipairs(team_ids) do
         valid_team_lookup[team_id] = true
@@ -243,13 +243,30 @@ function TeamShuffle:EnforceSetupTeamCapacity()
             if team_player_counts[team_id] < (team_capacities[team_id] or 0) then
                 team_player_counts[team_id] = team_player_counts[team_id] + 1
             else
-                table.insert(overflow_players, player_id)
+                table.insert(players_to_assign, player_id)
             end
+        else
+            table.insert(players_to_assign, player_id)
         end
     end
 
-    for _, player_id in ipairs(overflow_players) do
-        self:ApplyPlayerTeam(player_id, DOTA_TEAM_NOTEAM)
+    for _, player_id in ipairs(players_to_assign) do
+        local target_team_id = DOTA_TEAM_NOTEAM
+        local highest_open_slots = 0
+
+        for _, team_id in ipairs(team_ids) do
+            local open_slots = (team_capacities[team_id] or 0) - (team_player_counts[team_id] or 0)
+            if open_slots > highest_open_slots then
+                highest_open_slots = open_slots
+                target_team_id = team_id
+            end
+        end
+
+        self:ApplyPlayerTeam(player_id, target_team_id)
+
+        if valid_team_lookup[target_team_id] then
+            team_player_counts[target_team_id] = team_player_counts[target_team_id] + 1
+        end
     end
 end
 

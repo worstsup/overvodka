@@ -1,5 +1,3 @@
-LinkLuaModifier("modifier_peacemaker_q", "heroes/peacemaker/peacemaker_q", LUA_MODIFIER_MOTION_NONE )
-
 peacemaker_q = class({})
 
 function peacemaker_q:Precache(ctx)
@@ -28,38 +26,6 @@ function peacemaker_q:GetBehavior()
 	local additive = self:GetCaster():HasTalent("special_bonus_unique_peacemaker_5") and 1099511627776 or 0
     local behavior = self.BaseClass.GetBehavior(self)
     return tonumber(tostring(behavior)) + additive
-end
-
-function peacemaker_q:GetIntrinsicModifierName()
-	return "modifier_peacemaker_q"
-end
-
-modifier_peacemaker_q = class({})
-
-function modifier_peacemaker_q:IsHidden() return true end
-function modifier_peacemaker_q:IsPurgable() return false end
-function modifier_peacemaker_q:RemoveOnDeath() return false end
-
-function modifier_peacemaker_q:OnCreated()
-	if not IsServer() then return end
-end
-
-function modifier_peacemaker_q:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-end
-
-function modifier_peacemaker_q:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
-    	FireGameEvent("event_toggle_alt_cast", 
-    	{
-            ent_index = self:GetAbility():GetEntityIndex(),
-            is_alted = not self:GetAbility().alt_casted
-        })
-        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
-	end
 end
 
 function peacemaker_q:OnSpellStart()

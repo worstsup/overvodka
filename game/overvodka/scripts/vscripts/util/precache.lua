@@ -237,9 +237,20 @@ PrecacheUtils.units = {
 		"npc_silvername_garr",
 		"npc_zhenya_boss",
 		"npc_misolo_boss",
+		"sans_arcana_loadout",
+		"sans_arcana_loadout_picks",
+		"arsen_skin_loadout_picks",
+		"flash_immortal_loadout_picks",
+		"zhenya_moroz_loadout_picks",
+		"leon_werewolf_loadout_picks",
+		"sasavot_firefighter_loadout_picks",
+		"invincible_arcana_loadout",
+		"invincible_arcana_loadout_picks",
+		"macan_arcana_loadout_picks",
 }
 
 PrecacheUtils.models = {
+		"models/items/queenofpain/queenofpain_arcana/queenofpain_arcana_pedestal.vmdl",
 		"models/misolo/misolo_brood.vmdl",
 		"models/misolo/untitled.vmdl",
 		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",

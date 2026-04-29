@@ -49,10 +49,16 @@ function UpdateHeroSelection() {
     if (Game.GameStateIs(DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME)) {
         UnmuteAll()
     }
+
+    if (!Game.GameStateIsBefore(DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME)) {
+        StopSansPickMusic()
+    }
 }
 
 (function () {
     GameEvents.Subscribe('game_rules_state_change', UpdateHeroSelection);
+    GameEvents.Subscribe("sans_pick_music_start", OnSansPickMusicStart);
+    GameEvents.Subscribe("sans_pick_music_stop", OnSansPickMusicStop);
 })();
 
 HidePregameUntilTeamSelection();
@@ -130,6 +136,19 @@ function StartMuteLoop() {
 }
 
 StartMuteLoop();
+
+function OnSansPickMusicStart(event) {
+    const soundName = event && event.sound_name;
+    if (!soundName) {
+        return;
+    }
+
+    StartSansPickMusicByName(soundName);
+}
+
+function OnSansPickMusicStop() {
+    StopSansPickMusic();
+}
 
 
 GameEvents.Subscribe("PrintMuted", PrintMuted);

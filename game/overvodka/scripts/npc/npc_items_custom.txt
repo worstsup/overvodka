@@ -1334,13 +1334,13 @@
 		{
 				"aoe_bonus"				"75"
 				"bonus_health"			"275"
-				"bonus_intellect"		"20"
+				"bonus_intellect"		"15"
 				"bonus_strength"		"5"
 				"bonus_agility"			"5"
 				"bonus_hp_regen"		"5"
 				"bonus_armor"			"15"
 				"arctic_bind_root_max"  "2.0"
-				"arctic_bind_root_min"  "0.75"
+				"arctic_bind_root_min"  "0.5"
 				"aura_radius"
 				{
 					"value"	"1200"

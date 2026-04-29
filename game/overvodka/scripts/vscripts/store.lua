@@ -30,6 +30,7 @@ Store.Items = {
     pet_6 = { id = "pet_6", name = "#Store_Item_pet_6_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_6.png", modifier = "modifier_overvodka_store_pet_6" },
     pet_7 = { id = "pet_7", name = "#Store_Item_pet_7_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_7.png", modifier = "modifier_overvodka_store_pet_7" },
     pet_8 = { id = "pet_8", name = "#Store_Item_pet_8_name", type = "pets", price = 150, image = "file://{images}/custom_game/store/pets/pet_8.png", modifier = "modifier_overvodka_store_pet_8" },
+    pet_9 = { id = "pet_9", name = "#Store_Item_pet_9_name", type = "pets", price = 175, image = "file://{images}/custom_game/store/pets/pet_9.png", modifier = "modifier_overvodka_store_pet_9" },
     prime_day = { id = "prime_day", name = "#Store_Item_prime_day_name", type = "prime", price = 250, duration = "day", image = "file://{images}/custom_game/store/effects/effect_1.png" },
     prime_week = { id = "prime_week", name = "#Store_Item_prime_week_name", type = "prime", price = 700, duration = "week", image = "file://{images}/custom_game/store/effects/effect_1.png" }
 }
@@ -47,6 +48,7 @@ function Store:Init()
     CustomGameEventManager:RegisterListener("store_buy_item", function(_, event) self:OnBuyItem(event) end)
     CustomGameEventManager:RegisterListener("store_equip_item", function(_, event) self:OnEquipItem(event) end)
     CustomGameEventManager:RegisterListener("store_unequip_item", function(_, event) self:OnUnequipItem(event) end)
+    CustomGameEventManager:RegisterListener("hero_skin_switcher_preview_sound", function(_, event) self:OnHeroSkinSwitcherPreviewSound(event) end)
     CustomGameEventManager:RegisterListener("cases_request_info", function(_, event) self:OnCasesRequestInfo(event) end)
     CustomGameEventManager:RegisterListener("cases_open_case", function(_, event) self:OnCasesOpenCase(event) end)
     print("[Store] Initialized successfully.")
@@ -116,8 +118,14 @@ function Store:OnEquipItem(event)
     if not item or steamID == "0" then return end
     
     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-    if item.type == "skins" and hero and hero:GetUnitName() ~= item.hero then
+    local selectedHeroName = hero and hero:GetUnitName() or PlayerResource:GetSelectedHeroName(playerID)
+    if item.type == "skins" and selectedHeroName and selectedHeroName ~= "" and selectedHeroName ~= item.hero then
         SendErrorToPlayer(playerID, "#Store_NotYourHero", "UUI_SOUNDS.NoGold")
+        return
+    end
+
+    if item.prime_only and not Server:IsPlayerSubscribed(playerID) then
+        SendErrorToPlayer(playerID, "#DOTA_Tooltip_overvodka_prime_notice", "UUI_SOUNDS.NoGold")
         return
     end
 
@@ -137,6 +145,7 @@ function Store:OnEquipItem(event)
         elseif item.type == "skins" then
             self.playerData[playerID].equipped_skin = itemID
             self:ApplyEquippedSkin(playerID)
+            self:UpdateSansPickMusic(playerID)
         elseif item.type == "pets" then
             self.playerData[playerID].equipped_pet = itemID
             self:ApplyEquippedPet(playerID)
@@ -157,6 +166,7 @@ function Store:OnEquipItem(event)
             elseif item.type == "skins" then
                 self.playerData[playerID].equipped_skin = itemID
                 self:ApplyEquippedSkin(playerID)
+                self:UpdateSansPickMusic(playerID)
             elseif item.type == "pets" then
                 self.playerData[playerID].equipped_pet = itemID
                 self:ApplyEquippedPet(playerID)
@@ -187,6 +197,7 @@ function Store:OnUnequipItem(event)
             elseif body.unequipped_type == "skins" then
                 self.playerData[playerID].equipped_skin = nil
                 self:ApplyEquippedSkin(playerID)
+                self:UpdateSansPickMusic(playerID)
             elseif body.unequipped_type == "pets" then
                 self.playerData[playerID].equipped_pet = nil
                 self:ApplyEquippedPet(playerID)
@@ -195,6 +206,48 @@ function Store:OnUnequipItem(event)
             CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
         end
     )
+end
+
+function Store:UpdateSansPickMusic(playerID)
+    local player = PlayerResource:GetPlayer(playerID)
+    if not player then return end
+
+    local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+    local heroName = nil
+    if hero and not hero:IsNull() then
+        heroName = hero:GetUnitName()
+    else
+        heroName = PlayerResource:GetSelectedHeroName(playerID)
+    end
+
+    if heroName ~= "npc_dota_hero_morphling" then
+        return
+    end
+
+    local equippedSkin = self.playerData[playerID] and self.playerData[playerID].equipped_skin
+    local soundName = equippedSkin == "sans_arcana" and "sans_arcana_start" or "sans_start"
+    CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
+        sound_name = soundName
+    })
+end
+
+function Store:OnHeroSkinSwitcherPreviewSound(event)
+    local playerID = event.PlayerID
+    local player = PlayerResource:GetPlayer(playerID)
+    if not player then
+        return
+    end
+
+    local heroName = event.hero_name
+    if heroName ~= "npc_dota_hero_morphling" then
+        return
+    end
+
+    local previewSpecialSkin = tonumber(event.preview_special_skin or 0) == 1
+    local soundName = previewSpecialSkin and "sans_arcana_start" or "sans_start"
+    CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
+        sound_name = soundName
+    })
 end
 
 function Store:ApplyEquippedEffect(playerID, unit)

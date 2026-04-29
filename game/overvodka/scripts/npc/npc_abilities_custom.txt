@@ -8922,7 +8922,7 @@
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"AbilityCastRange"				"700"
+		"AbilityCastRange"				"600 800 1000"
 		"AbilityCooldown"				"15.0 13.0 11.0"
 		"AbilityManaCost"				"100 150 200"
 		"AbilityValues"

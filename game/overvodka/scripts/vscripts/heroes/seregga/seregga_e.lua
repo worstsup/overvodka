@@ -1,5 +1,3 @@
-LinkLuaModifier( "modifier_seregga_e", "heroes/seregga/seregga_e", LUA_MODIFIER_MOTION_NONE )
-
 seregga_e = class({})
 
 function seregga_e:Precache(ctx)
@@ -13,38 +11,6 @@ function seregga_e:GetBehavior()
 	local additive = self:GetSpecialValueFor("has_facet") == 1 and 1099511627776 or 0
     local behavior = self.BaseClass.GetBehavior(self)
     return tonumber(tostring(behavior)) + additive
-end
-
-function seregga_e:GetIntrinsicModifierName()
-	return "modifier_seregga_e"
-end
-
-modifier_seregga_e = class({})
-
-function modifier_seregga_e:IsHidden() return true end
-function modifier_seregga_e:IsPurgable() return false end
-function modifier_seregga_e:RemoveOnDeath() return false end
-
-function modifier_seregga_e:OnCreated()
-	if not IsServer() then return end
-end
-
-function modifier_seregga_e:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-end
-
-function modifier_seregga_e:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
-    	FireGameEvent("event_toggle_alt_cast", 
-    	{
-            ent_index = self:GetAbility():GetEntityIndex(),
-            is_alted = not self:GetAbility().alt_casted
-        })
-        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
-	end
 end
 
 function seregga_e:OnAbilityPhaseStart()
@@ -90,17 +56,7 @@ function seregga_e:OnSpellStart()
     ParticleManager:ReleaseParticleIndex(pfx)
     caster:EmitSound("Hero_Brewmaster.ThunderClap")
 
-    local enemies = FindUnitsInRadius(
-        caster:GetTeamNumber(),
-        origin,
-        nil,
-        radius,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-        DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER,
-        false
-    )
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
     local pull_mode = (self:GetSpecialValueFor("has_facet") == 1) and self:GetAltCastState()
     local pull_stop_offset = 50

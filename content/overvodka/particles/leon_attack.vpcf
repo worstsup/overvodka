@@ -224,13 +224,5 @@
 		{
 			m_ChildRef = resource:"particles/econ/items/vengeful/vengeful_arcana/vengeful_arcana_magic_missile_launch.vpcf"
 		},
-		{
-			m_ChildRef = resource:"particles/econ/items/drow/drow_arcana/drow_arcana_marksmanship_attack_triangles_frost.vpcf"
-			m_bDisableChild = true
-		},
-		{
-			m_ChildRef = resource:"particles/econ/items/drow/drow_arcana/drow_arcana_multishot_linear_proj_frost.vpcf"
-			m_bDisableChild = true
-		},
 	]
 }

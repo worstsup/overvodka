@@ -177,7 +177,7 @@ function OvervodkaGameMode:InitGameMode()
 	self.TEAMS_MISSING = 0
 	self.TeamsLeftGame = {}
 	self.TeamLeaveCheckTimers = {}
-	self.bDisableLastTeamAutoEnd = false -- поставить true если не хотим, чтобы игра заканчивалась, когда останется одна активная команда 
+	self.bDisableLastTeamAutoEnd = false -- поставить true если не хотим, чтобы игра заканчивалась, когда останется одна активная команда
 	self.GoldBonusPerTeam = 2
 	self.XpBonusPerTeam = 4
 	self.MIN_COUNTDOWN_TIME = 1200
@@ -289,7 +289,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -558,7 +558,7 @@ end
 function OvervodkaGameMode:GetSortedValidActiveTeams()
 	local sortedTeams = {}
 	for _, team in pairs( self.m_GatheredShuffledTeams ) do
-		if PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
+		if not (self.TeamsLeftGame and self.TeamsLeftGame[team]) and PlayerResource:GetNthPlayerIDOnTeam(team, 1) ~= -1 then
 			for i = 1, PlayerResource:GetPlayerCountForTeam(team) do
 				local PlayerID = PlayerResource:GetNthPlayerIDOnTeam(team, i)
 				if self:IsPlayerActiveForTeam(PlayerID) then

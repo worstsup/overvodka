@@ -369,8 +369,8 @@ function sans_w:PlayEffects( start_pos, end_pos, duration )
 	ParticleManager:SetParticleControl( effect_cast, 1, end_pos )
 	ParticleManager:SetParticleControl( effect_cast, 2, Vector( duration, 0, 0 ) )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	--EmitSoundOnLocationWithCaster( start_pos, sound_cast_2, caster )
-	--EmitSoundOnLocationWithCaster( end_pos, sound_cast_2, caster )
+	EmitSoundOnLocationWithCaster( start_pos, sound_cast_2, caster )
+	EmitSoundOnLocationWithCaster( end_pos, sound_cast_2, caster )
 end
 
 modifier_sans_w_thinker = class({})

@@ -1,43 +1,23 @@
 modifier_golovach_r = class({})
 
-function modifier_golovach_r:IsHidden()
-	return false
-end
+function modifier_golovach_r:IsHidden() return false end
+function modifier_golovach_r:IsDebuff() return false end
+function modifier_golovach_r:IsPurgable() return false end
 
-function modifier_golovach_r:IsDebuff()
-	return false
-end
-
-function modifier_golovach_r:IsPurgable()
-	return false
-end
-
-function modifier_golovach_r:OnCreated( kv )
+function modifier_golovach_r:OnCreated()
 	self.parent = self:GetParent()
 	self.bonus_ms = self:GetAbility():GetSpecialValueFor( "bonus_movespeed" )
 	if not IsServer() then return end
 	self.parent:Purge( false, true, false, false, false )
-	self.parent:AddNewModifier(
-		self.parent,
-		self:GetAbility(),
-		"modifier_golovach_r_fury",
-		{}
-	)
+	self.parent:AddNewModifier( self.parent, self:GetAbility(), "modifier_golovach_r_fury", {} )
 	self:PlayEffects()
-	self.hammer = self:GetCaster():GetTogglableWearable( DOTA_LOADOUT_TYPE_WEAPON )
-	if self.hammer then
-		self.hammer:AddEffects( EF_NODRAW )
-	end
 end
 
-function modifier_golovach_r:OnRefresh( kv )
+function modifier_golovach_r:OnRefresh()
 	self.bonus_ms = self:GetAbility():GetSpecialValueFor( "bonus_movespeed" )	
 	if not IsServer() then return end
 	self.parent:Purge( false, true, false, false, false )
 	self:PlayEffects()
-end
-
-function modifier_golovach_r:OnRemoved()
 end
 
 function modifier_golovach_r:OnDestroy()
@@ -51,21 +31,18 @@ function modifier_golovach_r:OnDestroy()
 	if recovery then
 		recovery:ForceDestroy()
 	end
-	self.hammer:RemoveEffects( EF_NODRAW )	
 end
 
 function modifier_golovach_r:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
-		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
 	}
-
-	return funcs
 end
+
 function modifier_golovach_r:OnAttackLanded(params)
 	if params.attacker ~= self:GetParent() then return end
-	if params.target:IsWard() then return end
+	if params.target:IsBuilding() or params.target:IsOther() then return end
 	local cleave_damage = self:GetAbility():GetSpecialValueFor("cleave_percent")
     local cleave_radius = self:GetAbility():GetSpecialValueFor("cleave_radius")
 	if not params.attacker:IsRangedAttacker() then
@@ -73,18 +50,13 @@ function modifier_golovach_r:OnAttackLanded(params)
 		DoCleaveAttack( self:GetParent(), params.target, self:GetAbility(), cleaveDamage, cleave_radius, cleave_radius, cleave_radius, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave_gods_strength.vpcf" )
 	end
 end
+
 function modifier_golovach_r:GetModifierMoveSpeedBonus_Percentage()
 	return self.bonus_ms
 end
 
-function modifier_golovach_r:GetActivityTranslationModifiers()
-	return "no_hammer"
-end
-
 function modifier_golovach_r:PlayEffects()
-	local particle_cast = "particles/units/heroes/hero_marci/marci_unleash_cast.vpcf"
-	local sound_cast = "golovach_r"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
+	local effect_cast = ParticleManager:CreateParticle( "particles/units/heroes/hero_marci/marci_unleash_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOn( sound_cast, self:GetParent() )
+	EmitSoundOn( "golovach_r", self:GetParent() )
 end

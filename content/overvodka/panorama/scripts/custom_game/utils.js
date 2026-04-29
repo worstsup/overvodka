@@ -523,6 +523,261 @@ function IsPlayerSubscribed(PlayerID){
     return false
 }
 
+const HERO_SKIN_PICK_CONFIG = {
+    "npc_dota_hero_morphling": {
+        itemId: "sans_arcana",
+        accessType: "prime",
+        specialPortrait: "file://{images}/heroes/npc_dota_hero_underfell_sans.png",
+        previewUnit: "sans_arcana_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseSans",
+        specialLabel: "#Store_Item_sans_arcana",
+        pickSoundBase: "sans_start",
+        pickSoundSpecial: "sans_arcana_start",
+    },
+    "npc_dota_hero_void_spirit": {
+        itemId: "invincible_arcana",
+        accessType: "prime",
+        specialPortrait: "file://{images}/heroes/npc_dota_hero_invincible_arcana.png",
+        previewUnit: "invincible_arcana_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseInvincible",
+        specialLabel: "#Store_Item_invincible_arcana",
+    },
+    "npc_dota_hero_earthshaker": {
+        itemId: "skin_9",
+        accessType: "prime",
+        previewUnit: "arsen_skin_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseArsen",
+        specialLabel: "#Store_Item_skin_9_name",
+    },
+    "npc_dota_hero_axe": {
+        itemId: "skin_11",
+        accessType: "prime",
+        previewUnit: "macan_arcana_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseMacan",
+        specialLabel: "#Store_Item_skin_11_name",
+    },
+    "npc_dota_hero_spirit_breaker": {
+        itemId: "skin_6",
+        accessType: "owned",
+        previewUnit: "flash_immortal_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseFlash",
+        specialLabel: "#Store_Item_skin_6_name",
+        price: 420,
+    },
+    "npc_dota_hero_mars": {
+        itemId: "skin_7",
+        accessType: "owned",
+        previewUnit: "zhenya_moroz_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseZhenya",
+        specialLabel: "#Store_Item_skin_7_name",
+        price: 300,
+    },
+    "npc_dota_hero_hoodwink": {
+        itemId: "skin_8",
+        accessType: "owned",
+        previewUnit: "leon_werewolf_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseLeon",
+        specialLabel: "#Store_Item_skin_8_name",
+        price: 325,
+    },
+    "npc_dota_hero_bloodseeker": {
+        itemId: "skin_10",
+        accessType: "owned",
+        previewUnit: "sasavot_firefighter_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseSasavot",
+        specialLabel: "#Store_Item_skin_10_name",
+        price: 250,
+    },
+};
+
+function GetOvervodkaUiSharedState() {
+    const customUiConfig = GameUI.CustomUIConfig();
+    if (!customUiConfig.__overvodkaSharedState) {
+        customUiConfig.__overvodkaSharedState = {
+            localHeroSkinSelectionOverrides: {},
+            sansPickMusicHandle: null,
+            sansPickMusicSoundName: null,
+        };
+    }
+
+    return customUiConfig.__overvodkaSharedState;
+}
+
+function GetOvervodkaLocalPlayerID() {
+    if (typeof Players !== "undefined" && typeof Players.GetLocalPlayer === "function") {
+        return Players.GetLocalPlayer();
+    }
+
+    if (typeof Game !== "undefined" && typeof Game.GetLocalPlayerID === "function") {
+        return Game.GetLocalPlayerID();
+    }
+
+    return -1;
+}
+
+function GetLocalHeroSkinSelectionOverrides() {
+    return GetOvervodkaUiSharedState().localHeroSkinSelectionOverrides;
+}
+
+function GetHeroSkinConfig(heroName) {
+    return HERO_SKIN_PICK_CONFIG[heroName] || null;
+}
+
+function GetPlayerStoreData(PlayerID) {
+    const steamID = GetSteamID32(PlayerID);
+    if (!steamID) {
+        return null;
+    }
+
+    return CustomNetTables.GetTableValue("player_data", steamID.toString()) || null;
+}
+
+function GetStoreItemData(itemId) {
+    const storeItems = CustomNetTables.GetTableValue("store", "items");
+    if (!storeItems || !itemId) {
+        return null;
+    }
+
+    return storeItems[itemId] || null;
+}
+
+function GetEquippedSkinForPlayer(PlayerID) {
+    const playerData = GetPlayerStoreData(PlayerID);
+    if (!playerData) {
+        return null;
+    }
+
+    return playerData.equipped_skin || null;
+}
+
+function GetEffectiveHeroSkinForPlayer(PlayerID, heroName) {
+    const localOverrides = GetLocalHeroSkinSelectionOverrides();
+    if (String(PlayerID) === String(GetOvervodkaLocalPlayerID()) && Object.prototype.hasOwnProperty.call(localOverrides, heroName)) {
+        return localOverrides[heroName];
+    }
+
+    return GetEquippedSkinForPlayer(PlayerID);
+}
+
+function IsSpecialHeroSkinEquippedForPlayer(PlayerID, heroName) {
+    const config = GetHeroSkinConfig(heroName);
+    if (!config) {
+        return false;
+    }
+
+    return GetEffectiveHeroSkinForPlayer(PlayerID, heroName) === config.itemId;
+}
+
+function PlayerOwnsSkinItem(PlayerID, itemId) {
+    const playerData = GetPlayerStoreData(PlayerID);
+    if (!playerData || !playerData.inventory) {
+        return false;
+    }
+
+    return !!playerData.inventory[itemId];
+}
+
+function CanUseSpecialHeroSkin(PlayerID, heroName) {
+    return HasAccessToSpecialHeroSkin(PlayerID, heroName);
+}
+
+function HasAccessToSpecialHeroSkin(PlayerID, heroName) {
+    const config = GetHeroSkinConfig(heroName);
+    if (!config) {
+        return false;
+    }
+
+    if (GetEquippedSkinForPlayer(PlayerID) === config.itemId) {
+        return true;
+    }
+
+    if (config.accessType === "prime") {
+        return IsPlayerSubscribed(PlayerID);
+    }
+
+    if (config.accessType === "owned") {
+        return PlayerOwnsSkinItem(PlayerID, config.itemId);
+    }
+
+    return false;
+}
+
+function GetHeroPickPortraitImage(heroName, playerId, defaultImage) {
+    const config = GetHeroSkinConfig(heroName);
+    if (config && config.specialPortrait && IsSpecialHeroSkinEquippedForPlayer(playerId, heroName)) {
+        return config.specialPortrait;
+    }
+
+    return defaultImage;
+}
+
+function SetLocalHeroSkinSelectionOverride(heroName, equippedSkinId) {
+    const localOverrides = GetLocalHeroSkinSelectionOverrides();
+    localOverrides[heroName] = equippedSkinId || null;
+}
+
+function ClearLocalHeroSkinSelectionOverrides() {
+    const localOverrides = GetLocalHeroSkinSelectionOverrides();
+    for (const heroName in localOverrides) {
+        delete localOverrides[heroName];
+    }
+}
+
+function GetSansPickMusicSoundName(heroName, playerId) {
+    const config = GetHeroSkinConfig(heroName);
+    if (!config || !config.pickSoundBase) {
+        return null;
+    }
+
+    if (config.pickSoundSpecial && IsSpecialHeroSkinEquippedForPlayer(playerId, heroName)) {
+        return config.pickSoundSpecial;
+    }
+
+    return config.pickSoundBase;
+}
+
+function StartSansPickMusicByName(soundName) {
+    if (!soundName) {
+        return;
+    }
+
+    const sharedState = GetOvervodkaUiSharedState();
+
+    if (!Game.GameStateIsBefore(DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME)) {
+        StopSansPickMusic();
+        return;
+    }
+
+    if (sharedState.sansPickMusicHandle !== null && sharedState.sansPickMusicSoundName === soundName) {
+        return;
+    }
+
+    StopSansPickMusic();
+    sharedState.sansPickMusicHandle = Game.EmitSound(soundName);
+    sharedState.sansPickMusicSoundName = sharedState.sansPickMusicHandle ? soundName : null;
+    if (!sharedState.sansPickMusicHandle) {
+        sharedState.sansPickMusicHandle = null;
+    }
+}
+
+function StopSansPickMusic() {
+    const sharedState = GetOvervodkaUiSharedState();
+    if (sharedState.sansPickMusicHandle !== null) {
+        Game.StopSound(sharedState.sansPickMusicHandle);
+        sharedState.sansPickMusicHandle = null;
+    }
+    sharedState.sansPickMusicSoundName = null;
+}
+
+function RestartSansPickMusicForLocalHero(heroName) {
+    if (heroName !== "npc_dota_hero_morphling") {
+        StopSansPickMusic();
+        return;
+    }
+
+    StartSansPickMusicByName(GetSansPickMusicSoundName(heroName, GetOvervodkaLocalPlayerID()));
+}
+
 function HasArcana(HeroName){
     if (HeroName == "npc_dota_hero_morphling")
     {
@@ -626,13 +881,14 @@ function GetDateString(Date, bTime){
 
 function GetUniqueSceneHeroName(hero_name)
 {
+    const usePickPreviewUnits = Game.GameStateIsBefore(DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME);
     if (hero_name == "npc_dota_hero_morphling")
     {
-        return "sans_arcana_loadout"
+        return usePickPreviewUnits ? "sans_arcana_loadout_picks" : "sans_arcana_loadout"
     }
     if (hero_name == "npc_dota_hero_void_spirit")
     {
-        return "invincible_arcana_loadout"
+        return usePickPreviewUnits ? "invincible_arcana_loadout_picks" : "invincible_arcana_loadout"
     }
     return hero_name
 }

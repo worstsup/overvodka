@@ -186,7 +186,7 @@
 		"AttackRange"		"150"
 		"MovementTurnRate"		"0.800000"
 		"ProjectileSpeed"		"900"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"18"
 		"AttributeStrengthGain"		"1.8"
 		"AttributeBaseIntelligence"		"15"

@@ -1,4 +1,3 @@
-LinkLuaModifier("modifier_visitor_w",  			  "heroes/pale_visitor/visitor_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_w_guest_solo",  "heroes/pale_visitor/visitor_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_w_guest_group", "heroes/pale_visitor/visitor_w", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_visitor_w_enemy_fear",  "heroes/pale_visitor/visitor_w", LUA_MODIFIER_MOTION_NONE)
@@ -28,39 +27,6 @@ end
 
 function visitor_w:GetManaCost(level)
 	return self.BaseClass.GetManaCost(self, level)
-end
-
-function visitor_w:GetIntrinsicModifierName()
-	return "modifier_visitor_w"
-end
-
-
-modifier_visitor_w = class({})
-
-function modifier_visitor_w:IsHidden() return true end
-function modifier_visitor_w:IsPurgable() return false end
-function modifier_visitor_w:RemoveOnDeath() return false end
-
-function modifier_visitor_w:OnCreated()
-	if not IsServer() then return end
-end
-
-function modifier_visitor_w:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-end
-
-function modifier_visitor_w:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
-    	FireGameEvent("event_toggle_alt_cast", 
-    	{
-            ent_index = self:GetAbility():GetEntityIndex(),
-            is_alted = not self:GetAbility().alt_casted
-        })
-        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
-	end
 end
 
 local function CountEnemiesAround(unit, radius)

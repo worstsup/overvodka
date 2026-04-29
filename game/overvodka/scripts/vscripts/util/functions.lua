@@ -31,15 +31,3 @@ function CDOTA_BaseNPC:HasArcana()
     end
     return false
 end
-
-function CDOTABaseAbility:ToggleAltCast()
-    ExecuteOrderFromTable({
-        UnitIndex = self:GetCaster():GetEntityIndex(),
-        OrderType = DOTA_UNIT_ORDER_CAST_TOGGLE_ALT,
-        AbilityIndex = self:GetEntityIndex()
-    })
-end
-
-function CDOTABaseAbility:GetAltCastState()
-    return self.alt_casted or false
-end

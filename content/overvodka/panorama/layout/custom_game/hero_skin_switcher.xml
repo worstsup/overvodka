@@ -1,0 +1,35 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/utils.js" />
+        <include src="file://{resources}/scripts/custom_game/hero_skin_switcher.js" />
+    </scripts>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/multiteam_hero_select_overlay.css" />
+    </styles>
+
+    <Panel class="HeroSkinSwitcherRoot" hittest="false">
+        <Panel id="HeroSkinSwitcher" hittest="true">
+            <Panel id="HeroSkinSwitcherWarning" hittest="false">
+                <Label id="HeroSkinSwitcherWarningLabel" text="#HeroSkinToggle_PrimeOnly" />
+            </Panel>
+            <Label id="HeroSkinSwitcherTitle" text="#HeroSkinToggle_Title" />
+            <Panel id="HeroSkinSwitcherButtons" hittest="true">
+                <Button id="HeroSkinBaseButton" hittest="true">
+                    <Label id="HeroSkinBaseButtonLabel" />
+                </Button>
+                <Button id="HeroSkinSpecialButton" hittest="true">
+                    <Label id="HeroSkinSpecialButtonLabel" />
+                </Button>
+            </Panel>
+            <Panel id="HeroSkinSubscribeButton" hittest="true">
+                <Panel class="HeroSkinSubscribeButtonGlow" hittest="false" />
+                <Panel class="HeroSkinSubscribeButtonShine" hittest="false" />
+                <Panel class="HeroSkinSubscribeButtonWrapper" hittest="false">
+                    <Image id="HeroSkinSubscribeButtonIcon" class="HeroSkinSubscribeTelegramIcon" src="file://{images}/custom_game/tg_icon.png"/>
+                    <Label id="HeroSkinSubscribeButtonLabel" class="HeroSkinSubscribeButtonText" text="#Store_Need_Prime_Button" />
+                    <Label id="HeroSkinSubscribeButtonPrice" class="HeroSkinSubscribeButtonPrice" text="" />
+                </Panel>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

@@ -28,13 +28,10 @@ const StoreBody = $("#StoreBody");
     const localPlayerID64 = Players.GetLocalPlayer();
     const localSteamID = GetSteamID32(localPlayerID64).toString();
 
-    const PRIME_AUTO_SKINS = {
-        "npc_dota_hero_morphling": "sans_arcana",
-        "npc_dota_hero_void_spirit": "invincible_arcana",
-    };
     const STORE_ITEM_ORDER = [
         "prime_day",
         "prime_week",
+        "pet_9",
         "pet_8",
         "pet_7",
         "pet_6",
@@ -64,8 +61,6 @@ const StoreBody = $("#StoreBody");
         "skin_1",
     ];
     const STORE_ITEM_ORDER_INDEX = {};
-    let primeAutoApplied = false;
-
     for (let i = 0; i < STORE_ITEM_ORDER.length; i++) {
         STORE_ITEM_ORDER_INDEX[STORE_ITEM_ORDER[i]] = i;
     }
@@ -119,42 +114,6 @@ const StoreBody = $("#StoreBody");
         }
         return false;
     }
-
-    function TryAutoEquipPrimeSkin() {
-        if (primeAutoApplied) return;
-
-        if (!hasPrime()) {
-            return;
-        }
-
-        const playerID = Players.GetLocalPlayer();
-        const heroEnt = Players.GetPlayerHeroEntityIndex(playerID);
-
-        if (heroEnt === -1) {
-            $.Schedule(1.0, TryAutoEquipPrimeSkin);
-            return;
-        }
-
-        const heroName = Entities.GetUnitName(heroEnt);
-        const itemId = PRIME_AUTO_SKINS[heroName];
-
-        if (!itemId) {
-            return;
-        }
-
-        if (playerEquipped.skin && playerEquipped.skin !== itemId) {
-            return;
-        }
-
-        primeAutoApplied = true;
-
-        GameEvents.SendCustomGameEventToServer("store_equip_item", {
-            item_id: itemId,
-            item_type: "skins"
-        });
-    }
-
-    $.Schedule(1.0, TryAutoEquipPrimeSkin);
 
     function OnStoreNetTableChange(table_name, key, data) {
         if (key === "items") {
@@ -439,6 +398,10 @@ const StoreBody = $("#StoreBody");
             const isSelected = name === categoryName;
             cat.button.SetHasClass("Selected", isSelected);
             cat.panel.SetHasClass("Visible", isSelected);
+        }
+
+        if (categoryName !== "cases" && CasesChestAnimation && CasesChestAnimation.Close) {
+            CasesChestAnimation.Close();
         }
 
         if (categoryName === "cases" && Store.Cases) {
@@ -1076,5 +1039,6 @@ var CasesChestAnimation = (function () {
     return {
         StartRoll: StartRoll,
         OpenChestHudForPreview: OpenChestHudForPreview,
+        Close: CloseDropPanel,
     };
 })();

@@ -1,5 +1,18 @@
 <!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
+    UUI_SOUNDS.SkinChange = 
+    {
+        type = "dota_src1_3d"
+        vsnd_files =
+        [
+            "sounds/ui/menu/option_toggle.vsnd"
+        ]
+        volume = "1.5"
+        pitch = "1.00000"
+        soundlevel = "100.0"
+        distance_max = "2500.0"
+        event_type = "2.0"
+    }
     ORBS.Drop =
     {
         type = "dota_src1_3d"

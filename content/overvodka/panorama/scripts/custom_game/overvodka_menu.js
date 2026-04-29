@@ -27,13 +27,53 @@ var Menu = {};
         Vote: $("#TabButton_Vote")
     };
 
-    $.CreatePanel("DOTAScenePanel", ModelPreview3, "", { class: "hero_model_strategy", style: "width:70%;height:90%;", unit: "arsen_skin_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
+    function EnsurePrimePreviewScene(parentPanel, panelId, desiredUnit, style) {
+        let previewPanel = parentPanel.FindChildTraverse(panelId);
+        if (previewPanel) {
+            const currentUnit = previewPanel.GetAttributeString("overvodka_unit", "");
+            if (currentUnit === desiredUnit) {
+                return previewPanel;
+            }
+
+            previewPanel.DeleteAsync(0);
+        }
+
+        previewPanel = $.CreatePanel("DOTAScenePanel", parentPanel, panelId, {
+            class: "hero_model_strategy",
+            style: style,
+            unit: desiredUnit,
+            particleonly: "false",
+            renderdeferred: "false",
+            antialias: "true",
+            renderwaterreflections: "true",
+            allowrotation: "true",
+            drawbackground: "false"
+        });
+        previewPanel.SetAttributeString("overvodka_unit", desiredUnit);
+        return previewPanel;
+    }
+
+    function RefreshPrimePreviewUnits() {
+        EnsurePrimePreviewScene(ModelPreview3, "PrimePreviewArsenScene", "arsen_skin_loadout", "width:70%;height:90%;");
+        EnsurePrimePreviewScene(
+            ModelPreview,
+            "PrimePreviewSansScene",
+            "sans_arcana_loadout",
+            "width:48%;height:80%;"
+        );
+        EnsurePrimePreviewScene(
+            ModelPreview2,
+            "PrimePreviewInvincibleScene",
+            "invincible_arcana_loadout",
+            "width:48%;height:80%;"
+        );
+        EnsurePrimePreviewScene(ModelPreview4, "PrimePreviewMacanScene", "macan_arcana_loadout", "width:70%;height:95%;");
+    }
+
+    RefreshPrimePreviewUnits();
     ModelPreview3.SetHasClass("Visible", false);
-    $.CreatePanel("DOTAScenePanel", ModelPreview, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "sans_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview.SetHasClass("Visible", false);
-    $.CreatePanel("DOTAScenePanel", ModelPreview2, "", { class: "hero_model_strategy", style: "width:48%;height:80%;", unit: "invincible_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview2.SetHasClass("Visible", false);
-    $.CreatePanel("DOTAScenePanel", ModelPreview4, "", { class: "hero_model_strategy", style: "width:70%;height:95%;", unit: "macan_arcana_loadout", particleonly:"false", renderdeferred:"false", antialias:"true", renderwaterreflections:"true", allowrotation: "true", drawbackground: "false" });
     ModelPreview4.SetHasClass("Visible", false);
 
     const primePreviewPanels = [
@@ -58,11 +98,15 @@ var Menu = {};
         isMenuOpen = !isMenuOpen;
         mainPanel.SetHasClass("Visible", isMenuOpen);
         OvervodkaHamster.SetHasClass("Visible", isMenuOpen);
+        RefreshPrimePreviewUnits();
 
         if (!isMenuOpen) {
             SetPrimePreviewVisible(false);
             if (Store && Store.HideCoinsTooltip) {
                 Store.HideCoinsTooltip();
+            }
+            if (typeof CasesChestAnimation !== "undefined" && CasesChestAnimation && CasesChestAnimation.Close) {
+                CasesChestAnimation.Close();
             }
         }
         Game.EmitSound("UUI_SOUNDS.OvervodkaMenu");
@@ -80,11 +124,15 @@ var Menu = {};
         
         Game.EmitSound("ui_topmenu_select");
         currentTab = tabName;
+        RefreshPrimePreviewUnits();
         
         const isPrimeOpen = tabName === 'Prime';
         SetPrimePreviewVisible(isPrimeOpen);
         if (Store && Store.HideCoinsTooltip && tabName !== 'Store') {
             Store.HideCoinsTooltip();
+        }
+        if (tabName !== 'Store' && typeof CasesChestAnimation !== "undefined" && CasesChestAnimation && CasesChestAnimation.Close) {
+            CasesChestAnimation.Close();
         }
 
         for (const name in tabButtons) {

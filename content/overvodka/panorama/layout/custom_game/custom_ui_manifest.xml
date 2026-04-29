@@ -32,6 +32,7 @@
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
 		<CustomUIElement type="HeroSelection" 		layoutfile="file://{resources}/layout/custom_game/pick_guides.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
+		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/hero_skin_switcher.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/pick_guides.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/strategy_links.xml" />
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_quests.xml" />
@@ -40,5 +41,6 @@
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
 		<Image id="gamemode" class="SeqImg" src="file://{images}/items/bloodstone_vodka.png" />
+		<Image src="file://{images}/custom_game/store/pets/pet_9.png" />
 	</Panel>
 </root>

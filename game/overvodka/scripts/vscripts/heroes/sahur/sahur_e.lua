@@ -1,5 +1,4 @@
 LinkLuaModifier( "modifier_sahur_e_thinker", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_sahur_e", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier( "modifier_sahur_e_jump", "heroes/sahur/sahur_e", LUA_MODIFIER_MOTION_BOTH )
 
 sahur_e = class({})
@@ -13,40 +12,6 @@ function sahur_e:GetBehavior()
 	local additive = self:GetSpecialValueFor("jump_end") == 1 and 1099511627776 or 0
     local behavior = self.BaseClass.GetBehavior(self)
     return tonumber(tostring(behavior)) + additive
-end
-
-function sahur_e:GetIntrinsicModifierName()
-	return "modifier_sahur_e"
-end
-
-
-modifier_sahur_e = class({})
-
-function modifier_sahur_e:IsHidden() return true end
-function modifier_sahur_e:IsPurgable() return false end
-function modifier_sahur_e:RemoveOnDeath() return false end
-
-function modifier_sahur_e:OnCreated()
-	if not IsServer() then return end
-end
-
-function modifier_sahur_e:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_ORDER,
-	}
-end
-
-
-function modifier_sahur_e:OnOrder( params )
-	if params.unit~=self:GetParent() then return end
-	if params.order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_ALT then
-    	FireGameEvent("event_toggle_alt_cast", 
-    	{
-            ent_index = self:GetAbility():GetEntityIndex(),
-            is_alted = not self:GetAbility().alt_casted
-        })
-        self:GetAbility().alt_casted = not self:GetAbility().alt_casted
-	end
 end
 
 function sahur_e:OnSpellStart()
