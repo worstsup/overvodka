@@ -298,7 +298,7 @@ function ApplyHeroSkinSwitcherSelection(heroName, equipSpecialSkin) {
 }
 
 function RequestHeroSkinSwitcherPreviewSound(heroName, equipSpecialSkin) {
-    if (heroName !== "npc_dota_hero_morphling") {
+    if (heroName !== "npc_dota_hero_morphling" && heroName !== "npc_dota_hero_bounty_hunter") {
         return;
     }
 

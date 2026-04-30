@@ -239,6 +239,8 @@ PrecacheUtils.units = {
 		"npc_misolo_boss",
 		"sans_arcana_loadout",
 		"sans_arcana_loadout_picks",
+		"dark_drun_loadout",
+		"dark_drun_loadout_picks",
 		"arsen_skin_loadout_picks",
 		"flash_immortal_loadout_picks",
 		"zhenya_moroz_loadout_picks",
@@ -253,6 +255,7 @@ PrecacheUtils.models = {
 		"models/items/queenofpain/queenofpain_arcana/queenofpain_arcana_pedestal.vmdl",
 		"models/misolo/misolo_brood.vmdl",
 		"models/misolo/untitled.vmdl",
+		"models/drun/temniydrun.vmdl",
 		"models/items/pedestals/pedestal_2/pedestal_2.vmdl",
         "models/props_gameplay/rune_goldxp.vmdl",
         "models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl",
@@ -384,6 +387,8 @@ PrecacheUtils.models = {
 		"models/amor/amor.vmdl",
 		"models/epstein/epstein.vmdl",
 		"models/nightfall/nightfall.vmdl",
+		"models/kotost/kot.vmdl",
+		"models/items/faceless_void/faceless_void_arcana/faceless_void_arcana_pedestal.vmdl",
 
 		--silvername
 		"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl", -- temporary
@@ -408,6 +413,7 @@ PrecacheUtils.sounds = {
 		"soundevents/bombardiro.vsndevts",
 		"soundevents/bombardiro_plane_sound.vsndevts",
     	"soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts",
+		"soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts",
     	"soundevents/armature_crit.vsndevts",
 		"soundevents/5opka_start.vsndevts",
 		"soundevents/kolibri_start.vsndevts",
@@ -493,7 +499,7 @@ PrecacheUtils.sounds = {
 		"soundevents/stopan.vsndevts",
 		"soundevents/lvinoe.vsndevts",
 		"soundevents/secret.vsndevts",
-		"soundevents/mell_start.vsndevts", 
+		"soundevents/mell_start.vsndevts",
 		"soundevents/cond.vsndevts",
 		"soundevents/zhishi.vsndevts",
 		"soundevents/zhishi_start.vsndevts",

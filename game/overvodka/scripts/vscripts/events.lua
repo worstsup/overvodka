@@ -149,6 +149,12 @@ function OvervodkaGameMode:OnHeroSelected(event)
 		CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
 			sound_name = soundName
 		})
+	elseif event.hero_unit == "npc_dota_hero_bounty_hunter" then
+		local equippedSkin = Store and Store.playerData and Store.playerData[event.player_id] and Store.playerData[event.player_id].equipped_skin
+		local soundName = equippedSkin == "skin_14" and "mell_start_arcana" or "mell_start"
+		CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
+			sound_name = soundName
+		})
 	else
 		CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_stop", {})
 	end

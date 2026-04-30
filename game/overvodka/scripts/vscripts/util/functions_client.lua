@@ -29,3 +29,10 @@ function C_DOTA_BaseNPC:HasArcana()
     end
     return false
 end
+
+function C_DOTA_BaseNPC:HasMellstroyArcanaSkin()
+    if self:HasModifier("modifier_overvodka_store_skin_14") then
+        return true
+    end
+    return false
+end

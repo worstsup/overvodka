@@ -7,6 +7,13 @@ function mellstroy_scepter:Precache( context )
     PrecacheResource("particle", "particles/mellstroy_scepter.vpcf", context)
 end
 
+function mellstroy_scepter:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "mellstroy_scepter_arcana"
+    end
+    return "mellstroy_scepter"
+end
+
 function mellstroy_scepter:GetGoldCost(iLevel)
     local base = self:GetSpecialValueFor("gold_cost")
 

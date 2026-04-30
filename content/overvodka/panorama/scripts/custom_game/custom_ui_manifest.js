@@ -51,6 +51,7 @@ function UpdateHeroSelection() {
     }
 
     if (!Game.GameStateIsBefore(DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME)) {
+        ClearLocalHeroSkinSelectionOverrides()
         StopSansPickMusic()
     }
 }

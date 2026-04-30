@@ -4,7 +4,15 @@ mellstroy_business = class({})
 
 function mellstroy_business:Precache(context)
     PrecacheResource("particle", "particles/mellstroy_business.vpcf", context)
+    PrecacheResource("particle", "particles/mellstroy_arcana/mellstroy_business_arcana.vpcf", context)
     PrecacheResource("soundfile", "soundevents/biznes.vsndevts", context ) 
+end
+
+function mellstroy_business:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "biznes_arcana"
+    end
+    return "biznes"
 end
 
 function mellstroy_business:GetGoldCost(iLevel)
@@ -20,16 +28,21 @@ end
 
 function mellstroy_business:OnSpellStart()
     if not IsServer() then return end
-    local gold_cost = self:GetSpecialValueFor( "gold_cost" ) + self:GetSpecialValueFor("shield_from_gold")  * PlayerResource:GetGold(self:GetCaster():GetPlayerID()) * 0.01
-    local player_id = self:GetCaster():GetPlayerID()
+    local caster = self:GetCaster()
+    local gold_cost = self:GetSpecialValueFor( "gold_cost" ) + self:GetSpecialValueFor("shield_from_gold")  * PlayerResource:GetGold(caster:GetPlayerID()) * 0.01
+    local player_id = caster:GetPlayerID()
     PlayerResource:SpendGold(player_id, gold_cost, 4)
     local duration = self:GetSpecialValueFor("duration")
-    local modifier_mellstroy_business = self:GetCaster():FindModifierByName("modifier_mellstroy_business")
+    local modifier_mellstroy_business = caster:FindModifierByName("modifier_mellstroy_business")
     if modifier_mellstroy_business then
         modifier_mellstroy_business:Destroy()
     end
-    self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_mellstroy_business", {duration = duration})
-    self:GetCaster():EmitSound("biznes")
+    local sound = "biznes"
+    if caster:HasMellstroyArcanaSkin() then
+        sound = "biznes_arcana"
+    end
+    caster:AddNewModifier(caster, self, "modifier_mellstroy_business", {duration = duration})
+    caster:EmitSound(sound)
 end
 
 modifier_mellstroy_business = class({})
@@ -41,9 +54,15 @@ function modifier_mellstroy_business:OnCreated()
         local ability = self:GetAbility()
         local caster = self:GetCaster()
         local gold = PlayerResource:GetGold(caster:GetPlayerID())
-        if self:GetCaster():HasScepter() then
+        if caster:HasScepter() then
             gold = gold * 1.5
         end
+        local particle = "particles/mellstroy_business.vpcf"
+        if caster:HasMellstroyArcanaSkin() then
+            particle = "particles/mellstroy_arcana/mellstroy_business_arcana.vpcf"
+        end
+        local p = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN_FOLLOW, caster)
+        self:AddParticle(p, false, false, -1, false, false)
         self.barrier_max = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
         self.barrier_block = ability:GetSpecialValueFor("shield") + ability:GetSpecialValueFor("shield_from_gold") * gold * 0.01
         self:SetHasCustomTransmitterData( true )
@@ -94,12 +113,4 @@ end
 
 function modifier_mellstroy_business:GetModifierMoveSpeedBonus_Percentage()
     return self:GetAbility():GetSpecialValueFor("bonus_movespeed")
-end
-
-function modifier_mellstroy_business:GetEffectName()
-    return "particles/mellstroy_business.vpcf"
-end
-
-function modifier_mellstroy_business:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
 end

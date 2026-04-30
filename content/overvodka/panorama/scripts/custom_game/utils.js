@@ -266,7 +266,12 @@ function GetOvervodkaHeroName(HeroName){
     }
     if (HeroName == "npc_dota_hero_bounty_hunter")
     {
-        OvervodkaName = "npc_dota_hero_mellstroy"
+        if (HasModifier(HeroName, "modifier_overvodka_store_skin_14")) {
+            OvervodkaName = "npc_dota_hero_mellstroy_drun"
+        }
+        else {
+            OvervodkaName = "npc_dota_hero_mellstroy"
+        }
     }
     if (HeroName == "npc_dota_hero_meepo")
     {
@@ -544,10 +549,11 @@ const HERO_SKIN_PICK_CONFIG = {
     },
     "npc_dota_hero_earthshaker": {
         itemId: "skin_9",
-        accessType: "prime",
+        accessType: "owned",
         previewUnit: "arsen_skin_loadout_picks",
         baseLabel: "#HeroSkinToggle_BaseArsen",
         specialLabel: "#Store_Item_skin_9_name",
+        price: 250,
     },
     "npc_dota_hero_axe": {
         itemId: "skin_11",
@@ -555,6 +561,16 @@ const HERO_SKIN_PICK_CONFIG = {
         previewUnit: "macan_arcana_loadout_picks",
         baseLabel: "#HeroSkinToggle_BaseMacan",
         specialLabel: "#Store_Item_skin_11_name",
+    },
+    "npc_dota_hero_bounty_hunter": {
+        itemId: "skin_14",
+        accessType: "prime",
+        specialPortrait: "file://{images}/heroes/npc_dota_hero_mellstroy_drun.png",
+        previewUnit: "dark_drun_loadout_picks",
+        baseLabel: "#HeroSkinToggle_BaseMellstroy",
+        specialLabel: "#Store_Item_skin_14_name",
+        pickSoundBase: "mell_start",
+        pickSoundSpecial: "mell_start_arcana",
     },
     "npc_dota_hero_spirit_breaker": {
         itemId: "skin_6",
@@ -709,6 +725,14 @@ function GetHeroPickPortraitImage(heroName, playerId, defaultImage) {
     }
 
     return defaultImage;
+}
+
+function GetHeroDefaultPortraitImage(heroName) {
+    if (heroName === "npc_dota_hero_bounty_hunter") {
+        return "file://{images}/heroes/npc_dota_hero_mellstroy.png";
+    }
+
+    return "file://{images}/heroes/" + GetOvervodkaHeroName(heroName) + ".png";
 }
 
 function SetLocalHeroSkinSelectionOverride(heroName, equippedSkinId) {

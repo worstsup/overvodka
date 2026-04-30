@@ -14,6 +14,13 @@ function mellstroy_meteors:Precache(context)
     PrecacheResource("soundfile", "soundevents/fruits.vsndevts", context)
 end
 
+function mellstroy_meteors:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "fruits_arcana"
+    end
+    return "fruits"
+end
+
 function mellstroy_meteors:GetGoldCost(iLevel)
     local base = self:GetSpecialValueFor("gold_cost")
 

@@ -13,9 +13,10 @@ Store.Items = {
     invincible_arcana = { id = "invincible_arcana", name = "#Store_Item_invincible_arcana", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/invincible_arcana.png", hero = "npc_dota_hero_void_spirit", modifier = "modifier_invincible_arcana" },
     skin_7 = { id = "skin_7", name = "#Store_Item_skin_7_name", type = "skins", price = 300, image = "file://{images}/custom_game/store/skins/skin_7.png", hero = "npc_dota_hero_mars", modifier = "modifier_overvodka_store_skin_7" },
     skin_8 = { id = "skin_8", name = "#Store_Item_skin_8_name", type = "skins", price = 325, image = "file://{images}/custom_game/store/skins/skin_8.png", hero = "npc_dota_hero_hoodwink", modifier = "modifier_overvodka_store_skin_8" },
-    skin_9 = { id = "skin_9", name = "#Store_Item_skin_9_name", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/skin_9.png", hero = "npc_dota_hero_earthshaker", modifier = "modifier_overvodka_store_skin_9" },
+    skin_9 = { id = "skin_9", name = "#Store_Item_skin_9_name", type = "skins", price = 250, image = "file://{images}/custom_game/store/skins/skin_9.png", hero = "npc_dota_hero_earthshaker", modifier = "modifier_overvodka_store_skin_9" },
     skin_10 = { id = "skin_10", name = "#Store_Item_skin_10_name", type = "skins", price = 250, image = "file://{images}/custom_game/store/skins/skin_10.png", hero = "npc_dota_hero_bloodseeker", modifier = "modifier_overvodka_store_skin_10" },
     skin_11 = { id = "skin_11", name = "#Store_Item_skin_11_name", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/skin_11.png", hero = "npc_dota_hero_axe", modifier = "modifier_overvodka_store_skin_11" },
+    skin_14 = { id = "skin_14", name = "#Store_Item_skin_14_name", type = "skins", price = 0, prime_only = true, image = "file://{images}/custom_game/store/skins/skin_14.png", hero = "npc_dota_hero_bounty_hunter", modifier = "modifier_overvodka_store_skin_14" },
     skin_12 = { id = "skin_12", name = "#Store_Item_skin_12_name", type = "skins", price = 120, image = "file://{images}/custom_game/store/skins/skin_12.png", hero = "npc_dota_hero_warlock", modifier = "modifier_overvodka_store_skin_12" },
     skin_13 = { id = "skin_13", name = "#Store_Item_skin_13_name", type = "skins", price = 150, image = "file://{images}/custom_game/store/skins/skin_13.png", hero = "npc_dota_hero_void_spirit", modifier = "modifier_overvodka_store_skin_13" },
     effect_1 = { id = "effect_1", name = "#Store_Item_effect_1_name", type = "effects", price = 50, image = "file://{images}/custom_game/store/effects/effect_1.png", modifier = "modifier_overvodka_store_effect_1" },
@@ -185,6 +186,29 @@ function Store:OnUnequipItem(event)
 
     if not itemType or steamID == "0" then return end
 
+    local equippedSkinID = self.playerData[playerID] and self.playerData[playerID].equipped_skin
+    local equippedEffectID = self.playerData[playerID] and self.playerData[playerID].equipped_effect
+    local equippedPetID = self.playerData[playerID] and self.playerData[playerID].equipped_pet
+    local equippedItemID = itemType == "skins" and equippedSkinID or itemType == "effects" and equippedEffectID or itemType == "pets" and equippedPetID or nil
+    local equippedItem = equippedItemID and self.Items[equippedItemID] or nil
+
+    if equippedItem and equippedItem.prime_only then
+        if itemType == "effects" then
+            self.playerData[playerID].equipped_effect = nil
+            self:ApplyEquippedEffect(playerID)
+        elseif itemType == "skins" then
+            self.playerData[playerID].equipped_skin = nil
+            self:ApplyEquippedSkin(playerID)
+            self:UpdateSansPickMusic(playerID)
+        elseif itemType == "pets" then
+            self.playerData[playerID].equipped_pet = nil
+            self:ApplyEquippedPet(playerID)
+        end
+
+        CustomNetTables:SetTableValue("player_data", steamID, self.playerData[playerID])
+        return
+    end
+
     self:SendRequest(
         SERVER_URL .. "unequip_item",
         { SteamID = steamID, item_type = itemType },
@@ -220,12 +244,23 @@ function Store:UpdateSansPickMusic(playerID)
         heroName = PlayerResource:GetSelectedHeroName(playerID)
     end
 
-    if heroName ~= "npc_dota_hero_morphling" then
+    if heroName ~= "npc_dota_hero_morphling" and heroName ~= "npc_dota_hero_bounty_hunter" then
         return
     end
 
     local equippedSkin = self.playerData[playerID] and self.playerData[playerID].equipped_skin
-    local soundName = equippedSkin == "sans_arcana" and "sans_arcana_start" or "sans_start"
+    local soundName = nil
+
+    if heroName == "npc_dota_hero_morphling" then
+        soundName = equippedSkin == "sans_arcana" and "sans_arcana_start" or "sans_start"
+    elseif heroName == "npc_dota_hero_bounty_hunter" then
+        soundName = equippedSkin == "skin_14" and "mell_start_arcana" or "mell_start"
+    end
+
+    if not soundName then
+        return
+    end
+
     CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
         sound_name = soundName
     })
@@ -239,12 +274,23 @@ function Store:OnHeroSkinSwitcherPreviewSound(event)
     end
 
     local heroName = event.hero_name
-    if heroName ~= "npc_dota_hero_morphling" then
+    if heroName ~= "npc_dota_hero_morphling" and heroName ~= "npc_dota_hero_bounty_hunter" then
         return
     end
 
     local previewSpecialSkin = tonumber(event.preview_special_skin or 0) == 1
-    local soundName = previewSpecialSkin and "sans_arcana_start" or "sans_start"
+    local soundName = nil
+
+    if heroName == "npc_dota_hero_morphling" then
+        soundName = previewSpecialSkin and "sans_arcana_start" or "sans_start"
+    elseif heroName == "npc_dota_hero_bounty_hunter" then
+        soundName = previewSpecialSkin and "mell_start_arcana" or "mell_start"
+    end
+
+    if not soundName then
+        return
+    end
+
     CustomGameEventManager:Send_ServerToPlayer(player, "sans_pick_music_start", {
         sound_name = soundName
     })

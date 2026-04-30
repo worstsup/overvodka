@@ -160,6 +160,94 @@ function HeroSelection() {
     PersonaSelector.style.visibility = "collapse"
     HeroAbilities.style.marginTop = "0px"
     let InnateHolder = HeroAbilities.FindChildTraverse("InnateAbilityContainer")
+    const PickAbilityIconMap = {
+        gaster_blaster: { hero: "npc_dota_hero_morphling", base: "gaster_blaster", special: "gaster_blaster_arcana" },
+        sans_w: { hero: "npc_dota_hero_morphling", base: "sans_w", special: "sans_w_arcana" },
+        sans_e: { hero: "npc_dota_hero_morphling", base: "sans_e", special: "sans_e_arcana" },
+        sans_shard: { hero: "npc_dota_hero_morphling", base: "sans_shard", special: "sans_shard_arcana" },
+        sans_scepter: { hero: "npc_dota_hero_morphling", base: "sans_scepter", special: "sans_scepter_arcana" },
+        sans_innate: { hero: "npc_dota_hero_morphling", base: "sans_innate", special: "sans_innate_arcana" },
+        sans_r: { hero: "npc_dota_hero_morphling", base: "sans_r", special: "sans_r_arcana" },
+        invincible_q: { hero: "npc_dota_hero_void_spirit", base: "invincible_q", special: "invincible_q_arcana" },
+        invincible_w: { hero: "npc_dota_hero_void_spirit", base: "invincible_w", special: "invincible_w_arcana" },
+        invincible_e: { hero: "npc_dota_hero_void_spirit", base: "invincible_e", special: "invincible_e_arcana" },
+        invincible_innate: { hero: "npc_dota_hero_void_spirit", base: "invincible_innate", special: "invincible_innate_arcana" },
+        invincible_r: { hero: "npc_dota_hero_void_spirit", base: "invincible_r", special: "invincible_r_arcana" },
+        flash_q_facet_1: { hero: "npc_dota_hero_spirit_breaker", base: "flash_q_facet_1", special: "flash_q_facet_1_immortal" },
+        flash_q_facet_2: { hero: "npc_dota_hero_spirit_breaker", base: "flash_q_facet_2", special: "flash_q_facet_2_immortal" },
+        flash_w: { hero: "npc_dota_hero_spirit_breaker", base: "flash_w", special: "flash_w_immortal" },
+        flash_e: { hero: "npc_dota_hero_spirit_breaker", base: "flash_e", special: "flash_e_immortal" },
+        flash_shard: { hero: "npc_dota_hero_spirit_breaker", base: "flash_shard", special: "flash_shard_immortal" },
+        flash_r: { hero: "npc_dota_hero_spirit_breaker", base: "flash_r", special: "flash_r_immortal" },
+        mellstroy_shavel: { hero: "npc_dota_hero_bounty_hunter", base: "shavel", special: "shavel_arcana" },
+        mellstroy_meteors: { hero: "npc_dota_hero_bounty_hunter", base: "fruits", special: "fruits_arcana" },
+        mellstroy_business: { hero: "npc_dota_hero_bounty_hunter", base: "biznes", special: "biznes_arcana" },
+        mellstroy_business_new: { hero: "npc_dota_hero_bounty_hunter", base: "biznes", special: "biznes_arcana" },
+        mellstroy_casino: { hero: "npc_dota_hero_bounty_hunter", base: "casino", special: "casino_arcana" },
+        mellstroy_scepter: { hero: "npc_dota_hero_bounty_hunter", base: "mellstroy_scepter", special: "mellstroy_scepter_arcana" },
+        mellstroy_amam: { hero: "npc_dota_hero_bounty_hunter", base: "amamam", special: "amamam_arcana" },
+        mellstroy_casino_allin: { hero: "npc_dota_hero_bounty_hunter", base: "casino_allin", special: "casino_allin_arcana" },
+    };
+
+    function GetSpellIconPath(iconName) {
+        return "file://{images}/spellicons/" + iconName + ".png";
+    }
+
+    function CollectDotaAbilityImages(panel, result) {
+        if (!panel) {
+            return;
+        }
+
+        if (panel.paneltype === "DOTAAbilityImage") {
+            result.push(panel);
+        }
+
+        const childCount = panel.GetChildCount ? panel.GetChildCount() : 0;
+        for (let i = 0; i < childCount; i++) {
+            CollectDotaAbilityImages(panel.GetChild(i), result);
+        }
+    }
+
+    function PatchPregameAbilityIcons() {
+        if (typeof IsSpecialHeroSkinEquippedForPlayer !== "function") {
+            return;
+        }
+
+        const localPlayerId = (typeof GetOvervodkaLocalPlayerID === "function")
+            ? GetOvervodkaLocalPlayerID()
+            : Players.GetLocalPlayer();
+        const abilityImages = [];
+
+        if (HeroAbilities) {
+            CollectDotaAbilityImages(HeroAbilities, abilityImages);
+        }
+
+        if (abilityImages.length <= 0) {
+            return;
+        }
+
+        for (const abilityImage of abilityImages) {
+            if (!abilityImage) {
+                continue;
+            }
+
+            const abilityName = String(abilityImage.abilityname || abilityImage.GetAttributeString("abilityname", ""));
+            const iconConfig = PickAbilityIconMap[abilityName];
+            if (!iconConfig) {
+                continue;
+            }
+
+            const useSpecialIcon = IsSpecialHeroSkinEquippedForPlayer(localPlayerId, iconConfig.hero);
+            const iconName = useSpecialIcon ? iconConfig.special : iconConfig.base;
+            const iconPath = GetSpellIconPath(iconName);
+
+            if (abilityImage._overvodkaPatchedIconPath !== iconPath) {
+                abilityImage.SetImage(iconPath);
+                abilityImage._overvodkaPatchedIconPath = iconPath;
+            }
+        }
+    }
+
     // Function to safely resize elements
     function resizeElements(elements) {
         if (elements && elements.length > 0) {
@@ -194,6 +282,8 @@ function HeroSelection() {
         // Find and resize hit target panels
         let hitTargets = HeroAbilities ? HeroAbilities.FindChildrenWithClassTraverse("Panel") : null;
         resizeElements(hitTargets);
+
+        PatchPregameAbilityIcons();
 
         // Schedule next update
         $.Schedule(0.1, applyResizing);

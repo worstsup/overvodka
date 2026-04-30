@@ -54,6 +54,7 @@ LinkLuaModifier("modifier_overvodka_store_skin_8", 		"modifiers/store/modifier_o
 LinkLuaModifier("modifier_overvodka_store_skin_9", 		"modifiers/store/modifier_overvodka_store_skin_9",   LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_10", 	"modifiers/store/modifier_overvodka_store_skin_10",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_11", 	"modifiers/store/modifier_overvodka_store_skin_11",  LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_overvodka_store_skin_14", 	"modifiers/store/modifier_overvodka_store_skin_14",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_12", 	"modifiers/store/modifier_overvodka_store_skin_12",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_skin_13", 	"modifiers/store/modifier_overvodka_store_skin_13",  LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_overvodka_store_pet_1", 		"modifiers/store/modifier_overvodka_store_pet_1", 	 LUA_MODIFIER_MOTION_NONE)

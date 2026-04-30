@@ -918,7 +918,7 @@
 		"SoundSet"		"Hero_Marci"
 		"Enabled"		"1"
 		"DisableWearables"				"1"	
-		"HeroSelectSoundEffect"		"mell_start"
+		"HeroSelectSoundEffect"		""
 		"GibType"		"default"
 		"ModelScale"		"1.2"
 		"LoadoutScale"		"0.9"

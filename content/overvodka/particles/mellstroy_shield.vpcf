@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf61:version{39d3ce1d-9442-4407-9b78-8317145b1732} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf65:version{48e806a9-c210-4cd8-811a-38b5ef63b195} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 1
@@ -180,11 +180,13 @@
 					m_nScalarAttribute = 3
 					m_nVectorAttribute = 6
 					m_nVectorComponent = 0
+					m_bReverseOrder = false
 					m_flRandomMin = 0.0
 					m_flRandomMax = 1.0
 					m_bHasRandomSignFlip = false
 					m_nRandomSeed = -1
 					m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+					m_strSnapshotSubset = ""
 					m_flLOD0 = 0.0
 					m_flLOD1 = 0.0
 					m_flLOD2 = 0.0
@@ -236,11 +238,13 @@
 					m_nScalarAttribute = 3
 					m_nVectorAttribute = 6
 					m_nVectorComponent = 0
+					m_bReverseOrder = false
 					m_flRandomMin = 0.0
 					m_flRandomMax = 1.0
 					m_bHasRandomSignFlip = false
 					m_nRandomSeed = -1
 					m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+					m_strSnapshotSubset = ""
 					m_flLOD0 = 0.0
 					m_flLOD1 = 0.0
 					m_flLOD2 = 0.0
@@ -292,11 +296,13 @@
 					m_nScalarAttribute = 3
 					m_nVectorAttribute = 6
 					m_nVectorComponent = 0
+					m_bReverseOrder = false
 					m_flRandomMin = 0.0
 					m_flRandomMax = 1.0
 					m_bHasRandomSignFlip = false
 					m_nRandomSeed = -1
 					m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+					m_strSnapshotSubset = ""
 					m_flLOD0 = 0.0
 					m_flLOD1 = 0.0
 					m_flLOD2 = 0.0
@@ -348,11 +354,13 @@
 					m_nScalarAttribute = 3
 					m_nVectorAttribute = 6
 					m_nVectorComponent = 0
+					m_bReverseOrder = false
 					m_flRandomMin = 0.0
 					m_flRandomMax = 1.0
 					m_bHasRandomSignFlip = false
 					m_nRandomSeed = -1
 					m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+					m_strSnapshotSubset = ""
 					m_flLOD0 = 0.0
 					m_flLOD1 = 0.0
 					m_flLOD2 = 0.0

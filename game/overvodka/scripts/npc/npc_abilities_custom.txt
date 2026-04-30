@@ -4742,7 +4742,7 @@
 	}
 	"special_bonus_unique_mellstroy_4"
 	{
-        "BaseClass"						"special_bonus_base"														
+        "BaseClass"						"special_bonus_base"
 		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}

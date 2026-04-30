@@ -5,6 +5,13 @@ function mellstroy_business_new:GetIntrinsicModifierName()
 	return "modifier_generic_orb_effect_lua"
 end
 
+function mellstroy_business_new:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "biznes_arcana"
+    end
+    return "biznes"
+end
+
 function mellstroy_business_new:GetCastRange(vLocation, hTarget)
     return self:GetCaster():Script_GetAttackRange()
 end

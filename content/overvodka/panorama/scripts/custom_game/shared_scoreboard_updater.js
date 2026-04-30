@@ -83,8 +83,11 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			if ( playerInfo.player_selected_hero !== "" )
 			{
 				let hero = playerInfo.player_selected_hero
-				let OvervodkaHeroName = GetOvervodkaHeroName(hero)
-				playerPortrait.SetImage( "file://{images}/heroes/" + OvervodkaHeroName + ".png" );
+				playerPortrait.SetImage(GetHeroPickPortraitImage(
+					hero,
+					playerId,
+					GetHeroDefaultPortraitImage(hero)
+				));
 			}
 			else
 			{

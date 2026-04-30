@@ -10,6 +10,13 @@ function mellstroy_casino:Precache(context)
     PrecacheResource( "soundfile", "soundevents/normalwin.vsndevts", context )
 end
 
+function mellstroy_casino:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "casino_arcana"
+    end
+    return "casino"
+end
+
 function mellstroy_casino:GetGoldCost(iLevel)
     local base = self:GetSpecialValueFor("base_cost")
     local each = self:GetSpecialValueFor("each_level")

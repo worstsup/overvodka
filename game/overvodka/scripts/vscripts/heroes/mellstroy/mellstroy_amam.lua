@@ -2,9 +2,25 @@ LinkLuaModifier("modifier_mell_amam", "heroes/mellstroy/mellstroy_amam", LUA_MOD
 
 mellstroy_amam = class({})
 
+local function GetAmamamSoundName(caster)
+    if caster and not caster:IsNull() and caster:HasModifier("modifier_overvodka_store_skin_14") then
+        return "amamam_arcana"
+    end
+
+    return "amamam"
+end
+
 function mellstroy_amam:Precache(context)
     PrecacheResource( "particle", "particles/earthshaker_arcana_echoslam_start_v2_new.vpcf", context)
+    PrecacheResource( "particle", "particles/mellstroy_arcana/mellstroy_amam.vpcf", context)
     PrecacheResource( "soundfile", "soundevents/amamam.vsndevts", context )
+end
+
+function mellstroy_amam:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "amamam_arcana"
+    end
+    return "amamam"
 end
 
 function mellstroy_amam:GetGoldCost(iLevel)
@@ -21,14 +37,14 @@ end
 function mellstroy_amam:OnAbilityPhaseStart()
     if not IsServer() then return end
     if not global_sounds_muted then
-        EmitSoundOn("amamam", self:GetCaster())
+        EmitSoundOn(GetAmamamSoundName(self:GetCaster()), self:GetCaster())
     end
     return true
 end
 
 function mellstroy_amam:OnAbilityPhaseInterrupted()
     if not IsServer() then return end
-    StopSoundOn("amamam", self:GetCaster())
+    StopSoundOn(GetAmamamSoundName(self:GetCaster()), self:GetCaster())
 end
 
 function mellstroy_amam:OnSpellStart()
@@ -44,7 +60,7 @@ function modifier_mell_amam:OnDestroy()
     if not IsServer() then return end
     if self.parent and not self.parent:IsNull() then
         if not self.parent:IsAlive() then
-            StopSoundOn("amamam", self.parent)
+            StopSoundOn(GetAmamamSoundName(self.parent), self.parent)
         end
     end
 end

@@ -10,6 +10,13 @@ function mellstroy_casino_allin:Precache(context)
     PrecacheResource( "soundfile", "soundevents/lose.vsndevts", context )
 end
 
+function mellstroy_casino_allin:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "casino_allin_arcana"
+    end
+    return "casino_allin"
+end
+
 function mellstroy_casino_allin:OnOwnerSpawned()
     if not IsServer() then return end
     local c = self:GetCaster()

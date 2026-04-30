@@ -884,9 +884,160 @@
 				"PortraitPosition"		"819.700012 -294.589996 57.000000"
 				"PortraitAngles"		"-2.000000 160.25 0.000000"
 				"PortraitFOV"		"12.000000"
-				"PortraitFar"		"1000.000000"
+		"PortraitFar"		"1000.000000"
 			}
 		}
+	}
+	"dark_drun_loadout_picks"
+	{
+		"PortraitLightPosition"		"162.820007 -117.080002 317.260010"
+		"PortraitLightAngles"		"55.380001 143.889999 0.000000"
+		"PortraitLightFOV"		"63.000000"
+		"PortraitLightDistance"		"392.000000"
+		"PortraitLightColor"		"234 243 254"
+		"PortraitShadowColor"		"56 56 56"
+		"PortraitShadowScale"		"5.000000"
+		"PortraitGroundShadowScale"		"1.500000"
+		"PortraitAmbientColor"		"79 93 93"
+		"PortraitAmbientScale"		"5.000000"
+		"PortraitSpecularColor"		"251 74 84"
+		"PortraitSpecularDirection"		"0.000000 0.000000 -1.000000"
+		"PortraitSpecularPower"		"16.000000"
+		"PortraitBackgroundColor1"		"0.650000 0.350000 0.000000"
+		"PortraitBackgroundColor2"		"0.650000 0.350000 0.000000"
+		"PortraitBackgroundColor3"		"0.650000 0.350000 0.000000"
+		"PortraitBackgroundColor4"		"0.650000 0.350000 0.000000"
+		"PortraitBackgroundTexture"		"materials/portraits_card/portrait_backgrounds/full_view_background.vmat"
+		"PortraitBackgroundModel"		"models/items/faceless_void/faceless_void_arcana/faceless_void_arcana_pedestal.vmdl"
+		"PortraitAnimationActivity"		"ACT_DOTA_LOADOUT"
+		"PortraitAnimationCycle"		"0.000000"
+		"PortraitAnimationRate"		"1.000000"
+		"PortraitHideHero"		"0"
+		"PortraitLightScale"		"1.450000"
+		"PortraitAmbientDirection"		"-27.230 -113.790 24.220"
+		"cameras"
+		{
+			"default"
+			{
+				"PortraitPosition"		"819.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.525207 155.100006 0.000000"
+				"PortraitFOV"		"17.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"econ_set_preview"
+			{
+				"PortraitPosition"		"819.700012 -294.589996 57.000000"
+				"PortraitAngles"		"359.424622 160.079895 0.000000"
+				"PortraitFOV"		"13.500000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_weapon"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.525207 155.100006 0.000000"
+				"PortraitFOV"		"15.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_head"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.082249 155.100006 0.000000"
+				"PortraitFOV"		"11.500000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_shoulder"
+			{
+				"PortraitPosition"		"776.687927 -369.589996 281.872375"
+				"PortraitAngles"		"13.639725 154.454605 0.000000"
+				"PortraitFOV"		"16.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_offhand_weapon"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.516597 154.681839 0.000000"
+				"PortraitFOV"		"16.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_back"
+			{
+				"PortraitPosition"		"764.037659 -369.589996 416.984131"
+				"PortraitAngles"		"22.053114 154.086334 0.000000"
+				"PortraitFOV"		"15.000000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_armor"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.525207 155.100006 0.000000"
+				"PortraitFOV"		"13.500000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_arms"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 112.000000"
+				"PortraitAngles"		"2.525207 155.100006 0.000000"
+				"PortraitFOV"		"13.500000"
+				"PortraitFar"		"2000.000000"
+			}
+			"slot_taunt"
+			{
+				"PortraitPosition"		"799.700012 -369.589996 333.137512"
+				"PortraitAngles"		"14.133264 155.375107 0.000000"
+				"PortraitFOV"		"24.000000"
+				"PortraitFar"		"2000.000000"
+			}
+		}
+		"hero_presets"
+		{
+			"Default"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+			"slot_weapon"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+			"slot_head"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+			"slot_shoulder"
+			{
+				"PortraitHeroRotation"		"-0.000000 128.528732 0.000000"
+			}
+			"slot_offhand_weapon"
+			{
+				"PortraitHeroRotation"		"-0.000000 -83.173065 0.000000"
+			}
+			"slot_back"
+			{
+				"PortraitHeroRotation"		"-0.000000 108.423241 0.000000"
+			}
+			"slot_armor"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+			"slot_arms"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+			"slot_taunt"
+			{
+				"PortraitHeroRotation"		"0.000000 0.000000 0.000000"
+			}
+		}
+		"PortraitPlayIdleExpression"		"0"
+		"PortraitHideParticles"		"0"
+		"PortraitHideDropShadow"		"0"
+		"PortraitDesaturateParticles"		"0"
+		"PortraitDesaturateHero"		"1"
+		"PortraitVignetteItem"		"0"
+		"EffectDissolveColor"		"0.650000 0.350000 0.000000"
+		"PortraitBackgroundMap"		"maps/ui/dota_hud_loadout_2022.vmap"
+		"PortraitAllowAnimatedPortrait"		"1"
+		"GodraysFXColor"		"0.600000 0.415396 0.200000"
+		"GroundfogFXColor"		"0.600000 0.415396 0.200000"
 	}
 	"npc_dota_hero_brewmaster"
 	{

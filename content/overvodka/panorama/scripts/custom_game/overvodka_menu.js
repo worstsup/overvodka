@@ -28,6 +28,10 @@ var Menu = {};
     };
 
     function EnsurePrimePreviewScene(parentPanel, panelId, desiredUnit, style) {
+        if (!parentPanel) {
+            return null;
+        }
+
         let previewPanel = parentPanel.FindChildTraverse(panelId);
         if (previewPanel) {
             const currentUnit = previewPanel.GetAttributeString("overvodka_unit", "");
@@ -54,27 +58,38 @@ var Menu = {};
     }
 
     function RefreshPrimePreviewUnits() {
-        EnsurePrimePreviewScene(ModelPreview3, "PrimePreviewArsenScene", "arsen_skin_loadout", "width:70%;height:90%;");
-        EnsurePrimePreviewScene(
-            ModelPreview,
-            "PrimePreviewSansScene",
-            "sans_arcana_loadout",
-            "width:48%;height:80%;"
-        );
-        EnsurePrimePreviewScene(
-            ModelPreview2,
-            "PrimePreviewInvincibleScene",
-            "invincible_arcana_loadout",
-            "width:48%;height:80%;"
-        );
-        EnsurePrimePreviewScene(ModelPreview4, "PrimePreviewMacanScene", "macan_arcana_loadout", "width:70%;height:95%;");
+        try {
+            EnsurePrimePreviewScene(ModelPreview3, "PrimePreviewDrunScene", "dark_drun_loadout", "width:68%;height:92%;");
+            EnsurePrimePreviewScene(
+                ModelPreview,
+                "PrimePreviewSansScene",
+                "sans_arcana_loadout",
+                "width:48%;height:80%;"
+            );
+            EnsurePrimePreviewScene(
+                ModelPreview2,
+                "PrimePreviewInvincibleScene",
+                "invincible_arcana_loadout",
+                "width:48%;height:80%;"
+            );
+            EnsurePrimePreviewScene(ModelPreview4, "PrimePreviewMacanScene", "macan_arcana_loadout", "width:70%;height:95%;");
+        } catch (e) {
+            $.Msg("[Menu] RefreshPrimePreviewUnits error:", e);
+        }
     }
 
-    RefreshPrimePreviewUnits();
-    ModelPreview3.SetHasClass("Visible", false);
-    ModelPreview.SetHasClass("Visible", false);
-    ModelPreview2.SetHasClass("Visible", false);
-    ModelPreview4.SetHasClass("Visible", false);
+    if (ModelPreview3) {
+        ModelPreview3.SetHasClass("Visible", false);
+    }
+    if (ModelPreview) {
+        ModelPreview.SetHasClass("Visible", false);
+    }
+    if (ModelPreview2) {
+        ModelPreview2.SetHasClass("Visible", false);
+    }
+    if (ModelPreview4) {
+        ModelPreview4.SetHasClass("Visible", false);
+    }
 
     const primePreviewPanels = [
         ModelPreview3,
@@ -87,7 +102,9 @@ var Menu = {};
 
     function SetPrimePreviewVisible(isVisible) {
         for (let i = 0; i < primePreviewPanels.length; i++) {
-            primePreviewPanels[i].SetHasClass("Visible", isVisible);
+            if (primePreviewPanels[i]) {
+                primePreviewPanels[i].SetHasClass("Visible", isVisible);
+            }
         }
     }
     

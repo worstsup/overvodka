@@ -191,7 +191,11 @@ function _GetChatLines(chatRoot) {
 }
 
 function PatchHeroIconInChatPrintf(playerID, heroName, rawText) {
-    const iconPath = "file://{images}/heroes/" + GetOvervodkaHeroName(heroName) + ".png";
+    const iconPath = GetHeroPickPortraitImage(
+        heroName,
+        playerID,
+        GetHeroDefaultPortraitImage(heroName)
+    );
     const needle = _StripTags(rawText);
     if (!needle) return;
 
@@ -446,7 +450,11 @@ GameEvents.Subscribe("overvodka_player_chat", (data) => {
     const heroName = data.hero || "";
     const msgText = (data.text || "").toString();
 
-    const customIconPath = "file://{images}/heroes/" + GetOvervodkaHeroName(heroName) + ".png";
+    const customIconPath = GetHeroPickPortraitImage(
+        heroName,
+        pid,
+        GetHeroDefaultPortraitImage(heroName)
+    );
 
     PatchChatLineForMessage(pid, msgText, customIconPath);
 });
@@ -620,11 +628,16 @@ function PlayerTipped(event){
     let RightPlayerHeroPanel = panel.FindChildTraverse("RightPlayerHero")
 
     if(LeftPlayerHeroPanel && RightPlayerHeroPanel){
-        let LeftHeroName = GetOvervodkaHeroName(LeftPlayerInfo.player_selected_hero)
-        let RightHeroName = GetOvervodkaHeroName(RightPlayerInfo.player_selected_hero)
-
-        LeftPlayerHeroPanel.SetImage("file://{images}/heroes/" + LeftHeroName + ".png");
-        RightPlayerHeroPanel.SetImage("file://{images}/heroes/" + RightHeroName + ".png");
+        LeftPlayerHeroPanel.SetImage(GetHeroPickPortraitImage(
+            LeftPlayerInfo.player_selected_hero,
+            event.tips_player,
+            GetHeroDefaultPortraitImage(LeftPlayerInfo.player_selected_hero)
+        ));
+        RightPlayerHeroPanel.SetImage(GetHeroPickPortraitImage(
+            RightPlayerInfo.player_selected_hero,
+            event.tipped_player,
+            GetHeroDefaultPortraitImage(RightPlayerInfo.player_selected_hero)
+        ));
     }
 
     panel.SetDialogVariable("LeftPlayerName", LeftPlayerInfo.player_name)
@@ -654,7 +667,6 @@ function SendCustomMessageToChat(event){
     let InfoTipped = Game.GetPlayerInfo(event.tipped_player)
     let playerColor = GetHEXPlayerColor(event.tips_player)
     let TippedPlayerColor = GetHEXPlayerColor(event.tipped_player)
-    let OvervodkaName = GetOvervodkaHeroName(HeroName)
     let Text = `<font color='${playerColor}'>${Info.player_name}</font> ${$.Localize('#PLAYER_HUD_TIPPED')} <font color='${TippedPlayerColor}'>${InfoTipped.player_name}</font>. ${$.Localize('#PLAYER_HUD_TIPPED_Text')}`
 
     let ChatLines = DotaHUDPanel.FindChildTraverse("ChatLinesPanel")
@@ -666,7 +678,11 @@ function SendCustomMessageToChat(event){
 
         let HeroImage = msgPanel.FindChildTraverse("HeroImage")
 
-        HeroImage.SetImage( "file://{images}/heroes/" + OvervodkaName + ".png" );
+        HeroImage.SetImage(GetHeroPickPortraitImage(
+            HeroName,
+            event.tips_player,
+            GetHeroDefaultPortraitImage(HeroName)
+        ));
 
         msgPanel.SetDialogVariable("text", Text)
         $.Schedule(5, function(){

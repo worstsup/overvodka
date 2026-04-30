@@ -576,6 +576,7 @@ function UpdatePlayer( teamPanel, playerId )
 
 		if (possibleHeroImages[playerInfo.possible_hero_selection]) {
 			let facet_pick_panel = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildrenWithClassTraverse("HeroFacetOuter");
+			const possibleHeroName = "npc_dota_hero_" + playerInfo.possible_hero_selection;
 
 			if (facet_pick_panel && facet_pick_panel.length > 0) {
 				facet_pick_panel[0].style.visibility = HEROES_WITH_NO_FACET[playerInfo.possible_hero_selection] ? "collapse" : "visible";
@@ -601,6 +602,15 @@ function UpdatePlayer( teamPanel, playerId )
 				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
 				playerPortrait.SetImage(GetHeroPickPortraitImage(
 					"npc_dota_hero_void_spirit",
+					playerId,
+					possibleHeroImages[playerInfo.possible_hero_selection]
+				));
+			}
+			else if (GetHeroSkinConfig(possibleHeroName))
+			{
+				if ( HeroPick ) ToggleLockInNotice(HeroPick, false);
+				playerPortrait.SetImage(GetHeroPickPortraitImage(
+					possibleHeroName,
 					playerId,
 					possibleHeroImages[playerInfo.possible_hero_selection]
 				));

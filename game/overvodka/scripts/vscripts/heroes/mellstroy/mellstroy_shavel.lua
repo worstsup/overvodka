@@ -7,12 +7,19 @@ function mellstroy_shavel:Precache( context )
 	PrecacheResource( "soundfile", "soundevents/shavel.vsndevts", context )
 end
 
-function mellstroy_shavel:GetGoldCost(iLevel)
-    local base = self:GetSpecialValueFor("gold_cost")
+function mellstroy_shavel:GetAbilityTextureName()
+    if self:GetCaster():HasMellstroyArcanaSkin() then
+        return "shavel_arcana"
+    end
+    return "shavel"
+end
 
-    local low = tonumber(self:GetCaster()._low_gold) or 0
+function mellstroy_shavel:GetGoldCost(iLevel)
+    local base = self:GetSpecialValueFor( "gold_cost" )
+
+    local low = tonumber( self:GetCaster()._low_gold ) or 0
     if low == 1 then
-        return math.floor(base * 0.75 + 0.5)
+        return math.floor( base * 0.75 + 0.5 )
     end
 
     return base
@@ -35,29 +42,13 @@ function mellstroy_shavel:OnSpellStart()
 		return
 	end
 	local duration = self:GetSpecialValueFor( "channel_time" )
-	if target:HasModifier("modifier_generic_motion") then
-		target:RemoveModifierByName("modifier_generic_motion")
-	end
-	if target:HasModifier("modifier_knockback") then
-		target:RemoveModifierByName("modifier_knockback")
-	end
-	if target:HasModifier("modifier_generic_knockback_lua") then
-		target:RemoveModifierByName("modifier_generic_knockback_lua")
-	end
-	local mod = target:AddNewModifier(
-		caster,
-		self,
-		"modifier_mellstroy_shavel_debuff",
-		{ duration = duration }
-	)
+	target:RemoveModifierByName( "modifier_generic_motion" )
+	target:RemoveModifierByName( "modifier_knockback" )
+	target:RemoveModifierByName( "modifier_generic_knockback_lua" )
+	local mod = target:AddNewModifier( caster, self, "modifier_mellstroy_shavel_debuff", { duration = duration } )
 	self.modifiers[mod] = true
 
-	caster:AddNewModifier(
-		caster,
-		self,
-		"modifier_mellstroy_shavel",
-		{ duration = duration }
-	)
+	caster:AddNewModifier( caster, self, "modifier_mellstroy_shavel", { duration = duration } )
 	if target:IsCreep() then
 		EmitSoundOn( "shavel", caster )
 	else
@@ -70,7 +61,7 @@ function mellstroy_shavel:GetChannelTime()
 end
 
 function mellstroy_shavel:OnChannelFinish( bInterrupted )
-	for mod,_ in pairs(self.modifiers) do
+	for mod,_ in pairs( self.modifiers ) do
 		if not mod:IsNull() then
 			mod:Destroy()
 		end
@@ -86,7 +77,7 @@ end
 function mellstroy_shavel:RemoveModifier( mod )
 	self.modifiers[mod] = nil
 	local has_enemies = false
-	for _,mod in pairs(self.modifiers) do
+	for _,mod in pairs( self.modifiers ) do
 		has_enemies = true
 	end
 
@@ -97,31 +88,14 @@ end
 
 modifier_mellstroy_shavel = class({})
 
-function modifier_mellstroy_shavel:IsHidden()
-	return false
-end
-function modifier_mellstroy_shavel:IsDebuff()
-	return false
-end
-function modifier_mellstroy_shavel:IsPurgable()
-	return false
-end
-function modifier_mellstroy_shavel:OnCreated( kv )
-	if not IsServer() then return end
-end
-function modifier_mellstroy_shavel:OnRefresh( kv )
-end
-function modifier_mellstroy_shavel:OnRemoved()
-end
-function modifier_mellstroy_shavel:OnDestroy()
-end
+function modifier_mellstroy_shavel:IsHidden() return false end
+function modifier_mellstroy_shavel:IsDebuff() return false end
+function modifier_mellstroy_shavel:IsPurgable() return false end
 
 function modifier_mellstroy_shavel:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_DISABLE_TURNING,
 	}
-
-	return funcs
 end
 
 function modifier_mellstroy_shavel:GetModifierDisableTurning()
@@ -130,18 +104,10 @@ end
 
 modifier_mellstroy_shavel_debuff = class({})
 
-function modifier_mellstroy_shavel_debuff:IsHidden()
-	return false
-end
-function modifier_mellstroy_shavel_debuff:IsDebuff()
-	return true
-end
-function modifier_mellstroy_shavel_debuff:IsPurgable()
-	return true
-end
-function modifier_mellstroy_shavel_debuff:IsStunDebuff()
-	return true
-end
+function modifier_mellstroy_shavel_debuff:IsHidden() return false end
+function modifier_mellstroy_shavel_debuff:IsDebuff() return true end
+function modifier_mellstroy_shavel_debuff:IsPurgable() return true end
+function modifier_mellstroy_shavel_debuff:IsStunDebuff() return true end
 
 function modifier_mellstroy_shavel_debuff:OnCreated( kv )
     self.parent = self:GetParent()
@@ -155,6 +121,9 @@ function modifier_mellstroy_shavel_debuff:OnCreated( kv )
     self.damage     = self:GetAbility():GetSpecialValueFor( "ministun" )
     self.animrate   = self:GetAbility():GetSpecialValueFor( "animation_rate" )
     self.lift_height = 250
+    self.elapsed_motion = 0
+    self.total_hits = math.max( 1, math.floor( ( self:GetDuration() / self.interval ) + 0.001 ) )
+    self.motion_duration = self.total_hits * self.interval
 
     if not IsServer() then return end
     self.damage = self:GetAbility():GetAbilityDamage()
@@ -186,11 +155,8 @@ function modifier_mellstroy_shavel_debuff:OnCreated( kv )
 
     self:SetPriority( DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST )
 
-    self._cycle_t = 0
-
     self:StartIntervalThink( self.interval )
 end
-
 
 function modifier_mellstroy_shavel_debuff:OnDestroy()
     if not IsServer() then return end
@@ -202,12 +168,10 @@ function modifier_mellstroy_shavel_debuff:OnDestroy()
 end
 
 function modifier_mellstroy_shavel_debuff:DeclareFunctions()
-	local funcs = {
+	return {
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
 		MODIFIER_PROPERTY_OVERRIDE_ANIMATION_RATE,
 	}
-
-	return funcs
 end
 
 function modifier_mellstroy_shavel_debuff:GetOverrideAnimation()
@@ -222,12 +186,10 @@ function modifier_mellstroy_shavel_debuff:GetOverrideAnimationRate()
 end
 
 function modifier_mellstroy_shavel_debuff:CheckState()
-	local state = {
+	return {
 		[MODIFIER_STATE_STUNNED] = true,
 		[MODIFIER_STATE_CANNOT_BE_MOTION_CONTROLLED] = true,
 	}
-
-	return state
 end
 
 function modifier_mellstroy_shavel_debuff:OnIntervalThink()
@@ -256,8 +218,6 @@ function modifier_mellstroy_shavel_debuff:OnIntervalThink()
 
     self:PlayEffects( origin, self.radius )
 
-    self._cycle_t = 0
-
     if (self.caster:GetOrigin()-self.cast_pos):Length2D()>self.pos_threshold then
         self:Destroy()
         return
@@ -268,13 +228,14 @@ function modifier_mellstroy_shavel_debuff:UpdateVerticalMotion( me, dt )
     if not IsServer() then return end
     if not self.parent or self.parent:IsNull() then return end
 
-    self._cycle_t = self._cycle_t + dt
-    local phase = 0
-    if self.interval > 0 then
-        phase = (self._cycle_t % self.interval) / self.interval
-    end
+    self.elapsed_motion = math.min( self.elapsed_motion + dt, self.motion_duration )
 
-    local height = math.sin( phase * math.pi ) * self.lift_height
+    local height = 0
+    if self.interval > 0 and self.elapsed_motion < self.motion_duration then
+        local cycle_elapsed = self.elapsed_motion % self.interval
+        local phase = cycle_elapsed / self.interval
+        height = math.sin( phase * math.pi ) * self.lift_height
+    end
 
     local pos = self.parent:GetAbsOrigin()
     local ground = GetGroundPosition( pos, self.parent )
@@ -289,20 +250,20 @@ function modifier_mellstroy_shavel_debuff:OnVerticalMotionInterrupted()
     if not IsServer() then return end
     self:Destroy()
 end
+
 function modifier_mellstroy_shavel_debuff:GetPriority()
 	return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
 end
+
 function modifier_mellstroy_shavel_debuff:GetMotionPriority()
 	return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
 end
 
 function modifier_mellstroy_shavel_debuff:PlayEffects( origin, radius )
-	local particle_cast = "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf"
-	local sound_cast = "Hero_PrimalBeast.Pulverize.Impact"
-	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_WORLDORIGIN, nil )
+	local effect_cast = ParticleManager:CreateParticle( "particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", PATTACH_WORLDORIGIN, nil )
 	ParticleManager:SetParticleControl( effect_cast, 0, origin )
 	ParticleManager:SetParticleControl( effect_cast, 1, Vector(radius, radius, radius) )
 	ParticleManager:DestroyParticle( effect_cast, false )
 	ParticleManager:ReleaseParticleIndex( effect_cast )
-	EmitSoundOnLocationWithCaster( self.parent:GetOrigin(), sound_cast, self.caster )
+	EmitSoundOnLocationWithCaster( self.parent:GetOrigin(), "Hero_PrimalBeast.Pulverize.Impact", self.caster )
 end
