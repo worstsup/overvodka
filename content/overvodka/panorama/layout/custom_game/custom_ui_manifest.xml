@@ -41,5 +41,6 @@
 		<CustomUIElement type="PregameStrategy" 	layoutfile="file://{resources}/layout/custom_game/overvodka_menu.xml" />
 		<!-- <CustomUIElement type="GameInfo" 			layoutfile="file://{resources}/layout/custom_game/overthrow_game_info.xml" /> -->
 		<Image src="file://{images}/heroes/icons/npc_dota_hero_pangolier.png" />
+		<Image src="file://{images}/items/cheaters_glasses.png" />
 	</Panel>
 </root>

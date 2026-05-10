@@ -106,7 +106,7 @@ return {
     ["item_hyperstone"] = true,
     ["item_infused_raindrop"] = true,
     ["item_invis_sword"] = true,
-    ["item_invis_sword_datadriven"] = true,
+    ["item_cheaters_glasses"] = true,
     ["item_javelin"] = true,
     ["item_jordan"] = true,
     ["item_kaya"] = true,

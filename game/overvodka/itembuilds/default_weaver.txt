@@ -48,7 +48,7 @@
             "item"      "item_aghanims_shard"
 		    "item"		"item_derzko"
 		    "item"		"item_govno"
-            "item"		"item_invis_sword_datadriven"
+            "item"		"item_cheaters_glasses"
 		}
 	}
 }

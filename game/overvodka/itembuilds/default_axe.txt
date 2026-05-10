@@ -46,7 +46,7 @@
 		{
 			"item"		"item_badun"
             "item"		"item_refresher"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_cheaters_glasses"
 		}
 	}
 }

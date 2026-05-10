@@ -37,7 +37,7 @@
 		{
 			"item"		"item_bablokrad"
 			"item"		"item_armature_strike"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_cheaters_glasses"
 			"item"		"item_govno"
 			"item"		"item_derzko"
 			"item"		"item_minion_generator"
