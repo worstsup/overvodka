@@ -18,6 +18,7 @@ PrecacheUtils.particles = {
 		"particles/units/heroes/hero_invoker_kid/invoker_kid_base_attack_exort.vpcf",
 		"particles/units/heroes/hero_invoker_kid/invoker_kid_base_attack_all.vpcf",
 		"particles/events/crownfall/survivors/abilities/crystal_maiden/crystal_maiden_frostbite.vpcf",
+		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf",
 		"particles/leon_attack.vpcf",
 		"particles/leon_attack_skin.vpcf",
 		"particles/leon_range_finder.vpcf",

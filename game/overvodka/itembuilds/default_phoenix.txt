@@ -58,7 +58,7 @@
 			"item"		"item_swag"
 			"item"		"item_bablokrad"
 			"item"		"item_aegis_hero"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_cheaters_glasses"
 		}
 	}
 }

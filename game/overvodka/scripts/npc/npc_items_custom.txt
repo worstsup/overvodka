@@ -742,10 +742,10 @@
 		"SuggestLategame"				"1"
 		"AbilityValues"
 		{
-				"bonus_damage"		"30"
+				"bonus_damage"			"30"
 				"bonus_strength"		"10"
 				"bash_chance_melee"		"25"
-				"bash_chance_ranged"		"10"
+				"bash_chance_ranged"	"10"
 				"bash_duration"			"1.2"
 				"bash_cooldown"			"2.3"
 				"bonus_chance_damage"	"100"
@@ -799,208 +799,43 @@
 				"stun_duration"			"1.6"
 		}
 	}
-	"item_invis_sword_datadriven"
-	{
-		"BaseClass"                     "item_datadriven"
-		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"Model"                         "models/props_gameplay/red_box.vmdl" 
-		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"            "invis_sword_datadriven"
-		"FightRecapLevel"               "1"
-		"AbilityCooldown"               "28.0"
-		"AbilityManaCost"               "75"
-		"AbilityCastPoint"              "0"
-		"ItemCost"                      "6200"
-		"ItemShopTags"                  "damage;attack_speed;movespeed;hard_to_tag"
-		"ItemQuality"                   "epic"
-		"ItemAliases"                   "sb;invis;shadow blade"
-		"ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		
-		"precache"
-			{
-				"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
-				"particle"	"particles/items3_fx/glimmer_cape_initial.vpcf"		
-			}
-			
-		
-		"AbilityValues"
-		{
-				"bonus_damage"                              "32"
-				"bonus_attack_speed"                        "70"
-				"duration"                         			"10.0"
-				"bonus_movement_speed"  					"20"
-				"debuff_duration"							"4.0"
-				"radius"                					"600"
-		}
-		
-		"OnSpellStart"
-			{
-
-				"FireSound"
-				{
-					"Target"		"CASTER"
-					"EffectName"	"Item.GlimmerCape.Activate"
-				}
-
-				"ApplyModifier"
-				{
-					"ModifierName" 	"modifier_invisible"
-					"Target"
-					{
-						"Center"	"CASTER"
-						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-					}
-					"Duration"		"%duration"
-				}
-
-				"ApplyModifier"
-				{
-					"ModifierName" 	"modifier_windwalk"
-					"Target"
-					{
-						"Center"	"CASTER"
-						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-					}
-					"Duration"		"%duration"
-				}
-			}
-		
-		"Modifiers"
-		{
-				"modifier_item_invis_sword_datadriven"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"      "%bonus_damage"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_attack_speed"
-				}
-			}
-				"modifier_windwalk"
-				{
-					"IsHidden"          "1"
-					"IsBuff"			"1"
-					"Duration"          "%duration"
-					"EffectName"		"particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
-					"EffectAttachType"	"follow_origin"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
-					}
-					
-					"States"
-					{
-						"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
-						"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-					}
-					
-					"OnAttackLanded"
-					{
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_invisible"
-							"Target"		"CASTER"
-						}
-
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_windwalk"
-							"Target"		"CASTER"
-						}
-
-						"ApplyModifier"
-						{
-							"ModifierName" 	"modifier_break"
-							"Target"		"TARGET"
-							"Duration"		"%debuff_duration"
-						}
-						"ApplyModifier"
-						{
-							"ModifierName" 	"modifier_visib"
-							"Target"		"TARGET"
-							"Duration"		"%debuff_duration"
-						}
-					}
-
-					"OnAbilityExecuted"
-					{
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_invisible"
-							"Target"		"CASTER"
-						}
-
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_windwalk"
-							"Target"		"CASTER"
-						}
-					}
-				}	
-			"modifier_truesight_datadriven"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-		
-				"ThinkInterval"  "0.03"
-				"OnIntervalThink"
-				{
-					"RemoveModifier"
-					{
-						"Target"
-						{
-							"Center"    "TARGET"
-							"Radius"    "%radius"
-							"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-							"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-						}
-						"ModifierName"  "modifier_truesight"
-					}
-					"ApplyModifier"
-					{
-						"Target"
-						{
-							"Center"    "TARGET"
-							"Radius"    "%radius"
-							"Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-							"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-						}
-						"ModifierName"  "modifier_truesight"
-						"Duration"      "0.50"
-					}           
-				}       
-			}
-			"modifier_visib"
-				{
-					"IsHidden"          "1"
-					"IsDebuff"			"1"
-					"Duration"          "%duration"
-					"States"
-					{
-						"MODIFIER_STATE_PROVIDES_VISION"	"MODIFIER_STATE_VALUE_ENABLED"
-					}
-				}
-		}
-	}
-	"item_recipe_invis_sword_datadriven"
+	"item_recipe_cheaters_glasses"
   	{
   		"BaseClass"                 "item_datadriven"
   		"AbilityTextureName"        "recipe"
   		"Model"						"models/props_gameplay/recipe.mdl"
-  		"ItemCost"					"300"
+  		"ItemCost"					"800"
 		"ItemShopTags"				""
 		"ItemRecipe"				"1"
-		"ItemResult"				"item_invis_sword_datadriven"
+		"ItemResult"				"item_cheaters_glasses"
 		"ItemRequirements"
 		{
 			"01" "item_invis_sword;item_hyperstone;item_gem"
 		}
   	}
+	"item_cheaters_glasses"
+	{
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/cheaters_glasses"
+		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"Model"                         "models/props_gameplay/red_box.vmdl" 
+		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+		"AbilityTextureName"            "cheaters_glasses"
+		"AbilityCooldown"               "25"
+		"AbilityManaCost"               "75"
+		"ItemCost"                      "6700"
+		"AbilityValues"
+		{
+				"bonus_damage"			"25"
+				"bonus_attack_speed"	"95"
+				"invis_duration"		"17"
+				"invis_delay"			"0.3"
+				"bonus_movement_speed"	"20"
+				"invis_damage"			"175"
+				"debuff_duration"		"4.0"
+				"true_sight_radius"		"600"
+		}
+	}
 	//=================================================================================================================
 	// Observer Wards
 	//=================================================================================================================

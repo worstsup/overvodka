@@ -85,7 +85,7 @@
 		"item"		"item_charik_new"
 		"item"		"item_pick_me"
 		"item"		"item_suchiy"
-		"item"		"item_invis_sword_datadriven"
+		"item"		"item_cheaters_glasses"
 		"item"		"item_badun"	
 		"item"		"item_drobe"
 		"item"		"item_mask_of_quadrobe"

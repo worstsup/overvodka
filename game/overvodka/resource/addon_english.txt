@@ -4492,10 +4492,14 @@
 		"DOTA_Tooltip_ability_item_charik_new_bonus_magresist"					"%+$spell_resist"
 		"DOTA_Tooltip_modifier_item_charik_new_regen_effect" "Gets high"
 
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven"    "CHEATER'S GLASSES"
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_Description"      "<h1>Active: Invisibility</h1> Makes you invisible for %duration% sec. Attacking from invisibility applies break effect to the enemy, and also makes them visible in the fog of war for %debuff_duration% sec. \n <h1>Passive: Cheat Vision</h1> Grants the owner the True Sight effect in a %radius% radius."
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_bonus_damage" "+$damage"
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_bonus_attack_speed" "+$attack"
+		"DOTA_Tooltip_ability_item_cheaters_glasses"    "CHEATER'S GLASSES"
+		"DOTA_Tooltip_ability_item_cheaters_glasses_Description"      "<h1>Active: Invisibility</h1> Makes you invisible for %invis_duration% sec and increases movement speed by %bonus_movement_speed%%%. Attacking from invisibility deals %invis_damage% bonus physical damage, applies break, and makes the enemy visible in the fog of war for %debuff_duration% sec.\n\n<h1>Passive: Cheat Vision</h1> Grants the owner True Sight in a %true_sight_radius% radius."
+		"DOTA_Tooltip_ability_item_cheaters_glasses_bonus_damage" "+$damage"
+		"DOTA_Tooltip_ability_item_cheaters_glasses_bonus_attack_speed" "+$attack"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_active" "Invisibility"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_active_Description" "The hero is invisible and gains bonus movement speed."
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_debuff" "Break"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_debuff_Description" "Passives are disabled. The target is visible in the fog of war."
 
 		"DOTA_Tooltip_Ability_item_ebasher" "Ebasher"
 		"DOTA_Tooltip_ability_item_ebasher_Description" "<h1>Passive: Ebash</h1> Each attack has a chance to stun the target for %bash_duration% sec and deal %bonus_chance_damage% physical damage. The chance depends on the wielder's attack type: %bash_chance_melee%%% for melee, %bash_chance_ranged%%% for ranged."

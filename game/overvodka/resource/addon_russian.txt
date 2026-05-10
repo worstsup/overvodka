@@ -4488,6 +4488,7 @@
 		"DOTA_Tooltip_ability_item_waka"   "WAKA"
 		"DOTA_Tooltip_ability_item_waka_Description" "<h1>Пассивное: Уменьшение брони</h1> Атаки уменьшают броню цели на %corruption_armor%.<br>Эффект длится %corruption_duration% сек.\n\n<h1>Пассивное: Стаки урона</h1> Когда умирает герой, броня которого была уменьшена WAKA, бонус к урону увеличивается на %bonus_damage_per_kill%. Максимум: %max_damage% урона"
 		"DOTA_Tooltip_ability_item_waka_bonus_damage"							"+$damage"
+
  		"DOTA_Tooltip_ability_item_suchiy" "СУЧИЙ ХОЛОД"
 		"DOTA_Tooltip_ability_item_suchiy_Description" "<h1>Использование: Зима</h1> Выпускает морозную волну, которая на %resist_debuff_duration% секунд увеличивает получаемый противниками урон от заклинаний на %spell_amp%%%, наносит им %blast_damage% магического урона и на %blast_debuff_duration% сек. снижает их скорость передвижения на %blast_movement_speed%%%.<br><br>Враги, задетые волной, получают оцепенение на время от %arctic_bind_root_max% до %arctic_bind_root_min% сек. в зависимости от расстояния до центра (чем ближе — тем дольше).<br><br>Радиус: %blast_radius%\n\n<h1>Пассивное: Аура сучьего холода</h1>Снижает скорость атаки противников на %aura_attack_speed%, а их пополнение здоровья и получаемое лечение — на %restoration_reduction_aura%%%.<br><br>Радиус: %aura_radius%"
 		"DOTA_Tooltip_ability_item_suchiy_bonus_strength" "+$str"
@@ -4508,13 +4509,16 @@
 		"DOTA_Tooltip_modifier_item_suchiy_blast_slow_description" "Скорость передвижения уменьшена на %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
 		"DOTA_Tooltip_modifier_item_suchiy_blast_amp"	  "Сучий Холодок"
 		"DOTA_Tooltip_modifier_item_suchiy_blast_amp_description" "Получаемый урон от заклинаний увеличен на %dMODIFIER_PROPERTY_TOOLTIP%%%."
+		
 		"DOTA_Tooltip_ability_item_bablokrad"			  "БАБЛОКРАД"
 		"DOTA_Tooltip_ability_item_bablokrad_Description" "<h1>Использование: Спиздить!</h1> Моментально ворует %gold%%% от текущего золота выбранного героя, а также ещё %gold_b% золота в виде трёх монет, которые выпадают около цели. \nИмеет 3 заряда."
 		"DOTA_Tooltip_ability_item_bablokrad_Attackspeed" "+$attack"
+
 		"DOTA_Tooltip_ability_item_aegis_hero"            "AEGIS HERO"
 		"DOTA_Tooltip_ability_item_aegis_hero_Description"            "<h1>Пассивное: Минибаш</h1> С шансом в %minibash_chance%%% атака героя пройдет сквозь уклонение и замедлит скорость передвижения врага на %movement_speed_slow%%% и скорость атаки на %attack_speed_slow% на %slow_duration% сек., а также нанесет %cleave_percent%%% прорубающего урона в радиусе %cleave_radius% и %bash_damage%%% магического доп. урона от атаки владельца по цели.\n\n Предмет не стакается и не работает на иллюзиях.\nПрорубающая атака и замедление не срабатывает у героев дальнего боя."
 		"DOTA_Tooltip_ability_item_aegis_hero_bonus_attack_speed" "+$attack"
 		"DOTA_Tooltip_ability_item_aegis_hero_bonus_range" "+$attack_range_melee"
+
 		"DOTA_Tooltip_ability_item_onehp"					"ТОТЕМ БЕССМЕРТИЯ"
 		"DOTA_Tooltip_ability_item_onehp_Description"		"<h1>Пассивное: Тотем бессмертия</h1> Если здоровье владельца упадёт ниже %percent_tooltip%%%, то он получит сильное развеивание и не будет получать и наносить урон в течение %duration% сек."
 		"DOTA_Tooltip_ability_item_onehp_bonus_health"	"+$health"
@@ -4522,18 +4526,21 @@
 		"DOTA_Tooltip_ability_item_onehp_bonus_damage"	"+$damage"
 		"DOTA_Tooltip_modifier_item_onehp_active"	"Тотем Бессмертия"
 		"DOTA_Tooltip_modifier_item_onehp_active_Description" "Герой не получает и не наносит урон"
+
 		"DOTA_Tooltip_ability_item_magic_aegis"                 "MAGIC AEGIS HERO"
 		"DOTA_Tooltip_ability_item_magic_aegis_Description"     "<h1>Пассивное: Уменьшение кулдаунов</h1> Уменьшает перезарядку всех способностей и предметов на %cd%%%\n\n<h1>Пассивное: Увеличение маг. урона</h1> Увеличивает урон от заклинаний на %dmg%%%"
 		"DOTA_Tooltip_ability_item_magic_aegis_hp" "+$health"
 		"DOTA_Tooltip_ability_item_magic_aegis_mp" "+$mana"
 		"DOTA_Tooltip_ability_item_magic_aegis_int" "+$int"
 		"DOTA_Tooltip_ability_item_magic_aegis_mana_regen" "+$mana_regen"
+
 		"DOTA_Tooltip_ability_item_octarine_vodka"                 "OCTARINE CORE"
 		"DOTA_Tooltip_ability_item_octarine_vodka_Description"     "<h1>Пассивное: Уменьшение кулдаунов</h1> Уменьшает перезарядку всех способностей и предметов на %cd%%%."
 		"DOTA_Tooltip_ability_item_octarine_vodka_hp" "+$health"
 		"DOTA_Tooltip_ability_item_octarine_vodka_mp" "+$mana"
 		"DOTA_Tooltip_ability_item_octarine_vodka_int" "+$int"
 		"DOTA_Tooltip_ability_item_octarine_vodka_mana_regen" "+$mana_regen"
+
 		"DOTA_Tooltip_ability_item_badun"                   "BADUN BLADE"
 		"DOTA_Tooltip_ability_item_badun_Description"        "<h1>Использование: Бадун</h1>Накладывает на врага эффект бадуна на %duration% сек. и наносит урон в размере %blast_agility_multiplier% * его основной атрибут + %blast_damage_base%. Во время бадуна враг не может атаковать и получать физ. урон, но получает увеличенный на %ethereal_damage_bonus%%% магический урон."
 		"DOTA_Tooltip_ability_item_badun_bonus_strength"  "+$str"
@@ -4545,18 +4552,22 @@
 		"DOTA_Tooltip_ability_item_badun_spell_amp"	"%+$spell_amp"
 		"DOTA_Tooltip_modifier_item_badun_ethereal"	"Badun Blade"
 		"DOTA_Tooltip_modifier_item_badun_ethereal_description"	"Не может атаковать и получает увеличенный маг. урон."
+
 		"DOTA_Tooltip_ability_item_pasito"                     "PASITO II"
 		"DOTA_Tooltip_ability_item_pasito_Description"	"<h1>Использование: Мега напас</h1> Курение PASITO II даёт вам невосприимчивость к эффектам и %magic_resist%%% сопротивления магии на %duration% сек."
 		"DOTA_Tooltip_ability_item_pasito_bonus_damage"							"+$damage"
 		"DOTA_Tooltip_ability_item_pasito_bonus_strength"				"+$str"
+
 		"DOTA_Tooltip_ability_item_hqd_maxx"                     "HQD MAXX"
 		"DOTA_Tooltip_ability_item_hqd_maxx_Description"	"<h1>Использование: Ультра парение</h1> Курение HQD MAXX даёт вам невосприимчивость к эффектам и %magic_resist%%% сопротивления магии на %duration% сек."
 		"DOTA_Tooltip_ability_item_hqd_maxx_bonus_damage"							"+$damage"
 		"DOTA_Tooltip_ability_item_hqd_maxx_bonus_strength"				"+$str"
+
 		"DOTA_Tooltip_ability_item_hqd"                     "HQD"
 		"DOTA_Tooltip_ability_item_hqd_Description"         "<h1>Использование: парение</h1> Курение HQD даёт вам невосприимчивость к эффектам и %magic_resist%%% сопротивления магии на %duration% сек."
 		"DOTA_Tooltip_ability_item_hqd_bonus_damage"							"+$damage"
 		"DOTA_Tooltip_ability_item_hqd_bonus_strength"				"+$str"
+
 		"DOTA_Tooltip_ability_item_balbe"                     "БАЛБЕСЫ"
 		"DOTA_Tooltip_ability_item_balbe_Description"      "<h1>Использование: бежать балбе!</h1> Балбесы ускоряют вас на %movespeed_bonus%%% на %duration% сек."
 		"DOTA_Tooltip_ability_item_balbe_bonus_movement_speed"					"+$move_speed"
@@ -4564,6 +4575,7 @@
 		"DOTA_Tooltip_ability_item_balbe_bonus_armor"							"+$armor"
 		"DOTA_Tooltip_ability_item_balbe_attack_speed_bonus"					"+$attack"
 		"DOTA_Tooltip_ability_item_balbe_bonus_all" 							"+$all"
+
 		"DOTA_Tooltip_ability_item_charik_new"                     "CHARON BABY"
 		"DOTA_Tooltip_ability_item_charik_new_Description"    "<h1>Пассивное: Раскумариться</h1> Если у владельца чарона меньше %percent_min%%% здоровья или маны и он стоит на месте, не получая урон в течение %time_to_heal% секунд, то он раскумарится, восстановив %percent_heal%%% от макс. здоровья и маны."
 		"DOTA_Tooltip_ability_item_charik_new_bonus_strength" "+$str"
@@ -4571,10 +4583,15 @@
 		"DOTA_Tooltip_ability_item_charik_new_bonus_attack_speed_stats" "+$attack"
 		"DOTA_Tooltip_ability_item_charik_new_bonus_ms" "%+$move_speed"
 		"DOTA_Tooltip_ability_item_charik_new_bonus_magresist"					"%+$spell_resist"
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven"    "ОЧКИ ЧИТЕРА"
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_Description"      "<h1>Использование: Невидимость</h1> Делает персонажа невидимым на %duration% сек. Атака из невидимости накладывает на врага истощение и видимость в тумане войны на %debuff_duration% сек.\n\n<h1>Пассивное: Читерское зрение</h1> Даёт владельцу эффект True Sight в радиусе %radius%."
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_bonus_damage" "+$damage"
-		"DOTA_Tooltip_ability_item_invis_sword_datadriven_bonus_attack_speed" "+$attack"
+
+		"DOTA_Tooltip_ability_item_cheaters_glasses"    "ОЧКИ ЧИТЕРА"
+		"DOTA_Tooltip_ability_item_cheaters_glasses_Description"      "<h1>Использование: Невидимость</h1> Делает владельца невидимым на %invis_duration% сек, увеличивая скорость передвижения на %bonus_movement_speed%%%. Атака из невидимости дополнительно нанесёт %invis_damage% физ. урона, наложив на врага истощение и видимость в тумане войны на %debuff_duration% сек.\n\n<h1>Пассивное: Читерское зрение</h1> Даёт владельцу эффект True Sight в радиусе %true_sight_radius%."
+		"DOTA_Tooltip_ability_item_cheaters_glasses_bonus_damage" "+$damage"
+		"DOTA_Tooltip_ability_item_cheaters_glasses_bonus_attack_speed" "+$attack"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_active" "Невидимость"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_active_Description" "Герой невидим и получает бонус к скорости передвижения."
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_debuff" "Истощение"
+		"DOTA_Tooltip_modifier_modifier_cheaters_glasses_debuff_Description" "Пассивные способности отключены. Цель видна в тумане войны."
 
 		"DOTA_Tooltip_ability_item_lesh"                    "ЛЕЩ"
 		"DOTA_Tooltip_ability_item_lesh_Description"        "<h1>Использование: Дать леща</h1>Дает врагу леща, наносящего урон в размере %damage_pct%%% от его максимального здоровья и оглушающего его на %stun_duration% секунду.\nИмеет 1 заряд в лавке."

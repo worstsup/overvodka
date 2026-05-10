@@ -34,7 +34,7 @@
 		"#DOTA_Item_Build_Luxury"
 		{
 			"item"		"item_aghanims_shard"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_cheaters_glasses"
 		}
 	}
 }

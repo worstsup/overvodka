@@ -44,7 +44,7 @@ return {
                     { item_name = "item_ultimate_scepter", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -143,7 +143,7 @@ return {
                 items = {
                     { item_name = "item_shemelis", note = "" },
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_armature_strike", note = "" }
                 },
             }
@@ -199,7 +199,7 @@ return {
                 items = {
                     { item_name = "item_badun", note = "" },
                     { item_name = "item_refresher", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -255,7 +255,7 @@ return {
                 items = {
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -360,7 +360,7 @@ return {
                     { item_name = "item_shemelis", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_red_chips", note = "" },
                     { item_name = "item_green_chips", note = "" },
                     { item_name = "item_blue_chips", note = "" }
@@ -463,7 +463,7 @@ return {
                 key = "luxury",
                 title = "#DOTA_Item_Build_Luxury",
                 items = {
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_aegis_hero", note = "" }
                 },
@@ -514,7 +514,7 @@ return {
                 items = {
                     { item_name = "item_bablokrad", note = "" },
                     { item_name = "item_armature_strike", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_minion_generator", note = "" }
@@ -563,7 +563,7 @@ return {
                 items = {
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_armature_strike", note = "" }
                 },
             }
@@ -668,7 +668,7 @@ return {
                 items = {
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_swag", note = "" }
                 },
             }
@@ -716,7 +716,7 @@ return {
                 items = {
                     { item_name = "item_shemelis", note = "" },
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_sigma_staff", note = "" }
                 },
             }
@@ -771,7 +771,7 @@ return {
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -971,7 +971,7 @@ return {
                 items = {
                     { item_name = "item_armature_strike", note = "" },
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -1117,7 +1117,7 @@ return {
                 items = {
                     { item_name = "item_aghanims_shard", note = "" },
                     { item_name = "item_waka", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_ultimate_scepter", note = "" },
                     { item_name = "item_blink", note = "" }
                 },
@@ -1356,7 +1356,7 @@ return {
                 title = "#DOTA_Item_Build_Luxury",
                 items = {
                     { item_name = "item_shemelis", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -1517,7 +1517,7 @@ return {
                     { item_name = "item_swag", note = "" },
                     { item_name = "item_bablokrad", note = "" },
                     { item_name = "item_aegis_hero", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -1662,7 +1662,7 @@ return {
                     { item_name = "item_blink", note = "" },
                     { item_name = "item_magic_aegis", note = "" },
                     { item_name = "item_armature_strike", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -1760,7 +1760,7 @@ return {
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_aghanims_shard", note = "" },
                     { item_name = "item_shemelis", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_magic_aegis", note = "" }
                 },
             }
@@ -1971,7 +1971,7 @@ return {
                 items = {
                     { item_name = "item_swag", note = "" },
                     { item_name = "item_aegis_hero", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_refresher", note = "" }
                 },
             }
@@ -2022,7 +2022,7 @@ return {
                     { item_name = "item_govno", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_shemelis", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -2072,7 +2072,7 @@ return {
                 items = {
                     { item_name = "item_ultimate_scepter", note = "" },
                     { item_name = "item_magic_daedalus", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_sigma_staff", note = "" }
                 },
             }
@@ -2318,7 +2318,7 @@ return {
                 title = "#DOTA_Item_Build_Luxury",
                 items = {
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_armature_strike", note = "" },
                     { item_name = "item_refresher", note = "" }
                 },
@@ -2366,7 +2366,7 @@ return {
                 title = "#DOTA_Item_Build_Luxury",
                 items = {
                     { item_name = "item_aghanims_shard", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },
@@ -2467,7 +2467,7 @@ return {
                 items = {
                     { item_name = "item_satanic", note = "" },
                     { item_name = "item_shemelis", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_govno", note = "" }
                 },
             }
@@ -2610,7 +2610,7 @@ return {
                 title = "#DOTA_Item_Build_Luxury",
                 items = {
                     { item_name = "item_armature_strike", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" },
+                    { item_name = "item_cheaters_glasses", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" }
                 },
@@ -2719,7 +2719,7 @@ return {
                     { item_name = "item_aghanims_shard", note = "" },
                     { item_name = "item_derzko", note = "" },
                     { item_name = "item_govno", note = "" },
-                    { item_name = "item_invis_sword_datadriven", note = "" }
+                    { item_name = "item_cheaters_glasses", note = "" }
                 },
             }
         },

@@ -41,7 +41,7 @@
 		{
 			"item"		"item_ultimate_scepter"
 			"item"		"item_magic_daedalus"
-			"item"		"item_invis_sword_datadriven"
+			"item"		"item_cheaters_glasses"
 			"item"		"item_sigma_staff"
 		}
 	}

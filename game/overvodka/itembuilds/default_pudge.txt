@@ -39,7 +39,7 @@
 			"item"		"item_blink"
 			"item"		"item_magic_aegis"
 			"item"		"item_armature_strike"
-            "item"		"item_invis_sword_datadriven"
+            "item"		"item_cheaters_glasses"
 		}
 	}
 }
