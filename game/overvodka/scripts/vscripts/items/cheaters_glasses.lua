@@ -1,45 +1,35 @@
-LinkLuaModifier("modifier_cheaters_glasses", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_cheaters_glasses_active", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_cheaters_glasses_debuff", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cheaters_glasses", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cheaters_glasses_active", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_cheaters_glasses_debuff", "items/cheaters_glasses", LUA_MODIFIER_MOTION_NONE)
 
-cheaters_glasses = class({})
+item_cheaters_glasses = class({})
 
-function cheaters_glasses:Precache(context)
-    PrecacheResource("particle", "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", context)
-    PrecacheResource("particle", "particles/units/heroes/hero_sniper/sniper_crosshair.vpcf", context)
+function item_cheaters_glasses:GetIntrinsicModifierName()
+    return "modifier_item_cheaters_glasses"
 end
 
-function cheaters_glasses:GetIntrinsicModifierName()
-    return "modifier_cheaters_glasses"
-end
-
-function cheaters_glasses:OnSpellStart()
+function item_cheaters_glasses:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
     local duration = self:GetSpecialValueFor("invis_duration")
-    local delay = self:GetSpecialValueFor("invis_delay")
-    Timers:CreateTimer(delay, function()
-        if not IsValid(self, caster) then return end
-        caster:AddNewModifier(caster, self, "modifier_cheaters_glasses_active", {duration = duration})
-    end)
-    EmitSoundOn("Item.GlimmerCape.Activate", caster)
+    caster:AddNewModifier(caster, self, "modifier_item_cheaters_glasses_active", {duration = duration})
+    EmitSoundOn("cheaters_glasses", caster)
+    local p = ParticleManager:CreateParticle("particles/generic_hero_status/status_invisibility_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+    ParticleManager:ReleaseParticleIndex(p)
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    ParticleManager:ReleaseParticleIndex(p)
 end
 
-function cheaters_glasses:QueueInvisAttack(attacker, target, record, damage, debuff_duration)
+function item_cheaters_glasses:QueueInvisAttack(attacker, target, record, damage, debuff_duration)
     if not IsServer() then return end
     if not record or record == -1 then return end
     if not IsValid(attacker, target) then return end
 
     self.invis_attack_records = self.invis_attack_records or {}
-    self.invis_attack_records[record] = {
-        attacker = attacker,
-        target = target,
-        damage = damage,
-        debuff_duration = debuff_duration,
-    }
+    self.invis_attack_records[record] = {attacker = attacker, target = target, damage = damage, debuff_duration = debuff_duration}
 end
 
-function cheaters_glasses:ConsumeInvisAttack(params)
+function item_cheaters_glasses:ConsumeInvisAttack(params)
     if not IsServer() then return end
     if not params.record or not self.invis_attack_records then return end
 
@@ -54,42 +44,39 @@ function cheaters_glasses:ConsumeInvisAttack(params)
     return record_data
 end
 
-function cheaters_glasses:ClearInvisAttackRecord(record)
+function item_cheaters_glasses:ClearInvisAttackRecord(record)
     if not IsServer() then return end
     if not record or not self.invis_attack_records then return end
     self.invis_attack_records[record] = nil
 end
 
 
-modifier_cheaters_glasses_active = class({})
+modifier_item_cheaters_glasses_active = class({})
 
-function modifier_cheaters_glasses_active:IsHidden() return false end
-function modifier_cheaters_glasses_active:IsPurgable() return false end
+function modifier_item_cheaters_glasses_active:IsHidden() return false end
+function modifier_item_cheaters_glasses_active:IsPurgable() return false end
 
-function modifier_cheaters_glasses_active:OnCreated()
+function modifier_item_cheaters_glasses_active:OnCreated()
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
     self:OnRefresh()
-    if not IsServer() then return end
-    self.p = ParticleManager:CreateParticle("particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
-    self:AddParticle(self.p, false, false, -1, false, false)
 end
 
-function modifier_cheaters_glasses_active:OnRefresh()
+function modifier_item_cheaters_glasses_active:OnRefresh()
     if not self.ability then return end
     self.movespeed = self.ability:GetSpecialValueFor("bonus_movement_speed")
     self.damage = self.ability:GetSpecialValueFor("invis_damage")
     self.debuff_duration = self.ability:GetSpecialValueFor("debuff_duration")
 end
 
-function modifier_cheaters_glasses_active:CheckState()
+function modifier_item_cheaters_glasses_active:CheckState()
 	return {
 		[MODIFIER_STATE_INVISIBLE] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
 	}
 end
 
-function modifier_cheaters_glasses_active:DeclareFunctions()
+function modifier_item_cheaters_glasses_active:DeclareFunctions()
     return {
 		MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_EVENT_ON_ABILITY_EXECUTED,
@@ -98,13 +85,13 @@ function modifier_cheaters_glasses_active:DeclareFunctions()
 	}
 end
 
-function modifier_cheaters_glasses_active:OnAbilityExecuted(params)
+function modifier_item_cheaters_glasses_active:OnAbilityExecuted(params)
 	if not IsServer() then return end
 	if params.unit~=self.parent then return end
 	self:Destroy()
 end
 
-function modifier_cheaters_glasses_active:OnAttack(params)
+function modifier_item_cheaters_glasses_active:OnAttack(params)
 	if not IsServer() then return end
 	if params.attacker~=self.parent then return end
     if not IsValid(self.ability, params.target) then return end
@@ -113,47 +100,49 @@ function modifier_cheaters_glasses_active:OnAttack(params)
 	self:Destroy()
 end
 
-function modifier_cheaters_glasses_active:GetModifierInvisibilityLevel()
+function modifier_item_cheaters_glasses_active:GetModifierInvisibilityLevel()
     return 1
 end
 
-function modifier_cheaters_glasses_active:GetModifierMoveSpeedBonus_Percentage()
+function modifier_item_cheaters_glasses_active:GetModifierMoveSpeedBonus_Percentage()
     return self.movespeed
 end
 
 
-modifier_cheaters_glasses_debuff = class({})
+modifier_item_cheaters_glasses_debuff = class({})
 
-function modifier_cheaters_glasses_debuff:IsHidden() return false end
-function modifier_cheaters_glasses_debuff:IsDebuff() return true end
-function modifier_cheaters_glasses_debuff:IsPurgable() return true end
+function modifier_item_cheaters_glasses_debuff:IsHidden() return false end
+function modifier_item_cheaters_glasses_debuff:IsDebuff() return true end
+function modifier_item_cheaters_glasses_debuff:IsPurgable() return true end
 
-function modifier_cheaters_glasses_debuff:CheckState()
+function modifier_item_cheaters_glasses_debuff:CheckState()
     return {
         [MODIFIER_STATE_PASSIVES_DISABLED] = true,
         [MODIFIER_STATE_PROVIDES_VISION] = true,
     }
 end
 
-function modifier_cheaters_glasses_debuff:DeclareFunctions()
+function modifier_item_cheaters_glasses_debuff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PROVIDES_FOW_POSITION,
     }
 end
 
-function modifier_cheaters_glasses_debuff:GetModifierProvidesFOWVision()
+function modifier_item_cheaters_glasses_debuff:GetModifierProvidesFOWVision()
     return 1
 end
 
-function modifier_cheaters_glasses_debuff:OnCreated()
+function modifier_item_cheaters_glasses_debuff:OnCreated()
     self.parent = self:GetParent()
     self.caster = self:GetCaster()
     self.ability = self:GetAbility()
     if not IsServer() then return end
     self:StartIntervalThink(0.1)
+    self.p = ParticleManager:CreateParticle("particles/items3_fx/silver_edge.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    self:AddParticle(self.p, false, false, -1, false, false)
 end
 
-function modifier_cheaters_glasses_debuff:OnIntervalThink()
+function modifier_item_cheaters_glasses_debuff:OnIntervalThink()
     if not IsServer() then return end
     if not IsValid(self.parent, self.caster, self.ability) or not self.parent:IsAlive() then
         self:Destroy()
@@ -165,13 +154,13 @@ function modifier_cheaters_glasses_debuff:OnIntervalThink()
 end
 
 
-modifier_cheaters_glasses = class({})
+modifier_item_cheaters_glasses = class({})
 
-function modifier_cheaters_glasses:IsHidden() return true end
-function modifier_cheaters_glasses:IsPurgable() return false end
-function modifier_cheaters_glasses:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
+function modifier_item_cheaters_glasses:IsHidden() return true end
+function modifier_item_cheaters_glasses:IsPurgable() return false end
+function modifier_item_cheaters_glasses:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
-function modifier_cheaters_glasses:OnCreated()
+function modifier_item_cheaters_glasses:OnCreated()
     self.ability = self:GetAbility()
     self.parent = self:GetParent()
     self:OnRefresh()
@@ -180,14 +169,14 @@ function modifier_cheaters_glasses:OnCreated()
     self:StartIntervalThink(0.1)
 end
 
-function modifier_cheaters_glasses:OnRefresh()
+function modifier_item_cheaters_glasses:OnRefresh()
     if not self.ability then return end
     self.damage = self.ability:GetSpecialValueFor("bonus_damage")
     self.attack_speed = self.ability:GetSpecialValueFor("bonus_attack_speed")
     self.radius = self.ability:GetSpecialValueFor("true_sight_radius")
 end
 
-function modifier_cheaters_glasses:DestroyCrosshairParticle(enemy)
+function modifier_item_cheaters_glasses:DestroyCrosshairParticle(enemy)
     if not self.crosshair_particles or not self.crosshair_particles[enemy] then return end
 
     ParticleManager:DestroyParticle(self.crosshair_particles[enemy], false)
@@ -195,7 +184,7 @@ function modifier_cheaters_glasses:DestroyCrosshairParticle(enemy)
     self.crosshair_particles[enemy] = nil
 end
 
-function modifier_cheaters_glasses:DestroyAllCrosshairParticles()
+function modifier_item_cheaters_glasses:DestroyAllCrosshairParticles()
     if not self.crosshair_particles then return end
 
     for enemy,_ in pairs(self.crosshair_particles) do
@@ -203,7 +192,7 @@ function modifier_cheaters_glasses:DestroyAllCrosshairParticles()
     end
 end
 
-function modifier_cheaters_glasses:OnIntervalThink()
+function modifier_item_cheaters_glasses:OnIntervalThink()
     if not IsServer() then return end
     if not IsValid(self.ability, self.parent) then
         self:DestroyAllCrosshairParticles()
@@ -220,7 +209,8 @@ function modifier_cheaters_glasses:OnIntervalThink()
         if was_invisible then
             active_crosshairs[enemy] = true
             if not self.crosshair_particles[enemy] then
-                self.crosshair_particles[enemy] = ParticleManager:CreateParticleForTeam("particles/units/heroes/hero_sniper/sniper_crosshair.vpcf", PATTACH_OVERHEAD_FOLLOW, enemy, self.parent:GetTeamNumber())
+                self.crosshair_particles[enemy] = ParticleManager:CreateParticleForTeam("particles/items/cheaters_glasses.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy, self.parent:GetTeamNumber())
+                ParticleManager:SetParticleControlEnt(self.crosshair_particles[enemy], 0, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy:GetAbsOrigin(), true)
             end
         end
     end
@@ -232,12 +222,12 @@ function modifier_cheaters_glasses:OnIntervalThink()
     end
 end
 
-function modifier_cheaters_glasses:OnDestroy()
+function modifier_item_cheaters_glasses:OnDestroy()
     if not IsServer() then return end
     self:DestroyAllCrosshairParticles()
 end
 
-function modifier_cheaters_glasses:DeclareFunctions()
+function modifier_item_cheaters_glasses:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
@@ -247,37 +237,37 @@ function modifier_cheaters_glasses:DeclareFunctions()
     }
 end
 
-function modifier_cheaters_glasses:OnAttackLanded(params)
+function modifier_item_cheaters_glasses:OnAttackLanded(params)
     if not IsServer() then return end
     if params.attacker ~= self.parent then return end
     if not IsValid(self.ability) then return end
 
     local record_data = self.ability:ConsumeInvisAttack(params)
     if not record_data then return end
-
-    params.target:AddNewModifier(self.parent, self.ability, "modifier_cheaters_glasses_debuff", {duration = record_data.debuff_duration})
+    EmitSoundOn("DOTA_Item.SilverEdge.Target", params.target)
+    params.target:AddNewModifier(self.parent, self.ability, "modifier_item_cheaters_glasses_debuff", {duration = record_data.debuff_duration})
     ApplyDamage({victim = params.target, attacker = self.parent, damage = record_data.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self.ability})
 end
 
-function modifier_cheaters_glasses:OnAttackFail(params)
+function modifier_item_cheaters_glasses:OnAttackFail(params)
     if not IsServer() then return end
     if params.attacker ~= self.parent then return end
     if not IsValid(self.ability) then return end
     self.ability:ClearInvisAttackRecord(params.record)
 end
 
-function modifier_cheaters_glasses:OnAttackRecordDestroy(params)
+function modifier_item_cheaters_glasses:OnAttackRecordDestroy(params)
     if not IsServer() then return end
     if not IsValid(self.ability) then return end
     self.ability:ClearInvisAttackRecord(params.record)
 end
 
-function modifier_cheaters_glasses:GetModifierPreAttack_BonusDamage()
+function modifier_item_cheaters_glasses:GetModifierPreAttack_BonusDamage()
     if not self.ability then return end
     return self.damage
 end
 
-function modifier_cheaters_glasses:GetModifierAttackSpeedBonus_Constant()
+function modifier_item_cheaters_glasses:GetModifierAttackSpeedBonus_Constant()
     if not self.ability then return end
     return self.attack_speed
 end

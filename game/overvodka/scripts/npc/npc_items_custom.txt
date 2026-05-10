@@ -829,7 +829,6 @@
 				"bonus_damage"			"25"
 				"bonus_attack_speed"	"95"
 				"invis_duration"		"17"
-				"invis_delay"			"0.3"
 				"bonus_movement_speed"	"20"
 				"invis_damage"			"175"
 				"debuff_duration"		"4.0"
