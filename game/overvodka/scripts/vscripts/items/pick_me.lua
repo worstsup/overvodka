@@ -96,9 +96,9 @@ function modifier_item_pick_me_windwalk:IsPurgable() return true end
 function modifier_item_pick_me_windwalk:OnCreated()
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
-    self.broken = false
     self.attack_record = nil
     self.attack_consumed = false
+    self:SetStackCount(0)
     self:OnRefresh()
 end
 
@@ -111,7 +111,7 @@ function modifier_item_pick_me_windwalk:OnRefresh()
 end
 
 function modifier_item_pick_me_windwalk:CheckState()
-    if self.broken then return {} end
+    if self:GetStackCount() == 1 then return {} end
 
     return {
         [MODIFIER_STATE_INVISIBLE] = true,
@@ -134,14 +134,14 @@ end
 function modifier_item_pick_me_windwalk:OnAttack(params)
     if not IsServer() then return end
     if params.attacker ~= self.parent then return end
-    if self.broken then return end
+    if self:GetStackCount() == 1 then return end
     if not IsValid(self.parent, self.ability, params.target) then return end
     if not params.record or params.record == -1 then
         self:Destroy()
         return
     end
 
-    self.broken = true
+    self:SetStackCount(1)
     self.attack_record = params.record
     self:SetDuration(-1, true)
 end
@@ -178,18 +178,18 @@ end
 function modifier_item_pick_me_windwalk:OnAbilityExecuted(params)
     if not IsServer() then return end
     if params.unit ~= self.parent then return end
-    if self.broken then return end
+    if self:GetStackCount() == 1 then return end
 
     self:Destroy()
 end
 
 function modifier_item_pick_me_windwalk:GetModifierInvisibilityLevel()
-    if self.broken then return 0 end
+    if self:GetStackCount() == 1 then return 0 end
     return 1
 end
 
 function modifier_item_pick_me_windwalk:GetModifierMoveSpeedBonus_Percentage()
     if not self.ability then return end
-    if self.broken then return 0 end
+    if self:GetStackCount() == 1 then return 0 end
     return self.bonus_movement_speed
 end
