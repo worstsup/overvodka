@@ -296,11 +296,13 @@ function OnSayLine(event){
             SoundIcon = `<img class='SoundIconChat' src='s2r://panorama/images/control_icons/chat_wheel_icon_png.vtex'> `
         }
 
-        let Text = `<font color='${playerColor}'>${Info.player_name}</font>: ${SoundIcon}${$.Localize(`#CUSTOM_CHAT_WHEEL_Item_${ItemInfo.Name}`)}`
+        let playerName = EscapeCustomChatHtml(Info.player_name)
+        let lineText = EscapeCustomChatHtml($.Localize(`#CUSTOM_CHAT_WHEEL_Item_${ItemInfo.Name}`))
+        let Text = `<font color='${playerColor}'>${playerName}</font>: ${SoundIcon}${lineText}`
 
         let ChatLines = DotaHUD.FindChildTraverse("ChatLinesPanel")
         if(ChatLines){
-            let msgPanel = $.CreatePanel("Panel", ChatLines, "", {class:"ChatLine"})
+            let msgPanel = $.CreatePanel("Panel", ChatLines, "", {class:"OvervodkaChatLine"})
             msgPanel.BLoadLayout("file://{resources}/layout/custom_game/custom_chat_line.xml", false, false)
             msgPanel.hittest = false
             msgPanel.hittestchildren = false
@@ -311,7 +313,9 @@ function OnSayLine(event){
     
             msgPanel.SetDialogVariable("text", Text)
             $.Schedule(5, function(){
+                if (!msgPanel || !msgPanel.IsValid()) return
                 msgPanel.AddClass("ExpireThisAfter")
+                msgPanel.DeleteAsync(0.35)
             })
         }
     }
@@ -437,10 +441,11 @@ function OnCaseOpened(event) {
     var playerColor = GetHEXPlayerColor(playerId);
     var OvervodkaName = GetOvervodkaHeroName(HeroName);
 
-    var caseName = $.Localize(event.case_name || "") || (event.case_name || "");
-    var dropName = $.Localize(event.drop_item_name || "") || (event.drop_item_name || "");
+    var caseName = EscapeCustomChatHtml($.Localize(event.case_name || "") || (event.case_name || ""));
+    var dropName = EscapeCustomChatHtml($.Localize(event.drop_item_name || "") || (event.drop_item_name || ""));
+    var playerName = EscapeCustomChatHtml(Info.player_name);
 
-    var Text = "<font color='" + playerColor + "'>" + Info.player_name + "</font> " +
+    var Text = "<font color='" + playerColor + "'>" + playerName + "</font> " +
                $.Localize("#Store_Chat_CaseOpened_Opened") + " " +
                caseName + " " +
                $.Localize("#Store_Chat_CaseOpened_AndGot") + " " +
@@ -450,9 +455,10 @@ function OnCaseOpened(event) {
         var ChatLines = DotaHUD.FindChildTraverse("ChatLinesPanel");
         if (!ChatLines) return;
 
-        var msgPanel = $.CreatePanel("Panel", ChatLines, "", { class: "ChatLine" });
+        var msgPanel = $.CreatePanel("Panel", ChatLines, "", { class: "OvervodkaChatLine" });
         msgPanel.BLoadLayout("file://{resources}/layout/custom_game/custom_chat_line.xml", false, false);
         msgPanel.hittest = false;
+        msgPanel.hittestchildren = false;
 
         var HeroImage = msgPanel.FindChildTraverse("HeroImage");
         if (HeroImage) {
@@ -462,7 +468,9 @@ function OnCaseOpened(event) {
         msgPanel.SetDialogVariable("text", Text);
 
         $.Schedule(10, function () {
+            if (!msgPanel || !msgPanel.IsValid()) return;
             msgPanel.AddClass("ExpireThisAfter");
+            msgPanel.DeleteAsync(0.35);
         });
     });
 }

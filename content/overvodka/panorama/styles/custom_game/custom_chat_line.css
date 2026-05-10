@@ -1,21 +1,35 @@
+.OvervodkaChatLine {
+    width: 100%;
+    min-height: 26px;
+    flow-children: right;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.25s;
+}
+
 .CustomChatLine{
     flow-children: right;
+    vertical-align: center;
 }
 
-.Text{
+.CustomChatLine .Text{
     color: #faeac9;
+    font-size: 18px;
+    font-family: defaultFont;
+    font-weight: semi-bold;
     margin-left: 5px;
     text-shadow: 1px 1.5px 0px 2 #000000;
+    vertical-align: center;
 }
 
-DOTAChat#HudChat .ChatLine.Expired { opacity: 1; }
-DOTAChat#HudChat .ChatLine.ExpireThisAfter { opacity: 0; }
+.OvervodkaChatLine.ExpireThisAfter { opacity: 0; }
 
-#HeroImage{
+.CustomChatLine #HeroImage{
     width: 40px;
     height: 23px;
     margin-left: 32px;
     border: 1px solid black;
+    vertical-align: center;
 }
 
 .ChatWheelIcon{

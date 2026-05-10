@@ -210,7 +210,7 @@ function modifier_misolo_innate:OnDeath(params)
     local victim = params.unit
     local attacker = params.attacker
 
-    if not IsValid(parent, ability, victim, attacker) or parent:PassivesDisabled() then
+    if not IsValid(parent, ability, victim, attacker) or parent:PassivesDisabled() or attacker:IsIllusion() then
         return
     end
 

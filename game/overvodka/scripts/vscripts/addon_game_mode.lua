@@ -166,7 +166,7 @@ function OvervodkaGameMode:InitGameMode()
 
 	self.itemSpawnLocations = nil
 	self.KILLS_TO_WIN_SINGLES = 50
-	self.KILLS_TO_WIN_DUOS = 50
+	self.KILLS_TO_WIN_DUOS = 75
 	self.KILLS_TO_WIN_TRIOS = 200
 	self.KILLS_TO_WIN_QUADS = 50
 	self.KILLS_TO_WIN_QUINTS = 50
@@ -289,7 +289,7 @@ function OvervodkaGameMode:InitGameMode()
 		else
 			GameRules:SetCustomGameBansPerTeam( 1 )
 		end
-		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 10.0 )
+		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride( 0.0 )
 	end
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen( 0 )
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen( 0 )
@@ -1044,6 +1044,11 @@ function OvervodkaGameMode:AssignTeams()
 		if hPlayer and not hPlayer:IsNull() then
 			hPlayer:SetTeam(nTeamNumber)
 		end
+
+		local hHero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
+		if hHero and not hHero:IsNull() then
+			hHero:SetTeam(nTeamNumber)
+		end
 	end
 
 	for nTeam = 0, (DOTA_TEAM_COUNT-1) do
@@ -1067,9 +1072,7 @@ function OvervodkaGameMode:AssignTeams()
 			end
 			--print( "Found player " .. nPlayerID .. " on team " .. nTeam )
 			if vecTeamValid[ nTeam ] then
-				if nActualTeam ~= nTeam or PlayerResource:GetCustomTeamAssignment( nPlayerID ) ~= nTeam then
-					ApplyResolvedTeam(nPlayerID, nTeam)
-				end
+				ApplyResolvedTeam(nPlayerID, nTeam)
 
 				if vecTeamNeededPlayers[ nTeam ] > 0 then
 					vecTeamNeededPlayers[ nTeam ] = vecTeamNeededPlayers[ nTeam ] - 1

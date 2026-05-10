@@ -667,11 +667,13 @@ function SendCustomMessageToChat(event){
     let InfoTipped = Game.GetPlayerInfo(event.tipped_player)
     let playerColor = GetHEXPlayerColor(event.tips_player)
     let TippedPlayerColor = GetHEXPlayerColor(event.tipped_player)
-    let Text = `<font color='${playerColor}'>${Info.player_name}</font> ${$.Localize('#PLAYER_HUD_TIPPED')} <font color='${TippedPlayerColor}'>${InfoTipped.player_name}</font>. ${$.Localize('#PLAYER_HUD_TIPPED_Text')}`
+    let PlayerName = EscapeCustomChatHtml(Info.player_name)
+    let TippedPlayerName = EscapeCustomChatHtml(InfoTipped.player_name)
+    let Text = `<font color='${playerColor}'>${PlayerName}</font> ${$.Localize('#PLAYER_HUD_TIPPED')} <font color='${TippedPlayerColor}'>${TippedPlayerName}</font>. ${$.Localize('#PLAYER_HUD_TIPPED_Text')}`
 
     let ChatLines = DotaHUDPanel.FindChildTraverse("ChatLinesPanel")
     if(ChatLines){
-        let msgPanel = $.CreatePanel("Panel", ChatLines, "", {class:"ChatLine"})
+        let msgPanel = $.CreatePanel("Panel", ChatLines, "", {class:"OvervodkaChatLine"})
         msgPanel.BLoadLayout("file://{resources}/layout/custom_game/custom_chat_line.xml", false, false)
         msgPanel.hittest = false
         msgPanel.hittestchildren = false
@@ -686,7 +688,9 @@ function SendCustomMessageToChat(event){
 
         msgPanel.SetDialogVariable("text", Text)
         $.Schedule(5, function(){
+            if (!msgPanel || !msgPanel.IsValid()) return
             msgPanel.AddClass("ExpireThisAfter")
+            msgPanel.DeleteAsync(0.35)
         })
     }
 }

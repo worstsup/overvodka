@@ -16,8 +16,8 @@ function OvervodkaGameMode:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_INIT then
         CustomGameEventManager:Send_ServerToAllClients("gamesetup", nil)
 	elseif nNewState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
-		if TeamShuffle and TeamShuffle.StartSetupSanitizer then
-			TeamShuffle:StartSetupSanitizer()
+		if TeamShuffle and TeamShuffle.StartSetupAutoShuffle then
+			TeamShuffle:StartSetupAutoShuffle()
 		end
 	elseif nNewState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		self:AssignTeams()

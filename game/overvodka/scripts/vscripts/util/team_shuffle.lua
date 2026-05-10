@@ -80,24 +80,6 @@ function TeamShuffle:ApplyPlayerTeam(player_id, team_id)
     end
 end
 
-function TeamShuffle:GetCurrentAssignedTeam(player_id, valid_team_lookup)
-    if not PlayerResource:IsValidPlayerID(player_id) then
-        return DOTA_TEAM_NOTEAM
-    end
-
-    local team_id = PlayerResource:GetTeam(player_id)
-    if valid_team_lookup[team_id] then
-        return team_id
-    end
-
-    local custom_team_id = PlayerResource:GetCustomTeamAssignment(player_id)
-    if valid_team_lookup[custom_team_id] then
-        return custom_team_id
-    end
-
-    return DOTA_TEAM_NOTEAM
-end
-
 function TeamShuffle:SortPartiesBySize(parties)
     local parties_by_size = {}
 
@@ -216,76 +198,26 @@ function TeamShuffle:ShuffleTeams()
     end
 end
 
-function TeamShuffle:EnforceSetupTeamCapacity()
-    if IsSolo() then return end
-    if GameRules:State_Get() ~= DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then return end
-
-    local team_ids = self:GetValidTeamIDs()
-    if #team_ids <= 1 then return end
-
-    local valid_team_lookup = {}
-    local team_player_counts = {}
-    local team_capacities = {}
-    local players_to_assign = {}
-
-    for _, team_id in ipairs(team_ids) do
-        valid_team_lookup[team_id] = true
-        team_player_counts[team_id] = 0
-        team_capacities[team_id] = GameRules:GetCustomGameTeamMaxPlayers(team_id)
-    end
-
-    local player_ids = self:GetEligiblePlayerIDs()
-    table.sort(player_ids)
-
-    for _, player_id in ipairs(player_ids) do
-        local team_id = self:GetCurrentAssignedTeam(player_id, valid_team_lookup)
-        if valid_team_lookup[team_id] then
-            if team_player_counts[team_id] < (team_capacities[team_id] or 0) then
-                team_player_counts[team_id] = team_player_counts[team_id] + 1
-            else
-                table.insert(players_to_assign, player_id)
-            end
-        else
-            table.insert(players_to_assign, player_id)
-        end
-    end
-
-    for _, player_id in ipairs(players_to_assign) do
-        local target_team_id = DOTA_TEAM_NOTEAM
-        local highest_open_slots = 0
-
-        for _, team_id in ipairs(team_ids) do
-            local open_slots = (team_capacities[team_id] or 0) - (team_player_counts[team_id] or 0)
-            if open_slots > highest_open_slots then
-                highest_open_slots = open_slots
-                target_team_id = team_id
-            end
-        end
-
-        self:ApplyPlayerTeam(player_id, target_team_id)
-
-        if valid_team_lookup[target_team_id] then
-            team_player_counts[target_team_id] = team_player_counts[target_team_id] + 1
-        end
-    end
-end
-
-function TeamShuffle:StartSetupSanitizer()
-    if self.setup_sanitizer_active then
+function TeamShuffle:StartSetupAutoShuffle()
+    if self.setup_auto_shuffle_active then
         return
     end
 
-    self.setup_sanitizer_active = true
+    if not IsDuo() then
+        return
+    end
 
-    GameRules:GetGameModeEntity():SetContextThink("overvodka_team_setup_sanitizer", function()
-        if GameRules:State_Get() ~= DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
-            self.setup_sanitizer_active = false
-            return nil
+    self.setup_auto_shuffle_active = true
+
+    GameRules:GetGameModeEntity():SetContextThink("overvodka_team_setup_auto_shuffle", function()
+        self.setup_auto_shuffle_active = false
+
+        if GameRules:State_Get() == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
+            self:ShuffleTeams()
         end
 
-        self:EnforceSetupTeamCapacity()
-        return 0.1
-    end, 0)
+        return nil
+    end, 0.1)
 end
 
 TeamShuffle:Init()

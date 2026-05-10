@@ -294,7 +294,7 @@
 		"COMEBACK_SYSTEM_DESC"							"Эта команда получает x2 опыта в кругу, x2 золота за монеты а также x2 очков счета за убийство"
 		"COMEBACK_SYSTEM_DESC2"							"Эта команда получает x1.5 опыта в кругу, x1.5 золота за монеты а также x2 очков счета за убийство"
 
-		"PLAYER_HUD_Subscribe_Description"				"• Новое <span class='PrimeAccent'>колесо чата</span>, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность <span class='PrimeAccentStrong'>удваивать</span> свою ставку рейтинга;<br>• Возможность <span class='PrimeAccent'>давать пять</span>, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность <span class='PrimeAccentStrong'>прогревать</span> других игроков за плохую игру;<br>• Специальную <span class='PrimeAccent'>рамку героя</span> на панели счета команд;<br>• <span class='PrimeAccent'>2 дополнительных ежедневных задания</span>;<br>• Возможность играть за эксклюзивного героя — <span class='PrimeAccentHero'>ЛЕВ</span>!<br>• <span class='PrimeAccent'>Эксклюзивные Arcana-предметы</span> для персонажей Санс, Sinister Mark, Арсен Маркарян и Macan."
+		"PLAYER_HUD_Subscribe_Description"				"• Новое <span class='PrimeAccent'>колесо чата</span>, состоящее из эксклюзивных мемных фраз, которых нет в дефолтных колёсах Dota 2;<br>• Возможность <span class='PrimeAccentStrong'>удваивать</span> свою ставку рейтинга;<br>• Возможность <span class='PrimeAccent'>давать пять</span>, бить врагов по лицу и использовать надувные игрушки;<br>• Возможность <span class='PrimeAccentStrong'>прогревать</span> других игроков за плохую игру;<br>• Специальную <span class='PrimeAccent'>рамку героя</span> на панели счета команд;<br>• <span class='PrimeAccent'>2 дополнительных ежедневных задания</span>;<br>• Возможность играть за эксклюзивного героя — <span class='PrimeAccentHero'>ЛЕВ</span>!<br>• <span class='PrimeAccent'>Эксклюзивные Arcana-предметы</span> для персонажей Санс, Sinister Mark, Mellstroy и Macan."
 
 		"PLAYER_HUD_Tip_GoodGame1"						"Ебать"
 		"PLAYER_HUD_Tip_GoodGame2"						"Ты лох"
@@ -5364,7 +5364,7 @@
 		"dota_tooltip_ability_special_bonus_unique_misolo_8"							"+{s:bonus_bonus_magic_damage} к урону от Чеканэ"
 
 		"DOTA_Tooltip_ability_nightfall_innate"										"Бкб Тпаут"
-		"DOTA_Tooltip_ability_nightfall_innate_Description"							"ПРЕРЫВАЕМАЯ - Nightfall начинает телепорт на свой фонтан. Во время подготовки герой невосприимчив к эффектам и получает +%magic_resistance%%% к сопротивлению магии. Если канал прерван оглушением, оцепенением, превращением или ручной отменой, телепорт не происходит."
+		"DOTA_Tooltip_ability_nightfall_innate_Description"							"ПРЕРЫВАЕМАЯ — Егор давит бкб и телепорт на свой фонтан. Во время применения герой невосприимчив к эффектам и получает бонус к сопротивлению магии."
 		"DOTA_Tooltip_ability_nightfall_innate_channel_duration"						"ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_ability_nightfall_innate_magic_resistance"						"%СОПРОТИВЛЕНИЕ МАГИИ:"
 		"DOTA_Tooltip_modifier_nightfall_innate_teleport"								"Бкб Тпаут"

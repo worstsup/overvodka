@@ -320,7 +320,7 @@ function CheckPrivileges() {
         return;
     }
 
-    HUD.CONTEXT.SetHasClass("BShowUnassigned", IsShowLobbyTools());
+    HUD.CONTEXT.SetHasClass("BShowUnassigned", true);
     HUD.CONTEXT.SetHasClass("BShowHostElements", player_info.player_has_host_privileges);
     HUD.CONTEXT.SetHasClass("BShowUnlock", player_info.player_has_host_privileges);
 }

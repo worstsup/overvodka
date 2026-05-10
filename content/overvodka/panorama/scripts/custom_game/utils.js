@@ -69,6 +69,16 @@ function FindDotaHudElement(sId)
 {
     return GetDotaHud().FindChildTraverse(sId);
 }
+
+function EscapeCustomChatHtml(value) {
+    return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
 function DeleteAllChildren(p) {
     if(p != null){
         let count = p.GetChildCount();
