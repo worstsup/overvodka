@@ -11,54 +11,25 @@ end
 function item_cheaters_glasses:OnSpellStart()
     if not IsServer() then return end
     local caster = self:GetCaster()
-    local duration = self:GetSpecialValueFor("invis_duration")
-    caster:AddNewModifier(caster, self, "modifier_item_cheaters_glasses_active", {duration = duration})
+    caster:AddNewModifier(caster, self, "modifier_item_cheaters_glasses_active", {duration = self:GetSpecialValueFor("invis_duration")})
     EmitSoundOn("cheaters_glasses", caster)
-    local p = ParticleManager:CreateParticle("particles/generic_hero_status/status_invisibility_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetCaster())
+    local p = ParticleManager:CreateParticle("particles/generic_hero_status/status_invisibility_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(p)
     local p = ParticleManager:CreateParticle("particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(p)
 end
 
-function item_cheaters_glasses:QueueInvisAttack(attacker, target, record, damage, debuff_duration)
-    if not IsServer() then return end
-    if not record or record == -1 then return end
-    if not IsValid(attacker, target) then return end
-
-    self.invis_attack_records = self.invis_attack_records or {}
-    self.invis_attack_records[record] = {attacker = attacker, target = target, damage = damage, debuff_duration = debuff_duration}
-end
-
-function item_cheaters_glasses:ConsumeInvisAttack(params)
-    if not IsServer() then return end
-    if not params.record or not self.invis_attack_records then return end
-
-    local record_data = self.invis_attack_records[params.record]
-    self.invis_attack_records[params.record] = nil
-
-    if not record_data then return end
-    if not IsValid(record_data.attacker, record_data.target) then return end
-    if params.attacker ~= record_data.attacker then return end
-    if params.target ~= record_data.target then return end
-
-    return record_data
-end
-
-function item_cheaters_glasses:ClearInvisAttackRecord(record)
-    if not IsServer() then return end
-    if not record or not self.invis_attack_records then return end
-    self.invis_attack_records[record] = nil
-end
-
-
 modifier_item_cheaters_glasses_active = class({})
 
-function modifier_item_cheaters_glasses_active:IsHidden() return false end
+function modifier_item_cheaters_glasses_active:IsHidden() return self.broken == true end
 function modifier_item_cheaters_glasses_active:IsPurgable() return false end
 
 function modifier_item_cheaters_glasses_active:OnCreated()
     self.parent = self:GetParent()
     self.ability = self:GetAbility()
+    self.broken = false
+    self.attack_record = nil
+    self.attack_consumed = false
     self:OnRefresh()
 end
 
@@ -70,6 +41,8 @@ function modifier_item_cheaters_glasses_active:OnRefresh()
 end
 
 function modifier_item_cheaters_glasses_active:CheckState()
+    if self.broken then return {} end
+
 	return {
 		[MODIFIER_STATE_INVISIBLE] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
@@ -79,7 +52,10 @@ end
 function modifier_item_cheaters_glasses_active:DeclareFunctions()
     return {
 		MODIFIER_EVENT_ON_ATTACK,
+        MODIFIER_EVENT_ON_ATTACK_FAIL,
+        MODIFIER_EVENT_ON_ATTACK_RECORD_DESTROY,
 		MODIFIER_EVENT_ON_ABILITY_EXECUTED,
+        MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
 		MODIFIER_PROPERTY_INVISIBILITY_LEVEL,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 	}
@@ -88,24 +64,63 @@ end
 function modifier_item_cheaters_glasses_active:OnAbilityExecuted(params)
 	if not IsServer() then return end
 	if params.unit~=self.parent then return end
+    if self.broken then return end
 	self:Destroy()
 end
 
 function modifier_item_cheaters_glasses_active:OnAttack(params)
 	if not IsServer() then return end
-	if params.attacker~=self.parent then return end
+    if params.attacker~=self.parent then return end
+    if self.broken then return end
     if not IsValid(self.ability, params.target) then return end
+    if not params.record or params.record == -1 then
+        self:Destroy()
+        return
+    end
 
-    self.ability:QueueInvisAttack(self.parent, params.target, params.record, self.damage, self.debuff_duration)
-	self:Destroy()
+    self.broken = true
+    self.attack_record = params.record
+    self:SetDuration(-1, true)
 end
 
 function modifier_item_cheaters_glasses_active:GetModifierInvisibilityLevel()
+    if self.broken then return 0 end
     return 1
 end
 
 function modifier_item_cheaters_glasses_active:GetModifierMoveSpeedBonus_Percentage()
+    if self.broken then return 0 end
     return self.movespeed
+end
+
+function modifier_item_cheaters_glasses_active:GetModifierProcAttack_BonusDamage_Physical(params)
+    if not IsServer() then return end
+    if self.attack_consumed then return 0 end
+    if params.attacker ~= self.parent then return end
+    if params.record ~= self.attack_record then return end
+    if not IsValid(self.parent, self.ability, params.target) then return 0 end
+    if params.target:IsBuilding() or params.target:IsOther() or params.target:IsWard() then return 0 end
+
+    self.attack_consumed = true
+    EmitSoundOn("DOTA_Item.SilverEdge.Target", params.target)
+    params.target:AddNewModifier(self.parent, self.ability, "modifier_item_cheaters_glasses_debuff", {duration = self.debuff_duration})
+
+    return self.damage
+end
+
+function modifier_item_cheaters_glasses_active:OnAttackFail(params)
+    if not IsServer() then return end
+    if params.attacker ~= self.parent then return end
+    if params.record ~= self.attack_record then return end
+
+    self:Destroy()
+end
+
+function modifier_item_cheaters_glasses_active:OnAttackRecordDestroy(params)
+    if not IsServer() then return end
+    if params.record ~= self.attack_record then return end
+
+    self:Destroy()
 end
 
 
@@ -231,35 +246,7 @@ function modifier_item_cheaters_glasses:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-        MODIFIER_EVENT_ON_ATTACK_LANDED,
-        MODIFIER_EVENT_ON_ATTACK_FAIL,
-        MODIFIER_EVENT_ON_ATTACK_RECORD_DESTROY,
     }
-end
-
-function modifier_item_cheaters_glasses:OnAttackLanded(params)
-    if not IsServer() then return end
-    if params.attacker ~= self.parent then return end
-    if not IsValid(self.ability) then return end
-
-    local record_data = self.ability:ConsumeInvisAttack(params)
-    if not record_data then return end
-    EmitSoundOn("DOTA_Item.SilverEdge.Target", params.target)
-    params.target:AddNewModifier(self.parent, self.ability, "modifier_item_cheaters_glasses_debuff", {duration = record_data.debuff_duration})
-    ApplyDamage({victim = params.target, attacker = self.parent, damage = record_data.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self.ability})
-end
-
-function modifier_item_cheaters_glasses:OnAttackFail(params)
-    if not IsServer() then return end
-    if params.attacker ~= self.parent then return end
-    if not IsValid(self.ability) then return end
-    self.ability:ClearInvisAttackRecord(params.record)
-end
-
-function modifier_item_cheaters_glasses:OnAttackRecordDestroy(params)
-    if not IsServer() then return end
-    if not IsValid(self.ability) then return end
-    self.ability:ClearInvisAttackRecord(params.record)
 end
 
 function modifier_item_cheaters_glasses:GetModifierPreAttack_BonusDamage()

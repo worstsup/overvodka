@@ -914,7 +914,8 @@
 	}
 	"item_pick_me"
 	{
-		"BaseClass"                     "item_datadriven"
+		"BaseClass"                     "item_lua"
+		"ScriptFile"					"items/pick_me"
 		"AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"Model"                         "models/props_gameplay/red_box.vmdl" 
 		"Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
@@ -943,113 +944,6 @@
 				"bonus_movement_speed"                              "15"
 				"stun_dur"							"1.0"
 				"invis_damage"						"175"
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"        "items/iphone"
-				"Function"          "IphoneNew"
-			}
-			"ApplyModifier"
-				{
-					"ModifierName" 	"modifier_invisible"
-					"Target"
-					{
-						"Center"	"CASTER"
-						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-					}
-					"Duration"		"%duration"
-				}
-
-			"ApplyModifier"
-				{
-					"ModifierName" 	"modifier_windwalk"
-					"Target"
-					{
-						"Center"	"CASTER"
-						"Flags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-					}
-					"Duration"		"%duration"
-				}
-		}
-		
-		"Modifiers"
-		{
-			"modifier_item_pick_me"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"                         "%bonus_agility"
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"						"%bonus_damage"
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"			        "%bonus_attack_speed"
-					
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE"           "%bonus_movement_speed_percentage"
-				}
-			}
-			"modifier_windwalk"
-				{
-					"IsHidden"          "1"
-					"IsBuff"			"1"
-					"Duration"          "%duration"
-					"Properties"
-					{
-						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"      "%bonus_movement_speed"
-					}
-					
-					"States"
-					{
-						"MODIFIER_STATE_INVISIBLE"			"MODIFIER_STATE_VALUE_ENABLED"
-						"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-					}
-					
-					"OnAttackLanded"
-					{
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_invisible"
-							"Target"		"CASTER"
-						}
-
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_windwalk"
-							"Target"		"CASTER"
-						}
-						"ApplyModifier"
-						{
-							"ModifierName" 	"modifier_stunned"
-							"Target"		"TARGET"
-							"Duration"		"%stun_dur"
-						}
-						"Damage"
-						{
-							"Target"	"TARGET"
-							"Type"		"DAMAGE_TYPE_PHYSICAL"
-							"Damage"	"%invis_damage"
-						}
-					}
-
-					"OnAbilityExecuted"
-					{
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_invisible"
-							"Target"		"CASTER"
-						}
-
-						"RemoveModifier"
-						{
-							"ModifierName" 	"modifier_windwalk"
-							"Target"		"CASTER"
-						}
-					}
-				}
 		}
 	}
 	"item_recipe_pick_me"
