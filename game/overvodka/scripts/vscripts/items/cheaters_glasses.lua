@@ -15,7 +15,8 @@ function item_cheaters_glasses:OnSpellStart()
     EmitSoundOn("cheaters_glasses", caster)
     local p = ParticleManager:CreateParticle("particles/generic_hero_status/status_invisibility_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(p)
-    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+    local p = ParticleManager:CreateParticle("particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf", PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(p, 0, caster:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
 end
 

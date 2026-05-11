@@ -156,6 +156,7 @@ function modifier_item_pick_me_windwalk:GetModifierProcAttack_BonusDamage_Physic
 
     self.attack_consumed = true
     params.target:AddNewModifier(self.parent, self.ability, "modifier_generic_stunned_lua", {duration = self.stun_duration})
+    EmitSoundOn("Hero_Spirit_Breaker.GreaterBash", params.target)
 
     return self.invis_damage
 end
