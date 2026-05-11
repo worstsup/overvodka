@@ -99,22 +99,24 @@ function modifier_chaos_meteor_thinker:Burn()
         FIND_ANY_ORDER,
         false
     )
+    local damage_table = {
+        attacker = caster,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = nil,
+    }
+    local burn_kv = {
+        duration = self.burnDuration,
+        burn_damage_pct = self.burnDamagePct,
+        tick_interval = 1,
+    }
 
     for _, unit in ipairs(units) do
         if unit and not unit:IsNull() and not unit:IsInvulnerable() and not unit:IsOutOfGame() then
-            ApplyDamage({
-                victim = unit,
-                attacker = caster,
-                damage = self:GetDamageFromMaxHealth(unit, self.impactDamagePct),
-                damage_type = DAMAGE_TYPE_MAGICAL,
-                ability = nil,
-            })
+            damage_table.victim = unit
+            damage_table.damage = self:GetDamageFromMaxHealth(unit, self.impactDamagePct)
+            ApplyDamage(damage_table)
 
-            unit:AddNewModifier(caster, nil, "modifier_chaos_meteor_burn", {
-                duration = self.burnDuration,
-                burn_damage_pct = self.burnDamagePct,
-                tick_interval = 1,
-            })
+            unit:AddNewModifier(caster, nil, "modifier_chaos_meteor_burn", burn_kv)
         end
     end
 end
@@ -225,13 +227,15 @@ function modifier_chaos_meteor_burn:OnIntervalThink()
 
     local maxHealth = parent:GetMaxHealth() or 0
     local damage = math.max(1, math.floor(maxHealth * self.burnDamagePct * 0.01 + 0.5))
-    ApplyDamage({
-        victim = parent,
+    self.damageTable = self.damageTable or {
         attacker = caster,
-        damage = damage,
         damage_type = DAMAGE_TYPE_MAGICAL,
         ability = nil,
-    })
+    }
+    self.damageTable.victim = parent
+    self.damageTable.attacker = caster
+    self.damageTable.damage = damage
+    ApplyDamage(self.damageTable)
     EmitSoundOn("Hero_Invoker.ChaosMeteor.Damage", self:GetParent())
 end
 

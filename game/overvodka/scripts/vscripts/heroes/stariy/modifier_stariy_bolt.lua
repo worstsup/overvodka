@@ -51,9 +51,11 @@ function modifier_stariy_bolt:OnIntervalThink()
 	if self:GetAbility():GetCooldownTimeRemaining() ~= 0 then return end
 	if not self:GetParent():IsAlive() then return end
 	if self:GetParent():PassivesDisabled() then return end
+	local parent = self:GetParent()
+	local ability = self:GetAbility()
 	local enemies = FindUnitsInRadius(
-		self:GetParent():GetTeamNumber(),
-		self:GetParent():GetOrigin(),
+		parent:GetTeamNumber(),
+		parent:GetOrigin(),
 		nil,
 		self.radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -62,24 +64,33 @@ function modifier_stariy_bolt:OnIntervalThink()
 		0,
 		false
 	)
+	local has_scepter = parent:HasScepter()
+	local linger_duration = has_scepter and ability:GetSpecialValueFor( "linger_time" ) or 0
+	local creep_mult = ability:GetSpecialValueFor("creep_mult")
+	local intellect_damage = parent:GetIntellect(false) * self.int_damage * 0.01
+	local damage_table = {
+		attacker = parent,
+		damage_type = DAMAGE_TYPE_MAGICAL,
+		ability = ability
+	}
 	for _,enemy in pairs(enemies) do
 		local debuff = enemy:AddNewModifier(
-			self:GetParent(),
-			self:GetAbility(),
+			parent,
+			ability,
 			"modifier_stariy_bolt_debuff",
 			{
 				duration = self.duration,
 			}
 		)
-		self:PlayEffectsNew( self:GetParent() )
+		self:PlayEffectsNew( parent )
 		self:PlayEffects( enemy )
-		if self:GetParent():HasScepter() then
-			CreateModifierThinker( self:GetParent(), self:GetAbility(), "modifier_stariy_lasers_linger_thinker", { duration = self:GetAbility():GetSpecialValueFor( "linger_time" ) }, enemy:GetAbsOrigin(), self:GetParent():GetTeamNumber(), false )
+		if has_scepter then
+			CreateModifierThinker( parent, ability, "modifier_stariy_lasers_linger_thinker", { duration = linger_duration }, enemy:GetAbsOrigin(), parent:GetTeamNumber(), false )
 		end
-		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01 + self:GetParent():GetIntellect(false) * self.int_damage * 0.01
+		local dmg = self.damage + self.percent * enemy:GetMaxHealth() * 0.01 + intellect_damage
 		if enemy:GetUnitName() == "npc_dota_hero_necrolyte" then
 			if peterka == 0 then
-				EmitSoundOn( "stariy_peterka", self:GetParent() )
+				EmitSoundOn( "stariy_peterka", parent )
 			end
 			peterka = peterka + 1
 			if peterka == 10 then
@@ -87,10 +98,12 @@ function modifier_stariy_bolt:OnIntervalThink()
 			end
 		end
 		if enemy:IsCreep() then
-			dmg = dmg * self:GetAbility():GetSpecialValueFor("creep_mult")
+			dmg = dmg * creep_mult
 		end
-		ApplyDamage({victim = enemy, attacker = self:GetParent(), damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
-		self:GetAbility():UseResources(false, false, false, true)
+		damage_table.victim = enemy
+		damage_table.damage = dmg
+		ApplyDamage(damage_table)
+		ability:UseResources(false, false, false, true)
 	end
 end
 

@@ -291,19 +291,20 @@ function modifier_worker_ai:Explode()
         false
     )
 
+    local damage_table = {
+        attacker = caster,
+        ability = ability,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    }
     for _, enemy in pairs(enemies) do
         local total_damage = damage
         if has_talent then
             total_damage = total_damage + (enemy:GetMaxHealth() * health_pct_damage)
         end
 
-        ApplyDamage({
-            victim = enemy,
-            attacker = caster,
-            ability = ability,
-            damage = total_damage,
-            damage_type = DAMAGE_TYPE_MAGICAL
-        })
+        damage_table.victim = enemy
+        damage_table.damage = total_damage
+        ApplyDamage(damage_table)
     end
 
     ParticleManager:CreateParticle("particles/units/heroes/hero_techies/techies_suicide_base.vpcf", PATTACH_ABSORIGIN, unit)

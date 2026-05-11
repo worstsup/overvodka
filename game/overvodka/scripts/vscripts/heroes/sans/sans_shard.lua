@@ -129,23 +129,19 @@ function sans_shard:OnProjectileHit( hTarget, vLocation )
                     blaster:EmitSound("gaster_blaster_shoot")
                     blaster_2:EmitSound("gaster_blaster_shoot")
                 end
+                local damage_table = {
+                    attacker = caster,
+                    damage = self:GetSpecialValueFor("damage"),
+                    damage_type = self:GetAbilityDamageType(),
+                    ability = self,
+                }
                 for _,unit in pairs(units) do
-                    ApplyDamage({
-                        victim = unit,
-                        attacker = caster,
-                        damage = self:GetSpecialValueFor("damage"),
-                        damage_type = self:GetAbilityDamageType(),
-                        ability = self,
-                    })
+                    damage_table.victim = unit
+                    ApplyDamage(damage_table)
                 end
 				for _,unit in pairs(units_2) do
-                    ApplyDamage({
-                        victim = unit,
-                        attacker = caster,
-                        damage = self:GetSpecialValueFor("damage"),
-                        damage_type = self:GetAbilityDamageType(),
-                        ability = self,
-                    })
+                    damage_table.victim = unit
+                    ApplyDamage(damage_table)
                 end
             blaster:ForceKill(false)
 			blaster_2:ForceKill(false)

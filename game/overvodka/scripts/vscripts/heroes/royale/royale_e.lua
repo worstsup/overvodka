@@ -45,21 +45,31 @@ function royale_e:OnSpellStart()
 	local caster = self:GetCaster()
     local point = self:GetCursorPosition()
     local radius = self:GetSpecialValueFor("radius")
+    local damage = self:GetSpecialValueFor("damage")
     local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local damage_table = {
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
     for _,unit in pairs(units) do
-        ApplyDamage({ victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
     end
-    if self:GetCaster():HasModifier("modifier_royale_e") then
-        CreateModifierThinker(caster, self, "modifier_royale_e_rage_aura", {duration = self:GetSpecialValueFor("rage_duration")}, point, caster:GetTeamNumber(), false)
+    if caster:HasModifier("modifier_royale_e") then
+        local rage_duration = self:GetSpecialValueFor("rage_duration")
+        CreateModifierThinker(caster, self, "modifier_royale_e_rage_aura", {duration = rage_duration}, point, caster:GetTeamNumber(), false)
         EmitSoundOnLocationWithCaster(point, "Royale.Rage", caster)
         caster:RemoveModifierByName("modifier_royale_e")
     else
+        local freeze_duration = self:GetSpecialValueFor("freeze_duration")
         for _,unit in pairs(units) do
             if unit and not unit:IsNull() then
-                unit:AddNewModifier(caster, self, "modifier_royale_e_freeze", {duration = self:GetSpecialValueFor("freeze_duration") * (1 - unit:GetStatusResistance())})
+                unit:AddNewModifier(caster, self, "modifier_royale_e_freeze", {duration = freeze_duration * (1 - unit:GetStatusResistance())})
             end
         end
-        CreateModifierThinker(caster, self, "modifier_royale_e_freeze_aura", {duration = self:GetSpecialValueFor("freeze_duration")}, point, caster:GetTeamNumber(), false)
+        CreateModifierThinker(caster, self, "modifier_royale_e_freeze_aura", {duration = freeze_duration}, point, caster:GetTeamNumber(), false)
         EmitSoundOnLocationWithCaster(point, "Royale.Freeze", caster)
         caster:AddNewModifier(caster, self, "modifier_royale_e", {})
     end

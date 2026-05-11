@@ -61,15 +61,17 @@ function invincible_r:OnSpellStart()
 		false
 	)
     local found = false
+    local slow_dur = self:GetSpecialValueFor("slow_dur")
+    local chain_dur = self:GetSpecialValueFor("chain_dur")
     for _,enemy in pairs(enemies) do
         enemy:AddNewModifier(
             caster, 
             self, 
             "modifier_invincible_r_slow", 
-            {duration = self:GetSpecialValueFor("slow_dur") * ( 1 - enemy:GetStatusResistance() )}
+            {duration = slow_dur * ( 1 - enemy:GetStatusResistance() )}
         )
         if not found and enemy:IsHero() then
-            enemy:AddNewModifier(caster, self, "modifier_invincible_r_debuff", { duration = self:GetSpecialValueFor("chain_dur") * ( 1 - enemy:GetStatusResistance() ) })
+            enemy:AddNewModifier(caster, self, "modifier_invincible_r_debuff", { duration = chain_dur * ( 1 - enemy:GetStatusResistance() ) })
             local effect_cast_target = ParticleManager:CreateParticle( cast_chain, PATTACH_ABSORIGIN_FOLLOW, caster )
             ParticleManager:SetParticleControlEnt( effect_cast_target, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:SetParticleControlEnt( effect_cast_target, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )

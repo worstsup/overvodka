@@ -122,11 +122,20 @@ function modifier_stray_w_facet_damage:OnCreated(params)
 end
 function modifier_stray_w_facet_damage:OnIntervalThink()
     if not IsServer() then return end
-    local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false)
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local units = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false)
+    local damage_table = {
+        attacker = caster,
+        ability = ability,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+    }
     for _, unit in pairs(units) do
         if unit and unit ~= self.target and self.targets[unit:entindex()] == nil then
             self.targets[unit:entindex()] = true
-            ApplyDamage({ victim = unit, attacker = self:GetCaster(), ability = self:GetAbility(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL })
+            damage_table.victim = unit
+            ApplyDamage(damage_table)
         end
     end
 end
@@ -139,12 +148,20 @@ function modifier_stray_w_facet:IsPurgable() return true end
 function modifier_stray_w_facet:OnCreated()
     if not IsServer() then return end
     self.interval = 0.5
+    self.damage = self:GetAbility():GetSpecialValueFor("damage_per_second") * self.interval
     self:StartIntervalThink(self.interval)
 end
 
 function modifier_stray_w_facet:OnIntervalThink()
     if not IsServer() then return end
-    ApplyDamage({ victim = self:GetParent(), attacker = self:GetCaster(), ability = self:GetAbility(), damage = self:GetAbility():GetSpecialValueFor("damage_per_second") * self.interval, damage_type = DAMAGE_TYPE_MAGICAL })
+    self.damage_table = self.damage_table or {
+        attacker = self:GetCaster(),
+        ability = self:GetAbility(),
+        damage_type = DAMAGE_TYPE_MAGICAL,
+    }
+    self.damage_table.victim = self:GetParent()
+    self.damage_table.damage = self.damage
+    ApplyDamage(self.damage_table)
 end
 
 function modifier_stray_w_facet:DeclareFunctions()

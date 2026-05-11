@@ -459,17 +459,21 @@ function modifier_sans_w_bone_thinker:OnIntervalThink()
             false
         )
 
+        local caster = self:GetCaster()
+        local ability = self:GetAbility()
+        local damage_table = {
+            attacker = caster,
+            damage = self.damage_mini,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = ability
+        }
+        local stun_kv = { duration = self.duration }
         for _, enemy in pairs(enemies) do
 			EmitSoundOn("sans_damage", enemy)
-            ApplyDamage({
-                victim = enemy,
-                attacker = self:GetCaster(),
-                damage = self.damage_mini,
-                damage_type = DAMAGE_TYPE_MAGICAL,
-                ability = self:GetAbility()
-            })
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
 			if enemy and not enemy:IsNull() then
-				enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", { duration = self.duration })
+				enemy:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", stun_kv)
 			end
         end
 

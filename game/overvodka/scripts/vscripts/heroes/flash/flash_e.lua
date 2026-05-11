@@ -73,6 +73,11 @@ function flash_e:OnSpellStart()
     if caster:HasModifier("modifier_overvodka_store_skin_6") then
         name = "particles/flash_e_target_immortal.vpcf"
     end
+    local damage_table = {
+        attacker = caster,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
     for _, enemy in pairs(enemies) do
         if not enemy:IsIllusion() and enemy:HasModifier("modifier_flash_e_debuff") then
             local debuff = enemy:FindModifierByName("modifier_flash_e_debuff")
@@ -80,13 +85,9 @@ function flash_e:OnSpellStart()
             ParticleManager:SetParticleControlEnt( p, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:SetParticleControlEnt( p, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
 	        ParticleManager:ReleaseParticleIndex(p)
-            ApplyDamage({
-                victim     = enemy,
-                attacker   = caster,
-                damage     = dmg_mul * debuff:GetStackCount(),
-                damage_type= DAMAGE_TYPE_MAGICAL,
-                ability    = self,
-            })
+            damage_table.victim = enemy
+            damage_table.damage = dmg_mul * debuff:GetStackCount()
+            ApplyDamage(damage_table)
             if enemy and not enemy:IsNull() then
                 enemy:RemoveModifierByName("modifier_flash_e_debuff")
                 local enemy_stacks = enemy:FindAllModifiersByName("modifier_flash_e_stack")

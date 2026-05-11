@@ -41,16 +41,27 @@ end
 function modifier_flash_q_facet_2:OnIntervalThink()
     if not IsServer() then return end
     local caster = self:GetCaster()
-    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self:GetAbility():GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local ability = self:GetAbility()
+    local caster_origin = caster:GetAbsOrigin()
+    local radius = ability:GetSpecialValueFor("radius")
+    local interval = ability:GetSpecialValueFor("interval")
+    local damage = ability:GetSpecialValueFor("damage") + (ability:GetSpecialValueFor("damage_speed") * caster:GetMoveSpeedModifier(caster:GetBaseMoveSpeed(), true) * 0.01) + self.damage
+    local damage_type = ability:GetAbilityDamageType()
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local damage_table = {
+        attacker = caster,
+        damage = damage,
+        damage_type = damage_type,
+    }
     for _, enemy in pairs(enemies) do
         if enemy and not enemy:IsNull() and not enemy:HasModifier("modifier_flash_q_facet_2_cooldown") then
-            enemy:AddNewModifier(caster, self:GetAbility(), "modifier_flash_q_facet_2_cooldown", {duration = self:GetAbility():GetSpecialValueFor("interval")})
+            enemy:AddNewModifier(caster, ability, "modifier_flash_q_facet_2_cooldown", {duration = interval})
             local particle = ParticleManager:CreateParticle("particles/econ/items/weaver/weaver_immortal_ti6/weaver_immortal_ti6_shukuchi_damage.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
             ParticleManager:SetParticleControl(particle, 0, enemy:GetAbsOrigin())
-            ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin())
+            ParticleManager:SetParticleControl(particle, 1, caster_origin)
             ParticleManager:ReleaseParticleIndex(particle)
-            local damage = self:GetAbility():GetSpecialValueFor("damage") + (self:GetAbility():GetSpecialValueFor("damage_speed") * caster:GetMoveSpeedModifier(caster:GetBaseMoveSpeed(), true) * 0.01) + self.damage
-            ApplyDamage({victim = enemy, attacker = caster, damage = damage, damage_type = self:GetAbility():GetAbilityDamageType()})
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
         end
     end
 end

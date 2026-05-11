@@ -68,23 +68,34 @@ function modifier_vihor_r:GetEffectAttachType()
 end
 function modifier_vihor_r:OnDestroy()
     if not IsServer() then return end
-    self:GetParent():EmitSound("Hero_Shredder.Bomb")
-    self.damage = self:GetAbility():GetSpecialValueFor("damage")
-    local units = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, self:GetAbility():GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
-    local stun_duration = self:GetAbility():GetSpecialValueFor("stun_duration")
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    parent:EmitSound("Hero_Shredder.Bomb")
+    local damage = ability:GetSpecialValueFor("damage")
+    local units = FindUnitsInRadius( caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, ability:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false )
+    local stun_duration = ability:GetSpecialValueFor("stun_duration")
+    local stun_kv = {duration = stun_duration}
+    local damage_table = {
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
     for _, unit in pairs(units) do
         unit:RemoveModifierByName("modifier_vihor_r_debuff")
-        ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
         if unit and not unit:IsNull() then
-            unit:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = stun_duration})
+            unit:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", stun_kv)
         end
     end
     local particle_death = ParticleManager:CreateParticle("particles/units/heroes/hero_gyrocopter/gyro_death_explosion.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(particle_death, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle_death, 0, parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle_death)
 
     local particle_radius = ParticleManager:CreateParticle("particles/econ/items/techies/techies_arcana/techies_suicide_arcana.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(particle_radius, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle_radius, 0, parent:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle_radius)
 end
 

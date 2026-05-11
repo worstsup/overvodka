@@ -306,10 +306,18 @@ function pistol_r:_LaunchOneShip(cast_id, ship_index, crash_pos)
             0, 0, false
         )
 
+        local damage_table = {
+            attacker = caster,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self,
+        }
+        local stun_kv = { duration = stun }
         for _, enemy in pairs(enemies) do
             if enemy and not enemy:IsNull() and enemy:IsAlive() then
-                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun })
-                ApplyDamage({victim = enemy, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", stun_kv)
+                damage_table.victim = enemy
+                ApplyDamage(damage_table)
             end
         end
     end)

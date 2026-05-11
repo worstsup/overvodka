@@ -83,22 +83,17 @@ function bratishkin_w:OnProjectileHit_ExtraData(target, location, ExtraData)
             return false
         end
         table.insert(self[ExtraData.index], target)
+        local caster = self:GetCaster()
         local distance_knock = self:GetSpecialValueFor("distance_knock")
         local direction = (target:GetAbsOrigin() - location):Normalized()
-        local knockback = target:AddNewModifier( self:GetCaster(), self, "modifier_generic_knockback_lua", 
+        local knockback = target:AddNewModifier( caster, self, "modifier_generic_knockback_lua", 
             { duration = 0.75, distance = distance_knock, height = 0, direction_x = direction.x, direction_y = direction.y })
         local damage = self:GetSpecialValueFor("damage")
-        ApplyDamage({
-            victim = target, 
-            attacker = self:GetCaster(), 
-            damage = damage, 
-            damage_type = DAMAGE_TYPE_MAGICAL, 
-            ability = self
-        })
+        ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
         local callback = function()
             local duration = self:GetSpecialValueFor("duration")
             if target and not target:IsNull() then
-                target:AddNewModifier(self:GetCaster(), self, "modifier_bratishkin_w_fear", {
+                target:AddNewModifier(caster, self, "modifier_bratishkin_w_fear", {
                     duration = duration * (1 - target:GetStatusResistance()),
                     dir_x = direction.x,
                     dir_y = direction.y,

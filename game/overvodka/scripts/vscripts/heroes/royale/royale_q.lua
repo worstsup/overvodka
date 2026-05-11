@@ -78,10 +78,13 @@ end
 function royale_q:ZapEnemies(point, radius)
     if not IsServer() then return end
     local caster = self:GetCaster()
+    local damage = self:GetSpecialValueFor("damage")
+    local stun_duration = self:GetSpecialValueFor("stun_duration")
+    local damageTable = { attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
     local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
     for _,unit in pairs(units) do
-        local damageTable = { victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
-        unit:AddNewModifier(caster, self, "modifier_royale_q_stun", {duration = self:GetSpecialValueFor("stun_duration") * (1 - unit:GetStatusResistance())})
+        damageTable.victim = unit
+        unit:AddNewModifier(caster, self, "modifier_royale_q_stun", {duration = stun_duration * (1 - unit:GetStatusResistance())})
         ApplyDamage(damageTable)
     end
     local sound = "Royale.Zap"
@@ -104,6 +107,12 @@ function royale_q:OnProjectileHit(target, location)
     local dmg    = self:GetSpecialValueFor("damage")
     local knock  = self:GetSpecialValueFor("knockback_distance")
     local slowD  = self:GetSpecialValueFor("slow_duration")
+    local damage_table = {
+        attacker = caster,
+        damage = dmg,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
 
     local enemies = FindUnitsInRadius(caster:GetTeamNumber(), location, nil, radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
@@ -111,8 +120,8 @@ function royale_q:OnProjectileHit(target, location)
 
     if not caster:HasTalent("special_bonus_unique_royale_6") then
         for _,unit in pairs(enemies) do
-            ApplyDamage({victim=unit, attacker=caster, damage=dmg,
-                damage_type=DAMAGE_TYPE_MAGICAL, ability=self})
+            damage_table.victim = unit
+            ApplyDamage(damage_table)
             if unit and not unit:IsNull() then
                 unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_slow", {
                     duration = slowD * (1 - unit:GetStatusResistance())
@@ -127,11 +136,13 @@ function royale_q:OnProjectileHit(target, location)
     end
     if caster:HasTalent("special_bonus_unique_royale_6") and not self._rolled and #enemies > 0 then
         self._rolled = true
+        local roll_distance = self:GetSpecialValueFor("evo_roll_distance")
+        local roll_duration = self:GetSpecialValueFor("evo_roll_duration")
         ProjectileManager:CreateLinearProjectile({
             Ability       = self,
             EffectName    = "particles/royale_snowball.vpcf",
             vSpawnOrigin  = location,
-            fDistance     = self:GetSpecialValueFor("evo_roll_distance"),
+            fDistance     = roll_distance,
             fStartRadius  = radius,
             fEndRadius    = radius,
             Source        = caster,
@@ -144,9 +155,9 @@ function royale_q:OnProjectileHit(target, location)
             unit:AddNewModifier(caster, self, "modifier_royale_q_snowball_roll", {
                 dir_x = self._cast_dir.x,
                 dir_y = self._cast_dir.y,
-                dist  = self:GetSpecialValueFor("evo_roll_distance"),
-                dur   = self:GetSpecialValueFor("evo_roll_duration"),
-                duration = self:GetSpecialValueFor("evo_roll_duration")
+                dist  = roll_distance,
+                dur   = roll_duration,
+                duration = roll_duration
             })
         end
     end
@@ -156,7 +167,7 @@ function royale_q:OnProjectileHit(target, location)
             PATTACH_WORLDORIGIN, nil
         )
         ParticleManager:SetParticleControl(p, 0, location)
-        ParticleManager:SetParticleControl(p, 1, Vector(self:GetSpecialValueFor("radius")-25,0,0))
+        ParticleManager:SetParticleControl(p, 1, Vector(radius - 25, 0, 0))
         ParticleManager:ReleaseParticleIndex(p)
 
     EmitSoundOnLocationWithCaster(location, "Royale.Snowball.Impact", caster)

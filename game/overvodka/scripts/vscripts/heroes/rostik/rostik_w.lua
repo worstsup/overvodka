@@ -54,12 +54,22 @@ function modifier_rostik_w_casting:OnIntervalThink()
 	ParticleManager:SetParticleControl(particle, 1, Vector(self.radius, self.radius, self.radius))
 	
 	local units = FindUnitsInRadius(self.caster:GetTeamNumber(), point, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local ability = self:GetAbility()
+    local damage = self.damage + (self.caster:GetIntellect(false) / 100 * self.multi)
+    local chance = ability:GetSpecialValueFor("chance")
+    local stun_duration = ability:GetSpecialValueFor("stun_duration")
+    local damageTable = {
+        attacker = self.caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
 				
 	for _,unit in pairs(units) do
-		local damageTable = { victim = unit, attacker = self.caster, damage = self.damage + (self.caster:GetIntellect(false) / 100 * self.multi), damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()}
-		if RandomInt(0, 100) <= self:GetAbility():GetSpecialValueFor("chance") then
-			self.caster:AddNewModifier(self.caster, self:GetAbility(), "modifier_ability_zuus_arc_lightning", {starting_unit_entindex  = unit:entindex()})
-			unit:AddNewModifier(self.caster, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self:GetAbility():GetSpecialValueFor("stun_duration")})
+        damageTable.victim = unit
+		if RandomInt(0, 100) <= chance then
+			self.caster:AddNewModifier(self.caster, ability, "modifier_ability_zuus_arc_lightning", {starting_unit_entindex  = unit:entindex()})
+			unit:AddNewModifier(self.caster, ability, "modifier_generic_stunned_lua", {duration = stun_duration})
         end
         ApplyDamage(damageTable)
 	end

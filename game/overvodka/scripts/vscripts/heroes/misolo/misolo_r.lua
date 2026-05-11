@@ -534,14 +534,15 @@ function modifier_misolo_r_scepter_shield:OnAttackLanded(params)
         end
     end
 
+    local damage_table = {
+        attacker = parent,
+        damage = shield_damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
     for _, target in pairs(victims) do
-        ApplyDamage({
-            victim = target,
-            attacker = parent,
-            damage = shield_damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = ability,
-        })
+        damage_table.victim = target
+        ApplyDamage(damage_table)
 
         local particle = ParticleManager:CreateParticle("particles/econ/events/ti6/maelstorm_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
         ParticleManager:SetParticleControlEnt(particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0, 0, 0), true)
@@ -754,6 +755,7 @@ function modifier_misolo_arc_spark_wraith:OnIntervalThink()
         false
     )
 
+    local projectile_speed = ability:GetSpecialValueFor("projectile_speed")
     for _, enemy in ipairs(enemies) do
         if IsValid(enemy) and enemy:IsAlive() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() then
             ProjectileManager:CreateTrackingProjectile({
@@ -761,7 +763,7 @@ function modifier_misolo_arc_spark_wraith:OnIntervalThink()
                 Source = parent,
                 Ability = ability,
                 EffectName = "particles/units/heroes/hero_arc_warden/arc_warden_wraith_prj.vpcf",
-                iMoveSpeed = ability:GetSpecialValueFor("projectile_speed"),
+                iMoveSpeed = projectile_speed,
                 bDodgeable = true,
                 bVisibleToEnemies = true,
                 bProvidesVision = false,

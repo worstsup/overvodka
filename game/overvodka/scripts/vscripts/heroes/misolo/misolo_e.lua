@@ -78,10 +78,11 @@ function modifier_misolo_e:OnIntervalThink()
             false
         )
 
+        local auto_silence_duration = ability:GetSpecialValueFor("auto_silence_duration")
         for _, enemy in ipairs(enemies) do
             if can_auto_silence and ability:IsCooldownReady() and enemy:IsRealHero() and not enemy:IsIllusion() and not enemy:IsInvulnerable() and not enemy:IsOutOfGame() and not enemy:IsMagicImmune() and not enemy:IsDebuffImmune() then
                 enemy:AddNewModifier(parent, ability, "modifier_generic_silenced_lua", {
-                    duration = ability:GetSpecialValueFor("auto_silence_duration"),
+                    duration = auto_silence_duration,
                     particle = "particles/items2_fx/orchid.vpcf",
                 })
 

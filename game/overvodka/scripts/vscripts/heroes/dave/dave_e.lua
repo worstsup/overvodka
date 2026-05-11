@@ -65,8 +65,9 @@ function dave_e:OnSpellStart()
         FIND_ANY_ORDER,
         false
     )
+    local barrier_kv = { duration = self:GetSpecialValueFor("barrier_duration"), shield = cost }
     for _,ally in ipairs(allies) do
-        ally:AddNewModifier( caster, self, "modifier_dave_e_barrier", { duration = self:GetSpecialValueFor("barrier_duration"), shield = cost } )
+        ally:AddNewModifier( caster, self, "modifier_dave_e_barrier", barrier_kv )
     end
     local effect_cast = ParticleManager:CreateParticle( "particles/dave_e_scepter.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
     ParticleManager:SetParticleControl( effect_cast, 0, caster:GetAbsOrigin() )

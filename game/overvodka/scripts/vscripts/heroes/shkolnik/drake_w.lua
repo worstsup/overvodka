@@ -32,12 +32,14 @@ function drake_w:OnSpellStart()
     ParticleManager:SetParticleControl(p, 0, caster:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(p)
     EmitSoundOn( "drake_w", caster )
+    local damage_table = { attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self}
     for _, enemy in pairs(enemies) do
-        local to_caster = caster:GetOrigin() - enemy:GetOrigin()
+        local to_caster = caster:GetAbsOrigin() - enemy:GetAbsOrigin()
         local angle = math.abs( AngleDiff( VectorToAngles( to_caster ).y, VectorToAngles( enemy:GetForwardVector() ).y ) )
         if angle < stone_angle then
             enemy:AddNewModifier(caster, self, "modifier_drake_w_petrified", {duration = stone_duration * (1-enemy:GetStatusResistance()), physical_bonus = physical_bonus, caster_entindex = caster:entindex()})
-            ApplyDamage({ victim = enemy, attacker = caster, damage = damage, damage_type = self:GetAbilityDamageType(), ability = self})
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
         end
     end
 end

@@ -164,12 +164,17 @@ function modifier_papich_q_clone:OnIntervalThink()
 		FIND_ANY_ORDER,
 		false) 
 
-	for _,unit in pairs(targets) do
-		ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self:GetAbility()})
-		if unit and not unit:IsNull() then
-			unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_papich_q_clone_blood", {duration = self.blood_duration})
+		local parent = self:GetParent()
+		local ability = self:GetAbility()
+		local damage_table = {attacker = parent, damage = self.damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = ability}
+		local blood_kv = {duration = self.blood_duration}
+		for _,unit in pairs(targets) do
+			damage_table.victim = unit
+			ApplyDamage(damage_table)
+			if unit and not unit:IsNull() then
+				unit:AddNewModifier(parent, ability, "modifier_papich_q_clone_blood", blood_kv)
+			end
 		end
-	end
 	local sound_cast = "Hero_Slark.Pounce.Impact"
 	EmitSoundOn( sound_cast, target )
 	self:Destroy()

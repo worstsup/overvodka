@@ -40,9 +40,10 @@ function chef_w:OnSpellStart()
 	local caster_loc = caster:GetAbsOrigin()
 	local caster_team = caster:GetTeamNumber()
 	local radius = self:GetSpecialValueFor("radius")
+    local duration = self:GetSpecialValueFor("duration")
 	local targets = FindUnitsInRadius( caster_team, caster_loc, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 	for _, unit in ipairs(targets) do
-		unit:AddNewModifier(caster, self, "modifier_chef_w_active_regeneration", {duration = self:GetSpecialValueFor("duration")})
+		unit:AddNewModifier(caster, self, "modifier_chef_w_active_regeneration", {duration = duration})
 	end
 end
 

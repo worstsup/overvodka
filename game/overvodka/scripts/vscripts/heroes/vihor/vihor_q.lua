@@ -51,18 +51,22 @@ function vihor_q:OnSpellStart()
         table.insert(chosen, caster)
     end
 
+    local blast_speed = self:GetSpecialValueFor("blast_speed")
+    local radius = self:GetSpecialValueFor("radius")
+    local damage = self:GetSpecialValueFor("damage")
+    local duration = self:GetSpecialValueFor("duration")
     for _, target in ipairs(chosen) do
         local info = {
             EffectName = "particles/units/heroes/hero_clinkz/clinkz_tar_bomb_projectile.vpcf",
             Ability = self,
-            iMoveSpeed = self:GetSpecialValueFor("blast_speed"),
+            iMoveSpeed = blast_speed,
             Source = caster,
             Target = target,
             iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1,
             ExtraData = {
-                radius = self:GetSpecialValueFor("radius"),
-                damage = self:GetSpecialValueFor("damage"),
-                duration = self:GetSpecialValueFor("duration"),
+                radius = radius,
+                damage = damage,
+                duration = duration,
             }
         }
         ProjectileManager:CreateTrackingProjectile(info)
@@ -89,10 +93,12 @@ function vihor_q:OnProjectileHit_ExtraData(hTarget, vLocation, ExtraData)
         0, 0, false
     )
 
+    local damage_table = {attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self}
     for _, enemy in ipairs(units) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
             enemy:AddNewModifier(caster, self, "modifier_vihor_q_slow", { duration = duration * (1 - enemy:GetStatusResistance()) })
-            ApplyDamage({victim = enemy, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
         end
     end
 

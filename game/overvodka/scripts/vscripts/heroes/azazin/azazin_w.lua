@@ -36,9 +36,11 @@ function azazin_w:OnSpellStart()
     if not global_sounds_muted then
         taunt:EmitSound("azazin_w")
     end
-    local targets = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
+    local radius = self:GetSpecialValueFor("radius")
+    local root_duration = self:GetSpecialValueFor( "root_duration" )
+    local targets = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
     for _,unit in pairs(targets) do
-        unit:AddNewModifier( caster, self, "modifier_azazin_w_root", { duration = self:GetSpecialValueFor( "root_duration" ) * (1 - unit:GetStatusResistance()) } )
+        unit:AddNewModifier( caster, self, "modifier_azazin_w_root", { duration = root_duration * (1 - unit:GetStatusResistance()) } )
     end
 end
 
@@ -96,20 +98,23 @@ function modifier_azazin_w:OnIntervalThink()
     if self.time == 1.0 then
         self:GetParent():StartGesture(ACT_DOTA_TAUNT)
     end
-    local radius = self:GetAbility():GetSpecialValueFor("radius")
-    local caster_particle = ParticleManager:CreateParticle( "particles/azazin_w_radius.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    local radius = ability:GetSpecialValueFor("radius")
+    local caster_particle = ParticleManager:CreateParticle( "particles/azazin_w_radius.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
     ParticleManager:ReleaseParticleIndex(caster_particle)
-    local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+    local targets = FindUnitsInRadius(parent:GetTeamNumber(), parent:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+    local damage_table = {
+        attacker = self:GetCaster(),
+        damage = ability:GetSpecialValueFor("damage") * 0.5,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability
+    }
+    local target_kv = {duration = 1}
     for _,unit in pairs(targets) do
-        unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_azazin_w_target", {duration = 1})
-        local damageTable = {
-            victim = unit,
-            attacker = self:GetCaster(),
-            damage = self:GetAbility():GetSpecialValueFor("damage") * 0.5,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self:GetAbility()
-        }
-        ApplyDamage(damageTable)
+        unit:AddNewModifier(parent, ability, "modifier_azazin_w_target", target_kv)
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
     end
 end
 

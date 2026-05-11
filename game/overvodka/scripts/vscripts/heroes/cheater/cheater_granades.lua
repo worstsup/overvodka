@@ -50,43 +50,56 @@ function cheater_granades:OnSpellStart()
 end
 
 function cheater_granades:OnProjectileHit( target, location )
+    local caster = self:GetCaster()
+    local caster_team = caster:GetTeamNumber()
+
 	if Chance == 0 then
 		local duration = self:GetSpecialValueFor( "duration" )
 		CreateModifierThinker(
-			self:GetCaster(),
+			caster,
 			self,
 			"modifier_cheater_granades",
 			{ duration = duration },
 			location,
-			self:GetCaster():GetTeamNumber(),
+			caster_team,
 			false
 		)
 		Chance = 1
 	elseif Chance == 1 then
 		local slow_duration = self:GetSpecialValueFor( "slow_dur" )
 		local damage = self:GetSpecialValueFor( "damage_exp" )
-		local targets = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+        local radius = self:GetSpecialValueFor( "radius" )
+        local far_damage_pct = self:GetSpecialValueFor( "damage_exp_percent_far" ) * 0.01
+        local mid_damage_pct = self:GetSpecialValueFor( "damage_exp_percent_mid" ) * 0.01
+        local close_damage_pct = self:GetSpecialValueFor( "damage_exp_percent_close" ) * 0.01
+        local damage_table = {
+            attacker = caster,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self,
+        }
+		local targets = FindUnitsInRadius(caster_team,
 			location,
 			nil,
-			self:GetSpecialValueFor( "radius" ),
+			radius,
 			DOTA_UNIT_TARGET_TEAM_ENEMY,
 			DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
 			DOTA_UNIT_TARGET_FLAG_NONE,
 			FIND_ANY_ORDER,
 			false)
 		for _,unit in pairs(targets) do
-			local dmg_far = damage + self:GetSpecialValueFor( "damage_exp_percent_far" ) * unit:GetHealth() * 0.01
-			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_far, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+            damage_table.victim = unit
+            damage_table.damage = damage + far_damage_pct * unit:GetHealth()
+			ApplyDamage(damage_table)
 			if unit and not unit:IsNull() then
 				unit:AddNewModifier(
-					self:GetCaster(),
+					caster,
 					self,
 					"modifier_cheater_slow",
 					{ duration = slow_duration }
 				)
 			end
 		end
-		local targets1 = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+		local targets1 = FindUnitsInRadius(caster_team,
 			location,
 			nil,
 			250,
@@ -96,10 +109,11 @@ function cheater_granades:OnProjectileHit( target, location )
 			FIND_ANY_ORDER,
 			false)
 		for _,unit in pairs(targets1) do
-			local dmg_mid = self:GetSpecialValueFor( "damage_exp_percent_mid" ) * unit:GetHealth() * 0.01
-			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_mid, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+            damage_table.victim = unit
+            damage_table.damage = mid_damage_pct * unit:GetHealth()
+			ApplyDamage(damage_table)
 		end
-		local targets2 = FindUnitsInRadius(self:GetCaster():GetTeamNumber(),
+		local targets2 = FindUnitsInRadius(caster_team,
 			location,
 			nil,
 			100,
@@ -109,21 +123,22 @@ function cheater_granades:OnProjectileHit( target, location )
 			FIND_ANY_ORDER,
 			false)
 		for _,unit in pairs(targets2) do
-			local dmg_close = self:GetSpecialValueFor( "damage_exp_percent_close" ) * unit:GetHealth() * 0.01
-			ApplyDamage({victim = unit, attacker = self:GetCaster(), damage = dmg_close, damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+            damage_table.victim = unit
+            damage_table.damage = close_damage_pct * unit:GetHealth()
+			ApplyDamage(damage_table)
 		end
-		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", self:GetCaster())
+		 EmitSoundOnLocationWithCaster(location, "grenade_explosion", caster)
 		 self:PlayEffects3( location )
 		 Chance = 2
 	elseif Chance == 2 then
 		local duration = self:GetSpecialValueFor( "duration" )
 		CreateModifierThinker(
-			self:GetCaster(),
+			caster,
 			self,
 			"modifier_cheater_smoke",
 			{ duration = duration },
 			location,
-			self:GetCaster():GetTeamNumber(),
+			caster_team,
 			false
 		)
 		Chance = 0

@@ -82,12 +82,20 @@ function pistol_q:OnSpellStart()
             end
             
             local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+            local damage_table = {
+                attacker = caster,
+                ability = self,
+                damage = damage,
+                damage_type = DAMAGE_TYPE_MAGICAL,
+            }
+            local stun_kv = {duration = stun_duration}
 
             for _,enemy in ipairs(units) do
                 local p2 = ParticleManager:CreateParticle("particles/units/heroes/hero_slardar/slardar_crush_entity.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
                 ParticleManager:ReleaseParticleIndex(p2)
-                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_duration})
-                ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
+                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", stun_kv)
+                damage_table.victim = enemy
+                ApplyDamage(damage_table)
             end
 
             if caster:HasShard() then
@@ -124,10 +132,17 @@ function pistol_q:OnSpellStart()
                         0, 0, false
                     )
 
+                    local shard_damage_table = {
+                        attacker = caster,
+                        ability = self,
+                        damage = shard_damage,
+                        damage_type = DAMAGE_TYPE_MAGICAL,
+                    }
                     for _, enemy in pairs(enemies2) do
                         if not enemy or enemy:IsNull() then return end
                         enemy:AddNewModifier(caster, self, "modifier_pistol_q_shard_torrent_slow", {duration = shard_slow_dur * (1 - enemy:GetStatusResistance())})
-                        ApplyDamage({ victim = enemy, attacker = caster, ability = self, damage = shard_damage, damage_type = DAMAGE_TYPE_MAGICAL})
+                        shard_damage_table.victim = enemy
+                        ApplyDamage(shard_damage_table)
                     end
                 end)
             end

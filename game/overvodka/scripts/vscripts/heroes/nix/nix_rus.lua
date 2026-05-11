@@ -63,9 +63,18 @@ function modifier_nix_rus:ApplyRusTick()
 		false
 	)
 
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    local damage_table = {
+        attacker = parent,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
 	for _, unit in pairs(enemies) do
 		if damage > 0 then
-			ApplyDamage({ victim = unit, attacker = self:GetParent(), damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+            damage_table.victim = unit
+			ApplyDamage(damage_table)
 		end
 	end
 end

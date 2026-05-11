@@ -270,25 +270,21 @@ function modifier_bikov_r_throw_timer:OnDestroy()
         damage_type = DAMAGE_TYPE_MAGICAL,
         ability = ability,
     }
+    local stun_kv = { duration = stun }
 
     for _,e in ipairs(enemies) do
         if e and not e:IsNull() then
             damageTable.victim = e
             ApplyDamage(damageTable)
-            e:AddNewModifier(caster, ability, "modifier_generic_stunned_lua",
-                { duration = stun })
+            e:AddNewModifier(caster, ability, "modifier_generic_stunned_lua", stun_kv)
         end
     end
     local pct = ability:GetSpecialValueFor("damage_hp") or 0
     if pct > 0 and parent and not parent:IsNull() then
         local extra = parent:GetMaxHealth() * pct * 0.01
-        ApplyDamage({
-            victim      = parent,
-            attacker    = caster,
-            damage      = extra,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability     = ability,
-        })
+        damageTable.victim = parent
+        damageTable.damage = extra
+        ApplyDamage(damageTable)
     end
     local fx = ParticleManager:CreateParticle("particles/units/heroes/hero_primal_beast/primal_beast_pulverize_hit.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(fx, 0, pos)

@@ -37,15 +37,16 @@ function t2x2_q:OnSpellStart()
         damage_type = DAMAGE_TYPE_MAGICAL,
         ability = self,
     }
+    local has_shard = caster:HasShard()
     for _, enemy in pairs(enemies) do
-        if caster:HasShard() and enemy:IsRealHero() and not enemy:IsIllusion() then
+        if has_shard and enemy:IsRealHero() and not enemy:IsIllusion() then
             heroes = heroes + 1
         end
         damageTable.victim = enemy
         enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", { duration = stun_duration })
         ApplyDamage(damageTable)
     end
-    if caster:HasShard() and heroes > 0 then
+    if has_shard and heroes > 0 then
         local mod = caster:AddNewModifier(caster, self, "modifier_t2x2_q_shard", {duration = self:GetSpecialValueFor("shard_duration")})
         mod:SetStackCount(heroes)
         caster:CalculateStatBonus(true)

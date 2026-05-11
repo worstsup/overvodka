@@ -145,33 +145,44 @@ end
 
 function modifier_stray_r_shard:OnIntervalThink()
     if not IsServer() then return end
-    GridNav:DestroyTreesAroundPoint(self:GetCaster():GetAbsOrigin(), self.radius, true)
-    local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local caster = self:GetCaster()
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    local parent_origin = parent:GetAbsOrigin()
+    GridNav:DestroyTreesAroundPoint(caster:GetAbsOrigin(), self.radius, true)
+    local units = FindUnitsInRadius(caster:GetTeamNumber(), parent_origin, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local damage_table = {
+        attacker = caster,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        damage_flags = DOTA_DAMAGE_FLAG_NONE,
+        ability = ability,
+    }
+    local knockback_kv = {
+        center_x = parent_origin.x,
+        center_y = parent_origin.y,
+        center_z = parent_origin.z,
+        duration = 0.2,
+        knockback_duration = 0.2,
+        knockback_distance = 300,
+        knockback_height = 50
+    }
+    local cooldown_kv = {duration = 0.5}
     for _, unit in pairs(units) do
         if not unit:IsDebuffImmune() and not unit:IsMagicImmune() and not unit:HasModifier("modifier_stray_r_shard_cooldown") then
             local particle = ParticleManager:CreateParticle( "particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", PATTACH_POINT_FOLLOW, unit )
             ParticleManager:SetParticleControlEnt( particle, 0, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true )
             ParticleManager:ReleaseParticleIndex( particle )
-            ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL, damage_flags = DOTA_DAMAGE_FLAG_NONE, ability = self:GetAbility() })
+            damage_table.victim = unit
+            ApplyDamage(damage_table)
             if unit and not unit:IsNull() then
-                local direction = (unit:GetAbsOrigin() - self:GetParent():GetAbsOrigin())
-                direction.z = 0
-                direction = direction:Normalized()
                 unit:AddNewModifier(
-                    self:GetCaster(),
+                    caster,
                     self,
                     "modifier_knockback",
-                    {
-                        center_x = self:GetParent():GetAbsOrigin().x,
-                        center_y = self:GetParent():GetAbsOrigin().y,
-                        center_z = self:GetParent():GetAbsOrigin().z,
-                        duration = 0.2,
-                        knockback_duration = 0.2,
-                        knockback_distance = 300,
-                        knockback_height = 50
-                    }
+                    knockback_kv
                 )
-                unit:AddNewModifier(self:GetCaster(), self, "modifier_stray_r_shard_cooldown", {duration = 0.5})
+                unit:AddNewModifier(caster, self, "modifier_stray_r_shard_cooldown", cooldown_kv)
             end
         end
     end

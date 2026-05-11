@@ -163,10 +163,18 @@ function modifier_stint_r_2:OnIntervalThink()
     ParticleManager:ReleaseParticleIndex(effect_cast)
     local base_damage = self:GetAbility():GetSpecialValueFor("armageddon_damage_base")
     local pct_damage = self:GetAbility():GetSpecialValueFor("armageddon_damage_pct")
-    local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local enemies = FindUnitsInRadius( caster:GetTeamNumber(), self:GetParent():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
+    local damage_table = {
+        attacker = caster,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
     for _,enemy in pairs(enemies) do
-        local damage = base_damage + pct_damage * enemy:GetHealth() * 0.01
-        ApplyDamage({ attacker = self:GetCaster(), victim = enemy, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility() })
+        damage_table.victim = enemy
+        damage_table.damage = base_damage + pct_damage * enemy:GetHealth() * 0.01
+        ApplyDamage(damage_table)
     end
 end
 
@@ -212,21 +220,23 @@ function modifier_stint_r_3:OnIntervalThink()
         FIND_ANY_ORDER,
         false
     )
+    local damage_table = {
+        attacker = self.parent,
+        damage = self.dps * self.interval,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self.ability,
+    }
+    local debuff_kv = { duration = self.debuff_dur }
     for _, enemy in pairs(enemies) do
-        ApplyDamage({
-            victim = enemy,
-            attacker = self.parent,
-            damage = self.dps * self.interval,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self.ability,
-        })
+        damage_table.victim = enemy
+        ApplyDamage(damage_table)
         if enemy and not enemy:IsNull() then
             local mod = enemy:FindModifierByName("modifier_stint_r_3_debuff")
             if mod then
                 mod:IncrementStackCount()
                 mod:SetDuration(self.debuff_dur, true)
             else
-                mod = enemy:AddNewModifier(self.parent, self.ability, "modifier_stint_r_3_debuff", { duration = self.debuff_dur })
+                mod = enemy:AddNewModifier(self.parent, self.ability, "modifier_stint_r_3_debuff", debuff_kv)
                 if mod then mod:SetStackCount(1) end
             end
         end

@@ -112,6 +112,13 @@ function modifier_papich_q:OnIntervalThink()
         end
     end
 
+    local damage_table = {
+        attacker = self.caster,
+        damage = self.damage,
+        damage_type = self.ability:GetAbilityDamageType(),
+        ability = self.ability
+    }
+    local silence_kv = { duration = self.silence }
     for _,t in pairs(valid) do
         if not t:IsNull() then
             local id = t:entindex()
@@ -119,15 +126,10 @@ function modifier_papich_q:OnIntervalThink()
                 self.hit_targets[id] = true
 
                 if t:GetTeam() ~= self.caster:GetTeam() then
-                    ApplyDamage({
-                        victim      = t,
-                        attacker    = self.caster,
-                        damage      = self.damage,
-                        damage_type = self.ability:GetAbilityDamageType(),
-                        ability     = self.ability
-                    })
+                    damage_table.victim = t
+                    ApplyDamage(damage_table)
                     if self.silence > 0 then
-                        t:AddNewModifier(self.caster, self.ability, "modifier_generic_silenced_lua", { duration = self.silence })
+                        t:AddNewModifier(self.caster, self.ability, "modifier_generic_silenced_lua", silence_kv)
                     end
                 end
 

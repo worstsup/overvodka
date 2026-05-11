@@ -114,8 +114,12 @@ end
 
 function modifier_dave_loonboon:OnIntervalThink()
     if not IsServer() then return end
-    local plants = FindUnitsInRadius(self:GetParent():GetTeamNumber(),
-        self:GetParent():GetAbsOrigin(),
+    local parent = self:GetParent()
+    local ability = self:GetAbility()
+    local parent_origin = parent:GetAbsOrigin()
+    local parent_team = parent:GetTeamNumber()
+    local plants = FindUnitsInRadius(parent_team,
+        parent_origin,
         nil,
         12000,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
@@ -124,11 +128,11 @@ function modifier_dave_loonboon:OnIntervalThink()
         FIND_ANY_ORDER,
         false)
     for _,unit in pairs(plants) do
-        unit:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_dave_loonboon_plants", { duration = 1.55 } )
+        unit:AddNewModifier(parent, ability, "modifier_dave_loonboon_plants", { duration = 1.55 } )
     end
     local enemies = FindUnitsInRadius(
-        self:GetParent():GetTeamNumber(),
-        self:GetParent():GetOrigin(),
+        parent_team,
+        parent:GetOrigin(),
         nil,
         self.radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -138,22 +142,22 @@ function modifier_dave_loonboon:OnIntervalThink()
         false
     )
     if #enemies == 0 then return end
-    t = 0
+    local t = 0
     for _,enemy in pairs(enemies) do
         if t == 1 then return end
         local target = enemy:GetAbsOrigin()
-        local projectile_direction = (target - self:GetParent():GetAbsOrigin())
+        local projectile_direction = (target - parent_origin)
         projectile_direction.z = 0
         projectile_direction = projectile_direction:Normalized()
         local distince = 900
         local arrow_projectile = {
-            Ability             = self:GetAbility(),
+            Ability             = ability,
             EffectName          = "particles/invoker_chaos_meteor_dave.vpcf",
-            vSpawnOrigin        = self:GetParent():GetAbsOrigin(),
+            vSpawnOrigin        = parent_origin,
             fDistance           = distince,
             fStartRadius        = 115,
             fEndRadius          = 120,
-            Source              = self:GetParent(),
+            Source              = parent,
             bHasFrontalCone     = false,
             bReplaceExisting    = false,
             iUnitTargetTeam     = DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -162,7 +166,7 @@ function modifier_dave_loonboon:OnIntervalThink()
             vVelocity           = projectile_direction * 1000,
             bProvidesVision     = true,
             iVisionRadius       = 200,
-            iVisionTeamNumber   = self:GetParent():GetTeamNumber(),
+            iVisionTeamNumber   = parent_team,
         }
         t = t + 1
         hit = false

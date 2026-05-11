@@ -21,14 +21,21 @@ function stray_innate:OnProjectileHit( target, vLocation )
     if not IsServer() then return end
     if target then
         local radius = self:GetSpecialValueFor("radius")
-        local damage = self:GetCaster():GetAverageTrueAttackDamage(nil)
-        local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), target:GetOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false )
+        local caster = self:GetCaster()
+        local damage = caster:GetAverageTrueAttackDamage(nil)
+        local duration = self:GetSpecialValueFor("duration")
+        local enemies = FindUnitsInRadius( caster:GetTeamNumber(), target:GetOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false )
+        local damage_table = {
+            attacker = caster,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_PHYSICAL,
+            ability = self,
+        }
         target:EmitSound("Hero_Tiny_Tree.Impact")
         for _,enemy in pairs(enemies) do
-            local duration = self:GetSpecialValueFor("duration")
-            local stun_duration = self:GetSpecialValueFor("stun_duration")
-            enemy:AddNewModifier(self:GetCaster(), self, "modifier_stray_innate_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
-            ApplyDamage({victim = enemy, attacker = self:GetCaster(), damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self})
+            enemy:AddNewModifier(caster, self, "modifier_stray_innate_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
         end
     end
     return true

@@ -97,21 +97,26 @@ end
 
 function modifier_speed_shake:OnIntervalThink()
     if not IsServer() then return end
-    local radius = self:GetAbility():GetSpecialValueFor("radius")
-    local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetParent():GetOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
+    local ability = self:GetAbility()
+    local caster = self:GetCaster()
+    local radius = ability:GetSpecialValueFor("radius")
+    local scepter_damage = caster:GetIdealSpeed() * 0.01 * ability:GetSpecialValueFor("dmg_scepter") * self.spinner_damage_tick
+    local damage = self.damage + scepter_damage
+    local heal = ability:GetSpecialValueFor("lifesteal") * self.damage * 0.01
+    local enemies = FindUnitsInRadius( caster:GetTeamNumber(), self:GetParent():GetOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false )
     for _,enemy in pairs(enemies) do
         self.damageTable.victim = enemy
-        self.damageTable.damage = self.damage + (self:GetCaster():GetIdealSpeed() * 0.01 * self:GetAbility():GetSpecialValueFor("dmg_scepter") * self.spinner_damage_tick)
-        local heal = self:GetAbility():GetSpecialValueFor("lifesteal") * self.damage * 0.01
-        self:GetCaster():HealWithParams( heal, self:GetAbility(), false, true, self:GetCaster(), false )
-        SendOverheadEventMessage( self:GetCaster(), OVERHEAD_ALERT_HEAL, self:GetCaster(), heal, nil )
+        self.damageTable.damage = damage
+        caster:HealWithParams( heal, ability, false, true, caster, false )
+        SendOverheadEventMessage( caster, OVERHEAD_ALERT_HEAL, caster, heal, nil )
+        local enemy_origin = enemy:GetAbsOrigin()
         local particle = ParticleManager:CreateParticle( "particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_omni_slash_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy )
-        ParticleManager:SetParticleControl( particle, 0, enemy:GetAbsOrigin() )
-        ParticleManager:SetParticleControl( particle, 1, enemy:GetAbsOrigin() )
-        ParticleManager:SetParticleControl( particle, 2, enemy:GetAbsOrigin() )
-        ParticleManager:SetParticleControl( particle, 3, enemy:GetAbsOrigin() )
-        ParticleManager:SetParticleControl( particle, 4, enemy:GetAbsOrigin() )
-        ParticleManager:SetParticleControl( particle, 5, enemy:GetAbsOrigin() )
+        ParticleManager:SetParticleControl( particle, 0, enemy_origin )
+        ParticleManager:SetParticleControl( particle, 1, enemy_origin )
+        ParticleManager:SetParticleControl( particle, 2, enemy_origin )
+        ParticleManager:SetParticleControl( particle, 3, enemy_origin )
+        ParticleManager:SetParticleControl( particle, 4, enemy_origin )
+        ParticleManager:SetParticleControl( particle, 5, enemy_origin )
         ParticleManager:ReleaseParticleIndex( particle )
         ApplyDamage( self.damageTable )
     end

@@ -340,23 +340,27 @@ end
 
 function modifier_prince_e:OnIntervalThink()
     if not IsServer() then return end
-    if not self:GetAbility() or self:GetAbility():IsNull() then
-        self:GetParent():ForceKill(false)
+    local ability = self:GetAbility()
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+    if not ability or ability:IsNull() then
+        parent:ForceKill(false)
         self:Destroy()
         return
     end
-    local enemies = FindUnitsInRadius( self:GetParent():GetTeamNumber(), self:GetParent():GetOrigin(), self:GetParent(), self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false )
-    local base_damage = self:GetAbility():GetSpecialValueFor("damage")
+    local enemies = FindUnitsInRadius( parent:GetTeamNumber(), parent:GetOrigin(), parent, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false )
+    local base_damage = ability:GetSpecialValueFor("damage")
+    local ability_level = ability:GetLevel()
     for _,enemy in pairs( enemies ) do
         if enemy ~= nil and enemy:IsAlive() then
-            local Zombie = CreateUnitByName( "npc_dota_prince_zombie", enemy:GetOrigin() + RandomVector( 50 ), true, self:GetParent(), self:GetParent(), self:GetParent():GetTeamNumber() )
+            local Zombie = CreateUnitByName( "npc_dota_prince_zombie", enemy:GetOrigin() + RandomVector( 50 ), true, parent, parent, parent:GetTeamNumber() )
             ParticleManager:ReleaseParticleIndex( ParticleManager:CreateParticle( "particles/neutral_fx/skeleton_spawn.vpcf", PATTACH_ABSORIGIN, Zombie ) )
-            Zombie:FindAbilityByName( "undying_tombstone_zombie_deathstrike" ):SetLevel(self:GetAbility():GetLevel())
+            Zombie:FindAbilityByName( "undying_tombstone_zombie_deathstrike" ):SetLevel(ability_level)
             Zombie:SetAggroTarget(enemy)
-            Zombie:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_prince_e_zombie", {enemy_entindex = enemy:entindex()})
+            Zombie:AddNewModifier(caster, ability, "modifier_prince_e_zombie", {enemy_entindex = enemy:entindex()})
             Zombie:SetBaseDamageMin(base_damage)
             Zombie:SetBaseDamageMax(base_damage)
-            local prince = self:GetCaster()
+            local prince = caster
             if prince and prince:HasTalent("special_bonus_unique_prince_7") then
                 local ab = prince:FindAbilityByName("prince_w")
                 if ab and ab:GetLevel() > 0 then

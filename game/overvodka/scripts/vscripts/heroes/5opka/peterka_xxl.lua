@@ -101,10 +101,18 @@ function peterka_xxl:OnSpellStart()
 
             local bonus_damage = hero_count * damage_per_hero + unit_count * damage_per_unit
             local total_damage = base_damage + bonus_damage
+            local damage_table = {
+                attacker = caster,
+                ability = self,
+                damage = total_damage,
+                damage_type = DAMAGE_TYPE_MAGICAL,
+            }
+            local stun_kv = {duration = stun_duration}
 
             for _,enemy in ipairs(units) do
-                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = stun_duration })
-                ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = total_damage, damage_type = DAMAGE_TYPE_MAGICAL})
+                enemy:AddNewModifier(caster, self, "modifier_generic_stunned_lua", stun_kv)
+                damage_table.victim = enemy
+                ApplyDamage(damage_table)
             end
         end)
     end

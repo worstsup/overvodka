@@ -85,13 +85,21 @@ end
 function modifier_c4_bomb:ExplodeBomb()
     if not IsServer() then return end
     local bomb = self:GetParent()
-    local explosion_particle = "particles/c4_explosion.vpcf"
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local bomb_origin = bomb:GetAbsOrigin()
+    local caster_team = caster:GetTeam()
     local explosion_radius = 1200
     local half_radius = 1800
     local damage = 50000
+    local damage_table = {
+        attacker = caster,
+        damage_type = DAMAGE_TYPE_PURE,
+        ability = ability,
+    }
     local enemies_in_explosion = FindUnitsInRadius(
-        self:GetCaster():GetTeam(),
-        bomb:GetAbsOrigin(),
+        caster_team,
+        bomb_origin,
         nil,
         explosion_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -101,18 +109,16 @@ function modifier_c4_bomb:ExplodeBomb()
         false
     )
 
+    local explosion_set = {}
     for _, enemy in pairs(enemies_in_explosion) do
-        ApplyDamage({
-            victim = enemy,
-            attacker = self:GetCaster(),
-            damage = damage,
-            damage_type = DAMAGE_TYPE_PURE,
-            ability = self:GetAbility()
-        })
+        explosion_set[enemy] = true
+        damage_table.victim = enemy
+        damage_table.damage = damage
+        ApplyDamage(damage_table)
     end
      local enemies_in_heavy = FindUnitsInRadius(
-        self:GetCaster():GetTeam(),
-        bomb:GetAbsOrigin(),
+        caster_team,
+        bomb_origin,
         nil,
         half_radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -121,21 +127,18 @@ function modifier_c4_bomb:ExplodeBomb()
         FIND_ANY_ORDER,
         false
     )
+    local heavy_set = {}
     for _, enemy in pairs(enemies_in_heavy) do
-        if not table.contains(enemies_in_explosion, enemy) then
-            local damage = enemy:GetMaxHealth() * 0.5
-            ApplyDamage({
-                victim = enemy,
-                attacker = self:GetCaster(),
-                damage = damage,
-                damage_type = DAMAGE_TYPE_PURE,
-                ability = self:GetAbility()
-            })
+        heavy_set[enemy] = true
+        if not explosion_set[enemy] then
+            damage_table.victim = enemy
+            damage_table.damage = enemy:GetMaxHealth() * 0.5
+            ApplyDamage(damage_table)
         end
     end
     local global_enemies = FindUnitsInRadius(
-        self:GetCaster():GetTeam(),
-        bomb:GetAbsOrigin(),
+        caster_team,
+        bomb_origin,
         nil,
         FIND_UNITS_EVERYWHERE,  -- Global radius
         DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -145,15 +148,10 @@ function modifier_c4_bomb:ExplodeBomb()
         false
     )
     for _, enemy in pairs(global_enemies) do
-        if not table.contains(enemies_in_lethal, enemy) and not table.contains(enemies_in_heavy, enemy) then
-            local damage = enemy:GetMaxHealth() * 0.25
-            ApplyDamage({
-                victim = enemy,
-                attacker = self:GetCaster(),
-                damage = damage,
-                damage_type = DAMAGE_TYPE_PURE,
-                ability = self:GetAbility()
-            })
+        if not explosion_set[enemy] and not heavy_set[enemy] then
+            damage_table.victim = enemy
+            damage_table.damage = enemy:GetMaxHealth() * 0.25
+            ApplyDamage(damage_table)
         end
     end
     local particle_cast = "particles/c4_explosion.vpcf"

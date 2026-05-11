@@ -72,9 +72,11 @@ function kolibri_w:OnSpellStart()
             ParticleManager:SetParticleControl(particle, 0, Vector(landing_pos.x,landing_pos.y,landing_pos.z))
             local units = FindUnitsInRadius(caster:GetTeamNumber(), landing_pos, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
 
+            local damage_table = {attacker = caster, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL}
             for _,enemy in ipairs(units) do
                 enemy:AddNewModifier(caster, self, "modifier_kolibri_w_slow", {duration = slow_duration * (1 - enemy:GetStatusResistance())})
-                ApplyDamage({victim = enemy, attacker = caster, ability = self, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
+                damage_table.victim = enemy
+                ApplyDamage(damage_table)
             end
         end)
     end

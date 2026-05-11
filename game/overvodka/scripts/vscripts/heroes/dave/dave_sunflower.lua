@@ -55,7 +55,6 @@ end
 function modifier_dave_sunflower_passive:OnCreated()
     if not IsServer() then return end
     self:StartIntervalThink(1)
-    local duration = self:GetAbility():GetSpecialValueFor('duration')
     local radius = self:GetAbility():GetSpecialValueFor( "radius" )
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_eyesintheforest.vpcf", PATTACH_WORLDORIGIN, self:GetParent())
     ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
@@ -64,20 +63,30 @@ function modifier_dave_sunflower_passive:OnCreated()
 end
 
 function modifier_dave_sunflower_passive:OnIntervalThink()
-    local radius = self:GetAbility():GetSpecialValueFor( "radius" ) 
-    local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    if not IsServer() then return end
+    local ability = self:GetAbility()
+    local caster = self:GetCaster()
+    local caster_team = caster:GetTeamNumber()
+    local radius = ability:GetSpecialValueFor( "radius" )
+    local heal_pct = ability:GetSpecialValueFor( "pct_heal" )
+    local base_damage = ability:GetSpecialValueFor("base_damage")
+    local damage_pct = ability:GetSpecialValueFor("pct_damage")
+    local damage_type = ability:GetAbilityDamageType()
+    local units = FindUnitsInRadius(caster_team, self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local damage_table = {
+        attacker = caster,
+        ability = ability,
+        damage_type = damage_type,
+    }
 
     for i,unit in ipairs(units) do
-        local radius = self:GetAbility():GetSpecialValueFor( "radius" )
-        local heal_pct = self:GetAbility():GetSpecialValueFor( "pct_heal" )
         local target_health_percentage = unit:GetHealth() / 100
-        local base_damage = self:GetAbility():GetSpecialValueFor("base_damage")
-        local damage_pct = self:GetAbility():GetSpecialValueFor("pct_damage")
         local total_damage = target_health_percentage * damage_pct + base_damage
-        local caster_team = self:GetCaster():GetTeamNumber()
 
         if unit:GetTeamNumber() ~= caster_team then
-            ApplyDamage({ victim = unit, attacker = self:GetCaster(), damage = total_damage, ability = self:GetAbility(), damage_type = self:GetAbility():GetAbilityDamageType() })
+            damage_table.victim = unit
+            damage_table.damage = total_damage
+            ApplyDamage(damage_table)
         else
             unit:GiveMana(heal_pct)
         end

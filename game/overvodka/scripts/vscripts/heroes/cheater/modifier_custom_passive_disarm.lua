@@ -18,7 +18,8 @@ end
 function modifier_custom_passive_disarm:OnIntervalThink()
     if not IsServer() then return end
     local parent = self:GetParent()
-    if not parent:IsAlive() or not self:GetAbility():IsCooldownReady() then return end
+    local ability = self:GetAbility()
+    if not parent:IsAlive() or not ability:IsCooldownReady() then return end
     local enemies = FindUnitsInRadius(
         parent:GetTeamNumber(),
         parent:GetAbsOrigin(),
@@ -31,21 +32,23 @@ function modifier_custom_passive_disarm:OnIntervalThink()
         false
     )
 
+    local damage_table = {
+        attacker = parent,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability
+    }
+    local stun_kv = {duration = self.disarm_duration}
     for _, enemy in ipairs(enemies) do
         if RollPercentage(self.chance) then
-            EmitSoundOn("tazer", self:GetParent())
-            local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent() )
-            ApplyDamage({
-                victim = enemy,
-                attacker = parent,
-                damage = self.damage,
-                damage_type = DAMAGE_TYPE_MAGICAL,
-                ability = self:GetAbility()
-            })
+            EmitSoundOn("tazer", parent)
+            local effect_cast = ParticleManager:CreateParticle( "particles/econ/items/disruptor/disruptor_2022_immortal/disruptor_2022_immortal_static_storm_lightning_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent )
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
             if enemy and not enemy:IsNull() then
-                enemy:AddNewModifier(parent, self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.disarm_duration})
+                enemy:AddNewModifier(parent, ability, "modifier_generic_stunned_lua", stun_kv)
             end
-            self:GetAbility():StartCooldown(self.cooldown)
+            ability:StartCooldown(self.cooldown)
             break
         end
     end

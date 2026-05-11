@@ -95,8 +95,15 @@ function modifier_sasavot_debuff:OnIntervalThink()
         FIND_ANY_ORDER,
         false) 
 
+    local damage_table = {
+        attacker = self:GetParent(),
+        damage = self.damage * 0.5,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self:GetAbility(),
+    }
     for _,unit in pairs(targets) do
-        ApplyDamage({victim = unit, attacker = self:GetParent(), damage = self.damage * 0.5, damage_type = DAMAGE_TYPE_MAGICAL, ability = self:GetAbility()})
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
     end
 end
 

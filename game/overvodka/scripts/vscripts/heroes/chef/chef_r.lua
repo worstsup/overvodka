@@ -56,20 +56,19 @@ function chef_r:OnProjectileHitHandle(target, location, projectileHandle)
     ParticleManager:SetParticleControl(effect_cast, 0, impact_point)
     ParticleManager:ReleaseParticleIndex(effect_cast)
     EmitSoundOn("chef_r_hit_" .. RandomInt(1,2), target)
+    local disarm_kv = {duration = disarm_duration}
+    local slow_kv = {duration = slow_duration}
+    local damage_table = {
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
     for _,enemy in pairs(enemies) do
-        enemy:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", {
-            duration = disarm_duration
-        })
-        enemy:AddNewModifier(caster, self, "modifier_chef_r_slow", {
-            duration = slow_duration
-        })
-        ApplyDamage({
-            victim = enemy,
-            attacker = caster,
-            damage = damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self,
-        })
+        enemy:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", disarm_kv)
+        enemy:AddNewModifier(caster, self, "modifier_chef_r_slow", slow_kv)
+        damage_table.victim = enemy
+        ApplyDamage(damage_table)
     end
 end
 

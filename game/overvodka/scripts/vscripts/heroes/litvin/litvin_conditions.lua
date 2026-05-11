@@ -91,7 +91,9 @@ function modifier_litvin_conditions:OnCreated( kv )
 			0,
 			false
 		)
-		local damageTable = { attacker = self.caster, damage = self.damage, damage_type = self:GetAbility():GetAbilityDamageType(), ability = self:GetAbility()}
+        local ability = self:GetAbility()
+		local damageTable = { attacker = self.caster, damage = self.damage, damage_type = ability:GetAbilityDamageType(), ability = ability}
+        local stun_kv = {duration = self.stun_duration}
 		for _,enemy in pairs(enemies) do
 			damageTable.victim = enemy
 			if enemy==self.parent then
@@ -99,7 +101,7 @@ function modifier_litvin_conditions:OnCreated( kv )
 			else
 				damageTable.damage = self.damage
 			end
-			enemy:AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_generic_stunned_lua", {duration = self.stun_duration} )
+			enemy:AddNewModifier( self.caster, ability, "modifier_generic_stunned_lua", stun_kv )
 			ApplyDamage(damageTable)
 		end
 		GridNav:DestroyTreesAroundPoint( self.parent:GetOrigin(), self.radius, false )

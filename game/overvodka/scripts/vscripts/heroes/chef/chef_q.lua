@@ -25,6 +25,7 @@ function chef_shout:OnSpellStart()
     if target:TriggerSpellAbsorb( self ) then return end
 	self:PlayEffects( target )
 	local damage = self:GetSpecialValueFor( "damage" )
+    local duration = self:GetSpecialValueFor( "duration" )
     local maxmana = caster:GetMaxMana()
     local nowmana = caster:GetMana() + self:GetManaCost(self:GetLevel() - 1)
     local pctmana = self:GetSpecialValueFor( "pctmana" )
@@ -46,17 +47,17 @@ function chef_shout:OnSpellStart()
         if Talent:GetLevel() == 1 then
             for i,unit in ipairs(units) do
                 damage_table.victim = unit
-                unit:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+                unit:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = duration})
                 ApplyDamage(damage_table)
             end
         else
             damage_table.victim = target
-            target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+            target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = duration})
             ApplyDamage(damage_table)
         end
     else
         damage_table.victim = target
-        target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = self:GetSpecialValueFor( "duration" )})
+        target:AddNewModifier(caster, self, "modifier_generic_stunned_lua", {duration = duration})
         ApplyDamage(damage_table)
     end
 end

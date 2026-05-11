@@ -135,27 +135,29 @@ function modifier_visitor_r:OnIntervalThink()
 			FIND_ANY_ORDER,
 			false
 		)
+		local burn_kv = {duration = 1.1}
+		local damage_table = {
+			attacker = caster,
+			damage_type = DAMAGE_TYPE_PURE,
+			damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
+			ability = self.ability
+		}
 		for _,u in pairs(units) do
-            if u and not u:IsNull() then
-                if u:IsAlive() then
+			if u and not u:IsNull() then
+				if u:IsAlive() then
 					if self.first then
 						local p = ParticleManager:CreateParticle("particles/econ/items/phoenix/phoenix_ti10_immortal/phoenix_ti10_fire_spirit_ground.vpcf", PATTACH_ABSORIGIN_FOLLOW, u)
 						ParticleManager:SetParticleControl(p, 0, u:GetAbsOrigin())
 						ParticleManager:SetParticleControl(p, 3, u:GetAbsOrigin())
 						ParticleManager:ReleaseParticleIndex(p)
 					end
-					u:AddNewModifier(caster, self.ability, "modifier_visitor_burn", {duration = 1.1})
-                    local dmg = self.base_dmg + u:GetMaxHealth() * self.hp_dmg_pct * 0.01
-                    ApplyDamage({
-                        victim = u,
-                        attacker = caster,
-                        damage = dmg,
-                        damage_type = DAMAGE_TYPE_PURE,
-                        damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                        ability = self.ability
-                    })
-                end
-            end
+					u:AddNewModifier(caster, self.ability, "modifier_visitor_burn", burn_kv)
+					local dmg = self.base_dmg + u:GetMaxHealth() * self.hp_dmg_pct * 0.01
+					damage_table.victim = u
+					damage_table.damage = dmg
+					ApplyDamage(damage_table)
+				end
+			end
 		end
 	end
 	if self.first then

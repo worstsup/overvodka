@@ -170,10 +170,18 @@ function modifier_epstein_e_active:OnIntervalThink()
     if dps <= 0 then return end
 
     local damage = dps * self._tick
+    local modifier_kv = {duration = 0.4}
+    local damage_table = {
+        attacker = parent,
+        ability = ability,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    }
     for _, enemy in pairs(enemies) do
         if enemy and (not enemy:IsNull()) and IsValidEntity(enemy) and enemy:IsAlive() and (not enemy:IsOutOfGame()) then
-            enemy:AddNewModifier(parent, ability, "modifier_epstein_e_enemy", {duration = 0.4})
-            ApplyDamage({victim = enemy, attacker = parent, ability = ability, damage = damage, damage_type = DAMAGE_TYPE_MAGICAL})
+            enemy:AddNewModifier(parent, ability, "modifier_epstein_e_enemy", modifier_kv)
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
         end
     end
 end

@@ -66,14 +66,21 @@ function zolo_batya:OnSpellStart()
         knockback_height = 350,
     }
 	local knock_enemies = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+    local damage_table = {
+        attacker = caster,
+        damage = self:GetSpecialValueFor("damage"),
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
 	for _,unit in pairs(knock_enemies) do
 		if unit:HasModifier("modifier_knockback") then
             unit:RemoveModifierByName("modifier_knockback")
         end
-        unit:AddNewModifier(self:GetCaster(), self, "modifier_knockback", knockbackProperties)
+        unit:AddNewModifier(caster, self, "modifier_knockback", knockbackProperties)
         self:PlayEffects( unit )
 	    self:PlayEffects1( unit )
-		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+        damage_table.victim = unit
+		ApplyDamage(damage_table)
 	end
     if not global_sounds_muted then
         EmitSoundOn("sharik", caster)

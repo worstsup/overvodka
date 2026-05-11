@@ -117,9 +117,16 @@ function modifier_item_drobe:OnAttackLanded(params)
 
     if self.parent:IsRangedAttacker() then
         local targets = FindUnitsInRadius(self.parent:GetTeamNumber(), params.target:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
+        local damage_table = {
+            attacker = self.parent,
+            damage = params.damage * self.ability:GetSpecialValueFor("cleave") / 100,
+            damage_type = DAMAGE_TYPE_PHYSICAL,
+            ability = self.ability,
+        }
         for _,unit in pairs(targets) do
             if unit ~= params.target then 
-                ApplyDamage({victim = unit, attacker = self.parent, damage = params.damage * self.ability:GetSpecialValueFor("cleave") / 100, damage_type = DAMAGE_TYPE_PHYSICAL, ability = self.ability})
+                damage_table.victim = unit
+                ApplyDamage(damage_table)
             end
         end
         self:PlayEffects(params.target)

@@ -59,15 +59,17 @@ function modifier_vihor_innate:OnAttackLanded(params)
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
 		0, 0, false)
 
-	for _,enemy in ipairs(enemies) do
-		if (enemy and not enemy:IsNull()) and (enemy:IsAlive()) then
-			if dur > 0 then
-				enemy:AddNewModifier(parent, q, "modifier_vihor_q_slow", {duration = dur * (1 - enemy:GetStatusResistance())})
-			end
+		local damage_table = {attacker = parent, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = q}
+		for _,enemy in ipairs(enemies) do
+			if (enemy and not enemy:IsNull()) and (enemy:IsAlive()) then
+				if dur > 0 then
+					enemy:AddNewModifier(parent, q, "modifier_vihor_q_slow", {duration = dur * (1 - enemy:GetStatusResistance())})
+				end
 
-			if dmg > 0 then
-				ApplyDamage({victim = enemy, attacker = parent, damage = dmg, damage_type = DAMAGE_TYPE_MAGICAL, ability = q})
+				if dmg > 0 then
+					damage_table.victim = enemy
+					ApplyDamage(damage_table)
+				end
 			end
 		end
 	end
-end

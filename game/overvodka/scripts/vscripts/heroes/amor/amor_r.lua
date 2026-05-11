@@ -162,10 +162,12 @@ function amor_ultimate:_ExecuteUltimateAt(caster, center, fw)
         0, 0, false
     )
 
+    local clap_damage_table = { attacker = caster, damage = clap_damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self }
     for _, enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
             enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()), dps = self.beer_dps })
-            ApplyDamage({ victim = enemy, attacker = caster, damage = clap_damage, damage_type = DAMAGE_TYPE_MAGICAL, ability = self })
+            clap_damage_table.victim = enemy
+            ApplyDamage(clap_damage_table)
         end
     end
 
@@ -229,6 +231,12 @@ function amor_ultimate:_ExplodeCrack(caster, start_pos, end_pos, width, affected
 
     local enemies = FindUnitsInLine(team, start_pos, end_pos, nil, width, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0)
 
+    local damage_table = {
+        attacker = caster,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+        damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+    }
     for _, enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
             local eid = enemy:entindex()
@@ -243,7 +251,9 @@ function amor_ultimate:_ExplodeCrack(caster, start_pos, end_pos, width, affected
                 FindClearSpaceForUnit(enemy, nearest, false)
 
                 enemy:AddNewModifier(caster, self, "modifier_amor_ultimate_beer", { duration = beer_duration * (1 - enemy:GetStatusResistance()), dps = self.beer_dps })
-                ApplyDamage({victim = enemy, attacker = caster,damage = enemy:GetMaxHealth() * hp_pct * 0.01, damage_type = DAMAGE_TYPE_MAGICAL, ability = self, damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION})
+                damage_table.victim = enemy
+                damage_table.damage = enemy:GetMaxHealth() * hp_pct * 0.01
+                ApplyDamage(damage_table)
             end
         end
     end

@@ -220,37 +220,41 @@ function modifier_invincible_w:OnIntervalThink()
 end
 
 function modifier_invincible_w:CheckEnemies(radius)
-    local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local duration_slow = ability:GetSpecialValueFor("duration_slow")
+    local caster_origin = caster:GetAbsOrigin()
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
 	for _, target in pairs(enemies) do
-        target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
-        local modifier = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_invincible_w_buff_attack", {} )
-        self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
-        EmitSoundOn("invincible_w_hit", self:GetCaster())
+        target:AddNewModifier(caster, ability, "modifier_invincible_w_debuff", {duration = duration_slow})
+        local modifier = caster:AddNewModifier( caster, ability, "modifier_invincible_w_buff_attack", {} )
+        caster:PerformAttack ( target, true, true, true, false, false, false, true )
+        EmitSoundOn("invincible_w_hit", caster)
         if modifier and not modifier:IsNull() then
             modifier:Destroy()
         end
-        self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_invincible_w_buff_attack_speed", {duration = self:GetRemainingTime() + 0.3} )
+        caster:AddNewModifier( caster, ability, "modifier_invincible_w_buff_attack_speed", {duration = self:GetRemainingTime() + 0.3} )
         self.enemy = true
         self:Destroy()
         local victim_angle = target:GetAnglesAsVector()
-        local victim_forward_vector = target:GetAbsOrigin() - self:GetCaster():GetAbsOrigin()
+        local victim_forward_vector = target:GetAbsOrigin() - caster_origin
         victim_forward_vector.z = 0
         victim_forward_vector = victim_forward_vector:Normalized()
         local attacker_new = target:GetAbsOrigin() + (victim_forward_vector) * 175
         attacker_new = GetGroundPosition(attacker_new, self:GetParent())
-        self:GetCaster():SetAbsOrigin(attacker_new)
-        FindClearSpaceForUnit(self:GetCaster(), attacker_new, true)
-        self:GetCaster():SetForwardVector(victim_forward_vector)
-        self:GetCaster():MoveToTargetToAttack(target)
+        caster:SetAbsOrigin(attacker_new)
+        FindClearSpaceForUnit(caster, attacker_new, true)
+        caster:SetForwardVector(victim_forward_vector)
+        caster:MoveToTargetToAttack(target)
         return
     end
 
-    local creeps = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
+    local creeps = FindUnitsInRadius(caster:GetTeamNumber(), caster_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
     for _, target in pairs(creeps) do
         if not target:HasModifier("modifier_invincible_w_creep_damage") then
-            target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
-            target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_creep_damage", {duration = 0.25})
-            self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
+            target:AddNewModifier(caster, ability, "modifier_invincible_w_debuff", {duration = duration_slow})
+            target:AddNewModifier(caster, ability, "modifier_invincible_w_creep_damage", {duration = 0.25})
+            caster:PerformAttack ( target, true, true, true, false, false, false, true )
         end
     end
 end
@@ -620,27 +624,31 @@ function modifier_generic_knockback_invincible:CheckStun(parent)
 end
 
 function modifier_generic_knockback_invincible:CheckEnemies(radius)
-    local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local duration_slow = ability:GetSpecialValueFor("duration_slow")
+    local caster_origin = caster:GetAbsOrigin()
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
 	for _, target in pairs(enemies) do
-        target:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_invincible_w_debuff", {duration = self:GetAbility():GetSpecialValueFor("duration_slow")})
-        local modifier = self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_invincible_w_buff_attack", {} )
-        self:GetCaster():PerformAttack ( target, true, true, true, false, false, false, true )
+        target:AddNewModifier(caster, ability, "modifier_invincible_w_debuff", {duration = duration_slow})
+        local modifier = caster:AddNewModifier( caster, ability, "modifier_invincible_w_buff_attack", {} )
+        caster:PerformAttack ( target, true, true, true, false, false, false, true )
         if modifier and not modifier:IsNull() then
             modifier:Destroy()
         end
         self.interrupted = true
         self:Destroy()
         local victim_angle = target:GetAnglesAsVector()
-        local victim_forward_vector = target:GetAbsOrigin() - self:GetCaster():GetAbsOrigin()
+        local victim_forward_vector = target:GetAbsOrigin() - caster_origin
         victim_forward_vector.z = 0
         victim_forward_vector = victim_forward_vector:Normalized()
         local attacker_new = target:GetAbsOrigin() + (victim_forward_vector) * 175
         attacker_new = GetGroundPosition(attacker_new, self:GetParent())
-        self:GetCaster():SetAbsOrigin(attacker_new)
-        FindClearSpaceForUnit(self:GetCaster(), attacker_new, true)
-        self:GetCaster():SetForwardVector(victim_forward_vector)
-        self:GetCaster():MoveToTargetToAttack(target)
-        self:GetCaster():AddNewModifier( self:GetCaster(), self:GetAbility(), "modifier_invincible_w_buff_attack_speed", {duration = self:GetAbility():GetSpecialValueFor("duration")+0.3} )
+        caster:SetAbsOrigin(attacker_new)
+        FindClearSpaceForUnit(caster, attacker_new, true)
+        caster:SetForwardVector(victim_forward_vector)
+        caster:MoveToTargetToAttack(target)
+        caster:AddNewModifier( caster, ability, "modifier_invincible_w_buff_attack_speed", {duration = ability:GetSpecialValueFor("duration")+0.3} )
         return
     end
 end

@@ -46,7 +46,8 @@ function invincible_e:OnOrbImpact( params )
 	local radius = self:GetSpecialValueFor("facet_radius")
 	if radius > 0 then
 		local heal = dmg * self:GetSpecialValueFor("facet_pct") * 0.01
-		local friends = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, FIND_ANY_ORDER, false)
+		local caster_origin = caster:GetAbsOrigin()
+		local friends = FindUnitsInRadius(caster:GetTeamNumber(), caster_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, FIND_ANY_ORDER, false)
 		for _,unit in pairs(friends) do
 			if unit ~= caster then
 				unit:HealWithParams(heal, self, false, true, caster, false)
@@ -59,8 +60,9 @@ function invincible_e:OnOrbImpact( params )
 		end
 	end
 	if caster:HasShard() and target and not target:IsNull() and not target:IsDebuffImmune() then
-		target:AddNewModifier( caster, self, "modifier_invincible_e_debuff", { duration = self:GetSpecialValueFor("shard_duration") } )
-		caster:AddNewModifier( caster, self, "modifier_invincible_e_buff", { duration = self:GetSpecialValueFor("shard_duration") } )
+		local shard_duration = self:GetSpecialValueFor("shard_duration")
+		target:AddNewModifier( caster, self, "modifier_invincible_e_debuff", { duration = shard_duration } )
+		caster:AddNewModifier( caster, self, "modifier_invincible_e_buff", { duration = shard_duration } )
 	end
 end
 

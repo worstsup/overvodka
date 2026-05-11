@@ -87,14 +87,15 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
                     blaster:EmitSound("gaster_blaster_shoot")
                 end
                 local dmg_r = dmg * self:GetCaster():FindAbilityByName("sans_r"):GetSpecialValueFor("blasters_damage_pct") * 0.01
+                local damage_table = {
+                    attacker = caster,
+                    damage = dmg_r,
+                    damage_type = self:GetAbilityDamageType(),
+                    ability = self,
+                }
                 for _, unit in pairs(units) do
-                    ApplyDamage({
-                        victim = unit,
-                        attacker = caster,
-                        damage = dmg_r,
-                        damage_type = self:GetAbilityDamageType(),
-                        ability = self,
-                    })
+                    damage_table.victim = unit
+                    ApplyDamage(damage_table)
                 end
                 blaster:ForceKill(false)
             end
@@ -144,14 +145,15 @@ function gaster_blaster:OnVectorCastStart(vStartLocation, direction_new)
             else
                 blaster:EmitSound("gaster_blaster_shoot")
             end
+            local damage_table = {
+                attacker = caster,
+                damage = dmg,
+                damage_type = self:GetAbilityDamageType(),
+                ability = self,
+            }
             for _,unit in pairs(units) do
-                ApplyDamage({
-                    victim = unit,
-                    attacker = caster,
-                    damage = dmg,
-                    damage_type = self:GetAbilityDamageType(),
-                    ability = self,
-                })
+                damage_table.victim = unit
+                ApplyDamage(damage_table)
             end
         blaster:ForceKill(false)
         end

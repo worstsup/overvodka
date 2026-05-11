@@ -117,11 +117,20 @@ function modifier_stray_w_damage:OnCreated(params)
 end
 function modifier_stray_w_damage:OnIntervalThink()
     if not IsServer() then return end
-    local units = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false)
+    local caster = self:GetCaster()
+    local ability = self:GetAbility()
+    local units = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false)
+    local damage_table = {
+        attacker = caster,
+        ability = ability,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+    }
     for _, unit in pairs(units) do
         if unit and unit ~= self.target and self.targets[unit:entindex()] == nil then
             self.targets[unit:entindex()] = true
-            ApplyDamage({ victim = unit, attacker = self:GetCaster(), ability = self:GetAbility(), damage = self.damage, damage_type = DAMAGE_TYPE_MAGICAL })
+            damage_table.victim = unit
+            ApplyDamage(damage_table)
         end
     end
 end

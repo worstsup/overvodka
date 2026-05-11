@@ -74,35 +74,39 @@ function chef_d:OnProjectileHit_ExtraData(htarget, vLocation, table)
         ParticleManager:DestroyParticle(table.particle_fx, true)
     end
     vLocation = GetGroundPosition(vLocation, nil)
-    EmitSoundOnLocationWithCaster(vLocation, "chef_d_hit", self:GetCaster())
+    local caster = self:GetCaster()
+    local caster_team = caster:GetTeamNumber()
+    local burn_duration = self:GetSpecialValueFor("burn_dur")
+    EmitSoundOnLocationWithCaster(vLocation, "chef_d_hit", caster)
     local explosion_fx = ParticleManager:CreateParticle("particles/chef_d_aoe.vpcf", PATTACH_WORLDORIGIN, nil)
     ParticleManager:SetParticleControl(explosion_fx, 0, vLocation)
     ParticleManager:SetParticleControl(explosion_fx, 1, Vector(radius, 0, 1))
 
-    local allies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), vLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    local allies = FindUnitsInRadius(caster_team, vLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
     for _, ally in pairs(allies) do
-        ally:HealWithParams(heal, self, false, true, self:GetCaster(), false)
-        ally:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_buff", {duration = duration})
-        if self:GetSpecialValueFor("burn_dur") > 0 then
-            ally:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_buff_facet", {duration = self:GetSpecialValueFor("burn_dur")})
+        ally:HealWithParams(heal, self, false, true, caster, false)
+        ally:AddNewModifier(caster, self, "modifier_chef_d_buff", {duration = duration})
+        if burn_duration > 0 then
+            ally:AddNewModifier(caster, self, "modifier_chef_d_buff_facet", {duration = burn_duration})
         end
-        SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal, self:GetCaster():GetPlayerOwner())
+        SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, ally, heal, caster:GetPlayerOwner())
         local particle = ParticleManager:CreateParticle("particles/items3_fx/fish_bones_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally)
         ParticleManager:ReleaseParticleIndex(particle)
     end
-    if self:GetCaster():HasShard() then
-        local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), vLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+    if caster:HasShard() then
+        local enemies = FindUnitsInRadius(caster_team, vLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
+        local damage_table = {
+            attacker = caster,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = self,
+            damage_flags = DOTA_DAMAGE_FLAG_NONE
+        }
         for _, enemy in pairs(enemies) do
-            ApplyDamage({
-                attacker = self:GetCaster(),
-                victim = enemy,
-                damage = damage,
-                damage_type = DAMAGE_TYPE_MAGICAL,
-                ability = self,
-                damage_flags = DOTA_DAMAGE_FLAG_NONE
-            })
+            damage_table.victim = enemy
+            ApplyDamage(damage_table)
             if enemy and not enemy:IsNull() then
-                enemy:AddNewModifier(self:GetCaster(), self, "modifier_chef_d_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
+                enemy:AddNewModifier(caster, self, "modifier_chef_d_debuff", {duration = duration * (1-enemy:GetStatusResistance())})
             end
         end
     end

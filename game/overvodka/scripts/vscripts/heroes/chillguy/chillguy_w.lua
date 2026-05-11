@@ -67,18 +67,21 @@ function modifier_chillguy_w:Burn()
 		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
 		0, 0, false
 	)
-	local damage = self:GetAbility():GetSpecialValueFor( "damage" )
-	local damage_pct = self:GetAbility():GetSpecialValueFor( "damage_pct" )
+	local ability = self:GetAbility()
+	local parent = self.parent
+	local damage = ability:GetSpecialValueFor( "damage" )
+	local damage_pct = ability:GetSpecialValueFor( "damage_pct" )
+	local heal_pct = ability:GetSpecialValueFor("heal")
+	local damageTable = {
+		attacker = parent,
+		damage_type = ability:GetAbilityDamageType(),
+		ability = ability,
+	}
 	for _,enemy in pairs(enemies) do
 		local damage_new = damage_pct * enemy:GetMaxHealth() * 0.01 + damage
-		self.damageTable = {
-			attacker = self:GetParent(),
-			damage = damage_new,
-			damage_type = self:GetAbility():GetAbilityDamageType(),
-			ability = self:GetAbility(),
-		}
-		self.damageTable.victim = enemy
-		ApplyDamage( self.damageTable )
+		damageTable.victim = enemy
+		damageTable.damage = damage_new
+		ApplyDamage( damageTable )
 		self:PlayEffects( enemy )
 	end
 	local friends = FindUnitsInRadius(
@@ -91,9 +94,9 @@ function modifier_chillguy_w:Burn()
 		FIND_ANY_ORDER, false
 	)
 	for _,ally in pairs(friends) do
-		if ally ~= self.parent then
-			local heal = (self:GetAbility():GetSpecialValueFor( "damage_pct" ) * ally:GetMaxHealth() * 0.01 + damage) * self:GetAbility():GetSpecialValueFor("heal") * 0.01
-			ally:HealWithParams(heal, self:GetAbility(), false, true, self.parent, false)
+		if ally ~= parent then
+			local heal = (damage_pct * ally:GetMaxHealth() * 0.01 + damage) * heal_pct * 0.01
+			ally:HealWithParams(heal, ability, false, true, parent, false)
 			SendOverheadEventMessage( ally, OVERHEAD_ALERT_HEAL, ally, heal, nil )
 		end
 	end

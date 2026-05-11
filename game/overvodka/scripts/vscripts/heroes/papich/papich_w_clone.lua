@@ -92,23 +92,24 @@ function papich_w_clone:OnSpellStart()
 				false
 			)
 
-			for _, enemy in ipairs(enemies) do
-				local entindex = enemy:entindex()
-				if not hit_targets[entindex] then
-					for i = 1, axe_count do
-						if (enemy:GetAbsOrigin() - axe_loc[i]):Length2D() <= axe_radius then
-							hit_targets[entindex] = true
-							enemy:EmitSound("Hero_TrollWarlord.WhirlingAxes.Target")
-							ApplyDamage({
-								victim = enemy,
-								attacker = caster,
-								ability = self,
-								damage = damage,
-								damage_type = damage_type
-							})
-							if enemy and not enemy:IsNull() then
-								enemy:AddNewModifier(caster, self, "modifier_papich_w_clone", {duration = blind_duration * (1 - enemy:GetStatusResistance())})
-							end
+				local damage_table = {
+					attacker = caster,
+					ability = self,
+					damage = damage,
+					damage_type = damage_type
+				}
+				for _, enemy in ipairs(enemies) do
+					local entindex = enemy:entindex()
+					if not hit_targets[entindex] then
+						for i = 1, axe_count do
+							if (enemy:GetAbsOrigin() - axe_loc[i]):Length2D() <= axe_radius then
+								hit_targets[entindex] = true
+								enemy:EmitSound("Hero_TrollWarlord.WhirlingAxes.Target")
+								damage_table.victim = enemy
+								ApplyDamage(damage_table)
+								if enemy and not enemy:IsNull() then
+									enemy:AddNewModifier(caster, self, "modifier_papich_w_clone", {duration = blind_duration * (1 - enemy:GetStatusResistance())})
+								end
 							break
 						end
 					end

@@ -68,23 +68,32 @@ function modifier_royale_megaknight:OnCreated(kv)
     self.preparing = false
     local spawnRadius = ability:GetSpecialValueFor("spawn_radius")
     local spawnDamage = ability:GetSpecialValueFor("spawn_dmg")
-    local units = FindUnitsInRadius(caster:GetTeamNumber(), parent:GetAbsOrigin(), nil, spawnRadius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
+    local parent_origin = parent:GetAbsOrigin()
+    local units = FindUnitsInRadius(caster:GetTeamNumber(), parent_origin, nil, spawnRadius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 0, false)
+    local damage_table = {
+        attacker = caster,
+        damage = spawnDamage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
+    local knockback_kv = {
+        center_x = parent_origin.x,
+        center_y = parent_origin.y,
+        center_z = parent_origin.z,
+        duration = 0.4,
+        knockback_duration = 0.4,
+        knockback_distance = spawnRadius,
+        knockback_height = 200,
+    }
     for _,unit in pairs(units) do
-        ApplyDamage({victim=unit, attacker=caster, damage=spawnDamage,damage_type=DAMAGE_TYPE_MAGICAL, ability=ability})
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
         if unit and not unit:IsNull() then
-            unit:AddNewModifier(caster, ability, "modifier_knockback", {
-                center_x = parent:GetAbsOrigin().x,
-                center_y = parent:GetAbsOrigin().y,
-                center_z = parent:GetAbsOrigin().z,
-                duration = 0.4,
-                knockback_duration = 0.4,
-                knockback_distance = spawnRadius,
-                knockback_height = 200,
-            })
+            unit:AddNewModifier(caster, ability, "modifier_knockback", knockback_kv)
         end
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-    ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 0, parent_origin)
     ParticleManager:SetParticleControl(particle, 1, Vector(spawnRadius, spawnRadius, 1))
     ParticleManager:ReleaseParticleIndex(particle)
     Timers:CreateTimer(0.5, function()
@@ -310,26 +319,35 @@ function modifier_royale_megaknight_jump:FinishJump()
     EmitSoundOn("MegaKnight.Jump.Land", parent)
     local jumpRadius = self.ability:GetSpecialValueFor("spawn_radius")
     local jumpDmg = self.ability:GetSpecialValueFor("spawn_dmg")
-    local enemies = FindUnitsInRadius(self.caster:GetTeamNumber(), parent:GetAbsOrigin(), nil,
+    local parent_origin = parent:GetAbsOrigin()
+    local enemies = FindUnitsInRadius(self.caster:GetTeamNumber(), parent_origin, nil,
                        jumpRadius, DOTA_UNIT_TARGET_TEAM_ENEMY,
                        DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
                        DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local damage_table = {
+        attacker = self.caster,
+        damage = jumpDmg,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self.ability,
+    }
+    local knockback_kv = {
+        center_x = parent_origin.x,
+        center_y = parent_origin.y,
+        center_z = parent_origin.z,
+        duration = 0.4,
+        knockback_duration = 0.4,
+        knockback_distance = jumpRadius,
+        knockback_height = 200,
+    }
     for _,unit in pairs(enemies) do
-        ApplyDamage({victim=unit, attacker=self.caster, damage=jumpDmg, damage_type=DAMAGE_TYPE_MAGICAL, ability=self.ability})
+        damage_table.victim = unit
+        ApplyDamage(damage_table)
         if unit and not unit:IsNull() then
-            unit:AddNewModifier(self.caster, self.ability, "modifier_knockback", {
-                center_x = parent:GetAbsOrigin().x,
-                center_y = parent:GetAbsOrigin().y,
-                center_z = parent:GetAbsOrigin().z,
-                duration = 0.4,
-                knockback_duration = 0.4,
-                knockback_distance = jumpRadius,
-                knockback_height = 200,
-            })
+            unit:AddNewModifier(self.caster, self.ability, "modifier_knockback", knockback_kv)
         end
     end
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_sandking/sandking_epicenter.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-    ParticleManager:SetParticleControl(particle, 0, parent:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 0, parent_origin)
     ParticleManager:SetParticleControl(particle, 1, Vector(jumpRadius, jumpRadius, 1))
     ParticleManager:ReleaseParticleIndex(particle)
 end

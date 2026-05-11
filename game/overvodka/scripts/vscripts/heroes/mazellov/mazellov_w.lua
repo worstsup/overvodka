@@ -196,14 +196,15 @@ function modifier_mazellov_w_thinker:OnIntervalThink()
         false
     )
 
+    local damage_table = {
+        attacker = caster,
+        ability = ability,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    }
     for _,enemy in pairs(enemies) do
-        ApplyDamage({
-            victim = enemy,
-            attacker = caster,
-            ability = ability,
-            damage = self.damage,
-            damage_type = DAMAGE_TYPE_MAGICAL
-        })
+        damage_table.victim = enemy
+        ApplyDamage(damage_table)
     end
 end
 

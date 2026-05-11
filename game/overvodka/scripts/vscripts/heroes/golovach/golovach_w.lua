@@ -18,10 +18,20 @@ function golovach_w:OnSpellStart()
 	local fear_particle2 = ParticleManager:CreateParticle( "particles/units/heroes/hero_night_stalker/nightstalker_ulti.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster )
 	ParticleManager:SetParticleControl( fear_particle2, 0, caster:GetAbsOrigin() )
 	ParticleManager:ReleaseParticleIndex( fear_particle2 )
-	local fear_enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, self:GetSpecialValueFor("fear_radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+    local caster_origin = caster:GetAbsOrigin()
+    local caster_team = caster:GetTeamNumber()
+    local fear_duration = self:GetSpecialValueFor("fear_duration")
+    local damage_table = {
+        attacker = caster,
+        damage = self:GetSpecialValueFor("damage"),
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
+	local fear_enemies = FindUnitsInRadius(caster_team, caster_origin, nil, self:GetSpecialValueFor("fear_radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
 	for _,unit in pairs(fear_enemies) do
-		unit:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = self:GetSpecialValueFor("fear_duration")})
-		ApplyDamage({victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage"), damage_type = DAMAGE_TYPE_MAGICAL, ability = self})
+		unit:AddNewModifier(caster, self, "modifier_dark_willow_debuff_fear", {duration = fear_duration})
+        damage_table.victim = unit
+		ApplyDamage(damage_table)
 	end
 	local invis_duration = self:GetSpecialValueFor("invis_duration")
 	if invis_duration > 0 then
@@ -29,9 +39,10 @@ function golovach_w:OnSpellStart()
 	end
 	local silence_radius = self:GetSpecialValueFor("radius")
 	if silence_radius > 0 then
-		local silence_enemies = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, silence_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+        local silence_duration = self:GetSpecialValueFor("duration")
+		local silence_enemies = FindUnitsInRadius(caster_team, caster_origin, nil, silence_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
 		for _,unit in pairs(silence_enemies) do
-			unit:AddNewModifier(caster, self, "modifier_generic_silenced_lua", {duration = self:GetSpecialValueFor("duration")})
+			unit:AddNewModifier(caster, self, "modifier_generic_silenced_lua", {duration = silence_duration})
 		end
 	end
 end

@@ -10,15 +10,17 @@ function prince_innate:OnSpellStart()
     local radius        = self:GetSpecialValueFor("radius")
     local push_range    = self:GetSpecialValueFor("push_range")
     local push_duration = self:GetSpecialValueFor("push_duration")
+    local disarm_duration = self:GetSpecialValueFor("disarm_duration")
+    local caster_origin = caster:GetAbsOrigin()
 
     local p = ParticleManager:CreateParticle("particles/prince_innate.vpcf", PATTACH_WORLDORIGIN, nil)
-    ParticleManager:SetParticleControl(p, 0, caster:GetAbsOrigin())
-    ParticleManager:SetParticleControl(p, 2, caster:GetAbsOrigin())
+    ParticleManager:SetParticleControl(p, 0, caster_origin)
+    ParticleManager:SetParticleControl(p, 2, caster_origin)
     ParticleManager:SetParticleControl(p, 7, Vector(radius, 0, 0))
     EmitSoundOn("prince_innate", caster)
     local enemies = FindUnitsInRadius(
         caster:GetTeamNumber(),
-        caster:GetAbsOrigin(),
+        caster_origin,
         nil,
         radius,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -32,28 +34,30 @@ function prince_innate:OnSpellStart()
     if caster:HasTalent("special_bonus_unique_prince_1") then
         damage = self:GetSpecialValueFor("damage")
     end
+    local kb = {
+        center_x = caster_origin.x,
+        center_y = caster_origin.y,
+        center_z = caster_origin.z,
+        duration = push_duration,
+        knockback_duration = push_duration,
+        knockback_distance = push_range,
+        knockback_height = 0,
+    }
+    local disarm_kv = { duration = disarm_duration }
+    local damage_table = {
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = self,
+    }
 
     for _, enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
-            local kb = {
-                center_x = caster:GetAbsOrigin().x,
-                center_y = caster:GetAbsOrigin().y,
-                center_z = caster:GetAbsOrigin().z,
-                duration = push_duration,
-                knockback_duration = push_duration,
-                knockback_distance = push_range,
-                knockback_height = 0,
-            }
             enemy:AddNewModifier(caster, self, "modifier_knockback", kb)
-            enemy:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", { duration = self:GetSpecialValueFor("disarm_duration") })
+            enemy:AddNewModifier(caster, self, "modifier_generic_disarmed_lua", disarm_kv)
             if damage > 0 then
-                ApplyDamage({
-                    victim = enemy,
-                    attacker = caster,
-                    damage = damage,
-                    damage_type = DAMAGE_TYPE_MAGICAL,
-                    ability = self,
-                })
+                damage_table.victim = enemy
+                ApplyDamage(damage_table)
             end
         end
     end
@@ -169,13 +173,14 @@ function modifier_prince_innate:OnAttackLanded(params)
 
     if unique_count >= attackers_need then
         EmitSoundOn("prince_innate", parent)
+        local parent_origin = parent:GetAbsOrigin()
         local p = ParticleManager:CreateParticle("particles/prince_innate.vpcf", PATTACH_WORLDORIGIN, nil)
-        ParticleManager:SetParticleControl(p, 0, parent:GetAbsOrigin())
-        ParticleManager:SetParticleControl(p, 2, parent:GetAbsOrigin())
+        ParticleManager:SetParticleControl(p, 0, parent_origin)
+        ParticleManager:SetParticleControl(p, 2, parent_origin)
         ParticleManager:SetParticleControl(p, 7, Vector(radius, 0, 0))
         local enemies = FindUnitsInRadius(
             parent:GetTeamNumber(),
-            parent:GetAbsOrigin(),
+            parent_origin,
             nil,
             radius,
             DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -188,27 +193,30 @@ function modifier_prince_innate:OnAttackLanded(params)
         if parent:HasTalent("special_bonus_unique_prince_1") then
             damage = ability:GetSpecialValueFor("damage")
         end
+        local disarm_duration = ability:GetSpecialValueFor("disarm_duration")
+        local kb = {
+            center_x = parent_origin.x,
+            center_y = parent_origin.y,
+            center_z = parent_origin.z,
+            duration = push_duration,
+            knockback_duration = push_duration,
+            knockback_distance = push_range,
+            knockback_height = 0,
+        }
+        local disarm_kv = { duration = disarm_duration }
+        local damage_table = {
+            attacker = parent,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = ability,
+        }
         for _, enemy in ipairs(enemies) do
             if enemy and not enemy:IsNull() and enemy:IsAlive() then
-                local kb = {
-                    center_x = parent:GetAbsOrigin().x,
-                    center_y = parent:GetAbsOrigin().y,
-                    center_z = parent:GetAbsOrigin().z,
-                    duration = push_duration,
-                    knockback_duration = push_duration,
-                    knockback_distance = push_range,
-                    knockback_height = 0,
-                }
                 enemy:AddNewModifier(parent, ability, "modifier_knockback", kb)
-                enemy:AddNewModifier(parent, ability, "modifier_generic_disarmed_lua", { duration = ability:GetSpecialValueFor("disarm_duration") })
+                enemy:AddNewModifier(parent, ability, "modifier_generic_disarmed_lua", disarm_kv)
                 if damage > 0 then
-                    ApplyDamage({
-                        victim = enemy,
-                        attacker = parent,
-                        damage = damage,
-                        damage_type = DAMAGE_TYPE_MAGICAL,
-                        ability = ability,
-                    })
+                    damage_table.victim = enemy
+                    ApplyDamage(damage_table)
                 end
             end
         end

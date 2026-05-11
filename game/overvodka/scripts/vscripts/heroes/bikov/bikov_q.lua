@@ -85,28 +85,29 @@ function modifier_bikov_q:OnIntervalThink()
         0,
         FIND_ANY_ORDER, false
     )
+    local kb = {
+        knockback_duration = 0.3,
+        duration = 0.3,
+        knockback_distance = self.push_distance,
+        knockback_height = 50,
+        center_x = origin.x, center_y = origin.y, center_z = origin.z,
+    }
+    local damage_table = {
+        attacker = caster,
+        damage = self.damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
     for _,e in ipairs(enemies) do
         if e and not e:IsNull() and e:IsAlive() then
             local held_by_ult = e:HasModifier("modifier_bikov_r_hold") or e:HasModifier("modifier_bikov_r_throw_timer")
 
             if not held_by_ult then
-                local kb = {
-                    knockback_duration = 0.3,
-                    duration = 0.3,
-                    knockback_distance = self.push_distance,
-                    knockback_height = 50,
-                    center_x = origin.x, center_y = origin.y, center_z = origin.z,
-                }
                 e:RemoveModifierByName("modifier_knockback")
                 e:AddNewModifier(caster, ability, "modifier_knockback", kb)
             end
-            ApplyDamage({
-                victim      = e,
-                attacker    = caster,
-                damage      = self.damage,
-                damage_type = DAMAGE_TYPE_MAGICAL,
-                ability     = ability,
-            })
+            damage_table.victim = e
+            ApplyDamage(damage_table)
         end
     end
 

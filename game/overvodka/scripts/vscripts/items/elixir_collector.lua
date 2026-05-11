@@ -255,29 +255,31 @@ end
 
 function modifier_elixir_collector_buff:OnIntervalThink()
 	if not IsServer() then return end
-	local radius = self:GetAbility():GetSpecialValueFor("radius")
-	local damage = self:GetAbility():GetSpecialValueFor("damage")
-	local caster_origin = self:GetCaster():GetAbsOrigin()
-	local parent_origin = self:GetParent():GetAbsOrigin()
+    local ability = self:GetAbility()
+    local caster = self:GetCaster()
+    local parent = self:GetParent()
+	local radius = ability:GetSpecialValueFor("radius")
+	local caster_origin = caster:GetAbsOrigin()
+	local parent_origin = parent:GetAbsOrigin()
 
 	if (caster_origin - parent_origin):Length2D() > (radius + 100) then
-		self:GetCaster():RemoveModifierByName("modifier_elixir_collector_buff_hero")
+		caster:RemoveModifierByName("modifier_elixir_collector_buff_hero")
 		return
 	end
-	local targets = FindUnitsInRadius(self:GetParent():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, 0, false)
+	local targets = FindUnitsInRadius(parent:GetTeamNumber(), parent_origin, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, 0, false)
 
 	if #targets <= 0 then
-		self:GetCaster():RemoveModifierByName("modifier_elixir_collector_buff_hero")
+		caster:RemoveModifierByName("modifier_elixir_collector_buff_hero")
 		return
 	end
 
     for _,target in pairs(targets) do
         if not target:IsIllusion() then
-    	    target:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_elixir_collector_debuff", {})
+            target:AddNewModifier(parent, ability, "modifier_elixir_collector_debuff", {})
         end
     end
 
-    self:GetCaster():AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_elixir_collector_buff_hero", {})
+    caster:AddNewModifier(parent, ability, "modifier_elixir_collector_buff_hero", {})
 end
 
 modifier_elixir_collector_debuff = class({})

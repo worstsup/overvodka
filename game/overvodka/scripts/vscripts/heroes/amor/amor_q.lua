@@ -184,9 +184,10 @@ function modifier_amor_q_trail_thinker:OnIntervalThink()
         0, 0, false
     )
 
+    local beer_dps = ult:GetSpecialValueFor("beer_dps")
     for _, enemy in ipairs(enemies) do
         if enemy and not enemy:IsNull() and enemy:IsAlive() then
-            enemy:AddNewModifier(caster, ult, "modifier_amor_ultimate_beer", { duration = self.debuff_dur * (1 - enemy:GetStatusResistance()), dps = ult:GetSpecialValueFor("beer_dps") })
+            enemy:AddNewModifier(caster, ult, "modifier_amor_ultimate_beer", { duration = self.debuff_dur * (1 - enemy:GetStatusResistance()), dps = beer_dps })
         end
     end
 end

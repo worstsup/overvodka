@@ -131,14 +131,15 @@ function sans_scepter:OnSpellStart()
 					else
 						blaster:EmitSound("gaster_blaster_shoot")
 					end
+                    local damage_table = {
+                        attacker = caster,
+                        damage = self:GetSpecialValueFor("damage"),
+                        damage_type = self:GetAbilityDamageType(),
+                        ability = self,
+                    }
                     for _,unit in pairs(units) do
-                        ApplyDamage({
-                            victim = unit,
-                            attacker = caster,
-                            damage = self:GetSpecialValueFor("damage"),
-                            damage_type = self:GetAbilityDamageType(),
-                            ability = self,
-                        })
+                        damage_table.victim = unit
+                        ApplyDamage(damage_table)
                     end
 				Timers:CreateTimer(0.5, function()
 					UTIL_Remove(blaster)

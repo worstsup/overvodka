@@ -15,21 +15,25 @@ function ashab_innate:GetIntrinsicModifierName()
 end
 
 function ashab_innate:OnSpellStart()
-	self:GetCaster():EmitSound("Hero_Batrider.StickyNapalm.Cast")
+    local caster = self:GetCaster()
+    local cursor_position = self:GetCursorPosition()
+    local radius = self:GetSpecialValueFor("radius")
+    local duration = self:GetSpecialValueFor("duration")
+	caster:EmitSound("Hero_Batrider.StickyNapalm.Cast")
 	
-	self.napalm_impact_particle = ParticleManager:CreateParticle("particles/batrider_stickynapalm_impact_new.vpcf", PATTACH_WORLDORIGIN, self:GetCaster())
-	ParticleManager:SetParticleControl(self.napalm_impact_particle, 0, self:GetCursorPosition())
-	ParticleManager:SetParticleControl(self.napalm_impact_particle, 1, Vector(self:GetSpecialValueFor("radius"), 0, 0))
-	ParticleManager:SetParticleControl(self.napalm_impact_particle, 2, self:GetCaster():GetAbsOrigin())
+	self.napalm_impact_particle = ParticleManager:CreateParticle("particles/batrider_stickynapalm_impact_new.vpcf", PATTACH_WORLDORIGIN, caster)
+	ParticleManager:SetParticleControl(self.napalm_impact_particle, 0, cursor_position)
+	ParticleManager:SetParticleControl(self.napalm_impact_particle, 1, Vector(radius, 0, 0))
+	ParticleManager:SetParticleControl(self.napalm_impact_particle, 2, caster:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(self.napalm_impact_particle)
 	self.napalm_impact_particle = nil
 	
-	self.enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetCaster():GetCursorPosition(), nil, self:GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+	self.enemies = FindUnitsInRadius(caster:GetTeamNumber(), cursor_position, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 	
 	for _, enemy in pairs(self.enemies) do
-		enemy:AddNewModifier(self:GetCaster(), self, "modifier_ashab_innate", {duration = self:GetSpecialValueFor("duration") * (1 - enemy:GetStatusResistance())})
+		enemy:AddNewModifier(caster, self, "modifier_ashab_innate", {duration = duration * (1 - enemy:GetStatusResistance())})
 	end
-	AddFOWViewer(self:GetCaster():GetTeamNumber(), self:GetCursorPosition(), 400, 2, false)
+	AddFOWViewer(caster:GetTeamNumber(), cursor_position, 400, 2, false)
 	
 	self.napalm_impact_particle = nil
 	self.enemies				= nil

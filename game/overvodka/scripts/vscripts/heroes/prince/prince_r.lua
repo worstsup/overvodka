@@ -262,22 +262,28 @@ function modifier_prince_r_thinker:UpdateHorizontalMotion( me, dt )
     local aoe1 = math.sin(math.min(self:GetElapsedTime() / 2, math.pi/2))  * self.aoe_max + 50
     local aoe2 = self:GetElapsedTime() / FrameTime()
     local aoe = aoe1 + aoe2
-    local pont_left = self.direction_left * aoe / 2 + self:GetParent():GetOrigin()
-    local direction_right = self.direction_right * aoe / 2 + self:GetParent():GetOrigin()
-    local enemies = FindUnitsInLine(self:GetParent():GetTeamNumber(), pont_left, direction_right, nil, 50, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE)
+    local parent = self:GetParent()
+    local parent_origin = parent:GetOrigin()
+    local ability = self:GetAbility()
+    local caster = self:GetCaster()
+    local pont_left = self.direction_left * aoe / 2 + parent_origin
+    local direction_right = self.direction_right * aoe / 2 + parent_origin
+    local duration = ability:GetSpecialValueFor("wave_knockback_duration")
+    local slow_kv = {
+        duration = duration,
+        direction_x = self.direction.x,
+        direction_y = self.direction.y,
+    }
+    local enemies = FindUnitsInLine(parent:GetTeamNumber(), pont_left, direction_right, nil, 50, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE)
     for _,enemy in pairs(enemies) do
-	    enemy:AddNewModifier(self:GetCaster(), self:GetAbility(), "modifier_prince_r_slow", {
-            duration = self:GetAbility():GetSpecialValueFor("wave_knockback_duration"),
-            direction_x = self.direction.x,
-            direction_y = self.direction.y,
-        })
+	    enemy:AddNewModifier(caster, ability, "modifier_prince_r_slow", slow_kv)
     end
-    ParticleManager:SetParticleControl(self.pcf, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:SetParticleControl(self.pcf, 0, parent:GetAbsOrigin())
     ParticleManager:SetParticleControlForward(self.pcf, 0, self.direction)
     ParticleManager:SetParticleControl(self.pcf, 26, Vector(aoe / 2, 0, self.voice_level * 50))
 
 
-    self:GetParent():SetOrigin(Vector(new_pos.x, new_pos.y, 0))
+    parent:SetOrigin(Vector(new_pos.x, new_pos.y, 0))
 end
 
 function modifier_prince_r_thinker:UpdateVerticalMotion( me, dt )

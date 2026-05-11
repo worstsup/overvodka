@@ -240,23 +240,28 @@ end
 
 function modifier_inator_1:OnIntervalThink()
     if not IsServer() then return end
-    if not self:GetAbility() then
+    local ability = self:GetAbility()
+    local parent = self:GetParent()
+    local caster = self:GetCaster()
+    if not ability then
         self:Destroy()
         return
     end
-    local effect_cast = ParticleManager:CreateParticle("particles/units/heroes/hero_ringmaster/ringmaster_wheel_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-    ParticleManager:SetParticleControl(effect_cast, 0, self:GetParent():GetAbsOrigin())
+    local parent_origin = parent:GetAbsOrigin()
+    local effect_cast = ParticleManager:CreateParticle("particles/units/heroes/hero_ringmaster/ringmaster_wheel_aoe.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
+    ParticleManager:SetParticleControl(effect_cast, 0, parent_origin)
     ParticleManager:SetParticleControl(effect_cast, 1, Vector(self.radius, 0, 0))
     ParticleManager:ReleaseParticleIndex(effect_cast)
-    local enemies = FindUnitsInRadius(self:GetCaster():GetTeamNumber(), self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local enemies = FindUnitsInRadius(caster:GetTeamNumber(), parent_origin, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+    local damage_table = {
+        attacker = parent,
+        damage = ability:GetSpecialValueFor("damage_first") * self.interval,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability,
+    }
     for _,enemy in pairs(enemies) do
-        ApplyDamage({
-            victim = enemy,
-            attacker = self:GetParent(),
-            damage = self:GetAbility():GetSpecialValueFor("damage_first") * self.interval,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            ability = self:GetAbility()
-        })
+        damage_table.victim = enemy
+        ApplyDamage(damage_table)
     end
 end
 
@@ -352,7 +357,9 @@ function modifier_inator_3:OnCreated(kv)
 end
 
 function modifier_inator_3:OnIntervalThink()
+    if not IsServer() then return end
     local parent = self:GetParent()
+    local ability = self:GetAbility()
     local team   = parent:GetTeamNumber()
     local enemies = FindUnitsInRadius(
         team,
@@ -368,7 +375,7 @@ function modifier_inator_3:OnIntervalThink()
     for _,unit in ipairs(enemies) do
         local idx = unit:entindex()
         if not self.applied[idx] then
-            unit:AddNewModifier(parent, self:GetAbility(), "modifier_inator_3_debuff", {duration = self.debuff_duration})
+            unit:AddNewModifier(parent, ability, "modifier_inator_3_debuff", {duration = self.debuff_duration})
             self.applied[idx] = true
         end
     end
